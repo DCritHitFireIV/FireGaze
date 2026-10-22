@@ -84,6 +84,33 @@ public sealed class Configuration : IPluginConfiguration
     [JsonProperty("Version")]
     public int Version { get; set; } = 1;
 
+    [JsonProperty("LocalPreviewEnabled")]
+    public bool LocalPreviewEnabled { get; set; }
+
+    [JsonProperty("LocalPreviewChatLinksEnabled")]
+    public bool LocalPreviewChatLinksEnabled { get; set; }
+
+    // Older local test builds enabled the feature automatically. The new opt-in
+    // settings must be acknowledged once before those preferences can be reused.
+    [JsonProperty("LocalPreviewSettingsRevision")]
+    public int LocalPreviewSettingsRevision { get; set; }
+
+    // Development probes only; the product has one unified four-category switch.
+    [JsonIgnore]
+    public bool LocalPreviewItemMenusEnabled { get; set; } = true;
+
+    [JsonIgnore]
+    public bool LocalPreviewMountEnabled { get; set; } = true;
+
+    [JsonIgnore]
+    public bool LocalPreviewMinionEnabled { get; set; } = true;
+
+    [JsonIgnore]
+    public bool LocalPreviewAccessoryEnabled { get; set; } = true;
+
+    [JsonIgnore]
+    public bool LocalPreviewEmoteEnabled { get; set; } = true;
+
     // ---------------- 插件安装器（位置记忆 + 拦住自动刷新） ----------------
 
     /// <summary>
@@ -299,4 +326,7 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("TranslateQuotaNoticeConfirmed")]
     public bool TranslateQuotaNoticeConfirmed { get; set; }
+
+    [JsonProperty("PreviewFeaturesAnnounced")]
+    public bool PreviewFeaturesAnnounced { get; set; }
 }

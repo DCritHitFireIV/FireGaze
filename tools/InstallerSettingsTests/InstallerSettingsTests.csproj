@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/UI/TranslateTab.cs" Link="TranslateTab.cs" />
+    <Compile Include="../../src/FireGaze/UI/InstallerListScrollSnapshot.cs" Link="InstallerListScrollSnapshot.cs" />
+    <Compile Include="../../src/FireGaze/Configuration.cs" Link="Configuration.cs" />
+    <Compile Include="../../src/FireGaze/Translate/TranslationTable.cs" Link="TranslationTable.cs" />
+    <Compile Include="../../src/FireGaze/Translate/ManifestPatcher.cs" Link="ManifestPatcher.cs" />
+    <Compile Include="../../src/FireGaze/Internal/AtomicFile.cs" Link="AtomicFile.cs" />
+    <Compile Include="../../src/FireGaze/Diagnostics/ActivityLog.cs" Link="ActivityLog.cs" />
+    <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(DALAMUD_HOME)/Newtonsoft.Json.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

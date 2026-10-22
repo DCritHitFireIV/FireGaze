@@ -114,7 +114,7 @@ internal sealed partial class UITextTab
     private readonly UITextStore store;
     private readonly UITextPatchManager patches;
     private readonly UITextRunLock runs;
-    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Warning("界面耗时", message));
+    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Trace("界面耗时", message));
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
@@ -259,7 +259,7 @@ internal sealed partial class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("重新读一遍已装插件列表（刚装 / 刚更新过插件时点它）。");
+            ImGui.SetTooltip("重新读取已安装插件，安装或更新插件后可刷新。");
         }
 
         PluginListLayout.ToolbarSameLineOrWrap(PluginListLayout.SearchWidth);
@@ -280,7 +280,7 @@ internal sealed partial class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("按汉化状态筛选：未汉化 / 待写入（翻了还没写进插件）/ 已汉化 / 补丁失败 / 中文插件。");
+            ImGui.SetTooltip("按汉化状态筛选。「待写入」表示已有译文，但尚未应用到插件。");
         }
         ImGui.EndGroup();
 
@@ -293,7 +293,7 @@ internal sealed partial class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("翻译方式、API key、灰名单口径、插件更新后是否自动重打——都在这里改。\n这里只汉化插件自己的界面，简介在「简介汉化」页。汉化会备份原文件并重载插件，请先停下插件任务。");
+            ImGui.SetTooltip("设置翻译通道、API key、灰名单和自动恢复汉化。\n此页汉化插件界面；介绍文字请到「简介汉化」。汉化会备份并重载插件，请先停止插件任务。");
         }
 
         this.DrawFeedbackButton();
@@ -304,7 +304,7 @@ internal sealed partial class UITextTab
         ImGui.Checkbox("只看已启用", ref this.onlyEnabled);
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("只列当前已加载运行的插件；在插件管理器里禁用、或还没加载起来的不列。\n（已装但停用的插件不用汉化；想给它打补丁时先启用。）");
+            ImGui.SetTooltip("只显示当前正在运行的插件。\n如需汉化已停用的插件，请先启用。");
         }
 
         // 插件装/卸/启/停（卫月事件）→ 后台重建；平时 30 秒兜底刷一次（2026-10-02 用户要求：
@@ -383,7 +383,7 @@ internal sealed partial class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("遇到问题、想提建议——直接在这里反馈。\n可以附带诊断日志（已脱敏），无需 GitHub 账号。");
+            ImGui.SetTooltip("提交问题或建议。\n可以附带诊断日志（已脱敏），无需 GitHub 账号。");
         }
     }
 
@@ -408,10 +408,10 @@ internal sealed partial class UITextTab
         var entry = this.index?.All.FirstOrDefault(e => string.Equals(e.InternalName, run.InternalName, StringComparison.Ordinal));
         var name = entry?.DisplayName ?? run.InternalName;
 
-        ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0.12f, 0.15f, 0.19f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ChildBg, FireGazePalette.Selected);
         if (ImGui.BeginChild("###UITextRunning", new Vector2(0, ImGui.GetFrameHeight() + 8)))
         {
-            var verb = run.Mode switch { RunMode.ExtractOnly => "正在抽取", RunMode.CheckUpdates => "正在检查更新", RunMode.ApplyUpdates => "正在更新汉化", RunMode.Rewrite => "正在处理译文", _ => "正在汉化" };
+            var verb = run.Mode switch { RunMode.ExtractOnly => "正在读取文字", RunMode.CheckUpdates => "正在检查更新", RunMode.ApplyUpdates => "正在更新汉化", RunMode.Rewrite => "正在处理译文", _ => "正在汉化" };
             var stage = run.Stage;
             if (run.CanCancel && run.TranslateStartedTicks > 0)
             {
@@ -451,7 +451,7 @@ internal sealed partial class UITextTab
             else if (!run.CanCancel)
             {
                 ImGui.SameLine();
-                ImGui.TextDisabled("这一步不能取消，等它写完。");
+                ImGui.TextDisabled("正在写入或重载，请等待完成。");
             }
         }
 
@@ -487,14 +487,12 @@ internal sealed partial class UITextTab
 
         const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
 
-        // 按钮列按「最宽按钮组合」留宽，左列用固定宽（而不是让内容自撑）——
-        // 2026-10-03 用户要求：行尾按钮必须在同一行，不要换行。
-        // 左列固定宽 = 可用宽 − 按钮列 − 余量（滚动条/单元格边距）；左侧文案用 Fitted 按宽截断，
-        // 不会反过来把按钮列挤窄。窗口真的不够时才由 SameLineOrWrap 兜底换行。
+        // 宽窗保留对齐的操作槽；窄窗在同一行项目内换排，不把任一列推出可视区。
         var columns = PluginListLayout.MeasureLegacyColumns(ImGui.GetContentRegionAvail().X,
             ImGui.GetStyle().ScrollbarSize, ActionsColumnWidth());
         var pluginWidth = columns.Content;
         var actionsWidth = columns.Actions;
+        var rowHeight = PluginListLayout.RowHeightForActions(actionsWidth);
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###UITextPlugins", 2, flags, new Vector2(0, -1)))
         {
@@ -510,7 +508,7 @@ internal sealed partial class UITextTab
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
         foreach (var plugin in items)
         {
-            this.DrawPluginRow(plugin);
+            this.DrawPluginRow(plugin, rowHeight);
             if (this.expanded == plugin.InternalName)
             {
                 ImGui.TableNextRow();
@@ -546,11 +544,11 @@ internal sealed partial class UITextTab
     private void DrawEnableButton(InstalledPluginEntry plugin, bool busy, float width)
     {
         var enablingThis = this.enabling.ContainsKey(plugin.InternalName);
-        ImGui.BeginDisabled(busy || enablingThis);
+        using var disabledScope1 = UiHelpers.Disabled(busy || enablingThis);
         UiHelpers.PushEnableButton();
         var clicked = ImGui.Button(enablingThis ? "启用中…" : "启用插件###UITextEnablePlugin", new Vector2(width, 0));
         UiHelpers.PopEnableButton();
-        ImGui.EndDisabled();
+        disabledScope1.Dispose();
         if (clicked)
         {
             this.StartEnable(plugin);
@@ -559,7 +557,7 @@ internal sealed partial class UITextTab
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(enablingThis
-                ? "正在加载，加载完这里会变成打开/设置。"
+                ? "正在加载，请稍候。"
                 : "启用这个插件，加载后就能看到汉化效果。");
         }
     }
@@ -595,7 +593,7 @@ internal sealed partial class UITextTab
                || r.PackNewerThanPatch;
     }
 
-    private void DrawPluginRow(InstalledPluginEntry plugin)
+    private void DrawPluginRow(InstalledPluginEntry plugin, float foldedHeight)
     {
         this.rows.TryGetValue(plugin.InternalName, out var info);
         var running = this.run is { } r && string.Equals(r.InternalName, plugin.InternalName, StringComparison.Ordinal);
@@ -604,7 +602,6 @@ internal sealed partial class UITextTab
         var editorOpen = this.editor.IsOpen && string.Equals(this.editor.CurrentInternalName, plugin.InternalName, StringComparison.Ordinal);
 
         ImGui.PushID(plugin.InternalName);
-        var foldedHeight = PluginListLayout.FoldedRowHeight();
         PluginListLayout.BeginFoldedRow(foldedHeight);
 
         // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
@@ -669,7 +666,7 @@ internal sealed partial class UITextTab
                 UiHelpers.ColoredText(UiHelpers.Warn, "· 有改动待写入");
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("译文包比已写入的补丁新（下载 / 编辑过），点这一行的主按钮写入插件生效。");
+                    ImGui.SetTooltip("译文已有更新，点击「写入并重载」应用。");
                 }
             }
             else
@@ -679,7 +676,7 @@ internal sealed partial class UITextTab
             }
             if (info is { DoNotLocalize: true } && ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("中文插件：本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
+                ImGui.SetTooltip("此插件已提供中文界面，无需汉化。\n如曾应用汉化，可点「还原原文」恢复原版。");
             }
 
             if (running && this.run is { Total: > 0 } active)
@@ -698,28 +695,56 @@ internal sealed partial class UITextTab
 
         // ── 右列：操作 ──
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowStartY + (foldedHeight - ImGui.GetFrameHeight()) * 0.5f);
-        this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen);
+        ImGui.SetCursorPosY(rowStartY);
+        this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen, foldedHeight);
 
         ImGui.PopID();
     }
 
-    private void DrawRowActions(InstalledPluginEntry plugin, RowInfo? info, bool running, bool busy, bool editorOpen, bool isOpen)
+    private void DrawRowActions(InstalledPluginEntry plugin, RowInfo? info, bool running, bool busy, bool editorOpen, bool isOpen, float rowHeight)
     {
+        var origin = ImGui.GetCursorScreenPos();
+        var right = MathF.Min(origin.X + ImGui.GetContentRegionAvail().X,
+            ImGui.GetWindowDrawList().GetClipRectMax().X) - ImGui.GetStyle().CellPadding.X;
+        var frame = ImGui.GetFrameHeight();
+        var spacing = ImGui.GetStyle().ItemSpacing.Y;
+        float[] widths;
+        float[] gaps;
+        if (info is { DoNotLocalize: true })
+        {
+            widths = [plugin.IsLoaded ? 0 : OpenOrEnableSlotWidth(), info.HasBackup ? UiHelpers.LabelWidth("还原原文") : 0, 0, 0];
+            gaps = [0, 12, 0, 0];
+        }
+        else if (running)
+        {
+            var next = this.run is { CanCancel: true } && this.workQueue.Active is null ? UiHelpers.LabelWidth("取消")
+                : this.run is { CanCancel: false } ? UiHelpers.LabelWidth("写入中…") : 0;
+            widths = [MainActionSlotWidth(), next, 0, info is { Translated: > 0 } ? UiHelpers.LabelWidth("一键上传") : 0];
+            gaps = [0, 8, 0, 10];
+        }
+        else
+        {
+            widths = [MainActionSlotWidth() + 4f + frame, OpenOrEnableSlotWidth(),
+                info is { HasBackup: true } ? UiHelpers.LabelWidth("还原原文") : 0,
+                info is { Translated: > 0 } ? UiHelpers.LabelWidth("一键上传") : 0];
+            gaps = [0, 12, 12, 10];
+        }
+        var positions = PluginListLayout.MeasureActionFlow(MathF.Max(0, right - origin.X), widths, gaps, false);
+        origin.Y += MathF.Max(0, rowHeight - PluginListLayout.ActionFlowHeight(positions, frame, spacing)) * .5f;
+        void Place(int slot) => ImGui.SetCursorScreenPos(origin + new Vector2(positions[slot].X, positions[slot].Row * (frame + spacing)));
+
         if (info is { DoNotLocalize: true })
         {
             // 不汉化 ≠ 不能启用：未加载的也给它一个启用入口（与已加载插件互斥的同一槽位）
             if (!plugin.IsLoaded)
             {
+                Place(0);
                 this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
             }
 
             if (info.HasBackup)
             {
-                if (!plugin.IsLoaded)
-                {
-                    UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
-                }
+                Place(1);
 
                 // 破坏性动作：红系实底（跨页规则，与仓库体检的「删除所选」一致；2026-10-03 P2-8）
                 UiHelpers.PushDangerButton();
@@ -732,7 +757,7 @@ internal sealed partial class UITextTab
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面回到英文）。\n之后还可以再「一键汉化」。");
+                    ImGui.SetTooltip("还原插件原始文件并重载，界面恢复原文。\n之后还可以再「一键汉化」。");
                 }
             }
 
@@ -741,12 +766,13 @@ internal sealed partial class UITextTab
 
         if (running)
         {
-            ImGui.BeginDisabled();
+            Place(0);
+            using var disabledScope2 = UiHelpers.Disabled();
             ImGui.Button("一键汉化", new Vector2(MainActionSlotWidth(), 0));
-            ImGui.EndDisabled();
+            disabledScope2.Dispose();
             if (this.run is { CanCancel: true } active && this.workQueue.Active is null)
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("取消"), 8);
+                Place(1);
                 if (ImGui.Button("取消###UITextRowCancel"))
                 {
                     active.Cancel.Cancel();
@@ -761,12 +787,13 @@ internal sealed partial class UITextTab
             }
             else if (this.run is { CanCancel: false })
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("写入中…"), 8);
+                Place(1);
                 ImGui.TextDisabled("写入中…");
             }
         }
         else
         {
+            Place(0);
             // Blue belongs to translation/update actions, not the settings shortcut.
             var fullyLocalized = info is { HasPack: true }
                                  && (info.Patch == UITextPatchStatus.Applied || info.Total == 0)
@@ -779,7 +806,7 @@ internal sealed partial class UITextTab
             var queued = this.workQueue.Items.Any(j => j.InternalName == plugin.InternalName
                 && j.Mode != UITextJobMode.CheckUpdates && j.State == UITextJobState.Pending);
             var label = queued ? "已排队" : canUpdate ? "点击更新" : retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "更新汉化" : "一键汉化";
-            ImGui.BeginDisabled(editorOpen || queued);
+            using var disabledScope3 = UiHelpers.Disabled(editorOpen || queued);
             if (canUpdate || !fullyLocalized)
             {
                 UiHelpers.PushPrimaryButton();
@@ -796,27 +823,27 @@ internal sealed partial class UITextTab
                 UiHelpers.PopPrimaryButton();
             }
 
-            ImGui.EndDisabled();
+            disabledScope3.Dispose();
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(
                     (queued ? "这个插件已在队列中，前面的任务结束后自动开始。\n" : busy ? "点击后加入队列，当前任务结束后自动开始。\n" : string.Empty) +
-                    (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
+                    (editorOpen ? "请先关闭此插件的校对窗口，以免覆盖正在编辑的译文。\n" : string.Empty) +
                     (canUpdate ? "写入检查到的译文更新并重载插件。保留人工译文，不做全量机器重翻。"
                         : retryable
-                        ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
+                        ? "使用当前通道继续未完成的翻译。\n已完成的译文保留，原始文件会先备份。"
                         : writeOnly
-                            ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
+                            ? "应用现有译文并自动重载插件，不重复翻译。\n原文件会先备份，随时可以「还原原文」。"
                             : fullyLocalized
-                                ? "重新抽取一遍：有新文本或写法变了会重打补丁；都没有就只报「已是最新」。\n原文件备份与「还原原文」照旧。"
-                                : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
+                                ? "检查新文本并更新汉化；没有变化时显示「已是最新」。\n原始文件会先备份，可用「还原原文」恢复。"
+                                : "翻译未完成的条目，应用后自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
             }
 
             this.DrawRewriteMenu(plugin, busy || editorOpen || queued);
 
             // 第二槽位：**未加载 → 启用插件；已加载 → 打开/设置**，两者互斥（用户要求：不允许两个同时亮），
             // 且用同一个固定宽度——不管哪个按钮，后面的「还原原文 / 一键上传」都能对齐。
-            UiHelpers.SameLineOrWrap(OpenOrEnableSlotWidth(), 12);
+            Place(1);
             if (!plugin.IsLoaded)
             {
                 this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
@@ -828,7 +855,7 @@ internal sealed partial class UITextTab
 
             if (info is { HasBackup: true })
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
+                Place(2);
                 if (ImGui.Button("还原原文"))
                 {
                     this.RestoreNow(plugin);
@@ -836,7 +863,7 @@ internal sealed partial class UITextTab
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面回到英文）。\n之后还可以再「一键汉化」。");
+                    ImGui.SetTooltip("还原插件原始文件并重载，界面恢复原文。\n之后还可以再「一键汉化」。");
                 }
             }
         }
@@ -846,19 +873,19 @@ internal sealed partial class UITextTab
         // 一键上传：把这台机器上已经翻好的译文交给社区公共库（2026-10-02 用户要求）
         if (info is { Translated: > 0 })
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("一键上传"), 10);
-            ImGui.BeginDisabled(this.uploading.ContainsKey(plugin.InternalName));
+            Place(3);
+            using var disabledScope4 = UiHelpers.Disabled(this.uploading.ContainsKey(plugin.InternalName));
             if (ImGui.Button("一键上传"))
             {
                 this.StartUpload(plugin);
             }
 
-            ImGui.EndDisabled();
+            disabledScope4.Dispose();
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(
                     "把已经翻好的译文上传到公共译文库，让其他玩家直接用你的译文。\n" +
-                    "（只含原文、译文与代码位置，不带账号信息；维护者收录后所有人「一键汉化」时能直接下载。）");
+                    "仅上传原文、译文和文本位置，不含账号信息；收录后可供其他玩家使用。");
             }
         }
     }
@@ -887,7 +914,7 @@ internal sealed partial class UITextTab
                 entry.IsLoaded = true;   // 行状态立刻变成「打开/设置」，不等索引重建
                 if (this.patches.HasBackup(entry))
                 {
-                    message += " 补丁已生效。";
+                    message += " 汉化已生效。";
                 }
             }
 
@@ -1013,7 +1040,7 @@ internal sealed partial class UITextTab
             }
             else
             {
-                noteText = $"本地检测：{blockingCount} 条有问题，没有上传（看弹窗）。";
+                noteText = $"有 {blockingCount} 条译文未通过检查，请查看提示后修改。";
             }
         }
         else
@@ -1190,7 +1217,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingUpload = null;
@@ -1205,8 +1232,8 @@ internal sealed partial class UITextTab
         if (upload.Total > 0)
         {
             // 去向与公开性要说清（2026-10-03 UI 评审 P1-3：v4 已修过、本轮改装时丢了）
-            ImGui.TextWrapped("上传后会在公共译文库里新增一个独立的译文包，所有玩家都能看到内容；中继不可用时回退到打开填好的 GitHub 提交页。");
-            ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
+            ImGui.TextWrapped("上传的译文会公开给所有玩家。服务不可用时，会打开已填写内容的 GitHub 提交页。");
+            ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；不上传账号信息和 key。");
 
             // 包名（2026-10-04 用户定）：提交时可自取昵称/包名，公共译文库里就以它命名；留空 = 匿名。
             ImGui.Spacing();
@@ -1220,7 +1247,7 @@ internal sealed partial class UITextTab
             ImGui.SameLine();
             ImGui.TextDisabled(author.Trim().Length > 0
                 ? $"库里会显示为「{author.Trim()}」"
-                : "留空时显示为「玩家包 · 短ID」");
+                : "留空时使用匿名包名。");
 
             // 翻译类型（2026-10-04 用户要求）：勾选后会标在公共译文库里，方便别人挑
             ImGui.Spacing();
@@ -1349,7 +1376,7 @@ internal sealed partial class UITextTab
 
         // 有主界面就叫「打开」，只能开设置就叫「设置」；都没有就叫「打开」但置灰（点了不会有反应）
         var label = hasMain || !hasConfig ? "打开" : "设置";
-        ImGui.BeginDisabled(!canOpen);
+        using var disabledScope5 = UiHelpers.Disabled(!canOpen);
         if (primary && canOpen)
         {
             UiHelpers.PushPrimaryButton();
@@ -1376,7 +1403,7 @@ internal sealed partial class UITextTab
             UiHelpers.PopPrimaryButton();
         }
 
-        ImGui.EndDisabled();
+        disabledScope5.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(!plugin.IsLoaded
@@ -1397,12 +1424,12 @@ internal sealed partial class UITextTab
         if (info is { DoNotLocalize: true })
         {
             ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + ImGui.GetContentRegionAvail().X - 8);
-            ImGui.TextDisabled("识别为中文插件。这个项目本身就是中文界面，FireGaze 跳过它的抽取 / 翻译 / 打包 / 上传。");
+            ImGui.TextDisabled("此插件已提供中文界面，无需汉化。");
             ImGui.PopTextWrapPos();
             if (info.HasBackup)
             {
                 ImGui.Spacing();
-                ImGui.TextDisabled("检测到以前打过汉化补丁：点这个插件的「还原原文」即可恢复原版。");
+                ImGui.TextDisabled("曾应用过汉化，可点击此插件的「还原原文」恢复原版。");
             }
 
             ImGui.Unindent(detailInset);
@@ -1427,7 +1454,7 @@ internal sealed partial class UITextTab
             {
                 UITextPatchStatus.Applied => "已应用（原始文件已备份）",
                 UITextPatchStatus.PendingReload => "已应用，等待重载确认",
-                UITextPatchStatus.NeedsRepatch => "插件更新过，需要重打",
+                UITextPatchStatus.NeedsRepatch => "插件已更新，需重新应用",
                 UITextPatchStatus.Failed => "上次失败，已还原",
                 _ => "未应用" + (info.HasBackup ? "（原始文件已备份）" : string.Empty),
             };
@@ -1435,7 +1462,7 @@ internal sealed partial class UITextTab
             PluginListLayout.DrawDetailValue("已翻译", $"{info.Translated} 条");
             PluginListLayout.DrawDetailValue("未翻译", $"{info.Untranslated} 条");
             PluginListLayout.DrawDetailValue("不翻", $"{info.Skipped} 条");
-            PluginListLayout.DrawDetailValue("补丁", patchText);
+            PluginListLayout.DrawDetailValue("汉化状态", patchText);
 
             if (info.PatchDetail.Length > 0 && ImGui.IsItemHovered())
             {
@@ -1444,35 +1471,35 @@ internal sealed partial class UITextTab
         }
         else
         {
-            ImGui.TextDisabled("还没有抽取过文本。点「一键汉化」会先抽取再翻译。");
+            ImGui.TextDisabled("尚未读取界面文字。点击「一键汉化」即可开始。");
         }
 
         ImGui.Spacing();
         var extracting = this.run is { Mode: RunMode.ExtractOnly } only
                          && string.Equals(only.InternalName, plugin.InternalName, StringComparison.Ordinal);
-        ImGui.BeginDisabled(busy || editorOpen || extracting);
-        if (ImGui.Button("抽取界面文本###UITextExtract"))
+        using var disabledScope6 = UiHelpers.Disabled(busy || editorOpen || extracting);
+        if (ImGui.Button("读取界面文字###UITextExtract"))
         {
             this.StartExtract(plugin);
         }
 
-        ImGui.EndDisabled();
+        disabledScope6.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(extracting
-                ? "正在抽取…"
+                ? "正在读取…"
                 : busy || editorOpen
-                    ? "先把当前任务跑完再抽取。"
-                    : "只读一遍插件 DLL，列出能翻的界面文本（不翻译、不写补丁）。\n"
-                      + "插件更新过、或想先看看有多少文本，就点它；结果会记进本地包，编辑器里也能接着改。\n"
+                    ? "请等待当前任务完成后再读取。"
+                    : "读取可翻译的界面文字，不翻译或修改插件。\n"
+                      + "可在「编辑校对」中查看结果。\n"
                       + "不会丢已翻好的译文；原文没了的条目会自动标成「不翻」，可在编辑器里恢复。");
         }
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("检查汉化更新"));
-        ImGui.BeginDisabled(busy || editorOpen);
+        using var disabledScope7 = UiHelpers.Disabled(busy || editorOpen);
         if (ImGui.Button("检查汉化更新###uit-check-one")) this.StartMaintenance(plugin);
-        ImGui.EndDisabled();
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("检查这个插件的新增文本、公共译文更新与插件识别 / IPC 误翻，不修改插件；发现问题后点击更新修复。");
+        disabledScope7.Dispose();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("检查此插件的新文本、译文更新和可能影响功能的误翻，不修改插件。发现更新后可点击应用。");
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("这句怎么还是英文"));
         if (ImGui.Button("这句怎么还是英文###uit-english")) ImGui.OpenPopup("###uit-english-popup");
@@ -1480,18 +1507,18 @@ internal sealed partial class UITextTab
         var diagnosisAnchorMax = ImGui.GetItemRectMax();
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("编辑校对"));
-        ImGui.BeginDisabled(busy);
+        using var disabledScope8 = UiHelpers.Disabled(busy);
         if (ImGui.Button("编辑校对###UITextOpenEditor"))
         {
             this.editor.OpenFor(plugin);
         }
 
-        ImGui.EndDisabled();
+        disabledScope8.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(busy
-                ? "先把当前任务跑完再进编辑器。"
-                : "逐条改译文、标记「不翻」、重新抽取。适合想自己核对的插件。");
+                ? "请等待当前任务完成后再打开校对窗口。"
+                : "逐条校对译文、标记「不翻」，或重新读取界面文字。");
         }
 
         this.DrawDiagnosisPopup(plugin, busy || editorOpen, diagnosisAnchorMin, diagnosisAnchorMax);
@@ -1556,7 +1583,7 @@ internal sealed partial class UITextTab
                 });
             }
 
-            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查公共译文库…" : "公共译文库暂时拉不到（收起这一行再展开可以重试）。");
+            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查公共译文库…" : "暂时无法读取公共译文库，收起后重新展开可重试。");
             return;
         }
 
@@ -1596,17 +1623,17 @@ internal sealed partial class UITextTab
             ImGui.TextDisabled($"{count} 条 · {pack.UpdatedAt ?? "—"} · {downloads} · {likes}");
 
             ImGui.SameLine();
-            ImGui.BeginDisabled(this.cloudDownloading.Contains(key));
+            using var disabledScope9 = UiHelpers.Disabled(this.cloudDownloading.Contains(key));
             if (ImGui.Button($"下载译文###cloud-{pack.ID ?? pack.File ?? "library"}"))
             {
                 this.StartCloudDownload(plugin, pack);
             }
 
-            ImGui.EndDisabled();
+            disabledScope9.Dispose();
 
             // 「喜欢」：每个包独立计数（中继 KV → 定时写回索引）；本机赞过就变灰，不重复计。
             ImGui.SameLine();
-            ImGui.BeginDisabled(liked);
+            using var disabledScope10 = UiHelpers.Disabled(liked);
             if (ImGui.Button($"喜欢###like-{packID}") && !liked)
             {
                 this.plugin.Config.UITextLikedPacks.Add(likedKey);
@@ -1617,12 +1644,12 @@ internal sealed partial class UITextTab
                 this.rowsDirty = true;
             }
 
-            ImGui.EndDisabled();
+            disabledScope10.Dispose();
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(liked
-                    ? "你已经喜欢过这个包了"
-                    : "喜欢这个译文包？点一下，喜欢数会计进云端统计，大家都看得到。");
+                    ? "已喜欢此译文包。"
+                    : "为此译文包点「喜欢」，计数会公开显示。");
             }
             if (this.cloudDownloading.Contains(key))
             {
@@ -1686,7 +1713,7 @@ internal sealed partial class UITextTab
                     this.cloudDownloading.Remove(key);
                     if (fetched is null)
                     {
-                        this.cloudNotes[key] = error is null ? "云端包拉不到" : "下载失败：" + error;
+                        this.cloudNotes[key] = error is null ? "暂时无法下载译文包" : "下载失败：" + error;
                         this.rowsDirty = true;
                         return;
                     }
@@ -1736,7 +1763,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingCloudApply = null;
@@ -1747,7 +1774,7 @@ internal sealed partial class UITextTab
         ImGui.TextWrapped($"应用公共译文库的译文：{pending.Label}（{pending.Source}）");
         ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新 {preview.Overwritten} 条 · 保留 {preview.Protected} 条（手改过的、或本机更好的译文不动）· 其余 {preview.Same} 条无变化");
         ImGui.Spacing();
-        ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的主按钮（此时会显示「写入并重载」）才会写进插件。");
+        ImGui.TextWrapped("保留本机人工译文。应用后，请点「写入并重载」更新插件。");
         ImGui.Separator();
         if (ImGui.Button("应用", new Vector2(100, 0)))
         {
@@ -1787,7 +1814,7 @@ internal sealed partial class UITextTab
                 var changed = local.MergeLibrary(fetched);
                 text = changed > 0
                     ? packStore.Save(internalName, local, out var saveError)
-                        ? $"已应用 {changed} 条，点主按钮（写入并重载）重打补丁生效"
+                        ? $"已应用 {changed} 条译文，请点「写入并重载」更新插件。"
                         : "写盘失败：" + saveError
                     : "没有变化（本机已有相同或更好的译文）";
             }
@@ -1883,7 +1910,7 @@ internal sealed partial class UITextTab
             case UITextPatchStatus.PendingReload:
                 return ($"{Done("已汉化")} · 待重载", UiHelpers.Info);
             case UITextPatchStatus.NeedsRepatch:
-                return ($"{Done("已汉化")} · 需要重打", UiHelpers.Warn);
+                return ($"{Done("已汉化")} · 需重新应用", UiHelpers.Warn);
             case UITextPatchStatus.Failed:
                 return ($"上次失败 · {Done("已翻译")}", UiHelpers.Bad);
         }
@@ -1908,12 +1935,12 @@ internal sealed partial class UITextTab
             return;
         }
 
-        if (!this.runs.TryEnter(entry.InternalName, "正在抽取 " + entry.DisplayName, out var reason))
+        if (!this.runs.TryEnter(entry.InternalName, "正在读取文字 " + entry.DisplayName, out var reason))
         {
             this.notes[entry.InternalName] = new RowNote
             {
                 Kind = NoteKind.Info,
-                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+                Text = "另一个任务正在进行：" + reason + " 请等待完成后重试。",
             };
             return;
         }
@@ -1998,7 +2025,7 @@ internal sealed partial class UITextTab
             this.notes[entry.InternalName] = new RowNote
             {
                 Kind = NoteKind.Info,
-                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+                Text = "另一个任务正在进行：" + reason + " 请等待完成后重试。",
             };
             return;
         }
@@ -2053,14 +2080,14 @@ internal sealed partial class UITextTab
 
             if (run.Mode == RunMode.ExtractOnly)
             {
-                var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedTotal} 条";
+                var summary = $"读取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedTotal} 条";
                 if (extraction.ChineseExcludedCount > 0)
                 {
                     summary += $" · 已是中文 {extraction.ChineseExcludedCount} 条";
                 }
                 if (merge.ResourceCount > 0 || merge.AttributeCount > 0)
                 {
-                    summary += $" · 资源 {merge.ResourceCount}（已译 {pack.TranslatedResourceCount}）· 属性 {merge.AttributeCount}（已译 {pack.TranslatedAttributeCount}）";
+                    summary += $" · 其他界面文字 {merge.ResourceCount + merge.AttributeCount} 条";
                 }
 
                 if (merge.Prune.Any)
@@ -2111,7 +2138,7 @@ internal sealed partial class UITextTab
                 this.FinishRun(run, new RowNote
                 {
                     Kind = NoteKind.Info,
-                    Text = "已是最新：没有要翻的条目，补丁也还在。想改某条译文，点这一行展开 → 「编辑校对…」。",
+                    Text = "汉化已是最新。修改译文可展开此行，进入「编辑校对」。",
                 });
                 this.rowsDirty = true;
                 return;
@@ -2208,12 +2235,12 @@ internal sealed partial class UITextTab
                     var bits = new List<string>();
                     if (unchanged > 0)
                     {
-                        bits.Add($"{unchanged} 条与原文一致（多为格式串或内部名，无需翻译）");
+                        bits.Add($"{unchanged} 条与原文一致，无需应用");
                     }
 
                     if (rejected > 0)
                     {
-                        bits.Add($"{rejected} 条没过占位符校验");
+                        bits.Add($"{rejected} 条格式标记不匹配，未应用");
                     }
 
                     if (bits.Count == 0)
@@ -2231,7 +2258,7 @@ internal sealed partial class UITextTab
                     var why = unchanged > 0
                         ? $"{unchanged} 条候选的翻译结果与原文一致（多半本来就无需翻译）"
                         : rejected > 0
-                            ? $"{rejected} 条没过占位符校验"
+                            ? $"{rejected} 条格式标记不匹配，未应用"
                             : "翻译通道没有返回内容";
                     if (result.Failed.Count > 0)
                     {
@@ -2274,7 +2301,7 @@ internal sealed partial class UITextTab
 
             if (translatedCount == 0 && merge.ReapplyNeeded)
             {
-                var reapply = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
+                var reapply = "已根据最新界面文字更新汉化。";
                 extra = libraryChanged > 0 ? $"从公共译文库补了 {libraryChanged} 条；" + reapply : reapply;
             }
 
@@ -2298,7 +2325,7 @@ internal sealed partial class UITextTab
         catch (Exception e)
         {
             Plugin.Log?.Warning(e, "[内部文本] 一键汉化出错");
-            this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message + "（点右侧「一键汉化」可以重来一次）" });
+            this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message + "（可点击「一键汉化」重试）" });
         }
     }
 
@@ -2319,7 +2346,7 @@ internal sealed partial class UITextTab
 
         return extraction.Entries.Count > 0
             ? $"没有可翻译的界面文本：抽到 {extraction.Entries.Count} 条文本，但都是命令 / 日志 / 键名这类不翻的内容。"
-            : "没有抽取到可翻译的界面文本：这个 DLL 里没有找到界面文字。";
+            : "未找到可翻译的界面文字。";
     }
 
     // ── 首次运行：选翻译方式 / 免费确认 ─────────────────────────────
@@ -2336,15 +2363,15 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(600, 0), new Vector2(780, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.feedbackOpen = false;
             return;
         }
 
-        ImGui.TextWrapped("遇到问题或想提建议——写在这里直接提交（匿名，不需要 GitHub 账号）。");
-        ImGui.TextDisabled("会带上 FireGaze / 卫月版本与时间；勾选「附带诊断日志」能帮我们定位（路径与密钥已脱敏）。");
+        ImGui.TextWrapped("提交问题或建议，无需 GitHub 账号。");
+        ImGui.TextDisabled("会附带 FireGaze、卫月版本与时间。可选择附带脱敏日志，并在发送前预览。");
         ImGui.Spacing();
 
         var categories = new[] { "问题", "建议", "其他" };
@@ -2380,16 +2407,16 @@ internal sealed partial class UITextTab
 
         ImGui.Separator();
         var canSend = !this.feedbackSending && this.feedbackText.Trim().Length >= 5;
-        ImGui.BeginDisabled(!canSend);
+        using var disabledScope11 = UiHelpers.Disabled(!canSend);
         if (ImGui.Button(this.feedbackSending ? "发送中…" : "发送", new Vector2(96, 0)))
         {
             this.StartFeedbackSend();
         }
 
-        ImGui.EndDisabled();
+        disabledScope11.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) && !canSend)
         {
-            ImGui.SetTooltip("至少写 5 个字，让维护者能看懂发生了什么。");
+            ImGui.SetTooltip("请至少填写 5 个字，说明遇到的问题或建议。");
         }
 
         ImGui.SameLine();
@@ -2437,7 +2464,7 @@ internal sealed partial class UITextTab
                     this.feedbackSending = false;
                     if (ok)
                     {
-                        this.feedbackStatus = "已提交，感谢反馈！";
+                        this.feedbackStatus = "反馈已提交。";
                         this.feedbackStatusError = false;
                         this.feedbackText = string.Empty;
                     }
@@ -2526,7 +2553,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             // 被 Esc / 点到外面关掉 = 取消（下次点「一键汉化」再问）
@@ -2535,11 +2562,11 @@ internal sealed partial class UITextTab
             return;
         }
 
-        ImGui.TextWrapped("「一键汉化」需要一个翻译方式。先花半分钟选好，之后随时能在「翻译设置…」里改。");
+        ImGui.TextWrapped("选择本次汉化的翻译通道，之后可在「翻译设置…」中更改。");
         ImGui.Spacing();
 
         var config = this.plugin.Config;
-        if (ImGui.RadioButton("FireGaze 公共彩云（推荐）：维护者提供的免费额度，不用填 key，一次能翻 50 条", pending.Choice == 0) && pending.Choice != 0)
+        if (ImGui.RadioButton("FireGaze 公共彩云：共享免费额度，无需 key", pending.Choice == 0) && pending.Choice != 0)
         {
             pending.Choice = 0;
             pending.SecretInput = string.Empty;
@@ -2551,12 +2578,12 @@ internal sealed partial class UITextTab
         if (pending.Choice == 0)
         {
             ImGui.Indent(24f);
-            ImGui.TextDisabled("由 FireGaze 维护者自费提供，密钥只存服务端；在额度用完 / 密钥失效前放给大家用。");
+            ImGui.TextDisabled("无需申请 key，使用共享免费额度。");
             ImGui.TextDisabled("公共额度不可用时会自动改用免费通道并在结果里说明；也可以随时在下面选别的通道。");
             ImGui.Unindent(24f);
         }
 
-        if (ImGui.RadioButton("大模型：速度最快、质量最好，用你自己的 API key", pending.Choice == 1) && pending.Choice != 1)
+        if (ImGui.RadioButton("大模型：使用自己的 API key", pending.Choice == 1) && pending.Choice != 1)
         {
             pending.Choice = 1;
             pending.SecretInput = string.Empty;
@@ -2569,11 +2596,11 @@ internal sealed partial class UITextTab
         {
             ImGui.Indent(24f);
             this.DrawSecretRow(pending, "llm", config.UITextLLMKeyProtected, "粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）");
-            ImGui.TextDisabled("翻译会带上随插件打包的 FF14 官方译名（地名 / 副本 / 技能 / 状态…）当术语表，专有名词更准。");
+            ImGui.TextDisabled("可参考 FF14 官方译名术语表；使用额度与费用以服务商规则为准。");
             ImGui.Unindent(24f);
         }
 
-        if (ImGui.RadioButton("彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条", pending.Choice == 2) && pending.Choice != 2)
+        if (ImGui.RadioButton("彩云小译：使用自己的 token", pending.Choice == 2) && pending.Choice != 2)
         {
             pending.Choice = 2;
             pending.SecretInput = string.Empty;
@@ -2587,11 +2614,11 @@ internal sealed partial class UITextTab
             ImGui.Indent(24f);
             ImGui.TextDisabled("到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
             this.DrawSecretRow(pending, "caiyun", config.UITextCaiyunKeyProtected, "粘贴彩云小译 token");
-            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
+            ImGui.TextDisabled("FF14 官方译名术语表仅在大模型通道生效。");
             ImGui.Unindent(24f);
         }
 
-        if (ImGui.RadioButton("免费 Google / MyMemory：不用 key，但很慢、随时可能被限流", pending.Choice == 3) && pending.Choice != 3)
+        if (ImGui.RadioButton("免费 Google / MyMemory：无需 key，可能限流", pending.Choice == 3) && pending.Choice != 3)
         {
             pending.Choice = 3;
             pending.SecretInput = string.Empty;
@@ -2603,7 +2630,7 @@ internal sealed partial class UITextTab
         if (pending.Choice == 3)
         {
             ImGui.Indent(24f);
-            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
+            ImGui.TextDisabled("FF14 官方译名术语表仅在大模型通道生效。");
             ImGui.Unindent(24f);
         }
 
@@ -2613,7 +2640,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.Spacing();
-        ImGui.TextDisabled("点「开始汉化」会翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。");
+        ImGui.TextDisabled("点击「开始汉化」会翻译并重载插件，请先停止插件任务。原始文件会先备份，可用「还原原文」恢复。");
         ImGui.Separator();
 
         var ready = pending.Choice switch
@@ -2623,7 +2650,7 @@ internal sealed partial class UITextTab
             _ => true,
         };
 
-        ImGui.BeginDisabled(!ready);
+        using var disabledScope12 = UiHelpers.Disabled(!ready);
         UiHelpers.PushPrimaryButton();
         if (ImGui.Button("开始汉化", new Vector2(140, 0)))
         {
@@ -2631,7 +2658,7 @@ internal sealed partial class UITextTab
         }
 
         UiHelpers.PopPrimaryButton();
-        ImGui.EndDisabled();
+        disabledScope12.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(ready ? "按上面选好的通道开始汉化。" : "先把上面选中通道的 key / token 填上。");
@@ -2681,19 +2708,19 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(pending.TestRunning);
+        using var disabledScope13 = UiHelpers.Disabled(pending.TestRunning);
         if (ImGui.Button("测试###firstrun-test-" + id))
         {
             this.StartFirstRunTest(pending);
         }
 
-        ImGui.EndDisabled();
+        disabledScope13.Dispose();
         if (pending.TestStatus.Length > 0)
         {
             UiHelpers.ColoredText(pending.TestOk ? UiHelpers.Good : UiHelpers.Bad, pending.TestStatus);
         }
 
-        ImGui.TextDisabled("key 只存在本机（加密保存），不会上传，也不会随任何提交发出去。");
+        ImGui.TextDisabled("key 在本机加密保存，不随反馈或译文投稿上传。");
     }
 
     /// <summary>拿还没保存的那份 key/token 试翻一条，省得翻译跑起来才发现填错。</summary>
@@ -2870,7 +2897,7 @@ internal sealed partial class UITextTab
 
     private void DrawFreeConfirmModal(PendingStart pending)
     {
-        const string Name = "免费接口会慢很多###UITextFreeConfirm";
+        const string Name = "确认使用免费通道###UITextFreeConfirm";
         if (this.pendingNeedsOpen)
         {
             ImGui.OpenPopup(Name);
@@ -2878,7 +2905,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(620, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
@@ -2886,17 +2913,17 @@ internal sealed partial class UITextTab
             return;
         }
 
-        UiHelpers.ColoredWrapped(UiHelpers.Warn, $"「{pending.Entry.DisplayName}」要走免费接口，会慢很多。");
+        UiHelpers.ColoredWrapped(UiHelpers.Warn, $"「{pending.Entry.DisplayName}」将使用免费通道，批量翻译可能较慢。");
         var estimate = this.FreeEstimate(pending);
         ImGui.TextWrapped(estimate.Length > 0
-            ? $"免费接口是一条一条翻的，每个词条约 0.8 秒；{estimate}"
-            : "免费接口是一条一条翻的，每个词条约 0.8 秒。");
-        ImGui.TextWrapped("Google 免 key 端点随时可能限流（429），MyMemory 每天只有约 5000 词。");
+            ? $"预计耗时仅供参考；{estimate}"
+            : "翻译耗时取决于网络与服务商限制。");
+        ImGui.TextWrapped("Google 和 MyMemory 的可用额度受服务商限制，可能暂时无法翻译。");
         ImGui.Spacing();
-        ImGui.TextDisabled("「FireGaze 公共彩云」（不用 key）「彩云小译」和「大模型」都快得多；「翻译设置…」里随时能改。");
-        ImGui.TextDisabled("点下去就会开始翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。");
+        ImGui.TextDisabled("也可选择公共彩云、彩云小译或大模型通道。");
+        ImGui.TextDisabled("确认后会翻译并重载插件，请先停止插件任务。原始文件会先备份，可用「还原原文」恢复。");
         ImGui.Separator();
-        if (ImGui.Button("仍要使用免费接口", new Vector2(170, 0)))
+        if (ImGui.Button("使用免费通道", new Vector2(170, 0)))
         {
             this.plugin.Config.UITextFreeWarned = true;
             this.ApplyPendingChoice(pending);
@@ -3049,15 +3076,15 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(480, 0), new Vector2(620, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingRestore = null;
             return;
         }
 
-        ImGui.TextWrapped($"把「{restore.Entry.DisplayName}」还原成打补丁之前的原始文件？");
-        ImGui.TextDisabled("会写入插件目录并自动重载插件，界面回到英文；之后还可以再「一键汉化」。");
+        ImGui.TextWrapped($"将「{restore.Entry.DisplayName}」恢复为汉化前的原始文件？");
+        ImGui.TextDisabled("会自动重载插件，界面恢复原文；之后仍可使用「一键汉化」。");
         ImGui.Separator();
         UiHelpers.PushDangerButton();
         if (ImGui.Button("还原", new Vector2(100, 0)))
@@ -3096,7 +3123,7 @@ internal sealed partial class UITextTab
             this.notes[entry.InternalName] = new RowNote
             {
                 Kind = NoteKind.Info,
-                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+                Text = "另一个任务正在进行：" + reason + " 请等待完成后重试。",
             };
             return;
         }

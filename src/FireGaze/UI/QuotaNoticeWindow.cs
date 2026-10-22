@@ -35,15 +35,24 @@ internal sealed class QuotaNoticeWindow : Window
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
+    public override void PreDraw()
+    {
+        var scale = Dalamud.Interface.Utility.ImGuiHelpers.GlobalScale;
+        FireGazeWindowPlacement.Prepare("FireGazeQuotaNotice", new Vector2(600, 300) * scale, scale, "FireGaze");
+        var maximum = ImGui.GetMainViewport().WorkSize / scale;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = Vector2.Min(new(540, 0), maximum), MaximumSize = Vector2.Min(new(760, float.MaxValue), maximum) };
+    }
+
     public override void Draw()
     {
+        FireGazeWindowPlacement.Remember("FireGazeQuotaNotice");
         ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + 560f);
 
-        ImGui.TextWrapped("有条件的朋友建议改用大模型翻译，效果更好；想用免费的也可以自己注册彩云、在「翻译设置…」里填自己的 key。");
+        ImGui.TextWrapped("公共彩云使用共享免费额度。你也可以在「翻译设置…」中选择其他通道，填写自己申请的 key。");
         ImGui.Spacing();
-        ImGui.TextWrapped("如果你用不完自己的彩云免费额度，又愿意把服务提供给大家用，可以到 DailyRoutines 的 Discord「插件讨论」的 FireGaze 里私聊我 API key，或直接通过「反馈」提交。");
+        ImGui.TextWrapped("公共额度不可用时会自动切换免费通道。自备 key 的额度与费用以服务商规则为准。");
         ImGui.Spacing();
-        ImGui.TextWrapped("狒人就这样互相照顾彼此。");
+        ImGui.TextWrapped("想贡献公共彩云可以到dailyroutine的dc，插件反馈里私聊作者。");
 
         ImGui.PopTextWrapPos();
 

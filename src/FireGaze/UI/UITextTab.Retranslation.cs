@@ -36,12 +36,12 @@ internal sealed partial class UITextTab
     private void DrawRewriteMenu(InstalledPluginEntry entry, bool disabled)
     {
         UiHelpers.SameLineOrWrap(ImGui.GetFrameHeight(), 4);
-        ImGui.BeginDisabled(disabled || this.pendingRewrite is not null);
+        using var disabledScope1 = UiHelpers.Disabled(disabled || this.pendingRewrite is not null);
         if (ImGui.ArrowButton("###uit-rewrite-menu", ImGuiDir.Down)) ImGui.OpenPopup("###uit-rewrite-actions");
-        ImGui.EndDisabled();
+        disabledScope1.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("提升或重翻译文");
         if (!ImGui.BeginPopup("###uit-rewrite-actions")) return;
-        ImGui.BeginDisabled(disabled || this.pendingRewrite is not null);
+        using var disabledScope2 = UiHelpers.Disabled(disabled || this.pendingRewrite is not null);
         if (ImGui.MenuItem("提升译文…")) this.PrepareRewrite(entry, UITextJobMode.UpgradeTranslations);
         if (ImGui.MenuItem("重翻非人工译文…")) this.PrepareRewrite(entry, UITextJobMode.RetranslateNonHuman);
         var resumable = this.workQueue.Items.LastOrDefault(j => j.InternalName == entry.InternalName && j.Rewrite is not null
@@ -49,7 +49,7 @@ internal sealed partial class UITextTab
             && j.State is UITextJobState.Failed or UITextJobState.Skipped);
         if (resumable is not null && ImGui.MenuItem("继续上次重翻…")) this.PrepareRewrite(entry, resumable.Mode, resumable.Rewrite);
         if (ImGui.MenuItem("撤回上次重翻…")) this.PrepareRewrite(entry, UITextJobMode.RestoreTranslations);
-        ImGui.EndDisabled();
+        disabledScope2.Dispose();
         ImGui.EndPopup();
     }
 
@@ -119,7 +119,7 @@ internal sealed partial class UITextTab
         const string name = "确认译文操作###uit-rewrite-confirm";
         if (pending.NeedsOpen) { ImGui.OpenPopup(name); pending.NeedsOpen = false; }
         ImGui.SetNextWindowSizeConstraints(new Vector2(420, 0), new Vector2(560, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(560, 420));
         if (!ImGui.BeginPopupModal(name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             // 弹窗被外部关闭（最常见是 Esc）：必须复位状态，否则重翻菜单会一直禁用、TickQueue 也会停摆。
@@ -144,7 +144,7 @@ internal sealed partial class UITextTab
                 ImGui.TextWrapped(pending.Mode == UITextJobMode.UpgradeTranslations
                     ? "提升未译、免费通道及基础云端译文，保留已有大模型和来源不明的译文。"
                     : "重翻所有非人工译文，包括云端、大模型和来源不明的译文。");
-                ImGui.TextWrapped($"本次 {preview.Count} 条（去重请求 {preview.Requests} 条） · 保留人工 {preview.Humans} 条");
+                ImGui.TextWrapped($"本次翻译 {preview.Count} 条 · 保留人工译文 {preview.Humans} 条");
                 if (preview.Count == 0) ImGui.TextWrapped(pending.Resume
                     ? "译文已保存，可继续写入并重载，不再发送翻译请求。"
                     : "没有符合这次范围的文本，现有译文保留。");
@@ -164,7 +164,7 @@ internal sealed partial class UITextTab
         }
         ImGui.SetItemDefaultFocus();
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("确认并加入队列"));
-        ImGui.BeginDisabled(pending.Cancelled || preview is null || pending.Error is not null || !restore && !pending.Resume && preview.Count == 0);
+        using var disabledScope3 = UiHelpers.Disabled(pending.Cancelled || preview is null || pending.Error is not null || !restore && !pending.Resume && preview.Count == 0);
         if (ImGui.Button("确认并加入队列") && preview is not null)
         {
             if (this.workQueue.RequestRewrite(pending.Entry.InternalName, pending.Entry.DisplayName, pending.Mode, preview.Plan))
@@ -176,7 +176,7 @@ internal sealed partial class UITextTab
             }
             else pending.Error = this.workQueue.Error ?? "这个插件已有汉化任务，请等它完成。";
         }
-        ImGui.EndDisabled();
+        disabledScope3.Dispose();
         ImGui.EndPopup();
     }
 

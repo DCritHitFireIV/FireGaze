@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs')">$(DefineConstants);HAS_FILTER</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEquipmentFilterSources.cs')">$(DefineConstants);HAS_SOURCE_CHOICES</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentModels.cs" Link="OwnedEquipmentModels.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs" Link="PortraitEquipmentFilter.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentFilterSources.cs" Link="PortraitEquipmentFilterSources.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEquipmentFilterSources.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentSourceSummary.cs" Link="PortraitEquipmentSourceSummary.cs" />
+  </ItemGroup>
+</Project>

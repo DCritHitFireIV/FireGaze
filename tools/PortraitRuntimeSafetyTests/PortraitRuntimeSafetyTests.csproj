@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+ <ItemGroup>
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureIsolation.cs" Link="Isolation.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhaseTrace.cs" Link="PhaseTrace.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs')" />
+ </ItemGroup>
+ <PropertyGroup Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs')"><DefineConstants>$(DefineConstants);LIGHTINPUTTRACE</DefineConstants></PropertyGroup>
+</Project>

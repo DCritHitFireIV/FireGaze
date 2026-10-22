@@ -513,7 +513,7 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
         }
 
         result.Note(serviceExhausted
-            ? "公共彩云的额度已用完，本次已自动改用免费通道，如果你有用不完的彩云免费额度，可以到 DailyRoutines 的 Discord「插件讨论」的 FireGaze 里私聊我 API key"
+            ? "公共彩云的额度已用完，本次已自动改用免费通道。"
             : $"公共彩云暂时不可用（{reason}），本次已自动改用免费通道");
         try
         {

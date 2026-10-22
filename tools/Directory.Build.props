@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <!-- Runtime references are required by the offline executables. SDK symbol and
+         documentation sidecars are not: copying them per test project multiplied
+         development storage. Each project's own generated PDB remains available. -->
+    <AllowedReferenceRelatedFileExtensions>.pri;.dll.config;.exe.config</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+</Project>

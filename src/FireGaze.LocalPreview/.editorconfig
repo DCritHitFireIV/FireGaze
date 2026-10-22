@@ -1,0 +1,5 @@
+# This shared interop module preserves ClientStructs/IPC Id casing and Harmony
+# reserved __instance/__state/__result argument names for exact method binding.
+[*.cs]
+dotnet_diagnostic.DR0009.severity = none
+dotnet_diagnostic.DR0002.severity = none

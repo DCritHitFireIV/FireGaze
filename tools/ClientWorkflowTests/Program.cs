@@ -11,6 +11,9 @@ void Check(bool condition, string name)
 var path = Path.Combine(Path.GetTempPath(), "firegaze-client-tests-" + Guid.NewGuid(), "queue.json");
 try
 {
+    PortraitReleaseCommandTests.Run(Check);
+    EmoteChatLinkTests.Run(Check);
+    await LocalPreviewSettingsTests.Run(Check);
     var queue = new UITextJobQueue(path);
     queue.Enqueue("A", "Alpha", UITextJobMode.Translate);
     queue.Enqueue("A", "Alpha", UITextJobMode.Translate);
@@ -204,6 +207,7 @@ try
     await InstallerTests.Run(Check);
     await RecoveryTests.Run(Check);
     await RetranslationTests.Run(Check);
+    ResponsiveListTests.Run(Check);
     await DiscoveryUiTests.Run(Check);
     await FullCoverageTests.Run(Check);
     Console.WriteLine($"ALL PASS {checks}");

@@ -9,18 +9,25 @@ namespace FireGaze.UI;
 /// </summary>
 internal static class UiHelpers
 {
-    public static readonly Vector4 Muted = new(0.65f, 0.65f, 0.65f, 1f);
-    public static readonly Vector4 Good = new(0.45f, 0.85f, 0.45f, 1f);
-    public static readonly Vector4 Warn = new(0.95f, 0.75f, 0.35f, 1f);
-    public static readonly Vector4 Bad = new(0.95f, 0.45f, 0.45f, 1f);
-    public static readonly Vector4 Info = new(0.62f, 0.76f, 0.94f, 1f);
-    public static readonly Vector4 Accent = new(0.55f, 0.75f, 1f, 1f);
+    public static Vector4 Muted => FireGazePalette.Muted;
+    public static Vector4 Good => FireGazePalette.GoodText;
+    public static Vector4 Warn => FireGazePalette.Warn;
+    public static Vector4 Bad => FireGazePalette.BadText;
+    public static Vector4 Info => FireGazePalette.Focus;
+    public static Vector4 Accent => FireGazePalette.Focus;
+
+    /// <summary>Use in place of the native pair so disabled input also has a distinct readable appearance.</summary>
+    public static void BeginDisabled(bool disabled = true) => FireGazeDisabled.Begin(disabled);
+    public static void EndDisabled() => FireGazeDisabled.End();
+    public static bool IsDisabled => FireGazeDisabled.IsDisabled;
+
+    /// <summary>Prefer this using scope when an early return or exception may leave the drawing block.</summary>
+    public static IDisposable Disabled(bool disabled = true) => FireGazeDisabled.Push(disabled);
 
     /// <summary>
-    ///     「跳过」的终态色（中文插件 · 不汉化等）：特意不用 Info 蓝——蓝在本页签表示「有进度/待处理」，
-    ///     复用会让「不汉化」被读成「正在处理」（2026-10-02 v4 定向复评 F8）。
+    ///     「跳过」的终态色（中文插件 · 不汉化等）；具体状态仍由文字说明。
     /// </summary>
-    public static readonly Vector4 Skip = new(0.78f, 0.70f, 0.95f, 1f);
+    public static Vector4 Skip => FireGazePalette.Skip;
 
     public static Vector4 StatusColor(RepoStatus status) => status switch
     {
@@ -55,44 +62,55 @@ internal static class UiHelpers
     }
 
     /// <summary>
-    ///     「要做的事」那种主按钮：比普通按钮深一点、蓝一点，198 行列表里能一眼看到落点。
+    ///     主操作使用深色实底，在长列表中保持明确的操作位置。
     ///     必须配套 <see cref="PopPrimaryButton" />（Push/Pop 数量要成对）。
     /// </summary>
     public static void PushPrimaryButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.23f, 0.37f, 0.55f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.28f, 0.44f, 0.64f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.20f, 0.33f, 0.50f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Primary);
     }
 
-    public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
+    public static void PopPrimaryButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
-    ///     「启用插件」这类正向动作的按钮：偏绿，与主色（蓝）区分，用户能一眼看到。
+    ///     「启用插件」这类正向动作的按钮，沿用中性深色实底。
     ///     必须配套 <see cref="PopEnableButton" />。
     /// </summary>
     public static void PushEnableButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.18f, 0.42f, 0.28f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.22f, 0.52f, 0.34f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.15f, 0.36f, 0.24f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Enable);
     }
 
-    public static void PopEnableButton() => ImGui.PopStyleColor(3);
+    public static void PopEnableButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
-    ///     破坏性动作的按钮（还原原文 / 删除）：红系实底，与主色（蓝）、启用（绿）一眼区分。
-    ///     跨页规则（2026-10-03 HCI 评审）：主操作=蓝（<see cref="PushPrimaryButton" />）、正向启用=绿、
-    ///     破坏动作=红；橙色只用于警示文字/徽标，不做按钮底色。必须配套 <see cref="PopDangerButton" />。
+    ///     破坏性动作的按钮（还原原文 / 删除）使用红系实底，并以操作文字说明后果。
+    ///     必须配套 <see cref="PopDangerButton" />。
     /// </summary>
     public static void PushDangerButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.55f, 0.20f, 0.20f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.66f, 0.25f, 0.25f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.48f, 0.17f, 0.17f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Danger);
     }
 
-    public static void PopDangerButton() => ImGui.PopStyleColor(3);
+    public static void PopDangerButton() => ImGui.PopStyleColor(4);
+
+    internal static FireGazeButtonColors SemanticButtonColors(FireGazeButtonStyle style, bool disabled)
+    {
+        if (disabled) return new(FireGazePalette.Hover, FireGazePalette.Hover, FireGazePalette.Hover, FireGazePalette.Muted);
+        if (style == FireGazeButtonStyle.Primary)
+            return new(FireGazePalette.Action, FireGazePalette.ActionHover, FireGazePalette.ActionActive, FireGazePalette.White);
+        var fill = style == FireGazeButtonStyle.Enable ? FireGazePalette.Good : FireGazePalette.Bad;
+        return new(fill, fill * new Vector4(.88f, .88f, .88f, 1), fill * new Vector4(.76f, .76f, .76f, 1), FireGazePalette.White);
+    }
+
+    private static void PushSemanticButton(FireGazeButtonStyle style)
+    {
+        var colors = SemanticButtonColors(style, IsDisabled);
+        ImGui.PushStyleColor(ImGuiCol.Button, colors.Fill);
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, colors.Hover);
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, colors.Active);
+        ImGui.PushStyleColor(ImGuiCol.Text, colors.Text);
+    }
 
     /// <summary>按钮标签的可见宽度（去掉 <c>###ID</c> 后缀）：给 <see cref="SameLineOrWrap" /> 估位置用。</summary>
     public static float LabelWidth(string label)
@@ -200,29 +218,11 @@ internal static class UiHelpers
             return;
         }
 
-        var available = ImGui.GetContentRegionAvail().X - 2f;
-        var full = ImGui.CalcTextSize(text).X;
-
-        if (available <= 1f || full <= available)
-        {
-            ImGui.TextUnformatted(text);
-        }
-        else
-        {
-            // 按「总宽 / 可用宽」的比例估算能放几个字符，并给省略号留位。
-            var keep = KeepCount(text.Length, available, full);
-            var candidate = Shorten(text, keep);
-
-            // 中英混排时估算可能偏宽：实测一次，还超就再收一轮
-            var width = ImGui.CalcTextSize(candidate).X;
-            if (width > available)
-            {
-                keep = KeepCount(candidate.Length, available, width);
-                candidate = Shorten(text, keep);
-            }
-
-            ImGui.TextUnformatted(candidate);
-        }
+        var available = MathF.Max(0, MathF.Min(ImGui.GetContentRegionAvail().X,
+            ImGui.GetWindowDrawList().GetClipRectMax().X - ImGui.GetCursorScreenPos().X) - 2f);
+        var fitted = FitText(text, available, static value => ImGui.CalcTextSize(value).X);
+        if (fitted.Length == 0) ImGui.Dummy(new Vector2(available, ImGui.GetTextLineHeight()));
+        else ImGui.TextUnformatted(fitted);
 
         if (!string.IsNullOrEmpty(tooltip) && ImGui.IsItemHovered())
         {
@@ -232,5 +232,28 @@ internal static class UiHelpers
             ImGui.PopTextWrapPos();
             ImGui.EndTooltip();
         }
+    }
+
+    internal static string FitText(string text, float available, Func<string, float> measure)
+    {
+        if (string.IsNullOrEmpty(text) || !float.IsFinite(available) || available <= 0) return string.Empty;
+        if (measure(text) <= available) return text;
+        const string ellipsis = "…";
+        if (measure(ellipsis) > available) return string.Empty;
+        var elements = System.Globalization.StringInfo.ParseCombiningCharacters(text);
+        var low = 0;
+        var high = elements.Length - 1;
+        var best = ellipsis;
+        while (low <= high)
+        {
+            var keep = (low + high) / 2;
+            var head = (keep * 2 + 2) / 3;
+            var tail = keep - head;
+            var candidate = text[..(head == elements.Length ? text.Length : elements[head])] + ellipsis
+                + (tail == 0 ? string.Empty : text[elements[elements.Length - tail]..]);
+            if (measure(candidate) <= available) { best = candidate; low = keep + 1; }
+            else high = keep - 1;
+        }
+        return best;
     }
 }

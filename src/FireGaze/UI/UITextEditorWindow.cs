@@ -97,7 +97,7 @@ internal sealed class UITextEditorWindow : Window
     private readonly List<Row> visible = [];
     private string search = string.Empty;
     private Filter filter = Filter.Candidates;
-    private string status = "打开插件后自动抽取。";
+    private string status = "打开后自动读取界面文字。";
     private bool statusIsError;
     private bool dirty;
     private DateTime dirtySince = DateTime.MinValue;
@@ -179,7 +179,7 @@ internal sealed class UITextEditorWindow : Window
         this.extractionTask = null;
         // 灰名单勾选框默认跟随全局设置；同一插件重开窗口时不重置（保留本次选择）
         this.includeGreyInTranslate = this.plugin.Config.UITextTranslateGreyList;
-        this.SetStatus($"已载入 {target.DisplayName}：正在抽取界面文本…", false);
+        this.SetStatus($"已载入 {target.DisplayName}：正在读取界面文字…", false);
         this.StartExtraction();
     }
 
@@ -194,8 +194,19 @@ internal sealed class UITextEditorWindow : Window
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
+    public override void PreDraw()
+    {
+        var scale = Dalamud.Interface.Utility.ImGuiHelpers.GlobalScale;
+        var placement = FireGazeWindowPlacement.Prepare("FireGazeUITextEditor", new System.Numerics.Vector2(980, 640) * scale, scale, "FireGaze");
+        Size = placement.Size / scale;
+        SizeCondition = ImGuiCond.Appearing;
+        var maximum = ImGui.GetMainViewport().WorkSize / scale;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = System.Numerics.Vector2.Min(new(640, 420), maximum), MaximumSize = maximum };
+    }
+
     public override void Draw()
     {
+        FireGazeWindowPlacement.Remember("FireGazeUITextEditor");
         try
         {
             this.DrawCore();
@@ -209,7 +220,7 @@ internal sealed class UITextEditorWindow : Window
                 Plugin.Log?.Error(e, "[内部文本] 编辑器窗口绘制出错");
             }
 
-            ImGui.TextWrapped("编辑器绘制出错（已写日志）：" + e.Message);
+            ImGui.TextWrapped("编辑校对暂时无法显示，请重开窗口。详情：" + e.Message);
         }
     }
 
@@ -256,7 +267,7 @@ internal sealed class UITextEditorWindow : Window
         var path = this.entry.DLLPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path))
         {
-            this.SetStatus("读不到插件主程序集路径，没法抽取。", true);
+            this.SetStatus("未找到插件文件，请刷新列表后重试。", true);
             return;
         }
 
@@ -288,13 +299,13 @@ internal sealed class UITextEditorWindow : Window
         }
         catch (Exception e)
         {
-            this.SetStatus("抽取失败：" + e.Message, true);
+            this.SetStatus("读取界面文字失败：" + e.Message, true);
             return;
         }
 
         if (result.Error is not null)
         {
-            this.SetStatus("抽取失败（插件可能加壳/加密）：" + result.Error, true);
+            this.SetStatus("无法读取此插件的界面文字：" + result.Error, true);
             return;
         }
 
@@ -321,11 +332,11 @@ internal sealed class UITextEditorWindow : Window
 
         if (merge.Prune.Any)
         {
-            pieces.Add(merge.Prune.Describe() + "（键名/功能串、版本变了、或上一轮抽错）");
+            pieces.Add(merge.Prune.Describe() + "（已不适合翻译的内容）");
         }
 
         this.SetStatus(
-            $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条（灰名单默认不翻）"
+            $"读取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条（灰名单默认不翻）"
             + (pieces.Count > 0 ? " · " + string.Join(" · ", pieces) : string.Empty),
             false);
     }
@@ -390,10 +401,10 @@ internal sealed class UITextEditorWindow : Window
                 Resource = resource,
                 Role = UITextRole.UI,
                 Reason = UITextLocalizationFiles.IsFileContainer(resource.Container)
-                    ? "插件自带的本地化文件（JSON）：只补中文侧缺的键；上游已有的译文不会覆盖"
+                    ? "插件自带的语言文件：只补充缺少的中文，保留已有译文。"
                     : UITextJSONResources.IsJSONContainer(resource.Container)
-                        ? "DLL 内嵌的 JSON 本地化表：只补 zh 缺的键；上游已有的中文不会覆盖"
-                        : "资源型本地化（.resources）：打补丁改容器里的值，不动卫星程序集",
+                        ? "插件内置的语言文件：只补充缺少的中文，保留已有译文。"
+                        : "插件内置的界面文字，可在此校对。",
                 Skipped = this.pack.IsResourceSkipped(resource.Container, resource.Key),
             });
         }
@@ -404,7 +415,7 @@ internal sealed class UITextEditorWindow : Window
             {
                 Attribute = attribute,
                 Role = UITextRole.UI,
-                Reason = "自定义特性参数里的界面文字（打补丁改特性参数，只改构造函数参数）",
+                Reason = "插件定义的界面文字，可在此校对。",
                 Skipped = this.pack.IsAttributeSkipped(attribute.Original),
             });
         }
@@ -579,8 +590,8 @@ internal sealed class UITextEditorWindow : Window
         var failed = outcome.Result.Failed.Count;
         var summary = (outcome.Result.Error == "已取消" ? "已停止翻译" : this.translateOverwriteExisting ? "全量重翻完成" : "翻译完成") + $"（{outcome.Channel}）：写入 {applied} 条" +
                       (failed > 0 ? $" · 失败 {failed} 条" : string.Empty) +
-                      (placeholderRejected > 0 ? $" · 占位符对不上跳过 {placeholderRejected} 条" : string.Empty) +
-                      (unchanged > 0 ? $" · 原样返回 {unchanged} 条" : string.Empty);
+                      (placeholderRejected > 0 ? $" · 格式标记不匹配，跳过 {placeholderRejected} 条" : string.Empty) +
+                      (unchanged > 0 ? $" · 与原文相同 {unchanged} 条" : string.Empty);
         if (outcome.Result.Error is not null)
         {
             summary += $"（{outcome.Result.Error}）";
@@ -598,7 +609,7 @@ internal sealed class UITextEditorWindow : Window
         var unapplied = this.rows.Count(r => r.HasTranslation && !r.Skipped);
         if (applied > 0 && unapplied > 0)
         {
-            summary += $" · 尚未应用——点「写入并重载」（共 {unapplied} 条）";
+            summary += $" · 尚未应用 {unapplied} 条，请点「写入并重载」";
         }
 
         this.SetStatus(summary, UITextTranslationSession.IsFailure(outcome.Result, applied, placeholderRejected, unchanged));
@@ -616,7 +627,7 @@ internal sealed class UITextEditorWindow : Window
 
         if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
-        this.SetStatus("正在写入补丁…（写入后会自动重载插件）", false);
+        this.SetStatus("正在写入译文并重载插件…", false);
         this.patchTask = Task.Run(() => this.patches.ApplyAndReloadAsync(target));
     }
 
@@ -632,7 +643,7 @@ internal sealed class UITextEditorWindow : Window
 
         if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
-        this.SetStatus("正在还原原始文件…（还原后会自动重载插件）", false);
+        this.SetStatus("正在还原原文并重载插件…", false);
         this.patchTask = Task.Run(() => this.patches.RestoreAndReloadAsync(target));
     }
 
@@ -658,11 +669,11 @@ internal sealed class UITextEditorWindow : Window
 
     private static string DescribePatchStatus(UITextPatchStatus status) => status switch
     {
-        UITextPatchStatus.Applied => "已打补丁",
-        UITextPatchStatus.PendingReload => "已打补丁，待重载确认",
-        UITextPatchStatus.NeedsRepatch => "插件更新过，需重打",
+        UITextPatchStatus.Applied => "已应用",
+        UITextPatchStatus.PendingReload => "已写入，等待重载确认",
+        UITextPatchStatus.NeedsRepatch => "插件已更新，需重新应用",
         UITextPatchStatus.Failed => "失败（已还原）",
-        _ => "未打补丁",
+        _ => "未应用",
     };
 
     // ── 界面 ─────────────────────────────────────────────────────────────
@@ -691,8 +702,8 @@ internal sealed class UITextEditorWindow : Window
         // 「｜」分开两个维度：抽取判定（候选/灰名单）与翻译状态（已翻译/未翻译/不翻）——
         // 直接把两组数字接在一起会让人试图相加（v4 复评 N6）。
         ImGui.TextDisabled(
-            $"共 {this.rows.Count} 条 ｜ 候选 {candidate}（文字 {literalCandidates} + 资源 {resources} + 属性 {attributes}）· 灰名单 {ambiguous} ｜ 已翻译 {translated} · 未翻译 {untranslated} · 不翻 {skipped}" +
-            (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
+            $"共 {this.rows.Count} 条 · 候选 {candidate} · 灰名单 {ambiguous} · 已翻译 {translated} · 未翻译 {untranslated} · 不翻 {skipped}" +
+            (this.extractionTask is { IsCompleted: false } ? " · 读取中…" : string.Empty));
     }
 
     private void DrawToolbar()
@@ -711,22 +722,22 @@ internal sealed class UITextEditorWindow : Window
         }
 
         // 主操作：翻译未翻（翻完不自动应用——这一步是给人校对用的）
-        ImGui.BeginDisabled(busy || targets == 0);
+        using var disabledScope1 = UiHelpers.Disabled(busy || targets == 0);
         if (ImGui.Button($"翻译未翻 ({targets})###uitranslate"))
         {
             this.StartTranslate(this.TranslationTargets());
         }
 
-        ImGui.EndDisabled();
+        disabledScope1.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             var hint = $"用当前通道翻 {targets} 条（未翻的候选" +
                        (this.includeGreyInTranslate ? " + 灰名单" : "，灰名单不翻") + "）。" +
-                       "\n翻完不会自动写入插件——想先核对就留在这里改，想直接生效点「写入并重载」。";
+                       "\n翻译后可先校对，再点「写入并重载」应用。";
             if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
             {
-                hint += "\n注意：这两条免 key 通道按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），而且是一条一条翻。" +
-                        "\n上百条建议改用「FireGaze 公共彩云」（不用 key）、「彩云小译」或「大模型（自填 key）」。";
+                hint += "\n当前免费通道可能限流，批量翻译较慢。" +
+                        "\n可在「翻译设置…」中选择其他通道。";
             }
 
             ImGui.SetTooltip(hint);
@@ -745,54 +756,54 @@ internal sealed class UITextEditorWindow : Window
 
         // 写入插件 + 自动重载（重载是合并步骤，不单独给按钮）
         ImGui.SameLine();
-        ImGui.BeginDisabled(busy || this.rows.Count(r => r.HasTranslation && !r.Skipped) == 0);
+        using var disabledScope2 = UiHelpers.Disabled(busy || this.rows.Count(r => r.HasTranslation && !r.Skipped) == 0);
         if (ImGui.Button("写入并重载"))
         {
             this.StartApply();
         }
 
-        ImGui.EndDisabled();
+        disabledScope2.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("把有译文的条目写进插件 DLL，然后自动重载插件——界面即刻变中文。" +
+            ImGui.SetTooltip("将译文应用到插件，并自动重载。请先停止此插件正在执行的任务。" +
                              "\n原始文件会先备份，随时可以「还原原文」。");
         }
 
         ImGui.SameLine();
         var retranslateCount = this.RetranslateTargetCount(includeUser: true);
-        ImGui.BeginDisabled(busy || retranslateCount == 0);
+        using var disabledScope3 = UiHelpers.Disabled(busy || retranslateCount == 0);
         if (ImGui.Button($"全量重翻 ({retranslateCount})…"))
         {
             this.retranslateIncludeUser = false;
             this.retranslateConfirmPending = true;
         }
 
-        ImGui.EndDisabled();
+        disabledScope3.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("把当前所有译文（含已经翻过的，比如公共库 / 玩家包带来的）重新用当前通道翻一遍。\n" +
-                             "适合下载到的包质量不行、想换成自己通道的译文时用；翻完要点「写入并重载」才生效。");
+            ImGui.SetTooltip("使用当前通道重新翻译全部条目，覆盖范围会在开始前确认。\n" +
+                             "翻译完成后需点「写入并重载」应用。");
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(busy);
+        using var disabledScope4 = UiHelpers.Disabled(busy);
         if (ImGui.Button("更多…###uitrans-more"))
         {
             ImGui.OpenPopup("###uitrans-more-popup");
         }
 
-        ImGui.EndDisabled();
+        disabledScope4.Dispose();
         if (ImGui.BeginPopup("###uitrans-more-popup"))
         {
-            if (ImGui.MenuItem("重新抽取", enabled: !busy))
+            if (ImGui.MenuItem("重新读取文字", enabled: !busy))
             {
                 this.StartExtraction();
-                this.SetStatus("正在重新抽取…", false);
+                this.SetStatus("正在重新读取界面文字…", false);
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("插件更新过、或想拾取新出现的文本时点它；会以原始文件为准重算候选。");
+                ImGui.SetTooltip("重新读取插件界面文字，保留已有译文。");
             }
 
             // 术语表更新后，旧的机器译不会自动升级（机器翻译不覆盖已有译文）——
@@ -807,7 +818,7 @@ internal sealed class UITextEditorWindow : Window
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("术语表更新后，旧的机器翻译不会自己升级；这一项把「术语对不上」的条目挑出来重翻。\n玩家自己改过的译文不会被动。");
+                ImGui.SetTooltip("按最新术语表修正不一致的机器译文，保留人工修改。");
             }
 
             ImGui.Separator();
@@ -846,8 +857,8 @@ internal sealed class UITextEditorWindow : Window
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(hasBackup
-                    ? "把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面恢复英文）。"
-                    : "还没有打过补丁，没有可还原的文件。");
+                    ? "还原插件原始文件并重载，界面恢复原文。"
+                    : "没有可还原的原始文件。");
             }
 
             ImGui.Separator();
@@ -862,10 +873,10 @@ internal sealed class UITextEditorWindow : Window
         // 连灰名单一起翻译：做成勾选框（2026-10-03 用户要求：长按钮只会让人更想按）。
         // 勾上后，主按钮「翻译未翻」会把灰名单里未翻的条目一并翻译；默认跟随翻译设置里的全局开关。
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("连灰名单一起翻译"), 12);
-        ImGui.BeginDisabled(busy || greyUntranslated == 0);
+        using var disabledScope5 = UiHelpers.Disabled(busy || greyUntranslated == 0);
         ImGui.Checkbox("连灰名单一起翻译###uitranslate-grey", ref this.includeGreyInTranslate);
         var greyHovered = ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled);
-        ImGui.EndDisabled();
+        disabledScope5.Dispose();
         ImGui.SameLine(0, 4);
         if (greyUntranslated == 0)
         {
@@ -876,8 +887,8 @@ internal sealed class UITextEditorWindow : Window
         {
             ImGui.SetTooltip("勾上后，点「翻译未翻」会把灰名单里还没翻的条目一起翻" +
                              (greyUntranslated > 0 ? $"（本插件还有 {greyUntranslated} 条）。」\n" : "。\n") +
-                             "默认跟随「翻译设置」里的全局开关；这一勾只影响本次编辑。\n" +
-                             "⚠ 灰名单多被插件当作键名 / 查表用，翻错很可能影响正常功能——建议翻完逐条确认再写入。");
+                             "默认沿用「翻译设置」；此处更改仅影响本次编辑。\n" +
+                             "灰名单可能影响插件功能，请逐条确认后再写入。");
         }
 
         if (this.patchTask is { IsCompleted: false })
@@ -903,7 +914,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SameLine(0, 0);
-        ImGui.TextDisabled(" · 补丁：" + DescribePatchStatus(patchStatus));
+        ImGui.TextDisabled(" · 汉化状态：" + DescribePatchStatus(patchStatus));
         if (patchDetailText.Length > 0 && ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(patchDetailText);
@@ -915,7 +926,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         // 灰名单翻译的风险提醒（勾选框的下面一行；2026-10-03 用户要求常驻，避免不知道这些条目的代价）
-        UiHelpers.ColoredText(UiHelpers.Warn, "⚠ 勾选「连灰名单一起翻译」后，翻译很可能影响插件正常功能（这些字符串多被当作键名 / 查表用）——建议在列表里逐条确认。");
+        UiHelpers.ColoredText(UiHelpers.Warn, "灰名单可能影响插件功能，建议在列表中逐条确认后再写入。");
     }
 
     /// <summary>
@@ -930,7 +941,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(720, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(720, 420));
         if (!ImGui.BeginPopupModal(name, ref this.retranslateConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
         {
             return;
@@ -939,7 +950,7 @@ internal sealed class UITextEditorWindow : Window
         var all = this.RetranslateTargets(includeUser: true);
         var keep = this.RetranslateTargets(includeUser: false);
         var handEdited = all.Count - keep.Count;
-        ImGui.TextWrapped($"会用当前翻译通道把 {all.Count} 条全部重新翻译一遍，已经有的译文（包括公共库 / 玩家包带来的）会被覆盖。");
+        ImGui.TextWrapped($"使用当前通道重新翻译 {all.Count} 条。公共译文和玩家包中的译文也在覆盖范围内。");
         ImGui.TextDisabled("翻完要点「写入并重载」才生效；原始文件会先备份。");
         if (handEdited > 0)
         {
@@ -947,8 +958,8 @@ internal sealed class UITextEditorWindow : Window
             ImGui.Checkbox($"连手动改过的 {handEdited} 条一起覆盖", ref this.retranslateIncludeUser);
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("不勾选：这些保持原样（本机自己改的、以及下载的玩家包里带的手改译文都算）。\n" +
-                                 "想把下载包整个换掉就勾上。");
+                ImGui.SetTooltip("关闭时，保留本机和玩家包中的人工译文。\n" +
+                                 "开启后，这些人工译文也会重新翻译。");
             }
         }
         else
@@ -970,7 +981,7 @@ internal sealed class UITextEditorWindow : Window
 
         ImGui.SameLine();
         var targets = this.retranslateIncludeUser ? all : keep;
-        ImGui.BeginDisabled(targets.Count == 0 || this.translateTask is { IsCompleted: false });
+        using var disabledScope6 = UiHelpers.Disabled(targets.Count == 0 || this.translateTask is { IsCompleted: false });
         if (ImGui.Button($"开始重翻（{targets.Count} 条）", new Vector2(180, 0)))
         {
             this.retranslateConfirmPending = false;
@@ -978,7 +989,7 @@ internal sealed class UITextEditorWindow : Window
             this.StartTranslate(targets, overwriteExisting: true, overwriteUser: this.retranslateIncludeUser);
         }
 
-        ImGui.EndDisabled();
+        disabledScope6.Dispose();
         ImGui.EndPopup();
     }
 
@@ -1087,7 +1098,7 @@ internal sealed class UITextEditorWindow : Window
             UiHelpers.ColoredText(UiHelpers.Info, "?");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("灰名单：既进 UI 又进功能语境，默认不翻。\n" + row.Reason);
+                ImGui.SetTooltip("灰名单：可能影响插件功能，默认不翻译。\n" + row.Reason);
             }
 
             return;
@@ -1315,8 +1326,8 @@ internal sealed class UITextEditorWindow : Window
             var selected = this.filter == filters[i].Filter;
             if (selected)
             {
-                ImGui.PushStyleColor(ImGuiCol.Button, UiHelpers.Accent);
-                ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(0.05f, 0.08f, 0.12f, 1f));
+                ImGui.PushStyleColor(ImGuiCol.Button, FireGazePalette.Selected);
+                ImGui.PushStyleColor(ImGuiCol.Text, FireGazePalette.Text);
             }
 
             if (ImGui.SmallButton($"{filters[i].Label} {counts[filters[i].Filter]}") && !selected)
@@ -1331,7 +1342,7 @@ internal sealed class UITextEditorWindow : Window
 
             if (filters[i].Filter == Filter.Ambiguous && ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("灰名单 = 既画在界面上、又被拿去做比较 / 当键名的字符串，默认不翻（翻错可能影响功能）。");
+                ImGui.SetTooltip("灰名单可能影响插件功能，默认不翻译。");
             }
         }
 
@@ -1375,7 +1386,7 @@ internal sealed class UITextEditorWindow : Window
     {
         var suggested = this.entry!.InternalName + "-未翻-" + DateTime.Now.ToString("yyyyMMdd-HHmm") + ".json";
         this.fileDialog.SaveFileDialog(
-            "导出未翻文本（桌面翻译工具 / AI 都能直接吃）",
+            "导出未翻译文本",
             ".json",
             suggested,
             ".json",
@@ -1612,7 +1623,7 @@ internal sealed class UITextEditorWindow : Window
         this.roles.Clear();
         this.extraction = null;
         this.extractionTask = null;
-        this.SetStatus("检测到包被外部更新（列表页跑过任务）：已重新载入并抽取…", false);
+        this.SetStatus("译文包已更新，正在重新读取界面文字…", false);
         this.StartExtraction();
     }
 
@@ -1686,7 +1697,7 @@ internal sealed class UITextEditorWindow : Window
 
         this.pack = disk;
         this.RebuildRows();
-        this.SetStatus("包被外部更新过：已把本地改动并到新的包上（新增条目保留）。", false);
+        this.SetStatus("已合并本地修改与更新后的译文包，新增条目保留。", false);
     }
 
     private void SetStatus(string message, bool isError)

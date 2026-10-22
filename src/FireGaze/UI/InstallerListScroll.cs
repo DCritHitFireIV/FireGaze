@@ -123,6 +123,19 @@ internal sealed class InstallerListScroll
     /// </summary>
     public bool IsOpen => installerWasOpen;
 
+    internal InstallerListScrollSnapshot Snapshot => new(
+        installerWasOpen,
+        layoutChecked,
+        layoutOk,
+        sawListContent,
+        phase.ToString(),
+        lastRestoreFailed,
+        restoreTarget,
+        restoreFrames,
+        maskedRuns,
+        lastMaskLocal,
+        pluginManager is not null && pluginsReadyProp is not null && reposReadyProp is not null && repoRefreshTaskField is not null);
+
     /// <summary>
     ///     每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。
     /// </summary>
@@ -430,17 +443,17 @@ internal sealed class InstallerListScroll
     {
         if (!blockEnabled && !rememberEnabled)
         {
-            return "未启用（上面两个开关都关着）";
+            return "未启用";
         }
 
         if (layoutChecked && !layoutOk)
         {
-            return "本次已停用（与当前卫月版本不兼容，详见日志）";
+            return "暂不可用，与当前卫月版本不兼容。详见日志。";
         }
 
         if (blockEnabled && !ReflectionReady())
         {
-            return "本次已停用（拿不到卫月的插件管理器内部字段，详见日志）";
+            return "暂不可用，无法读取插件安装器信息。详见日志。";
         }
 
         var parts = new List<string>(2);
@@ -448,7 +461,7 @@ internal sealed class InstallerListScroll
         if (rememberEnabled)
         {
             parts.Add(lastRestoreFailed
-                ? "位置记忆：上次打开时的位置没能恢复（详见日志）"
+                ? "未能恢复上次浏览位置，详见日志。"
                 : "位置记忆已开启");
         }
 
@@ -456,7 +469,7 @@ internal sealed class InstallerListScroll
         {
             parts.Add(maskedRuns > 0
                 ? $"拦截已拦下 {maskedRuns} 次后台刷新（最近 {lastMaskLocal:HH:mm}）"
-                : "拦截已开启（本会话还没遇到后台刷新）");
+                : "刷新拦截已开启");
         }
 
         return "已生效 · " + string.Join(" · ", parts);

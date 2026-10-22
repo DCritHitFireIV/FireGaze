@@ -1,0 +1,46 @@
+namespace FireGaze.PortraitPreview;
+
+internal sealed unsafe partial class PortraitPreviewFeature
+{
+    private PortraitHistoryPhotos photos = null!;
+    private long photoRecordsRevision = -1;
+    private int photoRecordsBytes = -1;
+    private long photoPublicationRevision = -1;
+
+    private void InitializePhotos(string directory)
+    {
+        photos = new(Path.Combine(directory, "portrait-history-thumbnails-v1.bin"), Plugin.Textures, Plugin.TextureReadback,
+            new(Plugin.Framework, Plugin.GameGUI, Plugin.Textures, target.IsCurrent), history.Bytes,
+            message => Plugin.Log.Information("[PortraitPhoto] {Message}", message),
+            Path.Combine(directory, "portrait-favorite-photos-v1.json"),
+            favoritesStore.IsReadOnly || favoritesTrashStore.IsReadOnly ? null : FavoriteSnapshotsForPhotos(),
+            storage: storageBudget);
+    }
+
+    private void PollPhotos()
+    {
+        if (LightingFitHistorySuppressed || SourceCensusBlocksOperations) return;
+        var changedRecords = photoRecordsRevision != history.NavigationRevision || photoRecordsBytes != history.Bytes;
+        if (changedRecords)
+        {
+            photoRecordsRevision = history.NavigationRevision;
+            photoRecordsBytes = history.Bytes;
+            photos.SetRecords(history.GetAllRecords(), history.Bytes);
+        }
+        var ready = false;
+        captureIsolation.RunHistory(() => ready = session.IsActive && observedKey is not null && observedEditor is not null
+            && !pointerHeld && !sampledKeyboard && target.TryResolve(out var identity, out _, out _)
+            && identity == observedIdentity);
+        var key = observedKey;
+        var currentID = key is { } current ? history.CurrentRecordID(current) : null;
+        var ownerKey = ready ? $"{key}|{observedIdentity}" : "";
+        var snapshot = ready && photos.NeedsStateValidation ? target.CaptureEditorState(observedIdentity) : observedEditor;
+        photos.Poll(ownerKey, observedIdentity, currentID, snapshot, ready && snapshot is not null);
+        historyPhotoStatus = photos.HistoryPublicationStatus;
+        if (changedRecords || photoPublicationRevision != photos.ImageRevision)
+        {
+            photoPublicationRevision = photos.ImageRevision;
+            if (history.SynchronizePhotographedRecords(photos.GetPhotographedRecordIDs())) RefreshHistoryRows();
+        }
+    }
+}

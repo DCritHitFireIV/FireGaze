@@ -1,4 +1,4 @@
-﻿<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
 
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-        <Version>1.4.0.32</Version>
+    <Version>1.5.0.56</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
@@ -28,6 +28,12 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
     <DalamudLibPath Condition="'$(DALAMUD_HOME)' != ''">$(DALAMUD_HOME)\</DalamudLibPath>
   </PropertyGroup>
 
+  <!-- Release payloads must not retain a developer's absolute PDB/source path. -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
   <!-- 离线冒烟测试（fgtest）要能调到 internal 类型：推送客户端、贡献存储等 -->
   <ItemGroup>
     <InternalsVisibleTo Include="fgtest" />
@@ -35,6 +41,7 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
 
   <!-- 词表与术语表跟随插件一起打包（发布 zip 里会有 translations.json / ffxiv-glossary.tsv） -->
   <ItemGroup>
+    <None Include="..\..\Resources\icon.png" Link="images\icon.png" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\ffxiv-glossary.tsv" Link="ffxiv-glossary.tsv" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\uit-rules.json" Link="uit-rules.json" CopyToOutputDirectory="PreserveNewest" />
@@ -49,6 +56,13 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
   <!-- 插件内部文本汉化：读 IL 抽字符串、打补丁（MIT）。要随插件一起发到玩家手里，所以不能设 PrivateAssets -->
   <ItemGroup>
     <PackageReference Include="dnlib" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FireGaze.LocalPreview.Core\FireGaze.LocalPreview.Core.csproj" />
+    <Compile Include="..\FireGaze.LocalPreview\Runtime\**\*.cs" LinkBase="LocalPreview\Runtime" />
+    <Compile Include="..\FireGaze.LocalPreview\Interaction\**\*.cs" LinkBase="LocalPreview\Interaction" />
+    <Compile Include="..\FireGaze.LocalPreview\Compatibility\**\*.cs" LinkBase="LocalPreview\Compatibility" />
   </ItemGroup>
 
 </Project>

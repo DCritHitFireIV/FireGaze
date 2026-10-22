@@ -52,14 +52,10 @@ internal sealed class IconStore : IDisposable
     private DateTime nextFlush = DateTime.MinValue;
 
     /// <summary>
-    ///     安装器打开时的预热清单（本会话只排一次）。
+    ///     安装器打开时的预热清单；已装插件变化后由新索引替换。
     /// </summary>
     private List<InstalledPluginEntry>? warmUpSource;
-
-    /// <summary>
-    ///     本会话是否已经排过预热（空清单也算，否则会每帧重建索引）。
-    /// </summary>
-    private bool warmUpQueued;
+    private ILookup<string, InstalledPluginEntry>? installedIconTargets;
 
     /// <summary>
     ///     已建纹理、还没拿到句柄的（拿到那一刻会顺手注入卫月缓存）。
@@ -124,6 +120,7 @@ internal sealed class IconStore : IDisposable
         if (wraps.TryGetValue(entry.InternalName, out var ready))
         {
             handle = ready.Handle;
+            TryInject(entry, ready);
             return !handle.IsNull;
         }
 
@@ -232,22 +229,21 @@ internal sealed class IconStore : IDisposable
     /// </summary>
     public void ScheduleWarmUp(IReadOnlyList<InstalledPluginEntry> installed)
     {
-        if (disposed || !enabled() || warmUpQueued)
+        if (disposed || !enabled())
         {
             return;
         }
 
-        warmUpQueued = true;
+        // Keep installer identities even when the first open has an empty cache.
+        // A discovery download completed later can then fill the installed keys.
+        installedIconTargets = installed.ToLookup(entry => entry.InternalName, StringComparer.Ordinal);
 
         var list = new List<InstalledPluginEntry>();
         foreach (var entry in installed)
         {
-            if (string.IsNullOrWhiteSpace(entry.IconURL))
-            {
-                continue;
-            }
-
-            if (cache.TryGetPath(entry.InternalName, entry.IconURL!, out _))
+            if (wraps.ContainsKey(entry.InternalName) || loading.ContainsKey(entry.InternalName)
+                || !string.IsNullOrWhiteSpace(entry.IconURL)
+                    && cache.TryGetPath(entry.InternalName, entry.IconURL!, out _))
             {
                 list.Add(entry);
             }
@@ -255,6 +251,9 @@ internal sealed class IconStore : IDisposable
 
         warmUpSource = list;
         warmUpCursor = 0;
+        // Replacing the index changes native installer identities, not texture
+        // ownership. Keep existing decodes and wraps; rebuild only the bounded queue.
+        warmUpPending.Clear();
 
         // 只在真的有东西要挂时写 Information（空缓存时不要刷屏）
         if (list.Count > 0)
@@ -298,7 +297,18 @@ internal sealed class IconStore : IDisposable
         while (max > 0 && warmUpCursor < warmUpSource.Count)
         {
             var entry = warmUpSource[warmUpCursor++];
-            if (EnsureTexture(entry))
+
+            // Discovery may have already decoded this plugin's icon under its
+            // internal-name key. Reuse that held texture for the installer entry
+            // (whose native key may be the effective plugin id) before touching disk.
+            if (wraps.TryGetValue(entry.InternalName, out var discovered))
+            {
+                TryInject(entry, discovered);
+                max--;
+                continue;
+            }
+
+            if (loading.ContainsKey(entry.InternalName) || EnsureTexture(entry))
             {
                 warmUpPending.Add((entry, now));
             }
@@ -308,7 +318,7 @@ internal sealed class IconStore : IDisposable
 
         if (warmUpCursor >= warmUpSource.Count && warmUpPending.Count == 0)
         {
-            warmUpSource = null;   // 排完了，收工（但 warmUpQueued 仍为 true，不再重建索引）
+            warmUpSource = null;
         }
     }
 
@@ -345,11 +355,19 @@ internal sealed class IconStore : IDisposable
         wraps.Clear();
         loading.Clear();
         warmUpSource = null;
-        warmUpQueued = true;
+        installedIconTargets = null;
         warmUpPending.Clear();
     }
 
     private void TryInject(InstalledPluginEntry entry, IDalamudTextureWrap wrap)
+    {
+        if (wrap.Handle.IsNull) return;
+        TryInjectEntry(entry, wrap);
+        if (installedIconTargets is not { } targets) return;
+        foreach (var installed in targets[entry.InternalName]) TryInjectEntry(installed, wrap);
+    }
+
+    private void TryInjectEntry(InstalledPluginEntry entry, IDalamudTextureWrap wrap)
     {
         try
         {

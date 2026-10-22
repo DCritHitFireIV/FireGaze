@@ -1,0 +1,355 @@
+using System.Buffers.Binary;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
+
+namespace FireGaze.PortraitPreview;
+
+internal sealed record PortraitNativePhaseProcessModule(string Name, nint BaseAddress, int ImageSize, byte[] FileImage);
+internal sealed record PortraitNativePhaseSDKImage(byte[] FileImage, Guid LoadedMVID);
+internal sealed record PortraitNativePhaseResolvedPlan(nint ModuleBase, int ModuleSize, string OnDiskEXESHA256,
+    string OnDiskSDKSHA256, Guid SDKMVID, IReadOnlyList<PortraitNativePhaseBoundTarget> Targets);
+
+/// <summary>OS/module boundaries only. Never resolves managers, characters, scenes, or textures.</summary>
+internal interface IPortraitNativePhaseProcess
+{
+    bool TryReadModule(out PortraitNativePhaseProcessModule module);
+    bool TryReadSDK(out PortraitNativePhaseSDKImage image);
+    nint SDKManagerRender { get; }
+    nint SDKSourceRender { get; }
+    bool IsAddressReserved(nint address);
+    bool TryReadMemory(nint address, Span<byte> destination);
+}
+
+/// <summary>
+/// Resolves actual audited entries before a diagnostic host can create any hooks. A resolved plan
+/// is inert metadata, never permission to install a hook, allocate a character or run a scene
+/// method. Installation must atomically reserve its targets and revalidate their live entries.
+/// </summary>
+internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhaseProcess process,
+    PortraitNativePhaseTargetSet targetSet = PortraitNativePhaseTargetSet.PhaseObservation)
+{
+    public bool TryResolve(out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        plan = null;
+        reason = "Native observation process, image, or runtime entry validation failed.";
+        try
+        {
+            if (nint.Size != 8 || PortraitNativeCounterIngressContract.For(targetSet).Count == 0
+                || !process.TryReadModule(out var module) || !ValidModule(module)
+                || !HashMatches(module.FileImage, PortraitNativePhaseObservationBinding.EXE)
+                || !process.TryReadSDK(out var sdk) || !ValidSDK(sdk)
+                || !TryInspectExecutableImage(module.FileImage, module.ImageSize, targetSet, out var diskEntries, out reason)) return false;
+            reason = "Runtime native entry, module identity, SDK resolution, or address reservation changed during qualification.";
+            if (!ReadEntries(module, diskEntries, out var first, out var entryFailure))
+            { reason = entryFailure; return false; }
+            if (!process.TryReadModule(out var after))
+            { reason = "Module identity re-read failed after the first runtime entry pass."; return false; }
+            if (after.Name != module.Name || after.BaseAddress != module.BaseAddress || after.ImageSize != module.ImageSize)
+            { reason = "Module identity changed after the first runtime entry pass."; return false; }
+            if (!HashMatches(after.FileImage, PortraitNativePhaseObservationBinding.EXE))
+            { reason = "Module image hash changed after the first runtime entry pass."; return false; }
+            if (!process.TryReadSDK(out var sdkAfter))
+            { reason = "Loaded SDK could not be re-read after the first runtime entry pass."; return false; }
+            if (sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter))
+            { reason = "Loaded SDK identity or file hash changed after the first runtime entry pass."; return false; }
+            if (!ReadEntries(after, diskEntries, out var second, out entryFailure))
+            { reason = entryFailure; return false; }
+            // Resource bodies span many copies. Identity may change inside the
+            // last one; a pre-second-round check alone cannot attest its owner.
+            if (targetSet == PortraitNativePhaseTargetSet.ResourceIngress)
+            {
+                if (!process.TryReadModule(out var final))
+                { reason = "Module identity re-read failed after the final resource-body pass."; return false; }
+                if (final.Name != module.Name || final.BaseAddress != module.BaseAddress || final.ImageSize != module.ImageSize
+                    || !HashMatches(final.FileImage, PortraitNativePhaseObservationBinding.EXE))
+                { reason = "Module identity or image hash changed after the final resource-body pass."; return false; }
+                if (!process.TryReadSDK(out var finalSDK))
+                { reason = "Loaded SDK could not be re-read after the final resource-body pass."; return false; }
+                if (finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK))
+                { reason = "Loaded SDK identity or file hash changed after the final resource-body pass."; return false; }
+            }
+            for (var index = 0; index < first.Length; index++)
+                if (StableEntry(first[index]) != StableEntry(second[index]))
+                { reason = EntryFailure(diskEntries[index], "changed between runtime read passes"); return false; }
+            if (!PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
+                    PortraitNativePhaseObservationBinding.SDK, second, targetSet, out var targets, out reason)) return false;
+            // A reservation can appear inside the final read. This last sweep rejects
+            // that observed drift; it cannot replace the installer's atomic lease.
+            var reservedTarget = targets.FirstOrDefault(target => process.IsAddressReserved(target.Address));
+            if (reservedTarget.Address != 0)
+            {
+                reason = EntryFailure(diskEntries.First(entry => entry.Phase == reservedTarget.Phase), "address became reserved before plan publication");
+                return false;
+            }
+            plan = new(module.BaseAddress, module.ImageSize, PortraitNativePhaseObservationBinding.EXE,
+                PortraitNativePhaseObservationBinding.SDK, sdk.LoadedMVID, targets);
+            reason = "The current module image, SDK MVID and complete target-set contracts match; no installation lease or scene admission.";
+            return true;
+        }
+        catch (Exception ex) when (ex is not OutOfMemoryException)
+        {
+            reason = "Native observation qualification unavailable: " + ex.GetType().Name;
+            return false;
+        }
+    }
+
+    internal static bool TryResolveCurrentProcess(Func<nint, bool> isAddressReserved,
+        out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        ArgumentNullException.ThrowIfNull(isAddressReserved);
+        return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved)).TryResolve(out plan, out reason);
+    }
+
+    internal static bool TryResolveCounterIngressCurrentProcess(Func<nint, bool> isAddressReserved,
+        out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        ArgumentNullException.ThrowIfNull(isAddressReserved);
+        return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved),
+            PortraitNativePhaseTargetSet.CounterIngress).TryResolve(out plan, out reason);
+    }
+
+    internal static bool TryResolveResourceIngressCurrentProcess(Func<nint, bool> isAddressReserved,
+        out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        ArgumentNullException.ThrowIfNull(isAddressReserved);
+        return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved),
+            PortraitNativePhaseTargetSet.ResourceIngress).TryResolve(out plan, out reason);
+    }
+
+    private static bool ValidModule(PortraitNativePhaseProcessModule module) => module is not null
+        && string.Equals(module.Name, "ffxiv_dx11.exe", StringComparison.OrdinalIgnoreCase)
+        && module.BaseAddress > 0 && module.ImageSize > 0 && module.BaseAddress <= nint.MaxValue - module.ImageSize;
+
+    private static bool ValidSDK(PortraitNativePhaseSDKImage sdk)
+    {
+        if (sdk is null || sdk.LoadedMVID == Guid.Empty || !HashMatches(sdk.FileImage, PortraitNativePhaseObservationBinding.SDK)) return false;
+        using var pe = new PEReader(new MemoryStream(sdk.FileImage, false));
+        if (!pe.HasMetadata) return false;
+        var metadata = pe.GetMetadataReader();
+        return metadata.GetGuid(metadata.GetModuleDefinition().Mvid) == sdk.LoadedMVID;
+    }
+
+    private bool ReadEntries(PortraitNativePhaseProcessModule module, IReadOnlyList<PortraitNativePhaseEntryEvidence> diskEntries,
+        out PortraitNativePhaseEntryEvidence[] entries, out string reason)
+    {
+        entries = new PortraitNativePhaseEntryEvidence[diskEntries.Count];
+        reason = "";
+        for (var index = 0; index < diskEntries.Count; index++)
+        {
+            var disk = diskEntries[index];
+            var address = module.BaseAddress + (nint)disk.FunctionRootRVA;
+            if (process.IsAddressReserved(address))
+            { reason = EntryFailure(disk, "address already reserved before runtime read"); return false; }
+            var prefix = new byte[disk.Prefix.Length];
+            string? bodyHash = null;
+            if (PortraitNativeResourceIngressContract.Find(disk.Phase) is { } resource)
+            {
+                if (!PortraitNativeResourceIngressContract.TryReadCompleteBody(process, module.BaseAddress, resource, out var hash)
+                    || hash != disk.CompleteBodySHA256)
+                { reason = EntryFailure(disk, "complete runtime body mismatch or unreadable"); return false; }
+                bodyHash = hash;
+                // The full digest attests the prefix too. Never introduce an
+                // extra prologue-only copy in place of complete fragment reads.
+                disk.Prefix.CopyTo(prefix, 0);
+            }
+            else if (!process.TryReadMemory(address, prefix))
+            { reason = EntryFailure(disk, "runtime prefix unreadable"); return false; }
+            else if (!prefix.AsSpan().SequenceEqual(disk.Prefix))
+            { reason = EntryFailure(disk, "runtime prefix mismatch"); return false; }
+            var sdkAddress = disk.Phase switch {
+                PortraitNativeObservedPhase.ManagerRender => process.SDKManagerRender,
+                PortraitNativeObservedPhase.SourceCharaViewRender => process.SDKSourceRender,
+                _ => 0,
+            };
+            var usesSDK = disk.Phase is PortraitNativeObservedPhase.ManagerRender or PortraitNativeObservedPhase.SourceCharaViewRender;
+            if (usesSDK && sdkAddress != address)
+            { reason = EntryFailure(disk, "SDK-resolved entry address mismatch"); return false; }
+            entries[index] = disk with { Address = address, Prefix = prefix, SDKResolvedAddress = sdkAddress, CompleteBodySHA256 = bodyHash };
+        }
+        return true;
+    }
+
+    private static string EntryFailure(PortraitNativePhaseEntryEvidence entry, string detail)
+        => $"{entry.Phase}: {detail} at RVA 0x{entry.FunctionRootRVA:X}.";
+
+    private static (PortraitNativeObservedPhase, nint, uint, int, Type, nint, string, string?) StableEntry(PortraitNativePhaseEntryEvidence entry)
+        => (entry.Phase, entry.Address, entry.FunctionRootRVA, entry.PrefixMatches, entry.DelegateType,
+            entry.SDKResolvedAddress, Convert.ToHexString(entry.Prefix), entry.CompleteBodySHA256);
+
+    private static bool HashMatches(byte[]? image, string expected) => image is not null
+        && Convert.ToHexString(SHA256.HashData(image)) == expected;
+
+    internal static bool TryInspectExecutableImage(byte[] image, int moduleSize,
+        out IReadOnlyList<PortraitNativePhaseEntryEvidence> entries, out string reason)
+        => TryInspectExecutableImage(image, moduleSize, PortraitNativePhaseTargetSet.PhaseObservation, out entries, out reason);
+
+    internal static bool TryInspectExecutableImage(byte[] image, int moduleSize, PortraitNativePhaseTargetSet targetSet,
+        out IReadOnlyList<PortraitNativePhaseEntryEvidence> entries, out string reason)
+    {
+        entries = [];
+        reason = "Executable PE entry or unwind contract does not match the audited native functions.";
+        try
+        {
+            using var pe = new PEReader(new MemoryStream(image, false));
+            var headers = pe.PEHeaders;
+            if (headers.CoffHeader.Machine != Machine.Amd64 || headers.PEHeader is not { Magic: PEMagic.PE32Plus } header
+                || header.SizeOfImage != moduleSize || moduleSize <= 0) return false;
+            var directory = header.ExceptionTableDirectory;
+            if (directory.Size <= 0 || directory.Size % 12 != 0 || directory.Size > image.Length) return false;
+            var tableOffset = FileOffset(headers, directory.RelativeVirtualAddress, directory.Size);
+            if (tableOffset < 0) return false;
+            var result = new List<PortraitNativePhaseEntryEvidence>();
+            var inventory = PortraitNativeCounterIngressContract.For(targetSet);
+            if (inventory.Count == 0) return false;
+            foreach (var contract in inventory)
+            {
+                var prefix = Convert.FromHexString(contract.Prefix);
+                if (contract.RVA > int.MaxValue || contract.RVA + prefix.Length > moduleSize) return false;
+                var rva = (int)contract.RVA;
+                if (!headers.SectionHeaders.Any(section => (section.SectionCharacteristics & SectionCharacteristics.MemExecute) != 0
+                    && rva >= section.VirtualAddress && (long)rva + prefix.Length <= (long)section.VirtualAddress + section.SizeOfRawData)) return false;
+                var offset = FileOffset(headers, rva, prefix.Length);
+                if (offset < 0 || !image.AsSpan(offset, prefix.Length).SequenceEqual(prefix)) return false;
+                var remaining = image.AsSpan(); var count = 0;
+                while (remaining.IndexOf(prefix) is var match && match >= 0)
+                {
+                    if (++count > 1) return false;
+                    remaining = remaining[(match + 1)..];
+                }
+                if (count != 1) return false;
+                uint root;
+                string? bodyHash = null;
+                if (contract.CompleteLeaf)
+                {
+                    // The entire pinned body includes its RET and trailing INT3.
+                    // These two audited leaves have no unwind owner. Accepting an
+                    // entry inside a larger unwind function would revoke the ABI proof.
+                    if (prefix.Length < 2 || prefix[^2] != 0xC3 || prefix[^1] != 0xCC
+                        || HasUnwindOverlap(image, tableOffset, directory.Size, contract.RVA, prefix.Length)) return false;
+                    root = contract.RVA;
+                }
+                else if (PortraitNativeResourceIngressContract.Find(contract.Phase) is { } resource)
+                {
+                    if (!TryResourceFragments(image, headers, tableOffset, directory.Size, contract.RVA, resource)) return false;
+                    root = contract.RVA; bodyHash = resource.SHA256;
+                }
+                else if (!TryFunctionRoot(image, headers, tableOffset, directory.Size, contract.RVA, out root)
+                    || root != contract.RVA) return false;
+                result.Add(new(contract.Phase, 0, root, count, prefix, contract.Delegate, 0, bodyHash));
+            }
+            entries = result.AsReadOnly();
+            reason = "Audited PE executable sections, unique prefixes and unwind roots verified.";
+            return true;
+        }
+        catch (Exception ex) when (ex is not OutOfMemoryException)
+        {
+            reason = "Executable inspection unavailable: " + ex.GetType().Name;
+            return false;
+        }
+    }
+
+    private static bool HasUnwindOverlap(byte[] image, int tableOffset, int tableSize, uint start, int length)
+    {
+        var end = (long)start + length;
+        for (var offset = tableOffset; offset < (long)tableOffset + tableSize; offset += 12)
+        {
+            var first = BinaryPrimitives.ReadUInt32LittleEndian(image.AsSpan(offset, 4));
+            var last = BinaryPrimitives.ReadUInt32LittleEndian(image.AsSpan(offset + 4, 4));
+            if (first >= last || first < end && last > start) return true;
+        }
+        return false;
+    }
+
+    private static bool TryResourceFragments(byte[] image, PEHeaders headers, int tableOffset, int tableSize, uint root,
+        PortraitNativeResourceBody body)
+    {
+        using var digest = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        var expected = body.Spans.ToHashSet(); var found = new HashSet<PortraitNativeResourceSpan>();
+        foreach (var span in body.Spans)
+        {
+            var length = checked((int)(span.End - span.Begin));
+            if (span.Begin >= span.End || span.End > int.MaxValue
+                || !headers.SectionHeaders.Any(s => (s.SectionCharacteristics & SectionCharacteristics.MemExecute) != 0
+                    && span.Begin >= s.VirtualAddress && span.End <= (long)s.VirtualAddress + s.SizeOfRawData)) return false;
+            var offset = FileOffset(headers, (int)span.Begin, length);
+            if (offset < 0) return false;
+            digest.AppendData(image.AsSpan(offset, length));
+        }
+        if (Convert.ToHexString(digest.GetHashAndReset()) != body.SHA256) return false;
+        for (var offset = tableOffset; offset < (long)tableOffset + tableSize; offset += 12)
+        {
+            var row = image.AsSpan(offset, 12);
+            var span = new PortraitNativeResourceSpan(BinaryPrimitives.ReadUInt32LittleEndian(row),
+                BinaryPrimitives.ReadUInt32LittleEndian(row[4..]), BinaryPrimitives.ReadUInt32LittleEndian(row[8..]));
+            var intersects = body.Spans.Any(s => span.Begin < s.End && span.End > s.Begin);
+            if (intersects && !expected.Contains(span)) return false;
+            var follows = TryUnwindRoot(image, headers, span.Begin, span.End, span.Unwind, out var actualRoot,
+                expected.Contains(span) ? expected : null);
+            if (expected.Contains(span))
+            {
+                if (!found.Add(span) || !follows || actualRoot != root) return false;
+            }
+            else if (follows && actualRoot == root) return false;
+        }
+        return found.SetEquals(expected);
+    }
+
+    private static int FileOffset(PEHeaders headers, int rva, int length)
+    {
+        if (rva < 0 || length < 0) return -1;
+        foreach (var section in headers.SectionHeaders)
+        {
+            if (rva < section.VirtualAddress || (long)rva + length > (long)section.VirtualAddress + section.SizeOfRawData) continue;
+            var offset = (long)section.PointerToRawData + rva - section.VirtualAddress;
+            return offset is >= 0 and <= int.MaxValue ? (int)offset : -1;
+        }
+        return -1;
+    }
+
+    private static bool TryFunctionRoot(byte[] image, PEHeaders headers, int tableOffset, int tableSize, uint rva, out uint root)
+    {
+        root = 0;
+        uint begin = 0, end = 0, unwind = 0;
+        var found = false;
+        for (var offset = tableOffset; offset < (long)tableOffset + tableSize; offset += 12)
+        {
+            var row = image.AsSpan(offset, 12);
+            var first = BinaryPrimitives.ReadUInt32LittleEndian(row);
+            var last = BinaryPrimitives.ReadUInt32LittleEndian(row[4..]);
+            if (rva < first || rva >= last) continue;
+            if (found) return false;
+            begin = first; end = last; unwind = BinaryPrimitives.ReadUInt32LittleEndian(row[8..]); found = true;
+        }
+        if (!found) return false;
+        return TryUnwindRoot(image, headers, begin, end, unwind, out root);
+    }
+
+    private static bool TryUnwindRoot(byte[] image, PEHeaders headers, uint begin, uint end, uint unwind, out uint root,
+        ISet<PortraitNativeResourceSpan>? allowed = null)
+    {
+        root = 0;
+        var seen = new HashSet<(uint, uint, uint)>();
+        for (var depth = 0; depth < 32; depth++)
+        {
+            if (begin >= end || unwind > int.MaxValue || !seen.Add((begin, end, unwind))
+                || allowed is not null && !allowed.Contains(new(begin, end, unwind))) return false;
+            var offset = FileOffset(headers, (int)unwind, 4);
+            if (offset < 0) return false;
+            var data = image.AsSpan(offset, 4);
+            if ((data[0] & 7) is not (1 or 2)) return false;
+            var flags = data[0] >> 3;
+            if ((flags & 4) == 0) { root = begin; return true; }
+            if ((flags & 3) != 0) return false;
+            var chainRVA = (long)unwind + 4 + ((data[2] + 1) & ~1) * 2;
+            if (chainRVA > int.MaxValue) return false;
+            var chainOffset = FileOffset(headers, (int)chainRVA, 12);
+            if (chainOffset < 0) return false;
+            var row = image.AsSpan(chainOffset, 12);
+            begin = BinaryPrimitives.ReadUInt32LittleEndian(row);
+            end = BinaryPrimitives.ReadUInt32LittleEndian(row[4..]);
+            unwind = BinaryPrimitives.ReadUInt32LittleEndian(row[8..]);
+        }
+        return false;
+    }
+}

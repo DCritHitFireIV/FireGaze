@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')">$(DefineConstants);HAS_FEATURE_BACKEND</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureIsolation.cs" Link="PortraitCaptureIsolation.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryStore.cs" Link="PortraitHistoryStore.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryWriter.cs" Link="PortraitHistoryWriter.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitToneTarget.cs" Link="PortraitToneTarget.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFit.cs" Link="PortraitLightingFit.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitSession.cs" Link="PortraitLightingFitSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitAdapter.cs" Link="PortraitLightingFitAdapter.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitBinding.cs" Link="PortraitLightingFitBinding.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryBatch.cs" Link="PortraitHistoryBatch.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSampleRegion.cs" Link="PortraitSampleRegion.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitView.cs" Link="PortraitLightingFitView.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.LightingFit.cs" Link="Feature.LightingFit.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs" Link="PortraitLightingFitFeatureBackend.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')" />
+  </ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
+</Project>

@@ -115,7 +115,7 @@ internal sealed partial class RepoAuditTab
         iconTailDeadline = default;
         nextIconKick = DateTime.MinValue;
         iconDownloadRunning = true;
-        iconDownloadLine = $"图标下载：已请求 0/{iconDownloadTotal} · 拿到 0";
+        iconDownloadLine = $"图标下载：0 / {iconDownloadTotal}";
         SetIconPanelStatus(null, false);
     }
 
@@ -225,7 +225,7 @@ internal sealed partial class RepoAuditTab
 
         var tailLeft = tail ? Math.Max(0, (iconTailDeadline - DateTime.Now).TotalSeconds) : 0;
 
-        iconDownloadLine = $"图标下载：拿到 {iconDownloadGot}/{iconDownloadTotal}"
+        iconDownloadLine = $"图标下载：{iconDownloadGot} / {iconDownloadTotal}"
                                 + (iconDownloadFailed > 0 ? $" · 失败 {iconDownloadFailed}" : string.Empty)
                                 + (remaining > 0 ? $" · 还剩 {remaining}" : string.Empty)
                                 + (tail ? $"，最多再等 {tailLeft:0} 秒" : string.Empty);
@@ -310,7 +310,7 @@ internal sealed partial class RepoAuditTab
             .Where(x => !(x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconURL)))
             .ToList();
 
-        var head = $"图标下载完成：拿到 {got} / {total} 个"
+        var head = $"图标下载完成：{got} / {total} 个"
                    + (failed > 0 ? $" · 失败 {failed}" : string.Empty)
                    + (leftover.Count > 0 ? $" · 未完成 {leftover.Count}" : string.Empty)
                    + $"；用时 {seconds:0}s。已存的图标重开游戏不用重下。";
@@ -321,7 +321,7 @@ internal sealed partial class RepoAuditTab
             return;
         }
 
-        SetIconPanelStatus(head + " 正在确认那几个的图标地址…", false);
+        SetIconPanelStatus(head + " 正在确认剩余图标地址…", false);
 
         var urls = checkable
             .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconURL))
@@ -379,12 +379,12 @@ internal sealed partial class RepoAuditTab
 
             if (failed > 0)
             {
-                parts.Add($"{failed} 个未完成，可以再点一次");
+                parts.Add($"{failed} 个未完成，可再次下载");
             }
 
             if (official > 0)
             {
-                parts.Add($"{official} 个是官方库插件，稍后自己会下好");
+                parts.Add($"{official} 个官方库图标将由卫月下载");
             }
 
             iconDeadReport = deadNames;
@@ -399,7 +399,7 @@ internal sealed partial class RepoAuditTab
         drawList.AddRect(
             start,
             start + new Vector2(size, size),
-            ImGui.GetColorU32(new Vector4(0.45f, 0.45f, 0.45f, 1f)),
+            ImGui.GetColorU32(FireGazePalette.Border),
             4f);
 
         var initial = string.IsNullOrEmpty(entry.DisplayName) ? "?" : entry.DisplayName[..1].ToUpperInvariant();

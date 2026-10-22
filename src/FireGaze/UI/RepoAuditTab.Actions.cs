@@ -17,25 +17,18 @@ internal sealed partial class RepoAuditTab
         var canAct = !scanning && selectedCount > 0;
         var filteredCount = snapshot.Count;
 
-        if (!canAct)
+        using (UiHelpers.Disabled(!canAct))
         {
-            ImGui.BeginDisabled();
-        }
+            ImGui.Button($"停用所选（{selectedCount}）###DisableSelected");
+            if (ImGui.IsItemClicked() && canAct)
+            {
+                DisableSelected();
+            }
 
-        ImGui.Button($"停用所选（{selectedCount}）###DisableSelected");
-        if (ImGui.IsItemClicked() && canAct)
-        {
-            DisableSelected();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("保留链接、只是不再加载这些库（可随时撤回）");
-        }
-
-        if (!canAct)
-        {
-            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("停止加载所选仓库，保留链接，可撤回。");
+            }
         }
 
         // 危险动作：与「停用」拉开间距 + 红色 + 独立分组（统一样式见 UiHelpers.PushDangerButton）
@@ -43,25 +36,18 @@ internal sealed partial class RepoAuditTab
         ImGui.SameLine();
         UiHelpers.PushDangerButton();
 
-        if (!canAct)
+        using (UiHelpers.Disabled(!canAct))
         {
-            ImGui.BeginDisabled();
-        }
+            ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected");
+            if (ImGui.IsItemClicked() && canAct)
+            {
+                deleteRequested = true;
+            }
 
-        ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected");
-        if (ImGui.IsItemClicked() && canAct)
-        {
-            deleteRequested = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("从仓库列表移除（会先自动备份，之后可撤回）");
-        }
-
-        if (!canAct)
-        {
-            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("移除所选仓库链接，会先备份，可撤回。");
+            }
         }
 
         UiHelpers.PopDangerButton();
@@ -71,39 +57,32 @@ internal sealed partial class RepoAuditTab
         ImGui.SameLine();
 
         var canSelect = !scanning;
-        if (!canSelect)
+        using (UiHelpers.Disabled(!canSelect))
         {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button($"全选当前（{filteredCount}）###SelectFiltered"))
-        {
-            lock (gate)
+            if (ImGui.Button($"全选当前（{filteredCount}）###SelectFiltered"))
             {
-                foreach (var item in snapshot.Where(x => x.IsSelectable))
+                lock (gate)
                 {
-                    selected.Add(item.URL);
+                    foreach (var item in snapshot.Where(x => x.IsSelectable))
+                    {
+                        selected.Add(item.URL);
+                    }
                 }
             }
-        }
 
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("只勾选当前筛选/搜索结果显示的行");
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("清空选择###ClearSelection"))
-        {
-            lock (gate)
+            if (ImGui.IsItemHovered())
             {
-                selected.Clear();
+                ImGui.SetTooltip("只选择当前搜索和筛选结果。");
             }
-        }
 
-        if (!canSelect)
-        {
-            ImGui.EndDisabled();
+            ImGui.SameLine();
+            if (ImGui.Button("清空选择###ClearSelection"))
+            {
+                lock (gate)
+                {
+                    selected.Clear();
+                }
+            }
         }
 
         // ---------------- 第二行：选择摘要 + 恢复动作 ----------------
@@ -155,9 +134,10 @@ internal sealed partial class RepoAuditTab
 
         if (undo is null)
         {
-            ImGui.BeginDisabled();
-            ImGui.Button("撤回上次操作###Undo");
-            ImGui.EndDisabled();
+            using (UiHelpers.Disabled())
+            {
+                ImGui.Button("撤回上次操作###Undo");
+            }
         }
         else
         {
@@ -184,7 +164,7 @@ internal sealed partial class RepoAuditTab
                     $"备份：{Path.GetFileName(undo.BackupPath ?? "（无）")}",
                     $"剩余可撤回：{plugin.Config.UndoHistory.Count} 步",
                 };
-                lines.AddRange(undo.Entries.Take(3).Select(x => "样本：" + UiHelpers.Shorten(x.URL, 60)));
+                lines.AddRange(undo.Entries.Take(3).Select(x => "包含：" + UiHelpers.Shorten(x.URL, 60)));
                 ImGui.SetTooltip(string.Join('\n', lines));
             }
         }
@@ -239,7 +219,7 @@ internal sealed partial class RepoAuditTab
         plugin.Repos.Save(out _);
         plugin.Repos.TriggerReload(out _);
 
-        SetStatus($"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}）—— 链接保留、不再加载；可点「撤回」恢复。", false);
+        SetStatus($"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}），链接保留，可撤回。", false);
         ActivityLog.Info("仓库体检", $"已停用 {changed} 个仓库：{string.Join("、", targets.Take(3))}{(targets.Count > 3 ? " 等" : string.Empty)}");
         RefreshFromLive();
     }
@@ -279,7 +259,7 @@ internal sealed partial class RepoAuditTab
 
         if (record.Entries.Count == 0)
         {
-            SetStatus("所选的仓库已经不在列表里了。", false);
+            SetStatus("所选仓库已不在列表中。", false);
             return;
         }
 
@@ -322,6 +302,7 @@ internal sealed partial class RepoAuditTab
             deleteRequested = false;
         }
 
+        FireGazeWindowPlacement.PrepareModal(new Vector2(600, 420));
         if (!ImGui.BeginPopupModal("确认删除仓库链接###DeleteConfirm", ImGuiWindowFlags.AlwaysAutoResize))
         {
             return;
@@ -347,7 +328,7 @@ internal sealed partial class RepoAuditTab
                 .ToList();
         }
 
-        ImGui.TextWrapped($"你确定要从仓库列表里删除这 {count} 个库链接吗？");
+        ImGui.TextWrapped($"删除所选的 {count} 个仓库链接？");
         ImGui.Spacing();
 
         foreach (var item in preview)
@@ -378,7 +359,7 @@ internal sealed partial class RepoAuditTab
             {
                 UiHelpers.ColoredWrapped(
                     UiHelpers.Muted,
-                    $"其中 {noInstalled} 条没从它装过插件——不代表这个库没用：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
+                    $"本机未从其中 {noInstalled} 个仓库安装插件。它们仍可能是备用源，请确认后再删除。");
             }
 
             if (withInstalled > 0)
@@ -390,8 +371,8 @@ internal sealed partial class RepoAuditTab
         }
 
         ImGui.Spacing();
-        ImGui.TextWrapped("删除前会自动备份（完整仓库列表 + dalamudConfig.json），删除后可以随时点「撤回」恢复。");
-        ImGui.TextWrapped("想保留链接、只是不想加载的话，建议改用「停用」。");
+        ImGui.TextWrapped("删除前会自动备份，之后可点「撤回」恢复。");
+        ImGui.TextWrapped("如需保留链接，请改用「停用」。");
         ImGui.Spacing();
 
         // 破坏性提交：红系实底，与旁边蓝色的「取消」拉开（跨页规则）

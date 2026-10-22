@@ -1,0 +1,126 @@
+"""Qualify actual temporary files; substitute only PE parsing, never the gate results."""
+import copy
+import importlib
+import json
+from pathlib import Path
+import tempfile
+import unittest
+
+
+class CandidateQualificationTests(unittest.TestCase):
+    def setUp(self):
+        try:
+            self.subject = importlib.import_module('portrait_candidate_qualification')
+        except ModuleNotFoundError:
+            self.fail('A reusable complete-gate candidate qualifier is missing')
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.repo = Path(self.temp.name)/'repo'
+        self.source = self.repo/'src/FireGaze/bin/Release'
+        self.source.mkdir(parents=True)
+        self.report = Path(self.temp.name)/'full.json'
+        self.suites = ['AlphaTests', 'BetaTests']
+        for name in self.suites:
+            path = self.repo/'tools'/name/(name+'.csproj')
+            path.parent.mkdir(parents=True)
+            path.write_text('<Project />', encoding='utf-8')
+        (self.repo/'build-local-preview.ps1').write_text('controlled input', encoding='utf-8')
+        for name in self.subject.PAYLOAD:
+            path = self.source/name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(name.encode())
+        for name in self.subject.ROOT_ASSETS:
+            (self.repo/name).write_bytes((self.source/name).read_bytes())
+        self.pe = dict(version='1.5.0.40', mvid='53ba9346-371b-4524-b4f7-412cd09dffb7',
+                       sha256=self.subject.digest(self.source/'FireGaze.dll'))
+        inputs = self.subject.current_inputs(self.repo)
+        self.value = dict(exitCode=0, inputFilesUnchanged=True, deployedUnchanged=True,
+                          inputBefore=inputs, inputAfter=copy.deepcopy(inputs),
+                          externalFilesUnchanged=True,
+                          externalFilesBefore={'cn-sdk.dll': 'A'*64},
+                          externalFilesAfter={'cn-sdk.dll': 'A'*64})
+        self.write_gate(self.suites)
+
+    def write_gate(self, suites, summary='Offline validation finished: 2 suites; skipped: .\n'):
+        self.report.write_text(json.dumps(self.value), encoding='utf-8')
+        self.report.with_suffix('.log').write_text(
+            ''.join('Running offline suite: '+name+'\n' for name in suites)+summary,
+            encoding='utf-8')
+
+    def qualify(self):
+        return self.subject.qualify(self.repo, self.report, '1.5.0.40', lambda _: self.pe)
+
+    def test_complete_gate_binds_real_inputs_payload_pe_and_every_suite(self):
+        result = self.qualify()
+        self.assertEqual(['AlphaTests', 'BetaTests'], result['suiteNames'])
+        self.assertEqual(2, result['suites'])
+        self.assertEqual(self.pe, result['peMetadata'])
+        self.assertFalse(result['deployed'])
+        self.assertFalse(result['inGameAccepted'])
+
+    def test_duplicate_missing_skipped_and_second_summary_are_rejected(self):
+        for suites, summary in [(['AlphaTests']*2, 'Offline validation finished: 2 suites; skipped: .\n'),
+                (['AlphaTests'], 'Offline validation finished: 1 suites; skipped: .\n'),
+                (self.suites, 'Offline validation finished: 2 suites; skipped: BetaTests.\n'),
+                (self.suites, 'Offline validation finished: 2 suites; skipped: .\n'*2)]:
+            with self.subTest(suites=suites, summary=summary):
+                self.write_gate(suites, summary)
+                with self.assertRaises(RuntimeError): self.qualify()
+
+    def test_fabricated_unchanged_flag_cannot_hide_different_input_snapshots(self):
+        self.value['inputBefore']['translations.json'] = '0'*64
+        self.write_gate(self.suites)
+        with self.assertRaises(RuntimeError): self.qualify()
+
+    def test_external_change_or_missing_external_evidence_cannot_qualify(self):
+        for updates in [dict(externalFilesUnchanged=False),
+                        dict(externalFilesAfter={'cn-sdk.dll': 'B'*64}),
+                        dict(externalFilesBefore={}, externalFilesAfter={})]:
+            with self.subTest(updates=updates):
+                baseline = copy.deepcopy(self.value)
+                self.value.update(updates)
+                self.write_gate(self.suites)
+                with self.assertRaises(RuntimeError): self.qualify()
+                self.value = baseline
+
+    def test_root_asset_or_new_code_after_gate_is_rejected(self):
+        for path in [self.repo/'translations.json', self.repo/'src/new.cs']:
+            with self.subTest(path=path):
+                original = path.read_bytes() if path.exists() else None
+                path.write_bytes(b'changed after gate')
+                with self.assertRaises(RuntimeError): self.qualify()
+                if original is None: path.unlink()
+                else: path.write_bytes(original)
+
+    def test_wrong_version_or_empty_mvid_cannot_qualify_even_with_matching_dll_hash(self):
+        for field, value in [('version', '1.5.0.39'), ('mvid', '00000000-0000-0000-0000-000000000000')]:
+            original = self.pe[field]
+            self.pe[field] = value
+            with self.subTest(field=field):
+                with self.assertRaises(RuntimeError): self.qualify()
+            self.pe[field] = original
+
+    def test_built_root_assets_cannot_differ_from_the_frozen_copy_inputs(self):
+        (self.source/'translations.json').write_bytes(b'old built copy')
+        with self.assertRaises(RuntimeError): self.qualify()
+
+    def test_generated_tool_bytecode_is_not_a_new_source_input(self):
+        generated = self.repo/'tools/DeliveryQualification/__pycache__/helper.pyc'
+        generated.parent.mkdir(parents=True)
+        generated.write_bytes(b'local generated bytecode')
+        try: qualified = self.qualify()
+        except RuntimeError as error: self.fail('Generated bytecode changed the qualified source set: '+str(error))
+        self.assertEqual(2, qualified['suites'])
+
+    def test_loaded_pinned_qualification_rejects_changed_report_or_payload(self):
+        qualified = self.qualify()
+        pinned = Path(self.temp.name)/'qualified.json'
+        pinned.write_text(json.dumps(qualified), encoding='utf-8')
+        pin = self.subject.digest(pinned)
+        self.assertEqual(qualified, self.subject.load(pinned, pin, self.repo, '1.5.0.40', lambda _: self.pe))
+        self.report.with_suffix('.log').write_text('different run', encoding='utf-8')
+        with self.assertRaises(RuntimeError):
+            self.subject.load(pinned, pin, self.repo, '1.5.0.40', lambda _: self.pe)
+
+
+if __name__ == '__main__': unittest.main()

@@ -1,0 +1,34 @@
+Initial missing-feature RED (exit 1):
+FAIL: acquire-only native live view has no owned publish / Draw-borrow / retirement lifecycle
+
+Final-descriptor callback regression RED:
+PASS: disabled and disposed view never acquires a native source
+PASS: current native image is borrowed with padding excluded
+PASS: same SRV is acquired and displayed again on every update
+PASS: disable retires immediately and waits for all Draw borrowers
+PASS: invalidation clears a published image without a new native call
+PASS: reentrant disable during acquire cannot publish its result
+PASS: reentrant invalidation during acquire cannot publish its result
+PASS: failed source and off-thread update stop the previous image
+PASS: acquisition exceptions do not leave old content visible
+PASS: malformed dimensions and dead texture handle cannot publish
+PASS: source owner and descriptor changes replace and retire old content
+PASS: concurrent replacement cannot dispose an active Draw borrow
+FAIL: native node source proves owner before and after bounds and retain: no owner callback after final descriptor validation may publish an obsolete SRV
+PortraitNativeLiveViewTests: 38 checks, 1 failed
+
+Final-addon callback invalidation regression RED:
+PASS: disabled and disposed view never acquires a native source
+PASS: current native image is borrowed with padding excluded
+PASS: same SRV is acquired and displayed again on every update
+PASS: disable retires immediately and waits for all Draw borrowers
+PASS: invalidation clears a published image without a new native call
+PASS: reentrant disable during acquire cannot publish its result
+PASS: reentrant invalidation during acquire cannot publish its result
+PASS: failed source and off-thread update stop the previous image
+PASS: acquisition exceptions do not leave old content visible
+PASS: malformed dimensions and dead texture handle cannot publish
+PASS: source owner and descriptor changes replace and retire old content
+PASS: concurrent replacement cannot dispose an active Draw borrow
+FAIL: native node source proves owner before and after bounds and retain: invalidation inside final addon callback stops before old native structures or component lookup are used
+PortraitNativeLiveViewTests: 39 checks, 1 failed

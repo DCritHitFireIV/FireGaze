@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings>
+  <Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks><AssemblyName>fgtest</AssemblyName>
+  <NoWarn>$(NoWarn);CS0436</NoWarn><TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+  <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitCaptureBridge.cs')">$(DefineConstants);HAS_BRIDGE</DefineConstants>
+ </PropertyGroup>
+ <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCapture*.cs" LinkBase="Source" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLive*.cs" LinkBase="Source" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Session.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailSource.cs" Link="ThumbnailSource.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitCaptureBridge.cs" Link="Bridge.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitCaptureBridge.cs')" />
+  <Reference Include="FireGaze"><HintPath>../../src/FireGaze/bin/Release/FireGaze.dll</HintPath></Reference>
+  <Reference Include="FFXIVClientStructs"><HintPath>$(DALAMUD_HOME)/FFXIVClientStructs.dll</HintPath></Reference>
+  <Reference Include="InteropGenerator.Runtime"><HintPath>$(DALAMUD_HOME)/InteropGenerator.Runtime.dll</HintPath></Reference>
+  <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+  <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(DALAMUD_HOME)/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+ </ItemGroup>
+</Project>

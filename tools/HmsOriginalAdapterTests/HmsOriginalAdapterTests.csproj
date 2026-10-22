@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DalamudHome Condition="'$(DalamudHome)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DalamudHome>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Fixtures/**/*.cs" />
+    <Reference Include="Dalamud"><HintPath>$(DalamudHome)/Dalamud.dll</HintPath></Reference>
+    <Reference Include="FFXIVClientStructs"><HintPath>$(DalamudHome)/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(DalamudHome)/InteropGenerator.Runtime.dll</HintPath></Reference>
+    <Reference Include="Serilog"><HintPath>$(DalamudHome)/Serilog.dll</HintPath></Reference>
+    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalAdapter.cs" Link="HmsOriginalAdapter.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalBodyState.cs" Link="HmsOriginalBodyState.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview.Core/HmsCoexistencePolicy.cs" Link="HmsCoexistencePolicy.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalFingerprint.cs" Condition="Exists('../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalFingerprint.cs')" Link="HmsOriginalFingerprint.cs" />
+  </ItemGroup>
+</Project>

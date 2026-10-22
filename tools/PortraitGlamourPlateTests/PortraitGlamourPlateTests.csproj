@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+ </PropertyGroup>
+ <ItemGroup>
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlate*.cs" LinkBase="GlamourPlate" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentModels.cs" Link="OwnedEquipmentModels.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/OwnedCacheWriter.cs" Link="OwnedCacheWriter.cs" />
+  <Reference Include="FFXIVClientStructs"><HintPath>$(DALAMUD_HOME)/FFXIVClientStructs.dll</HintPath></Reference>
+  <Reference Include="InteropGenerator.Runtime"><HintPath>$(DALAMUD_HOME)/InteropGenerator.Runtime.dll</HintPath></Reference>
+  <Reference Include="Lumina"><HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath></Reference>
+ </ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
+</Project>
