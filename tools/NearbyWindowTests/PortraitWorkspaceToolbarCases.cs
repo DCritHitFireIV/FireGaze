@@ -132,6 +132,7 @@ namespace Dalamud.Bindings.ImGui
             FontScale = scale; rowBottom = 100; itemMin = itemMax = cursor;
             VectorPaths.Clear(); VectorPath.Clear(); Items.Clear(); OpenedPopups.Clear(); PushedColors.Clear(); IDs.Clear(); Groups.Clear();
             click = nextClick; DisabledDepth = ConsumedClicks = 0;
+            BeginImageFrame();
         }
         public static Vector2 GetCursorScreenPos() => cursor;
         public static Vector2 GetContentRegionAvail() => contentSize - (cursor - Position);
@@ -165,7 +166,7 @@ namespace Dalamud.Bindings.ImGui
         public static void TextUnformatted(string label) => Submit(label, CalcTextSize(label));
         public static void TextWrapped(string label) => Submit(label, new(MathF.Min(GetContentRegionAvail().X, CalcTextSize(label).X), GetFontSize()));
         public static bool SmallButton(string label) => Button(label, Vector2.Zero);
-        public static bool IsItemHovered() => false;
+        public static bool IsItemHovered() => imageLastHovered;
         public static bool IsItemFocused() => false;
         public static void SetTooltip(string label) { }
         public static void PushStyleColor(ImGuiCol color, Vector4 value) => PushedColors.Add((color, value));
@@ -179,7 +180,7 @@ namespace Dalamud.Bindings.ImGui
         public static DrawList GetWindowDrawList() => new();
         internal sealed partial class DrawList
         {
-            public void AddRect(Vector2 a, Vector2 b, uint color, float rounding, ImDrawFlags flags, float thickness) { }
+            public void AddRect(Vector2 a, Vector2 b, uint color, float rounding, ImDrawFlags flags, float thickness) => ImageGripBorders++;
             public void AddLine(Vector2 a, Vector2 b, uint color, float thickness) { }
             public void AddImage(nint handle, Vector2 a, Vector2 b, Vector2 uv0, Vector2 uv1, uint tint)
                 => Items.Add(new("###draw-image", "###draw-image", a, b));
@@ -191,6 +192,7 @@ namespace Dalamud.Bindings.ImGui
         }
         private static void Submit(string label, Vector2 size)
         {
+            imageLastHovered = imageLastActive = false;
             itemMin = cursor; itemMax = cursor + size;
             var id = string.Join('/', IDs.Reverse().Append(label));
             Items.Add(new(label, id, itemMin, itemMax));

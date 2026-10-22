@@ -138,6 +138,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private readonly PortraitSourceGuideState sourceGuide = new();
     private string lastSourceOwner = "";
     private PortraitEditorBounds? ownerBounds;
+    // Wide workbench splitter positions, stored in logical pixels so a DPI
+    // change keeps the user's proportions. Narrow windows ignore these values.
 
     public void SetOwnerBounds(PortraitEditorBounds bounds) => ownerBounds = bounds;
 
@@ -215,7 +217,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         }
         DrawWorkspaceHeader();
         var area = ImGui.GetContentRegionAvail();
-        var layout = PortraitWorkspaceLayout.For(area.X, area.Y, Scale, workspacePortraitVisible);
+        var layout = GetWorkspaceLayout(area);
         var origin = ImGui.GetCursorScreenPos();
         var selected = SelectedAppearanceGroup();
 
@@ -242,6 +244,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
                 DrawSourceRecords();
             }
         });
+        DrawWorkspaceSplitters(origin, layout);
         ImGui.SetCursorScreenPos(origin + new Vector2(0, layout.BodyHeight + layout.Gap));
         DrawWorkspaceFooter();
         DrawHistoryPopup();

@@ -117,7 +117,7 @@ namespace Dalamud.Bindings.ImGui
         public static void CloseCurrentPopup() { }
         public static bool ColorButton(string label, Vector4 color, ImGuiColorEditFlags flags, Vector2 size) => Button(label, size);
         public static bool BeginChild(string id, Vector2 size, bool border) => true;
-        public static void EndChild() { }
+        public static void EndChild() => EndImageChild();
         internal sealed partial class DrawList
         {
             public void AddTriangleFilled(Vector2 a, Vector2 b, Vector2 c, uint color) { }
