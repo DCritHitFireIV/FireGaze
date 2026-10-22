@@ -1,0 +1,561 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-22",
+    "source": "user",
+    "label": "玩家包 · 9a2e8b",
+    "kinds": [
+      "llm"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Item ",
+      "Translated": "物品",
+      "Context": "ArmouryScanner.TryScan",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use /yeet scan for the reviewed workflow with selection and capacity checks.",
+      "Translated": "使用 /yeet scan 进入带选择与容量检查的审核流程。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The commands below scan and enqueue immediately without the reviewed confirmation window. Gearset protection and movement blockers still apply.",
+      "Translated": "以下命令会立即扫描并入队，不显示审核确认窗口。套装保护与移动限制仍然生效。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Click Copy beside any row, then paste the command into chat.",
+      "Translated": "点击任意行旁的复制，然后将命令粘贴到聊天框。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Armoryeet commands",
+      "Translated": "Armoryeet 命令",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open reviewed results",
+      "Translated": "打开审核结果",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show movement status",
+      "Translated": "显示移动状态",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Stop the active queue",
+      "Translated": "停止当前队列",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open settings",
+      "Translated": "打开设置",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use /yeet help for aliases and the full list.",
+      "Translated": "使用 /yeet help 查看别名与完整列表。",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Purpose",
+      "Translated": "用途",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Behavior",
+      "Translated": "行为",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Scan scope",
+      "Translated": "扫描范围",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Movement",
+      "Translated": "移动",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Appearance",
+      "Translated": "外观",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Head",
+      "Translated": "头部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Body",
+      "Translated": "身体",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hands",
+      "Translated": "手部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Waist",
+      "Translated": "腰部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Feet",
+      "Translated": "脚部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Ears",
+      "Translated": "耳部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Neck",
+      "Translated": "颈部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Wrists",
+      "Translated": "腕部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rings",
+      "Translated": "戒指",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Soul crystals are always protected and are never part of the scan scope.",
+      "Translated": "灵魂水晶始终受保护，不在扫描范围内。",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Delay between items",
+      "Translated": "物品间隔",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Skipping confirmation starts moves immediately. Capacity and selection checks still apply.",
+      "Translated": "跳过确认将立即开始移动。容量与选择检查仍会生效。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "No free inventory slots",
+      "Translated": "无空闲背包栏位",
+      "Context": "ItemMover.Tick",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Moving ",
+      "Translated": "移动中",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": ", skipped ",
+      "Translated": "，已跳过",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "; moved ",
+      "Translated": "；已移动",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open Armoryeet.",
+      "Translated": "打开 Armoryeet。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open Armoryeet (alias: /armoryeet).\n/yeet help → Show commands and aliases.",
+      "Translated": "打开 Armoryeet（别名：/armoryeet）。\n/yeet help → 显示命令与别名。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open Armoryeet settings.",
+      "Translated": "打开 Armoryeet 设置。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "enabled armoury categories",
+      "Translated": "已启用的军械库分类",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "main hand",
+      "Translated": "主手",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "off hand",
+      "Translated": "副手",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Move queue stopped.",
+      "Translated": "移动队列已停止。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Unknown command: /yeet ",
+      "Translated": "未知命令：/yeet",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": ". Use /yeet help.",
+      "Translated": "。使用 /yeet help 查看帮助。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Already moving. Use /yeet stop first.",
+      "Translated": "已在移动中。请先使用 /yeet stop。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Scan unavailable. Try again when character and inventory data are loaded.",
+      "Translated": "扫描不可用。请在角色和背包数据加载后重试。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Scan found ",
+      "Translated": "扫描找到",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " item(s).",
+      "Translated": "个物品。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "No unregistered ",
+      "Translated": "未找到未登记的",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " item(s) found.",
+      "Translated": "个物品。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Character changed or movement already active. Scan again.",
+      "Translated": "角色已切换或移动已在进行中。请重新扫描。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " unregistered ",
+      "Translated": "未登记的",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " item(s) to inventory.",
+      "Translated": "个物品已移入背包。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Idle. No scan results.",
+      "Translated": "空闲。无扫描结果。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Idle. Last scan found ",
+      "Translated": "空闲。上次扫描找到",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " item(s) in ",
+      "Translated": "个物品，位于",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " group(s). ",
+      "Translated": "个分组中。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " protected.",
+      "Translated": "已保护。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Commands: /yeet, /yeet scan, /yeet chest, /yeet weapons, /yeet armor, /yeet accessories, /yeet mainhand, /yeet offhand, /yeet head, /yeet body, /yeet hands, /yeet waist, /yeet legs, /yeet feet, /yeet ears, /yeet neck, /yeet wrist, /yeet rings, /yeet settings, /yeet stop, /yeet status.",
+      "Translated": "命令：/yeet、/yeet scan、/yeet chest、/yeet weapons、/yeet armor、/yeet accessories、/yeet mainhand、/yeet offhand、/yeet head、/yeet body、/yeet hands、/yeet waist、/yeet legs、/yeet feet、/yeet ears、/yeet neck、/yeet wrist、/yeet rings、/yeet settings、/yeet stop、/yeet status。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hover the ? button in Armoryeet for a quick command reference.",
+      "Translated": "将鼠标悬停在 Armoryeet 中的 ? 按钮上可查看快捷命令参考。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "104 free slots",
+      "Translated": "104 个空位",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Not enough inventory space: ",
+      "Translated": "背包空间不足：",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " required, ",
+      "Translated": "需要，",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " available.",
+      "Translated": "可用。",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Filter items",
+      "Translated": "筛选物品",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Filter by item name...",
+      "Translated": "按物品名称筛选...",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " of ",
+      "Translated": "/ 共",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "category-",
+      "Translated": "分类-",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Selection",
+      "Translated": "选择",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Category",
+      "Translated": "分类",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Count",
+      "Translated": "数量",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " selected. Click to ",
+      "Translated": "已选中。点击",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "select",
+      "Translated": "选择",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "clear",
+      "Translated": "清除",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " the entire category, including hidden items.",
+      "Translated": "整个分类，包括隐藏物品。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Stop the active move before changing selection.",
+      "Translated": "更改选择前请先停止当前移动。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "\nItem ID: ",
+      "Translated": "物品 ID：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "\nArmoury slot: ",
+      "Translated": "兵装库栏位：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "\nContainer: ",
+      "Translated": "容器：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "\nStop the active move before changing selection.",
+      "Translated": "更改选择前请先停止当前移动。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " slots needed · ",
+      "Translated": "需要槽位 ·",
+      "Context": "PluginUI.CapacityGuidance",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " available",
+      "Translated": "可用",
+      "Context": "PluginUI.CapacityGuidance",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Confirm move###ArmoryeetConfirm",
+      "Translated": "确认移动",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "soul crystals are protected",
+      "Translated": "灵魂水晶受保护",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "the scanned Armoury slot is now empty",
+      "Translated": "扫描的兵装库槽位现已为空",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "the item in the Armoury slot changed",
+      "Translated": "兵装库槽位中的物品已变更",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "the item is now used by a gearset or equipped",
+      "Translated": "该物品现已被套装使用或已装备",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "the move did not complete after repeated attempts",
+      "Translated": "多次尝试后移动仍未完成",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "the transfer could not be confirmed; rescan before retrying",
+      "Translated": "无法确认转移；请重新扫描后再试",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Main Hand",
+      "Translated": "主手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Off Hand",
+      "Translated": "副手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": ".ctor",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

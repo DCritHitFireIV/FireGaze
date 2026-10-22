@@ -1,1 +1,761 @@
-{"type":"uit-contribution","plugin":"Armoryeet","kinds":["llm"],"entries":[{"Original":"Item ","Translated":"物品","Context":"ArmouryScanner.TryScan","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Use /yeet scan for the reviewed workflow with selection and capacity checks.","Translated":"使用 /yeet scan 进入带选择与容量检查的审核流程。","Context":"CommandReferenceUI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"The commands below scan and enqueue immediately without the reviewed confirmation window. Gearset protection and movement blockers still apply.","Translated":"以下命令会立即扫描并入队，不显示审核确认窗口。套装保护与移动限制仍然生效。","Context":"CommandReferenceUI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Click Copy beside any row, then paste the command into chat.","Translated":"点击任意行旁的复制，然后将命令粘贴到聊天框。","Context":"CommandReferenceUI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Armoryeet commands","Translated":"Armoryeet 命令","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Open reviewed results","Translated":"打开审核结果","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Show movement status","Translated":"显示移动状态","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Stop the active queue","Translated":"停止当前队列","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Open settings","Translated":"打开设置","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Use /yeet help for aliases and the full list.","Translated":"使用 /yeet help 查看别名与完整列表。","Context":"CommandReferenceUI.DrawCompactTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Command","Translated":"命令","Context":"CommandReferenceUI.DrawSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Purpose","Translated":"用途","Context":"CommandReferenceUI.DrawSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Copy","Translated":"复制","Context":"CommandReferenceUI.DrawSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Behavior","Translated":"行为","Context":"ConfigUI.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Scan scope","Translated":"扫描范围","Context":"ConfigUI.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Movement","Translated":"移动","Context":"ConfigUI.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Appearance","Translated":"外观","Context":"ConfigUI.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Head","Translated":"头部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Body","Translated":"身体","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hands","Translated":"手部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Waist","Translated":"腰部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Legs","Translated":"腿部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Feet","Translated":"脚部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Ears","Translated":"耳部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Neck","Translated":"颈部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Wrists","Translated":"腕部","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Rings","Translated":"戒指","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Soul crystals are always protected and are never part of the scan scope.","Translated":"灵魂水晶始终受保护，不在扫描范围内。","Context":"ConfigUI.DrawScanScope","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Delay between items","Translated":"物品间隔","Context":"ConfigUI.DrawMovement","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Skipping confirmation starts moves immediately. Capacity and selection checks still apply.","Translated":"跳过确认将立即开始移动。容量与选择检查仍会生效。","Context":"ConfigUI.DrawMovement","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"No free inventory slots","Translated":"无空闲背包栏位","Context":"ItemMover.Tick","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Moving ","Translated":"移动中","Context":"ItemMover.FormatStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":", skipped ","Translated":"，已跳过","Context":"ItemMover.FormatStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"; moved ","Translated":"；已移动","Context":"ItemMover.FormatStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Open Armoryeet.","Translated":"打开 Armoryeet。","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Open Armoryeet (alias: /armoryeet).\n/yeet help → Show commands and aliases.","Translated":"打开 Armoryeet（别名：/armoryeet）。\n/yeet help → 显示命令与别名。","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Open Armoryeet settings.","Translated":"打开 Armoryeet 设置。","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"enabled armoury categories","Translated":"已启用的军械库分类","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"main hand","Translated":"主手","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"off hand","Translated":"副手","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Move queue stopped.","Translated":"移动队列已停止。","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Unknown command: /yeet ","Translated":"未知命令：/yeet","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":". Use /yeet help.","Translated":"。使用 /yeet help 查看帮助。","Context":"Plugin.OnYeetCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Already moving. Use /yeet stop first.","Translated":"已在移动中。请先使用 /yeet stop。","Context":"Plugin.ScanAndOpen","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Scan unavailable. Try again when character and inventory data are loaded.","Translated":"扫描不可用。请在角色和背包数据加载后重试。","Context":"Plugin.ScanAndOpen","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Scan found ","Translated":"扫描找到","Context":"Plugin.ScanAndOpen","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" item(s).","Translated":"个物品。","Context":"Plugin.ScanAndOpen","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"No unregistered ","Translated":"未找到未登记的","Context":"Plugin.ScanAndMove","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" item(s) found.","Translated":"个物品。","Context":"Plugin.ScanAndMove","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Character changed or movement already active. Scan again.","Translated":"角色已切换或移动已在进行中。请重新扫描。","Context":"Plugin.ScanAndMove","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" unregistered ","Translated":"未登记的","Context":"Plugin.ScanAndMove","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" item(s) to inventory.","Translated":"个物品已移入背包。","Context":"Plugin.ScanAndMove","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Idle. No scan results.","Translated":"空闲。无扫描结果。","Context":"Plugin.PrintStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Idle. Last scan found ","Translated":"空闲。上次扫描找到","Context":"Plugin.PrintStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" item(s) in ","Translated":"个物品，位于","Context":"Plugin.PrintStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" group(s). ","Translated":"个分组中。","Context":"Plugin.PrintStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" protected.","Translated":"已保护。","Context":"Plugin.PrintStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Commands: /yeet, /yeet scan, /yeet chest, /yeet weapons, /yeet armor, /yeet accessories, /yeet mainhand, /yeet offhand, /yeet head, /yeet body, /yeet hands, /yeet waist, /yeet legs, /yeet feet, /yeet ears, /yeet neck, /yeet wrist, /yeet rings, /yeet settings, /yeet stop, /yeet status.","Translated":"命令：/yeet、/yeet scan、/yeet chest、/yeet weapons、/yeet armor、/yeet accessories、/yeet mainhand、/yeet offhand、/yeet head、/yeet body、/yeet hands、/yeet waist、/yeet legs、/yeet feet、/yeet ears、/yeet neck、/yeet wrist、/yeet rings、/yeet settings、/yeet stop、/yeet status。","Context":"Plugin.PrintHelp","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Hover the ? button in Armoryeet for a quick command reference.","Translated":"将鼠标悬停在 Armoryeet 中的 ? 按钮上可查看快捷命令参考。","Context":"Plugin.PrintHelp","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"104 free slots","Translated":"104 个空位","Context":"PluginUI.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Not enough inventory space: ","Translated":"背包空间不足：","Context":"PluginUI.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":" required, ","Translated":"需要，","Context":"PluginUI.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":" available.","Translated":"可用。","Context":"PluginUI.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Filter items","Translated":"筛选物品","Context":"PluginUI.DrawReview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Filter by item name...","Translated":"按物品名称筛选...","Context":"PluginUI.DrawReview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":" of ","Translated":"/ 共","Context":"PluginUI.DrawReview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"category-","Translated":"分类-","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Selection","Translated":"选择","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Category","Translated":"分类","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Count","Translated":"数量","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":" selected. Click to ","Translated":"已选中。点击","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"select","Translated":"选择","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"clear","Translated":"清除","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" the entire category, including hidden items.","Translated":"整个分类，包括隐藏物品。","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop the active move before changing selection.","Translated":"更改选择前请先停止当前移动。","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"\nItem ID: ","Translated":"物品 ID：","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"\nArmoury slot: ","Translated":"兵装库栏位：","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"\nContainer: ","Translated":"容器：","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"\nStop the active move before changing selection.","Translated":"更改选择前请先停止当前移动。","Context":"PluginUI.DrawGroup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" slots needed · ","Translated":"需要槽位 ·","Context":"PluginUI.CapacityGuidance","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":" available","Translated":"可用","Context":"PluginUI.CapacityGuidance","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Confirm move###ArmoryeetConfirm","Translated":"确认移动","Context":"PluginUI.DrawConfirmation","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.OpenPopup"},{"Original":"soul crystals are protected","Translated":"灵魂水晶受保护","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"the scanned Armoury slot is now empty","Translated":"扫描的兵装库槽位现已为空","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"the item in the Armoury slot changed","Translated":"兵装库槽位中的物品已变更","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"the item is now used by a gearset or equipped","Translated":"该物品现已被套装使用或已装备","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"the move did not complete after repeated attempts","Translated":"多次尝试后移动仍未完成","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"the transfer could not be confirmed; rescan before retrying","Translated":"无法确认转移；请重新扫描后再试","Context":"PluginUI.FormatSkipReason","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Main Hand","Translated":"主手","Context":"PluginUI.FormatInventoryType","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Off Hand","Translated":"副手","Context":"PluginUI.FormatInventoryType","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Settings","Translated":"设置","Context":".ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Armoryeet",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Item ",
+      "Translated": "物品",
+      "Context": "ArmouryScanner.TryScan",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Use /yeet scan for the reviewed workflow with selection and capacity checks.",
+      "Translated": "使用 /yeet scan 进入带选择与容量检查的审核流程。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "The commands below scan and enqueue immediately without the reviewed confirmation window. Gearset protection and movement blockers still apply.",
+      "Translated": "以下命令会立即扫描并入队，不显示审核确认窗口。套装保护与移动限制仍然生效。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Click Copy beside any row, then paste the command into chat.",
+      "Translated": "点击任意行旁的复制，然后将命令粘贴到聊天框。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Armoryeet commands",
+      "Translated": "Armoryeet 命令",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Open reviewed results",
+      "Translated": "打开审核结果",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Show movement status",
+      "Translated": "显示移动状态",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Stop the active queue",
+      "Translated": "停止当前队列",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Open settings",
+      "Translated": "打开设置",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Use /yeet help for aliases and the full list.",
+      "Translated": "使用 /yeet help 查看别名与完整列表。",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Purpose",
+      "Translated": "用途",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Behavior",
+      "Translated": "行为",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Scan scope",
+      "Translated": "扫描范围",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Movement",
+      "Translated": "移动",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Appearance",
+      "Translated": "外观",
+      "Context": "ConfigUI.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Head",
+      "Translated": "头部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Body",
+      "Translated": "身体",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hands",
+      "Translated": "手部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Waist",
+      "Translated": "腰部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Feet",
+      "Translated": "脚部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Ears",
+      "Translated": "耳部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Neck",
+      "Translated": "颈部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Wrists",
+      "Translated": "腕部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Rings",
+      "Translated": "戒指",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Soul crystals are always protected and are never part of the scan scope.",
+      "Translated": "灵魂水晶始终受保护，不在扫描范围内。",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Delay between items",
+      "Translated": "物品间隔",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Skipping confirmation starts moves immediately. Capacity and selection checks still apply.",
+      "Translated": "跳过确认将立即开始移动。容量与选择检查仍会生效。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "No free inventory slots",
+      "Translated": "无空闲背包栏位",
+      "Context": "ItemMover.Tick",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Moving ",
+      "Translated": "移动中",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": ", skipped ",
+      "Translated": "，已跳过",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "; moved ",
+      "Translated": "；已移动",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Open Armoryeet.",
+      "Translated": "打开 Armoryeet。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Open Armoryeet (alias: /armoryeet).\n/yeet help → Show commands and aliases.",
+      "Translated": "打开 Armoryeet（别名：/armoryeet）。\n/yeet help → 显示命令与别名。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Open Armoryeet settings.",
+      "Translated": "打开 Armoryeet 设置。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "enabled armoury categories",
+      "Translated": "已启用的军械库分类",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "main hand",
+      "Translated": "主手",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "off hand",
+      "Translated": "副手",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Move queue stopped.",
+      "Translated": "移动队列已停止。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Unknown command: /yeet ",
+      "Translated": "未知命令：/yeet",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": ". Use /yeet help.",
+      "Translated": "。使用 /yeet help 查看帮助。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Already moving. Use /yeet stop first.",
+      "Translated": "已在移动中。请先使用 /yeet stop。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Scan unavailable. Try again when character and inventory data are loaded.",
+      "Translated": "扫描不可用。请在角色和背包数据加载后重试。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Scan found ",
+      "Translated": "扫描找到",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " item(s).",
+      "Translated": "个物品。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "No unregistered ",
+      "Translated": "未找到未登记的",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " item(s) found.",
+      "Translated": "个物品。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Character changed or movement already active. Scan again.",
+      "Translated": "角色已切换或移动已在进行中。请重新扫描。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " unregistered ",
+      "Translated": "未登记的",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " item(s) to inventory.",
+      "Translated": "个物品已移入背包。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Idle. No scan results.",
+      "Translated": "空闲。无扫描结果。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Idle. Last scan found ",
+      "Translated": "空闲。上次扫描找到",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " item(s) in ",
+      "Translated": "个物品，位于",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " group(s). ",
+      "Translated": "个分组中。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " protected.",
+      "Translated": "已保护。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Commands: /yeet, /yeet scan, /yeet chest, /yeet weapons, /yeet armor, /yeet accessories, /yeet mainhand, /yeet offhand, /yeet head, /yeet body, /yeet hands, /yeet waist, /yeet legs, /yeet feet, /yeet ears, /yeet neck, /yeet wrist, /yeet rings, /yeet settings, /yeet stop, /yeet status.",
+      "Translated": "命令：/yeet、/yeet scan、/yeet chest、/yeet weapons、/yeet armor、/yeet accessories、/yeet mainhand、/yeet offhand、/yeet head、/yeet body、/yeet hands、/yeet waist、/yeet legs、/yeet feet、/yeet ears、/yeet neck、/yeet wrist、/yeet rings、/yeet settings、/yeet stop、/yeet status。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Hover the ? button in Armoryeet for a quick command reference.",
+      "Translated": "将鼠标悬停在 Armoryeet 中的 ? 按钮上可查看快捷命令参考。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "104 free slots",
+      "Translated": "104 个空位",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Not enough inventory space: ",
+      "Translated": "背包空间不足：",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": " required, ",
+      "Translated": "需要，",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": " available.",
+      "Translated": "可用。",
+      "Context": "PluginUI.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Filter items",
+      "Translated": "筛选物品",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Filter by item name...",
+      "Translated": "按物品名称筛选...",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": " of ",
+      "Translated": "/ 共",
+      "Context": "PluginUI.DrawReview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "category-",
+      "Translated": "分类-",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Selection",
+      "Translated": "选择",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Category",
+      "Translated": "分类",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Count",
+      "Translated": "数量",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": " selected. Click to ",
+      "Translated": "已选中。点击",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "select",
+      "Translated": "选择",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "clear",
+      "Translated": "清除",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " the entire category, including hidden items.",
+      "Translated": "整个分类，包括隐藏物品。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop the active move before changing selection.",
+      "Translated": "更改选择前请先停止当前移动。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "\nItem ID: ",
+      "Translated": "物品 ID：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "\nArmoury slot: ",
+      "Translated": "兵装库栏位：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "\nContainer: ",
+      "Translated": "容器：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "\nStop the active move before changing selection.",
+      "Translated": "更改选择前请先停止当前移动。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " slots needed · ",
+      "Translated": "需要槽位 ·",
+      "Context": "PluginUI.CapacityGuidance",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": " available",
+      "Translated": "可用",
+      "Context": "PluginUI.CapacityGuidance",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Confirm move###ArmoryeetConfirm",
+      "Translated": "确认移动",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup"
+    },
+    {
+      "Original": "soul crystals are protected",
+      "Translated": "灵魂水晶受保护",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "the scanned Armoury slot is now empty",
+      "Translated": "扫描的兵装库槽位现已为空",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "the item in the Armoury slot changed",
+      "Translated": "兵装库槽位中的物品已变更",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "the item is now used by a gearset or equipped",
+      "Translated": "该物品现已被套装使用或已装备",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "the move did not complete after repeated attempts",
+      "Translated": "多次尝试后移动仍未完成",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "the transfer could not be confirmed; rescan before retrying",
+      "Translated": "无法确认转移；请重新扫描后再试",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Main Hand",
+      "Translated": "主手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Off Hand",
+      "Translated": "副手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": ".ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-22T14:33:33",
+  "imported": {
+    "archive": "uit-direct-2026-10-22T14-33-18-096Z-fe376236-2026-10-22T143333.json",
+    "accepted": 91,
+    "filled": 91,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 91 条 `Armoryeet` 的界面文字译文，已收为**独立译文包** `uit-packs/Armoryeet@user-9a2e8b.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 91 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
