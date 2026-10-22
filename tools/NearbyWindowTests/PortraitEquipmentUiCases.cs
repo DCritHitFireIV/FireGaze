@@ -9,6 +9,24 @@ internal static class PortraitEquipmentUiCases
     {
         foreach (var scale in new[] { 1f, 1.5f, 2f })
         {
+            var stable = new PortraitPreviewWindow();
+            var edges = new List<float>();
+            ImGui.NavigationOverflow = false; ImGui.NavigationScrollbarFrames.Clear();
+            for (var frame = 0; frame < 8; frame++)
+            {
+                ImGui.ResetItems(1120 * scale, scale);
+                stable.DrawNavigationForTest(new(0, 0, 160 * scale, 700 * scale));
+                var icon = ImGui.Items.First(item => item.Label == "###Slot");
+                edges.Add(icon.Maximum.X - icon.Minimum.X);
+            }
+            check(edges.Distinct().Count() == 1,
+                "short wide navigation settles immediately instead of alternating icon sizes at " + scale + "x");
+            check(ImGui.NavigationScrollbarFrames.All(visible => visible),
+                "navigation reserves its scroll gutter before measuring the grid at " + scale + "x");
+        }
+        ImGui.NavigationOverflow = false;
+        foreach (var scale in new[] { 1f, 1.5f, 2f })
+        {
             var window = new PortraitPreviewWindow();
             ImGui.ResetItems(160 * scale, scale);
             window.DrawSlotsForTest();
@@ -90,6 +108,11 @@ namespace FireGaze.PortraitPreview
         private static bool DrawItemIcon(string id, PortraitBrowserItem item, float size, bool selected, PortraitSlot? slot)
             => ImGui.Button(id, new(size));
         internal void DrawSlotsForTest() => DrawSlots(feature.Current);
+        internal void DrawNavigationForTest(PortraitWorkspaceRegion region)
+            => DrawWorkspaceNavigationRegion(new(100), region, () =>
+            {
+                ImGui.TextDisabled("装备部位"); ImGui.Separator(); DrawSlots(feature.Current);
+            });
         internal void DrawPaletteForTest() => DrawDyePalette();
         internal void OpenPaletteForTest()
         {

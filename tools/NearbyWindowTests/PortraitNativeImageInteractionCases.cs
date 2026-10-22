@@ -151,6 +151,8 @@ namespace Dalamud.Bindings.ImGui
         internal static ImGuiWindowFlags ImageChildFlags;
         internal static readonly List<(Vector2 Minimum, Vector2 Maximum)> ImageClips = [];
         internal static int ImageGripBackgrounds, ImageGripBorders;
+        internal static bool NavigationOverflow, NavigationChild;
+        internal static readonly List<bool> NavigationScrollbarFrames = [];
         private static readonly Stack<(Vector2 Position, Vector2 Cursor, Vector2 Content, float Bottom, Vector2 Min, Vector2 Max, Vector2 ChildSize)> ImageChildren = [];
         internal static void BeginImageFrame()
         {
@@ -198,11 +200,23 @@ namespace Dalamud.Bindings.ImGui
         {
             ImageChildren.Push((Position, cursor, contentSize, rowBottom, itemMin, itemMax, size));
             ImageChildFlags = flags; Position = cursor; contentSize = size; rowBottom = cursor.Y;
+            NavigationChild = id == "###PortraitWorkspaceNavigation";
+            if (NavigationChild)
+            {
+                var scrollbar = flags.HasFlag(ImGuiWindowFlags.AlwaysVerticalScrollbar) || NavigationOverflow;
+                NavigationScrollbarFrames.Add(scrollbar);
+                if (scrollbar) contentSize.X -= GetStyle().ScrollbarSize;
+            }
             return true;
         }
         private static void EndImageChild()
         {
             if (!ImageChildren.TryPop(out var parent)) return;
+            if (NavigationChild)
+            {
+                NavigationOverflow = rowBottom - Position.Y > parent.ChildSize.Y;
+                NavigationChild = false;
+            }
             Position = parent.Position; cursor = parent.Cursor; contentSize = parent.Content;
             rowBottom = parent.Bottom; itemMin = parent.Min; itemMax = parent.Max;
             Submit("###portrait-child-space", parent.ChildSize);

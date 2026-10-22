@@ -66,7 +66,7 @@ namespace Dalamud.Bindings.ImGui
 {
     internal enum ImGuiCond { Appearing, Always }
     [Flags]
-    internal enum ImGuiWindowFlags { NoDecoration = 1, AlwaysAutoResize = 2, NoSavedSettings = 4, NoFocusOnAppearing = 8, NoScrollbar = 16, NoScrollWithMouse = 32 }
+    internal enum ImGuiWindowFlags { None = 0, NoDecoration = 1, AlwaysAutoResize = 2, NoSavedSettings = 4, NoFocusOnAppearing = 8, NoScrollbar = 16, NoScrollWithMouse = 32, AlwaysVerticalScrollbar = 64 }
     internal readonly record struct ImGuiViewportPtr(uint ID, Vector2 WorkPos, Vector2 WorkSize)
     { public bool IsNull => ID == 0; public Vector2 Pos => WorkPos; }
     internal static partial class ImGui

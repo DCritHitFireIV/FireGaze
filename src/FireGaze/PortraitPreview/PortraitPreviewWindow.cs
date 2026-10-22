@@ -221,7 +221,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var origin = ImGui.GetCursorScreenPos();
         var selected = SelectedAppearanceGroup();
 
-        DrawWorkspaceRegion("###PortraitWorkspaceNavigation", origin, layout.Navigation, () =>
+        DrawWorkspaceNavigationRegion(origin, layout.Navigation, () =>
         {
             ImGui.TextDisabled(showDesignShowcase ? "展示内容" : appearanceTab ? "美容类别" : "装备部位");
             ImGui.Separator();
@@ -250,14 +250,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         DrawHistoryPopup();
         DrawLibraryPopups();
         DrawDyePalette();
-    }
-
-    private static void DrawWorkspaceRegion(string id, Vector2 origin, PortraitWorkspaceRegion region, Action draw)
-    {
-        ImGui.SetCursorScreenPos(origin + new Vector2(region.X, region.Y));
-        ImGui.BeginChild(id, new Vector2(region.Width, region.Height), false);
-        try { draw(); }
-        finally { ImGui.EndChild(); }
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
