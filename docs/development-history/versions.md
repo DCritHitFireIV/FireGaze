@@ -52,3 +52,10 @@ A binary receipt is explicitly distinguished from a complete frozen source versi
 
 Set `FIREGAZE_HMS_DEV_DLL` to the audited development HMS binary before running `HmsOriginalAdapterTests`.
 The test has no developer-machine path in the public sources.
+
+## Emergency candidate source receipts
+
+| Version | Public source commit | Status |
+| --- | --- | --- |
+| 1.5.0.58 | `34984bd6ae51fdc9fb149d72ee2177f6efd7036b` | unpublished failed candidate |
+| 1.5.0.59 | `13610af7a52e77830437cecbfcf994079cbed2fb` | qualified source; release recorded separately |
