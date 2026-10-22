@@ -135,4 +135,3 @@ namespace FireGaze.PortraitPreview
         internal static Task Combine(Action<Exception> error,params Task[] drains)=>Task.WhenAll(drains);
     }
 }
-

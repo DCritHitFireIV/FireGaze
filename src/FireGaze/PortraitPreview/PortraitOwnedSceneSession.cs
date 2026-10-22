@@ -48,7 +48,7 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
     {
         if (disposed || !Controller.TrySetObserverCamera(camera)) return false;
         renderTargets.RevokeResourceEpoch();
-        
+
         return true;
     }
     internal void Stop(string reason = "Owned scene stopped.")
