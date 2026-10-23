@@ -413,7 +413,7 @@ internal static unsafe class SourceReturnCases
         => (Func<nint, bool> _, out PortraitNativePhaseResolvedPlan? plan, out string reason) => {
             var module = unchecked((nint)0x5C00000000L);
             plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
-                typeof(RenderManager).Assembly.ManifestModule.ModuleVersionId, PortraitNativeCounterIngressContract.For(set)
+                Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"), PortraitNativeCounterIngressContract.For(set)
                     .Select(contract => new PortraitNativePhaseBoundTarget(contract.Phase, module + (nint)contract.RVA, contract.Delegate)).ToArray());
             reason = "external native fixture"; return true;
         };

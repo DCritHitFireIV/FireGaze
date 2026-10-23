@@ -76,7 +76,11 @@ internal sealed class PortraitOwnedSceneController : IDisposable
     internal bool TryStart(PortraitOwnedCharaViewSnapshot snapshot, uint requestedSlot)
     {
         if (disposed || disposeRequested || State != PortraitOwnedSceneControllerState.Off || snapshot is null
-            || !snapshot.Source.IsValid || snapshot.Source.Generation == 0 || requestedSlot >= 8
+            || snapshot.Version != PortraitOwnedCharaViewSnapshot.CurrentVersion || !snapshot.IsDetachedValid
+            || !snapshot.Provenance.IsValid || snapshot.Provenance.Digest != snapshot.ContentDigest
+            || snapshot.Source != snapshot.Provenance.Source || string.IsNullOrWhiteSpace(snapshot.ContentDigest)
+            || !snapshot.Source.IsValid
+            || snapshot.Source.Generation == 0 || requestedSlot >= 8
             || !broker.IsFrameworkThread || !broker.StartAdmission) return false;
         IPortraitOwnedSceneRuntime candidate;
         try { candidate = createRuntime() ?? throw new InvalidOperationException("Owned scene runtime factory returned null."); }

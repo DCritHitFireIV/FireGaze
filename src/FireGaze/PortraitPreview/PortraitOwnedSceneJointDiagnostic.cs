@@ -21,6 +21,7 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
     private readonly IPortraitOwnedSceneSlotNativeApi? native;
     private readonly Func<PortraitNativeThreadStamp> thread;
     private Run? run;
+    private PortraitConsumerObservationSnapshot? lastConsumerObservation;
     private long attempts;
     internal PortraitOwnedSceneJointDiagnostic(Func<bool> framework, Func<PortraitSourceCensusContext?> context,
         Func<PortraitOwnedSceneJointDiagnosticBindings, PortraitOwnedSceneJointHost> createHost,
@@ -32,6 +33,7 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
     }
     internal bool BlocksOperations => Volatile.Read(ref run) is { } value && !value.Retired.Task.IsCompletedSuccessfully;
     internal Task DrainPhysicalAsync() => Volatile.Read(ref run)?.Retired.Task ?? Task.CompletedTask;
+    internal PortraitConsumerObservationSnapshot? ConsumerObservation => Volatile.Read(ref lastConsumerObservation);
     internal PortraitOwnedSceneJointDiagnosticSnapshot Snapshot
     {
         get
@@ -50,9 +52,16 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
         if (!framework() || BlocksOperations) return false;
         try
         {
+            // A replacement request must never inherit a previous detached
+            // observation, even when the previous run retired cleanly.
+            Volatile.Write(ref lastConsumerObservation, null);
             var fresh = context(); var expected = thread(); var plan = createPlan();
             if (fresh is not { IsValid: true } || expected.NativeID == 0 || expected.ManagedID <= 0 || plan is null) return false;
-            var value = new Run(checked(++attempts), fresh, expected);
+            var manifest = plan.Targets.SelectMany(target => target.Roles
+                .Where(role => role.Consumer.HasValue)
+                .Select(role => new PortraitOwnedSceneNativeTarget(role.Consumer!.Value, target.Address)))
+                .ToArray();
+            var value = new Run(checked(++attempts), fresh, expected, manifest);
             value.Census = new(fresh.Source, fresh.SessionEpoch, value.Attempt, () => Current(value), native);
             Volatile.Write(ref run, value);
             value.Host = createHost(new(value.Census.BeginCounterMutation, value.Census.BeginResourceMutation,
@@ -79,8 +88,29 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
         {
             if (!framework() || context() != value.Context || thread() != value.Thread)
             { Stop("The Framework source, owner, session or thread changed."); return; }
-            if (value.Census.Result is not null) { Stop("One complete historical eight-slot observation was captured in the joint installation."); return; }
-            if (value.Host?.Snapshot() is not { Recording: true }) Stop("The bounded joint observation expired or lost qualification.");
+            var host = value.Host?.Snapshot();
+            if (host is not { Recording: true })
+            { Stop("The bounded joint observation expired or lost qualification."); return; }
+            if (value.Census.Result is { } census)
+            {
+                if (ConsumerObservation is null && host is { } && host.Installation != Guid.Empty)
+                {
+                    var expected = new PortraitConsumerObservationContext(host.Installation, value.Context.SessionEpoch,
+                        host.RequestEpoch, value.Context.Source);
+                    var consumers = value.Host!.ObserveConsumers(expected, census, value.Manifest);
+                    // The census is published inside the source Return callback;
+                    // the enclosing passive Render event is appended only after it
+                    // unwinds. Keep this bounded request alive for a later normal
+                    // refresh instead of stopping the collector before its append.
+                    // Snapshot enforces the existing host deadline on every retry.
+                    if (consumers.Issues.Contains(PortraitConsumerObservationIssue.SourceRenderNotAppended))
+                        return;
+                    Volatile.Write(ref lastConsumerObservation, consumers);
+                }
+                Stop("One complete historical eight-slot observation was captured in the joint installation.",
+                    preserveConsumerObservation: true);
+                return;
+            }
         }
         catch (Exception error) { Stop("Joint diagnostic update failed: " + error.GetType().Name); }
     }
@@ -89,13 +119,15 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
     {
         var value = Volatile.Read(ref run);
         if (value is null) return;
+        Volatile.Write(ref lastConsumerObservation, null);
         Volatile.Write(ref value.Live, 0); value.Reason = reason; value.Census.Cancel(); value.Host?.RevokeEvidence();
     }
-    internal void Stop(string reason)
+    internal void Stop(string reason, bool preserveConsumerObservation = false)
     {
         var value = Volatile.Read(ref run);
         if (value is null) return;
-        Revoke(reason);
+        if (!preserveConsumerObservation) Volatile.Write(ref lastConsumerObservation, null);
+        Volatile.Write(ref value.Live, 0); value.Reason = reason; value.Census.Cancel(); value.Host?.RevokeEvidence();
         if (Interlocked.Exchange(ref value.Stopping, 1) != 0) return;
         value.Host?.TryStop(); value.Retirement = RetireAsync(value);
     }
@@ -104,11 +136,13 @@ internal sealed class PortraitOwnedSceneJointDiagnostic
         try { if (value.Host is { } host) await host.DrainPhysicalAsync().ConfigureAwait(false); value.Retired.TrySetResult(); }
         finally { GC.KeepAlive(value); }
     }
-    private sealed class Run(long attempt, PortraitSourceCensusContext context, PortraitNativeThreadStamp thread)
+    private sealed class Run(long attempt, PortraitSourceCensusContext context, PortraitNativeThreadStamp thread,
+        IReadOnlyList<PortraitOwnedSceneNativeTarget> manifest)
     {
         internal readonly long Attempt = attempt;
         internal readonly PortraitSourceCensusContext Context = context;
         internal readonly PortraitNativeThreadStamp Thread = thread;
+        internal readonly IReadOnlyList<PortraitOwnedSceneNativeTarget> Manifest = manifest;
         internal readonly TaskCompletionSource Retired = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal PortraitOwnedSceneJointSourceCensus Census = null!;
         internal PortraitOwnedSceneJointHost? Host;

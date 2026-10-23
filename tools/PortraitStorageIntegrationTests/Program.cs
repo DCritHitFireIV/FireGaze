@@ -18,8 +18,10 @@ void Check(bool condition, string reason)
 }
 void FillBudget(string directory)
 {
-    using var file = new FileStream(Path.Combine(directory, "portrait-favorites-v1.json.bak"), FileMode.CreateNew);
-    file.SetLength(128L * 1024 * 1024);
+    using (var file = new FileStream(Path.Combine(directory, "portrait-favorites-v1.json.bak"), FileMode.CreateNew))
+        file.SetLength(176160768); // Approved 168 MiB, independent of the product constant.
+    Check(PortraitStorageBudget.ForDirectory(directory).Snapshot.LimitBytes == 176160768,
+        "production directory authority must use the approved 168 MiB default");
 }
 try
 {
@@ -32,7 +34,7 @@ try
         Check(accepted.Status == PortraitHistoryWriteStatus.Added, "history accepts into the bounded worker queue");
         Check(!await history.FlushAsync(), "full shared budget must reject physical history publication");
         Check(!File.Exists(path) && history.PersistenceError is not null, "failed physical write stays visibly undurable");
-        Check(new FileInfo(Path.Combine(directory, "portrait-favorites-v1.json.bak")).Length == 128L * 1024 * 1024,
+        Check(new FileInfo(Path.Combine(directory, "portrait-favorites-v1.json.bak")).Length == 176160768,
             "protected preexisting backup is retained");
     });
     await Case("owned-full-budget", directory =>
@@ -44,7 +46,7 @@ try
         catalog.ApplyRead(owner, new(OwnedSourceKind.Inventory), DateTimeOffset.UtcNow, [new(123, 1, 0)]);
         var cache = new OwnedEquipmentCacheFile(directory);
         Check(!cache.Save(catalog, out var reason), "full shared budget must reject owned-cache publication");
-        Check(!File.Exists(Path.Combine(directory, "portrait-owned-cache-v1.json")) && reason.Contains("128"),
+        Check(!File.Exists(Path.Combine(directory, "portrait-owned-cache-v1.json")) && reason.Contains("168 MiB", StringComparison.Ordinal),
             "owned-cache capacity reason is explicit and primary remains absent");
         return Task.CompletedTask;
     });

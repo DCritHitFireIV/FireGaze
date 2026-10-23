@@ -3,9 +3,11 @@
     <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
+    <PortraitCaptureFeatureSource Condition="'$(PortraitCaptureFeatureSource)' == ''">$(MSBuildThisFileDirectory)../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Capture.cs</PortraitCaptureFeatureSource>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureGeometry.cs')">$(DefineConstants);HAS_CAPTURE</DefineConstants>
   <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLiveCaptureApi.cs')">$(DefineConstants);HAS_CAPTURE_API</DefineConstants><DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureNodeReader.cs')">$(DefineConstants);HAS_CAPTURE_NODE</DefineConstants><DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLiveCaptureSource.cs')">$(DefineConstants);HAS_CAPTURE_NATIVE</DefineConstants></PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(PortraitCaptureFeatureSource)" Link="Source/PortraitPreviewFeature.Capture.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCapture*.cs" Link="Source/%(Filename)%(Extension)" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLive*.cs" Link="Source/%(Filename)%(Extension)" />

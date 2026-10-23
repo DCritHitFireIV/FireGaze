@@ -15,7 +15,7 @@ internal readonly record struct PortraitNativeBootQualificationResult(
 /// <summary>Official provider only. No Harmony, MonoMod, custom patching or backend configuration changes.</summary>
 internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider interop) : IPortraitNativePhaseHostFactory, IPortraitQualifiedNativeHookProvider
 {
-    private const string DalamudSHA = "CE0C3C8004CAC1E9AA96D0DC749463F5F1A32E9B49988419BF320545BF942C6A";
+    private const string DalamudSHA = "AF15D754340C659F9F57C110C9914D8C68A068F588725CAAE50AC237B07DA1C4";
     private bool qualified;
     private PortraitNativeBootIdentity? bootIdentity;
     public string Identity { get; private set; } = "Unqualified; no native hooks created.";

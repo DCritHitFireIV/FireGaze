@@ -29,6 +29,8 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
     public bool TryCreate(PortraitOwnedCharaViewSnapshot source, IPortraitOwnedSceneLease? lease)
     {
         if (snapshot is not null || view != 0 || IsRetired || IsQuarantined || source is null || lease is null
+            || source.Version != PortraitOwnedCharaViewSnapshot.CurrentVersion || !source.IsDetachedValid
+            || !source.Provenance.IsValid || source.Provenance.Digest != source.ContentDigest
             || !lease.IsCurrent || !lease.CanCreate || lease.Slot >= 8 || lease.Epoch <= 0
             || lease.Source != source.Source) return false;
         snapshot = source;

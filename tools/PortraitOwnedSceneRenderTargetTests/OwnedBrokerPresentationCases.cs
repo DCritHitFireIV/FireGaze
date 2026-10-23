@@ -28,7 +28,7 @@ internal static class OwnedBrokerPresentationCases
     private static async Task Ready()
     {
         using var f = new SceneFixture();
-        Check(f.Session.TryStart(f.Native.Snapshot(), 3), "native request rejected"); f.Native.Render(1);
+        Check(f.Session.TryStart(f.Native.Snapshot(), 3), "native request rejected: " + f.Session.LastError); f.Native.Render(1);
         Check(f.Read.Reads == 0 && f.Textures.Copies == 0, "creation copied an unready native view");
         f.Native.Render(2);
         Check(f.Read.Reads >= 3 && f.Textures.Copies == 1 && f.Native.Runtime.ReadDepth == 0,

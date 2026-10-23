@@ -4,6 +4,11 @@ using Dalamud.Interface.Textures.TextureWraps;
 namespace FireGaze.PortraitPreview;
 
 internal enum PortraitImageScope { Portrait,VisibleAdventurerPlate }
+internal sealed record PortraitCaptureSurface(string GenerationKey,int Width,int Height)
+{
+ public bool IsValid=>!string.IsNullOrWhiteSpace(GenerationKey)&&Width>0&&Height>0
+  &&(long)Width*Height<=PortraitCaptureGeometry.MaximumPixels;
+}
 internal readonly record struct PortraitCaptureOwner(ulong AccountID,ulong ContentID)
 {public bool IsValid=>AccountID!=0&&ContentID!=0;}
 // Addresses are opaque equality tokens. An asynchronous consumer must never dereference them.
@@ -27,10 +32,11 @@ internal sealed class PortraitCaptureLayers(int width,int height,IReadOnlyList<P
  public void Dispose(){if(Interlocked.Exchange(ref disposed,1)!=0)return;PortraitCaptureCleanupException.DisposeAll(Layers.Select(x=>(IDisposable)x.Texture).ToArray());}
 }
 internal sealed class PortraitCapturedImage(IDalamudTextureWrap texture,PortraitCaptureSample sample,
- PortraitCaptureRetirement? retirement=null,IDisposable? lifetime=null):IDisposable
+ PortraitCaptureRetirement? retirement=null,IDisposable? lifetime=null,PortraitCaptureSurface? surface=null):IDisposable
 {
  public IDalamudTextureWrap Texture{get;}=texture;
  public PortraitCaptureSample Sample{get;}=sample;
+ public PortraitCaptureSurface? Surface{get;}=surface;
  public int Width=>Texture.Width;
  public int Height=>Texture.Height;
  private int disposed;

@@ -93,18 +93,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     }
 
     public bool IsActive => session.IsActive;
-    /// <summary>Managed cache/history writes accepted during close, drained outside Framework.</summary>
-    public Task DrainManagedAsync() => managedDrain ?? Task.CompletedTask;
-    /// <summary>Actual provider work and late texture release, awaited only after Framework close.</summary>
-    public Task DrainPhysicalAsync()
-    {
-        if (physicalDrain is { } completedClose) return completedClose;
-        // A close exception before aggregation leaves physical ownership unknown. The
-        // host keeps only this task, so that task must also retain the unsealed Feature.
-        lock (incompletePhysicalClose)
-            return physicalDrain ?? (incompletePhysicalDrain ??=
-                PortraitCaptureRetirement.CombineOwned(this, incompletePhysicalClose.Task));
-    }
     public PortraitLook? Current => session.Current;
     public PortraitLook? Original => session.Original;
     public ushort? ActualFacewear => actualFacewear;
@@ -112,13 +100,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public bool StatusIsError => statusIsError || plateMirrorCloseError is not null || cachePersistenceWarning is not null;
     public IReadOnlyList<string> SourceSummary => SourceOwnerCurrent ? sourceSummary : [];
     public IReadOnlyList<PortraitDye> Dyes => dyes;
-    public PortraitBrowserItem? GetItem(PortraitSlot slot, uint id)
-    {
-        if (slot == PortraitSlot.Facewear)
-            return glasses.TryGetValue(id, out var face) ? new(id, face.Name.ToString(), (uint)Math.Max(0, face.Icon), 0, true, "") : null;
-        return metadata.GetValueOrDefault(id);
-    }
-
     private string Diagnostics()
     {
         var resolved = target.TryResolve(out var identity, out var bounds, out var openType);
@@ -152,6 +133,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             nativeLive = new { requested = nativeLiveRequested, enabled = NativeLiveEnabled,
                 sessionRevision = session.Revision, stopReason = nativeLiveController?.StopReason.ToString() },
+            developmentCamera = ReadDevelopmentCameraReceipt(),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
             liveCapture = liveImageService?.Diagnostics,
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
@@ -279,24 +261,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                     .OrderBy(item => item.Name).ToArray();
         }
         browser = next;
-    }
-
-    private PortraitBrowserItem BrowserItem(Item row)
-    {
-        var state = PlayerState.Instance();
-        var restriction = row.EquipRestriction.Value;
-        var reason = row.ModelMain == 0 ? "该装备没有可用外观模型" : "";
-        if (state != null && row.EquipRestriction.RowId != 0)
-        {
-            var raceAllowed = state->Race switch
-            {
-                1 => restriction.Hyur, 2 => restriction.Elezen, 3 => restriction.Lalafell, 4 => restriction.Miqote,
-                5 => restriction.Roegadyn, 6 => restriction.AuRa, 7 => restriction.Hrothgar, 8 => restriction.Viera, _ => false,
-            };
-            if (!raceAllowed || (state->Sex == 0 ? !restriction.Male : !restriction.Female)) reason = "该外观不支持当前角色的种族或性别";
-        }
-        return new(row.RowId, row.Name.ToString(), row.Icon, row.DyeCount, reason.Length == 0, reason,
-            Convert.ToUInt32(row.LevelItem.RowId), Convert.ToUInt32(row.LevelEquip));
     }
 
     private static bool Matches(EquipSlotCategory row, PortraitSlot slot) => slot switch
@@ -459,6 +423,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (TryDevelopmentCameraCommand(parts)) return;
         if (TryOwnedViewportCommand(parts)) return;
         if (TryOwnedJointCommand(parts)) return;
         if (TryOwnedPassiveCommand(parts)) return;
@@ -569,80 +534,5 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         }
     }
 
-    public void Dispose()
-    {
-        if (disposed) return;
-        try { DisposeCore(); }
-        finally { DisposeCaptureProgress(); }
-    }
 
-    private void DisposeCore()
-    {
-        Volatile.Write(ref analysisSession, null);
-        Task photoDrain = Task.CompletedTask;
-        Task nativePhysical = Task.CompletedTask;
-        Task remainingRelease = Task.CompletedTask;
-        void Release()
-        {
-            DisposeEditorOpening();
-            DisposeSourceCensus();
-            if (!CancelLightingFitForEdit()) _ = target.AbortCapturedEditor();
-            DisposeNativeLive();
-            DisposeLightingFit();
-            photoDrain = photos.BeginDispose();
-            liveImageService?.Dispose();
-            nativePhysical = PortraitCaptureRetirement.CombineOwned(this, photos.DrainPhysicalAsync(),
-                liveImageService?.DrainPhysicalAsync() ?? Task.CompletedTask,
-                lightingFitCapture?.DrainPhysicalAsync() ?? Task.CompletedTask,
-                window.DrainPhysicalAsync(), nativeLivePhysicalDrain, sourceCensusPhysicalDrain);
-            liveCaptureAPI?.Dispose();
-            FlushEditing();
-            if (!session.Close() && !target.AbortCapturedEditor())
-                Plugin.Log.Error("[肖像同步预览] 外观还原及编辑器关闭均失败：{Error}", target.LastError ?? "未知原因");
-            QueueOwnedCacheIfNeeded();
-            DisposeLibrary();
-            target.Dispose();
-        }
-        void BeginRelease()
-        {
-            StopOwnedViewport("Feature disposal is waiting for the independent scene to retire.");
-            if (ownedViewportDrain.IsCompletedSuccessfully) { Release(); return; }
-            remainingRelease = ownedViewportDrain.ContinueWith(finished =>
-            {
-                finished.GetAwaiter().GetResult();
-                return Plugin.Framework.RunOnFrameworkThread(Release);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
-        }
-        disposed = true;
-        Plugin.Framework.Update -= Update;
-        pluginInterface.UiBuilder.Draw -= Draw;
-        if (Plugin.Framework.IsInFrameworkUpdateThread) BeginRelease();
-        else Plugin.Framework.RunOnFrameworkThread(BeginRelease).GetAwaiter().GetResult();
-        managedDrain = PortraitCaptureRetirement.CombineOwned(this, remainingRelease.ContinueWith(finished =>
-        {
-            finished.GetAwaiter().GetResult();
-            return DrainManagedAsyncCore(photoDrain);
-        }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap());
-        physicalDrain = PortraitCaptureRetirement.CombineOwned(this, remainingRelease.ContinueWith(finished =>
-            finished.IsCompletedSuccessfully ? nativePhysical : incompletePhysicalClose.Task,
-            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap());
-        diagnostics.UnregisterFunc();
-        windows.RemoveAllWindows();
-        window.Dispose();
-    }
-
-    private Task DrainManagedAsyncCore(Task photoDrain)
-    {
-        var drains = new List<Task>(3)
-        {
-            photoDrain,
-            cacheWriter.BeginDispose(),
-            history.BeginDispose(),
-        };
-        if (glamourPlateCache is not null) drains.Add(glamourPlateCache.BeginDispose());
-        drains.Add(DrainFavoritePersistence());
-        drains.Add(DrainStorageObservation());
-        return PortraitManagedDrain.Combine(
-            error => Plugin.Log.Warning(error, "[肖像同步预览] 托管文件排空失败"), drains.ToArray());
-    }
 }

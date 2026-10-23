@@ -28,6 +28,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         version = typeof(Plugin).Assembly.GetName().Version?.ToString(),
         mvid = typeof(Plugin).Assembly.ManifestModule.ModuleVersionId,
         stages = photos.ReadCaptureProgress(),
+        lastFailure = photos.ReadCaptureFailure(),
     });
 
     private void DisposeCaptureProgress() => captureProgress?.UnregisterFunc();

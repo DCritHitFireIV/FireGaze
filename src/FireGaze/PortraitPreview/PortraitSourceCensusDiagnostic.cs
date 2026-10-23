@@ -141,7 +141,18 @@ internal sealed class PortraitSourceCensusDiagnostic
                 && rows.Any(enter => enter.Edge == PortraitNativeObservedEdge.Enter && enter.Capture == row.Capture
                     && enter.Call == row.Call && enter.Thread == row.Thread && enter.Frame == row.Frame
                     && enter.Depth == row.Depth && enter.ParentCall == row.ParentCall && enter.Sequence < row.Sequence));
-            if (returned.Call == 0) return;
+            if (returned.Call == 0)
+            {
+                // Counter/resource mutations can occur before the first source
+                // Render. Publish only the already detached Host samples; this
+                // neither arms a request nor reads the native slot table.
+                var previous = Snapshot;
+                if (Volatile.Read(ref current.Retiring) == 0 && ReferenceEquals(Volatile.Read(ref run), current) && previous.Attempt == current.Attempt
+                    && previous.State == PortraitSourceCensusDiagnosticState.ObservingThread)
+                    Interlocked.CompareExchange(ref snapshot,
+                        previous with { Source = source, Counters = counters, Resources = resources }, previous);
+                return;
+            }
             current.Observed = returned.Thread;
             if (context() != current.Context || thread() != current.Thread)
             { BeginRetirement(current, "Fresh Framework source qualification changed before arming."); return; }
@@ -218,7 +229,8 @@ internal sealed class PortraitSourceCensusDiagnostic
         if (source.Plan is not { } plan || counter.Plan is not { } c || resource.Plan is not { } r) return false;
         return plan.ModuleBase == c.ModuleBase && plan.ModuleBase == r.ModuleBase && plan.ModuleSize == c.ModuleSize && plan.ModuleSize == r.ModuleSize
             && plan.OnDiskEXESHA256 == PortraitNativePhaseObservationBinding.EXE && c.OnDiskEXESHA256 == plan.OnDiskEXESHA256 && r.OnDiskEXESHA256 == plan.OnDiskEXESHA256
-            && plan.OnDiskSDKSHA256 == PortraitNativePhaseObservationBinding.SDK && c.OnDiskSDKSHA256 == plan.OnDiskSDKSHA256 && r.OnDiskSDKSHA256 == plan.OnDiskSDKSHA256
+            && PortraitNativePhaseObservationBinding.SDKIdentityMatches(plan.OnDiskSDKSHA256, plan.SDKMVID)
+            && c.OnDiskSDKSHA256 == plan.OnDiskSDKSHA256 && r.OnDiskSDKSHA256 == plan.OnDiskSDKSHA256
             && plan.SDKMVID != Guid.Empty && plan.SDKMVID == c.SDKMVID && plan.SDKMVID == r.SDKMVID
             && plan.Targets.Count == 4 && c.Targets.Count == 2 && r.Targets.Count == 2
             && source.BackendIdentity == counter.BackendIdentity && source.BackendIdentity == resource.BackendIdentity;

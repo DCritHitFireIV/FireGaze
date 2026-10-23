@@ -42,6 +42,11 @@ public static class Program
 
     private static void QualificationDiagnostics()
     {
+        var hashField = typeof(DalamudPortraitNativePhaseHostFactory).GetField("DalamudSHA",
+            BindingFlags.NonPublic | BindingFlags.Static);
+        Check(hashField?.GetValue(null) as string
+            == "AF15D754340C659F9F57C110C9914D8C68A068F588725CAAE50AC237B07DA1C4",
+            "portrait phase host uses the currently audited CN Dalamud image");
         var order = new List<string>();
         Func<bool> Step(string name, bool value) => () => { order.Add(name); return value; };
         bool Boot(out PortraitNativeBootIdentity? identity, out string reason)
@@ -307,7 +312,7 @@ public static class Program
     {
         var baseAddress = (nint)Interlocked.Add(ref moduleKey, 0x1000000);
         return new(baseAddress, 0xA00000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
-            typeof(CharaView).Assembly.ManifestModule.ModuleVersionId, PortraitNativePhaseObservationBinding.Inventory.Select(contract =>
+            Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"), PortraitNativePhaseObservationBinding.Inventory.Select(contract =>
                 new PortraitNativePhaseBoundTarget(contract.Phase, baseAddress + (nint)contract.RVA, contract.Delegate)).ToArray());
     }
 

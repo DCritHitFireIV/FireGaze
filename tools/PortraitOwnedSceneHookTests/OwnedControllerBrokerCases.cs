@@ -136,7 +136,13 @@ internal sealed unsafe class BrokerNativeHost : IDisposable
         => new(() => Framework, CreateEnvironment, Factory, afterAdvance: ready);
     internal IPortraitOwnedSceneHookEnvironment CreateEnvironment() => new NativeEnvironment(this);
     internal PortraitOwnedCharaViewSnapshot Snapshot() => new(Source, default(CharaViewCharacterData),
-        default(CharaViewModelData), new CharaViewItem[14], 0, new PortraitComposition());
+        default(CharaViewModelData), CompleteItems(), 0, new PortraitComposition(), gameBuild: "fixture");
+    private static CharaViewItem[] CompleteItems()
+    {
+        var items = new CharaViewItem[14];
+        for (byte i = 0; i < items.Length; i++) items[i].SlotId = i;
+        return items;
+    }
     internal void Render(uint frame) => Factory.Get<CharaView.Delegates.Render>()((CharaView*)Source.Model, frame);
     public void Dispose() { }
     private sealed class NativeEnvironment(BrokerNativeHost host) : IPortraitOwnedSceneHookEnvironment

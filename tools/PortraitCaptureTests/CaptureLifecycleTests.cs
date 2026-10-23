@@ -237,7 +237,7 @@ internal static class CaptureLifecycleTests
  }
 }
 
-internal sealed class FakeCaptureApi : IPortraitLiveImageApi
+internal sealed class FakeCaptureApi : IPortraitLightingFitCaptureApi
 {
  public bool Framework=true,Ready=true;
  public int Samples,Captures,Composes;
@@ -250,6 +250,10 @@ internal sealed class FakeCaptureApi : IPortraitLiveImageApi
  {Samples++;sample=Ready?Sample with{Scope=scope}:null;return sample is not null;}
  public Task<PortraitCaptureLayers?> CaptureAsync(PortraitCaptureSample sample)
  {Captures++;Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);OnCapture?.Invoke();return Pending.Task;}
+ public bool TryDescribePortrait(PortraitCaptureSample sample,out PortraitCaptureSurface? surface)
+ {surface=new("controlled-lifecycle-surface",576,960);return true;}
+ public Task<PortraitCaptureLayers?> CaptureAsync(PortraitCaptureSample sample,PortraitCaptureSurface expectedSurface)
+  =>CaptureAsync(sample);
  public void Complete(PortraitCaptureLayers layers)=>Pending.SetResult(layers);
  public IDalamudTextureWrap Compose(PortraitCaptureLayers layers)
  {Composes++;var result=new CountingCaptureTexture(layers.Width,layers.Height);Outputs.Add(result);OnCompose?.Invoke();return result;}

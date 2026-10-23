@@ -209,7 +209,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (changed)
             {
                 historyLabelBaseline ??= previous;
-                var label = DescribeChange(historyLabelBaseline, recording);
+                var label = DescribeChange(historyLabelBaseline, WithoutPlaybackControls(recording, historyLabelBaseline));
                 historyObservedEditor = recording;
                 appearanceGroups = appearance.Build(captured.Customize);
                 HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), pointerHeld || lightDrag.IsActive, keyboard, label));
@@ -232,8 +232,15 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private static PortraitEditorSnapshot ForHistory(PortraitEditorSnapshot current, PortraitEditorSnapshot? baseline)
     {
         if (baseline is null || current.Composition.Paused) return current;
-        // Playing or selecting an unpaused action is a preview. Keep the last history pose
-        // until the player freezes a frame, while still recording camera/look/light edits.
+        var comparison = WithoutPlaybackControls(current, baseline);
+        // Playback alone is not an edit. A real camera/look/light edit must retain
+        // its actual playing pose so a newly captured photo can belong to this state.
+        return baseline.SameForHistory(comparison) ? comparison : current;
+    }
+
+    private static PortraitEditorSnapshot WithoutPlaybackControls(PortraitEditorSnapshot current, PortraitEditorSnapshot? baseline)
+    {
+        if (baseline is null || current.Composition.Paused) return current;
         var previous = baseline.Composition;
         return current with { Composition = current.Composition with
         {
@@ -291,7 +298,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void RefreshHistoryRows()
     {
         var owner = CurrentCharacter();
-        var records = owner is null ? [] : observedKey is { } key ? history.GetPublishedRecords(key) : history.GetPublishedRecordsForOwner(owner.Value.ContentID);
+        var records = owner is null ? [] : observedKey is { } key ? history.GetRecords(key) : history.GetRecordsForOwner(owner.Value.ContentID);
         var current = observedKey is { } active ? history.CurrentRecordID(active) : null;
         historyRows = records.Select(record => new PortraitHistoryListItem(record.ID, record.Timestamp,
             record.Label, record.ID == current)).ToArray();
@@ -359,7 +366,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var recording = ForHistory(captured, baseline);
         if (baseline is not null
             && label is "清空装备部位" or "装备显示设置" or "美容师修改")
-            label = DescribeChange(baseline, recording);
+            label = DescribeChange(baseline, WithoutPlaybackControls(recording, baseline));
         observedEditor = captured;
         historyObservedEditor = recording;
         observedIdentity = identity;

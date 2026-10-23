@@ -41,6 +41,23 @@ internal static unsafe class Program
     }
     private static void CurrentUnsupportedSDKRefusesBeforeNativeWork(FrozenSdkFixture fixture)
     {
+        var hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(fixture.CurrentImage));
+        if (hash == "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798")
+        {
+            Reset(); var current = Fresh(); current.SDKImage = fixture.CurrentImage; current.SDKMVID = fixture.CurrentMVID;
+            Check(Resolve(current, out var accepted) && accepted is { Targets.Count: 2 }
+                && accepted.OnDiskSDKSHA256 == hash && accepted.SDKMVID == fixture.CurrentMVID,
+                "audited current SDK resolves complete resource bodies with its own identity");
+            var currentFactory = new FakeFactory(); var currentGuards = 0;
+            var currentHost = Host(currentFactory, () => { currentGuards++; return new Guard(() => { }); }, current);
+            Check(currentHost.TryStart(TimeSpan.FromSeconds(30), out _) && currentFactory.CreateCalls == 2
+                && currentFactory.EnableCalls == 2 && currentGuards == 0 && nativeCalls == 0,
+                "audited current resource plan installs without invoking resource mutation guard or Original");
+            Check(!currentHost.Snapshot().Resource.Ready && !currentHost.Snapshot().Observation.ProductionAdmission,
+                "current SDK qualification grants neither resource Ready nor production admission");
+            Retire(currentHost);
+            return;
+        }
         if (!fixture.CurrentUnsupported) return;
         Reset(); var process = Fresh(); process.SDKImage = fixture.CurrentImage; process.SDKMVID = fixture.CurrentMVID;
         Check(!Resolve(process, out var plan) && plan is null && process.MemoryReads == 0,

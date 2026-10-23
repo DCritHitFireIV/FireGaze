@@ -86,8 +86,8 @@ static unsafe class PortraitLightingSpaceCommitCases
             && !feature.Native.Snapshot.Composition.Paused && feature.History.Count==count+1,
             "running timeline advances during a gesture without rejection or rewind and produces one camera history entry");
         var recorded=PortraitEditorSnapshot.FromJSON(feature.Store.GetRecords(feature.Key!.Value)[0].SnapshotJSON)!;
-        check(recorded.Composition.AnimationProgress==.4f && recorded.Composition.CameraYaw==.6f,
-            "space camera history retains the prior playback baseline rather than recording automatic animation time");
+        check(recorded.Composition.AnimationProgress==.9f && !recorded.Composition.Paused && recorded.Composition.CameraYaw==.6f,
+            "space camera history retains its real playing state for a matching representative photograph");
         feature.EditComposition(c=>c with {Paused=true,AnimationProgress=2});feature.Sample();binding=feature.CurrentLightingSpaceBinding!;
         count=feature.History.Count;calls=feature.Native.ApplyCalls;feature.EditComposition(c=>c with {AnimationProgress=2.1f});
         feature.ApplyLightingSpace(binding,WithYaw(binding.Composition,.2f));

@@ -32,10 +32,12 @@ internal static class FavoriteSharedBudgetTests
         var originalPhotos = File.ReadAllBytes(photoPath);
         var originalPhotosBackup = File.ReadAllBytes(photoPath + ".bak");
         var beforeEntries = store.Export();
-        const long productionLimit = 128L * 1024 * 1024;
+        const long productionLimit = 176160768; // Approved 168 MiB, independent of the product constant.
         var currentBytes = Directory.EnumerateFiles(directory).Sum(file => new FileInfo(file).Length);
         var fillerPath = Path.Combine(directory, "portrait-edit-history-v1.json");
         var budget = PortraitStorageBudget.ForDirectory(directory);
+        Check(budget.Snapshot.LimitBytes == productionLimit,
+            "shared production authority uses the approved 168 MiB default");
         // A legacy history file occupies the remaining logical bytes. SetLength avoids a
         // giant managed fixture buffer; no saved favorite or photo can be evicted to fit.
         using (var filler = new FileStream(fillerPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
@@ -44,17 +46,17 @@ internal static class FavoriteSharedBudgetTests
         Check(budget.Snapshot.UsedBytes == productionLimit,
             "real production authority accounts history, favorite content and both regular backups");
         Check(Directory.EnumerateFiles(directory).Sum(file => new FileInfo(file).Length) == productionLimit,
-            "shared production directory reaches exactly 128 MiB before new admissions");
+            "shared production directory reaches exactly 168 MiB before new admissions");
 
         var refused = store.Add(snapshot, 2, "second", "must-not-publish", []);
-        Check(refused.Status == PortraitFavoritesWriteStatus.TooLarge && refused.Reason.Contains("128", StringComparison.Ordinal),
-            "production-default library rejects a shared 128 MiB capacity exhaustion explicitly");
+        Check(refused.Status == PortraitFavoritesWriteStatus.TooLarge && refused.Reason.Contains("168 MiB", StringComparison.Ordinal),
+            "production-default library rejects a shared 168 MiB capacity exhaustion explicitly");
         Check(store.Export() == beforeEntries && originalLibrary.SequenceEqual(File.ReadAllBytes(favoritePath))
             && originalLibraryBackup.SequenceEqual(File.ReadAllBytes(favoritePath + ".bak")),
             "shared capacity rejection preserves the library memory, primary and exact rotating backup");
         Check(!photos.Synchronize(new HashSet<string> { a, b, c }, _ => Png())
             && photos.Status(c) == PortraitFavoritePhotoStatus.Capacity
-            && photos.LastError?.Contains("128", StringComparison.Ordinal) == true,
+            && photos.LastError?.Contains("168 MiB", StringComparison.Ordinal) == true,
             "production-default favorite PNG archive reports shared capacity instead of a generic storage failure");
         Check(photos.Count == 2 && photos.TryGet(a, out _) && photos.TryGet(b, out _) && !photos.TryGet(c, out _)
             && originalPhotos.SequenceEqual(File.ReadAllBytes(photoPath))

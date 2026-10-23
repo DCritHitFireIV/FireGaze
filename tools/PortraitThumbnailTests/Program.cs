@@ -98,6 +98,7 @@ try
     Check(!failed.TryPut(one, detached) && failed.LastError is not null && failed.Count == 0, "failed atomic publish does not claim a persisted image");
     Check(Directory.GetFiles(root).All(name => !Path.GetFileName(name).Contains(".tmp-", StringComparison.Ordinal)), "failed writes clean only their own temporary files");
     Check(File.ReadAllBytes(history).SequenceEqual(historyBefore), "all cache operations preserve unrelated history byte for byte");
+    checks += await CompletedImageRetentionTests.Run(root);
     checks += await TextureCacheTests.Run();
     Console.WriteLine($"PortraitThumbnailTests: {checks} passed, 0 failed");
     return 0;

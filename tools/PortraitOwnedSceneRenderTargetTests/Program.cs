@@ -148,6 +148,12 @@ static class Checks
 
 sealed class Fixture : IDisposable
 {
+    private static CharaViewItem[] CompleteItems()
+    {
+        var items = new CharaViewItem[14];
+        for (byte i = 0; i < items.Length; i++) items[i].SlotId = i;
+        return items;
+    }
     internal readonly Broker Broker = new();
     internal readonly Runtime Runtime = new();
     internal readonly Lease Lease = new();
@@ -159,8 +165,8 @@ sealed class Fixture : IDisposable
     {
         Controller = new(Broker, () => Runtime);
         var snapshot = new PortraitOwnedCharaViewSnapshot(Checks.Source, default(CharaViewCharacterData),
-            default(CharaViewModelData), new CharaViewItem[14], 0, new PortraitComposition());
-        if (!Controller.TryStart(snapshot, 3)) throw new Exception("offline fixture controller start");
+            default(CharaViewModelData), CompleteItems(), 0, new PortraitComposition(), gameBuild: "CN-test-build");
+        if (!Controller.TryStart(snapshot, 3)) throw new Exception($"offline fixture controller start: detached={snapshot.IsDetachedValid} complete={snapshot.IsComplete} prov={snapshot.Provenance.IsValid} digest={snapshot.ContentDigest}");
         Broker.Advance!(Lease); Broker.Advance(Lease);
         Read = new(Runtime);
         Adapter = admitted ? new(Read, Textures, () => true) : new(Read, Textures);

@@ -417,7 +417,8 @@ internal sealed partial class PortraitNativePhaseHost
     {
         var inventory = PortraitNativeCounterIngressContract.For(targetSet);
         if (value is null || value.ModuleBase <= 0 || value.ModuleSize <= 0 || value.SDKMVID == Guid.Empty
-            || value.OnDiskEXESHA256 != PortraitNativePhaseObservationBinding.EXE || value.OnDiskSDKSHA256 != PortraitNativePhaseObservationBinding.SDK
+            || value.OnDiskEXESHA256 != PortraitNativePhaseObservationBinding.EXE
+            || !PortraitNativePhaseObservationBinding.SDKIdentityMatches(value.OnDiskSDKSHA256, value.SDKMVID)
             || inventory.Count == 0 || value.Targets.Count != inventory.Count) return false;
         return value.Targets.SequenceEqual(inventory.Select(contract =>
             new PortraitNativePhaseBoundTarget(contract.Phase, value.ModuleBase + (nint)contract.RVA, contract.Delegate)))

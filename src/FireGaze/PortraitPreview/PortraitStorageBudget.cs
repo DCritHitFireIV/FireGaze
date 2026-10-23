@@ -11,7 +11,7 @@ internal readonly record struct PortraitStorageSnapshot(long LimitBytes, long Us
 /// </summary>
 internal sealed class PortraitStorageBudget
 {
-    public const long DefaultLimitBytes = 128L * 1024 * 1024;
+    public const long DefaultLimitBytes = 168L * 1024 * 1024;
     private static readonly object registryGate = new();
     private static readonly Dictionary<string, PortraitStorageBudget> registry = new(StringComparer.OrdinalIgnoreCase);
     private static readonly string[] ProductionNames =
@@ -338,7 +338,7 @@ internal sealed class PortraitStorageBudget
             if (used > limit || bytes > limit - used - reserved)
             {
                 if (requestReclaim) reclaimRequested++;
-                rejection = new(PortraitStorageCode.Capacity, "肖像历史、图片、收藏和备份的共享存储已达到 128 MiB 上限。");
+                rejection = new(PortraitStorageCode.Capacity, "肖像历史、图片、收藏和备份的共享存储已达到 168 MiB 上限。");
                 return false;
             }
             reserved += bytes;
@@ -401,7 +401,7 @@ internal sealed class PortraitStorageBudget
             uncertainReservation = unknown ? Math.Max(uncertainReservation, reserved) : 0;
             if (unknown) reason = errorReason;
             else if (failedCleanup.Count != 0) reason = "肖像临时文件清理失败，现有文件持续计费。";
-            else if (used > limit) reason = "现有肖像数据超过共享 128 MiB 上限，已保留原数据并暂停新增。";
+            else if (used > limit) reason = "现有肖像数据超过共享 168 MiB 上限，已保留原数据并暂停新增。";
             else reason = "";
         }
     }

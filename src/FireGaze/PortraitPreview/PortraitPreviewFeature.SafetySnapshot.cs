@@ -165,6 +165,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
                 editorOpening = JsonSerializer.SerializeToElement(feature.ReadEditorOpeningReceipt(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+#if !SAFETY_SNAPSHOT_FEATURE
+                developmentCamera = feature.ReadDevelopmentCameraReceipt(),
+#endif
                 captureIsolation = lease.EffectiveMode,
                 captureLease = new
                 {

@@ -39,8 +39,10 @@ internal static class PhotoDisplayStatusCases
             "storage failure label is explicit");
         Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.Available) == "照片已保存，正在载入",
             "favorite image availability is not confused with an empty slot");
-        Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.Missing) == "暂无照片",
-            "missing favorite photo stays distinct from a saved image");
+        Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.Pending) == "照片正在自动生成…",
+            "an admitted favorite photograph reports automatic generation");
+        Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.Missing) == "请用原角色在原肖像中载入补拍",
+            "an old missing favorite photograph gives an honest recovery action without claiming active work");
         Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.Capacity) == "照片空间已满",
             "favorite capacity refusal stays visible");
         Check(PortraitHistoryPhotoPresentation.FavoriteLabel(PortraitFavoritePhotoStatus.StorageError) == "照片读取或写入失败",
@@ -69,7 +71,7 @@ internal static class PhotoDisplayStatusCases
             await Task.Delay(5);
         Check(PortraitHistoryPhotoStatus.Missing,
             "browsing an uncaptured history image cannot turn its missing PNG into a write failure");
-        photos.SetRecords([record], PortraitHistoryStore.MaximumBytes);
+        photos.SetRecords([record], PortraitThumbnailCache.MaximumBytes);
         Check(PortraitHistoryPhotoStatus.Capacity, "history record at the photo capacity limit reports capacity refusal");
         return checks;
     }

@@ -85,6 +85,23 @@ internal sealed class PortraitOwnedSceneJointHost : IDisposable
             value.ResourceDepth, value.Recording, value.Failed, value.Resource, value.SourceReturns, value.Observation,
             hooks.PhysicalHookCount, hooks.PhysicalInFlight, hooks.ReservationHeld, hooks.DrainPhysicalAsync().IsCompletedSuccessfully);
     }
+
+    /// <summary>
+    /// Reads the detached consumer evidence after the passive callback has unwound.
+    /// This method performs no native work and never grants ownership, a lease, or
+    /// resource readiness. The caller must provide the request-owned census and
+    /// immutable target manifest; neither is reconstructed from the last event.
+    /// </summary>
+    internal PortraitConsumerObservationSnapshot ObserveConsumers(
+        PortraitConsumerObservationContext expected,
+        PortraitOwnedSceneJointSlotObservation? slots,
+        IReadOnlyList<PortraitOwnedSceneNativeTarget> consumerManifest)
+    {
+        var before = Snapshot();
+        var nativeEvents = hooks.PassiveNativeEvents;
+        var after = Snapshot();
+        return PortraitConsumerObservation.Collect(new(expected, before, after, slots, nativeEvents, consumerManifest));
+    }
     internal bool TryStop() => hooks.TryDispose();
     internal void RevokeEvidence() => ingress?.Revoke();
     internal bool IsSourceReturnCurrent(PortraitOwnedSceneHooks owner, PortraitOwnedSceneHooks.JointSourceInvocation invocation)

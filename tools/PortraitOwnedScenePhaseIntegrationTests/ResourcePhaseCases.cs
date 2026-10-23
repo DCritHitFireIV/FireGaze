@@ -19,7 +19,7 @@ internal static unsafe class ResourcePhaseCases
         var host = PortraitNativePhaseHost.CreateResourceIngress(f, recorder, new(), phases.BeginResourceMutation,
             (Func<nint,bool> _, out PortraitNativePhaseResolvedPlan? plan, out string why) => {
                 var module = unchecked((nint)0x5B00000000L);
-                plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK, typeof(RTManager).Assembly.ManifestModule.ModuleVersionId, [
+                plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK, Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"), [
                     new(PortraitNativeObservedPhase.ResourceCleanup, module + 0x2DBB90, typeof(PortraitNativeResourceCleanup)),
                     new(PortraitNativeObservedPhase.ResourceRecreate, module + 0x2DBFE0, typeof(PortraitNativeResourceRecreate))]); why = "fixture"; return true;
             });
@@ -56,7 +56,7 @@ internal static unsafe class ResourcePhaseCases
         var ch = PortraitNativePhaseHost.CreateCounterIngress(cf, counterRecorder, new(), phases.BeginCounterMutation,
             (Func<nint,bool> _, out PortraitNativePhaseResolvedPlan? plan, out string why) => {
                 var module = unchecked((nint)0x5B00000000L);
-                plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK, typeof(RenderManager).Assembly.ManifestModule.ModuleVersionId, [
+                plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK, Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"), [
                     new(PortraitNativeObservedPhase.CounterAdd, module + 0x2BA770, typeof(PortraitNativeSlotCounter)),
                     new(PortraitNativeObservedPhase.CounterSub, module + 0x2BA790, typeof(PortraitNativeSlotCounter))]); why = "fixture"; return true;
             });

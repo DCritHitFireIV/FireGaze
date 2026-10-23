@@ -44,6 +44,9 @@ static async Task<int> Run()
         Check(await history.FlushAsync(), "real history finishes its own independent writer before photo checks");
         var historyBefore = File.ReadAllBytes(historyPath);
         var records = history.GetRecords(key);
+        checks += await HistoryPhotoRetentionCases.RunAsync(root, initial);
+        checks += await ProductPhotoStateCases.RunAsync(root, identity);
+        checks += await PhotoGallerySelectionCases.RunAsync(root, identity);
         checks += PhotoDisplayStatusCases.Run();
         checks += PhotoReclaimPolicyCases.Run();
         checks += await PhotoNonBlockingStorageCases.RunAsync(root, initial);
@@ -95,6 +98,7 @@ static async Task<int> Run()
         checks += await PhotoManagedDrainCases.RunAsync(root, textures, readback, history.Bytes);
         checks += await ManagedDrainOutcomeCases.RunAsync(root, key, initial);
         checks += await PhotoPhysicalDrainCases.RunAsync(root, textures, readback);
+        checks += PhotoFailureEvidenceCases.Run();
         checks += await PhotoProgressReadCases.RunAsync(root, textures, readback);
 
         var source = new PortraitThumbnailSource();
@@ -171,9 +175,9 @@ static async Task<int> Run()
         Check(isolatedTexture.Disposes == 1, "the separate-character capture still follows unload resource ownership");
 
         var zeroSource = new PortraitThumbnailSource();
-        using (var photos = Photos("full-history.bin", zeroSource, PortraitHistoryStore.MaximumBytes))
+        using (var photos = Photos("full-history.bin", zeroSource, PortraitThumbnailCache.MaximumBytes))
         {
-            photos.SetRecords(records, PortraitHistoryStore.MaximumBytes);
+            photos.SetRecords(records, PortraitThumbnailCache.MaximumBytes);
             await Settle(photos, two.ID, changed);
             Check(zeroSource.Calls == 0 && !File.Exists(Path.Combine(root, "full-history.bin")),
                 "history using the entire shared budget leaves no space or work for disposable photos");
@@ -186,9 +190,9 @@ static async Task<int> Run()
         using (var photos = Photos("locked.bin", failedSource, history.Bytes))
         using (var exclusive = new FileStream(failurePath, FileMode.Open, FileAccess.Read, FileShare.None))
         {
-            photos.SetRecords(records, PortraitHistoryStore.MaximumBytes);
+            photos.SetRecords(records, PortraitThumbnailCache.MaximumBytes);
             await Settle(photos, two.ID, changed);
-            Check(failedSource.Calls == 0, "a cache deletion failure cannot spend the old budget on a new capture");
+            Check(failedSource.Calls == 0, "a cache capacity or maintenance refusal cannot spend the old budget on a new capture");
             var error = photos.Diagnostics().GetType().GetProperty("lastError")!.GetValue(photos.Diagnostics()) as string;
             Check(!string.IsNullOrWhiteSpace(error), "failed cache maintenance remains diagnosable without failing history");
         }

@@ -18,6 +18,7 @@ internal sealed class PortraitLiveImageService:IDisposable
  private readonly PortraitCaptureGate gate;
  private readonly PortraitCaptureRetirement physical=new();
  private (PortraitImageScope Scope,PortraitCaptureViewport Viewport)? request;
+ private long requestGeneration;
  private Work? work;
  private PortraitCapturedImage? current;
  private bool disposed;
@@ -44,10 +45,10 @@ internal sealed class PortraitLiveImageService:IDisposable
  public void Request(PortraitImageScope scope,PortraitCaptureViewport viewport)
  {
   if(scope is not (PortraitImageScope.Portrait or PortraitImageScope.VisibleAdventurerPlate))throw new ArgumentOutOfRangeException(nameof(scope));
-  lock(sync){if(disposed||physical.CleanupFailures!=0)return;request=(scope,viewport);gate.Reset();ClearCurrent();error=null;}
+  lock(sync){if(disposed||physical.CleanupFailures!=0)return;requestGeneration++;request=(scope,viewport);gate.Reset();ClearCurrent();error=null;}
  }
  public void Close()
- {lock(sync){request=null;gate.Reset();ClearCurrent();error=null;}}
+ {lock(sync){requestGeneration++;request=null;gate.Reset();ClearCurrent();error=null;}}
  public PortraitCapturedImage? AcquireCurrent()
  {
   lock(sync)
@@ -60,7 +61,7 @@ internal sealed class PortraitLiveImageService:IDisposable
     // then transfer that same lease to the consumer's independent image wrapper.
     shared=image.Texture.CreateWrapSharingLowLevelResource();
     if(disposed||!ReferenceEquals(current,image)||physical.CleanupFailures!=0)return null;
-    var result=new PortraitCapturedImage(shared,image.Sample,physical,lifetime);
+    var result=new PortraitCapturedImage(shared,image.Sample,physical,lifetime,image.Surface);
     shared=null;lifetime=null!;return result;
    }
    catch(Exception failure){physical.ObserveFailure(failure);return null;}
@@ -76,19 +77,37 @@ internal sealed class PortraitLiveImageService:IDisposable
    // Isolation revokes even a settling request with no physical task. Keep
    // pending copies owned until completion, but never inspect a native source
    // or revive a previous request when live capture is later re-enabled.
-   if(!allowCapture||physical.CleanupFailures!=0){request=null;gate.Reset();ClearCurrent();error=null;}
+   if(!allowCapture||physical.CleanupFailures!=0){requestGeneration++;request=null;gate.Reset();ClearCurrent();error=null;}
    PortraitCaptureSample? sample=null;
+   PortraitCaptureSurface? surface=null;
    var requested=request;
+   var requestedGeneration=requestGeneration;
    if(requested is {} desired)
    {
-    try{if(!api.TrySample(desired.Scope,desired.Viewport,out sample)||sample?.IsValid!=true)sample=null;}
-    catch(Exception){sample=null;error="当前图像尚未准备好，请稍后重试。";}
+    // Describing a portrait temporarily retains native SRVs. Own its synchronous
+    // prefix before a provider can reenter close/unload and seal physical work.
+    if(physical.TryEnter(out var samplingLifetime))
+    {
+     try
+     {
+      if(!api.TrySample(desired.Scope,desired.Viewport,out sample)||sample?.IsValid!=true)sample=null;
+      if(sample is {Scope:PortraitImageScope.Portrait})
+      {
+       if(api is not IPortraitLightingFitCaptureApi described
+        ||!described.TryDescribePortrait(sample,out surface)||surface is not{IsValid:true}
+        ||!api.TrySample(desired.Scope,desired.Viewport,out var after)||after!=sample)sample=null;
+      }
+     }
+     catch(Exception failure){physical.ObserveFailure(failure);sample=null;error="当前图像尚未准备好，请稍后重试。";}
+     finally{samplingLifetime.Dispose();}
+    }
    }
    // A native lookup may reenter Close/Request/Dispose.
    if(disposed)return;
-   if(requested!=request)sample=null;
-   gate.Observe(sample);
-   if(current is {} previous&&previous.Sample!=sample)ClearCurrent();
+   if(requestedGeneration!=requestGeneration||physical.CleanupFailures!=0)sample=null;
+   if(sample is null)surface=null;
+   gate.Observe(sample,surface);
+   if(current is {} previous&&(previous.Sample!=sample||previous.Surface!=surface))ClearCurrent();
    if(work is {} active)
    {
     if(!active.Consumed&&active.Copy?.IsCompleted==true)
@@ -104,14 +123,23 @@ internal sealed class PortraitLiveImageService:IDisposable
     }
     else if(active.Candidate is {} candidate)
     {
-     current=new(candidate,active.Ticket.Sample);active.Candidate=null;work=null;active.Lifetime.Dispose();error=null;
+     current=new(candidate,active.Ticket.Sample,surface:active.Ticket.Surface);active.Candidate=null;work=null;active.Lifetime.Dispose();error=null;
     }
-    else if(active.Consumed&&active.Layers is null){work=null;active.Lifetime.Dispose();}
+    else if(active.Consumed&&active.Layers is null)
+    {
+     // Keep this ticket attempted. Feature's existing throttled fresh Request
+     // owns recovery; stale/closed tickets take the rejection branch above.
+     error??="正在重新读取当前图像。";work=null;active.Lifetime.Dispose();
+    }
    }
    if(work is not null||request is null||sample is null)return;
-   if(gate.Begin() is not {} ticket)return;
-   var started=new Work(ticket,physical.Enter()){Starting=true};work=started;
-   try{started.Copy=api.CaptureAsync(ticket.Sample);}
+   // Retiring a stale result above may have quarantined its resources this tick.
+   // Admit before consuming the settled ticket, so refusal cannot start or spend it.
+   if(!physical.TryEnter(out var captureLifetime))return;
+   if(gate.Begin() is not {} ticket){captureLifetime.Dispose();return;}
+   var started=new Work(ticket,captureLifetime){Starting=true};work=started;
+   try{started.Copy=ticket.Surface is {} expected
+     ?((IPortraitLightingFitCaptureApi)api).CaptureAsync(ticket.Sample,expected):api.CaptureAsync(ticket.Sample);}
    catch(Exception failure){physical.ObserveFailure(failure);error="暂时无法读取图像，请重试。";started.Consumed=true;work=null;started.Lifetime.Dispose();return;}
    finally{started.Starting=false;}
    if(disposed)ObserveDetached(started);
@@ -146,7 +174,7 @@ internal sealed class PortraitLiveImageService:IDisposable
  {
   lock(sync)
   {
-   if(disposed)return;disposed=true;request=null;gate.Reset();ClearCurrent();
+   if(disposed)return;disposed=true;requestGeneration++;request=null;gate.Reset();ClearCurrent();
    if(work is {} active)
    {
     physical.Release(active.Layers);active.Layers=null;physical.Release(active.Candidate);active.Candidate=null;

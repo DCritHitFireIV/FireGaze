@@ -27,20 +27,50 @@ bool Publish(PortraitStorageBudget budget, string path, int length, bool backup,
     => budget.TryPublish(path, length, stream => stream.Write(new byte[length]), backup, out result);
 Run(root =>
 {
-    var limit = PortraitStorageBudget.DefaultLimitBytes;
+    const long limit = 176160768; // User-approved 168 MiB, independent of the product constant.
     var protectedBackup = Path.Combine(root, "portrait-favorites-v1.json.bak");
     using (var seed = new FileStream(protectedBackup, FileMode.CreateNew, FileAccess.Write, FileShare.Read))
         seed.SetLength(limit - 1);
-    var budget = new PortraitStorageBudget(root, limit);
+    var budget = PortraitStorageBudget.ForDirectory(root);
+    Check(budget.Snapshot.LimitBytes == limit,
+        "production directory authority uses the approved 168 MiB default");
     var exact = Path.Combine(root, "portrait-edit-history-v1.json");
-    Check(Publish(budget, exact, 1, false, out _), "fixed 128 MiB budget accepts the exact final byte");
+    Check(Publish(budget, exact, 1, false, out _), "fixed 168 MiB budget accepts the exact final byte");
     Check(budget.Snapshot.UsedBytes == limit && budget.Snapshot.ReservedBytes == 0,
-        "exact fixed budget reports 134217728 used bytes with no reservation");
+        "exact fixed budget reports 176160768 used bytes with no reservation");
     var over = Path.Combine(root, "portrait-owned-cache-v1.json");
     Check(!Publish(budget, over, 1, false, out var rejection) && rejection.Code == PortraitStorageCode.Capacity,
-        "one byte beyond the fixed 128 MiB budget is rejected");
+        "one byte beyond the fixed 168 MiB budget is rejected");
+    Check(rejection.Reason.Contains("168 MiB", StringComparison.Ordinal),
+        "production capacity rejection tells the player the current 168 MiB limit");
     Check(budget.Snapshot.UsedBytes == limit && new FileInfo(exact).Length == 1,
         "fixed-budget rejection preserves the exact final byte");
+});
+Run(root =>
+{
+    var priorBudget = Path.Combine(root, "portrait-favorites-v1.json.bak");
+    using (var seed = new FileStream(priorBudget, FileMode.CreateNew, FileAccess.Write, FileShare.Read))
+        seed.SetLength(134217728); // The previous 128 MiB ceiling must no longer reject growth.
+    var budget = PortraitStorageBudget.ForDirectory(root);
+    var added = Path.Combine(root, "portrait-edit-history-v1.json");
+    Check(!budget.Snapshot.Degraded && Publish(budget, added, 1, false, out _),
+        "a real production directory can grow beyond the previous shared budget without removing existing data");
+    Check(budget.Snapshot.UsedBytes == 134217729 && new FileInfo(priorBudget).Length == 134217728,
+        "the newly admitted byte preserves the complete existing backup and exact accounting");
+});
+Run(root =>
+{
+    var protectedBackup = Path.Combine(root, "portrait-favorites-v1.json.bak");
+    using (var seed = new FileStream(protectedBackup, FileMode.CreateNew, FileAccess.Write, FileShare.Read))
+        seed.SetLength(176160769);
+    var budget = PortraitStorageBudget.ForDirectory(root);
+    Check(budget.Snapshot.Degraded && budget.Snapshot.UsedBytes == 176160769
+        && budget.Snapshot.Reason.Contains("168 MiB", StringComparison.Ordinal),
+        "startup above the real 168 MiB default preserves data and reports the current limit");
+    Check(!Publish(budget, Path.Combine(root, "portrait-edit-history-v1.json"), 1, false, out var rejection)
+        && rejection.Code == PortraitStorageCode.Capacity
+        && new FileInfo(protectedBackup).Length == 176160769,
+        "startup over the approved shared limit rejects growth without shrinking the existing backup");
 });
 Run(root =>
 {

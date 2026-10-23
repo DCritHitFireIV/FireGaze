@@ -38,7 +38,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             if (nint.Size != 8 || PortraitNativeCounterIngressContract.For(targetSet).Count == 0
                 || !process.TryReadModule(out var module) || !ValidModule(module)
                 || !HashMatches(module.FileImage, PortraitNativePhaseObservationBinding.EXE)
-                || !process.TryReadSDK(out var sdk) || !ValidSDK(sdk)
+                || !process.TryReadSDK(out var sdk) || !ValidSDK(sdk, out var sdkHash)
                 || !TryInspectExecutableImage(module.FileImage, module.ImageSize, targetSet, out var diskEntries, out reason)) return false;
             reason = "Runtime native entry, module identity, SDK resolution, or address reservation changed during qualification.";
             if (!ReadEntries(module, diskEntries, out var first, out var entryFailure))
@@ -51,7 +51,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             { reason = "Module image hash changed after the first runtime entry pass."; return false; }
             if (!process.TryReadSDK(out var sdkAfter))
             { reason = "Loaded SDK could not be re-read after the first runtime entry pass."; return false; }
-            if (sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter))
+            if (sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter, out var afterHash) || afterHash != sdkHash)
             { reason = "Loaded SDK identity or file hash changed after the first runtime entry pass."; return false; }
             if (!ReadEntries(after, diskEntries, out var second, out entryFailure))
             { reason = entryFailure; return false; }
@@ -66,14 +66,14 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 { reason = "Module identity or image hash changed after the final resource-body pass."; return false; }
                 if (!process.TryReadSDK(out var finalSDK))
                 { reason = "Loaded SDK could not be re-read after the final resource-body pass."; return false; }
-                if (finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK))
+                if (finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK, out var finalHash) || finalHash != sdkHash)
                 { reason = "Loaded SDK identity or file hash changed after the final resource-body pass."; return false; }
             }
             for (var index = 0; index < first.Length; index++)
                 if (StableEntry(first[index]) != StableEntry(second[index]))
                 { reason = EntryFailure(diskEntries[index], "changed between runtime read passes"); return false; }
             if (!PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
-                    PortraitNativePhaseObservationBinding.SDK, second, targetSet, out var targets, out reason)) return false;
+                    sdkHash, second, targetSet, out var targets, out reason)) return false;
             // A reservation can appear inside the final read. This last sweep rejects
             // that observed drift; it cannot replace the installer's atomic lease.
             var reservedTarget = targets.FirstOrDefault(target => process.IsAddressReserved(target.Address));
@@ -83,7 +83,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 return false;
             }
             plan = new(module.BaseAddress, module.ImageSize, PortraitNativePhaseObservationBinding.EXE,
-                PortraitNativePhaseObservationBinding.SDK, sdk.LoadedMVID, targets);
+                sdkHash, sdk.LoadedMVID, targets);
             reason = "The current module image, SDK MVID and complete target-set contracts match; no installation lease or scene admission.";
             return true;
         }
@@ -121,9 +121,12 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
         && string.Equals(module.Name, "ffxiv_dx11.exe", StringComparison.OrdinalIgnoreCase)
         && module.BaseAddress > 0 && module.ImageSize > 0 && module.BaseAddress <= nint.MaxValue - module.ImageSize;
 
-    private static bool ValidSDK(PortraitNativePhaseSDKImage sdk)
+    private static bool ValidSDK(PortraitNativePhaseSDKImage sdk, out string hash)
     {
-        if (sdk is null || sdk.LoadedMVID == Guid.Empty || !HashMatches(sdk.FileImage, PortraitNativePhaseObservationBinding.SDK)) return false;
+        hash = string.Empty;
+        if (sdk is null || sdk.LoadedMVID == Guid.Empty || sdk.FileImage is null) return false;
+        hash = Convert.ToHexString(SHA256.HashData(sdk.FileImage));
+        if (!PortraitNativePhaseObservationBinding.SDKIdentityMatches(hash, sdk.LoadedMVID)) return false;
         using var pe = new PEReader(new MemoryStream(sdk.FileImage, false));
         if (!pe.HasMetadata) return false;
         var metadata = pe.GetMetadataReader();

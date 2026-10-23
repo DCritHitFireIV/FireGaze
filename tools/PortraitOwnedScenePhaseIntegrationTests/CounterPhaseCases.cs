@@ -19,7 +19,7 @@ internal static unsafe class CounterPhaseCases
             (Func<nint, bool> _, out PortraitNativePhaseResolvedPlan? plan, out string reason) => {
                 var module = unchecked((nint)0x5A00000000L);
                 plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
-                    typeof(RenderManager).Assembly.ManifestModule.ModuleVersionId, [
+                    Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"), [
                         new(PortraitNativeObservedPhase.CounterAdd, module + 0x2BA770, typeof(PortraitNativeSlotCounter)),
                         new(PortraitNativeObservedPhase.CounterSub, module + 0x2BA790, typeof(PortraitNativeSlotCounter))]);
                 reason = "native boundary fixture"; return true;

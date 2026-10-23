@@ -73,10 +73,16 @@ internal static unsafe class OwnedExperimentBrokerCases
         internal readonly Runtime Runtime;
         internal readonly PortraitOwnedSceneExperimentBroker Broker;
         internal readonly PortraitOwnedSceneController Controller;
-        internal readonly PortraitOwnedCharaViewSnapshot SourceSnapshot = new(Source,default,default,new CharaViewItem[14],0,new());
+        internal readonly PortraitOwnedCharaViewSnapshot SourceSnapshot = new(Source,default,default,CompleteItems(),0,new(),gameBuild:"fixture");
         internal long Now;
         internal int Copies,Stops;
         internal readonly PortraitOwnedSceneJointHost Host;
+        private static CharaViewItem[] CompleteItems()
+        {
+            var items = new CharaViewItem[14];
+            for (byte i = 0; i < items.Length; i++) items[i].SlotId = i;
+            return items;
+        }
         internal Fixture(bool admitted, Func<bool>? allowAdvance = null, Action<IPortraitOwnedSceneLease>? afterAdvance = null,
             Func<bool>? requestCurrent = null)
         {

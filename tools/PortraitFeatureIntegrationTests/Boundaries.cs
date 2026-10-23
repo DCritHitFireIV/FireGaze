@@ -277,7 +277,12 @@ namespace FireGaze.PortraitPreview
         public int NativeOwnerReads;
         private OwnedCharacterKey? CurrentCharacter() { NativeOwnerReads++; return Owner; }
         public void SampleSourceOwner() => RefreshSourceCharacter();
-        private void Mutate(System.Action action) => action();
+        private void Mutate(System.Action action, bool preserveSourceCensus = false)
+        {
+            DevelopmentCameraPreservedCensus = preserveSourceCensus;
+            if (Plugin.Framework.IsInFrameworkUpdateThread) action();
+            else DevelopmentCameraQueuedActions.Enqueue(action);
+        }
         // The production opening controller is outside this integration boundary. Keep the
         // receipt entry point available so the real editing partial can compile unchanged.
         private void OpenEditorWithReceipt(string kind, string nonce) { }
@@ -311,6 +316,7 @@ namespace FireGaze.PortraitPreview
         public string? FavoritesLoadErrorForTest => favoritesStore.LoadError;
         public void PublishFavoriteForTest(PortraitFavoritesWriteResult result) => PublishFavoriteResult(result);
         public bool RejectFavoriteArchive { get => photos.RejectArchive; set => photos.RejectArchive = value; }
+        public PortraitFavoritePhotoStatus FavoritePhotoForTest { get => photos.PhotoStatus; set => photos.PhotoStatus = value; }
         public bool FavoriteMetadataDrainSucceeded => DrainFavoritePersistence().GetAwaiter().GetResult();
         public void MakeStorageObservationDue() => nextStorageObservation = DateTime.MinValue;
         public void WaitStorageObservation() { storageObservation?.GetAwaiter().GetResult(); PollStorageObservation(); }
@@ -326,7 +332,11 @@ namespace FireGaze.PortraitPreview
 
     internal sealed class PhotoPersistenceBoundary
     {
+        public bool IsBusy;
+        public bool IsPhysicallyIdle = true;
         public bool RejectArchive { get; set; }
+        public PortraitFavoritePhotoStatus PhotoStatus { get; set; } = PortraitFavoritePhotoStatus.Missing;
+        public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong owner, PortraitEditorSnapshot snapshot) => PhotoStatus;
         public IDisposable? ProtectFavoriteSnapshot(ulong owner, PortraitEditorSnapshot snapshot) => null;
         public bool ReclaimStorage() => true;
         public bool TryWithStorageReclaim(Func<bool> attempt, Func<bool> capacity) => attempt();
@@ -334,4 +344,5 @@ namespace FireGaze.PortraitPreview
             Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> favorites,
             (ulong ContentID, PortraitEditorSnapshot Snapshot)? protect = null) => Task.Run(async () => await write() && !RejectArchive);
     }
+    internal enum PortraitFavoritePhotoStatus { Available, Missing, Capacity, StorageError, Pending }
 }

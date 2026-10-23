@@ -6,8 +6,9 @@ using Dalamud.Plugin.Services;
 namespace FireGaze.PortraitPreview;
 
 /// <summary>
-/// Normalizes sources through public readback, composes their pixels on the CPU, then uploads RGBA
-/// UNORM pixels. No draw list, ImGui context, native editor pointer, or private renderer API is used.
+/// Reads independently prepared sources without format conversion, composes supported pixels on
+/// the CPU, then uploads RGBA UNORM pixels. No draw list, ImGui context, native editor pointer, or
+/// private renderer API is used.
 /// </summary>
 internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider textures, ITextureReadbackProvider readback)
 {
@@ -81,9 +82,9 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
             {
                 token.ThrowIfCancellationRequested();
                 var raw = await operation.CallAsync(PortraitPhotoPhase.LayerReadback, () => readback.GetRawImageAsync(layer.Texture,
-                    // Official format normalization handles compressed game UI textures. Keep
-                    // full source UV/dimensions: placement, cropping and filtering happen below.
-                    new TextureModificationArgs { DxgiFormat = 28, Uv0 = Vector2.Zero, Uv1 = Vector2.One },
+                    // Callers prepare independent sources in a supported format before composition.
+                    // Preserve original format and full source: CPU sampling handles UVs and size.
+                    new TextureModificationArgs { Uv0 = Vector2.Zero, Uv1 = Vector2.One },
                     leaveWrapOpen: true, cancellationToken: CancellationToken.None), index).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
                 ValidateRaw(raw.Specification, raw.RawData, layer);

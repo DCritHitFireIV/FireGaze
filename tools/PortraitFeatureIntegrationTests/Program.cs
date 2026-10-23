@@ -15,6 +15,8 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            PortraitDevelopmentCameraCases.Run(root, Check);
+            PortraitFavoritePhotoNoticeCases.Run(root, Check);
             PortraitPhotoHistoryPublicationCases.Run(root, Check);
             PortraitStoragePlayerMessageCases.Run(root, Check);
             PortraitActionOwnerCases.Run(root, Check);

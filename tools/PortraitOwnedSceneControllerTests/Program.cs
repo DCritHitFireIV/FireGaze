@@ -19,6 +19,7 @@ static class ControllerChecks
             PartialCreationWaitsForConfirmedRetirement();
             SynchronousRequestFailureRetainsOwner();
             ClosedAdmissionNeverTouchesNative();
+            IncompleteSnapshotNeverRequestsNativeOwnership();
             ExplicitDevelopmentCapabilityDoesNotOpenProduction();
             NativeSceneStartsOnlyFromOwnedCallback();
             ReadyBorrowIsSynchronousAndRetiringBlocksIt();
@@ -48,8 +49,9 @@ static class ControllerChecks
         CharaViewCharacterData character = default;
         CharaViewModelData model = default;
         var items = new CharaViewItem[14];
+        for (byte i = 0; i < items.Length; i++) items[i].SlotId = i;
         return new PortraitOwnedCharaViewSnapshot(new(101, 102, 103, generation, 104), character, model, items, 0,
-            new PortraitComposition { Paused = true, CameraDistance = 3, CameraZoomNormalized = .5f });
+            new PortraitComposition { Paused = true, CameraDistance = 3, CameraZoomNormalized = .5f }, gameBuild: "CN-test-build");
     }
 
     private static PortraitOwnedSceneController Create(FakeBroker broker, FakeApi api)
@@ -63,6 +65,16 @@ static class ControllerChecks
         Check(!controller.TryStart(Snapshot(), 3), "closed admission rejects start");
         Check(controller.State == PortraitOwnedSceneControllerState.Off && api.Events.Count == 0 && broker.Requests == 0,
             "closed admission has no allocation or request side effects");
+    }
+    private static void IncompleteSnapshotNeverRequestsNativeOwnership()
+    {
+        var broker = new FakeBroker { ProductionAdmission = true };
+        using var api = new FakeApi();
+        using var controller = Create(broker, api);
+        var incomplete = new PortraitOwnedCharaViewSnapshot(Source, default, default, new CharaViewItem[14], 0,
+            new PortraitComposition { Paused = true, CameraDistance = 3, CameraZoomNormalized = .5f }, gameBuild: "CN-test-build");
+        Check(!incomplete.IsComplete && !controller.TryStart(incomplete, 3) && broker.Requests == 0,
+            "incomplete detached snapshots are rejected before any native ownership request");
     }
     private static void ExplicitDevelopmentCapabilityDoesNotOpenProduction()
     {

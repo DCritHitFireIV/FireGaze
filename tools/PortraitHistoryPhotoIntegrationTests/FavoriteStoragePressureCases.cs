@@ -27,7 +27,7 @@ internal static class FavoriteStoragePressureCases
         var before = File.ReadAllBytes(failedPath);
         File.WriteAllText(archivePath, "{broken-favorite-archive");
         using (var service = new PortraitHistoryPhotos(failedPath, textures, readback, new(),
-            PortraitHistoryStore.MaximumBytes, favoritePhotoPath: archivePath, favoriteSnapshots: [(10, snapshot)]))
+            PortraitThumbnailCache.MaximumBytes, favoritePhotoPath: archivePath, favoriteSnapshots: [(10, snapshot)]))
         {
             Check(File.Exists(failedPath) && before.SequenceEqual(File.ReadAllBytes(failedPath)),
                 "startup budget pressure preserves the only favorite PNG after archive rescue fails");
@@ -40,7 +40,7 @@ internal static class FavoriteStoragePressureCases
         // Null means that favorite references could not be read, not an authoritative empty set.
         var unknownPath = Path.Combine(root, "pressure-unknown-references.bin");
         new PortraitThumbnailCache(unknownPath, PortraitThumbnailCache.MaximumBytes).TryPut(key, png);
-        using (var service = new PortraitHistoryPhotos(unknownPath, textures, readback, new(), PortraitHistoryStore.MaximumBytes))
+        using (var service = new PortraitHistoryPhotos(unknownPath, textures, readback, new(), PortraitThumbnailCache.MaximumBytes))
         {
             Check(File.Exists(unknownPath), "unknown favorite references cannot destructively fit a valid bin during Load");
             Check(service.SetFavoriteSnapshots([(10, snapshot)])
@@ -60,7 +60,7 @@ internal static class FavoriteStoragePressureCases
             service.SetFavoriteSnapshots([(10, snapshot)]);
             Check(service.FavoritePhotoStatus(10, snapshot) == PortraitFavoritePhotoStatus.Capacity,
                 "favorite photo capacity refusal is distinct from a missing completed image");
-            service.SetRecords([], PortraitHistoryStore.MaximumBytes);
+            service.SetRecords([], PortraitThumbnailCache.MaximumBytes);
             service.Poll("", default, null, null, false);
             for (var retry = 0; retry < 100 && service.IsBusy; retry++) await Task.Delay(10);
             service.Poll("", default, null, null, false);
@@ -82,7 +82,7 @@ internal static class FavoriteStoragePressureCases
                 var second = (IDisposable?)protect.Invoke(service, [10UL, snapshot]);
                 Check(first is not null && second is not null, "overlapping saves can retain the same completed PNG independently");
                 first?.Dispose();
-                service.SetRecords([], PortraitHistoryStore.MaximumBytes);
+                service.SetRecords([], PortraitThumbnailCache.MaximumBytes);
                 service.Poll("", default, null, null, false);
                 for (var retry = 0; retry < 100 && service.IsBusy; retry++) await Task.Delay(10);
                 Check(File.Exists(provisionalPath), "disposing one save token cannot release another save's provisional pin");

@@ -94,7 +94,7 @@ internal static class FavoriteRetentionCases
 
         var migrationPath = Path.Combine(root, "migration-favorite.bin");
         var migrationCache = new PortraitThumbnailCache(migrationPath, PortraitThumbnailCache.MaximumBytes);
-        Check(migrationCache.TryPut(key, png), "first-upgrade migration starts with a completed photo that the new history budget cannot retain");
+            Check(migrationCache.TryPut(key, png), "first-upgrade migration starts with a completed photo that must remain retained");
         var migrationConstructor = typeof(PortraitHistoryPhotos).GetConstructors().SingleOrDefault(constructor =>
             constructor.GetParameters().Any(parameter => parameter.Name == "favoriteSnapshots"));
         Check(migrationConstructor is not null, "startup must migrate known favorite photos before applying the smaller history cache budget");
@@ -102,7 +102,7 @@ internal static class FavoriteRetentionCases
             { migrationPath, textures, readback, source, PortraitThumbnailCache.MaximumBytes, null, null,
                 new (ulong ContentID, PortraitEditorSnapshot Snapshot)[] { (10, snapshot) }, null, null }))
         {
-            Check(!File.Exists(migrationPath), "migration still applies the actual zero-byte history image budget");
+            Check(File.Exists(migrationPath), "migration keeps the completed PNG while history references remain conservatively protected");
         }
         using (var service = new PortraitHistoryPhotos(migrationPath, textures, readback, source, 0))
         {

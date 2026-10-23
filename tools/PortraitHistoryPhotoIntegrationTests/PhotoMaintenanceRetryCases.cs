@@ -33,17 +33,19 @@ internal static class PhotoMaintenanceRetryCases
         {
             using (var held = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                photos.SetRecords([], PortraitHistoryStore.MaximumBytes);
+                photos.SetRecords([], PortraitThumbnailCache.MaximumBytes);
                 await Settle(photos);
-                Check(delays.SequenceEqual(new double[] { 1, 2, 4 }) && File.Exists(path), "failed deletion retries exactly at one two four seconds and preserves original");
+                Check(delays.SequenceEqual(new double[] { 1, 2, 4 }) && File.Exists(path), "exhausted capacity retries exactly at one two four seconds and preserves original");
                 for (var i = 0; i < 30; i++) photos.Poll("", default, null, null, false);
                 Check(delays.Count == 3 && !photos.IsBusy, "unchanged exhausted maintenance cannot restart on every frame");
                 var diagnostics = photos.Diagnostics();
                 Check((bool)diagnostics.GetType().GetProperty("maintenancePending")!.GetValue(diagnostics)!, "exhausted maintenance remains pending and diagnosable");
             }
+            photos.SetRecords([], 0);
             storage.RequestReclaim();
             await Settle(photos);
-            Check(!File.Exists(path), "a later reclaim request recovers failed maintenance without another history edit");
+            Check(File.Exists(path) && new PortraitThumbnailCache(path, 1000, storage).Contains(key),
+                "a restored allowance and later reclaim request recover maintenance while preserving the completed PNG");
         }
         var archiveDirectory = Path.Combine(root, "archive-retries"); Directory.CreateDirectory(archiveDirectory);
         storage = new PortraitStorageBudget(archiveDirectory, 10_000);
@@ -55,15 +57,16 @@ internal static class PhotoMaintenanceRetryCases
         {
             Directory.CreateDirectory(archive);
             Check(!photos.SetFavoriteSnapshots([(10, snapshot)]), "real archive publication failure stays visible");
-            photos.SetRecords([], PortraitHistoryStore.MaximumBytes);
+            photos.SetRecords([], PortraitThumbnailCache.MaximumBytes);
             await Settle(photos);
             Check(delays.SequenceEqual(new double[] { 1, 2, 4 }) && File.Exists(path), "archive failure retries finitely and pins its only completed PNG");
             Check(photos.ReclaimStorage() && File.Exists(path), "explicit reclamation cannot discard an unarchived favorite");
             Directory.Delete(archive);
+            photos.SetRecords([], 0);
             storage.RequestReclaim();
             await Settle(photos);
             Check(photos.FavoritePhotoStatus(10, snapshot) == PortraitFavoritePhotoStatus.Available
-                && File.Exists(archive) && !File.Exists(path), "archive retry later succeeds before ordinary copy is removed");
+                && File.Exists(archive) && File.Exists(path), "archive retry later succeeds while the completed cache copy is retained");
         }
         var fullDirectory = Path.Combine(root, "full-mixed-retry"); Directory.CreateDirectory(fullDirectory);
         path = Path.Combine(fullDirectory, "photos.bin");
@@ -76,7 +79,7 @@ internal static class PhotoMaintenanceRetryCases
             typeof(PortraitHistoryPhotos).GetField("favoritePhotos", BindingFlags.Instance | BindingFlags.NonPublic)!
                 .SetValue(photos, new PortraitFavoritePhotos(Path.Combine(fullDirectory, "small.json"), 128, storage));
             photos.SetFavoriteSnapshots([(10, snapshot)]);
-            photos.SetRecords([], PortraitHistoryStore.MaximumBytes - 148);
+            photos.SetRecords([], PortraitThumbnailCache.MaximumBytes - 148);
             photos.Poll("", default, null, null, false);
             var pending = (Task)typeof(PortraitHistoryPhotos).GetField("maintenance", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(photos)!;
             await pending;

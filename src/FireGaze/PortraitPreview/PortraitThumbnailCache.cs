@@ -4,9 +4,9 @@ using System.Text;
 namespace FireGaze.PortraitPreview;
 
 /// <summary>Disposable encoded images. History snapshots remain the sole restoration data.</summary>
-internal sealed class PortraitThumbnailCache
+internal sealed partial class PortraitThumbnailCache
 {
-    public const int MaximumBytes = 10 * 1024 * 1024;
+    public const int MaximumBytes = 50 * 1024 * 1024;
     public const int MaximumImageBytes = 256 * 1024;
     private const int MaximumEntries = 4096;
     internal const int MaximumEntriesForReclaim = MaximumEntries;
@@ -19,6 +19,7 @@ internal sealed class PortraitThumbnailCache
     private readonly string path;
     private readonly object gate = new();
     private readonly PortraitStorageBudget storage;
+    private readonly bool preserveCompletedImages;
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, int> admissionPins = new(StringComparer.Ordinal);
     private volatile PortraitStorageCode lastStorageCode;
     private List<Entry> entries = [];
@@ -27,16 +28,21 @@ internal sealed class PortraitThumbnailCache
     private bool loadFailed;
     // Null means that the durable favorite library could not supply trusted references.
     // Preserve every completed image until that reference set becomes known.
-    private HashSet<string>? protectedKeys = new(StringComparer.Ordinal);
-    private HashSet<string> preferredKeys = new(StringComparer.Ordinal);
+    private sealed record Protection(HashSet<string>? Keys, HashSet<string> Preferred);
+    private Protection protection = new(new(StringComparer.Ordinal), new(StringComparer.Ordinal));
     private sealed record Entry(string Key, byte[] Image);
 
-    public PortraitThumbnailCache(string path, int availableBytes, PortraitStorageBudget? storage = null)
+    public PortraitThumbnailCache(string path, int availableBytes, PortraitStorageBudget? storage = null,
+        bool preserveCompletedImages = false)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ValidateBudget(availableBytes);
         this.path = Path.GetFullPath(path);
         this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(this.path)!);
+        // Selected before loading or admitting any writer. Completed player photos must not
+        // be retired by a candidate built before a later Framework reference publication.
+        // Retention mode refuses growth at capacity instead of risking the only durable PNG.
+        this.preserveCompletedImages = preserveCompletedImages;
         this.storage.RegisterPath(this.path);
         this.availableBytes = availableBytes;
         Load();
@@ -115,7 +121,7 @@ internal sealed class PortraitThumbnailCache
             var candidate = entries.Where(entry => entry.Key != key).ToList();
             candidate.Add(new(key, image.ToArray()));
             if (!Fit(candidate, availableBytes, key))
-            { lastStorageCode = PortraitStorageCode.Capacity; lastError = "照片容量不足，现有收藏照片已保留。"; return false; }
+            { lastStorageCode = PortraitStorageCode.Capacity; lastError = "照片容量不足，现有历史和收藏照片已保留。"; return false; }
             return Publish(candidate);
         }
     }
@@ -132,7 +138,7 @@ internal sealed class PortraitThumbnailCache
             var candidate = entries.ToList();
             var fits = Fit(candidate, value);
             if (candidate.Count != entries.Count && !Publish(candidate, requestReclaim)) return false;
-            lastError = fits ? null : "照片容量不足，尚未归档的收藏照片已保留。";
+            lastError = fits ? null : "照片容量不足，现有历史和收藏照片已保留。";
             lastStorageCode = fits ? PortraitStorageCode.Success : PortraitStorageCode.Capacity;
             return fits;
         }
@@ -140,11 +146,10 @@ internal sealed class PortraitThumbnailCache
 
     public void SetProtectedKeys(IReadOnlySet<string>? keys, IReadOnlySet<string>? preferred = null)
     {
-        lock (gate)
-        {
-            protectedKeys = keys?.ToHashSet(StringComparer.Ordinal);
-            preferredKeys = preferred?.ToHashSet(StringComparer.Ordinal) ?? new(StringComparer.Ordinal);
-        }
+        // Framework publishes detached managed policy without joining a worker's disk lock.
+        // Both sets belong to one immutable generation and are never modified after release.
+        Volatile.Write(ref protection, new(keys?.ToHashSet(StringComparer.Ordinal),
+            preferred?.ToHashSet(StringComparer.Ordinal) ?? new(StringComparer.Ordinal)));
     }
 
     /// <summary>Reclaims one oldest unpinned image, preferring ordinary photos to archived favorites.</summary>
@@ -153,7 +158,8 @@ internal sealed class PortraitThumbnailCache
         lock (gate)
         {
             if (!EnsureLoaded()) return false;
-            var remove = entries.FindIndex(entry => !IsProtected(entry.Key) && !preferredKeys.Contains(entry.Key));
+            var policy = Volatile.Read(ref protection);
+            var remove = entries.FindIndex(entry => !IsProtected(entry.Key) && !policy.Preferred.Contains(entry.Key));
             if (remove < 0) remove = entries.FindIndex(entry => !IsProtected(entry.Key));
             if (remove < 0) return true;
             var candidate = entries.ToList();
@@ -184,14 +190,19 @@ internal sealed class PortraitThumbnailCache
     private static int Size(List<Entry> values) => values.Count == 0 ? 0
         : HeaderBytes + values.Sum(entry => EntryBytes + entry.Image.Length);
 
-    private bool IsProtected(string key) => admissionPins.ContainsKey(key) || protectedKeys is null || protectedKeys.Contains(key);
+    private bool IsProtected(string key)
+    {
+        var policy = Volatile.Read(ref protection);
+        return preserveCompletedImages || admissionPins.ContainsKey(key) || policy.Keys is null || policy.Keys.Contains(key);
+    }
 
     private bool Fit(List<Entry> values, int limit, string? requiredKey = null)
     {
         while (values.Count > MaximumEntries || Size(values) > limit)
         {
+            var policy = Volatile.Read(ref protection);
             var remove = values.FindIndex(entry => entry.Key != requiredKey && !IsProtected(entry.Key)
-                && !preferredKeys.Contains(entry.Key));
+                && !policy.Preferred.Contains(entry.Key));
             if (remove < 0) remove = values.FindIndex(entry => entry.Key != requiredKey && !IsProtected(entry.Key));
             if (remove < 0) return false;
             values.RemoveAt(remove);
@@ -250,6 +261,18 @@ internal sealed class PortraitThumbnailCache
         }
         catch (Exception error) when (error is InvalidDataException or ArgumentException)
         {
+            if (preserveCompletedImages)
+            {
+                // Completed player photos are durable recovery data. A corrupt index must
+                // not turn a read failure into silent data loss: keep the original bytes,
+                // quarantine this cache instance, and wait for a readable file before any
+                // write or maintenance operation is allowed to proceed.
+                loadFailed = true;
+                lastStorageCode = PortraitStorageCode.StorageError;
+                lastError = "照片缓存文件无法读取，已保留原文件并暂停新增照片。";
+                Volatile.Write(ref entries, []);
+                return;
+            }
             lastError = error.Message;
             // This file owns images only. Never open, repair or delete the history file.
             if (!storage.TryDeleteOwned(path, out var cleanup)) lastError = cleanup.Reason;

@@ -18,6 +18,11 @@ unsafe static class Checks
         try
         {
             SnapshotPreservesCompleteAppearance();
+            SnapshotIdentityAndDigest();
+            SnapshotDigestTracksEveryModelField();
+            SnapshotRejectsUnknownContractAndVersion();
+            SnapshotRejectsMalformedProvenanceBeforeAdmission();
+            SnapshotDigestIgnoresNativePadding();
             NoPermitDoesNotTouchNative();
             NativeLifecycleAndComposition();
             FailedAllocationDoesNotConstruct();
@@ -68,7 +73,7 @@ unsafe static class Checks
         }
         // Native ModelData includes the complete eight-byte crest value.
         *(ulong*)&model.FreeCompanyCrestData=0x0102030405060708;
-        return new(Source,character,model,items,0x15,Composition);
+        return new(Source,character,model,items,0x15,Composition,gameBuild:"fixture");
     }
     static void SnapshotPreservesCompleteAppearance()
     {
@@ -86,6 +91,125 @@ unsafe static class Checks
         Check(snapshot.CreateSetupData().ItemIds[0]==2000,"caller item mutation cannot change retained snapshot");
         var raw=snapshot.CharacterData;raw.ItemIds[0]=9999;
         Check(snapshot.CharacterData.ItemIds[0]==1000,"raw character struct returned by value");
+    }
+    static void SnapshotIdentityAndDigest()
+    {
+        var snapshot=Snapshot();
+        Check(snapshot.Version==PortraitOwnedCharaViewSnapshot.CurrentVersion && snapshot.IsComplete,
+            "complete snapshot exposes its versioned detached contract");
+        Check(snapshot.ContentDigest.Length==64,"complete snapshot exposes a SHA-256 content digest");
+        Check(snapshot.ContentDigest==Snapshot().ContentDigest,"same detached values produce the same digest");
+        var changed=snapshot.CopyItems(); changed[0].ItemId++;
+        Check(PortraitOwnedCharaViewSnapshot.TryCreate(snapshot.Source,snapshot.CharacterData,snapshot.ModelData,changed,
+            snapshot.CrestBits,snapshot.Composition,out var changedSnapshot,gameBuild:snapshot.GameBuild,sdkContract:snapshot.SDKContract)
+            && changedSnapshot!.ContentDigest!=snapshot.ContentDigest,
+            "changing one equipment record changes the detached content digest");
+        Check(snapshot.MatchesSource(snapshot.Source),"snapshot accepts its original source generation");
+        Check(!snapshot.MatchesSource(snapshot.Source with {Generation=snapshot.Source.Generation+1}),
+            "a later source generation cannot reuse an older snapshot");
+        var incomplete=snapshot.CopyItems(); incomplete[13].SlotId=incomplete[0].SlotId;
+        Check(!PortraitOwnedCharaViewSnapshot.TryCreate(snapshot.Source,snapshot.CharacterData,snapshot.ModelData,incomplete,
+            snapshot.CrestBits,snapshot.Composition,out _),
+            "duplicate equipment slots cannot become a complete snapshot");
+    }
+    static void SnapshotRejectsUnknownContractAndVersion()
+    {
+        var baseline=Snapshot();
+        Check(!PortraitOwnedCharaViewSnapshot.TryCreate(baseline.Source,baseline.CharacterData,baseline.ModelData,
+            baseline.CopyItems(),baseline.CrestBits,baseline.Composition,out _,gameBuild:""),
+            "a snapshot without a verified game build cannot be published");
+        var unknownVersion=false;
+        try
+        {
+            _=new PortraitOwnedCharaViewSnapshot(baseline.Source,baseline.CharacterData,baseline.ModelData,
+                baseline.CopyItems(),baseline.CrestBits,baseline.Composition,
+                snapshotVersion:PortraitOwnedCharaViewSnapshot.CurrentVersion+1,gameBuild:"fixture");
+        }
+        catch(ArgumentException){unknownVersion=true;}
+        Check(unknownVersion,"unknown snapshot schema versions fail closed");
+    }
+    static void SnapshotDigestTracksEveryModelField()
+    {
+        var baseline=Snapshot();
+        var unchanged=new List<string>();
+        for(var slot=0;slot<10;slot++)
+        {
+            var changes=new (string Name,Func<CharaViewModelData,CharaViewModelData> Apply)[]
+            {
+                ("Id",m=>{m.EquipmentModelIds[slot].Id++;return m;}),
+                ("Variant",m=>{m.EquipmentModelIds[slot].Variant++;return m;}),
+                ("Stain0",m=>{m.EquipmentModelIds[slot].Stain0++;return m;}),
+                ("Stain1",m=>{m.EquipmentModelIds[slot].Stain1++;return m;}),
+            };
+            foreach(var change in changes)
+            {
+                var changed=new PortraitOwnedCharaViewSnapshot(baseline.Source,baseline.CharacterData,
+                    change.Apply(baseline.ModelData),baseline.CopyItems(),baseline.CrestBits,
+                    baseline.Composition,gameBuild:baseline.GameBuild,sdkContract:baseline.SDKContract);
+                if(changed.ContentDigest==baseline.ContentDigest) unchanged.Add($"Equipment[{slot}].{change.Name}");
+            }
+        }
+        for(var slot=0;slot<3;slot++)
+        {
+            var changes=new (string Name,Func<CharaViewModelData,CharaViewModelData> Apply)[]
+            {
+                ("Id",m=>{m.WeaponModelIds[slot].Id++;return m;}),
+                ("Type",m=>{m.WeaponModelIds[slot].Type++;return m;}),
+                ("Variant",m=>{m.WeaponModelIds[slot].Variant++;return m;}),
+                ("Stain0",m=>{m.WeaponModelIds[slot].Stain0++;return m;}),
+                ("Stain1",m=>{m.WeaponModelIds[slot].Stain1++;return m;}),
+            };
+            foreach(var change in changes)
+            {
+                var changed=new PortraitOwnedCharaViewSnapshot(baseline.Source,baseline.CharacterData,
+                    change.Apply(baseline.ModelData),baseline.CopyItems(),baseline.CrestBits,
+                    baseline.Composition,gameBuild:baseline.GameBuild,sdkContract:baseline.SDKContract);
+                if(changed.ContentDigest==baseline.ContentDigest) unchanged.Add($"Weapon[{slot}].{change.Name}");
+            }
+        }
+        Check(unchanged.Count==0,"every model field must affect the snapshot digest; omitted: "+string.Join(", ",unchanged));
+    }
+    static void SnapshotRejectsMalformedProvenanceBeforeAdmission()
+    {
+        var baseline=Snapshot();
+        var malformed=new List<(string Name,string? GameBuild,string? SDKContract)>();
+        foreach(var build in new string?[]{null,"","   "," fixture","fixture ","\tfixture","FFCS:1.0","ffcs:1.0","FfCs:1.0"," FFCS:1.0"})
+            malformed.Add(($"GameBuild={System.Text.Json.JsonSerializer.Serialize(build)}",build,null));
+        foreach(var sdk in new[]{"","   "," fixture","fixture ","\tfixture"})
+            malformed.Add(($"SDKContract={System.Text.Json.JsonSerializer.Serialize(sdk)}",baseline.GameBuild,sdk));
+        using var api=new Fixture();
+        var broker=new AdmissionBroker();
+        var factories=0;
+        using var controller=new PortraitOwnedSceneController(broker,()=>{factories++;return new PortraitOwnedCharaView(api);});
+        var admitted=new List<string>();
+        foreach(var value in malformed)
+        {
+            var snapshot=new PortraitOwnedCharaViewSnapshot(baseline.Source,baseline.CharacterData,baseline.ModelData,
+                baseline.CopyItems(),baseline.CrestBits,baseline.Composition,gameBuild:value.GameBuild,sdkContract:value.SDKContract);
+            if(snapshot.IsDetachedValid || snapshot.Provenance.IsValid || controller.TryStart(snapshot,3)
+                || new PortraitOwnedCharaView(api).TryCreate(snapshot,new Lease())) admitted.Add(value.Name);
+        }
+        Check(admitted.Count==0,"malformed provenance must fail before controller/native admission: "+string.Join(", ",admitted));
+        Check(factories==0&&broker.Requests==0&&api.Events.Count==0,"invalid provenance cannot create runtime, request ownership or allocate native memory");
+        var inferred=new PortraitOwnedCharaViewSnapshot(baseline.Source,baseline.CharacterData,baseline.ModelData,
+            baseline.CopyItems(),baseline.CrestBits,baseline.Composition,gameBuild:baseline.GameBuild,sdkContract:null);
+        var expectedSDK=typeof(CharaViewPortrait).Assembly.GetName().Version+"/"+typeof(CharaViewPortrait).Module.ModuleVersionId.ToString("D");
+        Check(inferred.IsDetachedValid&&inferred.SDKContract==expectedSDK,"only an omitted SDK identity can infer the current real SDK contract");
+    }
+    static void SnapshotDigestIgnoresNativePadding()
+    {
+        CharaViewCharacterData character=default;
+        CharaViewModelData model=default;
+        var items=new CharaViewItem[14];
+        for(var i=0;i<14;i++)items[i]=new(){SlotId=(byte)i};
+        var first=new PortraitOwnedCharaViewSnapshot(Source,character,model,items,0,Composition,gameBuild:"fixture");
+        // Current audited SDK: these bytes are padding, never appearance fields.
+        foreach(var offset in new[]{26,27,121,122,123}) ((byte*)&character)[offset]=0xA5;
+        foreach(var offset in new[]{30,31,140,141,142,143}) ((byte*)&model)[offset]=0x5A;
+        for(var slot=0;slot<10;slot++)
+            for(var padding=5;padding<8;padding++) ((byte*)&model)[32+slot*8+padding]=0xC3;
+        var second=new PortraitOwnedCharaViewSnapshot(Source,character,model,items,0,Composition,gameBuild:"fixture");
+        Check(first.ContentDigest==second.ContentDigest,"native padding changes cannot alter semantic snapshot identity");
     }
     static void NoPermitDoesNotTouchNative()
     {
@@ -198,6 +322,7 @@ unsafe static class Checks
     {
 #if OWNED_SOURCE
         using var fixture=new SourceFixture();using var target=new NativePortraitTarget(fixture,_=>false,_=>{});
+        target.SnapshotGameBuild="fixture";
         Check(target.TryResolve(out var identity,out _,out _),"source editor resolves before complete handoff");
         for(int i=0;i<14;i++)
         {
@@ -239,6 +364,16 @@ unsafe static class Checks
         Check(false,"ready scene has no phase-bounded consumer for texture capture");
 #endif
     }
+}
+
+sealed class AdmissionBroker : IPortraitOwnedSceneControllerBroker
+{
+    public bool IsFrameworkThread=>true;
+    public bool ProductionAdmission=>true;
+    public int Requests;
+    public bool TryRequest(PortraitIdentity source,uint slot,Action<IPortraitOwnedSceneLease> onAdvance,
+        Func<IPortraitOwnedSceneLease,bool> onRetire){Requests++;return false;}
+    public void Cancel(string reason){}
 }
 
 sealed class Lease : IPortraitOwnedSceneLease

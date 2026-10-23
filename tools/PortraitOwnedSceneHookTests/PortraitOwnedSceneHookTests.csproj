@@ -20,6 +20,10 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneControllerBroker.cs" Link="Production/PortraitOwnedSceneControllerBroker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs" Link="Production/PortraitOwnedSceneJointPlan.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" Link="Production/%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitConsumerObservation.cs" Link="Production/PortraitConsumerObservation.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointSourceCensus.cs" Link="Production/PortraitOwnedSceneJointSourceCensus.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs" Link="Production/PortraitOwnedSceneSlotNativePhaseSource.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativeApi.cs" Link="Production/PortraitOwnedSceneSlotNativeApi.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="Production/PortraitEditorState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" Link="Production/%(Filename)%(Extension)" />

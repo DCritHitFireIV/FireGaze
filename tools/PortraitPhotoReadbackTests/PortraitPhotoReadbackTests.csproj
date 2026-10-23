@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPngEncoder.cs" Link="PortraitPngEncoder.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPngEncoder.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackProvider.cs" Link="PortraitPhotoReadbackProvider.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackProvider.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPixelReadback.cs" Link="PortraitPixelReadback.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPixelReadbackDrawBackend.cs" Link="PortraitPixelReadbackDrawBackend.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackRuntime.cs" Link="PortraitPhotoReadbackRuntime.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackRuntime.cs')" />
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+  </ItemGroup>
+  <PropertyGroup Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPngEncoder.cs')">
+    <DefineConstants>$(DefineConstants);HAS_PNG_ENCODER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackProvider.cs')">
+    <DefineConstants>$(DefineConstants);HAS_PHOTO_PROVIDER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoReadbackRuntime.cs')">
+    <DefineConstants>$(DefineConstants);HAS_PHOTO_RUNTIME</DefineConstants>
+  </PropertyGroup>
+</Project>

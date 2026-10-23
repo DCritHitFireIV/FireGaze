@@ -217,7 +217,7 @@ internal static class HostReservationCases
     {
         var address = (nint)Interlocked.Add(ref moduleBase, 0x1000000);
         return new(address, 0xA00000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
-            typeof(FFXIVClientStructs.FFXIV.Client.UI.Misc.CharaView).Assembly.ManifestModule.ModuleVersionId,
+            Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"),
             PortraitNativePhaseObservationBinding.Inventory.Select(contract =>
                 new PortraitNativePhaseBoundTarget(contract.Phase, address + (nint)contract.RVA, contract.Delegate)).ToArray());
     }

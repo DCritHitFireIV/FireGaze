@@ -45,7 +45,7 @@ internal static unsafe class OwnedReservationCases
     {
         var plan = new PortraitNativePhaseResolvedPlan(address, 0xA00000,
             PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
-            typeof(CharaView).Assembly.ManifestModule.ModuleVersionId,
+            Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e"),
             PortraitNativePhaseObservationBinding.Inventory.Select(contract =>
                 new PortraitNativePhaseBoundTarget(contract.Phase, address + (nint)contract.RVA, contract.Delegate)).ToArray());
         bool Resolve(Func<nint, bool> reserved, out PortraitNativePhaseResolvedPlan? result, out string reason)

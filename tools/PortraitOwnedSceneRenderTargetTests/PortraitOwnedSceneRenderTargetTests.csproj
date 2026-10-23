@@ -14,10 +14,15 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneFirstFrameProof.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneExperimentBroker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedViewportDiagnostics.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Lifecycle.cs" Link="PortraitPreviewFeature.Lifecycle.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitManagedDrain.cs" Link="PortraitManagedDrain.cs" />
     <Compile Include="../PortraitOwnedSceneHookTests/OwnedExperimentBrokerCases.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneControllerBroker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks*.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitConsumerObservation.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointSourceCensus.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" />

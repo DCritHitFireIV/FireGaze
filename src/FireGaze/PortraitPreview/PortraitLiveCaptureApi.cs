@@ -7,12 +7,6 @@ using Dalamud.Interface.Textures.TextureWraps;
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitLiveCaptureInput(IDalamudTextureWrap Texture,TextureModificationArgs CopyArgs);
-internal sealed record PortraitCaptureSurface(string GenerationKey,int Width,int Height)
-{
- public bool IsValid=>!string.IsNullOrWhiteSpace(GenerationKey)&&Width>0&&Height>0
-  &&(long)Width*Height<=PortraitCaptureGeometry.MaximumPixels;
-}
-
 /// <summary>Owns independent SRV references; native objects are never carried through asynchronous work.</summary>
 internal sealed class PortraitLiveCaptureInputs(PortraitLiveCaptureInput character,
  IReadOnlyList<PortraitCaptureLayer> overlays,PortraitCaptureSize size,PortraitCaptureSurface? surface=null):IDisposable
@@ -90,7 +84,8 @@ internal sealed class PortraitLiveCaptureApi(IPortraitLiveCaptureSource source,I
   if(!source.TryAcquirePortrait(sample,out var inputs)||inputs is null)return Task.FromResult<PortraitCaptureLayers?>(null);
   try
   {
-   if(expectedSurface is not null&&inputs.Surface!=expectedSurface
+   if(expectedSurface is not null&&(inputs.Surface!=expectedSurface
+     ||!TryDescribePortrait(sample,out var afterSurface)||afterSurface!=expectedSurface)
     ||!source.TrySample(sample.Scope,sample.Viewport,out fresh)||fresh!=sample)
    {PortraitCaptureCleanupException.DisposeAll(inputs);return Task.FromResult<PortraitCaptureLayers?>(null);}
    return CapturePortrait(inputs);

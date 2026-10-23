@@ -132,14 +132,5 @@ internal sealed unsafe partial class PortraitPreviewFeature
         }
         ownedViewport.Update();
     }
-    private void StopOwnedViewport(string reason)
-    {
-        if (ownedViewport is null || ownedViewportClosing) return;
-        ownedViewportClosing = true;
-        ownedViewportProof?.Dispose();
-        ownedViewport.Stop(reason); ownedViewport.Dispose();
-        ownedViewportDrain = PortraitCaptureRetirement.CombineOwned(ownedViewport,
-            ownedViewport.DrainPhysicalAsync(), ownedViewportCom?.DrainPhysicalAsync() ?? Task.CompletedTask,
-            ownedViewportProof?.DrainPhysicalAsync() ?? Task.CompletedTask);
-    }
+
 }

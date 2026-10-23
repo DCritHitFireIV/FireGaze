@@ -20,6 +20,7 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Joint.cs" Link="Actual/PortraitOwnedSceneHooks.Joint.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs" Link="Actual/PortraitOwnedSceneJointPlan.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointDiagnostic.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointDiagnostic.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitConsumerObservation.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitConsumerObservation.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointSourceCensus.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointSourceCensus.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Joint.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Joint.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" Link="Actual/%(Filename)%(Extension)" />

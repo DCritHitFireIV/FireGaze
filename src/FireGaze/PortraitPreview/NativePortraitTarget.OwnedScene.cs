@@ -16,8 +16,9 @@ internal sealed unsafe partial class NativePortraitTarget
         if (portable is null || !IsCurrent(identity)) return null;
         var view = (CharaViewPortrait*)identity.Model;
         if (view->IsAnimationPauseStatePending) return null;
-        var result = new PortraitOwnedCharaViewSnapshot(identity, view->PortraitCharacterData,
-            view->ModelData, view->Items, view->FreeCompanyCrestBitfield, portable.Composition);
+        if (!PortraitOwnedCharaViewSnapshot.TryCreate(identity, view->PortraitCharacterData,
+                view->ModelData, view->Items, view->FreeCompanyCrestBitfield, portable.Composition,
+                out var result, gameBuild: SnapshotGameBuild)) return null;
         return IsCurrent(identity) && !view->IsAnimationPauseStatePending ? result : null;
     }
 }

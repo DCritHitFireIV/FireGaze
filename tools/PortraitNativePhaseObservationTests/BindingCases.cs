@@ -26,6 +26,9 @@ internal static unsafe class BindingCases
             check(targets[0].Address == module + 0x2BA030, "bound metadata does not retain caller-owned mutable evidence arrays");
             var relocated = unchecked((nint)0x180000000L);
             check(PortraitNativePhaseObservationBinding.TryBind(relocated, Exe, SDK, Evidence(relocated), out _, out _), "ASLR relocation preserves audited RVAs without resolving or calling native functions");
+            check(PortraitNativePhaseObservationBinding.TryBind(module, Exe,
+                "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798", Evidence(module), out var current, out _)
+                && current.Count == 4, "audited current SDK can bind the same detached four-target contract");
         });
         test("old update address cannot masquerade as render", () => {
             var wrong = Evidence(module); wrong[0] = wrong[0] with { Address = module + 0x2B9A40, FunctionRootRVA = 0x2B9A40 };

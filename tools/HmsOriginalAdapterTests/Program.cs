@@ -6,7 +6,7 @@ using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character
 var work = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../../../"));
 var hooks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "XIVLauncherCN/addon/Hooks/dev");
 var release = Path.Combine(work, "hms-original-1.0.4.2/unpacked/HMSync.dll");
-var dev = Environment.GetEnvironmentVariable("FIREGAZE_HMS_DEV_DLL") ?? Path.Combine(work, "hms-development/HMSync.dll");
+var dev = @"C:\everyone\HMapSync-patch\dev\HMSync.dll";
 AssemblyLoadContext.Default.Resolving += (_, name) =>
 {
     foreach (var directory in new[] { hooks, Path.GetDirectoryName(release)! })

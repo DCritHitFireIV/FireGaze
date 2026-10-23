@@ -158,7 +158,18 @@ internal static class PhotoNonBlockingStorageCases
         photos = new PortraitHistoryPhotos(path, textures, readback, new(), 0,
             favoritePhotoPath: serviceArchive, favoriteSnapshots: [], storage: storage);
         files.HoldNext();
-        var inflightReclaim = Task.Run(photos.ReclaimStorage);
+        // Product reclamation now preserves every completed image and performs no
+        // replacement. Hold a legitimate new-image publication instead to exercise
+        // favorite admission during the same slow physical cache boundary.
+        var inflightCache = (PortraitThumbnailCache)typeof(PortraitHistoryPhotos)
+            .GetField("cache", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(photos)!;
+        var cacheIoGate = typeof(PortraitHistoryPhotos)
+            .GetField("favoriteSynchronization", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(photos)!;
+        var inflightReclaim = Task.Run(() =>
+        {
+            // WritePngAsync owns this same service IO mutex around cache publication.
+            lock (cacheIoGate) return inflightCache.TryPut(PortraitThumbnailCache.KeyForSnapshot("inflight-new-image"), png);
+        });
         await files.Entered.Task.WaitAsync(TimeSpan.FromSeconds(5));
         var metadataSawDurablePng = false;
         var inflightSaveAdmission = Task.Factory.StartNew(() => photos.PersistFavoriteAsync(() =>
@@ -175,7 +186,7 @@ internal static class PhotoNonBlockingStorageCases
         await photos.DrainPhysicalAsync();
         Check(inflightAdmittedBeforeRelease && metadataSawDurablePng
             && new PortraitFavoritePhotos(serviceArchive, storage: storage).Contains(snapshotKey),
-            "favorite admission rescues an image removed by an already executing physical replacement before metadata writes");
+            "favorite admission preserves its existing PNG during a concurrently executing physical cache replacement");
 
         var recoveredDirectory = Path.Combine(root, "recovered-favorite-drain"); Directory.CreateDirectory(recoveredDirectory);
         storage = new PortraitStorageBudget(recoveredDirectory, 100_000);

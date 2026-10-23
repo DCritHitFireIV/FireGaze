@@ -37,7 +37,27 @@ void Reject(FakeProcess process, string name)
     Check(!Resolve(process, out var plan) && plan is null, name);
 }
 
-if (fixture.CurrentUnsupported)
+var currentHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(fixture.CurrentImage));
+if (currentHash == "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798")
+{
+    var current = Fresh(); current.SDKImage = fixture.CurrentImage; current.SDKMVID = fixture.CurrentMVID;
+    Check(Resolve(current, out var currentPlan) && currentPlan is { Targets.Count: 4 }
+        && currentPlan.OnDiskSDKSHA256 == currentHash
+        && currentPlan.SDKMVID == Guid.Parse("18eb3871-c94c-4c54-846b-2ee6a94a336d"),
+        "audited current SDK resolves inert observation targets and retains its actual hash and MVID");
+    var mixed = Fresh(); mixed.SDKMVID = fixture.CurrentMVID;
+    Check(!Resolve(mixed, out var mixedPlan) && mixedPlan is null && mixed.MemoryReads == 0,
+        "frozen SDK bytes cannot borrow the audited current loaded MVID");
+    mixed = Fresh(); mixed.SDKImage = fixture.CurrentImage;
+    Check(!Resolve(mixed, out mixedPlan) && mixedPlan is null && mixed.MemoryReads == 0,
+        "audited current SDK bytes cannot borrow the frozen loaded MVID");
+    var replacement = Fresh(); replacement.ReplacementSDK = fixture.CurrentImage; replacement.ReplacementMVID = fixture.CurrentMVID;
+    Reject(replacement, "switching from frozen to audited current SDK within one qualification refuses both accepted identities");
+    replacement = Fresh(); replacement.SDKImage = fixture.CurrentImage; replacement.SDKMVID = fixture.CurrentMVID;
+    replacement.ReplacementSDK = sdk; replacement.ReplacementMVID = mvid;
+    Reject(replacement, "switching from audited current to frozen SDK within one qualification refuses an obsolete plan");
+}
+else if (fixture.CurrentUnsupported)
 {
     var unsupported = Fresh(); unsupported.SDKImage = fixture.CurrentImage; unsupported.SDKMVID = fixture.CurrentMVID;
     Check(!Resolve(unsupported, out var unsupportedPlan) && unsupportedPlan is null && unsupported.MemoryReads == 0,
@@ -124,6 +144,8 @@ sealed class FakeProcess(byte[] executable, byte[] sdk, int size, Guid mvid, nin
     public nint ModuleBase = moduleBase;
     public int ImageSize = size;
     public Guid SDKMVID = mvid;
+    public byte[]? ReplacementSDK;
+    public Guid ReplacementMVID;
     public string Name = "ffxiv_dx11.exe";
     public bool ModuleAvailable = true, SDKAvailable = true, ChangeRoot, ChangeSDKMVID, ReserveLate, ThrowMemoryRead;
     public int RootReads, SDKReads, MemoryReads, ReserveAfterRead = int.MaxValue;
@@ -138,7 +160,8 @@ sealed class FakeProcess(byte[] executable, byte[] sdk, int size, Guid mvid, nin
     public bool TryReadSDK(out PortraitNativePhaseSDKImage image)
     {
         SDKReads++;
-        image = new(SDKImage, ChangeSDKMVID && SDKReads > 1 ? Guid.NewGuid() : SDKMVID);
+        image = SDKReads > 1 && ReplacementSDK is not null ? new(ReplacementSDK, ReplacementMVID)
+            : new(SDKImage, ChangeSDKMVID && SDKReads > 1 ? Guid.NewGuid() : SDKMVID);
         return SDKAvailable;
     }
     public nint SDKManagerRender => ManagerRender;

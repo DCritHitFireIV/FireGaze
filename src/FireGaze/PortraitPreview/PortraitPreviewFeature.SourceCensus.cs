@@ -125,6 +125,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
         object? Host(PortraitNativePhaseHostSnapshot? value) => value is null ? null : new
         {
             state = value.State.ToString(), value.Hooks, value.InFlight, value.BackendIdentity, value.Detail,
+            value.CounterInvalidationEpoch, value.CounterInvalidationFailed, value.ResourceInvalidationFailed,
+            resource = new
+            {
+                value.Resource.Generation, value.Resource.Depth, transition = value.Resource.Transition.ToString(),
+                Receiver = (long)value.Resource.Receiver, value.Resource.NativeReturn, value.Resource.Ready,
+            },
             plan = value.Plan is { } plan ? new { module = (long)plan.ModuleBase, plan.ModuleSize, plan.OnDiskEXESHA256,
                 plan.OnDiskSDKSHA256, plan.SDKMVID, targets = plan.Targets.Select(target => new { phase = target.Phase.ToString(), address = (long)target.Address }) } : null,
         };
@@ -139,6 +145,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                     row.ObjectKind, row.ObjectIndex, row.MemoryIndex, camera = (long)row.RegisteredCamera, row.ActiveCount, row.RenderActive,
                     offscreenCamera = (long)row.RetainedOffscreenCamera, viewCamera = (long)row.RetainedViewCamera }) } : null,
             source = Host(state.Source), counters = Host(state.Counters), resources = Host(state.Resources),
+            safety = ReadSourceCensusSafetyState(),
             productionAdmission = false,
         };
     }

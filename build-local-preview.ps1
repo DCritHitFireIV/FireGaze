@@ -81,10 +81,16 @@ Invoke-PreviewSuite 'PortraitEditorOpeningReceiptTests'
 Invoke-PreviewSuite 'PortraitEditorOpeningNativeTests'
 Invoke-PreviewSuite 'PortraitStorageBudgetTests'
 Invoke-PreviewSuite 'PortraitStorageIntegrationTests'
+Invoke-PreviewSuite 'PortraitPhotoAdmissionTests'
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitObserverCameraTests', 'PortraitCameraFitTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitNativeLiveViewTests', 'PortraitSoftwareCompositionTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
+# Nonblocking pixel-readback ownership, native ABI and photo-provider contracts.
+# Native fixtures stay inside the test process; none attaches to the game.
+foreach ($previewSuite in @('PortraitPixelReadbackTests', 'PortraitPixelReadbackNativeTests', 'PortraitPhotoReadbackTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitLightingNativeTests', 'PortraitLightingAdapterTests', 'PortraitLightingBindingTests', 'PortraitLightingCaptureTests', 'PortraitLightingControlsTests', 'PortraitLightingFeatureBackendTests')) {

@@ -43,6 +43,35 @@ internal static class Program
 
     private static void CurrentUnsupportedSDKRefusesBeforeNativeWork(FrozenSdkFixture fixture)
     {
+        var hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(fixture.CurrentImage));
+        if (hash == "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798")
+        {
+            Reset(); var current = Fresh(); current.SDK = fixture.CurrentImage; current.MVID = fixture.CurrentMVID;
+            Check(Resolve(current, out var accepted) && accepted is { Targets.Count: 2 }
+                && accepted.OnDiskSDKSHA256 == hash && accepted.SDKMVID == fixture.CurrentMVID,
+                "audited current SDK resolves counter targets with its own identity");
+            foreach (var wrongIdentity in new[] {
+                accepted! with { OnDiskSDKSHA256 = "5A7A8EA71E84D7410DBAD8A5391D4759C2A38B1A55F4F3BB745B22B556A6F778" },
+                accepted! with { SDKMVID = Guid.Parse("c72f17a8-6ed1-4a30-a097-74137dc08f9e") },
+                accepted! with { OnDiskSDKSHA256 = new string('0', 64) },
+                accepted! with { SDKMVID = Guid.Empty } })
+            {
+                var rejectedFactory = new FakeFactory();
+                var rejectedHost = PortraitNativePhaseHost.CreateCounterIngress(rejectedFactory, Recorder(), new(),
+                    static () => new DetachedGuard(),
+                    (Func<nint, bool> _, out PortraitNativePhaseResolvedPlan? output, out string reason) =>
+                    { output = wrongIdentity; reason = "detached untrusted plan fixture"; return true; });
+                Check(!rejectedHost.TryStart(TimeSpan.FromSeconds(30), out _) && rejectedFactory.CreateCalls == 0,
+                    "host rejects a mixed, unknown or absent SDK identity pair before creating hooks");
+            }
+            var currentFactory = new FakeFactory(); var currentGuards = 0;
+            var currentHost = Host(currentFactory, Recorder(), () => currentGuards++, current);
+            Check(currentHost.TryStart(TimeSpan.FromSeconds(30), out _) && currentFactory.CreateCalls == 2
+                && currentFactory.EnableCalls == 2 && currentGuards == 0 && nativeCalls == 0,
+                "audited current counter plan can start disabled then enable without invoking Original or mutation guard");
+            Retire(currentHost);
+            return;
+        }
         if (!fixture.CurrentUnsupported) return;
         Reset(); var process = Fresh(); process.SDK = fixture.CurrentImage; process.MVID = fixture.CurrentMVID;
         Check(!Resolve(process, out var plan) && plan is null && process.MemoryReads == 0,

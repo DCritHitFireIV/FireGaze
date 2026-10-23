@@ -82,16 +82,78 @@ internal sealed unsafe partial class PortraitPreviewFeature
             source = new { editor = (long)value.Source.Editor, state = (long)value.Source.State, view = (long)value.Source.Model,
                 value.Source.Generation, value.Source.Character },
         };
+        static object SourceIdentity(PortraitIdentity value) => new
+        {
+            Editor = (long)value.Editor, State = (long)value.State, Model = (long)value.Model,
+            value.Generation, value.Character,
+        };
+        static object ConsumerContext(PortraitConsumerObservationContext value) => new
+        {
+            value.Installation, value.SessionEpoch, value.RequestEpoch, Source = SourceIdentity(value.Source),
+        };
+        static object SourcePhase(PortraitOwnedSceneSlotPhase value) => new
+        {
+            Source = SourceIdentity(value.Source),
+            Roots = new
+            {
+                Renderer = (long)value.Roots.Renderer, SceneCameras = (long)value.Roots.SceneCameras,
+                Offscreen = (long)value.Roots.Offscreen, RenderTargets = (long)value.Roots.RenderTargets,
+                ClientObjects = (long)value.Roots.ClientObjects,
+            },
+            value.SessionEpoch, value.ManagerGeneration, value.NativeFrame, value.PhaseToken,
+            value.ThreadID, value.InNativePhase, value.BuildValidated,
+        };
+        static object SourceSlot(PortraitOwnedSceneSlotCensusRow value) => new
+        {
+            value.Slot, kind = value.Kind.ToString(), Character = (long)value.Character,
+            value.ObjectKind, value.ObjectIndex, value.MemoryIndex, RegisteredCamera = (long)value.RegisteredCamera,
+            value.ActiveCount, value.RenderActive, RetainedOffscreenCamera = (long)value.RetainedOffscreenCamera,
+            RetainedViewCamera = (long)value.RetainedViewCamera,
+        };
         return new
         {
             state = state.State.ToString(), state.Attempt, state.Reason, state.ExpectedThread,
             safety = ReadOwnedJointSafetyState(), productionAdmission = false,
+            consumers = ownedJoint?.ConsumerObservation is { } consumer ? new
+            {
+                Context = ConsumerContext(consumer.Context), consumer.ManifestTargetCount, initialCoverage = consumer.InitialCoverage.ToString(),
+                productionAdmission = false,
+                opaqueReceivers = consumer.OpaqueReceivers.Select(receiver => new
+                {
+                    receiver.Address, receiver.ObservedInitializations,
+                    calls = receiver.Calls.Select(call => new { call.Sequence, target = call.TargetKind.ToString(), call.TargetAddress,
+                        call.Receiver, call.ArgumentCount, call.EnteredAt, call.ReturnedAt, call.OriginalReturned,
+                        call.EntryThread, call.ReturnThread }),
+                }),
+                intervalRelations = consumer.IntervalRelations.Select(relation => new
+                {
+                    relation.LeftSequence, relation.RightSequence, order = relation.Order.ToString(),
+                }),
+                issues = consumer.Issues.Select(issue => issue.ToString()),
+                sourceObservation = consumer.SourceObservation is { } source ? new
+                {
+                    Context = ConsumerContext(source.Context), SourceReturn = SourceReturn(source.SourceReturn),
+                    Phase = SourcePhase(source.Phase), SourceSlot = SourceSlot(source.SourceSlot),
+                    Resource = new
+                    {
+                        source.Resource.Generation, source.Resource.Depth, transition = source.Resource.Transition.ToString(),
+                        Receiver = (long)source.Resource.Receiver, source.Resource.NativeReturn, source.Resource.Ready,
+                    },
+                    render = new { source.Render.Sequence, target = source.Render.TargetKind.ToString(), source.Render.TargetAddress,
+                        source.Render.Receiver, source.Render.EnteredAt, source.Render.ReturnedAt },
+                } : null,
+            } : null,
             context = state.Context is { } context ? new { editor = (long)context.Source.Editor, sourceState = (long)context.Source.State,
                 view = (long)context.Source.Model, context.Source.Character, context.Source.Generation, context.SessionEpoch } : null,
             host = state.Host is { } host ? new
             {
                 host.Installation, host.SessionEpoch, host.RequestEpoch, host.MutationEpoch, host.CounterDepth, host.ResourceDepth,
                 host.Recording, host.Failed, host.Hooks, host.InFlight, host.ReservationHeld, host.PhysicalRetired,
+                resource = new
+                {
+                    host.Resource.Generation, host.Resource.Depth, transition = host.Resource.Transition.ToString(),
+                    Receiver = (long)host.Resource.Receiver, host.Resource.NativeReturn, host.Resource.Ready,
+                },
                 sourceReturns = host.SourceReturns.Select(SourceReturn),
                 observation = new { host.Observation.Observing, stop = host.Observation.Stop.ToString(), host.Observation.Capture,
                     host.Observation.OverwrittenRecords, host.Observation.ObservedThreads,

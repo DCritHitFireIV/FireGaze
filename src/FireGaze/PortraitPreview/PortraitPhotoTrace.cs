@@ -10,18 +10,26 @@ internal enum PortraitPhotoPhase
 }
 
 internal sealed record PortraitPhotoStageSnapshot(long OperationID, string Kind, long StageID,
-    string Phase, int Layer, string State, int ThreadID, string? TaskStatus, string? ErrorType);
+    string Phase, int Layer, string State, int ThreadID, string? TaskStatus, string? ErrorType,
+    string? ErrorFrames);
 
 /// <summary>Bounded operation diagnostics; never samples editor pointers or image/user data.</summary>
 internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
 {
     public const int MaximumLinesPerOperation = 64;
     private static long serial;
+    private PortraitPhotoStageSnapshot? lastFailure;
+
+    // The current operation is replaced by automatic retries. Keep its preceding
+    // failure independently, without a photo-service lock or external log sink.
+    public PortraitPhotoStageSnapshot? LastFailure => Volatile.Read(ref lastFailure);
 
     public Operation Start(PortraitPhotoOperation kind)
-        => new(logger, Interlocked.Increment(ref serial), kind);
+        => new(logger, Interlocked.Increment(ref serial), kind,
+            onFailure: failure => Volatile.Write(ref lastFailure, failure));
 
-    internal sealed class Operation(Action<string>? logger, long id, PortraitPhotoOperation kind, bool tracking = true)
+    internal sealed class Operation(Action<string>? logger, long id, PortraitPhotoOperation kind, bool tracking = true,
+        Action<PortraitPhotoStageSnapshot>? onFailure = null)
     {
         internal static readonly Operation Silent = new(null, 0, default, false);
         private int reserved;
@@ -104,19 +112,41 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
             if (stage is null) return;
             var suffix = " elapsedMs=" + (long)Stopwatch.GetElapsedTime(stage.Start).TotalMilliseconds;
             if (error is not null) suffix += " error=" + error.GetType().Name;
-            Update(stage, "logging-terminal", errorType: error?.GetType().Name);
+            var evidence = Update(stage, "logging-terminal", errorType: error?.GetType().Name,
+                errorFrames: ReadErrorFrames(error));
+            if (error is not null) onFailure?.Invoke(evidence with { State = "failed" });
             Log(state, stage, suffix);
             Update(stage, error is null ? "completed" : "failed", errorType: error?.GetType().Name);
         }
 
-        private void Update(Stage stage, string state, string? taskStatus = null, string? errorType = null)
+        private PortraitPhotoStageSnapshot Update(Stage stage, string state, string? taskStatus = null,
+            string? errorType = null, string? errorFrames = null)
         {
             lock (snapshotSync)
             {
                 snapshots.TryGetValue(stage.ID, out var previous);
-                snapshots[stage.ID] = new(id, kind.ToString(), stage.ID, stage.Phase.ToString(), stage.Layer,
-                    state, Environment.CurrentManagedThreadId, taskStatus ?? previous?.TaskStatus, errorType);
+                return snapshots[stage.ID] = new(id, kind.ToString(), stage.ID, stage.Phase.ToString(), stage.Layer,
+                    state, Environment.CurrentManagedThreadId, taskStatus ?? previous?.TaskStatus, errorType,
+                    errorFrames ?? previous?.ErrorFrames);
             }
+        }
+
+        private static string? ReadErrorFrames(Exception? error)
+        {
+            if (error is null) return null;
+            try
+            {
+                // Method metadata only: no exception message, source file, image,
+                // player data or local directory is included in this evidence.
+                var frames = new StackTrace(error.GetBaseException(), false).GetFrames() ?? [];
+                return string.Join("\n", frames.Take(8).Select(frame =>
+                {
+                    var method = frame.GetMethod();
+                    var name = method is null ? "unavailable" : method.DeclaringType?.FullName + "." + method.Name;
+                    return name.Length <= 255 ? name : name[..255];
+                }));
+            }
+            catch { return null; }
         }
 
         private void Log(string state, Stage stage, string suffix = "")

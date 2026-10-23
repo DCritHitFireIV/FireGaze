@@ -39,6 +39,12 @@ internal static unsafe class OwnedSceneIntegrationCases
         Console.WriteLine($"{total-failed} integration passed; {failed} failed"); return failed == 0 ? 0 : 1;
     }
     static void Check(bool value, string name) { if (!value) throw new Exception(name); }
+    static CharaViewItem[] CompleteItems()
+    {
+        var items = new CharaViewItem[14];
+        for (byte i = 0; i < items.Length; i++) items[i].SlotId = i;
+        return items;
+    }
     static void StrictCreation()
     {
         using var f = new Fixture(); f.Prepare(); f.SourceRender(100);
@@ -79,7 +85,7 @@ internal static unsafe class OwnedSceneIntegrationCases
             if (mode == "setup-self-retired") api.SetupMode = "throw-owned";
             using var broker = new PortraitOwnedSceneControllerBroker(() => true, () => new EnvironmentProof(api), factory);
             using var controller = new PortraitOwnedSceneController(broker, () => new PortraitOwnedCharaView(api));
-            var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, new CharaViewItem[14], 0, new PortraitComposition());
+            var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, CompleteItems(), 0, new PortraitComposition(), gameBuild: "CN-test-build");
             Check(controller.TryStart(snapshot, 6), mode + " request failed");
             factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)Source.Model, 100);
             broker.Update();
@@ -98,7 +104,7 @@ internal static unsafe class OwnedSceneIntegrationCases
         var factory = new Factory(api); api.Factory = factory;
         using var broker = new PortraitOwnedSceneControllerBroker(() => true, () => new EnvironmentProof(api), factory);
         using var controller = new PortraitOwnedSceneController(broker, () => new PortraitOwnedCharaView(api));
-        var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, new CharaViewItem[14], 0, new PortraitComposition());
+        var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, CompleteItems(), 0, new PortraitComposition(), gameBuild: "CN-test-build");
         Check(controller.TryStart(snapshot, 6), "unconfirmed cleanup request failed");
         factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)Source.Model, 100);
         broker.Update();
@@ -197,7 +203,7 @@ internal static unsafe class OwnedSceneIntegrationCases
         public void Prepare()
         {
             Check(Hooks.TryInstall(Factory),Hooks.LastError??"hooks install failed");
-            var snapshot=new PortraitOwnedCharaViewSnapshot(Source,default,default,new CharaViewItem[14],0,new PortraitComposition{Paused=true,CameraDistance=3});
+            var snapshot=new PortraitOwnedCharaViewSnapshot(Source,default,default,CompleteItems(),0,new PortraitComposition{Paused=true,CameraDistance=3},gameBuild:"CN-test-build");
             Check(Hooks.TryRequest(Source,6,lease=>{
                 if(lease.CanCreate)Check(Scene.TryCreate(snapshot,lease),Scene.LastError??"scene create failed");
                 Check(Scene.Advance(lease,lease.NativeFrame),Scene.LastError??"scene advance failed");

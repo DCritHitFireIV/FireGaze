@@ -107,6 +107,7 @@ internal sealed unsafe class JointDiagnosticBoundary : IDisposable
     internal PortraitOwnedSceneJointHost? Host;
     internal Action? OnClock = null;
     internal Action? OnCreate = null;
+    internal long Now = 0;
     private object CensusObject
     {
         get
@@ -141,7 +142,7 @@ internal sealed unsafe class JointDiagnosticBoundary : IDisposable
         Controller = new(() => true, () => ReadContext?.Invoke() ?? Context,
             bindings => {
                 Host = new(new Environment(Plan.ModuleBase), factory, reservations, bindings.Counters, bindings.Resources,
-                    bindings.RequestCurrent, () => { OnClock?.Invoke(); return 0; }, 1000, PortraitSourceCensusDiagnostic.CurrentThread,
+                    bindings.RequestCurrent, () => { OnClock?.Invoke(); return Now; }, 1000, PortraitSourceCensusDiagnostic.CurrentThread,
                     mutationReceiver: bindings.MutationReceiver, sourceReceiver: bindings.SourceReturn);
                 OnCreate?.Invoke(); return Host;
             },
@@ -157,10 +158,18 @@ internal sealed unsafe class JointDiagnosticBoundary : IDisposable
     internal void Source(uint frame, nint receiver = 0)
         => Call<CharaView.Delegates.Render>(PortraitNativeObservedPhase.SourceCharaViewRender)((CharaView*)(receiver == 0 ? (nint)Memory.Source : receiver), frame);
     internal void Counter() => Call<PortraitNativeSlotCounter>(PortraitNativeObservedPhase.CounterAdd)((FFXIVClientStructs.FFXIV.Client.Graphics.Render.Manager*)Memory.RenderManager, 6);
+    internal byte RecreateResource() => Call<PortraitNativeResourceRecreate>(PortraitNativeObservedPhase.ResourceRecreate)(
+        (FFXIVClientStructs.FFXIV.Client.Graphics.Render.RenderTargetManager*)Memory.Phase.Roots.RenderTargets);
+    internal void ClearIdleRetainedRenderState(uint slot)
+    {
+        *((byte*)Memory.RenderManager + 0x3837C + slot) = 0;
+        *(nint*)(Memory.Phase.Roots.Offscreen + 0xC8 + (nint)(slot * 8)) = 0;
+        *(nint*)((nint)Memory.RenderManager + 0x2738 + (nint)(slot * 24)) = 0;
+    }
     private T Call<T>(PortraitNativeObservedPhase phase) where T : Delegate
     {
         var address = Plan.Targets.Single(t => t.Roles.Contains(new(null, phase))).Address;
-        var detour = Provider.Created.Single(h => h.Address == address).Detour;
+        var detour = Provider.Created.Last(h => h.Address == address).Detour;
         return (T)Delegate.CreateDelegate(typeof(T), detour.Target, detour.Method);
     }
     public void Dispose() { Controller.Stop("test cleanup"); Controller.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)); Memory.Dispose(); }
