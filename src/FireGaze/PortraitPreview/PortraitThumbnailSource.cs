@@ -9,7 +9,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FireGaze.PortraitPreview;
 
-/// <summary>Independent, cropped RGBA snapshots. Character includes the background.</summary>
+/// <summary>Owned character snapshot and retained static atlases. Character includes the background.</summary>
 internal sealed class PortraitThumbnailLayers(IDalamudTextureWrap character, IDalamudTextureWrap? frame,
     IDalamudTextureWrap? accent, Vector2? frameUV0 = null, Vector2? frameUV1 = null,
     Vector2? accentUV0 = null, Vector2? accentUV1 = null) : IDisposable
@@ -39,14 +39,18 @@ internal sealed class PortraitThumbnailInputs(PortraitThumbnailInput character, 
     PortraitThumbnailInput? accent) : IDisposable
 {
     public PortraitThumbnailInput Character { get; } = character;
-    public PortraitThumbnailInput? Frame { get; } = frame;
-    public PortraitThumbnailInput? Accent { get; } = accent;
+    private PortraitThumbnailInput? frame = frame;
+    private PortraitThumbnailInput? accent = accent;
     private int disposed;
+
+    // Transfer the already owned SRV reference instead of AddRefing a fake or native texture again.
+    public PortraitThumbnailInput? TakeFrame() => Interlocked.Exchange(ref frame, null);
+    public PortraitThumbnailInput? TakeAccent() => Interlocked.Exchange(ref accent, null);
 
     public void Dispose()
     {
         if (Interlocked.Exchange(ref disposed, 1) != 0) return;
-        PortraitCaptureCleanupException.DisposeAll(Character.Texture, Frame?.Texture, Accent?.Texture);
+        PortraitCaptureCleanupException.DisposeAll(Character.Texture, TakeFrame()?.Texture, TakeAccent()?.Texture);
     }
 }
 
@@ -60,9 +64,8 @@ internal interface IPortraitThumbnailSourceApi
 
 /// <summary>
 /// Reads only the current BannerEditor image layers on Framework, retaining their COM resources
-/// before asynchronous work. Every visible layer is cropped and normalized through the public
-/// service before readback; atlas formats and crop UVs never reach the composition boundary.
-/// Copies preserve alpha without any additional alpha operation or second composition crop.
+/// before asynchronous work. The mutable character target is copied through the public service;
+/// static overlays retain their SRVs and UVs for one final draw, avoiding double alpha multiplication.
 /// Pixel copying is scheduled by Dalamud at Present; callers must discard a result if the editor
 /// state changed while copying. No native editor pointer is dereferenced after the first await.
 /// </summary>
@@ -84,7 +87,7 @@ internal sealed class PortraitThumbnailSource
         if (!identity.IsValid || !api.IsFrameworkThread || !api.IsCurrent(identity)) return null;
         PortraitThumbnailInputs? inputs = null;
         IDalamudTextureWrap? character = null;
-        IDalamudTextureWrap? frame = null, accent = null;
+        PortraitThumbnailInput? frame = null, accent = null;
         PortraitThumbnailLayers? result = null;
         Exception? failure = null;
         try
@@ -94,28 +97,18 @@ internal sealed class PortraitThumbnailSource
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 character = await operation.CallAsync(PortraitPhotoPhase.SourceCopy,
-                    () => api.CopyAsync(inputs.Character, cancellationToken), 0).ConfigureAwait(false);
+                    () => api.CopyAsync(inputs.Character, cancellationToken)).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                if (inputs.Frame is { } frameInput)
-                {
-                    frame = await operation.CallAsync(PortraitPhotoPhase.SourceCopy,
-                        () => api.CopyAsync(frameInput, cancellationToken), 1).ConfigureAwait(false);
-                    cancellationToken.ThrowIfCancellationRequested();
-                }
-                if (inputs.Accent is { } accentInput)
-                {
-                    accent = await operation.CallAsync(PortraitPhotoPhase.SourceCopy,
-                        () => api.CopyAsync(accentInput, cancellationToken), 2).ConfigureAwait(false);
-                    cancellationToken.ThrowIfCancellationRequested();
-                }
-                // The validated source UV rectangle was already applied by CopyAsync.
-                // Independent outputs use full UVs, preserving alpha for one CPU composition.
-                result = new PortraitThumbnailLayers(character, frame, accent);
+                frame = inputs.TakeFrame();
+                accent = inputs.TakeAccent();
+                result = new PortraitThumbnailLayers(character, frame?.Texture, accent?.Texture,
+                    frame?.CopyArgs.Uv0, frame is null ? null : EffectiveUV1(frame.CopyArgs),
+                    accent?.CopyArgs.Uv0, accent is null ? null : EffectiveUV1(accent.CopyArgs));
                 character = null; frame = null; accent = null;
             }
         }
         catch (Exception error) { failure = error; }
-        try { PortraitCaptureCleanupException.DisposeAll(inputs, character, frame, accent); }
+        try { PortraitCaptureCleanupException.DisposeAll(inputs, character, frame?.Texture, accent?.Texture); }
         catch (Exception cleanup) { failure = failure is null ? cleanup : new AggregateException(failure, cleanup); }
         if (failure is not null)
         {
@@ -127,6 +120,9 @@ internal sealed class PortraitThumbnailSource
         }
         return result;
     }
+
+    private static Vector2 EffectiveUV1(TextureModificationArgs args)
+        => args.Uv1 == Vector2.Zero ? Vector2.One : args.Uv1;
 
     internal static bool TryCreateCopyArgs(uint width, uint height, ushort u, ushort v,
         ushort cropWidth, ushort cropHeight, out TextureModificationArgs args)

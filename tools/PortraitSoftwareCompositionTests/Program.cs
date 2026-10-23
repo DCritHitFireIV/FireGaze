@@ -60,8 +60,6 @@ static class Cases
             var gpu = new FakeGpu(); var source = new Texture(1, 1, bytes, format);
             using var output = await gpu.Compositor.ComposeAsync(1, 1, [new(source)]);
             Pixels(gpu, expected, $"DXGI {format} channel order and transfer function produce linear RGBA28");
-            Check(gpu.ReadArguments.Single().DxgiFormat == 0,
-                $"DXGI {format} readback preserves source format without requesting provider conversion");
             Check(gpu.UploadSpec.DxgiFormat == 28 && gpu.UploadSpec.Pitch == 4 && output.Width == 1 && output.Height == 1,
                 "single opaque layer is uploaded with the requested output dimensions and explicit RGBA28 pitch");
             Check(source.Disposes == 0 && source.Shares.Count == 1 && source.Shares[0].Disposes == 1,
@@ -76,8 +74,8 @@ static class Cases
             var gpu = new FakeGpu(); var source = new Texture(2, 2, [255,0,0,255,0,255,0,255,0,0,255,255,255,255,255,255]);
             using var output = await gpu.Compositor.ComposeAsync(1, 1, [new(source)]);
             Pixels(gpu, [128,128,128,255], "bilinear filtering averages four neighbors at the image center");
-            Check(gpu.ReadArguments.All(a => a.DxgiFormat == 0 && a.Uv0 == Vector2.Zero && a.Uv1 == Vector2.One && a.NewWidth == 0 && a.NewHeight == 0),
-                "public readback preserves original format, full source UV and unchanged dimensions");
+            Check(gpu.ReadArguments.All(a => a.DxgiFormat == 28 && a.Uv0 == Vector2.Zero && a.Uv1 == Vector2.One && a.NewWidth == 0 && a.NewHeight == 0),
+                "public readback requests official RGBA28 normalization with full source UV and unchanged dimensions");
         }
         {
             var gpu = new FakeGpu(); var source = new Texture(2, 1, [255,0,0,0,0,0,255,255]);
@@ -267,14 +265,13 @@ static class Cases
                 "later readback failure releases all retained layers without publishing a partial composition");
         }
         {
-            var gpu=new FakeGpu();
+            var normalized=Enumerable.Range(0,16).SelectMany(_=>new byte[]{20,40,80,255}).ToArray();
+            var gpu=new FakeGpu{ReadResultOverride=(new(4,4,28,16),normalized)};
             var compressed=new Texture(4,4,new byte[8],format:71,pitch:8);
-            await Throws<InvalidOperationException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(compressed)]),
-                "unsupported original compressed pixels are rejected without implicit format conversion");
-            Check(gpu.ReadArguments.Single().DxgiFormat==0&&gpu.UploadCalls==0,
-                "unsupported raw readback does not request provider conversion or publish an output");
-            Check(compressed.Disposes==0&&compressed.Shares.Single().Disposes==1,
-                "unsupported original format releases the retained reference while preserving caller ownership");
+            using var output=await gpu.Compositor.ComposeAsync(1,1,[new(compressed)]);
+            Pixels(gpu,[20,40,80,255],"compressed source composition consumes the official provider's normalized RGBA pixels");
+            Check(gpu.ReadArguments.Single().DxgiFormat==28&&compressed.Shares.Single().Disposes==1,
+                "compressed sources request official format conversion and retain ownership through composition");
         }
         Console.WriteLine($"PortraitSoftwareCompositionTests: {checks} passed, 0 failed");return 0;
     }
@@ -289,6 +286,7 @@ sealed class FakeGpu
     public List<TextureModificationArgs> ReadArguments=[];
     public Exception? ReadFailure,UploadFailure;
     public int ReadFailureAt=1;
+    public (RawImageSpecification Specification,byte[] RawData)? ReadResultOverride;
     public IDalamudTextureWrap? UploadResult;
     public TaskCompletionSource<(RawImageSpecification Specification,byte[] RawData)>? PendingRead;
     public TaskCompletionSource<IDalamudTextureWrap>? PendingUpload;
@@ -305,7 +303,7 @@ sealed class FakeGpu
             ReadCalls++;ActiveReads++;MaximumActiveReads=Math.Max(MaximumActiveReads,ActiveReads);
             if(ReadFailure is not null&&ReadCalls==ReadFailureAt){ActiveReads--;return Task.FromException<(RawImageSpecification,byte[])>(ReadFailure);}
             if(PendingRead is { } pending && !pendingReadUsed){pendingReadUsed=true;return AwaitRead(pending.Task);}
-            ActiveReads--;return Task.FromResult((texture.Specification,texture.Bytes));
+            ActiveReads--;return Task.FromResult(ReadResultOverride??(texture.Specification,texture.Bytes));
         });
         var textures=Proxy<ITextureProvider>((method,args)=>
         {

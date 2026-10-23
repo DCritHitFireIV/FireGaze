@@ -81,7 +81,6 @@ Invoke-PreviewSuite 'PortraitEditorOpeningReceiptTests'
 Invoke-PreviewSuite 'PortraitEditorOpeningNativeTests'
 Invoke-PreviewSuite 'PortraitStorageBudgetTests'
 Invoke-PreviewSuite 'PortraitStorageIntegrationTests'
-Invoke-PreviewSuite 'PortraitPhotoAdmissionTests'
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }

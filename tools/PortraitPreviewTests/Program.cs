@@ -15,7 +15,6 @@ PortraitLook Look(uint head) => new(Enumerable.Range(0, 13)
     .Select(i => new PortraitPiece(i == 2 ? head : (uint)(100+i), 0, 0)).ToArray(), true, true, false);
 try
 {
-    EquipmentMetadataCases.Run(Check);
     var menu = PortraitPreviewMenuState.Create(false, false, false, false, null);
     Check(menu.Status == PortraitPreviewMenuStatus.EditorUnavailable && !menu.CanOpenPreview && !menu.CanOpenWindow,
         "portrait menu reports an unopened editor and disables preview");

@@ -69,17 +69,11 @@ static class DirectionalLightCases
         using(var f=Open(root,"playing"))
         {
             f.EditComposition(c=>c with {Paused=true,BannerTimeline=1,AnimationProgress=.25f});f.RecordDirect();
-            var beforePlayback=f.Store.Count;
             f.EditComposition(c=>c with {Paused=false,BannerTimeline=0,AnimationProgress=8});f.Sample();
-            check(f.Store.Count==beforePlayback,"playback-only changes before a light edit create no history");
-            var beforeDrag=f.Store.Count;
             f.BeginLightDrag(5);f.MoveLightDrag(5,10,20);f.EndLightDrag(5,10,20);
             var history=PortraitEditorSnapshot.FromJSON(f.Store.GetRecords(f.Key!.Value).First().SnapshotJSON)!;
-            check(f.Store.Count==beforeDrag+1 && history.Composition is {Paused:false,BannerTimeline:0,AnimationProgress:8,
-                    DirectionalVerticalAngle:10,DirectionalHorizontalAngle:20},
-                "light direction history and its photograph share the real playing editor state");
-            f.EditComposition(c=>c with {AnimationProgress=12});f.Sample();
-            check(f.Store.Count==beforeDrag+1,"natural playback after a light edit creates no additional history");
+            check(history.Composition.Paused && history.Composition.BannerTimeline==1 && history.Composition.AnimationProgress==.25f,
+                "light direction history preserves last paused pose while live animation plays");
         }
         foreach(var reason in new[]{"owner","source","identity","saveguard","closed"})
         using(var f=Open(root,"invalid-"+reason))

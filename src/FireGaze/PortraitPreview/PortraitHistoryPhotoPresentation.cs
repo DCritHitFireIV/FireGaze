@@ -8,15 +8,10 @@ internal enum PortraitHistoryPhotoStatus
     Capacity,
     StorageError,
     ReadError,
-    Generating,
 }
 
 internal static class PortraitHistoryPhotoPresentation
 {
-    public static IReadOnlyList<PortraitHistoryListItem> SelectPhotographed(
-        IReadOnlyList<PortraitHistoryListItem> records, Func<long,bool> hasPhotograph)
-        => records.Where(record => hasPhotograph(record.ID)).ToArray();
-
     public static PortraitHistoryPhotoStatus Resolve(bool hasTexture, bool isLoading,
         bool hasDurableImage, PortraitStorageCode storageCode)
     {
@@ -36,7 +31,6 @@ internal static class PortraitHistoryPhotoPresentation
         PortraitHistoryPhotoStatus.Capacity => "照片空间已满",
         PortraitHistoryPhotoStatus.StorageError => "照片写盘失败",
         PortraitHistoryPhotoStatus.ReadError => "照片读取失败",
-        PortraitHistoryPhotoStatus.Generating => "照片正在自动生成…",
         _ => "暂无照片",
     };
 
@@ -45,7 +39,6 @@ internal static class PortraitHistoryPhotoPresentation
         PortraitFavoritePhotoStatus.Available => "照片已保存，正在载入",
         PortraitFavoritePhotoStatus.Capacity => "照片空间已满",
         PortraitFavoritePhotoStatus.StorageError => "照片读取或写入失败",
-        PortraitFavoritePhotoStatus.Pending => "照片正在自动生成…",
-        _ => "请用原角色在原肖像中载入补拍",
+        _ => "暂无照片",
     };
 }

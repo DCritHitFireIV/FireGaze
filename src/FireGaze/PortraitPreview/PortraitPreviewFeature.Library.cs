@@ -13,9 +13,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private IReadOnlyList<PortraitFavoriteEntry> favoriteTrashEntries = [];
     private string favoritesStatus = "";
     private string favoriteSuccessMessage = "收藏已保存";
-    private PortraitFavoriteEntry? favoriteAwaitingPhoto;
-    private long favoriteNoticeRevision;
-    private long favoriteWriteNoticeRevision;
     private bool libraryInitialized;
     private DateTime nextGlamourPlateRead;
     private OwnedCharacterKey? glamourPlateOwner;
@@ -69,7 +66,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (!libraryInitialized || !Plugin.Framework.IsInFrameworkUpdateThread) return;
         ObserveFavoritePersistence();
-        ObserveFavoritePhoto();
         // Worker completion is read without disk or native calls. A queued snapshot is not
         // presented as durable while storage is failing, and successful retry clears the warning.
         cachePersistenceWarning = glamourPlateCache.IsReadOnly ? "投影模板记录暂时无法读取，原文件已保留。"
@@ -162,8 +158,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void RestoreFavorite(Guid id) => Mutate(() =>
     {
-        favoriteNoticeRevision++;
-        favoriteAwaitingPhoto = null;
         var entry = favoriteEntries.FirstOrDefault(value => value.ID == id);
         if (entry is null) { SetFavoritesError("找不到这条收藏。"); return; }
         if (!TryCurrentSnapshot(out var before, out var reason)) { SetFavoritesError(reason); return; }
@@ -248,8 +242,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
             return;
         }
         retainedFavoriteWrite = write;
-        favoriteWriteNoticeRevision = ++favoriteNoticeRevision;
-        favoriteAwaitingPhoto = null;
         favoriteSuccessMessage = successMessage;
         retainedFavoriteProtection = protection;
         favoriteCompletedResult = null;
@@ -270,7 +262,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (favoritePersistence is not { IsCompleted: true } || favoriteCompletedResult is not { } result) return;
         favoriteCompletedResult = null;
-        PublishFavoriteResult(result, favoriteWriteNoticeRevision == favoriteNoticeRevision);
+        PublishFavoriteResult(result);
         if (result.Success)
         {
             retainedFavoriteWrite = null;
@@ -330,8 +322,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         { Error(validation); return false; }
         if (GetHistoryKey(identity, before) is not { } key) { Error("无法确认当前肖像记录来源。"); return false; }
         HandleHistoryBatchResult(historyBatch.Flush());
-        // Playback alone creates no entry; a real template edit owns the actual
-        // live pose so its history image never claims an unrelated paused state.
+        // Apply the complete live state, but persist only the settled pose when playback is
+        // running. This keeps a template edit from turning an animation frame into a pose record.
         var historyDesired = preservePlayingHistory ? ForHistory(desired, historyObservedEditor) : desired;
         var payload = historyDesired.ToJSON();
         var preparation = history.PrepareRecord(key, payload, label);
@@ -378,27 +370,17 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void SetFavoritesError(string reason)
     {
-        favoriteNoticeRevision++;
-        favoriteAwaitingPhoto = null;
         favoritesStatus = reason;
         status = reason;
         statusIsError = true;
     }
 
-    private void PublishFavoriteResult(PortraitFavoritesWriteResult result, bool publishNotice = true)
+    private void PublishFavoriteResult(PortraitFavoritesWriteResult result)
     {
-        // Accepted writes still complete and publish their data after a newer
-        // action. Only their obsolete player notification loses ownership.
         if (result.Success)
         {
             PublishFavoriteEntries();
-            if (!publishNotice) return;
             favoritesStatus = favoriteSuccessMessage;
-            if (retainedFavoriteProtection is not null && result.Entry is { } entry)
-            {
-                favoriteAwaitingPhoto = entry;
-                ObserveFavoritePhoto();
-            }
             if (favoritePersistence is { IsCompletedSuccessfully: true, Result: false })
                 favoritesStatus = "收藏已保存，照片暂时无法保存。";
         }
@@ -407,7 +389,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
             // Storage details can include operating-system messages and local paths.
             // Keep the detached evidence for diagnostics and map only structured codes to UI.
             lastFavoriteStorageFailure = result with { Entry = null };
-            if (!publishNotice) return;
             SetFavoritesError(result.Status switch
             {
                 PortraitFavoritesWriteStatus.InvalidInput => "收藏未能保存，请检查名称、标签和肖像内容后重试。",
@@ -422,22 +403,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 _ => "收藏未能保存，请检查本地存储后重试。已有收藏已保留。",
             });
         }
-    }
-
-    private void ObserveFavoritePhoto()
-    {
-        if (favoriteAwaitingPhoto is not { } entry) return;
-        if (!favoriteEntries.Any(value => value.ID == entry.ID)) { favoriteAwaitingPhoto = null; return; }
-        var photo = photos.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot);
-        favoritesStatus = photo switch
-        {
-            PortraitFavoritePhotoStatus.Available => "收藏和照片已保存。",
-            PortraitFavoritePhotoStatus.Pending => "收藏参数已保存，照片正在自动生成…",
-            PortraitFavoritePhotoStatus.Capacity => "收藏参数已保存，照片空间不足。已有收藏已保留。",
-            PortraitFavoritePhotoStatus.StorageError => "收藏参数已保存，照片暂时无法保存，插件会自动重试。",
-            _ => "收藏参数已保存。请用保存时的角色，在对应的肖像编辑器中载入，插件会自动补拍照片。",
-        };
-        if (photo == PortraitFavoritePhotoStatus.Available) favoriteAwaitingPhoto = null;
     }
 
     private IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> FavoriteSnapshotsForPhotos()

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs')">$(DefineConstants);HAS_PORTRAIT_SESSION</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -10,9 +10,6 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitDesignManifest.cs" Link="PortraitDesignManifest.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitDesignManifest.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentModels.cs" Link="OwnedEquipmentModels.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearanceModels.cs" Link="PortraitAppearanceModels.cs" />
-    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.EquipmentMetadata.cs" Link="EquipmentMetadata.cs" />
-    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs" Link="EquipmentFilter.cs" />
-    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateModels.cs" Link="GlamourPlateModels.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitDesignShowcaseLayout.cs" Link="PortraitDesignShowcaseLayout.cs" />
   </ItemGroup>
 </Project>

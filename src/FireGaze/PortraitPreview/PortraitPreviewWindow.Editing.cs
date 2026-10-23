@@ -80,15 +80,7 @@ internal sealed partial class PortraitPreviewWindow
             historyViewChanged = false;
         }
         var archived = historyBrowse.Archived(records);
-        if (historyPhotosView)
-            archived = PortraitHistoryPhotoPresentation.SelectPhotographed(archived,
-                id => photos?.HasPhotographedRecord(id) == true);
-        if (archived.Count == 0)
-        {
-            if (historyPhotosView)
-                ImGui.TextWrapped("当前还没有已保存照片。开启预览并停止编辑后，插件会自动生成当前画面的照片。完整步骤可在「操作记录」中查看。");
-            else ImGui.TextUnformatted("暂无编辑记录。");
-        }
+        if (archived.Count == 0) ImGui.TextUnformatted("暂无编辑记录。");
         var days = HistoryPresentation.GetValue(feature, _ => new PortraitHistoryPresentation()).Get(archived);
         foreach (var day in days)
         {
@@ -125,6 +117,9 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawHistoryPhotos(IReadOnlyList<PortraitHistoryListItem> records, bool allowRestore)
     {
+        // A cache reclamation can finish after the Framework published this list.
+        // Read the committed image index again before creating photo cards.
+        records = records.Where(record => photos?.HasPhotographedRecord(record.ID) == true).ToArray();
         var gap = ImGui.GetStyle().ItemSpacing;
         var layout = PortraitHistoryPhotoLayout.For(ImGui.GetContentRegionAvail().X, gap.X, Scale);
         var captionHeight = ImGui.GetTextLineHeightWithSpacing() * 3;

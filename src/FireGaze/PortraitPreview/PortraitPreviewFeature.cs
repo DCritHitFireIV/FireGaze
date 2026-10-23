@@ -112,6 +112,13 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public bool StatusIsError => statusIsError || plateMirrorCloseError is not null || cachePersistenceWarning is not null;
     public IReadOnlyList<string> SourceSummary => SourceOwnerCurrent ? sourceSummary : [];
     public IReadOnlyList<PortraitDye> Dyes => dyes;
+    public PortraitBrowserItem? GetItem(PortraitSlot slot, uint id)
+    {
+        if (slot == PortraitSlot.Facewear)
+            return glasses.TryGetValue(id, out var face) ? new(id, face.Name.ToString(), (uint)Math.Max(0, face.Icon), 0, true, "") : null;
+        return metadata.GetValueOrDefault(id);
+    }
+
     private string Diagnostics()
     {
         var resolved = target.TryResolve(out var identity, out var bounds, out var openType);
@@ -272,6 +279,24 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                     .OrderBy(item => item.Name).ToArray();
         }
         browser = next;
+    }
+
+    private PortraitBrowserItem BrowserItem(Item row)
+    {
+        var state = PlayerState.Instance();
+        var restriction = row.EquipRestriction.Value;
+        var reason = row.ModelMain == 0 ? "该装备没有可用外观模型" : "";
+        if (state != null && row.EquipRestriction.RowId != 0)
+        {
+            var raceAllowed = state->Race switch
+            {
+                1 => restriction.Hyur, 2 => restriction.Elezen, 3 => restriction.Lalafell, 4 => restriction.Miqote,
+                5 => restriction.Roegadyn, 6 => restriction.AuRa, 7 => restriction.Hrothgar, 8 => restriction.Viera, _ => false,
+            };
+            if (!raceAllowed || (state->Sex == 0 ? !restriction.Male : !restriction.Female)) reason = "该外观不支持当前角色的种族或性别";
+        }
+        return new(row.RowId, row.Name.ToString(), row.Icon, row.DyeCount, reason.Length == 0, reason,
+            Convert.ToUInt32(row.LevelItem.RowId), Convert.ToUInt32(row.LevelEquip));
     }
 
     private static bool Matches(EquipSlotCategory row, PortraitSlot slot) => slot switch

@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitFavoritePhotoStatus { Available, Missing, Capacity, StorageError, Pending }
+internal enum PortraitFavoritePhotoStatus { Available, Missing, Capacity, StorageError }
 
 /// <summary>
 /// Durable, bounded copies of already completed thumbnails. The favorite snapshots own the

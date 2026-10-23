@@ -92,7 +92,7 @@ var frameUV1 = typeof(PortraitThumbnailLayers).GetProperty("FrameUV1");
 var accentUV0 = typeof(PortraitThumbnailLayers).GetProperty("AccentUV0");
 var accentUV1 = typeof(PortraitThumbnailLayers).GetProperty("AccentUV1");
 Check(frameUV0 is not null && frameUV1 is not null && accentUV0 is not null && accentUV1 is not null,
-    "independent normalized layers expose full UV rectangles for exactly one final composition");
+    "retained atlases expose their own UV rectangles for exactly one final composition");
 using (var legacy = new PortraitThumbnailLayers(new FakeTexture(), new FakeTexture(), new FakeTexture()))
 {
     Check((Vector2)frameUV0!.GetValue(legacy)! == Vector2.Zero && (Vector2)frameUV1!.GetValue(legacy)! == Vector2.One,
@@ -119,36 +119,28 @@ foreach (var layers in new[] { 1, 2, 3 })
     using var result = await source.CaptureAsync(identity);
     Check(result is not null && result.Character is not null, "character copied");
     Check((result!.Frame is not null) == (layers >= 2) && (result.Accent is not null) == (layers >= 3), "hidden overlays remain absent");
-    Check(api.Copies == layers && api.Inputs.Count == layers, "every visible layer is independently copied before raw readback; compressed atlases never escape the source boundary");
-    Check(api.Inputs.All(x => x.Disposes == 1), "all original references are released after their real copy tasks complete");
-    Check(ReferenceEquals(result.Frame, layers >= 2 ? api.Outputs[1] : null) && ReferenceEquals(result.Accent, layers >= 3 ? api.Outputs[2] : null), "result owns independent frame and accent outputs rather than the original atlases");
-    Check(api.CopyInputs.Select(value => value.Texture).SequenceEqual(api.Inputs), "copies run in character, frame, accent order using the retained source references");
-    Check(api.CopyInputs.All(value => value.CopyArgs.NewWidth == 160 && value.CopyArgs.NewHeight == 256
-        && value.CopyArgs.DxgiFormat == 28 && !value.CopyArgs.MakeOpaque), "all copied layers request fixed RGBA8 size without changing alpha");
+    Check(api.Copies == 1 && api.Inputs.Count == layers, "only the mutable character render target is copied; overlays must not be premultiplied twice");
+    Check(api.Inputs[0].Disposes == 1 && api.Inputs.Skip(1).All(x => x.Disposes == 0), "overlay source references transfer to the result without being released early");
+    Check(ReferenceEquals(result.Frame, layers >= 2 ? api.Inputs[1] : null) && ReferenceEquals(result.Accent, layers >= 3 ? api.Inputs[2] : null), "result owns the retained atlas reference directly without another COM acquisition");
     Check(api.Outputs.All(x => x.Disposes == 0), "owned output remains alive for caller");
     if (layers >= 2)
-        Check((Vector2)frameUV0!.GetValue(result)! == Vector2.Zero
-            && (Vector2)frameUV1!.GetValue(result)! == Vector2.One
-            && api.CopyInputs[1].CopyArgs.Uv0 == new Vector2(.125f, .0625f)
-            && api.CopyInputs[1].CopyArgs.Uv1 == new Vector2(.625f, .84375f), "frame crop is applied exactly once by the copy service and not again at composition");
+        Check((Vector2)frameUV0!.GetValue(result)! == new Vector2(.125f, .0625f)
+            && (Vector2)frameUV1!.GetValue(result)! == new Vector2(.625f, .84375f), "frame retains atlas crop UV without baking its alpha");
     if (layers >= 3)
-        Check((Vector2)accentUV0!.GetValue(result)! == Vector2.Zero
-            && (Vector2)accentUV1!.GetValue(result)! == Vector2.One
-            && api.CopyInputs[2].CopyArgs.Uv0 == new Vector2(.25f, .125f)
-            && api.CopyInputs[2].CopyArgs.Uv1 == new Vector2(.75f, .875f), "accent crop is independently normalized exactly once");
+        Check((Vector2)accentUV0!.GetValue(result)! == new Vector2(.25f, .125f)
+            && (Vector2)accentUV1!.GetValue(result)! == new Vector2(.75f, .875f), "accent retains its independent atlas crop UV");
     result.Dispose(); result.Dispose();
-    Check(api.Outputs.All(x => x.Disposes == 1) && api.Inputs.All(x => x.Disposes == 1), "layers disposal is idempotent and owns all independent copied layers");
+    Check(api.Outputs.All(x => x.Disposes == 1) && api.Inputs.All(x => x.Disposes == 1), "layers disposal is idempotent and owns both character copy and transferred overlays");
 }
 
 {
     var api = new FakeApi { OmitFrame = true };
     using var result = await new PortraitThumbnailSource(api).CaptureAsync(identity);
-    Check(result is not null && result.Frame is null && ReferenceEquals(result.Accent, api.Outputs[1]),
-        "accent-only capture normalizes the accent independently when frame is hidden");
-    Check(api.Copies == 2 && api.Inputs.All(value => value.Disposes == 1), "accent-only capture copies both visible layers and releases source atlases");
-    Check((Vector2)accentUV0!.GetValue(result)! == Vector2.Zero
-        && (Vector2)accentUV1!.GetValue(result)! == Vector2.One
-        && api.CopyInputs[1].CopyArgs.Uv0 == new Vector2(.25f, .125f), "accent-only crop is applied before full-output composition");
+    Check(result is not null && result.Frame is null && ReferenceEquals(result.Accent, api.Inputs[1]),
+        "accent-only atlas transfers independently when frame is hidden");
+    Check(api.Copies == 1 && api.Inputs[1].Disposes == 0, "accent-only capture avoids an overlay copy and early disposal");
+    Check((Vector2)accentUV0!.GetValue(result)! == new Vector2(.25f, .125f)
+        && (Vector2)accentUV1!.GetValue(result)! == new Vector2(.75f, .875f), "accent-only crop remains bound to accent");
     result!.Dispose();
     Check(api.Inputs.All(x => x.Disposes == 1) && api.Outputs.All(x => x.Disposes == 1), "accent-only disposal releases every reference once");
 }
@@ -167,50 +159,21 @@ foreach (var layers in new[] { 1, 2, 3 })
     api.Framework = false; api.Current = false; api.RejectNativeReads = true;
     api.CompleteCopies();
     using var result = await pending;
-    Check(result is not null && api.Copies == 3, "all detached layer copies complete without native or framework ownership dereference after await");
-    Check(api.Inputs.All(x => x.Disposes == 1), "async completion releases all source atlases after normalization");
+    Check(result is not null && api.Copies == 1, "completion performs no native or framework ownership dereference after await");
+    Check(api.Inputs[0].Disposes == 1 && api.Inputs.Skip(1).All(x => x.Disposes == 0), "async completion releases character source but retains overlays until composition");
     result!.Dispose();
-    Check(api.Inputs.All(x => x.Disposes == 1), "late async result disposal leaves all original references released once");
+    Check(api.Inputs.All(x => x.Disposes == 1), "late async result disposal releases all transferred overlays");
 }
 
-foreach (var layer in new[] { 1, 2, 3 })
+foreach (var failure in new[] { 1 })
 {
-    var api = new FakeApi { PauseCopy = layer };
-    var pending = new PortraitThumbnailSource(api).CaptureAsync(identity);
-    Check(!pending.IsCompleted && api.Copies == layer && api.Outputs.Count == layer - 1,
-        "layer " + layer + " copy is strictly sequential and awaits the actual provider task");
-    Check(api.Inputs.All(value => value.Disposes == 0) && api.Outputs.All(value => value.Disposes == 0),
-        "layer " + layer + " pending task keeps every source and prior output alive");
-    api.CompleteCopies();
-    using var result = await pending;
-    Check(result is not null && api.Inputs.All(value => value.Disposes == 1), "layer " + layer + " completion releases retained inputs");
-}
-
-foreach (var failure in new[] { 1, 2, 3 })
-{
-    var api = new FakeApi { FailCopy = failure, PauseCopy = failure };
+    var api = new FakeApi { FailCopy = failure };
     var source = new PortraitThumbnailSource(api);
-    var pending = source.CaptureAsync(identity);
-    Check(!pending.IsCompleted && api.Copies == failure
-        && api.Inputs.All(value => value.Disposes == 0) && api.Outputs.All(value => value.Disposes == 0),
-        "pending failing layer " + failure + " retains its sources and prior outputs until actual completion");
-    api.CompleteCopies();
     bool failed = false;
-    try { using var result = await pending; } catch (InvalidOperationException) { failed = true; }
+    try { using var result = await source.CaptureAsync(identity); } catch (InvalidOperationException) { failed = true; }
     Check(failed, "copy failure reported");
     Check(api.Inputs.All(x => x.Disposes == 1), "copy failure releases all retained input layers");
     Check(api.Outputs.All(x => x.Disposes == 1), "copy failure releases previously copied output layers");
-}
-
-foreach (var layer in new[] { 1, 2, 3 })
-{
-    var api = new FakeApi { SynchronousFailCopy = layer };
-    var failed = false;
-    try { using var result = await new PortraitThumbnailSource(api).CaptureAsync(identity); }
-    catch (InvalidOperationException) { failed = true; }
-    Check(failed && api.Copies == layer, "synchronous copy prefix failure stops before subsequent layer copies");
-    Check(api.Inputs.All(value => value.Disposes == 1) && api.Outputs.All(value => value.Disposes == 1),
-        "synchronous layer " + layer + " failure releases every input and prior independent output once");
 }
 
 {
@@ -222,9 +185,8 @@ foreach (var layer in new[] { 1, 2, 3 })
     Check(canceled && api.Acquires == 0 && api.Copies == 0, "already canceled request never reads native source");
 }
 
-foreach (var layer in new[] { 1, 2, 3 })
 {
-    var api = new FakeApi { CancelCopy = layer };
+    var api = new FakeApi { CancelCopy = 1 };
     var source = new PortraitThumbnailSource(api);
     bool canceled = false;
     try { using var result = await source.CaptureAsync(identity); } catch (OperationCanceledException) { canceled = true; }
@@ -249,25 +211,23 @@ foreach (var timing in new[] { "acquire", "copy" })
         timing + " cancellation does not leak or double-dispose an overlay");
     Check(api.Copies == (timing == "acquire" ? 0 : 1), timing + " cancellation never starts overlay copies");
 }
-foreach (var layer in new[] { 1, 2, 3 })
 {
     using var cancellation = new CancellationTokenSource();
-    var api = new FakeApi { PauseCopy = layer, IgnoreCancellation = true };
+    var api = new FakeApi { DelayCopies = true, IgnoreCancellation = true };
     var pending = new PortraitThumbnailSource(api).CaptureAsync(identity, cancellation.Token);
     cancellation.Cancel();
     Check(api.Inputs.All(x => x.Disposes == 0), "canceled pending producer retains its resources until it really completes");
     api.CompleteCopies();
     var canceled = false;
     try { using var result = await pending; } catch (OperationCanceledException) { canceled = true; }
-    Check(canceled && api.Copies == layer, "late layer " + layer + " completion observes cancellation before starting another copy or transferring ownership");
+    Check(canceled && api.Copies == 1, "late copy completion still observes cancellation before ownership transfer");
     Check(api.Inputs.All(x => x.Disposes == 1) && api.Outputs.All(x => x.Disposes == 1),
-        "ignored producer cancellation cleans every source, prior output and late copy");
+        "ignored producer cancellation cleans both source overlays and late character copy");
 }
 
-foreach (var layer in new[] { 0, 1, 2 })
 {
     var api = new FakeApi();
-    api.AfterAcquire = () => api.Inputs[layer].OnDispose = () => throw new InvalidOperationException("unconfirmed release");
+    api.AfterAcquire = () => api.Inputs[0].OnDispose = () => throw new InvalidOperationException("unconfirmed release");
     var physical = new PortraitCaptureRetirement();
     var held = physical.Enter();
     try { using var result = await new PortraitThumbnailSource(api).CaptureAsync(identity); }
@@ -277,22 +237,6 @@ foreach (var layer in new[] { 0, 1, 2 })
         "failed source-input release transfers unconfirmed ownership to the host physical quarantine");
     Check(api.Inputs.All(value => value.Disposes == 1) && api.Outputs.All(value => value.Disposes == 1),
         "source-input cleanup failure still releases all independent layers and unpublished output exactly once");
-}
-
-foreach (var layer in new[] { 0, 1, 2 })
-{
-    var api = new FakeApi { FailCopy = 3 };
-    if (layer == 2) api.FailCopy = 0;
-    api.AfterCopy = () => { if (api.Outputs.Count > layer) api.Outputs[layer].OnDispose = () => throw new InvalidOperationException("unconfirmed copied-layer release"); };
-    var physical = new PortraitCaptureRetirement();
-    var held = physical.Enter();
-    try { using var result = await new PortraitThumbnailSource(api).CaptureAsync(identity); }
-    catch (Exception error) { physical.ObserveFailure(error); }
-    held.Dispose();
-    Check(!physical.Seal().IsCompleted && physical.CleanupFailures > 0,
-        "unconfirmed copied layer " + layer + " release remains physically quarantined");
-    Check(api.Inputs.All(value => value.Disposes == 1) && api.Outputs.All(value => value.Disposes == 1),
-        "copied-layer cleanup failure never prevents other independent resources releasing once");
 }
 
 #if HAS_PHOTO_TRACE
@@ -317,11 +261,10 @@ sealed class FakeTexture : IDalamudTextureWrap
 sealed class FakeApi : IPortraitThumbnailSourceApi
 {
     public bool Framework = true, Current = true, Missing, ReplacedOnAcquire, RejectNativeReads, DelayCopies;
-    public int LayerCount = 3, Acquires, Copies, FailCopy, CancelCopy, PauseCopy, SynchronousFailCopy;
+    public int LayerCount = 3, Acquires, Copies, FailCopy, CancelCopy;
     public bool IgnoreCancellation, OmitFrame, DefaultOverlayUV1;
     public Action? AfterAcquire, BeforeCopy, AfterCopy;
     public List<FakeTexture> Inputs = [], Outputs = [];
-    public List<PortraitThumbnailInput> CopyInputs = [];
     private readonly TaskCompletionSource gate = new(TaskCreationOptions.RunContinuationsAsynchronously);
     public bool IsFrameworkThread { get { if (RejectNativeReads) throw new Exception("native read after await"); return Framework; } }
     public bool IsCurrent(PortraitIdentity identity) { if (RejectNativeReads) throw new Exception("owner read after await"); return Current; }
@@ -332,7 +275,7 @@ sealed class FakeApi : IPortraitThumbnailSourceApi
         PortraitThumbnailInput New(int layer)
         {
             var texture = new FakeTexture(); Inputs.Add(texture);
-            return new(texture, new() { NewWidth = 160, NewHeight = 256, DxgiFormat = 28, MakeOpaque = false,
+            return new(texture, new() { NewWidth = 160, NewHeight = 256,
                 Uv0 = layer == 2 ? new(.125f, .0625f) : new(.25f, .125f),
                 Uv1 = DefaultOverlayUV1 ? Vector2.Zero : layer == 2 ? new(.625f, .84375f) : new(.75f, .875f) });
         }
@@ -341,19 +284,13 @@ sealed class FakeApi : IPortraitThumbnailSourceApi
         AfterAcquire?.Invoke();
         return true;
     }
-    public Task<IDalamudTextureWrap> CopyAsync(PortraitThumbnailInput input, CancellationToken token)
+    public async Task<IDalamudTextureWrap> CopyAsync(PortraitThumbnailInput input, CancellationToken token)
     {
         BeforeCopy?.Invoke();
-        var layer = ++Copies;
-        CopyInputs.Add(input);
-        if (layer == SynchronousFailCopy) throw new InvalidOperationException("synchronous copy failure");
-        return CompleteCopyAsync(token, layer);
-    }
-    private async Task<IDalamudTextureWrap> CompleteCopyAsync(CancellationToken token, int layer)
-    {
-        if (DelayCopies || PauseCopy == layer) await gate.Task;
-        if (layer == FailCopy) throw new InvalidOperationException("copy failure");
-        if (layer == CancelCopy) throw new OperationCanceledException();
+        Copies++;
+        if (DelayCopies) await gate.Task;
+        if (Copies == FailCopy) throw new InvalidOperationException("copy failure");
+        if (Copies == CancelCopy) throw new OperationCanceledException();
         if (!IgnoreCancellation) token.ThrowIfCancellationRequested();
         var output = new FakeTexture(); Outputs.Add(output); AfterCopy?.Invoke(); return output;
     }

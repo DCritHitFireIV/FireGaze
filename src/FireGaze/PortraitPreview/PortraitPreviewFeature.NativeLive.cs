@@ -28,9 +28,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var player = Plugin.Objects.LocalPlayer;
         var character = player is null ? null : (Character*)player.Address;
         var owner = character is null ? default : new PortraitCaptureOwner(character->AccountId, character->ContentId);
-        var CapturesDrained = !productPhotoPending && !photos.IsBusy && photos.IsPhysicallyIdle
-            && liveImageService?.IsBusy != true && liveImageService?.IsPhysicallyIdle != false
-            && lightingFitCapture?.IsBusy != true && lightingFitCapture?.IsPhysicallyIdle != false;
+        var CapturesDrained = !photos.IsBusy && liveImageService?.IsBusy != true
+            && lightingFitCapture?.IsBusy != true;
         return new(editor, owner, editor.IsValid && session.BlockSave(editor), target.CanBlockSave,
             captureIsolation.Mode, CapturesDrained, LightingFitMutationBlocked);
     }

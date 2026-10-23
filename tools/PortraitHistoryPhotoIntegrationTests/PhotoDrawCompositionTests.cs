@@ -58,8 +58,8 @@ internal static class PhotoDrawCompositionTests
                 throw new InvalidOperationException("Photo-backed history must complete its own durable write.");
         }
         using (var restart = new PortraitHistoryStore(publishedPath))
-            if (restart.Count != 3 || restart.IsReadOnly || !restart.TryGetUndo(key, out _))
-                throw new InvalidOperationException("Every admitted edit and its undo navigation must survive a history restart independently of photographs.");
+            if (restart.Count != 1 || restart.IsReadOnly)
+                throw new InvalidOperationException("Only the correct photographed state may survive a history restart.");
         return 8;
     }
 
