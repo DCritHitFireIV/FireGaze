@@ -1,0 +1,2073 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-25",
+    "source": "user",
+    "label": "玩家包 · 2822d6",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Turned off in the settings.",
+      "Translated": "在设置里关掉了。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-hand, ",
+      "Translated": "-手，",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "schema 1",
+      "Translated": "方案1",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "schema 2",
+      "Translated": "图式2",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No table installed (optional; generate one with tools/Precompute — docs/PRECOMPUTED_POLICY.md).",
+      "Translated": "未安装表（可选；使用 tools/Precompute — docs/PRECOMPUTED_POLICY.md 生成一个表）。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "simulation_policy (",
+      "Translated": "模拟策略（",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " records)",
+      "Translated": "记录）",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " belief states)",
+      "Translated": "信念状态）",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle the Mahjong Hater overlay. '/mhater config' opens the settings, '/mhater focus' logs why the table may not be taking clicks.",
+      "Translated": "切换麻将讨厌者叠加层。 '/mhater config' 打开设置，'/mhater focus' 记录表格可能不被点击的原因。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mahjong Hater – Settings",
+      "Translated": "麻将仇恨者 – 设置",
+      "Context": "ConfigWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Close settings",
+      "Translated": "关闭设置",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GENERAL",
+      "Translated": "一般的",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Plugin",
+      "Translated": "启用插件",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show overlay",
+      "Translated": "显示叠加层",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TABLE RULES",
+      "Translated": "餐桌规则",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable open tanyao except in the special kuitan-disabled room.",
+      "Translated": "除特殊奎坦禁用房间外，启用开放坦药。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DEFENSE",
+      "Translated": "防御",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Defense model v2",
+      "Translated": "防御模型v2",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Measured deal-in rates by tile class and live suji plus a push/fold budget (docs/DEFENSE_PLAN.md). Off = the v1.3 heuristics for A/B runs. Takes effect after a reload.",
+      "Translated": "按图块类别和现场筋以及推/弃牌预算测量的发牌率（docs/DEFENSE_PLAN.md）。 Off = A/B 运行的 v1.3 启发式。重新加载后生效。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Experimental learned policy",
+      "Translated": "实验学习策略",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use the trained discard/riichi policy and opponent predictions. Requires learned_policy.json. Save and reload to apply.",
+      "Translated": "使用经过训练的弃牌/立直策略和对手预测。需要 learn_policy.json。保存并重新加载以应用。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Experimental precomputed policy",
+      "Translated": "实验性预计算策略",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use offline discard estimates when this position is covered; otherwise use the learned policy when enabled, then the existing policy. Requires a trained policy file. Save and reload to apply.",
+      "Translated": "当该位置被覆盖时，使用离线丢弃估计；否则，在启用时使用学习到的策略，然后使用现有策略。需要经过培训的策略文件。保存并重新加载以应用。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Record situations for offline training",
+      "Translated": "记录线下训练情况",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Save public table snapshots locally to build a training corpus. Save and reload to apply.",
+      "Translated": "将公共表快照保存在本地以构建训练语料库。保存并重新加载以应用。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Opponents are human (calibration tag)",
+      "Translated": "对手是人类（校准标签）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tags the calibration CSV rows so human and NPC opponents are fitted separately.",
+      "Translated": "标记校准 CSV 行，以便分别安装人类和 NPC 对手。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DOUBLE-WIND PAIR FU",
+      "Translated": "双风对FU",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "2 fu",
+      "Translated": "2 福",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FFXIV does not document whether seat + round wind pairs grant 2 or 4 fu. Default is 4.",
+      "Translated": "FFXIV 没有记录座椅 + 圆风对是否授予 2 个或 4 个 fu。默认值为 4。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "4 fu",
+      "Translated": "4 福",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DORA DISPLAY",
+      "Translated": "朵拉展示",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Doman",
+      "Translated": "明天",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Traditional",
+      "Translated": "传统的",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Doman matches FFXIV's default display. Traditional shows dora indicators.",
+      "Translated": "Doman 与 FFXIV 的默认显示相匹配。传统显示朵拉指标。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FIXED FFXIV RULES",
+      "Translated": "固定的 FFXIV 规则",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Atozuke on / Kuikae off / Double ron on\nKazoe yakuman on / No four-riichi abort\nTobi below 0 / Agariyame for the 1st-place dealer",
+      "Translated": "Atozuke 开 / Kuikae 关 / 双轮开\nKazoe浇水你/没有四富流产\nTobi 低于 0 / Agariyame 为第一名荷官",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GAME LENGTH",
+      "Translated": "比赛长度",
+      "Context": "ConfigWindow.DrawGameLength",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tonpuusen",
+      "Translated": "通普乌森",
+      "Context": "ConfigWindow.DrawGameLength",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tonpuusen: East only. Hanchan: East + South.",
+      "Translated": "Tonpuusen：仅限东部。 Hanchan：东+南。",
+      "Context": "ConfigWindow.DrawGameLength",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Diagnostics (",
+      "Translated": "诊断（",
+      "Context": "MainWindow.DrawTabs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Table tracking, tracker notes and the auto-play counters.",
+      "Translated": "桌子跟踪、跟踪笔记和自动播放计数器。",
+      "Context": "MainWindow.DrawTabs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ready when you are",
+      "Translated": "当你准备好时",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not currently seated at a Doman Mahjong table.",
+      "Translated": "目前没有坐在 Doman 麻将桌上。",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layout check failed",
+      "Translated": "布局检查失败",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hand read may be stale. See the diagnostics tab.",
+      "Translated": "手读可能已经过时了。请参阅诊断选项卡。",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for tiles",
+      "Translated": "等待瓷砖",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Seated at the table. Waiting for hand tile data...",
+      "Translated": "坐在桌边。等待手牌数据...",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AVAILABLE CALLS",
+      "Translated": "可用通话",
+      "Context": "MainWindow.DrawPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No table",
+      "Translated": "没有桌子",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Table tracking appears here once you are seated.",
+      "Translated": "当您入座后，餐桌跟踪就会出现在此处。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LEARNED POLICY",
+      "Translated": "学到的政策",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Heuristics only",
+      "Translated": "仅启发式",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Model loaded",
+      "Translated": "模型已加载",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "From: ",
+      "Translated": "从：",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "A model in the plugin config folder overrides the one shipped with the plugin.",
+      "Translated": "插件配置文件夹中的模型会覆盖插件附带的模型。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Turn on Learned policy in the settings and reload the plugin to use the model shipped with it.",
+      "Translated": "在设置中打开学习策略并重新加载插件以使用附带的模型。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The heuristics are deciding. Fix the above and reload the plugin; the Dalamud log has the full message.",
+      "Translated": "启发法正在决定。修复上述问题并重新加载插件； Dalamud 日志有完整的消息。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Precomputed tables: ",
+      "Translated": "预计算表：",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "not in use",
+      "Translated": "未使用",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "loaded",
+      "Translated": "已加载",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AUTO PLAY COUNTERS",
+      "Translated": "自动游戏计数器",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " decisions · ",
+      "Translated": "决定 ·",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " stalls · ",
+      "Translated": "摊位·",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " recoveries · ",
+      "Translated": "康复情况·",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " queued",
+      "Translated": "排队",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Anti-AFK: ",
+      "Translated": "防AFK：",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " presses",
+      "Translated": "压力机",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Last press did not reduce the idle counters",
+      "Translated": "最后一次按下并没有减少空闲计数器",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "An idle timer reached ",
+      "Translated": "达到空闲计时器",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stall log: ",
+      "Translated": "失速日志：",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Each stall appends the snapshot, the decision, the prompt rows, slot clickability and the tracker's recent events.",
+      "Translated": "每个摊位都附加快照、决策、提示行、槽可点击性和跟踪器的最近事件。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No auto-play actions yet this session.",
+      "Translated": "此会话还没有自动播放操作。",
+      "Context": "MainWindow.DrawDiagnostics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Disabled",
+      "Translated": "残疾人",
+      "Context": "MainWindow.DrawHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hide overlay",
+      "Translated": "隐藏叠加层",
+      "Context": "MainWindow.DrawHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SCORE",
+      "Translated": "分数",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RANK",
+      "Translated": "秩",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Gold Saucer Info → Doman Mahjong once and the rank is remembered here.",
+      "Translated": "打开金碟信息→多曼麻将一次，排名就被记住了。",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Read from the Gold Saucer Info window; reopen it after a match to refresh.",
+      "Translated": "从金碟信息窗口读取；比赛结束后重新打开它以刷新。",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RATING",
+      "Translated": "等级",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Highest rating: ",
+      "Translated": "最高评价：",
+      "Context": "MainWindow.DrawSession",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ADDON INTERACTION",
+      "Translated": "插件交互",
+      "Context": "MainWindow.DrawInteraction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Click style: ",
+      "Translated": "点击样式：",
+      "Context": "MainWindow.DrawInteraction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Last action: ",
+      "Translated": "最后一个动作：",
+      "Context": "MainWindow.DrawInteraction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow the hover click style",
+      "Translated": "允许悬停点击样式",
+      "Context": "MainWindow.DrawInteraction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Off: clicks are the activation chain alone. On: an activation the game ignored switches this match to a matched MouseOver+MouseOut before the click — the style that preceded three AgentEmj.Update crashes.",
+      "Translated": "关闭：点击是单独的激活链。开启：游戏忽略的激活会在单击之前将此匹配切换为匹配的 MouseOver+MouseOut — 这是在三次 AgentEmj.Update 崩溃之前的样式。",
+      "Context": "MainWindow.DrawInteraction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AUTO PLAY",
+      "Translated": "自动播放",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Play the recommended actions",
+      "Translated": "执行推荐的操作",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "STALLED ",
+      "Translated": "停滞",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " s — dump #",
+      "Translated": "s——转储#",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " written",
+      "Translated": "书面",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Requeue when a match ends",
+      "Translated": "比赛结束时重新排队",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Prevent inactivity ejection during auto play",
+      "Translated": "防止自动播放期间不活动弹出",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "While auto play runs a match, sends a brief Control press to the game window when its idle counters exceed 30 seconds. Diagnostics shows whether the counters fell afterward.",
+      "Translated": "当自动游戏运行一场比赛时，当其空闲计数器超过 30 秒时，会向游戏窗口发送简短的 Control 按下。诊断显示计数器随后是否下降。",
+      "Context": "MainWindow.DrawAutoPlay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DUTY",
+      "Translated": "责任",
+      "Context": "MainWindow.DrawDutyPicker",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced Mahjong needs 1st dan or higher.",
+      "Translated": "高级麻将需要一段或以上。",
+      "Context": "MainWindow.DrawDutyPicker",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Seat ",
+      "Translated": "座位",
+      "Context": "MainWindow.DrawTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TABLE",
+      "Translated": "桌子",
+      "Context": "MainWindow.DrawTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hand read may be stale.",
+      "Translated": "手读可能已经过时了。",
+      "Context": "MainWindow.DrawTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analyzing hand...",
+      "Translated": "分析手...",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis stalled",
+      "Translated": "分析陷入停滞",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Your recommendation will appear here.",
+      "Translated": "您的推荐将出现在这里。",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Will retry on the next hand change.",
+      "Translated": "将在下次换手时重试。",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis failed",
+      "Translated": "分析失败",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis timed out",
+      "Translated": "分析超时",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PREVIOUS HAND",
+      "Translated": "前一手牌",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RECOMMENDED ACTION",
+      "Translated": "建议采取的行动",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Updating for the new hand...",
+      "Translated": "新手更新中...",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis stalled. Showing the previous hand; will retry on the next hand change.",
+      "Translated": "分析陷入停滞。显示前一手牌；将在下次换牌时重试。",
+      "Context": "MainWindow.DrawDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-shanten",
+      "Translated": "-山腾",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " vs seat ",
+      "Translated": "与座位",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "\nDanger: ",
+      "Translated": "危险：",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " tiles",
+      "Translated": "瓷砖",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Risk ",
+      "Translated": "风险",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Two-step ukeire: ",
+      "Translated": "两步尤克里里：",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "\nValue: ",
+      "Translated": "价值：",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "\nRanking score: ",
+      "Translated": "排名分数：",
+      "Context": "MainWindow.CacheChoice",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tsumo!",
+      "Translated": "一句谚语！",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ron!",
+      "Translated": "罗恩！",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Riichi!",
+      "Translated": "里奇！",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Discard",
+      "Translated": "丢弃",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open kan",
+      "Translated": "打开罐头",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Closed kan",
+      "Translated": "关闭kan",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added kan",
+      "Translated": "添加了",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Standing by",
+      "Translated": "待命",
+      "Context": "MainWindow.DrawAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "WAITS",
+      "Translated": "等待",
+      "Context": "MainWindow.DrawHandSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DISCARD CANDIDATES",
+      "Translated": "放弃候选人",
+      "Context": "MainWindow.DrawCandidates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "REASONING",
+      "Translated": "推理",
+      "Context": "MainWindow.DrawSteps",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CURRENT HAND",
+      "Translated": "当前手牌",
+      "Context": "MainWindow.DrawWaiting",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wh",
+      "Translated": "瓦时",
+      "Context": "Widgets..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis timed out.",
+      "Translated": "分析超时。",
+      "Context": "Dispatch",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " melds).",
+      "Translated": "融合）。",
+      "Context": "HandAnalyzer.Analyze",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " live improving tiles.",
+      "Translated": "生活改善瓷砖。",
+      "Context": "HandAnalyzer.AnalyzeWaiting",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Discard ",
+      "Translated": "丢弃",
+      "Context": "HandAnalyzer.BuildReasoning",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-shanten, ",
+      "Translated": "-山腾，",
+      "Context": "HandAnalyzer.BuildReasoning",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Characters",
+      "Translated": "人物",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Dots",
+      "Translated": "点",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Bamboo",
+      "Translated": "竹子",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "East Wind",
+      "Translated": "东风",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "South Wind",
+      "Translated": "南风",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "West Wind",
+      "Translated": "西风",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "North Wind",
+      "Translated": "北风",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "White Dragon",
+      "Translated": "白龙",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Green Dragon",
+      "Translated": "绿龙",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Red Dragon",
+      "Translated": "红龙",
+      "Context": "TileHelpers.GetDisplayName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " from=",
+      "Translated": "来自=",
+      "Context": "EventTracker.OnRefresh",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current action space uses the existing policy.",
+      "Translated": "当前的行动空间使用现有的政策。",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No exact entry in the simulation database.",
+      "Translated": "模拟数据库中没有准确的条目。",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Simulation database read failed: ",
+      "Translated": "模拟数据库读取失败：",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Simulation entry lacks complete, sufficiently sampled legal discards.",
+      "Translated": "模拟条目缺乏完整、充分采样的合法弃牌。",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "simulation",
+      "Translated": "模拟",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Exact database hit; selected by simulated end-of-hand utility.",
+      "Translated": "精确的数据库命中；由模拟的手端实用程序选择。",
+      "Context": "SimulationLookupPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "simulated ",
+      "Translated": "模拟的",
+      "Context": "Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " pts (",
+      "Translated": "分（",
+      "Context": "Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " samples)",
+      "Translated": "样品）",
+      "Context": "Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "simulation guideline",
+      "Translated": "模拟指南",
+      "Context": "Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "state",
+      "Translated": "状态",
+      "Context": "OfflineDiscardTrainer.Unusable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Position is outside the trained discard action space.",
+      "Translated": "位置位于经过训练的弃牌动作空间之外。",
+      "Context": "PrecomputedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No precomputed entry for this belief state.",
+      "Translated": "此信念状态没有预先计算的条目。",
+      "Context": "PrecomputedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Precomputed entry has incomplete legal actions or insufficient samples.",
+      "Translated": "预计算条目的法律行为不完整或样本不足。",
+      "Context": "PrecomputedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "precomputed",
+      "Translated": "预先计算的",
+      "Context": "PrecomputedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Exact belief-state hit; highest offline estimated utility among all legal discards.",
+      "Translated": "精确的信念状态命中；所有合法丢弃物中离线估计效用最高。",
+      "Context": "PrecomputedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Using the existing policy.",
+      "Translated": "使用现有政策。",
+      "Context": "PrecomputedPolicy.Fallback",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "offline estimate ",
+      "Translated": "离线估算",
+      "Context": "Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Offers=",
+      "Translated": "优惠=",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; confirmed=",
+      "Translated": ";确认=",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "tile=",
+      "Translated": "瓷砖=",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "closed=[",
+      "Translated": "关闭=[",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "]; melds=[",
+      "Translated": "];融合=[",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "hand layout or meld composition is unverified.",
+      "Translated": "手牌布局或融合成分未经验证。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "opponent claims and own-turn kans are offered together.",
+      "Translated": "对手的主张和自己的回合 kan 一起提供。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "existing meld has an invalid shape, length or open/closed status.",
+      "Translated": "现有熔体的形状、长度或打开/闭合状态无效。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "declared meld count disagrees with reconstructed melds.",
+      "Translated": "声明的融合计数与重建的融合不一致。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " closed + 3*",
+      "Translated": "关闭 + 3*",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " melds = ",
+      "Translated": "融合=",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; expected ",
+      "Translated": ";预期的",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "a claim needs an offered tile from an opponent.",
+      "Translated": "索赔需要对手提供一张牌。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "an own-turn kan cannot claim an opponent's tile.",
+      "Translated": "自己回合的 kan 不能领取对手的牌。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "the drawn tile is missing from the closed hand.",
+      "Translated": "紧握的手上缺少抽出的牌。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "invalid tile or more than four physical copies of one kind (including the offered tile).",
+      "Translated": "无效的牌或一种以上的实体副本超过四个（包括提供的牌）。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Offered ",
+      "Translated": "提供",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " has no constructible candidate: check copies, source seat, riichi and chooser shapes.",
+      "Translated": "没有可构造的候选者：检查副本、源座位、立直和选择器形状。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Offered own-turn Kan has no constructible candidate: need four closed copies or an open pon plus its fourth tile; riichi permits only the drawn kind.",
+      "Translated": "提供的己方 Kan 没有可构造的候选者：需要四个封闭副本或一个开放的 pon 加上其第四个瓷砖；立直只允许绘制的类型。",
+      "Context": "CallDescriptor.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "call-shape",
+      "Translated": "呼叫形状",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Invalid call construction: ",
+      "Translated": "无效的调用构造：",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": consumed physical copies are missing from the hand.",
+      "Translated": "：已消耗的物理副本从手中丢失。",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": resulting meld is not a valid shape.",
+      "Translated": "：生成的融合不是有效的形状。",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": resulting hand has invalid tile/meld counts (",
+      "Translated": "：所得手牌具有无效的牌/牌组计数（",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " closed, ",
+      "Translated": "关闭，",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Validated ",
+      "Translated": "已验证",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": consume [",
+      "Translated": "： 消耗 [",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "closed ",
+      "Translated": "关闭",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", melds ",
+      "Translated": ", 融合",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "hand total ",
+      "Translated": "手牌总数",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " before discard",
+      "Translated": "丢弃前",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " before replacement draw",
+      "Translated": "替换抽签前",
+      "Context": "Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Call keeps an open yaku route.",
+      "Translated": "呼叫保持开放的yaku路线。",
+      "Context": "CallPolicy.Viable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "call",
+      "Translated": "称呼",
+      "Context": "CallPolicy.Accept",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "push/fold",
+      "Translated": "推/折叠",
+      "Context": "IPushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No candidates.",
+      "Translated": "没有候选人。",
+      "Context": "IPushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "win",
+      "Translated": "赢",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Declare ",
+      "Translated": "宣布",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " yaku han meets the ",
+      "Translated": "屋久汉遇见",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-han minimum.",
+      "Translated": "-他最低限度。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Decline ",
+      "Translated": "衰退",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": winning hand has ",
+      "Translated": ": 获胜手牌有",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " yaku han (need ",
+      "Translated": "药函（需要",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "and no prompt event confirmed the offer.",
+      "Translated": "并且没有任何提示事件确认该报价。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": the game offered it, so it is a legal win, but our hand read scores only ",
+      "Translated": "：游戏提供了它，所以这是合法的胜利，但我们的手只读取分数",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " yaku han ",
+      "Translated": "药房",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "(closed [",
+      "Translated": "（已关闭[",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " meld(s), riichi=",
+      "Translated": "融合，立直=",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "). Taking the offer; the read is what needs fixing.",
+      "Translated": "）。接受报价；阅读是需要修复的。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Meld composition is incomplete; waiting for a confirmed read.",
+      "Translated": "熔体成分不完整；等待确认读取。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "opponents",
+      "Translated": "对手",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pass the offered call.",
+      "Translated": "传递所提供的电话。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No discard is currently legal.",
+      "Translated": "目前没有任何丢弃是合法的。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "hand out of sync (",
+      "Translated": "手不同步（",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " closed tiles + ",
+      "Translated": "封闭式瓷砖+",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; expected 14).",
+      "Translated": ";预计14）。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No valid discard candidate; waiting for stable hand and draw data.",
+      "Translated": "没有有效的丢弃候选者；等待稳定的手牌和抽牌数据。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "riichi",
+      "Translated": "立直",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Riichi is committed: only the drawn tile may be discarded. The game may discard it automatically.",
+      "Translated": "立直承诺：只有抽到的牌才可以被丢弃。游戏可能会自动丢弃它。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Riichi locked: discard ",
+      "Translated": "立直锁定：丢弃",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Best attack discard ",
+      "Translated": "最佳攻击丢弃",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Turn: ",
+      "Translated": "转动：",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " stays within budget (",
+      "Translated": "保持在预算范围内（",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ") at the cost of a shanten.",
+      "Translated": "）以 shanten 为代价。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Push: ",
+      "Translated": "推：",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " is within budget (",
+      "Translated": "在预算之内（",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fold: nothing within budget; safest discard ",
+      "Translated": "折叠：不超出预算；最安全的丢弃",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " safe tile(s) in hand).",
+      "Translated": "手中有安全的瓷砖）。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Safest discard ",
+      "Translated": "最安全的丢弃",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": deal-in risk ",
+      "Translated": ": 交易风险",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Riichi is unavailable or the hand is not tenpai.",
+      "Translated": "立直无法使用或手牌不是天牌。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Keep defensive flexibility; do not declare riichi while folding.",
+      "Translated": "保持防守灵活性；弃牌时不要声明立直。",
+      "Context": "DecisionPolicy.ChooseCore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "waits: ",
+      "Translated": "等待：",
+      "Context": "HeuristicDiscardPolicy.Rank",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "open hand has no winning yaku",
+      "Translated": "开手没有胜负",
+      "Context": "HeuristicDiscardPolicy.Rank",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "riichi locked: drawn tile",
+      "Translated": "立直锁定：绘制瓷砖",
+      "Context": "HeuristicDiscardPolicy.Rank",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "opponent tenpai ",
+      "Translated": "对手天牌",
+      "Context": "PushFoldPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "opponent riichi",
+      "Translated": "对手立一",
+      "Context": "PushFoldPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-shanten, value ",
+      "Translated": "-shanten，价值",
+      "Context": "PushFoldPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fold: ",
+      "Translated": "折叠：",
+      "Context": "PushFoldPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; choose lowest deal-in risk.",
+      "Translated": ";选择最低的交易风险。",
+      "Context": "PushFoldPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Push: nobody is threatening yet.",
+      "Translated": "Push：还没有人威胁。",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "two riichi",
+      "Translated": "二立直",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "placement stakes ×",
+      "Translated": "配售赌注 ×",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " (win ",
+      "Translated": "（赢",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", deal-in ",
+      "Translated": ", 成交",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Budget ",
+      "Translated": "预算",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " safe tile(s).",
+      "Translated": "安全瓷砖。",
+      "Context": "PushFoldPolicy.Decide",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " live winning tiles.",
+      "Translated": "活赢牌。",
+      "Context": "RiichiPolicy.ShouldDeclare",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chase the riichi: good wait with ",
+      "Translated": "追立直：好好等待",
+      "Context": "RiichiPolicy.ShouldDeclare",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "genbutsu vs seat ",
+      "Translated": "玄物 vs 座位",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " (riichi)",
+      "Translated": "（里奇）",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " honor, ",
+      "Translated": "荣誉，",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " visible",
+      "Translated": "可见的",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", dora",
+      "Translated": "、朵拉",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "one-chance",
+      "Translated": "一次机会",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "double one-chance",
+      "Translated": "双一机会",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "outside an early discard",
+      "Translated": "在早期丢弃之外",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "dora",
+      "Translated": "朵拉",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "next to dora",
+      "Translated": "朵拉旁边",
+      "Context": "TileDangerModel.Estimate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Off",
+      "Translated": "离开",
+      "Context": "AutoPlayer..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "nothing dispatched yet",
+      "Translated": "尚未发送任何内容",
+      "Context": "AutoPlayer..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for a table",
+      "Translated": "等待餐桌",
+      "Context": "AutoPlayer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " accepted after ",
+      "Translated": "之后接受",
+      "Context": "AutoPlayer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " ms",
+      "Translated": "多发性硬化症",
+      "Context": "AutoPlayer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " UNACKNOWLEDGED after ",
+      "Translated": "之后未确认",
+      "Context": "AutoPlayer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Win answered, waiting for the game",
+      "Translated": "Win已回复，等待比赛",
+      "Context": "AutoPlayer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Analysis ",
+      "Translated": "分析",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for analysis",
+      "Translated": "等待分析",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for a fresh decision",
+      "Translated": "等待新的决定",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Decision ",
+      "Translated": "决定",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": nothing to do",
+      "Translated": ": 没什么可做的",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for others",
+      "Translated": "等待其他人",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Decision: none — ",
+      "Translated": "决定：无 —",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Acted ",
+      "Translated": "演过",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "×), waiting for the game",
+      "Translated": "×），等待比赛",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In ",
+      "Translated": "在",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "REFUSED",
+      "Translated": "拒绝",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sent",
+      "Translated": "发送",
+      "Context": "AutoPlayer.ActOnDecision",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Round recap",
+      "Translated": "回合回顾",
+      "Context": "AutoPlayer.HandleRecap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Round recap: reading it for ",
+      "Translated": "回合回顾：阅读它",
+      "Context": "AutoPlayer.HandleRecap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Idle (no unattended match)",
+      "Translated": "空闲（没有无人值守的比赛）",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Activity observed after Control press",
+      "Translated": "按下 Control 后观察到的活动",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Control sent, but idle counters did not fall",
+      "Translated": "控制已发送，但空闲计数器未下降",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Control sent; timer reading unavailable",
+      "Translated": "控制发送；定时器读数不可用",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unavailable (no valid input timer readings)",
+      "Translated": "不可用（无有效输入计时器读数）",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Armed: ",
+      "Translated": "武装：",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for the held Control key to be released",
+      "Translated": "等待按住的 Control 键被释放",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unavailable (no game window for this process)",
+      "Translated": "不可用（此过程没有游戏窗口）",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Control key-down delivery failed; release requested",
+      "Translated": "控制按键下发失败；请求释放",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Control press #",
+      "Translated": "控制按#",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " sent; awaiting timer observation",
+      "Translated": "发送;等待定时器观察",
+      "Context": "IdleGuard.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Novice Mahjong (Full Ranked Match)",
+      "Translated": "新手麻将（全排名赛）",
+      "Context": "MatchQueuer.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Novice Mahjong (Quick Ranked Match)",
+      "Translated": "新手麻将（快速排名赛）",
+      "Context": "MatchQueuer.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced Mahjong (Full Ranked Match)",
+      "Translated": "高级麻将（全排名赛）",
+      "Context": "MatchQueuer.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced Mahjong (Quick Ranked Match)",
+      "Translated": "高级麻将（快速排名赛）",
+      "Context": "MatchQueuer.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "duty ",
+      "Translated": "责任",
+      "Context": "MatchQueuer.Describe",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not logged in",
+      "Translated": "未登录",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Off (",
+      "Translated": "离开 （",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In a match",
+      "Translated": "在一场比赛中",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match over, queueing in ",
+      "Translated": "比赛结束，排队入场",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In queue ",
+      "Translated": "在队列中",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " · position ",
+      "Translated": "· 位置",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match found, commencing…",
+      "Translated": "找到匹配，开始……",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match found, waiting for the Duty Finder window",
+      "Translated": "找到匹配项，正在等待“值班查找器”窗口",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match found → Commence",
+      "Translated": "找到匹配 → 开始",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Commenced, waiting for the table",
+      "Translated": "开始了，等桌子",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In content, waiting for the table",
+      "Translated": "内容中，等待上桌",
+      "Context": "MatchQueuer.Tick",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Queue request had no effect, retrying in ",
+      "Translated": "队列请求没有效果，正在重试",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Queue request sent for ",
+      "Translated": "已发送队列请求",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Queue request sent, waiting for the game (",
+      "Translated": "队列请求已发送，等待游戏（",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Registration failed (see log)",
+      "Translated": "注册失败（查看日志）",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waiting for the Duty Finder window",
+      "Translated": "等待“值班查找器”窗口",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duty Finder → Join",
+      "Translated": "值班查找器 → 加入",
+      "Context": "MatchQueuer.Register",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duty Finder opened on the duty",
+      "Translated": "值班查找器在值班时打开",
+      "Context": "MatchQueuer.OpenFinder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "learned-call",
+      "Translated": "学习调用",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not scored: position or model is outside the learned claim action space.",
+      "Translated": "未评分：位置或模型位于学习的声明操作空间之外。",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Own-turn kan candidates use the heuristic; the learned call policy does not score them.",
+      "Translated": "自己的 kan 候选人使用启发式；学习到的调用策略不会对它们进行评分。",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not scored: call construction is invalid.",
+      "Translated": "未得分：呼叫构建无效。",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Learned: pass (",
+      "Translated": "学到：通过（",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "); the heuristic would ",
+      "Translated": "）；启发式将",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " but Phoenix players usually let this go.",
+      "Translated": "但凤凰城的球员通常都会放过这一点。",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Learned: would ",
+      "Translated": "学到了：会",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ") but no yaku-preserving meld is available. ",
+      "Translated": "）但没有可用的保命融合。",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Learned: ",
+      "Translated": "学到：",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ") for tempo; ",
+      "Translated": ") 节奏；",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Learned agrees: ",
+      "Translated": "学习同意：",
+      "Context": "LearnedCallPolicy.Evaluate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MISMATCH",
+      "Translated": "不匹配",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match",
+      "Translated": "匹配",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": validated=[",
+      "Translated": ": 已验证=[",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "], learned mask=[",
+      "Translated": "], 学习到的掩码=[",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "feature shapes=[",
+      "Translated": "特征形状=[",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scoring only validated actions.",
+      "Translated": "仅对经过验证的操作进行评分。",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No validated calls; skip learned scoring.",
+      "Translated": "没有经过验证的通话；跳过学习评分。",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Skip learned scoring; use validated heuristic candidates.",
+      "Translated": "跳过学习评分；使用经过验证的启发式候选者。",
+      "Context": "LearnedCallPolicy.CompareActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; imitation ",
+      "Translated": ";模仿",
+      "Context": "Rank",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ": learned policy (",
+      "Translated": "：学习到的政策（",
+      "Context": "LearnedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " among legal actions).",
+      "Translated": "法律行动）。",
+      "Context": "LearnedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Expert imitation; probability is not expected value or a guarantee of correctness.",
+      "Translated": "专家模仿；概率不是期望值或正确性的保证。",
+      "Context": "LearnedPolicy.Choose",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
