@@ -1,0 +1,1173 @@
+{
+  "issue": "direct-2026-10-25T03-59-58-635Z-445e0ea7",
+  "receivedAt": "2026-10-25 04:00:12",
+  "author": "匿名直传",
+  "plugin": "SonarPlugin",
+  "fingerprint": "3b876c8c674e0e15",
+  "packFile": "SonarPlugin@user-3b876c.json",
+  "accepted": 138,
+  "filled": 138,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "SonarPlugin",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "SonarPlugin",
+        "Translated": "声纳插件",
+        "Context": "SonarPluginIoC..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "dev",
+        "Translated": "开发者",
+        "Context": "FlavorUtils.DetermineFlavor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "testing",
+        "Translated": "测试",
+        "Context": "FlavorUtils.DetermineFlavor",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "negative",
+        "Translated": "否定",
+        "Context": "FlavorUtils.DetermineFlavorCore",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "VersionUtils.GetSonarPluginVersion",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "all",
+        "Translated": "全部",
+        "Context": "RelayTrackerViews..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Audiences##",
+        "Translated": "受众##",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Regions##",
+        "Translated": "区域##",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Datacenters##",
+        "Translated": "数据中心",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Worlds##",
+        "Translated": "世界",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Zones##",
+        "Translated": "区域",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Instances##",
+        "Translated": "实例",
+        "Context": "IndexSelectionWidget.DrawBreadcrumb",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Sonar Lodestone Verification",
+        "Translated": "Sonar 石之家验证",
+        "Context": "LodestoneVerifyWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Lodestone Verification is needed for your currently logged in character:",
+        "Translated": "当前登录的角色需要进行石之家验证：",
+        "Context": "LodestoneVerifyWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.",
+        "Translated": "你可以在 /sonarconfig 的常规标签页、石之家设置中关闭此对话框。",
+        "Context": "LodestoneVerifyWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Unspecified Reason.",
+        "Translated": "未指明原因。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Please contact Sonar support for assistance.",
+        "Translated": "请联系 Sonar 支持以获取帮助。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character is currently not verified.",
+        "Translated": "你的角色当前未验证。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character lodestone profile is not found.",
+        "Translated": "未找到你的角色石之家资料。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.",
+        "Translated": "将你的角色石之家资料设为可搜索且公开。验证完成后可以改回私密。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character lodestone profile is private.",
+        "Translated": "你的角色石之家资料为私密状态。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done.",
+        "Translated": "将你的石之家资料设为公开以进行验证。验证完成后可以改回私密。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character has been renamed and your character's lodestone profile is private.",
+        "Translated": "你的角色已改名，且角色石之家资料为私密状态。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character hash mismatch and your character's lodestone profile is private.",
+        "Translated": "你的角色哈希不匹配，且角色石之家资料为私密状态。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your character lodestone information stored at Sonar is stale.",
+        "Translated": "Sonar 中存储的角色石之家信息已过期。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Unable to provide reason.",
+        "Translated": "无法提供原因。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Update your Sonar plugin or contact support for assistance.",
+        "Translated": "请更新您的 Sonar 插件或联系支持人员获取帮助。",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Add the following code into your chracter's lodestone profile bio:",
+        "Translated": "将以下代码添加到您角色的 Lodestone 个人资料简介中：",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Copy",
+        "Translated": "复制",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Open Lodestone Profile",
+        "Translated": "打开 Lodestone 个人资料",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Open Lodestone Website",
+        "Translated": "打开 Lodestone 网站",
+        "Context": "LodestoneVerifyWindow.DrawReason",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "This verification is a requirement.",
+        "Translated": "此验证为必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This verification will become a requirement in ",
+        "Translated": "此验证将在",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " days.",
+        "Translated": "天后成为必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " hours.",
+        "Translated": "小时后成为必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " minutes.",
+        "Translated": "分钟后成为必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This verification will become a requirement in less than 5 minutes.",
+        "Translated": "此验证将在 5 分钟内成为必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This verification is not a requirement at this time.",
+        "Translated": "此验证目前不是必需项。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Verify",
+        "Translated": "验证",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Verification timeout",
+        "Translated": "验证超时",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Verification in progress",
+        "Translated": "正在验证",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Verification failed",
+        "Translated": "验证失败",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You'll only be able to use Sonar in local mode if not verified by the time this becomes a requirement.",
+        "Translated": "若在此成为必需项时仍未验证，您将只能以本地模式使用 Sonar。",
+        "Context": "LodestoneVerifyWindow.DrawVerification",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Zone",
+        "Translated": "区域",
+        "Context": "SonarConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Sonar Configuration",
+        "Translated": "Sonar 设置",
+        "Context": "SonarConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Localization is still in development!",
+        "Translated": "本地化仍在开发中！",
+        "Context": "SonarConfigWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "- Lots of strings are still not covered",
+        "Translated": "- 许多字符串仍未覆盖",
+        "Context": "SonarConfigWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "- Strings may change between releases",
+        "Translated": "- 字符串可能在不同版本间变化",
+        "Context": "SonarConfigWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Use localization at your own risk!",
+        "Translated": "使用汉化风险自负！",
+        "Context": "SonarConfigWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hunt Report Notifications",
+        "Translated": "狩猎报告通知",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Separate Rank SS and Minions from Rank S",
+        "Translated": "将 SS 级与 S 级、宠物分开",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.Checkbox"
+      },
+      {
+        "Original": "Granular Hunt Reporting Settings",
+        "Translated": "详细狩猎报告设置",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.Checkbox"
+      },
+      {
+        "Original": "Hunt Display Timers",
+        "Translated": "狩猎显示计时器",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "All timers are in seconds. CTRL+Click to input directly.",
+        "Translated": "所有计时器单位为秒。按住 CTRL 点击可直接输入。",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Time since death (S and A)",
+        "Translated": "死亡后经过时间（S 和 A）",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.SliderInt"
+      },
+      {
+        "Original": "Time since last update (S and A)",
+        "Translated": "上次更新后经过时间（S 和 A）",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.SliderInt"
+      },
+      {
+        "Original": "Time since last update (B)",
+        "Translated": "上次更新后经过时间（B）",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.SliderInt"
+      },
+      {
+        "Original": "Hunts Display Limit",
+        "Translated": "狩猎显示数量上限",
+        "Context": "SonarConfigWindow.DrawHuntTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ SonarImGui.SliderInt"
+      },
+      {
+        "Original": "Fate Display Timers",
+        "Translated": "FATE 显示计时器",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Time since completion or failure",
+        "Translated": "完成或失败后经过时间",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Time since last update",
+        "Translated": "上次更新后经过时间",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Fates Display Limit",
+        "Translated": "FATE 显示数量上限",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Fate Selection",
+        "Translated": "FATE 选择",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Default Report Jurisdiction",
+        "Translated": "默认报告辖区",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Search",
+        "Translated": "搜索",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "{0} fate(s) selected to chat",
+        "Translated": "已选择 {0} 个 FATE 发送至聊天",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "{0} fate(s) selected to sound",
+        "Translated": "已选择 {0} 个 FATE 提示音",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "{0} fate(s) not set to default jurisdiction",
+        "Translated": "{0} 个 FATE 未设置默认管辖区域",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Chat",
+        "Translated": "聊天",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Sounds",
+        "Translated": "提示音",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Jurisdiction",
+        "Translated": "管辖区域",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Level",
+        "Translated": "等级",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Expansion",
+        "Translated": "版本",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Achievement",
+        "Translated": "成就",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Send to chat",
+        "Translated": "发送到聊天",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Play Sounds",
+        "Translated": "播放提示音",
+        "Context": "SonarConfigWindow.DrawFateTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Brought to you by the Sonar Team",
+        "Translated": "由 Sonar 团队呈现",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sonar Support Discord##SonarDiscord",
+        "Translated": "声纳支持 Discord##声纳 Discord",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Ask questions and report bugs at the Sonar Support Discord Server.\nNote that Sonar Support is not provided in the goat place's discord.",
+        "Translated": "如有疑问或报告错误，请前往 Sonar 支持 Discord 服务器。\n请注意，goat place 的 Discord 不提供 Sonar 支持。",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Sonar Patreon##SonarPatreon",
+        "Translated": "Sonar Patreon ##SonarPatreon",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Support Sonar on Patreon.\nEarnings will be used for the hosting costs of the Sonar Server and Discord Bots.",
+        "Translated": "在 Patreon 上支持 Sonar。\n收益将用于 Sonar 服务器和 Discord 机器人的托管费用。",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Sonar Status",
+        "Translated": "Sonar 状态",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Connected",
+        "Translated": "已连接",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "ms",
+        "Translated": "毫秒",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Disconnected",
+        "Translated": "未连接",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sonar will keep trying to reconnect automatically",
+        "Translated": "Sonar 将持续尝试自动重连",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Reconnect",
+        "Translated": "重新连接",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Signal Sonar to attempt reconnecting to server",
+        "Translated": "向 Sonar 发送信号以尝试重新连接服务器",
+        "Context": "SonarConfigWindow.DrawAboutTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Version Information",
+        "Translated": "版本信息",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Dalamud ",
+        "Translated": "在 Damud",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " (Git: ",
+        "Translated": "（吉特：",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "FFXIV ",
+        "Translated": "最终幻想 14",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Client Hash: ",
+        "Translated": "客户端哈希:",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Show",
+        "Translated": "显示",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hide",
+        "Translated": "隐藏",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Player Tracker",
+        "Translated": "玩家追踪",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Zone: ",
+        "Translated": "区域:",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hunts Tracker",
+        "Translated": "狩猎追踪",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Count: ",
+        "Translated": "数量:",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " | Index: ",
+        "Translated": "| 索引:",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Clear",
+        "Translated": "清除",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Check",
+        "Translated": "检查",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Perform a consistency check of the index\nOutput will be at /xllog",
+        "Translated": "对索引执行一致性检查\n输出将位于 /xllog",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Rebuild",
+        "Translated": "重建",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Rebuild index\nOutput will be at /xllog\n\nWarning: You may experience stuttering",
+        "Translated": "重建索引\n输出将位于 /xllog\n\n警告: 可能会出现卡顿",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Busy",
+        "Translated": "忙碌",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Fates Tracker",
+        "Translated": "FATE 追踪",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Request Relay Data",
+        "Translated": "请求中继数据",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Request all relay information to be received.\nTrack All options will automatically be enabled for both Hunts and Fates.\nThis can only be done once.\n\nWarning: You'll receive everything the Sonar server knows!\nThis is currently under testing.",
+        "Translated": "请求接收所有中继信息。\n狩猎和FATE的“追踪全部”选项将自动启用。\n此操作只能执行一次。\n\n警告：你将收到Sonar服务器已知的所有内容！\n此功能目前处于测试阶段。",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Log Level",
+        "Translated": "日志级别",
+        "Context": "SonarConfigWindow.DrawDebugTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "<rank>: <name> <hpp> <flag> <<world>> <instance> [<players>]",
+        "Translated": "<rank>: <name> <hpp> <flag> <world> <instance> [<players>]",
+        "Context": "SonarMainWindow.DrawHunt",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "[B] <name>: <flag> <<world>> <instance> <tap> [<players>]",
+        "Translated": "[B] <name>: <flag> <world> <instance> <tap> [<players>]",
+        "Context": "SonarMainWindow.DrawFate",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Sonar Tracker (UNDER DEVELOPMENT!!!)",
+        "Translated": "Sonar追踪器（开发中！！！）",
+        "Context": "SonarTrackerWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Index key: ",
+        "Translated": "索引键：",
+        "Context": "SonarTrackerWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hunts: ",
+        "Translated": "狩猎：",
+        "Context": "SonarTrackerWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " | Fates: ",
+        "Translated": "| FATE：",
+        "Context": "SonarTrackerWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Congratulations finding this!",
+        "Translated": "恭喜你发现了这个！",
+        "Context": "SonarTrackerWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Right now there's nothing useful in this window but I'll be working on this next release. In the meantime enjoy the filtering selector and hunt/fates counts",
+        "Translated": "目前此窗口还没有实用功能，但我会在下一个版本中继续开发。在此期间，请享受筛选选择器和狩猎/FATE计数",
+        "Context": "SonarTrackerWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sonar Support##",
+        "Translated": "声纳支持",
+        "Context": "SupportWindow..ctor",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Sonar Support Result##",
+        "Translated": "声纳支持结果",
+        "Context": "SupportWindow..ctor",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopupModal"
+      },
+      {
+        "Original": "* = required",
+        "Translated": "* = 必填",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Type",
+        "Translated": "类型",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Contact",
+        "Translated": "联系方式",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "We cannot contact you in-game.\nProvide an external method of contact.",
+        "Translated": "我们无法在游戏内联系你。\n请提供外部联系方式。",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Title",
+        "Translated": "标题",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Body*",
+        "Translated": "正文*",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextMultiline"
+      },
+      {
+        "Original": "Player Name",
+        "Translated": "玩家名称",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "(Required) ",
+        "Translated": "（必填）",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Provide character and world name",
+        "Translated": "请提供角色名和服务器名",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Send",
+        "Translated": "发送",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Add Logs or Additional Text",
+        "Translated": "添加日志或附加文本",
+        "Context": "SupportWindow.DrawForm",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Logs",
+        "Translated": "日志",
+        "Context": "SupportWindow.DrawLogs",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextMultiline"
+      },
+      {
+        "Original": "Exception details",
+        "Translated": "异常详情",
+        "Context": "SupportWindow.DrawResponseWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Close",
+        "Translated": "关闭",
+        "Context": "SupportWindow.DrawResponseWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "__Meta.Author",
+        "Translated": "__Meta.作者",
+        "Context": "LocalizationWidgetHelper.ShowTooltip",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "__Meta.Notes",
+        "Translated": "__Meta.注释",
+        "Context": "LocalizationWidgetHelper.ShowTooltip",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
