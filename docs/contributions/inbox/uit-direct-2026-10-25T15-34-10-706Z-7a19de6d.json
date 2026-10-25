@@ -1,1 +1,1738 @@
-{"type":"uit-contribution","plugin":"Accountant","kinds":["llm"],"entries":[{"Original":"Open Accountant config. Use '/acct' or '/accountant timers' to toggle the timer window.","Translated":"打开 Accountant 设置。使用 '/acct' 或 '/accountant timers' 切换计时器窗口。","Context":"[Accountant] Accountant..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Toggle the timer window.","Translated":"切换计时器窗口。","Context":"[Accountant] Accountant..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"All Objects Underway","Translated":"所有对象进行中","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Objects Underway","Translated":"部分对象进行中","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"No Objects Underway","Translated":"无对象进行中","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"All Objects Underway (Header)","Translated":"所有对象进行中（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Objects Underway (Header)","Translated":"部分对象进行中（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"No Objects Underway (Header)","Translated":"无对象进行中（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Crop Withered","Translated":"作物已枯萎","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Crop Wilted","Translated":"作物已凋零","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Crop Grown Out","Translated":"作物已成熟","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Crop Growing","Translated":"作物生长中","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Crop Self-Sufficient","Translated":"作物可自给","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Crops Withered (Header)","Translated":"部分作物已枯萎（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Crops Wilted (Header)","Translated":"部分作物已凋零（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Crops Grown Out (Header)","Translated":"部分作物已成熟（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"All Crops Growing (Header)","Translated":"所有作物生长中（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Some Crops Self-Sufficient (Header)","Translated":"部分作物可自给（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Leve Allowances Capped","Translated":"理符配额已满","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Leve Allowances Nearing Cap","Translated":"理符配额接近上限","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Leve Allowances Capped (Header)","Translated":"理符额度已满（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Leve Allowances Nearing Cap (Header)","Translated":"理符额度接近上限（标题）","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Collapsed Header Border","Translated":"折叠标题边框","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Default Text","Translated":"默认文本","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Default Header","Translated":"默认标题","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Disabled Text","Translated":"禁用文本","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Background","Translated":"背景","Context":"[Accountant] ColorIdExtensions.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by player or free company names if all their retainers, airships or submersibles are away.","Translated":"当玩家或部队的所有雇员、飞空艇或潜水艇均外出时，用于其名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by player or free company names if some their retainers, airships or submersibles are away and some are available.","Translated":"当玩家或部队的部分雇员、飞空艇或潜水艇外出、部分可用时，用于其名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by player or free company names if all their retainers, airships or submersibles are available.","Translated":"当玩家或部队的所有雇员、飞空艇或潜水艇均可用时，用于其名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Retainers and Machines headers if all retainers, airships or submersibles are away.","Translated":"当所有雇员、飞空艇或潜水艇均外出时，用于雇员与机器标题。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Retainers and Machines headers if some retainers, airships or submersibles are away and some are available.","Translated":"当部分雇员、飞空艇或潜水艇外出、部分可用时，用于雇员与机器标题。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Retainers and Machines headers if all retainers, airships or submersibles are available.","Translated":"当所有雇员、飞空艇或潜水艇均可用时，用于雇员与机器标题。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by single crops if they are withered.\nUsed by plot or player names if any of their crops is withered.","Translated":"当单株作物枯萎时，用于该作物。\n当田地或玩家名称下任一作物枯萎时，用于该名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by single crops if they are wilted.\nUsed by plot or player names if any of their crops are wilted and none are withered.","Translated":"当单株作物凋萎时，用于该作物。\n当田地或玩家名称下任一作物凋萎且无枯萎时，用于该名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by single crops if they are grown out.\nUsed by plot or player names if any of their crops are grown out and none are wilted or withered","Translated":"当单株作物成熟时，用于该作物。\n当田地或玩家名称下任一作物成熟且无凋萎或枯萎时，用于该名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by single crops if they are growing regularly.\nUsed by plot or player names if all of their crops are growing regularly.","Translated":"当单株作物正常生长中时，用于该作物。\n当田地或玩家名称下所有作物均正常生长中时，用于该名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by single crops if they are growing regularly and require no tending anymore.\nUsed by plot or player names if all of their crops are growing regularly and require no tending anymore.","Translated":"当单株作物正常生长中且无需再照料时，用于该作物。\n当田地或玩家名称下所有作物均正常生长中且无需再照料时，用于该名称。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Crops header and the collapsed header if any crop is withered.","Translated":"当任一作物枯萎时，用于作物标题及折叠标题。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Crops header and the collapsed header if any crop is wilted and none is withered.","Translated":"当任一作物凋萎且无枯萎时，用于作物标题及折叠标题。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Crops header and the collapsed header if any crop is grown out and none is wilted or withered.","Translated":"用于作物标题栏和折叠标题栏，当有作物已成熟且没有枯萎或凋零时。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Crops header and the collapsed header if all crops are growing regularly.","Translated":"用于作物标题栏和折叠标题栏，当所有作物正常生长时。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the Crops header and the collapsed header if all crops are growing regularly and require no tending anymore.","Translated":"用于作物标题栏和折叠标题栏，当所有作物正常生长且不再需要照料时。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by Leve Allowances per player when you have accrued more than ","Translated":"用于每位玩家的理符限额，当已累积超过","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":" allowances.","Translated":"个限额时。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by Leve Allowances per player when you have accrued more than than ","Translated":"用于每位玩家的理符限额，当已累积超过","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":" allowances. (Configure in Settings)","Translated":"个限额时。（在设置中配置）","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by Leve Allowances header when any player has accrued more than ","Translated":"用于理符限额标题栏，当有玩家已累积超过","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by the collapsed header to give it a border to improve visibility.","Translated":"用于折叠标题栏，为其添加边框以提高可见性。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by all text that is not colored differently.","Translated":"用于所有未使用其他颜色的文本。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by all headers that are not colored differently.","Translated":"用于所有未使用其他颜色的标题栏。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used by disabled retainers or machines.","Translated":"用于已禁用的雇员或机件。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Used for the background color.","Translated":"用于背景颜色。","Context":"[Accountant] ColorIdExtensions.Description","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.ConfigColorPicker"},{"Original":"Timers###Accountant.Timers","Translated":"计时器","Context":"[Accountant] TimerWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"No Full Free Company Data","Translated":"无完整部队数据","Context":"[Accountant] TimerWindow.DrawCompanyWarning","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"No full data about your current free company available.\n\nPlease leave your current instance or relog onto your character if this does not help to obtain Free Company Data after a Accountant Update.\n\nYou can disable this warning permanently in the settings.","Translated":"无法获取当前部队的完整数据。\n\n如果 Accountant 更新后仍无法获取部队数据，请离开当前副本或重新登录角色。\n\n你可以在设置中永久禁用此警告。","Context":"[Accountant] TimerWindow.DrawCompanyWarning","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Demolishing Houses","Translated":"房屋拆除","Context":"[Accountant] TimerWindow.DrawDemolition","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Outdoor crops only refresh every 63 minutes on a ward-specific update timer.\nAny timer may be delayed by up to 63 minutes.\nFertilizing a plant during these delays will automatically trigger updates.\nThey will still grow out/wilt/wither in order, and grown-out plants do not wither anymore.\nIndoors, clearing the house and re-entering should automatically trigger updates.\nYou can disable this tooltip in the configuration.","Translated":"室外作物仅在每个分区特定的更新计时器上每 63 分钟刷新一次。\n任何计时器都可能延迟最多 63 分钟。\n在这些延迟期间施肥会自动触发更新。\n它们仍会按顺序成熟/枯萎/凋零，且已成熟的植物不再凋零。\n在室内，清空房屋并重新进入应会自动触发更新。\n你可以在配置中禁用此提示。","Context":"[Accountant] CropCache.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Already","Translated":"已","Context":"[Accountant] CropCache.TimeSpanString2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Never","Translated":"从未","Context":"[Accountant] CropCache.TimeSpanString2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Planted:","Translated":"已种植：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Tended:","Translated":"已照料：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Finished:","Translated":"已完成：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Wilting:","Translated":"枯萎中：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Withering:","Translated":"凋零：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Position:","Translated":"位置：","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Squadron Mission","Translated":"中队任务","Context":"[Accountant] TaskCache.GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Squadron Training","Translated":"中队训练","Context":"[Accountant] TaskCache.GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"New Recruits","Translated":"新兵","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"None","Translated":"无","Context":"[Accountant] GenerateTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Your house ","Translated":"你的房屋","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" may have been demolished. Please visit it with a tracked character or remove tracking if you do not own this house anymore.","Translated":"可能已被拆除。请使用已追踪的角色前往查看，若你已不再拥有该房屋请移除追踪。","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" will be demolished in less than a day. Please visit it with a tracked character.","Translated":"将在不到一天内被拆除。请使用已追踪的角色前往查看。","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" will be demolished within the next day. Please visit it with a tracked character.","Translated":"将在接下来的一天内被拆除。请使用已追踪的角色前往查看。","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" will be demolished in ","Translated":"将在","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" days. Please visit it with a tracked character.","Translated":"天后被拆除。请使用已追踪的角色前往查看。","Context":"[Accountant] DemolitionWarning.UpdateNotifications","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Default","Translated":"默认","Context":"[Accountant] ImGuiRaii.ColorPicker","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Reset this color to ","Translated":"将此颜色重置为","Context":"[Accountant] ImGuiRaii.ColorPicker","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.HoverTooltip"},{"Original":"Blocked Crops","Translated":"屏蔽的作物","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Plots","Translated":"屏蔽的地块","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Players (Crops)","Translated":"屏蔽玩家（作物）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Players (Retainers)","Translated":"屏蔽玩家（雇员）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Players (Tasks)","Translated":"屏蔽玩家（任务）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Free Companies (Airships)","Translated":"屏蔽部队（飞空艇）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Free Companies (Submersibles)","Translated":"屏蔽部队（潜水艇）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Blocked Free Companies (Aetherial Wheels)","Translated":"屏蔽部队（以太轮）","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Wheels","Translated":"轮盘","Context":"[Accountant] ConfigWindow.DrawBlocklistsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"BlockedPlants","Translated":"屏蔽作物","Context":"[Accountant] ConfigWindow.DrawBlockedCrops","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Plant Name","Translated":"作物名称","Context":"[Accountant] ConfigWindow.DrawBlockedCrops","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Plant Name...","Translated":"作物名称...","Context":"[Accountant] ConfigWindow.DrawBlockedCrops","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"BlockedPlots","Translated":"屏蔽地块","Context":"[Accountant] ConfigWindow.DrawBlockedPlots","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"BlockedPlayers","Translated":"屏蔽玩家","Context":"[Accountant] ConfigWindow.DrawBlockedPlayers","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"World","Translated":"服务器","Context":"[Accountant] ConfigWindow.DrawBlockedPlayers","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Player Name","Translated":"玩家名称","Context":"[Accountant] ConfigWindow.DrawBlockedPlayers","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"New Player Name...","Translated":"新玩家名称...","Context":"[Accountant] ConfigWindow.DrawBlockedPlayers","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"BlockedCompanies","Translated":"屏蔽部队","Context":"[Accountant] ConfigWindow.DrawBlockedCompanies","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"New Free Company Name...","Translated":"新部队名称...","Context":"[Accountant] ConfigWindow.DrawBlockedCompanies","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Accountant###Accountant","Translated":"记账","Context":"[Accountant] ConfigWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Accountant v","Translated":"记账 v","Context":"[Accountant] ConfigWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Free Company Storage Data","Translated":"部队存储数据","Context":"[Accountant] ConfigWindow.DrawFreeCompanyStorage","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Last Change: ","Translated":"最后更改：","Context":"[Accountant] ConfigWindow.DrawFreeCompanyStorage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"> by ","Translated":"> 由","Context":"[Accountant] ConfigWindow.DrawFreeCompanyStorage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Strings","Translated":"字符串","Context":"[Accountant] ConfigWindow.DrawStrings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Squadron Container","Translated":"中队储物柜","Context":"[Accountant] ConfigWindow.DrawAddresses","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Update Gold Saucer Data","Translated":"更新金碟游乐场数据","Context":"[Accountant] ConfigWindow.DrawAddresses","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Position","Translated":"位置","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Current Clientstate Territory ID","Translated":"当前客户端状态区域 ID","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Current House","Translated":"当前房屋","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Current Housing Territory","Translated":"当前住宅区","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Current Ward","Translated":"当前区","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" (Subdivision)","Translated":"（分区）","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Current Plot","Translated":"当前地块","Context":"[Accountant] ConfigWindow.DrawPositionInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Squadron","Translated":"中队","Context":"[Accountant] ConfigWindow.DrawSquadron","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Mission ID","Translated":"任务 ID","Context":"[Accountant] ConfigWindow.DrawSquadron","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Mission End","Translated":"任务结束","Context":"[Accountant] ConfigWindow.DrawSquadron","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Training ID","Translated":"训练 ID","Context":"[Accountant] ConfigWindow.DrawSquadron","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Training End","Translated":"训练结束","Context":"[Accountant] ConfigWindow.DrawSquadron","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Tests","Translated":"测试","Context":"[Accountant] ConfigWindow.DrawTests","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Demolition Subscribed","Translated":"已订阅拆除","Context":"[Accountant] ConfigWindow.DrawTests","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Test Demolition","Translated":"测试拆除","Context":"[Accountant] ConfigWindow.DrawTests","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Clear FC Data","Translated":"清除部队数据","Context":"[Accountant] ConfigWindow.DrawTests","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Free Company","Translated":"部队","Context":"[Accountant] ConfigWindow.DrawCompanyInfo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Free Company Tag","Translated":"部队标签","Context":"[Accountant] ConfigWindow.DrawCompanyInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Free Company Leader","Translated":"部队长","Context":"[Accountant] ConfigWindow.DrawCompanyInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Free Company Server Id","Translated":"部队服务器 ID","Context":"[Accountant] ConfigWindow.DrawCompanyInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Click to copy to clipboard.","Translated":"点击复制到剪贴板。","Context":"[Accountant] ConfigWindow.CopyOnClickSelectable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold Control, Shift and right-click to delete.","Translated":"按住 Control、Shift 并右键点击以删除。","Context":"[Accountant] ConfigWindow.DrawDeletePlotCrops","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.HoverTooltip"},{"Original":"Hold Shift and right-click to delete.","Translated":"按住 Shift 并右键点击以删除。","Context":"[Accountant] ConfigWindow.DrawDeletePlotCrops","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.HoverTooltip"},{"Original":"Deletion","Translated":"删除","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Crop Entries","Translated":"作物条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Retainer Entries","Translated":"雇员条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Task Entries","Translated":"任务条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Airship Entries","Translated":"飞空艇条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Submersible Entries","Translated":"潜水艇条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Wheel Entries","Translated":"轮盘条目","Context":"[Accountant] ConfigWindow.DrawDeleteTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Enable Plugin","Translated":"启用插件","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Show Timers","Translated":"显示计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Show DTR Header","Translated":"显示 DTR 标题","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Show Unassigned Retainers/Machines in Headers","Translated":"在标题中显示未分配的雇员/机器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Show Sent-Out Retainers/Machines in Headers","Translated":"在标题中显示已派出的雇员/机器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"No Collapsed Header Styling","Translated":"不折叠标题栏样式","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"No Timer Window Resize","Translated":"禁止调整计时器窗口大小","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Fix Timer Window Width","Translated":"固定计时器窗口宽度","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Fixed Timer Window Width","Translated":"已固定计时器窗口宽度","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"No Timer Window Movement","Translated":"禁止移动计时器窗口","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Hide Disabled Objects","Translated":"隐藏已禁用对象","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Hide objects that are disabled or limited from the timers.","Translated":"在计时器中隐藏已禁用或受限的对象。","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiRaii.HoverTooltip"},{"Original":"Show Free Company Warning","Translated":"显示部队警告","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Retainer Timers","Translated":"启用雇员计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Airship Timers","Translated":"启用飞空艇计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Submersible Timers","Translated":"启用潜水艇计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Aetherial Wheel Timers","Translated":"启用以太转轮计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Crop Timers","Translated":"启用作物计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Ignore Indoor Plot Plants","Translated":"忽略室内地块植物","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Group Crop Beds by Plant","Translated":"按植物分组作物田","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Show Ward-Update Tooltip","Translated":"显示区服更新提示","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Leve Allowance Timers","Translated":"启用理符限额计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Squadron Mission Timers","Translated":"启用中队任务计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Map Allowance Timers","Translated":"启用地图限额计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Mini Cactpot Timers","Translated":"启用仙人微彩计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Jumbo Cactpot Timers","Translated":"启用仙人彩计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Custom Delivery Allowance Timers","Translated":"启用定制交付额度计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Enable Tribe Allowance Timers","Translated":"启用部族额度计时器","Context":"[Accountant] ConfigWindow.DrawConfigTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii.ConfigCheckmark"},{"Original":"Leve Allowances Warning","Translated":"理符额度警告","Context":"[Accountant] ConfigWindow.DrawLeveAllowancesWarningInput","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Tribe Quests Finished","Translated":"部族任务已完成","Context":"[Accountant] ConfigWindow.DrawTribeAllowancesFinishedInput","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Worlds","Translated":"服务器","Context":"[Accountant] ConfigWindow.DrawWorldsCombo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Zones","Translated":"区域","Context":"[Accountant] ConfigWindow.DrawZonesCombo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Wards","Translated":"区","Context":"[Accountant] ConfigWindow.DrawWardCombo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Plots","Translated":"地块","Context":"[Accountant] ConfigWindow.DrawPlotCombo","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Zone","Translated":"区域","Context":"[Accountant] ConfigWindow.SetupPlotHeaders","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Ward","Translated":"区","Context":"[Accountant] ConfigWindow.SetupPlotHeaders","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Plot","Translated":"地块","Context":"[Accountant] ConfigWindow.SetupPlotHeaders","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Order","Translated":"顺序","Context":"[Accountant] ConfigWindow.DrawOrderNamesTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiRaii/Id.Push"},{"Original":"Priority","Translated":"优先级","Context":"[Accountant] ConfigWindow.DrawOrderNamesTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"New Priority Name...","Translated":"新建优先级名称...","Context":"[Accountant] ConfigWindow.DrawOrderNamesTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Custom Name","Translated":"自定义名称","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Leave blank for default...","Translated":"留空则使用默认值...","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"The name entered here will replace all occurrences of the plot in the timer window.\n\nThe timer limit will show this house as due to be demolished in the timer window when the configured number of days passed since your last visit.\n\nThe warning timer limit will show notifications on the bottom right when the configured number of days passed since your last visit.\n\nYou need to manually add players that reset the timer when encountered within the house, otherwise the timer will not update.","Translated":"此处输入的名称将替换计时器窗口中该地块的所有显示。\n\n自上次访问起经过配置的天数后，计时器窗口会将此房屋显示为即将拆除。\n\n自上次访问起经过配置的天数后，警告计时器会在右下角显示通知。\n\n你需要在房屋内遇到重置计时器的玩家时手动添加，否则计时器不会更新。","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Show in Timers","Translated":"在计时器中显示","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"%i Days Since Visit","Translated":"距上次访问 %i 天","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Show Warnings","Translated":"显示警告","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Last Visit: Less than a day ago","Translated":"上次访问：不到一天前","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Last Visit: More than ","Translated":"上次访问：超过","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":" days ago","Translated":"天前","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Last Visit: ","Translated":"上次访问：","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Hold Control and click this button to force the last visit to now.","Translated":"按住 Control 并点击此按钮，将上次访问时间强制设为当前。","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add New Player","Translated":"添加新玩家","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add the player from the inputs if it is valid and not already added.","Translated":"若输入有效且尚未添加，则添加该玩家。","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add Current Player","Translated":"添加当前玩家","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add your current character.","Translated":"添加你当前的角色。","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Remove this character from tracking.","Translated":"从追踪中移除此角色。","Context":"[Accountant] ConfigWindow.DrawDemolitionData","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"The plot configured in the inputs was already added.","Translated":"输入中配置的房屋已添加。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add the plot configured in the inputs.","Translated":"添加输入中配置的房屋。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add Plot","Translated":"添加房屋","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add the plot ","Translated":"添加房屋","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" on ","Translated":"于","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"You are not on an identifiable plot.","Translated":"你不在可识别的房屋上。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"The plot ","Translated":"房屋","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" was already added","Translated":"已添加","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add Current Plot","Translated":"添加当前房屋","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Delete the selected plot.","Translated":"删除选中的地块。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Select a plot to delete.","Translated":"选择要删除的地块。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Select a plot and hold Control to delete.","Translated":"选择地块并按住 Control 删除。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold Control to delete the selected plot.","Translated":"按住 Control 删除选中的地块。","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Delete Selected Plot","Translated":"删除选中地块","Context":"[Accountant] ConfigWindow.DrawDemolitionTable","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Accountant",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Open Accountant config. Use '/acct' or '/accountant timers' to toggle the timer window.",
+      "Translated": "打开 Accountant 设置。使用 '/acct' 或 '/accountant timers' 切换计时器窗口。",
+      "Context": "[Accountant] Accountant..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Toggle the timer window.",
+      "Translated": "切换计时器窗口。",
+      "Context": "[Accountant] Accountant..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "All Objects Underway",
+      "Translated": "所有对象进行中",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Objects Underway",
+      "Translated": "部分对象进行中",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "No Objects Underway",
+      "Translated": "无对象进行中",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "All Objects Underway (Header)",
+      "Translated": "所有对象进行中（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Objects Underway (Header)",
+      "Translated": "部分对象进行中（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "No Objects Underway (Header)",
+      "Translated": "无对象进行中（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Crop Withered",
+      "Translated": "作物已枯萎",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Crop Wilted",
+      "Translated": "作物已凋零",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Crop Grown Out",
+      "Translated": "作物已成熟",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Crop Growing",
+      "Translated": "作物生长中",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Crop Self-Sufficient",
+      "Translated": "作物可自给",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Crops Withered (Header)",
+      "Translated": "部分作物已枯萎（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Crops Wilted (Header)",
+      "Translated": "部分作物已凋零（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Crops Grown Out (Header)",
+      "Translated": "部分作物已成熟（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "All Crops Growing (Header)",
+      "Translated": "所有作物生长中（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Some Crops Self-Sufficient (Header)",
+      "Translated": "部分作物可自给（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Leve Allowances Capped",
+      "Translated": "理符配额已满",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Leve Allowances Nearing Cap",
+      "Translated": "理符配额接近上限",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Leve Allowances Capped (Header)",
+      "Translated": "理符额度已满（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Leve Allowances Nearing Cap (Header)",
+      "Translated": "理符额度接近上限（标题）",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Collapsed Header Border",
+      "Translated": "折叠标题边框",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Default Text",
+      "Translated": "默认文本",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Default Header",
+      "Translated": "默认标题",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Disabled Text",
+      "Translated": "禁用文本",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Background",
+      "Translated": "背景",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by player or free company names if all their retainers, airships or submersibles are away.",
+      "Translated": "当玩家或部队的所有雇员、飞空艇或潜水艇均外出时，用于其名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by player or free company names if some their retainers, airships or submersibles are away and some are available.",
+      "Translated": "当玩家或部队的部分雇员、飞空艇或潜水艇外出、部分可用时，用于其名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by player or free company names if all their retainers, airships or submersibles are available.",
+      "Translated": "当玩家或部队的所有雇员、飞空艇或潜水艇均可用时，用于其名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Retainers and Machines headers if all retainers, airships or submersibles are away.",
+      "Translated": "当所有雇员、飞空艇或潜水艇均外出时，用于雇员与机器标题。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Retainers and Machines headers if some retainers, airships or submersibles are away and some are available.",
+      "Translated": "当部分雇员、飞空艇或潜水艇外出、部分可用时，用于雇员与机器标题。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Retainers and Machines headers if all retainers, airships or submersibles are available.",
+      "Translated": "当所有雇员、飞空艇或潜水艇均可用时，用于雇员与机器标题。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by single crops if they are withered.\nUsed by plot or player names if any of their crops is withered.",
+      "Translated": "当单株作物枯萎时，用于该作物。\n当田地或玩家名称下任一作物枯萎时，用于该名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by single crops if they are wilted.\nUsed by plot or player names if any of their crops are wilted and none are withered.",
+      "Translated": "当单株作物凋萎时，用于该作物。\n当田地或玩家名称下任一作物凋萎且无枯萎时，用于该名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by single crops if they are grown out.\nUsed by plot or player names if any of their crops are grown out and none are wilted or withered",
+      "Translated": "当单株作物成熟时，用于该作物。\n当田地或玩家名称下任一作物成熟且无凋萎或枯萎时，用于该名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by single crops if they are growing regularly.\nUsed by plot or player names if all of their crops are growing regularly.",
+      "Translated": "当单株作物正常生长中时，用于该作物。\n当田地或玩家名称下所有作物均正常生长中时，用于该名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by single crops if they are growing regularly and require no tending anymore.\nUsed by plot or player names if all of their crops are growing regularly and require no tending anymore.",
+      "Translated": "当单株作物正常生长中且无需再照料时，用于该作物。\n当田地或玩家名称下所有作物均正常生长中且无需再照料时，用于该名称。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Crops header and the collapsed header if any crop is withered.",
+      "Translated": "当任一作物枯萎时，用于作物标题及折叠标题。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Crops header and the collapsed header if any crop is wilted and none is withered.",
+      "Translated": "当任一作物凋萎且无枯萎时，用于作物标题及折叠标题。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Crops header and the collapsed header if any crop is grown out and none is wilted or withered.",
+      "Translated": "用于作物标题栏和折叠标题栏，当有作物已成熟且没有枯萎或凋零时。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Crops header and the collapsed header if all crops are growing regularly.",
+      "Translated": "用于作物标题栏和折叠标题栏，当所有作物正常生长时。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the Crops header and the collapsed header if all crops are growing regularly and require no tending anymore.",
+      "Translated": "用于作物标题栏和折叠标题栏，当所有作物正常生长且不再需要照料时。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by Leve Allowances per player when you have accrued more than ",
+      "Translated": "用于每位玩家的理符限额，当已累积超过",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": " allowances.",
+      "Translated": "个限额时。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by Leve Allowances per player when you have accrued more than than ",
+      "Translated": "用于每位玩家的理符限额，当已累积超过",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": " allowances. (Configure in Settings)",
+      "Translated": "个限额时。（在设置中配置）",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by Leve Allowances header when any player has accrued more than ",
+      "Translated": "用于理符限额标题栏，当有玩家已累积超过",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by the collapsed header to give it a border to improve visibility.",
+      "Translated": "用于折叠标题栏，为其添加边框以提高可见性。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by all text that is not colored differently.",
+      "Translated": "用于所有未使用其他颜色的文本。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by all headers that are not colored differently.",
+      "Translated": "用于所有未使用其他颜色的标题栏。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used by disabled retainers or machines.",
+      "Translated": "用于已禁用的雇员或机件。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Used for the background color.",
+      "Translated": "用于背景颜色。",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker"
+    },
+    {
+      "Original": "Timers###Accountant.Timers",
+      "Translated": "计时器",
+      "Context": "[Accountant] TimerWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "No Full Free Company Data",
+      "Translated": "无完整部队数据",
+      "Context": "[Accountant] TimerWindow.DrawCompanyWarning",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "No full data about your current free company available.\n\nPlease leave your current instance or relog onto your character if this does not help to obtain Free Company Data after a Accountant Update.\n\nYou can disable this warning permanently in the settings.",
+      "Translated": "无法获取当前部队的完整数据。\n\n如果 Accountant 更新后仍无法获取部队数据，请离开当前副本或重新登录角色。\n\n你可以在设置中永久禁用此警告。",
+      "Context": "[Accountant] TimerWindow.DrawCompanyWarning",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Demolishing Houses",
+      "Translated": "房屋拆除",
+      "Context": "[Accountant] TimerWindow.DrawDemolition",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Outdoor crops only refresh every 63 minutes on a ward-specific update timer.\nAny timer may be delayed by up to 63 minutes.\nFertilizing a plant during these delays will automatically trigger updates.\nThey will still grow out/wilt/wither in order, and grown-out plants do not wither anymore.\nIndoors, clearing the house and re-entering should automatically trigger updates.\nYou can disable this tooltip in the configuration.",
+      "Translated": "室外作物仅在每个分区特定的更新计时器上每 63 分钟刷新一次。\n任何计时器都可能延迟最多 63 分钟。\n在这些延迟期间施肥会自动触发更新。\n它们仍会按顺序成熟/枯萎/凋零，且已成熟的植物不再凋零。\n在室内，清空房屋并重新进入应会自动触发更新。\n你可以在配置中禁用此提示。",
+      "Context": "[Accountant] CropCache.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Already",
+      "Translated": "已",
+      "Context": "[Accountant] CropCache.TimeSpanString2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Never",
+      "Translated": "从未",
+      "Context": "[Accountant] CropCache.TimeSpanString2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Planted:",
+      "Translated": "已种植：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Tended:",
+      "Translated": "已照料：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Finished:",
+      "Translated": "已完成：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Wilting:",
+      "Translated": "枯萎中：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Withering:",
+      "Translated": "凋零：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Position:",
+      "Translated": "位置：",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Squadron Mission",
+      "Translated": "中队任务",
+      "Context": "[Accountant] TaskCache.GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Squadron Training",
+      "Translated": "中队训练",
+      "Context": "[Accountant] TaskCache.GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "New Recruits",
+      "Translated": "新兵",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "None",
+      "Translated": "无",
+      "Context": "[Accountant] GenerateTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Your house ",
+      "Translated": "你的房屋",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " may have been demolished. Please visit it with a tracked character or remove tracking if you do not own this house anymore.",
+      "Translated": "可能已被拆除。请使用已追踪的角色前往查看，若你已不再拥有该房屋请移除追踪。",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " will be demolished in less than a day. Please visit it with a tracked character.",
+      "Translated": "将在不到一天内被拆除。请使用已追踪的角色前往查看。",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " will be demolished within the next day. Please visit it with a tracked character.",
+      "Translated": "将在接下来的一天内被拆除。请使用已追踪的角色前往查看。",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " will be demolished in ",
+      "Translated": "将在",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " days. Please visit it with a tracked character.",
+      "Translated": "天后被拆除。请使用已追踪的角色前往查看。",
+      "Context": "[Accountant] DemolitionWarning.UpdateNotifications",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "[Accountant] ImGuiRaii.ColorPicker",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Reset this color to ",
+      "Translated": "将此颜色重置为",
+      "Context": "[Accountant] ImGuiRaii.ColorPicker",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip"
+    },
+    {
+      "Original": "Blocked Crops",
+      "Translated": "屏蔽的作物",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Plots",
+      "Translated": "屏蔽的地块",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Players (Crops)",
+      "Translated": "屏蔽玩家（作物）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Players (Retainers)",
+      "Translated": "屏蔽玩家（雇员）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Players (Tasks)",
+      "Translated": "屏蔽玩家（任务）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Free Companies (Airships)",
+      "Translated": "屏蔽部队（飞空艇）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Free Companies (Submersibles)",
+      "Translated": "屏蔽部队（潜水艇）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Blocked Free Companies (Aetherial Wheels)",
+      "Translated": "屏蔽部队（以太轮）",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Wheels",
+      "Translated": "轮盘",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "BlockedPlants",
+      "Translated": "屏蔽作物",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCrops",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Plant Name",
+      "Translated": "作物名称",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCrops",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Plant Name...",
+      "Translated": "作物名称...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCrops",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "BlockedPlots",
+      "Translated": "屏蔽地块",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlots",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "BlockedPlayers",
+      "Translated": "屏蔽玩家",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "World",
+      "Translated": "服务器",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Player Name",
+      "Translated": "玩家名称",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "New Player Name...",
+      "Translated": "新玩家名称...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "BlockedCompanies",
+      "Translated": "屏蔽部队",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCompanies",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "New Free Company Name...",
+      "Translated": "新部队名称...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCompanies",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Accountant###Accountant",
+      "Translated": "记账",
+      "Context": "[Accountant] ConfigWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Accountant v",
+      "Translated": "记账 v",
+      "Context": "[Accountant] ConfigWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Free Company Storage Data",
+      "Translated": "部队存储数据",
+      "Context": "[Accountant] ConfigWindow.DrawFreeCompanyStorage",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Last Change: ",
+      "Translated": "最后更改：",
+      "Context": "[Accountant] ConfigWindow.DrawFreeCompanyStorage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "> by ",
+      "Translated": "> 由",
+      "Context": "[Accountant] ConfigWindow.DrawFreeCompanyStorage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Strings",
+      "Translated": "字符串",
+      "Context": "[Accountant] ConfigWindow.DrawStrings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Squadron Container",
+      "Translated": "中队储物柜",
+      "Context": "[Accountant] ConfigWindow.DrawAddresses",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Update Gold Saucer Data",
+      "Translated": "更新金碟游乐场数据",
+      "Context": "[Accountant] ConfigWindow.DrawAddresses",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Position",
+      "Translated": "位置",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Current Clientstate Territory ID",
+      "Translated": "当前客户端状态区域 ID",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Current House",
+      "Translated": "当前房屋",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Current Housing Territory",
+      "Translated": "当前住宅区",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Current Ward",
+      "Translated": "当前区",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " (Subdivision)",
+      "Translated": "（分区）",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Current Plot",
+      "Translated": "当前地块",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Squadron",
+      "Translated": "中队",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Mission ID",
+      "Translated": "任务 ID",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Mission End",
+      "Translated": "任务结束",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Training ID",
+      "Translated": "训练 ID",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Training End",
+      "Translated": "训练结束",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Tests",
+      "Translated": "测试",
+      "Context": "[Accountant] ConfigWindow.DrawTests",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Demolition Subscribed",
+      "Translated": "已订阅拆除",
+      "Context": "[Accountant] ConfigWindow.DrawTests",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Test Demolition",
+      "Translated": "测试拆除",
+      "Context": "[Accountant] ConfigWindow.DrawTests",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Clear FC Data",
+      "Translated": "清除部队数据",
+      "Context": "[Accountant] ConfigWindow.DrawTests",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Free Company",
+      "Translated": "部队",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Free Company Tag",
+      "Translated": "部队标签",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Free Company Leader",
+      "Translated": "部队长",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Free Company Server Id",
+      "Translated": "部队服务器 ID",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Click to copy to clipboard.",
+      "Translated": "点击复制到剪贴板。",
+      "Context": "[Accountant] ConfigWindow.CopyOnClickSelectable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold Control, Shift and right-click to delete.",
+      "Translated": "按住 Control、Shift 并右键点击以删除。",
+      "Context": "[Accountant] ConfigWindow.DrawDeletePlotCrops",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip"
+    },
+    {
+      "Original": "Hold Shift and right-click to delete.",
+      "Translated": "按住 Shift 并右键点击以删除。",
+      "Context": "[Accountant] ConfigWindow.DrawDeletePlotCrops",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip"
+    },
+    {
+      "Original": "Deletion",
+      "Translated": "删除",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Crop Entries",
+      "Translated": "作物条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Retainer Entries",
+      "Translated": "雇员条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Task Entries",
+      "Translated": "任务条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Airship Entries",
+      "Translated": "飞空艇条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Submersible Entries",
+      "Translated": "潜水艇条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Wheel Entries",
+      "Translated": "轮盘条目",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Enable Plugin",
+      "Translated": "启用插件",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Show Timers",
+      "Translated": "显示计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Show DTR Header",
+      "Translated": "显示 DTR 标题",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Show Unassigned Retainers/Machines in Headers",
+      "Translated": "在标题中显示未分配的雇员/机器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Show Sent-Out Retainers/Machines in Headers",
+      "Translated": "在标题中显示已派出的雇员/机器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "No Collapsed Header Styling",
+      "Translated": "不折叠标题栏样式",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "No Timer Window Resize",
+      "Translated": "禁止调整计时器窗口大小",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Fix Timer Window Width",
+      "Translated": "固定计时器窗口宽度",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Fixed Timer Window Width",
+      "Translated": "已固定计时器窗口宽度",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "No Timer Window Movement",
+      "Translated": "禁止移动计时器窗口",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Hide Disabled Objects",
+      "Translated": "隐藏已禁用对象",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Hide objects that are disabled or limited from the timers.",
+      "Translated": "在计时器中隐藏已禁用或受限的对象。",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip"
+    },
+    {
+      "Original": "Show Free Company Warning",
+      "Translated": "显示部队警告",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Retainer Timers",
+      "Translated": "启用雇员计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Airship Timers",
+      "Translated": "启用飞空艇计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Submersible Timers",
+      "Translated": "启用潜水艇计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Aetherial Wheel Timers",
+      "Translated": "启用以太转轮计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Crop Timers",
+      "Translated": "启用作物计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Ignore Indoor Plot Plants",
+      "Translated": "忽略室内地块植物",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Group Crop Beds by Plant",
+      "Translated": "按植物分组作物田",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Show Ward-Update Tooltip",
+      "Translated": "显示区服更新提示",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Leve Allowance Timers",
+      "Translated": "启用理符限额计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Squadron Mission Timers",
+      "Translated": "启用中队任务计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Map Allowance Timers",
+      "Translated": "启用地图限额计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Mini Cactpot Timers",
+      "Translated": "启用仙人微彩计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Jumbo Cactpot Timers",
+      "Translated": "启用仙人彩计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Custom Delivery Allowance Timers",
+      "Translated": "启用定制交付额度计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Enable Tribe Allowance Timers",
+      "Translated": "启用部族额度计时器",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark"
+    },
+    {
+      "Original": "Leve Allowances Warning",
+      "Translated": "理符额度警告",
+      "Context": "[Accountant] ConfigWindow.DrawLeveAllowancesWarningInput",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Tribe Quests Finished",
+      "Translated": "部族任务已完成",
+      "Context": "[Accountant] ConfigWindow.DrawTribeAllowancesFinishedInput",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Worlds",
+      "Translated": "服务器",
+      "Context": "[Accountant] ConfigWindow.DrawWorldsCombo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Zones",
+      "Translated": "区域",
+      "Context": "[Accountant] ConfigWindow.DrawZonesCombo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Wards",
+      "Translated": "区",
+      "Context": "[Accountant] ConfigWindow.DrawWardCombo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Plots",
+      "Translated": "地块",
+      "Context": "[Accountant] ConfigWindow.DrawPlotCombo",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Zone",
+      "Translated": "区域",
+      "Context": "[Accountant] ConfigWindow.SetupPlotHeaders",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Ward",
+      "Translated": "区",
+      "Context": "[Accountant] ConfigWindow.SetupPlotHeaders",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Plot",
+      "Translated": "地块",
+      "Context": "[Accountant] ConfigWindow.SetupPlotHeaders",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Order",
+      "Translated": "顺序",
+      "Context": "[Accountant] ConfigWindow.DrawOrderNamesTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push"
+    },
+    {
+      "Original": "Priority",
+      "Translated": "优先级",
+      "Context": "[Accountant] ConfigWindow.DrawOrderNamesTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "New Priority Name...",
+      "Translated": "新建优先级名称...",
+      "Context": "[Accountant] ConfigWindow.DrawOrderNamesTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Custom Name",
+      "Translated": "自定义名称",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Leave blank for default...",
+      "Translated": "留空则使用默认值...",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "The name entered here will replace all occurrences of the plot in the timer window.\n\nThe timer limit will show this house as due to be demolished in the timer window when the configured number of days passed since your last visit.\n\nThe warning timer limit will show notifications on the bottom right when the configured number of days passed since your last visit.\n\nYou need to manually add players that reset the timer when encountered within the house, otherwise the timer will not update.",
+      "Translated": "此处输入的名称将替换计时器窗口中该地块的所有显示。\n\n自上次访问起经过配置的天数后，计时器窗口会将此房屋显示为即将拆除。\n\n自上次访问起经过配置的天数后，警告计时器会在右下角显示通知。\n\n你需要在房屋内遇到重置计时器的玩家时手动添加，否则计时器不会更新。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Show in Timers",
+      "Translated": "在计时器中显示",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "%i Days Since Visit",
+      "Translated": "距上次访问 %i 天",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Show Warnings",
+      "Translated": "显示警告",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Last Visit: Less than a day ago",
+      "Translated": "上次访问：不到一天前",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Last Visit: More than ",
+      "Translated": "上次访问：超过",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": " days ago",
+      "Translated": "天前",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Last Visit: ",
+      "Translated": "上次访问：",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Hold Control and click this button to force the last visit to now.",
+      "Translated": "按住 Control 并点击此按钮，将上次访问时间强制设为当前。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add New Player",
+      "Translated": "添加新玩家",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add the player from the inputs if it is valid and not already added.",
+      "Translated": "若输入有效且尚未添加，则添加该玩家。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add Current Player",
+      "Translated": "添加当前玩家",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add your current character.",
+      "Translated": "添加你当前的角色。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Remove this character from tracking.",
+      "Translated": "从追踪中移除此角色。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "The plot configured in the inputs was already added.",
+      "Translated": "输入中配置的房屋已添加。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add the plot configured in the inputs.",
+      "Translated": "添加输入中配置的房屋。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add Plot",
+      "Translated": "添加房屋",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add the plot ",
+      "Translated": "添加房屋",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " on ",
+      "Translated": "于",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "You are not on an identifiable plot.",
+      "Translated": "你不在可识别的房屋上。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "The plot ",
+      "Translated": "房屋",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " was already added",
+      "Translated": "已添加",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add Current Plot",
+      "Translated": "添加当前房屋",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Delete the selected plot.",
+      "Translated": "删除选中的地块。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Select a plot to delete.",
+      "Translated": "选择要删除的地块。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Select a plot and hold Control to delete.",
+      "Translated": "选择地块并按住 Control 删除。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold Control to delete the selected plot.",
+      "Translated": "按住 Control 删除选中的地块。",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Delete Selected Plot",
+      "Translated": "删除选中地块",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-25T15:34:23",
+  "imported": {
+    "archive": "uit-direct-2026-10-25T15-34-10-706Z-7a19de6d-2026-10-25T153423.json",
+    "accepted": 205,
+    "filled": 205,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 205 条 `Accountant` 的界面文字译文，已收为**独立译文包** `uit-packs/Accountant@user-91c511.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 205 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
