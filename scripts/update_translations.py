@@ -613,7 +613,8 @@ def main(argv=None) -> int:
     table: dict[str, dict] = {}
     saved_stamp: str | None = None
     if os.path.exists(args.table):
-        raw_table = json.load(open(args.table, encoding="utf-8"))
+        with open(args.table, encoding="utf-8") as handle:
+            raw_table = json.load(handle)
         saved_stamp = str((raw_table.get("_meta") or {}).get("updatedAt") or "") or None
         # 以下划线开口的键是元数据（_meta.updatedAt = 词表维护日期），不当插件条目
         table = {key: value for key, value in raw_table.items() if not key.startswith("_")}
@@ -954,7 +955,10 @@ def main(argv=None) -> int:
 
         # 旧译文是「外文原文原样当译文」（例如日文简介）→ 不当已有译文，重翻；
         # 但**玩家译例外**：那可能是玩家故意的（保留原样），不能当成没译。
-        if old_translated and not source_changed and (is_user or not copy_of_source(old_translated, original)):
+        # --recheck 的有效新机器译必须落盘；空结果/回显失败仍保留旧译文。
+        if old_translated and not source_changed and (
+            is_user or not args.recheck or not translated
+        ) and (is_user or not copy_of_source(old_translated, original)):
             if old_original != original:
                 saved["Original"] = original
             saved.setdefault("Translated", old_translated)
