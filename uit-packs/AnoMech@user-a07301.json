@@ -1,0 +1,3034 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-27",
+    "source": "user",
+    "label": "玩家包 · a07301",
+    "kinds": [
+      "free",
+      "llm"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Auto-collapse while running: ",
+      "Translated": "运行时自动折叠：",
+      "Context": ".ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Translated": "关闭",
+      "Context": ".ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Translated": "开启",
+      "Context": ".ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": ".ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "AnoMech Settings###AnoMechConfig",
+      "Translated": "AnoMech 设置",
+      "Context": "ConfigWindow..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable event logging",
+      "Translated": "启用事件日志",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Sim Menu when entering Inn",
+      "Translated": "进入旅馆时打开模拟菜单",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Open logs folder",
+      "Translated": "打开日志文件夹",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Resolve your own actions",
+      "Translated": "决意自己的行动",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Show mechanic success/failure marks",
+      "Translated": "显示机制成功/失败标记",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast window (s)",
+      "Translated": "滑步窗口（秒）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress scenario BGM",
+      "Translated": "屏蔽情景 BGM",
+      "Context": "ConfigWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "OT",
+      "Translated": "ST",
+      "Context": "MainWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "(no strats for this region yet)",
+      "Translated": "（该区域暂无攻略）",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "Source": "library"
+    },
+    {
+      "Original": "Region:",
+      "Translated": "区域：",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn — return to one to run a scenario.",
+      "Translated": "情景只能从旅馆启动——返回旅馆即可运行情景。",
+      "Context": "MainWindow.DrawLocationHint",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios only run in an inn",
+      "Translated": "情景只能在旅馆中运行",
+      "Context": "MainWindow.DrawLocationHint",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenario settings###scenario-config-v3",
+      "Translated": "情景设置",
+      "Context": "MainWindow.DrawMainContent",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a scenario",
+      "Translated": "选择情景",
+      "Context": "MainWindow.DrawMainContent",
+      "Source": "library"
+    },
+    {
+      "Original": "Setup###scenario-setup-v3",
+      "Translated": "设置",
+      "Context": "MainWindow.DrawMainContent",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start while you are busy (cutscene, NPC event, crafting, trading, zoning, etc.).",
+      "Translated": "忙碌时无法开始（过场动画、NPC 事件、制作、交易、切换区域等）。",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave",
+      "Translated": "离开",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Source": "library"
+    },
+    {
+      "Original": "No strat available for this region yet.",
+      "Translated": "该区域暂无可用攻略。",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Source": "library"
+    },
+    {
+      "Original": "Role:",
+      "Translated": "职能：",
+      "Context": "MainWindow.DrawRoleSelector",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-restart",
+      "Translated": "自动重启",
+      "Context": "MainWindow.DrawRunOptions",
+      "Source": "library"
+    },
+    {
+      "Original": "God mode",
+      "Translated": "无敌模式",
+      "Context": "MainWindow.DrawRunOptions",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart the same scenario immediately after a successful run. A death turns this back off.",
+      "Translated": "成功运行后立即重启同一情景。死亡会将其关闭。",
+      "Context": "MainWindow.DrawRunOptions",
+      "Source": "library"
+    },
+    {
+      "Original": "Streak: ",
+      "Translated": "连胜：",
+      "Context": "MainWindow.DrawRunOptions",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Translated": "空闲",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Translated": "已暂停",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Translated": "运行中",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Source": "library"
+    },
+    {
+      "Original": "scenario-panel-toggle",
+      "Translated": "场景 - 面板 - 切换",
+      "Context": "MainWindow.DrawScenarioPanelToggle",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scenarios",
+      "Translated": "情景",
+      "Context": "MainWindow.DrawScenariosPanel",
+      "Source": "library"
+    },
+    {
+      "Original": "Run without simulated party members or party AI.",
+      "Translated": "不使用模拟队友或队友 AI 运行。",
+      "Context": "MainWindow.DrawSoloOption",
+      "Source": "library"
+    },
+    {
+      "Original": "Solo",
+      "Translated": "单人",
+      "Context": "MainWindow.DrawSoloOption",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop the current scenario before changing the run mode.",
+      "Translated": "更改运行模式前请先停止当前情景。",
+      "Context": "MainWindow.DrawSoloOption",
+      "Source": "library"
+    },
+    {
+      "Original": "Strategy:",
+      "Translated": "攻略：",
+      "Context": "MainWindow.DrawStratSelector",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymarks:",
+      "Translated": "标点：",
+      "Context": "MainWindow.DrawWaymarkSelector",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias for /anomech",
+      "Translated": "/anomech 的别名",
+      "Context": "Plugin..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Open AnoMech. Subcommands: config, start, reset, leave",
+      "Translated": "打开 AnoMech。子命令：config、start、reset、leave",
+      "Context": "Plugin..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn.",
+      "Translated": "只能在旅馆中启动情景。",
+      "Context": "Plugin.StartSelectedScenario",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkF",
+      "Translated": "自动##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "Source": "library"
+    },
+    {
+      "Original": "Legs##atkF",
+      "Translated": "腿##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##atkF",
+      "Translated": "杖##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkM",
+      "Translated": "自动##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-M form:",
+      "Translated": "欧米茄M形态：",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield##atkM",
+      "Translated": "盾##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "Source": "library"
+    },
+    {
+      "Original": "Sword##atkM",
+      "Translated": "剑##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##glitch",
+      "Translated": "自动##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##glitch",
+      "Translated": "故障：远##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "Source": "library"
+    },
+    {
+      "Original": "Glitch:",
+      "Translated": "故障：",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##glitch",
+      "Translated": "故障：中##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##bd",
+      "Translated": "自动##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "Source": "library"
+    },
+    {
+      "Original": "Beyond Defence:",
+      "Translated": "超越防御：",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "Source": "library"
+    },
+    {
+      "Original": "No##bd",
+      "Translated": "否##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##bd",
+      "Translated": "是##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "Source": "library"
+    },
+    {
+      "Original": "No##hw",
+      "Translated": "否##hw",
+      "Context": "TopP5DeltaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor:",
+      "Translated": "监控：",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "Source": "library"
+    },
+    {
+      "Original": "No##mon",
+      "Translated": "否##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##mon",
+      "Translated": "是##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##tether",
+      "Translated": "自动##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Close any##tether",
+      "Translated": "任意近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Close inner##tether",
+      "Translated": "内侧近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Close outer##tether",
+      "Translated": "外侧近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Far any##tether",
+      "Translated": "任意远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Far inner##tether",
+      "Translated": "内侧远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Far outer##tether",
+      "Translated": "外侧远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether:",
+      "Translated": "连线：",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "First F attack:",
+      "Translated": "第一次F攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "First M attack:",
+      "Translated": "第一次M攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Second F attack:",
+      "Translated": "第二次F攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Second M attack:",
+      "Translated": "第二次M攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield",
+      "Translated": "盾",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff",
+      "Translated": "杖",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Sword",
+      "Translated": "剑",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##beetle",
+      "Translated": "自动##beetle",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "Source": "library"
+    },
+    {
+      "Original": "Beetle spawn:",
+      "Translated": "甲虫生成：",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra dynamis stack:",
+      "Translated": "额外潜能量层数：",
+      "Context": "TopP5OmegaSettingsWindow.DrawExtraDynamis",
+      "Source": "library"
+    },
+    {
+      "Original": "Force take monitor",
+      "Translated": "强制接取监控",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "Source": "library"
+    },
+    {
+      "Original": "Force take tether",
+      "Translated": "强制接取连线",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "Source": "library"
+    },
+    {
+      "Original": "Any##hwo",
+      "Translated": "任意##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwo",
+      "Translated": "自动##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "First##hwo",
+      "Translated": "第一##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World order:",
+      "Translated": "你好世界下令：",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "None##hwo",
+      "Translated": "无##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "Second##hwo",
+      "Translated": "第二##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwt",
+      "Translated": "自动##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hwt",
+      "Translated": "远##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World type:",
+      "Translated": "你好世界类型：",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hwt",
+      "Translated": "近##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##mon",
+      "Translated": "自动##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "Source": "library"
+    },
+    {
+      "Original": "Left##mon",
+      "Translated": "左##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor side:",
+      "Translated": "监视器方向：",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "Source": "library"
+    },
+    {
+      "Original": "Right##mon",
+      "Translated": "右##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##wc",
+      "Translated": "自动##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "Source": "library"
+    },
+    {
+      "Original": "Diffuse Wave Cannon:",
+      "Translated": "扩散波动炮：",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal##wc",
+      "Translated": "水平##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical##wc",
+      "Translated": "垂直##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cf",
+      "Translated": "自动##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##cf",
+      "Translated": "远##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##cf",
+      "Translated": "中##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether range:",
+      "Translated": "连线距离：",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dyn",
+      "Translated": "自动##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "Source": "library"
+    },
+    {
+      "Original": "No##dyn",
+      "Translated": "否##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "Source": "library"
+    },
+    {
+      "Original": "Start with Dynamis:",
+      "Translated": "以潜能量开始：",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##dyn",
+      "Translated": "是##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hw",
+      "Translated": "自动##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hw",
+      "Translated": "远##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World:",
+      "Translated": "你好世界：",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hw",
+      "Translated": "近##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "None##hw",
+      "Translated": "无##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##form",
+      "Translated": "自动##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "Source": "library"
+    },
+    {
+      "Original": "Leg blades##form",
+      "Translated": "腿部刀刃##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-F form:",
+      "Translated": "欧米茄F形态：",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##form",
+      "Translated": "杖##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##spin",
+      "Translated": "自动##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "Source": "library"
+    },
+    {
+      "Original": "CCW##spin",
+      "Translated": "逆时针##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "Source": "library"
+    },
+    {
+      "Original": "CW##spin",
+      "Translated": "顺时针##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "Source": "library"
+    },
+    {
+      "Original": "Spinner rotation:",
+      "Translated": "纺蛛转向：",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##flip",
+      "Translated": "自动##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "Source": "library"
+    },
+    {
+      "Original": "No##flip",
+      "Translated": "否##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "Source": "library"
+    },
+    {
+      "Original": "Tower-north flip:",
+      "Translated": "北塔翻转：",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##flip",
+      "Translated": "是##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cosmo",
+      "Translated": "自动##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmo Arrow:",
+      "Translated": "宇宙天箭：",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "Source": "library"
+    },
+    {
+      "Original": "In##cosmo",
+      "Translated": "内##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "Source": "library"
+    },
+    {
+      "Original": "Out##cosmo",
+      "Translated": "外##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "Source": "library"
+    },
+    {
+      "Original": "Ring",
+      "Translated": "圆环",
+      "Context": "TopZone..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "The Omega Protocol",
+      "Translated": "欧米茄绝境战",
+      "Context": "TopZone.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Dodge",
+      "Translated": "躲避",
+      "Context": "UcobP5ExaflaresAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##exadir",
+      "Translated": "自动##exadir",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Rolls toward:",
+      "Translated": "滚动方向：",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Markers",
+      "Translated": "以太标记",
+      "Context": "UcobZone..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "The Unending Coil of Bahamut",
+      "Translated": "巴哈姆特绝境战",
+      "Context": "UcobZone.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Positions:",
+      "Translated": "Boss 位置：",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "Source": "library"
+    },
+    {
+      "Original": "Center Dodge##centerdodge",
+      "Translated": "中央回避##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "Source": "library"
+    },
+    {
+      "Original": "Random##centerdodge",
+      "Translated": "随机##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "Source": "library"
+    },
+    {
+      "Original": "Assignment (Non-Tank Only):",
+      "Translated": "开始测验（仅非坦克）：",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##assignment",
+      "Translated": "自动##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Eruption##assignment",
+      "Translated": "地火喷发##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Gaol##assignment",
+      "Translated": "监狱##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Pillar##assignment",
+      "Translated": "光柱##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Mistral Song##assignment",
+      "Translated": "寒风之歌##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Source": "library"
+    },
+    {
+      "Original": "Kroxy-Rinon 341 (melee flex)",
+      "Translated": "Kroxy-Rinon 341（近战灵活）",
+      "Context": "UmadP2ForsakenKroxyRinonAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] Kroxy-Rinon 341 (melee flex)",
+      "Translated": "[旧站位] Kroxy-Rinon 341（近战灵活）",
+      "Context": "UmadP2ForsakenKroxyRinonOldAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Buddies",
+      "Translated": "[LPDU] 搭档",
+      "Context": "UmadP2ForsakenLpduBuddiesAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] p3Z Buddy Meow",
+      "Translated": "[旧] p3Z 搭档喵",
+      "Context": "UmadP2ForsakenP3ZBuddyMeowAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dpsstack",
+      "Translated": "自动##dpsstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "Source": "library"
+    },
+    {
+      "Original": "Dps Stack:",
+      "Translated": "DPS分摊：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportlockon",
+      "Translated": "自动##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "Source": "library"
+    },
+    {
+      "Original": "Chariot##supportlockon",
+      "Translated": "人马战车##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone##supportlockon",
+      "Translated": "锥形##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "Source": "library"
+    },
+    {
+      "Original": "Supports:",
+      "Translated": "支援：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportstack",
+      "Translated": "自动##supportstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "Source": "library"
+    },
+    {
+      "Original": "Support Stack:",
+      "Translated": "支援分摊：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] South Flex 341",
+      "Translated": "[旧站位] 南灵活 341",
+      "Context": "UmadP2ForsakenSouthFlex341OldAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "South Flex 341",
+      "Translated": "南灵活 341",
+      "Context": "UmadP2ForsakenSouthFlexAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] zP6 South adjust",
+      "Translated": "[旧] zP6 南调整",
+      "Context": "UmadP2ForsakenZP6SouthAdjustAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: D>S>A",
+      "Translated": "原子：吸引：D>S>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: S>D>A",
+      "Translated": "原子：吸引：S>D>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み：D>S>A",
+      "Translated": "原子：吸引：D>S>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み：S>D>A",
+      "Translated": "原子：吸引：S>D>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Accretion:",
+      "Translated": "混沌之泥土：",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##accretion",
+      "Translated": "自动##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "Source": "library"
+    },
+    {
+      "Original": "No##accretion",
+      "Translated": "否##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##accretion",
+      "Translated": "是##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##line",
+      "Translated": "自动##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "library"
+    },
+    {
+      "Original": "First##line",
+      "Translated": "第一防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "library"
+    },
+    {
+      "Original": "Line:",
+      "Translated": "防线：",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "library"
+    },
+    {
+      "Original": "Second##line",
+      "Translated": "第二防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "library"
+    },
+    {
+      "Original": "Third##line",
+      "Translated": "第三防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says (WIP)",
+      "Translated": "凯夫卡说（开发中）",
+      "Context": "UmadP4KefkaSaysAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 1:",
+      "Translated": "混沌 1：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 2:",
+      "Translated": "混沌 2：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 1:",
+      "Translated": "艾克斯迪司 1：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 3:",
+      "Translated": "艾克斯迪司 3：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 4:",
+      "Translated": "艾克斯迪司 4：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "chaos1",
+      "Translated": "Chaos1",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "chaos2",
+      "Translated": "Chaos2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto##ex2",
+      "Translated": "自动##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 2:",
+      "Translated": "艾克斯迪司 2：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##ex2",
+      "Translated": "假##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Source": "library"
+    },
+    {
+      "Original": "Opposite to 1##ex2",
+      "Translated": "与1相反##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Source": "library"
+    },
+    {
+      "Original": "Real##ex2",
+      "Translated": "真##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##",
+      "Translated": "自动##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##",
+      "Translated": "假##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "Source": "library"
+    },
+    {
+      "Original": "Real##",
+      "Translated": "真##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "Source": "library"
+    },
+    {
+      "Original": "Standard",
+      "Translated": "标准",
+      "Context": "UmadP5CelestriadAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Aero (green)",
+      "Translated": "风（绿）",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Earth (brown)",
+      "Translated": "土（棕）",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Fire",
+      "Translated": "火",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Free",
+      "Translated": "自由",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Ice",
+      "Translated": "冰",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Lightning",
+      "Translated": "雷光",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Set 1 variant:",
+      "Translated": "第 1 组变体：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Set 3 variant:",
+      "Translated": "第3组变体：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Your element:",
+      "Translated": "你的属性：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread",
+      "Translated": "分散",
+      "Context": "UmadP5ExaflaresAi.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Left order:",
+      "Translated": "左侧下令：",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "Right order:",
+      "Translated": "右侧下令：",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み",
+      "Translated": "原子：吸引",
+      "Context": "UmadReplayData..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "DN Zenith Waymarks",
+      "Translated": "DN 天顶标点",
+      "Context": "UmadZone..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Diamond Waymarks",
+      "Translated": "菱形标点",
+      "Context": "UmadZone..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Big Box",
+      "Translated": "[LPDU] 大盒子",
+      "Context": "UmadZone..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Dancing Mad",
+      "Translated": "妖星乱舞绝境战",
+      "Context": "UmadZone.get_Name",
+      "Source": "user"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "UwuZone..ctor",
+      "Source": "library"
+    },
+    {
+      "Original": "The Weapon's Refrain",
+      "Translated": "究极神兵",
+      "Context": "UwuZone.get_Name",
+      "Source": "user"
+    },
+    {
+      "Original": " is full.",
+      "Translated": "妖星乱舞绝境战",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "user"
+    },
+    {
+      "Original": " on this server. Check the code, or ask the host for a new one.",
+      "Translated": "在此服务器上。请检查代码，或向房主索取新代码。",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ") -- ask the host to start a new one.",
+      "Translated": ") -- 请房主开启新会话。",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ") -- start a new one.",
+      "Translated": ") -- 开启新会话。",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Session ",
+      "Translated": "会话",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "The relay lost this session (",
+      "Translated": "中继服务器丢失了此会话 (kr",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "The server refused to join session ",
+      "Translated": "服务器拒绝加入会话",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "There's no session ",
+      "Translated": "没有会话",
+      "Context": "[AnoMech] AttemptReconnectAsync",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Require tank mitigation",
+      "Translated": "检查防守减伤",
+      "Context": "[AnoMech] ConfigWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Some tankbusters (depending on scenario support) will check your mitigation.",
+      "Translated": "部分死刑（取决于机制支持）将检查你的减伤情况。",
+      "Context": "[AnoMech] ConfigWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " is out of range.",
+      "Translated": "超出范围。",
+      "Context": "[AnoMech] EmbeddedRelay.Start",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Port ",
+      "Translated": "端口",
+      "Context": "[AnoMech] EmbeddedRelay.Start",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "The embedded server isn't implemented yet.",
+      "Translated": "内置服务器尚未实现。",
+      "Context": "[AnoMech] EmbeddedRelay.Start",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA · Partner Swap",
+      "Translated": "美服 · 伙伴互换",
+      "Context": "[AnoMech] FruP2DiamondDustAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "First icicles:",
+      "Translated": "首批冰柱：",
+      "Context": "[AnoMech] FruP2DiamondDustSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Mirror:",
+      "Translated": "镜像：",
+      "Context": "[AnoMech] FruP2DiamondDustSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Opening kick:",
+      "Translated": "起手踢击：",
+      "Context": "[AnoMech] FruP2DiamondDustSettingsWindow.DrawKick",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Frigid Stone:",
+      "Translated": "冰石：",
+      "Context": "[AnoMech] FruP2DiamondDustSettingsWindow.DrawMarked",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Twin:",
+      "Translated": "双子：",
+      "Context": "[AnoMech] FruP2DiamondDustSettingsWindow.DrawTwin",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA · Conga",
+      "Translated": "美服 · 康加舞",
+      "Context": "[AnoMech] FruP2LightRampantAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Banish III:",
+      "Translated": "强放逐：",
+      "Context": "[AnoMech] FruP2LightRampantSettingsWindow.DrawBanish",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "duty:",
+      "Translated": "任务：",
+      "Context": "[AnoMech] FruP2LightRampantSettingsWindow.DrawDuty",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "First orbs:",
+      "Translated": "初始球：",
+      "Context": "[AnoMech] FruP2LightRampantSettingsWindow.DrawOrbs",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Duties set:",
+      "Translated": "已设任务：",
+      "Context": "[AnoMech] FruP2LightRampantSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA priority / static spreads / OT bait",
+      "Translated": "NA 优先级 / 固定分散 / OT 诱导",
+      "Context": "[AnoMech] FruP3ApocalypseAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Spirit Taker:",
+      "Translated": "碎灵一击：",
+      "Context": "[AnoMech] FruP3ApocalypseSettingsWindow.DrawSpiritTaker",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "First lights:",
+      "Translated": "初始光：",
+      "Context": "[AnoMech] FruP3ApocalypseSettingsWindow.DrawStart",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Dark Blizzard:",
+      "Translated": "暗冰结：",
+      "Context": "[AnoMech] FruP3UltimateRelativitySettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA priority / 7-1 Akh Morn (MT solo)",
+      "Translated": "NA 优先级 / 7-1 死亡轮回（MT 单吃）",
+      "Context": "[AnoMech] FruP4CrystallizeTimeAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Blue + Darkness",
+      "Translated": "蓝色 + 黑暗",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Blue + Ice / Water / Eruption",
+      "Translated": "蓝色 + 冰 / 水 / 地火喷发",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Red + Aero",
+      "Translated": "红色 + 疾风",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Red + Ice",
+      "Translated": "红色 + 冰",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Last safe corner:",
+      "Translated": "最后安全角落：",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Slowed hourglasses:",
+      "Translated": "减速沙漏：",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Your debuffs:",
+      "Translated": "你的状态：",
+      "Context": "[AnoMech] FruP4CrystallizeTimeSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA · you take Somber Dance",
+      "Translated": "NA · 你吃真夜舞蹈",
+      "Context": "[AnoMech] FruP4DarklitDragonsongAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Hallowed Wings:",
+      "Translated": "神圣之翼：",
+      "Context": "[AnoMech] FruP4DarklitDragonsongSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Mirrored:",
+      "Translated": "镜像：",
+      "Context": "[AnoMech] FruP5FulgentBladeSettingsWindow.DrawMirrored",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Starting pocket:",
+      "Translated": "起始安全区：",
+      "Context": "[AnoMech] FruP5FulgentBladeSettingsWindow.DrawPocket",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "H first / M1-R1 NW / M2-R2 NE; lines T-M-R-H",
+      "Translated": "H在前 / M1-R1 NW / M2-R2 NE；分摊 T-M-R-H",
+      "Context": "[AnoMech] FruP5ParadiseRegainedAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Second tower:",
+      "Translated": "第二个塔：",
+      "Context": "[AnoMech] FruP5ParadiseRegainedSettingsWindow.DrawSecondTower",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "First wing:",
+      "Translated": "第一侧翼：",
+      "Context": "[AnoMech] FruP5ParadiseRegainedSettingsWindow.DrawWings",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Inner Circle",
+      "Translated": "内圈",
+      "Context": "[AnoMech] FruZone..ctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Futures Rewritten",
+      "Translated": "光暗未来绝境战",
+      "Context": "[AnoMech] FruZone.get_Name",
+      "Source": "user"
+    },
+    {
+      "Original": "Leave###leave-instance",
+      "Translated": "离开",
+      "Context": "[AnoMech] MainWindow.DrawPrimaryActions",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Return to inn###leave-instance",
+      "Translated": "返回旅馆",
+      "Context": "[AnoMech] MainWindow.DrawPrimaryActions",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Takes the whole party back to the inn. Everyone stays in the session.",
+      "Translated": "带领全小队返回旅馆。所有人将留在会话中。",
+      "Context": "[AnoMech] MainWindow.DrawPrimaryActions",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Disabled in a multiplayer session.",
+      "Translated": "在多人会话中已禁用。",
+      "Context": "[AnoMech] MainWindow.DrawRunOptions",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Only the host's selection is used in multiplayer.",
+      "Translated": "多人联机时仅使用房主的策略。",
+      "Context": "[AnoMech] MainWindow.DrawStratSelector",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "The host picks the scenario.",
+      "Translated": "由房主选择剧本。",
+      "Context": "[AnoMech] MainWindow.DrawZoneScenarios",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "This scenario doesn't support multiplayer.",
+      "Translated": "该剧本不支持多人联机。",
+      "Context": "[AnoMech] MainWindow.DrawZoneScenarios",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "[AnoMech] Run ended -- ",
+      "Translated": "[AnoMech] 攻略已结束 --",
+      "Context": "[AnoMech] MultiplayerManager.AnnounceRunEnded",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " left -- session ended.",
+      "Translated": "已离开 -- 会话已结束。",
+      "Context": "[AnoMech] MultiplayerManager.DispatchCore",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "You were banned from the session by the host.",
+      "Translated": "你已被房主移出当前会话。",
+      "Context": "[AnoMech] MultiplayerManager.DispatchCore",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "You were removed from the session by the host.",
+      "Translated": "你已被房主请离当前会话。",
+      "Context": "[AnoMech] MultiplayerManager.DispatchCore",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ". Check the code, or ask the host whether their session is still up.",
+      "Translated": "。请检查代码，或向房主确认会话是否仍在进行。",
+      "Context": "[AnoMech] MultiplayerManager.TickLink",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lost contact with the host.",
+      "Translated": "与房主失去联系。",
+      "Context": "[AnoMech] MultiplayerManager.TickLink",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Reached the server, but no host answered in session ",
+      "Translated": "已连接至服务器，但会话中无房主响应",
+      "Context": "[AnoMech] MultiplayerManager.TickLink",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ". Anyone left on Auto gets the fight's own roll.",
+      "Translated": ". 保持自动分配的玩家将按战斗机制随机分配。",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ": mechanics per player",
+      "Translated": ": 每位玩家的机制",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Assign specific mechanics to players",
+      "Translated": "为玩家分配特定机制",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Choose which mechanic each player gets in ",
+      "Translated": "选择每位玩家获得的机制",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Done",
+      "Translated": "完成",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Mechanics###AnoMechAssignMechanics",
+      "Translated": "机制",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Pick a seat, then what that player gets. Anyone left on Auto gets the fight's own roll.",
+      "Translated": "选择位置，然后选择该玩家获得的机制。保持自动分配的玩家将按战斗机制随机分配。",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Yours only. Anything left on Auto gets the fight's own roll.",
+      "Translated": "仅限你的。保持自动分配的任何内容将按战斗机制随机分配。",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "\nLast error: ",
+      "Translated": "最后错误：",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "\nThis server doesn't support compression.",
+      "Translated": "此服务器不支持压缩。",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " (encrypted).",
+      "Translated": "（已加密）。",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " -- NOT encrypted, this server doesn't support wss://.",
+      "Translated": "-- 未加密，此服务器不支持 wss://。",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " -- NOT encrypted.",
+      "Translated": "-- 未加密。",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connected to the server",
+      "Translated": "已连接到服务器",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connecting...",
+      "Translated": "正在连接...",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Not connected to the server.",
+      "Translated": "未连接到服务器。",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Reconnecting to the server... (attempt ",
+      "Translated": "正在重新连接到服务器...（尝试",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Locked while the fight is running -- changes apply to the next start.",
+      "Translated": "战斗进行中已锁定 -- 更改将在下次开始时生效。",
+      "Context": "[AnoMech] MultiplayerUi.DrawScenarioSettings",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Set by the host -- everything random.",
+      "Translated": "由房主设置 -- 全部随机。",
+      "Context": "[AnoMech] MultiplayerUi.DrawScenarioSettings",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Set by the host:",
+      "Translated": "由房主设置：",
+      "Context": "[AnoMech] MultiplayerUi.DrawScenarioSettings",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Doesn't look like a valid server address.",
+      "Translated": "似乎不是有效的服务器地址。",
+      "Context": "[AnoMech] MultiplayerUi.DrawServerFields",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Server password",
+      "Translated": "服务器密码",
+      "Context": "[AnoMech] MultiplayerUi.DrawServerFields",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ")\nHost: ",
+      "Translated": ")\n房主：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Checking everyone's ready...",
+      "Translated": "正在检查所有人是否准备就绪...",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Last attempt: ",
+      "Translated": "上次尝试：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Last error: ",
+      "Translated": "上一次错误：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Last run ended: ",
+      "Translated": "上次运行结束：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Yours: ",
+      "Translated": "你的：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "⚠ Different AnoMech build than the host -- update before taking a seat.",
+      "Translated": "⚠️ AnoMech 版本与房主不同——入座前请先更新。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "⚠ Reconnecting to the server... (attempt ",
+      "Translated": "⚠️ 正在重新连接服务器...（尝试",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " · host ",
+      "Translated": "· 房主",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "). It stops when you leave.",
+      "Translated": "）。离开时将停止。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Copy the session code. Others join with it and your server's address.",
+      "Translated": "复制会话代码。其他人可通过该代码和你的服务器地址加入。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Disconnect###leave-session",
+      "Translated": "断开连接",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "End the session for everyone and go back to solo play.",
+      "Translated": "为所有人结束会话并返回单人游玩。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Hosting",
+      "Translated": "主持中",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Joined ",
+      "Translated": "已加入",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Joining ",
+      "Translated": "加入中",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Leave the session and go back to solo play. Mid-fight this ends the run for everyone.",
+      "Translated": "离开当前会话并返回单人游玩。战斗中途离开将结束所有人的进度。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Party ",
+      "Translated": "小队",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Running the server on this PC (port ",
+      "Translated": "服务器运行在本机（端口",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Server :",
+      "Translated": "服务器：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Starting session...",
+      "Translated": "正在启动会话...",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connect to a server",
+      "Translated": "连接到服务器",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connection failed: ",
+      "Translated": "连接失败：",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "How to run a server",
+      "Translated": "如何运行服务器",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Multiplayer",
+      "Translated": "多人游戏",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Run embedded server",
+      "Translated": "运行内置服务器",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Run the server on this PC and host a session on it.",
+      "Translated": "在此电脑上运行服务器并托管会话。",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Session code",
+      "Translated": "会话代码",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "‹ Back",
+      "Translated": "‹ 返回",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Waiting for host###start",
+      "Translated": "等待房主",
+      "Context": "[AnoMech] MultiplayerUi.DrawStartButton",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "can't reach the server, retrying",
+      "Translated": "无法连接服务器，正在重试",
+      "Context": "[AnoMech] MultiplayerUi.JoinProgress",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "connecting to the server",
+      "Translated": "正在连接服务器",
+      "Context": "[AnoMech] MultiplayerUi.JoinProgress",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "waiting for the host to answer",
+      "Translated": "等待房主响应",
+      "Context": "[AnoMech] MultiplayerUi.JoinProgress",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " hasn't taken a seat.",
+      "Translated": "尚未就座。",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "A player is on a different plugin build -- everyone needs to match.",
+      "Translated": "有玩家使用了不同的插件版本 —— 所有人的版本必须保持一致。",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No strat available for the selected scenario/region.",
+      "Translated": "所选战术/区域暂无可用打法。",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Select a multiplayer-supported scenario.",
+      "Translated": "请选择支持多人模式的战术。",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Take a seat in the Party panel first.",
+      "Translated": "请先在小队面板中就座。",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "The fight can't produce these settings together:\n",
+      "Translated": "战斗无法同时应用这些设置：",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Debug AI bot",
+      "Translated": "调试 AI 机器人",
+      "Context": "[AnoMech] PartyPanelWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Party",
+      "Translated": "小队",
+      "Context": "[AnoMech] PartyPanelWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Testing aid -- your seat is driven locally by the same AI a bot in that seat would use. Entirely client-side. Locked once the fight starts.",
+      "Translated": "测试辅助 -- 你的座位将由该位置机器人所使用的相同 AI 在本地驱动。完全客户端处理。战斗开始后锁定。",
+      "Context": "[AnoMech] PartyPanelWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Banned (",
+      "Translated": "已封禁 (",
+      "Context": "[AnoMech] PartyPanelWindow.DrawBanned",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Unban",
+      "Translated": "解封",
+      "Context": "[AnoMech] PartyPanelWindow.DrawBanned",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ban ",
+      "Translated": "封禁",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ban them",
+      "Translated": "确认封禁",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Kick ",
+      "Translated": "踢出",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Kick them",
+      "Translated": "确认踢出",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "They can come back with the session code. Mid-fight it ends the run.",
+      "Translated": "他们可以使用会话代码重新加入。如果在战斗中则会结束当前挑战。",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "They stay out of this session until you unban them.",
+      "Translated": "在将其解封之前，他们将无法加入此会话。",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No message from the host in ",
+      "Translated": "未收到房主消息，持续时间",
+      "Context": "[AnoMech] PartyPanelWindow.DrawHostStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No seat yet",
+      "Translated": "尚未就座",
+      "Context": "[AnoMech] PartyPanelWindow.DrawLobby",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ban...",
+      "Translated": "封禁...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerMenu",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Kick...",
+      "Translated": "踢出...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerMenu",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Move to seat",
+      "Translated": "移动至座位",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerMenu",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Unseat",
+      "Translated": "卸任",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerMenu",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " (host)",
+      "Translated": "(房主)",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerName",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": ")\nTheirs: ",
+      "Translated": ")\n对方：",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerName",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Different plugin build than yours -- everyone needs to match before starting.\nYours: ",
+      "Translated": "插件版本与你不一致——开始前所有人的版本必须相同。\n你的：",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerName",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " (you)",
+      "Translated": "(你)",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Take",
+      "Translated": "获取",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "action",
+      "Translated": "动作",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "bot",
+      "Translated": "机器人",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "name",
+      "Translated": "名字",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "role",
+      "Translated": "职能",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "\nLast message: ",
+      "Translated": "最后消息：",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connected -- measuring ping...",
+      "Translated": "已连接 -- 正在测定延迟...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Connected -- waiting for a status update...",
+      "Translated": "已连接 -- 等待状态更新...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No message received in a while -- likely disconnected.",
+      "Translated": "长时间未收到消息 -- 可能已断开连接。",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ping: ",
+      "Translated": "延迟：",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "fair",
+      "Translated": "一般",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "good",
+      "Translated": "良好",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "ms (",
+      "Translated": "毫秒 (",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "poor",
+      "Translated": "差",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "s ago",
+      "Translated": "秒前",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Open AnoMech. Subcommands: config, mp, start, reset, leave",
+      "Translated": "打开 AnoMech。子命令：config, mp, start, reset, leave",
+      "Context": "[AnoMech] Plugin..ctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " does not support Solo mode.",
+      "Translated": "不支持单人模式。",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": " to settle before starting...",
+      "Translated": "在开始前稳定...",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Cannot start: ",
+      "Translated": "无法开始：",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "In a multiplayer session -- only the host's Start button runs it.",
+      "Translated": "在多人会话中——只有房主的“开始”按钮能运行。",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No scenario selected.",
+      "Translated": "未选择剧本。",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Waiting for ",
+      "Translated": "正在等待",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "No",
+      "Translated": "否",
+      "Context": "[AnoMech] ScenarioSettingsSummary.Format",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "[AnoMech] ScenarioSettingsSummary.Format",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Can't happen: ",
+      "Translated": "不可能发生：",
+      "Context": "[AnoMech] SettingsGrid.ConflictRows",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Every setting in this scenario is one roll the whole sim shares.",
+      "Translated": "此剧本中的每一项设置都是整个模拟共享的一次判定。",
+      "Context": "[AnoMech] SettingsGrid.FightOnlyNote",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Fight",
+      "Translated": "战斗",
+      "Context": "[AnoMech] SettingsGrid.FightOnlyNote",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Editing:",
+      "Translated": "正在编辑：",
+      "Context": "[AnoMech] SettingsGrid.SeatRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Which seat the rows below are for. Each seat keeps its own settings; everyone left on Random gets the fight's usual roll.",
+      "Translated": "下方各行对应的位置。每个位置保留其自己的设置；所有留在随机的位置都将获得战斗的常规判定。",
+      "Context": "[AnoMech] SettingsGrid.SeatRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "you",
+      "Translated": "你",
+      "Context": "[AnoMech] SettingsGrid.SeatRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Never target the test spawn in a real zone. Every button holds the send firewall for ~7s outside a session.",
+      "Translated": "切勿在真实区域中将试炼巨像作为目标。在会话外部，每个按钮都会持续发送防御程序约 7 秒。",
+      "Context": "[AnoMech] TimelineDebug.DrawControls",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Timeline test (debug)",
+      "Translated": "时间轴测试（调试）",
+      "Context": "[AnoMech] TimelineDebug.DrawControls",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "test spawn: live",
+      "Translated": "测试生成：活动",
+      "Context": "[AnoMech] TimelineDebug.DrawControls",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "test spawn: none",
+      "Translated": "测试生成：无",
+      "Context": "[AnoMech] TimelineDebug.DrawControls",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NA pf",
+      "Translated": "美服野队",
+      "Context": "[AnoMech] TopP2PartySynergyAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Stacks set:",
+      "Translated": "分摊设置：",
+      "Context": "[AnoMech] TopP2PartySynergySettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Symbols set:",
+      "Translated": "标记设置：",
+      "Context": "[AnoMech] TopP2PartySynergySettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "stack:",
+      "Translated": "分摊：",
+      "Context": "[AnoMech] TopP2PartySynergySettingsWindow.DrawStack",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "symbol:",
+      "Translated": "标记：",
+      "Context": "[AnoMech] TopP2PartySynergySettingsWindow.DrawSymbol",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "monitor:",
+      "Translated": "监视：",
+      "Context": "[AnoMech] TopP5DeltaSettingsWindow.DrawMonitor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Beyond Defence set:",
+      "Translated": "超越防御设置：",
+      "Context": "[AnoMech] TopP5DeltaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Monitor set:",
+      "Translated": "监视设置：",
+      "Context": "[AnoMech] TopP5DeltaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Tethers set:",
+      "Translated": "连线设置：",
+      "Context": "[AnoMech] TopP5DeltaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "tether:",
+      "Translated": "连线：",
+      "Context": "[AnoMech] TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "extra dynamis stack:",
+      "Translated": "额外极限动态分摊：",
+      "Context": "[AnoMech] TopP5OmegaSettingsWindow.DrawExtraDynamis",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Extra dynamis set:",
+      "Translated": "额外极限动态设置：",
+      "Context": "[AnoMech] TopP5OmegaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "start with Dynamis:",
+      "Translated": "初始带有极限动态：",
+      "Context": "[AnoMech] TopP5SigmaSettingsWindow.DrawDynamis",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Dynamis set:",
+      "Translated": "极限动态设置：",
+      "Context": "[AnoMech] TopP5SigmaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Hello World set:",
+      "Translated": "HelloWorld设置：",
+      "Context": "[AnoMech] TopP5SigmaSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Confused:",
+      "Translated": "混乱：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Fire orb:",
+      "Translated": "火球：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Fire:",
+      "Translated": "火：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Flipped",
+      "Translated": "反转",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Gaze:",
+      "Translated": "视线：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Inverted",
+      "Translated": "内外反转",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lie",
+      "Translated": "假",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Normal",
+      "Translated": "正常",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Stack",
+      "Translated": "分摊",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Support",
+      "Translated": "支援",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Thunder flip:",
+      "Translated": "闪雷翻转：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Thunder orb:",
+      "Translated": "闪雷法球：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Truth",
+      "Translated": "真",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "confused",
+      "Translated": "混乱",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "fire",
+      "Translated": "火",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "firelie",
+      "Translated": "火假",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "gaze",
+      "Translated": "视线",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "thunflip",
+      "Translated": "雷翻转",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "thunlie",
+      "Translated": "雷假",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Different arrows:",
+      "Translated": "不同箭头：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.DrawDifferentArrows",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Thunder reals:",
+      "Translated": "闪雷实体：",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.DrawThunderOffset",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Yan",
+      "Translated": "延",
+      "Context": "[AnoMech] UmadP2ForsakenYanAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Everything here is per player -- use the button below.",
+      "Translated": "这里的各项设置均针对单人——请使用下方按钮。",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "line:",
+      "Translated": "连线：",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Accretion set:",
+      "Translated": "混沌之泥土配置：",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lines set:",
+      "Translated": "连线配置：",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Both tanks already shared the other set -- their own mitigation kit's big cooldowns (120s/90s) can't recover in ~41s, so neither can reach the required mitigation again.",
+      "Translated": "两位坦克都已经分担了另一组伤害——他们自身的大减伤技能（120秒/90秒）无法在约41秒内冷却完毕，因此两人都无法再次达到所需减伤要求。",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIOption",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "That tank already invulns the other set -- no tank invuln recovers in ~41s, so they can't do both.",
+      "Translated": "该坦克已经对另一组使用了无敌——没有任何坦克的无敌能在约41秒内冷却完毕，因此他们无法两组都接。",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIOption",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Set 1 (~42.6s):",
+      "Translated": "第 1 组（约 42.6 秒）：",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIPlan",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Set 2 (~83.9s):",
+      "Translated": "第 2 组（约 83.9 秒）：",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIPlan",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "MT invulns both",
+      "Translated": "主坦无敌处理两组",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "OT invulns both",
+      "Translated": "副坦无敌处理两组",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Share, MT first",
+      "Translated": "分担，主坦优先",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Share, OT first",
+      "Translated": "分担，副坦优先",
+      "Context": "[AnoMech] UmadP3BlackHoleSettingsWindow.DrawThunderIIIRow",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Main tank",
+      "Translated": "主坦",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Off tank",
+      "Translated": "副坦",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Phys ranged (default)",
+      "Translated": "物理远程（默认）",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Bosses held at:",
+      "Translated": "Boss拉在：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Clone order:",
+      "Translated": "分身顺序：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "First clone:",
+      "Translated": "第一个分身：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Umbra Smash bait:",
+      "Translated": "本影爆碎引导：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Numbers set:",
+      "Translated": "数字组：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Winds set:",
+      "Translated": "风组：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "number:",
+      "Translated": "数字：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawPlayerRows",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "wind:",
+      "Translated": "风：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawPlayerRows",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "After the charges (~38.6s):",
+      "Translated": "分摊结束后 (~38.6秒)：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawThunderIIIPlan",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Only the host's plan is used in multiplayer.",
+      "Translated": "多人模式下仅使用房主的排轴。",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawThunderIIIPlan",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Thunder III plan (planning tank bots will follow):",
+      "Translated": "暴雷排轴（MT机器人将遵循此排轴）：",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawThunderIIIPlan",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Kefka Says, gazes: supports N / DPS S",
+      "Translated": "凯夫卡言，视线：奶北 / 远敏南",
+      "Context": "[AnoMech] UmadP4KefkaSaysAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Fire, Ice, Lightning",
+      "Translated": "火、冰、雷光",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Fire, Lightning, Ice",
+      "Translated": "火、雷光、冰",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Free (no debuff)",
+      "Translated": "安全（无debuff）",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ice, Fire, Lightning",
+      "Translated": "冰、火、雷光",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Ice, Lightning, Fire",
+      "Translated": "冰、雷光、火",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lightning, Fire, Ice",
+      "Translated": "雷光、火、冰",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lightning, Ice, Fire",
+      "Translated": "雷光、冰、火",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Middle single, outer pair",
+      "Translated": "中间单人，外侧双人",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Doubled element:",
+      "Translated": "双重属性：",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Lit towers:",
+      "Translated": "发光塔：",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Sectors from NE:",
+      "Translated": "从东北开始的扇形：",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Your ",
+      "Translated": "你的",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.DrawDebuff",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "debuff:",
+      "Translated": "减益：",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.DrawDebuff",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Debuffs set:",
+      "Translated": "已设置减益：",
+      "Context": "[AnoMech] UmadP5CelestriadSettingsWindow.DrawPerPlayer",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Rotate",
+      "Translated": "旋转",
+      "Context": "[AnoMech] UmadP5FloodAi.get_Name",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Caster",
+      "Translated": "咏唱者",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Clockwise",
+      "Translated": "顺时针",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Counter-clockwise",
+      "Translated": "逆时针",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "East",
+      "Translated": "东",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Forward",
+      "Translated": "前",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Melee A",
+      "Translated": "近战 A",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Melee B",
+      "Translated": "近战 B",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NE-SW",
+      "Translated": "东北-西南",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NW-SE",
+      "Translated": "西北-东南",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "North",
+      "Translated": "北",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Phys ranged",
+      "Translated": "物理远敏",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Random per tick",
+      "Translated": "每跳随机",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Regen healer",
+      "Translated": "纯白奶",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Reversed",
+      "Translated": "反向",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Shield healer",
+      "Translated": "防护奶",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "South",
+      "Translated": "南",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "West",
+      "Translated": "西",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Leads first:",
+      "Translated": "优先引导：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NE-SW line:",
+      "Translated": "东北-西南连线：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "NW-SE line:",
+      "Translated": "西北-东南连线：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Rotation:",
+      "Translated": "旋转：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Stack target:",
+      "Translated": "分摊目标：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Starting quadrant:",
+      "Translated": "起始象限：",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Start",
+      "Translated": "开始",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Synergy",
+      "Translated": "协作程序PT",
+      "Context": "TopP2PartySynergyScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Delta",
+      "Translated": "德尔塔",
+      "Context": "TopP5DeltaScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega",
+      "Translated": "欧米茄",
+      "Context": "TopP5OmegaScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Sigma",
+      "Translated": "西格玛",
+      "Context": "TopP5SigmaScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Exasquares/WC2",
+      "Translated": "核爆方块/WC2",
+      "Context": "TopP6WaveCannon2Scenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Predation",
+      "Translated": "追击之究极幻想",
+      "Context": "UltimatePredationScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Suppression",
+      "Translated": "乱击之究极幻想",
+      "Context": "UltimateSuppressionScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Exaflares",
+      "Translated": "地火喷发",
+      "Context": "UmadP5ExaflaresScenario.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Translated": "随机",
+      "Context": "UmadP5ExaflaresSettingsWindow..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken Null",
+      "Translated": "遗弃虚无",
+      "Context": "UmadP5ForsakenNull.get_Name",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole",
+      "Translated": "原子：吸引",
+      "Context": "UmadReplayData..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Celestriad",
+      "Translated": "三星",
+      "Context": "UmadReplayData..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken",
+      "Translated": "遗弃末世",
+      "Context": "UmadReplayData..cctor",
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says",
+      "Translated": "凯夫卡说",
+      "Context": "UmadReplayData..cctor",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
