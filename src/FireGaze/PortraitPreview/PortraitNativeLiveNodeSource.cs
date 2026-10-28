@@ -3,6 +3,7 @@ using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Plugin.Services;
+using FireGaze.LocalPreview.Runtime;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -26,12 +27,17 @@ internal interface IPortraitNativeLiveNodeApi
 /// Framework-only CharacterImage SRV acquisition. No pause/state-key requirement, copy, readback,
 /// renderer, camera/light write, native render call, world object or custom draw callback.
 /// </summary>
-internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveSource, IDisposable
+internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveSource, IDisposable, INativePhysicalCloseState
 {
     private readonly IPortraitNativeLiveNodeApi api;
     private readonly IAddonLifecycle? lifecycle;
     private long epoch = 1;
     private int disposed;
+    private bool bannerAttempted;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => physicalClose?.Complete ?? false;
+    public string? PhysicalCloseFailure => physicalClose?.Failure;
 
     public event Action? Invalidated;
     public bool IsFrameworkThread => Volatile.Read(ref disposed) == 0 && api.IsFrameworkThread;
@@ -41,7 +47,17 @@ internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveS
         : this(new LiveApi(framework, gameGUI, objects, readReadyEditor))
     {
         this.lifecycle = lifecycle;
-        lifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeFinalize);
+        try
+        {
+            bannerAttempted = true;
+            lifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeFinalize);
+        }
+        catch (Exception initializationError)
+        {
+            try { Dispose(); } catch (Exception) { /* PhysicalClose retains the first cleanup failure. */ }
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, initializationError);
+            throw;
+        }
     }
 
     internal PortraitNativeLiveNodeSource(IPortraitNativeLiveNodeApi api) => this.api = api;
@@ -50,6 +66,7 @@ internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveS
 
     public void Invalidate()
     {
+        if (Volatile.Read(ref disposed) != 0) return;
         Interlocked.Increment(ref epoch);
         Invalidated?.Invoke();
     }
@@ -118,8 +135,13 @@ internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveS
     public void Dispose()
     {
         if (Interlocked.Exchange(ref disposed, 1) != 0) return;
-        Invalidate();
-        lifecycle?.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeFinalize);
+        Interlocked.Increment(ref epoch);
+        PhysicalClose.Try(() => Invalidated?.Invoke(), "Native live source invalidation");
+        if (bannerAttempted) PhysicalClose.Try(
+            () => lifecycle!.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeFinalize),
+            "Native live BannerEditor callback removal");
+        PhysicalClose.Finish();
+        if (!PhysicalClose.Complete) throw new InvalidOperationException(PhysicalClose.Failure);
     }
 
     private sealed class LiveApi(IFramework framework, IGameGui gameGUI, IObjectTable objects,

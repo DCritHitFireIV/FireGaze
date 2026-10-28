@@ -12,7 +12,11 @@ internal sealed class UITextStore
 {
     private const string ExportFormatName = "FireGaze UIText";
 
-    private readonly object gate = new();
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, object> DirectoryGates = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, Dictionary<EditIdentity, long>> DirectoryIntents = new(StringComparer.OrdinalIgnoreCase);
+    private static long editSequence;
+    private readonly string[] writeDirectories;
+    private readonly object[] writeGates;
     private readonly string? mirrorDirectory;
 
     /// <summary>包内容的缓存（按文件写入时间 + 长度失效）：列表每 5 秒、投稿前都会读，不能每次都读盘解析（2026-10-03 B-03/C-08）。</summary>
@@ -22,6 +26,80 @@ internal sealed class UITextStore
     {
         this.DirectoryPath = Path.Combine(configDirectory, "uitrans");
         this.mirrorDirectory = mirrorDirectory;
+        this.writeDirectories = new[] { this.DirectoryPath, mirrorDirectory }
+            .Where(path => path is not null)
+            .Select(path => Path.TrimEndingDirectorySeparator(Path.GetFullPath(path!)))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray();
+        this.writeGates = this.writeDirectories.Select(path => DirectoryGates.GetOrAdd(path, static _ => new object())).ToArray();
+    }
+
+    private readonly record struct EditIdentity(string Plugin, int Kind, string Container, string Key, string Original);
+
+    private static EditIdentity? IdentityOf(string name, UITextTarget target)
+    {
+        var plugin = SanitizeName(name).ToUpperInvariant();
+        if (target.Entry is { } entry && target.Resource is null && target.Attribute is null && entry.Original == target.Original)
+            return new(plugin, 0, string.Empty, entry.Original, entry.Original);
+        if (target.Resource is { } resource && target.Entry is null && target.Attribute is null && resource.Original == target.Original)
+            return new(plugin, 1, resource.Container, resource.Key, resource.Original);
+        if (target.Attribute is { } attribute && target.Entry is null && target.Resource is null && attribute.Original == target.Original)
+            return new(plugin, 2, string.Empty, attribute.Original, attribute.Original);
+        return null;
+    }
+
+    // Pending network work lives only in this process. Record manual intent at
+    // the action, including unsaved and same-value actions, without changing the
+    // public pack format. Overlapping primary/mirror stores share each directory
+    // journal just as they share its write gate.
+    internal void RecordEditIntent(string internalName, UITextTarget target)
+    {
+        if (IdentityOf(internalName, target) is not { } identity) return;
+        using var ownership = this.AcquireWrite();
+        var sequence = Interlocked.Increment(ref editSequence);
+        foreach (var directory in this.writeDirectories)
+            DirectoryIntents.GetOrAdd(directory, static _ => new())[identity] = sequence;
+    }
+
+    // Capture before reading the request baseline. Reuse this fence through
+    // library download and machine fallback; recreating it would forget an ABA.
+    // The callback enters only Store gates, never an editor or Manager owner.
+    internal Func<UITextTarget, bool> CaptureEditFence(string internalName)
+    {
+        long sequence;
+        using (this.AcquireWrite()) sequence = Volatile.Read(ref editSequence);
+        return target =>
+        {
+            if (IdentityOf(internalName, target) is not { } identity) return false;
+            using var ownership = this.AcquireWrite();
+            return this.writeDirectories.All(directory => !DirectoryIntents.TryGetValue(directory, out var intents)
+                || !intents.TryGetValue(identity, out var edited) || edited <= sequence);
+        };
+    }
+
+    // All instances writing the same primary or mirror directory share this
+    // process-local transaction boundary. Stable ordering also covers stores
+    // whose primary and mirror directories are reversed. Nested Save calls
+    // reenter the same monitors; independent directories remain concurrent.
+    private IDisposable AcquireWrite() => new WriteScope(this.writeGates);
+
+    private sealed class WriteScope : IDisposable
+    {
+        private readonly object[] gates;
+        private int held;
+        public WriteScope(object[] gates)
+        {
+            this.gates = gates;
+            try
+            {
+                foreach (var gate in gates) { Monitor.Enter(gate); this.held++; }
+            }
+            catch { this.Dispose(); throw; }
+        }
+        public void Dispose()
+        {
+            while (this.held > 0) Monitor.Exit(this.gates[--this.held]);
+        }
     }
 
     /// <summary>
@@ -111,6 +189,25 @@ internal sealed class UITextStore
         return pack;
     }
 
+    internal sealed record ReadSnapshot(UITextPack Pack, DateTime LastWriteTime);
+
+    // Contents and their timestamp must be observed under the same read handle.
+    // A sharing or parse failure is never a successful observation of an empty
+    // pack. The directory transaction covers other in-process Store writers;
+    // the handle also excludes external replacement while this snapshot is read.
+    internal ReadSnapshot LoadSnapshotRequired(string internalName)
+    {
+        using var ownership = this.AcquireWrite();
+        this.EnsureRestored(internalName);
+        var path = this.PathOf(internalName);
+        using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var reader = new StreamReader(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+        var pack = UITextPack.FromJSON(reader.ReadToEnd(), out var error)
+            ?? throw new IOException("译文包无法读取：" + error);
+        pack.Meta.Source ??= "local";
+        return new(pack, File.GetLastWriteTime(path));
+    }
+
     /// <summary>
     ///     读一个包；文件没变时直接复用上次解析出的对象（只给只读用途：列表行摘要 / 投稿体检）。
     ///     要改包（编辑器、翻译流程）一律走 <see cref="Load" /> 拿独立副本，避免共享实例被改。
@@ -160,7 +257,7 @@ internal sealed class UITextStore
         var path = this.PathOf(internalName);
         try
         {
-            lock (this.gate)
+            using (this.AcquireWrite())
             {
                 Directory.CreateDirectory(this.DirectoryPath);
                 pack.Meta.Source = "local";
@@ -183,6 +280,40 @@ internal sealed class UITextStore
         }
     }
 
+    // Keep the editor's read/merge/write inside the same owner as ordinary
+    // saves. A read failure must not turn the current disk pack into an empty
+    // merge base, and an unsuccessful write must not advance the caller's base.
+    internal bool SaveMerged(string internalName, Func<UITextPack, UITextPack> merge,
+        out UITextPack? saved, out string? error) => this.SaveMergedCore(internalName, merge, out saved, out error, false);
+
+    internal bool SaveMergedIfChanged(string internalName, Func<UITextPack, UITextPack> merge,
+        out UITextPack? saved, out string? error) => this.SaveMergedCore(internalName, merge, out saved, out error, true);
+
+    private bool SaveMergedCore(string internalName, Func<UITextPack, UITextPack> merge,
+        out UITextPack? saved, out string? error, bool skipUnchanged)
+    {
+        saved = null;
+        error = null;
+        try
+        {
+            using (this.AcquireWrite())
+            {
+                var latest = this.Exists(internalName) ? this.LoadRequired(internalName) : new UITextPack();
+                var before = skipUnchanged ? latest.ToJSON() : null;
+                var candidate = merge(latest);
+                if (skipUnchanged && candidate.ToJSON() == before) { saved = candidate; return true; }
+                if (!this.Save(internalName, candidate, out error)) return false;
+                saved = candidate;
+                return true;
+            }
+        }
+        catch (Exception exception)
+        {
+            error = exception.Message;
+            return false;
+        }
+    }
+
     /// <summary>
     ///     删掉一个本地包。
     /// </summary>
@@ -191,6 +322,7 @@ internal sealed class UITextStore
         error = null;
         try
         {
+            using var ownership = this.AcquireWrite();
             var path = this.PathOf(internalName);
             if (File.Exists(path))
             {
@@ -243,7 +375,7 @@ internal sealed class UITextStore
                 return false;
             }
 
-            lock (this.gate)
+            using (this.AcquireWrite())
             {
                 if (File.Exists(path))
                 {

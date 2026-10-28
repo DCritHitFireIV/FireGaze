@@ -19,10 +19,17 @@ namespace FireGaze.RepoAudit;
 /// </remarks>
 internal static class PluginEnableBridge
 {
+    internal sealed record EnableReceipt(bool Ok, string Message, bool LoadedByCall);
     /// <summary>
     ///     启用插件并等它加载。回调线程是线程池（调用方自己决定怎么回写界面状态）。
     /// </summary>
-    public static Task<(bool Ok, string Message)> EnableAsync(object? rawPlugin) => Task.Run(() =>
+    public static async Task<(bool Ok, string Message)> EnableAsync(object? rawPlugin)
+    {
+        var result = await EnableWithReceiptAsync(rawPlugin).ConfigureAwait(false);
+        return (result.Ok, result.Message);
+    }
+
+    internal static Task<EnableReceipt> EnableWithReceiptAsync(object? rawPlugin) => Task.Run(() =>
     {
         // 日志带上插件名，排查「是谁在什么时候启用的」不用猜（2026-10-03）
         var name = ReadProperty(ReadProperty(rawPlugin, "Manifest"), "InternalName") as string ?? "?";
@@ -48,11 +55,11 @@ internal static class PluginEnableBridge
             // 2026-10-03 用户实测：ChilledLeves 明明在跑，点「启用插件」却报红。
             if (IsAlreadyLoadedError(inner) && ReadProperty(rawPlugin, "IsLoaded") is true)
             {
-                return (true, "插件已经在运行，无需重复启用。");
+                return new EnableReceipt(true, "插件已经在运行，无需重复启用。", false);
             }
 
             ActivityLog.Error("启用插件", $"{name}：启用失败", e);
-            return (false, $"启用插件出错：{e.GetType().Name}: {inner.Message}");
+            return new EnableReceipt(false, $"启用插件出错：{e.GetType().Name}: {inner.Message}", false);
         }
     });
 
@@ -61,11 +68,11 @@ internal static class PluginEnableBridge
         || e.Message.Contains("已经加载", StringComparison.Ordinal)
         || e.Message.Contains("already loaded", StringComparison.OrdinalIgnoreCase);
 
-    private static (bool Ok, string Message) Enable(object? rawPlugin)
+    private static EnableReceipt Enable(object? rawPlugin)
     {
         if (rawPlugin is null)
         {
-            return (false, "无法读取此插件的信息，请刷新列表后重试。");
+            return new(false, "无法读取此插件的信息，请刷新列表后重试。", false);
         }
 
         var type = rawPlugin.GetType();
@@ -73,13 +80,13 @@ internal static class PluginEnableBridge
         var internalName = (ReadProperty(ReadProperty(rawPlugin, "Manifest"), "InternalName") as string) ?? string.Empty;
         if (workingID == Guid.Empty || internalName.Length == 0)
         {
-            return (false, "无法读取此插件的信息，请刷新列表后重试。");
+            return new(false, "无法读取此插件的信息，请刷新列表后重试。", false);
         }
 
         // 已经在跑就别再 LoadAsync（卫月会抛「无法加载 X, 已经加载」，用户看到的就是这个红字）
         if (ReadProperty(rawPlugin, "IsLoaded") is true)
         {
-            return (true, "插件已经在运行，无需重复启用。");
+            return new(true, "插件已经在运行，无需重复启用。", false);
         }
 
         // ① 记下「这个插件想要运行」——与安装器一致，不记的话重开游戏又会变回停用
@@ -98,18 +105,21 @@ internal static class PluginEnableBridge
         var loadAsync = type.GetMethod("LoadAsync", BindingFlags.Public | BindingFlags.Instance, [typeof(Dalamud.Plugin.PluginLoadReason), typeof(bool), typeof(CancellationToken)]);
         if (loadAsync?.Invoke(rawPlugin, [reason, false, CancellationToken.None]) is not Task task)
         {
-            return (false, "当前无法启用此插件，请在卫月插件安装器中重试。");
+            return new(false, "当前无法启用此插件，请在卫月插件安装器中重试。", false);
         }
 
         task.GetAwaiter().GetResult();
         if (task.IsFaulted)
         {
-            return (false, "加载失败：" + (task.Exception?.GetBaseException().Message ?? "未知错误"));
+            return new(false, "加载失败：" + (task.Exception?.GetBaseException().Message ?? "未知错误"), false);
         }
 
-        return (true, profileNote.Length > 0
+        if (ReadProperty(rawPlugin, "IsLoaded") is not true)
+            return new(false, "加载操作已结束，但插件未处于已加载状态。", false);
+
+        return new(true, profileNote.Length > 0
             ? $"已启用，插件已加载；{profileNote}"
-            : "已启用，插件已加载；界面即刻生效。");
+            : "已启用，插件已加载；界面即刻生效。", true);
     }
 
     /// <summary>把「想要运行」写进插件所在的 Profile（优先已声明它的那份，否则默认 Profile）。</summary>

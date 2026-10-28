@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-06",
+    "updatedAt": "2026-10-28",
     "source": "user",
     "label": "玩家包 · 3efeb7",
     "kinds": [
@@ -10,82 +10,77 @@
   },
   "entries": [
     {
-      "Original": "testing",
-      "Translated": "测试",
-      "Context": "FlavorUtils.DetermineFlavor",
-      "Source": "library"
-    },
-    {
-      "Original": "negative",
-      "Translated": "否定",
-      "Context": "FlavorUtils.DetermineFlavorCore",
-      "Source": "library"
-    },
-    {
-      "Original": "Unknown",
-      "Translated": "未知",
-      "Context": "VersionUtils.GetSonarPluginVersion",
-      "Source": "library"
-    },
-    {
-      "Original": "all",
-      "Translated": "所有",
-      "Context": "RelayTrackerViews..ctor",
-      "Source": "library"
-    },
-    {
       "Original": "Audiences##",
       "Translated": "受众##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "library",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Regions##",
       "Translated": "区域##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "library",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Datacenters##",
-      "Translated": "数据中心",
+      "Translated": "数据中心##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Worlds##",
-      "Translated": "世界",
+      "Translated": "服务器##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Zones##",
-      "Translated": "区域",
+      "Translated": "区域##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Instances##",
-      "Translated": "实例",
+      "Translated": "副本实例##",
       "Context": "IndexSelectionWidget.DrawBreadcrumb",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "Role": "Excluded",
+      "RoleReason": "纯 ImGui 弹窗身份前缀，拼接实例 ID 后由 OpenPopup/BeginPopup 成对消费，禁止翻译",
+      "Review": "自动排除：Sonar DrawBreadcrumb 纯弹窗身份（静态消费者复核 2026-10-26）；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "Sonar Lodestone Verification",
-      "Translated": "声纳磁石验证",
+      "Translated": "Sonar Lodestone 验证",
       "Context": "LodestoneVerifyWindow..ctor",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "PreserveID": true
     },
     {
       "Original": "Lodestone Verification is needed for your currently logged in character:",
-      "Translated": "您当前登录的角色需要进行磁石验证：",
+      "Translated": "您当前登录的角色需要进行 Lodestone 验证：",
       "Context": "LodestoneVerifyWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.",
-      "Translated": "您可以在/sonarconfig General 选项卡的 Lodestone Settings 中禁用此对话框。",
+      "Translated": "可在 /sonarconfig 的“常规”标签页中，通过 Lodestone 设置隐藏此对话框。",
       "Context": "LodestoneVerifyWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Unspecified Reason.",
@@ -95,9 +90,9 @@
     },
     {
       "Original": "Please contact Sonar support for assistance.",
-      "Translated": "请联系声纳支持寻求帮助。",
+      "Translated": "请联系 Sonar 支持以获取帮助。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Your character is currently not verified.",
@@ -107,63 +102,63 @@
     },
     {
       "Original": "Your character lodestone profile is not found.",
-      "Translated": "您的角色磁石档案未找到。",
+      "Translated": "未找到您的 Lodestone 角色资料。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.",
-      "Translated": "使您角色的 Lodestone 资料可搜索和公开。验证完成后，您可以将其恢复为私有。",
+      "Translated": "请将 Lodestone 角色资料设为公开且可搜索。验证完成后可重新设为私密。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Your character lodestone profile is private.",
-      "Translated": "您的角色磁石档案是私密的。",
+      "Translated": "您的 Lodestone 角色资料为私密。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done.",
-      "Translated": "将您的 Lodestone 配置文件公开，以便进行验证。验证完成后，您可以将其恢复为私有。",
+      "Translated": "请将 Lodestone 角色资料设为公开，以便完成验证。验证完成后可重新设为私密。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Your character has been renamed and your character's lodestone profile is private.",
-      "Translated": "您的角色已经被重新命名，并且您角色的磁石档案是私密的。",
+      "Translated": "您的角色已经改名，且 Lodestone 角色资料为私密。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Your character hash mismatch and your character's lodestone profile is private.",
-      "Translated": "你的角色哈希不匹配，而且你的角色磁石档案是私密的。",
+      "Translated": "您的角色哈希不匹配，且 Lodestone 角色资料为私密。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Your character lodestone information stored at Sonar is stale.",
-      "Translated": "你存储在 Sonar 中的角色磁石信息已经过时了。",
+      "Translated": "Sonar 中保存的 Lodestone 角色信息已过期。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Unable to provide reason.",
-      "Translated": "无法提供理由。",
+      "Translated": "无法提供原因。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Update your Sonar plugin or contact support for assistance.",
-      "Translated": "更新 Sonar 插件或联系支持以获取帮助。",
+      "Translated": "请更新 Sonar 插件，或联系支持以获取帮助。",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Add the following code into your chracter's lodestone profile bio:",
-      "Translated": "将以下代码添加到角色的磁石档案生物信息中：",
+      "Translated": "请将以下代码添加到 Lodestone 角色资料的个人简介中：",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Copy",
@@ -173,9 +168,9 @@
     },
     {
       "Original": "Open Lodestone Profile",
-      "Translated": "打开磁石档案",
+      "Translated": "打开 Lodestone 角色资料",
       "Context": "LodestoneVerifyWindow.DrawReason",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Open Lodestone Website",
@@ -185,45 +180,45 @@
     },
     {
       "Original": "This verification is a requirement.",
-      "Translated": "这种验证是必要的。",
+      "Translated": "此验证为必需步骤。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "This verification will become a requirement in ",
-      "Translated": "这项验证将成为一项要求。",
+      "Translated": "此验证将在 ",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": " days.",
-      "Translated": "天数。",
+      "Translated": " 天后成为必需步骤。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": " hours.",
-      "Translated": "小时。",
+      "Translated": " 小时后成为必需步骤。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": " minutes.",
-      "Translated": "分钟。",
+      "Translated": " 分钟后成为必需步骤。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "This verification will become a requirement in less than 5 minutes.",
-      "Translated": "这项验证将在不到 5 分钟内成为要求。",
+      "Translated": "此验证将在不到 5 分钟后成为必需步骤。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "This verification is not a requirement at this time.",
-      "Translated": "这种验证目前不是必需的。",
+      "Translated": "目前无需完成此验证。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Verify",
@@ -251,9 +246,9 @@
     },
     {
       "Original": "You'll only be able to use Sonar in local mode if not verified by the time this becomes a requirement.",
-      "Translated": "只有在未经验证的情况下，才能在本地模式下使用 Sonar。",
+      "Translated": "如果在验证成为必需之前仍未完成验证，您将只能以本地模式使用 Sonar。",
       "Context": "LodestoneVerifyWindow.DrawVerification",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Zone",
@@ -275,15 +270,15 @@
     },
     {
       "Original": "- Lots of strings are still not covered",
-      "Translated": "- 许多弦仍未被覆盖",
+      "Translated": "- 仍有许多文本尚未纳入本地化",
       "Context": "SonarConfigWindow.DrawGeneralTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "- Strings may change between releases",
-      "Translated": "字符串可能在不同版本之间发生变化",
+      "Translated": "- 文本可能随版本更新而变化",
       "Context": "SonarConfigWindow.DrawGeneralTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Use localization at your own risk!",
@@ -299,87 +294,87 @@
     },
     {
       "Original": "Separate Rank SS and Minions from Rank S",
-      "Translated": "将 SS 级别和小兵与 S 级别分开",
+      "Translated": "将 SS级及其随从的通知与 S级分开",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Granular Hunt Reporting Settings",
-      "Translated": "粒度狩猎报告设置",
+      "Translated": "狩猎报告详细设置",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Hunt Display Timers",
-      "Translated": "狩猎显示计时器",
+      "Translated": "狩猎显示时限",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "All timers are in seconds. CTRL+Click to input directly.",
-      "Translated": "所有定时器都以秒为单位。CTRL+ 单击直接输入。",
+      "Translated": "所有时限均以秒为单位。CTRL+单击可直接输入。",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Time since death (S and A)",
-      "Translated": "死亡时间 (S 和 A)",
+      "Translated": "死亡后的保留时间（S级与A级）",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Time since last update (S and A)",
-      "Translated": "自上次更新以来的时间 (S 和 A)",
+      "Translated": "最后更新后的保留时间（S级与A级）",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Time since last update (B)",
-      "Translated": "自上次更新以来的时间 (B)",
+      "Translated": "最后更新后的保留时间（B级）",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Hunts Display Limit",
-      "Translated": "Hunts 显示限制",
+      "Translated": "狩猎显示数量上限",
       "Context": "SonarConfigWindow.DrawHuntTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Fate Display Timers",
-      "Translated": "命运显示计时器",
+      "Translated": "临危受命显示时限",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Time since completion or failure",
-      "Translated": "自完成或失败以来的时间",
+      "Translated": "完成或失败后的保留时间",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Time since last update",
-      "Translated": "自上次更新以来的时间",
+      "Translated": "最后更新后的保留时间",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Fates Display Limit",
-      "Translated": "命运显示限制",
+      "Translated": "临危受命显示数量上限",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Fate Selection",
-      "Translated": "命运选择",
+      "Translated": "临危受命选择",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Default Report Jurisdiction",
-      "Translated": "默认报告管辖权",
+      "Translated": "默认报告接收范围",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Search",
@@ -389,21 +384,21 @@
     },
     {
       "Original": "{0} fate(s) selected to chat",
-      "Translated": "{0} 选择聊天的宿命",
+      "Translated": "已为 {0} 个临危受命开启聊天提示",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "{0} fate(s) selected to sound",
-      "Translated": "{0} 选择发声的宿命 (s)",
+      "Translated": "已为 {0} 个临危受命开启声音提示",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "{0} fate(s) not set to default jurisdiction",
-      "Translated": "{0} 未设置默认管辖权",
+      "Translated": "有 {0} 个临危受命使用自定义接收范围",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Chat",
@@ -419,9 +414,9 @@
     },
     {
       "Original": "Jurisdiction",
-      "Translated": "管辖权",
+      "Translated": "接收范围",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Level",
@@ -437,9 +432,9 @@
     },
     {
       "Original": "Expansion",
-      "Translated": "扩展",
+      "Translated": "资料片",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Achievement",
@@ -449,9 +444,9 @@
     },
     {
       "Original": "Send to chat",
-      "Translated": "发送到聊天室",
+      "Translated": "发送到聊天窗口",
       "Context": "SonarConfigWindow.DrawFateTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Play Sounds",
@@ -461,33 +456,33 @@
     },
     {
       "Original": "Brought to you by the Sonar Team",
-      "Translated": "声纳团队为您带来的",
+      "Translated": "由 Sonar 团队提供",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar Support Discord##SonarDiscord",
-      "Translated": "声纳支持 Discord##声纳 Discord",
+      "Translated": "Sonar 支持 Discord##SonarDiscord",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Ask questions and report bugs at the Sonar Support Discord Server.\nNote that Sonar Support is not provided in the goat place's discord.",
-      "Translated": "在声纳支持失谐服务器上提问和报告错误。\n请注意，在山羊栖息地的不谐波中没有提供声纳支持。",
+      "Translated": "请前往 Sonar 支持 Discord 服务器提问或报告问题。\n请勿在 goat place 的 Discord 服务器请求 Sonar 支持。",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar Patreon##SonarPatreon",
-      "Translated": "Sonar Patreon ##SonarPatreon",
+      "Translated": "Sonar Patreon##SonarPatreon",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Support Sonar on Patreon.\nEarnings will be used for the hosting costs of the Sonar Server and Discord Bots.",
-      "Translated": "Patreon 上的声纳支持。\n收益将用于支付 Sonar Server 和 Discord Bots 的托管费用。",
+      "Translated": "在 Patreon 上支持 Sonar。\n所得款项将用于 Sonar 服务器和 Discord 机器人的托管费用。",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar Status",
@@ -503,15 +498,15 @@
     },
     {
       "Original": "Disconnected",
-      "Translated": "断开连接",
+      "Translated": "未连接",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar will keep trying to reconnect automatically",
-      "Translated": "声纳将继续尝试自动重新连接。",
+      "Translated": "Sonar 将继续尝试自动重新连接",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Reconnect",
@@ -521,9 +516,9 @@
     },
     {
       "Original": "Signal Sonar to attempt reconnecting to server",
-      "Translated": "发出信号让声纳尝试重新连接到服务器",
+      "Translated": "请求 Sonar 尝试重新连接服务器",
       "Context": "SonarConfigWindow.DrawAboutTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Version Information",
@@ -533,21 +528,21 @@
     },
     {
       "Original": "Dalamud ",
-      "Translated": "在 Damud",
+      "Translated": "Dalamud ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "FFXIV ",
-      "Translated": "最终幻想 14",
+      "Translated": "FFXIV ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Client Hash: ",
-      "Translated": "客户端哈希：",
+      "Translated": "客户端哈希： ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Show",
@@ -569,9 +564,9 @@
     },
     {
       "Original": "Zone: ",
-      "Translated": "区域：",
+      "Translated": "区域： ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Hunts Tracker",
@@ -581,21 +576,21 @@
     },
     {
       "Original": "Count: ",
-      "Translated": "计数：",
+      "Translated": "数量： ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": " | Index: ",
-      "Translated": "索引：",
+      "Translated": " | 索引： ",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Clear",
-      "Translated": "清晰",
+      "Translated": "清空",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Check",
@@ -605,9 +600,9 @@
     },
     {
       "Original": "Perform a consistency check of the index\nOutput will be at /xllog",
-      "Translated": "对索引进行一致性检查\n输出将位于/xllog",
+      "Translated": "检查索引的一致性\n结果将输出到 /xllog",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Rebuild",
@@ -617,9 +612,9 @@
     },
     {
       "Original": "Rebuild index\nOutput will be at /xllog\n\nWarning: You may experience stuttering",
-      "Translated": "Rebuild 索引\n输出将显示在/xllog\n\n警告：你可能会遇到口吃的情况",
+      "Translated": "重建索引\n结果将输出到 /xllog\n\n警告：可能出现卡顿",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Busy",
@@ -629,9 +624,9 @@
     },
     {
       "Original": "Fates Tracker",
-      "Translated": "命运追踪器",
+      "Translated": "临危受命追踪器",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Request Relay Data",
@@ -641,9 +636,9 @@
     },
     {
       "Original": "Request all relay information to be received.\nTrack All options will automatically be enabled for both Hunts and Fates.\nThis can only be done once.\n\nWarning: You'll receive everything the Sonar server knows!\nThis is currently under testing.",
-      "Translated": "请求接收所有中继信息。\n追踪所有选项将自动为狩猎和命运开启。\n这只能做一次。\n\n警告：你将接收到声纳服务器所知的一切！\n这个目前正在测试中。",
+      "Translated": "请求接收全部报告信息。\n这会自动开启“追踪所有狩猎”和“追踪所有临危受命”。\n此操作只能执行一次。\n\n警告：您将接收 Sonar 服务器已知的全部信息！\n此功能仍在测试中。",
       "Context": "SonarConfigWindow.DrawDebugTab",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Log Level",
@@ -652,40 +647,29 @@
       "Source": "library"
     },
     {
-      "Original": "<rank>: <name> <hpp> <flag> <<world>> <instance> [<players>]",
-      "Translated": "<rank>: <name> <hpp> <flag> <world> <instance> [<players>]",
-      "Context": "SonarMainWindow.DrawHunt",
-      "Source": "library"
-    },
-    {
-      "Original": "[B] <name>: <flag> <<world>> <instance> <tap> [<players>]",
-      "Translated": "[B] <name>: <flag> <world> <instance> <tap> [<players>]",
-      "Context": "SonarMainWindow.DrawFate",
-      "Source": "library"
-    },
-    {
       "Original": "Sonar Tracker (UNDER DEVELOPMENT!!!)",
-      "Translated": "声纳追踪器 (未开发！!!)",
+      "Translated": "Sonar 追踪器（开发中）",
       "Context": "SonarTrackerWindow..ctor",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed",
+      "PreserveID": true
     },
     {
       "Original": "Index key: ",
-      "Translated": "索引键：",
+      "Translated": "索引键： ",
       "Context": "SonarTrackerWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Hunts: ",
-      "Translated": "狩猎：",
+      "Translated": "狩猎： ",
       "Context": "SonarTrackerWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": " | Fates: ",
-      "Translated": "命运：",
+      "Translated": " | 临危受命： ",
       "Context": "SonarTrackerWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Congratulations finding this!",
@@ -695,21 +679,21 @@
     },
     {
       "Original": "Right now there's nothing useful in this window but I'll be working on this next release. In the meantime enjoy the filtering selector and hunt/fates counts",
-      "Translated": "目前这个窗口中没有什么有用的内容，但我会继续开发下一个版本。与此同时，请尽情享受过滤选择器和搜索/命运计数。",
+      "Translated": "目前此窗口尚无实用功能，计划在后续版本继续开发。现阶段可试用筛选器，并查看狩猎与临危受命数量。",
       "Context": "SonarTrackerWindow.Draw",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar Support##",
-      "Translated": "声纳支持",
+      "Translated": "Sonar 支持##",
       "Context": "SupportWindow..ctor",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Sonar Support Result##",
-      "Translated": "声纳支持结果",
+      "Translated": "Sonar 支持结果##",
       "Context": "SupportWindow..ctor",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "* = required",
@@ -731,9 +715,9 @@
     },
     {
       "Original": "We cannot contact you in-game.\nProvide an external method of contact.",
-      "Translated": "我们无法在游戏中联系您。\n提供外部联系方式。",
+      "Translated": "我们无法在游戏中联系您。\n请提供游戏外的联系方式。",
       "Context": "SupportWindow.DrawForm",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Title",
@@ -743,27 +727,27 @@
     },
     {
       "Original": "Body*",
-      "Translated": "身体 *",
+      "Translated": "正文*",
       "Context": "SupportWindow.DrawForm",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Player Name",
-      "Translated": "玩家名称",
+      "Translated": "角色名",
       "Context": "SupportWindow.DrawForm",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "(Required) ",
-      "Translated": "(必填)",
+      "Translated": "（必填） ",
       "Context": "SupportWindow.DrawForm",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Provide character and world name",
-      "Translated": "提供角色和世界名称",
+      "Translated": "请提供角色名和服务器名",
       "Context": "SupportWindow.DrawForm",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Send",
@@ -791,29 +775,1304 @@
     },
     {
       "Original": "Exception details",
-      "Translated": "例外详情",
+      "Translated": "异常详情",
       "Context": "SupportWindow.DrawResponseWindow",
-      "Source": "library"
+      "Source": "ai:sonar-contract-reviewed"
     },
     {
       "Original": "Close",
       "Translated": "关闭",
       "Context": "SupportWindow.DrawResponseWindow",
       "Source": "library"
-    },
-    {
-      "Original": "__Meta.Author",
-      "Translated": "__Meta.作者",
-      "Context": "LocalizationWidgetHelper.ShowTooltip",
-      "Source": "library"
-    },
-    {
-      "Original": "__Meta.Notes",
-      "Translated": "__Meta.注释",
-      "Context": "LocalizationWidgetHelper.ShowTooltip",
-      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [
+    {
+      "Original": "Play Sound",
+      "Translated": "播放声音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::PlaySound",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sounds",
+      "Translated": "声音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sounds",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Game sound effect",
+      "Translated": "游戏音效",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::GameSound",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Legacy sound",
+      "Translated": "旧版音效",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Resource",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Custom",
+      "Translated": "自定义",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Custom",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayStatus::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayType::Unknown; [属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Unknown",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Uses FFXIV's audio engine to play the game's built in sound effects.\nUses FFXIV's system sounds volume.",
+      "Translated": "使用 FFXIV 音频引擎播放游戏内置音效。\n音量由游戏的系统音效设置控制。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::GameSoundTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Uses Sonar's audio engine to play previously included sound effects.\nUses Sonar's alert volume.",
+      "Translated": "使用 Sonar 音频引擎播放旧版内置音效。\n音量由 Sonar 提示音量设置控制。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResourceTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Uses Sonar's audio engine to play a custom sound effect.\nUses Sonar's alert volume.",
+      "Translated": "使用 Sonar 音频引擎播放自定义音效。\n音量由 Sonar 提示音量设置控制。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::CustomTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Contact Sonar Support should this appear",
+      "Translated": "如果出现此项，请联系 Sonar 支持。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::UnknownTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Select file...",
+      "Translated": "选择文件…",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFile",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Custom sound file",
+      "Translated": "自定义音效文件",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFilePrompt",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sound files",
+      "Translated": "音效文件",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFilePromptSoundFiles",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sound <id>",
+      "Translated": "音效 <id>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SoundGeneric",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Enter Chat",
+      "Translated": "进入聊天",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResEnterChat",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fanfare",
+      "Translated": "庆祝音效",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResFanfare",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Feature Unlocked",
+      "Translated": "功能解锁",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResFeatureUnlocked",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Incoming Tell 1",
+      "Translated": "收到悄悄话 1",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResIncomingTell1",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Incoming Tell 2",
+      "Translated": "收到悄悄话 2",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResIncomingTell2",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Limit Break Charged",
+      "Translated": "极限技蓄满",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLimitBreakCharged",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Limit Break Unlocked",
+      "Translated": "极限技解锁",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLimitBreakUnlocked",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Linkshell Transmission",
+      "Translated": "通讯贝消息",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLinkshellTransmission",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Notification",
+      "Translated": "通知",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResNotification",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Global Contribute",
+      "Translated": "上报总开关",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::GlobalContribute",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Disable this to disable contributing both hunts and fates.\nAccessible via /sonaron and /sonaroff commands.",
+      "Translated": "关闭后将停止上报狩猎和临危受命。\n也可使用 /sonaron 和 /sonaroff 命令控制。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::GlobalContributeTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Contribute Hunts",
+      "Translated": "上报狩猎",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeHunts",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Contribute Fates",
+      "Translated": "上报临危受命",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeFates",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Contributing reports is required in order to receive reports from other Sonar users.\nIf disabled Sonar will continue to work in local mode, where you'll see what's detected within your game but you'll not receive from others.",
+      "Translated": "只有开启上报，才能接收其他 Sonar 用户的报告。\n关闭后 Sonar 仍以本地模式工作，只显示当前游戏检测到的内容，不接收其他用户的报告。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Global Disabled",
+      "Translated": "总开关已关闭",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeGlobalDisabled",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Track All Hunts",
+      "Translated": "追踪所有狩猎",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::TrackAllHunts",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Track All Fates",
+      "Translated": "追踪所有临危受命",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::TrackAllFates",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Checked: Track all reports regardless of jurisdiction settings.\nUnchecked: Track reports within jurisdiction settings only.",
+      "Translated": "勾选：忽略接收范围设置，追踪所有报告。\n未勾选：仅追踪接收范围内的报告。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::TrackAllTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Receive Jurisdiction",
+      "Translated": "接收范围",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ReceiveJurisdiction",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sonar Configuration",
+      "Translated": "Sonar 配置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::WindowTitle",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::GeneralTab",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hunts",
+      "Translated": "狩猎",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntsTab",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "FATEs",
+      "Translated": "临危受命",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FatesTab",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AboutTab",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DebugTab; [属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Debug; [属性] EnumLocAttribute Sonar.Enums.SonarBuildEnvironment::Debug",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Overlay Visible by default",
+      "Translated": "默认显示悬浮窗",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::OverlaysVisibleByDefault",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Lock overlays",
+      "Translated": "锁定悬浮窗",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LockOverlays",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hide Title Bar",
+      "Translated": "隐藏标题栏",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HideTitleBar",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Enable window clickthrough",
+      "Translated": "允许鼠标穿透窗口",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::EnableClickthrough",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Enable tab bar clickthrough",
+      "Translated": "允许鼠标穿透标签栏",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::TabsClickthrough",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Enable list clickthrough",
+      "Translated": "允许鼠标穿透列表",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ListClickthrough",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sorting Mode",
+      "Translated": "排序方式",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SortingMode",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Alert Volume",
+      "Translated": "提示音量",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AlertVolume",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Duty Settings",
+      "Translated": "任务副本设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutySettingsHeader",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Click Settings",
+      "Translated": "点击操作设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ClickSettingsHeader",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Localization Settings",
+      "Translated": "语言设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LocalizationHeader",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Lodestone Verification Settings",
+      "Translated": "Lodestone 验证设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LodestoneHeader",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sonar Color Scheme",
+      "Translated": "Sonar 配色",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ColorSettingsHeader",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Disable Chat Alerts during Duties",
+      "Translated": "任务副本中禁用聊天提示",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutyDisableChatAlerts",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Disable Sounds Alerts during Duties",
+      "Translated": "任务副本中禁用声音提示",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutyDisableSoundAlerts",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Middle Click",
+      "Translated": "鼠标中键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::MiddleClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Right Click",
+      "Translated": "鼠标右键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::RightClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Shift Middle Click",
+      "Translated": "Shift + 鼠标中键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ShiftMiddleClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Shift Right Click",
+      "Translated": "Shift + 鼠标右键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ShiftRightClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Alt Middle Click",
+      "Translated": "Alt + 鼠标中键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AltMiddleClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Alt Right Click",
+      "Translated": "Alt + 鼠标右键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AltRightClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Ctrl Middle Click",
+      "Translated": "Ctrl + 鼠标中键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CtrlMiddleClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Ctrl Right Click",
+      "Translated": "Ctrl + 鼠标右键",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CtrlRightClick",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Preferred City State",
+      "Translated": "首选城邦",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PreferredCityState",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Suppress Verification Requests",
+      "Translated": "隐藏验证请求",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SuppressLodestoneVerifications",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hunt - Healthy",
+      "Translated": "狩猎 — 未开战",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HealthyHuntColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hunt - Pulled",
+      "Translated": "狩猎 — 已开战",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PulledHuntColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hunt - Dead",
+      "Translated": "狩猎 — 已死亡",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DeadHuntColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Running",
+      "Translated": "临危受命 — 进行中",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::RunningFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Progress",
+      "Translated": "临危受命 — 进度",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ProgressFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Complete",
+      "Translated": "临危受命 — 已完成",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CompleteFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Failed",
+      "Translated": "临危受命 — 已失败",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FailedFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Preparing",
+      "Translated": "临危受命 — 准备中",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PreparingFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate - Unknown",
+      "Translated": "临危受命 — 未知",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::UnknownFateColor",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Color Presets",
+      "Translated": "配色预设",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ColorPresets",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DefaultColorPreset; [属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Default; [属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Default; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Default; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Default",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Original",
+      "Translated": "原始",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::OriginalColorPreset",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Reports Configuration",
+      "Translated": "聊天报告设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatReportsConfig",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Show reports in game chat",
+      "Translated": "在游戏聊天窗口中显示报告",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatReportsEnabled",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Use italic font",
+      "Translated": "使用斜体",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableItalics",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Use crossworld icon when report is in another world",
+      "Translated": "其他服务器的报告显示跨服图标",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableCwIcon",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Show death reports",
+      "Translated": "显示死亡报告",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableDeaths",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sound Alerts Configuration",
+      "Translated": "声音提示设置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SoundAlertsConfig",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "S Rank Sounds",
+      "Translated": "S级狩猎提示音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntSRankSounds",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "A Rank Sounds",
+      "Translated": "A级狩猎提示音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntARankSounds",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "B Rank Sounds",
+      "Translated": "B级狩猎提示音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntBRankSounds",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fate Sounds",
+      "Translated": "临危受命提示音",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FateSounds",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::AllTab; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::All",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Location",
+      "Translated": "位置",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::LocationDetail",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Show coordinates in chat window",
+      "Translated": "在聊天窗口显示坐标",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailFlagToolTip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Set flag and open map",
+      "Translated": "设置旗标并打开地图",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailMapToolTip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Teleport to Closest Aetheryte",
+      "Translated": "传送至最近的以太之光",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailTeleportToolTip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Remove hunt from the list until next update",
+      "Translated": "从列表中移除该狩猎，直到下次更新",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailRemoveToolTip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Export Fallbacks",
+      "Translated": "导出默认文本",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::ExportFallbacks",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Run Setup",
+      "Translated": "初始化语言",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::RunSetup",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Import language file",
+      "Translated": "导入语言文件",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::ImportPrompt",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Export language file",
+      "Translated": "导出语言文件",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::ExportPrompt",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Debug fallbacks",
+      "Translated": "调试默认文本",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::DebugFallbacks",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Use debug fallbacks, showing the keys.",
+      "Translated": "使用调试默认文本，直接显示本地化键。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::DebugFallbacksTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Minified export",
+      "Translated": "压缩导出",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::MinifiedExport",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Run language setup in a separate thread.",
+      "Translated": "在独立线程中初始化语言。",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::ThreadedTooltip",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Sonar Team",
+      "Translated": "Sonar 团队",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Author; [属性] EnumLocAttribute Sonar.Localization.__LocMeta::Author",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "English",
+      "Translated": "英语",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Language; [属性] EnumLocAttribute Sonar.Localization.__LocMeta::Language; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::English; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::English",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Default plugin fallbacks",
+      "Translated": "插件默认文本",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Notes",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "None",
+      "Translated": "无",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::None; [属性] EnumLocAttribute SonarPlugin.Config.KeyModifier::None; [属性] EnumLocAttribute Sonar.Enums.HuntRank::None; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::None",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Send to Chat",
+      "Translated": "发送到聊天窗口",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Chat",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Create Flag",
+      "Translated": "创建旗标",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Map",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Teleport",
+      "Translated": "传送",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Teleport",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Remove",
+      "Translated": "移除",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Remove",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Single",
+      "Translated": "单条",
+      "Context": "[属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Single",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Multiple",
+      "Translated": "多条",
+      "Context": "[属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Multiple",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Last Found",
+      "Translated": "最后发现",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::LastFound; [属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastFound",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Last Updated",
+      "Translated": "最后更新",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::LastUpdated",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Alphabetical",
+      "Translated": "按名称",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Alphabetical",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Data Center ID",
+      "Translated": "数据中心",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Datacenter",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "World ID",
+      "Translated": "服务器",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::World",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Zone ID",
+      "Translated": "区域",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Zone",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "World then Zone then Instance then Relay IDs",
+      "Translated": "服务器、区域、副本实例、报告",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::WorldZoneInstanceRelay",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Zone then Instance then Relay IDs",
+      "Translated": "区域、副本实例、报告",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::ZoneInstanceRelay",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Jurisdiction",
+      "Translated": "接收范围",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Jurisdiction",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Jurisdiction then World then Zone then Instance then Relay IDs",
+      "Translated": "接收范围、服务器、区域、副本实例、报告",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::JurisdictionWorldZoneInstanceRelay",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Never",
+      "Translated": "从不",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.SuppressVerification::None",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Unless required",
+      "Translated": "除非必需",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.SuppressVerification::UnlessRequired",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Always",
+      "Translated": "始终",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.SuppressVerification::Always",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Not Applicable",
+      "Translated": "不适用",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::NotApplicable",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "FATE",
+      "Translated": "临危受命",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayType::Fate",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Unknown, should not happen.",
+      "Translated": "未知原因，正常情况下不应出现。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::Unknown",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "This character is not verified. You need to make your lodestone profile visible and searchable for verification to work. You can make your lodestone profile private again after verification.",
+      "Translated": "该角色尚未验证。请将 Lodestone 角色资料设为公开且可搜索，以便完成验证。验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::NotVerified",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Your character profile could not be found. You need to make your lodestone profile visible and searchable for verification to work. You can make your lodestone profile private again after verification.",
+      "Translated": "未找到您的角色资料。请将 Lodestone 角色资料设为公开且可搜索，以便完成验证。验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::NotFound",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Your character profile is found but its currently private. You need to make your lodestone profile visible and searchable for verification to work. You can make your lodestone profile private again after verification.",
+      "Translated": "已找到您的角色资料，但目前为私密。请将 Lodestone 角色资料设为公开且可搜索，以便完成验证。验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::PrivateProfile",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Request is the result of a rename. You need to make your lodestone profile visible. You can make your lodestone profile private again after verification.",
+      "Translated": "角色改名后需要重新验证。请将 Lodestone 角色资料设为公开，验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::Renamed",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Character hash mismatch and your lodestone profile is private. You need to make your lodestone profile visible. You can make your lodestone profile private again after verification.",
+      "Translated": "角色哈希不匹配，且 Lodestone 角色资料为私密。请将资料设为公开，验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::HashMismatch",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Character information is stale. You need to make your lodestone profile visible. You can make your lodestone profile private again after verification.",
+      "Translated": "角色信息已过期。请将 Lodestone 角色资料设为公开，验证后可重新设为私密。",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.LodestoneVerificationReason::Stale",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Last Seen",
+      "Translated": "最后目击",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastSeen",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Last Killed",
+      "Translated": "最后击杀",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastKilled",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Last Healthy",
+      "Translated": "最后未开战",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastHealthy",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Actor ID",
+      "Translated": "对象编号",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::ActorId",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Default sonar fallbacks",
+      "Translated": "Sonar 默认文本",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.__LocMeta::Notes",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "A Realm Reborn",
+      "Translated": "重生之境",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::ARealmReborn",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "SS Minion",
+      "Translated": "SS级狩猎随从",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.HuntRank::SSMinion",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Data Center",
+      "Translated": "数据中心",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Datacenter",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.1>",
+      "Translated": "聊天音效 <se.1>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound37",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.2>",
+      "Translated": "聊天音效 <se.2>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound38",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.3>",
+      "Translated": "聊天音效 <se.3>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound39",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.4>",
+      "Translated": "聊天音效 <se.4>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound40",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.5>",
+      "Translated": "聊天音效 <se.5>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound41",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.6>",
+      "Translated": "聊天音效 <se.6>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound42",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.7>",
+      "Translated": "聊天音效 <se.7>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound43",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.8>",
+      "Translated": "聊天音效 <se.8>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound44",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.9>",
+      "Translated": "聊天音效 <se.9>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound45",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.10>",
+      "Translated": "聊天音效 <se.10>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound46",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.11>",
+      "Translated": "聊天音效 <se.11>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound47",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.12>",
+      "Translated": "聊天音效 <se.12>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound48",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.13>",
+      "Translated": "聊天音效 <se.13>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound49",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.14>",
+      "Translated": "聊天音效 <se.14>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound50",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.15>",
+      "Translated": "聊天音效 <se.15>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound51",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chat Sounds <se.16>",
+      "Translated": "聊天音效 <se.16>",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sound52",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Opacity",
+      "Translated": "不透明度",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::Opacity",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Plugin",
+      "Translated": "插件",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Plugin",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Language",
+      "Translated": "语言",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Language",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Advanced",
+      "Translated": "高级",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Advanced",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Fallbacks",
+      "Translated": "默认文本",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Fallbacks",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Presets",
+      "Translated": "预设",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Presets",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Resources",
+      "Translated": "资源",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Resources",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Import",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Export",
+      "Translated": "导出",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Export",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Load",
+      "Translated": "加载",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Load",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Save",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Undefined",
+      "Translated": "未指定",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Undefined",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Japanese",
+      "Translated": "日语",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Japanese; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Japanese",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "German",
+      "Translated": "德语",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::German; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::German",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "French",
+      "Translated": "法语",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::French; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::French",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chinese",
+      "Translated": "中文",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Chinese",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Korean",
+      "Translated": "韩语",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Korean; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Korean",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Found",
+      "Translated": "已发现",
+      "Context": "[属性] EnumLocAttribute Sonar.Trackers.RelayStateStatus::Found",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Updated",
+      "Translated": "已更新",
+      "Context": "[属性] EnumLocAttribute Sonar.Trackers.RelayStateStatus::Updated",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Killed",
+      "Translated": "已击杀",
+      "Context": "[属性] EnumLocAttribute Sonar.Trackers.RelayStateStatus::Killed",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Preparing",
+      "Translated": "准备中",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Preparing",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Alive",
+      "Translated": "存活",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Alive",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Healthy",
+      "Translated": "未开战",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Healthy",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Running",
+      "Translated": "进行中",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Running",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Pulled",
+      "Translated": "已开战",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Pulled",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Dead",
+      "Translated": "已死亡",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Dead",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Complete",
+      "Translated": "已完成",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Complete",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Failed",
+      "Translated": "已失败",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Failed",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Expired",
+      "Translated": "已到期",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Expired",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Manual",
+      "Translated": "手动",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Manual; [属性] EnumLocAttribute Sonar.Relays.RelayType::Manual",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Stale",
+      "Translated": "已过期",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Stale",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hunt",
+      "Translated": "狩猎",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayType::Hunt",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Event",
+      "Translated": "事件",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayType::Event",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Normal",
+      "Translated": "正常",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.ReleaseMode::Normal",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Hold",
+      "Translated": "暂缓",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.ReleaseMode::Hold",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Forced",
+      "Translated": "强制",
+      "Context": "[属性] EnumLocAttribute Sonar.Models.ReleaseMode::Forced",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Name",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "World",
+      "Translated": "服务器",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::World; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::World",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Zone",
+      "Translated": "区域",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Zone; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Zone",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Instance",
+      "Translated": "副本实例",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Instance; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Instance",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Coordinates",
+      "Translated": "坐标",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Coordinates",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Status",
+      "Translated": "状态",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Status",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Rank",
+      "Translated": "级别",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Rank",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Level",
+      "Translated": "等级",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Level",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Duration",
+      "Translated": "持续时间",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Duration",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Progress",
+      "Translated": "进度",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Progress",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Players",
+      "Translated": "玩家人数",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Players",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Heavensward",
+      "Translated": "苍穹之禁城",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Heavensward",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Stormblood",
+      "Translated": "红莲之狂潮",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Stormblood",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Shadowbringers",
+      "Translated": "暗影之逆焰",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Shadowbringers",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Endwalker",
+      "Translated": "晓月之终途",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Endwalker",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Dawntrail",
+      "Translated": "金曦之遗辉",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Dawntrail",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Release",
+      "Translated": "正式版",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarBuildEnvironment::Release",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Region",
+      "Translated": "大区",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Region",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Audience",
+      "Translated": "受众",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Audience",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chinese Simplified",
+      "Translated": "简体中文",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarLanguage::ChineseSimplified",
+      "Source": "ai:sonar-contract-reviewed"
+    },
+    {
+      "Original": "Chinese Traditional",
+      "Translated": "繁体中文",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarLanguage::ChineseTraditional",
+      "Source": "ai:sonar-contract-reviewed"
+    }
+  ],
+  "skipped": [
+    "Audiences##",
+    "Regions##",
+    "Datacenters##",
+    "Worlds##",
+    "Zones##",
+    "Instances##"
+  ]
 }

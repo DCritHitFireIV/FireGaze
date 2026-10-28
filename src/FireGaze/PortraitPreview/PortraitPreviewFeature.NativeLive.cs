@@ -56,6 +56,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void UpdateNativeLive()
     {
+        if (captureScope != PortraitImageScope.Portrait)
+        {
+            if (nativeLiveRequested || nativeLiveController?.IsEnabled == true)
+                StopNativeLive(PortraitNativeLiveStopReason.Disabled);
+            return;
+        }
         if (!session.IsActive)
         {
             if (nativeLiveRequested || nativeLiveController?.IsEnabled == true)

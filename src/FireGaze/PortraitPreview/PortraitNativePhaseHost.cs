@@ -54,6 +54,7 @@ internal sealed partial class PortraitNativePhaseHost
     private PortraitNativePhaseResolvedPlan? plan;
     private PortraitNativePhaseHostReservation? reservation;
     private string detail = "Disabled; no native hooks installed.";
+    private string? retirementFailure;
     private long counterInvalidationEpoch;
     private volatile bool counterInvalidationFailed;
     private volatile bool resourceInvalidationFailed;
@@ -175,41 +176,50 @@ internal sealed partial class PortraitNativePhaseHost
         {
             reason = detail;
             if (state == PortraitNativePhaseHostState.Retired) return true;
-            if (state != PortraitNativePhaseHostState.Retiring) return false;
+            if (state != PortraitNativePhaseHostState.Retiring
+                && !(state == PortraitNativePhaseHostState.Faulted && retirementFailure is not null)) return false;
             try
             {
                 var unknownCreation = false;
+                var incomplete = false;
                 foreach (var entry in entries.AsEnumerable().Reverse())
                 {
                     if (entry.Released) continue;
+                    if (entry.RetirementFailure is not null) { incomplete = true; continue; }
                     if (entry.Hook is null && entry.CreateAttempted)
                     {
                         // A provider call that throws without returning a handle has no
                         // attested compensation result. Clean up other returned resources,
                         // but neither release the batch nor permit provider-scope disposal.
-                        unknownCreation = true; continue;
+                        unknownCreation = true;
+                        LatchRetirementFailure(entry, "Native Create did not return a handle; compensation is unproven and the complete address reservation must remain held.");
+                        continue;
                     }
-                    if (entry.Hook is null)
+                    try
                     {
-                        if (!entry.Gateway.TryAbandonUnpublishedOwnership()) return false;
-                        entry.Released = true; continue;
+                        if (entry.Hook is null)
+                        {
+                            if (!entry.Gateway.TryAbandonUnpublishedOwnership()) { incomplete = true; continue; }
+                            entry.Released = true; continue;
+                        }
+                        if (entry.Hook is { IsEnabled: true }) throw new InvalidOperationException("A native hook has not disabled.");
+                        if (!entry.Gateway.TryRetireTo(entry.Direct!)) { incomplete = true; continue; }
+                        // Late entries already read direct. A thrown or unconfirmed
+                        // backend teardown permanently owns this entry without retry.
+                        entry.Hook.Dispose();
+                        if (!entry.Hook.IsDisposed) throw new InvalidOperationException("Official hook did not dispose.");
+                        entry.Gateway.ReleaseOwnership(); entry.Released = true;
                     }
-                    if (entry.Hook is { IsEnabled: true }) { reason = detail = "A native hook has not disabled; provider scope must remain alive."; return false; }
-                    if (!entry.Gateway.TryRetireTo(entry.Direct!))
-                    { reason = detail = "Waiting asynchronously for native originals; provider scope must remain alive."; return false; }
-                    // New/late native entries already read direct target. There
-                    // are no copied trampoline delegates left when this frees it.
-                    entry.Hook?.Dispose();
-                    if (entry.Hook is { IsDisposed: false }) throw new InvalidOperationException("Official hook did not dispose.");
-                    entry.Gateway.ReleaseOwnership(); entry.Released = true;
+                    catch (Exception error) { LatchRetirementFailure(entry, "Native retirement failed: " + error.Message + "; provider scope must remain alive."); incomplete = true; }
                 }
-                if (unknownCreation)
+                if (unknownCreation || retirementFailure is not null)
                 {
                     state = PortraitNativePhaseHostState.Faulted;
                     PublishHealth();
-                    reason = detail = "Native Create did not return a handle; compensation is unproven and the complete address reservation must remain held.";
+                    reason = detail = retirementFailure!;
                     return false;
                 }
+                if (incomplete) { reason = detail = "Waiting asynchronously for native originals; provider scope must remain alive."; return false; }
                 if (!ReleaseAddresses(out reason)) throw new InvalidOperationException(reason);
                 state = PortraitNativePhaseHostState.Retired;
                 PublishHealth();
@@ -217,7 +227,8 @@ internal sealed partial class PortraitNativePhaseHost
             }
             catch (Exception error)
             {
-                reason = detail = "Native retirement failed: " + error.GetType().Name + "; provider scope must remain alive.";
+                retirementFailure ??= "Native retirement failed: " + error.Message + "; provider scope must remain alive.";
+                reason = detail = retirementFailure;
                 state = PortraitNativePhaseHostState.Faulted; PublishHealth(); return false;
             }
         }
@@ -291,6 +302,8 @@ internal sealed partial class PortraitNativePhaseHost
     private bool BeginRetirementCore()
     {
         if (state == PortraitNativePhaseHostState.Retired) return true;
+        if (retirementFailure is not null) { detail = retirementFailure; return false; }
+        if (state == PortraitNativePhaseHostState.Retiring) return true;
         state = PortraitNativePhaseHostState.Retiring;
         sourceReturnSink?.Cancel(); PublishHealth();
         observation.Stop(); foreach (var entry in entries) entry.Gateway.DetachObserver();
@@ -298,14 +311,23 @@ internal sealed partial class PortraitNativePhaseHost
         foreach (var entry in entries.AsEnumerable().Reverse())
         {
             if (entry.Hook is null || entry.Hook.IsDisposed) continue;
-            try { entry.Hook.Disable(); if (entry.Hook.IsEnabled) allDisabled = false; }
-            catch (Exception) { allDisabled = false; }
+            try { entry.Hook.Disable(); if (entry.Hook.IsEnabled) throw new InvalidOperationException("Official hook did not disable."); }
+            catch (Exception error)
+            {
+                LatchRetirementFailure(entry, "Native disable failed: " + error.Message + "; provider scope must remain alive.");
+                allDisabled = false;
+            }
         }
-        detail = allDisabled ? "Observation detached; waiting for asynchronous native retirement."
-            : "A native hook could not disable; provider scope must remain alive.";
+        detail = retirementFailure ?? "Observation detached; waiting for asynchronous native retirement.";
         if (!allDisabled) state = PortraitNativePhaseHostState.Faulted;
         PublishHealth();
         return allDisabled;
+    }
+
+    private void LatchRetirementFailure(Entry entry, string reason)
+    {
+        entry.RetirementFailure ??= reason;
+        retirementFailure ??= reason;
     }
 
     private void DetachRecordingObservers()
@@ -441,5 +463,6 @@ internal sealed partial class PortraitNativePhaseHost
         public IPortraitNativePhaseHostHook? Hook { get; set; }
         public bool CreateAttempted { get; set; }
         public bool Released { get; set; }
+        public string? RetirementFailure { get; set; }
     }
 }

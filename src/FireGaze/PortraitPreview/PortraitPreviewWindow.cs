@@ -28,6 +28,7 @@ internal interface IPortraitPreviewViewModel
     IReadOnlyList<OwnedSourceView> Sources => [];
     IReadOnlyList<OwnedEquipmentEntry> EquippedItems => [];
     OwnedCharacterKey? SourceCharacter => null;
+    long PreviewSessionRevision => 0;
     OwnedRetainerRoster? RetainerRoster => null;
     string SourceGuideKey => string.Empty;
     IReadOnlyList<string> StorageLocations(uint id) => [];
@@ -72,6 +73,7 @@ internal interface IPortraitPreviewViewModel
     bool NativeLiveEnabled => false;
     void SetNativeLiveEnabled(bool enabled) { }
     PortraitNativeLiveBorrow? TryBorrowNativeLive() => null;
+    PortraitWorkspaceImageBorrow? TryBorrowWorkspaceImage() => null;
     PortraitImageScope LiveCaptureScope => PortraitImageScope.Portrait;
     void SetLiveCaptureScope(PortraitImageScope scope) { }
     PortraitDirectionalLightView? DirectionalLight => null;
@@ -157,6 +159,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public override void OnOpen()
     {
+        favoriteGallery.ResetWindow();
         selectedSlot = PortraitSlot.Head;
         showDyePalette = false;
         search = string.Empty;
@@ -175,12 +178,16 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public override void OnClose()
     {
+        // Revoke observation ownership even if the actual preview close is
+        // deferred, refused, or throws. This does not alter native close policy.
+        favoriteGallery.ResetWindow();
         feature.ClosePreview();
         if (!feature.IsActive) CloseAuxiliaryWindows();
     }
 
     public void CloseAuxiliaryWindows()
     {
+        favoriteGallery.ResetWindow();
         showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = showDesignShowcase = showDyePalette = false;
         BindLightingSubject(null);
         editingFavorite = deletingFavorite = null;
@@ -195,6 +202,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public override void Draw()
     {
+        InvalidateFavoriteGalleryFrame();
         if (disposed) return;
         FireGazeWindowPlacement.Remember("FireGazePortraitPreview");
         var current = feature.Current;
@@ -470,6 +478,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     public void Dispose()
     {
         if (disposed) return;
+        favoriteGallery.ResetWindow();
         disposed = true;
         CancelLightInteraction();
         DisposeAnalysisResources();

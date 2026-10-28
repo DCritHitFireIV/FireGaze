@@ -56,6 +56,22 @@ public sealed class UITextEntry
 
     /// <summary>Plugin/IPC identity confirmed by current IL. Neither manual translations nor inverse recovery may rewrite it.</summary>
     public bool IsFunctionalIdentifier { get; init; }
+
+    /// <summary>Source or consumer analysis is incomplete; package metadata cannot authorize a write.</summary>
+    public bool AnalysisIncomplete { get; init; }
+
+    /// <summary>
+    /// At least one independent producer has a complete display-only contract.
+    /// Aggregate identity/incomplete diagnostics remain intact; this flag only
+    /// keeps translation content available. The patcher still checks each site.
+    /// </summary>
+    public bool HasWritableDisplaySite { get; init; }
+
+    /// <summary>Exact consumer-proven provider text; null keeps the normal display projection.</summary>
+    public string? TranslationText { get; init; }
+
+    /// <summary>Translation availability, separate from the aggregate safety diagnosis.</summary>
+    public UITextRole TranslationRole => this.HasWritableDisplaySite ? UITextRole.UI : this.Role;
 }
 
 /// <summary>
@@ -102,6 +118,7 @@ public sealed class UITextAttributeItem
 /// </summary>
 public sealed class UITextExtraction
 {
+    public List<string> AnalysisDiagnostics { get; init; } = [];
     /// <summary>
     ///     被抽取的程序集路径。
     /// </summary>
@@ -136,12 +153,12 @@ public sealed class UITextExtraction
     /// <summary>
     ///     UI 候选条数。
     /// </summary>
-    public int UICount => Entries.Count(e => e.Role == UITextRole.UI);
+    public int UICount => Entries.Count(e => e.TranslationRole == UITextRole.UI);
 
     /// <summary>
     ///     灰名单条数（既像 UI 又像功能串）。
     /// </summary>
-    public int AmbiguousCount => Entries.Count(e => e.Role == UITextRole.Ambiguous);
+    public int AmbiguousCount => Entries.Count(e => e.TranslationRole == UITextRole.Ambiguous);
 
     /// <summary>
     ///     被判「已是中文」排除的条数（没东西可翻时用它把原因说清楚：不是没抽到，是本来就中文）。

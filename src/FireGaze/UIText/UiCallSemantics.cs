@@ -1,3 +1,6 @@
+using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+
 namespace FireGaze.UIText;
 
 /// <summary>
@@ -5,9 +8,81 @@ namespace FireGaze.UIText;
 /// </summary>
 internal static class UICallSemantics
 {
-    /// <summary>Returns the identity argument; IPC payloads and shared-data values are not identities.</summary>
+    /// <summary>Returns the identity argument; visible labels, IPC payloads and shared-data values are not identities.</summary>
     public static int FunctionalIdentityArgument(string typeFullName, string methodName, int parameterCount)
     {
+        // InventoryTools menu item keys are the second constructor argument,
+        // after the visible label.  Keep the exact nested type and arity: a
+        // same-named wrapper with a different signature is not this contract.
+        if (typeFullName == "InventoryTools.Ui.Widgets.PopupMenu/PopupMenuItemSelectable"
+            && methodName == ".ctor" && parameterCount == 5)
+        {
+            return 1;
+        }
+
+        // Compendium tables use Key as a registry/table identity.  The setter
+        // receives only that key; generic arguments are irrelevant to the
+        // contract but the declaring type must remain CompendiumTableOptions.
+        if (StripGenericArgs(typeFullName) == "InventoryTools.Compendium.Models.CompendiumTableOptions`1"
+            && methodName == "set_Key" && parameterCount == 1)
+        {
+            return 0;
+        }
+
+        // These native ImGui APIs consume only a lookup/scope identity, not a
+        // visible label. In particular, Sonar builds "Zones##" + instance ID
+        // before passing it to both OpenPopup and BeginPopup. Rewriting that
+        // prefix cannot be made safe by appending a label-preservation suffix.
+        // Keep exact binding owners: unrelated ImGui-named wrappers may display
+        // their argument. Button, Checkbox and BeginPopupModal have real labels.
+        if ((typeFullName is "ImGuiNET.ImGui" or "Dalamud.Bindings.ImGui.ImGui")
+            && parameterCount > 0
+            && (methodName is "OpenPopup" or "BeginPopup" or "PushID" or "GetID"
+                or "BeginChild" or "BeginTable" or "BeginTabBar" or "IsPopupOpen"
+                or "OpenPopupOnItemClick" or "BeginPopupContextItem"
+                or "BeginPopupContextWindow" or "BeginPopupContextVoid"
+                or "Columns" or "InvisibleButton" or "ArrowButton" or "TreePush"))
+        {
+            // Columns keeps its optional ID in the second parameter; the
+            // other identity-only controls use their first string parameter.
+            return methodName == "Columns" ? 1 : 0;
+        }
+
+        // Font range builders consume a complete glyph repertoire. The string
+        // is data for the font atlas, never a player-facing label; translating
+        // it changes which glyphs are loaded and can break every later draw.
+        // Keep this exact native binding boundary narrow so ImGui.Text and
+        // ImDrawListPtr.AddText remain ordinary visible consumers.
+        if (typeFullName == "Dalamud.Bindings.ImGui.ImFontGlyphRangesBuilderPtr"
+            && methodName == "AddText" && parameterCount == 1)
+        {
+            return 0;
+        }
+
+        // Sonar sends this version identity in its MessagePack "plugin" field.
+        // The same fallback is also displayed, but must stay stable on the wire.
+        if (typeFullName == "Sonar.Models.SonarVersion" && methodName == "set_Plugin" && parameterCount == 1)
+        {
+            return 0;
+        }
+
+        // Sonar's older enum adapter uses the proven CheapLoc (key, fallback,
+        // optional assembly) contract alongside AG. A display consumer does not
+        // turn the key into translatable text, even with an obsolete user pack.
+        if (typeFullName == "CheapLoc.Loc" && methodName == "Localize" && parameterCount is 2 or 3)
+        {
+            return 0;
+        }
+
+        // AG's string overloads take a lookup key. Generic enum overloads have
+        // different arity and are deliberately not included here.
+        if (typeFullName == "AG.EnumLocalization.EnumLoc"
+            && ((methodName == "GetLocString" && parameterCount == 3)
+                || (methodName == "GetLocFallback" && parameterCount == 2)))
+        {
+            return 0;
+        }
+
         if (methodName is "GetIpcProvider" or "GetIpcSubscriber" or "GetIpcCaller"
             || (typeFullName.EndsWith("DalamudReflector", StringComparison.Ordinal)
                 && methodName is "TryGetDalamudPlugin" or "GetDalamudPlugin"))
@@ -33,6 +108,17 @@ internal static class UICallSemantics
 
         return -1;
     }
+
+    /// <summary>
+    ///     Exact InventoryTools string getters whose return value is an
+    ///     identity (the scanner records the literal at the Ret instruction).
+    ///     The zero-parameter guard keeps same-named overloads from inheriting
+    ///     a getter's functional identity contract.
+    /// </summary>
+    public static bool FunctionalIdentityReturn(string typeFullName, string methodName, int parameterCount) =>
+        parameterCount == 0
+        && ((typeFullName == "InventoryTools.Ui.ENpcsWindow" && methodName == "get_GenericKey")
+            || (typeFullName == "InventoryTools.Compendium.Types.ENpcCompendiumType" && methodName == "get_Key"));
 
     /// <summary>
     ///     类型名不含 ImGui 字样、但确实在画界面的包装器（前缀匹配）。
@@ -524,7 +610,11 @@ internal static class UICallSemantics
         "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized" or "T" or "Tr"
         or "LineCentered" or "GetImageTexture";
 
-    public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) => argIndex == 0;
+    public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) =>
+        // This official helper takes an icon first, then the visible text that
+        // it passes to PushId before drawing its empty-label Button.
+        typeFullName == "Dalamud.Interface.Components.ImGuiComponents" && methodName == "IconButtonWithText"
+            ? argIndex == 1 : argIndex == 0;
 
     public static bool UsesStringAsID(string typeFullName, string methodName)
     {
@@ -659,9 +749,10 @@ internal static class UICallSemantics
     /// <summary>
     ///     对象初始化器 / 字段赋值里的「给人看的字符串」：目前只认命令帮助。
     /// </summary>
-    public static string? DescribeUIField(string declaringType, string fieldName)
+    public static string? DescribeUIField(IField field)
     {
-        if (declaringType.Contains("CommandInfo", StringComparison.Ordinal) && fieldName is "HelpMessage")
+        if (IsCommandInfoOwner(field.DeclaringType) && field.Name == "HelpMessage"
+            && field.FieldSig?.Type.ElementType == ElementType.String)
         {
             return "CommandInfo.HelpMessage";
         }
@@ -672,15 +763,66 @@ internal static class UICallSemantics
     /// <summary>
     ///     属性 setter 版的「给人看的字段」：对象初始化器会编译成 <c>set_XXX</c> 调用。
     /// </summary>
-    public static string? DescribeUISetter(string declaringType, string methodName)
+    public static string? DescribeUISetter(IMethod method)
     {
-        if (methodName is "set_HelpMessage" && declaringType.Contains("CommandInfo", StringComparison.Ordinal))
+        if (method is not MethodSpec && IsCommandInfoOwner(method.DeclaringType)
+            && method.Name == "set_HelpMessage"
+            && method.MethodSig is { HasThis: true, ExplicitThis: false, Generic: false, GenParamCount: 0,
+                Params.Count: 1 } signature
+            && signature.CallingConvention == CallingConvention.HasThis
+            && signature.Params[0].ElementType == ElementType.String
+            && signature.RetType.ElementType == ElementType.Void)
         {
             return "CommandInfo.HelpMessage";
         }
 
         return null;
     }
+
+    // One audited SMS 1.0.6.7 producer, not a general file-dialog exemption.
+    // The fixed CN three-argument overload forwards title separately from its
+    // fixed OpenFileDialog id, uses SelectOnly=2 without ConfirmOverwrite, and
+    // draws title + "###" + id. Save/other overloads/callers remain opaque.
+    internal static bool IsSmsOpenFileTitleCall(MethodDef caller, Instruction call)
+    {
+        const string owner = "Dalamud.Interface.ImGuiFileDialog.FileDialogManager";
+        const string action = "System.Action`2<System.Boolean,System.String>";
+        const string producer = "SupermarketSweep.UI.MBShoppingList_UI";
+        if (caller.Module?.Assembly?.FullName != "SupermarketSweep, Version=1.0.6.7, Culture=neutral, PublicKeyToken=null"
+            || caller.Module.Mvid != Guid.Parse("bde83d26-1263-4da8-9cb3-16b3576ae0c2")
+            || caller.FullName != "System.Void " + producer + "::SelectFile()"
+            || caller.MethodSig is not { HasThis: true, ExplicitThis: false, Generic: false, GenParamCount: 0, Params.Count: 0 }
+            || !caller.HasBody || caller.Body.Variables.Count != 0 || caller.Body.ExceptionHandlers.Count != 0)
+            return false;
+        var il = caller.Body.Instructions;
+        if (il.Count != 9 || !ReferenceEquals(il[7], call) || call.OpCode.Code != Code.Callvirt
+            || call.Operand is not MemberRef callee || callee.DeclaringType is not TypeRef type
+            || type.FullName != owner || type.DefinitionAssembly?.Name != "Dalamud" || callee.Name != "OpenFileDialog"
+            || callee.MethodSig is not { HasThis: true, ExplicitThis: false, Generic: false, GenParamCount: 0, Params.Count: 3 } signature
+            || signature.CallingConvention != CallingConvention.HasThis || signature.RetType.ElementType != ElementType.Void
+            || signature.Params[0].ElementType != ElementType.String || signature.Params[1].ElementType != ElementType.String
+            || signature.Params[2] is not GenericInstSig callback || callback.FullName != action
+            || callback.GenericType.TypeDefOrRef.DefinitionAssembly?.Name != "System.Runtime")
+            return false;
+        return il[0].OpCode.Code == Code.Ldarg_0 && il[1].OpCode.Code == Code.Ldfld
+            && il[1].Operand is FieldDef field && field.DeclaringType == caller.DeclaringType
+            && field.FullName == owner + " " + producer + "::_fileDialogManager"
+            && il[2].OpCode.Code == Code.Ldstr && Equals(il[2].Operand, "Select MakePlace List File")
+            && il[3].OpCode.Code == Code.Ldstr && Equals(il[3].Operand, "MakePlace List Files{.txt}")
+            && il[4].OpCode.Code == Code.Ldarg_0 && il[5].OpCode.Code == Code.Ldftn
+            && il[5].Operand is MethodDef target && target.DeclaringType == caller.DeclaringType
+            && target.FullName == "System.Void " + producer + "::<SelectFile>g__Callback|11_0(System.Boolean,System.String)"
+            && il[6].OpCode.Code == Code.Newobj && il[6].Operand is IMethod ctor
+            && ctor.DeclaringType.DefinitionAssembly?.Name == "System.Runtime"
+            && ctor.FullName == "System.Void " + action + "::.ctor(System.Object,System.IntPtr)"
+            && il[8].OpCode.Code == Code.Ret;
+    }
+
+    // A name containing CommandInfo is not evidence of Dalamud's display
+    // contract. Local lookalikes and alternate overloads keep normal analysis.
+    private static bool IsCommandInfoOwner(ITypeDefOrRef? owner) => owner is TypeRef
+        && owner.FullName == "Dalamud.Game.Command.CommandInfo"
+        && owner.DefinitionAssembly?.Name == "Dalamud";
 
     /// <summary>
     ///     是不是日志调用。

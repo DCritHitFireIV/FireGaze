@@ -4,7 +4,8 @@ using System.Text.Json;
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitFavoriteEntry(Guid ID, DateTimeOffset CreatedAt, DateTimeOffset UpdatedAt,
-    ulong SourceContentID, string SourceName, string Name, string[] Tags, PortraitEditorSnapshot Snapshot)
+    ulong SourceContentID, string SourceName, string Name, string[] Tags, PortraitEditorSnapshot Snapshot,
+    PortraitPhotoSource? Source = null)
 {
     public PortraitFavoriteEntry Copy() => this with { Tags = (string[])Tags.Clone(), Snapshot = Snapshot.Copy() };
 }
@@ -69,17 +70,25 @@ internal sealed class PortraitFavoritesStore
 
     public PortraitFavoritesWriteResult Add(PortraitEditorSnapshot snapshot, ulong sourceContentID, string sourceName,
         string name, IEnumerable<string>? tags = null)
+        => AddCore(snapshot, sourceContentID, sourceName, null, name, tags);
+
+    public PortraitFavoritesWriteResult Add(PortraitEditorSnapshot snapshot, ulong sourceContentID, string sourceName,
+        PortraitPhotoSource source, string name, IEnumerable<string>? tags = null)
+        => AddCore(snapshot, sourceContentID, sourceName, source, name, tags);
+
+    private PortraitFavoritesWriteResult AddCore(PortraitEditorSnapshot snapshot, ulong sourceContentID, string sourceName,
+        PortraitPhotoSource? source, string name, IEnumerable<string>? tags)
     {
         lock (gate)
         {
             if (Unavailable() is { } unavailable) return unavailable;
             if (!TryName(name, out var normalizedName) || !TrySourceName(sourceName, out var normalizedSource)
-                || !TryTags(tags, out var normalizedTags) || !ValidSnapshot(snapshot))
+                || !TryTags(tags, out var normalizedTags) || !ValidSnapshot(snapshot) || source is { IsValid: false })
                 return Invalid();
             var now = clock();
             if (now < DateTimeOffset.UnixEpoch) return Invalid();
             var added = new PortraitFavoriteEntry(Guid.NewGuid(), now, now, sourceContentID, normalizedSource,
-                normalizedName, normalizedTags, snapshot.Copy());
+                normalizedName, normalizedTags, snapshot.Copy(), source);
             return Persist(entries.Append(added).ToList(), added);
         }
     }
@@ -166,7 +175,7 @@ internal sealed class PortraitFavoritesStore
         {
             var requested = ids?.Take(MaximumEntries + 1).ToHashSet();
             var selected = requested is null ? entries : entries.Where(entry => requested.Contains(entry.ID)).ToList();
-            return JsonSerializer.Serialize(new SavedDocument(1, selected), JSONOptions);
+            return JsonSerializer.Serialize(new SavedDocument(2, selected), JSONOptions);
         }
     }
 
@@ -205,7 +214,7 @@ internal sealed class PortraitFavoritesStore
     {
         if (candidate.Count > MaximumEntries) return TooLarge();
         byte[] bytes;
-        try { bytes = JsonSerializer.SerializeToUtf8Bytes(new SavedDocument(1, candidate), JSONOptions); }
+        try { bytes = JsonSerializer.SerializeToUtf8Bytes(new SavedDocument(2, candidate), JSONOptions); }
         catch (Exception exception) when (exception is JsonException or NotSupportedException or ArgumentException)
         { return Invalid(); }
         if (bytes.Length > MaximumBytes) return TooLarge();
@@ -284,7 +293,7 @@ internal sealed class PortraitFavoritesStore
         && TryName(entry.Name, out var name) && name == entry.Name
         && TrySourceName(entry.SourceName, out var source) && source == entry.SourceName
         && entry.Tags is not null && TryTags(entry.Tags, out var tags) && entry.Tags.SequenceEqual(tags)
-        && ValidSnapshot(entry.Snapshot);
+        && ValidSnapshot(entry.Snapshot) && entry.Source is not { IsValid: false };
 
     private static bool TryReadDocument(byte[] bytes, out List<PortraitFavoriteEntry> loaded, out string error)
     {
@@ -293,13 +302,17 @@ internal sealed class PortraitFavoritesStore
         if (bytes.Length > MaximumBytes) return false;
         try
         {
-            var document = JsonSerializer.Deserialize<SavedDocument>(bytes, JSONOptions);
-            if (document?.Version != 1 || document.Entries is null || document.Entries.Count > MaximumEntries) return false;
+            using var document = JsonDocument.Parse(bytes, new JsonDocumentOptions { MaxDepth = JSONOptions.MaxDepth });
+            var root = document.RootElement;
+            if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("Version", out var versionValue)
+                || versionValue.ValueKind != JsonValueKind.Number || !versionValue.TryGetInt32(out var version) || version is not (1 or 2)
+                || !root.TryGetProperty("Entries", out var entryValues) || entryValues.ValueKind != JsonValueKind.Array
+                || entryValues.GetArrayLength() > MaximumEntries) return false;
             var ids = new HashSet<Guid>();
-            foreach (var entry in document.Entries)
+            foreach (var value in entryValues.EnumerateArray())
             {
-                if (!ValidEntry(entry) || !ids.Add(entry.ID)) return false;
-                loaded.Add(entry.Copy());
+                if (!TryReadEntry(value, version, out var entry) || !ids.Add(entry!.ID)) return false;
+                loaded.Add(entry!.Copy());
             }
             return true;
         }
@@ -307,12 +320,31 @@ internal sealed class PortraitFavoritesStore
         { loaded = []; return false; }
     }
 
+    internal static bool TryReadEntry(JsonElement value, int documentVersion, out PortraitFavoriteEntry? entry)
+    {
+        entry = null;
+        if (value.ValueKind != JsonValueKind.Object) return false;
+        if (documentVersion == 1)
+        {
+            // The old schema did not describe its visual source. Never infer Portrait
+            // from the enum's zero value or promote an unversioned extra property.
+            var legacy = value.Deserialize<LegacyEntry>(JSONOptions);
+            if (legacy is not null) entry = new(legacy.ID, legacy.CreatedAt, legacy.UpdatedAt,
+                legacy.SourceContentID, legacy.SourceName, legacy.Name, legacy.Tags, legacy.Snapshot);
+        }
+        else if (documentVersion == 2 && value.TryGetProperty("Source", out _))
+            entry = value.Deserialize<PortraitFavoriteEntry>(JSONOptions);
+        return ValidEntry(entry);
+    }
+
     internal static bool SameEntry(PortraitFavoriteEntry a, PortraitFavoriteEntry b) => a.ID == b.ID
         && a.CreatedAt == b.CreatedAt && a.UpdatedAt == b.UpdatedAt && a.SourceContentID == b.SourceContentID
         && a.SourceName == b.SourceName && a.Name == b.Name && a.Tags.SequenceEqual(b.Tags)
-        && a.Snapshot.ToJSON() == b.Snapshot.ToJSON();
+        && a.Snapshot.ToJSON() == b.Snapshot.ToJSON() && a.Source == b.Source;
 
     private sealed record SavedDocument(int Version, List<PortraitFavoriteEntry> Entries);
+    private sealed record LegacyEntry(Guid ID, DateTimeOffset CreatedAt, DateTimeOffset UpdatedAt,
+        ulong SourceContentID, string SourceName, string Name, string[] Tags, PortraitEditorSnapshot Snapshot);
 }
 
 internal sealed record PortraitFavoriteTrashEntry(Guid ID, DateTimeOffset DeletedAt, PortraitFavoriteEntry Favorite)
@@ -400,7 +432,7 @@ internal sealed class PortraitFavoritesTrashStore
     {
         if (candidate.Count > MaximumEntries) return new(PortraitFavoritesWriteStatus.TooLarge, "回收站容量已满，请先清理已删除收藏。");
         byte[] bytes;
-        try { bytes = JsonSerializer.SerializeToUtf8Bytes(new SavedDocument(1, candidate), JSONOptions); }
+        try { bytes = JsonSerializer.SerializeToUtf8Bytes(new SavedDocument(2, candidate), JSONOptions); }
         catch (Exception exception) when (exception is JsonException or NotSupportedException or ArgumentException)
         { return new(PortraitFavoritesWriteStatus.InvalidInput, "回收站内容无效。"); }
         if (bytes.Length > MaximumBytes) return new(PortraitFavoritesWriteStatus.TooLarge, "回收站容量已满，请先清理已删除收藏。");
@@ -424,15 +456,23 @@ internal sealed class PortraitFavoritesTrashStore
         if (bytes.Length > MaximumBytes) return false;
         try
         {
-            var document = JsonSerializer.Deserialize<SavedDocument>(bytes, JSONOptions);
-            if (document?.Version != 1 || document.Entries is null || document.Entries.Count > MaximumEntries) return false;
+            using var document = JsonDocument.Parse(bytes, new JsonDocumentOptions { MaxDepth = JSONOptions.MaxDepth });
+            var root = document.RootElement;
+            if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("Version", out var versionValue)
+                || versionValue.ValueKind != JsonValueKind.Number || !versionValue.TryGetInt32(out var version) || version is not (1 or 2)
+                || !root.TryGetProperty("Entries", out var entryValues) || entryValues.ValueKind != JsonValueKind.Array
+                || entryValues.GetArrayLength() > MaximumEntries) return false;
             var ids = new HashSet<Guid>();
-            foreach (var record in document.Entries)
+            foreach (var value in entryValues.EnumerateArray())
             {
-                if (record is null || record.ID == Guid.Empty || !ids.Add(record.ID) || record.DeletedAt < DateTimeOffset.UnixEpoch
-                    || !PortraitFavoritesStore.ValidEntry(record.Favorite) || record.Favorite.ID != record.ID)
+                if (value.ValueKind != JsonValueKind.Object || !value.TryGetProperty("ID", out var idValue)
+                    || idValue.ValueKind != JsonValueKind.String || !idValue.TryGetGuid(out var id) || id == Guid.Empty || !ids.Add(id)
+                    || !value.TryGetProperty("DeletedAt", out var deletedValue) || deletedValue.ValueKind != JsonValueKind.String
+                    || !deletedValue.TryGetDateTimeOffset(out var deletedAt)
+                    || deletedAt < DateTimeOffset.UnixEpoch || !value.TryGetProperty("Favorite", out var favoriteValue)
+                    || !PortraitFavoritesStore.TryReadEntry(favoriteValue, version, out var favorite) || favorite!.ID != id)
                     return false;
-                loaded.Add(record with { Favorite = record.Favorite.Copy() });
+                loaded.Add(new(id, deletedAt, favorite!.Copy()));
             }
             return true;
         }

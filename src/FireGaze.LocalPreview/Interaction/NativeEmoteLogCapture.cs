@@ -9,8 +9,20 @@ using FFXIVClientStructs.FFXIV.Component.Text;
 using FFXIVClientStructs.STD;
 using InteropGenerator.Runtime;
 using Lumina.Excel.Sheets;
+using FireGaze.LocalPreview.Runtime;
 
 namespace FireGaze.LocalPreview.Interaction;
+
+/// <summary>
+/// The formatter hook is enabled after the invalid special-hotbar writer was
+/// corrected to use the typed GeneralAction #2 route. Keeping the switch as a
+/// named policy makes a future client ABI gate explicit instead of silently
+/// disabling sentence links.
+/// </summary>
+internal static class NativeEmoteCapturePolicy
+{
+    public static bool FormatterHookEnabled => true;
+}
 
 /// <summary>
 /// Binds the original emote-log writer's numeric Emote ID to its new queue item.
@@ -18,7 +30,7 @@ namespace FireGaze.LocalPreview.Interaction;
 /// multiple frames. Neither displayed prose nor the latest actor emote is used.
 /// </summary>
 internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInteropProvider interop, IPluginLog log,
-    Func<byte[], ushort, byte[]> linkMessage) : IDisposable
+    Func<byte[], ushort, byte[]> linkMessage) : IDisposable, INativePhysicalCloseState
 {
     // CN PlayEmote calls this writer with (controller, emoteId, targetId). It
     // queues the message and owns row overrides such as emote 106 on a minion.
@@ -39,6 +51,10 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
     private int logDepth;
     private int formatDepth;
     private bool disposed;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete;
+    public string? PhysicalCloseFailure => PhysicalClose.Failure;
 
     public bool Enabled { get; private set; }
     public int UniqueTemplates => templates.UniqueCount;
@@ -50,7 +66,14 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
     public bool Enable()
     {
         if (disposed) return false;
+        if (PhysicalClose.Failure is not null)
+            throw new NativePhysicalCloseException(this, new InvalidOperationException(PhysicalClose.Failure));
         if (Enabled) return true;
+        if (!NativeEmoteCapturePolicy.FormatterHookEnabled)
+        {
+            Detail = "原生情感日志捕获暂时关闭，基础右键菜单仍可使用。";
+            return false;
+        }
         try
         {
             foreach (var emote in data.GetExcelSheet<Emote>())
@@ -89,12 +112,18 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
             ReleaseHooks();
             Detail = "原生情感日志捕获启动失败，基础右键菜单仍可使用。";
             Report(ex, "[LocalPreview] Native emote log capture could not start.");
+            if (PhysicalClose.Failure is not null) throw new NativePhysicalCloseException(this, ex);
             return false;
         }
     }
 
     private bool EmoteLog(EmoteController* controller, uint emoteId, ulong targetId)
     {
+        if (disposed || PhysicalClose.Failure is not null)
+        {
+            try { return writeEmoteLog!.Original(controller, emoteId, targetId); }
+            catch (Exception error) { Report(error, "[LocalPreview] Native emote log pass-through failed."); return false; }
+        }
         nint[]? before = null;
         try
         {
@@ -124,6 +153,12 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
 
     private void UpdateLog(RaptureLogModule* module)
     {
+        if (disposed || PhysicalClose.Failure is not null)
+        {
+            try { update!.Original(module); }
+            catch (Exception error) { Report(error, "[LocalPreview] Native log update pass-through failed."); }
+            return;
+        }
         PruneQueue(module);
         logDepth++;
         try { update!.Original(module); }
@@ -137,6 +172,11 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
 
     private int FormatString(RaptureTextModule* module, CStringPointer input, StdDeque<TextParameter>* parameters, Utf8String* output)
     {
+        if (disposed || PhysicalClose.Failure is not null)
+        {
+            try { return format!.Original(module, input, parameters, output); }
+            catch (Exception error) { Report(error, "[LocalPreview] Native formatter pass-through failed."); return 0; }
+        }
         var topLevel = formatDepth++ == 0;
         var key = (nint)parameters;
         ushort emoteId = 0;
@@ -217,12 +257,9 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
 
     private void ReleaseHooks()
     {
-        writeEmoteLog?.Dispose();
-        update?.Dispose();
-        format?.Dispose();
-        writeEmoteLog = null;
-        update = null;
-        format = null;
+        PhysicalClose.CloseHook(ref writeEmoteLog);
+        PhysicalClose.CloseHook(ref update);
+        PhysicalClose.CloseHook(ref format);
         bindings.Clear();
     }
 
@@ -234,5 +271,6 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
         ReleaseHooks();
         logDepth = 0;
         formatDepth = 0;
+        PhysicalClose.Finish();
     }
 }

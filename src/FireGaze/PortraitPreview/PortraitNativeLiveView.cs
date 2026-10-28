@@ -75,6 +75,20 @@ internal sealed class PortraitNativeLiveView : IDisposable
     internal bool IsPhysicallyIdle => physical.Pending == 0 && physical.CleanupFailures == 0;
     public Task DrainPhysicalAsync() => physical.Seal();
 
+    /// <summary>
+    /// One stable official SRV may remain visible while history makes an independent read-only
+    /// copy of the same native source. This is not physical idle and must never admit native
+    /// mutation, resource recreation or teardown. The sole pending lifetime must be this slot:
+    /// an acquisition prefix, retired borrower, release or quarantine adds another lifetime.
+    /// </summary>
+    internal bool CanShareReadOnlyPhotoSource(PortraitIdentity editor, PortraitCaptureOwner owner)
+    {
+        lock (gate)
+            return !disposed && enabled && current is { Retired: false } slot
+                && slot.Image.Key.IsValid && slot.Image.Key.Editor == editor && slot.Image.Key.Owner == owner
+                && physical.Pending == 1 && physical.CleanupFailures == 0;
+    }
+
     public void SetEnabled(bool value)
     {
         Slot? retired = null;
@@ -99,39 +113,65 @@ internal sealed class PortraitNativeLiveView : IDisposable
         ReleaseSlot(retired);
     }
 
-    public void Update()
+    public void Update() => Update(false, null);
+
+    /// <summary>
+    /// The owning controller has freshly checked the same editor and owner. A missing
+    /// new frame may retain its last descriptor, but publication still requires the
+    /// post-acquire context check before replacing that descriptor.
+    /// </summary>
+    internal bool UpdatePreservingCurrent(Func<PortraitNativeLiveImage, bool> canPublish)
+        => Update(true, canPublish);
+
+    private bool Update(bool preserveCurrentOnTransientMiss, Func<PortraitNativeLiveImage, bool>? canPublish)
     {
         long ticket;
         IDisposable? candidateLifetime;
         lock (gate)
         {
-            if (disposed || !enabled || !physical.TryEnter(out candidateLifetime)) return;
+            if (disposed || !enabled || !physical.TryEnter(out candidateLifetime)) return false;
             ticket = revision;
         }
         PortraitNativeLiveFrame? candidate = null;
         Slot? retired = null;
         try
         {
-            if (!source.IsFrameworkThread || !source.TryAcquire(out candidate) || candidate is null
-                || !candidate.TryDescribe(0, out var image))
+            if (!source.IsFrameworkThread)
             {
                 Invalidate();
-                return;
+                return false;
             }
+            if (!source.TryAcquire(out candidate) || candidate is null)
+            {
+                if (!preserveCurrentOnTransientMiss || candidate is not null) Invalidate();
+                return false;
+            }
+            if (!candidate.TryDescribe(0, out var image))
+            {
+                // A replacement can be observed while the native portrait render target is
+                // still being rebuilt (zero dimensions, stale bounds, or a transient handle).
+                // Keep the last verified frame for this same session; the caller will retry
+                // after its ownership check. Initial acquisition still has no frame to retain.
+                if (!preserveCurrentOnTransientMiss) Invalidate();
+                return false;
+            }
+            if (canPublish is not null && !canPublish(image)) return false;
             lock (gate)
             {
-                if (disposed || !enabled || revision != ticket || physical.CleanupFailures != 0) return;
+                if (disposed || !enabled || revision != ticket || physical.CleanupFailures != 0) return false;
                 // Never deduplicate on SRV: the same render target can contain a new animated frame.
                 retired = RetireCurrent();
                 current = new(candidate, image with { FrameNumber = ++frameNumber }, candidateLifetime);
                 candidate = null;
                 candidateLifetime = null;
+                return true;
             }
         }
         catch (Exception error)
         {
             physical.ObserveFailure(error);
             Invalidate();
+            return false;
         }
         finally
         {

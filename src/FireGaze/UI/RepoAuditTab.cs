@@ -141,6 +141,138 @@ internal sealed partial class RepoAuditTab
     /// <summary>退订事件（插件卸载时由 MainWindow 链式调用）。</summary>
     public void Detach() => this.plugin.PluginInterface.ActivePluginsChanged -= this.activePluginsHandler;
 
+    private void DrawScanControls()
+    {
+        var available = ImGui.GetContentRegionAvail().X;
+        var scanLabel = plugin.Config.LastScanUTC != default ? "重新体检" : "开始体检";
+        var scanWidth = UiHelpers.LabelWidth("重新体检");
+        using (UiHelpers.Disabled(iconDownloadRunning))
+        {
+            if (scanning)
+            {
+                if (ImGui.Button("取消扫描###CancelScan", new Vector2(scanWidth, 0)))
+                {
+                    try { cancellation?.Cancel(); }
+                    catch { /* The scan may have finished while its button was drawn. */ }
+                }
+            }
+            else if (ImGui.Button(scanLabel + "###StartScan", new Vector2(scanWidth, 0)))
+            {
+                StartScan();
+            }
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(iconDownloadRunning
+                ? "正在下载图标，请等待完成，或到「插件安装器」停止下载。"
+                : "检查仓库链接和插件列表。");
+        }
+
+        var filterWidth = MathF.Min(PluginListLayout.FilterWidth, available);
+        var searchWidth = MathF.Min(available, MathF.Max(120f,
+            MathF.Min(PluginListLayout.SearchWidth, available - scanWidth - filterWidth - 20f)));
+        PluginListLayout.ToolbarSameLineOrWrap(searchWidth);
+        ImGui.SetNextItemWidth(searchWidth);
+        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref search, 128))
+        {
+            snapshotDirty = true;
+        }
+
+        PluginListLayout.ToolbarSameLineOrWrap(filterWidth);
+        ImGui.SetNextItemWidth(filterWidth);
+        var keys = new[] { "all", "problems", "unreachable", "disabled" };
+        var labels = new[] { "全部仓库", "有问题", "连接失败", "已停用" };
+        var selectedFilter = Math.Max(0, Array.IndexOf(keys, filter));
+        if (ImGui.Combo("###RepoFilter", ref selectedFilter, labels, labels.Length))
+        {
+            filter = keys[selectedFilter];
+            snapshotDirty = true;
+        }
+    }
+
+    private void DrawFilters()
+    {
+        var includeDisabled = plugin.Config.ScanIncludeDisabled;
+        if (ImGui.Checkbox("包含已停用仓库###IncDisabled", ref includeDisabled))
+        {
+            plugin.Config.ScanIncludeDisabled = includeDisabled;
+            plugin.SaveConfig();
+        }
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("体检时一并检查已停用的仓库。");
+
+        var indexReady = installedIndex is { Available: true };
+        using (UiHelpers.Disabled(!indexReady))
+        {
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("只看有插件的") + ImGui.GetFrameHeight());
+            if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref onlyWithPlugins))
+            {
+                if (onlyWithPlugins) onlyUnused = false;
+                snapshotDirty = true;
+            }
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                ImGui.SetTooltip(indexReady ? "只显示本机已从中安装插件的仓库。" : "插件数据不可用，暂时不能按这个条件筛选。");
+
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("只看未安装的") + ImGui.GetFrameHeight());
+            if (ImGui.Checkbox("只看未安装的###OnlyUnused", ref onlyUnused))
+            {
+                if (onlyUnused) onlyWithPlugins = false;
+                snapshotDirty = true;
+            }
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                ImGui.SetTooltip(indexReady ? "只显示本机未从中安装插件的仓库。" : "插件数据不可用，暂时不能按这个条件筛选。");
+        }
+
+        PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("显示插件图标") + ImGui.GetFrameHeight());
+        var showIcons = plugin.Config.ShowInstalledIcons;
+        if (ImGui.Checkbox("显示插件图标###ShowIcons", ref showIcons))
+        {
+            plugin.Config.ShowInstalledIcons = showIcons;
+            plugin.SaveConfig();
+        }
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("显示仓库内已安装插件的图标，悬停查看名称。");
+
+        if (installedIndex is { Available: false })
+            UiHelpers.ColoredWrapped(UiHelpers.Warn, "暂时无法读取已安装插件，相关筛选和数量暂不可用。");
+    }
+
+    private void DrawOverview()
+    {
+        int completed, count, ok, dead, invalid, blocked, unreachable, disabled, unknown;
+        bool active;
+        lock (gate)
+        {
+            completed = done; count = total; ok = okCount; dead = deadCount;
+            invalid = invalidCount; blocked = blockedCount; unreachable = unreachableCount;
+            disabled = disabledCount; unknown = unknownCount; active = scanning;
+        }
+
+        if (active && count > 0)
+        {
+            ImGui.ProgressBar((float)completed / count,
+                new Vector2(MathF.Min(220f, ImGui.GetContentRegionAvail().X), 0), $"检查 {completed} / {count}");
+        }
+        else if (count == 0)
+        {
+            ImGui.TextDisabled("尚未检查");
+            return;
+        }
+
+        var problems = dead + invalid + blocked + unreachable;
+        var summary = $"仓库 {count} · 可用 {ok} · 有问题 {problems}"
+            + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty);
+        if (active) PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(summary));
+        ImGui.TextWrapped(summary);
+        if (ImGui.IsItemHovered())
+        {
+            var installed = installedIndex is { Available: true }
+                ? $"已安装 {installedInUseCache} · 未安装 {installedUnusedCache}"
+                : "插件数据暂不可用";
+            ImGui.SetTooltip($"链接失效 {dead} · 链接不合规 {invalid} · 拒绝访问 {blocked} · 连接失败 {unreachable}\n"
+                + $"{installed} · 已停用 {disabled}");
+        }
+    }
+
     public void Draw()
     {
         drawWatch.Restart();
@@ -151,185 +283,10 @@ internal sealed partial class RepoAuditTab
         FillInstalledCounts();
         var tSetup = drawWatch.ElapsedMilliseconds;
 
-        // ---------------- 说明（压到两行以内） ----------------
-        ImGui.TextWrapped("检查第三方仓库链接是否可用，以及能否被卫月识别。");
-
-        // ---------------- 扫描控制 ----------------
-        // 图标下载进行中时，体检按钮就地置灰（别再画第二个同名按钮）
-        var scanBlocked = iconDownloadRunning;
-        using var disabledScope1 = UiHelpers.Disabled(scanBlocked);
-
-        // 体检过之后按钮改叫「重新体检」（行状态提示里也是这个词）
-        var scanLabel = plugin.Config.LastScanUTC != default ? "重新体检" : "开始体检";
-        if (scanning)
-        {
-            if (ImGui.Button("取消扫描###CancelScan"))
-            {
-                try
-                {
-                    cancellation?.Cancel();
-                }
-                catch
-                {
-                    // ignore
-                }
-            }
-        }
-        else if (ImGui.Button(scanLabel + "###StartScan"))
-        {
-            StartScan();
-        }
-
-        disabledScope1.Dispose();
-        if (scanBlocked)
-        {
-
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-            {
-                ImGui.SetTooltip("正在下载图标，请等待完成，或到「插件安装器」停止下载。");
-            }
-        }
-
-        ImGui.SameLine();
-        var includeDisabled = plugin.Config.ScanIncludeDisabled;
-        if (ImGui.Checkbox("扫描包含已停用仓库###IncDisabled", ref includeDisabled))
-        {
-            plugin.Config.ScanIncludeDisabled = includeDisabled;
-            plugin.SaveConfig();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("勾选后连已停用的库一起扫描");
-        }
-
-        // ---------------- 进度 / 统计 ----------------
-        int d, t, ok, dead, invalid, blocked, unreachable, disabled, unknown;
-        bool scan;
-        lock (gate)
-        {
-            d = done;
-            t = total;
-            ok = okCount;
-            dead = deadCount;
-            invalid = invalidCount;
-            blocked = blockedCount;
-            unreachable = unreachableCount;
-            disabled = disabledCount;
-            unknown = unknownCount;
-            scan = scanning;
-        }
-
-        if (scan && t > 0)
-        {
-            ImGui.ProgressBar((float)d / t, new Vector2(220, 0), $"{d} / {t}");
-            ImGui.SameLine();
-            ImGui.TextUnformatted($"可用 {ok} · 死链 {dead} · 不合规 {invalid} · 拒绝 {blocked} · 连接失败 {unreachable}");
-        }
-        else if (t > 0)
-        {
-            var index = installedIndex;
-            string machineGroup;
-            if (index is { Available: true })
-            {
-                machineGroup = $"已安装 {installedInUseCache} · 未安装 {installedUnusedCache}";
-            }
-            else
-            {
-                machineGroup = "插件数据不可用";
-            }
-
-            ImGui.TextWrapped(
-                $"共 {t} 个仓库 ｜ 可用 {ok} · 死链 {dead} · 链接不合规 {invalid} · 拒绝访问 {blocked} · "
-                + $"连接失败 {unreachable}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty)
-                + $" ｜ {machineGroup} ｜ 已停用 {disabled}");
-
-            if (plugin.Config.LastScanUTC != default)
-            {
-                ImGui.TextDisabled(
-                    $"上次体检：{plugin.Config.LastScanUTC.ToLocalTime():yyyy-MM-dd HH:mm} · 用时 {lastScanDuration.TotalSeconds:0}s");
-            }
-        }
-        else
-        {
-            ImGui.TextDisabled("还没有体检过。点「开始体检」扫描一次。");
-        }
-
+        DrawScanControls();
+        DrawFilters();
+        DrawOverview();
         ImGui.Separator();
-
-        // ---------------- 筛选 + 搜索 ----------------
-        ImGui.Text("显示");
-        FilterRadio("all", "全部");
-        FilterRadio("problems", "有问题的");
-        FilterRadio("unreachable", "连接失败");
-        FilterRadio("disabled", "已停用");
-
-        // 第二行：与健康度正交的两个开关（使用情况 / 图标展开）
-        var indexReady = installedIndex is { Available: true };
-
-        using var disabledScope2 = UiHelpers.Disabled(!indexReady);
-
-        if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref onlyWithPlugins) && onlyWithPlugins)
-        {
-            onlyUnused = false;
-            snapshotDirty = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(indexReady
-                ? "只显示本机已从中安装插件的仓库。"
-                : "插件数据不可用，暂时不能按这个筛选");
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Checkbox("只看未安装的###OnlyUnused", ref onlyUnused) && onlyUnused)
-        {
-            onlyWithPlugins = false;
-            snapshotDirty = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(indexReady
-                ? "只显示本机未从中安装插件的仓库。"
-                : "插件数据不可用，暂时不能按这个筛选");
-        }
-
-        disabledScope2.Dispose();
-
-        ImGui.SameLine();
-        var showIcons = plugin.Config.ShowInstalledIcons;
-        if (ImGui.Checkbox("显示插件图标###ShowIcons", ref showIcons))
-        {
-            plugin.Config.ShowInstalledIcons = showIcons;
-            plugin.SaveConfig();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("显示每个仓库中已安装插件的图标，悬停可查看名称。");
-        }
-
-
-        if (installedIndex is { Available: false })
-        {
-            UiHelpers.ColoredWrapped(
-                UiHelpers.Warn,
-                "读不到卫月的插件列表，「已安装」这一列显示为 —，这次没法判断哪条库链没在用。");
-        }
-
-        // ---------------- 搜索（贴着下面的列表） ----------------
-        ImGui.SetNextItemWidth(220);
-        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref search, 128))
-        {
-            snapshotDirty = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("搜索仓库地址中包含的文字。");
-        }
 
         List<RepoAuditItem> snapshot;
         int selectedCount;
@@ -355,6 +312,8 @@ internal sealed partial class RepoAuditTab
 
         // ---------------- 结果表 ----------------
         TickIconDownload();
+        var indexReady = installedIndex is { Available: true };
+        var showIcons = plugin.Config.ShowInstalledIcons;
 
         if (snapshot.Count == 0)
         {

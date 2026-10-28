@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FireGaze.PortraitPreview;
 
@@ -14,9 +15,10 @@ internal readonly record struct PortraitHistoryKey(ulong ContentID, PortraitHist
 }
 
 internal enum PortraitHistoryRecordKind { Edit, Restore, Undo, Redo }
-internal enum PortraitHistoryWriteStatus { Added, Duplicate, InvalidKey, InvalidJson, TooLarge, ReadOnlyCorrupt, StaleSelection, Disposed }
+internal enum PortraitHistoryWriteStatus { Added, Duplicate, InvalidKey, InvalidJson, TooLarge, ReadOnlyCorrupt, StaleSelection, Disposed, InvalidSource }
 internal sealed record PortraitHistoryRecord(long ID, PortraitHistoryKey Key, DateTimeOffset Timestamp,
-    long? ParentID, PortraitHistoryRecordKind Kind, string SnapshotJSON, long? TargetID = null, string Label = "编辑肖像");
+    long? ParentID, PortraitHistoryRecordKind Kind, string SnapshotJSON, long? TargetID = null, string Label = "编辑肖像",
+    [property: JsonRequired] PortraitPhotoSource? Source = null);
 /// <summary>
 /// Added means admission into the immutable write queue. For committed edits, Persistence
 /// reports success only after the corresponding document (or a later complete history state)
@@ -138,22 +140,30 @@ internal sealed class PortraitHistoryStore : IDisposable
 
     /// <summary>Validate quota and the complete next history document before changing a native preview.</summary>
     public PortraitHistoryWriteResult PrepareRecord(PortraitHistoryKey key, string snapshotJSON, string label = "编辑肖像")
-        => RecordCore(key, snapshotJSON, label, commit: false);
+        => RecordCore(key, snapshotJSON, null, label, commit: false);
+
+    public PortraitHistoryWriteResult PrepareRecord(PortraitHistoryKey key, string snapshotJSON, PortraitPhotoSource source, string label = "编辑肖像")
+        => RecordCore(key, snapshotJSON, source, label, commit: false);
 
     public PortraitHistoryWriteResult Record(PortraitHistoryKey key, string snapshotJSON, string label = "编辑肖像")
-        => RecordCore(key, snapshotJSON, label, commit: true);
+        => RecordCore(key, snapshotJSON, null, label, commit: true);
 
-    private PortraitHistoryWriteResult RecordCore(PortraitHistoryKey key, string snapshotJSON, string label, bool commit)
+    public PortraitHistoryWriteResult Record(PortraitHistoryKey key, string snapshotJSON, PortraitPhotoSource source, string label = "编辑肖像")
+        => RecordCore(key, snapshotJSON, source, label, commit: true);
+
+    private PortraitHistoryWriteResult RecordCore(PortraitHistoryKey key, string snapshotJSON, PortraitPhotoSource? source, string label, bool commit)
     {
         lock (gate)
         {
             if (Unavailable() is { } unavailable) return unavailable;
             if (!key.IsValid) return new(PortraitHistoryWriteStatus.InvalidKey);
+            if (source is { IsValid: false }) return new(PortraitHistoryWriteStatus.InvalidSource);
             if (!TryNormalize(snapshotJSON, out var normalized)) return new(PortraitHistoryWriteStatus.InvalidJson);
             var cursor = cursors.GetValueOrDefault(key);
             var current = cursor is null ? null : Find(cursor.ID);
-            if (current?.SnapshotJSON == normalized) return new(PortraitHistoryWriteStatus.Duplicate, current);
-            var added = new PortraitHistoryRecord(nextID, key, clock(), current?.ID, PortraitHistoryRecordKind.Edit, normalized, Label: NormalizeLabel(label, "编辑肖像"));
+            if (current?.SnapshotJSON == normalized && current.Source == source) return new(PortraitHistoryWriteStatus.Duplicate, current);
+            var added = new PortraitHistoryRecord(nextID, key, clock(), current?.ID, PortraitHistoryRecordKind.Edit, normalized,
+                Label: NormalizeLabel(label, "编辑肖像"), Source: source);
             var nextCursors = CloneCursors();
             nextCursors[key] = new(added.ID, []);
             return Accept(added, nextCursors, commit);
@@ -227,7 +237,7 @@ internal sealed class PortraitHistoryStore : IDisposable
             var nextCursors = CloneCursors();
             nextCursors[selection.Key] = new(selection.Record.ID, redo);
             return Accept(new(nextID, selection.Key, clock(), cursor.ID, kind, selection.Record.SnapshotJSON, selection.Record.ID,
-                NormalizeLabel(label, kind == PortraitHistoryRecordKind.Undo ? "撤销" : "重做")), nextCursors, commit);
+                NormalizeLabel(label, kind == PortraitHistoryRecordKind.Undo ? "撤销" : "重做"), selection.Record.Source), nextCursors, commit);
         }
     }
 
@@ -245,7 +255,8 @@ internal sealed class PortraitHistoryStore : IDisposable
             if (cursor.ID == selection.Record.ID)
                 return new(PortraitHistoryWriteStatus.Duplicate, Find(cursor.ID));
             var record = new PortraitHistoryRecord(nextID, selection.Key, clock(), cursor.ID,
-                PortraitHistoryRecordKind.Restore, selection.Record.SnapshotJSON, selection.Record.ID, NormalizeLabel(label, "恢复历史"));
+                PortraitHistoryRecordKind.Restore, selection.Record.SnapshotJSON, selection.Record.ID,
+                NormalizeLabel(label, "恢复历史"), selection.Record.Source);
             var nextCursors = CloneCursors();
             nextCursors[selection.Key] = new(record.ID, []);
             return Accept(record, nextCursors, commit);
@@ -273,7 +284,7 @@ internal sealed class PortraitHistoryStore : IDisposable
         var changedEncoding = new Dictionary<long, byte[]> { [added.ID] = JsonSerializer.SerializeToUtf8Bytes(added) };
         byte[] EncodingFor(PortraitHistoryRecord record) => changedEncoding.TryGetValue(record.ID, out var changed)
             ? changed : encodedRecords[record.ID];
-        var prefix = Encoding.UTF8.GetBytes("{\"Version\":2,\"NextID\":" + (nextID + 1).ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
+        var prefix = Encoding.UTF8.GetBytes("{\"Version\":3,\"NextID\":" + (nextID + 1).ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
         var suffix = Encoding.UTF8.GetBytes("],\"Cursors\":" + JsonSerializer.Serialize(nextCursors
             .Select(pair => new SavedCursor(pair.Key, pair.Value.ID, pair.Value.Redo)).ToList()) + "}");
         long byteCount = prefix.Length + suffix.Length + Math.Max(0, nextRecords.Count - 1);
@@ -366,16 +377,31 @@ internal sealed class PortraitHistoryStore : IDisposable
                 var selectedCursors = legacy.Cursors.GroupBy(cursor => cursor.Key.Canonical)
                     .Select(group => group.OrderByDescending(cursor => latestOperations[cursor.Key]).First())
                     .Select(cursor => new SavedCursor(cursor.Key.Canonical, cursor.ID, cursor.Redo.ToList())).ToList();
-                document = new(2, legacy.NextID, legacy.Records.Select(record => new PortraitHistoryRecord(record.ID,
+                document = new(3, legacy.NextID, legacy.Records.Select(record => new PortraitHistoryRecord(record.ID,
                     record.Key.Canonical, record.Timestamp, record.ParentID, record.Kind, record.SnapshotJSON,
-                    record.TargetID, record.Label)).ToList(), selectedCursors);
+                    record.TargetID, record.Label, Source: null)).ToList(), selectedCursors);
                 ValidateCurrent(document);
                 var candidate = JsonSerializer.SerializeToUtf8Bytes(document);
                 if (candidate.Length > byteLimit) throw new InvalidDataException("肖像历史升级后超过容量上限，已保留原文件。");
-                PersistMigration(path, fileBytes, candidate, migrationFiles);
+                PersistMigration(path, fileBytes, candidate, versionNumber, migrationFiles);
                 fileBytes = candidate;
             }
             else if (versionNumber == 2)
+            {
+                var previous = JsonSerializer.Deserialize<VersionTwoDocument>(fileBytes)
+                    ?? throw new InvalidDataException("肖像历史文件无效，已保留原文件。");
+                if (previous is not { Records: not null, Cursors: not null })
+                    throw new InvalidDataException("肖像历史记录关系无效，已保留原文件。");
+                document = new(3, previous.NextID, previous.Records.Select(record => record is null ? null! : new PortraitHistoryRecord(record.ID,
+                    record.Key, record.Timestamp, record.ParentID, record.Kind, record.SnapshotJSON,
+                    record.TargetID, record.Label, Source: null)).ToList(), previous.Cursors);
+                ValidateCurrent(document);
+                var candidate = JsonSerializer.SerializeToUtf8Bytes(document);
+                if (candidate.Length > byteLimit) throw new InvalidDataException("肖像历史升级后超过容量上限，已保留原文件。");
+                PersistMigration(path, fileBytes, candidate, versionNumber, migrationFiles);
+                fileBytes = candidate;
+            }
+            else if (versionNumber == 3)
             {
                 document = JsonSerializer.Deserialize<Document>(fileBytes)
                     ?? throw new InvalidDataException("肖像历史文件无效，已保留原文件。");
@@ -399,7 +425,8 @@ internal sealed class PortraitHistoryStore : IDisposable
 
     private static void ValidateCurrent(Document document)
     {
-        if (document is not { Version: 2, Records: not null, Cursors: not null }
+        if (document is not { Version: 3, Records: not null, Cursors: not null }
+            || document.Records.Any(record => record is not null && record.Source is { IsValid: false })
             || !ValidDocument(document.NextID,
                 document.Records.Select(row => row is null ? null : new ValidationRecord<PortraitHistoryKey>(row.ID, row.Key, row.ParentID, row.TargetID, row.Kind, row.SnapshotJSON)).ToArray(),
                 document.Cursors.Select(row => row is null ? null : new ValidationCursor<PortraitHistoryKey>(row.Key, row.ID, row.Redo)).ToArray(), key => key.IsValid))
@@ -428,16 +455,16 @@ internal sealed class PortraitHistoryStore : IDisposable
         return rows.All(record => keys.Contains(record!.Key));
     }
 
-    private void PersistMigration(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
+    private void PersistMigration(string path, byte[] original, byte[] candidate, int originalVersion, IPortraitHistoryMigrationFiles files)
     {
         if (!storage.TryRunMigration(path, checked((long)original.Length + candidate.Length),
-                () => PersistMigrationFiles(path, original, candidate, files), out var result))
+                () => PersistMigrationFiles(path, original, candidate, originalVersion, files), out var result))
             throw new IOException(result.Reason);
     }
 
-    private static void PersistMigrationFiles(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
+    private static void PersistMigrationFiles(string path, byte[] original, byte[] candidate, int originalVersion, IPortraitHistoryMigrationFiles files)
     {
-        var backup = path + ".v1-" + Convert.ToHexString(SHA256.HashData(original)) + ".bak";
+        var backup = path + ".v" + originalVersion.ToString(CultureInfo.InvariantCulture) + "-" + Convert.ToHexString(SHA256.HashData(original)) + ".bak";
         var temporary = Path.Combine(Path.GetDirectoryName(path)!, "." + Path.GetFileName(path) + ".migration-" + Guid.NewGuid().ToString("N") + ".tmp");
         var backupTemporary = Path.Combine(Path.GetDirectoryName(path)!, "." + Path.GetFileName(path) + ".backup-" + Guid.NewGuid().ToString("N") + ".tmp");
         try
@@ -508,6 +535,9 @@ internal sealed class PortraitHistoryStore : IDisposable
     private sealed record Cursor(long ID, List<long> Redo);
     private sealed record SavedCursor(PortraitHistoryKey Key, long ID, List<long> Redo);
     private sealed record Document(int Version, long NextID, List<PortraitHistoryRecord> Records, List<SavedCursor> Cursors);
+    private sealed record VersionTwoRecord(long ID, PortraitHistoryKey Key, DateTimeOffset Timestamp,
+        long? ParentID, PortraitHistoryRecordKind Kind, string SnapshotJSON, long? TargetID = null, string Label = "编辑肖像");
+    private sealed record VersionTwoDocument(int Version, long NextID, List<VersionTwoRecord> Records, List<SavedCursor> Cursors);
     private sealed record ValidationRecord<TKey>(long ID, TKey Key, long? ParentID, long? TargetID, PortraitHistoryRecordKind Kind, string SnapshotJSON);
     private sealed record ValidationCursor<TKey>(TKey Key, long ID, List<long> Redo);
     private readonly record struct LegacyKey(ulong AccountID, ulong ContentID, PortraitHistoryEntryPoint EntryPoint, int SourceID, string CompatToken)

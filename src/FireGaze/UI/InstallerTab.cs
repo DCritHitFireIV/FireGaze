@@ -60,7 +60,6 @@ internal sealed class InstallerTab
         ImGui.Unindent();
 
         ImGui.Spacing();
-        ImGui.Separator();
         ImGui.TextUnformatted("简介汉化");
         translateTab.Draw();
     }

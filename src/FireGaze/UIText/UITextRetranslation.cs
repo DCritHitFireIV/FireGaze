@@ -42,14 +42,14 @@ internal static class UITextRetranslation
 
     public static List<UITextTarget> SelectTargets(UITextPack pack, bool upgrade, bool includeGrey)
     {
-        bool Eligible(string original, bool translated, string? source) => !UITextText.LooksUntranslatable(original)
+        bool Eligible(string original, bool translated, string? source, string? providerText = null) => !UITextText.LooksUntranslatable(providerText ?? original)
             && !TranslationIndex.IsChinese(original) && !string.Equals(source, "user", StringComparison.OrdinalIgnoreCase)
             && (!upgrade || !translated || source?.Trim().ToLowerInvariant() is "library" or "ai:google"
                 or "ai:mymemory" or "ai:caiyun" or "ai:public-caiyun" or "ai:deepl");
         var result = new List<UITextTarget>();
         foreach (var e in pack.Entries)
             if (!pack.IsSkipped(e.Original) && (e.Role == "UI" || includeGrey && e.Role == "Ambiguous")
-                && Eligible(e.Original, e.HasTranslation, e.Source))
+                && Eligible(e.Original, e.HasTranslation, e.Source, e.ProviderText))
                 result.Add(new(e.Original, e.Context, e, null));
         foreach (var e in pack.Resources)
             if (!pack.IsResourceSkipped(e.Container, e.Key) && Eligible(e.Original, e.HasTranslation, e.Source))
@@ -74,26 +74,58 @@ internal static class UITextRetranslation
     public static (int Applied, int PlaceholderRejected, int Unchanged) Accept(UITextPack pack,
         IReadOnlyList<UITextTarget> targets, IEnumerable<KeyValuePair<string, string>> values, string channel)
     {
+        var receipt = AcceptWithReceipt(pack, targets, values, channel);
+        return (receipt.Applied, receipt.PlaceholderRejected, receipt.Unchanged);
+    }
+
+    public static (int Applied, int PlaceholderRejected, int Unchanged, string[] CompletedTargetIDs) AcceptWithReceipt(UITextPack pack,
+        IReadOnlyList<UITextTarget> targets, IEnumerable<KeyValuePair<string, string>> values, string channel)
+    {
         // Shared text is sent once, but only the selected identities receive its result.
+        var eligible = targets.Where(t => t.Entry is { IsUserSource: false } && !pack.IsSkipped(t.Original)
+            || t.Resource is { IsUserSource: false } r && !pack.IsResourceSkipped(r.Container, r.Key)
+            || t.Attribute is { IsUserSource: false } && !pack.IsAttributeSkipped(t.Original)).ToArray();
         var selected = new UITextPack
         {
-            Entries = targets.Where(t => t.Entry is { IsUserSource: false } && !pack.IsSkipped(t.Original)).Select(t => t.Entry!).ToList(),
-            Resources = targets.Where(t => t.Resource is { IsUserSource: false } r && !pack.IsResourceSkipped(r.Container, r.Key)).Select(t => t.Resource!).ToList(),
-            Attributes = targets.Where(t => t.Attribute is { IsUserSource: false } && !pack.IsAttributeSkipped(t.Original)).Select(t => t.Attribute!).ToList(),
+            Entries = eligible.Where(t => t.Entry is not null).Select(t => t.Entry!).ToList(),
+            Resources = eligible.Where(t => t.Resource is not null).Select(t => t.Resource!).ToList(),
+            Attributes = eligible.Where(t => t.Attribute is not null).Select(t => t.Attribute!).ToList(),
         };
+        var delivered = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var pair in values) delivered[pair.Key] = pair.Value;
         var safeValues = new List<KeyValuePair<string, string>>();
+        var acceptedValues = new Dictionary<string, string>(StringComparer.Ordinal);
+        var providerTexts = eligible.GroupBy(target => target.Original, StringComparer.Ordinal)
+            .Where(group => group.Select(target => target.TranslationText).Distinct(StringComparer.Ordinal).Count() == 1)
+            .ToDictionary(group => group.Key, group => group.First().TranslationText, StringComparer.Ordinal);
         var rejected = 0;
-        foreach (var pair in values)
+        foreach (var pair in delivered)
         {
             var clean = UITextText.CleanTranslated(pair.Value);
-            if (!string.IsNullOrWhiteSpace(clean) && clean != UITextText.ForTranslation(pair.Key)
-                && UITextText.CheckPlaceholders(pair.Key, clean) is not null)
+            var providerText = providerTexts.GetValueOrDefault(pair.Key, UITextText.ForTranslation(pair.Key));
+            if (!string.IsNullOrWhiteSpace(clean) && clean != providerText
+                && UITextText.CheckPlaceholders(providerText, clean) is not null)
                 rejected += selected.Entries.Count(e => e.Original == pair.Key)
                     + selected.Resources.Count(e => e.Original == pair.Key) + selected.Attributes.Count(e => e.Original == pair.Key);
-            else safeValues.Add(pair);
+            else
+            {
+                safeValues.Add(pair);
+                if (!string.IsNullOrWhiteSpace(clean) && clean != providerText)
+                    acceptedValues[pair.Key] = clean;
+            }
         }
-        var result = UITextFlow.AcceptTranslations(selected, safeValues, channel, overwriteExisting: true, overwriteUser: false);
-        return (result.Applied, result.PlaceholderRejected + rejected, result.Unchanged);
+        var result = UITextFlow.AcceptTranslations(selected, safeValues, channel, overwriteExisting: true,
+            overwriteUser: false, providerTexts: providerTexts);
+        // Receiving a value is not completion. Rejected, blank or unchanged
+        // replies must remain available to the next real resume operation.
+        var completed = eligible.GroupBy(TargetID, StringComparer.Ordinal).Where(group => group.All(target =>
+        {
+            if (!acceptedValues.TryGetValue(target.Original, out var accepted)) return false;
+            return target.Entry is { } entry ? entry.Translated == accepted && entry.Source == "ai:" + channel
+                : target.Resource is { } resource ? resource.Translated == accepted && resource.Source == "ai:" + channel
+                : target.Attribute is { } attribute && attribute.Translated == accepted && attribute.Source == "ai:" + channel;
+        })).Select(group => group.Key).ToArray();
+        return (result.Applied, result.PlaceholderRejected + rejected, result.Unchanged, completed);
     }
 
     private static string SnapshotPath(string directory, string name, string id)

@@ -6,6 +6,7 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Ipc;
 using FireGaze.UI;
+using FireGaze.LocalPreview.Runtime;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -67,32 +68,50 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         cache = new(configDirectory, storage: storageBudget);
         cache.Load(owned, out _);
         cacheWriter = new(cache.SaveJSONResult, storageBudget);
-        ownedSavePolicy = new(cacheWriter, owned.ContentRevision);
-        var cabinetItems = Plugin.DataManager.GetExcelSheet<CabinetRow>().Select(row => new OwnedCabinetItem(row.RowId, row.Item.RowId)).ToArray();
-        inventory = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter, () => cabinetItems, IsRetainerInventoryOpen);
-        target = new(Plugin.Framework, Plugin.Objects, Plugin.GameGUI, Plugin.Interop,
-            identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle, Plugin.AddonLifecycle);
-        session = new(target);
-        InitializeEditing(configDirectory);
-        InitializeLibrary(configDirectory);
-        InitializePhotos(configDirectory);
-        InitializeLiveCapture();
-        InitializeLightingFit();
-        InitializeNativeLive();
-        InitializeSourceCensus();
-        InitializeOwnedPassive();
-        InitializeOwnedJoint();
-        InitializeEditorOpening();
-        window = new(this, pluginInterface, Plugin.Textures, photos);
-        windows.AddWindow(window);
-        diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
-        diagnostics.RegisterFunc(() => OnFramework(Diagnostics));
-        Plugin.Framework.Update += Update;
-        pluginInterface.UiBuilder.Draw += Draw;
-        InitializeCaptureProgress();
+        try
+        {
+            ownedSavePolicy = new(cacheWriter, owned.ContentRevision);
+            var cabinetItems = Plugin.DataManager.GetExcelSheet<CabinetRow>().Select(row => new OwnedCabinetItem(row.RowId, row.Item.RowId)).ToArray();
+            inventory = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter, () => cabinetItems, IsRetainerInventoryOpen);
+            target = new(Plugin.Framework, Plugin.Objects, Plugin.GameGUI, Plugin.Interop,
+                identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle, Plugin.AddonLifecycle);
+            session = new(target);
+            InitializeEditing(configDirectory);
+            InitializeLibrary(configDirectory);
+            InitializePhotos(configDirectory);
+            InitializeLiveCapture();
+            InitializeLightingFit();
+            InitializeNativeLive();
+            InitializeSourceCensus();
+            InitializeOwnedPassive();
+            InitializeOwnedJoint();
+            InitializeEditorOpening();
+            window = new(this, pluginInterface, Plugin.Textures, photos);
+            windows.AddWindow(window);
+            diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
+            diagnostics.RegisterFunc(() => OnFramework(Diagnostics));
+            Plugin.Framework.Update += Update;
+            pluginInterface.UiBuilder.Draw += Draw;
+            InitializeCaptureProgress();
+        }
+        catch (Exception initializationFailure)
+        {
+            try { Dispose(); }
+            catch (Exception closeFailure)
+            {
+                throw new NativePhysicalCloseException(this,
+                    new AggregateException(initializationFailure, closeFailure));
+            }
+            // The field in Plugin is still unassigned. Transfer this Feature's real
+            // drains so delayed rollback can finish and unknown ownership stays pending.
+            if (!DrainManagedAsync().IsCompletedSuccessfully || !DrainPhysicalAsync().IsCompletedSuccessfully)
+                throw new NativePhysicalCloseException(this, initializationFailure);
+            throw;
+        }
     }
 
     public bool IsActive => session.IsActive;
+    public long PreviewSessionRevision => session.Revision;
     public PortraitLook? Current => session.Current;
     public PortraitLook? Original => session.Original;
     public ushort? ActualFacewear => actualFacewear;
@@ -119,6 +138,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             historyRows, appearanceGroups,
             designManifest = window.DesignManifestForDiagnostics(),
             historyPhotos = photos.Diagnostics(),
+            // The gallery DTO is a detached historical UI submission. Reading
+            // it neither visits ImGui nor requests a texture/native operation.
+            favoriteGallery = window.FavoriteGalleryObservation,
+            favoriteGalleryCurrent = new { ownerAccountID = sourceCharacter?.AccountID ?? 0,
+                ownerContentID = sourceCharacter?.ContentID ?? 0, previewSessionRevision = session.Revision,
+                active = IsActive, windowOpen = window.IsOpen },
             portraitStorage = storageBudget.Snapshot,
             captureIsolation = captureIsolation.Mode,
             sourceCensus = SourceCensusDiagnostics(),
@@ -195,7 +220,9 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             using (runtimeTrace.Measure("update.capture-state")) ObserveLiveCaptureState();
             using (runtimeTrace.Measure("update.library")) PollLibrary();
             using (runtimeTrace.Measure("update.photos")) PollPhotos();
-            using (runtimeTrace.Measure("update.live-image")) liveImageService?.Update(captureIsolation.LiveEnabled && session.IsActive);
+            using (runtimeTrace.Measure("update.live-image"))
+                liveImageService?.Update((captureIsolation.LiveEnabled || ProductWorkspacePlateCaptureAllowed)
+                    && session.IsActive);
             using (runtimeTrace.Measure("update.native-live")) UpdateNativeLive();
             using (runtimeTrace.Measure("update.resolve"))
             {
@@ -314,7 +341,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         var item = GetItems(slot).FirstOrDefault(row => row.ID == id);
         if (item is not { Available: true }) { Error(item?.Reason ?? "尚未在已读取的物品中找到此装备。"); return; }
         var variant = ownedView.Items.FirstOrDefault(row => row.ItemID == id)?.Variants.FirstOrDefault();
-        HandleHistoryResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (ApplyWithFailureNotice(() => session.Replace(slot, new(id, item.DyeChannels > 0 ? variant?.Stain1 ?? 0 : (byte)0,
                 item.DyeChannels > 1 ? variant?.Stain2 ?? 0 : (byte)0)), "暂时无法预览此装备，请等待肖像加载后重试。"))
             RecordDirectChange("更换装备：" + item.Name);
@@ -323,7 +350,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void Clear(PortraitSlot slot) => Mutate(() =>
     {
         if (!SynchronizeCurrentLook()) return;
-        HandleHistoryResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (ApplyWithFailureNotice(() => session.Replace(slot, default), "暂时无法清空此部位，请稍后重试。"))
             RecordDirectChange("清空装备部位");
     });
@@ -336,7 +363,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         var item = GetItem(slot, piece.ItemID);
         if (item is null || channel >= item.DyeChannels || (stain != 0 && !dyes.Any(row => row.ID == stain))) return;
         var next = channel == 0 ? piece with { Stain0 = stain } : piece with { Stain1 = stain };
-        HandleHistoryResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (ApplyWithFailureNotice(() => session.Replace(slot, next), "暂时无法预览此染色，请稍后重试。"))
             RecordDirectChange($"染色 {channel + 1}：" + (dyes.FirstOrDefault(dye => dye.ID == stain)?.Name ?? "无"));
     });
@@ -344,21 +371,34 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void SetVisibility(bool head, bool weapon, bool visor) => Mutate(() =>
     {
         if (!SynchronizeCurrentLook()) return;
-        HandleHistoryResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (ApplyWithFailureNotice(() => session.SetVisibility(head, weapon, visor), "暂时无法更改装备显示，请稍后重试。"))
             RecordDirectChange("装备显示设置");
     });
 
     public void ClosePreview() => Mutate(() =>
     {
-        StopNativeLive(PortraitNativeLiveStopReason.UserClosed);
         if (!CancelLightingFitForEdit()) { Error("正在结束灯光调整，请稍候再关闭预览。"); return; }
-        FlushEditing();
-        if (!ApplyWithFailureNotice(session.Close, "临时外观尚未还原，请等待肖像加载后再次关闭。"))
+        if (!FlushEditing())
         {
             window.IsOpen = true;
             return;
         }
+        StopNativeLive(PortraitNativeLiveStopReason.UserClosed);
+        if (!ApplyWithFailureNotice(session.Close, "临时外观尚未还原，请等待肖像加载后再次关闭。"))
+        {
+            // Restore failure leaves the preview lease active. Re-arm the same
+            // source-scoped NativeLive lease so a subsequent close attempt or
+            // continued preview does not strand the workspace without a frame.
+            if (captureScope == PortraitImageScope.Portrait
+                && session.IsActive
+                && target.TryResolve(out var identity, out _, out _))
+                nativeLiveController?.RearmAutomaticSession(session.Revision, identity);
+            window.IsOpen = true;
+            return;
+        }
+        photos?.InvalidateCurrentCapture();
+        CancelPendingFavoriteSave("肖像预览已结束，本次收藏未保存。");
         window.IsOpen = false;
         originalEditorSnapshot = null;
         liveImageService?.Close();

@@ -8,7 +8,10 @@ namespace FireGaze.UIText;
 /// <summary>
 ///     一条待翻的文本（<paramref name="Context" /> 是代码位置，给大模型当上下文用）。
 /// </summary>
-internal sealed record UITextTranslateItem(string Text, string? Context);
+internal sealed record UITextTranslateItem(string Text, string? Context, string? TranslationText = null)
+{
+    public string ProviderText => UITextText.ForTranslation(this.TranslationText ?? this.Text);
+}
 
 /// <summary>
 ///     一批翻译的结果：成功的进 <see cref="Translated" />（键 = 原文），失败的进 <see cref="Failed" />。
@@ -212,7 +215,7 @@ internal sealed class CaiyunTranslationChannel : IUITextChannel
         UITextTranslateResult result,
         CancellationToken token)
     {
-        var texts = batch.Select(item => UITextText.ForTranslation(item.Text)).ToList();
+        var texts = batch.Select(item => item.ProviderText).ToList();
         var attempt = 0;
         while (true)
         {
@@ -440,7 +443,7 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
         UITextTranslateResult result,
         CancellationToken token)
     {
-        var texts = batch.Select(item => UITextText.ForTranslation(item.Text)).ToList();
+        var texts = batch.Select(item => item.ProviderText).ToList();
         for (var attempt = 0; ; attempt++)
         {
             string body;
@@ -674,7 +677,7 @@ internal sealed class FreeTranslationChannel : IUITextChannel
                 break;
             }
 
-            var (text, notes) = await this.TranslateOneAsync(item.Text, token).ConfigureAwait(false);
+            var (text, notes) = await this.TranslateOneAsync(item.ProviderText, token).ConfigureAwait(false);
             if (text is null)
             {
                 result.Failed.Add(item.Text);
@@ -716,9 +719,8 @@ internal sealed class FreeTranslationChannel : IUITextChannel
         ? [this.google, this.myMemory]
         : [this.myMemory, this.google];
 
-    private async Task<(string? Text, List<string> Notes)> TranslateOneAsync(string original, CancellationToken token)
+    private async Task<(string? Text, List<string> Notes)> TranslateOneAsync(string text, CancellationToken token)
     {
-        var text = UITextText.ForTranslation(original);
         var notes = new List<string>();
         if (text.Length == 0)
         {
@@ -1097,7 +1099,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             try
             {
                 FFXIVGlossary.EnsureBuilt();
-                var terms = FFXIVGlossary.FindTerms(chunk.Select(item => UITextText.ForTranslation(item.Text)).ToList());
+                var terms = FFXIVGlossary.FindTerms(chunk.Select(item => item.ProviderText).ToList());
                 if (terms.Count > 0)
                 {
                     var multi = terms.Where(t => t.English.Contains(' ')).ToList();
@@ -1145,7 +1147,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
 
             var item = chunk[i];
             payload.Append("{\"i\":").Append(i)
-                .Append(",\"text\":").Append(JsonSerializer.Serialize(UITextText.ForTranslation(item.Text)));
+                .Append(",\"text\":").Append(JsonSerializer.Serialize(item.ProviderText));
             if (!string.IsNullOrEmpty(item.Context))
             {
                 payload.Append(",\"ctx\":").Append(JsonSerializer.Serialize(item.Context));
@@ -1395,7 +1397,7 @@ internal sealed class DeepLTranslationChannel : IUITextChannel
             };
             foreach (var item in chunk)
             {
-                fields.Add(new KeyValuePair<string, string>("text", UITextText.ForTranslation(item.Text)));
+                fields.Add(new KeyValuePair<string, string>("text", item.ProviderText));
             }
 
             try

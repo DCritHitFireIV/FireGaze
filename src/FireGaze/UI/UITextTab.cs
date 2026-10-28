@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using FireGaze.Diagnostics;
+using FireGaze.Lifecycle;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 using FireGaze.UIText;
@@ -93,13 +94,18 @@ internal sealed partial class UITextTab
 
     private sealed class Run
     {
+        public Run(CancellationToken shutdownToken)
+        {
+            this.Cancel = CancellationTokenSource.CreateLinkedTokenSource(shutdownToken);
+        }
+
         public string InternalName = string.Empty;
         public RunMode Mode = RunMode.Full;
         public string Stage = string.Empty;
         public bool CanCancel;
         public int Done;
         public int Total;
-        public CancellationTokenSource Cancel = new();
+        public CancellationTokenSource Cancel;
         public Task Task = Task.CompletedTask;
         public bool Finished;
         public HashSet<string>? NewOnly;
@@ -224,7 +230,7 @@ internal sealed partial class UITextTab
     {
         if (this.indexRebuild is null)
         {
-            this.indexRebuild = Task.Run(InstalledPluginsIndex.Build);
+            this.indexRebuild = this.plugin.RunTextTask(InstalledPluginsIndex.Build);
         }
     }
 
@@ -264,7 +270,7 @@ internal sealed partial class UITextTab
 
         PluginListLayout.ToolbarSameLineOrWrap(PluginListLayout.SearchWidth);
         ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
-        ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
+        ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名、作者、简介、详情…", ref this.search, 128);
 
         PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("状态") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
@@ -352,28 +358,29 @@ internal sealed partial class UITextTab
 
         var patched = this.rows.Values.Count(r => r.Patch == UITextPatchStatus.Applied && !r.DoNotLocalize);
         var attention = this.rows.Values.Count(NeedsAttention);
-        var summary = $"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}";
+        var summary = $"已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}";
         ImGui.SameLine(0, 8f);
         ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
         UiHelpers.Fitted(summary, summary);
         ImGui.PopStyleColor();
     }
 
-    /// <summary>插件汉化页第一行最右的「反馈…」入口（列表读不到时也会画）。</summary>
+    /// <summary>插件汉化页第一行最右的「反馈」入口（列表读不到时也会画）。</summary>
     private void DrawFeedbackButton()
     {
-        const string feedbackLabel = "反馈…";
-        var feedbackLeft = ImGui.GetWindowPos().X + ImGui.GetContentRegionMax().X - UiHelpers.LabelWidth(feedbackLabel);
+        const string feedbackLabel = "反馈";
+        var feedbackWidth = PluginListLayout.FeedbackSlotWidth();
+        var feedbackLeft = ImGui.GetWindowPos().X + ImGui.GetContentRegionMax().X - feedbackWidth;
         if (feedbackLeft > ImGui.GetItemRectMax().X + 12f)
         {
             ImGui.SameLine(feedbackLeft - ImGui.GetWindowPos().X);
         }
         else
         {
-            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(feedbackLabel));
+            PluginListLayout.ToolbarSameLineOrWrap(feedbackWidth);
         }
 
-        if (ImGui.Button(feedbackLabel))
+        if (ImGui.Button(feedbackLabel, new Vector2(feedbackWidth, 0)))
         {
             this.feedbackOpen = true;
             this.feedbackNeedsOpen = true;
@@ -903,14 +910,13 @@ internal sealed partial class UITextTab
         }
 
         this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "正在启用插件…" };
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
-            var (ok, message) = await PluginEnableBridge.EnableAsync(entry.RawPlugin).ConfigureAwait(false);
+            var (ok, message) = await this.patches.EnableAsync(entry).ConfigureAwait(false);
             this.enabling.TryRemove(entry.InternalName, out _);
             if (ok)
             {
-                // 插件已加载：它读的就是打过补丁的文件（没打过就无所谓），待确认状态直接转正
-                this.patches.MarkVerified(entry.InternalName);
+                // Manager has verified the same file operation after loading.
                 entry.IsLoaded = true;   // 行状态立刻变成「打开/设置」，不等索引重建
                 if (this.patches.HasBackup(entry))
                 {
@@ -947,7 +953,7 @@ internal sealed partial class UITextTab
         }
 
         var framework = Plugin.Framework;
-        _ = Task.Run(() =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             UploadBuildResult outcome;
             try
@@ -960,8 +966,10 @@ internal sealed partial class UITextTab
                 outcome = new UploadBuildResult(null, "整理投稿失败：" + e.GetBaseException().Message, NoteKind.Bad);
             }
 
-            _ = framework.RunOnFrameworkThread(() =>
+            if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
+            await framework.RunOnFrameworkThread(() =>
             {
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 this.uploadBuilds.TryRemove(entry.InternalName, out _);
                 if (outcome.NoteText is { Length: > 0 })
                 {
@@ -973,7 +981,7 @@ internal sealed partial class UITextTab
                     this.pendingUpload = outcome.Upload;
                     this.uploadModalNeedsOpen = true;
                 }
-            });
+            }).ConfigureAwait(false);
         });
     }
 
@@ -1176,7 +1184,7 @@ internal sealed partial class UITextTab
         var title = $"[译文贡献] {entry.InternalName} · {total} 条";
         var storeDirectory = this.store.DirectoryPath;
         this.uploading.TryAdd(entry.InternalName, true);
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             try
             {
@@ -1354,8 +1362,10 @@ internal sealed partial class UITextTab
     /// <summary>上传任务的收尾：回主线程把行提示写上（上传是后台任务）。</summary>
     private async Task FinishUploadAsync(string internalName, string text, NoteKind kind)
     {
+        if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
         await Plugin.Framework.RunOnFrameworkThread(() =>
         {
+            if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
             this.uploading.TryRemove(internalName, out _);
             this.notes[internalName] = new RowNote { Kind = kind, Text = text };
             this.rowsDirty = true;
@@ -1559,11 +1569,11 @@ internal sealed partial class UITextTab
             if (!this.cloudIndexFetching)
             {
                 this.cloudIndexFetching = true;
-                _ = Task.Run(async () =>
+                _ = this.plugin.RunTextTask(async () =>
                 {
                     try
                     {
-                        await library.FetchIndexAsync(CancellationToken.None).ConfigureAwait(false);
+                        await library.FetchIndexAsync(this.plugin.WorkLifetime.ShutdownToken).ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
@@ -1573,7 +1583,14 @@ internal sealed partial class UITextTab
                     {
                         try
                         {
-                            await Plugin.Framework.RunOnFrameworkThread(() => this.cloudIndexFetching = false).ConfigureAwait(false);
+                            if (this.plugin.WorkLifetime.State == PluginWorkLifetimeState.Running)
+                            {
+                                await Plugin.Framework.RunOnFrameworkThread(() =>
+                                {
+                                    if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
+                                    this.cloudIndexFetching = false;
+                                }).ConfigureAwait(false);
+                            }
                         }
                         catch (Exception)
                         {
@@ -1591,7 +1608,7 @@ internal sealed partial class UITextTab
         // 直接问中继拿现数（约 1 分钟内的值），5 分钟节流、失败静默。
         if (library.ShouldRefreshCounts)
         {
-            _ = Task.Run(() => library.RefreshCountsAsync(CancellationToken.None));
+            _ = this.plugin.RunTextTask(() => library.RefreshCountsAsync(this.plugin.WorkLifetime.ShutdownToken));
         }
 
         if (!index.Plugins.TryGetValue(plugin.InternalName, out var entry))
@@ -1688,14 +1705,14 @@ internal sealed partial class UITextTab
             null or "" or "library" => "公共译文库",
             var other => other,
         };
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             UITextPack? fetched = null;
             UITextFlow.MergePreview preview = default;
             string? error = null;
             try
             {
-                fetched = await library.FetchPackFileAsync(fileName, internalName, packID, CancellationToken.None).ConfigureAwait(false);
+                fetched = await library.FetchPackFileAsync(fileName, internalName, packID, this.plugin.WorkLifetime.ShutdownToken).ConfigureAwait(false);
                 if (fetched is not null)
                 {
                     preview = UITextFlow.PreviewMerge(packStore.Load(internalName), fetched);
@@ -1708,8 +1725,10 @@ internal sealed partial class UITextTab
 
             try
             {
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 await Plugin.Framework.RunOnFrameworkThread(() =>
                 {
+                    if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                     this.cloudDownloading.Remove(key);
                     if (fetched is null)
                     {
@@ -1805,17 +1824,19 @@ internal sealed partial class UITextTab
         var internalName = pending.Entry.InternalName;
         var fetched = pending.Fetched;
         var packStore = this.store;
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             string text;
             try
             {
-                var local = packStore.Load(internalName);
-                var changed = local.MergeLibrary(fetched);
-                text = changed > 0
-                    ? packStore.Save(internalName, local, out var saveError)
-                        ? $"已应用 {changed} 条译文，请点「写入并重载」更新插件。"
-                        : "写盘失败：" + saveError
+                var changed = 0;
+                var saved = packStore.SaveMergedIfChanged(internalName, latest =>
+                {
+                    changed = latest.MergeLibrary(fetched);
+                    return latest;
+                }, out _, out var saveError);
+                text = !saved ? "写盘失败：" + saveError
+                    : changed > 0 ? $"已应用 {changed} 条译文，请点「写入并重载」更新插件。"
                     : "没有变化（本机已有相同或更好的译文）";
             }
             catch (Exception e)
@@ -1825,8 +1846,10 @@ internal sealed partial class UITextTab
 
             try
             {
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 await Plugin.Framework.RunOnFrameworkThread(() =>
                 {
+                    if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                     this.cloudNotes[key] = text;
                     this.rowsDirty = true;
                 }).ConfigureAwait(false);
@@ -1945,10 +1968,10 @@ internal sealed partial class UITextTab
             return;
         }
 
-        var run = new Run { InternalName = entry.InternalName, Mode = RunMode.ExtractOnly, Stage = "正在读取插件界面文本…" };
+        var run = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Mode = RunMode.ExtractOnly, Stage = "正在读取插件界面文本…" };
         this.run = run;
         this.notes.TryRemove(entry.InternalName, out _);
-        run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
+        run.Task = this.plugin.RunTextTask(() => this.RunPipelineAsync(entry, run));
     }
 
     private void StartOneClick(InstalledPluginEntry entry, HashSet<string>? newOnly = null)
@@ -2030,15 +2053,16 @@ internal sealed partial class UITextTab
             return;
         }
 
-        var run = new Run { InternalName = entry.InternalName, Stage = "准备中…", NewOnly = newOnly };
+        var run = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Stage = "准备中…", NewOnly = newOnly };
         this.run = run;
         this.notes.TryRemove(entry.InternalName, out _);
-        run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
+        run.Task = this.plugin.RunTextTask(() => this.RunPipelineAsync(entry, run));
     }
 
     private async Task RunPipelineAsync(InstalledPluginEntry entry, Run run)
     {
         var token = run.Cancel.Token;
+        var editFence = this.store.CaptureEditFence(entry.InternalName);
         try
         {
             // ① 抽取（盘上是我们的补丁时自动改读原始备份）
@@ -2060,13 +2084,18 @@ internal sealed partial class UITextTab
                 return;
             }
 
-            var pack = this.store.Load(entry.InternalName);
-            var merge = UITextFlow.MergeExtraction(pack, extraction);
-            if (!this.store.Save(entry.InternalName, pack, out var saveError))
+            UITextFlow.MergeResult? extractionMerge = null;
+            if (!this.store.SaveMerged(entry.InternalName, latest =>
+                {
+                    extractionMerge = UITextFlow.MergeExtraction(latest, extraction);
+                    return latest;
+                }, out var savedPack, out var saveError))
             {
                 this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "保存译文包失败：" + saveError });
                 return;
             }
+            var pack = savedPack!;
+            var merge = extractionMerge!;
 
             if (merge.UICount + merge.AmbiguousCount + merge.ResourceCount + merge.AttributeCount == 0)
             {
@@ -2104,6 +2133,7 @@ internal sealed partial class UITextTab
 
             // ② 翻译没翻的条目
             var targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+            targets = targets.Where(editFence).ToList();
             if (run.NewOnly is not null) targets = targets.Where(t => run.NewOnly.Contains(t.Original)).ToList();
 
             // ②a 先看公共译文库有没有现成的（有就不用花用户自己的 key；合并规则：玩家自己改过的永不被顶）
@@ -2112,18 +2142,28 @@ internal sealed partial class UITextTab
             {
                 run.Stage = "正在查公共译文库…";
                 run.CanCancel = true; // 拉库也要能取消（限时 12 秒，拉不到就会直接跳过）
+                var libraryBaseline = UITextPackEditMerge.Clone(pack);
                 libraryChanged = await this.plugin.TextLibrary.MergeIntoAsync(pack, entry.InternalName, token).ConfigureAwait(false);
                 if (libraryChanged > 0)
                 {
-                    if (!this.store.Save(entry.InternalName, pack, out var librarySaveError))
+                    token.ThrowIfCancellationRequested();
+                    var proposal = pack;
+                    UITextLibraryReceipt.Result? accepted = null;
+                    if (!this.store.SaveMerged(entry.InternalName,
+                        latest => (accepted = UITextLibraryReceipt.Accept(libraryBaseline, proposal, latest, editFence)).Pack,
+                        out var committedLibrary, out var librarySaveError))
                         throw new IOException("保存公共译文失败：" + librarySaveError);
+                    pack = committedLibrary!;
+                    libraryChanged = accepted!.Applied;
                     targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+                    targets = targets.Where(editFence).ToList();
                     if (run.NewOnly is not null) targets = targets.Where(t => run.NewOnly.Contains(t.Original)).ToList();
                     Plugin.Log?.Information($"[内部文本] {entry.InternalName}：译文库补入 {libraryChanged} 条，还需翻译 {targets.Count} 条");
                 }
             }
 
             var translatedCount = 0;
+            targets = targets.Where(editFence).ToList();
             var channelNote = string.Empty;
 
             // 个别条目没回来时的如实说明（正常写补丁，但这几条给「重试」）
@@ -2170,6 +2210,7 @@ internal sealed partial class UITextTab
                 var savedApplied = 0;
                 var savedRejected = 0;
                 var savedUnchanged = 0;
+                var receipt = new UITextTranslationReceipt(pack, targets, overwriteExisting: false, overwriteUser: false);
                 var result = await UITextTranslationSession.TranslateAsync(channel,
                     items,
                     (done, _) =>
@@ -2179,12 +2220,20 @@ internal sealed partial class UITextTab
                     },
                     batch =>
                     {
-                        var accepted = UITextFlow.AcceptTranslations(pack, batch.Translated, channel.Name);
-                        savedApplied += accepted.Applied;
+                        token.ThrowIfCancellationRequested();
+                        UITextTranslationReceipt.Result? accepted = null;
+                        if (!this.store.SaveMerged(entry.InternalName,
+                                latest =>
+                                {
+                                    foreach (var target in targets.Where(target => !editFence(target))) receipt.Invalidate(target);
+                                    return (accepted = receipt.Accept(latest, batch.Translated, channel.Name)).Pack;
+                                },
+                                out var checkpoint, out var checkpointError))
+                            throw new IOException("保存译文失败：" + checkpointError);
+                        pack = checkpoint!;
+                        savedApplied += accepted!.Applied;
                         savedRejected += accepted.PlaceholderRejected;
                         savedUnchanged += accepted.Unchanged;
-                        if (!this.store.Save(entry.InternalName, pack, out var checkpointError))
-                            throw new IOException("保存译文失败：" + checkpointError);
                     },
                     token).ConfigureAwait(false);
 
@@ -2452,15 +2501,17 @@ internal sealed partial class UITextTab
         var text = this.feedbackText.Trim();
         var attachLog = this.feedbackAttachLog;
 
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             try
             {
                 ActivityLog.Info("反馈", $"提交反馈（{category}，{text.Length} 字，附带日志={attachLog}）");
                 var (ok, message) = await FeedbackSender.SendAsync(category, text, attachLog).ConfigureAwait(false);
                 // 这些字段是绘制线程读的，必须回主体线程写（2026-10-03 评审 C-11）
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 await Plugin.Framework.RunOnFrameworkThread(() =>
                 {
+                    if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                     this.feedbackSending = false;
                     if (ok)
                     {
@@ -2488,8 +2539,10 @@ internal sealed partial class UITextTab
             {
                 try
                 {
+                    if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                     await Plugin.Framework.RunOnFrameworkThread(() =>
                     {
+                        if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                         this.feedbackSending = false;
                         this.feedbackStatus = "发送失败：" + e.GetBaseException().Message + "（内容还在，可以稍后重试）";
                         this.feedbackStatusError = true;
@@ -2776,12 +2829,12 @@ internal sealed partial class UITextTab
         var generation = pending.TestGeneration;
         var items = new List<UITextTranslateItem> { new("Settings", "test") };
         var probeChannel = channel;
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             void Write(bool ok, string status)
             {
                 // 切单选 / 重开弹窗后旧的试连结果不许回写到新的那一行
-                if (pending.TestGeneration == generation)
+                if (this.plugin.WorkLifetime.State == PluginWorkLifetimeState.Running && pending.TestGeneration == generation)
                 {
                     pending.TestOk = ok;
                     pending.TestStatus = status;
@@ -2791,7 +2844,7 @@ internal sealed partial class UITextTab
 
             try
             {
-                var result = await probeChannel.TranslateAsync(items, null, CancellationToken.None).ConfigureAwait(false);
+                var result = await probeChannel.TranslateAsync(items, null, this.plugin.WorkLifetime.ShutdownToken).ConfigureAwait(false);
                 if (result.Translated.TryGetValue("Settings", out var text) && !string.IsNullOrWhiteSpace(text))
                 {
                     Write(true, $"连接正常（{probeChannel.Name}）：Settings → {text}");
@@ -3087,7 +3140,18 @@ internal sealed partial class UITextTab
         ImGui.TextDisabled("会自动重载插件，界面恢复原文；之后仍可使用「一键汉化」。");
         ImGui.Separator();
         UiHelpers.PushDangerButton();
-        if (ImGui.Button("还原", new Vector2(100, 0)))
+        bool confirmedRestore;
+        try
+        {
+            confirmedRestore = ImGui.Button("还原", new Vector2(100, 0));
+        }
+        finally
+        {
+            // Restore the button's colors before closing the popup or starting a reload.
+            UiHelpers.PopDangerButton();
+        }
+
+        if (confirmedRestore)
         {
             var confirmed = restore.Entry;
             this.pendingRestore = null;
@@ -3095,8 +3159,6 @@ internal sealed partial class UITextTab
             this.RunRestore(confirmed);
             return;
         }
-
-        UiHelpers.PopDangerButton();
 
         ImGui.SameLine();
         if (ImGui.Button("取消", new Vector2(90, 0)))
@@ -3128,10 +3190,10 @@ internal sealed partial class UITextTab
             return;
         }
 
-        var run = new Run { InternalName = entry.InternalName, Stage = "正在还原并重载…" };
+        var run = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Stage = "正在还原并重载…" };
         this.run = run;
         this.notes.TryRemove(entry.InternalName, out _);
-        run.Task = Task.Run(async () =>
+        run.Task = this.plugin.RunTextTask(async () =>
         {
             var (ok, message) = await this.patches.RestoreAndReloadAsync(entry).ConfigureAwait(false);
             this.FinishRun(run, new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message });

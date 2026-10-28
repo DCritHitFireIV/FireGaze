@@ -1,0 +1,54 @@
+<Project>
+  <!-- Keep the packager's manifest generation. Its image sidecar handling does
+       not implement this plugin's complete, nine-file ZIP payload contract. -->
+  <Target Name="FireGazeDalamudPackager"
+          AfterTargets="Build"
+          Condition="'$(Configuration)' == 'Debug' or '$(Configuration)' == 'Release'">
+    <DalamudPackager ProjectDir="$(ProjectDir)"
+                     OutputPath="$(OutputPath)"
+                     AssemblyName="$(AssemblyName)"
+                     MakeZip="false"
+                     HandleImages="false"
+                     Author="$(Author)"
+                     Name="$(Name)"
+                     MinimumDalamudVersion="$(MinimumDalamudVersion)"
+                     Punchline="$(Punchline)"
+                     Description="$(Description)"
+                     ApplicableVersion="$(ApplicableVersion)"
+                     RepoUrl="$(RepoUrl)"
+                     Tags="$(Tags)"
+                     CategoryTags="$(CategoryTags)"
+                     DalamudApiLevel="$(DalamudApiLevel)"
+                     LoadRequiredState="$(LoadRequiredState)"
+                     LoadSync="$(LoadSync)"
+                     CanUnloadAsync="$(CanUnloadAsync)"
+                     LoadPriority="$(LoadPriority)"
+                     ImageUrls="$(ImageUrls)"
+                     IconUrl="$(IconUrl)"
+                     Changelog="$(Changelog)"
+                     AcceptsFeedback="$(AcceptsFeedback)"
+                     FeedbackMessage="$(FeedbackMessage)" />
+
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+      <FireGazePackageFile Include="FireGaze.json;FireGaze.deps.json;FireGaze.LocalPreview.Core.dll;dnlib.dll;translations.json;ffxiv-glossary.tsv;uit-rules.json;images/icon.png;FireGaze.dll" />
+    </ItemGroup>
+    <Error Condition="'$(Configuration)' == 'Release' and !Exists('$(OutputPath)%(FireGazePackageFile.Identity)')"
+           Text="Missing FireGaze release payload: %(FireGazePackageFile.Identity)" />
+    <!-- A fresh staging directory prevents unrelated/stale output from entering
+         the package. ZipDirectory emits standard '/' member paths on Windows. -->
+    <RemoveDir Condition="'$(Configuration)' == 'Release'"
+               Directories="$(IntermediateOutputPath)FireGazePackage" />
+    <MakeDir Condition="'$(Configuration)' == 'Release'"
+             Directories="$(IntermediateOutputPath)FireGazePackage;$(OutputPath)$(AssemblyName)" />
+    <Copy Condition="'$(Configuration)' == 'Release'"
+          SourceFiles="@(FireGazePackageFile->'$(OutputPath)%(Identity)')"
+          DestinationFiles="@(FireGazePackageFile->'$(IntermediateOutputPath)FireGazePackage/%(Identity)')" />
+    <ZipDirectory Condition="'$(Configuration)' == 'Release'"
+                  SourceDirectory="$(IntermediateOutputPath)FireGazePackage"
+                  DestinationFile="$(OutputPath)$(AssemblyName)/latest.zip"
+                  Overwrite="true" />
+    <Copy Condition="'$(Configuration)' == 'Release'"
+          SourceFiles="$(OutputPath)$(AssemblyName).json"
+          DestinationFiles="$(OutputPath)$(AssemblyName)/$(AssemblyName).json" />
+  </Target>
+</Project>

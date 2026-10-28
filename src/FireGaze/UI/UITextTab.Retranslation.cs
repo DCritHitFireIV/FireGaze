@@ -11,12 +11,17 @@ internal sealed partial class UITextTab
     private sealed record RewritePreview(UITextRewritePlan Plan, int Count, int Requests, int Humans, string Channel);
     private sealed class PendingRewrite
     {
+        public PendingRewrite(CancellationToken shutdownToken)
+        {
+            this.Cancel = CancellationTokenSource.CreateLinkedTokenSource(shutdownToken);
+        }
+
         public InstalledPluginEntry Entry = null!;
         public UITextJobMode Mode;
         public Task<RewritePreview> Preview = null!;
         public bool NeedsOpen = true;
         public string? Error;
-        public CancellationTokenSource Cancel = new();
+        public CancellationTokenSource Cancel;
         public bool Cancelled;
         public bool Resume;
     }
@@ -56,7 +61,7 @@ internal sealed partial class UITextTab
     private void PrepareRewrite(InstalledPluginEntry entry, UITextJobMode mode, UITextRewritePlan? resume = null)
     {
         if (this.pendingRewrite is not null || !this.runs.TryEnter(entry.InternalName, "准备重翻预览", out _)) return;
-        var pending = new PendingRewrite { Entry = entry, Mode = mode, Resume = resume is not null };
+        var pending = new PendingRewrite(this.plugin.WorkLifetime.ShutdownToken) { Entry = entry, Mode = mode, Resume = resume is not null };
         this.pendingRewrite = pending;
         var channelSignature = this.RewriteChannelSignature();
         var channelDescription = UITextChannelFactory.Describe(this.plugin.Config);
@@ -67,7 +72,7 @@ internal sealed partial class UITextTab
                 pending.Error = "提升译文需要先在翻译设置中选择大模型。";
             else if (UITextChannelFactory.Create(this.plugin.Config, out var error) is null) pending.Error = error;
         }
-        pending.Preview = Task.Run(async () =>
+        pending.Preview = this.plugin.RunTextTask(async () =>
         {
             try
             {
@@ -193,9 +198,9 @@ internal sealed partial class UITextTab
         if (job.Rewrite is not { } plan || UITextRules.IsDoNotLocalize(entry.InternalName))
         { this.workQueue.Complete(entry.InternalName, false, "重翻记录不可用，请重新确认。"); return; }
         if (!this.runs.TryEnter(entry.InternalName, "重翻译文", out _)) return;
-        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.Rewrite, Stage = "正在验证译文操作…", CanCancel = true };
+        var active = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Mode = RunMode.Rewrite, Stage = "正在验证译文操作…", CanCancel = true };
         this.run = active;
-        active.Task = Task.Run(() => this.RunRewriteAsync(entry, job.Mode, plan, active));
+        active.Task = this.plugin.RunTextTask(() => this.RunRewriteAsync(entry, job.Mode, plan, active));
     }
 
     private async Task RunRewriteAsync(InstalledPluginEntry entry, UITextJobMode mode, UITextRewritePlan plan, Run active)
@@ -204,6 +209,7 @@ internal sealed partial class UITextTab
         var token = active.Cancel.Token;
         try
         {
+            var editFence = this.store.CaptureEditFence(entry.InternalName);
             var pack = this.store.LoadRequired(entry.InternalName);
             var expectedJSON = pack.ToJSON();
             if (mode != UITextJobMode.RestoreTranslations)
@@ -229,8 +235,12 @@ internal sealed partial class UITextTab
             }
             void SaveCheckpoint()
             {
-                if (!this.store.Save(entry.InternalName, pack, out var error)) throw new IOException("保存译文失败：" + error);
-                expectedJSON = pack.ToJSON();
+                if (!this.patches.SaveMaintenanceCandidateWithIntent(entry, expectedJSON, dll, source, pack,
+                    editFence, out var committed, out var error)) throw new IOException("保存译文失败：" + error);
+                // Targets refer to the working rows for every response batch.
+                // The Manager returns an independent committed snapshot; use
+                // it as the next disk baseline without detaching those targets.
+                expectedJSON = committed!.ToJSON();
                 UITextRetranslation.SealSnapshot(this.RewriteDirectory, entry.InternalName, plan.ID, expectedJSON, dll, source, completed.ToArray());
             }
             if (mode == UITextJobMode.RestoreTranslations)
@@ -258,15 +268,17 @@ internal sealed partial class UITextTab
                 }, batch =>
                 {
                     ValidateCurrent(checkCancellation: false);
-                    applied += UITextRetranslation.Accept(pack, targets, batch.Translated, channel.Name).Applied;
-                    foreach (var target in targets.Where(t => batch.Translated.ContainsKey(t.Original))) completed.Add(UITextRetranslation.TargetID(target));
+                    var receipt = UITextRetranslation.AcceptWithReceipt(pack, targets, batch.Translated, channel.Name);
+                    applied += receipt.Applied;
+                    completed.UnionWith(receipt.CompletedTargetIDs);
                     SaveCheckpoint();
                 }, token).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
-                if (result.Error is not null || result.Failed.Count > 0)
+                var remaining = targets.Count(t => !completed.Contains(UITextRetranslation.TargetID(t)));
+                if (result.Error is not null || result.Failed.Count > 0 || remaining > 0)
                 {
                     this.FinishRun(active, new RowNote { Kind = NoteKind.Bad, Text = "重翻未完成，旧译文及已保存结果保留。",
-                        Detail = result.Error ?? $"{result.Failed.Count} 条未返回；可从菜单继续上次重翻。" });
+                        Detail = result.Error ?? $"{remaining} 条未获得有效译文；可从菜单继续上次重翻。" });
                     return;
                 }
                 if (applied == 0 && items.Count > 0)

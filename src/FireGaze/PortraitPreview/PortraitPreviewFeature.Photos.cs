@@ -4,6 +4,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 {
     private PortraitHistoryPhotos photos = null!;
     private PortraitPhotoReadbackRuntime? photoReadbackRuntime;
+    private PortraitPhotoCaptureSource? platePhotoCapture;
     private long photoRecordsRevision = -1;
     private int photoRecordsBytes = -1;
     private bool? photoHistoryReferencesKnown;
@@ -14,12 +15,20 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         photoReadbackRuntime = new(pluginInterface.UiBuilder, new PortraitPixelReadbackD3D11(pluginInterface.UiBuilder),
             error => Plugin.Log.Error("[PortraitPhoto] Nonblocking readback stopped: {Error}", error));
+        allowPlatePhotoObservation = () => !SourceCensusBlocksOperations && !OwnedViewportBlocksOperations
+            && !LightingFitHistorySuppressed && !LightingFitMutationBlocked;
+        platePhotoCapture = new(() => Volatile.Read(ref observedPlatePhotoSample),
+            sample => liveCaptureAPI?.CaptureAsync(sample) ?? Task.FromResult<PortraitCaptureLayers?>(null),
+            (texture, placement) => new PortraitCaptureSoftwareCompositor(Plugin.Textures, photoReadbackRuntime.Provider)
+                .ComposeAsync(160, 256, [new(texture, placement)]));
         photos = new(Path.Combine(directory, "portrait-history-thumbnails-v1.bin"), Plugin.Textures, photoReadbackRuntime.Provider,
             new(Plugin.Framework, Plugin.GameGUI, Plugin.Textures, target.IsCurrent), history.Bytes,
             message => Plugin.Log.Information("[PortraitPhoto] {Message}", message),
             Path.Combine(directory, "portrait-favorite-photos-v1.json"),
             favoritesStore.IsReadOnly || favoritesTrashStore.IsReadOnly ? null : FavoriteSnapshotsForPhotos(),
-            storage: storageBudget);
+            storage: storageBudget,
+            qualifyCapture: source => platePhotoCapture.Qualify(source),
+            captureSource: (identity, source, token, operation) => platePhotoCapture.CaptureAsync(identity, source, token, operation));
     }
 
     private void PollPhotos()
@@ -38,6 +47,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         // Every admission and asynchronous completion observes the live owner and
         // snapshot again; drawing never qualifies a capture from a cached frame.
         var mode = captureIsolation.Mode;
+        var photoSource = CurrentPhotoSource();
         var key = observedKey;
         var currentID = key is { } current ? history.CurrentRecordID(current) : null;
         var owner = CurrentCharacter();
@@ -54,12 +64,15 @@ internal sealed unsafe partial class PortraitPreviewFeature
         ready &= snapshot is not null && observedEditor!.SameForHistory(snapshot)
             && target.IsCurrent(observedIdentity) && CurrentCharacter() == owner;
         productPhotoPending = mode == "off" && ready
-            && photos.NeedsCurrentCapture(currentID, snapshot, owner?.ContentID ?? 0);
-        // A current native-live wrap is retired by its ordinary ContextBusy update.
-        // Its automatic retry intent survives; no Stop/disable call is made here.
-        ready &= !productPhotoPending || nativeLiveController?.IsPhysicallyIdle != false;
+            && photos.NeedsCurrentCapture(currentID, snapshot, owner?.ContentID ?? 0, photoSource);
+        // History takes fresh independent SRV references and copies into its own pixels.
+        // A stable same-owner live display may remain retained during that read-only copy;
+        // pending acquisition/retirement or uncertain cleanup still excludes admission.
+        ready &= !productPhotoPending || nativeLiveController?.IsPhysicallyIdle != false
+            || owner is { } photoOwner && nativeLiveController?.CanShareReadOnlyPhotoSource(observedIdentity,
+                new(photoOwner.AccountID, photoOwner.ContentID)) == true;
         var ownerKey = ready ? $"{key}|{observedIdentity}|{session.Revision}" : "";
-        photos.Poll(ownerKey, observedIdentity, currentID, snapshot, ready, owner?.ContentID ?? 0);
+        photos.Poll(ownerKey, observedIdentity, currentID, snapshot, ready, owner?.ContentID ?? 0, photoSource);
         historyPhotoStatus = photos.HistoryPublicationStatus;
         if (changedRecords || photoPublicationRevision != photos.ImageRevision)
         {

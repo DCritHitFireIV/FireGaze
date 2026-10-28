@@ -1,6 +1,7 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Lifecycle;
 using FireGaze.UIText;
 
 namespace FireGaze.UI;
@@ -417,7 +418,7 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         this.glossaryBuilding = true;
-        _ = Task.Run(FFXIVGlossary.EnsureBuilt);
+        _ = this.plugin.RunTextTask(FFXIVGlossary.EnsureBuilt);
     }
 
     private void TestChannel()
@@ -432,11 +433,12 @@ internal sealed class UITextSettingsWindow : Window
 
         this.messageKey = "测试中…";
         var current = channel;
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             try
             {
-                var result = await current.TranslateAsync(targets, null, CancellationToken.None).ConfigureAwait(false);
+                var result = await current.TranslateAsync(targets, null, this.plugin.WorkLifetime.ShutdownToken).ConfigureAwait(false);
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 var text = result.Translated.TryGetValue("Settings", out var value) ? value : null;
                 this.messageKey = text is null
                     ? $"连接失败：{result.Error ?? "没有返回译文"}"
@@ -444,6 +446,7 @@ internal sealed class UITextSettingsWindow : Window
             }
             catch (Exception e)
             {
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
                 this.messageKey = "连接失败：" + e.Message;
             }
         });

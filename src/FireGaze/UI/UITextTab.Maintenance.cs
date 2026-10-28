@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.Lifecycle;
 using FireGaze.RepoAudit;
 using FireGaze.UIText;
 
@@ -31,18 +32,7 @@ internal sealed partial class UITextTab
     private static float RowDetailInset() => PluginListLayout.DetailInset;
 
     private static string MaintenanceSignature(InstalledPluginEntry entry, UITextPack pack)
-    {
-        var files = UITextRules.ResolveCompanions(entry.DLLPath, entry.InternalName);
-        var directory = Path.GetDirectoryName(entry.DLLPath);
-        if (directory is not null)
-            foreach (var resource in pack.Resources.Where(r => UITextLocalizationFiles.IsFileContainer(r.Container)
-                && !pack.IsResourceSkipped(r.Container, r.Key)))
-            {
-                var file = UITextLocalizationFiles.ResolveTarget(directory, resource.Container);
-                if (file is not null) files.Add(file);
-            }
-        return UITextMaintenance.FileSignature(files);
-    }
+        => UITextMaintenance.TargetFileSignature(entry.DLLPath, entry.InternalName, pack);
 
     public void FocusPlugin(string internalName)
     {
@@ -186,9 +176,9 @@ internal sealed partial class UITextTab
     {
         if (this.run is not null || !this.runs.TryEnter(entry.InternalName, "检查汉化更新", out _)) return;
         this.maintenance.TryRemove(entry.InternalName, out _);
-        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查界面文字和译文更新…", CanCancel = true };
+        var active = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查界面文字和译文更新…", CanCancel = true };
         this.run = active;
-        active.Task = Task.Run(async () =>
+        active.Task = this.plugin.RunTextTask(async () =>
         {
             try
             {
@@ -346,17 +336,14 @@ internal sealed partial class UITextTab
     private void ApplyMaintenance(InstalledPluginEntry entry, MaintenanceResult result)
     {
         if (this.run is not null || !result.CanApply || !this.runs.TryEnter(entry.InternalName, "应用译文更新", out _)) return;
-        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.ApplyUpdates, Stage = "正在应用译文更新并重载…" };
+        var active = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Mode = RunMode.ApplyUpdates, Stage = "正在应用译文更新并重载…" };
         this.run = active;
-        active.Task = Task.Run(async () =>
+        active.Task = this.plugin.RunTextTask(async () =>
         {
             try
             {
-                if (this.store.Load(entry.InternalName).ToJSON() != result.Baseline
-                    || string.IsNullOrEmpty(entry.DLLPath) || MaintenanceSignature(entry, result.Candidate) != result.DLLHash
-                    || this.patches.MaintenanceSourceSignature(entry) != result.SourceHash)
-                    throw new IOException("插件或本机译文已经变化，请重新检查更新。");
-                if (!this.store.Save(entry.InternalName, result.Candidate, out var error)) throw new IOException(error);
+                if (!this.patches.SaveMaintenanceCandidate(entry, result.Baseline, result.DLLHash,
+                    result.SourceHash, result.Candidate, out _, out var error)) throw new IOException(error);
                 this.maintenance.TryRemove(entry.InternalName, out _);
                 var safetyRepair = result.SafetyChanges + result.IdentityRepairs > 0;
                 var outcome = await this.patches.ApplyAndReloadAsync(entry, safetyRepair: safetyRepair).ConfigureAwait(false);
@@ -374,9 +361,9 @@ internal sealed partial class UITextTab
     private void StartApplyCurrent(InstalledPluginEntry entry)
     {
         if (this.run is not null || !this.runs.TryEnter(entry.InternalName, "写入并重载", out _)) return;
-        var active = new Run { InternalName = entry.InternalName, Stage = "正在写入并重载…" };
+        var active = new Run(this.plugin.WorkLifetime.ShutdownToken) { InternalName = entry.InternalName, Stage = "正在写入并重载…" };
         this.run = active;
-        active.Task = Task.Run(async () =>
+        active.Task = this.plugin.RunTextTask(async () =>
         {
             try
             {
@@ -391,12 +378,12 @@ internal sealed partial class UITextTab
     {
         if (!this.runs.TryEnter(entry.InternalName, "检查英文原文", out _)) return;
         this.diagnosticBusy.Add(entry.InternalName);
-        _ = Task.Run(async () =>
+        _ = this.plugin.RunTextTask(async () =>
         {
             DiagnosticResult result;
             try
             {
-                var extraction = (await this.patches.ExtractWithRecoveryAsync(entry).ConfigureAwait(false)).Extraction;
+                var extraction = (await this.patches.ExtractWithRecoveryAsync(entry, this.plugin.WorkLifetime.ShutdownToken).ConfigureAwait(false)).Extraction;
                 var pack = this.store.Load(entry.InternalName);
                 var applied = this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied;
                 result = new(query, UITextMaintenance.Diagnose(pack, extraction, query, applied, this.patches.PackNewerThanPatch(entry)), extraction.Error);
@@ -404,7 +391,12 @@ internal sealed partial class UITextTab
             catch (Exception e) { result = new(query, [], e.GetBaseException().Message); }
             finally { this.runs.Exit(entry.InternalName); }
             this.diagnostics[entry.InternalName] = result;
-            await Plugin.Framework.RunOnFrameworkThread(() => this.diagnosticBusy.Remove(entry.InternalName)).ConfigureAwait(false);
+            if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
+            await Plugin.Framework.RunOnFrameworkThread(() =>
+            {
+                if (this.plugin.WorkLifetime.State != PluginWorkLifetimeState.Running) return;
+                this.diagnosticBusy.Remove(entry.InternalName);
+            }).ConfigureAwait(false);
         });
     }
 }

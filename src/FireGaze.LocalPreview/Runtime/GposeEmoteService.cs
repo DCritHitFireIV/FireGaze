@@ -19,7 +19,7 @@ namespace FireGaze.LocalPreview.Runtime;
 /// current ClientStructs UIModule virtual-table ABI, as reviewed against local Brio.
 /// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-public sealed unsafe class GposeEmoteService : IDisposable
+public sealed unsafe class GposeEmoteService : IDisposable, INativePhysicalCloseState
 {
     private const int ReadyFrames = 180;
     // The same currently reviewed client allocation identity used by NativePreviewActor.
@@ -41,13 +41,17 @@ public sealed unsafe class GposeEmoteService : IDisposable
     private bool wasInGpose;
     private bool waitingForGpose;
     private bool disposed;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete;
+    public string? PhysicalCloseFailure => PhysicalClose.Failure;
     private int remainingFrames;
     private ulong observedPostureCharacter;
     private nint observedPostureSource;
     private uint observedPostureGeneration;
     private bool observedNativeSitting;
 
-    public bool Installed => !disposed && enterGpose is { IsEnabled: true };
+    public bool Installed => !disposed && PhysicalClose.Failure is null && enterGpose is { IsEnabled: true };
     public ushort CurrentEmoteId => memory.EmoteId;
     private ulong CharacterId => NativePlayerState.Addresses.Instance.Value == 0 ? 0
         : ((NativePlayerState*)NativePlayerState.Addresses.Instance.Value)->ContentId;
@@ -70,7 +74,13 @@ public sealed unsafe class GposeEmoteService : IDisposable
         this.isEnabled = isEnabled;
         this.isPreviewActor = isPreviewActor;
         this.activePreviewEmote=activePreviewEmote;
-        framework.Update += Update;
+        try { framework.Update += Update; }
+        catch (Exception error)
+        {
+            Dispose();
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, error);
+            throw;
+        }
     }
 
     /// <summary>Wire to actual accepted local emotes, never a query or attempted command.</summary>
@@ -99,6 +109,7 @@ public sealed unsafe class GposeEmoteService : IDisposable
         if (disposed || !framework.IsInFrameworkUpdateThread) return;
         memory.ChangeCharacter(clientState.IsLoggedIn ? CharacterId : 0);
         InstallEntryHook();
+        if (PhysicalClose.Failure is not null) return;
         bool gposing = clientState.IsGPosing;
         if (!isEnabled() || !clientState.IsLoggedIn)
         {
@@ -229,16 +240,17 @@ public sealed unsafe class GposeEmoteService : IDisposable
         }
         catch (Exception ex)
         {
-            enterGpose?.Dispose(); enterGpose = null; installFailed = true;
+            installFailed = true;
+            PhysicalClose.CloseHook(ref enterGpose);
             Detail = "当前客户端拍照入口不可用，已停用拍照动作记忆。";
-            log.Error(ex, "[LocalPreview] GPose entry hook unavailable.");
+            try { log.Error(ex, "[LocalPreview] GPose entry hook unavailable."); } catch { }
         }
     }
 
     private bool EnterGposeDetour(UIModule* module)
     {
         // Nested calls, disabled features and non-framework callers retain the native path.
-        if (disposed || entering || !framework.IsInFrameworkUpdateThread || !isEnabled()
+        if (disposed || PhysicalClose.Failure is not null || entering || !framework.IsInFrameworkUpdateThread || !isEnabled()
             || !clientState.IsLoggedIn || clientState.IsGPosing) return enterGpose!.Original(module);
         entering = true;
         long entry = 0;
@@ -450,8 +462,9 @@ public sealed unsafe class GposeEmoteService : IDisposable
     {
         if (disposed) return;
         disposed = true;
-        framework.Update -= Update;
-        enterGpose?.Dispose(); enterGpose = null;
-        memory.ChangeCharacter(0);
+        PhysicalClose.Try(() => framework.Update -= Update, "GPose Framework callback removal failed");
+        PhysicalClose.CloseHook(ref enterGpose);
+        PhysicalClose.Try(() => memory.ChangeCharacter(0), "GPose memory close failed");
+        PhysicalClose.Finish();
     }
 }

@@ -11,6 +11,7 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
 {
     private readonly IPortraitOwnedSceneSessionBroker broker;
     private readonly PortraitOwnedSceneRenderTargetAdapter renderTargets;
+    private readonly Func<IPortraitOwnedSceneLease, PortraitOwnedSceneFirstFrameIdentity?>? copyReceipt;
     private Task? drain;
     private bool disposed;
     internal PortraitOwnedSceneController Controller { get; }
@@ -27,13 +28,21 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
 
     internal PortraitOwnedSceneSession(
         Func<Action<IPortraitOwnedSceneLease>, Action<string>, IPortraitOwnedSceneSessionBroker> createBroker,
-        Func<IPortraitOwnedSceneRuntime> createRuntime, PortraitOwnedSceneRenderTargetAdapter renderTargets)
+        Func<IPortraitOwnedSceneRuntime> createRuntime, PortraitOwnedSceneRenderTargetAdapter renderTargets,
+        Func<IPortraitOwnedSceneLease, PortraitOwnedSceneFirstFrameIdentity?>? copyReceipt = null)
     {
         this.renderTargets = renderTargets ?? throw new ArgumentNullException(nameof(renderTargets));
+        this.copyReceipt = copyReceipt;
         broker = createBroker(CopyReady, RevokeSource) ?? throw new InvalidOperationException("Owned session broker factory returned null.");
         Controller = new(broker, createRuntime);
     }
-    private void CopyReady(IPortraitOwnedSceneLease lease) => renderTargets.TryCopy(Controller, lease);
+    private void CopyReady(IPortraitOwnedSceneLease lease)
+    {
+        // Evaluate only in this exact synchronous native callback. A missing receipt leaves
+        // display-only pixels unqualified for FirstFrameProof; no later identity can fill it.
+        var receipt = copyReceipt?.Invoke(lease);
+        renderTargets.TryCopy(Controller, lease, receipt);
+    }
     private void RevokeSource(string reason)
     {
         renderTargets.RevokeResourceEpoch();
@@ -48,7 +57,7 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
     {
         if (disposed || !Controller.TrySetObserverCamera(camera)) return false;
         renderTargets.RevokeResourceEpoch();
-
+        
         return true;
     }
     internal void Stop(string reason = "Owned scene stopped.")

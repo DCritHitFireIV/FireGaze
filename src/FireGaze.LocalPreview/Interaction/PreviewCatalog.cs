@@ -1,6 +1,13 @@
 namespace FireGaze.LocalPreview.Interaction;
 
-public sealed record PreviewCatalogEntry(PreviewKind Kind, uint Id, string Name);
+public enum MountCatalogView { Regular, Special }
+
+public sealed record PreviewCatalogEntry(PreviewKind Kind, uint Id, string Name, uint Icon = 0)
+{
+    public MountCatalogView MountView { get; init; } = MountCatalogView.Regular;
+    public uint MountRepresentativeId { get; init; } = Id;
+    public bool HasAdmittedSpecialAction { get; init; }
+}
 
 public sealed class PreviewCatalog(IEnumerable<PreviewCatalogEntry> entries)
 {
@@ -14,5 +21,12 @@ public sealed class PreviewCatalog(IEnumerable<PreviewCatalogEntry> entries)
         return entries.Where(e => e.Kind == kind && (query.Length == 0
             || e.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase)
             || e.Id.ToString() == query)).ToArray();
+    }
+
+    public IReadOnlyList<PreviewCatalogEntry> SearchMounts(MountCatalogView view, string query)
+    {
+        if (!Enum.IsDefined(view)) return [];
+        return Search(PreviewKind.Mount, query).Where(entry => entry.MountView == view
+            && entry.MountRepresentativeId == entry.Id).ToArray();
     }
 }

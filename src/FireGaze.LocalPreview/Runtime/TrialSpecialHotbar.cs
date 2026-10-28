@@ -2,25 +2,89 @@ using System;
 using System.Collections.Generic;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FireGaze.LocalPreview.Runtime;
 
 /// <summary>A cosmetic special action, resolved from the current client's six native special slots.</summary>
 public enum TrialSpecialActionKind { NativeAction, FlightPose }
 public sealed record TrialSpecialAction(int Slot, uint Id, uint Icon, string Name, ushort Timeline, bool UsesMountActor,
-    TrialSpecialActionKind Kind=TrialSpecialActionKind.NativeAction);
+    TrialSpecialActionKind Kind=TrialSpecialActionKind.NativeAction)
+{
+    /// <summary>The content row granting this action, not the owned actor receiving playback.</summary>
+    public ushort SourceMountId { get; init; }
+    /// <summary>The resolved AnimationEnd.Key used for visual de-duplication.</summary>
+    public string AnimationKey { get; init; } = string.Empty;
+}
 public sealed record TrialSpecialBar(bool IsMount, ushort Id, long Revision, string Name, IReadOnlyList<TrialSpecialAction?> Actions,
-    bool FlightPose=false);
+    bool FlightPose=false)
+{
+    public bool HasSpecialCommands => Actions.Any(action => action is not null);
+}
 
 /// <summary>Reads content only. It never writes hotbar files or the genuine player's state.</summary>
 public sealed class TrialSpecialHotbarCatalog(ExcelModule excel)
 {
     private readonly Dictionary<(bool Mount, ushort Id), TrialSpecialBar> cache = new();
+    private readonly Dictionary<(bool Mount, ushort Id), TrialSpecialBar> sourceCache = new();
+    private readonly MountVariantCatalog variants = new(excel);
 
     public TrialSpecialBar? GetBar(bool isMount, ushort id, long revision)
     {
         if (id == 0 || id > short.MaxValue) return null;
         if (cache.TryGetValue((isMount, id), out var cached)) return cached with { Revision = revision };
+        if (GetSourceBar(isMount, id, revision) is not { } own) return null;
+        if (!isMount) return own;
+
+        var sources = variants.GetActionSources(id);
+        // A source with no donors keeps the native physical slot contract exactly.
+        // Native input routing still observes this raw slot, so compacting a lone
+        // source with an empty leading slot would route its action to flight.
+        if (sources.Count <= 1)
+        {
+            var preserved = own.Actions.ToArray();
+            var flightSlot = Array.FindLastIndex(preserved, action => action is not null) + 1;
+            if (flightSlot < preserved.Length && excel.GetSheet<GeneralAction>().GetRowOrDefault(2) is { } loneJump)
+                preserved[flightSlot] = new(flightSlot, 2, (uint)loneJump.Icon, "切换飞行／地面姿态", 0, true, TrialSpecialActionKind.FlightPose);
+            var loneResult = own with { Actions = Array.AsReadOnly(preserved) };
+            cache[(isMount, id)] = loneResult;
+            return loneResult;
+        }
+
+        var slots = new TrialSpecialAction?[6];
+        var visuals = new HashSet<(bool Mount, string Key)>();
+        var next = 0;
+        // The shared variant policy admits only groups whose distinct local actions
+        // leave room for flight. Each member keeps its native row and source identity.
+        foreach (var sourceId in sources)
+        {
+            if (GetSourceBar(true, sourceId, revision) is not { } source) continue;
+            foreach (var action in source.Actions)
+            {
+                if (action is null) continue;
+                // Six native slots are the reviewed native-bar contract. A mapper
+                // overflow must fall back to the unmerged representative bar rather
+                // than hide a donor action or index beyond the lease array.
+                if (next >= slots.Length) return own;
+                if (!visuals.Add((action.UsesMountActor, action.AnimationKey))) continue;
+                slots[next] = action with { Slot = next };
+                next++;
+            }
+        }
+        // This command borrows Jump's icon only. Its dispatcher invokes a local
+        // visual toggle and never executes GeneralAction Jump.
+        if (next < slots.Length && excel.GetSheet<GeneralAction>().GetRowOrDefault(2) is { } jump)
+            slots[next] = new(next, 2, (uint)jump.Icon, "切换飞行／地面姿态", 0, true, TrialSpecialActionKind.FlightPose);
+        var result = own with { Actions = Array.AsReadOnly(slots) };
+        cache[(isMount, id)] = result;
+        return result;
+    }
+
+    /// <summary>The genuine source's original physical slots, without variant aggregation or local controls.</summary>
+    public TrialSpecialBar? GetSourceBar(bool isMount, ushort id, long revision)
+    {
+        if (id == 0 || id > short.MaxValue) return null;
+        if (sourceCache.TryGetValue((isMount, id), out var cached)) return cached with { Revision = revision };
         var slots = new TrialSpecialAction?[6];
         string name;
         if (isMount)
@@ -30,13 +94,13 @@ public sealed class TrialSpecialHotbarCatalog(ExcelModule excel)
             if (mount.MountAction.RowId != 0 && mount.MountAction.IsValid)
             {
                 var actions = mount.MountAction.Value.Action;
-                for (var i = 0; i < slots.Length; i++) slots[i] = Resolve(i, actions[i], true);
+                // The client row does not guarantee six references.  Older and
+                // newer CN rows use shorter action arrays; never index past the
+                // row and leave the remaining leased slots empty.
+                for (var i = 0; i < Math.Min(slots.Length, actions.Count); i++)
+                    slots[i] = Resolve(i, actions[i], true) is { } action
+                        ? action with { SourceMountId = id } : null;
             }
-            // The borrowed slot uses Jump's original icon only. Its leased dispatcher
-            // invokes a local visual toggle and never executes GeneralAction Jump.
-            var flightSlot=Array.FindLastIndex(slots,action=>action is not null)+1;
-            if(flightSlot<slots.Length && excel.GetSheet<GeneralAction>().GetRowOrDefault(2) is {} jump)
-                slots[flightSlot]=new(flightSlot,2,(uint)jump.Icon,"飞行姿态",0,true,TrialSpecialActionKind.FlightPose);
         }
         else
         {
@@ -45,11 +109,12 @@ public sealed class TrialSpecialHotbarCatalog(ExcelModule excel)
             if (ornament.Action.RowId != 0 && ornament.Action.IsValid)
             {
                 var actions = ornament.Action.Value.Actions;
-                for (var i = 0; i < slots.Length; i++) slots[i] = Resolve(i, actions[i], false);
+                for (var i = 0; i < Math.Min(slots.Length, actions.Count); i++)
+                    slots[i] = Resolve(i, actions[i], false);
             }
         }
         var result = new TrialSpecialBar(isMount, id, revision, name, Array.AsReadOnly(slots));
-        cache[(isMount,id)] = result;
+        sourceCache[(isMount,id)] = result;
         return result;
     }
 
@@ -63,7 +128,10 @@ public sealed class TrialSpecialHotbarCatalog(ExcelModule excel)
         // must agree with the clone target; unrelated gameplay actions never become previews.
         var key = action.AnimationEnd.Value.Key.ExtractText();
         if (!key.StartsWith(mount ? "mount_sp/" : "ornament_sp/", StringComparison.Ordinal)) return null;
-        return new(slot, reference.RowId, action.Icon, action.Name.ExtractText(), (ushort)timeline, mount);
+        return new(slot, reference.RowId, action.Icon, action.Name.ExtractText(), (ushort)timeline, mount)
+        {
+            AnimationKey = key
+        };
     }
 }
 
@@ -85,7 +153,7 @@ public sealed class TrialSpecialHotbarModel(TrialSpecialHotbarCatalog catalog)
         {
             var actions=new TrialSpecialAction?[current.Actions.Count];
             for(var i=0;i<actions.Length;i++)actions[i]=current.Actions[i] is {Kind:TrialSpecialActionKind.FlightPose} action
-                ?action with{Name="地面姿态"}:current.Actions[i];
+                ?action with{Name="切换飞行／地面姿态"}:current.Actions[i];
             Current=current with{Actions=Array.AsReadOnly(actions),FlightPose=true};
         }
         // Updating the button label after a toggle must not let a second route
@@ -95,14 +163,24 @@ public sealed class TrialSpecialHotbarModel(TrialSpecialHotbarCatalog catalog)
     public void Clear() { Current = null; Array.Clear(activated); }
     public void BeginFrame(long token) => frame = token;
 
+    public bool TryMapNativeCommand(ActionType type, uint id, ushort sourceMountId, ushort sourceAccessoryId, out int slot)
+    {
+        if (type == ActionType.Action) return TryMapNativeAction(id, sourceMountId, sourceAccessoryId, out slot);
+        slot = -1;
+        if (type != ActionType.GeneralAction || id != 2 || Current is not { IsMount: true } current) return false;
+        for (var i = 0; i < current.Actions.Count; i++)
+            if (current.Actions[i] is { Kind: TrialSpecialActionKind.FlightPose }) { slot = i; return true; }
+        return false;
+    }
+
     /// <summary>Map the genuine special bar's original slot to the replacement bar's slot.
     /// A missing replacement slot is still consumed so the genuine old item cannot execute.</summary>
     public bool TryMapNativeAction(uint actionId, ushort sourceMountId, ushort sourceAccessoryId, out int slot)
     {
         slot = -1;
         if (Current is not { } current || actionId == 0) return false;
-        var source = sourceMountId != 0 ? catalog.GetBar(true, sourceMountId, 0)
-            : sourceAccessoryId != 0 ? catalog.GetBar(false, sourceAccessoryId, 0) : null;
+        var source = sourceMountId != 0 ? catalog.GetSourceBar(true, sourceMountId, 0)
+            : sourceAccessoryId != 0 ? catalog.GetSourceBar(false, sourceAccessoryId, 0) : null;
         if (source is not null)
             for (var i = 0; i < source.Actions.Count; i++)
                 if (source.Actions[i] is {Kind:TrialSpecialActionKind.NativeAction} action && action.Id==actionId) { slot = i; return true; }

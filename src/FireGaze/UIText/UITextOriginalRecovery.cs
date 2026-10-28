@@ -18,12 +18,14 @@ internal sealed class UITextOriginalRecovery
     private readonly string directory;
     private readonly HttpClient client;
     private readonly object gate;
+    private readonly Func<bool>? admission;
 
-    public UITextOriginalRecovery(string directory, HttpClient? client = null, object? gate = null)
+    public UITextOriginalRecovery(string directory, HttpClient? client = null, object? gate = null, Func<bool>? admission = null)
     {
         this.directory = directory;
         this.client = client ?? Client;
         this.gate = gate ?? new object();
+        this.admission = admission;
     }
 
     public async Task<UITextPatchState> RecoverAsync(InstalledPluginEntry entry, UITextPatchStore store, CancellationToken cancel)
@@ -100,7 +102,12 @@ internal sealed class UITextOriginalRecovery
         try
         {
             await File.WriteAllBytesAsync(path, await this.FetchAsync(new Uri(url), MaxPackageBytes, cancel).ConfigureAwait(false), cancel).ConfigureAwait(false);
-            lock (this.gate) return AdoptPackage(entry, path, store, cancel);
+            lock (this.gate)
+            {
+                if (this.admission is not null && !this.admission())
+                    throw new IOException("原始包下载期间操作身份已变化，未更新恢复记录。");
+                return AdoptPackage(entry, path, store, cancel);
+            }
         }
         catch (Exception e) when (e is not OperationCanceledException || !cancel.IsCancellationRequested)
         { Plugin.Log?.Debug("[内部文本] 原始包未能匹配：{Name}，{Reason}", entry.InternalName, e.GetBaseException().Message); return null; }
@@ -140,8 +147,20 @@ internal sealed class UITextOriginalRecovery
     public static UITextPatchState AdoptPackage(InstalledPluginEntry entry, string zipPath, UITextPatchStore store, CancellationToken cancel)
     {
         cancel.ThrowIfCancellationRequested();
-        if (entry.DLLPath is null || !File.Exists(entry.DLLPath)) throw new IOException("插件文件已变化");
-        var installed = UITextRules.ResolveCompanions(entry.DLLPath, entry.InternalName);
+        UITextPatchState? ReadCompletedState()
+        {
+            var state = store.Load(entry.InternalName);
+            if (store.HasPendingOperation(entry.InternalName) || state is { IsWriteComplete: false })
+                throw new IOException("文件操作尚未结束，不能用下载的原始包覆盖恢复记录。");
+            if (state is not null && !state.InternalName.Equals(entry.InternalName, StringComparison.Ordinal))
+                throw new IOException("补丁记录的插件身份不匹配。");
+            return state;
+        }
+        _ = ReadCompletedState();
+        if (entry.DLLPath is null || !Path.IsPathFullyQualified(entry.DLLPath) || !File.Exists(entry.DLLPath))
+            throw new IOException("插件文件已变化");
+        var mainPath = Path.GetFullPath(entry.DLLPath);
+        var installed = UITextRules.ResolveCompanions(mainPath, entry.InternalName).Select(Path.GetFullPath).ToList();
         var signature = UITextMaintenance.FileSignature(installed);
         var packageDirectory = Path.GetFullPath(Path.GetDirectoryName(zipPath)!);
         var staging = Path.GetFullPath(Path.Combine(packageDirectory, "original-" + Guid.NewGuid()));
@@ -151,7 +170,7 @@ internal sealed class UITextOriginalRecovery
         try
         {
             using var archive = ZipFile.OpenRead(zipPath);
-            var mainName = Path.GetFileName(entry.DLLPath);
+            var mainName = Path.GetFileName(mainPath);
             var main = FindEntry(archive, mainName);
             var prefix = main.FullName[..^mainName.Length];
             var manifestEntry = archive.GetEntry(prefix + Path.ChangeExtension(mainName, ".json"));
@@ -185,19 +204,47 @@ internal sealed class UITextOriginalRecovery
                 if (backup is null || UITextPatchStore.HashOf(backup) != hash) throw new IOException("原始包备份保存失败");
                 files.Add(new() { Path = current, SourceHash = hash, PatchedHash = UITextPatchStore.HashOf(current), BackupPath = backup });
             }
-            // Preserve unaffected localization file records alongside the recovered assembly baseline.
-            var old = store.Load(entry.InternalName);
+            // Recovery repairs a verified baseline. It neither starts a file
+            // operation nor confirms a pending reload. Read the latest lifecycle
+            // metadata after package verification and durable backup creation.
+            var old = ReadCompletedState();
             if (old is not null)
-                files.AddRange(old.EffectiveFiles.Where(f => !files.Any(n => n.Path.Equals(f.Path, StringComparison.OrdinalIgnoreCase))
-                    && f.HasBackup && UITextPatchStore.HashOf(f.BackupPath!) == f.SourceHash
-                    && UITextPatchStore.HashOf(f.Path) == f.PatchedHash));
+            {
+                if (!UITextFileIdentity.TryMap(old, mainPath, out var mapped, out var error)) throw new IOException(error);
+                for (var i = 0; i < files.Count; i++)
+                    if (mapped.TryGetValue(files[i].Path, out var previous))
+                        files[i] = files[i] with { BeforeHash = previous.BeforeHash };
+                // Every retained file must keep its own current relative identity
+                // and verified original. Never silently discard an unverifiable
+                // JSON record or borrow a same-named file's backup.
+                foreach (var (current, previous) in mapped)
+                {
+                    if (files.Any(file => file.Path.Equals(current, StringComparison.OrdinalIgnoreCase))) continue;
+                    if (!Path.IsPathFullyQualified(previous.BackupPath ?? string.Empty) || !previous.HasBackup
+                        || string.IsNullOrEmpty(previous.SourceHash) || string.IsNullOrEmpty(previous.PatchedHash)
+                        || !string.Equals(UITextPatchStore.HashOf(previous.BackupPath!), previous.SourceHash, StringComparison.OrdinalIgnoreCase)
+                        || !string.Equals(UITextPatchStore.HashOf(current), previous.PatchedHash, StringComparison.OrdinalIgnoreCase))
+                        throw new IOException("保留的本地化文件或原始备份已变化，不能覆盖恢复记录。");
+                    files.Add(previous with { Path = current });
+                }
+            }
+            cancel.ThrowIfCancellationRequested();
             if (UITextMaintenance.FileSignature(installed) != signature) throw new IOException("恢复期间插件文件已变化");
-            var first = files[0];
-            var state = new UITextPatchState { InternalName = entry.InternalName, DLLPath = entry.DLLPath,
-                PluginVersion = entry.Version, Files = files, SourceHash = first.SourceHash, PatchedHash = first.PatchedHash,
-                BackupPath = first.BackupPath, PatchedAt = old?.PatchedAt, AppliedEntries = old?.AppliedEntries ?? 0 };
-            if (!store.Save(state)) throw new IOException("原始包恢复记录保存失败");
-            store.PublishManifest(entry.InternalName, entry.Version, state.PatchedAt, state.AppliedEntries, files, Path.GetDirectoryName(entry.DLLPath)!);
+            var mainFile = files.Single(file => file.Path.Equals(mainPath, StringComparison.OrdinalIgnoreCase));
+            var state = (old ?? new UITextPatchState { InternalName = entry.InternalName }) with
+            {
+                DLLPath = mainPath, PluginVersion = entry.Version, Files = files,
+                SourceHash = mainFile.SourceHash, PatchedHash = mainFile.PatchedHash, BackupPath = mainFile.BackupPath,
+            };
+            // Either durable metadata owner is useful if the other write fails.
+            // Keep all backups and the previous metadata; no operation ID or
+            // recovery phase may be invented for this baseline-only update.
+            var stateSaved = store.Save(state);
+            var manifestSaved = store.PublishManifest(entry.InternalName, entry.Version, state.PatchedAt,
+                state.AppliedEntries, files, Path.GetDirectoryName(mainPath)!, mainPath, state.OperationID,
+                state.PatchedHash ?? state.SourceHash);
+            if (!stateSaved || !manifestSaved)
+                throw new IOException(!stateSaved ? "原始包恢复记录保存失败，已保留原始备份。" : "原始包恢复清单保存失败，已保留恢复记录与原始备份。");
             return state;
         }
         finally { Directory.Delete(staging, recursive: true); }
@@ -206,8 +253,8 @@ internal sealed class UITextOriginalRecovery
     /// <summary>FireGaze changes literals/resources/attribute text, never executable structure or build identity.</summary>
     public static bool SameBuild(string originalPath, string currentPath)
     {
-        using var original = ModuleDefMD.Load(originalPath);
-        using var current = ModuleDefMD.Load(currentPath);
+        using var original = UIStringExtractor.LoadModule(originalPath);
+        using var current = UIStringExtractor.LoadModule(currentPath);
         if (original.Mvid is null || original.Mvid != current.Mvid || original.Assembly?.FullName != current.Assembly?.FullName) return false;
         if (!original.GetAssemblyRefs().Select(a => a.FullName).Order().SequenceEqual(current.GetAssemblyRefs().Select(a => a.FullName).Order())) return false;
         IEnumerable<string> Shape(ModuleDef module)

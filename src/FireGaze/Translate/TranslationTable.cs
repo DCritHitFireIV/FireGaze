@@ -126,6 +126,7 @@ public sealed class TranslationTable
 
     private readonly string configDirectory;
     private readonly string pluginDirectory;
+    private readonly Func<HttpClient> createClient;
     private readonly object gate = new();
     private Dictionary<string, TransEntry> table = new(StringComparer.Ordinal);
 
@@ -135,9 +136,15 @@ public sealed class TranslationTable
     private const string MetaKey = "_meta";
 
     public TranslationTable(string configDirectory, string pluginDirectory)
+        : this(configDirectory, pluginDirectory, CreateUpdateClient)
+    {
+    }
+
+    internal TranslationTable(string configDirectory, string pluginDirectory, Func<HttpClient> createClient)
     {
         this.configDirectory = configDirectory;
         this.pluginDirectory = pluginDirectory;
+        this.createClient = createClient;
     }
 
     public int Count => table.Count;
@@ -533,17 +540,41 @@ public sealed class TranslationTable
     /// </summary>
     public async Task<(bool Ok, string Message)> UpdateFromGitHubAsync(CancellationToken cancellationToken)
     {
-        using var handler = new SocketsHttpHandler
+        using var client = createClient();
+        return await UpdateFromClientAsync(client, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static HttpClient CreateUpdateClient()
+    {
+        var handler = new SocketsHttpHandler
         {
             AutomaticDecompression = DecompressionMethods.All,
             ConnectTimeout = TimeSpan.FromSeconds(10),
         };
-        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
-        return await UpdateFromClientAsync(client, cancellationToken).ConfigureAwait(false);
+        return new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
     }
 
     internal async Task<(bool Ok, string Message)> UpdateFromClientAsync(HttpClient client, CancellationToken cancellationToken)
     {
+        var (update, message) = await DownloadFromClientAsync(client, cancellationToken).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+        return update is null ? (false, message) : CommitUpdate(update);
+    }
+
+    internal sealed record DownloadedUpdate(string Text, Dictionary<string, TransEntry> Entries,
+        string? MaintainedAt, string SourceURL, int ExpectedRevision);
+
+    internal async Task<(DownloadedUpdate? Update, string Message)> DownloadFromGitHubAsync(CancellationToken cancellationToken)
+    {
+        using var client = createClient();
+        return await DownloadFromClientAsync(client, cancellationToken).ConfigureAwait(false);
+    }
+
+    // Downloading only prepares data. The Plugin owner admits the synchronous
+    // commit separately after its network await, using the original work lease.
+    private async Task<(DownloadedUpdate? Update, string Message)> DownloadFromClientAsync(HttpClient client, CancellationToken cancellationToken)
+    {
+        var expectedRevision = Revision;
         var errors = new List<string>();
         foreach (var url in new[] { RemoteURL, MirrorAtmoomen, MirrorGhProxy })
         {
@@ -569,16 +600,7 @@ public sealed class TranslationTable
                     continue;
                 }
 
-                Directory.CreateDirectory(configDirectory);
-                var target = Path.Combine(configDirectory, "translations.json");
-                await AtomicFile.WriteAllTextAsync(target, text, cancellationToken).ConfigureAwait(false);
-
-                table = dict;
-                MaintainedAt = maintainedAt;
-                LoadedFrom = target;
-                LoadedAt = DateTime.Now;
-                BumpRevision();
-                return (true, $"已更新词表：{dict.Count} 条（{url}）");
+                return (new(text, dict, maintainedAt, url, expectedRevision), string.Empty);
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
             catch (Exception e)
@@ -588,6 +610,37 @@ public sealed class TranslationTable
         }
 
         var detail = errors.Count > 0 ? errors[0] : "未知原因";
-        return (false, $"更新失败：{detail}（共尝试 {errors.Count} 个线路）");
+        return (null, $"更新失败：{detail}（共尝试 {errors.Count} 个线路）");
+    }
+
+    internal (bool Ok, string Message) CommitUpdate(DownloadedUpdate update)
+    {
+        try
+        {
+            lock (gate)
+            {
+                if (Revision != update.ExpectedRevision)
+                    return (false, "下载期间本机词表已更新，保留当前词表，请稍后重试。");
+                // Another admitted update may have completed while this download
+                // was in flight. Keep the no-downgrade rule at the actual commit.
+                if (DateTime.TryParse(MaintainedAt, out var local)
+                    && (!DateTime.TryParse(update.MaintainedAt, out var remote) || remote < local))
+                    return (false, "词表比本机旧，保留本机词表");
+
+                Directory.CreateDirectory(configDirectory);
+                var target = Path.Combine(configDirectory, "translations.json");
+                AtomicFile.WriteAllText(target, update.Text);
+                table = update.Entries;
+                MaintainedAt = update.MaintainedAt;
+                LoadedFrom = target;
+                LoadedAt = DateTime.Now;
+                BumpRevision();
+                return (true, $"已更新词表：{table.Count} 条（{update.SourceURL}）");
+            }
+        }
+        catch (Exception error)
+        {
+            return (false, $"更新失败：{error.Message}");
+        }
     }
 }

@@ -125,6 +125,16 @@ internal static class UITextJSONResources
     }
 
     /// <summary>
+    ///     译文包的 Original 只对抽取时看到的英文值负责。若插件更新后同一个 key
+    ///     的 en 已变化，禁止把陈旧译文补进新条目。
+    /// </summary>
+    internal static bool EnglishValueMatchesOriginal(
+        IReadOnlyDictionary<string, string> languages,
+        string original) =>
+        languages.TryGetValue(FallbackLanguage, out var current)
+        && string.Equals(current, original, StringComparison.Ordinal);
+
+    /// <summary>
     ///     把译文补进 zh 槽（只在 zh 还是空的时候补）；一条都没改返回 null。
     ///     上游已有 zh 的键原样保留——不覆盖别人翻好的。
     /// </summary>

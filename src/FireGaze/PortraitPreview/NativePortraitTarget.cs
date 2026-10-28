@@ -2,6 +2,7 @@ using Dalamud.Hooking;
 using Dalamud.Game.Agent;
 using Dalamud.Game.Agent.AgentArgTypes;
 using Dalamud.Plugin.Services;
+using FireGaze.LocalPreview.Runtime;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -32,7 +33,7 @@ internal unsafe interface IPortraitNativeApi
 /// item, changes a gearset/banner record, or writes the world player. All entry points fail closed
 /// outside the Framework thread or after an editor/model allocation has changed.
 /// </summary>
-internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarget, IDisposable
+internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarget, IDisposable, INativePhysicalCloseState
 {
     private const int GenerationOffset = 0x74;
     private static readonly byte[] NativeSlots = [0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12];
@@ -40,6 +41,9 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     private readonly Func<PortraitIdentity, bool> blockSave;
     private readonly Action<string> error;
     private Hook<AgentBannerEditorState.Delegates.Save>? saveHook;
+    private AgentBannerEditorState.Delegates.Save? saveOriginal;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
     private IAgentLifecycle? agentLifecycle;
     private bool saveEventRegistered;
     private NativeSnapshot? original;
@@ -49,7 +53,9 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     private PortraitPlateMirror? plateMirror;
     public string? LastError { get; private set; }
     public bool PlateMirrorDisposalRestored { get; private set; } = true;
-    public bool CanBlockSave => saveHook is { IsEnabled: true } && saveEventRegistered;
+    public bool CanBlockSave => !disposed && saveHook is { IsEnabled: true } && saveEventRegistered;
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete;
+    public string? PhysicalCloseFailure => PhysicalClose.Failure;
     public uint BlockedSaves { get; private set; }
     public uint BlockedSaveEvents { get; private set; }
 
@@ -64,13 +70,17 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         try
         {
             saveHook = interop.HookFromAddress<AgentBannerEditorState.Delegates.Save>(address, SaveDetour);
+            saveOriginal = saveHook.Original;
             saveHook.Enable();
             RegisterSaveEvents(agentLifecycle);
         }
         catch (Exception ex)
         {
             LastError = "无法阻止肖像保存，暂不能开启临时预览：" + ex.Message;
-            saveHook?.Dispose(); saveHook = null;
+            Dispose();
+            // Construction has not returned an owner to Feature yet. Keep that owner
+            // explicit when rollback cannot prove that native callbacks stopped.
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, ex);
         }
     }
 
@@ -287,20 +297,23 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
 
     private void SaveDetour(AgentBannerEditorState* state)
     {
-        if (!InterceptSave((nint)state)) saveHook!.Original(state);
+        // Keep the exact Original holder captured before Enable. A closing callback
+        // must not inspect native wardrobe state or call preview business logic.
+        if (disposed) { saveOriginal!(state); return; }
+        if (!InterceptSave((nint)state)) saveOriginal!(state);
     }
 
     internal void RegisterSaveEvents(IAgentLifecycle lifecycle)
     {
         if (disposed || saveEventRegistered) return;
-        lifecycle.RegisterListener(AgentEvent.PreReceiveEvent, Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent);
         agentLifecycle = lifecycle;
         saveEventRegistered = true;
+        lifecycle.RegisterListener(AgentEvent.PreReceiveEvent, Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent);
     }
 
     private void OnAgentEvent(AgentEvent eventType, AgentArgs args)
     {
-        if (eventType != AgentEvent.PreReceiveEvent || args is not AgentReceiveEventArgs receive || receive.ReturnValue == 0) return;
+        if (disposed || eventType != AgentEvent.PreReceiveEvent || args is not AgentReceiveEventArgs receive || receive.ReturnValue == 0) return;
         try
         {
             if (InterceptSaveEvent((nint)receive.GetAgentPointer<AgentBannerEditor>(), receive.AtkValues,
@@ -411,16 +424,26 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     public void Dispose()
     {
         if (disposed || !api.IsFrameworkThread) return;
-        if (plateMirror is not null) plateMirror.DisposalFailed += OnPlateMirrorDisposalFailed;
-        plateMirror?.Dispose();
-        if (plateMirror is { DisposalRestored: false })
-            OnPlateMirrorDisposalFailed(plateMirror.LastError ?? "本地铭牌预览未能还原，请关闭后重新打开铭牌。");
-        plateMirror = null;
         disposed = true;
-        if (saveEventRegistered) agentLifecycle?.UnregisterListener(AgentEvent.PreReceiveEvent,
-            Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent);
-        saveEventRegistered = false; agentLifecycle = null;
-        saveHook?.Dispose(); saveHook = null; original = null; originalLook = null;
+        var close = PhysicalClose;
+        close.Try(() =>
+        {
+            if (plateMirror is not null) plateMirror.DisposalFailed += OnPlateMirrorDisposalFailed;
+            plateMirror?.Dispose();
+            if (plateMirror is { DisposalRestored: false })
+                OnPlateMirrorDisposalFailed(plateMirror.LastError ?? "本地铭牌预览未能还原，请关闭后重新打开铭牌。");
+            plateMirror = null;
+        }, "Portrait plate mirror close is incomplete");
+        if (saveEventRegistered)
+        {
+            close.Try(() => agentLifecycle?.UnregisterListener(AgentEvent.PreReceiveEvent,
+                Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent), "Portrait save listener removal is incomplete");
+            saveEventRegistered = false;
+            if (close.Failure is null) agentLifecycle = null;
+        }
+        close.CloseHook(ref saveHook);
+        original = null; originalLook = null;
+        close.Finish();
     }
 
     private void OnPlateMirrorDisposalFailed(string message)

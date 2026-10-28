@@ -98,7 +98,8 @@ internal sealed partial class DiscoveryTab
         // 必须先切到列 0 再取行内坐标——TableNextRow 之后光标还停在上一行结束的位置，
         // 拿它当行起点会把后面画的东西整条画到窗口外（2026-10-07 用户看到的 "点赞旁黑条"）。
         ImGui.TableSetColumnIndex(0);
-        var rowStartY = ImGui.GetCursorPosY();
+        var rowStart = ImGui.GetCursorPos();
+        var rowStartY = rowStart.Y;
         if (ImGui.Selectable("##row", isOpen,
                 ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
                 new Vector2(0, rowHeight)))
@@ -106,20 +107,16 @@ internal sealed partial class DiscoveryTab
             expandedEntry = isOpen ? null : entry.InternalName;
         }
 
-        ImGui.SameLine(0, 0);
-
         // 删掉元信息行后仍是两行文字：行高保持原来三行的节奏，内容在行内垂直居中
         const float iconSize = PluginListLayout.IconSize;
         var textHeight = (ImGui.GetTextLineHeight() * 2f) + ImGui.GetStyle().ItemSpacing.Y;
         var contentHeight = MathF.Max(iconSize, textHeight);
         var padY = MathF.Max(2f, (rowHeight - contentHeight) * 0.5f);
-        ImGui.SetCursorPosY(rowStartY + padY);
+        // Position the overlay without inheriting the full-height Selectable's line metrics.
+        ImGui.SetCursorPos(rowStart + new Vector2(0, padY));
 
         if (!TryDrawIcon(entry, iconSize))
-        {
             InsStyle.DrawLetterAvatar(entry.DisplayName, iconSize);
-        }
-
         ImGui.SameLine(0, PluginListLayout.IconTextGap);
         ImGui.BeginGroup();
         {
@@ -405,7 +402,7 @@ internal sealed partial class DiscoveryTab
         });
     }
 
-    /// <summary>尝试画缓存里的图标；没有就返回 false（由调用方画首字母占位）。</summary>
+    /// <summary>尝试画缓存里的图标；没有就返回 false，不画占位头像。</summary>
     private bool TryDrawIcon(TranslationIndexEntry entry, float size)
     {
         if (iconHandles.TryGetValue(entry.InternalName, out var cached))
@@ -420,7 +417,7 @@ internal sealed partial class DiscoveryTab
 
         var installed = ToIconEntry(entry);
 
-        // 本地缓存（盘上 / 已建纹理）或卫月内存缓存里有就画；纹理还在解码时这一帧先画字母块
+        // 本地缓存（盘上 / 已建纹理）或卫月内存缓存里有就画；尚未就绪时不占图标位置。
         if (plugin.Icons.TryGetHandle(installed, out var handle) && !handle.IsNull)
         {
             iconHandles[entry.InternalName] = handle;
@@ -439,7 +436,7 @@ internal sealed partial class DiscoveryTab
         return false;
     }
 
-    /// <summary>圆形头像（ins 风：头像是完整的圆）；纹理为空返回 false 交字母占位。</summary>
+    /// <summary>圆形头像（ins 风：头像是完整的圆）；纹理为空返回 false。</summary>
     private static bool DrawRoundIcon(ImTextureID texture, float size)
     {
         if (!InsStyle.DrawRoundIcon(texture, ImGui.GetCursorScreenPos(), size))

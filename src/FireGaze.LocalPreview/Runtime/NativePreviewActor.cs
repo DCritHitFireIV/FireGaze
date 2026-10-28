@@ -18,7 +18,8 @@ public sealed unsafe class NativePreviewActor : IDisposable
     // The reviewed CN GameObject initializer allocates this generation at RVA 0x89D45A.
     // Unlike GetGameObjectId, it changes when the same local object slot is reused.
     private const int GenerationOffset = 0x74;
-    private const int DrawTimeoutFrames = 180;
+    private static TimeSpan DrawTimeout => TimeSpan.FromSeconds(12);
+    private readonly TimeProvider clock = TimeProvider.System;
     private readonly ClientObjectManager* manager;
     private readonly ushort slot;
     private readonly ushort objectIndex;
@@ -39,6 +40,9 @@ public sealed unsafe class NativePreviewActor : IDisposable
     private bool bodyWasVisible;
     private bool sourceSuppressionActive;
     private int drawFrames;
+    private long drawWaitStarted;
+    private bool drawWaitActive;
+    private DrawObject* awaitingBodyReveal;
     private bool disposed;
 
     private NativePreviewActor(ClientObjectManager* manager, ushort slot, NativeCharacter* actor,
@@ -95,7 +99,24 @@ public sealed unsafe class NativePreviewActor : IDisposable
     /// performs no native setup or object allocation.
     /// </summary>
     public bool ReassertSourceVisibility()
-        => !disposed && IsReady && sourceSuppressionActive && SetSourceVisibility(true);
+        => !disposed && sourceSuppressionActive && SetSourceVisibility(true);
+
+    /// <summary>
+    /// Reapplies the source transform after the client's own Character.Update.
+    /// The display actor has no gameplay movement state, so a native update can
+    /// otherwise leave it at the previous frame's position for one submission.
+    /// </summary>
+    public bool ReassertSourceTransform()
+    {
+        if (disposed) return false;
+        var source = GetSource();
+        var actor = GetOwnedActor();
+        if (source == null || actor == null) return false;
+        actor->Position = source->Position;
+        if (GetSource() != source || GetOwnedActor() != actor) return false;
+        actor->Rotation = source->Rotation;
+        return GetSource() == source && GetOwnedActor() == actor;
+    }
 
     /// <summary>Read-only mounted child guard; never performs native object lookups.</summary>
     public bool IsCurrentMountChild(NativeCharacter* child)
@@ -111,7 +132,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
             || child == (NativeCharacter*)actor->OrnamentData.OrnamentObject
             || cloneChildren[0].Address != child || cloneChildren[0].Generation != Generation(child)
             || child->Timeline.OwnerObject != child || child->Timeline.TimelineSequencer.Parent != child
-            || child->DrawObject == null || !child->DrawObject->IsVisible) return false;
+            || !DrawEnabled(child->DrawObject)) return false;
         return true;
     }
 
@@ -131,7 +152,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
             || ClientObjectManager.Instance() != manager || slot >= manager->BattleCharas.Length
             || manager->BattleCharas[slot].BattleChara != (BattleChara*)allocatedActor) return false;
         if (allocatedActor->ObjectIndex != objectIndex || Generation(allocatedActor) != allocationGeneration
-            || allocatedActor->DrawObject == null || !allocatedActor->DrawObject->IsVisible) return false;
+            || !DrawEnabled(allocatedActor->DrawObject)) return false;
 
         if (container == &source->DrawData)
             return container->OwnerObject == source
@@ -246,11 +267,22 @@ public sealed unsafe class NativePreviewActor : IDisposable
                     if (!BindingMatches(source, actor)) { Dispose(); return false; }
                     actor->GameObject.EnableDraw();
                     if (!BindingMatches(source, actor)) { Dispose(); return false; }
-                    drawRequested = true;
+                    var createdDraw = actor->DrawObject;
+                    // The client may return before allocating the body draw,
+                    // just as it does for attachment draws. Keep that request
+                    // retryable; otherwise a transient allocation gap becomes
+                    // a permanent wait followed by an idle preview timeout.
+                    drawRequested = createdDraw != null;
+                    if (DrawEnabled(createdDraw))
+                    {
+                        awaitingBodyReveal = createdDraw;
+                        createdDraw->IsVisible = false;
+                    }
                 }
             }
             var draw = actor->DrawObject;
-            IsReady = drawRequested && draw != null && draw->IsVisible;
+            if (awaitingBodyReveal != draw) awaitingBodyReveal = null;
+            IsReady = drawRequested && draw != null && (DrawEnabled(draw) || awaitingBodyReveal == draw);
             if (IsReady) bodyWasVisible = true;
             for (var i = 0; i < cloneChildren.Length; i++)
             {
@@ -261,12 +293,32 @@ public sealed unsafe class NativePreviewActor : IDisposable
             if (IsReady)
             {
                 if (!SetSourceVisibility(true)) { Dispose(); return false; }
+                // The source is suppressed before exposing any part of the replacement.
+                // Slow child setup must never leave a half-built second player visible.
+                if (awaitingBodyReveal == draw && draw != null)
+                {
+                    draw->IsVisible = true;
+                    awaitingBodyReveal = null;
+                }
+                for (var i = 0; i < cloneChildren.Length; i++) RevealChild(i);
                 drawFrames = 0;
+                drawWaitActive = false;
             }
             else
             {
-                ReleaseSourceHide();
-                if (drawFrames >= DrawTimeoutFrames) Dispose();
+                if (DrawEnabled(draw))
+                {
+                    awaitingBodyReveal = draw;
+                    draw->IsVisible = false;
+                }
+                // Keep the real actor suppressed while an owned display child is
+                // rebuilding. Releasing here exposes the genuine actor for one or
+                // more frames, which is the visible double-character flash reported
+                // during mount replacement and slow companion setup.
+                if (sourceSuppressionActive) SetSourceVisibility(true);
+                else ReleaseSourceHide();
+                if (!drawWaitActive) { drawWaitStarted = clock.GetTimestamp(); drawWaitActive = true; }
+                if (clock.GetElapsedTime(drawWaitStarted) >= DrawTimeout) Dispose();
             }
             return IsReady;
         }
@@ -280,8 +332,14 @@ public sealed unsafe class NativePreviewActor : IDisposable
 
     /// <summary>Animates the owned rider and mount from read-only, verified locomotion loops.</summary>
     public void UpdateGroundedMotion(bool emoteActuallyActive, Func<bool>? canApply = null, bool flightPose = false)
+        => UpdateGroundedMotionLanes(emoteActuallyActive, GroundedMotionLane.Both, canApply, flightPose);
+
+    /// <summary>Reconciles only the animation lanes owned by this update boundary.</summary>
+    public void UpdateGroundedMotionLanes(bool emoteActuallyActive, GroundedMotionLane lanes,
+        Func<bool>? canApply = null, bool flightPose = false)
     {
-        if (disposed || !IsReady) return;
+        lanes &= GroundedMotionLane.Both;
+        if (lanes == GroundedMotionLane.None || disposed || !IsReady) return;
         var actor = GetOwnedActor();
         var source = GetSource();
         if (actor == null || source == null || !BindingMatches(source, actor)) return;
@@ -319,8 +377,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
                 || actor != allocatedActor || actor->ObjectIndex != objectIndex
                 || Generation(actor) != allocationGeneration || actor->Mount.OwnerObject != actor
                 || actor->Mount.MountId != mountId || actor->Timeline.OwnerObject != actor
-                || actor->Timeline.TimelineSequencer.Parent != actor || actor->DrawObject == null
-                || !actor->DrawObject->IsVisible) return false;
+                || actor->Timeline.TimelineSequencer.Parent != actor || !DrawEnabled(actor->DrawObject)) return false;
             if (mountedSourceSample && !MountedSourceCurrent()) return false;
             if (mountId == 0) return true;
             if (child == null || actor->Mount.MountObject != child || child == actor || child == source
@@ -331,14 +388,13 @@ public sealed unsafe class NativePreviewActor : IDisposable
                 || child == (NativeCharacter*)actor->OrnamentData.OrnamentObject
                 || Generation(child) != childGeneration || cloneChildren[0].Address != child
                 || cloneChildren[0].Generation != childGeneration || child->Timeline.OwnerObject != child
-                || child->Timeline.TimelineSequencer.Parent != child || child->DrawObject == null
-                || !child->DrawObject->IsVisible) return false;
+                || child->Timeline.TimelineSequencer.Parent != child || !DrawEnabled(child->DrawObject)) return false;
             return true;
         }
 
         if (!Current()) { motion.Reset(); return; }
         var sourceTimeline = source->Timeline.TimelineSequencer.TimelineIds[0];
-        if (sourceTimeline is 166 or 167 or 6709 or 4047 or 4048 or 6703)
+        if (sourceTimeline is 166 or 167 or 6709 or 4047 or 4048 or 6703 or 9306 or 9307 or 6710)
         {
             // Genuine mounted loops are only visual inputs. The source hierarchy
             // must remain owned and current through both display-lane writes.
@@ -353,10 +409,20 @@ public sealed unsafe class NativePreviewActor : IDisposable
             {
                 166 or 4047 => (ushort)3,
                 6709 => (ushort)13,
+                9306 => (ushort)7,
+                9307 => (ushort)8,
+                6710 => sampledSourceMount->Timeline.TimelineSequencer.TimelineIds[0] switch
+                    { 31 => (ushort)31, 32 => (ushort)32, _ => (ushort)0 },
                 4048 => sampledSourceMount->Timeline.TimelineSequencer.TimelineIds[0] switch
                     { 4053 => (ushort)13, 4046 => (ushort)16, _ => (ushort)22 },
                 _ => (ushort)22,
             } : (ushort)0;
+        }
+        else if (source->Mode == CharacterModes.Mounted)
+        {
+            // A model clip such as normal idle is not a verified rider clip merely
+            // because its number also occurs in the on-foot classifier.
+            sourceTimeline = 0;
         }
         // Handheld accessories have their own posture resolver. An on-foot source
         // cannot establish the corresponding accessory clip, so leave it native.
@@ -366,20 +432,37 @@ public sealed unsafe class NativePreviewActor : IDisposable
                 && (byte)source->EmoteController.CurrentPoseType == 0 && source->EmoteController.CPoseState > 0);
         // A planner is scoped to this allocation; generation 1 never crosses actors.
         var plan = motion.Plan(sample, new(1, mountId, (ulong)(nuint)child, childGeneration, flightPose, flightPoseClips), emoteActuallyActive,
-            actor->Timeline.BaseOverride, child != null ? child->Timeline.BaseOverride : (ushort)0);
+            actor->Timeline.BaseOverride, child != null ? child->Timeline.BaseOverride : (ushort)0,
+            actor->Timeline.TimelineSequencer.TimelineIds[0], child != null ? child->Timeline.TimelineSequencer.TimelineIds[0] : (ushort)0,
+            lanes);
         if (!Current()) { motion.Reset(); return; }
-        if (plan.WriteBaseOverride) actor->Timeline.BaseOverride = plan.BaseOverride;
-        if (plan.PlayTimeline != 0) actor->Timeline.TimelineSequencer.PlayTimeline(plan.PlayTimeline);
-        // The first native playback may replace an allocation, request or child.
-        // Never continue the old plan on that hierarchy after re-entry.
-        if (!Current()) { motion.Reset(); return; }
-        if (child == null) return;
-        if (plan.WriteMountBaseOverride) child->Timeline.BaseOverride = plan.MountBaseOverride;
-        if (plan.PlayMountTimeline != 0) child->Timeline.TimelineSequencer.PlayTimeline(plan.PlayMountTimeline);
+        // The mounted native selector compares the root BaseOverride with the
+        // child's base lane when root playback is dispatched. Seed and play the
+        // child first so that a synchronous selector pass sees a matching pair;
+        // otherwise it can restore the rider's idle clip between the two writes.
+        if (child != null && (lanes & GroundedMotionLane.Mount) != 0)
+        {
+            if (plan.WriteMountBaseOverride) child->Timeline.BaseOverride = plan.MountBaseOverride;
+            if (plan.PlayMountTimeline != 0) child->Timeline.TimelineSequencer.PlayTimeline(plan.PlayMountTimeline);
+            // Child playback may replace an allocation, request or child. Never
+            // continue the root lane after re-entry on that hierarchy.
+            if (!Current()) { motion.Reset(); return; }
+        }
+        if ((lanes & GroundedMotionLane.Rider) != 0)
+        {
+            if (plan.WriteBaseOverride) actor->Timeline.BaseOverride = plan.BaseOverride;
+            if (plan.PlayTimeline != 0) actor->Timeline.TimelineSequencer.PlayTimeline(plan.PlayTimeline);
+            if (!Current()) { motion.Reset(); return; }
+        }
     }
 
     private bool BindingMatches(NativeCharacter* source, NativeCharacter* actor) =>
         GetSource() == source && GetOwnedActor() == actor;
+
+    // CN native show/hide controls bit0. IsVisible additionally requires bit3,
+    // which the renderer clears before each submission; that transient bit is
+    // not model readiness and must not restart or hide a healthy hierarchy.
+    private static bool DrawEnabled(DrawObject* draw) => draw != null && (draw->Flags & 1) != 0;
 
     private bool TickChildDraw(NativeCharacter* source, NativeCharacter* actor, int index)
     {
@@ -399,7 +482,8 @@ public sealed unsafe class NativePreviewActor : IDisposable
         // Each new attachment gets at least one framework frame to finish native setup.
         state.Frames++;
         var draw = child->DrawObject;
-        if (draw != null && draw->IsVisible) { state.WasVisible = true; return true; }
+        if (state.AwaitingReveal != draw) state.AwaitingReveal = null;
+        if (draw != null && (DrawEnabled(draw) || state.AwaitingReveal == draw)) { state.WasVisible = true; return true; }
         if (state.WasVisible && draw == null) { state.Requested = false; state.WasVisible = false; }
         if (state.Requested || state.Frames < 2 || !child->GameObject.IsReadyToDraw()) return false;
         if (!BindingMatches(source, actor) || GetChild(actor, index) != child
@@ -407,10 +491,31 @@ public sealed unsafe class NativePreviewActor : IDisposable
         child->GameObject.EnableDraw();
         if (!BindingMatches(source, actor) || GetChild(actor, index) != child
             || Generation(child) != generation) return false;
-        state.Requested = true;
         draw = child->DrawObject;
-        state.WasVisible = draw != null && draw->IsVisible;
+        // EnableDraw can return before the native attachment has allocated its
+        // DrawObject. Do not permanently mark that request complete: retry on
+        // the next framework frame while retaining the binding and generation
+        // checks above. Once a DrawObject exists, keep the one-shot request
+        // semantics so a slow visibility transition is observed without
+        // repeatedly touching the native child.
+        state.Requested = draw != null;
+        state.WasVisible = DrawEnabled(draw);
+        if (state.WasVisible)
+        {
+            state.AwaitingReveal = draw;
+            draw->IsVisible = false;
+        }
         return state.WasVisible;
+    }
+
+    private void RevealChild(int index)
+    {
+        ref var state = ref cloneChildren[index];
+        var current = GetChild(allocatedActor, index);
+        if (current == state.Address && current != null && Generation(current) == state.Generation
+            && state.AwaitingReveal != null && current->DrawObject == state.AwaitingReveal)
+            state.AwaitingReveal->IsVisible = true;
+        state.AwaitingReveal = null;
     }
 
     private struct ChildDrawState
@@ -420,6 +525,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
         public int Frames;
         public bool Requested;
         public bool WasVisible;
+        public DrawObject* AwaitingReveal;
     }
 
     private bool Follow(NativeCharacter* source, NativeCharacter* actor)

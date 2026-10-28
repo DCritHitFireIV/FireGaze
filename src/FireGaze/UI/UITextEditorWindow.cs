@@ -88,6 +88,7 @@ internal sealed class UITextEditorWindow : Window
 
     private InstalledPluginEntry? entry;
     private UITextPack pack = new();
+    private UITextPack? editBaseline;
     private DateTime packLoadedMtime = DateTime.MinValue;
     private Task<(UITextExtraction Extraction, string Note)>? extractionTask;
     private UITextExtraction? extraction;
@@ -113,6 +114,18 @@ internal sealed class UITextEditorWindow : Window
     private Task<(string Channel, UITextTranslateResult Result)>? translateTask;
     private Task<(bool Ok, string Message)>? patchTask;
     private CancellationTokenSource? translateCancel;
+    private object? translationGate;
+    private object TranslationGate => LazyInitializer.EnsureInitialized(ref this.translationGate);
+    private long editorGeneration;
+    private TranslationRequest? translationRequest;
+    private Dictionary<(int Kind, string Container, string Key), UITextPackEditMerge.EditIntent>? editIntents;
+    private sealed record TranslationRequest(string InternalName, long EditorGeneration, long HostGeneration,
+        UITextTranslationReceipt Receipt)
+    {
+        public int Applied;
+        public int PlaceholderRejected;
+        public int Unchanged;
+    }
     private int translateDone;
     private int translateTotal;
 
@@ -168,13 +181,24 @@ internal sealed class UITextEditorWindow : Window
         }
 
         if (this.dirty && !this.SaveIfDirty(force: true)) return;
+        lock (this.TranslationGate)
+        {
+            this.editorGeneration++;
+            this.translationRequest = null;
+            this.translateCancel?.Cancel();
+            this.translateCancel?.Dispose();
+            this.translateCancel = null;
+            this.translateTask = null;
+        }
         this.entry = target;
         this.pack = this.store.Load(target.InternalName);
+        this.editBaseline = UITextPackEditMerge.Clone(this.pack);
         this.packLoadedMtime = this.PackMtime(target.InternalName);
         this.rows = [];
         this.roles.Clear();
         this.search = string.Empty;
         this.dirty = false;
+        this.editIntents?.Clear();
         this.extraction = null;
         this.extractionTask = null;
         // 灰名单勾选框默认跟随全局设置；同一插件重开窗口时不重置（保留本次选择）
@@ -185,6 +209,18 @@ internal sealed class UITextEditorWindow : Window
 
     public override void OnClose()
     {
+        lock (this.TranslationGate)
+        {
+            // A file-dialog callback may outlive the window. Invalidate its
+            // editor identity before the close save so reopening the same
+            // plugin cannot accept the old selection.
+            this.editorGeneration++;
+            this.translationRequest = null;
+            this.translateCancel?.Cancel();
+            this.translateCancel?.Dispose();
+            this.translateCancel = null;
+            this.translateTask = null;
+        }
         if (!this.SaveIfDirty(force: true)) this.IsOpen = true;
     }
 
@@ -278,7 +314,8 @@ internal sealed class UITextEditorWindow : Window
 
         // 抽取走 ExtractWithGuard：它会自动改读原始备份；万一还是抽到「译文###原文」形态，
         // 会换备份重抽或停下报错，绝不把假原文并进包（2026-10-02 防污染）。
-        this.extractionTask = Task.Run(() => this.patches.ExtractWithRecoveryAsync(this.entry));
+        var target = this.entry;
+        this.extractionTask = this.plugin.RunTextTask(() => this.patches.ExtractWithRecoveryAsync(target, this.plugin.WorkLifetime.ShutdownToken));
     }
 
     private void PollExtraction()
@@ -369,6 +406,7 @@ internal sealed class UITextEditorWindow : Window
 
     private void RebuildRows()
     {
+        this.editBaseline ??= UITextPackEditMerge.Clone(this.pack);
         this.rows = [];
         foreach (var packEntry in this.pack.Entries)
         {
@@ -502,6 +540,16 @@ internal sealed class UITextEditorWindow : Window
         return list;
     }
 
+    private void StartGlossaryRepair()
+    {
+        var repairTargets = this.GlossaryRepairTargets();
+        this.StartTranslate(repairTargets, overwriteExisting: true);
+    }
+
+    private void StartTranslateRow(Row row) =>
+        this.StartTranslate([new UITextTarget(row.Original, row.Context, row.Entry, row.Resource, row.Attribute)],
+            overwriteExisting: true, overwriteUser: true);
+
     public void OpenForText(InstalledPluginEntry target, string original)
     {
         this.OpenFor(target);
@@ -511,11 +559,21 @@ internal sealed class UITextEditorWindow : Window
 
     private void StartTranslate(List<UITextTarget> targets, bool overwriteExisting = false, bool overwriteUser = false)
     {
-        if (this.translateTask is { IsCompleted: false })
+        if (this.entry is null || this.translateTask is { IsCompleted: false })
         {
             return;
         }
 
+        // Persist pending human edits first, then resolve the originally selected
+        // identities against the latest merged pack. Never widen by original text.
+        if (!this.SaveIfDirty(force: true)) return;
+        targets = targets.Select(target => target.Entry is not null
+                ? this.pack.Find(target.Original) is { } literal ? target with { Entry = literal } : null
+                : target.Resource is { } resource
+                    ? this.pack.FindResource(resource.Container, resource.Key) is { } row && row.Original == target.Original
+                        ? target with { Resource = row } : null
+                    : this.pack.FindAttribute(target.Original) is { } attribute ? target with { Attribute = attribute } : null)
+            .Where(target => target is not null).Select(target => target!).ToList();
         var items = UITextFlow.BuildTranslateItems(targets);
         if (items.Count == 0)
         {
@@ -532,25 +590,42 @@ internal sealed class UITextEditorWindow : Window
 
         this.translateOverwriteExisting = overwriteExisting;
         this.translateOverwriteUser = overwriteUser;
-        this.translateCancel = new CancellationTokenSource();
+        this.translateCancel?.Dispose();
+        this.translateCancel = CancellationTokenSource.CreateLinkedTokenSource(this.plugin.WorkLifetime.ShutdownToken);
         this.translateDone = 0;
         this.translateTotal = items.Count;
         var token = this.translateCancel.Token;
-        var checkpointPack = UITextPack.FromJSON(this.pack.ToJSON(), out _)!;
-        var checkpointName = this.entry!.InternalName;
-        this.translateTask = Task.Run(async () =>
+        var request = new TranslationRequest(this.entry.InternalName, this.editorGeneration,
+            this.plugin.WorkLifetime.Generation, new UITextTranslationReceipt(this.pack, targets, overwriteExisting, overwriteUser));
+        this.translationRequest = request;
+        this.translateTask = this.plugin.RunTextTask(async () =>
         {
             var result = await UITextTranslationSession.TranslateAsync(channel,
                 items,
                 (done, _) =>
                 {
-                    this.translateDone = done;
+                    lock (this.TranslationGate)
+                        if (this.IsCurrentTranslation(request)) this.translateDone = done;
                 },
                 batch =>
                 {
-                    UITextFlow.AcceptTranslations(checkpointPack, batch.Translated, channel.Name, overwriteExisting, overwriteUser);
-                    if (!this.store.Save(checkpointName, checkpointPack, out var checkpointError))
-                        throw new IOException("保存译文失败：" + checkpointError);
+                    lock (this.TranslationGate)
+                    {
+                        if (token.IsCancellationRequested || !this.IsCurrentTranslation(request)) return;
+                        if (!this.plugin.WorkLifetime.TryAcquire(out var lease, out _)) return;
+                        using (lease)
+                            lease!.TryExecute(() =>
+                            {
+                                UITextTranslationReceipt.Result? accepted = null;
+                                if (!this.store.SaveMerged(request.InternalName,
+                                    latest => (accepted = request.Receipt.Accept(latest, batch.Translated, channel.Name)).Pack,
+                                    out _, out var checkpointError))
+                                    throw new IOException("保存译文失败：" + checkpointError);
+                                request.Applied += accepted!.Applied;
+                                request.PlaceholderRejected += accepted.PlaceholderRejected;
+                                request.Unchanged += accepted.Unchanged;
+                            });
+                    }
                 },
                 token).ConfigureAwait(false);
             return (channel.Name, result);
@@ -560,15 +635,29 @@ internal sealed class UITextEditorWindow : Window
 
     private void PollTranslate()
     {
+        if (!this.plugin.WorkLifetime.TryAcquire(out var lease, out _)) return;
+        using (lease)
+            lease!.TryExecute(() =>
+            {
+                lock (this.TranslationGate) this.PollTranslateCore();
+            });
+    }
+
+    private bool IsCurrentTranslation(TranslationRequest request) =>
+        ReferenceEquals(this.translationRequest, request)
+        && this.editorGeneration == request.EditorGeneration
+        && string.Equals(this.entry?.InternalName, request.InternalName, StringComparison.Ordinal)
+        && this.plugin.WorkLifetime.Generation == request.HostGeneration
+        && this.plugin.WorkLifetime.State == FireGaze.Lifecycle.PluginWorkLifetimeState.Running;
+
+    private void PollTranslateCore()
+    {
         var task = this.translateTask;
-        if (task is null || !task.IsCompleted)
+        var request = this.translationRequest;
+        if (task is null || !task.IsCompleted || request is null || !this.IsCurrentTranslation(request))
         {
             return;
         }
-
-        this.translateTask = null;
-        this.translateCancel?.Dispose();
-        this.translateCancel = null;
 
         (string Channel, UITextTranslateResult Result) outcome;
         try
@@ -577,13 +666,42 @@ internal sealed class UITextEditorWindow : Window
         }
         catch (Exception e)
         {
+            this.translateTask = null;
+            this.translateCancel?.Dispose();
+            this.translateCancel = null;
+            this.translationRequest = null;
             this.SetStatus("翻译失败：" + e.Message, true);
             return;
         }
 
         // 收译文：字面量与资源条目共用同一套清洗/占位符校验/来源标记
-        var (applied, placeholderRejected, unchanged) = UITextFlow.AcceptTranslations(
-            this.pack, outcome.Result.Translated, outcome.Channel, this.translateOverwriteExisting, this.translateOverwriteUser);
+        UITextPack latest;
+        try { latest = this.store.LoadRequired(request.InternalName); }
+        catch (Exception error)
+        {
+            this.SetStatus("读取最新译文失败：" + error.Message, true);
+            return;
+        }
+        UITextPack current;
+        try
+        {
+            current = UITextPackEditMerge.Merge(this.editBaseline ?? latest, this.pack, latest, this.editIntents?.Values);
+        }
+        catch (Exception error)
+        {
+            this.SetStatus("翻译结果无法合并：" + error.Message, true);
+            return;
+        }
+        var accepted = request.Receipt.Accept(current, outcome.Result.Translated, outcome.Channel);
+        var (applied, placeholderRejected, unchanged) = (request.Applied, request.PlaceholderRejected, request.Unchanged);
+        this.pack = accepted.Pack;
+        // This is the disk observation used by the edit merge, not the fixed
+        // request baseline held by Receipt. Background fields are not edits.
+        this.editBaseline = UITextPackEditMerge.Clone(latest);
+        this.translateTask = null;
+        this.translateCancel?.Dispose();
+        this.translateCancel = null;
+        this.translationRequest = null;
         this.RebuildRows();
 
         this.MarkDirty();
@@ -628,7 +746,7 @@ internal sealed class UITextEditorWindow : Window
         if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
         this.SetStatus("正在写入译文并重载插件…", false);
-        this.patchTask = Task.Run(() => this.patches.ApplyAndReloadAsync(target));
+        this.patchTask = this.plugin.RunTextTask(() => this.patches.ApplyAndReloadAsync(target));
     }
 
     /// <summary>
@@ -644,7 +762,7 @@ internal sealed class UITextEditorWindow : Window
         if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
         this.SetStatus("正在还原原文并重载插件…", false);
-        this.patchTask = Task.Run(() => this.patches.RestoreAndReloadAsync(target));
+        this.patchTask = this.plugin.RunTextTask(() => this.patches.RestoreAndReloadAsync(target));
     }
 
     private void PollPatchTask()
@@ -811,9 +929,7 @@ internal sealed class UITextEditorWindow : Window
             var glossaryRepair = this.GlossaryRepairCount();
             if (ImGui.MenuItem($"按术语表重译（{glossaryRepair} 条）", enabled: !busy && glossaryRepair > 0))
             {
-                var repairTargets = this.GlossaryRepairTargets();
-                this.StartTranslate(repairTargets);
-                this.SetStatus($"正在按术语表重译 {repairTargets.Count} 条…", false);
+                this.StartGlossaryRepair();
             }
 
             if (ImGui.IsItemHovered())
@@ -1160,6 +1276,7 @@ internal sealed class UITextEditorWindow : Window
     /// <summary>写一行的译文（字面量 / 资源两种行都走这里，来源统一标 user）。</summary>
     private void SetTranslationValue(Row row, string value)
     {
+        this.RecordRowIntent(row, translation: true);
         if (row.Resource is not null)
         {
             row.Resource.Translated = value;
@@ -1205,6 +1322,7 @@ internal sealed class UITextEditorWindow : Window
     /// <summary>标/取消「不翻」。</summary>
     private void SetRowSkipped(Row row, bool skipped)
     {
+        this.RecordRowIntent(row, translation: false);
         if (row.Resource is not null)
         {
             if (skipped)
@@ -1257,7 +1375,7 @@ internal sealed class UITextEditorWindow : Window
 
         if (ImGui.MenuItem("翻译这一条", enabled: !(this.translateTask is { IsCompleted: false })))
         {
-            this.StartTranslate([new UITextTarget(row.Original, row.Context, row.Entry, row.Resource)]);
+            this.StartTranslateRow(row);
         }
 
         if (row.Skipped)
@@ -1276,6 +1394,7 @@ internal sealed class UITextEditorWindow : Window
 
         if (ImGui.MenuItem("清除译文", enabled: row.HasTranslation))
         {
+            this.RecordRowIntent(row, translation: true);
             ClearTranslationValue(row);
             this.MarkDirty();
         }
@@ -1454,6 +1573,9 @@ internal sealed class UITextEditorWindow : Window
 
     private void ImportFromFile()
     {
+        var internalName = this.entry?.InternalName;
+        var generation = this.editorGeneration;
+        var hostGeneration = this.plugin.WorkLifetime.Generation;
         this.fileDialog.OpenFileDialog(
             "导入译文（桌面翻译工具的 JSON 格式）",
             ".json",
@@ -1463,7 +1585,25 @@ internal sealed class UITextEditorWindow : Window
                 {
                     return;
                 }
+                if (!this.plugin.WorkLifetime.TryAcquire(out var lease, out _)) return;
+                using (lease)
+                    lease!.TryExecute(() =>
+                    {
+                        lock (this.TranslationGate)
+                        {
+                            if (!this.IsOpen || this.editorGeneration != generation
+                                || this.plugin.WorkLifetime.Generation != hostGeneration
+                                || !string.Equals(this.entry?.InternalName, internalName, StringComparison.Ordinal)) return;
+                            this.ImportTranslationFile(path);
+                        }
+                    });
+            });
+    }
 
+    private void ImportTranslationFile(string path)
+    {
+        lock (this.TranslationGate)
+        {
                 try
                 {
                     var entries = UITextStore.ParseAIExport(File.ReadAllText(path), out var error);
@@ -1479,10 +1619,11 @@ internal sealed class UITextEditorWindow : Window
                     {
                         var existing = this.pack.Find(incoming.Original);
                         var appliedOne = false;
-                        if (existing is not null)
+                        if (existing is not null && !this.pack.IsSkipped(existing.Original))
                         {
                             if (!existing.IsUserSource || existing.Translated.Length == 0)
                             {
+                                this.RecordTargetIntent(new(existing.Original, existing.Context, existing, null), translation: true);
                                 existing.Translated = incoming.Translated;
                                 existing.Source = incoming.Source ?? "user";
                                 existing.Review = null;
@@ -1504,6 +1645,7 @@ internal sealed class UITextEditorWindow : Window
                                 continue;
                             }
 
+                            this.RecordTargetIntent(new(resource.Original, null, null, resource), translation: true);
                             resource.Translated = incoming.Translated;
                             resource.Source = incoming.Source ?? "user";
                             resource.Review = null;
@@ -1524,6 +1666,7 @@ internal sealed class UITextEditorWindow : Window
                                 continue;
                             }
 
+                            this.RecordTargetIntent(new(attribute.Original, attribute.Context, null, null, attribute), translation: true);
                             attribute.Translated = incoming.Translated;
                             attribute.Source = incoming.Source ?? "user";
                             attribute.Review = null;
@@ -1548,7 +1691,7 @@ internal sealed class UITextEditorWindow : Window
                 {
                     this.SetStatus("导入失败：" + e.Message, true);
                 }
-            });
+        }
     }
 
     private void MarkDirty()
@@ -1561,7 +1704,41 @@ internal sealed class UITextEditorWindow : Window
         }
     }
 
+    private void RecordRowIntent(Row row, bool translation)
+    {
+        var target = new UITextTarget(row.Original, row.Context, row.Entry, row.Resource, row.Attribute);
+        this.RecordTargetIntent(target, translation);
+    }
+
+    private void RecordTargetIntent(UITextTarget target, bool translation)
+    {
+        lock (this.TranslationGate)
+        {
+            if (this.entry is not null) this.store.RecordEditIntent(this.entry.InternalName, target);
+            this.translationRequest?.Receipt.Invalidate(target);
+            var key = target.Resource is { } resource ? (1, resource.Container, resource.Key)
+                : (target.Attribute is null ? 0 : 2, string.Empty, target.Original);
+            this.editIntents ??= new();
+            this.editIntents.TryGetValue(key, out var old);
+            this.editIntents[key] = new(target, translation || old?.Translation == true, !translation || old?.Skipped == true);
+        }
+    }
+
     private bool SaveIfDirty(bool force)
+    {
+        if (!this.dirty) return true;
+        if (!this.plugin.WorkLifetime.TryAcquire(out var lease, out _)) return false;
+        using (lease)
+        {
+            var saved = false;
+            // Admission and the full synchronous write belong to one tracked
+            // operation. Closing rejects new saves and waits for started ones.
+            lease!.TryExecute(() => saved = this.SaveIfDirtyCore(force));
+            return saved;
+        }
+    }
+
+    private bool SaveIfDirtyCore(bool force)
     {
         if (!this.dirty)
         {
@@ -1578,18 +1755,19 @@ internal sealed class UITextEditorWindow : Window
             return false;
         }
 
-        // 盘上被外部更新过（例如编辑器开着时某个列表页任务刚跑完）：先把自己的「人工修改」并回磁盘那份，
-        // 否则会把新增条目（属性/新文本）整个覆盖掉。
-        if (this.PackMtime(this.entry.InternalName) > this.packLoadedMtime)
+        // Keep local intent separate from the merged candidate until the
+        // actual write succeeds. This includes deletion and unskip intent,
+        // and avoids promoting background changes to local edits on retry.
+        if (this.store.SaveMerged(this.entry.InternalName, latest =>
+            UITextPackEditMerge.Merge(this.editBaseline ?? latest, this.pack, latest, this.editIntents?.Values), out var saved, out var error))
         {
-            this.RebaseOnDiskPack();
-        }
-
-        if (this.store.Save(this.entry.InternalName, this.pack, out var error))
-        {
+            this.pack = saved!;
+            this.editBaseline = UITextPackEditMerge.Clone(this.pack);
             this.dirty = false;
+            this.editIntents?.Clear();
             this.lastSaveAt = DateTime.Now;
             this.packLoadedMtime = this.PackMtime(this.entry.InternalName);
+            this.RebuildRows();
             return true;
         }
         else
@@ -1597,6 +1775,17 @@ internal sealed class UITextEditorWindow : Window
             this.SetStatus("保存失败：" + error, true);
             return false;
         }
+    }
+
+    // Invoked by the host's final cleanup only, after ordinary text work has
+    // drained. Closing rejects ordinary saves, but must still persist edits
+    // made before close without reopening ordinary work admission.
+    internal void FlushForHostClose()
+    {
+        if (this.plugin.WorkLifetime.State != FireGaze.Lifecycle.PluginWorkLifetimeState.Closing)
+            throw new InvalidOperationException("编辑器最终保存只能在宿主关闭阶段执行。");
+        if (!this.SaveIfDirtyCore(force: true))
+            throw new IOException("编辑器最终保存失败，未保存的编辑仍被保留。");
     }
 
     private DateTime PackMtime(string internalName) => this.store.LastWriteTime(internalName);
@@ -1617,87 +1806,22 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        this.pack = this.store.Load(this.entry.InternalName);
-        this.packLoadedMtime = this.PackMtime(this.entry.InternalName);
+        UITextStore.ReadSnapshot snapshot;
+        try { snapshot = this.store.LoadSnapshotRequired(this.entry.InternalName); }
+        catch (Exception error)
+        {
+            this.SetStatus("读取最新译文失败，将稍后重试：" + error.Message, true);
+            return;
+        }
+        this.pack = snapshot.Pack;
+        this.editBaseline = UITextPackEditMerge.Clone(snapshot.Pack);
+        this.packLoadedMtime = snapshot.LastWriteTime;
         this.rows = [];
         this.roles.Clear();
         this.extraction = null;
         this.extractionTask = null;
         this.SetStatus("译文包已更新，正在重新读取界面文字…", false);
         this.StartExtraction();
-    }
-
-    /// <summary>
-    ///     把当前内存里的「人工修改」并回磁盘那份包（外部刚写过、我们又要落盘时用）：
-    ///     只带 user 来源的译文与不翻标记，磁盘上的新条目（属性文本等）原样保留。
-    /// </summary>
-    private void RebaseOnDiskPack()
-    {
-        if (this.entry is null)
-        {
-            return;
-        }
-
-        var disk = this.store.Load(this.entry.InternalName);
-        foreach (var entry in this.pack.Entries)
-        {
-            if (!entry.IsUserSource || !entry.HasTranslation)
-            {
-                continue;
-            }
-
-            var target = disk.Find(entry.Original) ?? disk.GetOrAdd(entry.Original, entry.Context, entry.PreserveID);
-            target.Translated = entry.Translated;
-            target.Source = "user";
-        }
-
-        foreach (var resource in this.pack.Resources)
-        {
-            if (!resource.IsUserSource || !resource.HasTranslation)
-            {
-                continue;
-            }
-
-            var target = disk.FindResource(resource.Container, resource.Key)
-                         ?? disk.GetOrAddResource(resource.Container, resource.Key, resource.Original);
-            target.Translated = resource.Translated;
-            target.Source = "user";
-        }
-
-        foreach (var attribute in this.pack.Attributes)
-        {
-            if (!attribute.IsUserSource || !attribute.HasTranslation)
-            {
-                continue;
-            }
-
-            var target = disk.FindAttribute(attribute.Original)
-                         ?? disk.GetOrAddAttribute(attribute.Original, attribute.Context);
-            target.Translated = attribute.Translated;
-            target.Source = "user";
-        }
-
-        foreach (var original in this.pack.Skipped)
-        {
-            disk.MarkSkipped(original);
-        }
-
-        foreach (var token in this.pack.SkippedResources)
-        {
-            if (!disk.SkippedResources.Contains(token, StringComparer.Ordinal))
-            {
-                disk.SkippedResources.Add(token);
-            }
-        }
-
-        foreach (var original in this.pack.SkippedAttributes)
-        {
-            disk.MarkAttributeSkipped(original);
-        }
-
-        this.pack = disk;
-        this.RebuildRows();
-        this.SetStatus("已合并本地修改与更新后的译文包，新增条目保留。", false);
     }
 
     private void SetStatus(string message, bool isError)

@@ -1,6 +1,7 @@
 using Dalamud.Interface;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
+using FireGaze.LocalPreview.Runtime;
 
 namespace FireGaze.PortraitPreview;
 
@@ -8,7 +9,7 @@ namespace FireGaze.PortraitPreview;
 /// Owns an independent public Draw subscription until every accepted GPU transfer retires.
 /// Feature/window disposal seals admission but cannot remove this retirement callback early.
 /// </summary>
-internal sealed class PortraitPhotoReadbackRuntime
+internal sealed class PortraitPhotoReadbackRuntime : IDisposable, INativePhysicalCloseState
 {
     private readonly object sync = new();
     private readonly IUiBuilder ui;
@@ -21,6 +22,10 @@ internal sealed class PortraitPhotoReadbackRuntime
     private long frame;
     private bool closed;
     private bool detached;
+    private bool drawAttempted;
+    private bool resizeAttempted;
+    private bool detachAttempted;
+    private NativePhysicalCloseState? physicalClose;
     private Exception? failure;
 
     public PortraitPhotoReadbackRuntime(IUiBuilder ui, IPortraitPixelReadbackDrawBackend backend,
@@ -31,11 +36,26 @@ internal sealed class PortraitPhotoReadbackRuntime
         this.report = report;
         drained = new(this, TaskCreationOptions.RunContinuationsAsynchronously);
         Provider = new PortraitPhotoReadbackProvider(Acquire);
-        ui.Draw += Draw;
-        ui.ResizeBuffers += Resize;
+        try
+        {
+            drawAttempted = true;
+            ui.Draw += Draw;
+            resizeAttempted = true;
+            ui.ResizeBuffers += Resize;
+        }
+        catch (Exception initializationError)
+        {
+            try { _ = Close(); }
+            catch (Exception error) { PhysicalClose.Fail("Readback initialization rollback", error); }
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, initializationError);
+            throw;
+        }
     }
 
     public PortraitPhotoReadbackProvider Provider { get; }
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete { get { lock (sync) return detached && PhysicalClose.Complete; } }
+    public string? PhysicalCloseFailure { get { lock (sync) return physicalClose?.Failure; } }
     public int Pending { get { lock (sync) return reader?.PendingCount ?? 0; } }
     public int Quarantined { get { lock (sync) return reader?.QuarantinedCount ?? 0; } }
     public string? Failure { get { lock (sync) return failure?.GetType().FullName ?? reader?.LastFailureType; } }
@@ -63,7 +83,7 @@ internal sealed class PortraitPhotoReadbackRuntime
     {
         lock (sync)
         {
-            if (detached) return;
+            if (detachAttempted) return;
             try
             {
                 using var nativeScope = backend.EnterDraw();
@@ -124,11 +144,18 @@ internal sealed class PortraitPhotoReadbackRuntime
         }
     }
 
+    public void Dispose() => _ = Close();
+
     private void FinishClose()
     {
-        if (!closed || detached || reader is not null && retiring?.IsCompletedSuccessfully != true) return;
-        ui.Draw -= Draw;
-        ui.ResizeBuffers -= Resize;
+        if (!closed || detachAttempted || reader is not null && retiring?.IsCompletedSuccessfully != true) return;
+        // Latch before either backend call: removal may reenter Close or throw
+        // after dropping the official callback root. An unknown result is terminal.
+        detachAttempted = true;
+        if (drawAttempted) PhysicalClose.Try(() => ui.Draw -= Draw, "Readback Draw callback removal");
+        if (resizeAttempted) PhysicalClose.Try(() => ui.ResizeBuffers -= Resize, "Readback ResizeBuffers callback removal");
+        PhysicalClose.Finish();
+        if (!PhysicalClose.Complete) return;
         detached = true;
         reader = null;
         drained.TrySetResult();

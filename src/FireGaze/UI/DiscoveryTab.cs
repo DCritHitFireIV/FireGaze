@@ -361,14 +361,14 @@ internal sealed partial class DiscoveryTab
         var messages = new List<string>();
         var remaining = iconInFlight + this.iconQueue.Count;
         if (remaining > 0) messages.Add($"图标加载中，还剩 {remaining}");
-        else if (this.iconQueue.CoolingCount(DateTime.UtcNow) > 0) messages.Add("部分图标暂不可用，稍后重试");
         if (indexMayBePartial) messages.Add("正在读取插件库");
         if (discoveryStats is null && statsFetchFailed) messages.Add("统计暂不可用");
         if (messages.Count > 0)
         {
             ImGui.SameLine(0, 8f);
             ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
-            UiHelpers.Fitted(string.Join(" · ", messages), "图标暂不可用时会稍后重试，不影响搜索和安装。");
+            var message = string.Join(" · ", messages);
+            UiHelpers.Fitted(message, message);
             ImGui.PopStyleColor();
         }
 

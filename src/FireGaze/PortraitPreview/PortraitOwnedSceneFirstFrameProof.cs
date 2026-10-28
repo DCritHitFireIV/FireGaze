@@ -6,10 +6,6 @@ using Dalamud.Plugin.Services;
 
 namespace FireGaze.PortraitPreview;
 
-internal sealed record PortraitOwnedSceneFirstFrameSource(long Editor,long State,long Model,uint Generation,ulong Character);
-internal sealed record PortraitOwnedSceneFirstFrameOwner(Guid Session,long Revision,uint Slot,long LeaseEpoch);
-internal sealed record PortraitOwnedSceneFirstFrameIdentity(Guid Installation,long SessionEpoch,long RequestEpoch,
-    uint NativeFrame,PortraitOwnedSceneFirstFrameSource Source,PortraitOwnedSceneFirstFrameOwner Owner);
 internal sealed record PortraitOwnedSceneRawFrame(byte[] Bytes,int Width,int Height,int Pitch,int DxgiFormat);
 internal sealed record PortraitOwnedSceneFirstFrameSnapshot(string State,PortraitOwnedSceneFirstFrameIdentity? Identity=null,
     int Width=0,int Height=0,int Pitch=0,int DxgiFormat=0,int ByteLength=0,string? SHA256=null,string? RawBase64=null,string? Error=null);
@@ -20,27 +16,38 @@ internal sealed class PortraitOwnedSceneFirstFrameProof : IDisposable
     private readonly object sync=new();
     private readonly PortraitOwnedSceneImageSource<IDalamudTextureWrap> images;
     private readonly Func<IDalamudTextureWrap,Task<PortraitOwnedSceneRawFrame>> read;
-    private readonly Func<PortraitOwnedSceneFirstFrameIdentity?> identity;
     private readonly Func<bool> admission;
     private bool closed,attempted,pending;
     private Task work=Task.CompletedTask;
+    // Drain roots this owner, which must also retain the actual readback awaiter graph.
+    private Task capture=Task.CompletedTask;
     private PortraitOwnedSceneFirstFrameSnapshot snapshot=new("None");
     internal PortraitOwnedSceneFirstFrameProof(PortraitOwnedSceneImageSource<IDalamudTextureWrap> images,
         Func<IDalamudTextureWrap,Task<PortraitOwnedSceneRawFrame>> read,
-        Func<PortraitOwnedSceneFirstFrameIdentity?> identity,Func<bool> admission)
-    {this.images=images;this.read=read;this.identity=identity;this.admission=admission;images.FramePublished+=Published;}
+        Func<bool> admission)
+    {this.images=images;this.read=read;this.admission=admission;images.FramePublished+=Published;}
     internal bool Pending {get{lock(sync)return pending;}}
     internal PortraitOwnedSceneFirstFrameSnapshot Snapshot {get{lock(sync)return snapshot;}}
     private void Published()
     {
         lock(sync)
         {
-            if(closed||attempted||!admission()||identity() is not {} stamp)return;
+            if(closed||attempted||!admission())return;
             var borrow=images.TryBorrow();
             if(borrow is null)return;
+            if(borrow.Receipt is not {IsValid:true} stamp){borrow.Dispose();return;}
             attempted=pending=true;snapshot=new("Pending",stamp);
-            work=Capture(borrow,stamp);
+            // Publish physical ownership before the read delegate can synchronously reenter close.
+            var completion=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            work=completion.Task;
+            capture=CaptureAndComplete(borrow,stamp,completion);
         }
+    }
+    private async Task CaptureAndComplete(PortraitOwnedSceneTextureLifetime<IDalamudTextureWrap>.Borrow borrow,
+        PortraitOwnedSceneFirstFrameIdentity stamp,TaskCompletionSource completion)
+    {
+        try{await Capture(borrow,stamp).ConfigureAwait(false);completion.TrySetResult();}
+        catch(Exception error){completion.TrySetException(error);}
     }
     private async Task Capture(PortraitOwnedSceneTextureLifetime<IDalamudTextureWrap>.Borrow borrow,
         PortraitOwnedSceneFirstFrameIdentity stamp)
@@ -59,7 +66,7 @@ internal sealed class PortraitOwnedSceneFirstFrameProof : IDisposable
         catch(Exception error){lock(sync)snapshot=new("Failed",stamp,Error:error.GetType().FullName);}
         finally{borrow.Dispose();lock(sync)pending=false;}
     }
-    internal Task DrainPhysicalAsync(){Dispose();lock(sync)return PortraitCaptureRetirement.CombineOwned(this,work);}
+    internal Task DrainPhysicalAsync(){Dispose();lock(sync)return PortraitCaptureRetirement.CombineOwned(this,work,capture);}
     public void Dispose(){lock(sync){if(closed)return;closed=true;images.FramePublished-=Published;}}
     internal static async Task<PortraitOwnedSceneRawFrame> ReadOfficialAsync(ITextureReadbackProvider readback,IDalamudTextureWrap texture)
     {

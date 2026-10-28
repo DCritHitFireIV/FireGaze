@@ -22,6 +22,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         }
         if (before.Composition == merged) return;
         CancelLightDrag();
+        if (!FlushHistoryForSourceChange()) return;
         if (!target.SetLightingSpace(identity, before, merged))
         {
             Error(target.LastError ?? "空间灯光未能应用到肖像预览。");

@@ -77,11 +77,12 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
         private T? original;
         private bool retired, createAttempted;
         private int closing, nativeOperation;
+        private string? retirementFailure;
         public T Original => original ?? throw new InvalidOperationException("The owned native trampoline is unavailable or retired.");
         public bool IsEnabled => hook?.IsEnabled == true;
         public bool IsDisposed => retired;
         public int InFlight => gateway.ActiveCount;
-        public bool RetirementFaulted { get; private set; }
+        public bool RetirementFaulted => Volatile.Read(ref retirementFailure) is not null;
         internal void Create(T dispatcher)
         {
             direct = provider.DirectTarget(target.Address, gateway.DelegateType);
@@ -125,11 +126,12 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
             if (Interlocked.CompareExchange(ref nativeOperation, 1, 0) != 0) return false;
             try
             {
+                if (retirementFailure is { } fault) { reason = fault; return false; }
                 if (hook is { IsDisposed: false, IsEnabled: true }) hook.Disable();
                 if (hook is { IsEnabled: true }) throw new InvalidOperationException("Official owned hook did not disable.");
-                RetirementFaulted = false; return true;
+                return true;
             }
-            catch (Exception error) { reason = error.Message; RetirementFaulted = true; return false; }
+            catch (Exception error) { reason = LatchRetirementFailure(error.Message); return false; }
             finally { Volatile.Write(ref nativeOperation, 0); }
         }
         public bool TryCompleteRetirement(out string reason)
@@ -139,23 +141,28 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
             if (Volatile.Read(ref closing) == 0 || Interlocked.CompareExchange(ref nativeOperation, 1, 0) != 0) return false;
             try
             {
-            if (hook is null && createAttempted) { RetirementFaulted = true; reason = "Official Create returned no handle; native compensation is unknown."; return false; }
-            if (!createAttempted)
-            { retired = gateway.TryAbandonUnpublishedOwnership(); RetirementFaulted = !retired; return retired; }
-            if (hook is { IsEnabled: true } || direct is null || !gateway.TryRetireTo(direct)) return false;
-            try
-            {
+                if (retirementFailure is { } fault) { reason = fault; return false; }
+                if (hook is null && createAttempted) { reason = LatchRetirementFailure("Official Create returned no handle; native compensation is unknown."); return false; }
+                if (!createAttempted)
+                {
+                    retired = gateway.TryAbandonUnpublishedOwnership();
+                    if (!retired) reason = LatchRetirementFailure("Unpublished owned gateway release was not confirmed.");
+                    return retired;
+                }
+                if (hook is { IsEnabled: true } || direct is null || !gateway.TryRetireTo(direct)) return false;
                 hook?.Dispose();
                 if (hook is { IsDisposed: false }) throw new InvalidOperationException("Official owned hook disposal was not confirmed.");
                 // Original/dispatcher references clear only after the active callback
                 // finally completed and the permanent entry switched to direct.
+                gateway.ReleaseOwnership();
                 original = null; hook = null; direct = null;
-                gateway.ReleaseOwnership(); retired = true; RetirementFaulted = false; return true;
+                retired = true; return true;
             }
-            catch (Exception error) { reason = error.Message; RetirementFaulted = true; return false; }
-            }
+            catch (Exception error) { reason = LatchRetirementFailure(error.Message); return false; }
             finally { Volatile.Write(ref nativeOperation, 0); }
         }
+        private string LatchRetirementFailure(string reason)
+            => Interlocked.CompareExchange(ref retirementFailure, reason, null) ?? reason;
         private static T AdaptOriginal(Delegate stableOriginal)
         {
             // A native Marshal delegate does not expose a rebindable managed

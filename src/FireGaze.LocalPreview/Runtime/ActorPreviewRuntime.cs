@@ -42,6 +42,9 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private readonly NativeInputHandoff<NativeIntent> handoff = new();
     private readonly ImplicitMinionOwnership implicitMinion = new();
     private readonly Dictionary<PreviewSlot, int> spawnWait = new();
+    private readonly TimeProvider? clock = TimeProvider.System;
+    private TimeProvider Clock => clock ?? TimeProvider.System;
+    private Dictionary<PreviewSlot, long>? collectionSpawnStarted;
     // Audited CN companion executor (RVA 0x8E2810 in the current executable).
     // UseAction can return true after merely queuing; this leaf runs only at execution.
     // The signature is unique in the reviewed client and resolves no packet sender.
@@ -73,11 +76,11 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private NativePreviewActor? visualActor;
     private bool deferredEmote;
     private PendingCollection? pendingCollection;
-    private sealed class PendingCollection(NativePreviewActor owner, PreviewEffect effect)
+    private sealed class PendingCollection(NativePreviewActor owner, PreviewEffect effect, long startedAt)
     {
         public NativePreviewActor Owner { get; } = owner;
         public PreviewEffect Effect { get; } = effect;
-        public int Frames { get; set; }
+        public long StartedAt { get; } = startedAt;
     }
     private nint actorAddress;
     private ulong actorId;
@@ -100,7 +103,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     public event Action<ushort>? ExternalEmoteAccepted;
     public event Action<ushort, byte>? PreviewEmoteStarted;
     public event Action<string>? PreviewCancelled;
-    public Func<uint, bool>? SpecialActionInput { get; set; }
+    public Func<ActionType, uint, bool>? SpecialActionInput { get; set; }
     public long NativeRequestsConsumed { get; private set; }
     public long Revision => revision;
     internal bool IsDisposed => disposed;
@@ -242,19 +245,20 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         {
             // Use generated pointers from the loaded CN ClientStructs, plus the audited
             // companion execution signature absent from its generated API.
-            useAction = Install(interop.HookFromAddress<ActionManager.Delegates.UseAction>(ActionManager.Addresses.UseAction.Value, UseActionDetour));
-            useCompanion = Install(interop.HookFromSignature<UseCompanionNative>(UseCompanionSignature, UseCompanionDetour));
-            useLocation = Install(interop.HookFromAddress<ActionManager.Delegates.UseActionLocation>(ActionManager.Addresses.UseActionLocation.Value, UseLocationDetour));
-            actionStatus = Install(interop.HookFromAddress<ActionManager.Delegates.GetActionStatus>(ActionManager.Addresses.GetActionStatus.Value, ActionStatusDetour));
-            canEmote = Install(interop.HookFromAddress<EmoteManager.Delegates.CanExecuteEmote>(EmoteManager.Addresses.CanExecuteEmote.Value, CanEmoteDetour));
-            executeEmote = Install(interop.HookFromAddress<EmoteManager.Delegates.ExecuteEmote>(EmoteManager.Addresses.ExecuteEmote.Value, ExecuteEmoteDetour));
-            canAgentEmote = Install(interop.HookFromAddress<AgentEmote.Delegates.CanUseEmote>(AgentEmote.Addresses.CanUseEmote.Value, CanAgentEmoteDetour));
-            executeAgentEmote = Install(interop.HookFromAddress<AgentEmote.Delegates.ExecuteEmote>(AgentEmote.Addresses.ExecuteEmote.Value, ExecuteAgentEmoteDetour));
-            playEmote = Install(interop.HookFromAddress<EmoteController.Delegates.PlayEmote>(EmoteController.Addresses.PlayEmote.Value, PlayEmoteDetour));
-            mountSetup = Install(interop.HookFromAddress<MountContainer.Delegates.CreateAndSetupMount>(MountContainer.Addresses.CreateAndSetupMount.Value, MountSetupDetour));
-            weaponVisibility = Install(interop.HookFromSignature<WeaponVisibilityNative>(WeaponVisibilitySignature, WeaponVisibilityDetour));
-            extraWeaponVisibility = Install(interop.HookFromSignature<WeaponVisibilityNative>(ExtraWeaponVisibilitySignature, ExtraWeaponVisibilityDetour));
+            Install(ref useAction, interop.HookFromAddress<ActionManager.Delegates.UseAction>(ActionManager.Addresses.UseAction.Value, UseActionDetour));
+            Install(ref useCompanion, interop.HookFromSignature<UseCompanionNative>(UseCompanionSignature, UseCompanionDetour));
+            Install(ref useLocation, interop.HookFromAddress<ActionManager.Delegates.UseActionLocation>(ActionManager.Addresses.UseActionLocation.Value, UseLocationDetour));
+            Install(ref actionStatus, interop.HookFromAddress<ActionManager.Delegates.GetActionStatus>(ActionManager.Addresses.GetActionStatus.Value, ActionStatusDetour));
+            Install(ref canEmote, interop.HookFromAddress<EmoteManager.Delegates.CanExecuteEmote>(EmoteManager.Addresses.CanExecuteEmote.Value, CanEmoteDetour));
+            Install(ref executeEmote, interop.HookFromAddress<EmoteManager.Delegates.ExecuteEmote>(EmoteManager.Addresses.ExecuteEmote.Value, ExecuteEmoteDetour));
+            Install(ref canAgentEmote, interop.HookFromAddress<AgentEmote.Delegates.CanUseEmote>(AgentEmote.Addresses.CanUseEmote.Value, CanAgentEmoteDetour));
+            Install(ref executeAgentEmote, interop.HookFromAddress<AgentEmote.Delegates.ExecuteEmote>(AgentEmote.Addresses.ExecuteEmote.Value, ExecuteAgentEmoteDetour));
+            Install(ref playEmote, interop.HookFromAddress<EmoteController.Delegates.PlayEmote>(EmoteController.Addresses.PlayEmote.Value, PlayEmoteDetour));
+            Install(ref mountSetup, interop.HookFromAddress<MountContainer.Delegates.CreateAndSetupMount>(MountContainer.Addresses.CreateAndSetupMount.Value, MountSetupDetour));
+            Install(ref weaponVisibility, interop.HookFromSignature<WeaponVisibilityNative>(WeaponVisibilitySignature, WeaponVisibilityDetour));
+            Install(ref extraWeaponVisibility, interop.HookFromSignature<WeaponVisibilityNative>(ExtraWeaponVisibilitySignature, ExtraWeaponVisibilityDetour));
             InstallOriginalHmsNativeBoundaries(interop);
+            if (PhysicalCloseFailure is not null) throw new InvalidOperationException("Native observer initialization rollback is incomplete.");
             bool mount = MountContainer.Addresses.CreateAndSetupMount.Value != 0;
             bool minion = CompanionContainer.Addresses.SetupCompanion.Value != 0;
             bool accessory = OrnamentContainer.Addresses.SetupOrnament.Value != 0;
@@ -268,18 +272,33 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             resolvedTimelineAdmitted = resolvedActionTimelineAdmitted = false;
             foreach (var hook in installedHooks.AsEnumerable().Reverse()) TryDisposeNativeHook(hook);
             installedHooks.Clear();
-            log.Error(ex, "[LocalPreview] Native hook setup failed; previews disabled.");
+            if (PhysicalCloseFailure is not null)
+            {
+                disposed = true;
+                PhysicalClose.Finish();
+                throw new NativePhysicalCloseException(this, ex);
+            }
+            try { log.Error(ex, "[LocalPreview] Native hook setup failed; previews disabled."); } catch { }
             Capabilities = new(false, false, false, false, false, false, "客户端接口不可用，已关闭本地试用。");
         }
-        framework.Update += Update;
+        try { framework.Update += Update; }
+        catch (Exception error)
+        {
+            // Event registration may partially succeed before throwing. Reuse
+            // the owner close path and carry any unknown rollback to the host.
+            DisposeCore();
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, error);
+            throw;
+        }
     }
 
-    private T Install<T>(T hook) where T : class, IDisposable
+    private void Install<T>(ref Hook<T>? holder, Hook<T> hook) where T : Delegate
     {
+        // Publish Original before Enable can activate a callback or throw after
+        // partial activation. Failed teardown must retain this exact holder.
+        holder = hook;
         installedHooks.Add(hook);
-        // Hook<T> has no non-generic Enable interface; enable through overload resolution below.
         EnableHook(hook);
-        return hook;
     }
     private static void EnableHook<T>(T hook) where T : class, IDisposable
     {
@@ -346,19 +365,30 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     {
         reason = "";
         if (disposed || !Capabilities.InputBridge) { reason = Capabilities.Reason; return false; }
-        if (nativeDepth != 0) { reason = "原生操作正在执行，请稍后再试。"; return false; }
+        if (nativeDepth != 0) { reason = "正在完成上一项操作，请稍后再试。"; return false; }
         if (!clientState.IsLoggedIn || IsTeleportCast()) { reason = "当前状态无法开始试用。"; return false; }
-        if (conditions[ConditionFlag.Crafting] || conditions[ConditionFlag.PreparingToCraft]) { reason = "正在制作状态中，请稍后再试"; return false; }
+        if (conditions[ConditionFlag.Crafting] || conditions[ConditionFlag.PreparingToCraft]) { reason = "请先结束制作，再开始试用。"; return false; }
         if (conditions[ConditionFlag.InCombat] || conditions[ConditionFlag.Unconscious]
             || conditions[ConditionFlag.LoggingOut] || conditions[ConditionFlag.WatchingCutscene]
             || conditions[ConditionFlag.OccupiedInCutSceneEvent]) { reason = "当前状态无法开始试用。"; return false; }
         var actor = Local();
         if (actor == null || conditions[ConditionFlag.BetweenAreas] || conditions[ConditionFlag.BetweenAreas51]) { reason = "当前无法试用。"; return false; }
-        if (!Valid(effect)) { reason = "该对象没有可用的本地显示资源。"; return false; }
+        if (!Valid(effect)) { reason = "暂时无法显示这个项目，请换一个项目试用。"; return false; }
         if (!EnsureBaseline(actor)) { reason = "角色或地图刚发生变化，请重试。"; return false; }
         // Conflicts are removed only after the requested resource has passed validation.
         replacingPreview = true;
-        try { foreach (var slot in GetConflicts(effect)) Clear(slot); }
+        try
+        {
+            foreach (var slot in GetConflicts(effect))
+            {
+                // Replacing a preview mount must wait for the old native child to
+                // finish its dismount. Removing only the lease here prevents the
+                // historical baseline mount from being created again before B starts.
+                if (slot == PreviewSlot.Mount && effect.Slot == PreviewSlot.Mount && visualActor != null)
+                { effects.Remove(slot); ClearSpawnWait(slot); revision++; }
+                else Clear(slot);
+            }
+        }
         finally { replacingPreview = false; }
         if (!EnsureBaseline(actor)) { reason = "角色或地图刚发生变化，请重试。"; return false; }
         try
@@ -371,7 +401,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
                 var display = visualActor.Actor;
                 if (display == null) throw new InvalidOperationException("本地展示角色已失效");
                 var snapshot = baseline!.Value;
-                if (snapshot.MountId != 0) Apply(display, new(PreviewSlot.Mount, snapshot.MountId));
+                if (snapshot.MountId != 0 && effect.Slot != PreviewSlot.Mount) Apply(display, new(PreviewSlot.Mount, snapshot.MountId));
                 if (snapshot.MinionId != 0) Apply(display, new(PreviewSlot.Minion, snapshot.MinionId));
                 if (snapshot.AccessoryId != 0) Apply(display, new(PreviewSlot.Accessory, snapshot.AccessoryId));
                 display->Mode = snapshot.Mode;
@@ -388,7 +418,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             if (revision != applyRevision || visualActor != applyOwner || !applyOwner.IsCurrentAllocation(actor))
             { reason = "角色或试用状态已变化，请重试。"; return false; }
             effects[effect.Slot] = effect;
-            spawnWait[effect.Slot] = 60;
+            BeginSpawnWait(effect.Slot);
             revision++;
             if (effect.Slot == PreviewSlot.Mount && effects.TryGetValue(PreviewSlot.Emote, out var heldEmote)) Apply(actor, heldEmote);
             return true;
@@ -422,6 +452,9 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         switch (effect.Slot)
         {
             case PreviewSlot.Mount:
+                if (ownedDisplay && effect.Id != 0 && actor->Mount.MountId != effect.Id
+                    && (actor->Mount.MountId != 0 || actor->Mount.MountObject != null || actor->Mount.DismountTimer > 0)
+                    && AwaitDismount(actor, effect, owner!, applyRevision)) return;
                 if (ownedDisplay && actor->OrnamentData.OrnamentId != 0)
                 {
                     actor->OrnamentData.SetupOrnament(0,0);
@@ -480,7 +513,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             if (actor->Mode == CharacterModes.Mounted) { actor->Mode = CharacterModes.Normal; actor->ModeParam = 0; }
         }
         if (actor->Mount.MountObject == null && actor->Mount.DismountTimer <= 0) return false;
-        pendingCollection = new(owner, effect);
+        pendingCollection = new(owner, effect, Clock.GetTimestamp());
         return true;
     }
 
@@ -500,11 +533,12 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         {
             // This is a failure deadline, not a fixed delay before applying. Keep
             // the ordinary child-spawn budget untouched until setup is dispatched.
-            if (++pending.Frames > 180) { pendingCollection = null; Clear(pending.Effect.Slot); }
+            if (Clock.GetElapsedTime(pending.StartedAt) >= TrialPreviewPresencePolicy.InitialSpawnGrace)
+            { pendingCollection = null; Clear(pending.Effect.Slot); }
             return;
         }
         pendingCollection = null;
-        spawnWait[effect.Slot] = 60;
+        BeginSpawnWait(effect.Slot);
         long applyRevision = revision;
         bool previousOwnCall = ownCall;
         ownCall = true;
@@ -522,7 +556,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     {
         if (pendingCollection?.Effect.Slot == slot) pendingCollection = null;
         if (slot == PreviewSlot.Emote) deferredEmote = false;
-        if (!effects.TryGetValue(slot, out var effect)) return;
+        if (!effects.TryGetValue(slot, out var effect)) { ClearSpawnWait(slot); return; }
         if (visualActor is not null)
         {
             InvalidateExternalPresentation();
@@ -540,7 +574,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             finally
             {
                 ownCall = false;
-                effects.Remove(slot); spawnWait.Remove(slot); revision++;
+                effects.Remove(slot); ClearSpawnWait(slot); revision++;
                 if (!HasActivePreview && !replacingPreview) Forget();
             }
             return;
@@ -566,7 +600,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         {
             ownCall = false;
             effects.Remove(slot);
-            spawnWait.Remove(slot);
+            ClearSpawnWait(slot);
             revision++;
             if (!replacingPreview) RestoreImplicitMinion(actor);
             if (!HasActivePreview && !replacingPreview) Forget();
@@ -578,12 +612,13 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         InvalidateExternalPresentation();
         if (visualActor is not null)
         {
-            effects.Clear(); spawnWait.Clear(); Forget();
+            effects.Clear(); spawnWait.Clear(); collectionSpawnStarted = null; Forget();
             return;
         }
         if (restoreBaseline) foreach (var slot in effects.Keys.ToArray()) Clear(slot);
         effects.Clear();
         spawnWait.Clear();
+        collectionSpawnStarted = null;
         Forget();
     }
 
@@ -715,6 +750,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     {
         deferredEmote = false;
         pendingCollection = null;
+        collectionSpawnStarted = null;
         InvalidateExternalPresentation();
         var owned = visualActor; visualActor = null;
         try { owned?.Dispose(); } catch (Exception ex) { ReportHandoff(ex); }
@@ -773,8 +809,15 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             if (effect.Slot == PreviewSlot.Emote && SpecialActionActive) continue;
             if (spawnWait.TryGetValue(effect.Slot, out int frames) && frames > 0)
             {
-                spawnWait[effect.Slot] = frames - 1;
-                continue;
+                if (effect.Slot == PreviewSlot.Emote)
+                {
+                    spawnWait[effect.Slot] = frames - 1;
+                    continue;
+                }
+                var starts = collectionSpawnStarted ??= new();
+                if (!starts.TryGetValue(effect.Slot, out var started)) starts[effect.Slot] = started = Clock.GetTimestamp();
+                if (Clock.GetElapsedTime(started) < TrialPreviewPresencePolicy.InitialSpawnGrace) continue;
+                spawnWait[effect.Slot] = 0;
             }
             bool present = effect.Slot switch
             {
@@ -788,14 +831,39 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
                 bool pendingChild = effect.Slot == PreviewSlot.Minion && actor->CompanionData.CompanionObject == null
                     || effect.Slot == PreviewSlot.Accessory && actor->OrnamentData.OrnamentObject == null
                     || effect.Slot == PreviewSlot.Mount && actor->Mount.MountObject == null;
-                if (pendingChild || effect.Slot == PreviewSlot.Emote && actor->EmoteController.EmoteId == effect.Id) Clear(effect.Slot);
-                else { effects.Remove(effect.Slot); spawnWait.Remove(effect.Slot); }
+                var remainingGrace = spawnWait.TryGetValue(effect.Slot, out var grace) ? grace : 0;
+                var currentId = effect.Slot == PreviewSlot.Mount ? actor->Mount.MountId
+                    : effect.Slot == PreviewSlot.Accessory ? actor->OrnamentData.OrnamentId : MinionId(actor);
+                if (pendingChild && TrialPreviewPresencePolicy.IsTransientlyMissing(
+                    effect.Slot, effect.Id, currentId, childPresent: false, remainingGrace))
+                {
+                    // Native setup publishes the collection id and child allocation on
+                    // different framework ticks. Keep the trial during that bounded gap.
+                    continue;
+                }
+                if (effect.Slot == PreviewSlot.Emote && actor->EmoteController.EmoteId == effect.Id) Clear(effect.Slot);
+                else { effects.Remove(effect.Slot); ClearSpawnWait(effect.Slot); }
             }
         }
         if (!HasActivePreview) Forget();
         else ApplyGroundedMotion(actor);
     }
+    private void BeginSpawnWait(PreviewSlot slot)
+    {
+        spawnWait[slot] = TrialPreviewPresencePolicy.InitialSpawnGraceFrames;
+        if (slot != PreviewSlot.Emote) (collectionSpawnStarted ??= new())[slot] = Clock.GetTimestamp();
+    }
+    private void ClearSpawnWait(PreviewSlot slot)
+    {
+        spawnWait.Remove(slot);
+        if (collectionSpawnStarted is not { } started) return;
+        started.Remove(slot);
+        if (started.Count == 0) collectionSpawnStarted = null;
+    }
     private void ApplyGroundedMotion(NativeCharacter* actor)
+        => ApplyGroundedMotionLanes(actor, GroundedMotionLane.Both);
+
+    private void ApplyGroundedMotionLanes(NativeCharacter* actor, GroundedMotionLane lanes)
     {
         if (visualActor is not { } display || display.Actor != actor) return;
         var expectedRevision = revision;
@@ -804,7 +872,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         // Native allocation lookups can synchronously start another action on the
         // same display actor. Recheck semantic ownership after the writer's last
         // native lookup; pointer/generation checks alone cannot detect that change.
-        display.UpdateGroundedMotion(emoteActive, () => !disposed && revision == expectedRevision
+        display.UpdateGroundedMotionLanes(emoteActive, lanes, () => !disposed && revision == expectedRevision
             && visualActor == display && HasActivePreview && (PreviewEmoteActive(actor) || SpecialActionActive) == emoteActive
             && FlightPoseActive == flightPose, flightPose);
     }
@@ -915,10 +983,15 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private bool UseActionDetour(ActionManager* mgr, ActionType type, uint id, ulong target, uint extra, ActionManager.UseActionMode mode, uint combo, bool* area)
     {
         if (nativeClosing || disposed) return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
-        if (!disposed && framework.IsInFrameworkUpdateThread && !ownCall && nativeDepth == 0 && type == ActionType.Action && SpecialActionInput is { } special)
+        if (!Bypass && nativeDepth == 0 && (type is ActionType.Action or ActionType.GeneralAction)
+            && BindingCurrent() && SpecialActionInput is { } special)
         {
-            try { if (special(id)) return true; }
-            catch (Exception ex) { ReportHandoff(ex); }
+            // Some native input paths use the apparent GeneralAction directly.
+            // During a bound mount trial it belongs to the local flight toggle;
+            // a rejected/failed local handler must never fall through to gameplay Jump.
+            bool localFlight = type == ActionType.GeneralAction && id == 2 && effects.ContainsKey(PreviewSlot.Mount);
+            try { if (special(type, id) || localFlight) return true; }
+            catch (Exception ex) { ReportHandoff(ex); if (localFlight) return true; }
         }
         if (!Bypass && nativeDepth == 0 && IsActiveCollectionRequest(type, id, mode))
         {
@@ -1084,7 +1157,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             return;
         }
         effects.Remove(PreviewSlot.Mount);
-        spawnWait.Remove(PreviewSlot.Mount);
+        ClearSpawnWait(PreviewSlot.Mount);
         revision++;
         RestoreImplicitMinion(Bound());
         if (!HasActivePreview) Forget();
@@ -1134,7 +1207,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         hmsBaseline = nativeHmsBaseline;
         InvalidateExternalPresentation();
         effects.Remove(PreviewSlot.Mount);
-        spawnWait.Remove(PreviewSlot.Mount);
+        ClearSpawnWait(PreviewSlot.Mount);
         revision++;
         if (!HasActivePreview) Forget();
     }
@@ -1224,7 +1297,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
                 // Explicit native dismount ends only the mount preview, preserving the other slots.
                 ResumeCore(includeMount: false);
                 runtime.effects.Remove(PreviewSlot.Mount);
-                runtime.spawnWait.Remove(PreviewSlot.Mount);
+                runtime.ClearSpawnWait(PreviewSlot.Mount);
                 runtime.revision++;
                 runtime.RestoreImplicitMinion(runtime.Bound());
                 if (!runtime.HasActivePreview) runtime.Forget();
@@ -1296,6 +1369,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
                 }
                 runtime.effects.Clear();
                 runtime.spawnWait.Clear();
+                runtime.collectionSpawnStarted = null;
                 runtime.Forget();
                 runtime.ownCall = false;
                 Raise(runtime.NativeInputAccepted);
@@ -1357,15 +1431,17 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         // Native visibility restoration, owned-object deletion and hook removal
         // are one synchronous Framework operation, including during worker unload.
         disposed = true;
-        try { framework.Update -= Update; } catch (Exception ex) { ReportHandoff(ex); }
+        PhysicalClose.Try(() => framework.Update -= Update, "Runtime Framework callback removal failed");
         try { ClearAll(); }
-        catch (Exception ex) { ReportHandoff(ex); }
+        catch (Exception ex) { PhysicalClose.Fail("Runtime preview restoration failed", ex); ReportHandoff(ex); }
         finally
         {
-            effects.Clear(); spawnWait.Clear(); Forget();
+            effects.Clear(); spawnWait.Clear(); collectionSpawnStarted = null;
+            PhysicalClose.Try(Forget, "Runtime owned actor close failed");
             foreach(var hook in installedHooks.AsEnumerable().Reverse())
                 TryDisposeNativeHook(hook);
             installedHooks.Clear();
+            PhysicalClose.Finish();
         }
     }
 }

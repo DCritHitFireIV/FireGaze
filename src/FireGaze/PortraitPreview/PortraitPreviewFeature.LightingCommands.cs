@@ -28,7 +28,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if(!CancelLightingFitForEdit()||!session.IsActive||!target.TryResolve(out var identity,out _,out _)
             ||target.CaptureEditorState(identity) is not{} before)return;
         if(before.Composition.Paused==paused)return;
-        HandleHistoryBatchResult(historyBatch.Flush());
+        if(!FlushHistoryForSourceChange())return;
         if(!target.SetAnimationPaused(identity,paused))
         { Error("暂时无法切换动作播放状态。");return; }
         if(paused)RecordDirectChange("定格动作");

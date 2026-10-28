@@ -76,7 +76,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         // Finish any existing user gesture before sample suppression. This captures real changes
         // preceding the transaction; individual probe states never enter the ordinary observer.
         CancelLightDrag();
-        HandleHistoryBatchResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         RecordDirectChange("调整肖像");
         if (!lightingFitSession.TryStart(colorTarget, mask))
         { Error("当前肖像暂时无法取样，请等待图像稳定后重试。"); return; }
@@ -219,13 +219,15 @@ internal sealed unsafe partial class PortraitPreviewFeature
             || current.State.Width != expected.State.Width || current.State.Height != expected.State.Height
             || !current.State.Ranges.SequenceEqual(expected.State.Ranges) || !current.State.Parameters.SequenceEqual(expected.State.Parameters)) return false;
         var captured = current.Snapshot;
-        var result = history.Record(current.HistoryKey, captured.ToJSON(), "调整灯光色彩");
+        var photoSource = CurrentPhotoSource();
+        var result = history.Record(current.HistoryKey, captured.ToJSON(), photoSource, "调整灯光色彩");
         HandleHistoryResult(result);
         if (result.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate)) return false;
         historyBatch.Cancel();
         historyLabelBaseline = null;
         observedIdentity = current.Identity;
         observedKey = current.HistoryKey;
+        observedPhotoSource = photoSource;
         observedEditor = captured;
         historyObservedEditor = captured;
         deferredBaselineSync = false;

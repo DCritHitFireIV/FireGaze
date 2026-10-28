@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-28",
+    "source": "ai",
+    "label": "SkipCutscene 静态消费者复核候选",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "/sc: skip cutscene enable/disable.",
+      "Translated": "/sc: 启用／停用过场动画跳过。",
+      "Context": "SkipCutscene..ctor",
+      "Source": "ai:static-consumer-reviewed",
+      "Role": "UI",
+      "RoleReason": "已静态复核真实显示消费者；详见配套审查证据",
+      "Review": "静态消费者确认显示用途；本轮提取未识别该路径，需最终产品准入验证"
+    },
+    {
+      "Original": "Skip Cutscene: Enabled",
+      "Translated": "过场动画跳过：已启用",
+      "Context": "SkipCutscene.OnCommand",
+      "Source": "ai:static-consumer-reviewed",
+      "Role": "UI",
+      "RoleReason": "已静态复核真实显示消费者；详见配套审查证据"
+    },
+    {
+      "Original": "Skip Cutscene: Disabled",
+      "Translated": "过场动画跳过：已停用",
+      "Context": "SkipCutscene.OnCommand",
+      "Source": "ai:static-consumer-reviewed",
+      "Role": "UI",
+      "RoleReason": "已静态复核真实显示消费者；详见配套审查证据"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "skipped": [
+    "/sc",
+    "SkipCutscene"
+  ]
+}

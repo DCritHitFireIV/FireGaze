@@ -80,6 +80,8 @@ internal sealed class MainWindow : Window
     /// </summary>
     public override void OnClose() => Plugin.Log.Debug("[FireGaze] 窗口已关闭");
 
+    public override void PostDraw() => MainWindowOpenPolicy.AfterExplicitOpenDraw(this);
+
     public override void Draw()
     {
         FireGazeWindowPlacement.Remember("FireGaze");

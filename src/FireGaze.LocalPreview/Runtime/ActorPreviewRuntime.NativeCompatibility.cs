@@ -67,14 +67,16 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void InstallOriginalHmsNativeBoundaries(IGameInteropProvider interop)
     {
-        characterUpdate = Install(interop.HookFromSignature<GameObject.Delegates.Update>(CharacterUpdateSignature, CharacterUpdateDetour));
-        characterDisable = Install(interop.HookFromSignature<GameObject.Delegates.DisableDraw>(CharacterDisableSignature, CharacterDisableDetour));
-        companionSetup = Install(interop.HookFromAddress<CompanionContainer.Delegates.SetupCompanion>(CompanionContainer.Addresses.SetupCompanion.Value, CompanionSetupDetour));
-        ornamentSetup = Install(interop.HookFromAddress<OrnamentContainer.Delegates.SetupOrnament>(OrnamentContainer.Addresses.SetupOrnament.Value, OrnamentSetupDetour));
-        timelinePlay = InstallOptionalTimelineHook<PlayTimelineNative, ActionTimelineSequencer.Delegates.PlayTimeline>(
-            () => interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour), out timelinePlayReason);
-        actionTimelinePlay = InstallOptionalTimelineHook<PlayActionTimelineNative, TimelineContainer.Delegates.PlayActionTimeline>(
-            () => interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour), out actionTimelinePlayReason);
+        Install(ref characterUpdate, interop.HookFromSignature<GameObject.Delegates.Update>(CharacterUpdateSignature, CharacterUpdateDetour));
+        Install(ref characterDisable, interop.HookFromSignature<GameObject.Delegates.DisableDraw>(CharacterDisableSignature, CharacterDisableDetour));
+        Install(ref companionSetup, interop.HookFromAddress<CompanionContainer.Delegates.SetupCompanion>(CompanionContainer.Addresses.SetupCompanion.Value, CompanionSetupDetour));
+        Install(ref ornamentSetup, interop.HookFromAddress<OrnamentContainer.Delegates.SetupOrnament>(OrnamentContainer.Addresses.SetupOrnament.Value, OrnamentSetupDetour));
+        InstallOptionalTimelineHook<PlayTimelineNative, ActionTimelineSequencer.Delegates.PlayTimeline>(
+            () => interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour), out timelinePlayReason, hook => timelinePlay = hook);
+        if (PhysicalCloseFailure is not null) throw new InvalidOperationException("Optional timeline observer rollback is incomplete.");
+        InstallOptionalTimelineHook<PlayActionTimelineNative, TimelineContainer.Delegates.PlayActionTimeline>(
+            () => interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour), out actionTimelinePlayReason, hook => actionTimelinePlay = hook);
+        if (PhysicalCloseFailure is not null) throw new InvalidOperationException("Optional action timeline observer rollback is incomplete.");
         // This does not override the SDK mismatch decision above. It qualifies
         // different native function starts with complete independent contracts.
         if (timelinePlay is null && actionTimelinePlay is null) InstallResolvedTimelineBoundaries(interop);
@@ -82,11 +84,12 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private OptionalNativeHookStatus TimelineHookStatus<T>(Hook<T>? hook, string reason) where T : Delegate
         => disposed ? new(false, "Runtime disposed.")
+            : nativeClosing ? new(false, "Runtime closing.")
             : hook is null ? new(false, reason)
             : hook.IsDisposed ? new(false, "Hook disposed.")
             : hook.IsEnabled ? new(true, "") : new(false, "Hook disabled.");
 
-    private Hook<T>? InstallOptionalTimelineHook<T, TSdk>(Func<Hook<T>> create, out string reason)
+    private Hook<T>? InstallOptionalTimelineHook<T, TSdk>(Func<Hook<T>> create, out string reason, Action<Hook<T>?>? bind = null)
         where T : Delegate where TSdk : Delegate
     {
         var actual = typeof(T).GetMethod("Invoke")!;
@@ -107,6 +110,7 @@ public sealed unsafe partial class ActorPreviewRuntime
         try
         {
             hook = create();
+            bind?.Invoke(hook);
             hook.Enable();
             installedHooks.Add(hook);
             reason = "";
@@ -116,8 +120,7 @@ public sealed unsafe partial class ActorPreviewRuntime
         {
             // A failed optional hook never enters runtime ownership or unwinds
             // the core input hooks. Release a partially enabled backend here.
-            if (hook is not null)
-                TryDisposeNativeHook(hook);
+            if (hook is not null && TryDisposeNativeHook(hook)) bind?.Invoke(null);
             reason = $"Optional timeline observer unavailable: {ex.Message}";
             log.Warning(ex, "[LocalPreview] Optional timeline hook setup failed; core input hooks retained.");
             return null;
@@ -149,6 +152,15 @@ public sealed unsafe partial class ActorPreviewRuntime
         // after Original; gameplay state and model setup remain untouched.
         var sourceUpdate = framework.IsInFrameworkUpdateThread && !disposed
             && visualActor?.IsCurrentSource((NativeCharacter*)obj) == true;
+        var display = visualActor;
+        var motionRevision = revision;
+        bool displayRootUpdate = framework.IsInFrameworkUpdateThread && !ownCall && nativeDepth == 0
+            && HasActivePreview && display is { IsReady: true }
+            && display.IsCurrentAllocation((NativeCharacter*)obj);
+        bool displayMountChildUpdate = framework.IsInFrameworkUpdateThread && !ownCall && nativeDepth == 0
+            && HasActivePreview && display is { IsReady: true }
+            && display.IsCurrentMountChild((NativeCharacter*)obj);
+        bool displayUpdate = displayRootUpdate || displayMountChildUpdate;
         // HMS writes bit2 directly. Ignore that bit exclusively on our current
         // private display allocation, immediately before native consumption.
         if (framework.IsInFrameworkUpdateThread && !disposed && hmsVisibilityProtection && visualActor?.IsCurrentAllocation((NativeCharacter*)obj) == true)
@@ -158,6 +170,27 @@ public sealed unsafe partial class ActorPreviewRuntime
         }
         characterUpdate!.Original(obj);
         if (sourceUpdate) visualActor?.ReassertSourceVisibility();
+        // Framework.Update runs before the client's Character.Update. The latter
+        // can replace the private rider's locomotion lane with an on-foot loop;
+        // repairing only on the next framework tick leaves that standing pose
+        // visible for the intervening draw. Reconcile at the last native owner
+        // update too, without touching the genuine source or restarting a match.
+        if (displayUpdate && !nativeClosing && !disposed && !ownCall && nativeDepth == 0
+            && revision == motionRevision && visualActor == display
+            && (displayRootUpdate && display!.IsCurrentAllocation((NativeCharacter*)obj)
+                || displayMountChildUpdate && display!.IsCurrentMountChild((NativeCharacter*)obj)))
+        {
+            var actor = display.Actor;
+            if (actor != null)
+            {
+                // The client updates the owned root after Framework.Update. Rebind
+                // its transform at the same boundary as animation repair; child
+                // updates must not independently move the hierarchy.
+                if (display.IsCurrentAllocation((NativeCharacter*)obj))
+                    display.ReassertSourceTransform();
+                ApplyGroundedMotionLanes(actor, displayRootUpdate ? GroundedMotionLane.Rider : GroundedMotionLane.Mount);
+            }
+        }
     }
 
     private void CharacterDisableDetour(GameObject* obj)

@@ -154,6 +154,8 @@ internal sealed class UITextLibrary
 
     private readonly Plugin plugin;
     private readonly string cacheDirectory;
+    private readonly Func<HttpMessageHandler> downloadHandlerFactory;
+    private readonly Action<string, string> reportDownload;
 
     private UITextLibraryIndex? index;
     private DateTime indexFetchedAt = DateTime.MinValue;
@@ -162,11 +164,26 @@ internal sealed class UITextLibrary
     private DateTime countsFetchedAt = DateTime.MinValue;
     private bool countsFetching;
 
-    public UITextLibrary(Plugin plugin)
+    public UITextLibrary(Plugin plugin) : this(plugin, CreateDownloadHandler, ContributeRelay.ReportLibraryDownload)
     {
+    }
+
+    internal UITextLibrary(Plugin plugin, Func<HttpMessageHandler> downloadHandlerFactory, Action<string, string> reportDownload)
+    {
+        ArgumentNullException.ThrowIfNull(plugin);
+        ArgumentNullException.ThrowIfNull(downloadHandlerFactory);
+        ArgumentNullException.ThrowIfNull(reportDownload);
         this.plugin = plugin;
         this.cacheDirectory = Path.Combine(plugin.ConfigDirectory, "uitrans", "library");
+        this.downloadHandlerFactory = downloadHandlerFactory;
+        this.reportDownload = reportDownload;
     }
+
+    private static HttpMessageHandler CreateDownloadHandler() => new SocketsHttpHandler
+    {
+        AutomaticDecompression = DecompressionMethods.All,
+        ConnectTimeout = TimeSpan.FromSeconds(10),
+    };
 
     /// <summary>本会话里库不可用的原因（没配/404/网络不通），给日志用；正常时为空。</summary>
     public string? LastError { get; private set; }
@@ -345,7 +362,7 @@ internal sealed class UITextLibrary
         if (pack is not null)
         {
             // 下载量按包统计（2026-10-04）：键 `<插件>@<包ID>`，基础包的包ID 是 library。
-            ContributeRelay.ReportLibraryDownload(pluginName, packID);
+            this.reportDownload(pluginName, packID);
         }
         if (pack is null)
         {
@@ -415,11 +432,7 @@ internal sealed class UITextLibrary
     /// </summary>
     private async Task<string?> FetchTextAsync(string fileName, CancellationToken token, Func<string, bool>? accept = null)
     {
-        using var handler = new SocketsHttpHandler
-        {
-            AutomaticDecompression = DecompressionMethods.All,
-            ConnectTimeout = TimeSpan.FromSeconds(10),
-        };
+        using var handler = this.downloadHandlerFactory();
         using var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
 
         // 整体限时：库只是加速器，不能把一键汉化拖住；超时就当拉不到（下次再试）

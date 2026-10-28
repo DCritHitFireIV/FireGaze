@@ -40,8 +40,17 @@ internal static class UITextText
     {
         var display = translated.Trim();
         var id = IDPart(original);
+        if (id.Length == 0)
+        {
+            var hidden = original.IndexOf("##", StringComparison.Ordinal);
+            if (hidden >= 0) id = original[hidden..];
+        }
         if (id.Length > 0)
         {
+            // Pack translations may omit, rename or repeat the hidden suffix.
+            // Its source spelling is authoritative; extraction keys stay intact.
+            var hidden = display.IndexOf("##", StringComparison.Ordinal);
+            if (hidden >= 0) display = display[..hidden].TrimEnd();
             return display + id;
         }
 
@@ -51,6 +60,20 @@ internal static class UITextText
     private static readonly Regex PlaceholderPattern = new(
         @"\{[^{}]*\}|%[sdif]|\\n|\\t|\\r",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    // Recognize argument syntax instead of treating arbitrary brace prose or
+    // JSON objects as new arguments. Existing format-specifier policy below
+    // remains unchanged; this additional contract checks identity and count.
+    private static readonly Regex ArgumentPlaceholderPattern = new(
+        @"\{(?<argument>[0-9]+|[A-Za-z_][A-Za-z0-9_]*)(?:[ \t]*,[ \t]*-?[0-9]+)?(?::[^{}\r\n]*)?\}",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    // Sonar's formatter uses <name> tokens. Admit the actual provider vocabulary,
+    // not every <...> fragment: HTML markup and generic type labels are not variables.
+    // Match spelling verbatim after recognition; changing case can break providers.
+    private static readonly Regex SonarPlaceholderPattern = new(
+        @"<+(?:id|name|rank|level|world|zone|instance|coords|coordx|coordy|coordz|zcoord|cwicon|key|flag|flagfull|hpp|progress|time|progressfull|tap|players|status|curhp|maxhp|actorid|objectid|relaykey|relayid|placekey|worldid|zoneid|instanceid|expansion|hasz|rawx|rawy|rawz|x|y|z|lastfound|lastkilled|lastseen|lastuntouched|sincefound|sincekilled|sinceseen|sinceuntouched)>+",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
     /// <summary>
     ///     百分号占位符（<c>%d</c> / <c>%.2f</c> / <c>%0.0f</c>）与游戏占位符（<c>%Zone%</c>）。
@@ -75,6 +98,11 @@ internal static class UITextText
             result.Add(match.Value);
         }
 
+        foreach (Match match in SonarPlaceholderPattern.Matches(text))
+        {
+            result.Add(match.Value);
+        }
+
         return result;
     }
 
@@ -84,6 +112,22 @@ internal static class UITextText
     /// </summary>
     public static string? CheckPlaceholders(string original, string translated)
     {
+        // Sonar variables must retain both names and multiplicity. Additional
+        // variables would ask the provider for values the original never used.
+        var sourceAngles = SonarPlaceholderPattern.Matches(ForDisplay(original)).Select(m => m.Value).Order(StringComparer.Ordinal);
+        var targetAngles = SonarPlaceholderPattern.Matches(translated).Select(m => m.Value).Order(StringComparer.Ordinal);
+        if (!sourceAngles.SequenceEqual(targetAngles, StringComparer.Ordinal))
+        {
+            return "占位符对不上：尖括号变量的名称或数量发生变化";
+        }
+
+        var sourceArguments = ArgumentIdentities(ForDisplay(original)).Order(StringComparer.Ordinal);
+        var targetArguments = ArgumentIdentities(translated).Order(StringComparer.Ordinal);
+        if (!sourceArguments.SequenceEqual(targetArguments, StringComparer.Ordinal))
+        {
+            return "占位符对不上：参数的名称或数量发生变化";
+        }
+
         var source = Placeholders(ForDisplay(original));
         if (source.Count == 0)
         {
@@ -103,6 +147,28 @@ internal static class UITextText
         }
 
         return missing.Count == 0 ? null : "占位符对不上：" + string.Join(" ", missing);
+    }
+
+    private static IEnumerable<string> ArgumentIdentities(string text)
+    {
+        bool Escaped(int index, char delimiter)
+        {
+            var preceding = 0;
+            while (index > 0 && text[--index] == delimiter) preceding++;
+            return preceding % 2 != 0;
+        }
+
+        foreach (Match match in ArgumentPlaceholderPattern.Matches(text))
+            if (!Escaped(match.Index, '{')) yield return "{" + match.Groups["argument"].Value + "}";
+
+        foreach (Match match in PercentTokenPattern.Matches(text))
+        {
+            if (Escaped(match.Index, '%')) continue;
+            var token = match.Value;
+            // Width/precision text does not name a new argument. Asterisks do
+            // consume arguments, so their count is part of the contract.
+            yield return token.EndsWith('%') ? token : "%" + token[^1] + new string('*', token.Count(ch => ch == '*'));
+        }
     }
 
     /// <summary>

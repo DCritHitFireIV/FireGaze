@@ -6,6 +6,7 @@ using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Plugin.Services;
+using FireGaze.LocalPreview.Runtime;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -33,24 +34,40 @@ internal interface IPortraitCaptureGameApi
 }
 
 /// <summary>All native reads occur synchronously on Framework, before any public texture task.</summary>
-internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSource
+internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSource,INativePhysicalCloseState
 {
  private readonly IPortraitCaptureGameApi api;
  private readonly IAddonLifecycle? lifecycle;
  private long generation=1;
  private bool disposed;
+ private bool bannerAttempted,charaCardAttempted;
+ private NativePhysicalCloseState? physicalClose;
+ private NativePhysicalCloseState PhysicalClose=>physicalClose??=new(this);
+ public bool PhysicalCloseComplete=>physicalClose?.Complete??false;
+ public string? PhysicalCloseFailure=>physicalClose?.Failure;
  public PortraitLiveCaptureSource(IFramework framework,IGameGui gameGUI,IObjectTable objects,
   IAddonLifecycle lifecycle,Func<PortraitCaptureEditorFrame?> readReadyEditor)
   :this(new LiveGameApi(framework,gameGUI,objects,readReadyEditor))
  {
   this.lifecycle=lifecycle;
-  lifecycle.RegisterListener(AddonEvent.PreFinalize,"BannerEditor",BeforeFinalize);
-  lifecycle.RegisterListener(AddonEvent.PreFinalize,"CharaCard",BeforeFinalize);
+  try
+  {
+   bannerAttempted=true;
+   lifecycle.RegisterListener(AddonEvent.PreFinalize,"BannerEditor",BeforeFinalize);
+   charaCardAttempted=true;
+   lifecycle.RegisterListener(AddonEvent.PreFinalize,"CharaCard",BeforeFinalize);
+  }
+  catch(Exception initializationError)
+  {
+   try{Dispose();}catch(Exception){ /* PhysicalClose retains the first removal failure. */ }
+   if(!PhysicalCloseComplete)throw new NativePhysicalCloseException(this,initializationError);
+   throw;
+  }
  }
  internal PortraitLiveCaptureSource(IPortraitCaptureGameApi api)=>this.api=api;
  public bool IsFrameworkThread=>!disposed&&api.IsFrameworkThread;
  private void BeforeFinalize(AddonEvent type,AddonArgs args)=>AdvanceGeneration();
- internal void AdvanceGeneration()=>generation++;
+ internal void AdvanceGeneration(){if(!disposed)generation++;}
 
  public bool TrySample(PortraitImageScope scope,PortraitCaptureViewport viewport,out PortraitCaptureSample? sample)
  {
@@ -161,13 +178,45 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
  private static string? PlateVisualKey(AgentCharaCard.Storage* storage)
  {
   using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
-  // Known pointer-free design/demographic blocks, not the animated CharaView or allocation padding.
-  hash.AppendData(new ReadOnlySpan<byte>((byte*)storage+24,27));
-  hash.AppendData(new ReadOnlySpan<byte>((byte*)storage+80,16));
-  hash.AppendData(new ReadOnlySpan<byte>((byte*)storage+200,24));
-  hash.AppendData(new ReadOnlySpan<byte>((byte*)storage+536,64));
-  hash.AppendData(new ReadOnlySpan<byte>((byte*)storage+1272,25));
-  hash.AppendData(new ReadOnlySpan<byte>(&storage->PortraitData,sizeof(ExportedPortraitData)));
+  // Hash qualified named CN SDK fields, never native padding, unknown flags,
+  // pointer addresses or backup working buffers. The paused pose's explicit
+  // AnimationProgress remains meaningful; ReadEditor rejects playing capture.
+  hash.AppendData("FireGaze.VisiblePlate.NamedFields.v1"u8);
+  AddValue(hash,storage->IsNotCreated);AddValue(hash,storage->WasResetDueToFantasia);
+  AddValue(hash,storage->CanEdit);AddValue(hash,storage->InvertPortraitPlacement);
+  var design=storage->PlateDesign;
+  if(design.NumDecorations>design.Decorations.Length||storage->NumPlayStyles>storage->PlayStyles.Length)return null;
+  AddValue(hash,design.BasePlate);AddValue(hash,design.TopBorder);AddValue(hash,design.BottomBorder);
+  AddValue(hash,design.NumDecorations);
+  foreach(var decoration in design.Decorations[..design.NumDecorations])AddValue(hash,decoration);
+  AddValue(hash,storage->NumPlayStyles);
+  foreach(var style in storage->PlayStyles[..storage->NumPlayStyles])AddValue(hash,style);
+  AddValue(hash,storage->ActiveHoursWeekdays);AddValue(hash,storage->ActiveHoursWeekends);
+  AddValue(hash,storage->BannerBg);AddValue(hash,storage->BannerFrame);AddValue(hash,storage->BannerDecoration);
+  AddValue(hash,storage->WorldId);AddValue(hash,storage->ClassJobId);AddValue(hash,storage->GrandCompany);
+  AddValue(hash,storage->GcRank);AddValue(hash,storage->Sex);AddValue(hash,storage->PreferredClassJobId);
+  AddValue(hash,storage->Level);AddValue(hash,storage->TitleId);
+  var crest=storage->FreeCompanyCrestData;
+  AddValue(hash,crest.Charge);AddValue(hash,crest.Ordinary);AddValue(hash,crest.Escutcheon);
+  AddValue(hash,crest.ChargeColor);AddValue(hash,crest.OrdinaryTincture1);AddValue(hash,crest.OrdinaryTincture2);
+  AddValue(hash,storage->BannerBgIconId);AddValue(hash,storage->TopBorderIconId);AddValue(hash,storage->BottomBorderIconId);
+  foreach(ref var decoration in storage->Decorations)
+  {AddValue(hash,decoration.Type);AddValue(hash,decoration.IconId);}
+  AddValue(hash,storage->BannerFrameIconId);AddValue(hash,storage->BannerDecorationIconId);
+  var portrait=storage->PortraitData;
+  AddValue(hash,portrait.CameraPosition.X);AddValue(hash,portrait.CameraPosition.Y);
+  AddValue(hash,portrait.CameraPosition.Z);AddValue(hash,portrait.CameraPosition.W);
+  AddValue(hash,portrait.CameraTarget.X);AddValue(hash,portrait.CameraTarget.Y);
+  AddValue(hash,portrait.CameraTarget.Z);AddValue(hash,portrait.CameraTarget.W);
+  AddValue(hash,portrait.ImageRotation);AddValue(hash,portrait.CameraZoom);AddValue(hash,portrait.BannerTimeline);
+  AddValue(hash,portrait.AnimationProgress);AddValue(hash,portrait.Expression);
+  AddValue(hash,portrait.HeadDirection.X);AddValue(hash,portrait.HeadDirection.Y);
+  AddValue(hash,portrait.EyeDirection.X);AddValue(hash,portrait.EyeDirection.Y);
+  AddValue(hash,portrait.DirectionalLightingColorRed);AddValue(hash,portrait.DirectionalLightingColorGreen);
+  AddValue(hash,portrait.DirectionalLightingColorBlue);AddValue(hash,portrait.DirectionalLightingBrightness);
+  AddValue(hash,portrait.DirectionalLightingVerticalAngle);AddValue(hash,portrait.DirectionalLightingHorizontalAngle);
+  AddValue(hash,portrait.AmbientLightingColorRed);AddValue(hash,portrait.AmbientLightingColorGreen);
+  AddValue(hash,portrait.AmbientLightingColorBlue);AddValue(hash,portrait.AmbientLightingBrightness);AddValue(hash,portrait.BannerBg);
   if(!AddText(hash,&storage->Name)||!AddText(hash,&storage->FreeCompany)||!AddText(hash,&storage->SearchComment))return null;
   foreach(ref var activity in storage->Activities)
   {
@@ -176,6 +225,8 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
   }
   return Convert.ToHexString(hash.GetHashAndReset());
  }
+ private static void AddValue<T>(IncrementalHash hash,T value)where T:unmanaged
+  =>hash.AppendData(new ReadOnlySpan<byte>(&value,sizeof(T)));
  private static bool AddText(IncrementalHash hash,Utf8String* text)
  {
   if(text->StringLength>4096||text->StringLength!=0&&(byte*)text->StringPtr==null)return false;
@@ -186,8 +237,10 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
  public void Dispose()
  {
   if(disposed)return;disposed=true;generation++;
-  lifecycle?.UnregisterListener(AddonEvent.PreFinalize,"BannerEditor",BeforeFinalize);
-  lifecycle?.UnregisterListener(AddonEvent.PreFinalize,"CharaCard",BeforeFinalize);
+  if(bannerAttempted)PhysicalClose.Try(()=>lifecycle!.UnregisterListener(AddonEvent.PreFinalize,"BannerEditor",BeforeFinalize),"Capture BannerEditor callback removal");
+  if(charaCardAttempted)PhysicalClose.Try(()=>lifecycle!.UnregisterListener(AddonEvent.PreFinalize,"CharaCard",BeforeFinalize),"Capture CharaCard callback removal");
+  PhysicalClose.Finish();
+  if(!PhysicalClose.Complete)throw new InvalidOperationException(PhysicalClose.Failure);
  }
 
  private sealed class LiveGameApi(IFramework framework,IGameGui gameGUI,IObjectTable objects,

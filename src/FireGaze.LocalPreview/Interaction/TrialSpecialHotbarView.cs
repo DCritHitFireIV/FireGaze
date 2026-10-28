@@ -16,7 +16,7 @@ namespace FireGaze.LocalPreview.Interaction;
 /// Uses the game's native special bar where its reviewed bridge is available. The local
 /// window and keybinding reader are a fallback. Mutations run on Framework; Draw only reads.
 /// </summary>
-public sealed unsafe class TrialSpecialHotbarView : IDisposable
+public sealed unsafe class TrialSpecialHotbarView : IDisposable, INativePhysicalCloseState
 {
     private readonly IFramework framework;
     private readonly TrialSpecialNativeBarLease nativeBarLease = new();
@@ -30,7 +30,13 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
     private string[] bindingLabels = new string[TrialSpecialHotbarModel.ExitSlot + 1];
     private bool pluginTextInput;
     private bool disposed;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete && (native?.PhysicalCloseComplete ?? true);
+    public string? PhysicalCloseFailure => PhysicalClose.Failure ?? native?.PhysicalCloseFailure;
     private bool keyboardUnavailable;
+    private sealed record FallbackAnchor(Vector2 Position);
+    private FallbackAnchor? fallbackMarketAnchor;
 
     public TrialSpecialHotbarView(ITextureProvider textures, IKeyState keys, IGameGui gameGui,
         IPluginLog log, Func<int, long, bool> activate, IFramework framework,
@@ -51,6 +57,33 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
         Volatile.Write(ref publication, disposed ? null : bar);
         native?.Publish(disposed?null:bar);
         UpdateNativeBarVisibility(!disposed && bar is not null && !NativeAvailable);
+        UpdateFallbackMarketAnchor(disposed ? null : bar);
+    }
+
+    private void UpdateFallbackMarketAnchor(TrialSpecialBar? bar)
+    {
+        FallbackAnchor? anchor = null;
+        // Native pointers are resolved only on Framework. Draw receives detached
+        // coordinates and never changes a game window or its saved placement.
+        if (framework.IsInFrameworkUpdateThread && !NativeActive && bar?.HasSpecialCommands == true
+            && IsMarketBoardOpen())
+        {
+            var primary = gameGui.GetAddonByName<AtkUnitBase>("_ActionBar", 1);
+            if (primary != null && primary->Id != 0 && primary->RootNode != null)
+            {
+                var position = new Vector2(primary->RootNode->X, primary->RootNode->Y);
+                if (float.IsFinite(position.X) && float.IsFinite(position.Y)) anchor = new(position);
+            }
+        }
+        Volatile.Write(ref fallbackMarketAnchor, anchor);
+    }
+
+    private bool CanPollKeyboard(bool allowed, bool gameTextInput, bool pluginTyping)
+    {
+        var bar = Volatile.Read(ref publication);
+        var visible = bar is not null && TrialSpecialHotbarVisibilityPolicy.ShouldShow(
+            true, gameGui.GameUiHidden, IsMarketBoardOpen(), bar.HasSpecialCommands);
+        return TrialSpecialKeyboardRouting.CanHandle(allowed && visible, false, gameTextInput, pluginTyping);
     }
 
     private void UpdateNativeBarVisibility(bool trialActive)
@@ -62,8 +95,25 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
         var change = nativeBarLease.Observe(trialActive, (nint)addon, addon == null ? (ushort)0 : addon->Id,
             addon != null && addon->IsVisible, (nint)source, source == null ? 0 : *(uint*)((byte*)source + 0x74),
             source == null ? (ushort)0 : source->Mount.MountId, source == null ? (ushort)0 : source->OrnamentData.OrnamentId);
+        // The native bridge owns its trial bar. This fallback lease only hides and
+        // restores the genuine bar it replaced; None must never overwrite the bridge.
         if (addon != null && change != TrialSpecialBarVisibilityChange.None)
-            addon->IsVisible = change == TrialSpecialBarVisibilityChange.Restore;
+            addon->IsVisible = change == TrialSpecialBarVisibilityChange.Restore
+                && !gameGui.GameUiHidden;
+    }
+
+    private unsafe bool IsMarketBoardOpen()
+    {
+        try
+        {
+            foreach (var name in new[] { "ItemSearch", "ItemSearchResult" })
+            {
+                var addon = gameGui.GetAddonByName<AtkUnitBase>(name, 1);
+                if (addon != null && addon->IsVisible) return true;
+            }
+        }
+        catch { }
+        return false;
     }
 
     /// <summary>Uses the player's existing twelve HOTBAR_EX bindings, never assumed digit keys.
@@ -77,8 +127,8 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
             var ui = UIModule.Instance();
             var input = ui == null ? null : ui->GetUIInputData();
             var atk = ui == null ? null : ui->GetRaptureAtkModule();
-            if (input == null || atk == null || !TrialSpecialKeyboardRouting.CanHandle(allowed,
-                    gameGui.GameUiHidden, atk->IsTextInputActive(), Volatile.Read(ref pluginTextInput))) return;
+            if (input == null || atk == null || !CanPollKeyboard(allowed,
+                    atk->IsTextInputActive(), Volatile.Read(ref pluginTextInput))) return;
             var labels = new string[TrialSpecialHotbarModel.ExitSlot + 1];
             for (var slot = 0; slot <= TrialSpecialHotbarModel.ExitSlot; slot++)
             {
@@ -116,13 +166,17 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
 
     public void Draw()
     {
-        if (disposed || NativeActive || gameGui.GameUiHidden || Volatile.Read(ref publication) is not { } bar) return;
+        if (disposed || NativeActive || Volatile.Read(ref publication) is not { } bar
+            || !TrialSpecialHotbarVisibilityPolicy.ShouldShow(true, gameGui.GameUiHidden, IsMarketBoardOpen(), bar.HasSpecialCommands)) return;
         Volatile.Write(ref pluginTextInput, ImGui.GetIO().WantTextInput);
         var viewport = ImGui.GetMainViewport();
-        ImGui.SetNextWindowPos(viewport.WorkPos + new Vector2(viewport.WorkSize.X * .5f, viewport.WorkSize.Y * .78f),
-            ImGuiCond.FirstUseEver, new Vector2(.5f, .5f));
+        if (Volatile.Read(ref fallbackMarketAnchor) is { } anchor)
+            ImGui.SetNextWindowPos(viewport.Pos + anchor.Position, ImGuiCond.Always);
+        else
+            ImGui.SetNextWindowPos(viewport.WorkPos + new Vector2(viewport.WorkSize.X * .5f, viewport.WorkSize.Y * .78f),
+                ImGuiCond.FirstUseEver, new Vector2(.5f, .5f));
         ImGui.SetNextWindowBgAlpha(.94f);
-        if (!ImGui.Begin("试用特殊热键栏###FireGaze.LocalPreview.SpecialHotbar",
+        if (!ImGui.Begin("试用动作###FireGaze.LocalPreview.SpecialHotbar",
                 ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoFocusOnAppearing))
         { ImGui.End(); return; }
         try
@@ -141,13 +195,17 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
                 else
                 {
                     if (action is null && slot != TrialSpecialHotbarModel.ExitSlot) ImGui.BeginDisabled();
-                    clicked = ImGui.Button(slot == TrialSpecialHotbarModel.ExitSlot ? "退出##trial-special-exit" : "　##trial-special-" + slot,
+                    clicked = ImGui.Button(slot == TrialSpecialHotbarModel.ExitSlot ? "结束试用##trial-special-exit" : "　##trial-special-" + slot,
                         new Vector2(48, 48));
                     if (action is null && slot != TrialSpecialHotbarModel.ExitSlot) ImGui.EndDisabled();
                 }
                 if (ImGui.IsItemHovered())
-                    ImGui.SetTooltip(slot == TrialSpecialHotbarModel.ExitSlot ? "结束全部试用，并解除实际使用的坐骑/时尚配饰"
-                        : action is null ? "空槽位" : action.Name + "（仅本地试用）");
+                {
+                    if (slot == TrialSpecialHotbarModel.ExitSlot)
+                        ImGui.SetTooltip("结束坐骑与时尚配饰试用；如有正在使用的坐骑或配饰，也会下坐骑或收起配饰。");
+                    else if (action is not null)
+                        ImGui.SetTooltip(action.Name);
+                }
                 if (clicked) activate(slot, bar.Revision);
                 ImGui.TextUnformatted(slot < labels.Length && !string.IsNullOrEmpty(labels[slot]) ? labels[slot] : "—");
                 ImGui.PopID();
@@ -162,8 +220,12 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
         if (disposed) return;
         disposed = true;
         Volatile.Write(ref publication, null);
-        native?.Dispose();
-        if (framework.IsInFrameworkUpdateThread) UpdateNativeBarVisibility(false);
-        else framework.RunOnFrameworkThread(() => UpdateNativeBarVisibility(false)).GetAwaiter().GetResult();
+        Volatile.Write(ref fallbackMarketAnchor, null);
+        PhysicalClose.Try(() => native?.Dispose(), "Native special bar close failed");
+        PhysicalClose.Try(() => {
+            if (framework.IsInFrameworkUpdateThread) UpdateNativeBarVisibility(false);
+            else framework.RunOnFrameworkThread(() => UpdateNativeBarVisibility(false)).GetAwaiter().GetResult();
+        }, "Special bar visibility restoration failed");
+        PhysicalClose.Finish();
     }
 }

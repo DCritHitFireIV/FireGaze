@@ -15,7 +15,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private Task ownedViewportDrain = Task.CompletedTask;
     private long ownedViewportAttempt;
     private PortraitOwnedSceneFirstFrameProof? ownedViewportProof;
-    private PortraitOwnedSceneFirstFrameIdentity? ownedReadyIdentity;
     public bool OwnedViewportVisible => ownedViewportViewRequested;
     public bool OwnedViewportExperimentActive => OwnedViewportBlocksOperations;
     private bool OwnedViewportBlocksOperations => ownedViewport is not null
@@ -60,7 +59,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
         { Error("源相机超出当前独立观察范围，无法使用观察预设。");return; }
         var attempt=checked(++ownedViewportAttempt);
         ownedViewportContext = context; ownedViewportClosing = false; ownedViewportViewRequested = true;
-        ownedReadyIdentity=null;
         PortraitOwnedSceneJointHost? host = null;
         PortraitOwnedSceneSlotNativePhaseSource? phases = null;
         PortraitOwnedSceneRenderTargetAdapter? adapter = null;
@@ -85,24 +83,20 @@ internal sealed unsafe partial class PortraitPreviewFeature
             broker = new(() => Plugin.Framework.IsInFrameworkUpdateThread, host, plan, context.Source,
                 context.SessionEpoch, attempt, PortraitSourceCensusDiagnostic.CurrentThread(), TimeSpan.FromSeconds(2),
                 () => { var accepted = PortraitOwnedSceneHooks.TryValidateCurrentExperiment(out var failure); return (accepted, failure); },
-                lease =>
-                {
-                    if(ownedViewport?.Controller.ImageOwner is {} owner)
-                    {
-                        var state=host.Snapshot();var identity=owner.Source;
-                        Volatile.Write(ref ownedReadyIdentity,new(state.Installation,state.SessionEpoch,state.RequestEpoch,lease.NativeFrame,
-                            new((long)identity.Editor,(long)identity.State,(long)identity.Model,identity.Generation,identity.Character),
-                            new(owner.Session,owner.Revision,owner.Slot,owner.LeaseEpoch)));
-                    }
-                    after(lease);
-                }, revoked, StopOwnedViewport,
+                after, revoked, StopOwnedViewport,
                 () => adapter.Images.InFlight == 0 && !adapter.Images.HasCurrentFrame);
             return ownedViewportBroker = broker;
         }, () => new PortraitOwnedCharaView(new PortraitOwnedCharaViewNativeApi(
-            () => Plugin.Objects.LocalPlayer is { } local ? local.Address : 0)), adapter);
+            () => Plugin.Objects.LocalPlayer is { } local ? local.Address : 0)), adapter, lease =>
+        {
+            if (host is null || ownedViewport?.Controller.ImageOwner is not { } owner) return null;
+            var state = host.Snapshot(); var identity = owner.Source;
+            return new(state.Installation, state.SessionEpoch, state.RequestEpoch, lease.NativeFrame,
+                new((long)identity.Editor, (long)identity.State, (long)identity.Model, identity.Generation, identity.Character),
+                new(owner.Session, owner.Revision, owner.Slot, owner.LeaseEpoch));
+        });
         ownedViewportProof=new(ownedViewport.Images,
             texture=>PortraitOwnedSceneFirstFrameProof.ReadOfficialAsync(Plugin.TextureReadback,texture),
-            ()=>Volatile.Read(ref ownedReadyIdentity),
             ()=>!Volatile.Read(ref ownedViewportClosing)&&broker?.Snapshot.Recording==true);
         if (!ownedViewport.TryStart(snapshot, slot))
         { reason = ownedViewport.LastError ?? "The bounded joint request was rejected."; StopOwnedViewport(reason); Error("独立人物实验未启动：" + reason); return; }

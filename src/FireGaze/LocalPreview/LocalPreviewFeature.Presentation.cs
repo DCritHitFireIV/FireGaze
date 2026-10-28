@@ -87,13 +87,13 @@ public sealed partial class LocalPreviewFeature
         return true;
     }
 
-    private bool RouteNativeSpecialAction(uint action)
+    private bool RouteNativeSpecialAction(ActionType type, uint action)
     {
         if (disposed || !enabled || runtime is null || specialHotbarModel is null) return false;
         PublishSpecialBar();
         var source=runtime.GenuineCollections;
         if (specialHotbarModel.Current is not { } current
-            || !specialHotbarModel.TryMapNativeAction(action,source.Mount,source.Accessory,out var slot)) return false;
+            || !specialHotbarModel.TryMapNativeCommand(type,action,source.Mount,source.Accessory,out var slot)) return false;
         return ActivateSpecialSlot(slot,current.Revision);
     }
 
@@ -120,14 +120,14 @@ public sealed partial class LocalPreviewFeature
 
     private void DisposePresentationExtras()
     {
-        Cleanup(() => pluginInterface.UiBuilder.Draw-=DrawSpecialHotbar,"特殊栏绘制");
+        CleanupPhysical(() => pluginInterface.UiBuilder.Draw-=DrawSpecialHotbar,"特殊栏绘制");
         if (runtime is not null)
         {
             runtime.SpecialActionInput=null;
             if (gposeEmotes is not null)
             {
-                runtime.ExternalEmoteAccepted-=gposeEmotes.RecordNative;
-                runtime.PreviewEmoteStarted-=gposeEmotes.RecordPreview;
+                CleanupPhysical(() => runtime.ExternalEmoteAccepted-=gposeEmotes.RecordNative,"拍照原生动作回调");
+                CleanupPhysical(() => runtime.PreviewEmoteStarted-=gposeEmotes.RecordPreview,"拍照试用动作回调");
             }
         }
         DisposeComponent(gposeEmotes,"拍照动作记录");

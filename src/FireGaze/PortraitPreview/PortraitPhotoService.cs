@@ -18,6 +18,10 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private readonly ITextureProvider textures;
     private readonly ITextureReadbackProvider readback;
     private readonly PortraitThumbnailSource source;
+    private readonly Func<PortraitPhotoSource?, object?>? qualifyCapture;
+    private readonly Func<PortraitIdentity, PortraitPhotoSource?, CancellationToken,
+        PortraitPhotoTrace.Operation?, Task<PortraitThumbnailLayers?>>? captureSource;
+    private object? captureQualification;
     private readonly PortraitThumbnailCache cache;
     private readonly PortraitFavoritePhotos favoritePhotos;
     private readonly PortraitStorageBudget storage;
@@ -36,7 +40,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private IDisposable? captureLifetime;
     private IDisposable? encodingLifetime;
     private Task? physicalDrain;
-    private readonly Dictionary<long, (string Key, PortraitEditorSnapshot? Snapshot)> records = [];
+    private readonly Dictionary<long, (string Key, PortraitEditorSnapshot? Snapshot, PortraitPhotoSource? Source, ulong ContentID)> records = [];
     // A managed projection may retire a record before its durable history writer has
     // published that retirement. Keep every observed reference for this lifetime;
     // the next service reconstructs its set from the actual persisted history.
@@ -80,14 +84,19 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     public PortraitHistoryPhotos(string path, ITextureProvider textures, ITextureReadbackProvider readback,
         PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null, string? favoritePhotoPath = null,
-        IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>? favoriteSnapshots = null,
+        IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)>? favoriteSnapshots = null,
         Func<TimeSpan, CancellationToken, Task>? retryDelay = null,
-        PortraitStorageBudget? storage = null)
+        PortraitStorageBudget? storage = null,
+        Func<PortraitPhotoSource?, object?>? qualifyCapture = null,
+        Func<PortraitIdentity, PortraitPhotoSource?, CancellationToken,
+            PortraitPhotoTrace.Operation?, Task<PortraitThumbnailLayers?>>? captureSource = null)
     {
         photoTrace = new(logger);
         this.textures = textures;
         this.readback = readback;
         this.source = source;
+        this.qualifyCapture = qualifyCapture;
+        this.captureSource = captureSource;
         this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
         this.retryDelay = retryDelay ?? Task.Delay;
         availableBytes = Math.Max(0, PortraitThumbnailCache.MaximumBytes - historyBytes);
@@ -184,6 +193,16 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             && HasImage(record.Key);
     }
 
+    public bool HasSnapshotPhoto(ulong contentID, PortraitEditorSnapshot snapshot)
+    {
+        lock (sync) return !disposed && HasImage(SnapshotKey(contentID, snapshot, null));
+    }
+
+    public bool HasSnapshotPhoto(ulong contentID, PortraitEditorSnapshot snapshot, PortraitPhotoSource source)
+    {
+        lock (sync) return !disposed && source.IsReady && HasImage(SnapshotKey(contentID, snapshot, source));
+    }
+
     public void RetryStorage()
     {
         lock (sync)
@@ -192,6 +211,19 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             maintenanceNeeded = true;
             maintenanceRequest++;
             retryPngRequested = retainedPng is not null;
+        }
+    }
+
+    // Source changes revoke logical eligibility immediately. Existing asynchronous
+    // work keeps its physical ownership until Poll or disposal observes completion.
+    public void InvalidateCurrentCapture()
+    {
+        lock (sync)
+        {
+            if (disposed) return;
+            gate.Reset();
+            readyToCompose = false;
+            currentCaptureKey = null;
         }
     }
 
@@ -218,12 +250,23 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             var ids = values.Select(value => value.ID).ToHashSet();
             foreach (var id in records.Keys.Where(id => !ids.Contains(id)).ToArray()) records.Remove(id);
             foreach (var record in values)
-                if (!records.ContainsKey(record.ID))
+            {
+                var snapshot = PortraitEditorSnapshot.FromJSON(record.SnapshotJSON);
+                var key = snapshot is null
+                    ? SourceKey(PortraitThumbnailCache.KeyForSnapshot(record.Key.ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture) + "|" + record.SnapshotJSON), record.Source)
+                    : SnapshotKey(record.Key.ContentID, snapshot, record.Source);
+                if (records.TryGetValue(record.ID, out var previous) && previous.Key != key)
                 {
-                    var snapshot = PortraitEditorSnapshot.FromJSON(record.SnapshotJSON);
-                    records[record.ID] = (snapshot is null ? PortraitThumbnailCache.KeyForSnapshot(record.Key.ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture) + "|" + record.SnapshotJSON)
-                        : SnapshotKey(record.Key.ContentID, snapshot), snapshot);
+                    historyPhotoKeys.Remove(previous.Key);
+                    if (currentCaptureKey == previous.Key || ticket?.StateKey == previous.Key)
+                    {
+                        gate.Reset();
+                        readyToCompose = false;
+                        currentCaptureKey = null;
+                    }
                 }
+                records[record.ID] = (key, snapshot, record.Source, record.Key.ContentID);
+            }
             historyReferencesKnown = referencesKnown && records.Values.All(record => record.Snapshot is not null);
             foreach (var record in records.Values) historyPhotoKeys.Add(record.Key);
             // This publishes an immutable managed policy only. It must never wait
@@ -238,6 +281,14 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     // Called after normal history sampling, so pending native gestures never get a premature image.
     public void Poll(string owner, PortraitIdentity identity, long? currentID, PortraitEditorSnapshot? snapshot, bool ready,
         ulong contentID = 0)
+        => PollCore(owner, identity, currentID, snapshot, ready, contentID, null);
+
+    public void Poll(string owner, PortraitIdentity identity, long? currentID, PortraitEditorSnapshot? snapshot, bool ready,
+        ulong contentID, PortraitPhotoSource photoSource)
+        => PollCore(owner, identity, currentID, snapshot, ready, contentID, photoSource);
+
+    private void PollCore(string owner, PortraitIdentity identity, long? currentID, PortraitEditorSnapshot? snapshot, bool ready,
+        ulong contentID, PortraitPhotoSource? photoSource)
     {
         lock (sync)
         {
@@ -263,8 +314,13 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 // Keep other characters' disposable photos; their history is not in the current UI.
                 maintenance = Task.Run(() => MaintainAsync(budget, request));
             }
-            var found = TryCurrentCapture(currentID, snapshot, contentID, out var captureID, out var stateKey);
-            ready &= found && identity.IsValid && identity.Generation > 0
+            var found = TryCurrentCapture(currentID, snapshot, contentID, photoSource, out var captureID, out var stateKey);
+            // The durable source key identifies the image namespace. A provider's
+            // detached qualification also binds transient owner/crop/lifetime changes.
+            var qualification = photoSource is { Scope: PortraitImageScope.VisibleAdventurerPlate }
+                ? qualifyCapture?.Invoke(photoSource) : null;
+            if (!Equals(captureQualification, qualification)) { captureQualification = qualification; gate.Reset(); }
+            ready &= CanCaptureSource(photoSource, qualification) && found && identity.IsValid && identity.Generation > 0
                 && physical.CleanupFailures == 0 && loaded.CleanupFailures == 0;
             currentCaptureKey = ready && !HasImage(stateKey) ? stateKey : null;
             var eligible = gate.Observe(owner + "|" + identity, captureID, stateKey, ready);
@@ -313,7 +369,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             {
                 Volatile.Write(ref photoOperation, photoTrace.Start(PortraitPhotoOperation.HistoryCapture));
                 captureLifetime = physical.Enter();
-                try { capture = source.CaptureAsync(identity, CancellationToken.None, photoOperation); }
+                try
+                {
+                    capture = photoSource is { Scope: PortraitImageScope.VisibleAdventurerPlate }
+                        ? captureSource!(identity, photoSource, CancellationToken.None, photoOperation)
+                        : source.CaptureAsync(identity, CancellationToken.None, photoOperation);
+                }
                 catch (Exception error) { physical.ObserveFailure(error); captureLifetime?.Dispose(); captureLifetime = null; throw; }
                 // Dispose may reenter the source's synchronous prefix before capture is assigned.
                 if (disposed) DetachCapture();
@@ -321,23 +382,46 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         }
     }
 
-    // This is a managed demand query, used to retire acquire-only native live wraps
-    // through ContextBusy before a new copy is admitted. It never starts GPU work.
+    // This managed demand query suspends fresh native-live acquisition through ContextBusy.
+    // Its stable retained display can coexist with an independent read-only history copy.
+    // The query never starts GPU work or qualifies pixels from that display.
     public bool NeedsCurrentCapture(long? currentID, PortraitEditorSnapshot? snapshot, ulong contentID)
     {
-        lock (sync) return !disposed && TryCurrentCapture(currentID, snapshot, contentID, out _, out var key)
+        lock (sync) return !disposed && TryCurrentCapture(currentID, snapshot, contentID, null, out _, out var key)
             && !HasImage(key);
     }
 
+    public bool NeedsCurrentCapture(long? currentID, PortraitEditorSnapshot? snapshot, ulong contentID,
+        PortraitPhotoSource source)
+    {
+        lock (sync) return !disposed && source.IsReady && CanCaptureSource(source)
+            && TryCurrentCapture(currentID, snapshot, contentID, source, out _, out var key)
+            && !HasImage(key);
+    }
+
+    // Capture capability is independent of archive/storage display status. A
+    // saved image may still be used when its live source is unavailable.
+    public bool CanCapturePhotoSource(PortraitPhotoSource requested)
+    {
+        lock (sync) return !disposed && requested.IsReady && CanCaptureSource(requested);
+    }
+
+    private bool CanCaptureSource(PortraitPhotoSource? requested, object? qualification = null)
+        => requested is null || requested.Value.CanCapture
+            || requested is { IsReady: true, Scope: PortraitImageScope.VisibleAdventurerPlate }
+                && captureSource is not null && (qualification ?? qualifyCapture?.Invoke(requested)) is not null;
+
     private bool TryCurrentCapture(long? currentID, PortraitEditorSnapshot? snapshot, ulong contentID,
-        out long captureID, out string stateKey)
+        PortraitPhotoSource? source, out long captureID, out string stateKey)
     {
         captureID = 0; stateKey = "";
-        if (snapshot?.IsValid != true) return false;
-        if (currentID is { } id && records.TryGetValue(id, out var record) && record.Snapshot?.SameForHistory(snapshot) == true)
+        if (source is { IsReady: false } || snapshot?.IsValid != true) return false;
+        if (currentID is { } id && records.TryGetValue(id, out var record) && record.Source == source
+            && (source is null && contentID == 0 || contentID == record.ContentID)
+            && record.Snapshot?.SameForHistory(snapshot) == true)
         { captureID = id; stateKey = record.Key; return true; }
         if (contentID == 0) return false;
-        var favoriteKey = SnapshotKey(contentID, snapshot);
+        var favoriteKey = SnapshotKey(contentID, snapshot, source);
         if (!favoriteKeys.Contains(favoriteKey) && !provisionalFavoriteKeys.ContainsKey(favoriteKey)) return false;
         captureID = long.MaxValue; stateKey = favoriteKey; return true;
     }
@@ -556,9 +640,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     }
 
     public bool SetFavoriteSnapshots(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
+        => SetFavoriteSnapshots(values.Select(value => (value.ContentID, value.Snapshot, (PortraitPhotoSource?)null)));
+
+    public bool SetFavoriteSnapshots(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot, value.Source))
             .ToHashSet(StringComparer.Ordinal);
         return SetFavoriteKeys(keys, accepted: false);
     }
@@ -587,9 +674,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     /// tracked through close; callers never wait on the archive's physical I/O lock.
     /// </summary>
     public Task<bool> SetFavoriteSnapshotsAsync(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
+        => SetFavoriteSnapshotsAsync(values.Select(value => (value.ContentID, value.Snapshot, (PortraitPhotoSource?)null)));
+
+    public Task<bool> SetFavoriteSnapshotsAsync(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot, value.Source))
             .ToHashSet(StringComparer.Ordinal);
         return QueueFavoriteWork(() => Task.FromResult(SetFavoriteKeys(keys, accepted: true)));
     }
@@ -603,10 +693,17 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     public Task<bool> PersistFavoriteAsync(Func<Task<bool>> writeMetadata,
         Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> readFavorites,
         (ulong ContentID, PortraitEditorSnapshot Snapshot)? protect = null)
+        => PersistFavoriteAsync(writeMetadata,
+            () => readFavorites().Select(value => (value.ContentID, value.Snapshot, (PortraitPhotoSource?)null)),
+            protect is { } value ? (value.ContentID, value.Snapshot, (PortraitPhotoSource?)null) : null);
+
+    public Task<bool> PersistFavoriteAsync(Func<Task<bool>> writeMetadata,
+        Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)>> readFavorites,
+        (ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)? protect = null)
     {
         ArgumentNullException.ThrowIfNull(writeMetadata);
         ArgumentNullException.ThrowIfNull(readFavorites);
-        var key = protect is { } value ? SnapshotKey(value.ContentID, value.Snapshot) : null;
+        var key = protect is { } value ? SnapshotKey(value.ContentID, value.Snapshot, value.Source) : null;
         lock (sync)
         {
             if (disposed) return Task.FromResult(false);
@@ -642,7 +739,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 }
                 if (!await writeMetadata().ConfigureAwait(false)) return false;
                 lock (sync) favoriteMetadataFailed = false;
-                var keys = readFavorites().Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+                var keys = readFavorites().Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot, value.Source))
                     .ToHashSet(StringComparer.Ordinal);
                 var archived = SetFavoriteKeys(keys, accepted: true);
                 // Permanent unarchived pins are published by SetFavoriteKeys even when the archive
@@ -685,10 +782,17 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         }
     }
 
-    public IDisposable ProtectFavoriteSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
+    public IDisposable? ProtectFavoriteSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
+        => ProtectFavoriteKey(SnapshotKey(contentID, snapshot, null));
+
+    public IDisposable? ProtectFavoriteSnapshot(ulong contentID, PortraitEditorSnapshot snapshot, PortraitPhotoSource source)
+        => source.IsReady ? ProtectFavoriteKey(SnapshotKey(contentID, snapshot, source)) : null;
+
+    public IDisposable? ProtectFavoriteSnapshotForSource(ulong contentID, PortraitEditorSnapshot snapshot, PortraitPhotoSource source)
+        => ProtectFavoriteSnapshot(contentID, snapshot, source);
+
+    private IDisposable ProtectFavoriteKey(string key)
     {
-        var key = SnapshotKey(contentID, snapshot);
-        lock (favoriteSynchronization)
         lock (sync)
         {
             if (disposed) return new FavoriteProtection(null, key);
@@ -700,7 +804,6 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     private void ReleaseFavoriteProtection(string key)
     {
-        lock (favoriteSynchronization)
         lock (sync)
         {
             if (!provisionalFavoriteKeys.TryGetValue(key, out var count)) return;
@@ -823,29 +926,58 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     }
 
     public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong contentID, PortraitEditorSnapshot snapshot)
+        => FavoritePhotoStatus(contentID, snapshot, null);
+
+    public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong contentID, PortraitEditorSnapshot snapshot,
+        PortraitPhotoSource? source)
     {
-        var key = SnapshotKey(contentID, snapshot);
+        if (source is { IsReady: false }) return PortraitFavoritePhotoStatus.SourceNotReady;
+        var key = SnapshotKey(contentID, snapshot, source);
         var status = favoritePhotos.Status(key);
         if (status != PortraitFavoritePhotoStatus.Missing) return status;
-        lock (sync) return !disposed && (currentCaptureKey == key
-            || ticket is { } current && current.StateKey == key && gate.CanAccept(current))
-            ? PortraitFavoritePhotoStatus.Pending : status;
+        // Display reads both durable stores. A completed history PNG is already available
+        // while the separate favorite archive is still synchronizing; do not label those
+        // exact pixels as missing or ask the player to reload the original portrait.
+        // Structured archive failures above stay visible even when a recovery copy exists.
+        if (HasImage(key)) return PortraitFavoritePhotoStatus.Available;
+        if (!CanCaptureSource(source)) return PortraitFavoritePhotoStatus.SourceNotReady;
+        lock (sync)
+        {
+            if (disposed) return status;
+            if (retainedPng?.Key == key && pngWriteError is not null)
+                return pngWriteCode == PortraitStorageCode.Capacity ? PortraitFavoritePhotoStatus.Capacity
+                    : PortraitFavoritePhotoStatus.StorageError;
+            if (currentCaptureKey != key && !(ticket is { } current && current.StateKey == key && gate.CanAccept(current))) return status;
+            return availableBytes < 85 ? PortraitFavoritePhotoStatus.Capacity : PortraitFavoritePhotoStatus.Pending;
+        }
     }
 
-    private string SnapshotKey(ulong contentID, PortraitEditorSnapshot snapshot)
+    private string SnapshotKey(ulong contentID, PortraitEditorSnapshot snapshot, PortraitPhotoSource? source)
     {
         var canonical = PortraitThumbnailCache.KeyForSnapshot(contentID, snapshot);
+        if (source is not null) return SourceKey(canonical, source);
         var legacy = PortraitThumbnailCache.KeyForSnapshot(contentID.ToString(System.Globalization.CultureInfo.InvariantCulture)
             + "|" + snapshot.ToJSON());
         if (legacy != canonical) legacyPhotoKeys.GetOrAdd(canonical, _ => new(StringComparer.Ordinal))[legacy] = 0;
         return canonical;
     }
 
+    // Explicit source descriptors start a new namespace, including portrait A. Only a
+    // null descriptor can read the older canonical/progress-specific legacy aliases.
+    private static string SourceKey(string canonical, PortraitPhotoSource? source)
+        => source is { } value
+            ? PortraitThumbnailCache.KeyForSnapshot(canonical + "|photo-source-v1=" + value.Canonical)
+            : canonical;
+
     // Saved favorites read their independent archive first. The source character remains part
     // of the key; a different character's identical parameters cannot borrow the wrong model.
     public IDalamudTextureWrap? GetSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
+        => GetSnapshot(contentID, snapshot, null);
+
+    public IDalamudTextureWrap? GetSnapshot(ulong contentID, PortraitEditorSnapshot snapshot, PortraitPhotoSource? source)
     {
-        var key = SnapshotKey(contentID, snapshot);
+        if (source is { IsReady: false }) return null;
+        var key = SnapshotKey(contentID, snapshot, source);
         lock (sync) return !disposed ? loaded.Get(key) : null;
     }
 

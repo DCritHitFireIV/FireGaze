@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-06",
+    "updatedAt": "2026-10-28",
     "source": "user",
     "label": "小笨狗",
     "kinds": [
@@ -2305,7 +2305,7 @@
     },
     {
       "Original": "NPC",
-      "Translated": "全国人大",
+      "Translated": "非玩家角色",
       "Context": "CraftBuyColumn.DrawVendorButton",
       "Source": "library"
     },
@@ -13269,7 +13269,10 @@
       "Original": "npcs",
       "Translated": "NPC",
       "Context": "ConfigurationWindow.Initialize",
-      "Source": "library"
+      "Source": "library",
+      "Role": "Excluded",
+      "RoleReason": "InventoryTools 功能身份键：PopupMenuItemSelectable 菜单键、GenericKey/CompendiumTableOptions.Key 均消费 npcs；禁止翻译",
+      "Review": "自动排除：InventoryTools npcs 功能身份消费者审计 2026-10-26；旧译文仅保留审查，不写入插件"
     },
     {
       "Original": "submarines",
@@ -16039,5 +16042,8 @@
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [],
+  "skipped": [
+    "npcs"
+  ]
 }

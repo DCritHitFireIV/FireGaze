@@ -10,7 +10,7 @@ namespace FireGaze.UIText;
 /// </summary>
 internal sealed record UITextPatchFile
 {
-    /// <summary>文件全路径（插件更新会换版本目录，所以要按文件名匹配而不是全路径）。</summary>
+    /// <summary>Recorded absolute path, mapped by its relative identity when the installation moves.</summary>
     [JsonPropertyName("Path")]
     public string Path { get; set; } = string.Empty;
 
@@ -22,6 +22,10 @@ internal sealed record UITextPatchFile
     [JsonPropertyName("PatchedHash")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? PatchedHash { get; set; }
+
+    /// <summary>Verified bytes before this operation; a prior patch is accepted only after its old record is verified.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? BeforeHash { get; set; }
 
     /// <summary>原始文件的备份路径。</summary>
     [JsonPropertyName("BackupPath")]
@@ -37,6 +41,19 @@ internal sealed record UITextPatchFile
 /// </summary>
 internal sealed record UITextPatchState
 {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("OperationId")]
+    public string? OperationID { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? WritePhase { get; set; }
+
+    [JsonIgnore]
+    public bool IsWriteComplete => this.WritePhase is null or "Committed";
+
+    [JsonIgnore]
+    public bool IsKnownWritePhase => this.WritePhase is null or "Prepared" or "RecoveryRequired" or "Committed" or "Restored";
+
     [JsonPropertyName("InternalName")]
     public string InternalName { get; set; } = string.Empty;
 
@@ -85,14 +102,14 @@ internal sealed record UITextPatchState
     public int AppliedEntries { get; set; }
 
     /// <summary>
-    ///     本会话里重载过几次（用来区分「补丁已经真的被加载过」和「只是写进了盘」）。
+    ///     已记录的重载尝试次数；尝试本身不证明加载成功或失败。
     /// </summary>
     [JsonPropertyName("ReloadAttempts")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public int ReloadAttempts { get; set; }
 
     /// <summary>
-    ///     打完补丁、还没确认重载成功：下次启动/重载后要复核，失败就自动还原。
+    ///     文件已提交、等待精确加载回执；旧记录也保留此含义，超时或缺少回执不授权还原。
     /// </summary>
     [JsonPropertyName("PendingVerify")]
     public bool PendingVerify { get; set; }
@@ -143,6 +160,16 @@ internal sealed record UITextPatchState
 /// </summary>
 internal sealed record UITextOriginalsManifest
 {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? MainFile { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? MainHash { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("OperationId")]
+    public string? OperationID { get; set; }
+
     [JsonPropertyName("format")]
     public int Format { get; set; } = 1;
 
@@ -184,7 +211,7 @@ internal sealed record UITextOriginalsManifestFile
 ///     补丁状态的读写与备份管理。
 ///     原始备份优先写进**持久目录**（活过插件配置重置）；写不进去才退回配置目录（老行为，保底）。
 /// </summary>
-internal sealed class UITextPatchStore
+internal sealed partial class UITextPatchStore
 {
     private readonly string stateDirectory;
     private readonly string backupDirectory;
@@ -222,6 +249,23 @@ internal sealed class UITextPatchStore
             Plugin.Log?.Warning(e, "[内部文本] 读补丁状态失败：{Path}", path);
             return null;
         }
+    }
+
+    // Identity confirmation must distinguish an absent record from a record
+    // which is temporarily locked, unreadable or malformed. Ordinary UI reads
+    // can still use Load's best-effort presentation behavior.
+    internal UITextPatchState? LoadForConfirmation(string internalName)
+    {
+        try
+        {
+            var json = File.ReadAllText(this.PathOf(internalName), Encoding.UTF8);
+            return JsonSerializer.Deserialize<UITextPatchState>(json, Options)
+                ?? throw new IOException("补丁状态为空，暂不能确认加载。");
+        }
+        catch (FileNotFoundException) { return null; }
+        catch (DirectoryNotFoundException) { return null; }
+        catch (JsonException error) { throw new IOException("补丁状态无法解析，暂不能确认加载。", error); }
+        catch (UnauthorizedAccessException error) { throw new IOException("补丁状态无法读取，暂不能确认加载。", error); }
     }
 
     /// <summary>
@@ -289,7 +333,8 @@ internal sealed class UITextPatchStore
                 var info = new FileInfo(path);
                 lock (this.loadCache)
                 {
-                    this.loadCache[state.InternalName] = (info.LastWriteTimeUtc, info.Length, state);
+                    this.loadCache[state.InternalName] = (info.LastWriteTimeUtc, info.Length,
+                        state with { Files = state.Files?.Select(file => file with { }).ToList() });
                 }
             }
             catch (Exception)
@@ -443,24 +488,30 @@ internal sealed class UITextPatchStore
     ///     把「这次打进 DLL 的哈希」与「备份文件的哈希」落成持久目录里的清单，供丢了补丁记录时认领。
     ///     只收录确实在持久目录里的备份；顺带清掉这一步不再引用的旧 *.orig。
     /// </summary>
-    public void PublishManifest(string internalName, string? pluginVersion, string? patchedAt, int appliedEntries, IReadOnlyList<UITextPatchFile> files, string pluginDirectory)
+    public bool PublishManifest(string internalName, string? pluginVersion, string? patchedAt, int appliedEntries, IReadOnlyList<UITextPatchFile> files, string pluginDirectory, string? mainDLLPath = null, string? operationID = null, string? expectedMainHash = null)
     {
         var directory = this.OriginalsDirectoryOf(internalName);
         if (directory is null)
         {
-            return;
+            return false;
         }
 
         try
         {
             lock (this.gate)
             {
+                var mainHash = mainDLLPath is null ? null : HashOf(mainDLLPath);
+                if (mainDLLPath is not null && (string.IsNullOrEmpty(mainHash)
+                    || (expectedMainHash is not null && !mainHash!.Equals(expectedMainHash, StringComparison.OrdinalIgnoreCase)))) return false;
                 var manifest = new UITextOriginalsManifest
                 {
                     InternalName = internalName,
                     PluginVersion = pluginVersion,
                     PatchedAt = patchedAt,
                     AppliedEntries = appliedEntries,
+                    MainFile = mainDLLPath is null ? null : RelativeName(pluginDirectory, mainDLLPath),
+                    MainHash = expectedMainHash ?? mainHash,
+                    OperationID = operationID,
                 };
 
                 var keep = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -469,7 +520,7 @@ internal sealed class UITextPatchStore
                     if (file.PatchedHash is not { Length: > 0 } patchedHash || !this.IsDurableBackup(file.BackupPath))
                     {
                         // 有文件没能进持久目录：不发清单——认领时缺一份就不完整，宁可退回反向还原
-                        return;
+                        return false;
                     }
 
                     var backupName = Path.GetFileName(file.BackupPath!);
@@ -485,27 +536,23 @@ internal sealed class UITextPatchStore
 
                 if (manifest.Files.Count == 0)
                 {
-                    return;
+                    return false;
                 }
 
                 Directory.CreateDirectory(directory);
-                foreach (var existing in Directory.GetFiles(directory, "*.orig"))
-                {
-                    if (!keep.Contains(Path.GetFileName(existing)))
-                    {
-                        TryDeleteFile(existing);
-                    }
-                }
-
                 var path = Path.Combine(directory, "manifest.json");
                 var temp = path + ".tmp";
                 File.WriteAllText(temp, JsonSerializer.Serialize(manifest, Options) + Environment.NewLine, new System.Text.UTF8Encoding(false));
                 File.Move(temp, path, overwrite: true);
+                // Cleanup belongs to the owner after pending/state retirement.
+                // Publication must never erase another recovery generation.
+                return true;
             }
         }
         catch (Exception e)
         {
             Plugin.Log?.Warning(e, "[内部文本] 写原始备份清单失败：{Name}", internalName);
+            return false;
         }
     }
 
@@ -515,6 +562,8 @@ internal sealed class UITextPatchStore
     /// </summary>
     public UITextPatchState? TryAdopt(string internalName, string dllPath, string? pluginVersion)
     {
+        if (this.HasPendingOperation(internalName))
+            return this.ReadPendingOperation(internalName, dllPath);
         var directory = this.OriginalsDirectoryOf(internalName);
         if (directory is null || string.IsNullOrEmpty(dllPath))
         {
@@ -538,18 +587,23 @@ internal sealed class UITextPatchStore
             var manifest = JsonSerializer.Deserialize<UITextOriginalsManifest>(
                 File.ReadAllText(manifestPath, System.Text.Encoding.UTF8),
                 Options);
-            if (manifest?.Files is not { Count: > 0 })
+            if (manifest?.Files is not { Count: > 0 } || manifest.Format != 1
+                || !string.Equals(manifest.InternalName, internalName, StringComparison.Ordinal))
             {
                 return null;
             }
 
             var mainName = Path.GetFileName(dllPath);
             var files = new List<UITextPatchFile>();
+            var targets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var backups = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             UITextPatchFile? main = null;
             foreach (var item in manifest.Files)
             {
-                var current = Path.Combine(pluginDirectory, item.Name);
-                var backup = Path.Combine(directory, item.Backup);
+                if (!TryResolveRelative(pluginDirectory, item.Name, out var current)
+                    || !TryResolveRelative(directory, item.Backup, out var backup)
+                    || !targets.Add(current) || !backups.Add(backup)
+                    || string.IsNullOrEmpty(item.SourceHash) || string.IsNullOrEmpty(item.PatchedHash)) return null;
                 if (!File.Exists(current) || !File.Exists(backup))
                 {
                     return null;
@@ -569,36 +623,40 @@ internal sealed class UITextPatchStore
                     BackupPath = backup,
                 };
                 files.Add(file);
-                if (string.Equals(item.Name, mainName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(current, Path.GetFullPath(dllPath), StringComparison.OrdinalIgnoreCase))
                 {
                     main = file;
                 }
             }
 
-            if (main is null)
+            if (manifest.MainFile is not null
+                && (!TryResolveRelative(pluginDirectory, manifest.MainFile, out var recordedMain)
+                    || !recordedMain.Equals(Path.GetFullPath(dllPath), StringComparison.OrdinalIgnoreCase)
+                    || string.IsNullOrEmpty(manifest.MainHash)
+                    || !HashOf(dllPath).Equals(manifest.MainHash, StringComparison.OrdinalIgnoreCase))) return null;
+            if (main is null && manifest.MainFile is null)
             {
                 return null;
             }
 
             // 主程序集排第一（界面与旧状态都按第一份当主程序集用）
-            files.Remove(main);
-            files.Insert(0, main);
+            if (main is not null) { files.Remove(main); files.Insert(0, main); }
 
             var state = new UITextPatchState
             {
                 InternalName = internalName,
-                DLLPath = main.Path,
+                DLLPath = Path.GetFullPath(dllPath),
                 PluginVersion = pluginVersion ?? manifest.PluginVersion,
-                SourceHash = main.SourceHash,
-                PatchedHash = main.PatchedHash,
+                SourceHash = main?.SourceHash ?? manifest.MainHash!,
+                PatchedHash = main?.PatchedHash ?? manifest.MainHash,
                 PatchedAt = manifest.PatchedAt ?? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                BackupPath = main.BackupPath,
+                BackupPath = main?.BackupPath,
+                OperationID = manifest.OperationID,
                 AppliedEntries = manifest.AppliedEntries,
                 Files = files,
                 PendingVerify = false,
             };
-            this.Save(state);
-            return state;
+            return this.Save(state) ? state : null;
         }
         catch (Exception e)
         {
@@ -621,7 +679,7 @@ internal sealed class UITextPatchStore
             lock (this.gate)
             {
                 Directory.CreateDirectory(directory);
-                var target = Path.Combine(directory, DurableBackupName(dllPath));
+                var target = Path.Combine(directory, DurableBackupName(dllPath, sourceHash));
                 if (File.Exists(target)
                     && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
                 {
@@ -648,37 +706,36 @@ internal sealed class UITextPatchStore
     }
 
     /// <summary>还原干净后清掉持久目录里这份补丁的原始备份（DLL 已经回到原版，不需要它们了）。</summary>
-    public void RemoveOriginals(UITextPatchState state)
+    public bool RemoveOriginals(UITextPatchState state)
     {
         var directory = this.OriginalsDirectoryOf(state.InternalName);
-        if (directory is null)
-        {
-            return;
-        }
-
+        if (directory is null) return false;
         try
         {
             lock (this.gate)
             {
+                var root = Path.GetFullPath(directory);
+                var backups = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var file in state.EffectiveFiles)
                 {
-                    if (this.IsDurableBackup(file.BackupPath))
-                    {
-                        TryDeleteFile(file.BackupPath!);
-                    }
+                    if (string.IsNullOrEmpty(file.BackupPath) || !Path.IsPathFullyQualified(file.BackupPath)
+                        || !TryResolveRelative(root, Path.GetRelativePath(root, file.BackupPath), out var backup)) return false;
+                    backups.Add(backup);
                 }
-
-                TryDeleteFile(Path.Combine(directory, "manifest.json"));
-                if (Directory.Exists(directory) && Directory.GetFileSystemEntries(directory).Length == 0)
+                foreach (var backup in backups)
                 {
-                    Directory.Delete(directory);
+                    if (Directory.Exists(backup)) return false;
+                    if (File.Exists(backup)) File.Delete(backup);
                 }
+                var manifest = Path.Combine(root, "manifest.json");
+                if (Directory.Exists(manifest)) return false;
+                if (File.Exists(manifest)) File.Delete(manifest);
+                // pending and Restored config stay owned by the caller until
+                // every deletion above is confirmed; a locked original is retryable.
+                return backups.All(path => !File.Exists(path) && !Directory.Exists(path)) && !File.Exists(manifest);
             }
         }
-        catch (Exception)
-        {
-            // 清理是尽力而为
-        }
+        catch (Exception) { return false; }
     }
 
     private string? OriginalsDirectoryOf(string internalName) =>
@@ -698,7 +755,7 @@ internal sealed class UITextPatchStore
             lock (this.gate)
             {
                 Directory.CreateDirectory(directory);
-                var target = Path.Combine(directory, DurableBackupName(dllPath));
+                var target = Path.Combine(directory, DurableBackupName(dllPath, sourceHash));
                 if (File.Exists(target)
                     && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
                 {
@@ -770,17 +827,17 @@ internal sealed class UITextPatchStore
     ///     只按文件名备份会让后写的顶掉先写的——还原时就会把 A 的内容写进 B。
     ///     路径不变时名字稳定：同一版本重打会复用已备份的原文，不会反复复制。
     /// </summary>
-    private static string DurableBackupName(string sourcePath)
+    private static string DurableBackupName(string sourcePath, string sourceHash)
     {
         try
         {
             var full = Path.GetFullPath(sourcePath);
             var hash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(full))).ToLowerInvariant();
-            return Path.GetFileName(sourcePath) + "." + hash[..10] + ".orig";
+            return Path.GetFileName(sourcePath) + "." + hash[..10] + "." + sourceHash + ".orig";
         }
         catch (Exception)
         {
-            return Path.GetFileName(sourcePath) + ".orig";
+            return Path.GetFileName(sourcePath) + "." + sourceHash + ".orig";
         }
     }
 

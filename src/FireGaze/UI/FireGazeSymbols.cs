@@ -72,4 +72,42 @@ internal static class FireGazeSymbols
             }
         }
     }
+
+    /// <summary>Draws a compact plus/minus control without relying on a font glyph.</summary>
+    public static bool StrokeButton(string id, string tooltip, bool enabled, bool plus)
+    {
+        var size = new Vector2(ImGui.GetFrameHeight());
+        Vector2 min;
+        Vector2 max;
+        bool clicked;
+        using (UiHelpers.Disabled(!enabled))
+        {
+            ImGui.PushStyleColor(ImGuiCol.Button, Vector4.Zero);
+            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, Vector4.Zero);
+            ImGui.PushStyleColor(ImGuiCol.ButtonActive, Vector4.Zero);
+            try
+            {
+                clicked = ImGui.Button(id, size);
+                min = ImGui.GetItemRectMin();
+                max = ImGui.GetItemRectMax();
+            }
+            finally
+            {
+                ImGui.PopStyleColor(3);
+            }
+        }
+
+        var center = (min + max) * .5f;
+        var half = MathF.Max(3f, MathF.Min(max.X - min.X, max.Y - min.Y) * .22f);
+        var color = ImGui.GetColorU32(enabled ? FireGazePalette.Text : FireGazePalette.Muted);
+        var draw = ImGui.GetWindowDrawList();
+        draw.AddLine(center - new Vector2(half, 0), center + new Vector2(half, 0), color, 1.6f);
+        if (plus)
+            draw.AddLine(center - new Vector2(0, half), center + new Vector2(0, half), color, 1.6f);
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) || ImGui.IsItemFocused())
+            ImGui.SetTooltip(tooltip);
+        if (ImGui.IsItemFocused()) DrawFocus(min, max);
+        return clicked;
+    }
 }

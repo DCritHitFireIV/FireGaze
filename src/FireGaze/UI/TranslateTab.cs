@@ -102,32 +102,25 @@ internal sealed class TranslateTab
             updateMessage = "正在更新…";
         }
 
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
-                updateMessage = message;
-                if (ok)
-                {
-                    ActivityLog.Info("简介汉化", "更新词表：" + message);
-                }
-                else
-                {
-                    ActivityLog.Warning("简介汉化", "更新词表失败：" + message);
-                }
-            }
-            catch (Exception e)
-            {
-                updateMessage = "更新出错：" + e.GetType().Name;
-                ActivityLog.Warning("简介汉化", "更新词表异常：" + e.GetType().Name);
-            }
-            finally
-            {
-                updateInFlight = false;
-            }
-        });
+        _ = CompleteTableUpdateAsync();
         return true;
+    }
+
+    private async Task CompleteTableUpdateAsync()
+    {
+        try
+        {
+            var (_, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+            updateMessage = message;
+        }
+        catch (Exception e)
+        {
+            updateMessage = "更新出错：" + e.GetType().Name;
+        }
+        finally
+        {
+            updateInFlight = false;
+        }
     }
 
     internal string OpenConflictSettings()
@@ -189,7 +182,13 @@ internal sealed class TranslateTab
 
         RefreshConflictStatus();
 
-        // ---------------- 顶部：更新词表（最显眼） ----------------
+        var enabled = config.TranslateEnabled;
+        if (ImGui.Checkbox("启用简介汉化###TranslateEnabled", ref enabled))
+        {
+            SetEnabled(enabled);
+        }
+
+        // ---------------- 更新词表 ----------------
         if (updateInFlight)
         {
             using var disabledScope1 = UiHelpers.Disabled();
@@ -203,8 +202,6 @@ internal sealed class TranslateTab
 
         ImGui.SameLine();
         ImGui.TextDisabled(updateInFlight ? "正在更新…" : updateMessage ?? string.Empty);
-
-        ImGui.Separator();
 
         // FastDalamudCN 冲突提示：常驻灰字（冲突是持续存在的，不该只提醒一次），并把它的设置窗口直接开出来
         if (fastDalamudInstalled)
@@ -224,13 +221,6 @@ internal sealed class TranslateTab
             }
         }
 
-        // ---------------- 开关 ----------------
-        var enabled = config.TranslateEnabled;
-        if (ImGui.Checkbox("启用简介汉化###TranslateEnabled", ref enabled))
-        {
-            SetEnabled(enabled);
-        }
-
         if (!string.IsNullOrEmpty(statusMessage))
         {
             ImGui.TextWrapped(statusMessage);
@@ -244,8 +234,6 @@ internal sealed class TranslateTab
         {
             ImGui.TextDisabled("词表未加载");
         }
-
-        ImGui.Separator();
 
         // ---------------- 三个字段的呈现方式 ----------------
         if (ImGui.BeginTable("###modeTable", 4, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.PadOuterX))

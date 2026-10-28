@@ -5,6 +5,7 @@ using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text;
 using Dalamud.Plugin.Services;
 using FireGaze.LocalPreview.Core;
+using FireGaze.LocalPreview.Runtime;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -17,7 +18,7 @@ public sealed record InteractionCapabilities(bool ObjectMenus, bool ItemMenus, b
     bool NativeEmoteContextObserved, string Detail, bool DirectEmoteClick = false);
 
 /// <summary>Collects immutable menu selections. Native display changes belong to the runtime.</summary>
-public sealed unsafe class PreviewInteractionService : IDisposable
+public sealed unsafe class PreviewInteractionService : IDisposable, INativePhysicalCloseState
 {
     private readonly IContextMenu menus;
     private readonly IChatGui chat;
@@ -34,6 +35,10 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     private readonly EmoteHistory history = new();
     private long generation;
     private bool disposed;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete && nativeLogCapture.PhysicalCloseComplete;
+    public string? PhysicalCloseFailure => PhysicalClose.Failure ?? nativeLogCapture.PhysicalCloseFailure;
     private bool chatProbeEnabled;
 
     public InteractionCapabilities Capabilities { get; private set; } =
@@ -74,9 +79,18 @@ public sealed unsafe class PreviewInteractionService : IDisposable
             .ToDictionary(emote => emote.RowId, emote => emote.UnlockLink);
         this.nativeLogCapture = new(data, interop, log, (message, id) => WrapEmoteMessage(message, id));
         history.ChangeTerritory(clientState.TerritoryType);
-        menus.OnMenuOpened += OnMenuOpened;
-        chat.ChatMessage += OnChatMessage;
-        clientState.TerritoryChanged += OnTerritoryChanged;
+        try
+        {
+            menus.OnMenuOpened += OnMenuOpened;
+            chat.ChatMessage += OnChatMessage;
+            clientState.TerritoryChanged += OnTerritoryChanged;
+        }
+        catch (Exception error)
+        {
+            Dispose();
+            if (!PhysicalCloseComplete) throw new NativePhysicalCloseException(this, error);
+            throw;
+        }
     }
 
     /// <summary>
@@ -107,10 +121,11 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         }
         catch (Exception ex)
         {
-            chatLink?.Dispose();
-            chatLink = null;
-            log.Error(ex, "[LocalPreview] Native chat sentence links could not start.");
+            PhysicalClose.Try(() => { chatLink?.Dispose(); chatLink = null; }, "Chat link initialization rollback failed");
+            try { log.Error(ex, "[LocalPreview] Native chat sentence links could not start."); } catch { }
             Capabilities = Capabilities with { Detail = "原生情感提示链接启动失败。" };
+            if (ex is NativePhysicalCloseException || PhysicalCloseFailure is not null)
+                throw new NativePhysicalCloseException(this, ex);
             return false;
         }
     }
@@ -314,12 +329,12 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         if (disposed) return;
         disposed = true;
         generation++;
-        menus.OnMenuOpened -= OnMenuOpened;
-        chat.ChatMessage -= OnChatMessage;
-        clientState.TerritoryChanged -= OnTerritoryChanged;
-        nativeLogCapture.Dispose();
-        chatLink?.Dispose();
-        chatLink = null;
-        history.Clear();
+        PhysicalClose.Try(() => menus.OnMenuOpened -= OnMenuOpened, "Context menu callback removal failed");
+        PhysicalClose.Try(() => chat.ChatMessage -= OnChatMessage, "Chat callback removal failed");
+        PhysicalClose.Try(() => clientState.TerritoryChanged -= OnTerritoryChanged, "Territory callback removal failed");
+        PhysicalClose.Try(nativeLogCapture.Dispose, "Native emote capture close failed");
+        PhysicalClose.Try(() => { chatLink?.Dispose(); chatLink = null; }, "Emote chat link removal failed");
+        PhysicalClose.Try(history.Clear, "Interaction history close failed");
+        PhysicalClose.Finish();
     }
 }

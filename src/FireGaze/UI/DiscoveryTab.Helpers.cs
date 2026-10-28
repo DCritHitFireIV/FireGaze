@@ -27,18 +27,24 @@ internal sealed partial class DiscoveryTab
 
         refreshInFlight = true;
         SetStatus("正在更新插件列表…", isError: false);
-        _ = Task.Run(async () =>
+        _ = CompleteCloudRefreshAsync();
+    }
+
+    private async Task CompleteCloudRefreshAsync()
+    {
+        try
         {
-            try
-            {
-                var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
-                refreshResult = (ok, message);
-            }
-            catch (Exception e)
-            {
-                refreshResult = (false, e.GetType().Name);
-            }
-        });
+            refreshResult = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            refreshResult = (false, e.GetType().Name);
+        }
+        finally
+        {
+            // Closing stops Draw; a terminal update must clear busy on its own.
+            refreshInFlight = false;
+        }
     }
 
     /// <summary>排序档位的中文名（下拉框用）。</summary>

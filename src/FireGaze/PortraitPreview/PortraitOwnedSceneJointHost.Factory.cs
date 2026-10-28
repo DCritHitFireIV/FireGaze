@@ -106,10 +106,11 @@ internal sealed class DalamudPortraitOwnedSceneJointHookFactory : IPortraitOwned
         private Delegate? direct;
         private bool attempted, retired;
         private int closing, operation;
+        private string? retirementFailure;
         public bool IsEnabled => hook?.IsEnabled == true;
         public bool IsDisposed => retired;
         public int InFlight => gateway.ActiveCount;
-        public bool RetirementFaulted { get; private set; }
+        public bool RetirementFaulted => Volatile.Read(ref retirementFailure) is not null;
         internal void Create()
         {
             direct = factory.DirectTarget(target, gateway.DelegateType);
@@ -140,11 +141,12 @@ internal sealed class DalamudPortraitOwnedSceneJointHookFactory : IPortraitOwned
             if (Interlocked.CompareExchange(ref operation, 1, 0) != 0) return false;
             try
             {
+                if (retirementFailure is { } fault) { reason = fault; return false; }
                 if (hook is { IsEnabled: true, IsDisposed: false }) hook.Disable();
                 if (hook is { IsEnabled: true }) throw new InvalidOperationException("Joint hook did not disable.");
-                RetirementFaulted = false; return true;
+                return true;
             }
-            catch (Exception error) { reason = error.Message; RetirementFaulted = true; return false; }
+            catch (Exception error) { reason = LatchRetirementFailure(error.Message); return false; }
             finally { Volatile.Write(ref operation, 0); }
         }
         public bool TryCompleteRetirement(out string reason)
@@ -154,17 +156,25 @@ internal sealed class DalamudPortraitOwnedSceneJointHookFactory : IPortraitOwned
             if (Volatile.Read(ref closing) == 0 || Interlocked.CompareExchange(ref operation, 1, 0) != 0) return false;
             try
             {
-                if (hook is null && attempted) { RetirementFaulted = true; reason = "Unknown official joint Create compensation."; return false; }
-                if (!attempted) { retired = gateway.TryAbandonUnpublishedOwnership(); return retired; }
+                if (retirementFailure is { } fault) { reason = fault; return false; }
+                if (hook is null && attempted) { reason = LatchRetirementFailure("Unknown official joint Create compensation."); return false; }
+                if (!attempted)
+                {
+                    retired = gateway.TryAbandonUnpublishedOwnership();
+                    if (!retired) reason = LatchRetirementFailure("Unpublished joint gateway release was not confirmed.");
+                    return retired;
+                }
                 if (hook is { IsEnabled: true } || direct is null || !gateway.TryRetireTo(direct)) return false;
                 hook!.Dispose();
                 if (!hook.IsDisposed) throw new InvalidOperationException("Joint hook disposal was not confirmed.");
-                hook = null; direct = null; gateway.ReleaseOwnership(); retired = true; RetirementFaulted = false; return true;
+                gateway.ReleaseOwnership(); hook = null; direct = null; retired = true; return true;
             }
-            catch (Exception error) { reason = error.Message; RetirementFaulted = true; return false; }
+            catch (Exception error) { reason = LatchRetirementFailure(error.Message); return false; }
             finally { Volatile.Write(ref operation, 0); }
         }
         public void Disable() { if (!BeginRetirement(out var reason)) throw new InvalidOperationException(reason); }
         public void Dispose() { if (!BeginRetirement(out var reason) || !TryCompleteRetirement(out reason)) throw new InvalidOperationException(reason); }
+        private string LatchRetirementFailure(string reason)
+            => Interlocked.CompareExchange(ref retirementFailure, reason, null) ?? reason;
     }
 }

@@ -2,6 +2,18 @@ using System.Runtime.CompilerServices;
 
 namespace FireGaze.PortraitPreview;
 
+// Detached evidence travels with one copied texture, never through a latest-identity lookup.
+// These scalar records live with the pure lifetime contract used by source-linked tests.
+internal sealed record PortraitOwnedSceneFirstFrameSource(long Editor,long State,long Model,uint Generation,ulong Character);
+internal sealed record PortraitOwnedSceneFirstFrameOwner(Guid Session,long Revision,uint Slot,long LeaseEpoch);
+internal sealed record PortraitOwnedSceneFirstFrameIdentity(Guid Installation,long SessionEpoch,long RequestEpoch,
+    uint NativeFrame,PortraitOwnedSceneFirstFrameSource Source,PortraitOwnedSceneFirstFrameOwner Owner)
+{
+    internal bool IsValid => Installation != Guid.Empty && SessionEpoch > 0 && RequestEpoch > 0
+        && Source is { Editor: not 0, State: not 0, Model: not 0, Generation: > 0, Character: not 0 }
+        && Owner is { Session: var session, Revision: > 0, Slot: < 8, LeaseEpoch: > 0 } && session != Guid.Empty;
+}
+
 /// <summary>
 /// Owns one public texture-provider operation and at most two copied frames. The factory's
 /// synchronous prefix runs on its caller's native phase; its task must complete only after
@@ -22,11 +34,13 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
     private string? lastCopyFailureType;
     private Task? drainTask;
 
-    internal sealed class Frame(T texture, IDisposable lifetime, long generation)
+    internal sealed class Frame(T texture, IDisposable lifetime, long generation,
+        PortraitOwnedSceneFirstFrameIdentity? receipt)
     {
         public readonly T Texture = texture;
         public readonly IDisposable Lifetime = lifetime;
         public readonly long Generation = generation;
+        public readonly PortraitOwnedSceneFirstFrameIdentity? Receipt = receipt;
         public int Borrowers;
         public bool Published = true, Releasing;
     }
@@ -57,7 +71,8 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
         return 0;
     }
 
-    public bool TryCopy(long expectedGeneration, Func<Task<T>> factory)
+    public bool TryCopy(long expectedGeneration, Func<Task<T>> factory,
+        PortraitOwnedSceneFirstFrameIdentity? receipt = null)
     {
         ArgumentNullException.ThrowIfNull(factory);
         IDisposable lifetime;
@@ -70,11 +85,12 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
         }
         // Do not Task.Run: callers acquire the retained source and initiate its public copy
         // synchronously before the native phase ends. Completion uses only managed ownership.
-        _ = Copy(expectedGeneration, factory, lifetime);
+        _ = Copy(expectedGeneration, factory, lifetime, receipt);
         return true;
     }
 
-    private async Task Copy(long expectedGeneration, Func<Task<T>> factory, IDisposable lifetime)
+    private async Task Copy(long expectedGeneration, Func<Task<T>> factory, IDisposable lifetime,
+        PortraitOwnedSceneFirstFrameIdentity? receipt)
     {
         T? result = null;
         Frame? replaced = null;
@@ -95,7 +111,7 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
                 if (result is not null) seenResults.Add(result, new object());
                 if (!closing && generation == expectedGeneration && physical.CleanupFailures == 0 && result is not null)
                 {
-                    var frame = new Frame(result, lifetime, expectedGeneration);
+                    var frame = new Frame(result, lifetime, expectedGeneration, receipt);
                     frames.Add(frame);
                     replaced = current;
                     if (replaced is not null) replaced.Published = false;
@@ -190,6 +206,7 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
         { this.owner = owner; this.frame = frame; this.texture = texture; }
         public T Texture => owner is not null ? texture : throw new ObjectDisposedException(nameof(Borrow));
         public long Generation => frame.Generation;
+        public PortraitOwnedSceneFirstFrameIdentity? Receipt => frame.Receipt;
         public void Dispose() => Interlocked.Exchange(ref owner, null)?.Return(frame);
     }
 }

@@ -16,6 +16,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitEditorSnapshot? historyObservedEditor;
     private PortraitEditorSnapshot? historyLabelBaseline;
     private PortraitHistoryKey? observedKey;
+    private PortraitPhotoSource? observedPhotoSource;
     private PortraitIdentity observedIdentity;
     private PortraitHistoryListItem[] historyRows = [];
     private IReadOnlyList<PortraitAppearanceGroup> appearanceGroups = [];
@@ -32,6 +33,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool sampledKeyboard;
     private bool deferredBaselineSync;
     private string? historyWriteError;
+    private bool historyBatchWriteBlocked;
     private string? historyPhotoStatus;
     private Task<bool>? historyPersistence;
     private DateTime nextStorageObservation;
@@ -113,6 +115,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         ObserveHistoryPersistence();
         if (LightingFitHistorySuppressed) return;
+        if (historyBatchWriteBlocked && !FlushHistoryForSourceChange()) return;
         var owner = CurrentCharacter();
         if (historyOwner != owner)
         {
@@ -125,6 +128,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             historyObservedEditor = null;
             observedIdentity = default;
             observedKey = null;
+            observedPhotoSource = null;
             deferredBaselineSync = false;
             appearanceGroups = [];
             historyRows = [];
@@ -154,6 +158,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 historyObservedEditor = null;
                 observedIdentity = default;
                 observedKey = null;
+                observedPhotoSource = null;
                 deferredBaselineSync = false;
                 appearanceGroups = [];
                 RequestPlateMirrorClose();
@@ -167,7 +172,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
             window.CloseAuxiliaryWindows();
             RequestPlateMirrorClose();
         }
-        if (!lightDrag.IsActive && DateTime.UtcNow < nextEditorSample && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
+        var photoSource = CurrentPhotoSource();
+        if (!lightDrag.IsActive && observedPhotoSource == photoSource && DateTime.UtcNow < nextEditorSample
+            && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
         sampledPointer = pointerHeld;
         sampledKeyboard = keyboard;
         nextEditorSample = DateTime.UtcNow.AddMilliseconds(50);
@@ -179,22 +186,23 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             // Close can restore while the addon is hidden. The first ready sample is a restored
             // baseline, even if strict capture could not run during the close itself.
-            historyBatch.Cancel();
-            historyLabelBaseline = null;
+            if (!historyBatchWriteBlocked) historyLabelBaseline = null;
             observedEditor = captured;
             historyObservedEditor = captured;
+            observedPhotoSource = photoSource;
             appearanceGroups = appearance.Build(captured.Customize);
         }
         deferredBaselineSync = false;
-        if (observedIdentity != identity || observedKey != key)
+        if (observedIdentity != identity || observedKey != key || observedPhotoSource != photoSource)
         {
             if (observedKey is not null) window.CloseAuxiliaryWindows();
-            HandleHistoryBatchResult(historyBatch.Flush());
+            if (!FlushHistoryForSourceChange()) return;
             observedIdentity = identity;
             observedKey = key;
+            observedPhotoSource = photoSource;
             observedEditor = captured;
             historyObservedEditor = captured;
-            HandleHistoryResult(history.Record(key, captured.ToJSON(), "打开肖像"));
+            HandleHistoryResult(history.Record(key, captured.ToJSON(), photoSource, "打开肖像"));
             appearanceGroups = appearance.Build(captured.Customize);
             RefreshHistoryRows();
         }
@@ -212,7 +220,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 var label = DescribeChange(historyLabelBaseline, WithoutPlaybackControls(recording, historyLabelBaseline));
                 historyObservedEditor = recording;
                 appearanceGroups = appearance.Build(captured.Customize);
-                HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), pointerHeld || lightDrag.IsActive, keyboard, label));
+                HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), photoSource,
+                    pointerHeld || lightDrag.IsActive, keyboard, label));
             }
             else if (observedEditor is not null)
             {
@@ -253,8 +262,17 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void HandleHistoryBatchResult(PortraitHistoryWriteResult? result)
     {
-        if (result is not null) historyLabelBaseline = null;
+        if (result is not null)
+            historyBatchWriteBlocked = result.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate);
+        if (result is { Status: PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate }) historyLabelBaseline = null;
         HandleHistoryResult(result);
+    }
+
+    private bool FlushHistoryForSourceChange()
+    {
+        var result = historyBatch.Flush();
+        HandleHistoryBatchResult(result);
+        return result is null or { Status: PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate };
     }
 
     private void HandleHistoryResult(PortraitHistoryWriteResult? result)
@@ -272,6 +290,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             {
                 PortraitHistoryWriteStatus.TooLarge => "历史记录空间不足，本次修改尚未记录。已有记录已保留。",
                 PortraitHistoryWriteStatus.ReadOnlyCorrupt => "历史记录无法读取，原文件已保留。本次修改未能记录。",
+                PortraitHistoryWriteStatus.InvalidSource => "照片来源无法确认，本次修改尚未记录。已有记录已保留。",
                 _ => "这次编辑记录未能保存，请稍后重试。",
             };
     }
@@ -312,11 +331,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
         canRedo = observedKey is { } current && history.TryGetRedo(current, out _);
     }
 
-    private void FlushEditing()
+    private bool FlushEditing()
     {
         CancelLightDrag();
-        HandleHistoryBatchResult(historyBatch.Flush());
+        var flushed = FlushHistoryForSourceChange();
         RequestPlateMirrorClose();
+        return flushed;
     }
 
     private void RequestPlateMirrorClose()
@@ -346,7 +366,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)) return;
         var before = target.CaptureEditorState(identity);
         if (before is null) return;
-        HandleHistoryBatchResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (!appearance.TryChange(before.Customize, groupID, value, out var customized, out var reason)) { Error(reason); return; }
         if (!ApplyWithFailureNotice(() => target.ApplyEditorState(identity, before with { Customize = customized }),
                 "暂时无法预览此美容选项，请稍后重试。若画面异常，请结束预览。")) return;
@@ -361,8 +381,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (LightingFitHistorySuppressed) return;
         if (!target.TryResolve(out var identity, out _, out _) || target.CaptureEditorState(identity) is not { } captured
             || GetHistoryKey(identity, captured) is not { } key) return;
-        HandleHistoryBatchResult(historyBatch.Flush());
-        var baseline = observedIdentity == identity && observedKey == key ? historyObservedEditor : null;
+        if (!FlushHistoryForSourceChange()) return;
+        var photoSource = CurrentPhotoSource();
+        var baseline = observedIdentity == identity && observedKey == key && observedPhotoSource == photoSource ? historyObservedEditor : null;
         var recording = ForHistory(captured, baseline);
         if (baseline is not null
             && label is "清空装备部位" or "装备显示设置" or "美容师修改")
@@ -371,8 +392,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         historyObservedEditor = recording;
         observedIdentity = identity;
         observedKey = key;
+        observedPhotoSource = photoSource;
         appearanceGroups = appearance.Build(captured.Customize);
-        HandleHistoryResult(history.Record(key, recording.ToJSON(), label));
+        HandleHistoryResult(history.Record(key, recording.ToJSON(), photoSource, label));
         if (syncPlate) _ = target.UpdatePlateMirror(identity, captured, true);
         RefreshHistoryRows();
     }
@@ -388,7 +410,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!target.TryResolve(out var identity, out _, out _)) { Error("请先打开对应肖像编辑器。"); return; }
         var before = target.CaptureEditorState(identity);
         if (before is null || GetHistoryKey(identity, before) is not { } key) return;
-        HandleHistoryBatchResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         PortraitHistorySelection selected;
         var found = kind switch
         {
@@ -424,6 +446,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         historyObservedEditor = ForHistory(observedEditor, desired);
         observedIdentity = identity;
         observedKey = key;
+        observedPhotoSource = CurrentPhotoSource();
         appearanceGroups = appearance.Build(observedEditor.Customize);
         SetStatus(kind == PortraitHistorySelectionKind.Undo ? "已撤回上一步" : kind == PortraitHistorySelectionKind.Redo ? "已重做" : "已恢复所选时刻");
         if (syncPlate) _ = target.UpdatePlateMirror(identity, observedEditor, true);
@@ -447,8 +470,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         window.CloseAuxiliaryWindows();
         CancelLightDrag();
-        historyBatch.Cancel();
-        historyLabelBaseline = null;
+        if (!historyBatchWriteBlocked) historyLabelBaseline = null;
         deferredBaselineSync = true;
         if (target.TryResolve(out var identity, out _, out _) && target.CaptureEditorState(identity) is { } restored)
         {
@@ -456,6 +478,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             historyObservedEditor = restored;
             observedIdentity = identity;
             observedKey = GetHistoryKey(identity, restored);
+            observedPhotoSource = CurrentPhotoSource();
             appearanceGroups = appearance.Build(restored.Customize);
             deferredBaselineSync = false;
         }
@@ -473,16 +496,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var menu = MenuState;
         ImGui.TextWrapped("试换装备、染色和外貌，立即查看自己的铭牌效果。结束预览后还原外观。");
 
-        ImGui.Separator();
-        ImGui.TextUnformatted("当前状态");
-        ImGui.SameLine();
-        UiHelpers.ColoredWrapped(menu.Status switch
+        ImGui.Spacing();
+        var menuStatus = DescribeMenuStatus(menu.Status);
+        if (menuStatus.Length != 0 && (IsActive || !OpeningAvailability.HasBlockers
+            && !OpeningAvailability.Opening && !OpeningAvailability.EditorAlreadyOpen))
         {
-            PortraitPreviewMenuStatus.Ready or PortraitPreviewMenuStatus.Active => UiHelpers.Good,
-            PortraitPreviewMenuStatus.RestoreWarning => UiHelpers.Bad,
-            PortraitPreviewMenuStatus.TemporarilyUnavailable => UiHelpers.Warn,
-            _ => UiHelpers.Muted,
-        }, DescribeMenuStatus(menu.Status));
+            UiHelpers.ColoredWrapped(menu.Status == PortraitPreviewMenuStatus.Active
+                ? UiHelpers.Good : UiHelpers.Muted, menuStatus);
+        }
 
         if (menu.RestoreWarning is not null)
             ImGui.TextWrapped(menu.RestoreWarning);
@@ -505,14 +526,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 ImGui.TextWrapped(OpeningAvailability.PrimaryMessage);
         }
 
-        ImGui.TextWrapped("请勿在传送或切换区域时使用，请等加载结束并站稳。");
-
         ImGui.Spacing();
         using (UiHelpers.Disabled(!menu.CanOpenEditor))
         {
             if (ImGui.Button("打开铭牌###PortraitOpenPlate")) OpenPlateEditor();
         }
-        ImGui.SameLine();
+        ImGui.SameLine(0, ImGui.GetStyle().ItemSpacing.X * 1.5f);
         if (menu.CanOpenWindow)
         {
             UiHelpers.PushPrimaryButton();
@@ -529,7 +548,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 UiHelpers.PushPrimaryButton();
                 try
                 {
-                    if (ImGui.Button("启用 FireGaze 预览###PortraitEnablePreview")) OpenPreviewWindow();
+                    if (ImGui.Button("启用预览###PortraitEnablePreview")) OpenPreviewWindow();
                 }
                 finally { UiHelpers.PopPrimaryButton(); }
             }
@@ -553,12 +572,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private static string DescribeMenuStatus(PortraitPreviewMenuStatus value) => value switch
     {
-        PortraitPreviewMenuStatus.EditorUnavailable => "编辑器未打开",
         PortraitPreviewMenuStatus.Loading => "铭牌正在加载",
-        PortraitPreviewMenuStatus.Ready => "可启用预览",
         PortraitPreviewMenuStatus.Active => "预览进行中",
-        PortraitPreviewMenuStatus.RestoreWarning => "还原异常",
-        PortraitPreviewMenuStatus.TemporarilyUnavailable => "暂时无法启用预览",
-        _ => "状态未知",
+        _ => string.Empty,
     };
 }

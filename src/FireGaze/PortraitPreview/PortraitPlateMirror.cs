@@ -83,9 +83,35 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
             var hiddenEmpty = source == 0 && !sourceImage.Visible;
             if (binding is { } active)
             {
-                if (editor == identity && api.IsCurrent(active)
-                    && (ownsTexture && source != 0 && Same(api.ReadTexture(active), temporary) && (nint)temporary.KernelTexture == source
-                        || !ownsTexture && hiddenEmpty))
+                if (editor == identity && api.IsCurrent(active) && ownsTexture)
+                {
+                    var current = api.ReadTexture(active);
+                    if (Same(current, temporary) && source == 0)
+                    {
+                        if (!hiddenEmpty) return false;
+                        // A native portrait can briefly publish no render texture while it
+                        // rebuilds after a movement or appearance change. Keep the last valid
+                        // mirrored frame in place; writing an empty source here creates the
+                        // visible blank flash that used to precede the next completed frame.
+                        return true;
+                    }
+                    if (Same(current, temporary) && (nint)temporary.KernelTexture == source)
+                    {
+                        if (!api.IsEditorCurrent(identity) || !api.TryWriteImage(active, temporaryImage, sourceImage)) return false;
+                        temporaryImage = sourceImage;
+                        return true;
+                    }
+                    // Acquire and install the next render target before releasing the old
+                    // lease. The old frame remains visible if the native target is still
+                    // rebuilding or a replacement check fails.
+                    if (Same(current, temporary) && source != 0)
+                    {
+                        if (TryReplaceTexture(active, identity, source, sourceImage)) return true;
+                        return api.IsEditorCurrent(identity) && api.IsCurrent(active)
+                            && Same(api.ReadTexture(active), temporary);
+                    }
+                }
+                if (editor == identity && api.IsCurrent(active) && !ownsTexture && hiddenEmpty)
                 {
                     if (!api.IsEditorCurrent(identity) || !api.TryWriteImage(active, temporaryImage, sourceImage)) return false;
                     temporaryImage = sourceImage;
@@ -123,6 +149,44 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
         }
         catch (Exception ex) { LastError = "冒险者铭牌临时显示无法更新：" + ex.Message; return false; }
         finally { CompleteOperation(); }
+    }
+
+    private bool TryReplaceTexture(PortraitPlateBinding active, PortraitIdentity identity, nint source,
+        PortraitPlateImageState sourceImage)
+    {
+        var oldTexture = temporary;
+        var before = api.ReadTexture(active);
+        if (!Same(before, oldTexture) || !api.IsEditorCurrent(identity)) return false;
+        var next = api.CreateRetainedTexture(identity, source);
+        var installed = false;
+        var rolledBack = false;
+        try
+        {
+            if (!api.IsEditorCurrent(identity) || api.GetSourceTexture(identity) != source || !api.IsCurrent(active)) return false;
+            if (!api.TryWriteTexture(active, before, next)) return false;
+            installed = true;
+            // Publish lease ownership before any subsequent native callback. Reentrant
+            // teardown must see the texture that is actually installed in the asset.
+            temporary = next;
+            if (!api.IsEditorCurrent(identity) || !api.TryWriteImage(active, temporaryImage, sourceImage))
+            {
+                // Roll back while the old lease is still held. A failed refresh therefore
+                // leaves the previous completed frame visible instead of exposing an empty
+                // native image to the player.
+                rolledBack = api.TryWriteTexture(active, next, before);
+                if (rolledBack) temporary = oldTexture;
+                return false;
+            }
+            temporaryImage = sourceImage;
+            return true;
+        }
+        finally
+        {
+            if (!installed || rolledBack) api.ReleaseTexture(ref next);
+            // Once replacement owns the asset, the prior temporary reference is
+            // detached even if a subsequent native image-state operation throws.
+            else api.ReleaseTexture(ref oldTexture);
+        }
     }
 
     public bool Close()

@@ -9,6 +9,8 @@ internal sealed partial class PortraitPreviewWindow
 {
     private bool showDesignShowcase;
     private bool showDesignList;
+    private bool hideDesignSources;
+    private float designDisplayScale = 1;
     private readonly HashSet<string> hiddenDesignRows = new(StringComparer.Ordinal);
 
     public void OpenDesignShowcase()
@@ -27,6 +29,20 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("对比肖像预览与实际穿着，保留已确认的外观差异");
         ImGui.Spacing();
         ImGui.TextWrapped("装备、染色和外貌的来源会随展示项列出。");
+        ImGui.Checkbox("隐藏位置说明###PortraitDesignHideSources", ref hideDesignSources);
+        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("隐藏展示项下方的位置与来源说明，并收起这一行。");
+        ImGui.Spacing();
+        ImGui.TextUnformatted($"展示大小 · {designDisplayScale * 100:0}%");
+        ImGui.BeginDisabled(designDisplayScale <= .75f);
+        if (ImGui.Button("缩小###PortraitDesignScaleDown"))
+            designDisplayScale = PortraitDesignShowcaseLayout.NormalizeDisplayScale(designDisplayScale - .1f);
+        ImGui.EndDisabled();
+        ImGui.SameLine();
+        ImGui.BeginDisabled(designDisplayScale >= 2);
+        if (ImGui.Button("放大###PortraitDesignScaleUp"))
+            designDisplayScale = PortraitDesignShowcaseLayout.NormalizeDisplayScale(designDisplayScale + .1f);
+        ImGui.EndDisabled();
+        if (ImGui.Button("恢复默认大小###PortraitDesignScaleReset")) designDisplayScale = 1;
         if (hiddenDesignRows.Count > 0)
         {
             ImGui.Separator();
@@ -36,6 +52,20 @@ internal sealed partial class PortraitPreviewWindow
     }
 
     private void DrawDesignShowcaseContents()
+    {
+        var baseScale = Scale;
+        // Only this workspace child is scaled. Determine its inherited scale first,
+        // then restore it even if a source read or texture lookup throws.
+        var inheritedFontSize = ImGui.GetFontSize();
+        ImGui.SetWindowFontScale(1);
+        var naturalFontSize = ImGui.GetFontSize();
+        var inheritedFontScale = naturalFontSize > 0 ? inheritedFontSize / naturalFontSize : 1;
+        ImGui.SetWindowFontScale(inheritedFontScale * PortraitDesignShowcaseLayout.NormalizeDisplayScale(designDisplayScale));
+        try { DrawScaledDesignShowcaseContents(baseScale); }
+        finally { ImGui.SetWindowFontScale(inheritedFontScale); }
+    }
+
+    private void DrawScaledDesignShowcaseContents(float baseScale)
     {
         var manifest = BuildDesignManifest();
         ImGui.TextUnformatted(showDesignList ? "造型差异" : "当前造型");
@@ -63,16 +93,16 @@ internal sealed partial class PortraitPreviewWindow
                 ImGui.PopStyleColor();
                 previousKind = row.KindLabel;
             }
-            DrawDesignRow(row);
+            DrawDesignRow(row, baseScale);
         }
         if (rows.Count > 0 && visibleCount == 0) ImGui.TextDisabled("已隐藏全部展示项，可在上方恢复。");
     }
 
-    private void DrawDesignRow(PortraitDesignEntry row)
+    private void DrawDesignRow(PortraitDesignEntry row, float baseScale)
     {
         ImGui.PushID(row.Key);
         var available = ImGui.GetContentRegionAvail().X;
-        var layout = PortraitDesignShowcaseLayout.Row(available, Scale);
+        var layout = PortraitDesignShowcaseLayout.Row(available, baseScale, designDisplayScale);
         var iconSize = layout.IconSize;
         var rowX = ImGui.GetCursorPosX();
         var origin = ImGui.GetCursorScreenPos();
@@ -86,9 +116,13 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.BeginGroup();
         ImGui.PushTextWrapPos(rowX + layout.TextX + layout.TextWidth);
         ImGui.TextWrapped(row.Name);
-        ImGui.PushStyleColor(ImGuiCol.Text, FireGazePalette.Muted);
-        ImGui.TextWrapped(row.Source);
-        ImGui.PopStyleColor();
+        var source = PortraitDesignShowcaseText.SourceFor(row, hideDesignSources);
+        if (source.Length > 0)
+        {
+            ImGui.PushStyleColor(ImGuiCol.Text, FireGazePalette.Muted);
+            ImGui.TextWrapped(source);
+            ImGui.PopStyleColor();
+        }
         if (row.Kind != PortraitDesignEntryKind.Appearance && (row.Stain0 != 0 || row.Stain1 != 0))
         {
             ImGui.TextWrapped($"染色：{DesignDyeName(row.Stain0)} / {DesignDyeName(row.Stain1)}");

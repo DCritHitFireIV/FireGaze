@@ -8,136 +8,69 @@ namespace FireGaze.UI;
 
 internal sealed partial class RepoAuditTab
 {
-    /// <summary>
-    ///     操作工具条：第一行是选择类动作（停用 │ 删除… + 全选/清空），删除用红色并与停用拉开距离；
-    ///     第二行左侧是动态选择摘要，右侧是恢复类动作（撤回 / 备份目录，永远渲染）。
-    /// </summary>
+    /// <summary>Selection actions appear only when needed; recovery stays visible.</summary>
     private void DrawActionBar(int selectedCount, int selectedHidden, List<RepoAuditItem> snapshot)
     {
-        var canAct = !scanning && selectedCount > 0;
-        var filteredCount = snapshot.Count;
-
-        using (UiHelpers.Disabled(!canAct))
-        {
-            ImGui.Button($"停用所选（{selectedCount}）###DisableSelected");
-            if (ImGui.IsItemClicked() && canAct)
-            {
-                DisableSelected();
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("停止加载所选仓库，保留链接，可撤回。");
-            }
-        }
-
-        // 危险动作：与「停用」拉开间距 + 红色 + 独立分组（统一样式见 UiHelpers.PushDangerButton）
-        ImGui.SameLine();
-        ImGui.SameLine();
-        UiHelpers.PushDangerButton();
-
-        using (UiHelpers.Disabled(!canAct))
-        {
-            ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected");
-            if (ImGui.IsItemClicked() && canAct)
-            {
-                deleteRequested = true;
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("移除所选仓库链接，会先备份，可撤回。");
-            }
-        }
-
-        UiHelpers.PopDangerButton();
-
-        ImGui.SameLine();
-        ImGui.TextDisabled("│");
-        ImGui.SameLine();
-
         var canSelect = !scanning;
+        var filteredCount = snapshot.Count;
         using (UiHelpers.Disabled(!canSelect))
         {
             if (ImGui.Button($"全选当前（{filteredCount}）###SelectFiltered"))
             {
                 lock (gate)
-                {
-                    foreach (var item in snapshot.Where(x => x.IsSelectable))
-                    {
-                        selected.Add(item.URL);
-                    }
-                }
+                    foreach (var item in snapshot.Where(x => x.IsSelectable)) selected.Add(item.URL);
             }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("只选择当前搜索和筛选结果。");
-            }
-
-            ImGui.SameLine();
-            if (ImGui.Button("清空选择###ClearSelection"))
-            {
-                lock (gate)
-                {
-                    selected.Clear();
-                }
-            }
+            if (ImGui.IsItemHovered()) ImGui.SetTooltip("只选择当前搜索和筛选结果。");
         }
 
-        // ---------------- 第二行：选择摘要 + 恢复动作 ----------------
-        var undo = plugin.Config.UndoHistory.Count > 0 ? plugin.Config.UndoHistory[^1] : null;
-
-        // 没勾选时不显示摘要行（用户 2026-10-13：去掉「已选 0 —— 勾选列表行，或用「全选当前」」）
-        string? hint = selectedCount == 0
-            ? null
-            : $"结果 {snapshot.Count} 行 · 已选 {selectedCount}（共 {ProblemCount()} 个问题项"
-              + (selectedHidden > 0 ? $"，其中 {selectedHidden} 项不在当前筛选内）" : "）");
-
-        // 非默认排序才显示（这一行常驻内容多，避免把右侧的恢复类按钮挤下去）
-        var sortText = sortKey switch
+        if (selectedCount > 0)
         {
-            "installed" => sortDescending ? "按已安装 ↓" : "按已安装 ↑",
-            "firstSeen" => sortDescending ? "按首次记录 ↓" : "按首次记录 ↑",
-            "url" => sortDescending ? "按地址 ↓" : "按地址 ↑",
-            _ => null,
-        };
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("清空选择"));
+            using (UiHelpers.Disabled(!canSelect))
+            {
+                if (ImGui.Button("清空选择###ClearSelection"))
+                    lock (gate) selected.Clear();
+            }
 
-        if (hint is not null && sortText is not null)
-        {
-            hint += $" · {sortText}";
-        }
-
-        var hintWidth = 0f;
-        if (hint is not null)
-        {
+            var hint = $"已选 {selectedCount}" + (selectedHidden > 0 ? $" · 筛选外 {selectedHidden}" : string.Empty);
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(hint));
             ImGui.TextDisabled(hint);
-            hintWidth = ImGui.GetItemRectSize().X;
+
+            var canAct = !scanning;
+            var disableLabel = $"停用所选（{selectedCount}）###DisableSelected";
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(disableLabel));
+            using (UiHelpers.Disabled(!canAct))
+            {
+                if (ImGui.Button(disableLabel)) DisableSelected();
+                if (ImGui.IsItemHovered()) ImGui.SetTooltip("停止加载所选仓库，保留链接，可撤回。");
+            }
+
+            var deleteLabel = $"删除所选（{selectedCount}）…###DeleteSelected";
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(deleteLabel));
+            UiHelpers.PushDangerButton();
+            using (UiHelpers.Disabled(!canAct))
+            {
+                if (ImGui.Button(deleteLabel)) deleteRequested = true;
+                if (ImGui.IsItemHovered()) ImGui.SetTooltip("移除所选仓库链接，会先备份，可撤回。");
+            }
+            UiHelpers.PopDangerButton();
         }
 
-        // 靠右摆放恢复类动作（SameLine 的参数是「距行首的绝对偏移」，不是剩余宽度）
+        var undo = plugin.Config.UndoHistory.Count > 0 ? plugin.Config.UndoHistory[^1] : null;
         var undoLabel = undo is null ? "撤回上次操作###Undo" : $"撤回：{undo.Describe()}###Undo";
-        var undoWidth = ImGui.CalcTextSize(undoLabel.Replace("###Undo", string.Empty)).X + 24;
-        var backupWidth = ImGui.CalcTextSize("打开备份目录").X + 24;
-        var totalWidth = undoWidth + backupWidth + 12;
-        var maxX = ImGui.GetContentRegionMax().X;
-        var targetX = maxX - totalWidth;
-
-        if (targetX < hintWidth + 12)
-        {
-            // 一行放不下（长提示 + 长撤回标签）：按钮换到下一行，仍然右对齐
-            ImGui.NewLine();
-            targetX = MathF.Max(4f, maxX - totalWidth);
-        }
-
-        ImGui.SameLine(targetX);
+        var undoWidth = UiHelpers.LabelWidth(undoLabel);
+        var backupWidth = UiHelpers.LabelWidth("打开备份目录");
+        var recoveryWidth = undoWidth + backupWidth + 10f;
+        var right = ImGui.GetContentRegionMax().X;
+        if (ImGui.GetItemRectMax().X + 10f + recoveryWidth <= ImGui.GetWindowPos().X + right)
+            ImGui.SameLine(right - recoveryWidth);
+        else
+            ImGui.SetCursorPosX(MathF.Max(0, right - MathF.Min(recoveryWidth, right)));
 
         if (undo is null)
         {
-            using (UiHelpers.Disabled())
-            {
-                ImGui.Button("撤回上次操作###Undo");
-            }
+            using (UiHelpers.Disabled()) ImGui.Button(undoLabel);
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("还没有可撤回的操作。");
         }
         else
         {
@@ -145,18 +78,10 @@ internal sealed partial class RepoAuditTab
             {
                 var ok = plugin.TryUndoLast(out var message);
                 SetStatus(ok ? message : "撤回失败：" + message, !ok);
-                if (ok)
-                {
-                    ActivityLog.Info("仓库体检", "撤回上次操作：" + message);
-                }
-                else
-                {
-                    ActivityLog.Warning("仓库体检", "撤回失败：" + message);
-                }
-
+                if (ok) ActivityLog.Info("仓库体检", "撤回上次操作：" + message);
+                else ActivityLog.Warning("仓库体检", "撤回失败：" + message);
                 RefreshFromLive();
             }
-
             if (ImGui.IsItemHovered())
             {
                 var lines = new List<string>
@@ -169,11 +94,8 @@ internal sealed partial class RepoAuditTab
             }
         }
 
-        ImGui.SameLine();
-        if (ImGui.Button("打开备份目录###OpenBackups"))
-        {
-            plugin.OpenBackupDirectory();
-        }
+        PluginListLayout.ToolbarSameLineOrWrap(backupWidth);
+        if (ImGui.Button("打开备份目录###OpenBackups")) plugin.OpenBackupDirectory();
     }
 
     private void DisableSelected()

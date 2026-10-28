@@ -1,0 +1,380 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-28",
+    "pluginVersion": "2.10.3.11",
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Displays the IINACT main window",
+      "Translated": "显示 IINACT 主窗口",
+      "Context": "Plugin..ctor",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Ends the current encounter IINACT is parsing",
+      "Translated": "结束 IINACT 当前正在解析的战斗",
+      "Context": "Plugin..ctor",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Status",
+      "Translated": "状态",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "OverlayPlugin Status:",
+      "Translated": "OverlayPlugin 状态：",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Overlay URI generator:",
+      "Translated": "悬浮窗 URI 生成器：",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Overlay",
+      "Translated": "悬浮窗",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "PreserveID": true
+    },
+    {
+      "Original": "<Error generating URI>",
+      "Translated": "<生成 URI 时出错>",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Stopped",
+      "Translated": "已停止",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Initializing...",
+      "Translated": "正在初始化……",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Listening on ",
+      "Translated": "正在监听：",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Failed",
+      "Translated": "失败",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Port ",
+      "Translated": "端口：",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " is already in use",
+      "Translated": "已被占用",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "WebSocket Server:",
+      "Translated": "WebSocket 服务器：",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "PreserveID": true
+    },
+    {
+      "Original": "Restart",
+      "Translated": "重新启动",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "PreserveID": true
+    },
+    {
+      "Original": "Start",
+      "Translated": "启动",
+      "Context": "MainWindow.DrawMainWindow",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "PreserveID": true
+    },
+    {
+      "Original": "Parser",
+      "Translated": "解析器",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Log File Path",
+      "Translated": "日志文件路径",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "PreserveID": true
+    },
+    {
+      "Original": "Parse Filter",
+      "Translated": "解析过滤",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "PreserveID": true
+    },
+    {
+      "Original": "Write out network log file",
+      "Translated": "写入网络日志文件",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Disable writing out network log file in PvP",
+      "Translated": "在 PvP 中停止写入网络日志文件",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Include chat and echo messages in log files",
+      "Translated": "在日志文件中包含聊天和回声消息",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Automatically delete old network log files",
+      "Translated": "自动删除旧网络日志文件",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Delete logs older than",
+      "Translated": "删除早于以下天数的日志",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "days",
+      "Translated": "天",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "PreserveID": true
+    },
+    {
+      "Original": "Disable Damage Shield Estimates",
+      "Translated": "禁用伤害护盾估算",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Disable Combine Pets with Owners",
+      "Translated": "禁用宠物与主人数据合并",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "End encounter automatically after leaving combat",
+      "Translated": "脱离战斗后自动结束当前战斗",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Show Debug Options",
+      "Translated": "显示调试选项",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Player name",
+      "Translated": "玩家名称",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "PreserveID": true
+    },
+    {
+      "Original": "Simulate Individual DoT Crits",
+      "Translated": "模拟独立的持续伤害暴击",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Also Show 'Real' DoT Ticks",
+      "Translated": "同时显示实际的持续伤害跳数",
+      "Context": "MainWindow.DrawParseSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Text to Speech",
+      "Translated": "语音合成",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Google TTS:",
+      "Translated": "Google 语音合成：",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Force Google TTS instead of SAPI",
+      "Translated": "强制使用 Google 语音合成来替代 SAPI",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "PreserveID": true
+    },
+    {
+      "Original": "Language",
+      "Translated": "语言",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "PreserveID": true
+    },
+    {
+      "Original": "(e.g. ja, en, de, fr, ko)",
+      "Translated": "（例如 ja、en、de、fr、ko）",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Playback Device",
+      "Translated": "播放设备",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "PreserveID": true
+    },
+    {
+      "Original": "WebSocket Server",
+      "Translated": "WebSocket 服务器",
+      "Context": "MainWindow.DrawWebSocketSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Port",
+      "Translated": "端口",
+      "Context": "MainWindow.DrawWebSocketSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "PreserveID": true
+    },
+    {
+      "Original": "A frame was compressed.",
+      "Translated": "检测到一帧压缩数据。",
+      "Context": "ZoneDownHookManager.PacketsFromFrame",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "MainWindow.DrawTtsSettings",
+      "Source": "ai",
+      "Role": "UI",
+      "RoleReason": "两个独立显示来源：BeginCombo 预览参数1纯文字；Selectable 标签参数0按当前指令保留来源身份。",
+      "PreserveID": true
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "skipped": []
+}

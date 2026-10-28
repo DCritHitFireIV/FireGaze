@@ -22,7 +22,12 @@ internal sealed partial class PortraitPreviewWindow
     private string editingFavoriteName = "";
     private string editingFavoriteTags = "";
 
-    public void OpenFavorites() { showFavorites = true; showFavoriteTrash = false; }
+    public void OpenFavorites()
+    {
+        if (!showFavorites) favoriteGallery.ResetWindow();
+        showFavorites = true;
+        showFavoriteTrash = false;
+    }
 
     private void DrawLibraryPopups()
     {
@@ -36,11 +41,16 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawFavoritesWindow()
     {
+        var observation = favoriteGallery.Begin(FavoriteGalleryContext, showFavorites, showFavoriteTrash);
         if (!showFavorites) return;
         FireGazeWindowPlacement.Prepare("FireGazePortraitFavorites", new Vector2(720, 700) * Scale, Scale, "FireGazePortraitPreview");
         FireGazeWindowPlacement.Constrain(new Vector2(430, 300) * Scale, new Vector2(1040, 920) * Scale, Scale);
         if (!FireGazeWindowPlacement.Begin("肖像收藏###FireGazePortraitFavorites", ref showFavorites, "FireGazePortraitFavorites"))
-        { ImGui.End(); return; }
+        {
+            ImGui.End();
+            favoriteGallery.Complete(observation, FavoriteGalleryContext, showFavorites, showFavoriteTrash, false, []);
+            return;
+        }
 
         if (FireGazeSymbols.NeutralButton($"我的收藏 · {feature.Favorites.Count}", default, !showFavoriteTrash)) showFavoriteTrash = false;
         ImGui.SameLine();
@@ -50,7 +60,8 @@ internal sealed partial class PortraitPreviewWindow
             : "在同步预览工作台点击“收藏”保存当前效果。点击照片选择操作。");
         ImGui.SetNextItemWidth(-1);
         ImGui.InputTextWithHint("###PortraitFavoriteSearch", "搜索名称、标签或来源角色", ref favoriteSearch, 120);
-        var source = showFavoriteTrash ? feature.FavoriteTrash : feature.Favorites;
+        var renderedTrash = showFavoriteTrash;
+        var source = renderedTrash ? feature.FavoriteTrash : feature.Favorites;
         ImGui.SetNextItemWidth(-1);
         if (ImGui.BeginCombo("###PortraitFavoriteTagFilter", favoriteTagFilter.Count == 0 ? "全部标签" : $"标签 · {favoriteTagFilter.Count}"))
         {
@@ -70,6 +81,7 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.Separator();
         ImGui.Spacing();
         // Child owns scrolling while navigation, filters and status remain in place.
+        var observedCards = new List<PortraitFavoriteGalleryCard>(PortraitFavoriteGalleryPublisher.MaximumCards + 1);
         if (ImGui.BeginChild("###PortraitFavoriteGallery", Vector2.Zero, false))
         {
             var visible = PortraitLibraryPresentation.Filter(source, favoriteSearch, favoriteTagFilter);
@@ -77,15 +89,20 @@ internal sealed partial class PortraitPreviewWindow
                 ImGui.TextWrapped(source.Count == 0
                     ? showFavoriteTrash ? "回收站是空的。" : "还没有收藏。请在同步预览工作台点击“收藏”。"
                     : "没有符合条件的收藏。");
-            else DrawFavoriteMasonry(visible);
+            else DrawFavoriteMasonry(visible, observedCards);
         }
         ImGui.EndChild();
         DrawFavoriteCardActions();
         DrawFavoriteMetadataEditor();
         ImGui.End();
+        // Navigation can reenter through a draw boundary. A changed tab cannot
+        // relabel rows already submitted from the previous collection.
+        if (showFavoriteTrash != renderedTrash) return;
+        favoriteGallery.Complete(observation, FavoriteGalleryContext, showFavorites, renderedTrash, true, observedCards);
     }
 
-    private void DrawFavoriteMasonry(IReadOnlyList<PortraitFavoriteEntry> entries)
+    private void DrawFavoriteMasonry(IReadOnlyList<PortraitFavoriteEntry> entries,
+        List<PortraitFavoriteGalleryCard> observedCards)
     {
         var layout = PortraitFavoriteMasonryLayout.For(ImGui.GetContentRegionAvail().X, Scale);
         var inset = 8 * Scale;
@@ -120,16 +137,20 @@ internal sealed partial class PortraitPreviewWindow
             // Submit off-screen buttons to keyboard navigation too, while only visible
             // cards can request or draw a GPU texture.
             if (!visible) { ImGui.PopID(); continue; }
+            var imageSubmitted = false;
             var imageOrigin = min + new Vector2(inset);
             ImGui.SetCursorScreenPos(imageOrigin);
-            if (photoRequests++ < 32 && photos?.GetSnapshot(entry.SourceContentID, entry.Snapshot) is { } texture)
+            if (photoRequests++ < 32 && photos?.GetSnapshot(entry.SourceContentID, entry.Snapshot, entry.Source) is { } texture)
+            {
                 ImGui.Image(texture.Handle, imageSize);
+                imageSubmitted = true;
+            }
             else
             {
                 ImGui.Dummy(imageSize);
                 var draw = ImGui.GetWindowDrawList();
                 draw.AddRectFilled(imageOrigin, imageOrigin + imageSize, ImGui.GetColorU32(FireGazePalette.Raised));
-                var status = photos?.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot) ?? PortraitFavoritePhotoStatus.Missing;
+                var status = photos?.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot, entry.Source) ?? PortraitFavoritePhotoStatus.Missing;
                 var label = PortraitHistoryPhotoPresentation.FavoriteLabel(status);
                 // Wrap within this card, including storage errors; never bleed into its neighbor.
                 ImGui.SetCursorScreenPos(imageOrigin + new Vector2(inset, imageSize.Y * .44f));
@@ -146,6 +167,10 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.PopStyleColor();
             if (hovered) ImGui.SetTooltip($"{entry.Name}\n{entry.SourceName}\n{string.Join(" · ", entry.Tags)}");
             ImGui.PopID();
+            // Keep one overflow row solely to report truncation. Missing rows
+            // are unknown coverage, never evidence that a card does not exist.
+            if (observedCards.Count <= PortraitFavoriteGalleryPublisher.MaximumCards)
+                observedCards.Add(new(entry.ID, entry.SourceContentID, true, imageSubmitted));
         }
         ImGui.SetCursorScreenPos(origin);
         ImGui.Dummy(new Vector2(1, bottom + layout.Gap));

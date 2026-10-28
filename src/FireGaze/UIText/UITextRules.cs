@@ -16,11 +16,9 @@ namespace FireGaze.UIText;
 ///
 ///     属性字符串：不少插件把配置界面的说明放在自定义特性参数里（ARSR 的 <c>UIAttribute</c>、
 ///     SimpleTweaks 的 <c>TweakNameAttribute</c>/<c>TweakDescriptionAttribute</c>/<c>TweakConfigOptionAttribute</c>），
-///     这些字符串不在 <c>ldstr</c> 里，普通抽取看不到。识别规则：
-///       · 内建：<c>System.ComponentModel</c> 的 Description / Category / Display / Tooltip / Label；
-///       · 内建：短名以 <c>UI</c>/<c>Ui</c> 开头且以 <c>Attribute</c> 结尾（UIAttribute / UiTextAttribute…）；
-///       · 名单：<c>uiAttributes</c> 里点名（SimpleTweaks 那套）。
-///     只翻**构造函数参数**（命名参数常是键/ID，不碰），且值要过 <c>LooksTranslatable</c>。
+///     这些字符串不在 <c>ldstr</c> 里，普通抽取看不到。准入由
+///     <see cref="UITextAttributeContracts" /> 根据完整类型、构造器与消费者上下文决定。
+///     旧规则文件的短名列表保留读取兼容，不授予未知类型或参数写入权限。
 /// </remarks>
 internal static class UITextRules
 {
@@ -187,134 +185,10 @@ internal static class UITextRules
     }
 
     /// <summary>
-    ///     这个特性的第 N 个构造参数是不是「功能字符串」（搜索标签之类）——抽取时跳过。
-    ///     名单在 <c>uit-rules.json</c> 的 <c>attributeSkipArgs</c>（例：BossMod 的 PropertyDisplay
-    ///     第 5 个参数是搜索标签，翻了会让英文搜索失效）。
+    ///     已知的精确属性类型。具体参数的抽取、写入及恢复检测还须通过
+    ///     <see cref="UITextAttributeContracts" /> 的完整合同，不能仅据此方法放行。
     /// </summary>
-    public static bool IsAttributeArgumentSkipped(string typeFullName, int index)
-    {
-        if (string.IsNullOrEmpty(typeFullName))
-        {
-            return false;
-        }
-
-        var name = typeFullName;
-        var dot = name.LastIndexOf('.');
-        if (dot >= 0)
-        {
-            name = name[(dot + 1)..];
-        }
-
-        EnsureLoaded();
-        return attributeSkipArgs!.TryGetValue(name, out var skip) && skip.Contains(index);
-    }
-
-    /// <summary>
-    ///     这个自定义特性里的字符串算不算界面文本。只看**构造函数参数**由调用方保证。
-    /// </summary>
-    public static bool IsUIAttribute(string typeFullName)
-    {
-        if (string.IsNullOrEmpty(typeFullName))
-        {
-            return false;
-        }
-
-        var name = typeFullName;
-        var dot = name.LastIndexOf('.');
-        if (dot >= 0)
-        {
-            name = name[(dot + 1)..];
-        }
-
-        if (name is "DescriptionAttribute" or "CategoryAttribute" or "DisplayAttribute" or "TooltipAttribute" or "LabelAttribute")
-        {
-            return true;
-        }
-
-        // 插件自己写的 UI 特性（UIAttribute / UiTextAttribute / UiStringAttribute…）
-        if (name.EndsWith("Attribute", StringComparison.Ordinal)
-            && (name.StartsWith("UI", StringComparison.Ordinal) || name.StartsWith("Ui", StringComparison.Ordinal)))
-        {
-            return true;
-        }
-
-        EnsureLoaded();
-        if (uiAttributes!.Contains(name))
-        {
-            return true;
-        }
-
-        // 命令类特性（ECommons 的 Cmd/SubCmd、卫月的 Command）：特性本身算 UI（帮助文本要翻），
-        // 但第 0 个参数是命令名/子命令名，抽取与打补丁都要跳过——见 CommandHelpStartIndex。
-        return commandAttributes!.ContainsKey(name);
-    }
-
-    /// <summary>
-    ///     命令类特性的帮助文本从第几个构造参数开始（前面的是命令名 / 别名，绝不能翻）。
-    ///     不是命令类特性时返回 <c>null</c>。
-    /// </summary>
-    /// <remarks>
-    ///     例：<c>[SubCmd("unlock", "Unlock all windows")]</c> → 1（0 是子命令名）；
-    ///     ECommons 的 <c>CmdAttribute(command, helpMessage, ...)</c>、卫月的 <c>[Command("/x", "help")]</c> 同理。
-    /// </remarks>
-    public static int? CommandHelpStartIndex(string typeFullName)
-    {
-        if (string.IsNullOrEmpty(typeFullName))
-        {
-            return null;
-        }
-
-        var name = typeFullName;
-        var dot = name.LastIndexOf('.');
-        if (dot >= 0)
-        {
-            name = name[(dot + 1)..];
-        }
-
-        EnsureLoaded();
-        return commandAttributes!.TryGetValue(name, out var start) ? start : null;
-    }
-
-    /// <summary>
-    ///     自定义特性的**命名参数**（Property / Field）里哪些名字算界面文本。
-    /// </summary>
-    /// <remarks>
-    ///     ARSR 的 <c>[RotationConfig(CombatType.PvE, Name = "…")]</c> 就是这种形态（2026-10-02 用户实测漏翻）。
-    ///     其余名字（Path / Id / Command / Version…）多是键与标识，一律不碰。
-    /// </remarks>
-    private static readonly string[] UINamedArgumentNames =
-    [
-        "Name",
-        "Text",
-        "Label",
-        "Title",
-        "Caption",
-        "Heading",
-        "Description",
-        "Tooltip",
-        "Hint",
-        "DisplayName",
-        "DisplayText",
-    ];
-
-    /// <summary>命名参数名是否算界面文本（大小写不敏感）。</summary>
-    public static bool IsUINamedArgument(string? name)
-    {
-        if (string.IsNullOrEmpty(name))
-        {
-            return false;
-        }
-
-        foreach (var candidate in UINamedArgumentNames)
-        {
-            if (string.Equals(candidate, name, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public static bool IsUIAttribute(string typeFullName) => UITextAttributeContracts.IsKnownType(typeFullName);
 
     /// <summary>测试与诊断用：当前加载进来的伴生名单。</summary>
     public static IReadOnlyDictionary<string, string[]> LoadedCompanions
@@ -326,7 +200,7 @@ internal static class UITextRules
         }
     }
 
-    /// <summary>测试与诊断用：当前生效的额外界面特性名单。</summary>
+    /// <summary>测试与诊断用：旧规则文件里的界面特性名单；不作为参数准入依据。</summary>
     public static IReadOnlyCollection<string> LoadedUIAttributes
     {
         get
@@ -336,7 +210,7 @@ internal static class UITextRules
         }
     }
 
-    /// <summary>测试与诊断用：命令类特性 → 帮助文本起始参数下标。</summary>
+    /// <summary>测试与诊断用：旧规则文件里的命令帮助下标；不作为参数准入依据。</summary>
     public static IReadOnlyDictionary<string, int> LoadedCommandAttributes
     {
         get

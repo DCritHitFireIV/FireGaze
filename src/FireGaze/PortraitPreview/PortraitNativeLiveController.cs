@@ -36,6 +36,8 @@ internal sealed class PortraitNativeLiveController : IDisposable
     private bool automaticAllowed;
     private long nextAutomaticAttempt;
     private int automaticFailures;
+    private long nextFrameAttempt;
+    private int frameFailures;
 
     public PortraitNativeLiveController(IPortraitNativeLiveSource source, Func<PortraitNativeLiveContext> readContext,
         Func<long>? readMonotonicMilliseconds = null)
@@ -121,15 +123,41 @@ internal sealed class PortraitNativeLiveController : IDisposable
             return false;
         }
     }
+
+    /// <summary>
+    /// Re-arms automatic acquisition after the feature intentionally paused this
+    /// controller for a source-scope transition within the same preview lease.
+    /// This is only called by the owning feature after it has returned to the
+    /// portrait source; ordinary Stop remains final until an explicit re-arm.
+    /// </summary>
+    internal void RearmAutomaticSession(long sessionRevision, PortraitIdentity requested)
+    {
+        lock (gate)
+        {
+            if (disposed || sessionRevision <= 0 || !requested.IsValid || requested.Generation == 0
+                || sessionRevision < startedSessionRevision) return;
+            if (sessionRevision > startedSessionRevision)
+                startedSessionRevision = sessionRevision;
+            automaticEditor = requested;
+            automaticOwner = default;
+            automaticAllowed = true;
+            automaticFailures = 0;
+            nextAutomaticAttempt = readMonotonicMilliseconds();
+        }
+    }
     public PortraitNativeLiveStopReason StopReason { get { lock (gate) return stopReason; } }
 
     public bool TryEnable(PortraitIdentity requested)
     {
         long ticket;
+        PortraitCaptureOwner existingOwner;
+        bool reuse;
         lock (gate)
         {
             if (disposed) return false;
-            StopLocked(PortraitNativeLiveStopReason.Disabled);
+            reuse = enabled && boundEditor == requested;
+            existingOwner = boundOwner;
+            if (!reuse) StopLocked(PortraitNativeLiveStopReason.Disabled);
             ticket = revision;
         }
         try
@@ -140,7 +168,7 @@ internal sealed class PortraitNativeLiveController : IDisposable
                 return false;
             }
             var context = readContext();
-            if (!Matches(context, requested, context.Owner))
+            if (!Matches(context, requested, context.Owner) || reuse && context.Owner != existingOwner)
             {
                 StopIfCurrent(ticket, PortraitNativeLiveStopReason.InvalidEnable);
                 return false;
@@ -149,6 +177,7 @@ internal sealed class PortraitNativeLiveController : IDisposable
             {
                 // A native callback in qualification may have invalidated or disposed this attempt.
                 if (disposed || revision != ticket) return false;
+                if (reuse) return enabled;
                 boundEditor = requested;
                 boundOwner = context.Owner;
                 enabled = true;
@@ -174,8 +203,8 @@ internal sealed class PortraitNativeLiveController : IDisposable
             ticket = revision;
             editor = boundEditor;
             owner = boundOwner;
-            // The new frame is not available to Draw until both context and descriptor are verified.
-            frameReady = false;
+            // Keep the already verified descriptor visible while a candidate is acquired.
+            // The view atomically replaces it only after the post-acquire context check.
         }
         try
         {
@@ -188,14 +217,52 @@ internal sealed class PortraitNativeLiveController : IDisposable
             if (!IsCurrent(ticket)) return;
             if (!Matches(before, editor, owner))
             {
+                if (Owns(before, editor, owner))
+                {
+                    // History photos temporarily exclude acquisition. They do not revoke
+                    // this editor's independently retained managed display descriptor.
+                    lock (gate) if (revision == ticket) stopReason = PortraitNativeLiveStopReason.ContextBusy;
+                    return;
+                }
                 StopIfCurrent(ticket, Owns(before, editor, owner) || TemporarilyUnresolved(before, owner)
                     ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
                 return;
             }
-            view.Update();
+            bool refreshed = false;
+            if (readMonotonicMilliseconds() >= nextFrameAttempt)
+                refreshed = view.UpdatePreservingCurrent(image =>
+                {
+                    if (!IsCurrent(ticket)) return false;
+                    if (image.Key.Editor != editor || image.Key.Owner != owner)
+                    {
+                        StopIfCurrent(ticket, PortraitNativeLiveStopReason.AcquireFailed);
+                        return false;
+                    }
+                    var after = readContext();
+                    if (!IsCurrent(ticket)) return false;
+                    if (Matches(after, editor, owner)) return true;
+                    if (Owns(after, editor, owner)) return false;
+                    StopIfCurrent(ticket, TemporarilyUnresolved(after, owner)
+                        ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
+                    return false;
+                });
             if (!IsCurrent(ticket)) return;
-            // Failed updates always retire the old descriptor. Only the same active preview
-            // lease may retry later, after a fresh owner/context check and physical retirement.
+            if (!refreshed)
+            {
+                // A failed native lookup can itself reenter logout or editor replacement.
+                // Keeping the prior descriptor requires the same final ownership proof
+                // even when there was no candidate for the publication callback.
+                var afterMiss = readContext();
+                if (!IsCurrent(ticket)) return;
+                if (!Owns(afterMiss, editor, owner))
+                {
+                    StopIfCurrent(ticket, TemporarilyUnresolved(afterMiss, owner)
+                        ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
+                    return;
+                }
+            }
+            // Initial misses have no image to keep. A same-session transient miss retains
+            // only the prior verified descriptor; malformed frames still fail closed.
             using (var verified = view.TryBorrow(out var borrow) ? borrow : null)
             {
                 if (verified is null || !verified.TryGetImage(out var image)
@@ -205,19 +272,20 @@ internal sealed class PortraitNativeLiveController : IDisposable
                     return;
                 }
             }
-            var after = readContext();
-            if (!IsCurrent(ticket)) return;
-            if (!Matches(after, editor, owner))
-            {
-                StopIfCurrent(ticket, Owns(after, editor, owner) || TemporarilyUnresolved(after, owner)
-                    ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
-                return;
-            }
             lock (gate)
                 if (!disposed && enabled && revision == ticket)
                 {
                     frameReady = true;
-                    automaticFailures = 0;
+                    if (refreshed)
+                    {
+                        automaticFailures = frameFailures = 0;
+                        nextFrameAttempt = 0;
+                    }
+                    else if (readMonotonicMilliseconds() >= nextFrameAttempt)
+                    {
+                        nextFrameAttempt = readMonotonicMilliseconds() + (250L << Math.Min(frameFailures, 3));
+                        frameFailures = Math.Min(frameFailures + 1, 3);
+                    }
                 }
         }
         catch (Exception)
@@ -233,6 +301,32 @@ internal sealed class PortraitNativeLiveController : IDisposable
             borrow = null;
             return !disposed && enabled && frameReady && view.TryBorrow(out borrow);
         }
+    }
+
+    /// <summary>
+    /// History photographs only read independently retained source SRVs and copy into their
+    /// own outputs. A freshly owned, stable display may coexist with that specific operation;
+    /// capture demand itself is deliberately not a requirement for physical retirement here.
+    /// </summary>
+    internal bool CanShareReadOnlyPhotoSource(PortraitIdentity editor, PortraitCaptureOwner owner)
+    {
+        long ticket;
+        lock (gate)
+        {
+            if (disposed || !enabled || !frameReady || boundEditor != editor || boundOwner != owner) return false;
+            ticket = revision;
+        }
+        try
+        {
+            if (!source.IsFrameworkThread) return false;
+            var context = readContext();
+            if (!Owns(context, editor, owner) || context.CaptureMode != "off" || context.LightingFitBusy) return false;
+            lock (gate)
+                return !disposed && enabled && frameReady && revision == ticket
+                    && boundEditor == editor && boundOwner == owner
+                    && view.CanShareReadOnlyPhotoSource(editor, owner);
+        }
+        catch (Exception) { return false; }
     }
 
     /// <summary>Call at close intent, owner loss, territory change, logout and the outer update catch.</summary>
@@ -283,6 +377,8 @@ internal sealed class PortraitNativeLiveController : IDisposable
         revision++;
         enabled = false;
         frameReady = false;
+        nextFrameAttempt = 0;
+        frameFailures = 0;
         boundEditor = default;
         boundOwner = default;
         stopReason = reason;

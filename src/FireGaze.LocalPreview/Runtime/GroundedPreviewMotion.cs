@@ -1,5 +1,8 @@
 namespace FireGaze.LocalPreview.Runtime;
 
+[Flags]
+public enum GroundedMotionLane { None = 0, Rider = 1, Mount = 2, Both = Rider | Mount }
+
 public enum GroundedMotionKind { Unknown, Idle, Walk, Run, Sprint, Turn, Jump, Landing }
 
 /// <summary>A classified source reading. It contains no target animation or gameplay state.</summary>
@@ -16,10 +19,11 @@ public static class GroundedMotionClassifier
         if (!sampleValid) return default;
         var kind = timelineId switch
         {
-            3 or 34 or 12001 => GroundedMotionKind.Idle,
+            3 or 34 or 12001 or 4040 => GroundedMotionKind.Idle,
             7 or 8 or 35 or 36 or 12006 or 12007 => GroundedMotionKind.Turn,
-            13 or 14 or 15 or 16 or 41 or 42 or 43 or 44 or 12002 or 12003 or 12004 or 12005 => GroundedMotionKind.Walk,
-            22 or 23 or 24 or 25 or 26 or 27 or 50 or 51 or 52 or 12008 or 12009 or 12010 => GroundedMotionKind.Run,
+            13 or 14 or 15 or 16 or 41 or 42 or 43 or 44 or 12002 or 12003 or 12004 or 12005
+                or 4053 or 4046 => GroundedMotionKind.Walk,
+            22 or 23 or 24 or 25 or 26 or 27 or 50 or 51 or 52 or 12008 or 12009 or 12010 or 4043 => GroundedMotionKind.Run,
             30 or 58 or 12011 => GroundedMotionKind.Sprint,
             31 or 32 or 59 or 60 or 12012 or 12013 => GroundedMotionKind.Jump,
             33 or 61 or 12014 => GroundedMotionKind.Landing,
@@ -63,8 +67,7 @@ public readonly record struct GroundedMotionPlan(bool WriteBaseOverride, ushort 
 /// </summary>
 public sealed class GroundedPreviewMotion
 {
-    private GroundedMotionTarget target;
-    private bool hasTarget;
+    private ulong ownerIdentity;
     private Lane root;
     private Lane mount;
 
@@ -77,43 +80,52 @@ public sealed class GroundedPreviewMotion
     /// Current owned-root reading, used to avoid clearing another writer's override
     /// when source sampling becomes invalid or returns an unknown clip.
     /// </param>
+    /// <param name="ownedLanes">
+    /// Only these lanes may observe this sample or consume a playback/cleanup edge.
+    /// None leaves all state untouched. Owner loss or active emotes revoke both lanes.
+    /// </param>
     public GroundedMotionPlan Plan(GroundedMotionSample sample, GroundedMotionTarget nextTarget,
-        bool emoteActuallyActive, ushort currentBaseOverride, ushort currentMountBaseOverride = 0)
+        bool emoteActuallyActive, ushort currentBaseOverride, ushort currentMountBaseOverride = 0,
+        ushort? currentTimeline = null, ushort? currentMountTimeline = null,
+        GroundedMotionLane ownedLanes = GroundedMotionLane.Both)
     {
-        if (nextTarget.Identity == 0) { Reset(); return default; }
-        if (!hasTarget || target.Identity != nextTarget.Identity)
+        ownedLanes &= GroundedMotionLane.Both;
+        if (ownedLanes == GroundedMotionLane.None) return default;
+        if (nextTarget.Identity == 0 || emoteActuallyActive)
         {
+            // Emotes and lost owners revoke all bookkeeping without issuing cleanup
+            // against an emote writer or an allocation we no longer own.
             Reset();
-            hasTarget = true;
-        }
-        else if (target.MountId != nextTarget.MountId || target.MountIdentity != nextTarget.MountIdentity
-            || target.MountGeneration != nextTarget.MountGeneration || target.FlightPose != nextTarget.FlightPose
-            || target.FlightClips != nextTarget.FlightClips)
-        {
-            // A new mount on the same actor needs a fresh playback edge. Its previous
-            // pin can still be released when switching back to on-foot natural idle.
-            root.FreshEdge();
-            mount = default;
-        }
-        target = nextTarget;
-
-        if (emoteActuallyActive)
-        {
-            // No cleanup write may interrupt the emote. Relinquish the pin claim and
-            // force fresh resolution from the current sample once the emote is over.
-            root = default;
-            mount = default;
             return default;
         }
+        if (ownerIdentity != nextTarget.Identity)
+        {
+            Reset();
+            ownerIdentity = nextTarget.Identity;
+        }
+
+        // Compare the configuration the selector actually uses: inactive flight
+        // resources are irrelevant, and every invalid flight pack uses Standard.
+        nextTarget = nextTarget with
+        {
+            FlightClips = !nextTarget.FlightPose ? default : nextTarget.FlightClips.IsValid
+                ? nextTarget.FlightClips : GroundedFlightPoseClips.Standard,
+        };
+        bool ownsRoot = (ownedLanes & GroundedMotionLane.Rider) != 0;
+        bool ownsMount = (ownedLanes & GroundedMotionLane.Mount) != 0;
+        if (ownsRoot) root.ObserveTarget(nextTarget, mountLane: false);
+        if (ownsMount) mount.ObserveTarget(nextTarget, mountLane: true);
         if (!sample.Known)
         {
-            return Combine(root.Release(currentBaseOverride), mount.Release(currentMountBaseOverride));
+            return Combine(ownsRoot ? root.Release(currentBaseOverride) : default,
+                ownsMount ? mount.Release(currentMountBaseOverride) : default);
         }
         if (nextTarget.MountId == 0)
         {
-            mount = default;
-            var foot = sample.Kind == GroundedMotionKind.Idle ? root.Release(currentBaseOverride)
-                : root.Play(sample.TimelineId, sample.Kind == GroundedMotionKind.Landing);
+            if (ownsMount) mount = default;
+            var foot = !ownsRoot ? default : sample.Kind == GroundedMotionKind.Idle ? root.Release(currentBaseOverride)
+                : root.Play(sample.TimelineId, sample.Kind == GroundedMotionKind.Landing, currentTimeline,
+                    currentBaseOverride);
             return Combine(foot, default);
         }
 
@@ -124,7 +136,7 @@ public sealed class GroundedPreviewMotion
             // movement flags, height, velocity or flight permission are requested.
             // Forward resources are a fallback for models such as Ark lacking lateral
             // flight clips. Ground jumps keep the hovering visual pose at real height.
-            var clips = nextTarget.FlightClips.IsValid ? nextTarget.FlightClips : GroundedFlightPoseClips.Standard;
+            var clips = nextTarget.FlightClips;
             ushort visualChild = sample.Kind switch
             {
                 GroundedMotionKind.Walk => sample.TimelineId is 16 or 44 or 12005 ? clips.Backward : clips.Forward,
@@ -133,7 +145,8 @@ public sealed class GroundedPreviewMotion
             };
             ushort visualRider = sample.Kind is GroundedMotionKind.Walk or GroundedMotionKind.Run or GroundedMotionKind.Sprint
                 ? (ushort)4048 : (ushort)4047;
-            return Combine(root.Play(visualRider, false), mount.Play(visualChild, false));
+            return Combine(ownsRoot ? root.Play(visualRider, false, currentTimeline, currentBaseOverride, visualChild) : default,
+                ownsMount ? mount.Play(visualChild, false, currentMountTimeline, currentMountBaseOverride, visualChild) : default);
         }
 
         // Current CN ActionTimeline rows: mount_idle 166, mount_run 167,
@@ -154,8 +167,8 @@ public sealed class GroundedPreviewMotion
             // Reviewed mount PAPs do not consistently contain normal turn clips.
             // Keep the child's idle loop while the rider uses its ground turn pose.
             7 or 8 or 35 or 36 or 12006 or 12007 => 3,
-            13 or 41 or 12002 => 13, 14 or 42 or 12003 => 14,
-            15 or 43 or 12004 => 15, 16 or 44 or 12005 => 16,
+            13 or 41 or 12002 or 4053 => 13, 14 or 42 or 12003 => 14,
+            15 or 43 or 12004 => 15, 16 or 44 or 12005 or 4046 => 16,
             23 or 51 or 12009 => 23, 24 or 52 or 12010 => 24,
             31 or 59 or 12012 => 31, 32 or 60 or 12013 => 32,
             33 or 61 or 12014 => 33,
@@ -163,7 +176,14 @@ public sealed class GroundedPreviewMotion
         };
         // Source run-start clips are one-shots; sustaining them freezes a mount.
         // Sprint also uses normal/run as a conservative model-resource fallback.
-        return Combine(root.Play(rider, false), mount.Play(child, sample.Kind == GroundedMotionKind.Landing));
+        // Mounted TimelineContainer.Update compares the root's BaseOverride with
+        // the CHILD's base lane. Pinning the rider clip here (167 vs child 22)
+        // makes native selection restart that posture on every update. Playback
+        // still targets the rider; its native base request follows the child.
+        ushort nativeBase = sample.Kind == GroundedMotionKind.Landing ? (ushort)0 : child;
+        return Combine(ownsRoot ? root.Play(rider, false, currentTimeline, currentBaseOverride, nativeBase) : default,
+            ownsMount ? mount.Play(child, sample.Kind == GroundedMotionKind.Landing, currentMountTimeline,
+                currentMountBaseOverride, child) : default);
     }
 
     private static GroundedMotionPlan Combine(LanePlan root, LanePlan mount) =>
@@ -173,34 +193,70 @@ public sealed class GroundedPreviewMotion
 
     private struct Lane
     {
+        private GroundedMotionTarget target;
+        private bool hasTarget;
         private bool previous;
         private ushort timeline;
         private ushort ownedPin;
 
-        public LanePlan Play(ushort next, bool terminal)
+        public void ObserveTarget(GroundedMotionTarget nextTarget, bool mountLane)
         {
-            bool edge = !previous || timeline != next;
+            if (hasTarget && target != nextTarget)
+            {
+                if (mountLane && (target.MountIdentity != nextTarget.MountIdentity
+                    || target.MountGeneration != nextTarget.MountGeneration))
+                {
+                    // A replaced child must never inherit the old allocation's pin.
+                    ForgetMotion();
+                }
+                else
+                {
+                    // Same allocation, new configuration: keep its pin until this
+                    // lane can apply a replacement or release on its own boundary.
+                    previous = false;
+                }
+            }
+            target = nextTarget;
+            hasTarget = true;
+        }
+
+        public LanePlan Play(ushort next, bool terminal, ushort? observedTimeline,
+            ushort currentBaseOverride, ushort? nativeBase = null)
+        {
+            // Native Character.Update can overwrite a display rider after Framework.Update.
+            // Repair a changed resident loop only when the native base selector no longer
+            // carries the pin owned by this lane. A mounted update can publish a transient
+            // timeline while preserving that pin; replaying on every such observation
+            // restarts the rider and produces visible locomotion twitching. One-shot landing
+            // remains edge-only even after the native clip ends.
+            bool basePinLost = nativeBase is { } expected && expected != 0 && currentBaseOverride != expected;
+            bool edge = !previous || timeline != next
+                || (!terminal && basePinLost && observedTimeline is { } observed && observed != next);
             timeline = next;
             previous = true;
-            ownedPin = terminal ? (ushort)0 : next;
-            return terminal ? edge ? new(true, 0, next) : default : new(true, next, edge ? next : (ushort)0);
+            ownedPin = terminal ? (ushort)0 : nativeBase ?? next;
+            return terminal ? edge ? new(true, 0, next) : default : new(true, ownedPin, edge ? next : (ushort)0);
         }
 
         public LanePlan Release(ushort current)
         {
             bool release = ownedPin != 0 && current == ownedPin;
-            this = default;
+            ForgetMotion();
             return release ? new(true, 0, 0) : default;
         }
 
-        public void FreshEdge() => previous = false;
+        private void ForgetMotion()
+        {
+            previous = false;
+            timeline = 0;
+            ownedPin = 0;
+        }
     }
 
     /// <summary>Forgets bookkeeping only. Never applies cleanup to an obsolete actor.</summary>
     public void Reset()
     {
-        target = default;
-        hasTarget = false;
+        ownerIdentity = 0;
         root = default;
         mount = default;
     }

@@ -42,6 +42,14 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private bool preferencesInitialized;
     private volatile bool disposed;
     private PreviewEffect[] uiActiveEffects = [];
+    // The catalog reads this detached value instead of inferring a transition from
+    // the runtime effect array, which can briefly contain neither the old nor the
+    // new mount while a switch is being applied.
+    private TrialPresentation mountPresentation = TrialPresentation.Ready;
+    private TrialPresentation accessoryPresentation = TrialPresentation.Ready;
+    private int pendingMountRequests;
+    private int pendingAccessoryRequests;
+    private int pendingTrialStops;
     private string lastMessage = "等待插件加载阶段完成";
     private HmsCoexistenceDecision coexistence = HmsCoexistencePolicy.Decide(0, null);
     private DateTime nextCoexistenceCheck;
@@ -51,14 +59,16 @@ public sealed partial class LocalPreviewFeature : IDisposable
     // A current Framework read for the sibling portrait safety collector. UI publication is a
     // separate cache and cannot establish the absence of world effects.
     internal PortraitPreview.PortraitSafetyTrialState ReadTrialSafetyState()
-        => !disposed && initialized && Framework.IsInFrameworkUpdateThread && runtime is { IsDisposed: false } current
-            ? new(true, current.HasActivePreview, current.Revision) : new(false, false, 0);
+        => !disposed && initialized && Framework.IsInFrameworkUpdateThread && NativeAdmissionAvailable() && runtime is { IsDisposed: false } current
+            ? new(true, current.HasActivePreview || companions?.HasWorldActors == true,
+                current.Revision + (companions?.Revision ?? 0)) : new(false, false, 0);
 
     public LocalPreviewFeature(IDalamudPluginInterface pluginInterface, IFramework framework,
         IClientState clientState, IObjectTable objects, ICondition conditions, IDataManager data,
         IGameInteropProvider interop, IPluginLog log, IChatGui chat, IGameGui gameGUI,
         IContextMenu contextMenu, ICommandManager commands, IAddonLifecycle addonLifecycle,
-        Configuration config, Action saveConfig, ITextureProvider? textures = null, IKeyState? keys = null)
+        Configuration config, Action saveConfig, ITextureProvider? textures = null, IKeyState? keys = null,
+        INamePlateGui? namePlateGUI = null)
     {
         this.pluginInterface = pluginInterface;
         Framework = framework; ClientState = clientState; Objects = objects; Condition = conditions;
@@ -70,6 +80,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         this.saveConfig = saveConfig;
         this.textures = textures;
         this.keys = keys;
+        this.namePlateGUI = namePlateGUI;
         diagnosticsIpc = pluginInterface.GetIpcProvider<string>("FireGaze.LocalPreview.Diagnostics");
         try
         {
@@ -87,14 +98,14 @@ public sealed partial class LocalPreviewFeature : IDisposable
 
     private void Update(IFramework framework)
     {
-        if (disposed) return;
+        if (!NativeAdmissionAvailable()) return;
         try { UpdateCore(framework); }
         finally { PublishActiveEffects(); }
     }
 
     private void UpdateCore(IFramework framework)
     {
-        if (disposed) return;
+        if (!NativeAdmissionAvailable()) return;
         if (!preferencesInitialized)
         {
             preferencesInitialized = true;
@@ -104,7 +115,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
                 Cleanup(saveConfig, "保存本地试用默认设置");
             }
         }
-        if (!initialized || runtime?.HasActivePreview == true || DateTime.UtcNow >= nextCoexistenceCheck)
+        if (!initialized || runtime?.HasActivePreview == true || companions?.HasWorldActors == true || DateTime.UtcNow >= nextCoexistenceCheck)
         {
             RefreshCoexistence();
             nextCoexistenceCheck = DateTime.UtcNow.AddSeconds(1);
@@ -113,11 +124,13 @@ public sealed partial class LocalPreviewFeature : IDisposable
         {
             runtime.BeforeHmsLifecycle();
         }
-        if (initialized) { UpdatePresentationExtras(); return; }
+        if (initialized) { UpdateCompanions(); UpdatePresentationExtras(); return; }
         initialized = true;
         try
         {
             runtime = new ActorPreviewRuntime(Framework, ClientState, Objects, Condition, Data, Interop, Log);
+            InitializeCompanions();
+            InitializeCompanionNames();
             LoadCatalog();
             hmsAdapter = new HmsOriginalAdapter(pluginInterface, Commands, runtime, Log);
             RefreshCoexistence();
@@ -127,14 +140,19 @@ public sealed partial class LocalPreviewFeature : IDisposable
             runtime.PreviewCancelled += OnCancelled;
             InitializePresentationExtras();
             lastMessage = "本地试用入口已就绪";
-            if (!enabled) { interaction?.Dispose(); interaction = null; }
+            if (!enabled) { DisposeComponent(interaction, "菜单入口"); interaction = null; }
             Log.Information("[LocalPreview] 初始化完成：" + Diagnostics());
         }
         catch (Exception ex)
         {
+            ObservePhysicalCloseFailure(ex);
             DisposePresentationExtras();
             DisposeComponent(interaction, "菜单入口");
             DisposeComponent(runtime, "角色显示");
+            DisposeComponent(companionNames, "宠物名称显示");
+            DisposeComponent(companions, "宠物显示");
+            DisposeComponent(companionEmotes, "宠物动作适配");
+            companions = null;
             DisposeComponent(hmsAdapter, "HMS 适配");
             hmsAdapter = null;
             interaction = null;
@@ -145,7 +163,24 @@ public sealed partial class LocalPreviewFeature : IDisposable
     }
 
     private void Request(MenuKind kind, uint id)
-        => DispatchMutation(() => RequestCore(kind, id));
+    {
+        var changesMount = kind == MenuKind.Mount && enabled && !disposed;
+        var changesAccessory = kind == MenuKind.Accessory && enabled && !disposed;
+        if (changesMount)
+            System.Threading.Interlocked.Increment(ref pendingMountRequests);
+        if (changesAccessory)
+            System.Threading.Interlocked.Increment(ref pendingAccessoryRequests);
+        if (changesMount || changesAccessory) PublishCatalogPresentations(ReadActiveEffects());
+        DispatchMutation(() =>
+        {
+            try { RequestCore(kind, id); }
+            finally
+            {
+                if (changesMount) System.Threading.Interlocked.Decrement(ref pendingMountRequests);
+                if (changesAccessory) System.Threading.Interlocked.Decrement(ref pendingAccessoryRequests);
+            }
+        });
+    }
 
     private void RequestCore(MenuKind kind, uint id)
     {
@@ -166,7 +201,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         }
         if (id == 0 || id > ushort.MaxValue)
         {
-            Chat.PrintError("[本地试用] 无效的试用编号。");
+            Chat.PrintError("[本地试用] 这个项目暂时无法试用，请重新选择。");
             return;
         }
         var slot = kind switch
@@ -178,6 +213,19 @@ public sealed partial class LocalPreviewFeature : IDisposable
         };
         try
         {
+            if (kind == MenuKind.Minion && companions is not null)
+            {
+                RequestCompanionCore(id);
+                return;
+            }
+            // Fail closed when the independent companion backend is unavailable.
+            // Falling through would reintroduce the old player-clone route.
+            if (kind == MenuKind.Minion)
+            {
+                lastMessage = "宠物显示服务尚未就绪，请稍后重试。";
+                Chat.PrintError("[本地试用] " + lastMessage);
+                return;
+            }
             if (runtime.TryApply(new PreviewEffect(slot, (ushort)id), out var reason))
             {
                 lastMessage = $"已开始本地试用{CategoryName(kind)}";
@@ -191,7 +239,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         }
         catch (Exception ex)
         {
-            lastMessage = "试用失败，查看卫月日志";
+            lastMessage = "试用暂时未能开始，请稍后重试。";
             Log.Error(ex, "[LocalPreview] 试用请求失败");
             Chat.PrintError("[本地试用] " + lastMessage);
         }
@@ -199,6 +247,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
 
     private void OnNativeAccepted()
     {
+        companions?.RecallAll(CompanionDisplayRetireReason.UserCancelled);
+        ResetCompanionRequests();
         lastMessage = "原生操作已被客户端接受，全部试用已结束";
     }
 
@@ -208,11 +258,22 @@ public sealed partial class LocalPreviewFeature : IDisposable
     }
 
     private void Cancel()
-        => DispatchMutation(CancelCore);
+    {
+        if (disposed) return;
+        System.Threading.Interlocked.Increment(ref pendingTrialStops);
+        PublishCatalogPresentations(ReadActiveEffects());
+        DispatchMutation(() =>
+        {
+            try { CancelCore(); }
+            finally { System.Threading.Interlocked.Decrement(ref pendingTrialStops); }
+        });
+    }
 
     private void CancelCore()
     {
         runtime?.ClearAll();
+        companions?.RecallAll(CompanionDisplayRetireReason.UserCancelled);
+        ResetCompanionRequests();
         lastMessage = "全部试用已结束";
     }
 
@@ -233,7 +294,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         if (!value)
         {
             CancelCore();
-            interaction?.Dispose();
+            DisposeComponent(interaction, "菜单入口");
             interaction = null;
             lastMessage = "本地试用已关闭";
         }
@@ -252,10 +313,10 @@ public sealed partial class LocalPreviewFeature : IDisposable
     // be waiting for rendering. Re-check lifetime when queued work actually runs.
     private void DispatchMutation(Action action)
     {
-        if (disposed) return;
+        if (!NativeAdmissionAvailable()) return;
         void Execute()
         {
-            if (disposed) return;
+            if (!NativeAdmissionAvailable()) return;
             try { action(); }
             catch (Exception ex) { Log.Error(ex, "[LocalPreview] 操作未能执行"); }
             finally { if (!disposed) PublishActiveEffects(); }
@@ -265,11 +326,39 @@ public sealed partial class LocalPreviewFeature : IDisposable
     }
 
     private void PublishActiveEffects()
-        => System.Threading.Volatile.Write(ref uiActiveEffects,
-            disposed ? [] : runtime?.ActiveEffects.ToArray() ?? []);
+    {
+        var effects = disposed ? [] : runtime?.ActiveEffects.ToArray() ?? [];
+        System.Threading.Volatile.Write(ref uiActiveEffects, effects);
+        PublishCatalogPresentations(effects);
+        PublishCompanions();
+    }
 
     private PreviewEffect[] ReadActiveEffects()
         => System.Threading.Volatile.Read(ref uiActiveEffects) ?? [];
+
+    private TrialPresentation ReadMountPresentation()
+        => System.Threading.Volatile.Read(ref mountPresentation) ?? TrialPresentation.Ready;
+
+    private TrialPresentation ReadAccessoryPresentation()
+        => System.Threading.Volatile.Read(ref accessoryPresentation) ?? TrialPresentation.Ready;
+
+    private bool IsTrialStopPending()
+        => System.Threading.Volatile.Read(ref pendingTrialStops) > 0;
+
+    private void PublishCatalogPresentations(IReadOnlyList<PreviewEffect> effects)
+    {
+        TrialPresentation Observe(PreviewSlot slot, MenuKind kind, int pending)
+        {
+            var effect = effects.FirstOrDefault(candidate => candidate.Slot == slot && candidate.Id != 0);
+            var name = effect.Id == 0 ? null
+                : catalog.Search(kind, "").FirstOrDefault(entry => entry.Id == effect.Id)?.Name;
+            return TrialPresentation.Observe(effect.Id, name, pending > 0, IsTrialStopPending());
+        }
+        System.Threading.Volatile.Write(ref mountPresentation,
+            Observe(PreviewSlot.Mount, MenuKind.Mount, System.Threading.Volatile.Read(ref pendingMountRequests)));
+        System.Threading.Volatile.Write(ref accessoryPresentation,
+            Observe(PreviewSlot.Accessory, MenuKind.Accessory, System.Threading.Volatile.Read(ref pendingAccessoryRequests)));
+    }
 
     private void CancelSlot(PreviewSlot slot)
         => DispatchMutation(() => runtime?.Clear(slot));
@@ -370,6 +459,11 @@ public sealed partial class LocalPreviewFeature : IDisposable
                 break;
             case "mount": ParseRequest(MenuKind.Mount, parts); break;
             case "minion": ParseRequest(MenuKind.Minion, parts); break;
+            case "pets": CompanionCommand(parts); break;
+            case "catalog":
+                if (pluginInterface.IsDev && TrialCatalogControls.TryParse(parts, out var catalogAction))
+                    UpdateCatalogControls(catalogAction);
+                break;
             case "accessory": ParseRequest(MenuKind.Accessory, parts); break;
             case "emote": ParseRequest(MenuKind.Emote, parts); break;
             default: Chat.PrintError("[本地试用] 用法：/firegaze preview status|cancel|on|off|mount|minion|accessory|emote <编号>；option <分类或 items> on|off"); break;
@@ -394,6 +488,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         chatLinksEffective = enabled && Preferences.CanLinkEmoteMessages,
         enableConfirmationPending = Preferences.ConfirmationPending,
         catalogCounts = Enum.GetValues<MenuKind>().ToDictionary(k => k.ToString(), k => catalog.Search(k, "").Count),
+        catalogPresentation = ReadCatalogControls(),
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
@@ -429,42 +524,32 @@ public sealed partial class LocalPreviewFeature : IDisposable
         lastMenuContext = interaction?.LastMenuContext,
         lastNativeEmoteEvent = interaction?.LastNativeEmoteEvent,
         active = runtime?.ActiveEffects,
+        companions = companions?.Snapshot,
+        companionWorldActors = companions?.HasWorldActors ?? false,
+        companionPreferences = new { multiCompanionEnabled = config.LocalPreviewMultiCompanionEnabled,
+            showNames = config.LocalPreviewShowCompanionNames,
+            maximumCompanions = config.LocalPreviewMaximumCompanions,
+            lastLimitedCompanions = config.LocalPreviewLastLimitedCompanions,
+            effectiveMaximumCompanions = companions?.MaximumCompanions },
+        companionCommandCapabilities = new { savedGroupClear = pluginInterface?.IsDev == true },
+        companionActors = companions?.NativeObservations(),
+        companionRetiredActors = companions?.RetiredNativeObservations(),
+        companionLastFailure = companions?.LastFailedNativeObservation,
+        companionFollow = companions?.ReadFollowDiagnosticsJSON(),
+        companionFollowExecution = companions?.ReadFollowExecutionJSON(),
+        companionIdleFollow = companions?.ReadIdleFollowJSON(),
+        companionTargetProbe = companions?.LastTargetProbe,
+        companionEmotesAvailable = companionEmotes?.Enabled ?? false,
+        companionBatchBeckon = companions?.BatchBeckonEvidence,
+        companionBatchBeckonStopReason = companions?.BatchBeckonStopReason,
+        companionInteractionDemos = companionInteractionSession?.Active,
+        companionInteractionCoverage = companionInteractionCatalog is null ? null
+            : CompanionInteractionDemoCatalogFactory.MeasureCoverage(companionInteractionCatalog.Entries),
+        companionInteractionSource = companionRequests is null ? (CompanionSourceInteractionSummary?)null
+            : CompanionSourceInteractionRules.Summarize(companionRequests.Search("")),
+        companionInteractionDemoRequested = companions?.HasInteractionDemoRequest ?? false,
+        savedCompanions = config.LocalPreviewSavedMinions.ToArray(),
         lastMessage,
     });
 
-    public void Dispose()
-        => OnFramework(() => { DisposeCore(); return true; });
-
-    private void DisposeCore()
-    {
-        if (disposed) return;
-        disposed = true;
-        System.Threading.Volatile.Write(ref uiActiveEffects, []);
-        Cleanup(() => Framework.Update -= Update, "帧回调");
-        DisposePresentationExtras();
-        if (diagnosticsRegistered) Cleanup(diagnosticsIpc.UnregisterFunc, "诊断 IPC");
-        DisposeComponent(interaction, "菜单入口");
-        if (runtime is not null)
-        {
-            runtime.EmoteObserved -= RecordEmote;
-            runtime.NativeInputAccepted -= OnNativeAccepted;
-            runtime.PreviewCancelled -= OnCancelled;
-            DisposeComponent(runtime, "角色显示");
-        }
-        DisposeComponent(hmsAdapter, "HMS 适配");
-        Log.Information("[LocalPreview] FireGaze 本地试用功能已卸载");
-    }
-
-    private void DisposeComponent(IDisposable? component, string name)
-        => Cleanup(() => component?.Dispose(), name);
-
-    private void Cleanup(Action cleanup, string name)
-    {
-        try { cleanup(); }
-        catch (Exception ex)
-        {
-            try { Log.Error(ex, "[LocalPreview] {Component} 清理失败", name); }
-            catch { /* Continue ownership cleanup even when the host log is unavailable. */ }
-        }
-    }
 }

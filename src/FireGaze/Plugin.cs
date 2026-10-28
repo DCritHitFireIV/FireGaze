@@ -4,6 +4,7 @@ using System.Timers;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Command;
 using Dalamud.Game.Text;
+using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -23,7 +24,7 @@ namespace FireGaze;
 ///       ② 第三方仓库体检（扫描死链、内容不合规，支持停用 / 删除 + 备份 + 撤回）
 ///       ③ 拦住插件安装器的自动刷新（并可选地记住列表浏览位置）
 /// </summary>
-public sealed class Plugin : IAsyncDalamudPlugin
+public sealed partial class Plugin : IAsyncDalamudPlugin
 {
     // 卸载时置空（Dispose 末段）：热重载时旧实例不再被静态字段钉住。读取方一律走可空。
     private static Plugin? instance;
@@ -53,10 +54,12 @@ public sealed class Plugin : IAsyncDalamudPlugin
     [PluginService] public static IGameInteropProvider Interop { get; private set; } = null!;
     [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
     [PluginService] public static IGameGui GameGUI { get; private set; } = null!;
+    [PluginService] public static INamePlateGui NamePlateGUI { get; private set; } = null!;
     [PluginService] public static IContextMenu ContextMenu { get; private set; } = null!;
     [PluginService] public static IAddonLifecycle AddonLifecycle { get; private set; } = null!;
     [PluginService] public static IAgentLifecycle AgentLifecycle { get; private set; } = null!;
     [PluginService] public static IKeyState Keys { get; private set; } = null!;
+    [PluginService] public static IUnlockState UnlockState { get; private set; } = null!;
 
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
@@ -81,8 +84,18 @@ public sealed class Plugin : IAsyncDalamudPlugin
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
     private readonly PluginWorkLifetime workLifetime = new();
+    private readonly List<Exception> detachErrors = new();
+    private IUiBuilder? subscribedUIBuilder;
+    private bool drawWindowsRegistered;
+    private bool installerTickRegistered;
+    private bool openConfigUIRegistered;
+    private bool openMainUIRegistered;
+    private bool activePluginsChangedRegistered;
+    private bool startupTickRegistered;
     private Task? portraitManagedDrain;
     private Task? portraitPhysicalDrain;
+    private Task? localPreviewPhysicalDrain;
+    private bool nativeInitializationUnknown;
     private int disposed;
 
     public Plugin(IDalamudPluginInterface pluginInterface)
@@ -168,19 +181,26 @@ public sealed class Plugin : IAsyncDalamudPlugin
         windowSystem.AddWindow(quotaNoticeWindow);
         window = new MainWindow(this, uiTextTab = new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
-        pluginInterface.UiBuilder.Draw += DrawWindows;
-        pluginInterface.UiBuilder.Draw += TickInstallerListScroll;
-        pluginInterface.UiBuilder.OpenConfigUi += ToggleWindow;
-        pluginInterface.UiBuilder.OpenMainUi += OpenMainWindow;
+        subscribedUIBuilder = pluginInterface.UiBuilder;
+        subscribedUIBuilder.Draw += DrawWindows;
+        drawWindowsRegistered = true;
+        subscribedUIBuilder.Draw += TickInstallerListScroll;
+        installerTickRegistered = true;
+        subscribedUIBuilder.OpenConfigUi += ToggleWindow;
+        openConfigUIRegistered = true;
+        subscribedUIBuilder.OpenMainUi += OpenMainWindow;
+        openMainUIRegistered = true;
 
         // 插件装/卸/启/停（公开事件，无钩子）：让「插件汉化」页的行状态立即跟上——
         // 用户在卫月安装器里手动启用后，不用等定期的 30 秒兜底
         pluginInterface.ActivePluginsChanged += OnActivePluginsChanged;
+        activePluginsChangedRegistered = true;
 
         // 重活（词表、挂钩、定时器）一律延后到「所有插件加载完」之后：
         // 加壳插件的模块初始化器会在加载阶段扫描/改写进程内存，我们需要在那个窗口里保持安静。
         loadedAt = DateTime.UtcNow;
         Framework.Update += OnStartupTick;
+        startupTickRegistered = true;
 
         Log.Information($"[FireGaze] 已加载 v{typeof(Plugin).Assembly.GetName().Version}（初始化将等插件加载阶段结束后进行）");
         if (UIText.UITextDataRoot.IsDedicated(DurableDataDirectory, ConfigDirectory))
@@ -222,20 +242,22 @@ public sealed class Plugin : IAsyncDalamudPlugin
         translateTimer.Elapsed += (_, _) =>
         {
             if (!workLifetime.TryAcquire(out var lease, out _)) return;
-            // 定时器线程上的未处理异常会直接终止游戏进程（Dalamud.Boot 的 0x12345679），
-            // 所以这里**全程包住**：宁可少应用一次汉化，也不能把游戏带下去。
-            try
+            using (lease)
             {
-                ApplyTranslationsQuiet();
-                MaybeAutoUpdateTable();
-            }
-            catch (Exception e)
-            {
-                Log.Warning(e, "[FireGaze] 定时任务出错（已拦下，不影响游戏）");
-            }
-            finally
-            {
-                lease!.Dispose();
+                lease!.TryExecute(() =>
+                {
+                    // Error reporting also uses plugin services and belongs
+                    // inside the operation that the host drains on close.
+                    try
+                    {
+                        ApplyTranslationsQuiet();
+                        if (lease.IsCurrent) MaybeAutoUpdateTable();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Warning(e, "[FireGaze] 定时任务出错（已拦下，不影响游戏）");
+                    }
+                });
             }
         };
     }
@@ -248,8 +270,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     private void OnStartupTick(IFramework framework)
     {
         if (!workLifetime.TryAcquire(out var lease, out _)) return;
-        try { OnStartupTickCore(framework); }
-        finally { lease!.Dispose(); }
+        using (lease) lease!.TryExecute(() => OnStartupTickCore(framework));
     }
 
     private void OnStartupTickCore(IFramework framework)
@@ -272,7 +293,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
             ReloadTranslationTable(out _);
             TrackFirstSeen();
 
-            // 补丁复核：上次打补丁后游戏如果没跑起来（崩了/被强杀），这里会自动还原
+            // 补丁复核：启动时按已记录的加载回执重试确认；未确认的保留恢复凭据
             uiTextPatchManager.VerifyOnStartup();
 
             translateTimer.Start();
@@ -287,16 +308,24 @@ public sealed class Plugin : IAsyncDalamudPlugin
             Log.Error(e, "[FireGaze] 延迟初始化失败");
         }
 
+        if (workLifetime.State == PluginWorkLifetimeState.Running) InitializePreviewFeatures();
+    }
+
+    private void InitializePreviewFeatures()
+    {
+        if (nativeInitializationUnknown) return;
         try
         {
             localPreview = new LocalPreview.LocalPreviewFeature(pluginInterface, Framework, ClientState,
                 Objects, Conditions, DataManager, Interop, Log, Chat, GameGUI, ContextMenu,
-                CommandManager, AddonLifecycle, Config, () => SaveConfig(force: true), Textures, Keys);
+                CommandManager, AddonLifecycle, Config, () => SaveConfig(force: true), Textures, Keys, NamePlateGUI);
         }
         catch (Exception e)
         {
+            ObserveNativeStartupFailure(e);
             Log.Error(e, "[FireGaze] 本地试用初始化失败");
         }
+        if (nativeInitializationUnknown) return;
         try
         {
             portraitPreview = new PortraitPreview.PortraitPreviewFeature(pluginInterface, ConfigDirectory,
@@ -304,29 +333,90 @@ public sealed class Plugin : IAsyncDalamudPlugin
         }
         catch (Exception e)
         {
+            ObserveNativeStartupFailure(e);
             Log.Error(e, "[FireGaze] 肖像同步预览初始化失败");
         }
         if (localPreview is not null && portraitPreview is not null && !Config.PreviewFeaturesAnnounced)
             Framework.Update += AnnouncePreviewFeatures;
     }
 
+    private bool ObserveNativeStartupFailure(Exception error)
+    {
+        if (nativeInitializationUnknown) return true;
+        var pending = new Stack<Exception>();
+        var observed = new HashSet<Exception>(ReferenceEqualityComparer.Instance);
+        var owners = new HashSet<IDisposable>(ReferenceEqualityComparer.Instance);
+        pending.Push(error);
+        while (pending.TryPop(out var current))
+        {
+            if (!observed.Add(current)) continue;
+            if (current is LocalPreview.Runtime.NativePhysicalCloseException native) owners.Add(native.Owner);
+            if (current is AggregateException aggregate)
+                foreach (var inner in aggregate.InnerExceptions) pending.Push(inner);
+            else if (current.InnerException is { } inner) pending.Push(inner);
+        }
+        if (owners.Count == 0) return false;
+        nativeInitializationUnknown = true;
+        // A Feature can already own delayed, known retirement work when its constructor
+        // fails. Preserve those real drains; only a raw native owner has no completion
+        // signal. No constructor rollback is retried here.
+        var unknownOwners = new List<IDisposable>();
+        foreach (var owner in owners)
+        {
+            if (owner is PortraitPreview.PortraitPreviewFeature portrait)
+            {
+                portraitManagedDrain = PreservePhysicalDrain(this, portraitManagedDrain, portrait.DrainManagedAsync());
+                portraitPhysicalDrain = PreservePhysicalDrain(this, portraitPhysicalDrain, portrait.DrainPhysicalAsync());
+            }
+            else if (owner is LocalPreview.LocalPreviewFeature local)
+                localPreviewPhysicalDrain = PreservePhysicalDrain(this, localPreviewPhysicalDrain, local.DrainPhysicalAsync());
+            else unknownOwners.Add(owner);
+        }
+        if (unknownOwners.Count != 0)
+        {
+            var incomplete = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startupDrain = PortraitPreview.PortraitCaptureRetirement.CombineOwned(
+                new object[] { this, unknownOwners.ToArray() }, incomplete.Task);
+            portraitPhysicalDrain = PreservePhysicalDrain(this, portraitPhysicalDrain, startupDrain);
+        }
+        var localToDrain = localPreview;
+        try { localToDrain?.Dispose(); }
+        catch (Exception failure) { Log.Error(failure, "[FireGaze] 原生初始化失败后的本地试用清理未完成"); }
+        finally
+        {
+            localPreviewPhysicalDrain = PreservePhysicalDrain(this, localPreviewPhysicalDrain, localToDrain?.DrainPhysicalAsync());
+            localPreview = null;
+        }
+        return true;
+    }
+
+    private static Task? PreservePhysicalDrain(object owner, Task? previous, Task? current)
+        => previous is null ? current
+            : current is null || ReferenceEquals(previous, current) ? previous
+            : PortraitPreview.PortraitCaptureRetirement.CombineOwned(owner, previous, current);
+
     private void AnnouncePreviewFeatures(IFramework framework)
     {
         if (!workLifetime.TryAcquire(out var lease, out _)) return;
-        try
+        using (lease)
         {
-            Internal.PreviewFeatureNotice.TryAnnounce(ClientState.IsLoggedIn,
-                localPreview is not null && portraitPreview is not null, Config,
-                message => Chat.Print(new XivChatEntry { Type = XivChatType.Echo, Message = message }),
-                () => SaveConfig(force: true));
-            if (Config.PreviewFeaturesAnnounced) Framework.Update -= AnnouncePreviewFeatures;
+            lease!.TryExecute(() =>
+            {
+                try
+                {
+                    Internal.PreviewFeatureNotice.TryAnnounce(ClientState.IsLoggedIn,
+                        localPreview is not null && portraitPreview is not null, Config,
+                        message => Chat.Print(new XivChatEntry { Type = XivChatType.Echo, Message = message }),
+                        () => SaveConfig(force: true));
+                    if (Config.PreviewFeaturesAnnounced) Framework.Update -= AnnouncePreviewFeatures;
+                }
+                catch (Exception error)
+                {
+                    Framework.Update -= AnnouncePreviewFeatures;
+                    Log.Warning(error, "[FireGaze] 新功能提示暂时未能完成");
+                }
+            });
         }
-        catch (Exception error)
-        {
-            Framework.Update -= AnnouncePreviewFeatures;
-            Log.Warning(error, "[FireGaze] 新功能提示暂时未能完成");
-        }
-        finally { lease!.Dispose(); }
     }
 
     /// <summary>
@@ -473,101 +563,67 @@ public sealed class Plugin : IAsyncDalamudPlugin
         {
             // An exceptional Framework release must not let the host skip still-owned
             // provider work. An unsealed feature deliberately reports an incomplete drain.
-            portraitManagedDrain = previewToDrain?.DrainManagedAsync();
-            portraitPhysicalDrain = previewToDrain?.DrainPhysicalAsync();
+            portraitManagedDrain = PreservePhysicalDrain(this, portraitManagedDrain, previewToDrain?.DrainManagedAsync());
+            portraitPhysicalDrain = PreservePhysicalDrain(this, portraitPhysicalDrain, previewToDrain?.DrainPhysicalAsync());
             portraitPreview = null;
         }
+        var localToDrain = localPreview;
         try
         {
-            localPreview?.Dispose();
-            localPreview = null;
+            localToDrain?.Dispose();
         }
         catch (Exception e)
         {
             Log.Error(e, "[FireGaze] 本地试用清理失败");
         }
+        finally
+        {
+            localPreviewPhysicalDrain = PreservePhysicalDrain(this, localPreviewPhysicalDrain, localToDrain?.DrainPhysicalAsync());
+            localPreview = null;
+        }
 
         uiTextTab?.StopWorkflows();
-        try
-        {
-            // 干净退出 = 补丁没把游戏搞死：把「待确认」全部转正，下次启动就不会误还原
-            uiTextPatchManager?.MarkAllVerified();
-        }
-        catch (Exception)
-        {
-            // 退出路径上不抛
-        }
+        // A clean host shutdown does not prove which plugin bytes were loaded.
+        // Keep pending verification for the identity-bound load receipt.
 
-        if (Config is not null)
-            SaveConfig(force: true);
+        if (startupTickRegistered)
+            TryDetach("Framework.Update / OnStartupTick", () => { Framework.Update -= OnStartupTick; startupTickRegistered = false; });
+        TryDetach("Framework.Update / AnnouncePreviewFeatures", () => Framework.Update -= AnnouncePreviewFeatures);
 
-        try
-        {
-            Icons?.Dispose();
-        }
-        catch
-        {
-            // ignore
-        }
+        TryDetach("translation timer stop", () => translateTimer?.Stop());
+        TryDetach("translation timer dispose", () => translateTimer?.Dispose());
 
-        try
-        {
-            Framework.Update -= OnStartupTick;
-            Framework.Update -= AnnouncePreviewFeatures;
-        }
-        catch
-        {
-            // ignore
-        }
-
-        try
-        {
-            translateTimer?.Stop();
-            translateTimer?.Dispose();
-        }
-        catch
-        {
-            // ignore
-        }
-
-        // 退订全部包在 try 里：卸载路径上任何一步抛异常都可能把旧窗口留在卫月的绘制链上，
-        // 变成“幽灵窗口”（2026-10-07 实机遇到：旧实例的页签顺序一直留在屏幕上）
-        try
-        {
-            pluginInterface.UiBuilder.Draw -= DrawWindows;
-            pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
-            pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
-            pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
-            pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged;
-        }
-        catch (Exception e)
-        {
-            Log.Warning(e, "[FireGaze] 卸载时退订 UI 事件失败（已忽略）");
-        }
-        try
-        {
-            window?.Detach();
-        }
-        catch
-        {
-            // ignore
-        }
+        // Attempt each host callback removal separately: one broken event accessor must not
+        // leave later delegates attached without even attempting their removal.
+        if (drawWindowsRegistered)
+            TryDetach("UIBuilder.Draw / DrawWindows", () => { subscribedUIBuilder!.Draw -= DrawWindows; drawWindowsRegistered = false; });
+        if (installerTickRegistered)
+            TryDetach("UIBuilder.Draw / TickInstallerListScroll", () => { subscribedUIBuilder!.Draw -= TickInstallerListScroll; installerTickRegistered = false; });
+        if (openConfigUIRegistered)
+            TryDetach("UIBuilder.OpenConfigUi", () => { subscribedUIBuilder!.OpenConfigUi -= ToggleWindow; openConfigUIRegistered = false; });
+        if (openMainUIRegistered)
+            TryDetach("UIBuilder.OpenMainUi", () => { subscribedUIBuilder!.OpenMainUi -= OpenMainWindow; openMainUIRegistered = false; });
+        if (activePluginsChangedRegistered)
+            TryDetach("ActivePluginsChanged", () => { pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged; activePluginsChangedRegistered = false; });
+        TryDetach("WindowSystem detach", () => window?.Detach());
         foreach (var command in registeredCommands)
         {
-            try
-            {
-                CommandManager.RemoveHandler(command);
-            }
-            catch
-            {
-                // ignore
-            }
+            TryDetach($"command {command}", () => CommandManager.RemoveHandler(command));
         }
 
-        // 卸载后别把旧实例留在静态字段上（热重载时旧实例与它的程序集因此可以被回收）
-        if (ReferenceEquals(instance, this))
+        if (detachErrors.Count != 0)
+            throw new AggregateException("FireGaze 无法确认所有宿主回调均已解绑。", detachErrors.ToArray());
+    }
+
+    private void TryDetach(string owner, Action detach)
+    {
+        try { detach(); }
+        catch (Exception error)
         {
-            instance = null;
+            var recorded = new InvalidOperationException($"Failed to detach {owner}.", error);
+            detachErrors.Add(recorded);
+            try { Log.Warning(recorded, "[FireGaze] 卸载时解绑失败；异步关闭将报告此错误"); }
+            catch { }
         }
     }
 
@@ -579,32 +635,59 @@ public sealed class Plugin : IAsyncDalamudPlugin
     {
         var result = await workLifetime.CloseAsync(
             beginClose: BeginDisposeAsync,
-            cleanupAfterDrain: async () =>
-            {
-                if (!await Diagnostics.ActivityLog.ShutdownAsync().ConfigureAwait(false))
-                    throw new InvalidOperationException("诊断日志未能完成最终排空。");
-            }).ConfigureAwait(false);
-        if (!result.Completed && result.Error is not null)
-            throw new AggregateException("FireGaze 异步清理未完成。", result.Error);
+            cleanupAfterDrain: FinishDisposeAsync).ConfigureAwait(false);
+        if (!result.Completed)
+            throw new AggregateException("FireGaze 异步清理未完成。",
+                new[] { result.BeginCloseError, result.CleanupError }.OfType<Exception>());
+    }
+
+    private async ValueTask FinishDisposeAsync()
+    {
+        var errors = new List<Exception>();
+        try { uiTextEditorWindow?.FlushForHostClose(); }
+        catch (Exception error) { errors.Add(error); }
+        // SaveConfig deliberately catches ordinary runtime errors. Final host
+        // persistence must report failure while still releasing drained roots.
+        try { if (Config is not null) pluginInterface.SavePluginConfig(Config); }
+        catch (Exception error) { errors.Add(error); }
+        try { Icons?.Dispose(); }
+        catch (Exception error) { errors.Add(error); }
+        if (ReferenceEquals(instance, this)) instance = null;
+        try
+        {
+            if (!await Diagnostics.ActivityLog.ShutdownAsync().ConfigureAwait(false))
+                throw new InvalidOperationException("诊断日志未能完成最终排空。");
+        }
+        catch (Exception error) { errors.Add(error); }
+        if (errors.Count != 0) throw new AggregateException("最终保存或资源收尾失败。", errors);
     }
 
     private async ValueTask BeginDisposeAsync()
     {
-        if (Framework is null || Framework.IsInFrameworkUpdateThread)
+        Exception? beginError = null;
+        try
         {
-            Dispose();
+            if (Framework is null || Framework.IsInFrameworkUpdateThread) Dispose();
+            else await Framework.RunOnFrameworkThread(Dispose).ConfigureAwait(false);
         }
-        else
-        {
-            await Framework.RunOnFrameworkThread(Dispose).ConfigureAwait(false);
-        }
+        catch (Exception error) { beginError = error; }
 
         // The host disposes its texture-provider scope after DisposeAsync returns. Logical
         // cancellation is insufficient: hold that scope through physical completion and late
         // resource release. When GPU work is stuck this remains visibly pending, never a
         // successful unload. A file failure must not bypass another unfinished physical task.
-        await Task.WhenAll(portraitManagedDrain ?? Task.CompletedTask,
-            portraitPhysicalDrain ?? Task.CompletedTask).ConfigureAwait(false);
+        try
+        {
+            await Task.WhenAll(portraitManagedDrain ?? Task.CompletedTask,
+                portraitPhysicalDrain ?? Task.CompletedTask,
+                localPreviewPhysicalDrain ?? Task.CompletedTask).ConfigureAwait(false);
+        }
+        catch (Exception error)
+        {
+            if (beginError is not null) throw new AggregateException(beginError, error);
+            throw;
+        }
+        if (beginError is not null) throw beginError;
     }
 
     /// <summary>
@@ -635,9 +718,19 @@ public sealed class Plugin : IAsyncDalamudPlugin
     /// </summary>
     // The style must exist before WindowSystem begins any window, including its popup/tooltip children.
     // This callback owns only FireGaze windows; disposal restores the host before the next plugin draws.
-    private void DrawWindows() => FireGazeTheme.Draw(windowSystem.Draw);
+    private void DrawWindows()
+    {
+        if (!this.workLifetime.TryAcquire(out var lease, out _)) return;
+        using (lease)
+            lease!.TryExecute(() => FireGazeTheme.Draw(windowSystem.Draw));
+    }
 
-    public void ToggleWindow() => window.Toggle();
+    public void ToggleWindow()
+    {
+        var wasOpen = window.IsOpen;
+        window.Toggle();
+        if (!wasOpen) UI.MainWindowOpenPolicy.ExpandForExplicitOpen(window);
+    }
 
     /// <summary>
     ///     卫月说插件列表变了（装/卸/启/停）：转给「插件汉化」页重建索引。
@@ -645,15 +738,20 @@ public sealed class Plugin : IAsyncDalamudPlugin
     /// </summary>
     private void OnActivePluginsChanged(Dalamud.Plugin.IActivePluginsChangedEventArgs args)
     {
-        iconWarmUpIndex.NotifyChanged();
-        try
-        {
-            uiTextTab.NotifyInstalledPluginsChanged();
-        }
-        catch (Exception e)
-        {
-            Log.Warning(e, "[FireGaze] 处理插件状态变化失败");
-        }
+        if (!this.workLifetime.TryAcquire(out var lease, out _)) return;
+        using (lease)
+            lease!.TryExecute(() =>
+            {
+                iconWarmUpIndex.NotifyChanged();
+                try
+                {
+                    uiTextTab.NotifyInstalledPluginsChanged();
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(e, "[FireGaze] 处理插件状态变化失败");
+                }
+            });
     }
 
     /// <summary>
@@ -662,6 +760,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     public void OpenMainWindow()
     {
         window.IsOpen = true;
+        UI.MainWindowOpenPolicy.ExpandForExplicitOpen(window);
         window.BringToFront();
     }
 
@@ -672,6 +771,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     {
         window.SelectTab(tab);
         window.IsOpen = true;
+        UI.MainWindowOpenPolicy.ExpandForExplicitOpen(window);
         window.BringToFront();
     }
 
@@ -688,6 +788,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
             ImGui.TextWrapped("本地试用功能正在初始化，请稍后再试。");
             return;
         }
+        using var trialTheme = UI.FireGazeTheme.PushPortrait();
         localPreview.DrawContent();
     }
 
@@ -708,10 +809,18 @@ public sealed class Plugin : IAsyncDalamudPlugin
     {
         window.SelectTab(UI.MainTab.Discovery);
         window.IsOpen = true;
+        UI.MainWindowOpenPolicy.ExpandForExplicitOpen(window);
         window.BringToFront();
     }
 
     private void OnCommand(string command, string args)
+    {
+        if (!workLifetime.TryAcquire(out var lease, out _)) return;
+        using (lease)
+            lease!.TryExecute(() => OnCommandCore(command, args));
+    }
+
+    private void OnCommandCore(string command, string args)
     {
         var trimmed = args.Trim();
         if (trimmed.Equals("portrait", StringComparison.OrdinalIgnoreCase)
@@ -808,6 +917,13 @@ public sealed class Plugin : IAsyncDalamudPlugin
     ///     每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新 / 图标预热；不用钩子）。
     /// </summary>
     private void TickInstallerListScroll()
+    {
+        if (!this.workLifetime.TryAcquire(out var lease, out _)) return;
+        using (lease)
+            lease!.TryExecute(this.TickInstallerListScrollCore);
+    }
+
+    private void TickInstallerListScrollCore()
     {
         try
         {
@@ -1003,29 +1119,43 @@ public sealed class Plugin : IAsyncDalamudPlugin
     /// <summary>
     ///     从 GitHub 更新词表并立刻应用。
     /// </summary>
-    public async Task<(bool Ok, string Message)> UpdateTranslationTableAsync()
-    {
-        var (ok, message) = await Table.UpdateFromGitHubAsync(CancellationToken.None).ConfigureAwait(false);
-        if (ok)
-        {
-            // 下载下来的那份不能盖掉本地还没交出去的译文（用户 2026-09-22 定：要保留，而且要优先）
-            var kept = ReapplyPendingContributions();
-            Config.LastTableUpdateLocal = DateTime.Now;
-            SaveConfig();
-            Patcher.ApplyAll();
-            if (kept > 0)
-            {
-                message += $"；本地还没提交的 {kept} 条译文已保留并优先生效";
-            }
-        }
+    public Task<(bool Ok, string Message)> UpdateTranslationTableAsync()
+        => UpdateTranslationTableAsync(automatic: false);
 
-        if (!ok)
+    private async Task<(bool Ok, string Message)> UpdateTranslationTableAsync(bool automatic)
+    {
+        const string closedMessage = "插件正在关闭，词表更新已取消。";
+        try
         {
-            // Keep the usable table and move the existing daily check forward to a one-hour retry.
-            Config.LastTableUpdateCheckUTC = DateTime.UtcNow.AddHours(-23);
-            SaveConfig();
+            return await RunTextTask(async lease =>
+            {
+                var (update, downloadMessage) = await Table.DownloadFromGitHubAsync(lease.ShutdownToken).ConfigureAwait(false);
+                (bool Ok, string Message) result = (false, closedMessage);
+                // Re-admit only the commit, using the same generation. Closing
+                // rejects a late network receipt before any disk/config/host write.
+                lease.TryExecute(() =>
+                {
+                    result = update is null ? (false, downloadMessage) : Table.CommitUpdate(update);
+                    if (result.Ok)
+                    {
+                        var kept = ReapplyPendingContributions();
+                        Config.LastTableUpdateLocal = DateTime.Now;
+                        if (kept > 0) result.Message += $"；本地还没提交的 {kept} 条译文已保留并优先生效";
+                    }
+                    if (automatic || !result.Ok)
+                        Config.LastTableUpdateCheckUTC = result.Ok ? DateTime.UtcNow : DateTime.UtcNow.AddHours(-23);
+                    SaveConfig();
+                    if (result.Ok) Patcher.ApplyAll();
+                    if (result.Ok) Diagnostics.ActivityLog.Info("简介汉化", "更新词表：" + result.Message);
+                    else Diagnostics.ActivityLog.Warning("简介汉化", "更新词表失败：" + result.Message);
+                });
+                return result;
+            }).ConfigureAwait(false);
         }
-        return (ok, message);
+        catch (OperationCanceledException)
+        {
+            return (false, closedMessage);
+        }
     }
 
     /// <summary>
@@ -1068,27 +1198,21 @@ public sealed class Plugin : IAsyncDalamudPlugin
             return;
         }
 
-        if (!workLifetime.Queue(async _ =>
+        _ = CompleteAutoUpdateTableAsync();
+    }
+
+    private async Task CompleteAutoUpdateTableAsync()
+    {
+        try
         {
-            var success = false;
-            try
-            {
-                var (ok, message) = await UpdateTranslationTableAsync().ConfigureAwait(false);
-                success = ok;
-                Log.Information($"[FireGaze] 自动更新词表：{message}");
-            }
-            catch (Exception e)
-            {
-                Log.Warning(e, "[FireGaze] 自动更新词表失败");
-            }
-            finally
-            {
-                // 成功 -> 24 小时后再查；失败 -> 1 小时后重试
-                Config.LastTableUpdateCheckUTC = success ? DateTime.UtcNow : DateTime.UtcNow.AddHours(-23);
-                SaveConfig();
-                Interlocked.Exchange(ref tableUpdateBusy, 0);
-            }
-        }, out _))
+            await UpdateTranslationTableAsync(automatic: true).ConfigureAwait(false);
+        }
+        catch (Exception)
+        {
+            // The observed task must terminate even if a consumer throws. No
+            // host service is used here: this continuation may run after close.
+        }
+        finally
         {
             Interlocked.Exchange(ref tableUpdateBusy, 0);
         }

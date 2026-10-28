@@ -46,6 +46,7 @@ internal static class PortraitHistoryPhotoPresentation
         PortraitFavoritePhotoStatus.Capacity => "照片空间已满",
         PortraitFavoritePhotoStatus.StorageError => "照片读取或写入失败",
         PortraitFavoritePhotoStatus.Pending => "照片正在自动生成…",
+        PortraitFavoritePhotoStatus.SourceNotReady => "当前照片来源尚未准备好",
         _ => "请用原角色在原肖像中载入补拍",
     };
 }

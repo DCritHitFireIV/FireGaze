@@ -22,7 +22,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
             nextEditorSample=DateTime.MinValue;
             PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryPoll,PollEditing);
             if (!TryCaptureLight(out var identity,out var key,out var current)) return;
-            PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryFlush,()=>HandleHistoryBatchResult(historyBatch.Flush()));
+            var historyReady = false;
+            PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryFlush,()=>historyReady=FlushHistoryForSourceChange());
+            if (!historyReady) return;
             if (lightDrag.Begin(token,identity,key,PortraitNativeLightAngles.From(current.Composition)))
             { lightInputTrace=trace;lightInputToken=token; }
         });

@@ -1,5 +1,6 @@
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
+using FireGaze.LocalPreview.Runtime;
 
 namespace FireGaze.PortraitPreview;
 
@@ -8,7 +9,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitSourceCensusDiagnostic? sourceCensus;
     private long sourceCensusSessionEpoch = 1;
     private Task sourceCensusPhysicalDrain = Task.CompletedTask;
-    private bool sourceCensusSubscribed;
+    private bool sourceCensusFinalizeSubscribed, sourceCensusLogoutSubscribed, sourceCensusTerritorySubscribed;
+    private Exception? sourceCensusCloseFailure;
 
     public bool SourceCensusBlocksOperations => sourceCensus?.BlocksOperations == true || ownedPassive?.BlocksOperations == true
         || ownedJoint?.BlocksOperations == true || OwnedViewportBlocksOperations;
@@ -19,10 +21,25 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         sourceCensus = diagnostic ?? new(() => Plugin.Framework.IsInFrameworkUpdateThread,
             ReadSourceCensusContext, new DalamudPortraitNativePhaseHostFactory(Plugin.Interop));
-        Plugin.AddonLifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeSourceCensusFinalize);
-        Plugin.ClientState.Logout += SourceCensusLogout;
-        Plugin.ClientState.TerritoryChanged += SourceCensusTerritoryChanged;
-        sourceCensusSubscribed = true;
+        try
+        {
+            // A registration can become observable before its backend throws.
+            sourceCensusFinalizeSubscribed = true;
+            Plugin.AddonLifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeSourceCensusFinalize);
+            sourceCensusLogoutSubscribed = true;
+            Plugin.ClientState.Logout += SourceCensusLogout;
+            sourceCensusTerritorySubscribed = true;
+            Plugin.ClientState.TerritoryChanged += SourceCensusTerritoryChanged;
+        }
+        catch (Exception initializationFailure)
+        {
+            try { DisposeSourceCensus(); }
+            catch (Exception rollbackFailure)
+            {
+                throw new NativePhysicalCloseException(this, new AggregateException(initializationFailure, rollbackFailure));
+            }
+            throw;
+        }
     }
 
     private PortraitSourceCensusContext? ReadSourceCensusContext()
@@ -103,19 +120,36 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void DisposeSourceCensus()
     {
-        InvalidateSourceCensusSession("Feature disposal revoked the diagnostic session.");
-        if (sourceCensusSubscribed)
+        if (sourceCensusCloseFailure is not null) throw sourceCensusCloseFailure;
+        List<Exception>? failures = null;
+        void Close(Action cleanup)
         {
-            Plugin.AddonLifecycle.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeSourceCensusFinalize);
-            Plugin.ClientState.Logout -= SourceCensusLogout;
-            Plugin.ClientState.TerritoryChanged -= SourceCensusTerritoryChanged;
-            sourceCensusSubscribed = false;
+            try { cleanup(); }
+            catch (Exception failure) { (failures ??= []).Add(failure); }
         }
-        sourceCensus?.Stop("Feature disposal awaits confirmed native retirement.");
-        ownedJoint?.Stop("Feature disposal awaits confirmed native retirement.");
-        sourceCensusPhysicalDrain = RetainJointDiagnosticUntilDrained(
-            RetainDiagnosticOwnersUntilDrained(sourceCensus, ownedPassive), ownedJoint);
+        Close(() => InvalidateSourceCensusSession("Feature disposal revoked the diagnostic session."));
+        if (sourceCensusFinalizeSubscribed)
+        {
+            sourceCensusFinalizeSubscribed = false;
+            Close(() => Plugin.AddonLifecycle.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeSourceCensusFinalize));
+        }
+        if (sourceCensusLogoutSubscribed)
+        {
+            sourceCensusLogoutSubscribed = false;
+            Close(() => Plugin.ClientState.Logout -= SourceCensusLogout);
+        }
+        if (sourceCensusTerritorySubscribed)
+        {
+            sourceCensusTerritorySubscribed = false;
+            Close(() => Plugin.ClientState.TerritoryChanged -= SourceCensusTerritoryChanged);
+        }
+        Close(() => sourceCensus?.Stop("Feature disposal awaits confirmed native retirement."));
+        Close(() => ownedJoint?.Stop("Feature disposal awaits confirmed native retirement."));
+        Close(() => sourceCensusPhysicalDrain = RetainJointDiagnosticUntilDrained(
+            RetainDiagnosticOwnersUntilDrained(sourceCensus, ownedPassive), ownedJoint));
         // Keep the controller strongly owned through the actual physical drain, including faults.
+        if (failures is not null)
+            throw sourceCensusCloseFailure = new AggregateException("Source-census callback or controller retirement is incomplete.", failures);
     }
 
     private object? SourceCensusDiagnostics()

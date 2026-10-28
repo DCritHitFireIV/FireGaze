@@ -5,6 +5,20 @@ internal sealed record UITextDiagnostic(string Original, string? Context, string
 
 internal static class UITextMaintenance
 {
+    internal static string TargetFileSignature(string? dllPath, string internalName, UITextPack pack)
+    {
+        var files = UITextRules.ResolveCompanions(dllPath, internalName);
+        var directory = Path.GetDirectoryName(dllPath);
+        if (directory is not null)
+            foreach (var resource in pack.Resources.Where(row => UITextLocalizationFiles.IsFileContainer(row.Container)
+                && !pack.IsResourceSkipped(row.Container, row.Key)))
+            {
+                var file = UITextLocalizationFiles.ResolveTarget(directory, resource.Container);
+                if (file is not null) files.Add(file);
+            }
+        return FileSignature(files);
+    }
+
     public static async Task<(UITextPack Candidate, int Changes, string? Warning)> FetchLibraryCandidateAsync(
         UITextPack baseline, Func<UITextPack, CancellationToken, Task<(int Changes, string? Warning)>> fetch,
         CancellationToken token, int retryDelayMilliseconds = 1000)
@@ -25,12 +39,28 @@ internal static class UITextMaintenance
         return (UITextPack.FromJSON(json, out _)!, 0, warning);
     }
 
-    public static bool HasVerifiedBaseline(IReadOnlyList<string> paths, UITextPatchState? state) => paths.Count > 0 && state is not null
-        && paths.All(path => state.EffectiveFiles.Any(f => f.HasBackup
-            && Path.GetFileName(f.Path).Equals(Path.GetFileName(path), StringComparison.OrdinalIgnoreCase)
-            && !string.IsNullOrEmpty(f.SourceHash) && !string.IsNullOrEmpty(f.PatchedHash)
-            && string.Equals(UITextPatchStore.HashOf(path), f.PatchedHash, StringComparison.OrdinalIgnoreCase)
-            && string.Equals(UITextPatchStore.HashOf(f.BackupPath!), f.SourceHash, StringComparison.OrdinalIgnoreCase)));
+    public static bool HasVerifiedBaseline(
+        IReadOnlyList<string> paths, UITextPatchState? state, string? currentMainPath = null)
+    {
+        if (paths.Count == 0 || state is null
+            || !UITextFileIdentity.TryMap(state, currentMainPath ?? paths[0], out var mapped, out _))
+            return false;
+
+        try
+        {
+            return paths.All(path => !string.IsNullOrWhiteSpace(path) && Path.IsPathFullyQualified(path)
+                && mapped.TryGetValue(Path.GetFullPath(path), out var file)
+                && file.HasBackup && Path.IsPathFullyQualified(file.BackupPath!)
+                && !string.IsNullOrEmpty(file.SourceHash) && !string.IsNullOrEmpty(file.PatchedHash)
+                && string.Equals(UITextPatchStore.HashOf(path), file.PatchedHash, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(UITextPatchStore.HashOf(file.BackupPath!), file.SourceHash, StringComparison.OrdinalIgnoreCase));
+        }
+        catch (Exception exception) when (exception is ArgumentException or NotSupportedException
+            or IOException or System.Security.SecurityException)
+        {
+            return false;
+        }
+    }
 
     public static bool CanApplyUpdate(UITextFlow.MergePreview preview, string? warning, int safetyRepairs = 0) => safetyRepairs > 0
         || (warning is null && (preview.Added > 0 || preview.Overwritten > 0));
@@ -42,9 +72,9 @@ internal static class UITextMaintenance
             || !string.Equals(UITextPatchStore.HashOf(originalPath), originalHash, StringComparison.OrdinalIgnoreCase)
             || !string.Equals(UITextPatchStore.HashOf(patchedPath), patchedHash, StringComparison.OrdinalIgnoreCase))
             throw new IOException("原始备份或插件文件已经变化，需要重新核对原始包。");
-        using var original = dnlib.DotNet.ModuleDefMD.Load(originalPath);
-        using var patched = dnlib.DotNet.ModuleDefMD.Load(patchedPath);
-        var identities = UIStringExtractor.FunctionalIdentifiers(original);
+        using var original = UIStringExtractor.LoadModule(originalPath);
+        using var patched = UIStringExtractor.LoadModule(patchedPath);
+        var sites = UIStringExtractor.CurrentLiteralMetadata(original).Sites;
         var methods = patched.GetTypes().SelectMany(t => t.Methods).ToDictionary(m => m.FullName, StringComparer.Ordinal);
         var repairs = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in original.GetTypes().SelectMany(t => t.Methods).Where(m => m.HasBody))
@@ -53,7 +83,7 @@ internal static class UITextMaintenance
             {
                 var instruction = method.Body.Instructions[i];
                 if (instruction.OpCode.Code != dnlib.DotNet.Emit.Code.Ldstr || instruction.Operand is not string text
-                    || !identities.Contains(text)) continue;
+                    || !sites.TryGetValue(instruction, out var site) || !site.FunctionalIdentity) continue;
                 if (!methods.TryGetValue(method.FullName, out var current) || !current.HasBody
                     || current.Body.Instructions.Count != method.Body.Instructions.Count
                     || current.Body.Instructions[i].OpCode.Code != dnlib.DotNet.Emit.Code.Ldstr)
@@ -82,7 +112,7 @@ internal static class UITextMaintenance
 
     public static int NewCandidates(UITextPack pack, UITextExtraction extraction)
     {
-        var originals = extraction.Entries.Where(e => e.Role == UITextRole.UI
+        var originals = extraction.Entries.Where(e => e.TranslationRole == UITextRole.UI
             && !UITextText.LooksUntranslatable(e.Original) && !pack.IsSkipped(e.Original) && pack.Find(e.Original) is null)
             .Select(e => e.Original).Distinct(StringComparer.Ordinal).Count();
         return originals
@@ -91,7 +121,7 @@ internal static class UITextMaintenance
     }
 
     public static HashSet<string> NewOriginals(UITextPack pack, UITextExtraction extraction) => extraction.Entries
-        .Where(e => e.Role == UITextRole.UI && pack.Find(e.Original) is null && !pack.IsSkipped(e.Original) && !UITextText.LooksUntranslatable(e.Original))
+        .Where(e => e.TranslationRole == UITextRole.UI && pack.Find(e.Original) is null && !pack.IsSkipped(e.Original) && !UITextText.LooksUntranslatable(e.Original))
         .Select(e => e.Original)
         .Concat(extraction.Resources.Where(e => pack.FindResource(e.Container, e.Key) is null && !pack.IsResourceSkipped(e.Container, e.Key) && !UITextText.LooksUntranslatable(e.Value)).Select(e => e.Value))
         .Concat(extraction.Attributes.Where(e => pack.FindAttribute(e.Value) is null && !pack.IsAttributeSkipped(e.Value) && !UITextText.LooksUntranslatable(e.Value)).Select(e => e.Value))
@@ -114,8 +144,8 @@ internal static class UITextMaintenance
         {
             var entry = pack.Find(item.Original);
             all.Add(new(item.Original, item.Context, entry?.Translated ?? string.Empty,
-                Kind(pack.IsSkipped(item.Original), item.Role == UITextRole.Excluded,
-                    item.Role == UITextRole.Ambiguous && entry?.IsUserSource != true, entry?.Review, entry?.Translated ?? string.Empty), item.Reason));
+                Kind(pack.IsSkipped(item.Original), item.TranslationRole == UITextRole.Excluded,
+                    item.TranslationRole == UITextRole.Ambiguous && entry?.IsUserSource != true, entry?.Review, entry?.Translated ?? string.Empty), item.Reason));
         }
         foreach (var item in extraction.Resources)
         {

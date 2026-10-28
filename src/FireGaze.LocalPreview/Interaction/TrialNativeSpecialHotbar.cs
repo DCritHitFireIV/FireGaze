@@ -17,7 +17,7 @@ namespace FireGaze.LocalPreview.Interaction;
 /// <summary>Temporarily lends the game's existing PetHotbar to local cosmetic actions.
 /// Only transient slots and UI presentation mode are changed. SetAndSaveSlot, HOTBAR.DAT,
 /// ActionManager, player collection fields and combat action replacement are never used.</summary>
-public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
+public sealed unsafe class TrialNativeSpecialHotbar : IDisposable, INativePhysicalCloseState
 {
     // Current CN mouse callbacks and HOTBAR_EX input both end at this (module, slot*)
     // dispatcher. FFCS ExecuteSlot currently aliases the three-argument ExecuteSlotById
@@ -34,9 +34,14 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
     private readonly IPluginLog log;
     private readonly Func<int,long,bool> activate;
     private readonly TrialNativeHotbarLease lease=new();
+    private readonly TrialMarketHotbarPresentation marketPresentation = new();
     private Hook<ExecuteSlot>? execute;
     private TrialSpecialBar? bar;
     private bool disposed;
+    private NativePhysicalCloseState? physicalClose;
+    private NativePhysicalCloseState PhysicalClose => physicalClose ??= new(this);
+    public bool PhysicalCloseComplete => disposed && PhysicalClose.Complete;
+    public string? PhysicalCloseFailure => PhysicalClose.Failure;
     private bool listenerRegistered;
     private bool available;
     private bool inside;
@@ -80,7 +85,14 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
         }
         catch(Exception ex)
         {
-            RemoveCallbacksAndHook();Status="原生特殊栏接口不可用";log.Warning(ex,"[LocalPreview] Native special bar unavailable.");
+            RemoveCallbacksAndHook();Status="原生特殊栏接口不可用";
+            try{log.Warning(ex,"[LocalPreview] Native special bar unavailable.");}catch{}
+            if(PhysicalCloseFailure is not null)
+            {
+                disposed=true;
+                PhysicalClose.Finish();
+                throw new NativePhysicalCloseException(this,ex);
+            }
         }
     }
 
@@ -120,9 +132,27 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
 
     private static TrialNativeHotbarCommand Read(HotbarSlot* slot)=>new((byte)slot->CommandType,slot->CommandId);
     private static TrialNativeHotbarCommand CommandFor(TrialSpecialAction action)
-        =>action.Kind==TrialSpecialActionKind.FlightPose?new((byte)SlotType.GeneralAction,2):new((byte)SlotType.Action,action.Id);
+        =>action.Kind==TrialSpecialActionKind.FlightPose
+            ?new((byte)SlotType.GeneralAction,2)
+            :new((byte)SlotType.Action,action.Id);
     private static void Write(HotbarSlot* slot,TrialNativeHotbarCommand command)
-        =>slot->Set((SlotType)command.Type,command.Id);
+    {
+        slot->Set((SlotType)command.Type,command.Id);
+        ApplyFlightPoseAppearance(slot, command);
+    }
+
+    private static void ApplyFlightPoseAppearance(HotbarSlot* slot, TrialNativeHotbarCommand command)
+    {
+        if (command.Type != (byte)SlotType.GeneralAction || command.Id != 2) return;
+        // Native Set/display-name/tooltip paths resolve these values before input
+        // dispatch. Both executable and apparent metadata must be real sheet rows.
+        // The slot lease and typed UseAction fallback consume Jump as a local pose.
+        slot->OriginalApparentActionId = 2;
+        slot->ApparentActionId = 2;
+        slot->OriginalApparentSlotType = SlotType.GeneralAction;
+        slot->ApparentSlotType = SlotType.GeneralAction;
+        slot->IconId = 102;
+    }
 
     private void Refresh()
     {
@@ -152,7 +182,7 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
                 {lease.Suspend(current.Revision);return;}
                 module->PetHotbarMode=TrialMode;
                 *(ushort*)((byte*)module+UiInputFlagsOffset)|=PetKeyboardInput;
-                addon->IsVisible=!gameGui.GameUiHidden;
+                addon->IsVisible=TrialSpecialHotbarVisibilityPolicy.ShouldShow(true, gameGui.GameUiHidden, IsMarketBoardOpen(), current.HasSpecialCommands);
                 Status="正在使用游戏原生特殊栏";
             }
             finally{inside=false;if(!lease.CanAcquire(current.Revision))Release();}
@@ -163,8 +193,60 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
             for(var i=0;i<16;i++)if(!lease.IsExpected(i,Read(module->PetHotbar.GetHotbarSlot((uint)i))))
             {lease.Suspend(current.Revision);Release();Status="原生特殊栏已被游戏更新";return;}
             if(module->PetHotbarMode!=TrialMode){lease.Suspend(current.Revision);Release();Status="原生特殊栏模式已被游戏更新";return;}
-            if(!gameGui.GameUiHidden)addon->IsVisible=true;
+            for (var i = 0; i < current.Actions.Count && i < 6; i++)
+                if (current.Actions[i] is { Kind: TrialSpecialActionKind.FlightPose }
+                    && lease.IsExpected(i, Read(module->PetHotbar.GetHotbarSlot((uint)i))))
+                    ApplyFlightPoseAppearance(module->PetHotbar.GetHotbarSlot((uint)i), CommandFor(current.Actions[i]!));
+            addon->IsVisible=TrialSpecialHotbarVisibilityPolicy.ShouldShow(true, gameGui.GameUiHidden, IsMarketBoardOpen(), current.HasSpecialCommands);
         }
+        ApplyMarketPresentation(addon, current);
+    }
+
+    private void ApplyMarketPresentation(AtkUnitBase* special, TrialSpecialBar current)
+    {
+        if (!TryReadCurrentUiFlags(out var hiddenUiFlags)) return;
+        var marketOpen = IsMarketBoardOpen();
+        var primary = gameGui.GetAddonByName<AtkUnitBase>("_ActionBar", 1);
+        // Only the trial special bar is exempted while browsing the market board. It
+        // borrows the existing primary bar geometry; normal bars and saved layout stay owned by the game.
+        if (current.HasSpecialCommands && marketOpen && primary != null)
+            marketPresentation.Apply(special, primary, hiddenUiFlags, true, true, current.Revision);
+        else
+            marketPresentation.Release(special, hiddenUiFlags, current.Revision);
+    }
+
+    private bool TryReadCurrentUiFlags(out UiFlags hiddenUiFlags)
+    {
+        hiddenUiFlags = default;
+        if (!framework.IsInFrameworkUpdateThread) return false;
+        var manager = RaptureAtkUnitManager.Instance();
+        if (manager == null) return false;
+        // The addon's hide class is not the current global hide state. In particular,
+        // closing the market can clear ActionBars before this leased addon is restored.
+        hiddenUiFlags = manager->UiFlags;
+        return true;
+    }
+
+    private void ReleaseMarketPresentation(AtkUnitBase* special, long revision)
+    {
+        // An unavailable singleton cannot authorize either a guessed visible state or
+        // a guessed hidden state. Keep the lease for a later, identity-checked retry.
+        if (TryReadCurrentUiFlags(out var hiddenUiFlags))
+            marketPresentation.Release(special, hiddenUiFlags, revision);
+    }
+
+    private unsafe bool IsMarketBoardOpen()
+    {
+        try
+        {
+            foreach (var name in new[] { "ItemSearch", "ItemSearchResult" })
+            {
+                var addon = gameGui.GetAddonByName<AtkUnitBase>(name, 1);
+                if (addon != null && addon->IsVisible) return true;
+            }
+        }
+        catch { }
+        return false;
     }
 
     private void OnAddon(AddonEvent eventType,AddonArgs args)
@@ -193,7 +275,12 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
 
     private void Release()
     {
-        if(!lease.Held)return;
+        if (!lease.Held)
+        {
+            var special = gameGui.GetAddonByName<AtkUnitBase>("_ActionBarEx", 1);
+            ReleaseMarketPresentation(special, bar?.Revision ?? 1);
+            return;
+        }
         try
         {
             Resolve(out var module,out var addon,out var identity);
@@ -227,6 +314,8 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
             }
         }
         finally{lease.Clear();}
+        var currentSpecial = gameGui.GetAddonByName<AtkUnitBase>("_ActionBarEx", 1);
+        ReleaseMarketPresentation(currentSpecial, bar?.Revision ?? 1);
     }
 
     public void Dispose()
@@ -242,8 +331,8 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
         // Stop addon callbacks before restoration can re-enter other plugin code.
         disposed=true;available=false;
         try{Release();}
-        catch(Exception ex){WarnCleanup(ex);}
-        finally{bar=null;RemoveCallbacksAndHook();}
+        catch(Exception ex){PhysicalClose.Fail("Native special bar restoration failed",ex);WarnCleanup(ex);}
+        finally{bar=null;RemoveCallbacksAndHook();PhysicalClose.Finish();}
     }
 
     private void RemoveCallbacksAndHook()
@@ -252,12 +341,11 @@ public sealed unsafe class TrialNativeSpecialHotbar : IDisposable
         {
             listenerRegistered=false;
             try{lifecycle.UnregisterListener(AddonEvent.PostUpdate,"_ActionBarEx",OnAddon);}
-            catch(Exception ex){WarnCleanup(ex);}
+            catch(Exception ex){PhysicalClose.Fail("Native special bar PostUpdate removal failed",ex);WarnCleanup(ex);}
             try{lifecycle.UnregisterListener(AddonEvent.PostRequestedUpdate,"_ActionBarEx",OnAddon);}
-            catch(Exception ex){WarnCleanup(ex);}
+            catch(Exception ex){PhysicalClose.Fail("Native special bar PostRequestedUpdate removal failed",ex);WarnCleanup(ex);}
         }
-        var hook=execute;execute=null;
-        try{hook?.Dispose();}catch(Exception ex){WarnCleanup(ex);}
+        PhysicalClose.CloseHook(ref execute);
     }
 
     private void WarnCleanup(Exception ex)

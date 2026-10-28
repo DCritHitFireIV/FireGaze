@@ -49,7 +49,7 @@ internal sealed partial class PortraitPreviewWindow
             ObserveAnalysisSubject();
             ImGui.TextDisabled(scope == PortraitImageScope.Portrait
                 ? "读取肖像角色与边框装饰。"
-                : "读取当前屏幕可见的完整铭牌，不改变铭牌数据。");
+                : "按当前可见画面拍摄铭牌；遮挡会入图，播放时暂不拍照。");
             var current = feature.History.FirstOrDefault(record => record.IsCurrent);
             if (current?.ID != analysisRecord)
             {

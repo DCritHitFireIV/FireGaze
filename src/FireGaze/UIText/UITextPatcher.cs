@@ -66,17 +66,38 @@ internal sealed class UITextPatchOutcome
     /// <summary>Pack entries blocked because current IL uses them as plugin/IPC identities.</summary>
     public int FunctionalIdentifierSkipped { get; set; }
 
+    public List<string> LiteralWriteRejected { get; } = [];
+
+    private readonly List<UITextIdentitySite> identitySites = [];
+
+    /// <summary>Evidence from actual successful writes, never package claims.</summary>
+    public IReadOnlyList<UITextIdentitySite> IdentitySites => this.identitySites;
+
+    public int DisplayOnlyWrites => this.identitySites.Count(site => site.Effect == UITextIdentityEffect.DisplayOnly);
+    public int NumericIDPreservedWrites => this.identitySites.Count(site => site.Effect == UITextIdentityEffect.NumericIdPreserved);
+    public int NumericIDChangedWrites => this.identitySites.Count(site => site.Effect == UITextIdentityEffect.NumericIdChanged);
+
+    // Resource/attribute/recovery paths without a per-site proof remain
+    // conservative. A newly added writer cannot silently opt out of admission.
+    public int UnknownIdentityWrites => this.identitySites.Count(site => site.Effect == UITextIdentityEffect.Unknown)
+        + Math.Max(0, this.PatchedTotal - this.identitySites.Count);
+
+    public bool RequiresRetirement => this.NumericIDChangedWrites > 0 || this.UnknownIdentityWrites > 0;
+
+    internal void RecordIdentitySite(UITextIdentitySite site) => this.identitySites.Add(site);
+
     public bool Ok => this.Error is null;
 }
 
 /// <summary>
-///     把译文写进插件 DLL：只改字符串字面量（<c>ldstr</c>），代码结构一个字节都不动。
+///     把译文写进插件 DLL：普通文本只改字符串操作数；已证明的有限动态标签
+///     通过可逆指令改写保留完整显示内容和控件标识。
 /// </summary>
 /// <remarks>
 ///     口径：
 ///       · 只改「有译文、且没被用户标记不翻」的条目；
 ///       · 按**文本内容**匹配，不绑版本号——插件更新后仍按原文匹配，对不上的记进 <see cref="UITextPatchOutcome.Missing" />；
-///       · 被 ImGui 当控件 ID 用的字面量写成「译文###原文」，显示译文、ID 还在原文上；
+///       · 被 ImGui 当控件 ID 用的字面量写成「译文###原文」，source key 稳定，但首次 numeric ID 会改变；
 ///       · 原文自带 <c>###</c> 时只替换显示段，ID 段原样保留。
 /// </remarks>
 internal static class UITextPatcher
@@ -207,21 +228,10 @@ internal static class UITextPatcher
             using (var module = UIStringExtractor.LoadModule(sourcePath, searchDirectories))
             {
                 // Pack roles can be stale or come from another localized fork. Current IL is authoritative.
-                var identities = UIStringExtractor.FunctionalIdentifiers(module);
-                foreach (var identity in identities)
-                {
-                    if (map.Remove(identity))
-                    {
-                        seen.Add(identity);
-                        outcome.FunctionalIdentifierSkipped++;
-                    }
-                }
-
-                if (map.Count + resourceMap.Count + attributeMap.Count == 0 && !allowEmptyPatch)
-                {
-                    outcome.Error = "译文只命中了插件 / IPC 标识符，为保留插件识别功能，没有写入。";
-                    return outcome;
-                }
+                var currentMetadata = UIStringExtractor.CurrentLiteralMetadata(module);
+                // A translation provides display content, not write permission.
+                // The current module's exact instruction is the authority for
+                // consumer admission and label identity, even for user packs.
 
                 // ① 内嵌本地化资源（.resx / ResourceManager）：按「容器 + key」改值。
                 //    只动主程序集的内嵌容器：官方 zh 卫星优先（ResourceManager 的查找顺序），
@@ -253,7 +263,9 @@ internal static class UITextPatcher
                             continue;
                         }
 
-                        foreach (var instruction in method.Body.Instructions)
+                        var dynamicLabels = UITextDynamicLabelContracts.FindOriginal(method)
+                            .ToDictionary(contract => contract.Label);
+                        foreach (var instruction in method.Body.Instructions.ToArray())
                         {
                             if (instruction.OpCode.Code != Code.Ldstr || instruction.Operand is not string literal)
                             {
@@ -266,7 +278,47 @@ internal static class UITextPatcher
                             }
 
                             seen.Add(literal);
-                            var replaced = UITextText.BuildPatched(literal, entry.Translated, entry.PreserveID || forcePreserve.Contains(entry.Original));
+                            if (!currentMetadata.Sites.TryGetValue(instruction, out var site)
+                                || !string.Equals(site.Original, literal, StringComparison.Ordinal) || !site.CanWrite)
+                            {
+                                if (site?.FunctionalIdentity == true) outcome.FunctionalIdentifierSkipped++;
+                                outcome.LiteralWriteRejected.Add($"{method.FullName} IL_{instruction.Offset:X4}: {site?.Reason ?? "没有当前消费者证明"}");
+                                continue;
+                            }
+                            if (UITextText.CheckPlaceholders(site.ProviderText ?? literal, entry.Translated.Trim()) is not null)
+                            {
+                                outcome.PlaceholderSkipped++;
+                                continue;
+                            }
+                            if (site.ProviderText is not null)
+                            {
+                                if (UITextTeleporterSearchContracts.TryApply(module, instruction, entry.Translated))
+                                {
+                                    outcome.PatchedLiterals++;
+                                    outcome.RecordIdentitySite(new($"{method.FullName} IL_{instruction.Offset:X4}", literal,
+                                        (string)instruction.Operand, UITextIdentityEffect.NumericIdChanged,
+                                        "精确 Teleporter InputText 完整标签合同；新增 ###source 改变首次 numeric ID"));
+                                }
+                                else
+                                    outcome.LiteralWriteRejected.Add($"{method.FullName} IL_{instruction.Offset:X4}: 精确消费者合同拒绝此译文");
+                                continue;
+                            }
+                            if (dynamicLabels.TryGetValue(instruction, out var dynamicLabel))
+                            {
+                                if (UITextDynamicLabelContracts.TryApply(dynamicLabel, entry.Translated))
+                                {
+                                    outcome.PatchedLiterals++;
+                                    var display = (string)dynamicLabel.Label.Operand;
+                                    outcome.RecordIdentitySite(new($"{method.FullName} IL_{instruction.Offset:X4}", literal,
+                                        display, UITextIdentityEffect.NumericIdChanged,
+                                        $"{dynamicLabel.InputTextCall.Operand}; complete labels: {literal} -> {display}###{literal}; {literal}* -> {display}*###{literal}*"));
+                                }
+                                else
+                                    outcome.LiteralWriteRejected.Add($"{method.FullName} IL_{instruction.Offset:X4}: 完整动态标签合同拒绝此译文");
+                                continue;
+                            }
+                            var replaced = UITextText.BuildPatched(literal, entry.Translated, site.PreserveID);
+                            if (site.PreserveID && !entry.PreserveID) outcome.PreserveIDForced++;
                             if (string.Equals(replaced, literal, StringComparison.Ordinal))
                             {
                                 continue;
@@ -274,12 +326,21 @@ internal static class UITextPatcher
 
                             instruction.Operand = replaced;
                             outcome.PatchedLiterals++;
+                            outcome.RecordIdentitySite(UITextIdentityEffects.Literal(method, instruction, site, literal, replaced));
                         }
                     }
                 }
 
                 if (outcome.PatchedTotal == 0 && !allowEmptyPatch)
                 {
+                    if (seen.Count > 0 || seenResources.Count > 0 || seenAttributes.Count > 0)
+                    {
+                        // Finding a source but refusing its consumers is not evidence
+                        // of a lost patch record. In particular it must never trigger
+                        // the manager's inverse-recovery path.
+                        outcome.Error = "已找到原文，但当前用途没有可写译文；请查看消费者检查结果。";
+                        return outcome;
+                    }
                     // NoMatch：盘上可能已经是我们的旧补丁（记录丢了）——调用方据此做一次自愈重试，见 UITextPatchManager.Apply
                     outcome.NoMatch = true;
                     outcome.Error = $"译文有 {outcome.Candidates} 条，但在 DLL 里一条都没对上。到插件安装器里把这个插件重装一次（回到原版）再点「一键汉化」；行尾有「还原原文」时也可以先点它。";
@@ -427,8 +488,23 @@ internal static class UITextPatcher
                             continue;
                         }
 
-                        foreach (var instruction in method.Body.Instructions)
+                        // A dynamic label is one reversible unit. Even if its
+                        // package entry is missing or stale, the generic suffix
+                        // recovery must never rewrite only part of this unit.
+                        var dynamicInstructions = new HashSet<Instruction>();
+                        foreach (var contract in UITextDynamicLabelContracts.FindPatched(method))
                         {
+                            dynamicInstructions.Add(contract.Label);
+                            dynamicInstructions.Add(contract.RequiredMarker);
+                            if (contract.InsertedOptionalIdentity is { } identity) dynamicInstructions.Add(identity);
+                            var entry = pack.Find(contract.OriginalBase);
+                            if (entry is not null && entry.HasTranslation && !pack.IsSkipped(entry.Original)
+                                && UITextDynamicLabelContracts.TryRevert(contract, entry.Original, entry.Translated))
+                                outcome.PatchedLiterals++;
+                        }
+                        foreach (var instruction in method.Body.Instructions.ToArray())
+                        {
+                            if (dynamicInstructions.Contains(instruction)) continue;
                             if (instruction.OpCode.Code != Code.Ldstr || instruction.Operand is not string literal)
                             {
                                 continue;
@@ -571,28 +647,20 @@ internal static class UITextPatcher
             try
             {
                 var data = embedded.CreateReader().ToArray();
-                var items = new List<(string Key, object? Value)>();
+                var items = new List<UITextBinaryResources.Entry>();
                 var changed = false;
-                using (var reader = new ResourceReader(new MemoryStream(data)))
+                foreach (var item in UITextBinaryResources.Read(data))
                 {
-                    foreach (DictionaryEntry item in reader)
+                    if (item.StringValue is string value
+                        && keys.TryGetValue(item.Key, out var entry)
+                        && string.Equals(value, entry.Translated.Trim(), StringComparison.Ordinal))
                     {
-                        if (item.Key is not string resourceKey)
-                        {
-                            throw new NotSupportedException("容器里出现了非字符串的 key");
-                        }
-
-                        if (item.Value is string value
-                            && keys.TryGetValue(resourceKey, out var entry)
-                            && string.Equals(value, entry.Translated.Trim(), StringComparison.Ordinal))
-                        {
-                            items.Add((resourceKey, entry.Original));
-                            changed = true;
-                        }
-                        else
-                        {
-                            items.Add((resourceKey, item.Value));
-                        }
+                        items.Add(item.WithStringValue(entry.Original));
+                        changed = true;
+                    }
+                    else
+                    {
+                        items.Add(item);
                     }
                 }
 
@@ -601,19 +669,9 @@ internal static class UITextPatcher
                     continue;
                 }
 
-                var stream = new MemoryStream();
-                using (var writer = new ResourceWriter(stream))
-                {
-                    foreach (var (key, value) in items)
-                    {
-                        writer.AddResource(key, value);
-                    }
-
-                    writer.Generate();
-                }
-
+                var updated = UITextBinaryResources.Write(items);
                 module.Resources.Remove(embedded);
-                module.Resources.Add(new EmbeddedResource(container, stream.ToArray(), embedded.Attributes));
+                module.Resources.Add(new EmbeddedResource(container, updated, embedded.Attributes));
                 outcome.PatchedResources++;
             }
             catch (Exception e)
@@ -624,8 +682,8 @@ internal static class UITextPatcher
     }
 
     /// <summary>
-    ///     把属性译文写进自定义特性参数：只碰 <see cref="UITextRules.IsUIAttribute" /> 认的特性、
-    ///     只改构造函数参数里的字符串（含字符串数组的每一项）；命名参数常是键/ID，一概不动。
+    ///     把属性译文写进已证显示参数。精确类型、构造签名、命名参数及宿主上下文
+    ///     与抽取端共用 <see cref="UITextAttributeContracts" />；未知参数保持原样。
     /// </summary>
     /// <remarks>
     ///     dnlib 的 <c>CAArgument</c> 是**结构体**：不能传参后直接改（改的是副本），
@@ -641,24 +699,22 @@ internal static class UITextPatcher
         {
             foreach (var attribute in host.CustomAttributes)
             {
-                if (!UITextRules.IsUIAttribute(attribute.TypeFullName))
-                {
-                    continue;
-                }
-
-                // 命令类特性（Cmd / SubCmd / Command）：第 0 个参数是命令名，跳过（与抽取端同一规则）
                 var arguments = attribute.ConstructorArguments;
-                var startIndex = UITextRules.CommandHelpStartIndex(attribute.TypeFullName) ?? 0;
-                for (var i = startIndex; i < arguments.Count; i++)
+                for (var i = 0; i < arguments.Count; i++)
                 {
+                    if (!UITextAttributeContracts.IsDisplayConstructorArgument(attribute, host, i))
+                    {
+                        continue;
+                    }
+
                     arguments[i] = PatchAttributeArgument(arguments[i], attributeMap, seen, outcome);
                 }
 
-                // 命名参数：与抽取端同一份白名单（ARSR 的 [RotationConfig(…, Name = "…")] 这类）。
+                // 命名参数也须由该类型的已证消费者合同批准，不能根据 Name 等通用名字推断。
                 // CANamedArgument 是引用类型，直接改它的 Argument 属性即可（CAArgument 是结构体，返回值得写回）。
                 foreach (var named in attribute.NamedArguments)
                 {
-                    if (!UITextRules.IsUINamedArgument(named.Name?.String))
+                    if (!UITextAttributeContracts.IsDisplayNamedArgument(attribute, host, named))
                     {
                         continue;
                     }
@@ -679,6 +735,43 @@ internal static class UITextPatcher
             foreach (var field in type.Fields)
             {
                 Handle(field);
+                if (!UIStringExtractor.TryGetMissingEnumFallback(field, out var fallback, out var attribute)
+                    || !attributeMap.TryGetValue(fallback, out var entry))
+                {
+                    continue;
+                }
+
+                // Add only metadata understood by the existing AG consumer. The
+                // marker's assembly scope is retained; enum identity never changes.
+                if (attribute is null)
+                {
+                    var marker = type.CustomAttributes.Single(a => a.TypeFullName == "AG.EnumLocalization.Attributes.EnumLocStringsAttribute");
+                    if (marker.AttributeType is not TypeRef markerType)
+                    {
+                        continue;
+                    }
+
+                    var attributeType = new TypeRefUser(module, "AG.EnumLocalization.Attributes", "EnumLocAttribute", markerType.ResolutionScope);
+                    var constructor = new MemberRefUser(module, ".ctor", MethodSig.CreateInstance(module.CorLibTypes.Void,
+                        module.CorLibTypes.String, module.CorLibTypes.String), attributeType);
+                    attribute = new CustomAttribute(constructor,
+                        [new CAArgument(module.CorLibTypes.String, null), new CAArgument(module.CorLibTypes.String, null)]);
+                    field.CustomAttributes.Add(attribute);
+                }
+
+                var existing = attribute.NamedArguments.FirstOrDefault(a => a.Name == "Fallback");
+                var argument = new CAArgument(module.CorLibTypes.String, new UTF8String(entry.Translated));
+                if (existing is null)
+                {
+                    attribute.NamedArguments.Add(new CANamedArgument(false, module.CorLibTypes.String, "Fallback", argument));
+                }
+                else
+                {
+                    existing.Argument = argument;
+                }
+
+                seen.Add(fallback);
+                outcome.PatchedAttributes++;
             }
 
             foreach (var property in type.Properties)
@@ -720,8 +813,13 @@ internal static class UITextPatcher
 
     /// <summary>
     ///     把资源条目写进内嵌 <c>.resources</c> 容器：读出全部条目 → 换掉匹配 key 的值 → 重写容器。
-    ///     非字符串的值原样保留；重写失败（自定义序列化类型）只跳过该容器，不算整体失败。
+    ///     原始类型与字节不反序列化；只改与包 Original 精确匹配的字符串值。
+    ///     重写成功后才提交已命中集合与计数，失败时保留原容器。
     /// </summary>
+    internal static bool ResourceValueMatchesOriginal(object? current, UITextResourceEntry entry) =>
+        current is string value
+        && string.Equals(value, entry.Original, StringComparison.Ordinal);
+
     private static void PatchResources(
         ModuleDefMD module,
         Dictionary<(string Container, string Key), UITextResourceEntry> resourceMap,
@@ -757,48 +855,37 @@ internal static class UITextPatcher
             try
             {
                 var data = embedded.CreateReader().ToArray();
-                var items = new List<(string Key, object? Value)>(keys.Count + 8);
-                using (var reader = new ResourceReader(new MemoryStream(data)))
+                var items = new List<UITextBinaryResources.Entry>();
+                var replaced = new List<string>();
+                foreach (var item in UITextBinaryResources.Read(data))
                 {
-                    foreach (DictionaryEntry item in reader)
+                    if (keys.TryGetValue(item.Key, out var entry)
+                        && ResourceValueMatchesOriginal(item.StringValue, entry))
                     {
-                        if (item.Key is not string resourceKey)
+                        var translated = entry.Translated.Trim();
+                        if (!string.Equals(item.StringValue, translated, StringComparison.Ordinal))
                         {
-                            throw new NotSupportedException("容器里出现了非字符串的 key");
-                        }
-
-                        if (keys.TryGetValue(resourceKey, out var entry))
-                        {
-                            // 写回用 Trim 后的值：反向还原是按 Trim 比较的（不统一会还原不回来，2026-10-03 评审 B-12）
-                            items.Add((resourceKey, entry.Translated.Trim()));
-                            seen.Add((container, resourceKey));
-                            outcome.PatchedResources++;
-                        }
-                        else
-                        {
-                            items.Add((resourceKey, item.Value));
+                            items.Add(item.WithStringValue(translated));
+                            replaced.Add(item.Key);
+                            continue;
                         }
                     }
+                    items.Add(item);
                 }
 
-                if (items.Count == 0)
+                if (replaced.Count == 0)
                 {
                     continue;
                 }
 
-                var stream = new MemoryStream();
-                using (var writer = new ResourceWriter(stream))
-                {
-                    foreach (var (key, value) in items)
-                    {
-                        writer.AddResource(key, value);
-                    }
-
-                    writer.Generate();
-                }
-
+                var updated = UITextBinaryResources.Write(items);
                 module.Resources.Remove(embedded);
-                module.Resources.Add(new EmbeddedResource(container, stream.ToArray(), embedded.Attributes));
+                module.Resources.Add(new EmbeddedResource(container, updated, embedded.Attributes));
+                foreach (var resourceKey in replaced)
+                {
+                    seen.Add((container, resourceKey));
+                    outcome.PatchedResources++;
+                }
             }
             catch (Exception e)
             {
@@ -858,19 +945,35 @@ internal static class UITextPatcher
             try
             {
                 var text = Encoding.UTF8.GetString(embedded.CreateReader().ToArray());
-                if (!UITextJSONResources.TryParse(text, out _))
+                if (!UITextJSONResources.TryParse(text, out var table))
                 {
                     outcome.Missing.Add($"内嵌 JSON：{name}（形状不像语言表，没写成）");
                     continue;
                 }
 
-                var translations = keys.ToDictionary(pair => pair.Key, pair => pair.Value.Translated, StringComparer.Ordinal);
-                var updated = UITextJSONResources.Apply(text, translations, out var changed);
-                foreach (var key in keys.Keys)
+                var translations = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var (key, entry) in keys)
                 {
-                    // 没改动也可能是「上游已经有 zh」——都算处理过，不再报「没对上」
+                    if (!table.TryGetValue(key, out var languages)
+                        || !UITextJSONResources.EnglishValueMatchesOriginal(languages, entry.Original))
+                    {
+                        // Missing keys and changed upstream English values remain
+                        // unmodified and are reported by the final coverage pass.
+                        continue;
+                    }
+
+                    // A matching entry is safely accounted for even when upstream
+                    // already supplied zh and Apply therefore makes no byte change.
                     seen.Add((UITextJSONResources.Prefix + name, key));
+                    translations[key] = entry.Translated;
                 }
+
+                if (translations.Count == 0)
+                {
+                    continue;
+                }
+
+                var updated = UITextJSONResources.Apply(text, translations, out var changed);
 
                 if (updated is null)
                 {

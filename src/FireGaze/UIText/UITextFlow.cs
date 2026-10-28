@@ -8,7 +8,12 @@ internal sealed record UITextTarget(
     string? Context,
     UITextPackEntry? Entry,
     UITextResourceEntry? Resource,
-    UITextAttributeEntry? Attribute = null);
+    UITextAttributeEntry? Attribute = null,
+    string? ProviderText = null)
+{
+    public string TranslationText => UITextText.ForTranslation(
+        this.ProviderText ?? this.Entry?.ProviderText ?? this.Original);
+}
 
 /// <summary>
 ///     抽取结果合并 / 选翻译目标 / 收译文 —— 三步的共用逻辑。
@@ -55,10 +60,12 @@ internal static class UITextFlow
     public static MergeResult MergeExtraction(UITextPack pack, UITextExtraction extraction)
     {
         var result = new MergeResult();
+        foreach (var entry in pack.Entries) entry.ProviderText = null;
         var preserve = new Dictionary<string, bool>(StringComparer.Ordinal);
         foreach (var item in extraction.Entries)
         {
-            if (item.Role == UITextRole.Excluded)
+            var role = item.TranslationRole;
+            if (role == UITextRole.Excluded)
             {
                 if (item.IsFunctionalIdentifier && pack.Find(item.Original) is { } identifier)
                 {
@@ -70,15 +77,16 @@ internal static class UITextFlow
 
             // 同一原文出现在多处时，只要有「候选」就算候选
             if (!result.Roles.TryGetValue(item.Original, out var existing)
-                || (existing == UITextRole.Ambiguous && item.Role == UITextRole.UI))
+                || (existing == UITextRole.Ambiguous && role == UITextRole.UI))
             {
-                result.Roles[item.Original] = item.Role;
+                result.Roles[item.Original] = role;
                 result.Reasons[item.Original] = item.Reason;
             }
 
             preserve[item.Original] = preserve.GetValueOrDefault(item.Original) || item.PreserveID;
             var existed = pack.Find(item.Original) is not null;
             var entry = pack.GetOrAdd(item.Original, item.Context, item.PreserveID);
+            entry.ProviderText = item.TranslationText;
             if (!existed)
             {
                 result.ReapplyNeeded = true;
@@ -91,7 +99,7 @@ internal static class UITextFlow
 
             // 记下本轮的判定（UI / 灰名单）：打补丁时当闸门用。
             // 首次把「已有译文的条目」记成灰名单时要重打——它可能在升级前已经写进过 DLL，得按新口径撤出来。
-            var newRole = item.Role == UITextRole.Ambiguous ? "Ambiguous" : "UI";
+            var newRole = role == UITextRole.Ambiguous ? "Ambiguous" : "UI";
             if (entry.Role is null)
             {
                 entry.Role = newRole;
@@ -108,7 +116,7 @@ internal static class UITextFlow
 
             entry.RoleReason = item.Reason;
 
-            if (item.Role == UITextRole.UI)
+            if (role == UITextRole.UI)
             {
                 result.UICount++;
             }
@@ -184,7 +192,7 @@ internal static class UITextFlow
             // 格式串 / 内部 ID 不选进候选（2026-10-07：送翻必然「原样返回」，白耗额度）
             if (entry.HasTranslation
                 || pack.IsSkipped(entry.Original)
-                || UITextText.LooksUntranslatable(entry.Original))
+                || UITextText.LooksUntranslatable(entry.ProviderText ?? entry.Original))
             {
                 continue;
             }
@@ -317,7 +325,7 @@ internal static class UITextFlow
         foreach (var target in targets)
         {
             // 最后一道闸：格式串 / 内部 ID 不进通道（编辑窗口不走 TranslationTargets，靠这里兜住）
-            if (UITextText.LooksUntranslatable(target.Original))
+            if (UITextText.LooksUntranslatable(target.TranslationText))
             {
                 continue;
             }
@@ -327,7 +335,7 @@ internal static class UITextFlow
                 continue;
             }
 
-            items.Add(new UITextTranslateItem(target.Original, target.Context));
+            items.Add(new UITextTranslateItem(target.Original, target.Context, target.TranslationText));
         }
 
         return items;
@@ -345,7 +353,8 @@ internal static class UITextFlow
         IEnumerable<KeyValuePair<string, string>> translated,
         string channelName,
         bool overwriteExisting = false,
-        bool overwriteUser = false)
+        bool overwriteUser = false,
+        IReadOnlyDictionary<string, string>? providerTexts = null)
     {
         var applied = 0;
         var placeholderRejected = 0;
@@ -367,14 +376,16 @@ internal static class UITextFlow
             }
 
             var clean = UITextText.CleanTranslated(value);
+            var providerText = providerTexts is not null && providerTexts.TryGetValue(original, out var projected)
+                ? projected : UITextText.ForTranslation(original);
             if (string.IsNullOrWhiteSpace(clean)
-                || string.Equals(clean, UITextText.ForTranslation(original), StringComparison.Ordinal))
+                || string.Equals(clean, providerText, StringComparison.Ordinal))
             {
                 unchanged++;
                 continue;
             }
 
-            var problem = UITextText.CheckPlaceholders(original, clean);
+            var problem = UITextText.CheckPlaceholders(providerText, clean);
             if (problem is not null)
             {
                 entry.Review = problem;

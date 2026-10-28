@@ -59,7 +59,8 @@ internal sealed class PortraitOwnedSceneRenderTargetAdapter(
         Interlocked.Increment(ref resourceRevision);
         Images.InvalidateNativeSource();
     }
-    internal bool TryCopy(PortraitOwnedSceneController controller, IPortraitOwnedSceneLease lease)
+    internal bool TryCopy(PortraitOwnedSceneController controller, IPortraitOwnedSceneLease lease,
+        PortraitOwnedSceneFirstFrameIdentity? receipt = null)
     {
         if (disposed || busy || !Admitted() || controller.ImageOwner is not { } owner
             || !owner.IsValid || !lease.IsCurrent || lease.Slot != owner.Slot || owner.Slot >= 8
@@ -80,7 +81,8 @@ internal sealed class PortraitOwnedSceneRenderTargetAdapter(
                 try
                 {
                 if (!Current() || !lease.CanAccess(view) || !read.TryRead(owner, lease, view, out var first)
-                    || !first.IsValid || first.Owner != owner || first.NativeOwner.View != view) return;
+                    || !first.IsValid || first.Owner != owner || first.NativeOwner.View != view
+                    || receipt is not null && !ReceiptMatches(receipt, first, lease)) return;
                 retained = textures.Retain(first); // Independent AddRef via public Dalamud wrap.
                 if (retained is null || !Current() || !read.TryRead(owner, lease, view, out var afterRetain)
                     || afterRetain != first) return;
@@ -97,7 +99,7 @@ internal sealed class PortraitOwnedSceneRenderTargetAdapter(
                 // Prepared has no lease, native pointer, raw descriptor or native callback.
                 prepared = new(textures, retained, args, acquisitions, held);
                 retained = null; held = null!;
-                started = Images.TryCopyWithinReadyView(controller, lease, descriptor, prepared.Start);
+                started = Images.TryCopyWithinReadyView(controller, lease, descriptor, prepared.Start, receipt);
                 if (!started) return;
                 // Provider invocation has an external synchronous prefix. Revalidate all native
                 // values before allowing its managed task to publish even an already-done copy.
@@ -131,6 +133,15 @@ internal sealed class PortraitOwnedSceneRenderTargetAdapter(
             busy = false;
         }
     }
+    private static bool ReceiptMatches(PortraitOwnedSceneFirstFrameIdentity receipt,
+        PortraitOwnedSceneRenderTargetRead value, IPortraitOwnedSceneLease lease)
+        => receipt.IsValid && receipt.SessionEpoch == value.Phase.SessionEpoch
+            && receipt.NativeFrame == value.Phase.NativeFrame && receipt.NativeFrame == lease.NativeFrame
+            && receipt.Source == new PortraitOwnedSceneFirstFrameSource((long)value.Owner.Source.Editor,
+                (long)value.Owner.Source.State, (long)value.Owner.Source.Model,
+                value.Owner.Source.Generation, value.Owner.Source.Character)
+            && receipt.Owner == new PortraitOwnedSceneFirstFrameOwner(value.Owner.Session,
+                value.Owner.Revision, value.Owner.Slot, value.Owner.LeaseEpoch);
     private bool Admitted() { try { return admission?.Invoke() == true; } catch { return false; } }
     public void Dispose() { disposed = true; Images.Dispose(); }
     internal Task DrainPhysicalAsync() => PortraitCaptureRetirement.CombineOwned(this, Images.DrainPhysicalAsync(), acquisitions.Seal());

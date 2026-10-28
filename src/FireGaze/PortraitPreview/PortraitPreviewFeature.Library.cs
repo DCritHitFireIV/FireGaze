@@ -14,6 +14,10 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private string favoritesStatus = "";
     private string favoriteSuccessMessage = "收藏已保存";
     private PortraitFavoriteEntry? favoriteAwaitingPhoto;
+    private PendingFavoriteSave? pendingFavoriteSave;
+    private sealed record PendingFavoriteSave(string Name, string[] Tags, OwnedCharacterKey Owner,
+        string SourceName, PortraitIdentity Identity, PortraitEditorSnapshot Snapshot, PortraitPhotoSource PhotoSource,
+        IDisposable? Protection);
     private long favoriteNoticeRevision;
     private long favoriteWriteNoticeRevision;
     private bool libraryInitialized;
@@ -26,7 +30,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitFavoritesWriteResult? favoriteCompletedResult;
     private PortraitFavoritesWriteResult? lastFavoriteStorageFailure;
     private Func<PortraitFavoritesWriteResult>? retainedFavoriteWrite;
-    private (ulong ContentID, PortraitEditorSnapshot Snapshot)? retainedFavoriteProtection;
+    private (ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)? retainedFavoriteProtection;
     private Task<bool>? storageObservation;
     private bool storageObservationClosing;
     private readonly Dictionary<ulong, string> retainerDisplayNames = [];
@@ -37,8 +41,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     // inventory capture. Drawing must not resolve PlayerState or the local actor.
     private void RefreshSourceCharacter()
     {
-        sourceCharacter = null;
-        sourceCharacter = CurrentCharacter();
+        // Publish one coherent snapshot. Clearing the published owner first creates a
+        // one-frame empty state for the UI while the current actor is still available.
+        PortraitSourceOwnerPublication.Refresh(CurrentCharacter, value => sourceCharacter = value);
     }
 
     private bool SourceOwnerCurrent => sourceCharacter is { } owner && ownedView.Character == owner;
@@ -68,6 +73,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void PollLibrary()
     {
         if (!libraryInitialized || !Plugin.Framework.IsInFrameworkUpdateThread) return;
+        ObservePendingFavoriteSave();
         ObserveFavoritePersistence();
         ObserveFavoritePhoto();
         // Worker completion is read without disk or native calls. A queued snapshot is not
@@ -147,21 +153,82 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void SaveFavorite(string name, IReadOnlyCollection<string> tags) => Mutate(() =>
     {
+        if (pendingFavoriteSave is not null || favoritePersistence is { IsCompleted: false })
+        { SetFavoritesError("上一条收藏仍在保存，请稍候再试。"); return; }
         if (favoritesStore.Entries.Concat(favoritesTrashStore.Entries).DistinctBy(entry => entry.ID).Count() >= PortraitFavoritesStore.MaximumEntries)
         { SetFavoritesError("收藏容量已满，请先清理回收站中的部分收藏。已有收藏已保留。"); return; }
         if (!TryCurrentSnapshot(out var snapshot, out var reason)) { SetFavoritesError(reason); return; }
         var owner = CurrentCharacter();
         if (owner is not { } character) { SetFavoritesError("尚未进入角色。"); return; }
+        var photoSource = CurrentPhotoSource();
+        if (!photoSource.IsReady || !photos.HasSnapshotPhoto(character.ContentID, snapshot, photoSource)
+            && !photos.CanCapturePhotoSource(photoSource))
+        { SetFavoritesError("当前照片来源尚未准备好，本次收藏未保存。"); return; }
         var sourceName = Plugin.Objects.LocalPlayer?.Name.TextValue;
         // Protect an existing completed photo before metadata can make it an intentional save.
         // The token spans durable metadata, archive synchronization and permanent pin refresh.
         var savedTags = tags.ToArray();
+        if (!photos.HasSnapshotPhoto(character.ContentID, snapshot, photoSource))
+        {
+            if (!target.TryResolve(out var identity, out _, out _))
+            { SetFavoritesError("肖像尚未准备好，本次收藏未保存，请稍后重试。"); return; }
+            // New image-first favorites are not published until their exact snapshot owns
+            // completed pixels. The provisional pin also requests capture when a playing
+            // pose intentionally has no new operation-history record.
+            pendingFavoriteSave = new(name, savedTags, character,
+                string.IsNullOrWhiteSpace(sourceName) ? "当前角色" : sourceName, identity, snapshot.Copy(), photoSource,
+                photos.ProtectFavoriteSnapshotForSource(character.ContentID, snapshot, photoSource));
+            favoriteNoticeRevision++;
+            favoriteAwaitingPhoto = null;
+            favoritesStatus = "正在保存收藏照片…";
+            return;
+        }
         QueueFavoriteWrite(() => favoritesStore.Add(snapshot, character.ContentID,
-            string.IsNullOrWhiteSpace(sourceName) ? "当前角色" : sourceName, name, savedTags), (character.ContentID, snapshot));
+            string.IsNullOrWhiteSpace(sourceName) ? "当前角色" : sourceName, photoSource, name, savedTags),
+            (character.ContentID, snapshot, photoSource));
     });
+
+    private void ObservePendingFavoriteSave()
+    {
+        if (pendingFavoriteSave is not { } pending) return;
+        if (!session.IsActive || CurrentCharacter() != pending.Owner || !target.IsCurrent(pending.Identity)
+            || CurrentPhotoSource() != pending.PhotoSource)
+        { CancelPendingFavoriteSave("肖像预览已结束或来源已改变，本次收藏未保存。"); return; }
+        if (!target.TryResolve(out var identity, out _, out _) || target.CaptureEditorState(identity) is not { } snapshot) return;
+        if (identity != pending.Identity || !pending.Snapshot.SameForHistory(snapshot))
+        { CancelPendingFavoriteSave("肖像已改变，本次收藏未保存，请在画面稳定后重新收藏。"); return; }
+        if (!photos.HasSnapshotPhoto(pending.Owner.ContentID, pending.Snapshot, pending.PhotoSource))
+        {
+            favoritesStatus = photos.FavoritePhotoStatus(pending.Owner.ContentID, pending.Snapshot, pending.PhotoSource) switch
+            {
+                PortraitFavoritePhotoStatus.Capacity => "照片空间不足，收藏尚未保存。已有收藏已保留。",
+                PortraitFavoritePhotoStatus.StorageError => "收藏照片暂时无法保存，插件会自动重试。",
+                PortraitFavoritePhotoStatus.SourceNotReady => "当前照片来源尚未准备好，收藏照片暂未保存。",
+                _ => "正在保存收藏照片…",
+            };
+            return;
+        }
+        pendingFavoriteSave = null;
+        try
+        {
+            QueueFavoriteWrite(() => favoritesStore.Add(pending.Snapshot, pending.Owner.ContentID,
+                pending.SourceName, pending.PhotoSource, pending.Name, pending.Tags),
+                (pending.Owner.ContentID, pending.Snapshot, pending.PhotoSource));
+        }
+        finally { pending.Protection?.Dispose(); }
+    }
+
+    private void CancelPendingFavoriteSave(string? message = null)
+    {
+        var pending = pendingFavoriteSave;
+        pendingFavoriteSave = null;
+        pending?.Protection?.Dispose();
+        if (pending is not null && message is not null) SetFavoritesError(message);
+    }
 
     public void RestoreFavorite(Guid id) => Mutate(() =>
     {
+        CancelPendingFavoriteSave();
         favoriteNoticeRevision++;
         favoriteAwaitingPhoto = null;
         var entry = favoriteEntries.FirstOrDefault(value => value.ID == id);
@@ -237,7 +304,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     }, successMessage: "已永久删除收藏。"));
 
     private void QueueFavoriteWrite(Func<PortraitFavoritesWriteResult> write,
-        (ulong ContentID, PortraitEditorSnapshot Snapshot)? protection = null, string successMessage = "收藏已保存")
+        (ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)? protection = null, string successMessage = "收藏已保存")
     {
         ObserveFavoritePersistence();
         if (favoritesStore.IsReadOnly || favoritesTrashStore.IsReadOnly)
@@ -329,19 +396,20 @@ internal sealed unsafe partial class PortraitPreviewFeature
             && !appearance.IsValidChange(before.Customize, desired.Customize, out validation))
         { Error(validation); return false; }
         if (GetHistoryKey(identity, before) is not { } key) { Error("无法确认当前肖像记录来源。"); return false; }
-        HandleHistoryBatchResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return false;
         // Playback alone creates no entry; a real template edit owns the actual
         // live pose so its history image never claims an unrelated paused state.
         var historyDesired = preservePlayingHistory ? ForHistory(desired, historyObservedEditor) : desired;
         var payload = historyDesired.ToJSON();
-        var preparation = history.PrepareRecord(key, payload, label);
+        var photoSource = CurrentPhotoSource();
+        var preparation = history.PrepareRecord(key, payload, photoSource, label);
         if (preparation.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate))
         { HandleHistoryResult(preparation); Error("这次修改无法记录，原肖像保持不变。"); return false; }
         if (!ApplyWithFailureNotice(() => target.ApplyEditorState(identity, desired),
                 "本次造型未能应用，请稍后重试。若画面异常，请结束预览。")) return false;
         if (!session.ObserveLook(desired.Look))
         { RollbackLibrarySnapshot(identity, before, "预览状态无法确认，已取消本次修改。"); return false; }
-        var result = history.Record(key, payload, label);
+        var result = history.Record(key, payload, photoSource, label);
         if (result.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate))
         {
             HandleHistoryResult(result);
@@ -352,6 +420,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         historyObservedEditor = historyDesired.Copy();
         observedIdentity = identity;
         observedKey = key;
+        observedPhotoSource = photoSource;
         appearanceGroups = appearance.Build(desired.Customize);
         HandleHistoryResult(result);
         RefreshHistoryRows();
@@ -428,7 +497,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (favoriteAwaitingPhoto is not { } entry) return;
         if (!favoriteEntries.Any(value => value.ID == entry.ID)) { favoriteAwaitingPhoto = null; return; }
-        var photo = photos.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot);
+        var photo = photos.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot, entry.Source);
         favoritesStatus = photo switch
         {
             PortraitFavoritePhotoStatus.Available => "收藏和照片已保存。",
@@ -440,9 +509,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (photo == PortraitFavoritePhotoStatus.Available) favoriteAwaitingPhoto = null;
     }
 
-    private IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> FavoriteSnapshotsForPhotos()
+    private IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot, PortraitPhotoSource? Source)> FavoriteSnapshotsForPhotos()
         => favoritesStore.Entries.Concat(favoritesTrashStore.Entries)
-            .DistinctBy(entry => entry.ID).Select(entry => (entry.SourceContentID, entry.Snapshot));
+            .Select(entry => (entry.SourceContentID, entry.Snapshot, entry.Source));
 
     private void PublishFavoriteEntries()
     {
@@ -454,6 +523,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void DisposeLibrary()
     {
         if (!libraryInitialized) return;
+        CancelPendingFavoriteSave();
         glamourPlateCache.QueueIfNeeded(glamourPlates);
         // Seal the writer here; the parent lifetime awaits the managed drain after the
         // Framework-owned native release has returned.
@@ -515,7 +585,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             .Where(value => sources.Count == 0 || sources.Contains(value.Source.Kind)).FirstOrDefault();
         if (item is not { Available: true } || variant is null) { Error("尚未在选择的来源中读取此装备。"); return; }
         var piece = new PortraitPiece(id, item.DyeChannels > 0 ? variant.Stain1 : (byte)0, item.DyeChannels > 1 ? variant.Stain2 : (byte)0);
-        HandleHistoryResult(historyBatch.Flush());
+        if (!FlushHistoryForSourceChange()) return;
         if (ApplyWithFailureNotice(() => session.Replace(slot, piece), "暂时无法预览此装备，请稍后重试。"))
             RecordDirectChange("更换装备：" + item.Name);
     });

@@ -30,14 +30,40 @@ internal sealed partial class PortraitPreviewWindow
             finally { ImGui.PopStyleColor(); }
         }
         ImGui.Separator();
+        if (feature.LiveCaptureScope == PortraitImageScope.VisibleAdventurerPlate)
+        {
+            using var workspace = feature.TryBorrowWorkspaceImage();
+            if (workspace is null || !workspace.TryGetImage(out var owned))
+            {
+                DrawPortraitPlaceholder();
+                return;
+            }
+            DrawPortraitImage(owned.PixelWidth, owned.PixelHeight,
+                (minimum, maximum) => ImGui.GetWindowDrawList().AddImage(
+                    owned.Handle, minimum, maximum, owned.UV0, owned.UV1, owned.Tint));
+            return;
+        }
+
         using var borrow = feature.TryBorrowNativeLive();
         if (borrow is null || !borrow.TryGetImage(out var image))
         {
-            // Framework owns readiness and retries. Draw never prompts the player to repair
-            // loading state, mutates the editor, or substitutes a previous session's image.
-            ImGui.Dummy(ImGui.GetContentRegionAvail());
+            DrawPortraitPlaceholder();
             return;
         }
+        DrawPortraitImage(image.PixelWidth, image.PixelHeight,
+            (minimum, maximum) => ImGui.GetWindowDrawList().AddImage(
+                image.Handle, minimum, maximum, image.UV0, image.UV1, image.Tint));
+    }
+
+    private static void DrawPortraitPlaceholder()
+    {
+        // Framework owns readiness and retries. Draw never prompts the player to repair
+        // loading state, mutates the editor, or substitutes a previous session's image.
+        ImGui.Dummy(ImGui.GetContentRegionAvail());
+    }
+
+    private void DrawPortraitImage(int pixelWidth, int pixelHeight, Action<Vector2, Vector2> drawImage)
+    {
         var available = ImGui.GetContentRegionAvail();
         if (available.X <= 0 || available.Y <= 0) return;
         // Keep wheel input inside this fixed viewport. Its content never resizes the
@@ -48,8 +74,8 @@ internal sealed partial class PortraitPreviewWindow
         {
             if (!childVisible) return;
             available = ImGui.GetContentRegionAvail();
-            var maximum = PortraitNativeLiveLayout.Fit(available, image.PixelWidth, image.PixelHeight);
-            var fitted = PortraitNativeLiveLayout.Fit(available, image.PixelWidth, image.PixelHeight,
+            var maximum = PortraitNativeLiveLayout.Fit(available, pixelWidth, pixelHeight);
+            var fitted = PortraitNativeLiveLayout.Fit(available, pixelWidth, pixelHeight,
                 workspacePortraitFraction, workspacePortraitPan);
             if (fitted.Size.X <= 0 || fitted.Size.Y <= 0) return;
             var viewport = ImGui.GetCursorScreenPos();
@@ -76,11 +102,11 @@ internal sealed partial class PortraitPreviewWindow
             if ((hovered || grip.Hovered) && wheel != 0)
             {
                 (workspacePortraitFraction, workspacePortraitPan) = PortraitNativeLiveLayout.ZoomAt(available,
-                    image.PixelWidth, image.PixelHeight, workspacePortraitFraction, workspacePortraitPan,
+                    pixelWidth, pixelHeight, workspacePortraitFraction, workspacePortraitPan,
                     ImGui.GetMousePos() - viewport, wheel);
                 ImGui.GetIO().MouseWheel = 0;
             }
-            fitted = PortraitNativeLiveLayout.Fit(available, image.PixelWidth, image.PixelHeight,
+            fitted = PortraitNativeLiveLayout.Fit(available, pixelWidth, pixelHeight,
                 workspacePortraitFraction, workspacePortraitPan);
             workspacePortraitPan = PortraitNativeLiveLayout.PanBy(available, fitted.Size, workspacePortraitPan, Vector2.Zero);
             var origin = viewport + fitted.Offset;
@@ -88,7 +114,7 @@ internal sealed partial class PortraitPreviewWindow
             try
             {
                 var draw = ImGui.GetWindowDrawList();
-                draw.AddImage(image.Handle, origin, origin + fitted.Size, image.UV0, image.UV1, image.Tint);
+                drawImage(origin, origin + fitted.Size);
                 DrawPortraitResizeMark(Vector2.Max(viewport, origin),
                     Vector2.Min(viewport + available, origin + fitted.Size), grip.Hovered || grip.Active);
             }

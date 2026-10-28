@@ -432,7 +432,8 @@ internal sealed class PortraitStorageBudget
             if (file.Equals(name, StringComparison.OrdinalIgnoreCase) || file.Equals(name + ".bak", StringComparison.OrdinalIgnoreCase)
                 || file.Equals(name + ".v1.bak", StringComparison.OrdinalIgnoreCase)) return true;
             if (file.StartsWith(name + ".tmp-", StringComparison.OrdinalIgnoreCase) && Hex(file[(name.Length + 5)..], 32)) return true;
-            if (file.StartsWith(name + ".v1-", StringComparison.OrdinalIgnoreCase) && file.EndsWith(".bak", StringComparison.OrdinalIgnoreCase)
+            if ((file.StartsWith(name + ".v1-", StringComparison.OrdinalIgnoreCase) || file.StartsWith(name + ".v2-", StringComparison.OrdinalIgnoreCase))
+                && file.EndsWith(".bak", StringComparison.OrdinalIgnoreCase)
                 && Hex(file[(name.Length + 4)..^4], 64)) return true;
             if (file.StartsWith(name + ".retainer-equipped.", StringComparison.OrdinalIgnoreCase) && file.EndsWith(".bak", StringComparison.OrdinalIgnoreCase)
                 && Hex(file[(name.Length + 19)..^4], 64)) return true;

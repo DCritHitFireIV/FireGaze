@@ -28,9 +28,74 @@ public static class UIStringExtractor
     /// <summary>调试用：只给名字里含这个片段的方法打逐条 IL 栈深（临时排查用）。</summary>
     public static string? TraceKey { get; set; }
 
+    internal sealed record LiteralSite(string Original, bool CanWrite, bool PreserveID, bool FunctionalIdentity, string Reason,
+        string? ProviderText = null);
+
+    internal static (IReadOnlyList<UITextEntry> Entries, IReadOnlySet<string> CompleteWindowTitles,
+        IReadOnlyDictionary<Instruction, LiteralSite> Sites) CurrentLiteralMetadata(ModuleDefMD module)
+    {
+        var scanner = new Scanner(module, string.Empty);
+        var extraction = scanner.Run(includeResources: false);
+        return (extraction.Entries, scanner.CompleteWindowTitles, scanner.Sites);
+    }
+
     internal static HashSet<string> FunctionalIdentifiers(ModuleDefMD module) =>
-        new Scanner(module, string.Empty).Run(includeResources: false).Entries
+        CurrentLiteralMetadata(module).Entries
             .Where(e => e.IsFunctionalIdentifier).Select(e => e.Original).ToHashSet(StringComparer.Ordinal);
+
+    /// <summary>
+    /// AG derives missing enum display fallbacks from its key. This contract is
+    /// shared by extraction and patching; field names and numeric values remain identities.
+    /// </summary>
+    internal static bool TryGetMissingEnumFallback(FieldDef field, out string fallback, out CustomAttribute? attribute)
+    {
+        fallback = string.Empty;
+        attribute = null;
+        var type = field.DeclaringType;
+        if (type is null || !type.IsEnum || !field.IsLiteral || field.Constant is null
+            || !type.CustomAttributes.Any(a => a.TypeFullName == "AG.EnumLocalization.Attributes.EnumLocStringsAttribute")
+            || field.CustomAttributes.Any(a => a.TypeFullName.StartsWith("AG.EnumLocalization.Attributes.EnumLocAliasAttribute`", StringComparison.Ordinal)))
+        {
+            return false;
+        }
+
+        // AG calls Enum.GetName(numericValue). With numeric aliases it need not
+        // return this field's name, so there is no unique default key to extend.
+        if (type.Fields.Count(candidate => candidate.IsLiteral
+            && candidate.Constant is not null && Equals(candidate.Constant.Value, field.Constant.Value)) != 1)
+        {
+            return false;
+        }
+
+        attribute = field.CustomAttributes.FirstOrDefault(a => a.TypeFullName == "AG.EnumLocalization.Attributes.EnumLocAttribute");
+        if (attribute is null)
+        {
+            fallback = field.Name.String;
+            return true;
+        }
+
+        if (attribute.ConstructorArguments.Count != 2)
+        {
+            return false;
+        }
+
+        object? key = attribute.ConstructorArguments[0].Value;
+        object? value = attribute.ConstructorArguments[1].Value;
+        foreach (var named in attribute.NamedArguments)
+        {
+            if (named.Name == "Key") key = named.Argument.Value;
+            if (named.Name == "Fallback") value = named.Argument.Value;
+        }
+
+        // Empty string is an intentional empty fallback, not a missing one.
+        if (value is not null)
+        {
+            return false;
+        }
+
+        fallback = key?.ToString() ?? field.Name.String;
+        return fallback.Length > 0;
+    }
 
     /// <summary>
     ///     抽取一个程序集；读不出来（加壳 / 加密 / 不是 .NET 程序集）时返回带 <see cref="UITextExtraction.Error" /> 的结果。
@@ -106,7 +171,14 @@ public static class UIStringExtractor
             creation.PdbFileOrData = embeddedPdb;
         }
 
-        return ModuleDefMD.Load(assemblyPath, creation);
+        // dnlib's filename overload uses Win32 CreateFile directly. A plugin
+        // cannot assume its host opted in to long paths, even when .NET can
+        // create and hash the durable original successfully. Keep path IO in
+        // managed code and retain the real location for dependency resolution.
+        var fullPath = Path.GetFullPath(assemblyPath);
+        var module = ModuleDefMD.Load(File.ReadAllBytes(fullPath), creation);
+        module.Location = fullPath;
+        return module;
     }
 
     private static void AddSearchPath(AssemblyResolver resolver, HashSet<string> seen, string? directory)
@@ -119,7 +191,15 @@ public static class UIStringExtractor
         var full = Path.GetFullPath(directory);
         if (seen.Add(full))
         {
-            resolver.PreSearchPaths.Add(full);
+            // dnlib also uses native filename reads inside its dependency
+            // resolver. Scope the Windows extended path to that IO boundary;
+            // public module locations and persisted file identities stay normal.
+            var resolverPath = full;
+            if (OperatingSystem.IsWindows() && !full.StartsWith(@"\\?\", StringComparison.Ordinal))
+                resolverPath = full.StartsWith(@"\\", StringComparison.Ordinal)
+                    ? @"\\?\UNC\" + full[2..]
+                    : @"\\?\" + full;
+            resolver.PreSearchPaths.Add(resolverPath);
         }
     }
 
@@ -129,7 +209,8 @@ public static class UIStringExtractor
     /// <remarks>
     ///     同一原文在多个文件里出现时，取「更强的判定」（候选 &gt; 灰名单 &gt; 排除），PreserveID 取或；
     ///     多文件时给 Context 加 <c>[文件名]</c> 前缀，编辑器里能看出这句在哪个程序集。
-    ///     单个文件读不出来（加壳等）只跳过它；全部读不出来才算失败。
+    ///     单个文件读不出来时保留其它文件的抽取数据和诊断，但通过 Error 阻止消费方合并或清账。
+    ///     全部读不出来时只返回失败信息。
     /// </remarks>
     public static UITextExtraction ExtractMany(IReadOnlyList<string> assemblyPaths, IReadOnlyList<string>? searchDirectories = null)
     {
@@ -168,6 +249,7 @@ public static class UIStringExtractor
         var attributes = new List<UITextAttributeItem>();
         var seenAttributes = new HashSet<string>(StringComparer.Ordinal);
         var errors = new List<string>();
+        var diagnostics = new HashSet<string>(StringComparer.Ordinal);
         var resourceKeyCount = 0;
         var succeeded = 0;
 
@@ -182,6 +264,7 @@ public static class UIStringExtractor
 
             succeeded++;
             var tag = $"[{Path.GetFileNameWithoutExtension(path)}] ";
+            foreach (var diagnostic in single.AnalysisDiagnostics) diagnostics.Add(tag + diagnostic);
             foreach (var item in single.Entries)
             {
                 var tagged = item.Context.StartsWith(tag, StringComparison.Ordinal)
@@ -194,30 +277,14 @@ public static class UIStringExtractor
                         Reason = item.Reason,
                         PreserveID = item.PreserveID,
                         IsFunctionalIdentifier = item.IsFunctionalIdentifier,
+                        AnalysisIncomplete = item.AnalysisIncomplete,
+                        HasWritableDisplaySite = item.HasWritableDisplaySite,
                     };
 
                 if (indexByOriginal.TryGetValue(item.Original, out var index))
                 {
                     var existing = entries[index];
-                    // 跨程序集「同文异角色」冲突：一边当界面文本、另一边当功能语境/查表 key → 降为灰名单。
-                    // 不能按「更强判定」直接翻——那会在用了功能语境的那份 DLL 里也改字面量（2026-10-03 评审 A3）。
-                    var conflict = (existing.Role == UITextRole.UI && tagged.Role == UITextRole.Excluded)
-                                   || (existing.Role == UITextRole.Excluded && tagged.Role == UITextRole.UI);
-                    var keep = RoleRank(tagged.Role) < RoleRank(existing.Role) ? tagged : existing;
-                    entries[index] = new UITextEntry
-                    {
-                        Original = existing.Original,
-                        Context = keep.Context,
-                        Role = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier
-                            ? UITextRole.Excluded : conflict ? UITextRole.Ambiguous : keep.Role,
-                        Reason = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier
-                            ? "插件 / IPC 标识符（翻译或反向还原会破坏插件识别）"
-                            : conflict
-                            ? "同一原文在不同程序集里角色冲突（一份当界面文本、一份当功能语境），默认不翻；确认安全可在编辑器里单条翻"
-                            : keep.Reason,
-                        PreserveID = existing.PreserveID || tagged.PreserveID,
-                        IsFunctionalIdentifier = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier,
-                    };
+                    entries[index] = AggregateEntries([existing, tagged]);
                 }
                 else
                 {
@@ -272,6 +339,9 @@ public static class UIStringExtractor
             Resources = resources,
             Attributes = attributes,
             Entries = entries,
+            Error = errors.Count == 0 ? null : string.Join("；", errors),
+            AnalysisDiagnostics = diagnostics.Concat(errors.Select(error => "程序集提取失败：" + error))
+                .OrderBy(value => value, StringComparer.Ordinal).ToList(),
         };
     }
 
@@ -281,6 +351,32 @@ public static class UIStringExtractor
         UITextRole.Ambiguous => 1,
         _ => 2,
     };
+
+    private static UITextEntry AggregateEntries(IReadOnlyList<UITextEntry> items)
+    {
+        var first = items[0];
+        var identity = items.Any(entry => entry.IsFunctionalIdentifier);
+        var incomplete = items.Any(entry => entry.AnalysisIncomplete);
+        var conflict = items.Any(entry => entry.Role != first.Role) || incomplete;
+        var writable = items.Where(entry => entry.HasWritableDisplaySite
+            || (entry.Role == UITextRole.UI && !entry.IsFunctionalIdentifier && !entry.AnalysisIncomplete)).ToArray();
+        var keep = writable.FirstOrDefault() ?? items.OrderBy(entry => RoleRank(entry.Role)).First();
+        return new UITextEntry
+        {
+            Original = first.Original,
+            Context = keep.Context,
+            Role = identity ? UITextRole.Excluded : conflict ? UITextRole.Ambiguous : keep.Role,
+            Reason = writable.Length > 0 && (identity || conflict)
+                ? "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+                : identity ? "插件 / IPC 标识符（翻译或反向还原会破坏插件识别）"
+                : conflict ? "同文包含不同或未证明的用途；写入时逐位置核对" : keep.Reason,
+            PreserveID = (writable.Length > 0 ? writable : items).Any(entry => entry.PreserveID),
+            IsFunctionalIdentifier = identity,
+            AnalysisIncomplete = incomplete,
+            HasWritableDisplaySite = writable.Length > 0,
+            TranslationText = writable.Length == 1 ? writable[0].TranslationText : null,
+        };
+    }
 
     /// <summary>
     ///     抽象值：一个字符串值由「哪些字面量 + 哪些方法参数 + 哪些本程序集方法的返回值」拼出来。
@@ -300,7 +396,8 @@ public static class UIStringExtractor
         int RefArg = -1,
         string? FieldKey = null,
         int FromLocal = -1,
-        bool Joined = false)
+        bool Joined = false,
+        int DirectParameter = -1)
     {
         /// <summary>
         ///     一个值里最多带多少项。字段是跨方法合并的，不封顶会组合爆炸
@@ -329,7 +426,7 @@ public static class UIStringExtractor
 
         public static V FromLiteral(int id) => new([id], [], [], false, false);
 
-        public static V FromParam(int index) => new([], [index], [], false, false);
+        public static V FromParam(int index) => new([], [index], [], false, false, DirectParameter: index);
 
         public static V This => new([], [], [], false, true);
 
@@ -358,13 +455,15 @@ public static class UIStringExtractor
             AppendCapped(keys, b.CallKeys);
 
             var isArray = a.IsArray || b.IsArray;
-            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey, a.FromLocal >= 0 ? a.FromLocal : b.FromLocal, a.Joined || b.Joined);
+            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey, a.FromLocal >= 0 ? a.FromLocal : b.FromLocal, a.Joined || b.Joined,
+                a.DirectParameter == b.DirectParameter ? a.DirectParameter : -1);
         }
     }
 
     private sealed class Literal
     {
         public int ID;
+        public Instruction Instruction = null!;
         public string Text = string.Empty;
         public string Context = string.Empty;
         public bool PreserveID;
@@ -379,12 +478,14 @@ public static class UIStringExtractor
         ///     拉一个滑块全动，2026-10-02 用户实测）。
         /// </remarks>
         public bool Joined;
+        public bool JoinedLabel;
 
         public bool Dangerous;
         public string DangerousTarget = string.Empty;
         public string UnknownTarget = string.Empty;
         public bool UIDirect;
         public string UITarget = string.Empty;
+        public bool HasCommandHelpConsumer;
 
         /// <summary>被控件调用用作文本（需要保留 <c>###原文</c>）。</summary>
         public bool IDMarked;
@@ -426,6 +527,7 @@ public static class UIStringExtractor
         public List<Instruction> Instructions = [];
         public bool[] ParamsToUI = [];
         public string[] ParamsToUITarget = [];
+        public bool[] ParamsToCommandHelp = [];
         public bool[] ParamsToUIPreserveID = [];
         public bool[] ParamsDangerous = [];
         public string[] ParamsDangerousTarget = [];
@@ -435,6 +537,7 @@ public static class UIStringExtractor
         public bool[] ParamsDictionaryKey = [];
         public bool ReturnsToUI;
         public string ReturnsToUITarget = string.Empty;
+        public bool ReturnsToCommandHelp;
         public bool ReturnsDangerous;
 
         /// <summary>每条指令进入时的真实栈深（从 CFG 算出来；-1 = 到不了 / 未知）。</summary>
@@ -450,7 +553,24 @@ public static class UIStringExtractor
         private readonly ModuleDefMD module;
         private readonly string path;
         private readonly List<Literal> literals = [];
-        private readonly Dictionary<string, int> literalIDs = new(StringComparer.Ordinal);
+        private readonly Dictionary<Instruction, int> literalIDs = [];
+        private readonly Dictionary<Instruction, LiteralSite> sites = [];
+        private readonly Dictionary<Instruction, string> inventoryMapDisplays = [];
+        private readonly Dictionary<Instruction, string> providerTextLabels = [];
+        private readonly Dictionary<Instruction, UITextDynamicLabelContracts.Contract> dynamicLabelCalls = [];
+        private readonly HashSet<Instruction> completeDynamicLabels = [];
+        public IReadOnlyDictionary<Instruction, LiteralSite> Sites => this.sites;
+        private readonly HashSet<int> incompleteLiterals = [];
+        private readonly HashSet<(string Method, int Param)> incompleteParams = [];
+        private readonly HashSet<string> incompleteReturns = [];
+        private readonly HashSet<int> labelLiterals = [];
+        private readonly HashSet<(string Method, int Param)> labelParams = [];
+        private readonly HashSet<string> labelReturns = [];
+        private readonly HashSet<int> plainLiterals = [];
+        private readonly HashSet<(string Method, int Param)> plainParams = [];
+        private readonly HashSet<string> plainReturns = [];
+        private readonly HashSet<string> analysisDiagnostics = new(StringComparer.Ordinal);
+        private MethodScan activeScan = null!;
 
         /// <summary>被栈深夹掉、等待并入下一个 push 值的分支值（见 ScanMethod 里的 clamp 注释）。</summary>
         private readonly List<V> carried = [];
@@ -471,6 +591,9 @@ public static class UIStringExtractor
         private readonly HashSet<int> identityLiterals = [];
         private readonly HashSet<(string Method, int Param)> identityParams = [];
         private readonly HashSet<string> identityReturns = [];
+        private readonly HashSet<string> completeWindowTitles = new(StringComparer.Ordinal);
+
+        public IReadOnlySet<string> CompleteWindowTitles => this.completeWindowTitles;
 
         /// <summary>
         ///     接口 / 基类虚方法的键 → 本程序集里的实现方法键。
@@ -480,7 +603,8 @@ public static class UIStringExtractor
         private readonly Dictionary<string, List<string>> dispatchAliases = new(StringComparer.Ordinal);
 
         /// <summary>调用点上「这个值进了 UI」但方法可能还没扫描到的记录，建完别名后统一落实成 ReturnsToUI。</summary>
-        private readonly List<(string Key, string Target)> returnToUIRequests = [];
+        private readonly List<(string Key, string Target, bool CommandHelp)> returnToUIRequests = [];
+        private readonly HashSet<string> dangerousReturnRequests = new(StringComparer.Ordinal);
 
         /// <summary>(字段, 方法)：这个方法把字段的内容返回给调用方。</summary>
         private readonly List<(string Field, string Method)> fieldReturnRefs = [];
@@ -489,6 +613,8 @@ public static class UIStringExtractor
 
         /// <summary>字段键 → 存进去过的值（跨方法、跨两遍扫描累积）。</summary>
         private readonly Dictionary<string, V> fieldValues = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, string[]> fieldJoinSources = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, string> fieldJoinKeys = new(StringComparer.Ordinal);
 
         private bool useFieldValues;
 
@@ -500,17 +626,30 @@ public static class UIStringExtractor
 
         public UITextExtraction Run(bool includeResources = true)
         {
+            foreach (var (label, providerText) in UITextTeleporterSearchContracts.FindOriginal(this.module))
+                this.providerTextLabels.Add(label, providerText);
+            foreach (var contract in UITextInventoryMapContracts.Find(this.module))
+                this.inventoryMapDisplays.Add(contract.Label, contract.Reason);
             foreach (var type in this.module.GetTypes())
             {
                 if (type.FullName is { Length: > 0 } fullName)
                 {
                     this.typesByName.TryAdd(fullName, type);
                 }
+                foreach (var method in type.Methods)
+                    foreach (var contract in UITextDynamicLabelContracts.FindOriginal(method))
+                    {
+                        this.dynamicLabelCalls.Add(contract.InputTextCall, contract);
+                        this.completeDynamicLabels.Add(contract.Label);
+                    }
             }
 
             // 扫两遍：第一遍只收集「谁往字段里存了什么」，第二遍把字段当已知值用。
             // 很多标题 / 说明是「构造对象 → 存进静态数组或字段 → 以后读出来画」的，只扫一遍会断在字段上
             // （2026-10-01：ARSR 的新手教程 = 记录数组的字段；AnoMech 的场景表也有一半走静态字段）。
+            // Local implementations of an external interface must be known
+            // before calls are classified as opaque external consumers.
+            this.BuildDispatchAliases();
             for (var pass = 0; pass < 2; pass++)
             {
                 this.useFieldValues = pass > 0;
@@ -541,7 +680,6 @@ public static class UIStringExtractor
 
             // 扫描时只记原始键（别名表还没建）；先把接口 / 虚方法展开到实现，再跑不动点
             Stage("scan");
-            this.BuildDispatchAliases();
             Stage($"aliases={this.dispatchAliases.Count} passRefs={this.passRefs.Count} param={this.paramFlowRefs.Count} retParam={this.returnToParamRefs.Count} retRet={this.returnToReturnRefs.Count} fields={this.fieldValues.Count}");
             this.ExpandFlowRefs();
             Stage($"expand passRefs={this.passRefs.Count} param={this.paramFlowRefs.Count} retParam={this.returnToParamRefs.Count}");
@@ -560,7 +698,7 @@ public static class UIStringExtractor
 
         private void ScanMethod(TypeDef type, MethodDef method)
         {
-            var key = MethodKey(type.FullName, method.Name.String, method.MethodSig?.Params.Count ?? 0);
+            var key = this.MethodKey(method);
             if (!this.methodByKey.TryGetValue(key, out var scan))
             {
                 scan = new MethodScan
@@ -574,6 +712,7 @@ public static class UIStringExtractor
                 var paramCount = method.MethodSig?.Params.Count ?? 0;
                 scan.ParamsToUI = new bool[paramCount];
                 scan.ParamsToUITarget = EmptyStrings(paramCount);
+                scan.ParamsToCommandHelp = new bool[paramCount];
                 scan.ParamsToUIPreserveID = new bool[paramCount];
                 scan.ParamsDangerous = new bool[paramCount];
                 scan.ParamsDangerousTarget = EmptyStrings(paramCount);
@@ -583,6 +722,8 @@ public static class UIStringExtractor
                 this.methods.Add(scan);
                 this.methodByKey[scan.Key] = scan;
             }
+
+            this.activeScan = scan;
 
             // 简单字段 getter（`get_Main => _main`）——对象初始化器里的 `Main = { "..." }` 靠它
             // 把元素并回 `<Main>k__BackingField`（2026-10-02 AutoHook 更新日志）
@@ -603,11 +744,34 @@ public static class UIStringExtractor
             var locals = new Dictionary<int, V>();
             var args = new Dictionary<int, V>();
             this.carried.Clear();
+            var coalescedValues = new Dictionary<Instruction, (int Slot, V Value)>();
 
             var methodWatch = Trace is null ? null : Stopwatch.StartNew();
             for (var index = 0; index < scan.Instructions.Count; index++)
             {
                 var instr = scan.Instructions[index];
+
+                // C# (value ?? "") emits dup; brtrue join; pop; ldstr "".
+                // Linear interpretation sees only the empty path. Retain the
+                // proven non-null value at this exact join, without declaring
+                // either branch UI until a real downstream consumer sees it.
+                if (instr.OpCode.Code == Code.Dup && stack.Count > 0
+                    && index + 4 < scan.Instructions.Count
+                    && scan.Instructions[index + 1].OpCode.Code is Code.Brtrue or Code.Brtrue_S
+                    && scan.Instructions[index + 1].Operand is Instruction target
+                    && scan.Instructions[index + 2].OpCode.Code == Code.Pop
+                    && scan.Instructions[index + 3].OpCode.Code == Code.Ldstr
+                    && scan.Instructions[index + 3].Operand is string { Length: 0 }
+                    && ReferenceEquals(scan.Instructions[index + 4], target))
+                {
+                    coalescedValues[target] = (stack.Count - 1, stack[^1]);
+                }
+
+                if (coalescedValues.TryGetValue(instr, out var incoming)
+                    && incoming.Slot < stack.Count)
+                {
+                    stack[incoming.Slot] = this.MergeValues(stack[incoming.Slot], incoming.Value);
+                }
 
                 // 线性走 IL 时，分支汇合点会让模拟栈多出/少掉值——按 CFG 算出的真实栈深夹一下，
                 // 否则后面所有调用的参数位置都会错位（2026-10-01：ARSR 的 SelectableCombo 标签就丢在这）。
@@ -909,8 +1073,8 @@ public static class UIStringExtractor
                     return (2, 1, false, true);
 
                 case Code.Constrained:
-                    // 真实语义是弹掉托管指针；我们的模拟里 callvirt 还会弹 this，所以这里补一个占位值
-                    return (0, 1, false, true);
+                    // A prefix changes dispatch, not the evaluation stack.
+                    return (0, 0, false, true);
 
                 case Code.Ret:
                     return (returnsVoid ? 0 : 1, 0, false, false);
@@ -943,7 +1107,7 @@ public static class UIStringExtractor
             switch (code)
             {
                 case Code.Ldstr when instr.Operand is string text:
-                    Push(stack, V.FromLiteral(this.Intern(text, scan.Context)));
+                    Push(stack, V.FromLiteral(this.Intern(instr, text, scan.Context)));
                     return;
 
                 case Code.Ldloc_0:
@@ -1002,8 +1166,9 @@ public static class UIStringExtractor
                 case Code.Ldarga_S:
                 {
                     // 取参数地址：带着「这是谁的地址」的信息走，被调方法写完要能写回参数
-                    var index = ParamIndex(scan, ArgIndex(instr));
-                    Push(stack, index >= 0 ? LoadArg(scan, args, index) with { RefArg = index } : V.This);
+                    var slot = ArgIndex(instr);
+                    var index = ParamIndex(scan, slot);
+                    Push(stack, index >= 0 ? LoadArg(scan, args, slot) with { RefArg = index } : V.This);
                     return;
                 }
 
@@ -1125,17 +1290,23 @@ public static class UIStringExtractor
                         {
                             var fieldKey = FieldKey(field);
                             this.fieldValues[fieldKey] = this.fieldValues.TryGetValue(fieldKey, out var stored)
-                                ? V.Merge(stored, value)
+                                ? this.MergeValues(stored, value)
                                 : value;
                             this.RecordFieldStore(scan, value, fieldKey);
+                            // Collection fields alias the allocated container;
+                            // a later Add through either alias is visible to
+                            // consumers of all aliases, including IPC readers.
+                            if (value.FieldKey is { } alias && UITextCollectionContracts.IsStringDictionary(field.FieldSig?.Type))
+                                this.RecordFieldStore(scan, V.FromField(fieldKey), alias);
                         }
 
-                        var label = UICallSemantics.DescribeUIField(field.DeclaringType?.FullName ?? string.Empty, field.Name.String);
+                        var label = code == Code.Stfld ? UICallSemantics.DescribeUIField(field) : null;
                         if (label is not null)
                         {
                             foreach (var id in value.IDs)
                             {
                                 this.literals[id].UIDirect = true;
+                                this.literals[id].HasCommandHelpConsumer |= label == "CommandInfo.HelpMessage";
                                 if (this.literals[id].UITarget.Length == 0)
                                 {
                                     this.literals[id].UITarget = label;
@@ -1145,7 +1316,7 @@ public static class UIStringExtractor
                             // 赋给「给人看的字段」的也可能是一个方法的返回值
                             foreach (var key in value.CallKeys)
                             {
-                                this.returnToUIRequests.Add((key, label));
+                                this.returnToUIRequests.Add((key, label, label == "CommandInfo.HelpMessage"));
                             }
                         }
                     }
@@ -1275,9 +1446,8 @@ public static class UIStringExtractor
                     Pop(stack);
                     return;
 
-                // constrained. 前缀自己会把托管指针弹掉，后面 callvirt 的 this 由我们补一个占位值
+                // Keep the managed receiver for the following callvirt.
                 case Code.Constrained:
-                    Push(stack, V.Unknown);
                     return;
 
                 case Code.Add:
@@ -1329,6 +1499,11 @@ public static class UIStringExtractor
                 case Code.Ret:
                 {
                     var returned = Pop(stack);
+                    if (UICallSemantics.FunctionalIdentityReturn(scan.Def.DeclaringType.FullName,
+                            scan.Def.Name.String, scan.Def.MethodSig?.Params.Count ?? 0))
+                    {
+                        this.ProtectIdentity(scan, returned);
+                    }
                     if (IsStringLike(scan.Def.ReturnType?.FullName ?? string.Empty))
                     {
                         foreach (var id in returned.IDs)
@@ -1403,6 +1578,61 @@ public static class UIStringExtractor
                 }
             }
 
+            // Keep temporary collection allocations addressable even before
+            // their first field store. The same node survives dup and aliases,
+            // so both display and functional restrictions reach each producer.
+            var collection = UITextCollectionContracts.Classify(callee);
+            switch (collection)
+            {
+                case UITextCollectionContracts.Kind.Dictionary when isNewObj:
+                    var allocation = $"allocation:{scan.Key}:{scan.Instructions.IndexOf(instr)}";
+                    this.fieldValues.TryAdd(allocation, V.FromField(allocation));
+                    this.GetFieldScan(allocation);
+                    Push(stack, V.FromField(allocation));
+                    return;
+                case UITextCollectionContracts.Kind.Add:
+                    this.ProtectIdentity(scan, argValues[0]);
+                    if (thisValue?.FieldKey is { } node) this.RecordFieldStore(scan, argValues[1], node);
+                    else this.MarkIncomplete(argValues[1], "集合接收者来源尚未证明");
+                    return;
+                case UITextCollectionContracts.Kind.Values:
+                    Leave(thisValue ?? V.Unknown);
+                    return;
+                case UITextCollectionContracts.Kind.Keys:
+                case UITextCollectionContracts.Kind.Count:
+                    Leave(V.Unknown);
+                    return;
+                case UITextCollectionContracts.Kind.ToArray:
+                case UITextCollectionContracts.Kind.Span:
+                    Leave(argValues[0]);
+                    return;
+                case UITextCollectionContracts.Kind.Localize:
+                    this.ProtectIdentity(scan, argValues[0]);
+                    Leave(argValues[1]);
+                    return;
+                case UITextCollectionContracts.Kind.Dictionary:
+                case UITextCollectionContracts.Kind.Rejected:
+                    if (thisValue is not null) this.MarkIncomplete(thisValue, "集合调用元数据合同未通过");
+                    foreach (var value in argValues) this.MarkIncomplete(value, "集合调用元数据合同未通过");
+                    if (isNewObj) Push(stack, V.Unknown);
+                    else Leave(V.Unknown);
+                    return;
+            }
+
+            // object.ToString is a virtual conversion, not a display consumer.
+            // Carry only a proven string receiver; unknown object overrides
+            // cannot inherit display permission from their return type/name.
+            if (this.IsCoreObjectToString(callee))
+            {
+                if (this.IsStringToStringReceiver(scan, instr, thisValue)) Leave(thisValue!);
+                else
+                {
+                    if (thisValue is not null) this.MarkIncomplete(thisValue, "ToString 接收者尚未证明为字符串");
+                    Leave(V.Unknown);
+                }
+                return;
+            }
+
             // Dependency / IPC prefixes / shared-data keys: resolve the argument position by API contract.
             // Run before constructor and UI heuristics; only the identity, never IPC payloads, is protected.
             var identityArgument = UICallSemantics.FunctionalIdentityArgument(typeName, methodName, argValues.Length);
@@ -1414,6 +1644,17 @@ public static class UIStringExtractor
                 return;
             }
 
+            // The selected SMS producer has a closed external title proof.
+            // CurrentLiteralMetadata supplies this same per-instruction gate
+            // to extraction and the patcher; Store keeps its extracted role.
+            if (UICallSemantics.IsSmsOpenFileTitleCall(scan.Def, instr))
+            {
+                this.MarkUI(scan, argValues[0], "SMS OpenFileDialog title（固定 id / SelectOnly）", preserveID: false);
+                this.ProtectIdentity(scan, argValues[1]);
+                Leave(V.Unknown);
+                return;
+            }
+
             // 构造函数：参数不直接进 UI，但对象带着这些字符串走
             // （`new TutorialStep("标题", "说明")` 之后字段里就是它们；以前这里直接丢成 Unknown，
             //  存进数组 / 字段后就再也追不回来了）。窗口标题是另一回事，见下。
@@ -1421,11 +1662,12 @@ public static class UIStringExtractor
             {
                 if (UICallSemantics.IsWindowTitleCall(typeName, methodName) && argValues.Length > 0)
                 {
+                    this.RecordCompleteWindowTitle(argValues[0]);
                     this.MarkUI(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), preserveID: true);
                 }
 
                 // 构造函数也是方法：实参要登记成「流进了它的参数」，否则对象存进字段后再也追不回来
-                var ctorKey = MethodKey(typeName, methodName, argValues.Length);
+                var ctorKey = this.MethodKey(callee);
                 if (this.methodByKey.ContainsKey(ctorKey) || DeclaredInModule(callee, this.module))
                 {
                     for (var i = 0; i < argValues.Length; i++)
@@ -1592,7 +1834,7 @@ public static class UIStringExtractor
                     && (UICallSemantics.IsContainerAccessor(typeName, methodName)
                         || UICallSemantics.IsStringLikeOrGeneric(callee.MethodSig?.RetType.FullName ?? string.Empty)))
                 {
-                    produced = V.Merge(produced, thisValue);
+                    produced = this.MergeValues(produced, thisValue);
                 }
 
                 Leave(produced);
@@ -1600,7 +1842,7 @@ public static class UIStringExtractor
             }
 
             // ② 给「给人看的字段」赋值（对象初始化器里的 CommandInfo.HelpMessage 之类）
-            if (UICallSemantics.DescribeUISetter(typeName, methodName) is { } fieldLabel)
+            if (UICallSemantics.DescribeUISetter(callee) is { } fieldLabel)
             {
                 if (argValues.Length > 0)
                 {
@@ -1656,7 +1898,12 @@ public static class UIStringExtractor
                     // 只有标签（第 0 个字符串参数）当 ID 用；hint / preview / format 这些「只显示」的参数不加 ### 后缀
                     var preserveThisArgument = preserveID
                                                && UICallSemantics.UsesStringAsIDForArgument(typeName, methodName, i);
-                    this.MarkUI(scan, argValues[i], target, preserveThisArgument);
+                    if (i == 0 && UICallSemantics.IsWindowTitleCall(typeName, methodName))
+                    {
+                        this.RecordCompleteWindowTitle(argValues[i]);
+                    }
+                    this.MarkUI(scan, argValues[i], target, preserveThisArgument,
+                        i == 0 && this.dynamicLabelCalls.TryGetValue(instr, out var dynamicLabel) ? dynamicLabel : null);
                 }
 
                 Leave(MakeResult(callee, argValues, isInternal: false));
@@ -1696,8 +1943,9 @@ public static class UIStringExtractor
             // 2026-10-03 评审 A4：本程序集内的「日志包装方法」不走这条快速返回——要走 ⑤ 登记参数流，
             // 否则参数里真正画到界面的文本会整条断流（漏翻）。
             var logCall = UICallSemantics.IsLogCall(typeName, methodName);
-            var key = MethodKey(typeName, methodName, paramTypes.Count);
-            var isInternal = this.methodByKey.ContainsKey(key) || DeclaredInModule(callee, this.module);
+            var key = this.MethodKey(callee);
+            var isInternal = this.methodByKey.ContainsKey(key) || DeclaredInModule(callee, this.module)
+                || this.dispatchAliases.ContainsKey(key);
             if (logCall && !isInternal)
             {
                 Leave(MakeResult(callee, argValues, isInternal: false));
@@ -1730,13 +1978,39 @@ public static class UIStringExtractor
                 return;
             }
 
+            // An exact local identity function returns the selected caller
+            // value unchanged. Keep the result at this call site: a global
+            // open-generic summary would mix display and IPC callers, while
+            // MakeResult would also carry arguments that are not returned.
+            // Resolve the body even when a local MemberRef is seen before its
+            // flow scan; the helper independently enforces module ownership.
+            if (this.TryTransparentStringReturn(callee, argValues, out var transparentReturn))
+            {
+                Leave(transparentReturn);
+                return;
+            }
+
             // ⑤ 本程序集内的方法：记参数流 / 返回值流（key / isInternal 在上面算好了）
             if (isInternal)
             {
                 for (var i = 0; i < argValues.Length; i++)
                 {
-                    if (!IsStringLike(paramTypes[i]))
+                    if (!CanFollowInternalStringArgument(callee, i, paramTypes[i]))
                     {
+                        // A producer can be consumed by a display call and by
+                        // an internal method whose parameter is not proven to
+                        // preserve string semantics (for example object or an
+                        // open generic).  Do not let the display path grant a
+                        // writable UI entry while the second path disappears
+                        // from the summary.  Carry the uncertainty back to
+                        // the originating literal/parameter so the conservative
+                        // identity gate remains effective through Merge/Prune.
+                        var value = argValues[i];
+                        if (value.IDs.Count != 0 || value.Params.Count != 0 || value.CallKeys.Count != 0
+                            || value.FieldKey is not null)
+                        {
+                            this.MarkIncomplete(value, "内部参数类型尚未证明保持字符串语义");
+                        }
                         continue;
                     }
 
@@ -1771,12 +2045,21 @@ public static class UIStringExtractor
             }
 
             // ⑥ 外部方法、语义不明
+            if (thisValue is { IsKnown: true })
+                this.MarkIncomplete(thisValue, "外部接收者用途尚未证明");
             for (var i = 0; i < argValues.Length; i++)
             {
+                if (argValues[i].IsKnown)
+                    this.MarkIncomplete(argValues[i], "外部参数用途尚未证明");
                 if (!IsStringLike(paramTypes[i]))
                 {
                     continue;
                 }
+
+                // A known display path cannot prove what an unresolved consumer
+                // does with the same producer. Carry this restriction through
+                // local wrapper parameters, fields and returned values as well.
+                this.MarkDangerous(scan, argValues[i], "未解析消费者：" + UICallSemantics.ShortTarget(typeName, methodName));
 
                 foreach (var id in argValues[i].IDs)
                 {
@@ -1791,20 +2074,52 @@ public static class UIStringExtractor
             Leave(MakeResult(callee, argValues, isInternal: false));
         }
 
-        private void MarkUI(MethodScan scan, V value, string target, bool preserveID)
+        private void RecordCompleteWindowTitle(V value)
+        {
+            // Automatic repair of stale packs is deliberately narrower than UI
+            // classification: require one complete literal at the real Window
+            // constructor, without joined fragments, parameters or helper returns.
+            if (value.Joined || value.IsArray || value.IDs.Count != 1 || value.Params.Count != 0
+                || value.CallKeys.Count != 0 || value.FieldKey is not null)
+            {
+                return;
+            }
+
+            this.completeWindowTitles.Add(this.literals[value.IDs[0]].Text);
+        }
+
+        private void MarkUI(MethodScan scan, V value, string target, bool preserveID,
+            UITextDynamicLabelContracts.Contract? dynamicLabel = null)
         {
             // 数组元素（Combo / ListBox 的条目）不是控件 ID，不能加 ### 后缀
             var isArray = value.IsArray;
+            var completeDynamic = dynamicLabel is not null && value.IDs.Count > 0
+                && value.IDs.All(id => ReferenceEquals(this.literals[id].Instruction, dynamicLabel.Label)
+                    || ReferenceEquals(this.literals[id].Instruction, dynamicLabel.RequiredMarker));
+            if (preserveID && !isArray && value.Joined && !completeDynamic)
+                this.MarkIncomplete(value, "动态控件标签片段，完整身份尚未证明");
+
+            var label = preserveID && !isArray;
+            var literals = label ? this.labelLiterals : this.plainLiterals;
+            var parameters = label ? this.labelParams : this.plainParams;
+            var returns = label ? this.labelReturns : this.plainReturns;
+            literals.UnionWith(value.IDs);
+            foreach (var parameter in value.Params) parameters.Add((scan.Key, parameter));
+            if (value.FieldKey is { } field) parameters.Add((field, 0));
+            foreach (var key in value.CallKeys)
+                foreach (var expanded in this.ExpandDispatch(key)) returns.Add(expanded);
             foreach (var id in value.IDs)
             {
                 var literal = this.literals[id];
                 literal.UIDirect = true;
+                literal.HasCommandHelpConsumer |= target == "CommandInfo.HelpMessage";
+                literal.JoinedLabel |= preserveID && !isArray && value.Joined;
                 if (literal.UITarget.Length == 0)
                 {
                     literal.UITarget = target;
                 }
 
-                if (preserveID && !isArray && !value.Joined)
+                if (preserveID && !isArray && (!value.Joined || completeDynamic))
                 {
                     literal.PreserveID = true;
                     literal.IDMarked = true;
@@ -1820,6 +2135,7 @@ public static class UIStringExtractor
                 if (index >= 0 && index < scan.ParamsToUI.Length)
                 {
                     scan.ParamsToUI[index] = true;
+                    scan.ParamsToCommandHelp[index] |= target == "CommandInfo.HelpMessage";
                     if (scan.ParamsToUITarget[index].Length == 0)
                     {
                         scan.ParamsToUITarget[index] = target;
@@ -1836,7 +2152,7 @@ public static class UIStringExtractor
             // ⇒ 那个方法的返回值会进 UI（接口键在 BuildDispatchAliases 之后统一展开到实现）
             foreach (var key in value.CallKeys)
             {
-                this.returnToUIRequests.Add((key, target));
+                this.returnToUIRequests.Add((key, target, target == "CommandInfo.HelpMessage"));
             }
 
             // 这个值是某个字段的内容 ⇒ 那个字段是画给人看的
@@ -1844,6 +2160,7 @@ public static class UIStringExtractor
             {
                 var fieldScan = this.GetFieldScan(fieldKey);
                 fieldScan.ParamsToUI[0] = true;
+                fieldScan.ParamsToCommandHelp[0] |= target == "CommandInfo.HelpMessage";
                 if (fieldScan.ParamsToUITarget[0].Length == 0)
                 {
                     fieldScan.ParamsToUITarget[0] = target;
@@ -1883,6 +2200,77 @@ public static class UIStringExtractor
             }
 
             return null;
+        }
+
+        private bool IsCoreObjectToString(IMethod callee) => callee.DeclaringType?.FullName == "System.Object"
+            && callee.Name == "ToString" && callee.MethodSig is { HasThis: true, GenParamCount: 0, Params.Count: 0 } signature
+            && signature.RetType.ElementType == ElementType.String
+            && callee.DeclaringType.DefinitionAssembly?.FullName == this.module.CorLibTypes.AssemblyRef.FullName;
+
+        private bool TryTransparentStringReturn(IMethod callee, V[] arguments, out V result)
+        {
+            result = V.Unknown;
+            // Resolve the actual local definition instead of consulting flow
+            // scans: the caller can appear before this method in metadata.
+            // No external assembly or virtual-dispatch body is admitted.
+            var declared = callee is MethodSpec specification ? specification.Method : callee;
+            if (declared.DeclaringType?.DefinitionAssembly?.FullName != this.module.Assembly?.FullName) return false;
+            MethodDef? definition;
+            try { definition = declared.ResolveMethodDef(); }
+            catch (Exception) { return false; }
+            if (definition is not { IsStatic: true, IsAbstract: false, IsVirtual: false, HasBody: true }
+                || definition.Module != this.module || definition.Body.ExceptionHandlers.Count != 0
+                || definition.MethodSig is not { } signature || signature.Params.Count != arguments.Length
+                || ClosedParameterType(callee, signature.RetType).ElementType != ElementType.String)
+                return false;
+
+            Instruction? load = null;
+            Instruction? returned = null;
+            foreach (var instruction in definition.Body.Instructions)
+            {
+                if (instruction.OpCode.Code == Code.Nop) continue;
+                if (load is null) load = instruction;
+                else if (returned is null) returned = instruction;
+                else return false;
+            }
+            if (load is null || returned?.OpCode.Code != Code.Ret) return false;
+
+            var parameter = load.OpCode.Code switch
+            {
+                Code.Ldarg_0 => 0,
+                Code.Ldarg_1 => 1,
+                Code.Ldarg_2 => 2,
+                Code.Ldarg_3 => 3,
+                Code.Ldarg or Code.Ldarg_S => ArgIndex(load),
+                _ => -1,
+            };
+            if (parameter < 0 || parameter >= arguments.Length
+                || ClosedParameterType(callee, signature.Params[parameter]).ElementType != ElementType.String)
+                return false;
+
+            result = arguments[parameter];
+            return true;
+        }
+
+        private bool IsStringToStringReceiver(MethodScan scan, Instruction call, V? receiver)
+        {
+            if (receiver is null || receiver.IDs.Count != 0 || receiver.CallKeys.Count != 0
+                || receiver.FieldKey is not null || receiver.Params.Count != 1 || receiver.IsArray || receiver.Joined)
+                return false;
+            var parameter = receiver.Params[0];
+            var parameters = scan.Def.MethodSig?.Params;
+            if (parameters is null || parameter < 0 || parameter >= parameters.Count) return false;
+            var declared = parameters[parameter];
+            // Constructor/call provenance can contain a string parameter even
+            // when the current receiver is an unrelated object. Only an
+            // unchanged parameter value proves the string receiver contract.
+            if (declared.ElementType == ElementType.String) return receiver.DirectParameter == parameter;
+            if (declared is not GenericSig generic || receiver.RefArg != parameter) return false;
+            var index = scan.Instructions.IndexOf(call) - 1;
+            return index >= 0 && scan.Instructions[index].OpCode.Code == Code.Constrained
+                && scan.Instructions[index].Operand is ITypeDefOrRef constrained
+                && constrained.ToTypeSig() is GenericSig prefix
+                && prefix.ElementType == generic.ElementType && prefix.Number == generic.Number;
         }
 
         private void RecordSimpleFieldGetter(MethodScan scan)
@@ -1993,6 +2381,11 @@ public static class UIStringExtractor
                     }
                 }
             }
+
+            foreach (var key in value.CallKeys)
+            {
+                this.dangerousReturnRequests.Add(key);
+            }
         }
 
         private V MakeResult(IMethod callee, V[] args, bool isInternal)
@@ -2000,6 +2393,12 @@ public static class UIStringExtractor
             var ids = new List<int>();
             var prms = new List<int>();
             var keys = new List<string>();
+            if (args.SelectMany(value => value.IDs).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems
+                || args.SelectMany(value => value.Params).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems
+                || args.SelectMany(value => value.CallKeys).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems)
+            {
+                foreach (var value in args) this.MarkIncomplete(value, "来源集合超过分析预算");
+            }
             foreach (var arg in args)
             {
                 V.AppendCapped(ids, arg.IDs);
@@ -2039,7 +2438,7 @@ public static class UIStringExtractor
 
             if (isInternal)
             {
-                var key = MethodKey(typeName, methodName, args.Length);
+                var key = this.MethodKey(callee);
                 if (!keys.Contains(key))
                 {
                     keys.Add(key);
@@ -2062,6 +2461,15 @@ public static class UIStringExtractor
         /// <summary>这个调用是不是「字符串拼接 / 格式化」（结果字符串由多段拼出来）。</summary>
         private static bool IsStringJoinCall(string typeName, string methodName)
         {
+            // ImU8String interpolation appends fragments before passing the
+            // completed buffer to ImGui. op_Implicit is a whole-string conversion
+            // and intentionally does not enter this fragment contract.
+            if (typeName.Contains("ImU8String", StringComparison.Ordinal)
+                && methodName is "AppendLiteral" or "AppendFormatted")
+            {
+                return true;
+            }
+
             if (typeName.EndsWith("String", StringComparison.Ordinal)
                 && methodName is "Concat" or "Join" or "Format")
             {
@@ -2100,12 +2508,7 @@ public static class UIStringExtractor
                         continue;
                     }
 
-                    var implKey = MethodKey(type.FullName, method.Name.String, method.MethodSig?.Params.Count ?? 0);
-                    if (!this.methodByKey.ContainsKey(implKey))
-                    {
-                        continue;
-                    }
-
+                    var implKey = this.MethodKey(method);
                     foreach (var root in this.FindDispatchRoots(type, method))
                     {
                         if (string.Equals(root, implKey, StringComparison.Ordinal))
@@ -2136,7 +2539,10 @@ public static class UIStringExtractor
                 return [key];
             }
 
-            var result = new List<string>(impls.Count + 1) { key };
+            // Abstract interface roots have no consumer body. Including them
+            // alongside their known implementations invents an opaque use.
+            var result = new List<string>(impls.Count + 1);
+            if (this.methodByKey.ContainsKey(key)) result.Add(key);
             foreach (var impl in impls)
             {
                 if (!result.Contains(impl))
@@ -2208,7 +2614,7 @@ public static class UIStringExtractor
         /// <summary>把「这个调用结果进了 UI」落实成 <c>ReturnsToUI</c>（接口调用要落到每个实现上）。</summary>
         private void ApplyReturnToUIRequests()
         {
-            foreach (var (request, target) in this.returnToUIRequests)
+            foreach (var (request, target, commandHelp) in this.returnToUIRequests)
             {
                 foreach (var key in this.ExpandDispatch(request))
                 {
@@ -2219,6 +2625,7 @@ public static class UIStringExtractor
                         {
                             scan.ReturnsToUITarget = target;
                         }
+                        scan.ReturnsToCommandHelp |= commandHelp;
                     }
                 }
             }
@@ -2237,8 +2644,7 @@ public static class UIStringExtractor
             {
                 if (impl.MethodDeclaration is { } declaration)
                 {
-                    var (declType, declName) = Describe(declaration);
-                    roots.Add(MethodKey(declType, declName, declaration.MethodSig?.Params.Count ?? 0));
+                    roots.Add(this.MethodKey(declaration));
                 }
             }
 
@@ -2254,7 +2660,7 @@ public static class UIStringExtractor
                         continue;
                     }
 
-                    roots.Add(MethodKey(iface.FullName, ifaceMethod.Name.String, arity));
+                    roots.Add(this.MethodKey(ifaceMethod));
                 }
             }
 
@@ -2275,7 +2681,7 @@ public static class UIStringExtractor
                         && candidate.IsVirtual
                         && SignatureMatches(candidate, method))
                     {
-                        roots.Add(MethodKey(baseDef.FullName, candidate.Name.String, arity));
+                        roots.Add(this.MethodKey(candidate));
                         break;
                     }
                 }
@@ -2313,7 +2719,7 @@ public static class UIStringExtractor
             while (pending.Count > 0)
             {
                 var def = this.ResolveTypeDef(pending.Pop());
-                if (def is null || !seen.Add(def.FullName))
+                if (def is null || !seen.Add(TypeIdentity(def)))
                 {
                     continue;
                 }
@@ -2333,7 +2739,8 @@ public static class UIStringExtractor
                 return self;
             }
 
-            if (type.FullName is { Length: > 0 } name && this.typesByName.TryGetValue(name, out var found))
+            if (string.Equals(type.DefinitionAssembly?.FullName, this.module.Assembly?.FullName, StringComparison.Ordinal)
+                && type.FullName is { Length: > 0 } name && this.typesByName.TryGetValue(name, out var found))
             {
                 return found;
             }
@@ -2380,6 +2787,10 @@ public static class UIStringExtractor
 
         private void SolveFlow()
         {
+            foreach (var request in this.dangerousReturnRequests)
+            foreach (var key in this.ExpandDispatch(request))
+                if (this.methodByKey.TryGetValue(key, out var scan)) scan.ReturnsDangerous = true;
+
             var changed = true;
             var rounds = 0;
             while (changed && rounds < 12)
@@ -2397,6 +2808,12 @@ public static class UIStringExtractor
 
                     if (InRange(from, fromParam) && InRange(to, toParam))
                     {
+                        if (to.ParamsToCommandHelp[toParam] && !from.ParamsToCommandHelp[fromParam])
+                        {
+                            from.ParamsToCommandHelp[fromParam] = true;
+                            changed = true;
+                        }
+
                         if (to.ParamsToUI[toParam] && !from.ParamsToUI[fromParam])
                         {
                             from.ParamsToUI[fromParam] = true;
@@ -2430,6 +2847,11 @@ public static class UIStringExtractor
                         from.ReturnsToUITarget = to.ReturnsToUITarget;
                         changed = true;
                     }
+                    if (to.ReturnsToCommandHelp && !from.ReturnsToCommandHelp)
+                    {
+                        from.ReturnsToCommandHelp = true;
+                        changed = true;
+                    }
 
                     if (to.ReturnsDangerous && !from.ReturnsDangerous)
                     {
@@ -2451,6 +2873,11 @@ public static class UIStringExtractor
                     {
                         fieldScan.ParamsToUI[0] = true;
                         fieldScan.ParamsToUITarget[0] = returner.ReturnsToUITarget;
+                        changed = true;
+                    }
+                    if (returner.ReturnsToCommandHelp && !fieldScan.ParamsToCommandHelp[0])
+                    {
+                        fieldScan.ParamsToCommandHelp[0] = true;
                         changed = true;
                     }
 
@@ -2477,12 +2904,45 @@ public static class UIStringExtractor
                         calleeScan.ReturnsToUITarget = methodScan.ParamsToUITarget[param];
                         changed = true;
                     }
+                    if (methodScan.ParamsToCommandHelp[param] && !calleeScan.ReturnsToCommandHelp)
+                    {
+                        calleeScan.ReturnsToCommandHelp = true;
+                        changed = true;
+                    }
 
                     if (methodScan.ParamsDangerous[param] && !calleeScan.ReturnsDangerous)
                     {
                         calleeScan.ReturnsDangerous = true;
                         changed = true;
                     }
+                }
+            }
+
+            if (changed)
+            {
+                // The budget is a resource limit, not proof of convergence.
+                // Restrict producers participating in the unfinished flow graph;
+                // independent direct UI producers remain eligible.
+                this.analysisDiagnostics.Add("数据流达到迭代预算，相关来源需要复核");
+                foreach (var (from, fromParam, to, toParam) in this.paramFlowRefs)
+                {
+                    this.incompleteParams.Add((from, fromParam));
+                    this.incompleteParams.Add((to, toParam));
+                }
+                foreach (var (from, to) in this.returnToReturnRefs)
+                {
+                    this.incompleteReturns.Add(from);
+                    this.incompleteReturns.Add(to);
+                }
+                foreach (var (callee, method, param) in this.returnToParamRefs)
+                {
+                    this.incompleteReturns.Add(callee);
+                    this.incompleteParams.Add((method, param));
+                }
+                foreach (var (field, method) in this.fieldReturnRefs)
+                {
+                    this.incompleteParams.Add((field, 0));
+                    this.incompleteReturns.Add(method);
                 }
             }
 
@@ -2508,12 +2968,28 @@ public static class UIStringExtractor
         private void Classify()
         {
             this.ClassifyFunctionalIdentifiers();
+            this.PropagateRestrictions(this.incompleteLiterals, this.incompleteParams, this.incompleteReturns);
+            this.PropagateRestrictions(this.labelLiterals, this.labelParams, this.labelReturns);
+            this.PropagateRestrictions(this.plainLiterals, this.plainParams, this.plainReturns);
             this.ClassifyFlow(this.passRefs, ui: true);
             this.ClassifyFlow(this.passRefs, ui: false);
             this.ClassifyReturns();
+            foreach (var literal in this.literals)
+            {
+                if (this.labelLiterals.Contains(literal.ID))
+                {
+                    literal.IDMarked = true;
+                    literal.PreserveID = true;
+                }
+                literal.PlainTextMarked |= this.plainLiterals.Contains(literal.ID);
+            }
         }
 
         private void ClassifyFunctionalIdentifiers()
+            => this.PropagateRestrictions(this.identityLiterals, this.identityParams, this.identityReturns);
+
+        private void PropagateRestrictions(HashSet<int> literalRestrictions,
+            HashSet<(string Method, int Param)> parameterRestrictions, HashSet<string> returnRestrictions)
         {
             // Monotone finite sets: follow wrapper parameters, returned identities and field getters.
             bool changed;
@@ -2522,33 +2998,33 @@ public static class UIStringExtractor
                 changed = false;
                 foreach (var (from, fromParam, to, toParam) in this.paramFlowRefs)
                 {
-                    if (this.identityParams.Contains((to, toParam)))
+                    if (parameterRestrictions.Contains((to, toParam)))
                     {
-                        changed |= this.identityParams.Add((from, fromParam));
+                        changed |= parameterRestrictions.Add((from, fromParam));
                     }
                 }
 
                 foreach (var (callee, method, param) in this.returnToParamRefs)
                 {
-                    if (this.identityParams.Contains((method, param)))
+                    if (parameterRestrictions.Contains((method, param)))
                     {
-                        changed |= this.identityReturns.Add(callee);
+                        changed |= returnRestrictions.Add(callee);
                     }
                 }
 
                 foreach (var (from, to) in this.returnToReturnRefs)
                 {
-                    if (this.identityReturns.Contains(to))
+                    if (returnRestrictions.Contains(to))
                     {
-                        changed |= this.identityReturns.Add(from);
+                        changed |= returnRestrictions.Add(from);
                     }
                 }
 
                 foreach (var (field, method) in this.fieldReturnRefs)
                 {
-                    if (this.identityReturns.Contains(method))
+                    if (returnRestrictions.Contains(method))
                     {
-                        changed |= this.identityParams.Add((field, 0));
+                        changed |= parameterRestrictions.Add((field, 0));
                     }
                 }
             }
@@ -2556,12 +3032,12 @@ public static class UIStringExtractor
 
             foreach (var (literal, method, param) in this.passRefs)
             {
-                if (this.identityParams.Contains((method, param))) this.identityLiterals.Add(literal);
+                if (parameterRestrictions.Contains((method, param))) literalRestrictions.Add(literal);
             }
 
             foreach (var (literal, method) in this.literalReturns)
             {
-                if (this.identityReturns.Contains(method)) this.identityLiterals.Add(literal);
+                if (returnRestrictions.Contains(method)) literalRestrictions.Add(literal);
             }
         }
 
@@ -2582,6 +3058,7 @@ public static class UIStringExtractor
 
                 if (ui)
                 {
+                    literal.HasCommandHelpConsumer |= scan.ParamsToCommandHelp[param];
                     if (scan.ParamsToUI[param])
                     {
                         literal.UIViaFlow = true;
@@ -2590,7 +3067,10 @@ public static class UIStringExtractor
                             literal.UIFlowTarget = scan.ParamsToUITarget[param];
                         }
 
-                        if (scan.ParamsToUIPreserveID[param] && !literal.Joined)
+                        // Returned fields/getters also carry label provenance in
+                        // the monotone restriction graph. A missing summary bit
+                        // is not evidence of a second, plain-text consumer.
+                        if ((scan.ParamsToUIPreserveID[param] || this.labelParams.Contains((method, param))) && !literal.Joined)
                         {
                             literal.PreserveID = true;
                             literal.IDMarked = true;
@@ -2636,6 +3116,8 @@ public static class UIStringExtractor
                         literal.UIFlowTarget = scan.ReturnsToUI ? scan.ReturnsToUITarget : "接口文本属性";
                     }
                 }
+
+                literal.HasCommandHelpConsumer |= scan.ReturnsToCommandHelp;
 
                 if (scan.ReturnsDangerous)
                 {
@@ -2732,7 +3214,7 @@ public static class UIStringExtractor
 
             foreach (var literal in this.literals)
             {
-                if (this.identityLiterals.Contains(this.literalIDs[literal.Text]))
+                if (this.identityLiterals.Contains(literal.ID))
                 {
                     entries.Add(new UITextEntry
                     {
@@ -2745,7 +3227,35 @@ public static class UIStringExtractor
                     continue;
                 }
 
-                if (!LooksTranslatable(literal.Text))
+                if (this.inventoryMapDisplays.TryGetValue(literal.Instruction, out var mapReason))
+                {
+                    // This exact producer has its own closed DTO/consumer proof.
+                    // General record/getter and incomplete-flow rules stay intact.
+                    literal.PreserveID = false;
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text, Context = literal.Context, Role = UITextRole.UI,
+                        Reason = mapReason, PreserveID = false, HasWritableDisplaySite = true,
+                    });
+                    continue;
+                }
+
+                if (this.incompleteLiterals.Contains(literal.ID))
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text, Context = literal.Context, Role = UITextRole.Ambiguous,
+                        Reason = "来源或数据流分析不完整，保留原文", AnalysisIncomplete = true,
+                    });
+                    continue;
+                }
+
+                // Only the exact host help consumer can override slash/path
+                // shape filtering. Identity, incomplete and mixed-use guards
+                // remain attached to this producer, including wrapper flows.
+                var commandHelp = literal.HasCommandHelpConsumer;
+                var providerText = this.providerTextLabels.GetValueOrDefault(literal.Instruction);
+                if (!LooksTranslatable(providerText ?? literal.Text, commandHelp))
                 {
                     entries.Add(new UITextEntry
                     {
@@ -2767,6 +3277,21 @@ public static class UIStringExtractor
 
                 var hasUI = literal.UIDirect || literal.UIViaFlow || literal.UIViaReturn;
                 var hasDanger = literal.Dangerous || literal.DangerousViaFlow;
+
+                if (providerText is not null && hasUI && !hasDanger && literal.UnknownTarget.Length == 0)
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.UI,
+                        Reason = $"精确消费者合同 → {uiTarget}",
+                        PreserveID = false,
+                        HasWritableDisplaySite = true,
+                        TranslationText = providerText,
+                    });
+                    continue;
+                }
 
                 // 当键名用过：本地化/资源查表 key（查的是 DLL 外面的表）一律排除；
                 // 字典/集合键名只有在**没有界面用途**时排除——两边都沾的（插件自带汉化词典的 key，
@@ -2835,7 +3360,24 @@ public static class UIStringExtractor
                     continue;
                 }
 
-                if (hasUI && hasDanger)
+                if (providerText is null && literal.IDMarked && literal.Text.Contains("##", StringComparison.Ordinal)
+                    && !literal.Text.Contains("###", StringComparison.Ordinal))
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text, Context = literal.Context, Role = UITextRole.Ambiguous,
+                        Reason = "双井号标签仍对完整文本计算身份；尚无保持原身份的改写合同",
+                    });
+                }
+                else if (literal.JoinedLabel && !this.completeDynamicLabels.Contains(literal.Instruction))
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text, Context = literal.Context, Role = UITextRole.Ambiguous,
+                        Reason = "动态控件标签片段，完整身份尚未证明", AnalysisIncomplete = true,
+                    });
+                }
+                else if (hasUI && (hasDanger || literal.UnknownTarget.Length > 0))
                 {
                     entries.Add(new UITextEntry
                     {
@@ -2868,6 +3410,7 @@ public static class UIStringExtractor
                         Role = UITextRole.UI,
                         Reason = $"→ {uiTarget}",
                         PreserveID = literal.PreserveID,
+                        TranslationText = providerText,
                     });
                 }
                 else
@@ -2885,13 +3428,29 @@ public static class UIStringExtractor
                 }
             }
 
+            for (var index = 0; index < this.literals.Count; index++)
+            {
+                var literal = this.literals[index];
+                var entry = entries[index];
+                this.sites[literal.Instruction] = new LiteralSite(literal.Text,
+                    entry.Role == UITextRole.UI && !entry.AnalysisIncomplete && !entry.IsFunctionalIdentifier,
+                    literal.PreserveID, entry.IsFunctionalIdentifier, entry.Reason,
+                    this.providerTextLabels.GetValueOrDefault(literal.Instruction));
+            }
+
+            // The editor still has one row per original; write admission above
+            // stays attached to each instruction and is never reconstructed from
+            // this aggregate display row or an old package role.
+            var aggregate = entries.GroupBy(entry => entry.Original, StringComparer.Ordinal)
+                .Select(group => AggregateEntries(group.ToArray())).ToList();
             return new UITextExtraction
             {
                 AssemblyPath = this.path,
                 ResourceKeyCount = this.resourceKeyIds.Count,
                 Resources = includeResources ? this.ScanResources() : [],
                 Attributes = includeResources ? this.ScanAttributes() : [],
-                Entries = entries,
+                Entries = aggregate,
+                AnalysisDiagnostics = this.analysisDiagnostics.OrderBy(value => value, StringComparer.Ordinal).ToList(),
             };
         }
 
@@ -2948,11 +3507,9 @@ public static class UIStringExtractor
                 try
                 {
                     var bytes = embedded.CreateReader().ToArray();
-                    using var stream = new MemoryStream(bytes);
-                    using var reader = new ResourceReader(stream);
-                    foreach (DictionaryEntry entry in reader)
+                    foreach (var entry in UITextBinaryResources.Read(bytes))
                     {
-                        if (entry.Key is not string key || entry.Value is not string value)
+                        if (entry.StringValue is not string value)
                         {
                             continue;
                         }
@@ -2962,7 +3519,7 @@ public static class UIStringExtractor
                             list.Add(new UITextResourceItem
                             {
                                 Container = container,
-                                Key = key,
+                                Key = entry.Key,
                                 Value = value,
                             });
                         }
@@ -3013,10 +3570,10 @@ public static class UIStringExtractor
         }
 
         /// <summary>
-        ///     扫描自定义特性里的界面文字（构造函数参数；命名参数常是键/ID，不碰）。
+        ///     扫描自定义特性里已证可译的构造参数和命名显示字段。
         /// </summary>
         /// <remarks>
-        ///     哪些特性算界面文本见 <see cref="UITextRules.IsUIAttribute" />。
+        ///     参数准入与写入端共用 <see cref="UITextAttributeContracts" />。
         ///     这些字符串不在 <c>ldstr</c> 里，普通 IL 抽取看不到（ARSR / SimpleTweaks 的主要缺口）。
         /// </remarks>
         private List<UITextAttributeItem> ScanAttributes()
@@ -3027,23 +3584,14 @@ public static class UIStringExtractor
             {
                 foreach (var attr in host.CustomAttributes)
                 {
-                    if (!UITextRules.IsUIAttribute(attr.TypeFullName))
-                    {
-                        continue;
-                    }
-
                     var fullName = attr.TypeFullName;
                     var dot = fullName.LastIndexOf('.');
                     var shortName = dot >= 0 ? fullName[(dot + 1)..] : fullName;
 
-                    // 命令类特性（Cmd / SubCmd / Command）的第 0 个参数是命令名，不能翻——
-                    // 从帮助文本起始下标开始收（UITextRules.CommandHelpStartIndex）。
                     var arguments = attr.ConstructorArguments;
-                    var startIndex = UITextRules.CommandHelpStartIndex(attr.TypeFullName) ?? 0;
-                    for (var argumentIndex = startIndex; argumentIndex < arguments.Count; argumentIndex++)
+                    for (var argumentIndex = 0; argumentIndex < arguments.Count; argumentIndex++)
                     {
-                        // 个别特性的参数是功能字符串（如 BossMod PropertyDisplay 第 5 个参数 = 搜索标签），不碰
-                        if (UITextRules.IsAttributeArgumentSkipped(attr.TypeFullName, argumentIndex))
+                        if (!UITextAttributeContracts.IsDisplayConstructorArgument(attr, host, argumentIndex))
                         {
                             continue;
                         }
@@ -3062,12 +3610,10 @@ public static class UIStringExtractor
                         }
                     }
 
-                    // 命名参数（Property / Field）：只收名字明确是界面文本的（UITextRules.IsUINamedArgument）。
-                    // ARSR 的 [RotationConfig(CombatType.PvE, Name = "…")] 就靠这条（2026-10-02 用户实测漏翻）；
-                    // Path / Id / Command / Version 这类名字一律不碰。
+                    // 命名参数需核对完整属性合同；Name 本身不能证明它不是资源键。
                     foreach (var named in attr.NamedArguments)
                     {
-                        if (!UITextRules.IsUINamedArgument(named.Name?.String))
+                        if (!UITextAttributeContracts.IsDisplayNamedArgument(attr, host, named))
                         {
                             continue;
                         }
@@ -3100,6 +3646,15 @@ public static class UIStringExtractor
                 foreach (var field in type.Fields)
                 {
                     Collect(field, typeName + "::" + field.Name);
+                    if (TryGetMissingEnumFallback(field, out var fallback, out _) && LooksTranslatable(fallback))
+                    {
+                        list.Add(new UITextAttributeItem
+                        {
+                            Owner = typeName + "::" + field.Name,
+                            Attribute = "EnumLocAttribute.Fallback (derived)",
+                            Value = fallback,
+                        });
+                    }
                 }
 
                 foreach (var property in type.Properties)
@@ -3197,16 +3752,61 @@ public static class UIStringExtractor
 
         // ── 小工具 ───────────────────────────────────────────────────────────
 
-        private int Intern(string text, string context)
+        private void MarkIncomplete(V value, string reason)
         {
-            if (this.literalIDs.TryGetValue(text, out var id))
+            this.analysisDiagnostics.Add(reason);
+            this.incompleteLiterals.UnionWith(value.IDs);
+            foreach (var parameter in value.Params) this.incompleteParams.Add((this.activeScan.Key, parameter));
+            if (value.FieldKey is { } field) this.incompleteParams.Add((field, 0));
+            this.incompleteReturns.UnionWith(value.CallKeys);
+        }
+
+        private V MergeValues(V left, V right)
+        {
+            if (left.IDs.Concat(right.IDs).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems
+                || left.Params.Concat(right.Params).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems
+                || left.CallKeys.Concat(right.CallKeys).Distinct().Take(V.MaxItems + 1).Count() > V.MaxItems)
+            {
+                this.MarkIncomplete(left, "来源集合超过分析预算");
+                this.MarkIncomplete(right, "来源集合超过分析预算");
+            }
+            var merged = V.Merge(left, right);
+            if (left.FieldKey is not { } first || right.FieldKey is not { } second || first == second)
+                return merged;
+
+            // A joined local/branch can refer to either collection. Keep both
+            // sources so later display, IPC and unknown consumers propagate
+            // back to both, without aliasing the two independent allocations.
+            var sources = (this.fieldJoinSources.TryGetValue(first, out var a) ? a : [first])
+                .Concat(this.fieldJoinSources.TryGetValue(second, out var b) ? b : [second])
+                .Distinct(StringComparer.Ordinal).OrderBy(x => x, StringComparer.Ordinal).ToArray();
+            if (sources.Length > V.MaxItems)
+            {
+                this.MarkIncomplete(left, "集合来源合并超过分析预算");
+                this.MarkIncomplete(right, "集合来源合并超过分析预算");
+                return merged;
+            }
+            var signature = string.Join("\0", sources);
+            if (!this.fieldJoinKeys.TryGetValue(signature, out var join))
+            {
+                join = "collection-join:" + this.fieldJoinKeys.Count;
+                this.fieldJoinKeys.Add(signature, join);
+                this.fieldJoinSources.Add(join, sources);
+                foreach (var source in sources) this.paramFlowRefs.Add((source, 0, join, 0));
+            }
+            return merged with { FieldKey = join };
+        }
+
+        private int Intern(Instruction instruction, string text, string context)
+        {
+            if (this.literalIDs.TryGetValue(instruction, out var id))
             {
                 return id;
             }
 
             id = this.literals.Count;
-            this.literals.Add(new Literal { ID = id, Text = text, Context = context });
-            this.literalIDs[text] = id;
+            this.literals.Add(new Literal { ID = id, Instruction = instruction, Text = text, Context = context });
+            this.literalIDs[instruction] = id;
             return id;
         }
 
@@ -3217,7 +3817,7 @@ public static class UIStringExtractor
             {
                 foreach (var extra in this.carried)
                 {
-                    value = V.Merge(value, extra);
+                    value = this.MergeValues(value, extra);
                 }
 
                 this.carried.Clear();
@@ -3256,14 +3856,14 @@ public static class UIStringExtractor
 
         private static int ParamIndex(MethodScan scan, int slot) => slot < 0 ? -1 : scan.Def.IsStatic ? slot : slot - 1;
 
-        private static void StoreLocal(Dictionary<int, V> locals, int index, V value)
+        private void StoreLocal(Dictionary<int, V> locals, int index, V value)
         {
-            locals[index] = locals.TryGetValue(index, out var old) ? V.Merge(old, value) : value;
+            locals[index] = locals.TryGetValue(index, out var old) ? this.MergeValues(old, value) : value;
         }
 
-        private static void Store(Dictionary<int, V> map, int index, V value)
+        private void Store(Dictionary<int, V> map, int index, V value)
         {
-            map[index] = map.TryGetValue(index, out var old) ? V.Merge(old, value) : value;
+            map[index] = map.TryGetValue(index, out var old) ? this.MergeValues(old, value) : value;
         }
 
         private static bool IsInstance(IMethod method)
@@ -3320,10 +3920,35 @@ public static class UIStringExtractor
                 // 泛型参数（泛型类型的 TKey / TValue、泛型方法的 !!0）在 dnlib 里 FullName 可能只剩裸名字，
                 // 归一成 "!0" 记号——IsStringLikeOrGeneric 认它，否则字典 set_Item 的键判定整条失效
                 //（2026-10-02 实测：Allagan 的词典键因此绕过硬键保护，被当成普通文本升成 UI）。
-                result.Add(p is GenericSig generic ? "!" + generic.Number : p.FullName);
+                // Only close method invocations here. Collection-owner slot
+                // contracts retain their existing generic representation.
+                var resolved = method is MethodSpec ? ClosedParameterType(method, p) : p;
+                result.Add(resolved is GenericSig generic
+                    ? (generic is GenericMVar ? "!!" : "!") + generic.Number : resolved.FullName);
             }
 
             return result;
+        }
+
+        private static TypeSig ClosedParameterType(IMethod method, TypeSig parameter)
+        {
+            if (parameter is GenericMVar methodParameter && method is MethodSpec specification
+                && methodParameter.Number < specification.GenericInstMethodSig.GenericArguments.Count)
+                return specification.GenericInstMethodSig.GenericArguments[(int)methodParameter.Number];
+            if (parameter is GenericVar typeParameter && method.DeclaringType?.ToTypeSig() is GenericInstSig owner
+                && typeParameter.Number < owner.GenericArguments.Count)
+                return owner.GenericArguments[(int)typeParameter.Number];
+            return parameter;
+        }
+
+        private static bool CanFollowInternalStringArgument(IMethod method, int index, string typeName)
+        {
+            var parameter = method.MethodSig?.Params[index];
+            // A generic ToString summary is safe only at a closed string call.
+            // object or a custom type with "String" in its name is not proof.
+            return parameter is GenericSig
+                ? ClosedParameterType(method, parameter).ElementType == ElementType.String
+                : IsStringLike(typeName);
         }
 
         /// <summary>
@@ -3344,6 +3969,7 @@ public static class UIStringExtractor
                 Context = fieldKey,
                 ParamsToUI = new bool[1],
                 ParamsToUITarget = [string.Empty],
+                ParamsToCommandHelp = new bool[1],
                 ParamsToUIPreserveID = new bool[1],
                 ParamsDangerous = new bool[1],
                 ParamsDangerousTarget = [string.Empty],
@@ -3379,11 +4005,53 @@ public static class UIStringExtractor
             }
         }
 
-        private static string FieldKey(IField field) =>
-            $"{field.DeclaringType?.FullName}::{field.Name.String}";
+        private static string TypeIdentity(ITypeDefOrRef? type) =>
+            $"[{type?.DefinitionAssembly?.FullName}]{type?.FullName}";
 
-        private static string MethodKey(string typeFullName, string methodName, int paramCount) =>
-            $"{StripGenericArgs(typeFullName)}::{methodName}/{paramCount}";
+        private static string FieldKey(IField field) =>
+            $"{TypeIdentity(field.DeclaringType)}::{field.Name.String}:{field.FieldSig?.Type.FullName}";
+
+        private string MethodKey(IMethod method)
+        {
+            // A closed generic invocation shares the flow of its open method,
+            // while overloads and equally named types in other assemblies do not.
+            if (method is MethodSpec specification)
+            {
+                method = specification.Method;
+            }
+
+            var owner = method.DeclaringType;
+            if (method is not MethodDef && owner is not null
+                && string.Equals(owner.DefinitionAssembly?.FullName, this.module.Assembly?.FullName, StringComparison.Ordinal))
+            {
+                try
+                {
+                    // Resolve only this module's member references. This also
+                    // normalizes instantiated generic owner signatures to the
+                    // matching definition without loading external assemblies.
+                    if (method.ResolveMethodDef() is { } definition && definition.Module == this.module)
+                    {
+                        method = definition;
+                        owner = definition.DeclaringType;
+                    }
+                }
+                catch (Exception)
+                {
+                    // An unresolved signature retains its own identity below.
+                }
+            }
+
+            var signature = method.MethodSig;
+            static string TypeIdentity(TypeSig type) =>
+                $"[{type.ToTypeDefOrRef()?.DefinitionAssembly?.FullName}]{type.FullName}";
+            var scope = owner?.DefinitionAssembly?.FullName ?? owner?.Scope?.ToString() ?? string.Empty;
+            var parameters = signature is null ? string.Empty : string.Join(",", signature.Params.Select(TypeIdentity));
+            var sentinel = signature?.ParamsAfterSentinel is { Count: > 0 } optional
+                ? ";...;" + string.Join(",", optional.Select(TypeIdentity)) : string.Empty;
+            return $"[{scope}]{StripGenericArgs(owner?.FullName ?? string.Empty)}::{method.Name.String}"
+                + $"`{signature?.GenParamCount ?? 0}/{signature?.CallingConvention}({parameters}{sentinel})"
+                + $"->{(signature is null ? string.Empty : TypeIdentity(signature.RetType))}";
+        }
 
         /// <summary>委托 <c>Invoke</c> 的参数名（定义解析不到就返回空表）。</summary>
         private static List<string> DelegateParameterNames(IMethod callee)
@@ -3522,7 +4190,7 @@ public static class UIStringExtractor
                    && (text.Contains(':', StringComparison.Ordinal) || text.Contains('{', StringComparison.Ordinal));
         }
 
-        private static bool LooksTranslatable(string text)
+        private static bool LooksTranslatable(string text, bool commandHelp = false)
         {
             if (text.Length < 2)
             {
@@ -3558,7 +4226,9 @@ public static class UIStringExtractor
             }
 
             // 网址 / 路径：可显示，但翻了会弄坏链接或路径
-            if (LooksLikeURLOrPath(text))
+            if (LooksLikeURLOrPath(text)
+                && !(commandHelp && Regex.IsMatch(text,
+                    @"^/[A-Za-z][A-Za-z0-9_-]*(?::[ \t]+|[ \t]+\[[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\]:[ \t]+|[ \t]+(?:[^\r\n]*?[ \t]+)?-[ \t]+)[^\r\n]*[A-Za-z]{3,}")))
             {
                 return false;
             }

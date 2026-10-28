@@ -1,52 +1,32 @@
-name: release
+name: release (manual promotion policy)
 
+# Replacement draft for .github/workflows/release.yml.
+# Tag pushes intentionally have no release workflow trigger.
 on:
-  push:
-    tags:
-      - 'v*'
   workflow_dispatch:
 
-permissions:
-  contents: write
+# This workflow builds nothing, downloads nothing, and publishes nothing.
+permissions: {}
 
 jobs:
-  build:
-    runs-on: windows-latest
-
+  manual-promotion-instructions:
+    name: Show manual release promotion policy
+    runs-on: ubuntu-latest
+    permissions: {}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      - name: Download Dalamud (API 15)
-        shell: pwsh
+      - name: Explain release promotion
+        shell: bash
         run: |
-          # upstream 已于 2026-09-22 删除 api15 目录（提交信息「api15 bye bye」，现在的分发只有 api16/latest）——
-          # 钉到最后仍含 api15 的提交（4359d8e，54MB），与本机 XIVLauncherCN 的 15.0.3.6 对齐；
-          # 清单里的 DalamudApiLevel 另行固定为 15，保证国服/旧版卫月也能加载。
-          $ErrorActionPreference = 'Stop'
-          $dest = "$env:APPDATA\XIVLauncher\addon\Hooks\dev"
-          New-Item -ItemType Directory -Force -Path $dest | Out-Null
-          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/goatcorp/dalamud-distrib/4359d8e3af11e7521e67ebbad80fba06100dc3a3/api15/latest.zip" -OutFile "$env:TEMP\dalamud.zip"
-          Expand-Archive -Path "$env:TEMP\dalamud.zip" -DestinationPath $dest -Force
+          cat >> "$GITHUB_STEP_SUMMARY" <<'SUMMARY'
+          ## Release promotion is manual
 
-      - name: Build
-        shell: pwsh
-        run: dotnet build src/FireGaze/FireGaze.csproj -c Release
+          This workflow does not build or publish a release.
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: FireGaze
-          path: src/FireGaze/bin/Release/FireGaze/latest.zip
+          Ordinary CI builds belong in a separate read-only build workflow.
+          CI outputs are not the accepted release assets.
 
-      - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: src/FireGaze/bin/Release/FireGaze/latest.zip
-          generate_release_notes: true
+          Promote the reviewed, already accepted ZIP without rebuilding it.
+          Bind the release tag, source commit, source file manifest, and ZIP SHA-256.
+          Upload the accepted ZIP and the reviewed source manifest to a draft release.
+          Publication requires a separate explicit decision after reviewing that draft.
+          SUMMARY

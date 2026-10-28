@@ -33,3 +33,4 @@ internal sealed class PortraitLightingFitControls
     }
     public bool TryTarget(out PortraitColorToneTarget? target) => PortraitColorToneTarget.TryCreate(points[0],points[1],points[2],out target);
 }
+

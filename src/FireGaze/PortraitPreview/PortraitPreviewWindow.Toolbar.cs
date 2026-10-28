@@ -38,6 +38,7 @@ internal sealed partial class PortraitPreviewWindow
         DrawUndoRedo();
         ContinueToolbar(right, ImGui.CalcTextSize("历史记录").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("历史记录")) showHistory = !showHistory;
+        DrawPhotoSourceSelector(right);
         if (!stacked) ContinueToolbar(right, ImGui.CalcTextSize("铭牌同步预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
         var sync = feature.SyncPlate;
         if (ImGui.Checkbox("铭牌同步预览", ref sync)) feature.SetSyncPlate(sync);
@@ -47,6 +48,28 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Button("结束预览###PortraitEndPreview")) feature.ClosePreview();
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("结束试换并还原进入预览时的外观");
         ImGui.PopID();
+    }
+
+    private void DrawPhotoSourceSelector(float right)
+    {
+        var style = ImGui.GetStyle();
+        var radioExtra = ImGui.GetFrameHeight() + style.ItemInnerSpacing.X;
+        var width = ImGui.CalcTextSize("照片来源").X + ImGui.CalcTextSize("肖像").X
+            + ImGui.CalcTextSize("可见铭牌").X + radioExtra * 2 + style.ItemSpacing.X * 2;
+        ContinueToolbar(right, width);
+        ImGui.BeginGroup();
+        ImGui.TextUnformatted("照片来源");
+        ImGui.SameLine();
+        var portrait = feature.LiveCaptureScope == PortraitImageScope.Portrait;
+        if (ImGui.RadioButton("肖像###PortraitPhotoSourcePortrait", portrait) && !portrait)
+            feature.SetLiveCaptureScope(PortraitImageScope.Portrait);
+        ImGui.SameLine();
+        var plate = feature.LiveCaptureScope == PortraitImageScope.VisibleAdventurerPlate;
+        if (ImGui.RadioButton("可见铭牌###PortraitPhotoSourcePlate", plate) && !plate)
+            feature.SetLiveCaptureScope(PortraitImageScope.VisibleAdventurerPlate);
+        if (ImGui.IsItemHovered() || ImGui.IsItemFocused())
+            ImGui.SetTooltip("按当前可见画面拍摄铭牌；遮挡会入图，播放时暂不拍照。");
+        ImGui.EndGroup();
     }
 
     private void DrawUndoRedo()

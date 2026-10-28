@@ -1,13 +1,15 @@
 using System.Diagnostics;
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
+using FireGaze.LocalPreview.Runtime;
 
 namespace FireGaze.PortraitPreview;
 
 internal sealed unsafe partial class PortraitPreviewFeature
 {
     private PortraitEditorOpeningController editorOpening = null!;
-    private bool editorOpeningSubscribed;
+    private bool editorOpeningFinalizeSubscribed, editorOpeningLogoutSubscribed, editorOpeningTerritorySubscribed;
+    private Exception? editorOpeningCloseFailure;
     private double nextOpeningAvailability;
     private string? lastOpeningPlayerError;
     public PortraitOpeningAvailability OpeningAvailability => editorOpening.ReadAvailability();
@@ -17,10 +19,26 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         editorOpening = controller ?? new(ReadEditorOpeningSample,
             () => Stopwatch.GetTimestamp() / (double)Stopwatch.Frequency, ReadEditorOpeningIssues);
-        Plugin.AddonLifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeEditorOpeningFinalize);
-        Plugin.ClientState.Logout += EditorOpeningLogout;
-        Plugin.ClientState.TerritoryChanged += EditorOpeningTerritoryChanged;
-        editorOpeningSubscribed = true;
+        try
+        {
+            // A backend may register a callback before throwing. Publish each
+            // ownership attempt before crossing that registration boundary.
+            editorOpeningFinalizeSubscribed = true;
+            Plugin.AddonLifecycle.RegisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeEditorOpeningFinalize);
+            editorOpeningLogoutSubscribed = true;
+            Plugin.ClientState.Logout += EditorOpeningLogout;
+            editorOpeningTerritorySubscribed = true;
+            Plugin.ClientState.TerritoryChanged += EditorOpeningTerritoryChanged;
+        }
+        catch (Exception initializationFailure)
+        {
+            try { DisposeEditorOpening(); }
+            catch (Exception rollbackFailure)
+            {
+                throw new NativePhysicalCloseException(this, new AggregateException(initializationFailure, rollbackFailure));
+            }
+            throw;
+        }
     }
 
     // Diagnostics/safety sampling must not perform native reads, progress readiness or revoke an
@@ -73,11 +91,30 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void DisposeEditorOpening()
     {
-        editorOpening.Invalidate("Feature disposal revoked native editor ownership.");
-        if (!editorOpeningSubscribed) return;
-        Plugin.AddonLifecycle.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeEditorOpeningFinalize);
-        Plugin.ClientState.Logout -= EditorOpeningLogout;
-        Plugin.ClientState.TerritoryChanged -= EditorOpeningTerritoryChanged;
-        editorOpeningSubscribed = false;
+        editorOpening?.Invalidate("Feature disposal revoked native editor ownership.");
+        if (editorOpeningCloseFailure is not null) throw editorOpeningCloseFailure;
+        List<Exception>? failures = null;
+        void Remove(Action cleanup)
+        {
+            try { cleanup(); }
+            catch (Exception failure) { (failures ??= []).Add(failure); }
+        }
+        if (editorOpeningFinalizeSubscribed)
+        {
+            editorOpeningFinalizeSubscribed = false;
+            Remove(() => Plugin.AddonLifecycle.UnregisterListener(AddonEvent.PreFinalize, "BannerEditor", BeforeEditorOpeningFinalize));
+        }
+        if (editorOpeningLogoutSubscribed)
+        {
+            editorOpeningLogoutSubscribed = false;
+            Remove(() => Plugin.ClientState.Logout -= EditorOpeningLogout);
+        }
+        if (editorOpeningTerritorySubscribed)
+        {
+            editorOpeningTerritorySubscribed = false;
+            Remove(() => Plugin.ClientState.TerritoryChanged -= EditorOpeningTerritoryChanged);
+        }
+        if (failures is not null)
+            throw editorOpeningCloseFailure = new AggregateException("Editor opening callback retirement is incomplete.", failures);
     }
 }

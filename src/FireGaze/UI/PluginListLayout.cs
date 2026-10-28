@@ -20,6 +20,9 @@ internal static class PluginListLayout
 
     public static float RefreshSlotWidth() => MaxWidth("刷新", "刷新中…");
 
+    public static float FeedbackSlotWidth()
+        => MathF.Max(UiHelpers.LabelWidth("反馈"), RefreshSlotWidth() - ImGui.GetFontSize() * .5f);
+
     public static float MeasureFoldedRowHeight(float textLineHeight, float frameHeight, float spacing)
         => MathF.Max(frameHeight + 16f, MathF.Max(IconSize, textLineHeight * 3f + spacing * 2f) + MathF.Max(4f, spacing));
 
@@ -55,7 +58,7 @@ internal static class PluginListLayout
     private static int ToolbarRows() => MeasureToolbarRows(
         ImGui.GetWindowContentRegionMax().X - ImGui.GetWindowContentRegionMin().X,
         [RefreshSlotWidth(), SearchWidth, MaxWidth("状态", "排序") + FilterWidth + ImGui.GetStyle().ItemSpacing.X,
-            UiHelpers.LabelWidth("翻译设置…"), UiHelpers.LabelWidth("反馈…")], 10f);
+            UiHelpers.LabelWidth("翻译设置…"), FeedbackSlotWidth()], 10f);
 
     public static void ToolbarSameLineOrWrap(float width)
     {

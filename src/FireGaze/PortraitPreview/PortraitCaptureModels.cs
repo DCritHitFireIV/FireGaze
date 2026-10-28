@@ -3,7 +3,6 @@ using Dalamud.Interface.Textures.TextureWraps;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitImageScope { Portrait,VisibleAdventurerPlate }
 internal sealed record PortraitCaptureSurface(string GenerationKey,int Width,int Height)
 {
  public bool IsValid=>!string.IsNullOrWhiteSpace(GenerationKey)&&Width>0&&Height>0

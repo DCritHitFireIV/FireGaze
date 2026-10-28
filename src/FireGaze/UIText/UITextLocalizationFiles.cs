@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -113,9 +114,14 @@ internal static class UITextLocalizationFiles
             }
 
             string currentText;
+            string currentHash;
             try
             {
-                currentText = File.ReadAllText(target, Encoding.UTF8);
+                var bytes = File.ReadAllBytes(target);
+                currentHash = Convert.ToHexStringLower(SHA256.HashData(bytes));
+                using var reader = new StreamReader(new MemoryStream(bytes, writable: false), Encoding.UTF8,
+                    detectEncodingFromByteOrderMarks: true);
+                currentText = reader.ReadToEnd();
             }
             catch (Exception e)
             {
@@ -123,17 +129,42 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
-            var currentHash = UITextHash.OfFile(target);
             previousByPath.TryGetValue(target, out var previous);
             var isOurs = IsOurPatchedFile(previous, currentHash);
+            if (!isOurs && previous?.PatchedHash is { Length: > 0 }
+                && currentHash.Length > 0
+                && string.Equals(currentHash, previous.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                // A recognized patched file must never fall back to treating
+                // its translated content as an original when its backup is lost.
+                error ??= $"找不到 {Path.GetFileName(target)} 的原始备份，未写入";
+                continue;
+            }
 
             string baselineText;
             try
             {
                 // 盘上是我们的补丁 → 回到原始内容再重新写；否则当前文件就是原始基线
-                baselineText = isOurs
-                    ? File.ReadAllText(previous!.BackupPath!, Encoding.UTF8)
-                    : currentText;
+                if (isOurs)
+                {
+                    var backupBytes = File.ReadAllBytes(previous!.BackupPath!);
+                    var backupHash = Convert.ToHexString(SHA256.HashData(backupBytes));
+                    if (!string.Equals(backupHash, previous.SourceHash, StringComparison.OrdinalIgnoreCase))
+                    {
+                        error ??= $"{Path.GetFileName(target)} 的原始备份校验失败，未写入";
+                        continue;
+                    }
+
+                    // Decode exactly the bytes whose hash was verified, with
+                    // the same BOM detection as File.ReadAllText(path, UTF8).
+                    using var reader = new StreamReader(new MemoryStream(backupBytes, writable: false), Encoding.UTF8,
+                        detectEncodingFromByteOrderMarks: true);
+                    baselineText = reader.ReadToEnd();
+                }
+                else
+                {
+                    baselineText = currentText;
+                }
             }
             catch (Exception e)
             {
@@ -152,19 +183,25 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
-            // 英文侧（配对规则找得到才用）：陈旧指针闸门用（2026-10-03 评审 B-13）
-            JsonNode? englishRoot = null;
+            // A current English baseline is required: a stable pointer alone
+            // cannot authorize an older translation after upstream text changes.
             var englishFile = FindEnglishCounterpart(pluginDirectory, target);
-            if (englishFile is not null)
+            if (englishFile is null)
             {
-                try
-                {
-                    englishRoot = JsonNode.Parse(File.ReadAllText(englishFile, Encoding.UTF8));
-                }
-                catch (Exception)
-                {
-                    englishRoot = null; // 读不动英文侧 → 回退旧行为（宁可多写，也别漏写）
-                }
+                error ??= $"找不到 {Path.GetFileName(target)} 对应的英文原文，未写入";
+                continue;
+            }
+
+            JsonNode englishRoot;
+            try
+            {
+                englishRoot = JsonNode.Parse(File.ReadAllText(englishFile, Encoding.UTF8))
+                    ?? throw new JsonException("英文原文为空");
+            }
+            catch (Exception e)
+            {
+                error ??= $"读不动 {Path.GetFileName(target)} 对应的英文原文，未写入：{e.Message}";
+                continue;
             }
 
             var changed = 0;
@@ -178,10 +215,18 @@ internal static class UITextLocalizationFiles
                     continue;
                 }
 
-                // 陈旧指针闸门：英文侧已经没有这个 key（上游把文案删了）→ 不往中文文件里补孤儿键。
-                // 定位不到英文侧（配对规则没覆盖）时保持旧行为。
-                if (englishRoot is not null && !EnglishHasKey(englishRoot, item.Key))
+                var placeholderError = UITextText.CheckPlaceholders(item.Original, item.Translated);
+                if (placeholderError is not null)
                 {
+                    error ??= $"{Path.GetFileName(target)} · {item.Key}：{placeholderError}";
+                    continue;
+                }
+
+                var currentOriginal = ReadString(englishRoot, item.Key);
+                if (string.IsNullOrEmpty(currentOriginal)
+                    || !string.Equals(currentOriginal, item.Original, StringComparison.Ordinal))
+                {
+                    error ??= $"{Path.GetFileName(target)} · {item.Key}：英文原文已变更或不存在，未写入";
                     stale++;
                     continue;
                 }
@@ -194,7 +239,7 @@ internal static class UITextLocalizationFiles
 
             if (stale > 0)
             {
-                Plugin.Log?.Information($"[内部文本] {Path.GetFileName(target)}：{stale} 条指针在英文侧已不存在，跳过（陈旧条目，不补孤儿键）");
+                Plugin.Log?.Information($"[内部文本] {Path.GetFileName(target)}：{stale} 条英文原文已变更或不存在，跳过陈旧条目");
             }
 
             if (changed == 0)
@@ -215,7 +260,8 @@ internal static class UITextLocalizationFiles
                 content,
                 isOurs ? previous!.SourceHash : currentHash,
                 NeedsBackup: !isOurs,
-                ReuseBackup: isOurs ? previous!.BackupPath : null));
+                ReuseBackup: isOurs ? previous!.BackupPath : null,
+                CurrentBeforeHash: currentHash));
         }
 
         return true;
@@ -449,16 +495,6 @@ internal static class UITextLocalizationFiles
     }
 
     /// <summary>
-    ///     能不能在这个指针上写译文：位置上是空的或者空字符串（当缺）；
-    ///     已有非空字符串（别人的译文）或根本不是字符串（两边结构对不上）都不能写。
-    /// </summary>
-    /// <summary>英文侧是否还留着这个指针（非空字符串）。B-13 的陈旧指针闸门用。</summary>
-    private static bool EnglishHasKey(JsonNode? englishRoot, string pointer) =>
-        Resolve(englishRoot, pointer) is JsonValue value
-        && value.GetValueKind() == JsonValueKind.String
-        && value.GetValue<string>() is { Length: > 0 };
-
-    /// <summary>
     ///     找中文文件对应的英文文件（复用扫描时的配对规则）；找不到返回 null。
     /// </summary>
     private static string? FindEnglishCounterpart(string pluginDirectory, string chineseFile)
@@ -481,20 +517,24 @@ internal static class UITextLocalizationFiles
         }
         catch (Exception)
         {
-            // 扫不动就当作找不到：调用方回退到旧行为
+            // An unverified counterpart cannot authorize a file write.
         }
 
         return null;
     }
 
+    /// <summary>
+    ///     能不能在这个指针上写译文：位置上是空的或者空字符串（当缺）；
+    ///     已有非空字符串（别人的译文）或根本不是字符串（两边结构对不上）都不能写。
+    /// </summary>
     private static bool CanWrite(JsonNode? root, string pointer)
     {
         var node = Resolve(root, pointer);
         return node switch
         {
             null => true,
-            JsonValue value => value.GetValueKind() != JsonValueKind.String
-                               || value.GetValue<string>() is not { Length: > 0 },
+            JsonValue value => value.GetValueKind() == JsonValueKind.String
+                               && value.GetValue<string>() is not { Length: > 0 },
             _ => false,
         };
     }
@@ -612,4 +652,5 @@ internal sealed record UITextFileWrite(
     string Content,
     string SourceHash,
     bool NeedsBackup,
-    string? ReuseBackup);
+    string? ReuseBackup,
+    string CurrentBeforeHash = "");

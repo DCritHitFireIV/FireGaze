@@ -104,12 +104,46 @@ public sealed class Configuration : IPluginConfiguration
 
     [JsonIgnore]
     public bool LocalPreviewMinionEnabled { get; set; } = true;
+    /// <summary>Explicit opt-in from the pet collection for persistent multi-pet display.</summary>
+    [JsonProperty("LocalPreviewMultiCompanionEnabled")]
+    public bool LocalPreviewMultiCompanionEnabled { get; set; }
+
+    [JsonProperty("LocalPreviewShowCompanionNames")]
+    public bool LocalPreviewShowCompanionNames { get; set; }
+
+    private int localPreviewMaximumCompanions = 30;
+    private int localPreviewLastLimitedCompanions = 30;
+
+    [JsonProperty("LocalPreviewMaximumCompanions")]
+    public int LocalPreviewMaximumCompanions
+    {
+        get => localPreviewMaximumCompanions;
+        set
+        {
+            if (value < 0) return;
+            localPreviewMaximumCompanions = value;
+            if (value > 0) localPreviewLastLimitedCompanions = value;
+        }
+    }
+
+    [JsonProperty("LocalPreviewLastLimitedCompanions")]
+    public int LocalPreviewLastLimitedCompanions
+    {
+        get => localPreviewMaximumCompanions > 0 ? localPreviewMaximumCompanions : localPreviewLastLimitedCompanions;
+        set => localPreviewLastLimitedCompanions = value > 0 ? value : 30;
+    }
 
     [JsonIgnore]
     public bool LocalPreviewAccessoryEnabled { get; set; } = true;
 
     [JsonIgnore]
     public bool LocalPreviewEmoteEnabled { get; set; } = true;
+
+    // The pet panel intentionally has one saved group slot. Keeping the IDs in
+    // the normal plugin config lets the player recall that group after reload
+    // without pretending the native client has multiple companion slots.
+    [JsonProperty("LocalPreviewSavedMinions")]
+    public uint[] LocalPreviewSavedMinions { get; set; } = [];
 
     // ---------------- 插件安装器（位置记忆 + 拦住自动刷新） ----------------
 

@@ -56,6 +56,9 @@ internal sealed class UITextPackEntry
     public string? RoleReason { get; set; }
 
     [JsonIgnore]
+    public string? ProviderText { get; set; }
+
+    [JsonIgnore]
     public bool IsAmbiguous => string.Equals(this.Role, "Ambiguous", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
@@ -786,7 +789,7 @@ internal sealed class UITextPack
         var keep = new HashSet<string>(StringComparer.Ordinal);
         foreach (var item in extraction.Entries)
         {
-            if (item.Role != UITextRole.Excluded)
+            if (item.TranslationRole != UITextRole.Excluded)
             {
                 keep.Add(item.Original);
             }
@@ -953,7 +956,7 @@ internal sealed class UITextPack
     {
         foreach (var item in extraction.Entries)
         {
-            if (item.Role == UITextRole.Excluded)
+            if (item.TranslationRole == UITextRole.Excluded)
             {
                 continue;
             }
