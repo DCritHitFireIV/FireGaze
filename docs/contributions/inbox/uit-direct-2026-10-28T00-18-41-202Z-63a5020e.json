@@ -1,1 +1,491 @@
-{"type":"uit-contribution","plugin":"ARealmReorganized","kinds":["free"],"entries":[{"Original":"Open A Realm Reorganized.","Translated":"打开重组的领域。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Tidy up your glam collection! Scans your Glamour Dresser for items that can be moved to the Armoire, detects sets that can be regrouped, and helps you free inventory/retainers/chocobo space.","Translated":"整理你的迷人收藏！扫描您的魅力梳妆台中是否有可以移动到衣橱的物品，检测可以重新组合的物品，并帮助您释放库存/固定器/陆行鸟空间。","Context":"MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Press Scan to populate results.","Translated":"按“扫描”填充结果。","Context":"MainWindow.DrawBody","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"♥ Support on Ko-fi","Translated":"♥ 支持 Ko-fi","Context":"MainWindow.DrawFooter","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"dresser","Translated":"梳妆台","Context":"MainWindow.DrawServiceStatus","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" items","Translated":"项目","Context":"MainWindow.DrawServiceStatus","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"armoire","Translated":"衣橱","Context":"MainWindow.DrawServiceStatus","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" stored","Translated":"已存储","Context":"MainWindow.DrawServiceStatus","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":": not seen yet","Translated":": 还没见过","Context":"MainWindow.DescribeCache","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":", cached ","Translated":", 缓存","Context":"MainWindow.DescribeCache","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" ago","Translated":"前","Context":"MainWindow.DescribeCache","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Open your dresser / bags / armoury / saddlebag / retainer, slots in these colors:","Translated":"打开你的梳妆台/包/军械库/边箱/固定器，插槽有以下颜色：","Context":"MainWindow.DrawHighlightLegend","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"in your dresser, can move to the armoire","Translated":"在你的梳妆台上，可以移到衣橱里","Context":"MainWindow.DrawHighlightLegend","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"in bags / armoury / saddlebag / retainer, can move to the armoire","Translated":"放在包/军械库/边箱/固定器中，可以移动到衣橱","Context":"MainWindow.DrawHighlightLegend","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"would complete a partial dresser set if put into the dresser","Translated":"如果放入梳妆台，将完成部分梳妆台套装","Context":"MainWindow.DrawHighlightLegend","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your saddlebag wasn't readable when you scanned, which happens in instances and until you open it. Anything in it may be missing from the lists below, so open the saddlebag once and scan again.","Translated":"当您扫描时，您的马鞍包无法读取，这种情况有时会发生，直到您打开它为止。以下列表中可能缺少其中的任何内容，因此请打开边箱并再次扫描。","Context":"MainWindow.DrawSaddlebagUnavailableBanner","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Open the Armoire once this session to load stored-item data. Until then, items already in the armoire may show in the lists below.","Translated":"在此会话中打开衣橱一次以加载存储的物品数据。在此之前，衣橱中已有的物品可能会显示在下面的列表中。","Context":"MainWindow.DrawCabinetUnavailableBanner","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" HQ","Translated":"总部","Context":"MainWindow.DrawItemRow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Scan","Translated":"扫描","Context":"MainWindow.DrawScanRow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Dresser → Armoire (","Translated":"梳妆台→衣柜（","Context":"ArmoireTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":")###armoire","Translated":"）","Context":"ArmoireTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Nothing in your dresser is currently armoire-eligible.","Translated":"您的梳妆台中目前没有任何东西符合衣橱条件。","Context":"ArmoireTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Sets (","Translated":"套 （","Context":"CompressTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":")###compress","Translated":"）","Context":"CompressTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"No detected sets. Add gear to your dresser and re-scan.","Translated":"没有检测到集合。将装备添加到您的梳妆台并重新扫描。","Context":"CompressTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Complete sets","Translated":"成套","Context":"CompressTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"completesets","Translated":"成套","Context":"CompressTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Incomplete sets","Translated":"不完整集","Context":"CompressTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"incompletesets","Translated":"不完全集","Context":"CompressTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":" pieces","Translated":"件","Context":"CompressTab.DrawSetSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Duplicates (","Translated":"重复项（","Context":"DuplicatesTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":")###duplicates","Translated":"）","Context":"DuplicatesTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"No duplicates detected.","Translated":"未检测到重复项。","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Already in the armoire","Translated":"已经在衣橱里了","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"armoiredupes","Translated":"衣柜骗子","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"The armoire keeps one forever; these copies just take up space. Dyed bag or retainer copies may be worth keeping.","Translated":"衣橱里永远留着一个；这些副本只是占用空间。染色的袋子或保留副本可能值得保留。","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Multiple copies","Translated":"多份","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"multidupes","Translated":"多重重复","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"You own these more than once, pick which to keep.","Translated":"您不止一次拥有这些，请选择保留哪些。","Context":"DuplicatesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"retainer #","Translated":"保持器#","Context":"DuplicatesTab.DescribeLocations","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"bags","Translated":"包","Context":"DuplicatesTab.SourceLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"armoury","Translated":"军械库","Context":"DuplicatesTab.SourceLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"saddlebag","Translated":"马鞍包","Context":"DuplicatesTab.SourceLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"retainer","Translated":"保持器","Context":"DuplicatesTab.SourceLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Undyed","Translated":"未染色","Context":"DuplicatesTab.DrawDyeSwatch","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Inventory → Armoire (","Translated":"库存 → 衣橱 (","Context":"InventoryTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":")###inventory","Translated":"）","Context":"InventoryTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Nothing in your inventory, armoury, or saddlebag is currently armoire-eligible.","Translated":"目前，您的库存、军械库或马鞍包中的任何内容均不符合军械库资格。","Context":"InventoryTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":")###invsection","Translated":"）","Context":"InventoryTab.DrawSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Retainers → Armoire (","Translated":"固定器 → 衣橱 (","Context":"RetainersTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":")###retainers","Translated":"）","Context":"RetainersTab.get_TabLabel","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"No retainer data yet. Open each retainer's inventory once at the summoning bell to populate this list.","Translated":"尚无保留数据。在召唤铃响时打开每个随从的库存一次以填充此列表。","Context":"RetainersTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Retainer #","Translated":"固定器#","Context":"RetainersTab.DrawRetainerSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":" [active]","Translated":"[积极的]","Context":"RetainersTab.DrawRetainerSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":" eligible, refreshed ","Translated":"符合条件，刷新","Context":"RetainersTab.DrawRetainerSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":")###retainer","Translated":"）","Context":"RetainersTab.DrawRetainerSection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Item #","Translated":"物品 ＃","Context":"ItemNames.Resolve","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set ","Translated":"放","Context":"SetCompression.Analyze","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "ARealmReorganized",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Open A Realm Reorganized.",
+      "Translated": "打开重组的领域。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Tidy up your glam collection! Scans your Glamour Dresser for items that can be moved to the Armoire, detects sets that can be regrouped, and helps you free inventory/retainers/chocobo space.",
+      "Translated": "整理你的迷人收藏！扫描您的魅力梳妆台中是否有可以移动到衣橱的物品，检测可以重新组合的物品，并帮助您释放库存/固定器/陆行鸟空间。",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Press Scan to populate results.",
+      "Translated": "按“扫描”填充结果。",
+      "Context": "MainWindow.DrawBody",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "♥ Support on Ko-fi",
+      "Translated": "♥ 支持 Ko-fi",
+      "Context": "MainWindow.DrawFooter",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "dresser",
+      "Translated": "梳妆台",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " items",
+      "Translated": "项目",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "armoire",
+      "Translated": "衣橱",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " stored",
+      "Translated": "已存储",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": ": not seen yet",
+      "Translated": ": 还没见过",
+      "Context": "MainWindow.DescribeCache",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": ", cached ",
+      "Translated": ", 缓存",
+      "Context": "MainWindow.DescribeCache",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " ago",
+      "Translated": "前",
+      "Context": "MainWindow.DescribeCache",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Open your dresser / bags / armoury / saddlebag / retainer, slots in these colors:",
+      "Translated": "打开你的梳妆台/包/军械库/边箱/固定器，插槽有以下颜色：",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "in your dresser, can move to the armoire",
+      "Translated": "在你的梳妆台上，可以移到衣橱里",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "in bags / armoury / saddlebag / retainer, can move to the armoire",
+      "Translated": "放在包/军械库/边箱/固定器中，可以移动到衣橱",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "would complete a partial dresser set if put into the dresser",
+      "Translated": "如果放入梳妆台，将完成部分梳妆台套装",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your saddlebag wasn't readable when you scanned, which happens in instances and until you open it. Anything in it may be missing from the lists below, so open the saddlebag once and scan again.",
+      "Translated": "当您扫描时，您的马鞍包无法读取，这种情况有时会发生，直到您打开它为止。以下列表中可能缺少其中的任何内容，因此请打开边箱并再次扫描。",
+      "Context": "MainWindow.DrawSaddlebagUnavailableBanner",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Open the Armoire once this session to load stored-item data. Until then, items already in the armoire may show in the lists below.",
+      "Translated": "在此会话中打开衣橱一次以加载存储的物品数据。在此之前，衣橱中已有的物品可能会显示在下面的列表中。",
+      "Context": "MainWindow.DrawCabinetUnavailableBanner",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " HQ",
+      "Translated": "总部",
+      "Context": "MainWindow.DrawItemRow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Scan",
+      "Translated": "扫描",
+      "Context": "MainWindow.DrawScanRow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Dresser → Armoire (",
+      "Translated": "梳妆台→衣柜（",
+      "Context": "ArmoireTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": ")###armoire",
+      "Translated": "）",
+      "Context": "ArmoireTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Nothing in your dresser is currently armoire-eligible.",
+      "Translated": "您的梳妆台中目前没有任何东西符合衣橱条件。",
+      "Context": "ArmoireTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Sets (",
+      "Translated": "套 （",
+      "Context": "CompressTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": ")###compress",
+      "Translated": "）",
+      "Context": "CompressTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "No detected sets. Add gear to your dresser and re-scan.",
+      "Translated": "没有检测到集合。将装备添加到您的梳妆台并重新扫描。",
+      "Context": "CompressTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Complete sets",
+      "Translated": "成套",
+      "Context": "CompressTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "completesets",
+      "Translated": "成套",
+      "Context": "CompressTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Incomplete sets",
+      "Translated": "不完整集",
+      "Context": "CompressTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "incompletesets",
+      "Translated": "不完全集",
+      "Context": "CompressTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": " pieces",
+      "Translated": "件",
+      "Context": "CompressTab.DrawSetSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Duplicates (",
+      "Translated": "重复项（",
+      "Context": "DuplicatesTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": ")###duplicates",
+      "Translated": "）",
+      "Context": "DuplicatesTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "No duplicates detected.",
+      "Translated": "未检测到重复项。",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Already in the armoire",
+      "Translated": "已经在衣橱里了",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "armoiredupes",
+      "Translated": "衣柜骗子",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "The armoire keeps one forever; these copies just take up space. Dyed bag or retainer copies may be worth keeping.",
+      "Translated": "衣橱里永远留着一个；这些副本只是占用空间。染色的袋子或保留副本可能值得保留。",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Multiple copies",
+      "Translated": "多份",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "multidupes",
+      "Translated": "多重重复",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "You own these more than once, pick which to keep.",
+      "Translated": "您不止一次拥有这些，请选择保留哪些。",
+      "Context": "DuplicatesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "retainer #",
+      "Translated": "保持器#",
+      "Context": "DuplicatesTab.DescribeLocations",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "bags",
+      "Translated": "包",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "armoury",
+      "Translated": "军械库",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "saddlebag",
+      "Translated": "马鞍包",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "retainer",
+      "Translated": "保持器",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Undyed",
+      "Translated": "未染色",
+      "Context": "DuplicatesTab.DrawDyeSwatch",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Inventory → Armoire (",
+      "Translated": "库存 → 衣橱 (",
+      "Context": "InventoryTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": ")###inventory",
+      "Translated": "）",
+      "Context": "InventoryTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Nothing in your inventory, armoury, or saddlebag is currently armoire-eligible.",
+      "Translated": "目前，您的库存、军械库或马鞍包中的任何内容均不符合军械库资格。",
+      "Context": "InventoryTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": ")###invsection",
+      "Translated": "）",
+      "Context": "InventoryTab.DrawSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Retainers → Armoire (",
+      "Translated": "固定器 → 衣橱 (",
+      "Context": "RetainersTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": ")###retainers",
+      "Translated": "）",
+      "Context": "RetainersTab.get_TabLabel",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "No retainer data yet. Open each retainer's inventory once at the summoning bell to populate this list.",
+      "Translated": "尚无保留数据。在召唤铃响时打开每个随从的库存一次以填充此列表。",
+      "Context": "RetainersTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Retainer #",
+      "Translated": "固定器#",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": " [active]",
+      "Translated": "[积极的]",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": " eligible, refreshed ",
+      "Translated": "符合条件，刷新",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": ")###retainer",
+      "Translated": "）",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Item #",
+      "Translated": "物品 ＃",
+      "Context": "ItemNames.Resolve",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set ",
+      "Translated": "放",
+      "Context": "SetCompression.Analyze",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-28T00:18:56",
+  "imported": {
+    "archive": "uit-direct-2026-10-28T00-18-41-202Z-63a5020e-2026-10-28T001856.json",
+    "accepted": 58,
+    "filled": 58,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 58 条 `ARealmReorganized` 的界面文字译文，已收为**独立译文包** `uit-packs/ARealmReorganized@user-5a5dc6.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 58 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
