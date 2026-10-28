@@ -7,7 +7,7 @@ name: update-plugin-stats
 
 on:
   schedule:
-    # 每 6 小时一次，错开整点的下载数（:30）与库计数（:30）任务
+    # 每 6 小时一次，与下载数（:17/:47）及库计数（:30）错开
     - cron: '15 */6 * * *'
   workflow_dispatch:
 

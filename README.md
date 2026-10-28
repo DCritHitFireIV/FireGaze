@@ -7,7 +7,7 @@
 
 <p>
   <a href="https://github.com/DCritHitFireIV/FireGaze/releases"><img alt="最新版本" src="https://img.shields.io/github/v/release/DCritHitFireIV/FireGaze?display_name=tag&label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC&style=for-the-badge" /></a>
-  <a href="https://github.com/DCritHitFireIV/FireGaze/releases"><img alt="下载" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FDCritHitFireIV%2FFireGaze%2Fmain%2FResources%2Fdownload-count.json&style=for-the-badge" /></a>
+  <a href="https://github.com/DCritHitFireIV/FireGaze/releases"><img alt="下载" title="GitHub Release 附件累计下载次数；每半小时同步，可能有排队和缓存延迟" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FDCritHitFireIV%2FFireGaze%2Fmain%2FResources%2Fdownload-count.json&style=for-the-badge" /></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/DCritHitFireIV/FireGaze?label=License&style=for-the-badge" /></a>
 </p>
 

@@ -7,7 +7,7 @@ name: update-library-counts
 
 on:
   schedule:
-    # 每 6 小时一次，错开整点的插件下载数更新（download-count.yml）
+    # 每 6 小时一次，与插件下载数更新的 :17/:47 错开（download-count.yml）
     - cron: '30 */6 * * *'
   workflow_dispatch:
 

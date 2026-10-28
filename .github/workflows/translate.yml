@@ -1,7 +1,7 @@
 name: update-translations
 
 # 节奏（三处对齐，可单独改）：
-#   · 下载数：download-count.yml 每 6 小时回写一次下载数（数据统计，与译文无关）
+#   · 下载数：download-count.yml 每半小时及发布版本时回写下载数（数据统计，与译文无关）
 #   · 全量译文：周一与周五 08:00（北京时间）跑本工作流，只翻译新增或原文改过的条目
 #     （准点由 scripts/relay 的中继 Worker Cron 发 repository_dispatch 触发；
 #      GitHub 自带 schedule 不可靠——实测延迟 5–7 小时、偶发整次丢掉，只留作兜底）
