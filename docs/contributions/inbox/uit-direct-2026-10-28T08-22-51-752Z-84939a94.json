@@ -1,1 +1,1262 @@
-{"type":"uit-contribution","plugin":"NotificationMaster","kinds":["free"],"entries":[{"Original":"Stop","Translated":"停止","Context":"AudioPlayer.BeginThread","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Error during playing audio file:\n","Translated":"播放音频文件时出错：","Context":"BeginThread","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"Failed to open file dialog","Translated":"无法打开文件对话框","Context":"AudioSelector.SelectFile","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"Error: ","Translated":"错误：","Context":"SelectFile","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"GET","Translated":"得到","Context":"ConfigGui..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"POST","Translated":"邮政","Context":"ConfigGui..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"JSON POST","Translated":"JSON 发布","Context":"ConfigGui..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"NotificationMasterPauseWarning","Translated":"通知大师暂停警告","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"NotificationMaster configuration","Translated":"通知主配置","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Awaiting file selection...","Translated":"正在等待文件选择...","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"GP replenish","Translated":"全科医生补充","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Cutscene ending","Translated":"过场动画结局","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Chat message","Translated":"聊天消息","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Duty pop","Translated":"值勤流行","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Connection error","Translated":"连接错误","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Approaching map flag","Translated":"接近地图标志","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Mob pulled","Translated":"暴徒拉了","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"PartyFinder","Translated":"派对查找器","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Fish Notify","Translated":"鱼通知","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Configuration saved","Translated":"配置已保存","Context":"ConfigGui.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Success"},{"Original":"Unfortunately bringing FFXIV to foreground isn't very reliable function.\nIf it fails to work for you - not much can be done.","Translated":"不幸的是，将 FFXIV 带到前台并不是非常可靠的功能。\n如果它对你不起作用 - 无能为力。","Context":"ConfigGui.ForegroundWarning","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Perform following HTTP requests:","Translated":"执行以下 HTTP 请求：","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"You may use following placeholders:\n","Translated":"您可以使用以下占位符：","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Hold CTRL + click to delete","Translated":"按住 CTRL 键并单击即可删除","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"URL:","Translated":"网址：","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Content:","Translated":"内容：","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"AAAAAAAA","Translated":"啊啊啊啊","Context":"ConfigGui.DrawHttpMaster","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Enable","Translated":"使能够","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Debug info: ","Translated":"调试信息：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Flag state: ","Translated":"旗州：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Flag territory: ","Translated":"旗帜领地：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Flag X: ","Translated":"标志X：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Flag Y: ","Translated":"标志 Y：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Player X: ","Translated":"玩家X：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Player Y: ","Translated":"玩家Y：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Territory: ","Translated":"领土：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Distance: ","Translated":"距离：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When getting close to map flag if FFXIV is running in background:","Translated":"如果 FFXIV 在后台运行，接近地图标志时：","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Show tray notification","Translated":"显示托盘通知","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Flash taskbar icon","Translated":"Flash 任务栏图标","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Bring FFXIV to foreground","Translated":"将 FFXIV 置于前台","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Execute actions even if game is active","Translated":"即使游戏处于活动状态也执行操作","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Distance to marker","Translated":"到标记的距离","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Note: this is in-game coordinates distance, not map coordinates distance.","Translated":"注意：这是游戏中的坐标距离，而不是地图坐标距离。","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"You are currently ","Translated":"您目前是","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" yalms away from currently set marker.","Translated":"远离当前设置的标记。","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Set flag on your map to see your current distance to it","Translated":"在地图上设置标记以查看您当前到它的距离","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Also trigger on crossing X/Y flag axis before reaching set distance","Translated":"在到达设定距离之前穿过 X/Y 标志轴时也会触发","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Axis cross tolerance","Translated":"轴交叉公差","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"None available","Translated":"无可用","Context":"ConfigGui.DrawMapFlagConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When duty pops, do the following if FFXIV is running in background:","Translated":"当职责弹出时，如果 FFXIV 在后台运行，请执行以下操作：","Context":"ConfigGui.DrawCfPopConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Repeat in 30 seconds if invitation still not accepted","Translated":"如果邀请仍未被接受，请在 30 秒后重复","Context":"ConfigGui.DrawCfPopConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Only notify when 15 seconds are left","Translated":"仅在还剩 15 秒时通知","Context":"ConfigGui.DrawCfPopConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"$N - name of the duty\n$T - time left to accept the duty","Translated":"$N - 职责名称\n$T - 接受任务的剩余时间","Context":"ConfigGui.DrawCfPopConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When chat message matching any rule received, if FFXIV is running in background:","Translated":"当聊天消息匹配收到的任何规则时，如果 FFXIV 在后台运行：","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"$S - sender\n$M - message\n$T - chat type","Translated":"$S - 发件人\n$M - 消息\n$T - 聊天类型","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Triggers","Translated":"触发器","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Type","Translated":"类型","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sender","Translated":"发件人","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Message","Translated":"信息","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Search mode","Translated":"搜索模式","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Del","Translated":"的","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Any","Translated":"任何","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Add custom type","Translated":"添加自定义类型","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Exceptions:","Translated":"例外情况：","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Message log","Translated":"消息日志","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Pause log","Translated":"暂停日志","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Error","Translated":"错误","Context":"ConfigGui.DrawChatMessageGui","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When cutscene ends do the following if FFXIV is running in background:","Translated":"如果 FFXIV 在后台运行，过场动画结束时请执行以下操作：","Context":"ConfigGui.DrawCutsceneConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Zone locking:","Translated":"区域锁定：","Context":"ConfigGui.DrawCutsceneConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Only trigger in MSQ roulette dungeons","Translated":"仅在 MSQ 轮盘地下城中触发","Context":"ConfigGui.DrawCutsceneConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When a fish bites, do the following:","Translated":"当鱼咬钩时，请执行以下操作：","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Show chat message","Translated":"显示聊天消息","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Bite type settings:","Translated":"咬合类型设置：","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Light bite (!)","Translated":"轻咬（！）","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Medium bite (!!)","Translated":"中等咬合（！！）","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Heavy bite (!!!)","Translated":"重咬（！！！）","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"$B - bite type (light/medium/heavy)","Translated":"$B - 咬合类型（轻/中/重）","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Reset to Defaults","Translated":"重置为默认值","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"(Restores default sounds and settings)","Translated":"（恢复默认声音和设置）","Context":"ConfigGui.DrawFishBiteConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Nodes around: ","Translated":"周围节点：","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Potion cooldown: ","Translated":"药水冷却时间：","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Notify upon reaching this amount of GP","Translated":"达到此 GP 数量后通知","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Use command /gp <number> to quickly change this amount","Translated":"使用命令 /gp <number> 快速更改此数量","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Potion capacity","Translated":"药水容量","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Tolerance","Translated":"宽容","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragInt"},{"Original":"Suppress notification if no potential gathering places are around","Translated":"如果周围没有潜在的聚集地点，则禁止通知","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"If your GP is lower than targeted by not more than this amount, notification will not be sent upon regaining it.","Translated":"如果您的 GP 低于目标值不超过此金额，则恢复后将不会发送通知。","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Notification options:","Translated":"通知选项：","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"$G - available GP","Translated":"$G - 可用的全科医生","Context":"ConfigGui.DrawGpNotify","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When server connection error occurs, do the following","Translated":"当服务器连接错误时，执行以下操作","Context":"ConfigGui.DrawLoginErrorConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" if FFXIV is running in background","Translated":"如果 FFXIV 在后台运行","Context":"ConfigGui.DrawLoginErrorConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"None","Translated":"没有任何","Context":"ConfigGui.DrawLoginErrorConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Please note that is required that you CAN SEE the mob for plugin to detect it's pull.\nIf your area is extremely congested, A ranks may disappear.\nS/SS should always be visible, however. Solution to this problem will come at a later date.","Translated":"请注意，您必须能够看到插件的生物才能检测到它的拉力。\n如果您所在的区域极其拥挤，A 级可能会消失。\n然而，S/SS 应始终可见。这个问题的解决方案将在稍后出现。","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"When mob from list in specified zones is pulled, do the following","Translated":"当指定区域中的列表中的生物被拉出时，执行以下操作","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Print warning in chat","Translated":"在聊天中打印警告","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Display an in-game toast","Translated":"显示游戏内的吐司","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"$M - mob name","Translated":"$M - 生物名称","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"List of watched mobs (currently contains ","Translated":"监视的生物列表（当前包含","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":")###MPListmobs","Translated":"）","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Allow deleting entries","Translated":"允许删除条目","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Export mob names to clipboard","Translated":"将生物名称导出到剪贴板","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add mobs (one per line; case sensitive; extra spaces will be trimmed; duplicates will be removed)","Translated":"添加小怪（每行一个；区分大小写；多余的空格将被修剪；重复的将被删除）","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Add mobs","Translated":"添加小怪","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"List of territories where module will be enabled, currently has ","Translated":"当前将启用模块的地区列表","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":" entries###MPListOfTerr","Translated":"条目","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Filter...","Translated":"筛选...","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Only world zones","Translated":"仅限世界区域","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Only selected","Translated":"仅选定","Context":"ConfigGui.DrawMobPulledConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":" (world zone)","Translated":"（世界区）","Context":"ConfigGui.MPPrintZone","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Only when the party fills up","Translated":"仅当聚会已满时","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Notify if the party is delisted","Translated":"通知该方是否被除名","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When the party fills or is delisted","Translated":"当该方填补或除名时","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When the party fills","Translated":"当聚会填满时","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When someone joins or leaves the party, or the party is delisted","Translated":"当有人加入或离开队伍，或队伍被除名时","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When someone joins or leaves the party","Translated":"当有人加入或离开队伍时","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"do the following if FFXIV is running in background: ","Translated":"如果 FFXIV 在后台运行，请执行以下操作：","Context":"ConfigGui.DrawPartyFinderConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Play sound","Translated":"播放声音","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Path to file: ","Translated":"文件路径：","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Browse...","Translated":"浏览...","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Test","Translated":"测试","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Stop playing once game is focused","Translated":"一旦游戏集中注意力就停止玩","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Repeat","Translated":"重复","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"|  Volume: ","Translated":"|  体积：","Context":"ConfigGui.DrawSoundSettings","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"[NotificationMaster] Error occurred while sending an HTTP request: ","Translated":"[NotificationMaster] 发送 HTTP 请求时发生错误：","Context":"HttpMaster.Request","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Plugin paused until restart","Translated":"插件暂停直至重新启动","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Success"},{"Original":"Plugin paused for ","Translated":"插件暂停时间","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ Notify.Success"},{"Original":" minutes","Translated":"分钟","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ Notify.Success"},{"Original":"Please enter amount of time in minutes","Translated":"请输入时间（以分钟为单位）","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"Plugin operation resumed","Translated":"插件操作已恢复","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Success"},{"Original":"Invanid command","Translated":"无敌命令","Context":"NotificationMaster.OnCommand","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"You have installed NotificationMaster plugin. By default, it has no modules enabled. \nA settings window has been opened: please configure the plugin.","Translated":"您已经安装了NotificationMaster插件。默认情况下，它没有启用任何模块。 \n设置窗口已打开：请配置插件。","Context":"NotificationMaster..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Warning"},{"Original":"open/close configuration\n/pnotify shutup|s [time in minutes] - pause plugin for specified amount of minutes or until restart if time is not specified\n/pnotify resume|r - resume plugin operation","Translated":"打开/关闭配置\n/pnotify shutdown|s [以分钟为单位的时间] - 暂停插件指定的分钟数，或者如果未指定时间则直到重新启动\n/pnotifyresume|r - 恢复插件操作","Context":"NotificationMaster..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Exact","Translated":"精确的","Context":"ChatMessageElement..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Case insensitive","Translated":"不区分大小写","Context":"ChatMessageElement..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Regexp","Translated":"正则表达式","Context":"ChatMessageElement..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"light","Translated":"光","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"medium","Translated":"中等的","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"heavy","Translated":"重的","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"unknown(","Translated":"未知（","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"[FishNotify] You hook a fish with a ","Translated":"[FishNotify] 你用","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" bite.","Translated":"咬。","Context":"FishBite.OnBite","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Fish Notify settings reset to defaults","Translated":"鱼类通知设置重置为默认值","Context":"FishBite.ResetToDefaults","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Success"},{"Original":"Failed to reset settings","Translated":"重置设置失败","Context":"FishBite.ResetToDefaults","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"open config\n/gp <number> → set trigger GP amount","Translated":"打开配置\n/gp <数字> → 设置触发GP数量","Context":"GpNotify..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"GP can't be negative","Translated":"GP不能为负数","Context":"GpNotify.OnCommand","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"Trigger GP amount set to ","Translated":"触发 GP 金额设置为","Context":"GpNotify.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ Notify.Success"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "NotificationMaster",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "AudioPlayer.BeginThread",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Error during playing audio file:\n",
+      "Translated": "播放音频文件时出错：",
+      "Context": "BeginThread",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "Failed to open file dialog",
+      "Translated": "无法打开文件对话框",
+      "Context": "AudioSelector.SelectFile",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "Error: ",
+      "Translated": "错误：",
+      "Context": "SelectFile",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "GET",
+      "Translated": "得到",
+      "Context": "ConfigGui..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "POST",
+      "Translated": "邮政",
+      "Context": "ConfigGui..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "JSON POST",
+      "Translated": "JSON 发布",
+      "Context": "ConfigGui..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "NotificationMasterPauseWarning",
+      "Translated": "通知大师暂停警告",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "NotificationMaster configuration",
+      "Translated": "通知主配置",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Awaiting file selection...",
+      "Translated": "正在等待文件选择...",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "GP replenish",
+      "Translated": "全科医生补充",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Cutscene ending",
+      "Translated": "过场动画结局",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Chat message",
+      "Translated": "聊天消息",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Duty pop",
+      "Translated": "值勤流行",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Connection error",
+      "Translated": "连接错误",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Approaching map flag",
+      "Translated": "接近地图标志",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Mob pulled",
+      "Translated": "暴徒拉了",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "PartyFinder",
+      "Translated": "派对查找器",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Fish Notify",
+      "Translated": "鱼通知",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Configuration saved",
+      "Translated": "配置已保存",
+      "Context": "ConfigGui.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": "Unfortunately bringing FFXIV to foreground isn't very reliable function.\nIf it fails to work for you - not much can be done.",
+      "Translated": "不幸的是，将 FFXIV 带到前台并不是非常可靠的功能。\n如果它对你不起作用 - 无能为力。",
+      "Context": "ConfigGui.ForegroundWarning",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Perform following HTTP requests:",
+      "Translated": "执行以下 HTTP 请求：",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "You may use following placeholders:\n",
+      "Translated": "您可以使用以下占位符：",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Hold CTRL + click to delete",
+      "Translated": "按住 CTRL 键并单击即可删除",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "URL:",
+      "Translated": "网址：",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Content:",
+      "Translated": "内容：",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "AAAAAAAA",
+      "Translated": "啊啊啊啊",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "使能够",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Debug info: ",
+      "Translated": "调试信息：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Flag state: ",
+      "Translated": "旗州：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Flag territory: ",
+      "Translated": "旗帜领地：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Flag X: ",
+      "Translated": "标志X：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Flag Y: ",
+      "Translated": "标志 Y：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Player X: ",
+      "Translated": "玩家X：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Player Y: ",
+      "Translated": "玩家Y：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Territory: ",
+      "Translated": "领土：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Distance: ",
+      "Translated": "距离：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When getting close to map flag if FFXIV is running in background:",
+      "Translated": "如果 FFXIV 在后台运行，接近地图标志时：",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Show tray notification",
+      "Translated": "显示托盘通知",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Flash taskbar icon",
+      "Translated": "Flash 任务栏图标",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Bring FFXIV to foreground",
+      "Translated": "将 FFXIV 置于前台",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Execute actions even if game is active",
+      "Translated": "即使游戏处于活动状态也执行操作",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Distance to marker",
+      "Translated": "到标记的距离",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Note: this is in-game coordinates distance, not map coordinates distance.",
+      "Translated": "注意：这是游戏中的坐标距离，而不是地图坐标距离。",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "You are currently ",
+      "Translated": "您目前是",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " yalms away from currently set marker.",
+      "Translated": "远离当前设置的标记。",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Set flag on your map to see your current distance to it",
+      "Translated": "在地图上设置标记以查看您当前到它的距离",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Also trigger on crossing X/Y flag axis before reaching set distance",
+      "Translated": "在到达设定距离之前穿过 X/Y 标志轴时也会触发",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Axis cross tolerance",
+      "Translated": "轴交叉公差",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "None available",
+      "Translated": "无可用",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When duty pops, do the following if FFXIV is running in background:",
+      "Translated": "当职责弹出时，如果 FFXIV 在后台运行，请执行以下操作：",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Repeat in 30 seconds if invitation still not accepted",
+      "Translated": "如果邀请仍未被接受，请在 30 秒后重复",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Only notify when 15 seconds are left",
+      "Translated": "仅在还剩 15 秒时通知",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "$N - name of the duty\n$T - time left to accept the duty",
+      "Translated": "$N - 职责名称\n$T - 接受任务的剩余时间",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When chat message matching any rule received, if FFXIV is running in background:",
+      "Translated": "当聊天消息匹配收到的任何规则时，如果 FFXIV 在后台运行：",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "$S - sender\n$M - message\n$T - chat type",
+      "Translated": "$S - 发件人\n$M - 消息\n$T - 聊天类型",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Triggers",
+      "Translated": "触发器",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Type",
+      "Translated": "类型",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sender",
+      "Translated": "发件人",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Message",
+      "Translated": "信息",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Search mode",
+      "Translated": "搜索模式",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Del",
+      "Translated": "的",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Any",
+      "Translated": "任何",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Add custom type",
+      "Translated": "添加自定义类型",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Exceptions:",
+      "Translated": "例外情况：",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Message log",
+      "Translated": "消息日志",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Pause log",
+      "Translated": "暂停日志",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Error",
+      "Translated": "错误",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When cutscene ends do the following if FFXIV is running in background:",
+      "Translated": "如果 FFXIV 在后台运行，过场动画结束时请执行以下操作：",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Zone locking:",
+      "Translated": "区域锁定：",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Only trigger in MSQ roulette dungeons",
+      "Translated": "仅在 MSQ 轮盘地下城中触发",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When a fish bites, do the following:",
+      "Translated": "当鱼咬钩时，请执行以下操作：",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Show chat message",
+      "Translated": "显示聊天消息",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Bite type settings:",
+      "Translated": "咬合类型设置：",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Light bite (!)",
+      "Translated": "轻咬（！）",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Medium bite (!!)",
+      "Translated": "中等咬合（！！）",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Heavy bite (!!!)",
+      "Translated": "重咬（！！！）",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "$B - bite type (light/medium/heavy)",
+      "Translated": "$B - 咬合类型（轻/中/重）",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Reset to Defaults",
+      "Translated": "重置为默认值",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "(Restores default sounds and settings)",
+      "Translated": "（恢复默认声音和设置）",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Nodes around: ",
+      "Translated": "周围节点：",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Potion cooldown: ",
+      "Translated": "药水冷却时间：",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Notify upon reaching this amount of GP",
+      "Translated": "达到此 GP 数量后通知",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Use command /gp <number> to quickly change this amount",
+      "Translated": "使用命令 /gp <number> 快速更改此数量",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Potion capacity",
+      "Translated": "药水容量",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Tolerance",
+      "Translated": "宽容",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt"
+    },
+    {
+      "Original": "Suppress notification if no potential gathering places are around",
+      "Translated": "如果周围没有潜在的聚集地点，则禁止通知",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "If your GP is lower than targeted by not more than this amount, notification will not be sent upon regaining it.",
+      "Translated": "如果您的 GP 低于目标值不超过此金额，则恢复后将不会发送通知。",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Notification options:",
+      "Translated": "通知选项：",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "$G - available GP",
+      "Translated": "$G - 可用的全科医生",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When server connection error occurs, do the following",
+      "Translated": "当服务器连接错误时，执行以下操作",
+      "Context": "ConfigGui.DrawLoginErrorConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " if FFXIV is running in background",
+      "Translated": "如果 FFXIV 在后台运行",
+      "Context": "ConfigGui.DrawLoginErrorConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "None",
+      "Translated": "没有任何",
+      "Context": "ConfigGui.DrawLoginErrorConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Please note that is required that you CAN SEE the mob for plugin to detect it's pull.\nIf your area is extremely congested, A ranks may disappear.\nS/SS should always be visible, however. Solution to this problem will come at a later date.",
+      "Translated": "请注意，您必须能够看到插件的生物才能检测到它的拉力。\n如果您所在的区域极其拥挤，A 级可能会消失。\n然而，S/SS 应始终可见。这个问题的解决方案将在稍后出现。",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "When mob from list in specified zones is pulled, do the following",
+      "Translated": "当指定区域中的列表中的生物被拉出时，执行以下操作",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Print warning in chat",
+      "Translated": "在聊天中打印警告",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Display an in-game toast",
+      "Translated": "显示游戏内的吐司",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "$M - mob name",
+      "Translated": "$M - 生物名称",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "List of watched mobs (currently contains ",
+      "Translated": "监视的生物列表（当前包含",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": ")###MPListmobs",
+      "Translated": "）",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Allow deleting entries",
+      "Translated": "允许删除条目",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Export mob names to clipboard",
+      "Translated": "将生物名称导出到剪贴板",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add mobs (one per line; case sensitive; extra spaces will be trimmed; duplicates will be removed)",
+      "Translated": "添加小怪（每行一个；区分大小写；多余的空格将被修剪；重复的将被删除）",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Add mobs",
+      "Translated": "添加小怪",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "List of territories where module will be enabled, currently has ",
+      "Translated": "当前将启用模块的地区列表",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": " entries###MPListOfTerr",
+      "Translated": "条目",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Only world zones",
+      "Translated": "仅限世界区域",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Only selected",
+      "Translated": "仅选定",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": " (world zone)",
+      "Translated": "（世界区）",
+      "Context": "ConfigGui.MPPrintZone",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Only when the party fills up",
+      "Translated": "仅当聚会已满时",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Notify if the party is delisted",
+      "Translated": "通知该方是否被除名",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When the party fills or is delisted",
+      "Translated": "当该方填补或除名时",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When the party fills",
+      "Translated": "当聚会填满时",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When someone joins or leaves the party, or the party is delisted",
+      "Translated": "当有人加入或离开队伍，或队伍被除名时",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When someone joins or leaves the party",
+      "Translated": "当有人加入或离开队伍时",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "do the following if FFXIV is running in background: ",
+      "Translated": "如果 FFXIV 在后台运行，请执行以下操作：",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Play sound",
+      "Translated": "播放声音",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Path to file: ",
+      "Translated": "文件路径：",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Browse...",
+      "Translated": "浏览...",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Test",
+      "Translated": "测试",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Stop playing once game is focused",
+      "Translated": "一旦游戏集中注意力就停止玩",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Repeat",
+      "Translated": "重复",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "|  Volume: ",
+      "Translated": "|  体积：",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "[NotificationMaster] Error occurred while sending an HTTP request: ",
+      "Translated": "[NotificationMaster] 发送 HTTP 请求时发生错误：",
+      "Context": "HttpMaster.Request",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Plugin paused until restart",
+      "Translated": "插件暂停直至重新启动",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": "Plugin paused for ",
+      "Translated": "插件暂停时间",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": " minutes",
+      "Translated": "分钟",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": "Please enter amount of time in minutes",
+      "Translated": "请输入时间（以分钟为单位）",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "Plugin operation resumed",
+      "Translated": "插件操作已恢复",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": "Invanid command",
+      "Translated": "无敌命令",
+      "Context": "NotificationMaster.OnCommand",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "You have installed NotificationMaster plugin. By default, it has no modules enabled. \nA settings window has been opened: please configure the plugin.",
+      "Translated": "您已经安装了NotificationMaster插件。默认情况下，它没有启用任何模块。 \n设置窗口已打开：请配置插件。",
+      "Context": "NotificationMaster..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning"
+    },
+    {
+      "Original": "open/close configuration\n/pnotify shutup|s [time in minutes] - pause plugin for specified amount of minutes or until restart if time is not specified\n/pnotify resume|r - resume plugin operation",
+      "Translated": "打开/关闭配置\n/pnotify shutdown|s [以分钟为单位的时间] - 暂停插件指定的分钟数，或者如果未指定时间则直到重新启动\n/pnotifyresume|r - 恢复插件操作",
+      "Context": "NotificationMaster..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Exact",
+      "Translated": "精确的",
+      "Context": "ChatMessageElement..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Case insensitive",
+      "Translated": "不区分大小写",
+      "Context": "ChatMessageElement..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Regexp",
+      "Translated": "正则表达式",
+      "Context": "ChatMessageElement..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "light",
+      "Translated": "光",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "medium",
+      "Translated": "中等的",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "heavy",
+      "Translated": "重的",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "unknown(",
+      "Translated": "未知（",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "[FishNotify] You hook a fish with a ",
+      "Translated": "[FishNotify] 你用",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " bite.",
+      "Translated": "咬。",
+      "Context": "FishBite.OnBite",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Fish Notify settings reset to defaults",
+      "Translated": "鱼类通知设置重置为默认值",
+      "Context": "FishBite.ResetToDefaults",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    },
+    {
+      "Original": "Failed to reset settings",
+      "Translated": "重置设置失败",
+      "Context": "FishBite.ResetToDefaults",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "open config\n/gp <number> → set trigger GP amount",
+      "Translated": "打开配置\n/gp <数字> → 设置触发GP数量",
+      "Context": "GpNotify..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "GP can't be negative",
+      "Translated": "GP不能为负数",
+      "Context": "GpNotify.OnCommand",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "Trigger GP amount set to ",
+      "Translated": "触发 GP 金额设置为",
+      "Context": "GpNotify.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-28T08:23:07",
+  "imported": {
+    "archive": "uit-direct-2026-10-28T08-22-51-752Z-84939a94-2026-10-28T082307.json",
+    "accepted": 147,
+    "filled": 147,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 147 条 `NotificationMaster` 的界面文字译文，已收为**独立译文包** `uit-packs/NotificationMaster@user-16e716.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 147 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}

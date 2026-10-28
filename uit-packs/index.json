@@ -32,6 +32,7 @@
       "entries": 0,
       "resources": 0,
       "attributes": 0,
+      "downloads": 0,
       "packs": [
         {
           "id": "user-5a5dc6",
@@ -42,11 +43,11 @@
           "resources": 0,
           "attributes": 0,
           "updatedAt": "2026-10-28",
+          "downloads": 0,
+          "likes": 0,
           "kinds": [
             "free"
-          ],
-          "downloads": 0,
-          "likes": 0
+          ]
         }
       ]
     },
@@ -2820,6 +2821,29 @@
         }
       ]
     },
+    "IINACT": {
+      "file": "IINACT.json",
+      "updatedAt": "2026-10-28",
+      "entries": 43,
+      "resources": 0,
+      "attributes": 0,
+      "downloads": 0,
+      "likes": 0,
+      "packs": [
+        {
+          "id": "library",
+          "file": "IINACT.json",
+          "label": "基础包",
+          "source": "library",
+          "entries": 43,
+          "resources": 0,
+          "attributes": 0,
+          "updatedAt": "2026-10-28",
+          "downloads": 0,
+          "likes": 0
+        }
+      ]
+    },
     "Intoner": {
       "file": "Intoner.json",
       "updatedAt": "2026-10-25",
@@ -3504,6 +3528,28 @@
           "updatedAt": "2026-10-13",
           "downloads": 0,
           "likes": 0,
+          "kinds": [
+            "free"
+          ]
+        }
+      ]
+    },
+    "NotificationMaster": {
+      "file": "NotificationMaster.json",
+      "updatedAt": "2026-10-28",
+      "entries": 0,
+      "resources": 0,
+      "attributes": 0,
+      "packs": [
+        {
+          "id": "user-16e716",
+          "file": "NotificationMaster@user-16e716.json",
+          "label": "玩家包 · 16e716",
+          "source": "user",
+          "entries": 147,
+          "resources": 0,
+          "attributes": 0,
+          "updatedAt": "2026-10-28",
           "kinds": [
             "free"
           ]
@@ -4382,6 +4428,32 @@
         }
       ]
     },
+    "SkipCutscene": {
+      "file": "SkipCutscene.json",
+      "updatedAt": "2026-10-28",
+      "entries": 3,
+      "resources": 0,
+      "attributes": 0,
+      "downloads": 0,
+      "likes": 0,
+      "packs": [
+        {
+          "id": "library",
+          "file": "SkipCutscene.json",
+          "label": "SkipCutscene 静态消费者复核候选",
+          "source": "ai",
+          "entries": 3,
+          "resources": 0,
+          "attributes": 0,
+          "updatedAt": "2026-10-28",
+          "downloads": 0,
+          "likes": 0,
+          "kinds": [
+            "free"
+          ]
+        }
+      ]
+    },
     "SomethingNeedDoing": {
       "file": "SomethingNeedDoing.json",
       "updatedAt": "2026-10-13",
@@ -4409,7 +4481,7 @@
     },
     "SonarPlugin": {
       "file": "SonarPlugin.json",
-      "updatedAt": "2026-10-28",
+      "updatedAt": "2026-10-25",
       "entries": 0,
       "resources": 0,
       "attributes": 0,
@@ -5366,55 +5438,6 @@
           "likes": 0,
           "kinds": [
             "llm"
-          ]
-        }
-      ]
-    },
-    "IINACT": {
-      "file": "IINACT.json",
-      "updatedAt": "2026-10-28",
-      "entries": 43,
-      "resources": 0,
-      "attributes": 0,
-      "downloads": 0,
-      "likes": 0,
-      "packs": [
-        {
-          "id": "library",
-          "file": "IINACT.json",
-          "label": "基础包",
-          "source": "library",
-          "entries": 43,
-          "resources": 0,
-          "attributes": 0,
-          "updatedAt": "2026-10-28",
-          "downloads": 0,
-          "likes": 0
-        }
-      ]
-    },
-    "SkipCutscene": {
-      "file": "SkipCutscene.json",
-      "updatedAt": "2026-10-28",
-      "entries": 3,
-      "resources": 0,
-      "attributes": 0,
-      "downloads": 0,
-      "likes": 0,
-      "packs": [
-        {
-          "id": "library",
-          "file": "SkipCutscene.json",
-          "label": "SkipCutscene 静态消费者复核候选",
-          "source": "ai",
-          "entries": 3,
-          "resources": 0,
-          "attributes": 0,
-          "updatedAt": "2026-10-28",
-          "downloads": 0,
-          "likes": 0,
-          "kinds": [
-            "free"
           ]
         }
       ]
