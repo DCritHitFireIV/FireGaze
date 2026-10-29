@@ -1,0 +1,2466 @@
+{
+  "issue": "direct-2026-10-29T14-09-53-657Z-e5f3e358",
+  "receivedAt": "2026-10-29 14:10:10",
+  "author": "匿名直传",
+  "plugin": "Gardener",
+  "fingerprint": "0c9959717b73c018",
+  "packFile": "Gardener@user-0c9959.json",
+  "accepted": 346,
+  "filled": 346,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Gardener",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Use the XIV Hub theme",
+        "Translated": "使用 XIV Hub 主题",
+        "Context": "HubThemeEditor.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Off leaves every window in your own Dalamud style.\nThe setting is shared, so it applies to every XIV Hub plugin at once.",
+        "Translated": "关闭后所有窗口使用你自己的 Dalamud 样式。\n该设置为共享，会同时应用于所有 XIV Hub 插件。",
+        "Context": "HubThemeEditor.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Reset all",
+        "Translated": "全部重置",
+        "Context": "HubThemeEditor.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": " override(s) · ",
+        "Translated": "项覆盖 ·",
+        "Context": "HubThemeEditor.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "e.g. http://127.0.0.1:9999/log",
+        "Translated": "例如 http://127.0.0.1:9999/log",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Gardener###GardenerMain",
+        "Translated": "园艺工",
+        "Context": "MainWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "removecrop",
+        "Translated": "移除裁剪",
+        "Context": "MainWindow.DrawRemoveCropButton",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "[Gardener] clipboard copy failed; dump is still saved at ",
+        "Translated": "[Gardener] 剪贴板复制失败；转储仍已保存至",
+        "Context": "DebugDump.DrainClipboard",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "(file write also failed, see /xllog)",
+        "Translated": "（文件写入也失败，见 /xllog）",
+        "Context": "DebugDump.DrainClipboard",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "dump FILE WRITE FAILED (see /xllog)",
+        "Translated": "转储文件写入失败（见 /xllog）",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "dump written to ",
+        "Translated": "转储已写入",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "devlog off",
+        "Translated": "开发日志已关闭",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "devlog send failed (see /xllog)",
+        "Translated": "开发日志发送失败（见 /xllog）",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "sent to devlog",
+        "Translated": "已发送至开发日志",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "copied to clipboard",
+        "Translated": "已复制到剪贴板",
+        "Context": "DebugDump.Deliver",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      }
+    ],
+    "resources": [
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_OccupiedGeneric",
+        "Original": "Player is occupied ({0}).",
+        "Translated": "玩家正忙（{0}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_GapLiveMissing",
+        "Original": "Live outdoor rows missing from the bundle",
+        "Translated": "数据包中缺少实时户外行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenMature",
+        "Original": "Mature.",
+        "Translated": "已成熟。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_StageGrowing",
+        "Original": "growing ({0} of 4)",
+        "Translated": "生长中（{0}/4）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Patch_EstatePrivate",
+        "Original": "Private estate",
+        "Translated": "私人住宅",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StepDoneWithSeed",
+        "Original": "Done. You hold {0} {1}.",
+        "Translated": "完成。你持有 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Patch_EstateFreeCompany",
+        "Original": "Free Company estate",
+        "Translated": "部队房屋",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_ColCrop",
+        "Original": "Crop",
+        "Translated": "作物",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_ColWhen",
+        "Original": "When",
+        "Translated": "时间",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_HarvestYieldFixed",
+        "Original": "Harvest gives {0} {1} and {2} seed back at any soil grade.",
+        "Translated": "任意土壤等级下，吸魂返还 {0} {1} 和 {2} 个种子。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SeedReturnOne",
+        "Original": "It gives back the one seed you planted, at any soil grade, so a bed sustains itself but never multiplies.",
+        "Translated": "任意土壤等级下，返还你种下的那一颗种子，因此苗床能自给自足但不会增殖。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_DemandLaterSteps",
+        "Original": "Later steps need {0} {1}.",
+        "Translated": "后续步骤需要 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_DebugDumpHeader",
+        "Original": "Debug dump",
+        "Translated": "调试转储",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_ShowDtr",
+        "Original": "Show reminder counts on the server info bar",
+        "Translated": "在服务器信息栏显示提醒计数",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TendWithinHours_Other",
+        "Original": "Growing in bed {0}. Tend it within {1} hours or it wilts.",
+        "Translated": "正在 {0} 号苗床生长中。请在 {1} 小时内照料，否则会枯萎。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "RemoveCrop_SweepRunning",
+        "Original": "Can't remove a crop while a sweep is running.",
+        "Translated": "扫描进行中时无法移除作物。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_NoPredictedEntityChat",
+        "Original": "the game hasn't located this bed yet",
+        "Translated": "游戏尚未定位到此苗床",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TendOrWilt",
+        "Original": "Tend these beds {0} or they wilt.",
+        "Translated": "请在 {0} 照料这些苗床，否则会枯萎。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PairBedPlantHere",
+        "Original": "bed {0}: plant {1} here",
+        "Translated": "{0} 号苗床：在此种植 {1}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NotAtGarden",
+        "Original": "You are not at the garden.",
+        "Translated": "你不在菜园。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Command_HelpMessage",
+        "Original": "Open the Gardener window. Subcommands: dump, dump menu.",
+        "Translated": "打开 Gardener 窗口。子命令：dump、dump menu。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_HarvestYieldVaries",
+        "Original": "Harvest gives {0} {1} and {2} seed back, depending on your soil.",
+        "Translated": "根据土壤不同，吸魂返还 {0} {1} 和 {2} 个种子。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Action_Tend",
+        "Original": "Tend Crop",
+        "Translated": "照料作物",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_NoPlantSeedsEntryChat",
+        "Original": "planting wasn't offered for this bed",
+        "Translated": "此苗床未提供种植选项",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Sweep_StopButton",
+        "Original": "Stop",
+        "Translated": "停止",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SectionSizing",
+        "Original": "How many",
+        "Translated": "数量",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToTendChat",
+        "Original": "Nothing to tend on your {0} patch.",
+        "Translated": "你的 {0} 地块上没有需要照料的东西。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_DemandNamedStep",
+        "Original": "Growing {0} needs {1} {2}.",
+        "Translated": "种植 {0} 需要 {1} {2}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilHeldSame",
+        "Original": "You hold {0} {1}.",
+        "Translated": "你持有 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NoPlanToRun",
+        "Original": "No plan to run.",
+        "Translated": "没有可执行的计划。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_NoHarvestEntryChat",
+        "Original": "it wasn't actually ready to harvest yet",
+        "Translated": "它其实还没到可以收获的时候",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_YieldNeedsRounds_Other",
+        "Original": "A bed of {0} returns {1} seeds, so this needs {2} rounds of {3} beds, about {4} days total.",
+        "Translated": "一块 {0} 地可收获 {1} 颗种子，因此需要 {2} 轮 {3} 块地，总共约 {4} 天。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NeedMoreSeed",
+        "Original": "You need {0} more {1}.",
+        "Translated": "你还需要 {0} 个 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_WhyParent",
+        "Original": "Parent for {0}: plant here first so its neighbours can cross with it.",
+        "Translated": "{0} 的父本：先在这里种植，以便其相邻作物能与它杂交。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NoSoilForCrossingFallback",
+        "Original": "No soil available for the crossing step.",
+        "Translated": "杂交步骤没有可用的土壤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_NearestPatchTooFar",
+        "Original": "Nearest patch is {0}y away (limit {1}y).",
+        "Translated": "最近的地块距离 {0}y（上限 {1}y）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_PlantingTimePopupHeading",
+        "Original": "When was this bed planted?",
+        "Translated": "这块地是什么时候种的？",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PlantsIntoHeader",
+        "Original": "This step plants into",
+        "Translated": "此步骤将种植到",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Common_Cancel",
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_BedsCountOnePatch",
+        "Original": "Beds: {0} ({1} pairs).",
+        "Translated": "地块：{0}（{1} 对）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_DumpButton",
+        "Original": "Dump",
+        "Translated": "导出",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Tend_MenuClosedChat",
+        "Original": "the menu closed before it could be tended",
+        "Translated": "菜单在照料之前就关闭了",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_MineHint",
+        "Original": "Mine Grade 3 in {0}.",
+        "Translated": "在 {0} 采集 3 级矿。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_RecentlyFertilizedChat",
+        "Original": "already fertilized recently",
+        "Translated": "最近已经施过肥",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_OccupiedSummoningBell",
+        "Original": "Player is occupied at a summoning bell ({0}).",
+        "Translated": "玩家正在使用传唤铃（{0}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_SummaryNothingDue",
+        "Original": "nothing due",
+        "Translated": "暂无到期",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_PlanNothingLeft",
+        "Original": "Nothing left to plant; every step in the plan no longer checks out.",
+        "Translated": "没有可种植的了；计划中的每一步都不再满足条件。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_FcPermissionsWarning",
+        "Original": "This character may lack FC rank permissions here; gardening actions may silently fail.",
+        "Translated": "该角色可能在此处缺少部队权限；园艺操作可能会静默失败。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoRouteCheckSettings",
+        "Original": "Open Settings and check Data health.",
+        "Translated": "打开设置并检查数据健康。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "GardeningItems_NoSoilPinned",
+        "Original": "No soil is pinned (FixedSoilItemId is 0).",
+        "Translated": "未固定土壤（FixedSoilItemId 为 0）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_MarkerNow",
+        "Original": "Now",
+        "Translated": "现在",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_ChatIntervalMinutes",
+        "Original": "Chat reminder interval (minutes)",
+        "Translated": "聊天提醒间隔（分钟）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Common_Unknown",
+        "Original": "unknown",
+        "Translated": "未知",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NeedOneMoreSeed",
+        "Original": "You need 1 more {0} to plant this step.",
+        "Translated": "此步骤还需要 1 个 {0} 才能种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossFinalRoundsPerRound",
+        "Original": "One round plants {0} pairs.",
+        "Translated": "每轮种植 {0} 对。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_ReadyHeader",
+        "Original": "Ready to harvest ({0})",
+        "Translated": "可收获（{0}）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "SeedItems_ProduceRowFallback",
+        "Original": "row {0}",
+        "Translated": "第 {0} 行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NoCrossSoilLeft",
+        "Original": "No {0} left for the cross beds.",
+        "Translated": "交叉田没有剩余的 {0} 了。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Dtr_BarText",
+        "Original": "Gardener: {0}",
+        "Translated": "园艺：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_StoppedWithReason",
+        "Original": "Stopped: {0}",
+        "Translated": "已停止：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Language_Spanish",
+        "Original": "Español",
+        "Translated": "西班牙语",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Odds_AboutNInTen",
+        "Original": "About {0} in 10",
+        "Translated": "约 {0}/10",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenReadyNow",
+        "Original": "Ready now.",
+        "Translated": "现在已就绪。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_AlreadyMatureChat",
+        "Original": "it's already mature; fertilizer wouldn't help",
+        "Translated": "它已成熟；施肥不会有帮助",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Theme_Header",
+        "Original": "Appearance",
+        "Translated": "外观",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NeedFreeSlotsToHarvest",
+        "Original": "Need at least {0} free inventory slots to harvest.",
+        "Translated": "至少需要 {0} 个空闲背包栏位才能吸魂。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_ContextMenuNotOpenChat",
+        "Original": "the item menu didn't open",
+        "Translated": "物品菜单未打开",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_TabLabel",
+        "Original": "Garden",
+        "Translated": "花园",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_DumpMenuButton",
+        "Original": "Dump menu",
+        "Translated": "导出菜单",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Cleanup_AddonWouldNotClose",
+        "Original": "Stop: {0} was open but would not close.",
+        "Translated": "停止：{0} 已打开但无法关闭。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Language_English",
+        "Original": "English",
+        "Translated": "英语",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_NoPatches",
+        "Original": "No patches discovered. Stand in an outdoor housing plot.",
+        "Translated": "未发现苗圃。请站在室外住宅区地块上。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Cleanup_NoQuitEntry",
+        "Original": "Stop: the open bed menu has no {0} entry; closing it directly instead.",
+        "Translated": "停止：打开的苗床菜单中没有 {0} 项；改为直接关闭。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CopyButton",
+        "Original": "Copy",
+        "Translated": "复制",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_SetAllPlantingTimesBody",
+        "Original": "Sets every bed on this patch with no recorded planting time to planted this many hours ago:",
+        "Translated": "将本苗圃中所有未记录种植时间的苗床设为在以下小时数之前种下：",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_SetAllPlantingTimesButton",
+        "Original": "Set them all",
+        "Translated": "全部设置",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Action_RemoveCrop",
+        "Original": "Remove Crop",
+        "Translated": "移除作物",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StepProgress",
+        "Original": "Step {0} of {1}",
+        "Translated": "第 {0} 步，共 {1} 步",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PickSomethingElseButton",
+        "Original": "Pick something else",
+        "Translated": "选择其他",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_AutomaticFirstHeld",
+        "Original": "Automatic (first one held)",
+        "Translated": "自动（优先持有中的第一个）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CurrentGoal",
+        "Original": "Goal: {0}",
+        "Translated": "目标：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_DemandFinalCross",
+        "Original": "The final cross needs {0} {1}.",
+        "Translated": "最终杂交需要 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_OpenInGardenButton",
+        "Original": "Show in the Garden tab",
+        "Translated": "在花园标签页中显示",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_BedsCountAssumed",
+        "Original": "Beds: {0} ({1} pairs), assuming a single Deluxe patch; no patch has been recorded yet.",
+        "Translated": "苗床：{0}（{1} 对），假设为单个豪华苗圃；尚未记录任何苗圃。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_GenericComplete",
+        "Original": "Sweep complete.",
+        "Translated": "扫描完成。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_AlreadyMetPlan",
+        "Original": "Plant one in {0} and harvest in {1} for {2} {3} and {4} seed back.",
+        "Translated": "在 {0} 种下一颗，在 {1} 收获，可获得 {2} {3} 并回收 {4} 种子。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_SoilPreference_Fixed",
+        "Original": "One specific soil, pinned below",
+        "Translated": "指定一种土壤，固定如下",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToFertilize",
+        "Original": "Nothing to fertilize on {0} patch.",
+        "Translated": "{0} 地块上没有可施肥的作物。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_NoFertilizeEntryChat",
+        "Original": "fertilizing wasn't offered for this bed",
+        "Translated": "此苗床未提供施肥选项",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ObtainWhere",
+        "Original": "Where: {0}",
+        "Translated": "位置：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ObtainTitle",
+        "Original": "Get the starting seeds",
+        "Translated": "获取初始种子",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TagNoCrossData",
+        "Original": "no crossbreed data, see Settings",
+        "Translated": "无杂交数据，请见设置",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Cleanup_ClosedAddon",
+        "Original": "Stop: closed the open {0}.",
+        "Translated": "停止：已关闭打开的 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_NoPatchesOnPlot",
+        "Original": "No patches discovered on plot {0}.",
+        "Translated": "未在 {0} 号地块发现苗床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_GenericFinished",
+        "Original": "Sweep finished.",
+        "Translated": "扫描完成。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilPerRound",
+        "Original": "This round needs {0} {1} and {2} {3}.",
+        "Translated": "本轮需要 {0} {1} 和 {2} {3}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_CollectGrowSamplesNote",
+        "Original": "Narrows the harvest window in the Reminders tab from your own garden's timing.",
+        "Translated": "根据你自己菜园的计时，在提醒标签页中缩小收获时间窗口。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "GardeningItems_SoilNotInBag",
+        "Original": "No {0} in the bag.",
+        "Translated": "背包中没有 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_NotConfirmedChat",
+        "Original": "Stopped: bed {0}'s planting couldn't be confirmed.",
+        "Translated": "已停止：无法确认 {0} 号苗床的种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenWiltedTendNow",
+        "Original": "Wilted; tend now.",
+        "Translated": "已枯萎；立即照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_XivapiVersion",
+        "Original": "XIVAPI version {0}",
+        "Translated": "XIVAPI 版本 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "ActivityLog_SkippedBeds_Other",
+        "Original": "Skipped {0} beds: {1}.",
+        "Translated": "已跳过 {0} 个苗床：{1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NeedParentsToStart",
+        "Original": "You need {0} and {1} to start this pair; none held.",
+        "Translated": "启动此组合需要 {0} 和 {1}；当前均未持有。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StepDonePlain",
+        "Original": "Done.",
+        "Translated": "完成。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_ReachSwitch",
+        "Original": "switch to {0}",
+        "Translated": "切换到 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Planting_SoilForCross",
+        "Original": "Soil for a crossbreed step",
+        "Translated": "杂交步骤用土壤",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Planting_SoilForYield",
+        "Original": "Soil for a yield step",
+        "Translated": "产量步骤用土壤",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_WhyCrossUnrated",
+        "Original": "Crosses with its neighbouring {0} to reach {1} (no rating yet).",
+        "Translated": "与相邻的 {0} 杂交可获得 {1}（暂无评级）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_SoilPreference_HighestThanalan",
+        "Original": "Highest-grade Thanalan Topsoil (best intercross rate)",
+        "Translated": "最高级萨纳兰表土（最佳杂交率）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_TimingUnknownHeader",
+        "Original": "Planting time unknown ({0})",
+        "Translated": "种植时间未知（{0}）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_DialogueStillOpenChat",
+        "Original": "its dialogue box would not close",
+        "Translated": "其对话框无法关闭",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_StopIfPlayerMoves",
+        "Original": "Stop a run if I move",
+        "Translated": "我移动时停止运行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_NotHeld",
+        "Original": "(not held)",
+        "Translated": "（未持有）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenNotRecordedYet",
+        "Original": "Not recorded yet.",
+        "Translated": "尚未记录。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenTendWithin",
+        "Original": "Tend within {0}.",
+        "Translated": "在 {0} 内照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoRouteNoParentPair",
+        "Original": "Its crossbreed data has no parent pair for it, so there is nothing to plan.",
+        "Translated": "其杂交数据没有对应的亲本组合，因此无可规划内容。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_PlayerPositionUnavailable",
+        "Original": "Player position unavailable.",
+        "Translated": "无法获取玩家位置。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToHarvest",
+        "Original": "Nothing to harvest on {0} patch.",
+        "Translated": "{0} 地块上没有可采集的东西。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Planting_PinnedSoilHeader",
+        "Original": "Pinned soil",
+        "Translated": "固定土壤",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ObtainSoilNote",
+        "Original": "You will also need {0} and {1} later in this route.",
+        "Translated": "此路线后续还需要 {0} 和 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_MovedAwayFromPatch",
+        "Original": "you moved away from the patch.",
+        "Translated": "你离开了地块。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_ForgetButton",
+        "Original": "Forget",
+        "Translated": "遗忘",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_WhichHeader",
+        "Original": "Which fertilizer to use",
+        "Translated": "使用哪种肥料",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StepHeader",
+        "Original": "Step {0}: {1}",
+        "Translated": "步骤 {0}：{1}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Action_Harvest",
+        "Original": "Harvest",
+        "Translated": "采集",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_WiltVisitCount_One",
+        "Original": "That is {0} visit.",
+        "Translated": "这是第 {0} 次访问。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_MoveAbortDistance",
+        "Original": "Distance that counts as moved away (yalms)",
+        "Translated": "判定为离开的距离（星码）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_NothingReady",
+        "Original": "Nothing is ready to harvest yet.",
+        "Translated": "还没有可采集的东西。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_Nick75gCommit",
+        "Original": "nick75g commit {0}",
+        "Translated": "nick75g 提交 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_PromptUnparsedChat",
+        "Original": "its menu wasn't recognized",
+        "Translated": "无法识别其菜单",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_NoSoilAvailableFallback",
+        "Original": "No soil available.",
+        "Translated": "没有可用的土壤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenWithered",
+        "Original": "Withered.",
+        "Translated": "已枯萎。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_NoLongerInBagChat",
+        "Original": "no fertilizer in your bags",
+        "Translated": "背包中没有肥料",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_TargetSystemUnavailableChat",
+        "Original": "a game error while targeting",
+        "Translated": "选定目标时发生游戏错误",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PickerSearchHint",
+        "Original": "Search",
+        "Translated": "搜索",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Language_Label",
+        "Original": "UI language",
+        "Translated": "界面语言",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_MenuTimeoutMs",
+        "Original": "Menu wait timeout (ms)",
+        "Translated": "菜单等待超时（毫秒）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ReadyToHarvest",
+        "Original": "Ready to harvest in bed {0}.",
+        "Translated": "花坛 {0} 已可采集。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_Generated",
+        "Original": "Generated {0}",
+        "Translated": "生成于 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Phrase_UnknownCount",
+        "Original": "an unknown number of",
+        "Translated": "未知数量的",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_LotlabCommit",
+        "Original": "Lotlab commit {0}",
+        "Translated": "Lotlab 提交 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_CooldownMinutes",
+        "Original": "Cooldown per bed (minutes)",
+        "Translated": "每个花坛的冷却时间（分钟）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_SoilPreference_HighestLaNoscean",
+        "Original": "Highest-grade La Noscean Topsoil (Potting Soil-equivalent)",
+        "Translated": "最高级拉诺西亚土壤（等同盆栽土）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoSoilForStepFallback",
+        "Original": "You have no soil for this step.",
+        "Translated": "此步骤没有土壤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PairBedExisting",
+        "Original": "bed {0}: {1}",
+        "Translated": "花坛 {0}：{1}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_AboutToWitherHeader",
+        "Original": "About to wither ({0})",
+        "Translated": "即将凋零（{0}）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_StageMature",
+        "Original": "mature (4)",
+        "Translated": "成熟（4）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_LastSeenLine",
+        "Original": "Last seen by {0}, {1}h ago.",
+        "Translated": "最后出现：{0}，{1}小时前。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_HarvestedChat",
+        "Original": "Harvested bed {0} ({1}).",
+        "Translated": "已收获苗圃 {0}（{1}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_DialogNeverOpenedChat",
+        "Original": "the planting dialog never opened",
+        "Translated": "种植对话框未打开",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToHarvestChat",
+        "Original": "Nothing to harvest on your {0} patch.",
+        "Translated": "你的{0}苗圃没有可收获的作物。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_MenuClosedChat",
+        "Original": "the menu closed before it could be harvested",
+        "Translated": "菜单在收获前关闭了",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Common_Empty",
+        "Original": "empty",
+        "Translated": "空",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Tend_TendedChat",
+        "Original": "Tended bed {0} ({1}).",
+        "Translated": "已照料苗圃 {0}（{1}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_AllTended",
+        "Original": "Every bed is tended.",
+        "Translated": "所有苗圃均已照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PickerIntro",
+        "Original": "Pick what you want to grow and Gardener works out the steps from what you already hold.",
+        "Translated": "选择你想种植的作物，Gardener 会根据你现有的物品规划步骤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Planting_Intro",
+        "Original": "Which topsoil to reach for when the plugin plants for you.",
+        "Translated": "插件代种时使用哪种土壤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_Started",
+        "Original": "Started {0} on {1} patch.",
+        "Translated": "已在{1}苗圃开始{0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossStepTitle",
+        "Original": "Grow {0}",
+        "Translated": "种植 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_DueToTendHeader",
+        "Original": "Due to tend ({0})",
+        "Translated": "待照料（{0}）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_GrowTimeUnknown",
+        "Original": "Gardener does not know how long this seed takes to grow.",
+        "Translated": "Gardener 不知道这种种子需要多长时间生长。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_GapNoGrowTime",
+        "Original": "Rows with no grow time",
+        "Translated": "无生长时间的行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_BedCrossMismatch",
+        "Original": "Bed {0} ({1}) no longer crosses the way the plan expected; skipped.",
+        "Translated": "苗圃 {0}（{1}）不再符合计划的交叉方式；已跳过。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_NothingWithering",
+        "Original": "Nothing is close to withering.",
+        "Translated": "没有即将凋零的作物。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_Header",
+        "Original": "Data health",
+        "Translated": "数据状态",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_PlantedChat",
+        "Original": "Planted {0} in bed {1}, {2}.",
+        "Translated": "已在 {1} 号苗床种下 {0}，{2}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_ReasonBeds",
+        "Original": "Only {0} of free beds fit on this patch.",
+        "Translated": "这块地只能容纳 {0} 个空闲苗床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_ReasonSoil",
+        "Original": "You hold enough topsoil for {0}.",
+        "Translated": "你持有的表土足够 {0} 使用。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_WiltedTendBeforeWithers",
+        "Original": "Growing in bed {0}. It has wilted; tend it before it withers.",
+        "Translated": "正在 {0} 号苗床生长中。它已枯萎，请在其凋零前照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoteRatingMeaning",
+        "Original": "That rating is per pair, not per result, and its meaning isn't published, so Gardener only uses it to prefer one pair over another and sizes this step from the soil estimate instead.",
+        "Translated": "该评分是按组合而非按结果计算的，其含义未公开，因此 Gardener 仅用它来优先选择某个组合，并改为根据土壤估算来确定此步骤的规模。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_OrphansNote",
+        "Original": "This patch may be in storage, or it may have moved; either way the record stays and its timers are paused. Forget a record to stop tracking it.",
+        "Translated": "这块地可能已被收起，也可能已移动；无论哪种情况，记录都会保留，其计时器会暂停。忘记记录即可停止追踪。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ConfirmPlantPatchBody",
+        "Original": "Plant on {0}: {1}.",
+        "Translated": "在 {0} 上种植：{1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_Header",
+        "Original": "Automation",
+        "Translated": "自动化",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilAllRoundsSame",
+        "Original": "Over {0} rounds that is {1}.",
+        "Translated": "经过 {0} 轮，即 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_AgentUnavailableChat",
+        "Original": "a game error while opening the item menu",
+        "Translated": "打开物品菜单时发生游戏错误",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "GardeningItems_SoilFamilyNotInBag",
+        "Original": "You hold no soil of this kind. {0} is the one to get.",
+        "Translated": "你没有这种土壤。应获取 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_HarvestLagNote",
+        "Original": "Harvest readiness is checked roughly once an hour, so a bed can stay unlisted for a while after it matures.",
+        "Translated": "吸魂就绪状态大约每小时检查一次，因此苗床成熟后可能有一段时间不会列出。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "RemoveCrop_RemovedChat",
+        "Original": "Removed {0} from bed {1}.",
+        "Translated": "已从 {1} 号苗床移除 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossCoinToss",
+        "Original": "Nobody has published the split between the two, so Gardener treats it as a coin toss.",
+        "Translated": "没有人公布过两者的比例，因此 Gardener 将其视为掷硬币。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_ReasonSeeds",
+        "Original": "You hold enough {0} and {1} for {2}.",
+        "Translated": "你持有的 {0} 和 {1} 足够 {2} 使用。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_PatchTooFar",
+        "Original": "This patch is {0}y away (limit {1}y).",
+        "Translated": "这块地距离 {0}y（上限 {1}y）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_AlsoYields",
+        "Original": "This cross can also yield {0} instead of {1}; the result isn't guaranteed.",
+        "Translated": "此杂交也可能产出 {0} 而非 {1}；结果并不保证。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_FertilizedChat",
+        "Original": "Fertilized bed {0} ({1}).",
+        "Translated": "已为 {0} 号苗床施肥（{1}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_BedsCountManyPatches",
+        "Original": "Beds: {0} across {1} patches ({2} pairs).",
+        "Translated": "苗床：{0} 个，分布于 {1} 块地（{2} 对）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_SeedGoneChat",
+        "Original": "that seed is no longer in your bags",
+        "Translated": "该种子已不在你的背包中",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Dtr_TooltipNothingDue",
+        "Original": "Nothing due.",
+        "Translated": "暂无到期。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilSameFamily",
+        "Original": "Soil: {0} in every bed.",
+        "Translated": "土壤：每块苗床 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Sweep_BedOrderVerified",
+        "Original": "Bed order verified: {0}/{1}",
+        "Translated": "苗床顺序已验证：{0}/{1}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TabLabel",
+        "Original": "Goal",
+        "Translated": "目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_WiltWarningHours",
+        "Original": "Warn this many hours before a bed wilts",
+        "Translated": "苗床枯萎前多少小时提醒",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_ConfidenceObserved",
+        "Original": "observed, {0} sample(s)",
+        "Translated": "已观测，{0} 个样本",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_ConfidenceBundled",
+        "Original": "bundled",
+        "Translated": "内置",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_BedNoLongerEmpty",
+        "Original": "Bed {0} is no longer empty; the {1} step was dropped.",
+        "Translated": "苗床 {0} 已不再为空；{1} 步骤已跳过。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Action_PlantSeeds",
+        "Original": "Plant Seeds",
+        "Translated": "播种",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_OccupiedQuestEvent",
+        "Original": "Player is occupied in a quest event ({0}).",
+        "Translated": "玩家正忙于任务事件（{0}）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SectionCare",
+        "Original": "Care",
+        "Translated": "照料",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CapacityIgnoresUnconfirmed",
+        "Original": "Patches with an unconfirmed layout: {0}. This route does not plant on them.",
+        "Translated": "布局未确认的地块：{0}。此路线不会在其上种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenReadyIn",
+        "Original": "Ready in {0}.",
+        "Translated": "{0} 后就绪。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NotStarted",
+        "Original": "Not started.",
+        "Translated": "未开始。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Patch_EstateShared",
+        "Original": "Shared estate",
+        "Translated": "共享房屋",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Patch_NotRecorded",
+        "Original": "This patch has not been recorded yet.",
+        "Translated": "此地块尚未记录。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_CollectGrowSamples",
+        "Original": "Record how long your own crops take to mature and become harvestable",
+        "Translated": "记录你自己的作物成熟并可收获所需的时间",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_AgentUnavailableChat",
+        "Original": "a game error while planting",
+        "Translated": "种植时出现游戏错误",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Developer_Header",
+        "Original": "Developer",
+        "Translated": "开发者",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CropEmpty",
+        "Original": "empty",
+        "Translated": "空",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CropRipe",
+        "Original": "ripe",
+        "Translated": "成熟",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NoFertilizerInBag",
+        "Original": "No fertilizer in the bag.",
+        "Translated": "袋中没有肥料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_AllTimingKnown",
+        "Original": "Every bed's planting time is known.",
+        "Translated": "所有苗床的种植时间已知。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToTend",
+        "Original": "Nothing to tend on {0} patch.",
+        "Translated": "{0} 号苗床无需照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_XivapiSchema",
+        "Original": "XIVAPI schema {0}",
+        "Translated": "XIVAPI 架构 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_GrowingTimeLeftEstimated",
+        "Original": "Growing in bed {0}. About {1} left, at the earliest, estimated.",
+        "Translated": "{0} 号苗床生长中。预计最早还需约 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_CooldownNote",
+        "Original": "The game accepts one application per bed per hour regardless of this setting; a shorter cooldown here just tries earlier and gets refused.",
+        "Translated": "无论此设置如何，游戏每小时每苗床只接受一次施肥；此处冷却更短只会更早尝试并被拒绝。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Harvest_ConfidenceEstimated",
+        "Original": "estimated",
+        "Translated": "估算",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_NoDataForPatch",
+        "Original": "no data for this patch",
+        "Translated": "此苗床无数据",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_BedTooltipHeading",
+        "Original": "Bed {0}",
+        "Translated": "苗床 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Common_Confirm",
+        "Original": "Confirm",
+        "Translated": "确认",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_AlreadyRunning",
+        "Original": "Already running.",
+        "Translated": "已在运行。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_LastVisitAge",
+        "Original": "This is what Gardener saw on your last visit, {0} ago.",
+        "Translated": "这是 Gardener 在 {0} 前上次查看时看到的内容。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_GapBundledMissing",
+        "Original": "Bundled rows missing from the live sheet",
+        "Translated": "实时表中缺少内置行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Developer_LogUrl",
+        "Original": "Log server URL",
+        "Translated": "日志服务器 URL",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TagCrossbreedOnly",
+        "Original": "crossbreed only",
+        "Translated": "仅杂交",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_PlanNothingLeftChat",
+        "Original": "Nothing left to plant; the plan no longer checks out.",
+        "Translated": "没有可种植的了；计划已不再成立。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CropWilted",
+        "Original": "wilted",
+        "Translated": "枯萎",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Developer_TelemetryDesc",
+        "Original": "Streams live activity + state snapshots to a local log server.",
+        "Translated": "将实时活动和状态快照流式发送到本地日志服务器。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossMultiOutcome",
+        "Original": "The crossing beds come back as {0}, and you cannot pick which.",
+        "Translated": "杂交苗床的结果为 {0}，且无法选择。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_TabLabel",
+        "Original": "Reminders",
+        "Translated": "提醒",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_YieldCoversOne_Other",
+        "Original": "A bed of {0} returns {1} seeds, so one round of {2} beds covers it.",
+        "Translated": "一床{0}可收获{1}颗种子，因此一轮{2}床即可满足。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Reminders_ReachNone",
+        "Original": "no character seen here yet",
+        "Translated": "此处尚未见到角色",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossFinalRoundsPlan",
+        "Original": "This cross wants about {0} attempts, so plan on {1} rounds, about {2} days total.",
+        "Translated": "该杂交约需{0}次尝试，请计划{1}轮，共约{2}天。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PickerHeader",
+        "Original": "Pick a seed",
+        "Translated": "选择种子",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CannotFitStep",
+        "Original": "Gardener cannot fit this step into the free beds on this patch.",
+        "Translated": "Gardener 无法将此步骤安排进该地块的空闲苗床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_WindowTitle",
+        "Original": "Gardener Settings",
+        "Translated": "Gardener 设置",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ObtainSoilNoteSame",
+        "Original": "You will also need {0} later in this route.",
+        "Translated": "此路线后续还需要{0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Theme_SharedNote",
+        "Original": "Shared with every XIV Hub plugin.",
+        "Translated": "与所有 XIV Hub 插件共享。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_NothingToFertilizeChat",
+        "Original": "Nothing to fertilize on your {0} patch.",
+        "Translated": "你的{0}地块没有可施肥的作物。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StandAtGardenPlantHandoff",
+        "Original": "Stand at your garden to plant this step.",
+        "Translated": "站在你的花园处以种植此步骤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Tend_NoCareEntryChat",
+        "Original": "tending wasn't offered for this bed",
+        "Translated": "此苗床未提供照料选项",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_NarrateSweepsNote",
+        "Original": "Prints a line in chat as a sweep tends, fertilizes, harvests, plants or skips each bed.",
+        "Translated": "当一轮照料、施肥、收获、种植或跳过各苗床时，在聊天栏输出一行信息。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilAllRounds",
+        "Original": "Over {0} rounds that is {1} and {2}.",
+        "Translated": "经过{0}轮，即{1}和{2}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_AttemptUnresolved",
+        "Original": "Bed {0} is growing. You will know whether it crossed when it is ready to harvest.",
+        "Translated": "{0}号苗床正在生长。待其可收获时即可得知是否杂交成功。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "GardeningItems_PinnedSoilNotRecognised",
+        "Original": "Pinned soil item {0} is not a recognised topsoil.",
+        "Translated": "固定的土壤物品{0}不是可识别的表土。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Planting_Header",
+        "Original": "Planting defaults",
+        "Translated": "种植默认值",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_GrowingNoEarliest",
+        "Original": "Growing in bed {0}.",
+        "Translated": "正在{0}号苗床生长。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_ModeNeverEngagedChat",
+        "Original": "fertilizing didn't start",
+        "Translated": "施肥未开始",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Language_Automatic",
+        "Original": "Automatic (follow Dalamud)",
+        "Translated": "自动（跟随 Dalamud）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Action_Fertilize",
+        "Original": "Fertilize Crop",
+        "Translated": "施肥作物",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_QuickPicksHeader",
+        "Original": "Quickest from what you hold right now:",
+        "Translated": "从你当前持有中最快的：",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilTwoFamilies",
+        "Original": "Soil: {0} in the crossing beds, {1} in the beds that cross with nothing and come back as seed.",
+        "Translated": "土壤：交叉花坛中为 {0}，与无作物交叉并回收为种子的花坛中为 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_GrowingTimeLeft",
+        "Original": "Growing in bed {0}. About {1} left, at the earliest.",
+        "Translated": "正在花坛 {0} 中生长。最早约剩 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_StoppedNoReason",
+        "Original": "Stopped.",
+        "Translated": "已停止。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_NoPatchesHere",
+        "Original": "No patches discovered here.",
+        "Translated": "此处未发现地块。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_MarkerDone",
+        "Original": "Done",
+        "Translated": "完成",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Patch_EstateUnknown",
+        "Original": "Unknown estate",
+        "Translated": "未知庭院",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_Header",
+        "Original": "Reminders",
+        "Translated": "提醒",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_EntityGoneChat",
+        "Original": "the bed can't be found right now",
+        "Translated": "当前找不到该花坛",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_AlreadyHold",
+        "Original": "You already hold {0} {1}.",
+        "Translated": "你已持有 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NeedBothSeeds",
+        "Original": "You need {0} and {1} to plant this step.",
+        "Translated": "此步骤需要 {0} 和 {1} 才能种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_ColBed",
+        "Original": "Bed",
+        "Translated": "花坛",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SourcesWhere",
+        "Original": "Where: {0}",
+        "Translated": "位置：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_ConfirmBeforeRun",
+        "Original": "Confirm before running a sweep",
+        "Translated": "运行扫描前确认",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SourcesNotRecorded",
+        "Original": "Where: not recorded.",
+        "Translated": "位置：未记录。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_GapNoCrossData",
+        "Original": "Rows absent from the cross data",
+        "Translated": "交叉数据中缺失的行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_BedReachDistance",
+        "Original": "Reach distance to start a run (yalms)",
+        "Translated": "开始运行的到达距离（星码）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Duration_Every",
+        "Original": "every {0}",
+        "Translated": "每 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Duration_About",
+        "Original": "about {0}",
+        "Translated": "约 {0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_SetPlantingTimeButton",
+        "Original": "Set planting time",
+        "Translated": "设置种植时间",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_WhenWiltedTendWithin",
+        "Original": "Wilted; tend within {0}.",
+        "Translated": "已枯萎；请在 {0} 内照料。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NoKnownCross",
+        "Original": "No known cross produces {0}.",
+        "Translated": "没有已知交叉能产出 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_SoilStaleGoneChat",
+        "Original": "your {0} is gone",
+        "Translated": "你的{0}已消失",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_ColGrowth",
+        "Original": "Growth",
+        "Translated": "生长",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_MenuNeverOpenedChat",
+        "Original": "its menu never opened",
+        "Translated": "其菜单从未打开",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_OnlyGrowing",
+        "Original": "Only fertilize a growing bed",
+        "Translated": "仅对生长中的苗床施肥",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_OrphansHeader",
+        "Original": "Beds recorded here before, not found this visit ({0})",
+        "Translated": "此前记录过的苗床，本次未找到（{0}）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Fertilizer_Header",
+        "Original": "Fertilizer",
+        "Translated": "肥料",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TendWithinHours_One",
+        "Original": "Growing in bed {0}. Tend it within {1} hour or it wilts.",
+        "Translated": "正在{0}号苗床生长。请在{1}小时内照料，否则会枯萎。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Log_TabLabel",
+        "Original": "Log",
+        "Translated": "日志",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_NarrateSweeps",
+        "Original": "Narrate sweeps in chat",
+        "Translated": "在聊天中播报清扫",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ConfirmPlantStepTitle",
+        "Original": "Plant this step?",
+        "Translated": "种植此步骤？",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_GapSoilMissing",
+        "Original": "Live soils missing from the soil table",
+        "Translated": "土壤表中缺少的现有土壤",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_TagGatherable",
+        "Original": "you can buy or gather this",
+        "Translated": "可购买或采集",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_SlowerReliable",
+        "Original": "Raising this makes runs slower but more reliable.",
+        "Translated": "提高此项会使运行变慢但更可靠。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Reminders_ChatEcho",
+        "Original": "Echo reminders to chat",
+        "Translated": "将提醒回显到聊天",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Guard_NotInHousing",
+        "Original": "Not standing in a housing territory.",
+        "Translated": "未站在住宅区内。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ClearGoalButton",
+        "Original": "Clear goal",
+        "Translated": "清除目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_WiltVisitCount_Other",
+        "Original": "That is {0} visits.",
+        "Translated": "即{0}次访问。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_NoFertilizeOnItemChat",
+        "Original": "fertilizing wasn't offered on the item",
+        "Translated": "该物品未提供施肥选项",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_ParentSoilStock",
+        "Original": "You hold {0} {1} for the parent beds.",
+        "Translated": "你持有{0}个{1}用于母床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Cleanup_DismissedTalk",
+        "Original": "Stop: dismissed the open crop dialogue.",
+        "Translated": "停止：已关闭打开的作物对话。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_BedDelayMs",
+        "Original": "Delay between beds (ms)",
+        "Translated": "床间延迟 (ms)",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_EntryDisabledOnItemChat",
+        "Original": "fertilizing was disabled on the item",
+        "Translated": "该物品已禁用施肥",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Cleanup_ClosedBedMenu",
+        "Original": "Stop: closed the open bed menu.",
+        "Translated": "停止：已关闭打开的苗床菜单。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_SoilPreference_HighestShroud",
+        "Original": "Highest-grade Shroud Topsoil (best yield)",
+        "Translated": "最高级暗影表土（最佳产量）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Duration_EveryDay",
+        "Original": "every day",
+        "Translated": "每天",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoRouteCannotGrow",
+        "Original": "Gardener cannot find a way to grow {0} from seeds you can buy or gather.",
+        "Translated": "园丁找不到用可购买或采集的种子种植 {0} 的方法。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_PlantedHoursAgoButton",
+        "Original": "Planted {0}h ago",
+        "Translated": "{0}小时前种植",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Developer_EnableTelemetry",
+        "Original": "Enable dev telemetry",
+        "Translated": "启用开发遥测",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_YieldCoversOne_One",
+        "Original": "A bed of {0} returns 1 seed, so one round of {1} beds covers it.",
+        "Translated": "一床 {0} 可回收 1 颗种子，因此一轮 {1} 床即可覆盖。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_UnresolvedSeedRow",
+        "Original": "row {0}",
+        "Translated": "第 {0} 行",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Automation_StepDelayMs",
+        "Original": "Delay between actions (ms)",
+        "Translated": "操作间延迟 (ms)",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilPerRoundSame",
+        "Original": "This round needs {0} {1}.",
+        "Translated": "本轮需要 {0} {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CropWithered",
+        "Original": "withered",
+        "Translated": "已枯萎",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SectionPlant",
+        "Original": "Plant",
+        "Translated": "种植",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_ReadyAfterPlant",
+        "Original": "Ready {0} after you plant.",
+        "Translated": "种植后 {0} 成熟。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoCrossbreedNeeded",
+        "Original": "You do not need to crossbreed {0}.",
+        "Translated": "你不需要杂交 {0}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Fertilize_MenuClosedChat",
+        "Original": "the menu closed before it could be fertilized",
+        "Translated": "菜单在施肥前关闭了",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossSingleOutcomeOnly",
+        "Original": "This pair makes nothing else.",
+        "Translated": "此组合不会产生其他结果。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_StandAtGardenSeeBeds",
+        "Original": "Stand at your garden to see which beds this uses.",
+        "Translated": "站在你的花园旁可查看使用哪些苗床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NeedSeedsToPlant",
+        "Original": "You need {0} to plant this step.",
+        "Translated": "此步骤需要 {0} 才能种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "OpenBed_GaveUpAfterAttemptsChat",
+        "Original": "its position kept disagreeing with the map",
+        "Translated": "其位置始终与地图不符",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_SoilSharedStock",
+        "Original": "You hold {0} {1}, and a pair needs one for the parent bed and one for the cross bed.",
+        "Translated": "你持有 {0} {1}，一对需要一颗用于亲本床、一颗用于杂交床。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_SeenBy",
+        "Original": "seen by {0}, {1}h ago",
+        "Translated": "由 {0} 于 {1} 小时前发现",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_PatchOutOfReach",
+        "Original": "Stand closer to this patch to plant it ({0}y away).",
+        "Translated": "靠近此地块再种植（距离 {0} 码）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plant_MenuClosedChat",
+        "Original": "the menu closed before it could be planted",
+        "Translated": "菜单在种植前已关闭",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_WhyCrossRated",
+        "Original": "Crosses with its neighbouring {0} to reach {1} (ffxivgardening.com rating: {2}/100).",
+        "Translated": "与相邻的 {0} 杂交可得到 {1}（ffxivgardening.com 评分：{2}/100）。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_GrowingUnknownTiming",
+        "Original": "Growing in bed {0}. Gardener does not know when this one is ready. Set when you planted it on the Garden tab.",
+        "Translated": "正在 {0} 号床生长中。Gardener 不知道它何时成熟。请在花园标签页设置你的种植时间。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_YieldNeedsRounds_One",
+        "Original": "A bed of {0} returns 1 seed, so this needs {1} rounds of {2} beds, about {3} days total.",
+        "Translated": "一床 {0} 可回收 1 颗种子，因此需要 {1} 轮、每轮 {2} 床，共约 {3} 天。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SeedReturnNone",
+        "Original": "It gives back no seeds when harvested, so plant another from your stock each time.",
+        "Translated": "收获时不返还种子，每次需从库存中另取一颗种植。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SeedReturnMany",
+        "Original": "It gives back {0} seeds at any soil grade, so a bed of these multiplies over time.",
+        "Translated": "无论土壤等级如何都会返还 {0} 颗种子，因此一床会随时间不断增殖。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NoteRating",
+        "Original": "ffxivgardening.com rates this pair {0} out of 100.",
+        "Translated": "ffxivgardening.com 给此组合的评分为 {0}/100。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_CrossPlantLayout",
+        "Original": "Half the beds hold {0} and half hold {1}, alternating around the ring.",
+        "Translated": "一半的床种 {0}，另一半种 {1}，沿环形交替排列。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Scheduler_LeftHousingArea",
+        "Original": "you left the housing area.",
+        "Translated": "你离开了住宅区。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Config_Data_ShowGapWarnings",
+        "Original": "Show data gap warnings",
+        "Translated": "显示数据缺失警告",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Garden_CropVigorous",
+        "Original": "vigorous",
+        "Translated": "生长中",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NoSoilForParentFallback",
+        "Original": "No soil for the parent beds.",
+        "Translated": "亲本床没有可用土壤。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "GardeningItems_SoilNameUnresolved",
+        "Original": "no item id recorded for grade {0} {1} soil",
+        "Translated": "未记录 {0} 级 {1} 土壤的物品 ID",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "SeedItems_ItemRowFallback",
+        "Original": "row {0}'s seed",
+        "Translated": "第 {0} 行的种子",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_NeverSeenGarden",
+        "Original": "Gardener has never seen a garden of yours. Stand at your plot once and it will know which step you are on.",
+        "Translated": "Gardener 从未见过你的花园。站在你的地块旁一次，它就能知道你处于哪一步。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_NoFreeBedsLeft",
+        "Original": "No free beds are left on this patch to start a new pair.",
+        "Translated": "此地块没有空闲的床来开始新的一对。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Plan_PlantingFewerPairs",
+        "Original": "Planting {0} instead of {1}.",
+        "Translated": "改为种植 {0}，而非 {1}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "Goal_SoilHeld",
+        "Original": "You hold {0} {1} and {2} {3}.",
+        "Translated": "你持有 {0} {1} 和 {2} {3}。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "Gardener.Localization.Strings.resources",
+        "Key": "ActivityLog_SkippedBeds_One",
+        "Original": "Skipped bed {0}: {1}.",
+        "Translated": "已跳过苗圃 {0}：{1}。",
+        "Source": "ai:deepseek"
+      }
+    ],
+    "attributes": []
+  }
+}
