@@ -34,12 +34,12 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout latest main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -61,31 +61,13 @@ jobs:
 
       # Recovery transactions are independent: earlier successes still receive
       # their replies even if a later issue fails. Failed attempts publish nothing.
-      - name: Reply only for persisted new contributions
+      - name: Reply for persisted contributions and report missing input
         if: always() && steps.ingest.outcome != 'skipped'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
-            const fs = require('fs');
-            const path = require('path');
-            const directory = path.join(process.env.RUNNER_TEMP, 'inbox-persisted', 'issues');
-            if (!fs.existsSync(directory)) return;
-            let failed = false;
-            for (const filename of fs.readdirSync(directory).filter(name => name.endsWith('.json'))) {
-              const item = JSON.parse(fs.readFileSync(path.join(directory, filename), 'utf8'));
-              try {
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: item.issue_number,
-                  body: item.comment,
-                });
-              } catch (error) {
-                failed = true;
-                core.error(`Could not reply to persisted issue #${item.issue_number}: ${error.message}`);
-              }
-            }
-            if (failed) core.setFailed('Some persisted contributions could not receive their reply');
+            const reply = require(process.env.GITHUB_WORKSPACE + '/scripts/reply_inbox_results.cjs');
+            await reply({ github, context, core });
 
       - name: Publish persisted review samples
         if: always() && steps.ingest.outcome != 'skipped'
@@ -135,7 +117,7 @@ jobs:
 
       - name: Preserve persisted outbox for inspection
         if: always() && steps.ingest.outcome != 'skipped'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: inbox-persisted-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/inbox-persisted

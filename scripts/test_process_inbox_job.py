@@ -1,6 +1,7 @@
 """Real Git/ingest regression tests; temporary repositories never contact GitHub."""
 from __future__ import annotations
 
+import hashlib
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
@@ -157,7 +158,8 @@ class InboxTransactionTests(unittest.TestCase):
         self.assert_success(second)
         self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
         self.assertEqual(len([p for p in self.remote_paths() if p.startswith("docs/contributions/inbox/11-")]), 1)
-        self.assertFalse(output.exists())
+        self.assertEqual([str(p.relative_to(output)).replace("\\", "/")
+                          for p in output.rglob("*") if p.is_file()], ["resolved-issues/11.json"])
 
     def test_documented_legacy_title_and_body_marker_are_ingested(self):
         issue = self.issue()
@@ -204,11 +206,11 @@ class InboxTransactionTests(unittest.TestCase):
         self.assertTrue(any(p.startswith("uit-packs/Alpha@") for p in self.remote_paths()))
         self.assertEqual(len(list((output / "issues").glob("*.json"))), 1)
 
-    def serve_issues(self, issues):
+    def serve_issues(self, issues, *, status=200):
         class Handler(BaseHTTPRequestHandler):
             def do_GET(handler):
                 encoded = json.dumps(issues).encode("utf-8")
-                handler.send_response(200)
+                handler.send_response(status)
                 handler.send_header("Content-Type", "application/json")
                 handler.end_headers()
                 handler.wfile.write(encoded)
@@ -223,9 +225,9 @@ class InboxTransactionTests(unittest.TestCase):
         self.addCleanup(server.shutdown)
         return f"http://127.0.0.1:{server.server_port}"
 
-    def recover(self, issues, *, max_pages=5):
+    def recover(self, issues, *, max_pages=5, status=200):
         environment = dict(os.environ, GITHUB_REPOSITORY="fixture/repository",
-                           GITHUB_API_URL=self.serve_issues(issues))
+                           GITHUB_API_URL=self.serve_issues(issues, status=status))
         # Never forward a real token to the local test server.
         environment.pop("GH_TOKEN", None)
         environment.pop("GITHUB_TOKEN", None)
@@ -246,11 +248,14 @@ class InboxTransactionTests(unittest.TestCase):
         ordinary = self.issue(33, "Ordinary")
         ordinary["title"] = "[收稿] Ordinary"
         result, output = self.recover([broken, ordinary, self.issue()])
-        self.assertNotEqual(result.returncode, 0, "Recovery must expose its unprocessed issue")
+        self.assert_success(result)
         self.assertEqual(set(self.remote_json("uit-packs/index.json")["plugins"]), {"Alpha", "Beta"})
         self.assertTrue(self.remote_json("docs/contributions/inbox/uit-direct-beta.json").get("importedAt"))
         self.assertFalse(any(p.endswith(".processed-issues/22.json") for p in self.remote_paths()))
         self.assertEqual(len(list((output / "issues").glob("*.json"))), 1)
+        rejected = json.loads((output / "invalid-issues/22.json").read_text(encoding="utf-8"))
+        self.assertEqual(rejected["status"], "needs-input")
+        self.assertIn("Issue #22", result.stdout)
 
     def test_recovery_fails_visibly_when_pagination_limit_is_reached(self):
         ordinary = self.issue()
@@ -272,12 +277,185 @@ class InboxTransactionTests(unittest.TestCase):
         self.assertFalse(output.exists(), "Failed transaction must not publish any success outbox")
 
     def test_malformed_contribution_does_not_record_a_processed_ledger(self):
-        """Marking a parse failure handled would make recovery skip an unprocessed contribution."""
+        """Input rejection must stay outside the persisted-contribution ledger and success outbox."""
         issue = self.issue()
         issue["body"] = "```json\n{broken}\n```"
         before = self.git(self.remote, "rev-parse", "main")
         result, output = self.invoke(self.a, issue)
+        self.assert_success(result)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        rejected = json.loads((output / "invalid-issues/11.json").read_text(encoding="utf-8"))
+        self.assertEqual(rejected["status"], "needs-input")
+        self.assertEqual(rejected["bodySha256"], hashlib.sha256(issue["body"].encode("utf-8")).hexdigest())
+        self.assertFalse(list((output / "issues").glob("*.json")))
+        self.assertFalse(list((output / "reviews").glob("*.json")))
+        self.assertFalse((output / "result.json").exists())
+
+    def test_oversized_export_template_requests_json_without_publishing_the_local_path(self):
+        """The #230 export-template shape is actionable input rejection, not an infrastructure failure."""
+        issue = self.issue(230, "RotationSolver")
+        issue["body"] = (
+            "### FireGaze contributions · 插件界面文字译文贡献\n\n"
+            "- 插件：`RotationSolver`\n- 条数：3157\n\n"
+            "正文较长，放不进提交页链接；投稿内容已经导出成文件，请把**文件内容**（含 JSON 代码块）整段粘贴到这里再提交。\n\n"
+            r"> 文件：`C:\Users\fixture\AppData\Roaming\XIVLauncherCN\pluginConfigs\FireGaze\contributions\uit-RotationSolver.json`"
+        )
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.invoke(self.a, issue)
+        self.assert_success(result)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        rejected_text = (output / "invalid-issues/230.json").read_text(encoding="utf-8")
+        rejected = json.loads(rejected_text)
+        self.assertEqual(rejected["issue_number"], 230)
+        self.assertEqual(rejected["status"], "needs-input")
+        self.assertIn("JSON", rejected["comment"])
+        self.assertNotIn("fixture", rejected_text)
+        self.assertNotIn("AppData", rejected_text)
+        self.assertNotIn("RotationSolver", rejected_text)
+        self.assertNotIn("body", set(rejected))
+        self.assertFalse((output / "result.json").exists())
+        self.assertFalse(any(p.endswith(".processed-issues/230.json") for p in self.remote_paths()))
+
+    def test_invalid_issue_repeat_is_stable_and_edited_json_can_be_ingested(self):
+        """A rejection must neither masquerade as success nor prevent a later corrected edit."""
+        issue = self.issue()
+        valid_body = issue["body"]
+        issue["body"] = "No JSON has been supplied yet."
+        before = self.git(self.remote, "rev-parse", "main")
+        first, first_out = self.invoke(self.a, issue, name="invalid-first")
+        second, second_out = self.invoke(self.a, issue, name="invalid-second")
+        self.assert_success(first)
+        self.assert_success(second)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        self.assertEqual((first_out / "invalid-issues/11.json").read_bytes(),
+                         (second_out / "invalid-issues/11.json").read_bytes())
+        for output in (first_out, second_out):
+            self.assertFalse((output / "result.json").exists())
+            self.assertFalse(list((output / "issues").glob("*.json")))
+        issue["body"] = valid_body
+        corrected, output = self.invoke(self.a, issue, name="corrected")
+        self.assert_success(corrected)
+        self.assertEqual(set(self.remote_json("uit-packs/index.json")["plugins"]), {"Alpha"})
+        self.assertTrue(self.remote_json("docs/contributions/inbox/.processed-issues/11.json"))
+        self.assertTrue((output / "issues/11.json").exists())
+        self.assertFalse((output / "invalid-issues").exists())
+
+    def test_invalid_entry_container_is_rejected_before_git_or_ingestion(self):
+        """Malformed user containers should not become subprocess or repository errors."""
+        issue = self.issue()
+        payload = self.payload("Alpha")
+        payload["entries"] = "not a list"
+        issue["body"] = json.dumps(payload)
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.invoke(self.a, issue)
+        self.assert_success(result)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        self.assertEqual(json.loads((output / "invalid-issues/11.json").read_text(encoding="utf-8"))["status"], "needs-input")
+
+    def test_corrected_duplicate_pack_and_persisted_ledger_emit_only_resolution(self):
+        """A corrected duplicate must clear old input guidance without inventing a new contribution."""
+        (self.a / "uit-packs/Alpha.json").write_text(json.dumps(self.payload("Alpha")), encoding="utf-8")
+        self.commit(self.a, "already persisted base pack")
+        self.git(self.a, "push", "origin", "HEAD:main")
+        issue = self.issue()
+        valid_body = issue["body"]
+        issue["body"] = "Please read my exported file."
+        rejected, _ = self.invoke(self.a, issue, name="duplicate-invalid")
+        self.assert_success(rejected)
+        issue["body"] = valid_body
+        corrected, first_out = self.invoke(self.a, issue, name="duplicate-corrected")
+        self.assert_success(corrected)
+        self.assertTrue(self.remote_json("docs/contributions/inbox/.processed-issues/11.json"))
+        before = self.git(self.remote, "rev-parse", "main")
+        replay, replay_out = self.invoke(self.a, issue, name="duplicate-replayed")
+        self.assert_success(replay)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        for output in (first_out, replay_out):
+            resolved_path = output / "resolved-issues/11.json"
+            self.assertTrue(resolved_path.exists(), "A durable duplicate needs a resolution outbox")
+            resolved = json.loads(resolved_path.read_text(encoding="utf-8"))
+            self.assertEqual(resolved, {"issue_number": 11,
+                             "bodySha256": hashlib.sha256(valid_body.encode("utf-8")).hexdigest(),
+                             "status": "processed"})
+            self.assertFalse(list((output / "issues").glob("*.json")))
+            self.assertFalse(list((output / "reviews").glob("*.json")))
+            self.assertFalse((output / "summary.txt").exists())
+        self.assertFalse((replay_out / "result.json").exists())
+
+    def test_duplicate_pack_push_failure_publishes_no_resolution(self):
+        """An unpersisted duplicate ledger must not be exposed as a resolved issue."""
+        (self.a / "uit-packs/Alpha.json").write_text(json.dumps(self.payload("Alpha")), encoding="utf-8")
+        self.commit(self.a, "already persisted base pack")
+        self.git(self.a, "push", "origin", "HEAD:main")
+        hook = self.remote / "hooks" / "pre-receive"
+        hook.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8", newline="\n")
+        hook.chmod(0o755)
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.invoke(self.a, self.issue(), attempts=1)
         self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        self.assertFalse(output.exists())
+        self.assertFalse(any(p.endswith(".processed-issues/11.json") for p in self.remote_paths()))
+
+    def test_missing_or_invalid_uit_plugin_is_needs_input_without_processed_ledger(self):
+        """Missing/unsafe plugin identity must not become a silently processed valid issue."""
+        before = self.git(self.remote, "rev-parse", "main")
+        for index, plugin in enumerate((None, "bad/name", "A" * 121), start=40):
+            with self.subTest(plugin=plugin):
+                issue = self.issue(index)
+                payload = self.payload("Alpha")
+                if plugin is None:
+                    payload.pop("plugin")
+                else:
+                    payload["plugin"] = plugin
+                issue["body"] = json.dumps(payload)
+                result, output = self.invoke(self.a, issue, name=f"invalid-plugin-{index}")
+                self.assert_success(result)
+                self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+                rejection = json.loads((output / f"invalid-issues/{index}.json").read_text(encoding="utf-8"))
+                self.assertEqual(rejection["status"], "needs-input")
+                self.assertFalse((output / "result.json").exists())
+                self.assertFalse((output / "resolved-issues").exists())
+                self.assertFalse(any(p.endswith(f".processed-issues/{index}.json") for p in self.remote_paths()))
+
+    def test_repository_json_corruption_is_not_misclassified_as_user_input(self):
+        """Catching every ValueError would hide a broken persisted pack as an ordinary rejection."""
+        (self.a / "uit-packs/Alpha.json").write_text("{broken}", encoding="utf-8")
+        self.commit(self.a, "corrupted repository pack")
+        self.git(self.a, "push", "origin", "HEAD:main")
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.invoke(self.a, self.issue())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        self.assertFalse(output.exists())
+
+    def test_corrupted_processed_ledger_publishes_no_resolution(self):
+        """An unreadable persisted ledger cannot certify that an issue was processed."""
+        ledger = self.a / "docs/contributions/inbox/.processed-issues/11.json"
+        ledger.parent.mkdir(parents=True)
+        ledger.write_text("{broken}", encoding="utf-8")
+        self.commit(self.a, "corrupted processed ledger")
+        self.git(self.a, "push", "origin", "HEAD:main")
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.invoke(self.a, self.issue())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
+        self.assertFalse(output.exists())
+
+    def test_git_fetch_failure_is_not_misclassified_as_user_input(self):
+        """A valid contribution still fails visibly when its authoritative remote cannot be fetched."""
+        self.git(self.a, "remote", "set-url", "origin", str(self.root / "missing.git"))
+        result, output = self.invoke(self.a, self.issue())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("git failed", result.stderr)
+        self.assertFalse(output.exists())
+
+    def test_recovery_api_http_failure_remains_a_workflow_failure(self):
+        """An unavailable Issues API must not turn into a green run with no contributions."""
+        before = self.git(self.remote, "rev-parse", "main")
+        result, output = self.recover([], status=503)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("503", result.stderr)
         self.assertEqual(self.git(self.remote, "rev-parse", "main"), before)
         self.assertFalse(output.exists())
 

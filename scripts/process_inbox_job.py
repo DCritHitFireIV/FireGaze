@@ -29,6 +29,10 @@ INBOX = Path("docs/contributions/inbox")
 LEDGER = INBOX / ".processed-issues"
 
 
+class InvalidContribution(ValueError):
+    """An eligible issue needs corrected input; repository/API failures are not this outcome."""
+
+
 def write_json(path: Path, data) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -56,17 +60,41 @@ def prepare_issue(issue: dict) -> tuple[int, str, dict] | None:
         raise ValueError("Issue number must be positive")
     payload = extract_json(body)
     if not isinstance(payload, dict):
-        raise ValueError(f"Issue #{number} has no valid JSON contribution")
+        raise InvalidContribution("正文中没有可解析的 JSON 投稿内容。")
     if legacy_title and (not isinstance(payload.get("contributions"), list) or not payload["contributions"]):
         return None
     if payload.get("type") == "uit-contribution":
+        plugin = str(payload.get("plugin") or "").strip()
+        if not re.fullmatch(r"[A-Za-z0-9_.\-]{1,120}", plugin):
+            raise InvalidContribution("投稿缺少合法的插件内部名 plugin（1–120 个英文字母、数字、下划线、点或连字符）。")
         for key in ("entries", "resources", "attributes"):
             items = payload.get(key, [])
             if not isinstance(items, list) or any(not isinstance(item, dict) for item in items):
-                raise ValueError(f"Issue #{number} has invalid {key}")
+                raise InvalidContribution(f"投稿的 {key} 必须是由对象组成的列表。")
     elif not isinstance(payload.get("contributions"), list) or not payload["contributions"]:
-        raise ValueError(f"Issue #{number} is not a contribution payload")
+        raise InvalidContribution("JSON 中没有可处理的界面文字投稿或 contributions 列表。")
     return number, body, payload
+
+
+def reject_issue(output_dir: Path, issue: dict, error: InvalidContribution) -> None:
+    """Publish input guidance separately, without a success outbox or processed ledger."""
+    number = int(issue["number"])
+    reason = str(error)
+    comment = (
+        "### FireGaze 投稿需要补充内容\n\n"
+        f"{reason}\n\n"
+        "这份投稿尚未入库。请编辑本 issue，将导出文件的完整内容（包括 JSON 代码块）"
+        "粘贴到正文后保存；仅提供文件名或本机路径无法读取投稿。"
+        "保存后会重新校验，不需要重复创建 issue。\n"
+    )
+    write_json(output_dir / "invalid-issues" / f"{number}.json", {
+        "issue_number": number,
+        "bodySha256": hashlib.sha256(str(issue.get("body") or "").encode("utf-8")).hexdigest(),
+        "status": "needs-input",
+        "reason": reason,
+        "comment": comment,
+    })
+    print(f"::warning title=Contribution needs input::Issue #{number}: {reason}", flush=True)
 
 
 def ingest_issue(worktree: Path, outbox: Path, issue: dict, prepared: tuple) -> None:
@@ -142,7 +170,11 @@ def ingest_issue(worktree: Path, outbox: Path, issue: dict, prepared: tuple) -> 
 
 
 def transact(args, *, issue: dict | None = None) -> None:
-    prepared = prepare_issue(issue) if issue is not None else None
+    try:
+        prepared = prepare_issue(issue) if issue is not None else None
+    except InvalidContribution as error:
+        reject_issue(args.output_dir, issue, error)
+        return
     if issue is not None and prepared is None:
         return
     repo = args.repo.resolve()
@@ -160,12 +192,22 @@ def transact(args, *, issue: dict | None = None) -> None:
                     message = "chore: ingest direct translation contributions"
                 else:
                     ingest_issue(worktree, outbox, issue, prepared)
+                    write_json(outbox / "resolved-issues" / f"{prepared[0]}.json", {
+                        "issue_number": prepared[0],
+                        "bodySha256": hashlib.sha256(prepared[1].encode("utf-8")).hexdigest(),
+                        "status": "processed",
+                    })
                     message = f"chore: ingest translation contribution #{prepared[0]}"
                 # Stage only the ingestion's public data, never scripts or unrelated checkout changes.
                 paths = [str(path) for path in (INBOX, Path("uit-packs")) if (worktree / path).exists()]
                 if paths:
                     run(worktree, "git", "add", "--", *paths)
                 if run(worktree, "git", "diff", "--cached", "--quiet", check=False).returncode == 0:
+                    # A no-op issue was confirmed against freshly fetched main.
+                    # Publish only that durable fact, never a new success reply.
+                    resolved = outbox / "resolved-issues"
+                    if resolved.exists():
+                        shutil.copytree(resolved, args.output_dir / "resolved-issues", dirs_exist_ok=True)
                     return
                 run(worktree, "git", "-c", "user.name=github-actions[bot]", "-c",
                     "user.email=41898282+github-actions[bot]@users.noreply.github.com",

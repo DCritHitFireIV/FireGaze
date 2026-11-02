@@ -18,89 +18,20 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Release events point at a tag; statistics must update the main branch.
           ref: ${{ github.event.repository.default_branch }}
 
       - name: Update download statistics and README badge
-        id: update
         env:
           GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          python3 - <<'PY'
-          import json, os, urllib.request
-          from pathlib import Path
-
-          token = os.environ['GH_TOKEN']
-          repo = os.environ['GITHUB_REPOSITORY']
-
-          def api(url):
-              req = urllib.request.Request(
-                  url,
-                  headers={
-                      'Authorization': f'Bearer {token}',
-                      'Accept': 'application/vnd.github+json',
-                  },
-              )
-              with urllib.request.urlopen(req) as response:
-                  return json.load(response)
-
-          total = 0
-          latest_update = 0
-          page = 1
-          while True:
-              releases = api(f'https://api.github.com/repos/{repo}/releases?per_page=100&page={page}')
-              if not releases:
-                  break
-              for release in releases:
-                  for asset in release.get('assets', []):
-                      total += int(asset.get('download_count') or 0)
-                  published = release.get('published_at')
-                  if published:
-                      from datetime import datetime, timezone
-                      ts = int(datetime.fromisoformat(published.replace('Z', '+00:00')).timestamp())
-                      latest_update = max(latest_update, ts)
-              page += 1
-
-          with open('pluginmaster.json', encoding='utf-8') as handle:
-              master = json.load(handle)
-
-          changed = False
-          for item in master:
-              if item.get('DownloadCount') != total:
-                  item['DownloadCount'] = total
-                  changed = True
-              if latest_update and item.get('LastUpdate') != latest_update:
-                  item['LastUpdate'] = latest_update
-                  changed = True
-
-          with open('pluginmaster.json', 'w', encoding='utf-8') as handle:
-              json.dump(master, handle, ensure_ascii=False, indent=2)
-              handle.write('\n')
-
-          # Preserve the full count as text so Shields does not abbreviate it to k/M.
-          badge_path = Path('Resources/download-count.json')
-          badge = {'schemaVersion': 1, 'label': '下载', 'message': f'{total:,}', 'color': 'blue'}
-          badge_text = json.dumps(badge, ensure_ascii=False, indent=2) + '\n'
-          if not badge_path.exists() or badge_path.read_text(encoding='utf-8') != badge_text:
-              badge_path.write_text(badge_text, encoding='utf-8')
-              changed = True
-
-          print(f'total downloads = {total}, latest update = {latest_update}, changed = {changed}')
-          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
-              out.write(f'changed={str(changed).lower()}\n')
-          PY
-
-      - name: Commit changes
-        if: steps.update.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pluginmaster.json Resources/download-count.json
-          git commit -m "chore: update download count"
-          # 并发推送兜底：定时回写期间别的机器人工作流也在往 main 推，裸 push 会被 fetch first 拒绝
-          git push || { git pull --rebase && git push; }
+          python3 scripts/update_download_count.py \
+            --repo "$GITHUB_WORKSPACE" \
+            --branch "$DEFAULT_BRANCH"
