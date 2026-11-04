@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "updatedAt": "2026-11-02"
+  "updatedAt": "2026-11-04"
  },
  "DalamudRepoBrowser": {
   "Punchline": {
@@ -456,7 +456,7 @@
   "Repo": "https://love.puni.sh/ment.json",
   "Author": "Det, croizat",
   "Icon": "https://puni.sh/api/plugins/icon/47",
-  "Updated": 1793566143,
+  "Updated": 1793700884,
   "ApiLevel": 15
  },
  "Marketbuddy": {
@@ -498,7 +498,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "kawaii, NightmareXIV",
   "Icon": "https://puni.sh/api/plugins/icon/24",
-  "Updated": 1792368614,
+  "Updated": 1793771225,
   "ApiLevel": 15
  },
  "YesAlready": {
@@ -1049,7 +1049,7 @@
   "Repo": "https://raw.githubusercontent.com/IndividualGather/RotationSolverRebornButBetter/main/repo.json",
   "Author": "The Combat Reborn Team (fork by IndividualGather)",
   "Icon": "https://raw.githubusercontent.com/IndividualGather/RotationSolverRebornButBetter/main/branding/Logo.png",
-  "Updated": 1793393244,
+  "Updated": 1793734184,
   "ApiLevel": 15
  },
  "ActionTimelineReborn": {
@@ -1519,7 +1519,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "veyn, croizat",
   "Icon": "https://puni.sh/api/plugins/icon/58",
-  "Updated": 1781106410,
+  "Updated": 1793783682,
   "ApiLevel": 15
  },
  "visland": {
@@ -1540,7 +1540,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "veyn, croizat",
   "Icon": "https://puni.sh/api/plugins/icon/28",
-  "Updated": 1789544765,
+  "Updated": 1793782631,
   "ApiLevel": 15
  },
  "vfaux": {
@@ -4738,7 +4738,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "croizat",
   "Icon": "https://puni.sh/api/plugins/icon/34",
-  "Updated": 1793406987,
+  "Updated": 1793704449,
   "ApiLevel": 15
  },
  "GlamourLog": {
@@ -4903,7 +4903,7 @@
   },
   "Repo": "https://repo.caraxian.com",
   "Author": "Caraxi",
-  "Updated": 1785502455,
+  "Updated": 1793778838,
   "ApiLevel": 15
  },
  "ARControl": {
@@ -7046,7 +7046,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/HuntAlerts/main/images/icon.png",
-  "Updated": 1793516611,
+  "Updated": 1793695827,
   "ApiLevel": 15
  },
  "XIVComboExpanded": {
@@ -8463,7 +8463,7 @@
   "Repo": "https://raw.githubusercontent.com/FunkyJumbo/DPS-In-Server-Bar/master/pluginmaster.json",
   "Author": "FunkyJumbo",
   "Icon": "https://raw.githubusercontent.com/FunkyJumbo/DPS-In-Server-Bar/master/DpsInServerBar/icon.png",
-  "Updated": 1793057793,
+  "Updated": 1793755409,
   "ApiLevel": 15
  },
  "RollingBattery": {
@@ -9391,7 +9391,7 @@
   "Repo": "https://aethertek.io/x.json",
   "Author": "XA",
   "Icon": "https://raw.githubusercontent.com/xa-io/XA-Slave/master/XASlave/images/icon.png",
-  "Updated": 1793286699,
+  "Updated": 1793646884,
   "ApiLevel": 15
  },
  "XAHudNavigator": {
@@ -9788,18 +9788,19 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Meant to import/create mit plans and showcase the cooldowns in real time",
-   "Translated": "用于导入或创建减伤计划，并实时显示技能冷却。",
+   "Original": "Detects your duty, runs the fight's timeline (cactbot format, synced to the boss's actual abilities), and shows the next mechanics with countdowns and type (tank buster, raid-wide, ...). Attach your cooldowns to specific mechanics per job, and get a callout a few seconds before each one. Optional per-cooldown auto-use. Ships with every fight cactbot has a timeline for (300+ dungeons, trials, raids and ultimates, refreshed weekly), with tank busters and raid-wides pre-tagged.",
+   "Translated": "检测你的任务，运行战斗时间轴（cactbot 格式，与首领的实际技能同步），并显示接下来的机制及倒计时和类型（坦克死刑、全屏攻击等）。按职业将你的冷却技能关联到特定机制，并在每个机制前几秒获得提示。可选按冷却自动使用。附带 cactbot 拥有时间轴的所有战斗（300+ 副本、讨伐战、大型任务和绝境战，每周更新），坦克死刑和全屏攻击已预先标记。",
    "Source": "ai"
   },
   "Name": {
-   "Original": "Mitigation Planner",
-   "Translated": "减伤规划器"
+   "Original": "Mit Planner",
+   "Translated": "减伤规划器",
+   "Source": "ai"
   },
-  "Repo": "https://raw.githubusercontent.com/psikerfy/MitigationPlanner/master/MitPlanner/plugin.json",
-  "Author": "psikerfy",
-  "Icon": "https://raw.githubusercontent.com/psikerfy/MitigationPlanner/refs/heads/master/Data/neeko.png",
-  "ApiLevel": 14
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
  },
  "ProjectSecondPromise": {
   "Punchline": {
@@ -9913,7 +9914,7 @@
   "Repo": "https://aethertek.io/x.json",
   "Author": "DhogGPT",
   "Icon": "https://raw.githubusercontent.com/McVaxius/dad/main/images/icon.png",
-  "Updated": 1793390058,
+  "Updated": 1793744211,
   "ApiLevel": 15
  },
  "dheacon": {
@@ -10101,7 +10102,7 @@
   "Repo": "https://aethertek.io/x.json",
   "Author": "DhogGPT",
   "Icon": "https://raw.githubusercontent.com/McVaxius/ADS/main/ADS/images/icon.png",
-  "Updated": 1793454319,
+  "Updated": 1793744182,
   "ApiLevel": 15
  },
  "BFE": {
@@ -10602,7 +10603,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/twelvehouse/DalamudPlugins/main/pluginmaster.json",
   "Author": "twelvehouse",
-  "Updated": 1790381687,
+  "Updated": 1793684611,
   "ApiLevel": 15
  },
  "FootIK": {
@@ -10622,7 +10623,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/twelvehouse/DalamudPlugins/main/pluginmaster.json",
   "Author": "twelvehouse",
-  "Updated": 1790381687,
+  "Updated": 1793684611,
   "ApiLevel": 14
  },
  "TomestonePhone": {
@@ -11872,7 +11873,7 @@
   "Repo": "https://raw.githubusercontent.com/Cellar-Mander/say-my-name/main/repo.json",
   "Author": "Cellar Mander",
   "Icon": "https://raw.githubusercontent.com/Cellar-Mander/say-my-name/v0.1.1.0/SayMyName/images/icon.png",
-  "Updated": 1793404327,
+  "Updated": 1793760518,
   "ApiLevel": 15
  },
  "UndercutterFFXIV": {
@@ -12073,7 +12074,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/PvpAutoLb.png",
-  "Updated": 1792657543,
+  "Updated": 1793718801,
   "ApiLevel": 15
  },
  "TempoTerror": {
@@ -13258,7 +13259,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/VimaFFXIV/DalamudPlugins/master/repo.json",
   "Author": "VimaFFXIV",
-  "Updated": 1793570116,
+  "Updated": 1793771591,
   "ApiLevel": 15
  },
  "ArtisanBuddy": {
@@ -13603,13 +13604,13 @@
  },
  "AuxMarketboard": {
   "Punchline": {
-   "Original": "Price imported and custom item lists from Universalis",
-   "Translated": "利用 Universalis 为导入或自定义的物品清单估价。",
+   "Original": "Price shopping lists by whole stack with tax and plan which worlds to buy from",
+   "Translated": "按整叠含税为购物清单比价，并规划从哪些服务器购买",
    "Source": "ai"
   },
   "Description": {
-   "Original": "Builds an item list manually or from artisan/teamcraft link imports, fetches marketboard prices from Universalis, and shows per-item plus total cost.",
-   "Translated": "手动创建物品清单，或从 Artisan/Teamcraft 链接导入；从 Universalis 获取市场价格，并显示单项及总成本。",
+   "Original": "Build a shopping list by search or by importing Teamcraft links, Artisan exports and item lines. Prices come from live Universalis listings, bought as whole stacks including the 5% market tax, and are turned into a per-world buy plan with an optional limit on how many worlds to use.",
+   "Translated": "通过搜索或导入 Teamcraft 链接、Artisan 导出和物品行来构建购物清单。价格来自实时 Universalis 挂单，按整叠购买并包含 5% 市场税，并转化为按服务器划分的购买计划，可选择性限制使用的服务器数量。",
    "Source": "ai"
   },
   "Name": {
@@ -13618,8 +13619,8 @@
   },
   "Repo": "https://raw.githubusercontent.com/auxee/AuxDalamudRepo/main/repo.json",
   "Author": "Auxie",
-  "Icon": "https://raw.githubusercontent.com/auxee/AuxMarketboard/main/AuxMarketboard/plugin_icon.png",
-  "Updated": 1779005484,
+  "Icon": "https://raw.githubusercontent.com/auxee/AuxMarketboard/main/plugin_icon.png",
+  "Updated": 1793666445,
   "ApiLevel": 15
  },
  "AuxEmotion": {
@@ -13640,7 +13641,7 @@
   "Repo": "https://raw.githubusercontent.com/auxee/AuxDalamudRepo/main/repo.json",
   "Author": "Auxie",
   "Icon": "https://raw.githubusercontent.com/auxee/AuxEmotion/main/plugin_icon.png",
-  "Updated": 1779005484,
+  "Updated": 1793666445,
   "ApiLevel": 15
  },
  "NoBodyPull": {
@@ -14005,7 +14006,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/solona-m/plugins/main/repo.json",
   "Author": "Solona",
-  "Updated": 1793586623,
+  "Updated": 1793706298,
   "ApiLevel": 15
  },
  "Privacy": {
@@ -14189,7 +14190,7 @@
   "Repo": "https://raw.githubusercontent.com/solona-m/plugins/main/repo.json",
   "Author": "Solona",
   "Icon": "https://dl.solona.info/icon.png",
-  "Updated": 1793586622,
+  "Updated": 1793706296,
   "ApiLevel": 15
  },
  "Slackingway": {
@@ -14371,7 +14372,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/Mahjong.Plugin.Dalamud.png",
-  "Updated": 1791862628,
+  "Updated": 1793718801,
   "ApiLevel": 15
  },
  "AutoDailyTribes": {
@@ -14393,7 +14394,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoDailyTribes.png",
-  "Updated": 1792657527,
+  "Updated": 1793718801,
   "ApiLevel": 15
  },
  "GlamorousTerror": {
@@ -14708,7 +14709,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoFateGrind.png",
-  "Updated": 1792597846,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "AutoPvpSeriesGrind": {
@@ -14729,7 +14730,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoPvpSeriesGrind.png",
-  "Updated": 1792849223,
+  "Updated": 1793778800,
   "ApiLevel": 15
  },
  "Aetherphone": {
@@ -14771,7 +14772,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoHuntGrinder.png",
-  "Updated": 1792597850,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "SealBreaker": {
@@ -16878,7 +16879,7 @@
   "Repo": "https://raw.githubusercontent.com/AlexFlipnote/XIV_HolyPlugin/release/repo.json",
   "Author": "AlexFlipnote",
   "Icon": "https://raw.githubusercontent.com/AlexFlipnote/XIV_HolyPlugin/master/HoliestFluffiness/Images/icon.png",
-  "Updated": 1793481033,
+  "Updated": 1793729813,
   "ApiLevel": 15
  },
  "KefkaHelper": {
@@ -17060,7 +17061,7 @@
   "Repo": "https://raw.githubusercontent.com/HeiMiyano/Aethernet/main/repo.json",
   "Author": "Hei Miyano",
   "Icon": "https://raw.githubusercontent.com/HeiMiyano/Aethernet/main/images/icon.png",
-  "Updated": 1793473469,
+  "Updated": 1793592950,
   "ApiLevel": 15
  },
  "GlamLevels": {
@@ -19589,7 +19590,7 @@
   "Repo": "https://raw.githubusercontent.com/ofnature/Charon/main/repo.json",
   "Author": "ofnature",
   "Icon": "https://raw.githubusercontent.com/ofnature/Charon/main/images/icon.png",
-  "Updated": 1793559594,
+  "Updated": 1793761575,
   "ApiLevel": 15
  },
  "BetterDiscordRichPresence": {
@@ -20758,8 +20759,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Phu de tieng Viet cho thoai FFXIV. Overlay chu co dau chuan (font BeVietnam Pro), giu nguyen ten rieng tieng Anh. A Realm Reborn, Heavensward, Stormblood, Shadowbringers, Endwalker va Dawntrail (toi 7.5): MSQ day du cung nhiem vu Nghe/Job, Role, Duty va mo khoa tinh nang; nhiem vu bo toc (beast tribe / allied society) tu A Realm Reborn toi Dawntrail: day du, ca nhiem vu hang ngay (daily). Side quest (nhiem vu phu) ca sau ban mo rong, tu A Realm Reborn toi Dawntrail: day du. Them thoai boss trong dungeon/trial/raid tu ARR toi Dawntrail, va cac su kien mua 7.x. Ban dich ngoai tuyen, khong sua du lieu game.",
-   "Translated": "为 FFXIV 对话提供越南语字幕。悬浮文本使用 BeVietnam Pro 字体正确显示变音符号，并保留英文专有名词。覆盖《重生之境》《苍穹之禁城》《红莲之狂潮》《暗影之逆焰》《晓月之终途》和《金曦之遗辉》（截至 7.5）：完整主线，以及职业、特职、职能、副本和功能解锁任务；《重生之境》至《金曦之遗辉》的友好部族任务完整覆盖，包含每日任务。六部资料片的支线任务也全部覆盖。另包含从 ARR 到《金曦之遗辉》的迷宫、讨伐歼灭战和团队副本首领对话，以及 7.x 的季节活动。采用离线译文，不修改游戏数据。",
+   "Original": "Phu de tieng Viet cho thoai FFXIV. Overlay chu co dau chuan (font BeVietnam Pro), giu nguyen ten rieng tieng Anh. A Realm Reborn, Heavensward, Stormblood, Shadowbringers, Endwalker va Dawntrail (toi 7.5): MSQ day du cung nhiem vu Nghe/Job, Role, Duty va mo khoa tinh nang; nhiem vu bo toc (beast tribe / allied society) tu A Realm Reborn toi Dawntrail: day du, ca nhiem vu hang ngay (daily). Side quest (nhiem vu phu) ca sau ban mo rong, tu A Realm Reborn toi Dawntrail: day du. Phim co long tieng (voiced cutscene) ca sau ban mo rong, tu A Realm Reborn toi Dawntrail: day du. Them thoai boss trong dungeon/trial/raid tu ARR toi Dawntrail, va cac su kien mua 7.x. Ban dich ngoai tuyen, khong sua du lieu game.",
+   "Translated": "Phu de tieng Viet cho thoai FFXIV. Overlay chu co dau chuan (font BeVietnam Pro), giu nguyen ten rieng tieng Anh. 重生之境、苍穹、Stormblood　-血雨狂潮-、Shadowbringers　-暗影使者-、晓月之终途 va 金曦之遗辉 (toi 7.5): MSQ day du cung nhiem vu Nghe/Job, Role, Duty va mo khoa tinh nang; nhiem vu bo toc (beast tribe / allied society) tu 重生之境 toi 金曦之遗辉: day du, ca nhiem vu hang ngay (daily). Side quest (nhiem vu phu) ca sau ban mo rong, tu 重生之境 toi 金曦之遗辉: day du. Phim co long tieng (voiced cutscene) ca sau ban mo rong, tu 重生之境 toi 金曦之遗辉: day du. Them thoai boss trong dungeon/trial/raid tu ARR toi 金曦之遗辉, va cac su kien mua 7.x. Ban dich ngoai tuyen, khong sua du lieu game.",
    "Source": "ai"
   },
   "Name": {
@@ -20888,7 +20889,7 @@
   "Repo": "https://raw.githubusercontent.com/ashdam/gubal-library/main/repo.json",
   "Author": "ashdam",
   "Icon": "https://raw.githubusercontent.com/ashdam/gubal-library/main/images/icon.png",
-  "Updated": 1793134922,
+  "Updated": 1793641984,
   "ApiLevel": 15
  },
  "NyaaTriggers": {
@@ -23799,7 +23800,7 @@
   "Repo": "https://raw.githubusercontent.com/n0way02/FateFrenzy/main/repo/pluginmaster.json",
   "Author": "n0way02",
   "Icon": "https://raw.githubusercontent.com/n0way02/FateFrenzy/main/FateFrenzy/Images/Icon.png",
-  "Updated": 1793391042
+  "Updated": 1793622823
  },
  "UMADAnoMech": {
   "Punchline": {
@@ -25202,7 +25203,7 @@
   "Repo": "https://raw.githubusercontent.com/PayneZA/ViewInFFXIV/main/repo.json",
   "Author": "PayneZA",
   "Icon": "https://raw.githubusercontent.com/PayneZA/ViewInFFXIV/main/ViewInFFXIV/images/icon.png",
-  "Updated": 1792397816,
+  "Updated": 1793746893,
   "ApiLevel": 15
  },
  "MidnightTimeline": {
@@ -28154,7 +28155,7 @@
   "Repo": "https://raw.githubusercontent.com/ShoOtaku/DalamudPlugins/main/pluginmaster.json",
   "Author": "XSZYYS",
   "Icon": "https://raw.githubusercontent.com/ShoOtaku/DalamudPlugins/main/plugins/XSZToolbox/icon.png",
-  "Updated": 1793586047,
+  "Updated": 1793759907,
   "ApiLevel": 15
  },
  "XSZRemoteChatBridge": {
@@ -28650,7 +28651,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/gezimao/Plugins/main/custom-repo/repo.json",
   "Author": "gezimao",
-  "Updated": 1792901710,
+  "Updated": 1793628576,
   "ApiLevel": 15
  },
  "NameplateSignResizer": {
@@ -29638,7 +29639,7 @@
   "Repo": "https://raw.githubusercontent.com/kuchris/DalamudPlugins/main/repo.json",
   "Author": "kuchris",
   "Icon": "https://raw.githubusercontent.com/kuchris/OCBFR/main/images/icon.png",
-  "Updated": 1792868497,
+  "Updated": 1793615859,
   "ApiLevel": 15
  },
  "MagicBulletFullEffects": {
@@ -31059,7 +31060,7 @@
   "Repo": "https://raw.githubusercontent.com/QuserH/zh-repo/main/pluginmaster.json",
   "Author": "菱叶",
   "Icon": "https://raw.githubusercontent.com/QuserH/zh-repo/main/EorzeaPhone-icon.png",
-  "Updated": 1793527785,
+  "Updated": 1793689727,
   "ApiLevel": 15
  },
  "AutoBot": {
@@ -32700,7 +32701,7 @@
   "Repo": "https://raw.githubusercontent.com/zhui-zi/DalamudPlugins/main/pluginmaster.json",
   "Author": "zhui-zi",
   "Icon": "https://raw.githubusercontent.com/zhui-zi/DalamudPlugins/main/plugins/KeitaToolbox/icon.png",
-  "Updated": 1792718540,
+  "Updated": 1793625092,
   "ApiLevel": 15
  },
  "NyaDamagePrediction": {
@@ -32834,7 +32835,7 @@
   "Repo": "https://raw.githubusercontent.com/anmili2022/Phantom/main/repo.json",
   "Author": "Anmi",
   "Icon": "https://raw.githubusercontent.com/anmili2022/Phantom/main/images/icon.png",
-  "Updated": 1793525967,
+  "Updated": 1793696604,
   "ApiLevel": 15
  },
  "DjScraperPlugin": {
@@ -34533,7 +34534,7 @@
   "Repo": "https://raw.githubusercontent.com/AngelicaProject/Harmonia/main/repo.json",
   "Author": "pokeda",
   "Icon": "https://raw.githubusercontent.com/AngelicaProject/Harmonia/main/Harmonia/Assets/Icon/harmonia_icon.png",
-  "Updated": 1793360969,
+  "Updated": 1793697486,
   "ApiLevel": 15
  },
  "BlueMageHelper-bld": {
@@ -34722,7 +34723,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/Iluay0/studium/master/repo.json",
   "Author": "Iluay",
-  "Updated": 1790534197,
+  "Updated": 1793610245,
   "ApiLevel": 15
  },
  "AutoFatre": {
@@ -35225,7 +35226,7 @@
   "Repo": "https://raw.githubusercontent.com/MarshalTitan/Sentinel/main/repo.json",
   "Author": "MTitan",
   "Icon": "https://raw.githubusercontent.com/MarshalTitan/SentinelHUD/main/assets/icon.png",
-  "Updated": 1793579970,
+  "Updated": 1793624874,
   "ApiLevel": 15
  },
  "GearsetGallery": {
@@ -35268,7 +35269,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoHuntTrain.png",
-  "Updated": 1792657534,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "AutoTripleTriadGrind": {
@@ -35290,7 +35291,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoTripleTriadGrind.png",
-  "Updated": 1792657547,
+  "Updated": 1793718801,
   "ApiLevel": 15
  },
  "BibisUpdateBuddy": {
@@ -35589,7 +35590,7 @@
   "Repo": "https://raw.githubusercontent.com/IndividualGather/xiv-mcp/master/repo.json",
   "Author": "IndividualGather",
   "Icon": "https://raw.githubusercontent.com/IndividualGather/xiv-mcp/master/XivMcp/images/icon.png",
-  "Updated": 1793579406,
+  "Updated": 1793754656,
   "ApiLevel": 15
  },
  "XivWayfinder": {
@@ -35696,7 +35697,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/twelvehouse/DalamudPlugins/main/pluginmaster.json",
   "Author": "twelvehouse",
-  "Updated": 1790381687,
+  "Updated": 1793684611,
   "ApiLevel": 15
  },
  "SellWise": {
@@ -35938,8 +35939,8 @@
   },
   "Repo": "https://raw.githubusercontent.com/boloni96/Equinox-Companion/main/repo.json",
   "Author": "Boloni",
-  "Icon": "https://raw.githubusercontent.com/boloni96/Equinox-Companion/main/dist/v0.5.1.372/icon.png",
-  "Updated": 1793575448,
+  "Icon": "https://raw.githubusercontent.com/boloni96/Equinox-Companion/main/dist/v0.5.1.404/icon.png",
+  "Updated": 1793769200,
   "ApiLevel": 15
  },
  "ChocoboRadio": {
@@ -36552,7 +36553,7 @@
   "Repo": "https://raw.githubusercontent.com/t3knical/DalamudPlugins/main/repo.json",
   "Author": "T3chnicalD3ath Inc.",
   "Icon": "https://raw.githubusercontent.com/t3knical/DalamudPlugins/main/plugins/BardPerformanceHelper/icon.png",
-  "Updated": 1793251681,
+  "Updated": 1793771871,
   "ApiLevel": 15
  },
  "RomEmulator": {
@@ -36640,7 +36641,7 @@
   "Repo": "https://raw.githubusercontent.com/dsarhid/GoblinTweaks/main/repo.json",
   "Author": "David Sarhid",
   "Icon": "https://raw.githubusercontent.com/dsarhid/GoblinTweaks/main/GoblinTweaks/Assets/Icon.png",
-  "Updated": 1793482514,
+  "Updated": 1793698686,
   "ApiLevel": 15
  },
  "EnhancedContextMenu": {
@@ -37127,7 +37128,7 @@
   "Repo": "https://raw.githubusercontent.com/Lunarris/LunarRepo/main/repo/pluginmaster.json",
   "Author": "Lunarris",
   "Icon": "https://raw.githubusercontent.com/Lunarris/LunarRepo/refs/heads/main/icons/Chat3Icon.png",
-  "Updated": 1792792631,
+  "Updated": 1793764518,
   "ApiLevel": 15
  },
  "RimeReadyCheck": {
@@ -45805,7 +45806,7 @@
   "Repo": "https://raw.githubusercontent.com/shifusen329/raid-replay/master/repo.json",
   "Author": "shifusen329",
   "Icon": "https://raw.githubusercontent.com/shifusen329/raid-replay/master/assets/icon.png",
-  "Updated": 1793463430,
+  "Updated": 1793765762,
   "ApiLevel": 15
  },
  "AvailableHousingSearch": {
@@ -45890,7 +45891,7 @@
   "Repo": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
   "Author": "Roxyz0501",
   "Icon": "https://raw.githubusercontent.com/Roxyz0501/AllaganLocal/main/images/icon.png",
-  "Updated": 1792993928,
+  "Updated": 1793779741,
   "ApiLevel": 15
  },
  "RetainerRecall": {
@@ -46084,7 +46085,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "wah",
   "Icon": "https://puni.sh/api/plugins/icon/180",
-  "Updated": 1793562879,
+  "Updated": 1793766773,
   "ApiLevel": 15
  },
  "EmoteShelf": {
@@ -46211,7 +46212,7 @@
   "Repo": "https://raw.githubusercontent.com/Lunarris/LunarRepo/main/repo/pluginmaster.json",
   "Author": "Lunarris",
   "Icon": "https://raw.githubusercontent.com/Lunarris/LunarRepo/refs/heads/main/icons/VFXHider.png",
-  "Updated": 1791968793,
+  "Updated": 1793764991,
   "ApiLevel": 15
  },
  "PluginChatOverlay": {
@@ -46298,7 +46299,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/nedris/xiv-plugins/main/repo.json",
   "Author": "Nedris",
-  "Updated": 1792870235,
+  "Updated": 1792870237,
   "ApiLevel": 15
  },
  "SyncPriority": {
@@ -46319,7 +46320,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/nedris/xiv-plugins/main/repo.json",
   "Author": "Nedris",
-  "Updated": 1792582200,
+  "Updated": 1792582202,
   "ApiLevel": 15
  },
  "Waypoint": {
@@ -46341,7 +46342,7 @@
   "Repo": "https://raw.githubusercontent.com/nedris/xiv-plugins/main/repo.json",
   "Author": "Nedris",
   "Icon": "https://raw.githubusercontent.com/nedris/xiv-plugins/main/plugins/Waypoint/icon.png",
-  "Updated": 1792939369,
+  "Updated": 1792939373,
   "ApiLevel": 15
  },
  "StoryMode": {
@@ -47648,7 +47649,7 @@
   },
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "Nickoos",
-  "Updated": 1793569802,
+  "Updated": 1793784003,
   "ApiLevel": 13
  },
  "PovPlus": {
@@ -49091,14 +49092,14 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Right-click any character in the world, on the party list or in chat and pick Zoom In. The camera swings around to face them and moves in close, and it stays on them as they move.\n\n• Nearby list: everyone around you with job icons, distance and a name search. Double-click to zoom, right-click for options.\n• Framing pad: drag to slide the view around them to set up the shot.\n• Mirror: look at yourself from the front to check your glam or expression.\n• Player Sync / Lightless: filter the list to synced people, with PS / LL badges.\n• Top bar button to open it, showing who you're zoomed on.\n\nWhen you stop, the camera returns behind you at your old zoom. It stops on its own if they leave, you zone, a cutscene starts or you enter combat — all adjustable in settings.",
-   "Translated": "右键点击场景、小队列表或聊天中的任意角色，并选择“放大”。镜头会转到对方面前并拉近，在其移动时继续跟随。\n\n• 附近玩家列表：显示职业图标、距离，支持按姓名搜索。双击放大，右键查看更多选项。\n• 构图面板：拖动以调整围绕目标的视角，安排构图。\n• 镜子：从正面查看自己，检查幻化或表情。\n• Player Sync／Lightless：按同步关系筛选列表，显示 PS／LL 标识。\n• 顶栏按钮：点击打开，并显示当前镜头锁定的对象。\n\n停止后，镜头恢复到你身后及原来的缩放距离。目标离开、切换区域、开始过场动画或进入战斗时会自动停止，这些行为均可调整。",
+   "Original": "Right-click any character in the world, on the party list or in chat and pick Zoom In. The camera swings around to face them and moves in close, and it stays on them as they move.\n\n• Nearby list: everyone around you with job icons, distance and a name search. Double-click to zoom, right-click for options.\n• Framing pad: drag to slide the view around them to set up the shot.\n• Mirror: look at yourself from the front to check your glam or expression.\n• Player Sync / Lightless: filter the list to synced people, with PS / LL badges.\n• Hide UI while zoomed for clean screenshots.\n• Top bar button to open it, showing who you're zoomed on.\n\nWhen you stop, the camera returns behind you at your old zoom. It stops on its own if they leave, you zone, a cutscene starts or you enter combat — all adjustable in settings.",
+   "Translated": "右键点击世界中的任何角色、小队列表或聊天窗口中的角色，并选择放大。镜头会转向他们并拉近，且在他们移动时保持跟随。\n\n• 附近列表：显示你周围的所有人，包含职业图标、距离和名称搜索。双击放大，右键查看选项。\n• 构图板：拖动以在他们周围滑动视角来构图。\n• 镜像：从正面观察自己，检查幻化或表情。\n• Player Sync / Lightless：将列表筛选为同步的人，带有 PS / LL 标记。\n• 放大时隐藏 UI，以便截取干净的画面。\n• 顶栏按钮可打开它，显示你当前放大的是谁。\n\n当你停止时，镜头会回到你身后原来的缩放。如果他们离开、你切换区域、开始过场动画或进入战斗，它会自动停止——所有这些都可以在设置中调整。",
    "Source": "ai"
   },
-  "Repo": "https://raw.githubusercontent.com/sadoniaveletoria/TargetZoom/main/repo.json",
+  "Repo": "https://raw.githubusercontent.com/sadoniaveletoria/DalamudPlugins/main/pluginmaster.json",
   "Author": "Sadonia",
   "Icon": "https://raw.githubusercontent.com/sadoniaveletoria/TargetZoom/main/images/icon.png",
-  "Updated": 1791987511,
+  "Updated": 1793727296,
   "ApiLevel": 15
  },
  "Ukeire": {
@@ -49652,7 +49653,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoGcSupply.png",
-  "Updated": 1792597902,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "AutoHouseLottery": {
@@ -49674,7 +49675,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoHouseLottery.png",
-  "Updated": 1792657537,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "AutoSeller": {
@@ -49696,7 +49697,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoSeller.png",
-  "Updated": 1792597869,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "AutoShopper": {
@@ -49718,7 +49719,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoShopper.png",
-  "Updated": 1792597978,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "DelvUIJP": {
@@ -49938,7 +49939,7 @@
   "Repo": "https://raw.githubusercontent.com/NoirYamato/DalamudPlugins/main/repo.json",
   "Author": "Anomek, Noir Yamato",
   "Icon": "https://raw.githubusercontent.com/NoirYamato/DalamudPlugins/main/icons/noirmech.png",
-  "Updated": 1793461104,
+  "Updated": 1793765042,
   "ApiLevel": 15
  },
  "Chronicle": {
@@ -49959,7 +49960,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/nedris/xiv-plugins/main/repo.json",
   "Author": "Nedris",
-  "Updated": 1792939369,
+  "Updated": 1792939373,
   "ApiLevel": 15
  },
  "CrowdMute": {
@@ -50023,7 +50024,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/pressing7/PartyViewKR/main/pluginmaster.json",
   "Author": "Local build",
-  "Updated": 1793146678,
+  "Updated": 1793713620,
   "ApiLevel": 15
  },
  "DutyHuddle": {
@@ -50219,7 +50220,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoTreasureMaps.png",
-  "Updated": 1792641419,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "Yanjiu": {
@@ -50647,7 +50648,7 @@
   "Repo": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
   "Author": "Roxyz0501",
   "Icon": "https://raw.githubusercontent.com/Roxyz0501/KuzushiBeacon/main/KuzushiBeacon/images/icon.png",
-  "Updated": 1792993970,
+  "Updated": 1793730475,
   "ApiLevel": 15
  },
  "MarketLedger": {
@@ -50931,7 +50932,7 @@
   "Repo": "https://raw.githubusercontent.com/kaldigo/DalamudPlugins/main/pluginmaster.json",
   "Author": "kaldigo",
   "Icon": "https://raw.githubusercontent.com/kaldigo/FFXIVAccord/main/assets/icon.png",
-  "Updated": 1793395480,
+  "Updated": 1793615522,
   "ApiLevel": 15
  },
  "Aetherworks": {
@@ -51476,7 +51477,7 @@
   "Repo": "https://raw.githubusercontent.com/kaldigo/DalamudPlugins/main/pluginmaster.json",
   "Author": "kaldigo; based on MidoriKami's ExpandedHotbars",
   "Icon": "https://raw.githubusercontent.com/kaldigo/ExpandedHotbars/master/ExpandedHotbars/images/icon.png",
-  "Updated": 1793294109,
+  "Updated": 1793716089,
   "ApiLevel": 15
  },
  "BagSense": {
@@ -51658,7 +51659,6 @@
   },
   "Repo": "https://raw.githubusercontent.com/SmolShar/NearVoice-Downloads/main/repo.json",
   "Author": "XeldarAlz; local Discord adaptation",
-  "Icon": "https://raw.githubusercontent.com/XeldarAlz/FFXIV-Aetherphone/master/src/Aetherphone/Images/Icon.png",
   "Updated": 1792890854,
   "ApiLevel": 15
  },
@@ -52003,8 +52003,8 @@
   },
   "Repo": "https://aethertek.io/x.json",
   "Author": "McVaxius",
-  "Icon": "https://github.com/McVaxius/BMRVariantLoader-Public/releases/download/v3.1.0.1/icon.png",
-  "Updated": 1793593298,
+  "Icon": "https://github.com/McVaxius/BMRVariantLoader-Public/releases/download/v3.1.2.7/icon.png",
+  "Updated": 1793785626,
   "ApiLevel": 15
  },
  "ICantBeHere": {
@@ -52175,7 +52175,7 @@
   "Repo": "https://raw.githubusercontent.com/kaldigo/DalamudPlugins/main/pluginmaster.json",
   "Author": "kaldigo",
   "Icon": "https://raw.githubusercontent.com/kaldigo/FFXIVSteward/main/assets/icon.png",
-  "Updated": 1793404384,
+  "Updated": 1793756195,
   "ApiLevel": 15
  },
  "CraftProfile": {
@@ -52434,7 +52434,7 @@
   "Repo": "https://raw.githubusercontent.com/Rin-0617/RinPlugins/main/pluginmaster.json",
   "Author": "Rin",
   "Icon": "https://raw.githubusercontent.com/Rin-0617/ReplayToolboxDist/main/images/icon.png",
-  "Updated": 1793535461,
+  "Updated": 1793627832,
   "ApiLevel": 15
  },
  "BackSlide": {
@@ -52707,7 +52707,7 @@
   "Repo": "https://raw.githubusercontent.com/Momikk/DalamudPlugins/main/pluginmaster.json",
   "Author": "Momikk",
   "Icon": "https://raw.githubusercontent.com/Momikk/RecycleKing/main/images/icon.png",
-  "Updated": 1793191936,
+  "Updated": 1793724875,
   "ApiLevel": 15
  },
  "MeowNET": {
@@ -53017,7 +53017,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/wefljkwg/Limber/main/repo.json",
   "Author": "Limber contributors",
-  "Updated": 1793578015,
+  "Updated": 1793768244,
   "ApiLevel": 15
  },
  "PlayerSyncModExporter": {
@@ -53489,7 +53489,7 @@
   "Repo": "https://raw.githubusercontent.com/KEWI-hub/KeyboundBrawler/main/repo.json",
   "Author": "KEWI",
   "Icon": "https://raw.githubusercontent.com/KEWI-hub/KeyboundBrawler/main/images/icon.png",
-  "Updated": 1793536391,
+  "Updated": 1793612770,
   "ApiLevel": 15
  },
  "KTGProbe": {
@@ -53797,7 +53797,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/repo.json",
   "Author": "Tataru-business",
-  "Icon": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/plugins/TataruBrawler/images/icon.png",
+  "Icon": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/plugins/KeyboundAutomation/images/icon.png",
   "Updated": 1793551497,
   "ApiLevel": 15
  },
@@ -53958,7 +53958,7 @@
   "Repo": "https://raw.githubusercontent.com/Tiberius1OOO/DragonTyper/main/repo.json",
   "Author": "Tiberius1OOO",
   "Icon": "https://raw.githubusercontent.com/Tiberius1OOO/DragonTyper/main/images/icon.png",
-  "Updated": 1793352522,
+  "Updated": 1793658081,
   "ApiLevel": 15
  },
  "KeyboundAssist": {
@@ -53980,7 +53980,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/KeyboundAssist/main/images/icon.png",
-  "Updated": 1793516525,
+  "Updated": 1793695814,
   "ApiLevel": 15
  },
  "Typemaxxer": {
@@ -54055,7 +54055,7 @@
   "Repo": "https://github.com/TheNickoos/FFXIVPluginRepo/raw/refs/heads/master/repo.json",
   "Author": "XeldarAlz",
   "Icon": "https://grindless.pages.dev/icons/AutoKeyboundBrawler.png",
-  "Updated": 1793220520,
+  "Updated": 1793766356,
   "ApiLevel": 15
  },
  "FlashBang": {
@@ -54086,19 +54086,19 @@
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Draw, guess, and share a little Kupo creativity.",
-   "Translated": "画画、猜谜，分享一点库啵的创意。",
+   "Original": "A multiplayer Pictionary-style drawing game inside FFXIV.",
+   "Translated": "FFXIV 内的多人你画我猜风格绘画游戏。",
    "Source": "ai"
   },
   "Description": {
-   "Original": "A native multiplayer drawing and guessing game with private/public rooms and custom drawn avatars. Experimental: requires a separately hosted Kupopop server. No Kupo-Points yet.",
-   "Translated": "原生多人绘画与猜谜游戏，支持私密/公开房间和自定义绘制头像。实验性功能：需要单独托管的 Kupopop 服务器。暂无 Kupo-Points。",
+   "Original": "Kupo Skribbl is a multiplayer Pictionary-style drawing and guessing game for 2–16 players",
+   "Translated": "Kupo Skribbl 是一款支持 2–16 名玩家的多人你画我猜风格绘画与猜词游戏",
    "Source": "ai"
   },
   "Repo": "https://raw.githubusercontent.com/cloudesh/kupopop/main/plugin/releases/repo.json",
   "Author": "cloudesh",
-  "Icon": "https://raw.githubusercontent.com/cloudesh/kupopop/main/plugin/images/icon.png?v=1.0.4.0",
-  "Updated": 1793578862,
+  "Icon": "https://raw.githubusercontent.com/cloudesh/kupopop/main/plugin/images/icon.png",
+  "Updated": 1793656753,
   "ApiLevel": 15
  },
  "MonkLayout": {
@@ -54224,7 +54224,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/Aetherpath/main/images/icon.png",
-  "Updated": 1793516485,
+  "Updated": 1793695773,
   "ApiLevel": 15
  },
  "Babel14": {
@@ -54246,7 +54246,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/Babel14/main/images/icon.png",
-  "Updated": 1793526768,
+  "Updated": 1793695764,
   "ApiLevel": 15
  },
  "Calc14": {
@@ -54268,7 +54268,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/Calc14/main/images/icon.png",
-  "Updated": 1793516480,
+  "Updated": 1793695758,
   "ApiLevel": 15
  },
  "FrontlineAdvisor": {
@@ -54290,7 +54290,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/FrontlineAdvisor/main/images/icon.png",
-  "Updated": 1793518787,
+  "Updated": 1793695775,
   "ApiLevel": 15
  },
  "GateAlert": {
@@ -54312,7 +54312,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/GateAlert/main/images/icon.png",
-  "Updated": 1793516609,
+  "Updated": 1793695791,
   "ApiLevel": 15
  },
  "NameplateOffset": {
@@ -54334,7 +54334,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/NameplateOffset/main/images/icon.png",
-  "Updated": 1793516812,
+  "Updated": 1793695802,
   "ApiLevel": 15
  },
  "VenueLedger": {
@@ -54356,7 +54356,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/VenueLedger/main/images/icon.png",
-  "Updated": 1793518880,
+  "Updated": 1793695794,
   "ApiLevel": 15
  },
  "WorldClock14": {
@@ -54378,7 +54378,7 @@
   "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
   "Author": "PriestKos",
   "Icon": "https://raw.githubusercontent.com/priestkos/WorldClock14/main/images/icon.png",
-  "Updated": 1793516806,
+  "Updated": 1793695869,
   "ApiLevel": 15
  },
  "Sinophone": {
@@ -54531,7 +54531,7 @@
   "Repo": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/pluginmaster.json",
   "Author": "Kyuuso",
   "Icon": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/plugins/BozjaSuite/images/icon.png",
-  "Updated": 1793540701,
+  "Updated": 1793716699,
   "ApiLevel": 15
  },
  "ZodiacHelper": {
@@ -54553,7 +54553,7 @@
   "Repo": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/pluginmaster.json",
   "Author": "Kyuuso",
   "Icon": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/plugins/ZodiacHelper/images/icon.png",
-  "Updated": 1793540701,
+  "Updated": 1793716699,
   "ApiLevel": 15
  },
  "InventoryDiscardAssistant": {
@@ -54637,7 +54637,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/LucianoBentrup/FcTimers/main/repo.json",
   "Author": "Luciano",
-  "Updated": 1793495784,
+  "Updated": 1793753113,
   "ApiLevel": 15
  },
  "NCLBowlingScore": {
@@ -54680,7 +54680,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/Ajimsan2096/DalamudPlugins/main/repo.json",
   "Author": "Ajimsan2096",
-  "Updated": 1793529155,
+  "Updated": 1793637205,
   "ApiLevel": 15
  },
  "AnoMechElementalStrats": {
@@ -54745,7 +54745,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/AuriLumi/dalamud-plugins/main/repo.json",
   "Author": "Auri",
-  "Updated": 1793539121,
+  "Updated": 1793718144,
   "ApiLevel": 15
  },
  "BattlefieldFrontlineCollector": {
@@ -54766,7 +54766,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/chefiffer/pvpchronicle/main/repo.json",
   "Author": "Battlefield Logs Project",
-  "Updated": 1793437348,
+  "Updated": 1793641220,
   "ApiLevel": 15
  },
  "KeyboundDanceMode": {
@@ -54860,7 +54860,7 @@
   "Repo": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/repo.json",
   "Author": "Lily; Jacob5800 (BiSplanner fork)",
   "Icon": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/plugins/BiSplanner/images/icon.png",
-  "Updated": 1793394399,
+  "Updated": 1793674357,
   "ApiLevel": 15
  },
  "XivCinema": {
@@ -54881,8 +54881,8 @@
   },
   "Repo": "https://raw.githubusercontent.com/jeffrick-cloud/XivCinema-releases/main/repo.json",
   "Author": "jeffrick-cloud",
-  "Icon": "https://github.com/jeffrick-cloud/XivCinema-releases/releases/download/v0.1.4/icon.png",
-  "Updated": 1793540741,
+  "Icon": "https://github.com/jeffrick-cloud/XivCinema-releases/releases/download/v0.1.9/icon.png",
+  "Updated": 1793725954,
   "ApiLevel": 15
  },
  "RotationTrainer": {
@@ -54904,7 +54904,7 @@
   "Repo": "https://raw.githubusercontent.com/kabojnk/RotationTrainer/main/repo.json",
   "Author": "Big Bear",
   "Icon": "https://raw.githubusercontent.com/kabojnk/RotationTrainer/main/src/RotationTrainer/images/icon.png",
-  "Updated": 1793522713,
+  "Updated": 1793652345,
   "ApiLevel": 15
  },
  "FateAutopilot": {
@@ -55013,7 +55013,7 @@
   "Repo": "https://raw.githubusercontent.com/Shigu330/Tensho-Assistant/main/repo.json",
   "Author": "Tensho",
   "Icon": "https://raw.githubusercontent.com/Shigu330/Tensho-Assistant/main/src/TenshoAssistant/images/icon.png",
-  "Updated": 1793537464,
+  "Updated": 1793728654,
   "ApiLevel": 15
  },
  "GlamourShelf": {
@@ -55023,7 +55023,7 @@
   "Repo": "https://raw.githubusercontent.com/Shikisai-XXII/DalamudPlugins/main/repo.json",
   "Author": "Shikisai-XXII",
   "Icon": "https://raw.githubusercontent.com/Shikisai-XXII/DalamudPlugins/main/icon.png",
-  "Updated": 1793581399,
+  "Updated": 1793670628,
   "ApiLevel": 15
  },
  "FindMyFurnishings": {
@@ -55045,7 +55045,7 @@
   "Repo": "https://raw.githubusercontent.com/SmileworksXIV/FindMyFurnishings/main/FindMyFurnishings/pluginmaster.json",
   "Author": "Smileworks",
   "Icon": "https://raw.githubusercontent.com/SmileworksXIV/FindMyFurnishings/main/FindMyFurnishings/images/icon.png",
-  "Updated": 1793420000,
+  "Updated": 1793601302,
   "ApiLevel": 15
  },
  "KeyboundBrawlerAutopilot": {
@@ -55196,7 +55196,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/yanpmd/PmDalamud/main/release/Dalamud.json",
   "Author": "pmyan",
-  "Updated": 1793538771,
+  "Updated": 1793750158,
   "ApiLevel": 15
  },
  "MistUI": {
@@ -55261,7 +55261,7 @@
   "Repo": "https://raw.githubusercontent.com/koko-puffs/raid-planner-plugin/main/repo.json",
   "Author": "koko",
   "Icon": "https://raw.githubusercontent.com/koko-puffs/raid-planner-plugin/main/RaidPlanner/images/icon.png",
-  "Updated": 1793583264,
+  "Updated": 1793596283,
   "ApiLevel": 15
  },
  "RPChronicles": {
@@ -55283,7 +55283,7 @@
   "Repo": "https://raw.githubusercontent.com/NeonCelestialLanes/Afterword/main/pluginmaster.json",
   "Author": "Afterword",
   "Icon": "https://raw.githubusercontent.com/NeonCelestialLanes/Afterword/main/images/icon.png",
-  "Updated": 1793586253,
+  "Updated": 1793752845,
   "ApiLevel": 15
  },
  "DailyTodo": {
@@ -55305,7 +55305,7 @@
   "Repo": "https://raw.githubusercontent.com/Powerl3ss/DailyTodo/main/repo.json",
   "Author": "Powerl3ss",
   "Icon": "https://raw.githubusercontent.com/Powerl3ss/DailyTodo/main/DailyTodo/images/icon.png",
-  "Updated": 1793586254,
+  "Updated": 1793757543,
   "ApiLevel": 15
  },
  "PillionRider": {
@@ -55317,7 +55317,7 @@
   "Repo": "https://raw.githubusercontent.com/SmilessNEKO/PillionRider/main/pluginmaster.json",
   "Author": "Neko",
   "Icon": "https://cdn.jsdelivr.net/gh/SmilessNEKO/PillionRider@main/assets/icon-512.png",
-  "Updated": 1793585711,
+  "Updated": 1793596085,
   "ApiLevel": 15
  },
  "Vanity": {
@@ -55338,7 +55338,7 @@
   },
   "Repo": "https://raw.githubusercontent.com/dzmitryj/vanity-dist/main/repo.json",
   "Author": "dimit",
-  "Updated": 1793578168,
+  "Updated": 1793710133,
   "ApiLevel": 15
  },
  "Drydock": {
@@ -55360,7 +55360,610 @@
   "Repo": "https://raw.githubusercontent.com/tangent-thorn/Drydock/main/repo.json",
   "Author": "tangent-thorn",
   "Icon": "https://raw.githubusercontent.com/tangent-thorn/Drydock/main/Drydock/images/icon.png",
-  "Updated": 1793585689,
+  "Updated": 1793652892,
+  "ApiLevel": 15
+ },
+ "ConnectionGuardian": {
+  "Name": {
+   "Original": "Connection Guardian",
+   "Translated": "连接守护",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Survive short internet drops without being logged out.",
+   "Translated": "在短暂断网时保持在线，避免被登出。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Keeps the game's connections alive during short internet outages so you are not logged out, and logs every drop and recovery for diagnosis. Windows and Linux (XIVLauncher/Wine); on Linux it also makes the connection resume within about 1 s.",
+   "Translated": "在短暂网络中断期间保持游戏连接存活，以免你被登出，并记录每次断线和恢复以便诊断。支持 Windows 和 Linux（XIVLauncher/Wine）；在 Linux 上还能让连接在约 1 秒内恢复。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/LevHowly/Connection_Guardian/main/pluginmaster.json",
+  "Author": "LevHowly",
+  "Updated": 1793614968,
+  "ApiLevel": 15
+ },
+ "MinionHumanizer": {
+  "Name": {
+   "Original": "Minion Humanizer",
+   "Translated": "Minion Humanizer",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/MISAEKU/DalamudPlugins/main/pluginmaster.json",
+  "Author": "MISAEKU",
+  "Updated": 1793684429,
+  "ApiLevel": 15
+ },
+ "SmartNpc": {
+  "Name": {
+   "Original": "Smart Npc",
+   "Translated": "Smart Npc",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/MISAEKU/DalamudPlugins/main/pluginmaster.json",
+  "Author": "MISAEKU",
+  "Updated": 1793701265,
+  "ApiLevel": 15
+ },
+ "BetterChat": {
+  "Name": {
+   "Original": "BetterChat",
+   "Translated": "BetterChat",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Powerl3ss/BetterChat/main/repo.json",
+  "Author": "Powerl3ss",
+  "Icon": "https://raw.githubusercontent.com/Powerl3ss/BetterChat/main/BetterChat/images/icon.png",
+  "Updated": 1793757735,
+  "ApiLevel": 15
+ },
+ "DPSmeter": {
+  "Name": {
+   "Original": "DPSmeter",
+   "Translated": "DPSmeter",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Powerl3ss/DPSmeter/main/repo.json",
+  "Author": "Powerl3ss",
+  "Icon": "https://raw.githubusercontent.com/Powerl3ss/DPSmeter/main/DPSmeter/images/icon.png",
+  "Updated": 1793757246,
+  "ApiLevel": 15
+ },
+ "KeyLock": {
+  "Name": {
+   "Original": "KeyLock",
+   "Translated": "KeyLock",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Moves movement off WASD and jump off Space on demand, and puts them back.",
+   "Translated": "按需将移动从 WASD 移开、将跳跃从空格移开，并可恢复。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "One command rebinds the game's own movement keybinds to the arrow keys and clears the Space binding from Jump, so typing in chat can never move the character by accident. Running it again restores exactly the binds it replaced; the original keybinds are saved in the plugin configuration so a restore still works after the client restarts.",
+   "Translated": "一条命令即可将游戏自带的移动键位重新绑定到方向键，并清除跳跃的空格绑定，这样在聊天中打字就绝不会意外移动角色。再次运行会精确恢复它所替换的键位；原始键位保存在插件配置中，因此客户端重启后仍可恢复。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/priestkos/PlogonYes/main/pluginmaster.json",
+  "Author": "PriestKos",
+  "Icon": "https://raw.githubusercontent.com/priestkos/KeyLock/main/images/icon.png",
+  "Updated": 1793695838,
+  "ApiLevel": 15
+ },
+ "GiantStep": {
+  "Name": {
+   "Original": "GiantStep",
+   "Translated": "GiantStep",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Set, add or multiply your height with /height (2m, +1ft, x2), animated as it happens.\nStomps that get louder and heavier the bigger you are, growth effects and emotes, size requests from chat, riding and carrying, and games of chance for size.\nWith sync on, friends running GiantStep see your changes, looks and stomps too.\nType /height help for every command, and /height <command> help (or /gdice help, /gcard help) for the details of each one.\nNeeds Penumbra. Works through a temporary Penumbra mod, so nothing in your mod library changes. SimpleHeels and Moodles are used when installed.",
+   "Translated": "使用 /height 设置、增加或乘以你的身高（2m、+1ft、x2），并实时播放动画。\n体型越大，踩踏声越响越重，还有成长效果和表情动作、聊天中的体型请求、骑乘与搬运，以及体型相关的概率游戏。\n开启同步后，运行 GiantStep 的好友也能看到你的变化、外观和踩踏。\n输入 /height help 查看所有命令，输入 /height <command> help（或 /gdice help、/gcard help）查看各命令详情。\n需要 Penumbra。通过临时 Penumbra 模组工作，因此你的模组库不会有任何改动。安装 SimpleHeels 和 Moodles 时会使用它们。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/giantstep-xiv/GiantStep/main/repo.json",
+  "Author": "giantstep-xiv",
+  "Updated": 1793738276,
+  "ApiLevel": 15
+ },
+ "BatchTrade": {
+  "Name": {
+   "Original": "批量物品交易"
+  },
+  "Repo": "https://raw.githubusercontent.com/Houraiji9/FFXIV-StandalonePlugins/main/pluginmaster.json",
+  "Author": "Houraiji9",
+  "Updated": 1793728360,
+  "ApiLevel": 15
+ },
+ "RetainerCraftBridge": {
+  "Name": {
+   "Original": "雇员收取后制作"
+  },
+  "Repo": "https://raw.githubusercontent.com/Houraiji9/FFXIV-StandalonePlugins/main/pluginmaster.json",
+  "Author": "Houraiji9",
+  "Updated": 1793726884,
+  "ApiLevel": 15
+ },
+ "RollKnockout": {
+  "Name": {
+   "Original": "Roll Knockout",
+   "Translated": "Roll Knockout",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Track highest and lowest rolls and elimination rounds.",
+   "Translated": "追踪最高和最低点数以及淘汰轮次。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Count unique player rolls, track highest and lowest, and announce elimination rounds.",
+   "Translated": "统计玩家不重复的点数，追踪最高和最低，并公布淘汰轮次。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Jacob5800/DalamudPlugins/main/repo.json",
+  "Author": "Jacob5800",
+  "Updated": 1793662103,
+  "ApiLevel": 15
+ },
+ "GlamourStudio": {
+  "Name": {
+   "Original": "Glamour Studio",
+   "Translated": "Glamour Studio",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Your wardrobe on Glamour Studio, and its looks on your glamour plates.",
+   "Translated": "将你的衣橱放到 Glamour Studio，并将其造型应用到幻化模板上。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Puts any look from Glamour Studio on a glamour plate in a press: every piece is found in your glamour dresser or armoire and the plate filled, ready to save. It also tries looks on in the fitting room, and, linked to your account, keeps your closet on the site up to date (your dresser, armoire, bags, armoury chest, saddlebags and retainers), with your glamour plates and what you're wearing.\n\nOpen it with /gstudio.",
+   "Translated": "一键将 Glamour Studio 中的任意造型应用到幻化模板：每件装备都会在你的幻化柜或收藏柜中找到并填充模板，随时可保存。它还会在试衣间中试穿造型，并与你的账号关联，保持网站在线衣橱的最新状态（你的幻化柜、收藏柜、背包、兵装库、鞍囊和雇员），以及你的幻化模板和当前穿着。\n\n使用 /gstudio 打开。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/koko-puffs/glamour-studio-plugin/main/repo.json",
+  "Author": "koko",
+  "Icon": "https://raw.githubusercontent.com/koko-puffs/glamour-studio-plugin/main/GlamourStudio/images/icon.png",
+  "Updated": 1793756646,
+  "ApiLevel": 15
+ },
+ "xivtrade": {
+  "Name": {
+   "Original": "xivtrade",
+   "Translated": "xivtrade",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Send and receive gil with a simple trade window.",
+   "Translated": "通过简单的交易窗口发送和接收金币。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Send gil across consecutive trades, or automatically receive pure gil trades from any player. Use /xivtrade.",
+   "Translated": "在连续交易中发送金币，或自动接收任何玩家的纯金币交易。使用 /xivtrade。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/kuchris/DalamudPlugins/main/repo.json",
+  "Author": "kuchris",
+  "Icon": "https://raw.githubusercontent.com/kuchris/xivtrade/1.0.0.0/images/icon.png",
+  "Updated": 1793626404,
+  "ApiLevel": 15
+ },
+ "TexasPoker": {
+  "Name": {
+   "Original": "Eorzean Poker",
+   "Translated": "Eorzean Poker",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Deal no-limit Texas Hold'em at your venue.",
+   "Translated": "在你的场所开设无限注德州扑克。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A dealer tool for running Texas Hold'em tables. Shuffles and deals, sends hole cards by /tell, tracks blinds, bets, side pots, rake and each player's gil ledger, and announces the action to party chat with wording you can customise. Reads players' actions from chat for you to confirm, and can show your table live on the web. Only the dealer needs the plugin.",
+   "Translated": "用于运营德州扑克牌桌的发牌工具。洗牌并发牌，通过 /tell 发送底牌，追踪盲注、下注、边池、抽水以及每位玩家的金币账本，并将行动播报到小队频道，措辞可自定义。从聊天中读取玩家的行动供你确认，并可在网页上实时展示你的牌桌。只有发牌者需要该插件。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Kynyssael/TexasPokerPlugin/main/repo/pluginmaster.json",
+  "Author": "Elenor",
+  "Icon": "https://raw.githubusercontent.com/Kynyssael/TexasPokerPlugin/main/TexasPoker/images/icon.png",
+  "Updated": 1793732069,
+  "ApiLevel": 15
+ },
+ "CrystalLedger": {
+  "Name": {
+   "Original": "Crystal Ledger",
+   "Translated": "Crystal Ledger",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Sends your collections, bags, retainers and desynthesis skill to your Crystal Market Ledger site.",
+   "Translated": "将你的收藏、背包、雇员和分解技能发送到你的 Crystal Market Ledger 网站。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Reads what your character owns while you play (collections the Lodestone doesn't show, currencies, bags, saddlebag, armoury, and each retainer once you open them at a bell) and uploads it to your own Crystal Market Ledger site with your private key. Nothing is sent anywhere else.",
+   "Translated": "在你游玩时读取角色拥有的物品（Lodestone 不显示的收藏、货币、背包、鞍囊、兵装库，以及在铃处打开后的每个雇员），并用你的私钥上传到你自己的 Crystal Market Ledger 网站。不会发送到其他任何地方。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/rhyseverett94/crystal-ledger-plugin/main/repo.json",
+  "Author": "Rhys",
+  "Updated": 1793745718,
+  "ApiLevel": 15
+ },
+ "LocalNameAPI16": {
+  "Name": {
+   "Original": "本地改名 LocalName（API16）"
+  },
+  "Repo": "https://raw.githubusercontent.com/SAD777A/1010/main/pluginmaster.json",
+  "Author": "1010",
+  "ApiLevel": 16
+ },
+ "CraftBuddy": {
+  "Name": {
+   "Original": "CraftBuddy",
+   "Translated": "CraftBuddy",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Gets every material for a craft — retainers, mob drops, gathering, fishing, reduction, vendors — then crafts it with Artisan.",
+   "Translated": "为制作获取所有材料——雇员、怪物掉落、采集、钓鱼、精炼、商人——然后用 Artisan 制作。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Pick a recipe or an item and how many. CraftBuddy works out everything it needs, sub-crafts included, and gets it: it takes what your retainers hold first, farms mob drops with vnavmesh and Wrath Combo, gathers and fishes through GatherBuddy Reborn (buying the right bait), uses aetherial reduction only when nothing else gives the material, and buys from vendors. Then it goes home and crafts with Artisan, and stores the leftovers with your retainers.\n\nCraftBuddy used to be called DropBuddy; your settings carry over.\n\nRequires: vnavmesh, Wrath Combo. Optional: Lifestream, GatherBuddy Reborn, Artisan, AutoHook, AutoRetainer, FateRunner.",
+   "Translated": "选择一个配方或物品以及数量。CraftBuddy 会算出所需的一切，包括子制作，并去获取：优先取用雇员持有的物品，用 vnavmesh 和 Wrath Combo 刷怪物掉落，通过 GatherBuddy Reborn 采集和钓鱼（购买正确的鱼饵），只有在其他途径都无法提供材料时才使用以太精炼，并从商人处购买。然后回家用 Artisan 制作，并把剩余物品存入雇员。\n\nCraftBuddy 以前叫 DropBuddy；你的设置会保留。\n\n需要：vnavmesh、Wrath Combo。可选：Lifestream、GatherBuddy Reborn、Artisan、AutoHook、AutoRetainer、FateRunner。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/sadoniaveletoria/CraftBuddy/main/repo.json",
+  "Author": "Sadonia",
+  "Updated": 1793727267,
+  "ApiLevel": 15
+ },
+ "FateRunner": {
+  "Name": {
+   "Original": "FateRunner",
+   "Translated": "FateRunner",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Automated FATE farming for Bicolor Gemstones or leveling.",
+   "Translated": "自动刷 FATE，用于获取双色宝石或练级。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Finds FATEs, flies to them, level syncs, fights with Wrath Combo (BossMod AI optional), handles hand-in and escort FATEs, keeps your chocobo out, and hops zones. Requires vnavmesh and Wrath Combo.",
+   "Translated": "寻找 FATE、飞往目标、等级同步、用 Wrath Combo 战斗（可选 BossMod AI）、处理交纳和护送 FATE、保持陆行鸟出战，并跨区域移动。需要 vnavmesh 和 Wrath Combo。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/sadoniaveletoria/DalamudPlugins/main/pluginmaster.json",
+  "Author": "Sadonia",
+  "Updated": 1793759150,
+  "ApiLevel": 15
+ },
+ "Starflow": {
+  "Name": {
+   "Original": "Starflow",
+   "Translated": "Starflow",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Read the stars, set your course. When the realm changes, your setup follows.",
+   "Translated": "读取星辰，设定航向。当环境变化时，你的配置随之调整。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A graph of When, Do, Until, and After cards that reacts to what is going on around you. Conditions read zone, duty, housing address, party size, job, schedule, weather, mount, HP and effects, enmity, chat messages, and loaded plugins. Actions write game settings, run commands, set the search comment and online status, switch plugin collections, apply Glamourer designs, change Penumbra mods, post to webhooks, and travel with Lifestream. Slotted actions put back what they replaced when the flow stops. Starflow never uses combat actions for you.",
+   "Translated": "由 When、Do、Until 和 After 卡片组成的图表，会响应你周围发生的情况。条件可读取区域、任务、房屋地址、小队人数、职业、日程、天气、坐骑、HP 和状态、仇恨、聊天消息以及已加载的插件。动作可写入游戏设置、运行命令、设置搜索留言和在线状态、切换插件集合、应用 Glamourer 设计、更改 Penumbra 模组、发布到 webhook，以及使用 Lifestream 传送。已放置的动作在流程停止时会恢复它们替换掉的内容。Starflow 绝不会替你使用战斗动作。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/ShadowstarIO/XIV/main/repo.json",
+  "Author": "Shadowstar",
+  "ApiLevel": 15
+ },
+ "CombatRecorder": {
+  "Name": {
+   "Original": "Combat Recorder",
+   "Translated": "战斗记录器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Records your fights (actions, damage, heals, buffs, HP, movement) to compact local files for review.",
+   "Translated": "将你的战斗（动作、伤害、治疗、增益、HP、移动）记录到紧凑的本地文件中以供回顾。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Writes one compressed JSON-lines file per duty: every action you, your party and enemies use (with damage/heal numbers), buffs and debuffs gained and lost, HP/MP and positions twice a second, casts, deaths and target changes. Party members are recorded by job and slot, never by name. /crec mark <note> drops a marker you can point to later (\"downtime here\"). Nothing leaves your PC.",
+   "Translated": "每个任务写入一个压缩的 JSON-lines 文件：你、你的小队和敌人使用的每个动作（含伤害/治疗数值）、获得和失去的增益与减益、每秒两次的 HP/MP 和位置、咏唱、死亡和目标切换。小队成员按职业和位置记录，绝不记录姓名。/crec mark <note> 会放置一个标记，供你之后引用（“此处为停工期”）。任何内容都不会离开你的电脑。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "CooldownGrid": {
+  "Name": {
+   "Original": "Cooldown Grid",
+   "Translated": "冷却网格",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Clickable cooldown grids, grouped into Defensive (self), Defensive (group), Support, and your own groups.",
+   "Translated": "可点击的冷却网格，分为防御（自身）、防御（团队）、支援以及你自己的分组。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Pick any of your job's cooldown abilities and sort them into groups. Each group gets its own window: a grid of ability icons showing time remaining and charges. Click an icon to use the ability, just like a hotbar button. Settings are saved per job; Warrior ships with a starter layout.",
+   "Translated": "选择你职业的任意冷却能力，并将它们分类到各组。每个组都有自己的窗口：一个能力图标网格，显示剩余时间和充能次数。点击图标即可使用该能力，就像热键栏按钮一样。设置按职业保存；战士附带一个初始布局。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "MapClickNav": {
+  "Name": {
+   "Original": "Map Click Nav",
+   "Translated": "地图点击导航",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Ctrl+click any map to teleport, mount, and fly there with vnavmesh.",
+   "Translated": "Ctrl+点击任意地图，即可用 vnavmesh 传送到那里、上坐骑并飞过去。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Hold a modifier (Ctrl by default) and left-click a spot on any zone's map. Map Click Nav places your flag there, teleports to the nearest attuned aetheryte if that's faster (always, for another zone), mounts with Mount Roulette, and has vnavmesh fly you there if flight is unlocked (or ride there if not). A Stop button appears while traveling. Requires vnavmesh.",
+   "Translated": "按住一个修饰键（默认 Ctrl）并左键点击任意区域地图上的位置。Map Click Nav 会在那里放置你的标记，如果更快的话会传送到最近的已调谐以太之光（跨区域时总是如此），用随机坐骑上坐骑，并在解锁飞行时让 vnavmesh 带你飞过去（未解锁则骑乘前往）。旅行时会显示一个停止按钮。需要 vnavmesh。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "PoeticsSpender": {
+  "Name": {
+   "Original": "Poetics Spender",
+   "Translated": "诗学消耗器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Turn your Poetics into Grade 3 topsoil with one click, plus a near-cap alert.",
+   "Translated": "一键将你的诗学神典石兑换为3级土壤，并提供接近上限提醒。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Pick a topsoil (Thanalan or Shroud). One click teleports you to Idyllshire, buys Unidentifiable Ore/Shell from Hismena with all your Poetics (150 each), and trades it to Bertana for Grade 3 topsoil. A movable alert pops up when your Poetics reach a threshold (1800 by default); click it to run. Requires vnavmesh. English client.",
+   "Translated": "选择一种土壤（萨纳兰或黑衣森林）。一键传送到田园郡，用你所有的诗学神典石（每个150）从希丝梅娜处购买未鉴定的矿石/贝壳，再交给贝尔塔纳兑换为3级土壤。当你的诗学神典石达到阈值（默认1800）时会弹出可移动的提醒；点击即可执行。需要 vnavmesh。英文客户端。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "TankStanceManager": {
+  "Name": {
+   "Original": "Tank Stance Manager",
+   "Translated": "坦克姿态管理",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Keeps tank stance on as MT, or holds an enmity band as OT.",
+   "Translated": "作为MT时保持坦克姿态开启，或作为OT时将仇恨维持在一定区间。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "MT mode keeps tank stance on at all times. OT mode toggles tank stance to hold your enmity inside a configurable band of the main tank's enmity (default 75%-90%), and turns it on if you are pushed to #3. Supports PLD, WAR, DRK, GNB.",
+   "Translated": "MT模式始终开启坦克姿态。OT模式切换坦克姿态，将你的仇恨维持在MT仇恨的可配置区间内（默认75%-90%），若你被推至第3仇恨则自动开启。支持PLD、WAR、DRK、GNB。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "TurnInManager": {
+  "Name": {
+   "Original": "Turn-In Manager",
+   "Translated": "上交管理器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Grand Company expert delivery with guardrails, materia retrieval first, and seal spending by stock targets.",
+   "Translated": "带保护机制的筹备稀有品交付，优先回收魔晶石，并按库存目标消耗军票。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Turns in gear for Grand Company seals with guardrails: never items in a gearset, a maximum item level, rarity (green/blue) and HQ/NQ filters, optional armoury chest. Retrieves materia from qualifying gear first (gear turned in with materia loses it). Before seals would cap, it buys items you choose up to a stock target (e.g. Ventures up to 65,000), then keeps delivering. Preview shows exactly what would be turned in. Uses vnavmesh to walk, and Lifestream (if installed) to travel to your Grand Company. English client.",
+   "Translated": "用装备换取大国防联军军票，并带有保护机制：绝不交付套装中的物品，可设置最高品级、稀有度（绿/蓝）和HQ/NQ筛选，可选兵装库。优先从符合条件的装备中回收魔晶石（带魔晶石交付的装备会失去魔晶石）。在军票即将达到上限前，会按你选择的物品购买至库存目标（例如探险币最多65,000），然后继续交付。预览会准确显示将要交付的内容。使用 vnavmesh 行走，若安装了 Lifestream 则用于前往你的大国防联军。英文客户端。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/syberdamon/ffxiv-plugins/main/repo.json",
+  "Author": "syberdamon",
+  "Updated": 1793747712,
+  "ApiLevel": 15
+ },
+ "Vignette": {
+  "Name": {
+   "Original": "Vignette",
+   "Translated": "Vignette",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Aporiyan/Vignette/main/pluginmaster.json",
+  "Author": "Luno",
+  "Icon": "https://raw.githubusercontent.com/Aporiyan/Vignette/main/images/icon.png",
+  "Updated": 1793637118,
+  "ApiLevel": 15
+ },
+ "StellarAutoLogin": {
+  "Name": {
+   "Original": "Stellar Auto Login",
+   "Translated": "Stellar Auto Login",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Calamyr/StellarPluginRepo/main/china/repo.json",
+  "Author": "StellarAutoLogin",
+  "Updated": 1793718777,
+  "ApiLevel": 15
+ },
+ "OhMyVoice": {
+  "Name": {
+   "Original": "Oh My Voice",
+   "Translated": "Oh My Voice",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Voices for unvoiced FFXIV dialogue.",
+   "Translated": "为无配音的 FFXIV 对话提供语音。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Pre-generated Qwen3-TTS voice packs that voice unvoiced NPC dialogue and cutscenes across FFXIV's expansions. English. Silent on cache miss, never doubles real voice-over.",
+   "Translated": "预生成的 Qwen3-TTS 语音包，为 FFXIV 各资料片中无配音的 NPC 对话和过场动画提供语音。英语。缓存未命中时静音，绝不会与真实配音重叠。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/cutieway/oh-my-voice/main/repo.json",
+  "Author": "cutieway",
+  "Icon": "https://repos.codetrunk.eu/cutieway/oh-my-voice/raw/branch/main/docs/assets/plugin-icon.png",
+  "Updated": 1793121853,
+  "ApiLevel": 15
+ },
+ "ReflavorRP": {
+  "Name": {
+   "Original": "ReflavorRP",
+   "Translated": "ReflavorRP",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "SA-MP / GTA World style RP chat commands for FFXIV.",
+   "Translated": "为 FFXIV 提供 SA-MP / GTA World 风格的 RP 聊天命令。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Type RP the way you would on SA-MP or GTA World (/me, /s, /low, /w, /b, *actions*) and it is rewritten into FFXIV RP style emotes and speech.",
+   "Translated": "像在 SA-MP 或 GTA World 中那样输入 RP（/me、/s、/low、/w、/b、*动作*），它会被改写为 FFXIV RP 风格的表情和说话。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Day-OS/ffxiv-reflavor-rp/master/repo.json",
+  "Author": "Day-OS",
+  "Icon": "https://raw.githubusercontent.com/Day-OS/ffxiv-sampstyled-rp/master/Data/icon.png",
+  "Updated": 1793757052,
+  "ApiLevel": 15
+ },
+ "MentorRoulette": {
+  "Name": {
+   "Original": "导随助手"
+  },
+  "Repo": "https://raw.githubusercontent.com/denghaoxuan991876906/DalamudPlugins/main/pluginmaster.json",
+  "Author": "destesasinsh",
+  "Updated": 1793722101,
+  "ApiLevel": 15
+ },
+ "CruciblePilot": {
+  "Name": {
+   "Original": "CruciblePilot",
+   "Translated": "CruciblePilot",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Drives FFXIV's Crucible of the Unbroken through AutoDuty: picks the difficulty (Standard through Third Degree), registers your team, reads the enemies and weaknesses from the stage window, scores your familiars per encounter and puts the best three on the battlehorns before every fight, then starts it. Includes a settings window, per-board rosters, a food check and a run log for troubleshooting.",
+   "Translated": "通过 AutoDuty 驱动 FFXIV 的斗兽奇弈：选择难度（从标准到第三阶），登记你的队伍，从舞台窗口读取敌人和弱点，为每场战斗给你的召唤兽评分，并在每场战斗前把最好的三只放到战斗号角上，然后开始。包含设置窗口、按棋盘划分的阵容、食物检查和用于排查问题的运行日志。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/dexcss/CruciblePilot/main/repo.json",
+  "Author": "dexcss",
+  "Updated": 1793769539,
+  "ApiLevel": 15
+ },
+ "NearCameraVisible": {
+  "Name": {
+   "Original": "Near Camera Visible",
+   "Translated": "近景相机可见",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Stop your character and mount from vanishing when the camera is close while mounted.",
+   "Translated": "骑乘时镜头靠近不再使角色和坐骑消失。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "While mounted, the game hides your character and mount when the camera gets too close. This plugin turns that off so they stay visible up close, which is handy for close-up screenshots. First-person view is left as is.",
+   "Translated": "骑乘时，镜头过近会导致游戏隐藏你的角色和坐骑。此插件会关闭该效果，使其在近距离下保持可见，便于近距离截图。第一人称视角保持不变。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/twelvehouse/DalamudPlugins/main/pluginmaster.json",
+  "Author": "twelvehouse",
+  "Updated": 1793684611,
+  "ApiLevel": 15
+ },
+ "RaidBuffOff": {
+  "Name": {
+   "Original": "Raid Buff Off (Wayne)",
+   "Translated": "Raid Buff Off (Wayne)",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Cancel selected buffs during combat in selected areas.",
+   "Translated": "在指定区域战斗中取消选定的增益。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Global client. Cancel checked PvE raid buffs during combat in checked Ultimate raids, or enable the optional all-area testing checkbox. Three-column English job headings are always expanded. Starry Muse is excluded. DTR raidbuff: left-click ON/OFF, right-click settings. Open /rbo. Defaults OFF with empty selections; all-area testing defaults OFF.",
+   "Translated": "国际服客户端。在勾选的绝境战中于战斗期间取消勾选的PvE团队增益，或启用可选的全区域测试复选框。三列英文职业标题始终展开。星空构想被排除。DTR团队增益：左键开/关，右键设置。打开 /rbo。默认关闭且选择为空；全区域测试默认关闭。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/WayneXXDD/DalamudPlugins/main/pluginmaster.json",
+  "Author": "WayneXXDD",
+  "Updated": 1793714311,
+  "ApiLevel": 15
+ },
+ "VenueAudio": {
+  "Name": {
+   "Original": "Venue Audio",
+   "Translated": "Venue Audio",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Broadcast your PC audio and listen together, inside FFXIV.",
+   "Translated": "在FFXIV内广播你的电脑音频并一起收听。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Broadcast a PC audio output or mixer, optionally add your microphone, and listen together inside FFXIV. Automatic temporary internet hosting lets friends join from other networks using a guest invite. Audio is encrypted before entering the relay. Open using the plugin settings button or /venueaudio. Early test build; the temporary hosting address changes each broadcast.",
+   "Translated": "广播电脑音频输出或混音，可选加入你的麦克风，并在FFXIV内一起收听。自动临时互联网托管让好友可通过访客邀请从其他网络加入。音频在进入中继前会加密。通过插件设置按钮或 /venueaudio 打开。早期测试版本；临时托管地址每次广播都会变化。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/NoctusDev/buddys-buddy/main/repo.json",
+  "Author": "NoctusDev",
+  "ApiLevel": 15
+ },
+ "ScreenshotSorter": {
+  "Name": {
+   "Original": "Screenshot Sorter",
+   "Translated": "截图分类器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Separate normal-UI screenshots from Group Pose and hidden-UI shots.",
+   "Translated": "将普通UI截图与集体动作及隐藏UI截图分开存放。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Moves FFXIV screenshots taken outside Group Pose with the game UI visible to a folder you choose. Group Pose and hidden-UI screenshots stay in their original folder. Configure with /screenshotsorter. Does not analyze image contents or sort existing files.",
+   "Translated": "将非集体动作状态下、游戏UI可见时拍摄的FFXIV截图移动到你选择的文件夹。集体动作和隐藏UI的截图保留在原文件夹。使用 /screenshotsorter 配置。不会分析图像内容或整理已有文件。",
+   "Source": "ai"
+  },
+  "Repo": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+  "Author": "Roxyz0501",
+  "Icon": "https://raw.githubusercontent.com/Roxyz0501/ScreenshotSorter/main/ScreenshotSorter/images/icon.png",
+  "Updated": 1793778754,
   "ApiLevel": 15
  }
 }
