@@ -1,0 +1,579 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-11-05",
+    "source": "user",
+    "label": "玩家包 · 6a41de",
+    "kinds": [
+      "llm"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "opens configuration window; \"reset\" or \"r\" resets all assignments",
+      "Translated": "打开配置窗口；“reset”或“r”重置所有分配",
+      "Context": "CommandHandler..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Occupations are reset, roles are auto assigned.",
+      "Translated": "职业已重置，职能已自动分配。",
+      "Context": "CommandHandler.OnCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Occupations/assignments are reset.",
+      "Translated": "职业/分配已重置。",
+      "Context": "CommandHandler.OnCommand",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "PartyIcons",
+      "Translated": "小队图标",
+      "Context": "SettingsWindow..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Nameplates",
+      "Translated": "名牌",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Appearance",
+      "Translated": "外观",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Status Icons",
+      "Translated": "状态图标",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Chat Names",
+      "Translated": "聊天名称",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Roles",
+      "Translated": "职能",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Important",
+      "Translated": "重要",
+      "Context": "ImGuiExt.DrawIconSetCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Unknown (",
+      "Translated": "未知 (",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Overworld",
+      "Translated": "野外",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Dungeon",
+      "Translated": "迷宫",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Raid",
+      "Translated": "大型任务",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Alliance Raid",
+      "Translated": "团队任务",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Chaotic Raid",
+      "Translated": "混沌团队任务",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Field Operation",
+      "Translated": "特殊场景探索",
+      "Context": "UiNames.GetName",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Instances",
+      "Translated": "副本",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Field Operations",
+      "Translated": "特殊场景探索",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Configure nameplate appearance",
+      "Translated": "配置名牌外观",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Presets",
+      "Translated": "预设",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "User-created",
+      "Translated": "用户创建",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Create new",
+      "Translated": "新建",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Icon set",
+      "Translated": "图标集",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Scale",
+      "Translated": "缩放",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hold Control and click the slider to input an exact value",
+      "Translated": "按住 Control 并点击滑块可输入精确值",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Swap style",
+      "Translated": "交换样式",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Determines how to perform icon swaps for statuses set to 'Important':\r\n- 'None' does nothing\r\n- 'Swap' will swap the status icon and job icon positions\r\n- 'Replace' will move the status icon into the job item slot, leaving the status icon empty",
+      "Translated": "决定对设为“重要”的状态执行图标交换的方式：\n-“无”不执行任何操作\n-“交换”将交换状态图标与职业图标的位置\n-“替换”将状态图标移入职业物品槽，使状态图标位置留空",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Role display style",
+      "Translated": "职能显示样式",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Job Icon",
+      "Translated": "职业图标",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Status Icon",
+      "Translated": "状态图标",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Status icon visibility by location",
+      "Translated": "按位置显示状态图标",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Other actions",
+      "Translated": "其他操作",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Reset to default",
+      "Translated": "重置为默认",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hold Control to allow reset",
+      "Translated": "按住 Control 以允许重置",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hold Control to allow deletion",
+      "Translated": "按住 Control 以允许删除",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show",
+      "Translated": "显示",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Offset X/Y",
+      "Translated": "偏移 X/Y",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hold Control and click a slider to input an exact value",
+      "Translated": "按住 Control 并点击滑块以输入精确数值",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Party:",
+      "Translated": "小队：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Others:",
+      "Translated": "其他：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Dungeon:",
+      "Translated": "迷宫：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Raid:",
+      "Translated": "大型任务：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Alliance:",
+      "Translated": "团队：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Chaotic:",
+      "Translated": "混沌：",
+      "Context": "ChatNameTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Prioritize status icons",
+      "Translated": "优先显示状态图标",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Note: Priority status icons are now configured per nameplate type from the 'Appearance' tab via the 'Swap Style' option. You can also configure which icons are considered important enough to prioritize in the 'Status Icons' tab.",
+      "Translated": "注意：优先状态图标现已在“外观”标签页通过“切换样式”选项按名牌类型分别配置。你也可以在“状态图标”标签页中配置哪些图标重要到需要优先显示。",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable testing mode",
+      "Translated": "启用测试模式",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Applies settings to any player, contrary to only the ones that are in the party.",
+      "Translated": "将设置应用于所有玩家，而非仅小队成员。",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Display chat message when entering duty",
+      "Translated": "进入任务时显示聊天消息",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Can be used to determine the duty type before fully loading in.",
+      "Translated": "可用于在完全加载前判断任务类型。",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show upgrade guide again",
+      "Translated": "再次显示升级指南",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hold Control to allow clicking",
+      "Translated": "按住 Control 以允许点击",
+      "Context": "GeneralTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Icon set:",
+      "Translated": "图标集：",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Nameplate size:",
+      "Translated": "名牌大小：",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Affects all presets, except Game Default.",
+      "Translated": "影响所有预设，游戏默认除外。",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Custom scale",
+      "Translated": "自定义缩放",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hide own nameplate",
+      "Translated": "隐藏自己的名牌",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "You can turn your own nameplate on and also turn this\nsetting own to only use nameplate to display own raid position.\nIf you don't want your position displayed with this setting you can simply disable\nyour nameplates in the Character settings.",
+      "Translated": "你可以开启自己的名牌，并开启此设置以仅使用名牌显示自己的团队位置。\n如果你不想通过此设置显示位置，只需在角色设置中禁用名牌即可。",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "e.g. Eureka, Bozja",
+      "Translated": "例如：优雷卡、博兹雅",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "This plugin is intentionally disabled during PvP matches.",
+      "Translated": "此插件在 PvP 对战中会被有意禁用。",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Examples",
+      "Translated": "示例",
+      "Context": "NameplateTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Eastern role naming convention",
+      "Translated": "日式职能命名规则",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use Japanese data center role naming convention (MT ST D1-D4 H1-2).",
+      "Translated": "使用日服数据中心职能命名规则（MT ST D1-D4 H1-2）。",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Replace party numbers with role in Party List",
+      "Translated": "在队员列表中用职能替换队员编号",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only works when nameplates set to 'Role letters' or 'Small job icon, role and name'.",
+      "Translated": "仅在名牌设置为“职能字母”或“小职业图标、职能和名称”时生效。",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Add context menu commands to assign roles",
+      "Translated": "添加分配职能的右键菜单命令",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Adds context menu commands to assign roles to players. When applicable, commands to swap role and use a suggested role are also added.",
+      "Translated": "添加为玩家分配职能的右键菜单命令。适用时，还会添加交换职能和使用推荐职能的命令。",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Add context menu command to save a role as static",
+      "Translated": "添加将职能保存为固定队的右键菜单命令",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Place context menu commands (if enabled) in a dedicated submenu",
+      "Translated": "将右键菜单命令（若已启用）放入专用子菜单",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Allow party members to self-assign roles via party chat",
+      "Translated": "允许队员通过小队频道自行分配职能",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Allows party members to assign themselves a role, e.g. saying 'h1' in party chat will give that player the healer 1 role.",
+      "Translated": "允许队员自行分配职能，例如在小队频道发送“h1”即可为该玩家分配治疗 1 职能。",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Static Roles",
+      "Translated": "固定职能",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Name should include world name, separated by @. Keep in mind that if players job is not appropriate for the assigned role, the assignment will be ignored!",
+      "Translated": "名称应包含服务器名，以 @ 分隔。请注意，如果玩家的职业不适合所分配的职能，该分配将被忽略！",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Configure status icon visibility based on location",
+      "Translated": "根据位置配置状态图标可见性",
+      "Context": "StatusTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Name: ",
+      "Translated": "名称：",
+      "Context": "StatusTab.DrawStatusConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Other actions: ",
+      "Translated": "其他操作：",
+      "Context": "StatusTab.DrawStatusConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Copy to new list",
+      "Translated": "复制到新列表",
+      "Context": "StatusTab.DrawStatusConfig",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Party Icons Upgrade Guide (for version 1.2)",
+      "Translated": "小队图标升级指南（适用于 1.2 版本）",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The Dawntrail update of Party Icons brings some changes to how status icons are displayed.",
+      "Translated": "Dawntrail -曦光旅路- 版本的小队图标更新对状态图标的显示方式做了一些改动。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "(Status icons are the icons for online statuses such as Disconnected, Viewing Cutscene, Waiting for Duty, Mentor, New Adventurer (sprout), and so on.)",
+      "Translated": "（状态图标是指在线状态的图标，例如离线、观看过场动画、等待任务、导师、新冒险者（豆芽）等。）",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "From this version, it's now possible to display both job icons and status icons together, and to customize this setting for each nameplate display type.",
+      "Translated": "从本版本起，可以同时显示职业图标和状态图标，并且可以针对每种名牌显示类型单独自定义此设置。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "How would you like status icons to be displayed?",
+      "Translated": "你希望如何显示状态图标？",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use the new\n    defaults",
+      "Translated": "使用新的\n默认设置",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "In duties, certain important statuses are swapped with the job icon, but otherwise mostly hidden. In the overworld, most statuses are displayed in their own status icon slot.",
+      "Translated": "在任务中，某些重要状态会替换职业图标，其余状态大多隐藏。在野外，大多数状态会显示在各自的状态图标槽位中。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Replicate the\n  old priority\n      system",
+      "Translated": "沿用旧的\n优先级\n系统",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Certain important status icons (like Disconnected, AFK or Viewing Cutscene) replace job icons entirely when appropriate, but status icons are otherwise hidden.",
+      "Translated": "某些重要状态图标（如离线、暂离或观看过场动画）会在适当的时候完全替换职业图标，其余状态图标则隐藏。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " Don't show\nstatus icons\n      at all",
+      "Translated": "完全不显示\n状态图标",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only job icons will be displayed.",
+      "Translated": "仅显示职业图标。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "No changes will be made.",
+      "Translated": "不做任何更改。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Please select one of the above options to continue. You can bring this window up again from the General tab, or customize status icon visibility in much greater detail from the Appearance and Status Icons tabs.",
+      "Translated": "请选择上述选项之一以继续。你可以从“常规”标签页再次打开此窗口，或在“外观”和“状态图标”标签页中更详细地自定义状态图标的可见性。",
+      "Context": "UpgradeGuideTab.Draw",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
