@@ -1,0 +1,44 @@
+name: chinese-navigation-notification
+
+on:
+  issues:
+    types: [opened, labeled]
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Optional issue number; empty retries all pending navigation notifications'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+# One durable outbox consumer at a time, including scheduled/manual runs.
+# GitHub may replace a pending run; the next scheduled scan recovers its labels.
+concurrency:
+  group: chinese-navigation-notification-outbox
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: github.event_name != 'issues' || (contains(github.event.issue.labels.*.name, 'chinese-navigation') && contains(github.event.issue.labels.*.name, 'chinese-navigation-notify-pending'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Retry the durable notification outbox
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SERVER3_PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+          NAVIGATION_BOT_LOGIN: ${{ vars.NAVIGATION_BOT_LOGIN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number || '' }}
+        run: python scripts/chinese_navigation_notify.py

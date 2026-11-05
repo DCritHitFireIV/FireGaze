@@ -81,7 +81,8 @@ function load(fetch) {
     crypto: webcrypto, atob, btoa, setTimeout, clearTimeout,
     console: Object.fromEntries(['log', 'warn', 'error'].map(level => [level, (...args) => logs.push({level, args})])),
   });
-  vm.runInContext(source.replace(/^export default \{/m, 'globalThis.relay = {'), context);
+  vm.runInContext(source.replace(/^export default \{/m, 'globalThis.relay = {')
+    .replace(/^export \{[^}]+\};\r?$/gm, ''), context);
   const submit = (name, ip = '192.0.2.33', env = {}) => context.relay.fetch(new Request('https://relay.invalid/uit-submit', {
     method: 'POST', headers: {'CF-Connecting-IP': ip}, body: payloadText(name),
   }), {REPO: 'mock/repo', GITHUB_TOKEN: token, ...env});

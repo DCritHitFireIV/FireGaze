@@ -1,0 +1,50 @@
+name: reviewed-chinese-navigation-candidate
+
+# Manual, read-only publication preparation. This never approves player submissions,
+# creates a PR, pushes a branch, or mutates the deployed directory.
+on:
+  workflow_dispatch:
+    inputs:
+      review_file:
+        description: 'Committed review batch basename under docs/chinese-navigation/reviews/'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate explicit review and build candidate
+        env:
+          REVIEW_FILE: ${{ inputs.review_file }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$REVIEW_FILE" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\.json$ ]]; then
+            echo 'Invalid review batch basename' >&2
+            exit 2
+          fi
+          python -B -m unittest discover -s scripts/navigation-review -p test_review_index.py -v
+          python -B scripts/navigation-review/review_index.py \
+            --base Resources/chinese-navigation-index.json \
+            --reviews "docs/chinese-navigation/reviews/$REVIEW_FILE" \
+            --output "$RUNNER_TEMP/chinese-navigation-index-candidate.json" \
+            > "$RUNNER_TEMP/chinese-navigation-review-receipt.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewed-chinese-navigation-candidate
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/chinese-navigation-index-candidate.json
+            ${{ runner.temp }}/chinese-navigation-review-receipt.json

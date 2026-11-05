@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "expectedBaseSha256": "REPLACE_WITH_SHA256_OF_CURRENT_INDEX_BYTES",
+  "expectedBaseRevision": "empty",
+  "revision": "REPLACE_WITH_NEW_REVIEW_REVISION",
+  "reviews": [
+    {
+      "decision": "pending",
+      "reviewer": "REPLACE_WITH_PUBLIC_REVIEWER_HANDLE",
+      "reviewedOn": "REPLACE_WITH_YYYY-MM-DD",
+      "identityConfirmed": false,
+      "languageConsumptionConfirmed": false,
+      "coverageConfirmed": false,
+      "compatibilityConfirmed": false,
+      "publicDataChecked": false,
+      "entry": {
+        "entryId": "REPLACE_WITH_STABLE_ENTRY_ID",
+        "target": {
+          "internalName": "REPLACE_WITH_TARGET_NAME",
+          "sourceUrl": "",
+          "projectUrl": "",
+          "version": "",
+          "apiLevel": 0,
+          "client": "CN"
+        },
+        "kind": "alternative",
+        "coverage": "unknown",
+        "coverageNote": "",
+        "maintainer": "",
+        "maintenance": "unknown",
+        "evidenceUrl": "",
+        "description": "",
+        "instructions": "",
+        "entryUrl": "",
+        "subscriptionUrl": null,
+        "sourceIssueUrl": null,
+        "alternativeInternalName": ""
+      }
+    }
+  ]
+}

@@ -1429,3 +1429,6 @@ export default {
     }
   },
 };
+
+// Reused by the optional module entry; the legacy default handler stays standalone.
+export { allow, githubToken, githubJson, submissionContext, withinSubmission, REPO_DEFAULT };
