@@ -1,1 +1,3551 @@
-{"type":"uit-contribution","plugin":"Limber","kinds":["free"],"entries":[{"Original":"Open Limber. '/limber on' / '/limber off' turn the whole plugin on or off; '/limber close' closes the window; '/limber undo' / '/limber redo'; '/limber reset' puts moved / scaled characters back.","Translated":"打开Limber。'/limber on'/'/limber off'打开或关闭整个插件； '/limber close'关闭窗口； '/limber undo'/'/limber redo'; '/limber reset'放回移动/缩放的字符。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Koikatsu link: '/koilink on' / '/koilink off' start or stop all links; '/koilink pause' pauses or resumes Koikatsu's animation.","Translated":"Koikatsu链接： “/koilink on”/“/koilink off”开始或停止所有链接； “/koilink pause”暂停或恢复Koikatsu的动画。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Same as /limber.","Translated":"与/limber相同。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Limber: another plugin already uses /limber. Use /lmb to open Limber.","Translated":"Limber ：另一个插件已使用/limber。使用/lmb打开Limber。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"on","Translated":"开","Context":"LimberAnimationsTab.DrawAhegao","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"off","Translated":"关闭","Context":"LimberAnimationsTab.DrawAhegao","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Limber is on.","Translated":"Limber已开启。","Context":"Plugin.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Limber is off.","Translated":"Limber已关闭。","Context":"Plugin.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Limber: characters back where the game has them.","Translated":"柔韧性：角色回到游戏中拥有他们的位置。","Context":"Plugin.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Limber: window opened (","Translated":"LIMBER ：窗户打开（","Context":"Plugin.OnCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Koikatsu link on.","Translated":"Koikatsu链接已打开。","Context":"Plugin.OnKoiCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Koikatsu link off.","Translated":"Koikatsu链接关闭。","Context":"Plugin.OnKoiCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"(none)","Translated":"（无）","Context":"Hotkey.get_Label","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Ctrl","Translated":"Ctrl键","Context":"Hotkey.get_Label","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Shift","Translated":"Shift键","Context":"Hotkey.get_Label","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Alt","Translated":"Alt键","Context":"Hotkey.get_Label","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Key ","Translated":"项目名","Context":"Hotkey.get_Label","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"GVHMR stopped (","Translated":"GVHMR已停止（","Context":"GvhmrRunner.Run","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"exit code ","Translated":"退出代码","Context":"GvhmrRunner.Run","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Off","Translated":"关闭","Context":"LiveTracker..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Connecting to VLC...","Translated":"正在连接...","Context":"LiveTracker.Start","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Stopped.","Translated":"已停止。","Context":"LiveTracker.SafeLoop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Connected.","Translated":"连接( N)","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Connected. Waiting for NLF's first frames...","Translated":"已连接。正在等待NLF的第一个帧...","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Waiting for VLC...","Translated":"正在等待VLC...","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Connected. VLC isn't playing a video.","Translated":"已连接。VLC未播放视频。","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Starting NLF in WSL (the first time takes a while)...","Translated":"在WSL中启动NLF （第一次需要一段时间）...","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"NLF: ","Translated":"NLF ：","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"NLF isn't running (trying again in 10 s)","Translated":"NLF未运行（ 10秒后重试）","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Loading the tracking model...","Translated":"正在加载跟踪模型...","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"fast model - the accurate one isn't installed","Translated":"快速型号-未安装精确型号","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"VLC is paused - holding the pose","Translated":"VLC已暂停-保持姿势","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Following VLC (NLF)","Translated":"遵循VLC （ NLF ）","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Following VLC","Translated":"关注VLC","Context":"LiveTracker.Loop","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Settings","Translated":"设置","Context":"LimberTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"stopped","Translated":"已停止","Context":"LimberAnimationsTab.DrawTwerk","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"State","Translated":"状态","Context":"LimberTab.DrawGoalTable","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Choose a character at the top of the window.","Translated":"在窗口顶部选择一个字符。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Couldn't read the game's animation list.","Translated":"无法读取游戏的动画列表。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Playing: ","Translated":"玩耍","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  (held by Limber: ","Translated":"（由Limber持有：","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Stop (back to its own)###anim_stop","Translated":"停止（返回自身）","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Speed###anim_speed","Translated":"速度","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"How fast it plays (0 = paused on this frame).","Translated":"播放速度（ 0 =在此帧上暂停）。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Its own race","Translated":"自己的种族","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Race's version###anim_race","Translated":"种族版本","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Its own race###anim_race_own","Translated":"自己的种族","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Play another race's version of the animation (experimental: the mod manager swaps the file for this character's collection). If the game already has the animation loaded, play another one first, then this one again.","Translated":"玩另一个种族版本的动画（实验：改装配件管理器将文件换成此角色的集合）。如果游戏已经加载了动画，请先播放另一个动画，然后再播放这个动画。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Kind###anim_group","Translated":"种类","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"(all)","Translated":"（所有）","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"(all)###anim_group_all","Translated":"（所有）","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Search (name or key)","Translated":"搜索（名称或密钥）","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Right-click an animation to add it to (or take it out of) your favourites.","Translated":"右键单击动画以将其添加到（或从中删除）您的收藏夹。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" found. Double-click to play.","Translated":"找到了。双击播放。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"\nDouble-click to play.  Right-click: favourite.","Translated":"双击播放。右键单击：收藏夹。","Context":"AnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This character can't be read right now.","Translated":"目前无法读取此字符。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"All smallclothes###app_out_small","Translated":"所有小衣服","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Takes off all gear: smallclothes, nothing on the head, no accessories (weapons kept).","Translated":"脱下所有装备：小衣服，头上没有任何东西，没有配件（武器）。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"All smallclothes NPC###app_out_npc","Translated":"所有小衣服NPC","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The NPCs' smallclothes on body, hands, legs and feet; nothing on the head, no accessories.","Translated":"NPC身上、手上、腿上、脚上的小衣服；头上没有任何东西，也没有配饰。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"All emperor's###app_out_emp","Translated":"全皇帝的","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The whole Emperor's New set (hat, robe, gloves, breeches, boots and accessories).","Translated":"皇帝的全新套装（帽子、长袍、手套、马裤、靴子和配饰）。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Apply###app_apply","Translated":"确认","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Apply as I change###app_live","Translated":"更改后即可申请","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Each change goes on as soon as you let go of it (race, clan, sex, face and colours redraw the character).","Translated":"每次更改都会在您放手后立即进行（种族、氏族、性别、面孔和颜色重新绘制角色）。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Back to its original look###app_original","Translated":"回归原貌","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The look it had when you first opened this page for it.","Translated":"您第一次打开此页面时的外观。","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Body###app_body","Translated":"正文","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Gear###app_gear","Translated":"齿轮","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Looks###app_looks","Translated":"查看次数","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"NPC looks###app_npcs","Translated":"NPC看起来","Context":"AppearanceTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"This is a child's body: its appearance can't be changed here.","Translated":"这是一个孩子的身体：它的外观在这里不能改变。","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Race###app_race","Translated":"比賽","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Clan###app_clan","Translated":"俱乐部","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Highlights###app_highlights","Translated":"亮点","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Heterochromia###app_hetero","Translated":"异色症","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Each eye its own colour. Off: both eyes take the right eye's colour.","Translated":"每只眼睛都有自己的颜色。关：两只眼睛都取右眼的颜色。","Context":"AppearanceTab.DrawBody","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"The game's colours couldn't be read: use the number.","Translated":"无法读取游戏的颜色：使用数字。","Context":"AppearanceTab.ColourPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Click for the colours.","Translated":"单击以查看颜色。","Context":"AppearanceTab.ColourPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"The hairstyles couldn't be read: use the number.","Translated":"无法读取发型：使用数字。","Context":"AppearanceTab.HairPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Click for the hairstyles.","Translated":"单击以查看发型。","Context":"AppearanceTab.HairPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hairstyle ","Translated":"发型","Context":"AppearanceTab.HairPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hide headgear###app_hat","Translated":"隐藏头饰","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Hide weapons###app_weap","Translated":"隐藏武器","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Visor###app_visor","Translated":"遮光罩","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Facewear###app_glasses","Translated":"面具","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Facewear (glasses) by its number from the game (0 = none); press Enter.","Translated":"面具（眼镜）按其在游戏中的编号（ 0 =无） ；按Enter键。","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Slot","Translated":"栏位","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Item","Translated":"道具","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Model","Translated":"型号","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Dyes","Translated":"染料","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Off hand","Translated":"非手头","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Main hand","Translated":"主手","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Search...","Translated":"搜索...","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"(nothing)","Translated":"无","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"(more: search to narrow it down)","Translated":"（更多：搜索以缩小范围）","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Weapon model: set, type, variant.","Translated":"武器型号：套装、类型、变体。","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Gear model: model number, variant.","Translated":"齿轮型号：型号、变体。","Context":"AppearanceTab.DrawGear","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Weapon ","Translated":"作用武器","Context":"AppearanceTab.ItemName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Model ","Translated":"型号","Context":"AppearanceTab.ItemName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":", variant ","Translated":"变体","Context":"AppearanceTab.ItemName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Name for this look","Translated":"此造型的名称","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Save this look###app_save","Translated":"保存此外观","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Copy as text###app_copy","Translated":"以Wiki形式复制","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Paste###app_paste","Translated":"粘贴","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Import a .chara file...###app_chara","Translated":"导入.chara文件...","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Puts a look saved as a .chara file (the look files other posing tools save) on this character:\nbody, face, hair, colours, gear and weapons. Save it here afterwards to keep it with your looks.","Translated":"将外观保存为.chara文件（其他姿势工具保存的外观文件）放在此字符上：\n身体、脸部、头发、颜色、装备和武器。 之后保存在这里，以便与您的外观保持一致。","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy from###app_from","Translated":"复制自","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"another character...","Translated":"另一个角色……","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Whole look","Translated":"全貌","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Body only","Translated":"仅正文","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Gear only","Translated":"仅齿轮","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Hold Ctrl and click to delete this look.","Translated":"按住Ctrl并单击可删除此外观。","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Actor name","Translated":"演员名称","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"An actor added with this look (Actors page) gets this name, and keeps this look. Empty: Limber 1, Limber 2...","Translated":"使用此外观添加的Actor （ Actors页面）会获得此名称，并保持此外观。空： Limber 1 ， Limber 2...","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"No global preset","Translated":"无全局预设","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"A global preset (Global presets page) put on an actor added with this look.","Translated":"全局预设（全局预设页面）放置在使用此外观添加的参与者上。","Context":"AppearanceTab.DrawLooks","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Mod collection###app_collection","Translated":"改装配件收藏","Context":"AppearanceTab.DrawCollection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":" (the default)","Translated":"（默认）","Context":"AppearanceTab.DrawCollection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"(the default)###app_coll_none","Translated":"（默认）","Context":"AppearanceTab.DrawCollection","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Which mod collection this character is drawn with. Picking one gives this character its own;\n\"(the default)\" takes that away again. It's redrawn either way.","Translated":"此角色使用哪个改装配件集合绘制。 选择一个字符将赋予此字符自己的字符；\n“（默认值）”再次将其删除。 无论哪种方式，它都会重新绘制。","Context":"AppearanceTab.DrawCollection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Mod collection: the mod manager isn't available.","Translated":"改装配件收藏：改装配件管理器不可用。","Context":"AppearanceTab.DrawCollection","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Reading the NPCs from the game's data...","Translated":"正在从游戏数据中读取NPC...","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Search ","Translated":"寻觅","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Type at least two letters of a name.","Translated":"键入至少两个名称字母。","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"... and ","Translated":"和","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" more: type more of the name.","Translated":"more ：键入更多名称。","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"No NPC by that name.","Translated":"没有那个名字的NPC。","Context":"AppearanceTab.DrawNpcPicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Put on","Translated":"穿上","Context":"DrawNpcs","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"The NPC's whole look on the chosen character.","Translated":"NPC对所选角色的全部外观。","Context":"DrawNpcs","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Save","Translated":"保存","Context":"DrawNpcs","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Saved \"","Translated":"已保存","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Keeps it under Looks (and for new actors on the Actors page).","Translated":"将其保留在“外观”下（以及“演员”页面上的新演员）。","Context":"DrawNpcs","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Body physics - how to use it###LimberBodyPhysicsHelp","Translated":"人体物理学-如何使用","Context":"BodyPhysicsHelpWindow..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Hover any slider or button on the Body physics page for a short explanation of it.","Translated":"将鼠标悬停在人体物理页面上的任何滑块或按钮上，以获得简短的说明。","Context":"BodyPhysicsHelpWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Choose a character first.","Translated":"首先选择一个字符。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Not available for this character.","Translated":"不适用于此角色。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Body shape on###lmb_bs_on","Translated":"体形开启","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Turns the live body shape on or off (off whenever Limber starts). Shapes already built into your models stay.","Translated":"打开或关闭活体形状（每当Limber启动时关闭）。您的模型中已内置的形状会保持不变。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Live preview###lmb_bs_preview","Translated":"实时预览","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Shows the sliders on the character straight away (only on your screen). Off: only what's built shows.","Translated":"直接在角色上显示滑块（仅在屏幕上）。关闭：仅显示已构建的内容。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Keep feet on the ground###lmb_bs_feet","Translated":"脚踏实地","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"With Leg length: the body goes up by what the legs gained, so the feet stay where they were.","Translated":"腿长：身体向上伸展双腿，双脚保持原状。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Filter###lmb_bs_filter","Translated":"籂選","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Only the sliders (or groups) whose name has this in it.","Translated":"只有名称中包含此内容的滑块（或组）。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Detail","Translated":"详细信息","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Sculpted into the models when building (no live preview): press Build to see them, or turn on\nAuto-build to build by itself a moment after you let go of one.","Translated":"构建时雕刻到模型中（无实时预览） ：按构建查看它们，或打开\n自动构建功能可在您放弃自动构建功能后自行构建。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Auto-build###lmb_bs_autobuild","Translated":"自动生成","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Builds (and redraws the character) about a second after you let go of a detail slider.","Translated":"在放开细节滑块大约一秒钟后构建（并重新绘制角色）。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Reset all###lmb_bs_reset_all","Translated":"重置全部","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Every slider back to the body as it is.","Translated":"每个滑块都按原样返回身体。","Context":"BodyShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"\nCtrl+click to type a value. Right-click: back to 0.","Translated":"Ctrl +单击键入值。右键单击：返回0。","Context":"BodyShapeTab.DrawSlider","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Preset","Translated":"预置","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Load###lmb_bs_load","Translated":"载入","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Loaded \"","Translated":"已加载","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Puts the preset's values on the sliders.","Translated":"将预设值放在滑块上。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Delete###lmb_bs_delete","Translated":"删除","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Deleted \"","Translated":"已删除","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Save###lmb_bs_save","Translated":"保存","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Saves the sliders as a preset with this name (replacing one with the same name).","Translated":"将滑块保存为具有此名称的预设值（替换具有相同名称的预设值）。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy###lmb_bs_copy","Translated":"复制","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Copied the sliders as text.","Translated":"将滑块复制为文本。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Copies the sliders as text, to share or keep.","Translated":"将滑块复制为文本，以共享或保留。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Paste###lmb_bs_paste","Translated":"粘贴","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The clipboard doesn't hold a body shape.","Translated":"剪贴板没有体形。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Pasted \"","Translated":"粘贴","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"\" (Save to keep it as a preset).","Translated":"\"（保存以保留为预设）。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Puts a copied body shape on the sliders.","Translated":"在滑块上放置复制的体形。","Context":"BodyShapeTab.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Build","Translated":"打造","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Build###lmb_bs_build","Translated":"打造","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Building...###lmb_bs_build","Translated":"正在生成...","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Bakes the shape into every model this character wears (body and outfit) as a mod above your\nothers in its collection, and redraws it. Your own mods are only read. Live-only sliders aren't built.","Translated":"将形状烘焙到此角色穿着的每个模型中（身体和服装） ，作为您\n在其集合中的其他人，并重新绘制它。 您自己的模组只会被读取。 不构建仅实时滑块。","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Remove built shape###lmb_bs_remove","Translated":"删除已构建的形状","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Turns the built shape off for this character's collection (the sliders stay as they are).","Translated":"关闭此角色集合的构建形状（滑块保持原样）。","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Built into this character's models.","Translated":"内置于此角色的模型中。","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"The sliders differ from what's built: the difference shows live. Build again to bake it in.","Translated":"滑块与构建的不同：差异实时显示。再次构建以将其烘焙。","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Nothing built yet: the shape is live only.","Translated":"尚未建造：形状仅为活体。","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Clear###lmb_bs_log_clear","Translated":"清空","Context":"BodyShapeTab.DrawBuild","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Breast shapes: no shaped top drawn yet.","Translated":"乳房形状：尚未绘制形状顶部。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Only for adult characters.","Translated":"仅适用于成人角色。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"This character has no name to keep the settings under.","Translated":"此角色没有名称可以保留设置。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Paused: the GPU soft body (Body physics) is on for this character, and both would change the same model. Turn the GPU soft body off to use the breast size shapes (the bone soft body works with them).","Translated":"暂停：此角色的GPU软体（身体物理）已打开，两者都将更改相同的模型。关闭GPU软体以使用乳房大小的形状（骨骼软体与它们配合使用）。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"This character isn't wearing a top with breast size shapes.","Translated":"这个角色没有穿着胸围形状的上衣。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Its top is drawn from: ","Translated":"其顶部由以下材料制成：","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"If you turned the shaped top's mod on: another mod that changes the top (a Limber rigged model, a body mod) may have a higher priority in your mod manager. Give the shaped top the highest priority, or turn the other off.","Translated":"如果您打开了形状顶部的模组：另一个改变顶部的模组（柔软的装配模型，身体模组）可能在模组管理器中具有更高的优先级。将形状的顶部置于最高优先级，或将其他形状的顶部关闭。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Wearing a shaped top: sizes ","Translated":"穿成型上衣：尺寸","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Shape the breasts by size###bust_on","Translated":"按尺寸塑造乳房","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Off: the top is drawn as its model is, at its own size.","Translated":"关闭：顶部按其模型绘制，以其自身尺寸绘制。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Use the character's Bust slider###bust_game","Translated":"使用角色的胸部滑块","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"(Bust: ","Translated":"经营失败,破产,暴降","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"0: a flat chest. About 12: small mounds. 30: small. 50: medium. 75: large. 100: huge.","Translated":"0 ：扁平的胸部约12 ：小土堆。30 ：小。50 ：中。75 ：大。100 ：大。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Added to the size: below 0 smaller, and past 100 it carries on growing a little.","Translated":"添加到尺寸：小于0 ，超过100则继续略微增长。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Take off the game's own bust scaling###bust_cancel","Translated":"脱离游戏自身的半身像缩放","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"The game also scales the breast bones by the Bust slider; the shapes already are the size, so this takes that off.","Translated":"游戏还通过胸部滑块缩放乳房骨骼；形状已经是大小了，所以这会脱落。","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"size ","Translated":"尺寸","Context":"BustShapeTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.ProgressBar"},{"Original":"\nCtrl+click to type a value.","Translated":"Ctrl +单击键入值。","Context":"BustShapeTab.Slider","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"No camera to work with right now.","Translated":"目前没有可供使用的摄像头。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Unlock the camera's limits###cam_unlock","Translated":"解锁摄像头的极限","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Closer and further than the game allows, looking straight up or down, and a wider / narrower field of view.","Translated":"比游戏允许的更近更远，向上或向下直视，视野更宽/更窄。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Furthest###cam_far","Translated":"最远","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Through floors and walls###cam_nocollide","Translated":"穿过地板和墙壁","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"The camera passes through floors, walls and ceilings instead of bumping into them and pulling in.","Translated":"摄像头穿过地板、墙壁和天花板，而不是撞到它们并拉进去。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Position###cam_offset","Translated":"位置","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat3"},{"Original":"Moves the camera (and what it looks at) sideways (+ right), up and forward, in metres, the way the camera looks.","Translated":"将摄像机（及其所看到的内容）向上和向前移动（ +向右） ，以米为单位，与摄像机的外观相同。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Reset###cam_offset_reset","Translated":"一键复原","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Distance###cam_dist","Translated":"距离","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"How far the camera is from what it looks at (zoom). Ctrl+click to type.","Translated":"摄像头距离其视线（缩放）的距离。Ctrl +单击键入。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Field of view###cam_fov","Translated":"视场角","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Narrower (telephoto, flatter) or wider (more perspective).","Translated":"更窄（长焦，更平坦）或更宽（更透视）。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Round###cam_yaw","Translated":"回合","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"The camera's angle round what it looks at.","Translated":"摄像头的角度围绕着它所看到的内容。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Up / down###cam_pitch","Translated":"上 / 下","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Looking up (+) or down (-).","Translated":"向上（ + ）或向下（ - ）查找。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Tilt###cam_tilt","Translated":"倾斜","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"The camera's tilt offset (what the game's camera height setting moves).","Translated":"摄像机的倾斜偏移（游戏的摄像机高度设置移动的内容）。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Look from:","Translated":"查看自：","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Name for this shot","Translated":"此镜头的名称","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Save this shot###cam_save","Translated":"保存此镜头","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Go","Translated":"前往","Context":"CameraTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":" away, ","Translated":"客","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"° round, ","Translated":"场次","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"° up)","Translated":"向上","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Hold Ctrl and click to delete this shot.","Translated":"按住Ctrl并单击可删除此镜头。","Context":"CameraTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Channel ","Translated":"通道","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Plays like a Koikatsu character on this channel. Use one Koikatsu isn't using.","Translated":"在这个频道上扮演Koikatsu角色。使用不使用的Koikatsu。","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Pick a character","Translated":"选择一个角色","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Current GPose target","Translated":"当前GPose目标","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"My character","Translated":"我的角色","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Enter GPose to pick other characters.","Translated":"输入GPose以选择其他字符。","Context":"ChannelTarget.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" (not in scene)","Translated":"（不在场景中）","Context":"ChannelTarget.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"People to follow:","Translated":"要关注的人：","Context":"ChannelTarget.DrawPeople","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Two people: person 1 is whoever starts on the left of the video, person 2 on the right.\nTick this if they're the other way round.","Translated":"两个人：人1是从视频的左边开始的人，右边的人2是从视频的右边开始的人。\n如果它们是相反的，请勾选此项。","Context":"ChannelTarget.DrawPeople","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"The penis as a chain of springs: Hardness decides how much the pose wins. 100%: exactly as posed / animated. Lower: it gives, hangs and swings with the body's moves. 0%: flaccid. Needs an IVCS / YAS skeleton with a penis (iv_ochinko bones). Kept for this character by name; only on your screen.","Translated":"阴茎作为弹簧链：硬度决定姿势的胜率。100% ：与姿势/动画完全一致。较低：随着身体的动作，它会产生、悬挂和摆动。0% ：松弛。需要有阴茎的IVCS/YAS骨骼（ iv_ochinko骨骼）。按名称保留此角色；仅在屏幕上显示。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Penis","Translated":"阴茎","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"100%: holds the pose exactly. 0%: flaccid (hangs, swings). Anything between: firm but gives a little, half hard...","Translated":"100% ：完全保持姿势。0% ：松弛（悬挂、摆动）。任何介于两者之间的东西：公司，但给了一点，半硬...","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hard###dyn_hard","Translated":"困难","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Half###dyn_half","Translated":"中場","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Soft###dyn_soft","Translated":"软","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Flaccid###dyn_flaccid","Translated":"松软","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"How long it keeps swinging after a move (0%: settles at once).","Translated":"移动后持续摆动的时间（ 0% ：一次结算）。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How much it hangs down when it isn't hard.","Translated":"当它不难的时候，它挂了多少。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How much the body's speeding up and turning swings it (0%: moves with the body).","Translated":"身体加速和转动的速度（ 0 ％ ：随身体移动）。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How much it resists bending at each joint: higher keeps its shape and swings as one piece from the base (no warping when it's heavy or soft); lower lets it curl and fold.","Translated":"它在每个关节处抵抗弯曲的程度：越高，其形状和摆动就越好（重或柔软时不会翘曲） ；越低，其卷曲和折叠就越好。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"While this character is Oral's partner, the shaft stays as posed (the mouth follows it).","Translated":"当这个角色是Oral的搭档时，杆身保持姿势（嘴巴跟着它）。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Each bone separately###dyn_perbone","Translated":"每块骨头分别","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Give every bone along the penis its own hardness, bounce, weight and inertia (base to tip), instead of the settings above for all of them. E.g. a firm base with a softer, heavier tip.","Translated":"为阴茎沿线的每块骨骼赋予其自身的硬度、弹性、重量和惯性（从底部到尖端） ，而不是上述所有设置。例如，带有较软、较重的尖端的坚固底座。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy the settings above to all###dyn_copyall","Translated":"将上述设置复制到所有","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Firm base, soft tip###dyn_taper","Translated":"坚固的底座，柔软的尖端","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"100%: this bone holds the pose exactly. 0%: it hangs and swings.","Translated":"100% ：这块骨头完全保持姿势。0% ：悬挂和摆动。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How long this bone keeps swinging.","Translated":"这块骨头持续摆动的时间。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How heavy this bone is: how much it hangs down when it isn't hard.","Translated":"这块骨头有多重：当它不硬时，它会垂下多少。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How much this bone trails behind when the body moves.","Translated":"当身体移动时，这块骨头会落后多少。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"How much this joint resists bending against the bone before it.","Translated":"这个关节在它之前抵抗骨头弯曲的程度。","Context":"DynamicBonesTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Ragdoll mode###extras_ragdoll","Translated":"布娃娃模式","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Stop ragdoll###extras_ragdoll","Translated":"停止布娃娃","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The chosen character goes limp and falls where they stand.","Translated":"所选角色一瘸一拐地摔倒在原地。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"They get back up (back to their pose).","Translated":"他们重新站起来（回到自己的姿势）。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Push###extras_ragdoll_push","Translated":"推塔","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Shoves them again while they're down (a random way, up and over).","Translated":"在他们倒下时再次推他们（随机，上下）。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Choose a character at the top first.","Translated":"首先从顶部选择一个字符。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Bounce###extras_ragdoll_bounce","Translated":"摆动","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"How much a part bounces back off the floor.","Translated":"零件从地板上反弹了多少。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Slide###extras_ragdoll_slide","Translated":"切片","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"How far they slide along the floor (high: like ice).","Translated":"它们在地板上滑动多远（高：像冰一样）。","Context":"ExtrasTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This character has no name to keep the face pose under.","Translated":"此角色没有保持脸部摆姿势的名字。","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Face posing on###face_on","Translated":"脸部摆姿势","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Mirror edits###face_mirror","Translated":"镜像编辑","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Changing a left or right bone changes the one on the other side the mirrored way.","Translated":"更改左侧或右侧骨骼会以镜像方式更改另一侧的骨骼。","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Face dots in the scene###face_dots","Translated":"场景中的人脸点","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Dots on the character's face bones: click one to pick it, drag it to move it.\nTip: Freeze motion first, so the animation's own expression doesn't fight you.","Translated":"人物脸部骨骼上的点：单击一个以选择它，拖动它以移动它。\n提示：首先冻结动作，这样动画本身的表情就不会与您对抗。","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Reset face###face_reset_all","Translated":"重置面部","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Takes every face bone's offset off (Undo at the top brings it back).","Translated":"消除每个面部骨骼的偏移量（顶部的撤消将其带回）。","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This character's face isn't available right now (GPose, and Limber on?).","Translated":"此角色的脸部目前不可用（ GPose和Limber开启？ ）。","Context":"FacePosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"\nDrag: move across / up.  Alt + drag: forward / back.","Translated":"拖动：横向/上移。Alt +拖动：向前/向后。","Context":"FacePosingTab.DrawMap","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Seen from the front","Translated":"从正面看","Context":"FacePosingTab.DrawMap","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":"Pick a bone on the face map, in the list, or on the face in the scene.","Translated":"在面部地图上、列表中或场景中的面部上挑选骨骼。","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Move (mm)###face_move","Translated":"移动(mm)","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat3"},{"Original":"Across (+ = the character's left), up, forward (out of the face).","Translated":"跨越（ + =角色的左侧） ，向上，向前（从脸上）。","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Turn (°)###face_turn","Translated":"车","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat3"},{"Original":"About the face's axes: tip (nod), turn (shake), tilt.","Translated":"关于面部的轴：尖端（点头）、转动（抖动）、倾斜。","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Scale###face_scale","Translated":"设备规模","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"Reset this bone###face_reset_bone","Translated":"重置此骨骼","Context":"FacePosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Brows","Translated":"眉毛","Context":"MainWindow.DrawFaceTab","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Eyes","Translated":"眼睛","Context":"LimberAnimationsTab.DrawAhegao","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Cheeks","Translated":"脸颊","Context":"MainWindow.DrawFaceTab","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Click to add it to your favourites.","Translated":"点击将其添加到您的收藏夹。","Context":"Favorites.Star","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"A favourite: click to take it out.","Translated":"收藏夹：点击取出。","Context":"Favorites.Star","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This character has no name to keep the pose under.","Translated":"此角色没有要保持姿势的名字。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"FK on for this character###fk_on","Translated":"此角色的FK开启","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":" bone","Translated":"骨头","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" posed)","Translated":"姿势）","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"On top of the animation###fk_mode_layer","Translated":"在动画之上","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Each bone's FK is a turn added to what the animation does, so the character keeps animating (breathing, emotes, idles) with your pose on it. Freeze motion (top of the window) to hold everything still.","Translated":"每个骨骼的FK是添加到动画的回合，因此角色保持动画（呼吸，表情，闲置）与您的姿势。冻结运动（窗口顶部）以保持静止。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold the pose###fk_mode_hold","Translated":"保持姿势","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Each bone you pose holds its own turn and stops animating; the bones you haven't touched keep animating.","Translated":"您摆出的每个骨骼都会保持其自身的回合并停止动画；您尚未触摸的骨骼会继续动画。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Parts:","Translated":"控制页眉主体中左侧，中央和右侧部分的顶部和底部内边距。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Start from what's on screen###fk_bake","Translated":"从屏幕上显示的内容开始","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":" bones)","Translated":"骨头，骸骨","Context":"MainWindow.DrawPresets","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Copies the pose on screen (animation, IK and all) into FK, bone by bone, so it holds still and you can edit it.","Translated":"将屏幕上的姿势（动画、IK和所有）复制到FK ，逐个骨骼，以便保持静止，您可以对其进行编辑。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Mirror pose###fk_mirror_all","Translated":"镜像姿势","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Swaps left and right: each side takes the other's pose, reflected.","Translated":"左右互换：每边采取对方的姿势，反射。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Rest pose###fk_rest_all","Translated":"休息姿势","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Every bone to the skeleton's own rest pose (the pose the model is built in).","Translated":"骨骼自身休息姿势的每个骨骼（模型内置的姿势）。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Clear FK###fk_clear","Translated":"清除FK","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Removes every FK turn on this character (undo brings it back).","Translated":"删除此角色的每次FK开启（撤消将其带回）。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Undo###fk_undo","Translated":"撤销","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Redo###fk_redo","Translated":"重做","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"This character's bones aren't available right now (GPose, and Limber on?).","Translated":"此角色的骨骼目前不可用（ GPose和Limber开启？ ）。","Context":"FkPosingTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"This character's bones aren't available right now.","Translated":"此角色的骨骼目前不可用。","Context":"LimberTab.DrawBonePicker","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Search bones (arm, finger, tail...)","Translated":"搜索骨骼（手臂、手指、尾巴... ）","Context":"FkPosingTab.DrawBoneList","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Pick a bone in the list, or click its dot in the scene.","Translated":"在列表中选择一个骨骼，或单击场景中的点。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Not available on this character.","Translated":"不适用于此角色。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"IK has a goal on this bone (IK Posing page): IK decides where it ends up.","Translated":"IK在这块骨头上有一个目标（ IK姿势页面） ： IK决定它最终会在哪里结束。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Pinned: it stays where it is while the rest of the body moves.","Translated":"固定：当身体其他部分移动时，它会保持在原位。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Pin###fk_pin","Translated":"销针","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Unpin###fk_pin","Translated":"取消固定","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Hold this bone where it is now: the body can move and turn, and the limb bends to keep it there.","Translated":"将这块骨头固定在现在的位置：身体可以移动和转动，四肢弯曲以保持在那里。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop holding it in place (it keeps any other IK goal it has).","Translated":"停止将其固定到位（它保留了其拥有的任何其他IK目标）。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Let go###fk_letgo","Translated":"松手","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Removes the pin (or any IK goal) from this bone: FK and the animation move it again.","Translated":"删除此骨骼的针脚（或任何IK目标） ： FK ，动画再次移动它。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Bone axes###fk_axes_bone","Translated":"骨斧","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"The gizmo and the quick turns go round the bone's own axes.","Translated":"辅助图标和快速转弯绕过骨骼自身的轴。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"World axes###fk_axes_world","Translated":"世界轴","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"The gizmo and the quick turns go round the world's axes (X across, Y up, Z forward in the scene), whatever way the bone faces.","Translated":"无论骨骼面向何方，控件和快速转弯都会绕着世界的轴（场景中的X向上， Y向上， Z向前）。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Use FK on this bone###fk_bone_on","Translated":"在此骨骼上使用FK","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Not posed with FK yet: it follows the animation. Turning it starts from where it is now.","Translated":"尚未与FK一起摆姿势：它遵循动画。转动它从现在的地方开始。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Turn added to the animation (0 / 0 / 0 = as it animates):","Translated":"添加到动画的转弯（ 0/0/0 =动画） ：","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Angles from the rest pose###fk_from_rest","Translated":"来自其他姿势的角度","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"On: 0 / 0 / 0 is the skeleton's rest pose for this bone. Off: the bone's whole turn relative to its parent.","Translated":"开： 0/0/0是骨骼对此骨骼的休息姿势。关闭：骨骼相对于其父级的整个旋转。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"X / Y / Z (degrees, the bone's own axes). Drag, or double-click to type.","Translated":"X/Y/Z （度，骨骼自身的轴）。拖动或双击键入。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Also move it###fk_move","Translated":"也移动它","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Holds the bone at a place relative to its parent too (stretches the joint). The gizmo's move mode sets it.","Translated":"将骨骼保持在相对于其父级的位置（拉伸关节）。辅助图标的移动模式设置它。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Move children###fk_move_children","Translated":"移动子级","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"On: the bones under this one go with it when you turn or move it (usual FK).\nOff: they stay where they are; only this bone turns / moves (bones under it that you posed with FK still follow it).","Translated":"开：当您转动或移动它时，它下面的骨骼会与它一起移动（通常是FK ）。\n关闭：它们停留在原地；只有这块骨头转动/移动（您与FK合影的骨头仍然跟随它）。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Rest###fk_bone_rest","Translated":"休息","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"This bone to the skeleton's rest pose.","Translated":"这个骨头对着骨骼的休息姿势。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Clear FK for this bone###fk_bone_clear","Translated":"清除此骨骼的FK","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Removes FK from this bone: it follows the animation again.","Translated":"从此骨骼中删除FK ：它再次跟随动画。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Mirror to other side###fk_bone_mirror","Translated":"镜像到另一侧","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The bone on the other side takes this bone's pose, reflected (and so do the bones below it that FK holds).","Translated":"另一侧的骨骼采取这种骨骼的姿势，反射（ FK保持的骨骼也是如此）。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy###fk_copy","Translated":"复制","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Paste###fk_paste","Translated":"粘贴","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Branch back to animation###fk_branch_clear","Translated":"分支回到动画","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"This bone and every bone below it follow the animation again.","Translated":"此骨骼及其下方的每个骨骼再次跟随动画。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"In the scene: click a dot to pick its bone; the rings turn it (Posing settings: the gizmo can also move, and use world or the bone's axes). Purple dots are bones FK holds.","Translated":"在场景中：单击点以选择其骨骼；环转动它（姿势设置：辅助图标也可以移动，并使用世界或骨骼的轴）。紫色圆点是FK持有的骨头。","Context":"FkPosingTab.DrawEditor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Save a global preset","Translated":"保存全局预设值","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Choose a character at the top: everything Limber has for them is saved as one preset.","Translated":"在顶部选择一个角色： Limber为他们提供的所有内容都将保存为一个预设。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" has: ","Translated":"有","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"nothing set yet","Translated":"尚未设置任何内容","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Name for the preset","Translated":"预设的名称","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Save###gp_save","Translated":"保存","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Global presets (","Translated":"全局预设（","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"None yet.","Translated":"尚无","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"OK###gp_rename_ok","Translated":"确认","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Put on the chosen character###gp_apply","Translated":"穿上所选角色","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Every page's settings in this preset replace the chosen character's.","Translated":"此预设中的每个页面设置都会替换所选角色的设置。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Overwrite with the chosen character###gp_overwrite","Translated":"用所选字符覆盖","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Edit this preset: set the chosen character up the way you want, then press this to save it over the preset.","Translated":"编辑此预设值：按照您想要的方式设置所选字符，然后按此键将其保存在预设值上。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Rename###gp_rename_btn","Translated":"重命名","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"x###gp_delete","Translated":"X","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Hold Ctrl and click to delete this preset.","Translated":"按住Ctrl并单击以删除此预设。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Put on by themselves","Translated":"自己穿上","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"When a player or actor with this name comes into the scene (or is added), they get the preset and look.","Translated":"当具有此名称的玩家或演员进入场景（或添加）时，他们将获得预设和外观。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Character or actor name","Translated":"角色或演员姓名","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Add###gp_rule_add","Translated":"视需要增加填充棉。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Adds a rule for this name (empty: the character chosen at the top).","Translated":"为此名称添加规则（空：顶部选择的字符）。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"On","Translated":"开","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Character","Translated":"角色","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Global preset","Translated":"全局预设","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Look","Translated":"查看","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"(keep their own)","Translated":"（保留自己的）","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"x###gp_rule_del","Translated":"X","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Hold Ctrl and click to delete this rule.","Translated":"按住Ctrl并单击可删除此规则。","Context":"GlobalPresetsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" (pinned)","Translated":"置顶","Context":"HandleOverlay.DrawHandles","Source":"ai:public-caiyun","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":" (attached)","Translated":"(随附)","Context":"HandleOverlay.DrawHandles","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":" (held)","Translated":"(举行)","Context":"HandleOverlay.DrawHandles","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":" (turned)","Translated":"Turn","Context":"HandleOverlay.DrawHandles","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":"Reading the ","Translated":"正在读取对局","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"housing items","Translated":"住房用品","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"world props","Translated":"世界道具","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Couldn't read the ","Translated":"无法读取","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" from the game data.","Translated":"来自游戏数据。","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" world props","Translated":"世界道具","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Sort by area###world_by_area","Translated":"面积排序","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Sort by type###world_by_type","Translated":"按类型排序","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Click the star next to an item to add it to your favourites.","Translated":"单击餐点旁边的星标，将其添加到您的收藏夹。","Context":"HousingPropsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" more: search to narrow it down.","Translated":"more:搜索以缩小范围。","Context":"HousingPropsTab.DrawList","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Pick an item to see it here.","Translated":"选择一个项目以在此处查看。","Context":"HousingPropsTab.DrawPreview","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"No model to show.","Translated":"没有要显示的模型。","Context":"HousingPropsTab.DrawPreview","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":"Loading the model...","Translated":"正在加载模型...","Context":"HousingPropsTab.DrawPreview","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":"Drag: turn   Wheel: zoom","Translated":"拖动:旋转滚轮:缩放","Context":"HousingPropsTab.DrawPreview","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImDrawListPtr.AddText"},{"Original":"Nothing placed yet.","Translated":"尚未放置任何内容。","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Remove all###housing_remove_all","Translated":"删除所有","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Visible###visible","Translated":"可见","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Move to character###to_actor","Translated":"至字元","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Delete###delete","Translated":"删除","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Position###position","Translated":"位置","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat3"},{"Original":"Turn (°)###turn","Translated":"车","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat3"},{"Original":"Scale###scale","Translated":"设备规模","Context":"HousingPropsTab.DrawPlaced","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"Indoor and outdoor","Translated":"室内和室外","Context":"HousingPropsTab..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Indoor","Translated":"室内","Context":"HousingPropsTab..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Outdoor","Translated":"户外","Context":"HousingPropsTab..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Start both throbbings (in sync)###lanim_both","Translated":"启动两个跳动（同步）","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Stop both throbbings###lanim_both","Translated":"停止两次跳动","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Starts (or stops) penis and testicle throbbing together, their beats starting at the same moment.","Translated":"开始（或停止）阴茎和睾丸一起跳动，它们的节拍在同一时刻开始。","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Throbbing###lanim_throb","Translated":"跳动性疼痛","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Testicle throbbing###lanim_balls","Translated":"睾丸悸动","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Twerking###lanim_twerk","Translated":"扭动","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Expansion###lanim_expansion","Translated":"扩增","Context":"LimberAnimationsTab.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Start all###lanim_ex_all_on","Translated":"一键开始","Context":"LimberAnimationsTab.DrawExpansion","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Stop all###lanim_ex_all_off","Translated":"暂停所有","Context":"LimberAnimationsTab.DrawExpansion","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Restart all###lanim_ex_all_re","Translated":"重启所有","Context":"LimberAnimationsTab.DrawExpansion","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Start###go","Translated":"启动","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Stop###go","Translated":"停止","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Restart###restart","Translated":"重启","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start the growth over from its own size.","Translated":"从自身的规模重新开始增长。","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"starting...","Translated":"开始","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"starting... (no penis bones found?)","Translated":"开始… （未找到阴茎骨？ ）","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Presets:","Translated":"预设：","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Pattern###pattern","Translated":"图案","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"At the end###repeat","Translated":"最后","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"How much bigger the ","Translated":"有多大","Context":"LimberAnimationsTab.DrawExpansionPart","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Limber",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Open Limber. '/limber on' / '/limber off' turn the whole plugin on or off; '/limber close' closes the window; '/limber undo' / '/limber redo'; '/limber reset' puts moved / scaled characters back.",
+      "Translated": "打开Limber。'/limber on'/'/limber off'打开或关闭整个插件； '/limber close'关闭窗口； '/limber undo'/'/limber redo'; '/limber reset'放回移动/缩放的字符。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Koikatsu link: '/koilink on' / '/koilink off' start or stop all links; '/koilink pause' pauses or resumes Koikatsu's animation.",
+      "Translated": "Koikatsu链接： “/koilink on”/“/koilink off”开始或停止所有链接； “/koilink pause”暂停或恢复Koikatsu的动画。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Same as /limber.",
+      "Translated": "与/limber相同。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Limber: another plugin already uses /limber. Use /lmb to open Limber.",
+      "Translated": "Limber ：另一个插件已使用/limber。使用/lmb打开Limber。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "on",
+      "Translated": "开",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "off",
+      "Translated": "关闭",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Limber is on.",
+      "Translated": "Limber已开启。",
+      "Context": "Plugin.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Limber is off.",
+      "Translated": "Limber已关闭。",
+      "Context": "Plugin.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Limber: characters back where the game has them.",
+      "Translated": "柔韧性：角色回到游戏中拥有他们的位置。",
+      "Context": "Plugin.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Limber: window opened (",
+      "Translated": "LIMBER ：窗户打开（",
+      "Context": "Plugin.OnCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Koikatsu link on.",
+      "Translated": "Koikatsu链接已打开。",
+      "Context": "Plugin.OnKoiCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Koikatsu link off.",
+      "Translated": "Koikatsu链接关闭。",
+      "Context": "Plugin.OnKoiCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "(none)",
+      "Translated": "（无）",
+      "Context": "Hotkey.get_Label",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Ctrl",
+      "Translated": "Ctrl键",
+      "Context": "Hotkey.get_Label",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Shift",
+      "Translated": "Shift键",
+      "Context": "Hotkey.get_Label",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Alt",
+      "Translated": "Alt键",
+      "Context": "Hotkey.get_Label",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Key ",
+      "Translated": "项目名",
+      "Context": "Hotkey.get_Label",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "GVHMR stopped (",
+      "Translated": "GVHMR已停止（",
+      "Context": "GvhmrRunner.Run",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "exit code ",
+      "Translated": "退出代码",
+      "Context": "GvhmrRunner.Run",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Off",
+      "Translated": "关闭",
+      "Context": "LiveTracker..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Connecting to VLC...",
+      "Translated": "正在连接...",
+      "Context": "LiveTracker.Start",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Stopped.",
+      "Translated": "已停止。",
+      "Context": "LiveTracker.SafeLoop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Connected.",
+      "Translated": "连接( N)",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Connected. Waiting for NLF's first frames...",
+      "Translated": "已连接。正在等待NLF的第一个帧...",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Waiting for VLC...",
+      "Translated": "正在等待VLC...",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Connected. VLC isn't playing a video.",
+      "Translated": "已连接。VLC未播放视频。",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Starting NLF in WSL (the first time takes a while)...",
+      "Translated": "在WSL中启动NLF （第一次需要一段时间）...",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "NLF: ",
+      "Translated": "NLF ：",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "NLF isn't running (trying again in 10 s)",
+      "Translated": "NLF未运行（ 10秒后重试）",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Loading the tracking model...",
+      "Translated": "正在加载跟踪模型...",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "fast model - the accurate one isn't installed",
+      "Translated": "快速型号-未安装精确型号",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "VLC is paused - holding the pose",
+      "Translated": "VLC已暂停-保持姿势",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Following VLC (NLF)",
+      "Translated": "遵循VLC （ NLF ）",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Following VLC",
+      "Translated": "关注VLC",
+      "Context": "LiveTracker.Loop",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "LimberTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "stopped",
+      "Translated": "已停止",
+      "Context": "LimberAnimationsTab.DrawTwerk",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "State",
+      "Translated": "状态",
+      "Context": "LimberTab.DrawGoalTable",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Choose a character at the top of the window.",
+      "Translated": "在窗口顶部选择一个字符。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Couldn't read the game's animation list.",
+      "Translated": "无法读取游戏的动画列表。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Playing: ",
+      "Translated": "玩耍",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  (held by Limber: ",
+      "Translated": "（由Limber持有：",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Stop (back to its own)###anim_stop",
+      "Translated": "停止（返回自身）",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Speed###anim_speed",
+      "Translated": "速度",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "How fast it plays (0 = paused on this frame).",
+      "Translated": "播放速度（ 0 =在此帧上暂停）。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Its own race",
+      "Translated": "自己的种族",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Race's version###anim_race",
+      "Translated": "种族版本",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Its own race###anim_race_own",
+      "Translated": "自己的种族",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Play another race's version of the animation (experimental: the mod manager swaps the file for this character's collection). If the game already has the animation loaded, play another one first, then this one again.",
+      "Translated": "玩另一个种族版本的动画（实验：改装配件管理器将文件换成此角色的集合）。如果游戏已经加载了动画，请先播放另一个动画，然后再播放这个动画。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Kind###anim_group",
+      "Translated": "种类",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "(all)",
+      "Translated": "（所有）",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "(all)###anim_group_all",
+      "Translated": "（所有）",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Search (name or key)",
+      "Translated": "搜索（名称或密钥）",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Right-click an animation to add it to (or take it out of) your favourites.",
+      "Translated": "右键单击动画以将其添加到（或从中删除）您的收藏夹。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " found. Double-click to play.",
+      "Translated": "找到了。双击播放。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "\nDouble-click to play.  Right-click: favourite.",
+      "Translated": "双击播放。右键单击：收藏夹。",
+      "Context": "AnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This character can't be read right now.",
+      "Translated": "目前无法读取此字符。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "All smallclothes###app_out_small",
+      "Translated": "所有小衣服",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Takes off all gear: smallclothes, nothing on the head, no accessories (weapons kept).",
+      "Translated": "脱下所有装备：小衣服，头上没有任何东西，没有配件（武器）。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "All smallclothes NPC###app_out_npc",
+      "Translated": "所有小衣服NPC",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The NPCs' smallclothes on body, hands, legs and feet; nothing on the head, no accessories.",
+      "Translated": "NPC身上、手上、腿上、脚上的小衣服；头上没有任何东西，也没有配饰。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "All emperor's###app_out_emp",
+      "Translated": "全皇帝的",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The whole Emperor's New set (hat, robe, gloves, breeches, boots and accessories).",
+      "Translated": "皇帝的全新套装（帽子、长袍、手套、马裤、靴子和配饰）。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Apply###app_apply",
+      "Translated": "确认",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Apply as I change###app_live",
+      "Translated": "更改后即可申请",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Each change goes on as soon as you let go of it (race, clan, sex, face and colours redraw the character).",
+      "Translated": "每次更改都会在您放手后立即进行（种族、氏族、性别、面孔和颜色重新绘制角色）。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Back to its original look###app_original",
+      "Translated": "回归原貌",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The look it had when you first opened this page for it.",
+      "Translated": "您第一次打开此页面时的外观。",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Body###app_body",
+      "Translated": "正文",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Gear###app_gear",
+      "Translated": "齿轮",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Looks###app_looks",
+      "Translated": "查看次数",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "NPC looks###app_npcs",
+      "Translated": "NPC看起来",
+      "Context": "AppearanceTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "This is a child's body: its appearance can't be changed here.",
+      "Translated": "这是一个孩子的身体：它的外观在这里不能改变。",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Race###app_race",
+      "Translated": "比賽",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Clan###app_clan",
+      "Translated": "俱乐部",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Highlights###app_highlights",
+      "Translated": "亮点",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Heterochromia###app_hetero",
+      "Translated": "异色症",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Each eye its own colour. Off: both eyes take the right eye's colour.",
+      "Translated": "每只眼睛都有自己的颜色。关：两只眼睛都取右眼的颜色。",
+      "Context": "AppearanceTab.DrawBody",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "The game's colours couldn't be read: use the number.",
+      "Translated": "无法读取游戏的颜色：使用数字。",
+      "Context": "AppearanceTab.ColourPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Click for the colours.",
+      "Translated": "单击以查看颜色。",
+      "Context": "AppearanceTab.ColourPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "The hairstyles couldn't be read: use the number.",
+      "Translated": "无法读取发型：使用数字。",
+      "Context": "AppearanceTab.HairPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Click for the hairstyles.",
+      "Translated": "单击以查看发型。",
+      "Context": "AppearanceTab.HairPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hairstyle ",
+      "Translated": "发型",
+      "Context": "AppearanceTab.HairPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hide headgear###app_hat",
+      "Translated": "隐藏头饰",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Hide weapons###app_weap",
+      "Translated": "隐藏武器",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Visor###app_visor",
+      "Translated": "遮光罩",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Facewear###app_glasses",
+      "Translated": "面具",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Facewear (glasses) by its number from the game (0 = none); press Enter.",
+      "Translated": "面具（眼镜）按其在游戏中的编号（ 0 =无） ；按Enter键。",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Slot",
+      "Translated": "栏位",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Item",
+      "Translated": "道具",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Model",
+      "Translated": "型号",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Dyes",
+      "Translated": "染料",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Off hand",
+      "Translated": "非手头",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Main hand",
+      "Translated": "主手",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Search...",
+      "Translated": "搜索...",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "(nothing)",
+      "Translated": "无",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "(more: search to narrow it down)",
+      "Translated": "（更多：搜索以缩小范围）",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Weapon model: set, type, variant.",
+      "Translated": "武器型号：套装、类型、变体。",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Gear model: model number, variant.",
+      "Translated": "齿轮型号：型号、变体。",
+      "Context": "AppearanceTab.DrawGear",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Weapon ",
+      "Translated": "作用武器",
+      "Context": "AppearanceTab.ItemName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Model ",
+      "Translated": "型号",
+      "Context": "AppearanceTab.ItemName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": ", variant ",
+      "Translated": "变体",
+      "Context": "AppearanceTab.ItemName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Name for this look",
+      "Translated": "此造型的名称",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Save this look###app_save",
+      "Translated": "保存此外观",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Copy as text###app_copy",
+      "Translated": "以Wiki形式复制",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Paste###app_paste",
+      "Translated": "粘贴",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Import a .chara file...###app_chara",
+      "Translated": "导入.chara文件...",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Puts a look saved as a .chara file (the look files other posing tools save) on this character:\nbody, face, hair, colours, gear and weapons. Save it here afterwards to keep it with your looks.",
+      "Translated": "将外观保存为.chara文件（其他姿势工具保存的外观文件）放在此字符上：\n身体、脸部、头发、颜色、装备和武器。 之后保存在这里，以便与您的外观保持一致。",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy from###app_from",
+      "Translated": "复制自",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "another character...",
+      "Translated": "另一个角色……",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Whole look",
+      "Translated": "全貌",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Body only",
+      "Translated": "仅正文",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Gear only",
+      "Translated": "仅齿轮",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Hold Ctrl and click to delete this look.",
+      "Translated": "按住Ctrl并单击可删除此外观。",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Actor name",
+      "Translated": "演员名称",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "An actor added with this look (Actors page) gets this name, and keeps this look. Empty: Limber 1, Limber 2...",
+      "Translated": "使用此外观添加的Actor （ Actors页面）会获得此名称，并保持此外观。空： Limber 1 ， Limber 2...",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "No global preset",
+      "Translated": "无全局预设",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "A global preset (Global presets page) put on an actor added with this look.",
+      "Translated": "全局预设（全局预设页面）放置在使用此外观添加的参与者上。",
+      "Context": "AppearanceTab.DrawLooks",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Mod collection###app_collection",
+      "Translated": "改装配件收藏",
+      "Context": "AppearanceTab.DrawCollection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": " (the default)",
+      "Translated": "（默认）",
+      "Context": "AppearanceTab.DrawCollection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "(the default)###app_coll_none",
+      "Translated": "（默认）",
+      "Context": "AppearanceTab.DrawCollection",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Which mod collection this character is drawn with. Picking one gives this character its own;\n\"(the default)\" takes that away again. It's redrawn either way.",
+      "Translated": "此角色使用哪个改装配件集合绘制。 选择一个字符将赋予此字符自己的字符；\n“（默认值）”再次将其删除。 无论哪种方式，它都会重新绘制。",
+      "Context": "AppearanceTab.DrawCollection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Mod collection: the mod manager isn't available.",
+      "Translated": "改装配件收藏：改装配件管理器不可用。",
+      "Context": "AppearanceTab.DrawCollection",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Reading the NPCs from the game's data...",
+      "Translated": "正在从游戏数据中读取NPC...",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Search ",
+      "Translated": "寻觅",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Type at least two letters of a name.",
+      "Translated": "键入至少两个名称字母。",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "... and ",
+      "Translated": "和",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " more: type more of the name.",
+      "Translated": "more ：键入更多名称。",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "No NPC by that name.",
+      "Translated": "没有那个名字的NPC。",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Put on",
+      "Translated": "穿上",
+      "Context": "DrawNpcs",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "The NPC's whole look on the chosen character.",
+      "Translated": "NPC对所选角色的全部外观。",
+      "Context": "DrawNpcs",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "DrawNpcs",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Saved \"",
+      "Translated": "已保存",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Keeps it under Looks (and for new actors on the Actors page).",
+      "Translated": "将其保留在“外观”下（以及“演员”页面上的新演员）。",
+      "Context": "DrawNpcs",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Body physics - how to use it###LimberBodyPhysicsHelp",
+      "Translated": "人体物理学-如何使用",
+      "Context": "BodyPhysicsHelpWindow..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Hover any slider or button on the Body physics page for a short explanation of it.",
+      "Translated": "将鼠标悬停在人体物理页面上的任何滑块或按钮上，以获得简短的说明。",
+      "Context": "BodyPhysicsHelpWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Choose a character first.",
+      "Translated": "首先选择一个字符。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Not available for this character.",
+      "Translated": "不适用于此角色。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Body shape on###lmb_bs_on",
+      "Translated": "体形开启",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Turns the live body shape on or off (off whenever Limber starts). Shapes already built into your models stay.",
+      "Translated": "打开或关闭活体形状（每当Limber启动时关闭）。您的模型中已内置的形状会保持不变。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Live preview###lmb_bs_preview",
+      "Translated": "实时预览",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Shows the sliders on the character straight away (only on your screen). Off: only what's built shows.",
+      "Translated": "直接在角色上显示滑块（仅在屏幕上）。关闭：仅显示已构建的内容。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Keep feet on the ground###lmb_bs_feet",
+      "Translated": "脚踏实地",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "With Leg length: the body goes up by what the legs gained, so the feet stay where they were.",
+      "Translated": "腿长：身体向上伸展双腿，双脚保持原状。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Filter###lmb_bs_filter",
+      "Translated": "籂選",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Only the sliders (or groups) whose name has this in it.",
+      "Translated": "只有名称中包含此内容的滑块（或组）。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Detail",
+      "Translated": "详细信息",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Sculpted into the models when building (no live preview): press Build to see them, or turn on\nAuto-build to build by itself a moment after you let go of one.",
+      "Translated": "构建时雕刻到模型中（无实时预览） ：按构建查看它们，或打开\n自动构建功能可在您放弃自动构建功能后自行构建。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Auto-build###lmb_bs_autobuild",
+      "Translated": "自动生成",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Builds (and redraws the character) about a second after you let go of a detail slider.",
+      "Translated": "在放开细节滑块大约一秒钟后构建（并重新绘制角色）。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Reset all###lmb_bs_reset_all",
+      "Translated": "重置全部",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Every slider back to the body as it is.",
+      "Translated": "每个滑块都按原样返回身体。",
+      "Context": "BodyShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "\nCtrl+click to type a value. Right-click: back to 0.",
+      "Translated": "Ctrl +单击键入值。右键单击：返回0。",
+      "Context": "BodyShapeTab.DrawSlider",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Preset",
+      "Translated": "预置",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Load###lmb_bs_load",
+      "Translated": "载入",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Loaded \"",
+      "Translated": "已加载",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Puts the preset's values on the sliders.",
+      "Translated": "将预设值放在滑块上。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Delete###lmb_bs_delete",
+      "Translated": "删除",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Deleted \"",
+      "Translated": "已删除",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Save###lmb_bs_save",
+      "Translated": "保存",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Saves the sliders as a preset with this name (replacing one with the same name).",
+      "Translated": "将滑块保存为具有此名称的预设值（替换具有相同名称的预设值）。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy###lmb_bs_copy",
+      "Translated": "复制",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Copied the sliders as text.",
+      "Translated": "将滑块复制为文本。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Copies the sliders as text, to share or keep.",
+      "Translated": "将滑块复制为文本，以共享或保留。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Paste###lmb_bs_paste",
+      "Translated": "粘贴",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The clipboard doesn't hold a body shape.",
+      "Translated": "剪贴板没有体形。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Pasted \"",
+      "Translated": "粘贴",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "\" (Save to keep it as a preset).",
+      "Translated": "\"（保存以保留为预设）。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Puts a copied body shape on the sliders.",
+      "Translated": "在滑块上放置复制的体形。",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Build",
+      "Translated": "打造",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Build###lmb_bs_build",
+      "Translated": "打造",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Building...###lmb_bs_build",
+      "Translated": "正在生成...",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Bakes the shape into every model this character wears (body and outfit) as a mod above your\nothers in its collection, and redraws it. Your own mods are only read. Live-only sliders aren't built.",
+      "Translated": "将形状烘焙到此角色穿着的每个模型中（身体和服装） ，作为您\n在其集合中的其他人，并重新绘制它。 您自己的模组只会被读取。 不构建仅实时滑块。",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Remove built shape###lmb_bs_remove",
+      "Translated": "删除已构建的形状",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Turns the built shape off for this character's collection (the sliders stay as they are).",
+      "Translated": "关闭此角色集合的构建形状（滑块保持原样）。",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Built into this character's models.",
+      "Translated": "内置于此角色的模型中。",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "The sliders differ from what's built: the difference shows live. Build again to bake it in.",
+      "Translated": "滑块与构建的不同：差异实时显示。再次构建以将其烘焙。",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Nothing built yet: the shape is live only.",
+      "Translated": "尚未建造：形状仅为活体。",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Clear###lmb_bs_log_clear",
+      "Translated": "清空",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Breast shapes: no shaped top drawn yet.",
+      "Translated": "乳房形状：尚未绘制形状顶部。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Only for adult characters.",
+      "Translated": "仅适用于成人角色。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "This character has no name to keep the settings under.",
+      "Translated": "此角色没有名称可以保留设置。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Paused: the GPU soft body (Body physics) is on for this character, and both would change the same model. Turn the GPU soft body off to use the breast size shapes (the bone soft body works with them).",
+      "Translated": "暂停：此角色的GPU软体（身体物理）已打开，两者都将更改相同的模型。关闭GPU软体以使用乳房大小的形状（骨骼软体与它们配合使用）。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "This character isn't wearing a top with breast size shapes.",
+      "Translated": "这个角色没有穿着胸围形状的上衣。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Its top is drawn from: ",
+      "Translated": "其顶部由以下材料制成：",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "If you turned the shaped top's mod on: another mod that changes the top (a Limber rigged model, a body mod) may have a higher priority in your mod manager. Give the shaped top the highest priority, or turn the other off.",
+      "Translated": "如果您打开了形状顶部的模组：另一个改变顶部的模组（柔软的装配模型，身体模组）可能在模组管理器中具有更高的优先级。将形状的顶部置于最高优先级，或将其他形状的顶部关闭。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Wearing a shaped top: sizes ",
+      "Translated": "穿成型上衣：尺寸",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Shape the breasts by size###bust_on",
+      "Translated": "按尺寸塑造乳房",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Off: the top is drawn as its model is, at its own size.",
+      "Translated": "关闭：顶部按其模型绘制，以其自身尺寸绘制。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Use the character's Bust slider###bust_game",
+      "Translated": "使用角色的胸部滑块",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "(Bust: ",
+      "Translated": "经营失败,破产,暴降",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "0: a flat chest. About 12: small mounds. 30: small. 50: medium. 75: large. 100: huge.",
+      "Translated": "0 ：扁平的胸部约12 ：小土堆。30 ：小。50 ：中。75 ：大。100 ：大。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Added to the size: below 0 smaller, and past 100 it carries on growing a little.",
+      "Translated": "添加到尺寸：小于0 ，超过100则继续略微增长。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Take off the game's own bust scaling###bust_cancel",
+      "Translated": "脱离游戏自身的半身像缩放",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "The game also scales the breast bones by the Bust slider; the shapes already are the size, so this takes that off.",
+      "Translated": "游戏还通过胸部滑块缩放乳房骨骼；形状已经是大小了，所以这会脱落。",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "size ",
+      "Translated": "尺寸",
+      "Context": "BustShapeTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar"
+    },
+    {
+      "Original": "\nCtrl+click to type a value.",
+      "Translated": "Ctrl +单击键入值。",
+      "Context": "BustShapeTab.Slider",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "No camera to work with right now.",
+      "Translated": "目前没有可供使用的摄像头。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Unlock the camera's limits###cam_unlock",
+      "Translated": "解锁摄像头的极限",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Closer and further than the game allows, looking straight up or down, and a wider / narrower field of view.",
+      "Translated": "比游戏允许的更近更远，向上或向下直视，视野更宽/更窄。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Furthest###cam_far",
+      "Translated": "最远",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Through floors and walls###cam_nocollide",
+      "Translated": "穿过地板和墙壁",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "The camera passes through floors, walls and ceilings instead of bumping into them and pulling in.",
+      "Translated": "摄像头穿过地板、墙壁和天花板，而不是撞到它们并拉进去。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Position###cam_offset",
+      "Translated": "位置",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3"
+    },
+    {
+      "Original": "Moves the camera (and what it looks at) sideways (+ right), up and forward, in metres, the way the camera looks.",
+      "Translated": "将摄像机（及其所看到的内容）向上和向前移动（ +向右） ，以米为单位，与摄像机的外观相同。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Reset###cam_offset_reset",
+      "Translated": "一键复原",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Distance###cam_dist",
+      "Translated": "距离",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "How far the camera is from what it looks at (zoom). Ctrl+click to type.",
+      "Translated": "摄像头距离其视线（缩放）的距离。Ctrl +单击键入。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Field of view###cam_fov",
+      "Translated": "视场角",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Narrower (telephoto, flatter) or wider (more perspective).",
+      "Translated": "更窄（长焦，更平坦）或更宽（更透视）。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Round###cam_yaw",
+      "Translated": "回合",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "The camera's angle round what it looks at.",
+      "Translated": "摄像头的角度围绕着它所看到的内容。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Up / down###cam_pitch",
+      "Translated": "上 / 下",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Looking up (+) or down (-).",
+      "Translated": "向上（ + ）或向下（ - ）查找。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Tilt###cam_tilt",
+      "Translated": "倾斜",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "The camera's tilt offset (what the game's camera height setting moves).",
+      "Translated": "摄像机的倾斜偏移（游戏的摄像机高度设置移动的内容）。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Look from:",
+      "Translated": "查看自：",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Name for this shot",
+      "Translated": "此镜头的名称",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Save this shot###cam_save",
+      "Translated": "保存此镜头",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Go",
+      "Translated": "前往",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": " away, ",
+      "Translated": "客",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "° round, ",
+      "Translated": "场次",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "° up)",
+      "Translated": "向上",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Hold Ctrl and click to delete this shot.",
+      "Translated": "按住Ctrl并单击可删除此镜头。",
+      "Context": "CameraTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Channel ",
+      "Translated": "通道",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Plays like a Koikatsu character on this channel. Use one Koikatsu isn't using.",
+      "Translated": "在这个频道上扮演Koikatsu角色。使用不使用的Koikatsu。",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Pick a character",
+      "Translated": "选择一个角色",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Current GPose target",
+      "Translated": "当前GPose目标",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "My character",
+      "Translated": "我的角色",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Enter GPose to pick other characters.",
+      "Translated": "输入GPose以选择其他字符。",
+      "Context": "ChannelTarget.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " (not in scene)",
+      "Translated": "（不在场景中）",
+      "Context": "ChannelTarget.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "People to follow:",
+      "Translated": "要关注的人：",
+      "Context": "ChannelTarget.DrawPeople",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Two people: person 1 is whoever starts on the left of the video, person 2 on the right.\nTick this if they're the other way round.",
+      "Translated": "两个人：人1是从视频的左边开始的人，右边的人2是从视频的右边开始的人。\n如果它们是相反的，请勾选此项。",
+      "Context": "ChannelTarget.DrawPeople",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "The penis as a chain of springs: Hardness decides how much the pose wins. 100%: exactly as posed / animated. Lower: it gives, hangs and swings with the body's moves. 0%: flaccid. Needs an IVCS / YAS skeleton with a penis (iv_ochinko bones). Kept for this character by name; only on your screen.",
+      "Translated": "阴茎作为弹簧链：硬度决定姿势的胜率。100% ：与姿势/动画完全一致。较低：随着身体的动作，它会产生、悬挂和摆动。0% ：松弛。需要有阴茎的IVCS/YAS骨骼（ iv_ochinko骨骼）。按名称保留此角色；仅在屏幕上显示。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Penis",
+      "Translated": "阴茎",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "100%: holds the pose exactly. 0%: flaccid (hangs, swings). Anything between: firm but gives a little, half hard...",
+      "Translated": "100% ：完全保持姿势。0% ：松弛（悬挂、摆动）。任何介于两者之间的东西：公司，但给了一点，半硬...",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hard###dyn_hard",
+      "Translated": "困难",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Half###dyn_half",
+      "Translated": "中場",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Soft###dyn_soft",
+      "Translated": "软",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Flaccid###dyn_flaccid",
+      "Translated": "松软",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "How long it keeps swinging after a move (0%: settles at once).",
+      "Translated": "移动后持续摆动的时间（ 0% ：一次结算）。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How much it hangs down when it isn't hard.",
+      "Translated": "当它不难的时候，它挂了多少。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How much the body's speeding up and turning swings it (0%: moves with the body).",
+      "Translated": "身体加速和转动的速度（ 0 ％ ：随身体移动）。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How much it resists bending at each joint: higher keeps its shape and swings as one piece from the base (no warping when it's heavy or soft); lower lets it curl and fold.",
+      "Translated": "它在每个关节处抵抗弯曲的程度：越高，其形状和摆动就越好（重或柔软时不会翘曲） ；越低，其卷曲和折叠就越好。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "While this character is Oral's partner, the shaft stays as posed (the mouth follows it).",
+      "Translated": "当这个角色是Oral的搭档时，杆身保持姿势（嘴巴跟着它）。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Each bone separately###dyn_perbone",
+      "Translated": "每块骨头分别",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Give every bone along the penis its own hardness, bounce, weight and inertia (base to tip), instead of the settings above for all of them. E.g. a firm base with a softer, heavier tip.",
+      "Translated": "为阴茎沿线的每块骨骼赋予其自身的硬度、弹性、重量和惯性（从底部到尖端） ，而不是上述所有设置。例如，带有较软、较重的尖端的坚固底座。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy the settings above to all###dyn_copyall",
+      "Translated": "将上述设置复制到所有",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Firm base, soft tip###dyn_taper",
+      "Translated": "坚固的底座，柔软的尖端",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "100%: this bone holds the pose exactly. 0%: it hangs and swings.",
+      "Translated": "100% ：这块骨头完全保持姿势。0% ：悬挂和摆动。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How long this bone keeps swinging.",
+      "Translated": "这块骨头持续摆动的时间。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How heavy this bone is: how much it hangs down when it isn't hard.",
+      "Translated": "这块骨头有多重：当它不硬时，它会垂下多少。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How much this bone trails behind when the body moves.",
+      "Translated": "当身体移动时，这块骨头会落后多少。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "How much this joint resists bending against the bone before it.",
+      "Translated": "这个关节在它之前抵抗骨头弯曲的程度。",
+      "Context": "DynamicBonesTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Ragdoll mode###extras_ragdoll",
+      "Translated": "布娃娃模式",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Stop ragdoll###extras_ragdoll",
+      "Translated": "停止布娃娃",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The chosen character goes limp and falls where they stand.",
+      "Translated": "所选角色一瘸一拐地摔倒在原地。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "They get back up (back to their pose).",
+      "Translated": "他们重新站起来（回到自己的姿势）。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Push###extras_ragdoll_push",
+      "Translated": "推塔",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Shoves them again while they're down (a random way, up and over).",
+      "Translated": "在他们倒下时再次推他们（随机，上下）。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Choose a character at the top first.",
+      "Translated": "首先从顶部选择一个字符。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Bounce###extras_ragdoll_bounce",
+      "Translated": "摆动",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "How much a part bounces back off the floor.",
+      "Translated": "零件从地板上反弹了多少。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Slide###extras_ragdoll_slide",
+      "Translated": "切片",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "How far they slide along the floor (high: like ice).",
+      "Translated": "它们在地板上滑动多远（高：像冰一样）。",
+      "Context": "ExtrasTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This character has no name to keep the face pose under.",
+      "Translated": "此角色没有保持脸部摆姿势的名字。",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Face posing on###face_on",
+      "Translated": "脸部摆姿势",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Mirror edits###face_mirror",
+      "Translated": "镜像编辑",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Changing a left or right bone changes the one on the other side the mirrored way.",
+      "Translated": "更改左侧或右侧骨骼会以镜像方式更改另一侧的骨骼。",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Face dots in the scene###face_dots",
+      "Translated": "场景中的人脸点",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Dots on the character's face bones: click one to pick it, drag it to move it.\nTip: Freeze motion first, so the animation's own expression doesn't fight you.",
+      "Translated": "人物脸部骨骼上的点：单击一个以选择它，拖动它以移动它。\n提示：首先冻结动作，这样动画本身的表情就不会与您对抗。",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Reset face###face_reset_all",
+      "Translated": "重置面部",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Takes every face bone's offset off (Undo at the top brings it back).",
+      "Translated": "消除每个面部骨骼的偏移量（顶部的撤消将其带回）。",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This character's face isn't available right now (GPose, and Limber on?).",
+      "Translated": "此角色的脸部目前不可用（ GPose和Limber开启？ ）。",
+      "Context": "FacePosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "\nDrag: move across / up.  Alt + drag: forward / back.",
+      "Translated": "拖动：横向/上移。Alt +拖动：向前/向后。",
+      "Context": "FacePosingTab.DrawMap",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Seen from the front",
+      "Translated": "从正面看",
+      "Context": "FacePosingTab.DrawMap",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": "Pick a bone on the face map, in the list, or on the face in the scene.",
+      "Translated": "在面部地图上、列表中或场景中的面部上挑选骨骼。",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Move (mm)###face_move",
+      "Translated": "移动(mm)",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3"
+    },
+    {
+      "Original": "Across (+ = the character's left), up, forward (out of the face).",
+      "Translated": "跨越（ + =角色的左侧） ，向上，向前（从脸上）。",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Turn (°)###face_turn",
+      "Translated": "车",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3"
+    },
+    {
+      "Original": "About the face's axes: tip (nod), turn (shake), tilt.",
+      "Translated": "关于面部的轴：尖端（点头）、转动（抖动）、倾斜。",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Scale###face_scale",
+      "Translated": "设备规模",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "Reset this bone###face_reset_bone",
+      "Translated": "重置此骨骼",
+      "Context": "FacePosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Brows",
+      "Translated": "眉毛",
+      "Context": "MainWindow.DrawFaceTab",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Eyes",
+      "Translated": "眼睛",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Cheeks",
+      "Translated": "脸颊",
+      "Context": "MainWindow.DrawFaceTab",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Click to add it to your favourites.",
+      "Translated": "点击将其添加到您的收藏夹。",
+      "Context": "Favorites.Star",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "A favourite: click to take it out.",
+      "Translated": "收藏夹：点击取出。",
+      "Context": "Favorites.Star",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This character has no name to keep the pose under.",
+      "Translated": "此角色没有要保持姿势的名字。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "FK on for this character###fk_on",
+      "Translated": "此角色的FK开启",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": " bone",
+      "Translated": "骨头",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " posed)",
+      "Translated": "姿势）",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "On top of the animation###fk_mode_layer",
+      "Translated": "在动画之上",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Each bone's FK is a turn added to what the animation does, so the character keeps animating (breathing, emotes, idles) with your pose on it. Freeze motion (top of the window) to hold everything still.",
+      "Translated": "每个骨骼的FK是添加到动画的回合，因此角色保持动画（呼吸，表情，闲置）与您的姿势。冻结运动（窗口顶部）以保持静止。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold the pose###fk_mode_hold",
+      "Translated": "保持姿势",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Each bone you pose holds its own turn and stops animating; the bones you haven't touched keep animating.",
+      "Translated": "您摆出的每个骨骼都会保持其自身的回合并停止动画；您尚未触摸的骨骼会继续动画。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Parts:",
+      "Translated": "控制页眉主体中左侧，中央和右侧部分的顶部和底部内边距。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Start from what's on screen###fk_bake",
+      "Translated": "从屏幕上显示的内容开始",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": " bones)",
+      "Translated": "骨头，骸骨",
+      "Context": "MainWindow.DrawPresets",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Copies the pose on screen (animation, IK and all) into FK, bone by bone, so it holds still and you can edit it.",
+      "Translated": "将屏幕上的姿势（动画、IK和所有）复制到FK ，逐个骨骼，以便保持静止，您可以对其进行编辑。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Mirror pose###fk_mirror_all",
+      "Translated": "镜像姿势",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Swaps left and right: each side takes the other's pose, reflected.",
+      "Translated": "左右互换：每边采取对方的姿势，反射。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Rest pose###fk_rest_all",
+      "Translated": "休息姿势",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Every bone to the skeleton's own rest pose (the pose the model is built in).",
+      "Translated": "骨骼自身休息姿势的每个骨骼（模型内置的姿势）。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Clear FK###fk_clear",
+      "Translated": "清除FK",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Removes every FK turn on this character (undo brings it back).",
+      "Translated": "删除此角色的每次FK开启（撤消将其带回）。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Undo###fk_undo",
+      "Translated": "撤销",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Redo###fk_redo",
+      "Translated": "重做",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "This character's bones aren't available right now (GPose, and Limber on?).",
+      "Translated": "此角色的骨骼目前不可用（ GPose和Limber开启？ ）。",
+      "Context": "FkPosingTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "This character's bones aren't available right now.",
+      "Translated": "此角色的骨骼目前不可用。",
+      "Context": "LimberTab.DrawBonePicker",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Search bones (arm, finger, tail...)",
+      "Translated": "搜索骨骼（手臂、手指、尾巴... ）",
+      "Context": "FkPosingTab.DrawBoneList",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Pick a bone in the list, or click its dot in the scene.",
+      "Translated": "在列表中选择一个骨骼，或单击场景中的点。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Not available on this character.",
+      "Translated": "不适用于此角色。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "IK has a goal on this bone (IK Posing page): IK decides where it ends up.",
+      "Translated": "IK在这块骨头上有一个目标（ IK姿势页面） ： IK决定它最终会在哪里结束。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Pinned: it stays where it is while the rest of the body moves.",
+      "Translated": "固定：当身体其他部分移动时，它会保持在原位。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Pin###fk_pin",
+      "Translated": "销针",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Unpin###fk_pin",
+      "Translated": "取消固定",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Hold this bone where it is now: the body can move and turn, and the limb bends to keep it there.",
+      "Translated": "将这块骨头固定在现在的位置：身体可以移动和转动，四肢弯曲以保持在那里。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop holding it in place (it keeps any other IK goal it has).",
+      "Translated": "停止将其固定到位（它保留了其拥有的任何其他IK目标）。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Let go###fk_letgo",
+      "Translated": "松手",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Removes the pin (or any IK goal) from this bone: FK and the animation move it again.",
+      "Translated": "删除此骨骼的针脚（或任何IK目标） ： FK ，动画再次移动它。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Bone axes###fk_axes_bone",
+      "Translated": "骨斧",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "The gizmo and the quick turns go round the bone's own axes.",
+      "Translated": "辅助图标和快速转弯绕过骨骼自身的轴。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "World axes###fk_axes_world",
+      "Translated": "世界轴",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "The gizmo and the quick turns go round the world's axes (X across, Y up, Z forward in the scene), whatever way the bone faces.",
+      "Translated": "无论骨骼面向何方，控件和快速转弯都会绕着世界的轴（场景中的X向上， Y向上， Z向前）。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Use FK on this bone###fk_bone_on",
+      "Translated": "在此骨骼上使用FK",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Not posed with FK yet: it follows the animation. Turning it starts from where it is now.",
+      "Translated": "尚未与FK一起摆姿势：它遵循动画。转动它从现在的地方开始。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Turn added to the animation (0 / 0 / 0 = as it animates):",
+      "Translated": "添加到动画的转弯（ 0/0/0 =动画） ：",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Angles from the rest pose###fk_from_rest",
+      "Translated": "来自其他姿势的角度",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "On: 0 / 0 / 0 is the skeleton's rest pose for this bone. Off: the bone's whole turn relative to its parent.",
+      "Translated": "开： 0/0/0是骨骼对此骨骼的休息姿势。关闭：骨骼相对于其父级的整个旋转。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "X / Y / Z (degrees, the bone's own axes). Drag, or double-click to type.",
+      "Translated": "X/Y/Z （度，骨骼自身的轴）。拖动或双击键入。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Also move it###fk_move",
+      "Translated": "也移动它",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Holds the bone at a place relative to its parent too (stretches the joint). The gizmo's move mode sets it.",
+      "Translated": "将骨骼保持在相对于其父级的位置（拉伸关节）。辅助图标的移动模式设置它。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Move children###fk_move_children",
+      "Translated": "移动子级",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "On: the bones under this one go with it when you turn or move it (usual FK).\nOff: they stay where they are; only this bone turns / moves (bones under it that you posed with FK still follow it).",
+      "Translated": "开：当您转动或移动它时，它下面的骨骼会与它一起移动（通常是FK ）。\n关闭：它们停留在原地；只有这块骨头转动/移动（您与FK合影的骨头仍然跟随它）。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Rest###fk_bone_rest",
+      "Translated": "休息",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "This bone to the skeleton's rest pose.",
+      "Translated": "这个骨头对着骨骼的休息姿势。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Clear FK for this bone###fk_bone_clear",
+      "Translated": "清除此骨骼的FK",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Removes FK from this bone: it follows the animation again.",
+      "Translated": "从此骨骼中删除FK ：它再次跟随动画。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Mirror to other side###fk_bone_mirror",
+      "Translated": "镜像到另一侧",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The bone on the other side takes this bone's pose, reflected (and so do the bones below it that FK holds).",
+      "Translated": "另一侧的骨骼采取这种骨骼的姿势，反射（ FK保持的骨骼也是如此）。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy###fk_copy",
+      "Translated": "复制",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Paste###fk_paste",
+      "Translated": "粘贴",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Branch back to animation###fk_branch_clear",
+      "Translated": "分支回到动画",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "This bone and every bone below it follow the animation again.",
+      "Translated": "此骨骼及其下方的每个骨骼再次跟随动画。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "In the scene: click a dot to pick its bone; the rings turn it (Posing settings: the gizmo can also move, and use world or the bone's axes). Purple dots are bones FK holds.",
+      "Translated": "在场景中：单击点以选择其骨骼；环转动它（姿势设置：辅助图标也可以移动，并使用世界或骨骼的轴）。紫色圆点是FK持有的骨头。",
+      "Context": "FkPosingTab.DrawEditor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Save a global preset",
+      "Translated": "保存全局预设值",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Choose a character at the top: everything Limber has for them is saved as one preset.",
+      "Translated": "在顶部选择一个角色： Limber为他们提供的所有内容都将保存为一个预设。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " has: ",
+      "Translated": "有",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "nothing set yet",
+      "Translated": "尚未设置任何内容",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Name for the preset",
+      "Translated": "预设的名称",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Save###gp_save",
+      "Translated": "保存",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Global presets (",
+      "Translated": "全局预设（",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "None yet.",
+      "Translated": "尚无",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "OK###gp_rename_ok",
+      "Translated": "确认",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Put on the chosen character###gp_apply",
+      "Translated": "穿上所选角色",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Every page's settings in this preset replace the chosen character's.",
+      "Translated": "此预设中的每个页面设置都会替换所选角色的设置。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Overwrite with the chosen character###gp_overwrite",
+      "Translated": "用所选字符覆盖",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Edit this preset: set the chosen character up the way you want, then press this to save it over the preset.",
+      "Translated": "编辑此预设值：按照您想要的方式设置所选字符，然后按此键将其保存在预设值上。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Rename###gp_rename_btn",
+      "Translated": "重命名",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "x###gp_delete",
+      "Translated": "X",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Hold Ctrl and click to delete this preset.",
+      "Translated": "按住Ctrl并单击以删除此预设。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Put on by themselves",
+      "Translated": "自己穿上",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "When a player or actor with this name comes into the scene (or is added), they get the preset and look.",
+      "Translated": "当具有此名称的玩家或演员进入场景（或添加）时，他们将获得预设和外观。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Character or actor name",
+      "Translated": "角色或演员姓名",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Add###gp_rule_add",
+      "Translated": "视需要增加填充棉。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Adds a rule for this name (empty: the character chosen at the top).",
+      "Translated": "为此名称添加规则（空：顶部选择的字符）。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "On",
+      "Translated": "开",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Character",
+      "Translated": "角色",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Global preset",
+      "Translated": "全局预设",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Look",
+      "Translated": "查看",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "(keep their own)",
+      "Translated": "（保留自己的）",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "x###gp_rule_del",
+      "Translated": "X",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Hold Ctrl and click to delete this rule.",
+      "Translated": "按住Ctrl并单击可删除此规则。",
+      "Context": "GlobalPresetsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " (pinned)",
+      "Translated": "置顶",
+      "Context": "HandleOverlay.DrawHandles",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": " (attached)",
+      "Translated": "(随附)",
+      "Context": "HandleOverlay.DrawHandles",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": " (held)",
+      "Translated": "(举行)",
+      "Context": "HandleOverlay.DrawHandles",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": " (turned)",
+      "Translated": "Turn",
+      "Context": "HandleOverlay.DrawHandles",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": "Reading the ",
+      "Translated": "正在读取对局",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "housing items",
+      "Translated": "住房用品",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "world props",
+      "Translated": "世界道具",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Couldn't read the ",
+      "Translated": "无法读取",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " from the game data.",
+      "Translated": "来自游戏数据。",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " world props",
+      "Translated": "世界道具",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Sort by area###world_by_area",
+      "Translated": "面积排序",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Sort by type###world_by_type",
+      "Translated": "按类型排序",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Click the star next to an item to add it to your favourites.",
+      "Translated": "单击餐点旁边的星标，将其添加到您的收藏夹。",
+      "Context": "HousingPropsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " more: search to narrow it down.",
+      "Translated": "more:搜索以缩小范围。",
+      "Context": "HousingPropsTab.DrawList",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Pick an item to see it here.",
+      "Translated": "选择一个项目以在此处查看。",
+      "Context": "HousingPropsTab.DrawPreview",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "No model to show.",
+      "Translated": "没有要显示的模型。",
+      "Context": "HousingPropsTab.DrawPreview",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": "Loading the model...",
+      "Translated": "正在加载模型...",
+      "Context": "HousingPropsTab.DrawPreview",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": "Drag: turn   Wheel: zoom",
+      "Translated": "拖动:旋转滚轮:缩放",
+      "Context": "HousingPropsTab.DrawPreview",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText"
+    },
+    {
+      "Original": "Nothing placed yet.",
+      "Translated": "尚未放置任何内容。",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Remove all###housing_remove_all",
+      "Translated": "删除所有",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Visible###visible",
+      "Translated": "可见",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Move to character###to_actor",
+      "Translated": "至字元",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Delete###delete",
+      "Translated": "删除",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Position###position",
+      "Translated": "位置",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3"
+    },
+    {
+      "Original": "Turn (°)###turn",
+      "Translated": "车",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3"
+    },
+    {
+      "Original": "Scale###scale",
+      "Translated": "设备规模",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "Indoor and outdoor",
+      "Translated": "室内和室外",
+      "Context": "HousingPropsTab..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Indoor",
+      "Translated": "室内",
+      "Context": "HousingPropsTab..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Outdoor",
+      "Translated": "户外",
+      "Context": "HousingPropsTab..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Start both throbbings (in sync)###lanim_both",
+      "Translated": "启动两个跳动（同步）",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Stop both throbbings###lanim_both",
+      "Translated": "停止两次跳动",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Starts (or stops) penis and testicle throbbing together, their beats starting at the same moment.",
+      "Translated": "开始（或停止）阴茎和睾丸一起跳动，它们的节拍在同一时刻开始。",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Throbbing###lanim_throb",
+      "Translated": "跳动性疼痛",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Testicle throbbing###lanim_balls",
+      "Translated": "睾丸悸动",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Twerking###lanim_twerk",
+      "Translated": "扭动",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Expansion###lanim_expansion",
+      "Translated": "扩增",
+      "Context": "LimberAnimationsTab.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Start all###lanim_ex_all_on",
+      "Translated": "一键开始",
+      "Context": "LimberAnimationsTab.DrawExpansion",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Stop all###lanim_ex_all_off",
+      "Translated": "暂停所有",
+      "Context": "LimberAnimationsTab.DrawExpansion",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Restart all###lanim_ex_all_re",
+      "Translated": "重启所有",
+      "Context": "LimberAnimationsTab.DrawExpansion",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Start###go",
+      "Translated": "启动",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Stop###go",
+      "Translated": "停止",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Restart###restart",
+      "Translated": "重启",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start the growth over from its own size.",
+      "Translated": "从自身的规模重新开始增长。",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "starting...",
+      "Translated": "开始",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "starting... (no penis bones found?)",
+      "Translated": "开始… （未找到阴茎骨？ ）",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Presets:",
+      "Translated": "预设：",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Pattern###pattern",
+      "Translated": "图案",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "At the end###repeat",
+      "Translated": "最后",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "How much bigger the ",
+      "Translated": "有多大",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-11-05T05:47:00",
+  "imported": {
+    "archive": "uit-direct-2026-11-05T05-46-46-808Z-305c28cf-2026-11-05T054700.json",
+    "accepted": 422,
+    "filled": 422,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 422 条 `Limber` 的界面文字译文，已收为**独立译文包** `uit-packs/Limber@user-e44bbe.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 422 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
