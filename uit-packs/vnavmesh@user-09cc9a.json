@@ -1,0 +1,855 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-11-06",
+    "source": "user",
+    "label": "大肥鱼",
+    "kinds": [
+      "llm"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Filtering",
+      "Translated": "过滤",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Record seed point",
+      "Translated": "记录种子点",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Dump all polygons connected to player (to clipboard)",
+      "Translated": "导出与玩家相连的所有多边形（到剪贴板）",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Failed to find path",
+      "Translated": "找不到路径",
+      "Context": "AsyncMoveRequest.Update",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Automatically load/build navigation data when changing zones",
+      "Translated": "切换区域时自动加载/构建导航数据",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable DTR bar",
+      "Translated": "启用 DTR 栏",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show detailed query status in DTR",
+      "Translated": "在 DTR 中显示详细查询状态",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Align camera to movement direction",
+      "Translated": "将视角对齐到移动方向",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Camera height (degrees)",
+      "Translated": "视角高度（度）",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show active waypoints",
+      "Translated": "显示活动路径点",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Always visualize game collision",
+      "Translated": "始终显示游戏碰撞",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Cancel current path on player movement input",
+      "Translated": "玩家移动输入时取消当前路径",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Stop pathing when stuck",
+      "Translated": "卡住时停止寻路",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Max cores used during mesh build",
+      "Translated": "网格构建时使用的最大核心数",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "0 = use all available; positive number = use that many cores; negative number = leave that many cores idle",
+      "Translated": "0 = 使用全部可用核心；正数 = 使用该数量的核心；负数 = 保留该数量的核心空闲",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Stuck tolerance (yalms/second)",
+      "Translated": "卡住容差（亚尔姆/秒）",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The minimum distance the object must move each frame to avoid being considered stuck.",
+      "Translated": "物体每帧必须移动的最小距离，低于此值将被视为卡住。",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Stuck timeout (ms)",
+      "Translated": "卡住超时（毫秒）",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "How long you can remain under the stuck threshold before stopping.",
+      "Translated": "在低于卡住阈值后可以持续多久才停止。",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Retry pathing after stop",
+      "Translated": "停止后重试寻路",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "If enabled, the agent will attempt to re-path after being considered stuck.",
+      "Translated": "启用后，代理在被视为卡住后会尝试重新寻路。",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Randomness Multiplier",
+      "Translated": "随机性倍率",
+      "Context": "Config.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Navmesh",
+      "Translated": "导航网格",
+      "Context": "MainWindow..ctor",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Tabs",
+      "Translated": "标签页",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Config",
+      "Translated": "配置",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Layout",
+      "Translated": "布局",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Collision",
+      "Translated": "冲击",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Navmesh manager",
+      "Translated": "导航网格管理器",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Navmesh custom",
+      "Translated": "自定义导航网格",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rasterization: Cell Size (#cs)",
+      "Translated": "栅格化：单元格大小 (#cs)",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The xz-plane cell size to use for fields. [Limit: > 0] [Units: world]\r\n\r\nThe voxelization cell size #cs defines the voxel size along both axes of\r\nthe ground plane: x and z in Recast. This value is usually derived from the\r\ncharacter radius `r`. A recommended starting value for #cs is either `r/2`\r\nor `r/3`. Smaller values of #cs will increase rasterization resolution and\r\nnavmesh detail, but total generation time will increase exponentially.  In\r\noutdoor environments, `r/2` is often good enough.  For indoor scenes with\r\ntight spaces you might want the extra precision, so a value of `r/3` or\r\nsmaller may give better results.\r\n\r\nThe initial instinct is to reduce this value to something very close to zero\r\nto maximize the detail of the generated navmesh. This quickly becomes a case\r\nof diminishing returns, however. Beyond a certain point there's usually not\r\nmuch perceptable difference in the generated navmesh, but huge increases in\r\ngeneration time.  This hinders your ability to quickly iterate on level\r\ndesigns and provides little benefit.  The general recommendation here is to\r\nuse as large a value for #cs as you can get away with.\r\n\r\n#cs and #ch define voxel/grid/cell size.  So their values have significant\r\nside effects on all parameters defined in voxel units.\r\n\r\nThe minimum value for this parameter depends on the platform's floating point\r\naccuracy, with the practical minimum usually around 0.05.",
+      "Translated": "用于场数据的 xz 平面单元格大小。[限制：> 0] [单位：世界]\n\n体素化单元格大小 #cs 定义了 Recast 中地平面两个轴（x 和 z）上的体素大小。该值通常由角色半径 `r` 推导而来。#cs 的推荐初始值为 `r/2` 或 `r/3`。#cs 越小，栅格化分辨率和导航网格细节越高，但总生成时间会呈指数增长。在室外环境中，`r/2` 通常已足够。对于空间狭窄的室内场景，可能需要更高的精度，因此 `r/3` 或更小的值可能效果更好。\n\n直觉上会想将此值降到接近零以最大化生成导航网格的细节。然而这很快就会变成收益递减的情况。超过某个点后，生成的导航网格通常不会有明显差异，但生成时间会大幅增加。这会妨碍你快速迭代关卡设计，且收益甚微。通常建议在可接受范围内尽量使用较大的 #cs 值。\n\n#cs 和 #ch 定义了体素/网格/单元格大小。因此它们的值会对所有以体素为单位定义的参数产生重大影响。\n\n此参数的最小值取决于平台的浮点精度，实际最小值通常在 0.05 左右。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rasterization: Cell Height (#ch)",
+      "Translated": "栅格化：单元格高度 (#ch)",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The y-axis cell size to use for fields. [Limit: > 0] [Units: world]\r\n\r\nThe voxelization cell height #ch is defined separately in order to allow for\r\ngreater precision in height tests. A good starting point for #ch is half the\r\n#cs value. Smaller #ch values ensure that the navmesh properly connects areas\r\nthat are only separated by a small curb or ditch.  If small holes are generated\r\nin your navmesh around where there are discontinuities in height (for example,\r\nstairs or curbs), you may want to decrease the cell height value to increase\r\nthe vertical rasterization precision of Recast.\r\n\r\n#cs and #ch define voxel/grid/cell size.  So their values have significant\r\nside effects on all parameters defined in voxel units.\r\n\r\nThe minimum value for this parameter depends on the platform's floating point\r\naccuracy, with the practical minimum usually around 0.05.",
+      "Translated": "用于场数据的 y 轴单元格大小。[限制：> 0] [单位：世界]\n\n体素化单元格高度 #ch 单独定义，以便在高度测试中获得更高精度。#ch 的良好初始值为 #cs 的一半。较小的 #ch 值可确保导航网格正确连接仅被小台阶或沟渠分隔的区域。如果导航网格在高度不连续处（例如楼梯或台阶）周围产生小孔洞，你可能需要减小单元格高度值以提高 Recast 的垂直栅格化精度。\n\n#cs 和 #ch 定义了体素/网格/单元格大小。因此它们的值会对所有以体素为单位定义的参数产生重大影响。\n\n此参数的最小值取决于平台的浮点精度，实际最小值通常在 0.05 左右。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Agent: Height",
+      "Translated": "代理：高度",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Minimum floor to 'ceiling' height that will still allow the floor area to be considered walkable. [Limit: >= 3 * CellHeight] [Units: world]\r\n\r\nThis value defines the worldspace height `h` of the agent in voxels. The value\r\nof #walkableHeight should be calculated as `ceil(h / ch)`.  Note this is based\r\non #ch not #cs since it's a height value.\r\n\r\nPermits detection of overhangs in the source geometry that make the geometry\r\nbelow un-walkable. The value is usually set to the maximum agent height.",
+      "Translated": "仍允许地面区域被视为可行走的最小地板到“天花板”高度。[限制：>= 3 * CellHeight] [单位：世界]\n\n此值定义了代理在世界空间中的高度 `h`（以体素计）。#walkableHeight 的值应计算为 `ceil(h / ch)`。注意这基于 #ch 而非 #cs，因为它是高度值。\n\n允许检测源几何体中的悬垂物，这些悬垂物会使下方几何体不可行走。该值通常设为代理的最大高度。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Agent: Radius",
+      "Translated": "代理：半径",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The distance to erode/shrink the walkable area of the heightfield away from obstructions. [Limit: >= 0] [Units: world]\r\n\r\nThe parameter #walkableRadius defines the worldspace agent radius `r` in voxels.\r\nMost often, this value of #walkableRadius should be calculated as `ceil(r / cs)`.\r\nNote this is based on #cs since the agent radius is always parallel to the ground\r\nplane.\r\n\r\nIf the #walkableRadius value is greater than zero, the edges of the navmesh will\r\nbe pushed away from all obstacles by this amount.\r\n\r\nA non-zero #walkableRadius allows for much simpler runtime navmesh collision checks.\r\nThe game only needs to check that the center point of the agent is contained within\r\na navmesh polygon.  Without this erosion, runtime navigation checks need to collide\r\nthe geometric projection of the agent's logical cylinder onto the navmesh with the\r\nboundary edges of the navmesh polygons.\r\n\r\nIn general, this is the closest any part of the final mesh should get to an\r\nobstruction in the source geometry.  It is usually set to the maximum\r\nagent radius.\r\n\r\nIf you want to have tight-fitting navmesh, or want to reuse the same navmesh for\r\nmultiple agents with differing radii, you can use a `walkableRadius` value of zero.\r\nBe advised though that you will need to perform your own collisions with the navmesh\r\nedges, and odd edge cases issues in the mesh generation can potentially occur.  For\r\nthese reasons, specifying a radius of zero is allowed but is not recommended.",
+      "Translated": "将高度场的可行走区域从障碍物处侵蚀/收缩的距离。[限制：>= 0] [单位：世界]\n\n参数 #walkableRadius 定义了世界空间中的代理半径 `r`（以体素计）。通常 #walkableRadius 的值应计算为 `ceil(r / cs)`。注意这基于 #cs，因为代理半径始终平行于地平面。\n\n如果 #walkableRadius 值大于零，导航网格的边缘将被推离所有障碍物该距离。\n\n非零的 #walkableRadius 允许更简单的运行时导航网格碰撞检测。游戏只需检查代理的中心点是否位于导航网格多边形内。如果没有此侵蚀，运行时导航检测需要将代理逻辑圆柱体的几何投影与导航网格多边形的边界边缘进行碰撞检测。\n\n一般来说，这是最终网格任何部分应接近源几何体中障碍物的最近距离。通常设为代理的最大半径。\n\n如果你想要紧密贴合的导航网格，或想为半径不同的多个代理复用同一导航网格，可以使用 `walkableRadius` 值为零。但请注意，你需要自行处理与导航网格边缘的碰撞，且网格生成中可能出现奇怪的边缘情况问题。因此，允许指定半径为零但不推荐。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Agent: Max Climb",
+      "Translated": "代理：最大攀爬",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Maximum ledge height that is considered to still be traversable. [Limit: >= 0] [Units: world]\r\n\r\nThe #walkableClimb value defines the maximum height of ledges and steps that\r\nthe agent can walk up. Given a designer-defined `maxClimb` distance in world\r\nunits, the value of #walkableClimb should be calculated as `ceil(maxClimb / ch)`.\r\nNote that this is using #ch not #cs because it's a height-based value.\r\n\r\nAllows the mesh to flow over low lying obstructions such as curbs and\r\nup/down stairways. The value is usually set to how far up/down an agent can step.",
+      "Translated": "仍被视为可通行的最大台阶高度。[限制：>= 0] [单位：世界]\n\n#walkableClimb 值定义了代理可以走上的台阶和梯级的最大高度。给定设计者定义的世界单位 `maxClimb` 距离，#walkableClimb 的值应计算为 `ceil(maxClimb / ch)`。注意这使用 #ch 而非 #cs，因为它是基于高度的值。\n\n允许网格跨越低矮障碍物（如台阶和上下楼梯）。该值通常设为代理可以上下的距离。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Agent: Max Slope",
+      "Translated": "代理：最大坡度",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The maximum slope that is considered walkable. [Limits: 0 <= value < 90] [Units: Degrees]\r\n\r\nThe parameter #walkableSlopeAngle is to filter out areas of the world where\r\nthe ground slope would be too steep for an agent to traverse. This value is\r\ndefined as a maximum angle in degrees that the surface normal of a polgyon\r\ncan differ from the world's up vector.  This value must be within the range\r\n`[0, 90]`.\r\n\r\nThe practical upper limit for this parameter is usually around 85 degrees.",
+      "Translated": "被视为可行走的最大坡度。[限制：0 <= 值 < 90] [单位：度]\n\n参数 #walkableSlopeAngle 用于过滤掉地面坡度过陡、代理无法通行的区域。此值定义为多边形表面法线与世界上方向向量之间允许的最大角度（度）。此值必须在 `[0, 90]` 范围内。\n\n此参数的实际上限通常在 85 度左右。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Select which filtering passes to apply to voxelized geometry to remove some classes of artifacts.",
+      "Translated": "选择要对体素化几何体应用哪些过滤通道，以移除某些类别的伪影。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Region: Min Size",
+      "Translated": "区域：最小尺寸",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The minimum number of cells allowed to form isolated island areas. [Limit: >= 0] [Units: voxels]\r\n\r\nWatershed partitioning is really prone to noise in the input distance field.\r\nIn order to get nicer areas, the areas are merged and small disconnected areas\r\nare removed after the water shed partitioning. The parameter #minRegionArea\r\ndescribes the minimum isolated region size that is still kept. A region is\r\nremoved if the number of voxels in the region is less than the square of\r\n#minRegionArea.\r\n\r\nAny regions that are smaller than this area will be marked as unwalkable.\r\nThis is useful in removing useless regions that can sometimes form on\r\ngeometry such as table tops, box tops, etc.",
+      "Translated": "允许形成孤立岛屿区域的最小单元格数量。[限制：>= 0] [单位：体素]\n\n分水岭分割非常容易受到输入距离场噪声的影响。为了获得更好的区域，在分水岭分割后会合并区域并移除小的不连通区域。参数 #minRegionArea 描述了仍保留的最小孤立区域大小。如果区域中的体素数量小于 #minRegionArea 的平方，则该区域会被移除。\n\n任何小于此区域的区域将被标记为不可行走。这对于移除有时会在桌面、箱顶等几何体上形成的有用区域很有帮助。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Region: Merge Size",
+      "Translated": "区域：合并大小",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Any regions with a span count smaller than this value will, if possible, be merged with larger regions. [Limit: >=0] [Units: voxels]\r\n\r\nThe triangulation process works best with small, localized voxel regions.\r\nThe parameter #mergeRegionArea controls the maximum voxel area of a region\r\nthat is allowed to be merged with another region.  If you see small patches\r\nmissing here and there, you could lower the #minRegionArea value.",
+      "Translated": "任何跨度计数小于此值的区域，如果可能的话，将与更大的区域合并。[限制：>=0] [单位：体素]\n\n三角化过程在小而局部的体素区域中效果最好。\n参数 #mergeRegionArea 控制允许与另一个区域合并的区域的最大体素面积。\n如果你看到这里或那里缺少小块区域，可以降低 #minRegionArea 的值。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Partitioning algorithm",
+      "Translated": "分区算法",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "There are 3 martitioning methods, each with some pros and cons.",
+      "Translated": "共有 3 种分区方法，各有优缺点。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Polygonization: Max Edge Length",
+      "Translated": "多边形化：最大边长",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The maximum allowed length for contour edges along the border of the mesh. [Limit: >= 0] [Units: world]\r\n\r\nIn certain cases, long outer edges may decrease the quality of the resulting\r\ntriangulation, creating very long thin triangles. This can sometimes be\r\nremedied by limiting the maximum edge length, causing the problematic long\r\nedges to be broken up into smaller segments.\r\n\r\nThe parameter #maxEdgeLen defines the maximum edge length and is defined in\r\nterms of voxels. A good value for #maxEdgeLen is something like\r\n`walkableRadius * 8`. A good way to adjust this value is to first set it really\r\nhigh and see if your data creates long edges. If it does, decrease #maxEdgeLen\r\nuntil you find the largest value which improves the resulting tesselation.\r\n\r\nExtra vertices will be inserted as needed to keep contour edges below this\r\nlength. A value of zero effectively disables this feature.",
+      "Translated": "网格边界上轮廓边允许的最大长度。[限制：>= 0] [单位：世界]\n\n在某些情况下，较长的外边缘可能会降低最终三角化的质量，产生非常细长的三角形。\n有时可以通过限制最大边长来改善，将问题长边拆分为更小的段。\n\n参数 #maxEdgeLen 定义最大边长，以体素为单位。#maxEdgeLen 的一个好值大约是\n`walkableRadius * 8`。调整此值的一个好方法是先将其设得很高，看看你的数据是否会产生长边。\n如果会，就降低 #maxEdgeLen，直到找到能改善最终镶嵌的最大值。\n\n将根据需要插入额外顶点，以保持轮廓边低于此长度。值为零实际上会禁用此功能。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Polygonization: Max Edge Simplification Error",
+      "Translated": "多边形化：最大边简化误差",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The maximum distance a simplfied contour's border edges should deviate from the original raw contour. [Limit: >=0] [Units: voxels]\r\n\r\nWhen the rasterized areas are converted back to a vectorized representation,\r\nthe #maxSimplificationError describes how loosely the simplification is done.\r\nThe simplification process uses the Ramer–Douglas-Peucker algorithm,\r\nand this value describes the max deviation in voxels.\r\n\r\nGood values for #maxSimplificationError are in the range `[1.1, 1.5]`.\r\nA value of `1.3` is a good starting point and usually yields good results.\r\nIf the value is less than `1.1`, some sawtoothing starts to appear at the\r\ngenerated edges.  If the value is more than `1.5`, the mesh simplification\r\nstarts to cut some corners it shouldn't.\r\n\r\nThe effect of this parameter only applies to the xz-plane.",
+      "Translated": "简化轮廓的边界边与原始轮廓的最大偏差距离。[限制：>=0] [单位：体素]\n\n当栅格化区域转换回矢量化表示时，#maxSimplificationError 描述简化的宽松程度。\n简化过程使用 Ramer–Douglas–Peucker 算法，此值描述以体素为单位的最大偏差。\n\n#maxSimplificationError 的好值范围是 `[1.1, 1.5]`。\n`1.3` 是一个好的起点，通常能产生良好结果。\n如果值小于 `1.1`，生成的边缘会开始出现锯齿。如果值大于 `1.5`，网格简化会开始\n削减一些不该削减的角。\n\n此参数的效果仅适用于 xz 平面。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Polygonization: Max Vertices per Polygon",
+      "Translated": "多边形化：每多边形最大顶点数",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The maximum number of vertices allowed for polygons generated during the contour to polygon conversion process. [Limit: >= 3]\r\n\r\nIf the mesh data is to be used to construct a Detour navigation mesh, then the upper limit\r\nis limited to <= #DT_VERTS_PER_POLYGON.",
+      "Translated": "在轮廓到多边形转换过程中生成的多边形允许的最大顶点数。[限制：>= 3]\n\n如果网格数据要用于构建 Detour 导航网格，则上限限制为 <= #DT_VERTS_PER_POLYGON。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Detail Mesh: Sample Distance",
+      "Translated": "细节网格：采样距离",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Sampling distance to use when generating the detail mesh. [Limits: 0 or >= 0.9] [Units: voxels]",
+      "Translated": "生成细节网格时使用的采样距离。[限制：0 或 >= 0.9] [单位：体素]",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Detail Mesh: Max Sample Error",
+      "Translated": "细节网格：最大采样误差",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "The maximum distance the detail mesh surface should deviate from heightfield data. (For height detail only.) [Limit: >= 0] [Units: world]",
+      "Translated": "细节网格表面与高度场数据的最大偏差距离。（仅用于高度细节。）[限制：>= 0] [单位：世界]",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "L1 Tile count",
+      "Translated": "L1 瓦片数",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Number of tiles per axis for first-level subdivision. Has to be power-of-2. [Limit: 1 <= value <= 32]\r\nAffects both navmesh and nav volume.",
+      "Translated": "第一级细分的每轴瓦片数。必须为 2 的幂。[限制：1 <= 值 <= 32]\n同时影响导航网格和导航体积。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "L2 Tile count",
+      "Translated": "L2 瓦片数",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Number of tiles per axis for second-level subdivision. Has to be power-of-2. [Limit: 1 <= value <= 32]\r\nAffects only nav volume.",
+      "Translated": "第二级细分的每轴瓦片数。必须为 2 的幂。[限制：1 <= 值 <= 32]\n仅影响导航体积。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "L3 Voxel count",
+      "Translated": "L3 体素数",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Number of leaf voxels per axis per tile. Has to be power-of-2. [Limit: 1 <= value <= 32]\r\nAffects only nav volume.",
+      "Translated": "每瓦片每轴的叶体素数。必须为 2 的幂。[限制：1 <= 值 <= 32]\n仅影响导航体积。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Generate climb-down links",
+      "Translated": "生成下行链接",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Generate jump-down links",
+      "Translated": "生成跳下链接",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Ground tolerance",
+      "Translated": "地面容差",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Undocumented",
+      "Translated": "未记录",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Climb down distance",
+      "Translated": "下行距离",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Horizontal distance for edge climb samples.",
+      "Translated": "边缘攀爬采样的水平距离。",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Climb down max height",
+      "Translated": "下行最大高度",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Climb down min height",
+      "Translated": "下行最小高度",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Edge jump end distance",
+      "Translated": "边缘跳跃终点距离",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Edge jump height",
+      "Translated": "边缘跳跃高度",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Edge jump max drop",
+      "Translated": "边缘跳跃最大落差",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Edge jump min drop",
+      "Translated": "边缘跳跃最小落差",
+      "Context": "NavmeshSettings.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Low-hanging obstacles",
+      "Translated": "低矮障碍",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Marks non-walkable spans as walkable if their maximum is within #walkableClimb of the span below them.\r\n\r\nThis removes small obstacles and rasterization artifacts that the agent would be able to walk over\r\nsuch as curbs.  It also allows agents to move up terraced structures like stairs.\r\n\r\nObstacle spans are marked walkable if: obstacleSpan.smax - walkableSpan.smax < walkableClimb",
+      "Translated": "若不可行走跨度的最大值与其下方跨度的差值在 #walkableClimb 以内，则将其标记为可行走。\n\n这会移除代理能够跨越的小型障碍和光栅化伪影，\n例如路缘石。它还允许代理沿阶梯等台地结构向上移动。\n\n满足以下条件时障碍跨度被标记为可行走：obstacleSpan.smax - walkableSpan.smax < walkableClimb",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Ledge spans",
+      "Translated": "边缘跨度",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Marks spans that are ledges as not-walkable.\r\n\r\nA ledge is a span with one or more neighbors whose maximum is further away than #walkableClimb\r\nfrom the current span's maximum.\r\nThis method removes the impact of the overestimation of conservative voxelization \r\nso the resulting mesh will not have regions hanging in the air over ledges.\r\n\r\nA span is a ledge if: abs(currentSpan.smax - neighborSpan.smax) > walkableClimb",
+      "Translated": "将属于边缘的跨度标记为不可行走。\n\n边缘是指一个或多个相邻跨度的最大值与当前跨度最大值之差超过 #walkableClimb 的跨度。\n此方法可消除保守体素化高估的影响，\n使生成的网格不会在边缘上方悬空。\n\n满足以下条件时跨度为边缘：abs(currentSpan.smax - neighborSpan.smax) > walkableClimb",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Walkable low-height spans",
+      "Translated": "可行走低高度跨度",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Marks walkable spans as not walkable if the clearance above the span is less than the specified #walkableHeight.\r\n\r\nFor this filter, the clearance above the span is the distance from the span's \r\nmaximum to the minimum of the next higher span in the same column.\r\nIf there is no higher span in the column, the clearance is computed as the\r\ndistance from the top of the span to the maximum heightfield height.",
+      "Translated": "若跨度上方的净空小于指定的 #walkableHeight，则将该可行走跨度标记为不可行走。\n\n对于此过滤器，跨度上方的净空是指从该跨度的最大值\n到同一列中下一个更高跨度的最小值的距离。\n若该列中没有更高的跨度，则净空按从跨度顶部到高度场最大高度的距离计算。",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Interiors",
+      "Translated": "内部区域",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Marks spans inside manifold geometry (or below non-manifold) as non-walkable.",
+      "Translated": "将流形几何体内部（或非流形下方）的跨度标记为不可行走。",
+      "Context": "NavmeshSettings.DrawConfigFilteringCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Watershed",
+      "Translated": "分水岭",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Monotone",
+      "Translated": "单调",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Layer",
+      "Translated": "分层",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Watershed partitioning:\r\n - the classic Recast partitioning\r\n - creates the nicest tessellation\r\n - usually slowest\r\n - partitions the heightfield into nice regions without holes or overlaps\r\n - the are some corner cases where this method creates produces holes and overlaps\r\n    - holes may appear when a small obstacles is close to large open area (triangulation can handle this)\r\n    - overlaps may occur if you have narrow spiral corridors (i.e stairs), this make triangulation to fail\r\nGenerally the best choice if you precompute the nacmesh, use this if you have large open areas.",
+      "Translated": "分水岭分区：\n - 经典的 Recast 分区方式\n - 生成最精细的密铺铁桥\n - 通常最慢\n - 将高度场划分为无孔洞、无重叠的优质区域\n - 某些边界情况下此方法会产生孔洞和重叠\n    - 当小障碍物靠近大片开阔区域时可能出现孔洞（三角化可处理此情况）\n    - 若存在狭窄的螺旋走廊（如楼梯）可能出现重叠，导致三角化失败\n若预先计算导航网格，通常是最佳选择；适用于大片开阔区域。",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Monotone partitioning:\r\n - fastest\r\n - partitions the heightfield into regions without holes and overlaps (guaranteed)\r\n - creates long thin polygons, which sometimes causes paths with detours\r\nUse this if you want fast navmesh generation.",
+      "Translated": "单调分区：\n - 最快\n - 将高度场划分为无孔洞、无重叠的区域（有保证）\n - 生成细长多边形，有时会导致路径绕行\n若需要快速生成导航网格，请使用此项。",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Layer partitioning\r\n - quite fast\r\n - partitions the heighfield into non-overlapping regions\r\n - relies on the triangulation code to cope with holes (thus slower than monotone partitioning)\r\n - produces better triangles than monotone partitioning\r\n - does not have the corner cases of watershed partitioning\r\n - can be slow and create a bit ugly tessellation (still better than monotone)\r\n   if you have large open areas with small obstacles (not a problem if you use tiles)\r\nGood choice to use for tiled navmesh with medium and small sized tiles.",
+      "Translated": "分层分区\n - 较快\n - 将高度场划分为互不重叠的区域\n - 依赖三角化代码处理孔洞（因此比分水岭分区慢）\n - 生成的三角形比单调分区更好\n - 没有分水岭分区的边界情况问题\n - 若存在大片开阔区域且带有小障碍物，可能较慢且密铺铁桥略显粗糙（仍优于单调分区）\n   （若使用瓦片则不成问题）\n适用于中小型瓦片的分块导航网格。",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Opens the debug menu.\n/vnav moveto <X> <Y> <Z> → move to raw coordinates\n/vnav movedir <X> <Y> <Z> → move this many units over (relative to player facing)\n/vnav movetarget → move to target's position\n/vnav moveflag → move to flag position\n/vnav flyto <X> <Y> <Z> → fly to raw coordinates\n/vnav flydir <X> <Y> <Z> → fly this many units over (relative to player facing)\n/vnav flytarget → fly to target's position\n/vnav flyflag → fly to flag position\n/vnav stop → stop all movement\n/vnav reload → reload current territory's navmesh from cache\n/vnav rebuild → rebuild current territory's navmesh from scratch\n/vnav aligncamera → toggle aligning camera to movement direction\n/vnav aligncamera true|yes|enable → enable aligning camera to movement direction\n/vnav aligncamera false|no|disable → disable aligning camera to movement direction\n/vnav dtr → toggle dtr status\n/vnav collider → toggle collision debug visualization",
+      "Translated": "打开调试菜单。\n/vnav moveto <X> <Y> <Z> → 移动到原始坐标\n/vnav movedir <X> <Y> <Z> → 按此单位数移动（相对于玩家朝向）\n/vnav movetarget → 移动到目标位置\n/vnav moveflag → 移动到标记位置\n/vnav flyto <X> <Y> <Z> → 飞往原始坐标\n/vnav flydir <X> <Y> <Z> → 按此单位数飞行（相对于玩家朝向）\n/vnav flytarget → 飞往目标位置\n/vnav flyflag → 飞往标记位置\n/vnav stop → 停止所有移动\n/vnav reload → 从缓存重新加载当前区域的导航网格\n/vnav rebuild → 从零重组当前区域的导航网格\n/vnav aligncamera → 切换相机对齐移动方向\n/vnav aligncamera true|yes|enable → 启用相机对齐移动方向\n/vnav aligncamera false|no|disable → 禁用相机对齐移动方向\n/vnav dtr → 切换 DTR 状态\n/vnav collider → 切换冲击调试可视化",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Filter",
+      "Translated": "过滤",
+      "Context": "DebugExtractedCollision.DrawExtractor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Export to DotRecast obj file",
+      "Translated": "导出为 DotRecast obj 文件",
+      "Context": "DebugExtractedCollision.DrawExtractor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Log raycasts",
+      "Translated": "记录射线检测",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Reset remembered raycast hit",
+      "Translated": "重置已记录的射线命中",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Module: ",
+      "Translated": "模块：",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " scenes, ",
+      "Translated": "场景，",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " loads)",
+      "Translated": "加载）",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Streaming: ",
+      "Translated": "流式加载：",
+      "Context": "DebugGameCollision.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show objects with zero layer",
+      "Translated": "显示零层对象",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Shown layers",
+      "Translated": "显示的层",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "None",
+      "Translated": "无",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Material mask",
+      "Translated": "材质掩码",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Material id",
+      "Translated": "材质 ID",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Flag filter",
+      "Translated": "标记过滤",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only if raycast flag is set",
+      "Translated": "仅当设置了射线检测标记",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only when both flags are set",
+      "Translated": "仅当两个标记都设置时",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hide objects without raycast flag (0x1)",
+      "Translated": "隐藏没有射线检测标记 (0x1) 的对象",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hide objects without global viist flag (0x2)",
+      "Translated": "隐藏没有全局访问标记 (0x2) 的对象",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Copy translation to clipboard",
+      "Translated": "复制平移至剪贴板",
+      "Context": "DebugGameCollision.DrawColliderMesh",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Flag: raycast",
+      "Translated": "标记：射线检测",
+      "Context": "DebugGameCollision.ContextCollider",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Flag: global visit",
+      "Translated": "标记：全局访问",
+      "Context": "DebugGameCollision.ContextCollider",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Group by layer group",
+      "Translated": "按层组分组",
+      "Context": "DebugLayout.DrawComparison",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Group by layer",
+      "Translated": "按层分组",
+      "Context": "DebugLayout.DrawComparison",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Group by instance type",
+      "Translated": "按实例类型分组",
+      "Context": "DebugLayout.DrawComparison",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Group by material",
+      "Translated": "按材质分组",
+      "Context": "DebugLayout.DrawComparison",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Filter by ID",
+      "Translated": "按 ID 过滤",
+      "Context": "DebugLayout.DrawComparison",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Support flying",
+      "Translated": "支持飞行",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Load existing territory customization",
+      "Translated": "加载现有区域自定义",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rebuild navmesh",
+      "Translated": "重建导航网格",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rebuild scene extract only",
+      "Translated": "仅重建场景提取",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "State: ",
+      "Translated": "状态：",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pathfind",
+      "Translated": "寻路",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Source": "ai:llm"
+    },
+    {
+      "Original": "Reload",
+      "Translated": "重新加载",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Rebuild",
+      "Translated": "重组",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Num pathfinding tasks: ",
+      "Translated": "寻路任务数：",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " in progress, ",
+      "Translated": "进行中，",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " queued",
+      "Translated": "排队中",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Player pos: ",
+      "Translated": "玩家位置：",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Set target to current pos",
+      "Translated": "将目标设为当前位置",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Set target to target pos",
+      "Translated": "将目标设为目标位置",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Set target to flag position",
+      "Translated": "将目标设为标记位置",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Current target: ",
+      "Translated": "当前目标：",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Export bitmap",
+      "Translated": "导出位图",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Allow movement",
+      "Translated": "允许移动",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use raycasts",
+      "Translated": "使用射线检测",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use string pulling",
+      "Translated": "使用路径拉直",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pathfind to target using navmesh",
+      "Translated": "使用导航网格寻路至目标",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pathfind to target using volume",
+      "Translated": "使用体积寻路至目标",
+      "Context": "DebugNavmeshManager.Draw",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
