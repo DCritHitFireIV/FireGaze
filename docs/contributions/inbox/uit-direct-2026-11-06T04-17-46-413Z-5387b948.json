@@ -1,1 +1,248 @@
-{"type":"uit-contribution","plugin":"ActionTimelineReborn","kinds":["llm"],"entries":[{"Original":"Action Timeline","Translated":"动作时间轴","Context":"SettingsWindow.DrawBrand","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Help","Translated":"帮助","Context":"SettingsWindow.Draw","Source":"library","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"ms","Translated":"毫秒","Context":"TimelineWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"},{"Original":"Name","Translated":"名称","Context":"SettingsWindow.DrawGeneralTab","Source":"library","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Enabled","Translated":"启用","Context":"SettingsWindow.DrawGridTab","Source":"library","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Locked","Translated":"锁定","Context":"SettingsWindow.DrawGeneralTab","Source":"library","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Threshold (ms)","Translated":"阈值 (ms)","Context":"SettingsWindow.DrawGCDClippingTab","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Support the developer on Ko-fi","Translated":"在 Ko-fi 上支持开发者","Context":".ctor","Source":"library","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Timeline: ","Translated":"时间轴：","Context":"TimelineWindow.Draw","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"an unknown status","Translated":"未知状态","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":" stacks","Translated":"层","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"1 stack","Translated":"1 层","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Gained ","Translated":"获得","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"Lost ","Translated":"失去","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":" up to ","Translated":"最多","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":" down to ","Translated":"降至","Context":"TimelineWindow.Describe","Source":"ai:deepseek","Role":"Ambiguous","RoleReason":"同文包含不同或未证明的用途；写入时逐位置核对"},{"Original":"now","Translated":"现在","Context":"TimelineWindow.DrawNowLine","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Actions show up here as you use them.","Translated":"使用技能后将在此显示。","Context":"TimelineWindow.DrawEmpty","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Unknown action","Translated":"未知技能","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Direct hit","Translated":"直击","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Critical hit","Translated":"暴击","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Critical direct hit","Translated":"暴击直击","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Casting now","Translated":"正在咏唱","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"s ago","Translated":"秒前","Context":"TimelineWindow.DrawTooltip","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Clipping: ","Translated":"截断：","Context":"TimelineManager.ActionFromSelf","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"ms (","Translated":"毫秒 (","Context":"TimelineManager.ActionFromSelf","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"}],"resources":[],"attributes":[{"Original":"Opens the ActionTimelineReborn configuration window.","Translated":"打开 ActionTimelineReborn 配置窗口。","Context":"[投稿]","Source":"ai:deepseek"},{"Original":"Lock all windows","Translated":"锁定所有窗口","Context":"[投稿]","Source":"ai:deepseek"},{"Original":"Unlock all windows","Translated":"解锁所有窗口","Context":"[投稿]","Source":"ai:deepseek"}]}
+{
+  "type": "uit-contribution",
+  "plugin": "ActionTimelineReborn",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Action Timeline",
+      "Translated": "动作时间轴",
+      "Context": "SettingsWindow.DrawBrand",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Help",
+      "Translated": "帮助",
+      "Context": "SettingsWindow.Draw",
+      "Source": "library",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "ms",
+      "Translated": "毫秒",
+      "Context": "TimelineWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "启用",
+      "Context": "SettingsWindow.DrawGridTab",
+      "Source": "library",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Locked",
+      "Translated": "锁定",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Threshold (ms)",
+      "Translated": "阈值 (ms)",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Support the developer on Ko-fi",
+      "Translated": "在 Ko-fi 上支持开发者",
+      "Context": ".ctor",
+      "Source": "library",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Timeline: ",
+      "Translated": "时间轴：",
+      "Context": "TimelineWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "an unknown status",
+      "Translated": "未知状态",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": " stacks",
+      "Translated": "层",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "1 stack",
+      "Translated": "1 层",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Gained ",
+      "Translated": "获得",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "Lost ",
+      "Translated": "失去",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": " up to ",
+      "Translated": "最多",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": " down to ",
+      "Translated": "降至",
+      "Context": "TimelineWindow.Describe",
+      "Source": "ai:deepseek",
+      "Role": "Ambiguous",
+      "RoleReason": "同文包含不同或未证明的用途；写入时逐位置核对"
+    },
+    {
+      "Original": "now",
+      "Translated": "现在",
+      "Context": "TimelineWindow.DrawNowLine",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Actions show up here as you use them.",
+      "Translated": "使用技能后将在此显示。",
+      "Context": "TimelineWindow.DrawEmpty",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Unknown action",
+      "Translated": "未知技能",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Direct hit",
+      "Translated": "直击",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Critical hit",
+      "Translated": "暴击",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Critical direct hit",
+      "Translated": "暴击直击",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Casting now",
+      "Translated": "正在咏唱",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "s ago",
+      "Translated": "秒前",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Clipping: ",
+      "Translated": "截断：",
+      "Context": "TimelineManager.ActionFromSelf",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "ms (",
+      "Translated": "毫秒 (",
+      "Context": "TimelineManager.ActionFromSelf",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Opens the ActionTimelineReborn configuration window.",
+      "Translated": "打开 ActionTimelineReborn 配置窗口。",
+      "Context": "[投稿]",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Lock all windows",
+      "Translated": "锁定所有窗口",
+      "Context": "[投稿]",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Unlock all windows",
+      "Translated": "解锁所有窗口",
+      "Context": "[投稿]",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "importedAt": "2026-11-06T04:18:01",
+  "imported": {
+    "archive": "uit-direct-2026-11-06T04-17-46-413Z-5387b948-2026-11-06T041800.json",
+    "accepted": 29,
+    "filled": 29,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 29 条 `ActionTimelineReborn` 的界面文字译文，已收为**独立译文包** `uit-packs/ActionTimelineReborn@user-da7d31.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 29 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
