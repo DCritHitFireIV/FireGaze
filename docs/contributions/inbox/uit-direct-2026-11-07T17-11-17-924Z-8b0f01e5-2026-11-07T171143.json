@@ -1,0 +1,591 @@
+{
+  "issue": "direct-2026-11-07T17-11-17-924Z-8b0f01e5",
+  "receivedAt": "2026-11-07 17:11:43",
+  "author": "匿名直传",
+  "plugin": "GlamourThis",
+  "fingerprint": "efad50ad161c6a32",
+  "packFile": "GlamourThis@user-efad50.json",
+  "accepted": 69,
+  "filled": 69,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "GlamourThis",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open the Glamour This browser. Use /gt as a shortcut.",
+        "Translated": "打开 Glamour 此浏览器。使用/gt 作为快捷方式。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Open the Glamour This browser.",
+        "Translated": "打开 Glamour This 浏览器。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Glamour This - Settings###GlamourThisConfig",
+        "Translated": "Glamour This - 设置",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Open automatically with the Glamour Dresser",
+        "Translated": "使用魅力服装自动打开",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Highlight duplicate items",
+        "Translated": "突出显示重复项目",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Icon size",
+        "Translated": "图标大小",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Glamour This###GlamourThisMain",
+        "Translated": "魅力在此",
+        "Context": "MainWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Items",
+        "Translated": "物品",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Sets",
+        "Translated": "集合",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Search by name...",
+        "Translated": "按名字搜索......",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Which storage to list items from. Defaults to the Glamour Dresser.",
+        "Translated": "从哪个仓库列出物品？默认选择 Glamour Dresser。",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Filter by expansion, approximated from each item's required level.\nLevel 1 cosmetic / event gear is grouped under \"Special (Lv 1)\".",
+        "Translated": "通过展开过滤，根据每个项目的所需水平进行近似。\n1 级化妆品/活动装备分为 “特殊 (Lv 1)” 类别。",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Duplicates",
+        "Translated": "重复",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show only items you hold more than one of (across the dresser, bags and armoury).",
+        "Translated": "只展示你持有多个物品的物品 (越过梳妆台、包和武器柜)。",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Outfit-ready",
+        "Translated": "服装准备就绪",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Items tab: show only Outfit Glamour-ready pieces.\nSets tab: show only complete sets you can still store as an outfit.",
+        "Translated": "物品选项卡：仅展示成衣魅力准备就绪的作品。\nSets 选项卡：只显示完整的套装，你仍然可以将其存储为一套服装。",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Include Armoire (cabinet) items. Turn off to hide the endless armoire and focus on the dresser.",
+        "Translated": "包括衣柜物品。关闭以隐藏无尽的衣柜，专注于梳妆台。",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Refresh",
+        "Translated": "更新",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "(dresser closed - actions disabled)",
+        "Translated": "(梳妆台关闭——操作禁用)",
+        "Context": "MainWindow.DrawToolbar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " items",
+        "Translated": "项目",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "of ",
+        "Translated": "的",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " owned",
+        "Translated": "拥有",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Item",
+        "Translated": "项目",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Slot",
+        "Translated": "插槽",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Location",
+        "Translated": "位置",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Count",
+        "Translated": "计数",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "行动",
+        "Context": "MainWindow.DrawItemsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Outfit Glamour-ready Item",
+        "Translated": "服装魅力准备就绪的物品",
+        "Context": "MainWindow.DrawItemRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " sets",
+        "Translated": "set",
+        "Context": "MainWindow.DrawSetsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "complete = you own every piece of the set (so it can be stored as one outfit glamour).\nstored = the set is already condensed into a single outfit slot in your dresser.\nx/y = how many of the set's pieces you currently own.\n\nWith \"Outfit-ready\" ticked this lists only sets you own in full and have not stored yet,\nand a set drops off the list once you have stored it as an outfit.",
+        "Translated": "完成=你拥有套装的每一件物品 (这样它就可以作为一件迷人的服装保存起来)。\n已存储=套装已经压缩成你梳妆台上的一个单独的服装槽。\nx/y = 你目前拥有的套装组件数量。\n\n这个列表只包含您已完整拥有且尚未存储的设备，并标注了 “服装准备”。\n一旦你将一套衣服存储为服装，它就会从清单中消失。",
+        "Context": "MainWindow.DrawSetsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " (complete)",
+        "Translated": "(完成)",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "You own ",
+        "Translated": "你拥有",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " of ",
+        "Translated": "的",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " pieces of this set.",
+        "Translated": "这个集合的所有碎片。",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "You own all pieces of this set.",
+        "Translated": "你拥有这个套装的所有部件。",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "This set is currently condensed into a single outfit slot in your dresser.",
+        "Translated": "这套衣服目前被压缩成了你梳妆台上的一个单独的服装槽。",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Stored as one outfit - restore it from the dresser window.",
+        "Translated": "储存为一件衣服——从梳妆台窗口恢复。",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Pull pulls one piece per click into your inventory.",
+        "Translated": "每次点击将一件物品拉入库存。",
+        "Context": "MainWindow.DrawSetGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "  (Armoire)",
+        "Translated": "(衣柜)",
+        "Context": "MainWindow.DrawSetPiece",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Dresser",
+        "Translated": "德雷瑟",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Bags / Armoury",
+        "Translated": "包包/衣柜",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Everywhere",
+        "Translated": "无处不在",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "All expansions",
+        "Translated": "所有扩展",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "A Realm Reborn",
+        "Translated": "一个世界的重生",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Heavensward",
+        "Translated": "向天",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Stormblood",
+        "Translated": "风暴之血",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Shadowbringers",
+        "Translated": "影子使者",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Endwalker",
+        "Translated": "终结者",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Dawntrail",
+        "Translated": "《曙光之路》",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Special (Lv 1)",
+        "Translated": "特殊 (Lv 1)",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Sort: Name",
+        "Translated": "排序：名称",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Sort: Slot",
+        "Translated": "分类：插槽",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Sort: iLvl",
+        "Translated": "分类:iLvl",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Sort: Dupes",
+        "Translated": "分类：欺骗",
+        "Context": "MainWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Open the Glamour Dresser to pull items out.",
+        "Translated": "打开魅力衣橱，取出物品。",
+        "Context": "DresserActionService.RestoreItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Could not pull ",
+        "Translated": "无法拉出",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": " (the dresser did not finish loading).",
+        "Translated": "(梳妆台没有完成装载)",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Pulled ",
+        "Translated": "拉动了",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": " into your inventory.",
+        "Translated": "进入你的库存。",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": ": a copy is in your Armoire, and the game treats it as one-of-a-kind. Remove the Armoire copy first if you want this one in your bags.",
+        "Translated": ":你的衣柜里有一个副本，游戏会把它视为独一无二的。如果你想把这个副本放在包里，就先把衣柜的副本拿出来。",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": " (inventory full, or you already own this unique item).",
+        "Translated": "(库存已满，或者您已经拥有这件独特的物品)",
+        "Context": "DresserActionService.DriveRestores",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Glamour This",
+        "Translated": "这个的魅力",
+        "Context": "DresserActionService.Inform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Title"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "Expansions.ToLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Set #",
+        "Translated": "设定#",
+        "Context": "OutfitSetService.ResolveSetName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Waist",
+        "Translated": "腰部",
+        "Context": "SlotLabels.ForEquipSlotCategory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Soul Crystal",
+        "Translated": "灵魂水晶",
+        "Context": "SlotLabels.ForEquipSlotCategory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Other",
+        "Translated": "其他",
+        "Context": "SlotLabels.ForEquipSlotCategory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Bags",
+        "Translated": "包包",
+        "Context": "GlamourLocationExtensions.ToLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Armoury",
+        "Translated": "武器库",
+        "Context": "GlamourLocationExtensions.ToLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

@@ -1,0 +1,3377 @@
+{
+  "issue": "direct-2026-11-07T17-11-22-446Z-db6c7ab3",
+  "receivedAt": "2026-11-07 17:11:43",
+  "author": "匿名直传",
+  "plugin": "Encore",
+  "fingerprint": "bd07035b7c11e657",
+  "packFile": "Encore@user-bd0703.json",
+  "accepted": 412,
+  "filled": 412,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Encore",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "New Folder",
+        "Translated": "新建文件夹",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "New Preset",
+        "Translated": "新预设",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "(none)",
+        "Translated": "（没有任何）",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Open the Encore dance preset manager",
+        "Translated": "打开 Encore 舞蹈预设管理器",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Reset all mod priorities to their original values",
+        "Translated": "将所有 mod 优先级重置为其原始值",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Walk to your target's position for alignment",
+        "Translated": "走到目标位置进行对齐",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Loop an emote (e.g., /loop stomp). Use /loop to stop.",
+        "Translated": "循环表情（例如 /loop stomp）。使用 /loop 停止。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Play an emote with vanilla animation, or use a modded animation you don't have the emote for (e.g., /vanilla beesknees)",
+        "Translated": "使用原版动画播放表情，或使用您没有表情的修改动画（例如 /vanilla beesknees）",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Make your target play a preset (e.g., /do wiggle). Use /do stop to end it.",
+        "Translated": "让您的目标播放预设（例如 /do wiggle）。使用 /do stop 结束它。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "[Encore] BPM tracking unavailable (sig scan failed).",
+        "Translated": "[Encore] BPM 跟踪不可用（信号扫描失败）。",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[Encore] BPM cache cleared. Re-analyzing current track.",
+        "Translated": "[Encore] BPM 缓存已清除。重新分析当前曲目。",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "BGM row ",
+        "Translated": "背景音乐排",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "mod SCD: ",
+        "Translated": "模组SCD：",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[Encore] ",
+        "Translated": "[安可]",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": " - BPM: ",
+        "Translated": "- 节拍器：",
+        "Context": "Plugin.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Encore: ",
+        "Translated": "安可：",
+        "Context": "Plugin.UpdatePresetCommands",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Encore routine: ",
+        "Translated": "另一个例程：",
+        "Context": "Plugin.UpdateRoutineCommands",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Select a target first.",
+        "Translated": "首先选择一个目标。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Dismount first.",
+        "Translated": "先下马。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stop your emote first.",
+        "Translated": "先停止你的情绪。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stand up first.",
+        "Translated": "先站起来。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stop performing first.",
+        "Translated": "先停止表演。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stop what you're doing first.",
+        "Translated": "首先停止你正在做的事情。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Name",
+        "Translated": "姓名",
+        "Context": "ImGuiFileBrowserWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Files",
+        "Translated": "文件",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Encore Guide###EncoreHelp",
+        "Translated": "安可指南",
+        "Context": "HelpWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "THE PLAYBOOK",
+        "Translated": "剧本",
+        "Context": "HelpWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "CHAPTER ",
+        "Translated": "章",
+        "Context": "HelpWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " OF 05",
+        "Translated": "05年",
+        "Context": "HelpWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Encore manages your dance mod presets. Swap between modded animations with one click or a chat command. No more fiddling with Penumbra priorities mid-party.",
+        "Translated": "Encore 管理您的舞蹈模式预设。只需单击一下或使用聊天命令即可在修改后的动画之间进行切换。不再需要在聚会中摆弄半影优先事项。",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One-click switching",
+        "Translated": "一键切换",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Between dance mods",
+        "Translated": "舞蹈模组之间",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Custom chat commands",
+        "Translated": "自定义聊天命令",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Penumbra priority handling",
+        "Translated": "半影优先级处理",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Automatic conflict resolution",
+        "Translated": "自动解决冲突",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Pose presets",
+        "Translated": "姿势预设",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Idle, sit, groundsit, doze",
+        "Translated": "闲置、坐下、趴地、打瞌睡",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Next up",
+        "Translated": "接下来",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": ": how to set up your first preset. Tap Chapter 02 above, or use the arrow below.",
+        "Translated": "：如何设置您的第一个预设。点击上面的第 02 章，或使用下面的箭头。",
+        "Context": "HelpWindow.DrawWelcomePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Nine steps. Most are optional. Hit ",
+        "Translated": "九步。大多数都是可选的。打",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " in the main window to get started.",
+        "Translated": "在主窗口中开始。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Name your preset",
+        "Translated": "为您的预设命名",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Something memorable. \"Victory Dance,\" \"Shimmy,\" you pick.",
+        "Translated": "令人难忘的事情。 “胜利之舞”、“摇摆”，你选。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Set a chat command",
+        "Translated": "设置聊天命令",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Short handle like /vdance. Can't collide with a native game command.",
+        "Translated": "短柄如/vdance。不能与本机游戏命令发生冲突。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Choose an icon",
+        "Translated": "选择一个图标",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Pick a game icon to represent the preset on its card.",
+        "Translated": "选择一个游戏图标来代表其卡上的预设。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Select your mod",
+        "Translated": "选择您的模组",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Browse the Penumbra mod list and click the dance mod you want.",
+        "Translated": "浏览 Penumbra 模组列表并单击您想要的舞蹈模组。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pick the emote",
+        "Translated": "选择表情",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "If the mod replaces multiple emotes, choose the one this preset should fire.",
+        "Translated": "如果该模组替换了多个表情，请选择此预设应触发的表情。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Don't own the emote?",
+        "Translated": "不拥有该表情？",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Tick \"I don't have this emote\" and Encore routes through a carrier bypass.",
+        "Translated": "勾选“我没有这个表情”，Encore 将通过运营商旁路进行路由。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mod settings",
+        "Translated": "模组设置",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Pre-select option group values. Restored when you switch away.",
+        "Translated": "预选择选项组值。当您关闭时恢复。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Modifiers",
+        "Translated": "修饰符",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Named variants that override options or swap the emote. See Chapter 03.",
+        "Translated": "覆盖选项或交换表情的命名变体。参见第 03 章。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Save",
+        "Translated": "节省",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Commit the preset. It drops into your library and the chat command fires.",
+        "Translated": "提交预设。它会落入您的库中并触发聊天命令。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ready to roll",
+        "Translated": "准备滚动",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": ": your preset lives on the main window now. Chapter 03 covers how to actually play it.",
+        "Translated": "：您的预设现在位于主窗口上。第 03 章介绍了如何实际演奏它。",
+        "Context": "HelpWindow.DrawCreatePage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Click It",
+        "Translated": "点击它",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Tap the Play button on any preset card in the main window.",
+        "Translated": "点击主窗口中任意预设卡上的“播放”按钮。",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Type It",
+        "Translated": "输入它",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Use the preset's chat command, like /vdance or /mydance.",
+        "Translated": "使用预设的聊天命令，例如 /vdance 或 /mydance。",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Your mod's priority is boosted in Penumbra",
+        "Translated": "你的模组的优先级在半影中得到提升",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Conflicting emote mods are temp-disabled",
+        "Translated": "冲突的表情模组被临时禁用",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The dance fires. Pose presets switch to the right index",
+        "Translated": "舞蹈火了。姿势预设切换到右侧索引",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Everything restores when you switch or reset",
+        "Translated": "当您切换或重置时一切都会恢复",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sit & Doze",
+        "Translated": "部位和剂量",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": ": by default these need furniture nearby. Flip Allow Sit/Doze Anywhere in settings to skip that check. Sends position data to the server.",
+        "Translated": "：默认情况下，这些需要附近的家具。在设置中翻转“允许在任何地方坐下/打瞌睡”以跳过该检查。将位置数据发送到服务器。",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Instead of cloning a preset for each variation, add modifiers. Each one can override mod options or swap the emote.",
+        "Translated": "添加修饰符，而不是为每个变体克隆预设。每个人都可以覆盖模组选项或交换表情。",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Example: a jumping-jacks mod with speed options. One preset /jj with modifiers 'slow' and 'fast'. Fire them with /jj slow or /jj fast.",
+        "Translated": "示例：带有速度选项的开合跳 mod。一个预设 /jj 带有修饰符“慢”和“快”。用 /jj Slow 或 /jj fast 来射击它们。",
+        "Context": "HelpWindow.DrawPlayPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "A routine is a timeline of presets. Drag presets from the library, set a duration per step, add expressions or macros, hit play. That's a show.",
+        "Translated": "例程是预设的时间线。从库中拖动预设，设置每步的持续时间，添加表达式或宏，然后点击播放。那是一场表演。",
+        "Context": "HelpWindow.DrawRoutinesPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "That's the tour",
+        "Translated": "这就是游览",
+        "Context": "HelpWindow.DrawTipsPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": ": hit Done to close this book and start writing your own setlist.",
+        "Translated": "：点击“完成”关闭这本书并开始编写您自己的歌单。",
+        "Context": "HelpWindow.DrawTipsPage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "OPTIONAL",
+        "Translated": "选修的",
+        "Context": "HelpWindow.DrawStep",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "DONE",
+        "Translated": "完毕",
+        "Context": "HelpWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "WELCOME",
+        "Translated": "欢迎",
+        "Context": "HelpWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "CREATE",
+        "Translated": "创造",
+        "Context": "HelpWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "PLAY",
+        "Translated": "玩",
+        "Context": "HelpWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "ROUTINES",
+        "Translated": "例程",
+        "Context": "HelpWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "TIPS",
+        "Translated": "尖端",
+        "Context": "HelpWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Icon Picker###EncoreIconPicker",
+        "Translated": "图标选择器",
+        "Context": "IconPickerWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Favorites",
+        "Translated": "收藏夹",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Categories",
+        "Translated": "类别",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Search:",
+        "Translated": "搜索：",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Selected:",
+        "Translated": "已选择：",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Icon ID: ",
+        "Translated": "图标ID：",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "None",
+        "Translated": "没有任何",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Confirm",
+        "Translated": "确认",
+        "Context": "IconPickerWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No icons found.",
+        "Translated": "没有找到图标。",
+        "Context": "IconPickerWindow.DrawIconGrid",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Right-click to favorite",
+        "Translated": "右键收藏",
+        "Context": "IconPickerWindow.DrawIconGrid",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Right-click to unfavorite",
+        "Translated": "右键单击取消收藏",
+        "Context": "IconPickerWindow.DrawIconGrid",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Preview",
+        "Translated": "预览",
+        "Context": "ImGuiFileBrowserWindow.DrawPreview",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Go up one directory",
+        "Translated": "上一级目录",
+        "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Refresh",
+        "Translated": "刷新",
+        "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Type a path and press Enter to navigate",
+        "Translated": "输入路径并按 Enter 进行导航",
+        "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Filter files...",
+        "Translated": "过滤文件...",
+        "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Quick Access",
+        "Translated": "快速访问",
+        "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pinned",
+        "Translated": "已固定",
+        "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Unpin from Quick Access",
+        "Translated": "从快速访问取消固定",
+        "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Recent",
+        "Translated": "最近的",
+        "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Ascending",
+        "Translated": "升序",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Descending",
+        "Translated": "降序",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Open",
+        "Translated": "打开",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Pin to Quick Access",
+        "Translated": "固定到快速访问",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "No files found",
+        "Translated": "没有找到文件",
+        "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Select a file to preview",
+        "Translated": "选择要预览的文件",
+        "Context": "ImGuiFileBrowserWindow.DrawPreview",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " KB",
+        "Translated": "知识库",
+        "Context": "ImGuiFileBrowserWindow.DrawPreview",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Loading preview...",
+        "Translated": "正在加载预览...",
+        "Context": "ImGuiFileBrowserWindow.DrawPreview",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "File not found",
+        "Translated": "找不到文件",
+        "Context": "ImGuiFileBrowserWindow.DrawPreview",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Selected: ",
+        "Translated": "已选择：",
+        "Context": "ImGuiFileBrowserWindow.DrawBottomBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Select",
+        "Translated": "选择",
+        "Context": "ImGuiFileBrowserWindow.DrawBottomBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Date Modified",
+        "Translated": "修改日期",
+        "Context": "ImGuiFileBrowserWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Size",
+        "Translated": "尺寸",
+        "Context": "ImGuiFileBrowserWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Type",
+        "Translated": "类型",
+        "Context": "ImGuiFileBrowserWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Encore###EncoreMain",
+        "Translated": "安可",
+        "Context": "MainWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Penumbra",
+        "Translated": "半影",
+        "Context": "MainWindow.DrawRibbonInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " offline",
+        "Translated": "离线",
+        "Context": "MainWindow.DrawRibbonInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " online",
+        "Translated": "在线的",
+        "Context": "MainWindow.DrawRibbonInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Create your first preset to get started. A preset pairs an animation mod with a chat command, handles priority conflicts, and plays back with a single click.",
+        "Translated": "创建您的第一个预设即可开始。预设将动画模式与聊天命令配对，处理优先级冲突，并通过单击进行播放。",
+        "Context": "MainWindow.DrawPresetList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "+ New Preset",
+        "Translated": "+ 新预设",
+        "Context": "MainWindow.DrawPresetList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Open Playbook",
+        "Translated": "打开剧本",
+        "Context": "MainWindow.DrawPresetList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "(Here)",
+        "Translated": "（这里）",
+        "Context": "MainWindow.DrawPresetMoveToFolderMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Play Random",
+        "Translated": "随机播放",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Rename",
+        "Translated": "重命名",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Folder Color",
+        "Translated": "文件夹颜色",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Default",
+        "Translated": "默认",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Custom:",
+        "Translated": "风俗：",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Move to Folder",
+        "Translated": "移至文件夹",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "(Top Level)",
+        "Translated": "（顶层）",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Move Up",
+        "Translated": "向上移动",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Move Down",
+        "Translated": "下移",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Delete Folder",
+        "Translated": "删除文件夹",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Hold Ctrl+Shift and click to delete\nContents move to parent folder",
+        "Translated": "按住 Ctrl+Shift 并单击即可删除\n内容移至父文件夹",
+        "Context": "MainWindow.DrawFolderHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Custom",
+        "Translated": "风俗",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Command",
+        "Translated": "命令",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Newest",
+        "Translated": "最新",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Oldest",
+        "Translated": "最古老的",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Current pose indices",
+        "Translated": "当前姿势指数",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Idle",
+        "Translated": "闲置的",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Sit",
+        "Translated": "坐",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Ground sit",
+        "Translated": "地面坐",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Doze",
+        "Translated": "瞌睡",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "filter presets...",
+        "Translated": "过滤器预设...",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "filter routines...",
+        "Translated": "过滤例程...",
+        "Context": "MainWindow.DrawSortControlsInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Build your first setlist. A routine stitches presets together into a timed performance, auto-advancing step by step with optional loops and macros.",
+        "Translated": "建立你的第一个歌单。例程将预设拼接在一起形成定时表演，并通过可选的循环和宏逐步自动前进。",
+        "Context": "MainWindow.DrawRoutineList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "+ New Routine",
+        "Translated": "+ 新例程",
+        "Context": "MainWindow.DrawRoutineList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " step",
+        "Translated": "步",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " - loop",
+        "Translated": "- 环形",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " (disabled)",
+        "Translated": "（已禁用）",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "(disabled)",
+        "Translated": "（已禁用）",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "- no command",
+        "Translated": "- 没有命令",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Edit",
+        "Translated": "编辑",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Enable",
+        "Translated": "使能够",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Disable",
+        "Translated": "禁用",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Duplicate",
+        "Translated": "复制",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "(None)",
+        "Translated": "（没有任何）",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Hold Ctrl+Shift and click to delete",
+        "Translated": "按住 Ctrl+Shift 并单击即可删除",
+        "Context": "MainWindow.DrawRoutineCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Stop the dance (jump). Mods stay until you hit reset.",
+        "Translated": "停止舞蹈（跳跃）。模组会一直保留到您点击重置为止。",
+        "Context": "MainWindow.DrawPresetCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Tip: Stop dancing before switching between mods that share the same base emote.",
+        "Translated": "提示：在共享相同基本表情的模组之间切换之前，请停止跳舞。",
+        "Context": "MainWindow.DrawPresetCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Favorite",
+        "Translated": "最喜欢的",
+        "Context": "MainWindow.DrawPresetCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Unfavorite",
+        "Translated": "不喜欢",
+        "Context": "MainWindow.DrawPresetCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "+ NEW PRESET",
+        "Translated": "+ 新预设",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "+ NEW ROUTINE",
+        "Translated": "+ 新的日常安排",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Pinned Mods (",
+        "Translated": "固定模组 (",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Pinned mods stay enabled during preset switches.",
+        "Translated": "固定的模组在预设切换期间保持启用状态。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Walking to target...",
+        "Translated": "步行至目标...",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Click to cancel.",
+        "Translated": "单击以取消。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Align to Target",
+        "Translated": "与目标对齐",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Target: ",
+        "Translated": "目标：",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Ready to align!",
+        "Translated": "准备对齐！",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Move closer to your target.",
+        "Translated": "靠近你的目标。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Play Random Preset",
+        "Translated": "播放随机预设",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Picks one preset at random and plays it.",
+        "Translated": "随机选择一个预设并播放它。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "No presets to pick from",
+        "Translated": "没有可供选择的预设",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Reset Priorities",
+        "Translated": "重置优先级",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Ctrl+Shift + Click to restore mods.",
+        "Translated": "Ctrl+Shift + 单击可恢复 Mod。",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No changes to restore",
+        "Translated": "没有要恢复的更改",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Playbook (Guide)",
+        "Translated": "剧本（指南）",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Patch Notes (What's New)",
+        "Translated": "补丁说明（新增内容）",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Board (Settings)",
+        "Translated": "董事会（设置）",
+        "Context": "MainWindow.DrawFooterInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Pinned mods stay enabled during preset switches - conflict detection won't disable them.",
+        "Translated": "固定模组在预设切换期间保持启用状态 - 冲突检测不会禁用它们。",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Search mods...",
+        "Translated": "搜索模组...",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "No emote mods found in cache.",
+        "Translated": "在缓存中找不到表情模组。",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Create some presets first to populate.",
+        "Translated": "首先创建一些预设来填充。",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Emotes: ",
+        "Translated": "表情：",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "... and ",
+        "Translated": "... 和",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " more",
+        "Translated": "更多的",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " mods",
+        "Translated": "模组",
+        "Context": "MainWindow.DrawPinnedModsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Folder Name:",
+        "Translated": "文件夹名称：",
+        "Context": "MainWindow.DrawNewFolderDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Color:",
+        "Translated": "颜色：",
+        "Context": "MainWindow.DrawNewFolderDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Inside:",
+        "Translated": "里面：",
+        "Context": "MainWindow.DrawNewFolderDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Create",
+        "Translated": "创造",
+        "Context": "MainWindow.DrawNewFolderDialog",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Encore - What's New###EncorePatchNotes",
+        "Translated": "安可 - 最新消息",
+        "Context": "PatchNotesWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "PATCH NOTES",
+        "Translated": "补丁说明",
+        "Context": "PatchNotesWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "WHAT'S  NEW  IN",
+        "Translated": "最新动态",
+        "Context": "PatchNotesWindow.DrawBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "LATEST",
+        "Translated": "最新的",
+        "Context": "PatchNotesWindow.DrawPatchSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Mod Dependencies",
+        "Translated": "模组依赖",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Presets can enable other mods alongside the animation mod, each with its own priority boost. Useful for skeleton mods an animation needs, or textures for props it uses. They revert when the preset ends.",
+        "Translated": "预设可以启用动画模组之外的其他模组，每个模组都有自己的优先级提升。对于动画需要的骨架模型或它使用的道具的纹理很有用。当预设结束时它们会恢复。",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HEADLINER",
+        "Translated": "头条新闻",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Apply to Target",
+        "Translated": "适用于目标",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Locked Emotes",
+        "Translated": "锁定表情",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Removed the 'I don't have this emote' checkbox, Encore works out if you own the emote or not. Typing a locked emote's command plays your mod instead of the vanilla animation.",
+        "Translated": "删除了“我没有这个表情”复选框，Encore 会判断您是否拥有该表情。输入锁定表情的命令会播放您的模组而不是原版动画。",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reduce Motion",
+        "Translated": "减少运动",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "New Motion section in Settings. Turn the UI's animations off one by one, or all at once.",
+        "Translated": "设置中的新运动部分。一项一项或一次全部关闭 UI 的动画。",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Penumbra 1.7 Ready",
+        "Translated": "半影 1.7 就绪",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Encore has been made to work with the Penumbra update.",
+        "Translated": "Encore 已与 Penumbra 更新配合使用。",
+        "Context": "PatchNotesWindow.DrawVersion1010Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "UI Redesign",
+        "Translated": "用户界面重新设计",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Encore's had a full visual refresh. Hover over things, open some menus, switch between tabs, and you'll notice little touches tucked in all over the place. Everything's a bit easier on the eyes, too.",
+        "Translated": "安可的视觉效果焕然一新。将鼠标悬停在某些内容上，打开一些菜单，在选项卡之间切换，您会发现到处都隐藏着一些小细节。一切对眼睛来说也更容易一些。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Routines (Timeline)",
+        "Translated": "例程（时间轴）",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Choreograph multi-step performances. Drop presets onto a timeline, set per-step duration (fixed time, until the emote ends, or forever), and optionally loop the whole routine. Mix in macro steps to fire raw FFXIV commands (job skills, VFX, /em lines) with /wait support between steps. Great for dance shows, ceremony flows, or anything you'd otherwise run by hand.",
+        "Translated": "编排多步表演。将预设拖放到时间线上，设置每一步的持续时间（固定时间，直到表情结束或永远），并可选择循环整个例程。混合宏步骤来触发原始 FFXIV 命令（工作技能、VFX、/em 线），并在步骤之间提供 /wait 支持。非常适合舞蹈表演、仪式流程或任何您需要手动运行的内容。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Simple Heels Integration",
+        "Translated": "简单的高跟鞋整合",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Every preset (and per-step in routines) can now carry a Simple Heels offset: X/Y/Z translate, plus rotation, pitch, and roll. Drag the sliders or grab the in-world gizmo to dial in position visually while the preview updates live.",
+        "Translated": "现在，每个预设（以及例程中的每个步骤）都可以携带简单的脚后跟偏移：X/Y/Z 平移，加上旋转、俯仰和滚动。拖动滑块或抓取世界中的小玩意，在预览实时更新时直观地拨入位置。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Play a Random Preset",
+        "Translated": "播放随机预设",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Use /encore random to fire a random preset, or /encore random <folder> to roll within a specific folder. Also available as a shuffle button in the bottom bar.",
+        "Translated": "使用 /encore random 触发随机预设，或 /encore random <folder> 在特定文件夹中滚动。也可用作底部栏中的随机播放按钮。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Conflict Handling",
+        "Translated": "冲突处理",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "New Conflict Handling section in the preset editor lets you opt out of disabling specific conflicting mods per preset.",
+        "Translated": "预设编辑器中的新冲突处理部分可让您选择不禁用每个预设的特定冲突模组。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Just Type the Emote",
+        "Translated": "只需输入表情",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "With 'Allow All Emotes' enabled, just type the emote command directly (/consider, /beesknees, /runwaywalk) and it works automatically.",
+        "Translated": "启用“允许所有表情”后，只需直接键入表情命令（/consider、/beesknees、/runwaywalk）即可自动运行。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Nested Folders",
+        "Translated": "嵌套文件夹",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Folders can now contain other folders. Drag them into each other, or use the context menu to move them around.",
+        "Translated": "文件夹现在可以包含其他文件夹。将它们拖放到一起，或使用上下文菜单来移动它们。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Search Finds Everything",
+        "Translated": "搜索找到一切",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Searching in Custom sort mode now auto-expands folders to reveal matching presets.",
+        "Translated": "现在，在自定义排序模式下搜索会自动展开文件夹以显示匹配的预设。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Icon Zoom & Pan",
+        "Translated": "图标缩放和平移",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Custom preset icons now have zoom (1-4x) and X/Y offset controls in the editor for precise framing.",
+        "Translated": "自定义预设图标现在在编辑器中具有缩放 (1-4x) 和 X/Y 偏移控件，可实现精确取景。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Bug Fixes",
+        "Translated": "错误修复",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Fixed reset button not clearing temporary mod settings. Various other stability fixes.",
+        "Translated": "修复了重置按钮无法清除临时模组设置的问题。各种其他稳定性修复。",
+        "Context": "PatchNotesWindow.DrawVersion1006Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Don't Have the Emote? No Problem.",
+        "Translated": "没有表情吗？没问题。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "With 'Allow All Emotes' enabled, your dance and emote mod presets work regardless of whether you have the base emote.",
+        "Translated": "启用“允许所有表情”后，无论您是否有基本表情，您的舞蹈和表情模组预设都会起作用。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Vanilla Emotes",
+        "Translated": "香草表情",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Use /vanilla <emote> to play the original unmodded animation. Temporarily disables conflicting mods.",
+        "Translated": "使用 /vanilla <emote> 播放原始未修改的动画。暂时禁用冲突的模组。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Custom Icon Fix",
+        "Translated": "自定义图标修复",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Fixed custom icon uploads failing for some users.",
+        "Translated": "修复了某些用户自定义图标上传失败的问题。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Icon Search by Name",
+        "Translated": "按名称搜索图标",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Icon picker now lets you search by emote, mount, or minion name - not just icon ID.",
+        "Translated": "图标选择器现在允许您按表情、坐骑或小兵名称进行搜索，而不仅仅是图标 ID。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Better Mod Detection",
+        "Translated": "更好的模组检测",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Improved detection for movement mods, hyphenated emotes, and multi-pose-type mods.",
+        "Translated": "改进了对运动模组、连字符表情和多姿势类型模组的检测。",
+        "Context": "PatchNotesWindow.DrawVersion1005Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One-Click Preset Switching",
+        "Translated": "一键预设切换",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Create presets for your dance and emote mods. Switch with a single click - Encore handles Penumbra priority automatically.",
+        "Translated": "为您的舞蹈和表情模组创建预设。单击即可切换 - Encore 自动处理 Penumbra 优先级。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Chat Commands",
+        "Translated": "聊天命令",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Assign custom chat commands to your presets. Use /encore to open the main window, /encorereset to restore all mods.",
+        "Translated": "将自定义聊天命令分配给您的预设。使用/encore打开主窗口，/encorereset恢复所有mod。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mod Conflict Resolution",
+        "Translated": "模组冲突解决",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "When you activate a preset, conflicting emote mods are automatically disabled. Everything is restored when you switch or reset.",
+        "Translated": "当您激活预设时，冲突的表情模组将自动禁用。当您切换或重置时，一切都会恢复。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pose Presets",
+        "Translated": "姿势预设",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Supports idle, sit, groundsit, and doze pose mods. Encore writes the correct pose index and cycles /cpose for you.",
+        "Translated": "支持闲置、坐下、趴地和打瞌睡姿势模式。 Encore 会为您写入正确的姿势索引和循环 /cpose。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Add named variants to a single preset instead of duplicating it. e.g., /mydance slow or /mydance fast.",
+        "Translated": "将命名变体添加到单个预设而不是复制它。例如，/mydance 慢速或 /mydance 快。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Folders & Organization",
+        "Translated": "文件夹和组织",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Group presets into color-coded folders. Drag and drop to reorder. Sort by name, command, favorites, or newest.",
+        "Translated": "将预设分组到颜色编码的文件夹中。拖放以重新排序。按名称、命令、收藏夹或最新排序。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Emote Looping",
+        "Translated": "表情循环",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Use /loop <emote> to continuously repeat any non-looping emote. Move to stop.",
+        "Translated": "使用 /loop <emote> 连续重复任何非循环表情。动则停。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "For duo emotes, use /align or the button in the bottom bar.",
+        "Translated": "对于双人表情，请使用 /align 或底部栏中的按钮。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Movement Mods",
+        "Translated": "运动模组",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Walk, sprint, and jog animation mods are detected and supported as presets.",
+        "Translated": "步行、冲刺和慢跑动画模式都会被检测到并支持作为预设。",
+        "Context": "PatchNotesWindow.DrawVersion100Notes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "MARK AS READ",
+        "Translated": "标记为已读",
+        "Context": "PatchNotesWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Scroll through the new features first!",
+        "Translated": "首先滚动浏览新功能！",
+        "Context": "PatchNotesWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Create Dance Preset###EncorePresetEditor",
+        "Translated": "创建舞蹈预设",
+        "Context": "PresetEditorWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Loading mods...",
+        "Translated": "正在加载模组...",
+        "Context": "PresetEditorWindow.RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Rescanning all mods...",
+        "Translated": "正在重新扫描所有模组...",
+        "Context": "PresetEditorWindow.RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "I understand, use this command anyway",
+        "Translated": "我明白了，无论如何使用这个命令",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Use vanilla animation (disable mods only)",
+        "Translated": "使用原版动画（仅禁用模组）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Create a preset that disables conflicting dance mods\nwithout enabling any mod (uses vanilla animation)",
+        "Translated": "创建一个预设来禁用冲突的舞蹈模式\n不启用任何模组（使用香草动画）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Zoom %.1fx",
+        "Translated": "缩放%.1fx",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Vanilla preset - no mod will be enabled. Encore will only temporarily disable conflicting mods so the vanilla animation plays.",
+        "Translated": "普通预设 - 不会启用任何模组。 Encore 只会暂时禁用冲突的模组，以便播放原版动画。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Scanning...",
+        "Translated": "扫描...",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Scan in progress - please wait",
+        "Translated": "扫描正在进行中 - 请稍候",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Click: Refresh mod list from cache",
+        "Translated": "单击：从缓存中刷新模组列表",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Shift+Click: Full rescan (clears cache)",
+        "Translated": "Shift+单击：完全重新扫描（清除缓存）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Please wait...",
+        "Translated": "请稍等...",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No dance/emote mods found.",
+        "Translated": "未找到舞蹈/表情模组。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Click Refresh (or Shift+Refresh to rescan)",
+        "Translated": "单击“刷新”（或按 Shift+刷新重新扫描）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No mods match the search.",
+        "Translated": "没有与搜索匹配的模组。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "[MOVE]",
+        "Translated": "[移动]",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Detected emote(s): ",
+        "Translated": "检测到的表情：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Could not auto-detect emote command.",
+        "Translated": "无法自动检测表情命令。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "You'll need to set the emote manually after creating.",
+        "Translated": "创建后，您需要手动设置表情。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Animation files: ",
+        "Translated": "动画文件：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Used by: ",
+        "Translated": "使用者：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Plays the vanilla animation. Conflicting dance mods are temporarily disabled while this preset is active.",
+        "Translated": "播放原版动画。当此预设处于活动状态时，冲突的舞蹈模式将暂时禁用。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Type: Movement (Walk / Sprint / Jog)",
+        "Translated": "类型：运动（步行/冲刺/慢跑）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "This mod changes your walking and movement animations.",
+        "Translated": "这个模组改变了你的行走和运动动画。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Optional emote to execute on activation:",
+        "Translated": "激活时执行的可选表情：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Leave as (none) for movement-only, or pick an emote to play when activated.",
+        "Translated": "保留为（无）仅用于移动，或选择一个表情在激活时播放。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No emote or pose selection needed - just enable and go.",
+        "Translated": "无需选择表情或姿势 - 只需启用即可开始。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Type: ",
+        "Translated": "类型：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " (will redraw)",
+        "Translated": "（将重新绘制）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pose to use:",
+        "Translated": "使用姿势：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "This mod affects poses: ",
+        "Translated": "该模式影响姿势：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Pose mods require a Penumbra redraw to take effect",
+        "Translated": "姿势模组需要半影重绘才能生效",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Enter a custom emote command",
+        "Translated": "输入自定义表情命令",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Use Detected",
+        "Translated": "检测到使用",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "(auto-detect failed)",
+        "Translated": "（自动检测失败）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " pose to use:",
+        "Translated": "使用姿势：",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " pose #",
+        "Translated": "姿势#",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pick a mod above and the emote dropdown will populate with the commands it was detected to affect.",
+        "Translated": "选择上面的 mod，表情下拉列表将填充检测到影响的命令。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Select a mod in card 02 to see its adjustable option groups here.",
+        "Translated": "在卡 02 中选择一个模组，即可在此处查看其可调整选项组。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This mod has no adjustable option groups - it will play with its defaults.",
+        "Translated": "该模组没有可调整的选项组 - 它将以其默认值进行播放。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(default)",
+        "Translated": "（默认）",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "NONE",
+        "Translated": "没有任何",
+        "Context": "SettingsWindow.DrawQuickSetRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Modifiers aren't applicable - this preset has nothing to vary. Pick a mod with multiple options, emotes, or poses to unlock variants.",
+        "Translated": "修饰符不适用 - 此预设没有任何变化。选择具有多个选项、表情或姿势的模组来解锁变体。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Nothing to opt out of - this preset only affects one emote/pose so there are no conflicts to choose between.",
+        "Translated": "没有什么可以选择退出 - 此预设仅影响一种表情/姿势，因此不存在可供选择的冲突。",
+        "Context": "PresetEditorWindow.DrawContentInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Extra mods enabled together with this preset (skeleton mods, prop textures). Each uses its own priority boost on top of that mod's current priority.",
+        "Translated": "与此预设一起启用的额外模组（骨架模组、道具纹理）。每个模块在当前优先级之上都使用自己的优先级提升。",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Search all mods...",
+        "Translated": "搜索所有模组...",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Reload the Penumbra mod list",
+        "Translated": "重新加载半影模组列表",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No Penumbra mods found.",
+        "Translated": "未找到半影模组。",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Priority boost on top of this mod's current priority.\nSkeletons only need to beat your current skeleton mod;\ntexture overrides usually need a high value.",
+        "Translated": "在此模组当前优先级之上的优先级提升。\n骷髅只需要击败你当前的骷髅模组即可；\n纹理覆盖通常需要一个高值。",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Redraw",
+        "Translated": "重画",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Redraw the character after enabling this mod, before the emote runs.\nRequired for skeleton mods; leave off for textures.",
+        "Translated": "启用此模组后，在表情运行之前重新绘制角色。\n骨架模组所需；保留纹理。",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Choose this mod's option groups while the preset is active.\nGroups left on (current) keep whatever is set in Penumbra.",
+        "Translated": "在预设处于活动状态时选择此模组的选项组。\n留在（当前）的组保留半影中设置的任何内容。",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Remove",
+        "Translated": "消除",
+        "Context": "PresetEditorWindow.DrawDependenciesSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "No adjustable option groups - the mod's current settings are used.",
+        "Translated": "没有可调整的选项组 - 使用模组的当前设置。",
+        "Context": "PresetEditorWindow.DrawDependencyOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "(current)",
+        "Translated": "（当前的）",
+        "Context": "PresetEditorWindow.DrawDependencyOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Click to add as a dependency",
+        "Translated": "单击添加为依赖项",
+        "Context": "PresetEditorWindow.DrawDependencyListRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to remove this dependency",
+        "Translated": "单击以删除此依赖项",
+        "Context": "PresetEditorWindow.DrawDependencyListRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Simple Heels plugin not detected.",
+        "Translated": "未检测到简单的高跟鞋插件。",
+        "Context": "PresetEditorWindow.DrawHeelsSectionBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Install the Simple Heels plugin to use per-preset heel offsets. Values saved here will apply once Simple Heels is available.",
+        "Translated": "安装 Simple Heels 插件以使用预设的脚跟偏移量。 Simple Heels 上市后，此处保存的值将适用。",
+        "Context": "PresetEditorWindow.DrawHeelsSectionBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds to your current Simple Heels offset while this preset is active. Drag the world-space arrows/rotation ring in game, or use the numeric fields below. Clears when a different preset or /encorereset runs.",
+        "Translated": "当此预设处于活动状态时，添加到当前的简单高跟鞋偏移。在游戏中拖动世界空间箭头/旋转环，或使用下面的数字字段。当不同的预设或 /encorereset 运行时清除。",
+        "Context": "PresetEditorWindow.DrawHeelsSectionBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enable heel override for this preset",
+        "Translated": "为此预设启用后跟覆盖",
+        "Context": "PresetEditorWindow.DrawHeelsSectionBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "(disabled - Simple Heels will use your normal character config)",
+        "Translated": "（已禁用 - 简单高跟鞋将使用您的正常角色配置）",
+        "Context": "PresetEditorWindow.DrawHeelsSectionBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Drag the arrows/ring in-world, or click-drag values below. Double-click to type.",
+        "Translated": "在世界中拖动箭头/环，或单击并拖动下面的值。双击即可键入。",
+        "Context": "PresetEditorWindow.DrawHeelsControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pitch / Roll (advanced)",
+        "Translated": "俯仰/横滚（高级）",
+        "Context": "PresetEditorWindow.DrawHeelsControls",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Reset to 0",
+        "Translated": "重置为0",
+        "Context": "PresetEditorWindow.ScrubFloat",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "When this preset activates, Encore will NOT disable other mods that conflict on the checked items.",
+        "Translated": "当此预设激活时，Encore 将不会禁用与选中项目冲突的其他模组。",
+        "Context": "PresetEditorWindow.DrawConflictExclusionsSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Switch between different mod options without creating separate presets.",
+        "Translated": "在不同的模组选项之间切换，无需创建单独的预设。",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Name:",
+        "Translated": "姓名：",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "OK",
+        "Translated": "好的",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "New...###draftTab",
+        "Translated": "新的...",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Modifier name:",
+        "Translated": "修改器名称：",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Name already used",
+        "Translated": "名称已被使用",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Add modifier",
+        "Translated": "添加修饰符",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No modifiers yet",
+        "Translated": "还没有修改器",
+        "Context": "PresetEditorWindow.DrawModifiersSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Emote",
+        "Translated": "表情",
+        "Context": "PresetEditorWindow.DrawModifierOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "(use preset default: ",
+        "Translated": "（使用预设默认值：",
+        "Context": "PresetEditorWindow.DrawModifierOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": " Pose",
+        "Translated": "姿势",
+        "Context": "PresetEditorWindow.DrawModifierOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pose #",
+        "Translated": "姿势#",
+        "Context": "PresetEditorWindow.DrawModifierOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "CANCEL",
+        "Translated": "取消",
+        "Context": "PresetEditorWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "SAVE",
+        "Translated": "节省",
+        "Context": "PresetEditorWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No emote mods found",
+        "Translated": "未找到表情模组",
+        "Context": "RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Scanning... (",
+        "Translated": "正在扫描...（",
+        "Context": "RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " mods processed)",
+        "Translated": "已处理模组）",
+        "Context": "RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Error: ",
+        "Translated": "错误：",
+        "Context": "RefreshEmoteModsAsync",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Routine Editor###EncoreRoutineEditor",
+        "Translated": "例程编辑器",
+        "Context": "RoutineEditorWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Left-click: pick game icon - Right-click: more options",
+        "Translated": "左键单击：选择游戏图标 - 右键单击​​：更多选项",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Pick game icon",
+        "Translated": "选择游戏图标",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Upload custom image",
+        "Translated": "上传自定义图片",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Frame (zoom / offset)",
+        "Translated": "框架（缩放/偏移）",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "reset framing",
+        "Translated": "重置取景",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Clear icon",
+        "Translated": "清除图标",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Enter routine name...",
+        "Translated": "输入例程名称...",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "command",
+        "Translated": "命令",
+        "Context": "RoutineEditorWindow.DrawMarquee",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "search presets...",
+        "Translated": "搜索预设...",
+        "Context": "RoutineEditorWindow.DrawLibraryPanel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Drag any preset from the library,",
+        "Translated": "从库中拖动任何预设，",
+        "Context": "RoutineEditorWindow.DrawTimelineEmptyState",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "or click \"+ macro step\" below.",
+        "Translated": "或点击下面的“+宏步骤”。",
+        "Context": "RoutineEditorWindow.DrawTimelineEmptyState",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Add a free-form macro step (FFXIV macro syntax with /wait support)",
+        "Translated": "添加自由格式的宏步骤（带有 /wait 支持的 FFXIV 宏语法）",
+        "Context": "RoutineEditorWindow.DrawAddMacroButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(missing preset)",
+        "Translated": "（缺少预设）",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Drag to reorder",
+        "Translated": "拖动以重新排序",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(one-shot emotes only)",
+        "Translated": "（仅限一次性表情）",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "loop",
+        "Translated": "环形",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Click to match step duration to the mod's loop length",
+        "Translated": "单击以使步骤持续时间与模组的循环长度相匹配",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "measuring",
+        "Translated": "测量",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "variant",
+        "Translated": "变体",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Click to cycle variants - right-click to reset to base",
+        "Translated": "单击以循环变体 - 右键单击​​以重置为基础",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to pick a preset variant",
+        "Translated": "单击以选择预设变体",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "expression",
+        "Translated": "表达",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "heels",
+        "Translated": "高跟鞋",
+        "Context": "RoutineEditorWindow.DrawStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Macro #",
+        "Translated": "宏#",
+        "Context": "RoutineEditorWindow.DrawMacroStepCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "SAVE ROUTINE",
+        "Translated": "保存例行程序",
+        "Context": "RoutineEditorWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "emote:",
+        "Translated": "表情：",
+        "Context": "RoutineEditorWindow.DrawExpressionEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Re-fires the expression every few seconds so it stays on the face for the whole step.",
+        "Translated": "每隔几秒重新触发一次表情，使其在整个步骤中保持在脸上。",
+        "Context": "RoutineEditorWindow.DrawExpressionEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "delay:",
+        "Translated": "延迟：",
+        "Context": "RoutineEditorWindow.DrawExpressionEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Per-step heel override",
+        "Translated": "每步脚后跟覆盖",
+        "Context": "RoutineEditorWindow.DrawInlineHeelsEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "- Simple Heels not detected",
+        "Translated": "- 未检测到简单高跟鞋",
+        "Context": "RoutineEditorWindow.DrawInlineHeelsEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "- overrides the preset's heels for this step",
+        "Translated": "- 覆盖此步骤的预设后跟",
+        "Context": "RoutineEditorWindow.DrawInlineHeelsEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Encore - Settings###EncoreSettings",
+        "Translated": "安可 - 设置",
+        "Context": "SettingsWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "THE BOARD",
+        "Translated": "董事会",
+        "Context": "SettingsWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "SIGNAL  ",
+        "Translated": "信号",
+        "Context": "SettingsWindow.DrawRibbon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "EMT",
+        "Translated": "急救人员",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "DSP",
+        "Translated": "数字信号处理器",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "MIX",
+        "Translated": "混合",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "FX",
+        "Translated": "外汇",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Allow Sit / Doze Anywhere",
+        "Translated": "允许在任何地方坐下/打瞌睡",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Allow All Emotes",
+        "Translated": "允许所有表情",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show patch notes on update",
+        "Translated": "显示更新的补丁说明",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Notify of updates in chat",
+        "Translated": "在聊天中通知更新",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Ignore global font scale",
+        "Translated": "忽略全局字体比例",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "decorative",
+        "Translated": "装饰性的",
+        "Context": "SettingsWindow.DrawConsoleBanner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Purely cosmetic - not wired to anything.",
+        "Translated": "纯粹是装饰性的——没有连接到任何东西。",
+        "Context": "SettingsWindow.DrawFaderTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sit or doze without requiring nearby furniture. Uses the game's internal emote functions.",
+        "Translated": "坐下或打瞌睡，不需要附近的家具。使用游戏的内部表情功能。",
+        "Context": "SettingsWindow.DrawEmotesChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HEADS UP",
+        "Translated": "小心",
+        "Context": "SettingsWindow.DrawEmotesChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "This uses the same technique as DozeAnywhere. It sends position data to Square Enix's servers and may be detectable. Use at your own risk.",
+        "Translated": "这使用与 DozeAnywhere 相同的技术。它将位置数据发送到 Square Enix 的服务器，并且可能会被检测到。使用风险自负。",
+        "Context": "SettingsWindow.DrawEmotesChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Play your modded animations regardless of whether you have the base emote unlocked. Works with a preset checkbox or /vanilla <emote>. Like other mods, animations may not show to other players the first time they're played.",
+        "Translated": "无论您是否解锁了基本表情，都可以播放修改后的动画。与预设复选框或 /vanilla <emote> 配合使用。与其他模组一样，动画在第一次玩时可能不会向其他玩家显示。",
+        "Context": "SettingsWindow.DrawEmotesChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Opens the What's New window automatically after Encore updates.",
+        "Translated": "Encore 更新后自动打开“新增功能”窗口。",
+        "Context": "SettingsWindow.DrawNotificationsChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Shows a chat message when a new version of Encore is available on the plugin repo.",
+        "Translated": "当插件存储库上有新版本的 Encore 可用时显示聊天消息。",
+        "Context": "SettingsWindow.DrawNotificationsChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignore global font scale for window sizes",
+        "Translated": "忽略窗口大小的全局字体比例",
+        "Context": "SettingsWindow.DrawDisplayChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "For high-DPI users: keeps Encore windows at their base size even when Dalamud's global font scale is large. Fonts still scale normally - this only affects window dimensions so they fit smaller screens.",
+        "Translated": "对于高 DPI 用户：即使 Dalamud 的全局字体比例很大，Encore 窗口也保持其基本尺寸。字体仍然正常缩放 - 这只会影响窗口尺寸，因此它们适合较小的屏幕。",
+        "Context": "SettingsWindow.DrawDisplayChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Equalizer bars",
+        "Translated": "均衡器条",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "The audio meter bars that pump along the window edges and beside playing tracks. The equalizer behind the ENCORE title always stays.",
+        "Translated": "沿着窗户边缘和播放曲目旁边的音频表条。 ENCORE 冠军背后的均衡器始终保持不变。",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Card dimming on hover",
+        "Translated": "悬停时卡片变暗",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Fades the other cards darker when you hover one, so the hovered card stands out. Turn off to keep every card at full brightness.",
+        "Translated": "当您将鼠标悬停在一张卡片上时，其他卡片会变暗，因此悬停的卡片会脱颖而出。关闭以使每张卡保持全亮度。",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Cursor glow",
+        "Translated": "光标发光",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "The soft glow that follows your mouse across a card, and its slow drift on the currently playing card.",
+        "Translated": "当鼠标滑过卡片时发出柔和的光芒，并在当前播放的卡片上缓慢漂移。",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Button bounce and ripples",
+        "Translated": "按钮弹跳和波纹",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "All motion on the play, save, and stop buttons: the squash-and-bounce, the glow, the pulsing dot, and the ripple halo. Also the ripple when you click a card and the spark burst when a preset starts.",
+        "Translated": "播放、保存和停止按钮上的所有动作：挤压和弹跳、发光、脉冲点和波纹光环。还有单击卡片时的涟漪和预设启动时的火花爆发。",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ambient shimmer",
+        "Translated": "环境微光",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "General idle motion: breathing status dots, drifting header spotlights, the ENCORE title shimmer, the sliding tab underline, and the beat pulse and rings on a playing card.",
+        "Translated": "一般空闲运动：呼吸状态点、漂移的标题聚光灯、ENCORE 标题闪烁、滑动选项卡下划线以及扑克牌上的节拍脉冲和铃声。",
+        "Context": "SettingsWindow.DrawReduceMotionChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "QUICK SET",
+        "Translated": "快速设置",
+        "Context": "SettingsWindow.DrawQuickSetRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "ALL",
+        "Translated": "全部",
+        "Context": "SettingsWindow.DrawQuickSetRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "  ARMED",
+        "Translated": "武装",
+        "Context": "SettingsWindow.BeginChannel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "STOP",
+        "Translated": "停止",
+        "Context": "UIStyles.DrawStopButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

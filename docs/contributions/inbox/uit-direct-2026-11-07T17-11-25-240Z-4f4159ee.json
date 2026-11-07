@@ -1,1 +1,256 @@
-{"type":"uit-contribution","plugin":"DawntrailReady","kinds":["free"],"entries":[{"Original":"Open Dawntrail Ready. \"/dtready scan\" checks your mods; \"/dtready convert <file>\" updates a .pmp or .ttmp2.","Translated":"打开 Dawntrail Ready。“/dtready scan” 检查您的模块;“/dtready convert <file>” 更新.pmp 或.ttmp2。","Context":"[DawntrailReady] Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Dawntrail Ready","Translated":"Dawntrail 就绪","Context":"[DawntrailReady] Plugin.HandleCommand","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Dawntrail Ready could not read its settings and started fresh. The old file was kept as ","Translated":"Dawntrail Ready 无法读取其设置，只能重新开始。旧文件保持不变。","Context":"[DawntrailReady] Plugin.LoadConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Dawntrail Ready###DawntrailReadyMain","Translated":"黎明踏浪号准备就绪","Context":"[DawntrailReady] MainWindow..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Penumbra isn't loaded. Dawntrail Ready waits for it.","Translated":"《Penumbra》尚未加载。《Dawntrail Ready》正在等待。","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Automatically update mods I import","Translated":"自动更新我导入的模式","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Mods made before Dawntrail are updated the moment Penumbra imports them, the same way TexTools would.","Translated":"在 Dawntrail 之前创建的模块会在 Penumbra 导入时立即更新，就像 TexTools 一样。","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your mods","Translated":"你的模式","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"A mod file","Translated":"一个调制文件","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Convert a mod file...","Translated":"转换 mod 文件......","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Choose a .pmp or .ttmp2. The updated copy is saved next to it as \"(Dawntrail).pmp\" and imported into Penumbra.","Translated":"选择.pmp 或.ttmp2。更新后的副本将保存在其旁边作为 “(Downtrail.pmp)”，并导入到 Penumbra 中。","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Recent","Translated":"最近","Context":"[DawntrailReady] MainWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Checked ","Translated":"已检查","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.ProgressBar"},{"Original":"Scan my mods","Translated":"扫描我的模组","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Looks through every mod Penumbra has and lists the ones made before Dawntrail.","Translated":"浏览 Penumbra 拥有的所有模式，并列出在《黎明踏浪号》之前制作的模式。","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" mods are Dawntrail-ready.","Translated":"Mods 已准备好进行 Dawntrail。","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" couldn't be checked or updated; /xllog says why.","Translated":"无法检查或更新;/xllog 说明原因。","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" mods were made before Dawntrail:","Translated":"在《曙光》之前就已经创建了模组：","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Update ","Translated":"更新","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":" mods","Translated":"Mods","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Update 1 mod","Translated":"更新 1 个模块","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":" done","Translated":"已完成","Context":"[DawntrailReady] MainWindow.DrawLibrary","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" materials","Translated":"材料","Context":"[DawntrailReady] MainWindow.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"1 material","Translated":"1 种材料","Context":"[DawntrailReady] MainWindow.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" models","Translated":"模型","Context":"[DawntrailReady] MainWindow.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"1 model","Translated":"1 个模型","Context":"[DawntrailReady] MainWindow.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"(textures)","Translated":"(纹理)","Context":"[DawntrailReady] MainWindow.Describe","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Updates and conversions will be listed here.","Translated":"更新和转换将在此列出。","Context":"[DawntrailReady] MainWindow.DrawRecent","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"}],"resources":[],"attributes":[{"Original":"UNKNOWN","Translated":"未知","Context":"[属性] DescriptionAttribute [DawntrailReady.Core] DawntrailReady.Core.Materials.EShaderPack::Unknown","Source":"ai:public-caiyun"}]}
+{
+  "type": "uit-contribution",
+  "plugin": "DawntrailReady",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Open Dawntrail Ready. \"/dtready scan\" checks your mods; \"/dtready convert <file>\" updates a .pmp or .ttmp2.",
+      "Translated": "打开 Dawntrail Ready。“/dtready scan” 检查您的模块;“/dtready convert <file>” 更新.pmp 或.ttmp2。",
+      "Context": "[DawntrailReady] Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Dawntrail Ready",
+      "Translated": "Dawntrail 就绪",
+      "Context": "[DawntrailReady] Plugin.HandleCommand",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Dawntrail Ready could not read its settings and started fresh. The old file was kept as ",
+      "Translated": "Dawntrail Ready 无法读取其设置，只能重新开始。旧文件保持不变。",
+      "Context": "[DawntrailReady] Plugin.LoadConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Dawntrail Ready###DawntrailReadyMain",
+      "Translated": "黎明踏浪号准备就绪",
+      "Context": "[DawntrailReady] MainWindow..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Penumbra isn't loaded. Dawntrail Ready waits for it.",
+      "Translated": "《Penumbra》尚未加载。《Dawntrail Ready》正在等待。",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Automatically update mods I import",
+      "Translated": "自动更新我导入的模式",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Mods made before Dawntrail are updated the moment Penumbra imports them, the same way TexTools would.",
+      "Translated": "在 Dawntrail 之前创建的模块会在 Penumbra 导入时立即更新，就像 TexTools 一样。",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your mods",
+      "Translated": "你的模式",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "A mod file",
+      "Translated": "一个调制文件",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Convert a mod file...",
+      "Translated": "转换 mod 文件......",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Choose a .pmp or .ttmp2. The updated copy is saved next to it as \"(Dawntrail).pmp\" and imported into Penumbra.",
+      "Translated": "选择.pmp 或.ttmp2。更新后的副本将保存在其旁边作为 “(Downtrail.pmp)”，并导入到 Penumbra 中。",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Recent",
+      "Translated": "最近",
+      "Context": "[DawntrailReady] MainWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Checked ",
+      "Translated": "已检查",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar"
+    },
+    {
+      "Original": "Scan my mods",
+      "Translated": "扫描我的模组",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Looks through every mod Penumbra has and lists the ones made before Dawntrail.",
+      "Translated": "浏览 Penumbra 拥有的所有模式，并列出在《黎明踏浪号》之前制作的模式。",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " mods are Dawntrail-ready.",
+      "Translated": "Mods 已准备好进行 Dawntrail。",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " couldn't be checked or updated; /xllog says why.",
+      "Translated": "无法检查或更新;/xllog 说明原因。",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " mods were made before Dawntrail:",
+      "Translated": "在《曙光》之前就已经创建了模组：",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Update ",
+      "Translated": "更新",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": " mods",
+      "Translated": "Mods",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Update 1 mod",
+      "Translated": "更新 1 个模块",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": " done",
+      "Translated": "已完成",
+      "Context": "[DawntrailReady] MainWindow.DrawLibrary",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " materials",
+      "Translated": "材料",
+      "Context": "[DawntrailReady] MainWindow.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "1 material",
+      "Translated": "1 种材料",
+      "Context": "[DawntrailReady] MainWindow.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " models",
+      "Translated": "模型",
+      "Context": "[DawntrailReady] MainWindow.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "1 model",
+      "Translated": "1 个模型",
+      "Context": "[DawntrailReady] MainWindow.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "(textures)",
+      "Translated": "(纹理)",
+      "Context": "[DawntrailReady] MainWindow.Describe",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Updates and conversions will be listed here.",
+      "Translated": "更新和转换将在此列出。",
+      "Context": "[DawntrailReady] MainWindow.DrawRecent",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "UNKNOWN",
+      "Translated": "未知",
+      "Context": "[属性] DescriptionAttribute [DawntrailReady.Core] DawntrailReady.Core.Materials.EShaderPack::Unknown",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "importedAt": "2026-11-07T17:11:44",
+  "imported": {
+    "archive": "uit-direct-2026-11-07T17-11-25-240Z-4f4159ee-2026-11-07T171144.json",
+    "accepted": 29,
+    "filled": 29,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 29 条 `DawntrailReady` 的界面文字译文，已收为**独立译文包** `uit-packs/DawntrailReady@user-eb63dc.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 29 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
