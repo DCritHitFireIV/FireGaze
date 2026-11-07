@@ -1,0 +1,6093 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-11-07",
+    "source": "user",
+    "label": "玩家包 · abeffd",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Shorthand for /gagspeak.",
+      "Translated": "/gagspeak 的简写。",
+      "Context": "CommandManager..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggles the GagSpeak UI.",
+      "Translated": "切换 GagSpeak UI。",
+      "Context": "CommandManager..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reverts all active features. For emergency uses.",
+      "Translated": "恢复所有活动功能。供紧急情况下使用。",
+      "Context": "CommandManager..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reverts all hardcore settings. For emergency uses.",
+      "Translated": "恢复所有硬核设置。供紧急情况下使用。",
+      "Context": "CommandManager..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shorthand for /globalchat",
+      "Translated": "/globalchat 的简写",
+      "Context": "CommandManager..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Switches the native chat channel to GagSpeak Global Chat.\n/gstell <alias|uid|anon-user name|anon-user tag> → DM's another Kinkster.\n\nSubcommands for /gagspeak & /gspeak:\n\t /gspeak settings <navIdx> <panelIdx> → Opens the settings UI to a defined navbar and panel.\n\t /gspeak profile → Opens your UserProfile. (Append 'edit' to open the editor)\n\t /gspeak account → Opens the settings for your Account.\n\t /gspeak chat → Toggles the ChatUI.\n\t /dr / /gdr → Deathrolls. '/dr' to Start, '/dr r' to respond.\n\t /safeword → Reverts all active features. For emergency uses.\n\t /safewordhardcore → Reverts all hardcore settings. For emergency uses.",
+      "Translated": "将本机聊天频道切换到 GagSpeak Global Chat。\n/gstell <别名|uid|匿名用户名|匿名用户标签> → DM 的另一个 Kinkster。\n\n/gagspeak 和 /gspeak 的子命令：\n\t /gspeak settings <navIdx> <panelIdx> → 打开已定义导航栏和面板的设置 UI。\n\t /gspeak profile → 打开您的用户配置文件。 （附加“编辑”以打开编辑器）\n\t /gspeak account → 打开您的帐户设置。\n\t /gspeak chat → 切换 ChatUI。\n\t /dr / /gdr → 死亡卷。 '/dr' 开始，'/dr r' 响应。\n\t /safeword → 恢复所有活动功能。供紧急情况下使用。\n\t /safewordhardcore → 恢复所有硬核设置。供紧急情况下使用。",
+      "Context": "CommandManager.BuildChatHelp",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak",
+      "Translated": "插科打诨",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Achievements",
+      "Translated": "成就",
+      "Context": "DebugPersonalDataUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Follow",
+      "Translated": "跟随",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name",
+      "Translated": "姓名",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Connecting",
+      "Translated": "正在连接",
+      "Context": "MainUI.DrawTopBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type",
+      "Translated": "类型",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Identifier",
+      "Translated": "标识符",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HardcoreStatusTable",
+      "Translated": "硬核状态表",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "State",
+      "Translated": "状态",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enactor",
+      "Translated": "执行者",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Time Left",
+      "Translated": "剩余时间",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Devo",
+      "Translated": "德沃",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Information",
+      "Translated": "信息",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Emote",
+      "Translated": "表情",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Emote ID:",
+      "Translated": "表情ID：",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confinement",
+      "Translated": "坐月子",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "World:",
+      "Translated": "世界：",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Imprisonment",
+      "Translated": "监禁",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Territory:",
+      "Translated": "领土：",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NoChatBox",
+      "Translated": "没有聊天框",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NoChatInput",
+      "Translated": "无聊天输入",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "BlockedChatInput",
+      "Translated": "阻止聊天输入",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Changelog UI###Gagspeak_ChangelogUI",
+      "Translated": "更新日志用户界面",
+      "Context": "ChangelogUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Active State Debugger",
+      "Translated": "活动状态调试器",
+      "Context": "DebugActiveStateUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci IPC",
+      "Translated": "位点IPC",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hardcore State",
+      "Translated": "硬核状态",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HcTaskManager State",
+      "Translated": "HcTaskManager 状态",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Location Service",
+      "Translated": "定位服务",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Location Data",
+      "Translated": "位置数据",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Previous",
+      "Translated": "以前的",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current",
+      "Translated": "当前的",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glamour Cache",
+      "Translated": "魅力缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unbound Cache Queue",
+      "Translated": "未绑定缓存队列",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CPlus State",
+      "Translated": "CPlus 州",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mods Cache",
+      "Translated": "模组缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci Cache",
+      "Translated": "缓存位点",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Traits/Attributes Cache",
+      "Translated": "特性/属性缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Overlay Cache",
+      "Translated": "覆盖缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stimulation Cache",
+      "Translated": "刺激缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RemoteService Cache",
+      "Translated": "远程服务缓存",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DataCenter:",
+      "Translated": "数据中心：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Territory Intended Use:",
+      "Translated": "领土预期用途：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In Housing District:",
+      "Translated": "在住宅区：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Housing Area:",
+      "Translated": "住房面积：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Housing Type:",
+      "Translated": "住房类型：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ward:",
+      "Translated": "病房：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Plot:",
+      "Translated": "阴谋：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Indoors:",
+      "Translated": "室内：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apartment Division:",
+      "Translated": "公寓部门：",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci IPC Status:",
+      "Translated": "位点 IPC 状态：",
+      "Context": "DebugActiveStateUI.DrawLociIpc",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Statuses: ",
+      "Translated": "总状态：",
+      "Context": "DebugActiveStateUI.DrawLociIpc",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Presets: ",
+      "Translated": "预设总数：",
+      "Context": "DebugActiveStateUI.DrawLociIpc",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Kinkster Data Debugger",
+      "Translated": "Kinkster 数据调试器",
+      "Context": "DebugPersonalDataUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Client Player Data (Serverside Active State)",
+      "Translated": "客户端玩家数据（服务器端活动状态）",
+      "Context": "DebugPersonalDataUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Pair Info",
+      "Translated": "的配对信息",
+      "Context": "DebugPersonalDataUI.DrawPairData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Global Perms",
+      "Translated": "的全球权限",
+      "Context": "DebugPersonalDataUI.DrawPairData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Hardcore State",
+      "Translated": "的硬核状态",
+      "Context": "DebugPersonalDataUI.DrawPairData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Completed: ",
+      "Translated": "完全的：",
+      "Context": "DebugPersonalDataUI.DrawAchievements",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player",
+      "Translated": "玩家",
+      "Context": "DebugPersonalDataUI.DrawPlayerCharacterDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Account Reputation",
+      "Translated": "账户信誉",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ReputationStatus",
+      "Translated": "声誉状态",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Social Component",
+      "Translated": "社交成分",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allowed",
+      "Translated": "允许",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current Strikes",
+      "Translated": "目前的罢工",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profile Viewing",
+      "Translated": "个人资料查看",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profile Editing",
+      "Translated": "个人资料编辑",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chat Usage",
+      "Translated": "聊天使用",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player Hardcore State",
+      "Translated": "玩家硬核状态",
+      "Context": "DebugPersonalDataUI.DrawPlayerHardcore",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Global Perms",
+      "Translated": "全球烫发",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Permission",
+      "Translated": "允许",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Value",
+      "Translated": "价值",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allowed Garble Channels",
+      "Translated": "允许的乱码通道",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Live Chat Garbler",
+      "Translated": "实时聊天 Garbler",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Live Chat Garbler Locked",
+      "Translated": "实时聊天 Garbler 已锁定",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gagged Nameplate",
+      "Translated": "封口铭牌",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wardrobe Active",
+      "Translated": "衣柜活跃",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Visuals",
+      "Translated": "搞笑视觉效果",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Visuals",
+      "Translated": "限制视觉效果",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restraint Visuals",
+      "Translated": "约束视觉效果",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer Active",
+      "Translated": "傀儡师活跃",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Trigger Phrase",
+      "Translated": "全局触发短语",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Sit Requests",
+      "Translated": "允许坐席请求",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Motion Requests",
+      "Translated": "允许动作请求",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Alias Requests",
+      "Translated": "允许别名请求",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow All Requests",
+      "Translated": "允许所有请求",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toybox Active",
+      "Translated": "玩具盒活动",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toys Are Interactable",
+      "Translated": "玩具是可互动的",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In VibeRoom",
+      "Translated": "在 VibeRoom 中",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Spatial Vibrator Audio",
+      "Translated": "空间振动器音频",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Collar Code",
+      "Translated": "减震环代码",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Shocks ",
+      "Translated": "允许冲击",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Vibrations",
+      "Translated": "允许振动",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Beeps",
+      "Translated": "允许蜂鸣声",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Intensity",
+      "Translated": "最大强度",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Duration",
+      "Translated": "最长持续时间",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Hardcore State",
+      "Translated": "硬核状态",
+      "Context": "DebugPersonalDataUI.DrawHardcoreStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Pair Permissions",
+      "Translated": "的配对权限",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Own Setting",
+      "Translated": "自己的设置",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allows Permanent Locks",
+      "Translated": "允许永久锁定",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allows Owner Locks",
+      "Translated": "允许所有者锁定",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allows Devotional Locks",
+      "Translated": "允许虔诚锁",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Gags",
+      "Translated": "应用噱头",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lock Gags",
+      "Translated": "锁堵头",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Gag Time",
+      "Translated": "最长堵嘴时间",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unlock Gags",
+      "Translated": "解锁笑料",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Gags",
+      "Translated": "消除堵嘴",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Restrictions",
+      "Translated": "应用限制",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lock Restrictions",
+      "Translated": "锁定限制",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Restriction Lock Time",
+      "Translated": "最大限制锁定时间",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unlock Restrictions",
+      "Translated": "解锁限制",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Restrictions",
+      "Translated": "删除限制",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Restraint Sets",
+      "Translated": "应用约束装置",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Restraint Layers",
+      "Translated": "应用约束层",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add Locked Layers",
+      "Translated": "添加锁定图层",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lock Restraint Sets",
+      "Translated": "锁具约束装置",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Restraint Lock Time",
+      "Translated": "最大约束锁定时间",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unlock Restraint Sets",
+      "Translated": "解锁约束装置",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Restraint Layers",
+      "Translated": "移除约束层",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Locked Layers",
+      "Translated": "删除锁定图层",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Restraint Sets",
+      "Translated": "移除约束装置",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Phrase",
+      "Translated": "触发短语",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Start Char",
+      "Translated": "起始字符",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "End Char",
+      "Translated": "结束字符",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sit Requests",
+      "Translated": "坐席请求",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Motion Requests",
+      "Translated": "动议请求",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alias Requests",
+      "Translated": "别名请求",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "All Requests",
+      "Translated": "所有请求",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Positive Statuses",
+      "Translated": "积极的状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Negative Statuses",
+      "Translated": "消极状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Special Statuses",
+      "Translated": "特殊身份",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Own LociData",
+      "Translated": "应用自己的轨迹数据",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Your LociData",
+      "Translated": "应用您的 LociData",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Status Time",
+      "Translated": "最大状态时间",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Permanent Statuses",
+      "Translated": "永久状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Removing Applied Statuses",
+      "Translated": "删除已应用状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Removing Any Status",
+      "Translated": "删除任何状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can Execute Patterns",
+      "Translated": "可以执行模式",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can Stop Patterns",
+      "Translated": "可以停止模式",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can Toggle Alarms",
+      "Translated": "可以切换警报",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can Toggle Triggers",
+      "Translated": "可以切换触发器",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hypno Effects",
+      "Translated": "催眠效果",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In Hardcore Mode",
+      "Translated": "在硬核模式下",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Devotional States For Pair",
+      "Translated": "两人的虔诚状态",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Forced Follow",
+      "Translated": "允许强制跟随",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Forced Sit",
+      "Translated": "允许强制坐下",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Forced Emote",
+      "Translated": "允许强制表情",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Indoor Confinement",
+      "Translated": "允许室内限制",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Imprisonment",
+      "Translated": "允许监禁",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow GarbleChannelEditing",
+      "Translated": "允许 GarbleChannel 编辑",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Hiding Chat Boxes",
+      "Translated": "允许隐藏聊天框",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Hiding Chat Input",
+      "Translated": "允许隐藏聊天输入",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Chat Input Blocking",
+      "Translated": "允许聊天输入阻止",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Hypnosis Image Sending",
+      "Translated": "允许催眠图像发送",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Collar Share Code",
+      "Translated": "减震环 分享代码",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Shocks",
+      "Translated": "允许冲击",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Edit Access",
+      "Translated": "的编辑权限",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chat Garbler State",
+      "Translated": "聊天加布勒州",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chat Garbler Lock",
+      "Translated": "聊天乱码锁",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gagged Nameplates",
+      "Translated": "堵嘴铭牌",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wardrobe",
+      "Translated": "衣柜",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Permanent Locks",
+      "Translated": "永久锁",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Owner Locks",
+      "Translated": "业主锁",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Devotional Locks",
+      "Translated": "虔诚锁",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add Restraint Layers",
+      "Translated": "添加约束层",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Locked Layers",
+      "Translated": "应用锁定图层",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Restraint Set Lock Time",
+      "Translated": "最大约束设置锁定时间",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer",
+      "Translated": "傀儡师",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci",
+      "Translated": "位点",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Positive Statuses",
+      "Translated": "允许积极状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Negative Statuses",
+      "Translated": "允许负面状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Special Statuses",
+      "Translated": "允许特殊状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Permanent Statuses",
+      "Translated": "允许永久状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Removing Applied Statuses",
+      "Translated": "允许删除已应用的状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Allow Removing Any Status",
+      "Translated": "允许删除任何状态",
+      "Context": "DebugPersonalDataUI.DrawPairAccess",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s IPC Data",
+      "Translated": "的IPC数据",
+      "Context": "DebugPersonalDataUI.DrawKinksterIpcData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Stored Preset Data",
+      "Translated": "存储的预设数据",
+      "Context": "DebugPersonalDataUI.DrawLociPresetTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PresetTable-",
+      "Translated": "预设表-",
+      "Context": "DebugPersonalDataUI.DrawLociPresetTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Preset Title",
+      "Translated": "预设标题",
+      "Context": "DebugPersonalDataUI.DrawLociPresetTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Statuses",
+      "Translated": "状态",
+      "Context": "DebugPersonalDataUI.DrawLociPresetTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Data",
+      "Translated": "搞笑数据",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layer",
+      "Translated": "层",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enabler",
+      "Translated": "推动者",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Padlock",
+      "Translated": "挂锁",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Password",
+      "Translated": "密码",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TimeLeft",
+      "Translated": "剩余时间",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Assigner",
+      "Translated": "分配",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restrictions Data",
+      "Translated": "限制数据",
+      "Context": "DebugPersonalDataUI.DrawRestrictions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "None",
+      "Translated": "没有任何",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restraint Data",
+      "Translated": "约束数据",
+      "Context": "DebugPersonalDataUI.DrawRestraint",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Data",
+      "Translated": "衣领数据",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Property",
+      "Translated": "财产",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Applied",
+      "Translated": "应用",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Owners",
+      "Translated": "业主",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visuals",
+      "Translated": "视觉效果",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dye1",
+      "Translated": "染料1",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dye2",
+      "Translated": "染料2",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociStatus",
+      "Translated": "位置状态",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Writing",
+      "Translated": "写作",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Permission-Relation",
+      "Translated": "权限关系",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dye Control",
+      "Translated": "染料控制",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociData Control",
+      "Translated": "轨迹数据控制",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Writing",
+      "Translated": "领写",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glamour/Mod Control",
+      "Translated": "魅力/时尚控制",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Active Cursed Items",
+      "Translated": "活跃的诅咒物品",
+      "Context": "DebugPersonalDataUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shred Aliases",
+      "Translated": "粉碎别名",
+      "Context": "DebugPersonalDataUI.DrawPuppeteer",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer Storage is null or empty",
+      "Translated": "Puppeteer 存储为空或为空",
+      "Context": "DebugPersonalDataUI.DrawPuppeteer",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "启用",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Label",
+      "Translated": "标签",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "InputCommand",
+      "Translated": "输入命令",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type:",
+      "Translated": "类型：",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TextAction",
+      "Translated": "文本动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "OutputCommand",
+      "Translated": "输出命令",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagAction",
+      "Translated": "搞笑动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LayerIdx",
+      "Translated": "层IDx",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NewState",
+      "Translated": "新州",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagType",
+      "Translated": "堵嘴类型",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LowerBound",
+      "Translated": "下界",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "UpperBound",
+      "Translated": "上限",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestrictionAction",
+      "Translated": "限制行动",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestrictionId",
+      "Translated": "限制ID",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestraintAction",
+      "Translated": "约束动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociDataAction",
+      "Translated": "轨迹数据动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociDataItem",
+      "Translated": "位置数据项",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PiShockAction",
+      "Translated": "PiShock动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SexToyAction",
+      "Translated": "SexToy动作",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "StartAfter",
+      "Translated": "开始之后",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "EndAfter",
+      "Translated": "结束之后",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Action",
+      "Translated": "未知行动",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Active Alarms",
+      "Translated": "活动警报",
+      "Context": "DebugPersonalDataUI.DrawToybox",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Active Triggers",
+      "Translated": "主动触发器",
+      "Context": "DebugPersonalDataUI.DrawToybox",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Cache",
+      "Translated": "的缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s GagCache",
+      "Translated": "的 GagCache",
+      "Context": "DebugPersonalDataUI.DrawKinksterGagCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Type",
+      "Translated": "堵嘴类型",
+      "Context": "DebugPersonalDataUI.DrawKinksterGagCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Equip Slot",
+      "Translated": "装备槽位",
+      "Context": "DebugPersonalDataUI.DrawKinksterGagCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Restriction Cache",
+      "Translated": "的限制缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestrictionCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set ID",
+      "Translated": "设置ID",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestrictionCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Name",
+      "Translated": "限制名称",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestrictionCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Affected Slots",
+      "Translated": "受影响的老虎机",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestrictionCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Restraint Cache",
+      "Translated": "的约束缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestraintCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restraint Set Name",
+      "Translated": "约束装置名称",
+      "Context": "DebugPersonalDataUI.DrawKinksterRestraintCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Loot Cache",
+      "Translated": "的战利品缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterLootCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Item ID",
+      "Translated": "被诅咒的物品ID",
+      "Context": "DebugPersonalDataUI.DrawKinksterLootCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Item Name",
+      "Translated": "被诅咒的物品名称",
+      "Context": "DebugPersonalDataUI.DrawKinksterLootCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestrictionType?",
+      "Translated": "限制类型？",
+      "Context": "DebugPersonalDataUI.DrawKinksterLootCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Type",
+      "Translated": "未知类型",
+      "Context": "DebugPersonalDataUI.DrawKinksterLootCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Pattern Cache",
+      "Translated": "的模式缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterPatternCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern ID",
+      "Translated": "模式ID",
+      "Context": "DebugPersonalDataUI.DrawKinksterPatternCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duration",
+      "Translated": "期间",
+      "Context": "DebugPersonalDataUI.DrawKinksterPatternCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loops?",
+      "Translated": "循环？",
+      "Context": "DebugPersonalDataUI.DrawKinksterPatternCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Alarm Cache",
+      "Translated": "的警报缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterAlarmCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alarm ID",
+      "Translated": "报警ID",
+      "Context": "DebugPersonalDataUI.DrawKinksterAlarmCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alarm Time",
+      "Translated": "闹钟时间",
+      "Context": "DebugPersonalDataUI.DrawKinksterAlarmCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Trigger Cache",
+      "Translated": "的触发缓存",
+      "Context": "DebugPersonalDataUI.DrawKinksterTriggerCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger ID",
+      "Translated": "触发器ID",
+      "Context": "DebugPersonalDataUI.DrawKinksterTriggerCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Type",
+      "Translated": "触发类型",
+      "Context": "DebugPersonalDataUI.DrawKinksterTriggerCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action Kind",
+      "Translated": "动作种类",
+      "Context": "DebugPersonalDataUI.DrawKinksterTriggerCache",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Debugger for Storages",
+      "Translated": "存储调试器",
+      "Context": "DebugStorageUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player Global Data",
+      "Translated": "玩家全局数据",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Incoming Kinkster Requests",
+      "Translated": "传入 Kinkster 请求",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Outgoing Kinkster Requests",
+      "Translated": "传出 Kinkster 请求",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Incoming Collar Requests",
+      "Translated": "收到的项圈请求",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Outgoing Collar Requests",
+      "Translated": "传出项圈请求",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Permissions",
+      "Translated": "全局权限",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Permissions:",
+      "Translated": "全局权限：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AllowedGarblerChannels:",
+      "Translated": "允许的 GarblerChannels:",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ChatGarblerActive:",
+      "Translated": "聊天加布勒活跃：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ChatGarblerLocked:",
+      "Translated": "ChatGarbler锁定：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GaggedNameplate:",
+      "Translated": "堵嘴铭牌：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "WardrobeEnabled:",
+      "Translated": "衣柜已启用：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagVisuals:",
+      "Translated": "搞笑视觉效果：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestrictionVisuals:",
+      "Translated": "视觉限制：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestraintSetVisuals:",
+      "Translated": "约束集视觉效果：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PuppeteerEnabled:",
+      "Translated": "傀儡师启用：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TriggerPhrase:",
+      "Translated": "触发短语：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PuppetPerms:",
+      "Translated": "傀儡权限：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ToyboxEnabled:",
+      "Translated": "玩具箱已启用：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ToysInteractable:",
+      "Translated": "玩具互动：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "InVibeRoom:",
+      "Translated": "室内空间：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SpatialAudio:",
+      "Translated": "空间音频：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GlobalShockShareCode:",
+      "Translated": "GlobalShock分享代码：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AllowShocks:",
+      "Translated": "允许冲击：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AllowVibrations:",
+      "Translated": "允许振动：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AllowBeeps:",
+      "Translated": "允许蜂鸣声：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MaxIntensity:",
+      "Translated": "最大强度：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MaxDuration:",
+      "Translated": "最长持续时间：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ShockVibrateDuration:",
+      "Translated": "冲击振动持续时间：",
+      "Context": "DebugStorageUI.DrawGlobalData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "table",
+      "Translated": "桌子",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Kinkster",
+      "Translated": "金克斯特",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Recipient Kinkster",
+      "Translated": "收件人金克斯特",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Creation Time",
+      "Translated": "创建时间",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Attached Message",
+      "Translated": "附留言",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Incoming Requests:",
+      "Translated": "传入请求：",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "inc-table",
+      "Translated": "inc-表",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Initial Writing",
+      "Translated": "初步写作",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Your Permissions",
+      "Translated": "您的权限",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Owners Permissions",
+      "Translated": "所有者权限",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Outgoing Requests:",
+      "Translated": "传出请求：",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "out-table",
+      "Translated": "出桌",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Recipient",
+      "Translated": "接受者",
+      "Context": "DebugStorageUI.DrawCollarRequests",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dynamic Draw Systems",
+      "Translated": "动态牵引系统",
+      "Context": "DebugStorageUI.DrawDDSDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Kinkster DDS",
+      "Translated": "奇克斯特DDS",
+      "Context": "DebugStorageUI.DrawDDSDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Requests DDS",
+      "Translated": "请求 DDS",
+      "Context": "DebugStorageUI.DrawDDSDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Storage",
+      "Translated": "恶作剧存储",
+      "Context": "DebugStorageUI.DrawGagStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Storage is null or empty",
+      "Translated": "Gag 存储空间为空或为空",
+      "Context": "DebugStorageUI.DrawGagStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Storage",
+      "Translated": "限制存储",
+      "Context": "DebugStorageUI.DrawRestrictionStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Storage is null or empty",
+      "Translated": "限制存储为空或为空",
+      "Context": "DebugStorageUI.DrawRestrictionStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestraintSet Storage",
+      "Translated": "约束装置存储",
+      "Context": "DebugStorageUI.DrawRestraintStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestraintSet Storage is null or empty",
+      "Translated": "RestraintSet 存储为 null 或为空",
+      "Context": "DebugStorageUI.DrawRestraintStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Client Collar",
+      "Translated": "客户领",
+      "Context": "DebugStorageUI.DrawCollarStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CursedLoot Storage",
+      "Translated": "被诅咒的战利品存储",
+      "Context": "DebugStorageUI.DrawCursedLootStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Loot Storage is null or empty",
+      "Translated": "被诅咒的战利品存储为空或为空",
+      "Context": "DebugStorageUI.DrawCursedLootStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AliasList Storage",
+      "Translated": "别名列表存储",
+      "Context": "DebugStorageUI.DrawPuppeteerAliases",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteers Storage",
+      "Translated": "木偶师存储",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "puppeteers",
+      "Translated": "木偶师",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "UID",
+      "Translated": "用户识别码",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name@World",
+      "Translated": "名字@世界",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Orders",
+      "Translated": "订单总数",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sit Orders",
+      "Translated": "坐订单",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Emote Orders",
+      "Translated": "表情命令",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alias Orders",
+      "Translated": "别名订单",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Other Orders",
+      "Translated": "其他订单",
+      "Context": "DebugStorageUI.DrawPuppeteers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sex Toy Storage",
+      "Translated": "性玩具存放",
+      "Context": "DebugStorageUI.DrawToyStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sex Toy Storage is null/empty",
+      "Translated": "性玩具存储为空/空",
+      "Context": "DebugStorageUI.DrawToyStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern Storage",
+      "Translated": "模式存储",
+      "Context": "DebugStorageUI.DrawPatternStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern Storage is null or empty",
+      "Translated": "模式存储为空或为空",
+      "Context": "DebugStorageUI.DrawPatternStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alarm Storage",
+      "Translated": "报警存储",
+      "Context": "DebugStorageUI.DrawAlarmStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alarm Storage is null or empty",
+      "Translated": "警报存储为空或为空",
+      "Context": "DebugStorageUI.DrawAlarmStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Storage",
+      "Translated": "触发存储",
+      "Context": "DebugStorageUI.DrawTriggerStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Storage is null or empty",
+      "Translated": "触发器存储为空或为空",
+      "Context": "DebugStorageUI.DrawTriggerStorage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Overview:",
+      "Translated": "概述：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Description (Hover)",
+      "Translated": "描述（悬停）",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RestraintSet File System Path",
+      "Translated": "RestraintSet 文件系统路径",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Assigned Thumbnail Path",
+      "Translated": "指定的缩略图路径",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hardcore Traits",
+      "Translated": "硬核特征",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Arousal",
+      "Translated": "唤醒",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Do Redraw?",
+      "Translated": "重画吗？",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No",
+      "Translated": "不",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是的",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Equipment:",
+      "Translated": "设备：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layers:",
+      "Translated": "层数：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MetaData:",
+      "Translated": "元数据：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Headgear",
+      "Translated": "帽子",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visor",
+      "Translated": "遮阳板",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Weapon",
+      "Translated": "武器",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mods:",
+      "Translated": "模组：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociData:",
+      "Translated": "位置数据：",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag FS Path",
+      "Translated": "堵嘴 FS 路径",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Headgear State",
+      "Translated": "头饰状态",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Visor?",
+      "Translated": "显示遮阳板？",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glamour",
+      "Translated": "魅力",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mod Association",
+      "Translated": "模组协会",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<No Assigned Data>",
+      "Translated": "<无指定数据>",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociData",
+      "Translated": "位置数据",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "[Preset Type]",
+      "Translated": "[预设类型]",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Preset",
+      "Translated": "未知预设",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "[Status Type]",
+      "Translated": "[状态类型]",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Status",
+      "Translated": "未知状态",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Arousal Strength",
+      "Translated": "唤醒强度",
+      "Context": "DebugStorageUI.DrawGag",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Type",
+      "Translated": "限制类型",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restrictions FS Path",
+      "Translated": "限制 FS 路径",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Thumbnail Path",
+      "Translated": "缩略图路径",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociData Type",
+      "Translated": "轨迹数据类型",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci Preset",
+      "Translated": "轨迹预设",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci Status",
+      "Translated": "本地状态",
+      "Context": "DebugStorageUI.DrawRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-Equipment",
+      "Translated": "-设备",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Normal",
+      "Translated": "普通的",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced",
+      "Translated": "先进的",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reference (",
+      "Translated": "参考 （",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Item",
+      "Translated": "未知物品",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-Layers",
+      "Translated": "-层数",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction",
+      "Translated": "限制",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NULL REFERENCE",
+      "Translated": "空引用",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Further Info (Hover)",
+      "Translated": "更多信息（悬停）",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Custom Stains",
+      "Translated": "定制污渍",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ModLayer",
+      "Translated": "模组层",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "UNK LAYER DATA",
+      "Translated": "UNK层数据",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "(Hover)",
+      "Translated": "（徘徊）",
+      "Context": "DebugStorageUI.DrawModAssociationRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "InPool",
+      "Translated": "池内",
+      "Context": "DebugStorageUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AppliedTime",
+      "Translated": "应用时间",
+      "Context": "DebugStorageUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ReleaseTime",
+      "Translated": "发布时间",
+      "Context": "DebugStorageUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Precedence",
+      "Translated": "优先级",
+      "Context": "DebugStorageUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "null",
+      "Translated": "无效的",
+      "Context": "DebugStorageUI.DrawCursedLoot",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toy Type",
+      "Translated": "玩具类型",
+      "Context": "DebugStorageUI.DrawBuzzToy",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "BrandName",
+      "Translated": "品牌名称",
+      "Context": "DebugStorageUI.DrawBuzzToy",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LabelName",
+      "Translated": "标签名称",
+      "Context": "DebugStorageUI.DrawBuzzToy",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Valid For Remotes:",
+      "Translated": "适用于遥控器：",
+      "Context": "DebugStorageUI.DrawBuzzToy",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Interactable",
+      "Translated": "可互动",
+      "Context": "ToysPanel.DrawSelectedInner",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Description",
+      "Translated": "描述",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "StartPoint",
+      "Translated": "起点",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PlaybackDuration",
+      "Translated": "播放时长",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ShouldLoop",
+      "Translated": "应该循环",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Primary Device:",
+      "Translated": "主要设备：",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Secondary Device:",
+      "Translated": "辅助设备：",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern Playback Data:",
+      "Translated": "花样播放数据：",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Device: ",
+      "Translated": "设备：",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Motor ",
+      "Translated": "发动机",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ") Contains ",
+      "Translated": ") 包含",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " points.",
+      "Translated": "点。",
+      "Context": "DebugStorageUI.DrawPattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SetTimeUTC",
+      "Translated": "设置时间UTC",
+      "Context": "DebugStorageUI.DrawAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PatternToPlay",
+      "Translated": "播放模式",
+      "Context": "DebugStorageUI.DrawAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PatternStartPoint",
+      "Translated": "图案起始点",
+      "Context": "DebugStorageUI.DrawAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PatternDuration",
+      "Translated": "模式持续时间",
+      "Context": "DebugStorageUI.DrawAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RepeatFrequency",
+      "Translated": "重复频率",
+      "Context": "DebugStorageUI.DrawAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Priority",
+      "Translated": "优先事项",
+      "Context": "DebugStorageUI.DrawTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action Type",
+      "Translated": "动作类型",
+      "Context": "DebugStorageUI.DrawTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociAction",
+      "Translated": "Loci动作",
+      "Context": "DebugStorageUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LociItem",
+      "Translated": "地点",
+      "Context": "DebugStorageUI.DrawActionTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " (DDS)",
+      "Translated": "（直达数据系统）",
+      "Context": "DebugStorageUI.DrawDDSDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Folder Map",
+      "Translated": "文件夹图",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FolderMap-table",
+      "Translated": "文件夹映射表",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "String Name",
+      "Translated": "字符串名称",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Folder Name",
+      "Translated": "文件夹名称",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Folder Path",
+      "Translated": "文件夹路径",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort Order:",
+      "Translated": "排序顺序：",
+      "Context": "DebugStorageUI.DrawFolderGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FolderLeaves-",
+      "Translated": "文件夹叶子-",
+      "Context": "DebugStorageUI.DrawFolder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FullPath",
+      "Translated": "完整路径",
+      "Context": "DebugStorageUI.DrawFolder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GroupData-",
+      "Translated": "组数据-",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Parent",
+      "Translated": "家长",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Items",
+      "Translated": "项目",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Interaction Events Viewer",
+      "Translated": "交互事件查看器",
+      "Context": "InteractionEventsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search Filter Text...",
+      "Translated": "搜索过滤文本...",
+      "Context": "InteractionEventsUI.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "interactionsTable",
+      "Translated": "交互表",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Time",
+      "Translated": "时间",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Applier",
+      "Translated": "施药者",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Interaction",
+      "Translated": "相互作用",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Details",
+      "Translated": "细节",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Welcome to GagSpeak! ♥",
+      "Translated": "欢迎来到 GagSpeak！ ♥",
+      "Context": "IntroUi..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Welcome",
+      "Translated": "欢迎",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Usage",
+      "Translated": "用法",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create Account",
+      "Translated": "创建账户",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Being a Server-Side Plugin, and a plugin full of kinky individuals, we all know there will always be some of *those* people who will try to ruin the fun for everyone.",
+      "Translated": "作为一个服务器端插件，并且是一个充满变态个体的插件，我们都知道总会有一些*那些*人会试图破坏每个人的乐趣。",
+      "Context": "IntroUi.PageContentsUsage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "BDSM, at its foundation, highly values the aspect of consent.",
+      "Translated": "BDSM 从根本上高度重视同意方面。",
+      "Context": "IntroUi.PageContentsUsage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "By using GagSpeak, you understand and acknowledge the following about data sharing:",
+      "Translated": "使用 GagSpeak，即表示您了解并承认以下有关数据共享的内容：",
+      "Context": "IntroUi.PageContentsUsage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The Main Dev of GagSpeak has endured years of manipulative predatory abuse, and will ensure that any report madeis resolved thoughtfully and with consideration in a manner that will not cause the reported to go after the reporter.",
+      "Translated": "GagSpeak 的主要开发人员经历了多年的操纵性掠夺性虐待，并将确保任何举报都得到深思熟虑的解决，并且考虑的方式不会导致被举报者追捕举报者。",
+      "Context": "IntroUi.PageContentsUsage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Proceed To Account Creation.",
+      "Translated": "继续创建帐户。",
+      "Context": "IntroUi.PageContentsUsage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "You are not required to join the discord to login. Instead, it is generated for you below.",
+      "Translated": "您无需加入不和谐即可登录。相反，它是在下面为您生成的。",
+      "Context": "IntroUi.PageContentsAccountSetup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Generated Account UID..",
+      "Translated": "生成的帐户 UID..",
+      "Context": "IntroUi.DrawNewAccountGeneration",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Generated Account Secret Key..",
+      "Translated": "生成的帐户密钥..",
+      "Context": "IntroUi.DrawNewAccountGeneration",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Existing Account Key / Recovered Account Key..",
+      "Translated": "现有帐户密钥/恢复的帐户密钥..",
+      "Context": "IntroUi.DrawExistingAccountRecovery",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Migrations",
+      "Translated": "GagSpeak 迁移",
+      "Context": "MigrationsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select Account UID",
+      "Translated": "选择帐户 UID",
+      "Context": "MigrationsUI.DrawUidSelector",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Achievements###AchievementsUI",
+      "Translated": "成就",
+      "Context": "AchievementsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Achievements (",
+      "Translated": "GagSpeak 成就 (",
+      "Context": "AchievementsUI.CenteredHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search for an Achievement...",
+      "Translated": "搜索成就...",
+      "Context": "AchievementsUI.DrawSearchFilter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "AchievementTable ",
+      "Translated": "成就表",
+      "Context": "AchievementsUI.DrawAchievementProgressBox",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Achievement Completed!",
+      "Translated": "成就完成！",
+      "Context": "AchievementsService.OnCompletion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Discord",
+      "Translated": "不和谐",
+      "Context": "PluginGuideProvider.DrawCenterButtonRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Penumbra",
+      "Translated": "半影",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glamourer",
+      "Translated": "魅力者",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sundouleia",
+      "Translated": "桑杜莱亚",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Style Editor",
+      "Translated": "GagSpeak 风格编辑器",
+      "Context": "StyleEditorUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Display Filter",
+      "Translated": "显示过滤器",
+      "Context": "StyleEditorUI.GsColorTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Filter Style...",
+      "Translated": "过滤器样式...",
+      "Context": "StyleEditorUI.GsColorTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Opaque",
+      "Translated": "不透明",
+      "Context": "StyleEditorUI.GsColorTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alpha",
+      "Translated": "阿尔法",
+      "Context": "StyleEditorUI.GsColorTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alpha Half",
+      "Translated": "阿尔法半",
+      "Context": "StyleEditorUI.GsColorTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "new Vector4(1.000f, 0.181f, 0.715f, 0.825f)...",
+      "Translated": "新的 Vector4(1.000f, 0.181f, 0.715f, 0.825f)...",
+      "Context": "StyleEditorUI.DrawValueConverters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sund Colors",
+      "Translated": "阳光颜色",
+      "Context": "StyleEditorUI.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sund Style",
+      "Translated": "桑德风格",
+      "Context": "StyleEditorUI.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ck Colors",
+      "Translated": "CK颜色",
+      "Context": "StyleEditorUI.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ck Style",
+      "Translated": "CK风格",
+      "Context": "StyleEditorUI.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scale: %.2fx",
+      "Translated": "比例：%.2fx",
+      "Context": "ThumbnailUI.DrawHeaderItems",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No Thumbnails In Folder",
+      "Translated": "文件夹中没有缩略图",
+      "Context": "ThumbnailUI.DrawAllEntries",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delete Thumbnail",
+      "Translated": "删除缩略图",
+      "Context": "ThumbnailUI.RenamePopupContext",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename File:",
+      "Translated": "重命名文件：",
+      "Context": "ThumbnailUI.RenamePopupContext",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Customize+",
+      "Translated": "定制+",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Heels",
+      "Translated": "高跟鞋",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LifeStream",
+      "Translated": "生命流",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Honorific",
+      "Translated": "敬语",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Intiface",
+      "Translated": "因蒂法斯",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Events",
+      "Translated": "活动",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Context Menus",
+      "Translated": "上下文菜单",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DTR Bar",
+      "Translated": "DTR酒吧",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hooks",
+      "Translated": "挂钩",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Detours",
+      "Translated": "少走弯路",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GlobalChat",
+      "Translated": "环球聊天",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DMs",
+      "Translated": "DM",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visual Cache",
+      "Translated": "视觉缓存",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Items",
+      "Translated": "被诅咒的物品",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vibe Lobbies",
+      "Translated": "氛围大堂",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Actions",
+      "Translated": "行动",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Movement",
+      "Translated": "移动",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Prompt",
+      "Translated": "迅速的",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tasks",
+      "Translated": "任务",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Watcher",
+      "Translated": "守望者",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visibility",
+      "Translated": "能见度",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Management",
+      "Translated": "管理",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Transfers",
+      "Translated": "接送服务",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Handlers",
+      "Translated": "处理程序",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Caches",
+      "Translated": "缓存",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Excessive",
+      "Translated": "过多的",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action Effects",
+      "Translated": "动作效果",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Emotes",
+      "Translated": "表情",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Spatial Audio",
+      "Translated": "空间音频",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto-Unlocks",
+      "Translated": "自动解锁",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Event Notifier",
+      "Translated": "事件通知器",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "KinkPlate Editor",
+      "Translated": "扭结板编辑器",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Draw Systems",
+      "Translated": "绘图系统",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Share Hub",
+      "Translated": "分享中心",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Factory",
+      "Translated": "工厂",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Main Hub",
+      "Translated": "主枢纽",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "JWT Tokens",
+      "Translated": "JWT 令牌",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alias..",
+      "Translated": "别名..",
+      "Context": "SettingsHubProfile.DrawVanityOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vanity name..",
+      "Translated": "虚名..",
+      "Context": "SettingsHubProfile.DrawVanityOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "profile-delete-confirmation",
+      "Translated": "个人资料删除确认",
+      "Context": "SettingsHubService.AccountDeletionPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Paste SecretKey Here...",
+      "Translated": "将 SecretKey 粘贴到此处...",
+      "Context": "SettingsHubService.DrawSecretKey",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The server failed to delete this user. It may no longer exist on the server (e.g., removed via Discord), or there was a network error.",
+      "Translated": "服务器无法删除该用户。它可能不再存在于服务器上（例如，通过 Discord 删除），或者存在网络错误。",
+      "Context": "SettingsHubService.AccountDeletionPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Are you sure you want to forcibly remove the locally cached data?",
+      "Translated": "您确定要强制删除本地缓存的数据吗？",
+      "Context": "SettingsHubService.AccountDeletionPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select Service",
+      "Translated": "选择服务",
+      "Context": "SettingsHubService.DrawHubSelector",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Verified:",
+      "Translated": "已验证：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Banned:",
+      "Translated": "禁止：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Strikes:",
+      "Translated": "罢工：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profile Viewing:",
+      "Translated": "个人资料查看：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profile Editing:",
+      "Translated": "个人资料编辑：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chat Usage:",
+      "Translated": "聊天用途：",
+      "Context": "SettingsHubService.DrawReputation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show when hiding UI",
+      "Translated": "隐藏 UI 时显示",
+      "Context": "SettingsMainChat.DrawRules",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show in cutscenes",
+      "Translated": "在过场动画中显示",
+      "Context": "SettingsMainChat.DrawRules",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show in gpose",
+      "Translated": "在 gpose 中显示",
+      "Context": "SettingsMainChat.DrawRules",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Chat Window on startup.",
+      "Translated": "启动时打开聊天窗口。",
+      "Context": "SettingsMainChat.DrawRules",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Timestamps",
+      "Translated": "显示时间戳",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Emotes",
+      "Translated": "显示表情",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show unread bubble",
+      "Translated": "显示未读气泡",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Window Opacity",
+      "Translated": "窗口不透明度",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%% Opacity",
+      "Translated": "%% 不透明度",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unfocused Opacity",
+      "Translated": "未聚焦的不透明度",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Opacity Delta per frame",
+      "Translated": "每帧的不透明度增量",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use Custom Font.",
+      "Translated": "使用自定义字体。",
+      "Context": "SettingsMainChat.DrawFontOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Pings for DMs",
+      "Translated": "为 DM 启用 Ping",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Highlight Mentions",
+      "Translated": "突出提及",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mention Color",
+      "Translated": "提及颜色",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Play Audio on chat mentions",
+      "Translated": "在聊天提及时播放音频",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sound File Path..",
+      "Translated": "声音文件路径..",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Volume: ",
+      "Translated": "体积：",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", protecting your identity while socializing.",
+      "Translated": "，在社交时保护您的身份。",
+      "Context": "SettingsMainChat.DrawGlobalChatOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Print messages to Chatbox.",
+      "Translated": "将消息打印到聊天框。",
+      "Context": "SettingsMainChat.DrawGlobalChatOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "audio-import-options",
+      "Translated": "音频导入选项",
+      "Context": "SettingsMainChat.DrawFolderPickerButton",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Highlight paired players",
+      "Translated": "突出显示配对球员",
+      "Context": "SettingsMainNativeUI.DrawNameplatesOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Include Friends",
+      "Translated": "包括朋友",
+      "Context": "SettingsMainNativeUI.DrawNameplatesOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Requests DTR",
+      "Translated": "启用请求 DTR",
+      "Context": "SettingsMainNativeUI.DrawDtrOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show GlobalChat",
+      "Translated": "显示 GlobalChat",
+      "Context": "SettingsMainNativeUI.DrawChatIntegrations",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Direct Messages",
+      "Translated": "显示私信",
+      "Context": "SettingsMainNativeUI.DrawChatIntegrations",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Incoming total",
+      "Translated": "显示传入总数",
+      "Context": "SettingsMainNotifications.DrawRequestOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show as DTR Entry",
+      "Translated": "显示为 DTR 条目",
+      "Context": "SettingsMainNotifications.DrawRequestOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Play Audio Alerts",
+      "Translated": "播放音频警报",
+      "Context": "SettingsMainNotifications.DrawRequestOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match Filters",
+      "Translated": "匹配过滤器",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Temporary",
+      "Translated": "暂时的",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Nicknamed",
+      "Translated": "绰号",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Favorited",
+      "Translated": "已收藏",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Match Policy:",
+      "Translated": "比赛政策：",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Any Filter",
+      "Translated": "任意过滤器",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "All Selected Filters",
+      "Translated": "所有选定的过滤器",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Display unread mentions Bubble",
+      "Translated": "显示未读提及气泡",
+      "Context": "SettingsMainNotifications.DrawChatMentionOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Visible folder.",
+      "Translated": "显示可见文件夹。",
+      "Context": "SettingsMainPluginUI.DrawMainUIOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Offline folder.",
+      "Translated": "显示脱机文件夹。",
+      "Context": "SettingsMainPluginUI.DrawMainUIOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Perms is null! Safely returning early",
+      "Translated": "全局权限为空！提前安全返回",
+      "Context": "SettingsModulesHardcore.DrawHardcoreStateOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Settings",
+      "Translated": "全局设置",
+      "Context": "SidePanelPair.DrawKinksterPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Triggers...",
+      "Translated": "全球触发因素...",
+      "Context": "SettingsModulesPuppeteer.DrawGlobals",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Leave blank for default...",
+      "Translated": "默认留空...",
+      "Context": "SettingsModulesToybox.DrawMyToys",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ws://localhost:12345",
+      "Translated": "ws://本地主机:12345",
+      "Context": "SettingsModulesToybox.DrawMyToys",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select a device...",
+      "Translated": "选择设备...",
+      "Context": "SettingsModulesToybox.DrawPiShock",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Audio API",
+      "Translated": "音频API",
+      "Context": "SettingsModulesToybox.DrawSimulatedAudioSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Output Device",
+      "Translated": "输出设备",
+      "Context": "SettingsModulesToybox.DrawSimulatedAudioSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "SettingsModulesToybox.GetCurrentDeviceName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Device",
+      "Translated": "未知设备",
+      "Context": "SettingsModulesToybox.GetCurrentDeviceName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Globals is null! Returning early",
+      "Translated": "全局变量为空！提前返回",
+      "Context": "SettingsModulesWardrobe.DrawGarblerOptions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Settings",
+      "Translated": "GagSpeak 设置",
+      "Context": "NewSettingsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Report Overlay###GagSpeakReportUI",
+      "Translated": "GagSpeak 报告叠加",
+      "Context": "ReportWindowUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Submit",
+      "Translated": "提交",
+      "Context": "ReportWindowUI.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remote###BuzzToyRemote",
+      "Translated": "偏僻的",
+      "Context": "BuzzToyRemoteUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LayoutLeft",
+      "Translated": "左布局",
+      "Context": "BuzzToyRemoteUI.DrawVibeRoomLayout",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LayoutRight",
+      "Translated": "布局权",
+      "Context": "BuzzToyRemoteUI.DrawVibeRoomLayout",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Controls",
+      "Translated": "控制",
+      "Context": "BuzzToyRemoteUI.DrawInteractableRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "InteractiveMotors",
+      "Translated": "互动电机",
+      "Context": "BuzzToyRemoteUI.DrawInteractableRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "RightSideButtons",
+      "Translated": "右侧按钮",
+      "Context": "BuzzToyRemoteUI.DrawInteractableRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "KinkPlate Editor###KP_EditorUI",
+      "Translated": "扭结板编辑器",
+      "Context": "KinkPlateEditorUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Edit KinkPlate Pic###KP_PFP_UI",
+      "Translated": "编辑 KinkPlate 图片",
+      "Context": "ProfilePictureEditor..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Width",
+      "Translated": "宽度",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Height",
+      "Translated": "高度",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rotation",
+      "Translated": "旋转",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Zoom",
+      "Translated": "飞涨",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Original Image Size: ",
+      "Translated": "原始图像尺寸：",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scaled Image Size: ",
+      "Translated": "缩放图像尺寸：",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cropped Image Size: ",
+      "Translated": "裁剪图像尺寸：",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " KB",
+      "Translated": "知识库",
+      "Context": "ProfilePictureEditor.CompressImage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MM-DD-YYYY",
+      "Translated": "月-日-年",
+      "Context": "KinkPlatePreviewUI.DrawStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Start Point",
+      "Translated": "起点",
+      "Context": "AlarmsPanel.DrawPatternTimeSpans",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Playback Duration",
+      "Translated": "播放时长",
+      "Context": "AlarmsPanel.DrawPatternTimeSpans",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name Here...",
+      "Translated": "在此命名...",
+      "Context": "PatternsPanel.DrawLabel",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Input a description in the space provided...",
+      "Translated": "在提供的空白处输入描述...",
+      "Context": "PatternsPanel.DrawDescription",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toybox UI",
+      "Translated": "玩具盒用户界面",
+      "Context": "ToyboxUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Author DisplayName...",
+      "Translated": "作者显示名称...",
+      "Context": "PublicationsManager.DrawPatternPublications",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter tags split by , (optional)",
+      "Translated": "输入由 , 分隔的标签（可选）",
+      "Context": "PublicationsManager.DrawPatternPublications",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Your Currently Published Patterns",
+      "Translated": "您当前发布的模式",
+      "Context": "PublicationsManager.DrawPatternPublications",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No Patterns Published.",
+      "Translated": "没有发布任何模式。",
+      "Context": "PublicationsManager.DrawPublishedPatternList",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter tags split by `,` (optional)",
+      "Translated": "输入由“,”分隔的标签（可选）",
+      "Context": "PublicationsManager.DrawLociPublications",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Nothing Published.",
+      "Translated": "没有发布任何内容。",
+      "Context": "PublicationsManager.DrawUploadedStatuses",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select Tag..",
+      "Translated": "选择标签..",
+      "Context": "PublicationsManager.DrawTagCombo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "My Publications",
+      "Translated": "我的出版物",
+      "Context": "PublicationsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Loot UI",
+      "Translated": "被诅咒的战利品用户界面",
+      "Context": "CursedLootUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Applied Cursed Loot",
+      "Translated": "应用诅咒战利品",
+      "Context": "LootAppliedTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Loot Found:",
+      "Translated": "发现的战利品总数：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gags Found:",
+      "Translated": "发现笑点：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restrictions Found:",
+      "Translated": "发现限制：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mimics Evaded:",
+      "Translated": "模仿者躲避：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Time Cursed:",
+      "Translated": "被诅咒的总时间：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Longest Lock Time:",
+      "Translated": "最长锁定时间：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Active At Once:",
+      "Translated": "一次最大活动量：",
+      "Context": "LootItemsTab.DrawStatistics",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loot Name..",
+      "Translated": "战利品名字..",
+      "Context": "LootItemsTab.DrawGagLootEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply Traits",
+      "Translated": "应用特征",
+      "Context": "LootItemsTab.DrawGagLootEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Min Time",
+      "Translated": "我的时间",
+      "Context": "LootItemsTab.DrawIndividualTimeSpan",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Time",
+      "Translated": "最长时间",
+      "Context": "LootItemsTab.DrawIndividualTimeSpan",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cursed Item Pool",
+      "Translated": "诅咒物品池",
+      "Context": "LootPoolTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "An error occurred while drawing the Mod Presets Panel. Check the logs for details.",
+      "Translated": "绘制 Mod 预设面板时发生错误。检查日志以获取详细信息。",
+      "Context": "ModPresetsPanel.DrawPresetEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mod Presets UI",
+      "Translated": "模组预设 UI",
+      "Context": "ModPresetsUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer Interface",
+      "Translated": "傀儡师界面",
+      "Context": "PuppeteerUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Aliases",
+      "Translated": "别名",
+      "Context": "AliasesTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create aliases to enhance puppeteer!",
+      "Translated": "创建别名来增强傀儡师！",
+      "Context": "AliasesTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "whitelist",
+      "Translated": "白名单",
+      "Context": "AliasesTab.DrawWhitelist",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Whitelist",
+      "Translated": "白名单",
+      "Context": "AliasesTab.DrawWhitelist",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ignore Case",
+      "Translated": "忽略大小写",
+      "Context": "AliasesTab.DrawAliasEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Display Name..",
+      "Translated": "显示名称..",
+      "Context": "AliasesTab.DrawAliasEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Text to detect..",
+      "Translated": "文本检测..",
+      "Context": "AliasesTab.DrawAliasEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Alias Reactions:",
+      "Translated": "别名反应：",
+      "Context": "PuppeteersTab.DrawMarionetteStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Marionettes",
+      "Translated": "木偶",
+      "Context": "MarionettesTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "See what control kinksters surrendered to you, and their shared aliases.",
+      "Translated": "看看怪癖者向你投降了哪些控制权，以及他们共享的别名。",
+      "Context": "MarionettesTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Triggers",
+      "Translated": "触发器",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteers",
+      "Translated": "木偶师",
+      "Context": "PuppeteersTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Manage how others can puppeteer you, distinct for each person.",
+      "Translated": "管理其他人如何操纵你，每个人都有所不同。",
+      "Context": "PuppeteersTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteered:",
+      "Translated": "傀儡操纵：",
+      "Context": "PuppeteersTab.DrawMarionetteStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sit Reactions:",
+      "Translated": "坐下反应：",
+      "Context": "PuppeteersTab.DrawMarionetteStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Emote Reactions:",
+      "Translated": "表情反应：",
+      "Context": "PuppeteersTab.DrawMarionetteStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Other Reactions:",
+      "Translated": "其他反应：",
+      "Context": "PuppeteersTab.DrawMarionetteStats",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Triggers ###GagSpeakTriggers",
+      "Translated": "触发器",
+      "Context": "TriggersUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Description...",
+      "Translated": "触发说明...",
+      "Context": "TriggersUI.DrawTriggerEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Overview",
+      "Translated": "衣领概览",
+      "Context": "CollarOverviewTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Name..",
+      "Translated": "领子名称..",
+      "Context": "CollarOverviewTab.DrawSetupEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle Visibility",
+      "Translated": "切换可见性",
+      "Context": "CollarOverviewTab.DrawPermissionEdits",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glamour Dyes",
+      "Translated": "魅力染料",
+      "Context": "CollarOverviewTab.DrawPermissionEdits",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glam/Mod Editing",
+      "Translated": "华丽/时尚编辑",
+      "Context": "CollarOverviewTab.DrawPermissionEdits",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Visuals",
+      "Translated": "衣领视觉效果",
+      "Context": "CollarOverviewTab.DrawCollarVisuals",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Written text on collar..",
+      "Translated": "衣领上写着文字..",
+      "Context": "CollarOverviewTab.DrawCollarWriting",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collar Management",
+      "Translated": "领子管理",
+      "Context": "CollarPanel.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Incoming Requests",
+      "Translated": "传入请求",
+      "Context": "CollarRequestsIncomingTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Outgoing Requests",
+      "Translated": "传出请求",
+      "Context": "CollarRequestsOutgoingTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Desired Writing...",
+      "Translated": "想要的写作...",
+      "Context": "CollarRequestsOutgoingTab.DrawRequestCreator",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Glam/Mod Access",
+      "Translated": "华丽/时尚访问",
+      "Context": "CollarRequestsOutgoingTab.DrawRequestCreator",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Editing: ",
+      "Translated": "编辑：",
+      "Context": "GagRestrictionsPanel.DrawEditorHeaderLeft",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Equip Slots",
+      "Translated": "装备槽位",
+      "Context": "RestraintEditorEquipment.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Configure Gear and Customizations.",
+      "Translated": "配置装备和自定义。",
+      "Context": "RestraintEditorEquipment.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Info & Traits",
+      "Translated": "信息与特征",
+      "Context": "RestraintEditorInfo.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "View and edit the traits and information of the selected item.",
+      "Translated": "查看和编辑所选项目的特征和信息。",
+      "Context": "RestraintEditorInfo.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layers",
+      "Translated": "层数",
+      "Context": "RestraintEditorLayers.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Define the layers that can be applied to the restraint set.--SEP--Restraint Layers can be toggled while a restraint set is locked.",
+      "Translated": "定义可应用于约束集的层。--SEP--在锁定约束集时可以切换约束层。",
+      "Context": "RestraintEditorLayers.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layer XX",
+      "Translated": "第XX层",
+      "Context": "RestraintEditorLayers.get_DragDropHeaderWidth",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Layer ",
+      "Translated": "层",
+      "Context": "RestraintEditorLayers.DrawExistingLayer",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Input Layer Name..",
+      "Translated": "输入层名称..",
+      "Context": "RestraintEditorLayers.DrawExistingLayer",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mods & LociData",
+      "Translated": "模组与轨迹数据",
+      "Context": "RestraintEditorModsLociData.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set the Mods & LociData for your set.--SEP--These are applied in addition to the ones linked to layers and advanced slots.",
+      "Translated": "为您的集合设置 Mods 和 LociData。--SEP--除了链接到层和高级插槽的之外还应用这些。",
+      "Context": "RestraintEditorModsLociData.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter Name...",
+      "Translated": "输入姓名...",
+      "Context": "RestraintsPanel.DrawEditorHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "1st Person",
+      "Translated": "第一人称",
+      "Context": "RestrictionsPanel.DrawBlindfoldInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wardrobe UI",
+      "Translated": "衣柜界面",
+      "Context": "WardrobeUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak v",
+      "Translated": "插科打诨v",
+      "Context": "AlertService.PrintVersionUpdateMessage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Other players UID/Alias",
+      "Translated": "其他玩家 UID/别名",
+      "Context": "MainUI.DrawRequestCreator",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Attach Msg to Request (Optional)",
+      "Translated": "将消息附加到请求（可选）",
+      "Context": "MainUI.DrawRequestCreator",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current Ver: ",
+      "Translated": "当前版本：",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Expected Ver: ",
+      "Translated": "预期版本：",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If you aren't attached to a profile, you are",
+      "Translated": "如果您没有附加到个人资料，那么您",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select (or add) your profile in",
+      "Translated": "选择（或添加）您的个人资料",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Drag your character to the profile you want to use.",
+      "Translated": "将您的角色拖到您要使用的配置文件中。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Inspect the profile in",
+      "Translated": "检查配置文件",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ensure the profile has the correct secret key.",
+      "Translated": "确保配置文件具有正确的密钥。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If unsure, you may need to refresh your secret key.",
+      "Translated": "如果不确定，您可能需要刷新您的密钥。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This can be done via the bot in the ",
+      "Translated": "这可以通过机器人来完成",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Check the plugin installer for updates.",
+      "Translated": "检查插件安装程序是否有更新。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If no update is visible, try forcing a repository refresh or game restart.",
+      "Translated": "如果没有可见更新，请尝试强制刷新存储库或重新启动游戏。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Details: ",
+      "Translated": "细节：",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Verify your secret key in",
+      "Translated": "验证您的密钥",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If you believe this is an error, please open a support ticket.",
+      "Translated": "如果您认为这是一个错误，请打开支持票证。",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Global Settings (view only)",
+      "Translated": "全局设置（仅查看）",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Padlock Permissions",
+      "Translated": "挂锁权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Permissions",
+      "Translated": "禁言权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Permissions",
+      "Translated": "限制权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restraint Set Permissions",
+      "Translated": "约束设置权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer Permissions",
+      "Translated": "傀儡师权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci Permissions",
+      "Translated": "轨迹权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Miscellaneous Permissions",
+      "Translated": "杂项权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toybox Permissions",
+      "Translated": "玩具箱权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hardcore Permissions",
+      "Translated": "核心权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confirm Hardcore",
+      "Translated": "确认硬核",
+      "Context": "PanelPairEx.HardcoreConfirmationPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Collar Permissions",
+      "Translated": "防震项圈权限",
+      "Context": "SidePanelPair.DrawClientPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Misc. Permissions",
+      "Translated": "杂项。权限",
+      "Context": "SidePanelPair.DrawKinksterPermissions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Individual Pair Functions",
+      "Translated": "单独的配对功能",
+      "Context": "SidePanelPair.DrawInteractions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Profile",
+      "Translated": "公开资料",
+      "Context": "HybridChatDrawer.DrawContentMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hardcore Actions",
+      "Translated": "硬核动作",
+      "Context": "SidePanelPair.DrawHardcoreActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "House",
+      "Translated": "房子",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apartment",
+      "Translated": "公寓",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chambers",
+      "Translated": "钱伯斯",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ward %d",
+      "Translated": "守卫 %d",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Plot %d",
+      "Translated": "绘制%d",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Room %d",
+      "Translated": "%d 号房间",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chamber %d",
+      "Translated": "室 %d",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Actions",
+      "Translated": "堵嘴行为",
+      "Context": "SidePanelPair.DrawGagActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Apply",
+      "Translated": "申请",
+      "Context": "SidePanelPair.DrawGagActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Gag",
+      "Translated": "移除堵嘴",
+      "Context": "SidePanelPair.DrawGagActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restriction Actions",
+      "Translated": "限制措施",
+      "Context": "SidePanelPair.DrawRestrictionActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Restriction",
+      "Translated": "解除限制",
+      "Context": "SidePanelPair.DrawRestrictionActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restraint Actions",
+      "Translated": "限制行动",
+      "Context": "SidePanelPair.DrawRestraintActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove Restraint",
+      "Translated": "解除束缚",
+      "Context": "SidePanelPair.DrawRestraintActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loci Actions",
+      "Translated": "位点行动",
+      "Context": "SidePanelPair.DrawLociActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toybox Actions",
+      "Translated": "玩具箱动作",
+      "Context": "SidePanelPair.DrawToyboxActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Actions",
+      "Translated": "休克行动",
+      "Context": "SidePanelPair.DrawShockActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Intensity",
+      "Translated": "强度",
+      "Context": "SidePanelPair.DrawShockActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Duration",
+      "Translated": "冲击持续时间",
+      "Context": "SidePanelPair.DrawShockActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Misc Actions",
+      "Translated": "其他操作",
+      "Context": "SidePanelPair.DrawMiscActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Intensity: %d%%",
+      "Translated": "最大强度：%d%%",
+      "Context": "SidePanelPair.UniqueShareCode",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Duration: %ds",
+      "Translated": "最长持续时间：%ds",
+      "Context": "SidePanelPair.UniqueShareCode",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shock Collar Actions",
+      "Translated": "防震项圈动作",
+      "Context": "SidePanelPair.DrawShockActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Locked Follow",
+      "Translated": "启用锁定关注",
+      "Context": "DrawHardcoreActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Oh my, take me back!",
+      "Translated": "哎呀，带我回去吧！",
+      "Context": "PanelPairEx.HardcoreConfirmationPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " prevents removing applied Statuses. ",
+      "Translated": "防止删除已应用的状态。",
+      "Context": "KinksterInfoCache.get_DispWidth",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "1. Refrain from spamming, flooding, or sharing unsafe links.",
+      "Translated": "1. 避免发送垃圾邮件、大量传播或分享不安全的链接。",
+      "Context": "GlobalChatTab.DrawChatRegion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "2. Agressive toxicity and harassment are strictly prohibited.",
+      "Translated": "2. 严禁攻击性毒害和骚扰行为。",
+      "Context": "GlobalChatTab.DrawChatRegion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "3. Moderation team decisions regarding reports are final.",
+      "Translated": "3. 审核小组有关报告的决定为最终决定。",
+      "Context": "GlobalChatTab.DrawChatRegion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "4. Accruing 3 chat violations revokes RadarChat access.",
+      "Translated": "4. 累计 3 次聊天违规将撤销 RadarChat 访问权限。",
+      "Context": "GlobalChatTab.DrawChatRegion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "5. Accruing 5 account violations totals results in an account ban.",
+      "Translated": "5. 累计 5 次帐户违规将导致帐户被封禁。",
+      "Context": "GlobalChatTab.DrawChatRegion",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Your Profile Icon.",
+      "Translated": "您的个人资料图标。",
+      "Context": "HomeTab.DrawHeadingRight",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set a Safeword..",
+      "Translated": "设置安全词..",
+      "Context": "HomeTab.DrawHeadingLeft",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search something to find results!",
+      "Translated": "搜索一些东西来找到结果！",
+      "Context": "LociSharehubTab.DrawSharehub",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search for Statuses...",
+      "Translated": "搜索状态...",
+      "Context": "LociSharehubTab.DrawSearchFilter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search for Patterns...",
+      "Translated": "搜索模式...",
+      "Context": "PatternSharehubTab.DrawSearchFilter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "DPS",
+      "Translated": "输出功率",
+      "Context": "DetectionDrawer.DrawSpellActionEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HP",
+      "Translated": "惠普",
+      "Context": "DetectionDrawer.DrawSpellActionEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Devious Diva@Balmung..",
+      "Translated": "狡猾的天后@Balmung..",
+      "Context": "DetectionDrawer.DrawSpellActionEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%d%% Chance",
+      "Translated": "%d%% 机会",
+      "Context": "DetectionDrawer.DrawSpellActionEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "undermmm",
+      "Translated": "下嗯",
+      "Context": "DetectionDrawer.DrawHealthPercentEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Min. %dHP",
+      "Translated": "分钟。 %dHP",
+      "Context": "DetectionDrawer.DrawHealthPercentEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max. %dHP",
+      "Translated": "最大限度。 %dHP",
+      "Context": "DetectionDrawer.DrawHealthPercentEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "EditorContainerOuter",
+      "Translated": "编辑容器外部",
+      "Context": "HypnoEffectEditor.DrawPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "EditorArea",
+      "Translated": "编辑区",
+      "Context": "HypnoEffectEditor.DrawPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "PreviewArea",
+      "Translated": "预览区",
+      "Context": "HypnoEffectEditor.DrawPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HypnoEffectEditTable",
+      "Translated": "催眠效果编辑表",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Input",
+      "Translated": "输入",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Static",
+      "Translated": "静止的",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Grows Overtime",
+      "Translated": "加班增长",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Random Scale",
+      "Translated": "随机尺度",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Options",
+      "Translated": "选项",
+      "Context": "CompactConfigTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Adjust Effect Display",
+      "Translated": "调整效果显示",
+      "Context": "CompactConfigTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Grows",
+      "Translated": "成长",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Random",
+      "Translated": "随机的",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%.2fx Spin Speed",
+      "Translated": "%.2fx 旋转速度",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%.2fx Zoom",
+      "Translated": "%.2fx 缩放",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dpx Font Size",
+      "Translated": "%dpx 字体大小",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dpx Outline",
+      "Translated": "%dpx 轮廓",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dms per phase",
+      "Translated": "每相 %dms",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dms Fade-In Time",
+      "Translated": "%dms 淡入时间",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dms Fade-Out Time",
+      "Translated": "%dms 淡出时间",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dms Transition Time",
+      "Translated": "%dms 转换时间",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "%dms Transpose Time",
+      "Translated": "%dms 转置时间",
+      "Context": "CompactConfigTab.DrawContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Text & Color",
+      "Translated": "文字和颜色",
+      "Context": "CompactPhrasesColorsTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Adjust Displayed Phrases & Colors!",
+      "Translated": "调整显示的短语和颜色！",
+      "Context": "CompactPhrasesColorsTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Presets",
+      "Translated": "预设",
+      "Context": "CompactPresetsTab.get_Label",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set, Create, Remove, Rename, or Modify Presets!",
+      "Translated": "设置、创建、删除、重命名或修改预设！",
+      "Context": "CompactPresetsTab.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mod is Null!",
+      "Translated": "模组为空！",
+      "Context": "ModPresetDrawer.DrawPresetTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No options in selected Mod.",
+      "Translated": "所选模组中没有选项。",
+      "Context": "ModPresetDrawer.DrawPresetTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Previewing",
+      "Translated": "预览",
+      "Context": "ModPresetDrawer.DrawPresetPreview",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "party Hello World!",
+      "Translated": "派对 你好世界！",
+      "Context": "ReactionsDrawer.DrawTextEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "output text response",
+      "Translated": "输出文本响应",
+      "Context": "ReactionsDrawer.DrawTextRowEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "removem",
+      "Translated": "消除",
+      "Context": "ReactionsDrawer.DrawGagEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Any Layerm",
+      "Translated": "任意层",
+      "Context": "ReactionsDrawer.DrawGagEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Statusm",
+      "Translated": "现状",
+      "Context": "ReactionsDrawer.DrawLociItemEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vibratem",
+      "Translated": "振动",
+      "Context": "ReactionsDrawer.DrawShockEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vibrationm",
+      "Translated": "振动",
+      "Context": "ReactionsDrawer.DrawToyEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tightness (50-1000)TrivialImpossible",
+      "Translated": "紧密度 (50-1000)微不足道不可能",
+      "Context": "AttributeDrawer.get_EscapeAttributeContentWidth",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tightness (50-1000)",
+      "Translated": "松紧度（50-1000）",
+      "Context": "AttributeDrawer.DrawEscapeAttributesInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trivial",
+      "Translated": "琐碎的",
+      "Context": "AttributeDrawer.DrawEscapeAttributesInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Impossible",
+      "Translated": "不可能的",
+      "Context": "AttributeDrawer.DrawEscapeAttributesInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "InvalidImageObject.",
+      "Translated": "无效图像对象。",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type: ",
+      "Translated": "类型：",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SizeConstraint: ",
+      "Translated": "尺寸限制：",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FileName: ",
+      "Translated": "文件名：",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "OriginalImageSize: ",
+      "Translated": "原图尺寸：",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CroppedImageSize: ",
+      "Translated": "裁剪图像尺寸：",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create New Pattern",
+      "Translated": "创造新模式",
+      "Context": "SavePatternPopupHandler.DrawContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern Name",
+      "Translated": "图案名称",
+      "Context": "SavePatternPopupHandler.DrawContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a name...",
+      "Translated": "输入名字...",
+      "Context": "SavePatternPopupHandler.DrawContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pattern Duration: ",
+      "Translated": "模式持续时间：",
+      "Context": "SavePatternPopupHandler.DrawContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loop Pattern",
+      "Translated": "循环模式",
+      "Context": "SavePatternPopupHandler.DrawContent",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Verification Overlay",
+      "Translated": "GagSpeak 验证覆盖",
+      "Context": "VerificationUi..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "VerificationModal",
+      "Translated": "验证模式",
+      "Context": "VerificationUi.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Verification Code for ",
+      "Translated": "验证码",
+      "Context": "VerificationUi.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loading...",
+      "Translated": "加载中...",
+      "Context": "VerificationUi.DrawInternal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Chat Window###GagSpeakChatWindow",
+      "Translated": "GagSpeak 聊天窗口",
+      "Context": "ChatWindowUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Still a W.I.P!",
+      "Translated": "仍然是 W.I.P！",
+      "Context": "ChatWindowUI.DrawCompactSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Message Global Chat...",
+      "Translated": "消息全球聊天...",
+      "Context": "GlobalChatDrawer.DrawChatInputRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Send user a DM",
+      "Translated": "向用户发送 DM",
+      "Context": "GlobalChatDrawer.DrawContentMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Attached Request Msg..",
+      "Translated": "附请求消息..",
+      "Context": "GlobalChatDrawer.DrawContentMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Message ",
+      "Translated": "信息",
+      "Context": "HybridChatDrawer.GetChatInputHint",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Message...",
+      "Translated": "信息...",
+      "Context": "HybridChatDrawer.GetChatInputHint",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ignored Message",
+      "Translated": "被忽略的消息",
+      "Context": "RichEmoteChatDrawer.DrawIgnoredMessageRow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "emote-selector-content",
+      "Translated": "表情选择器内容",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NavBar",
+      "Translated": "导航栏",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Content",
+      "Translated": "内容",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Filter Emotes..",
+      "Translated": "过滤表情..",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Favorites",
+      "Translated": "收藏夹",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "All Emotes",
+      "Translated": "所有表情",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add to Favorites",
+      "Translated": "添加到收藏夹",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove from Favorites",
+      "Translated": "从收藏夹中删除",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "online-users-table",
+      "Translated": "在线用户表",
+      "Context": "OnlineKinksterManager.DebugUsers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "User",
+      "Translated": "用户",
+      "Context": "OnlineKinksterManager.DebugUsers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ident",
+      "Translated": "识别",
+      "Context": "OnlineKinksterManager.DebugUsers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-visible",
+      "Translated": "-可见的",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "OwnedObject",
+      "Translated": "拥有的对象",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rendered?",
+      "Translated": "渲染了？",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ObjectIdx",
+      "Translated": "对象IDx",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "EntityId",
+      "Translated": "实体ID",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ObjectId",
+      "Translated": "对象ID",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ParentId",
+      "Translated": "父ID",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "N/A",
+      "Translated": "不适用",
+      "Context": "Kinkster.DrawRenderDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Branch-",
+      "Translated": "分支-",
+      "Context": "HcTaskManager.DrawBranchTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No Active Tasks.",
+      "Translated": "没有活动任务。",
+      "Context": "HcTaskManager.DrawCacheState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Active Task",
+      "Translated": "活动任务",
+      "Context": "HcTaskManager.DrawCacheState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Task Operations",
+      "Translated": "任务操作",
+      "Context": "HcTaskManager.DrawCacheState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown Task Type: ",
+      "Translated": "未知任务类型：",
+      "Context": "HcTaskManager.DrawTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collection-",
+      "Translated": "收藏-",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collection",
+      "Translated": "收藏",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Executing",
+      "Translated": "执行中",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current Idx",
+      "Translated": "电流 Idx",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total Tasks",
+      "Translated": "任务总数",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Completed",
+      "Translated": "完全的",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Timeout",
+      "Translated": "暂停",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Flags",
+      "Translated": "旗帜",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Branch Name",
+      "Translated": "分行名称",
+      "Context": "HcTaskManager.DrawBranchTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Predicate",
+      "Translated": "谓词",
+      "Context": "HcTaskManager.DrawBranchTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Group-",
+      "Translated": "团体-",
+      "Context": "HcTaskManager.DrawGroupTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Task-",
+      "Translated": "任务-",
+      "Context": "HcTaskManager.DrawSingleTask",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Individual C+ Listings",
+      "Translated": "个人 C+ 列表",
+      "Context": "CustomizePlusCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CPlusCache",
+      "Translated": "CPlus缓存",
+      "Context": "CustomizePlusCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Combined Key",
+      "Translated": "组合钥匙",
+      "Context": "CustomizePlusCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<No Label Set>",
+      "Translated": "<无标签集>",
+      "Context": "CustomizePlusCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FinalProfileCache",
+      "Translated": "最终配置文件缓存",
+      "Context": "CustomizePlusCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "IndividualGlamRows",
+      "Translated": "个人魅力行",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GlamourCache",
+      "Translated": "魅力缓存",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Key",
+      "Translated": "钥匙",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restrictionss(0)",
+      "Translated": "限制(0)",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Head",
+      "Translated": "头",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chest",
+      "Translated": "胸部",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gloves",
+      "Translated": "手套",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Feet",
+      "Translated": "脚",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Earring",
+      "Translated": "耳环",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Necklace",
+      "Translated": "项链",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Bracelet",
+      "Translated": "手镯",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "L-Ring",
+      "Translated": "L 形环",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "R-Ring",
+      "Translated": "R型环",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Final Glamour State:",
+      "Translated": "最终魅力状态：",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GlamourCacheFinal",
+      "Translated": "魅力缓存决赛",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Final State",
+      "Translated": "最终状态",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cached MetaData Rows",
+      "Translated": "缓存的元数据行",
+      "Context": "GlamourCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unbound State Cache History:",
+      "Translated": "未绑定状态缓存历史记录：",
+      "Context": "GlamourCache.DrawUnboundCacheStates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "UnboundStateCacheHistory",
+      "Translated": "未绑定状态缓存历史记录",
+      "Context": "GlamourCache.DrawUnboundCacheStates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " RowsTable",
+      "Translated": "行表",
+      "Context": "GlamourCache.DrawMetaTableRows",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "IndividualLociRows",
+      "Translated": "个别轨迹行",
+      "Context": "LociCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LocisCache",
+      "Translated": "轨迹缓存",
+      "Context": "LociCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "LocisDisplay",
+      "Translated": "轨迹显示",
+      "Context": "LociCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Individual Mod Listings",
+      "Translated": "单独的模组列表",
+      "Context": "ModCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ModsCache",
+      "Translated": "模组缓存",
+      "Context": "ModCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Mod Name",
+      "Translated": "模组名称",
+      "Context": "ModCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Container Mod",
+      "Translated": "集装箱模组",
+      "Context": "ModCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FinalModsCache",
+      "Translated": "最终模组缓存",
+      "Context": "ModCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Individual Blindfolds",
+      "Translated": "个人眼罩",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "BlindfoldsCache",
+      "Translated": "蒙眼缓存",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ImagePath",
+      "Translated": "图像路径",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "1st PoV Forced?",
+      "Translated": "第一视角是被迫的？",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<No Image Path Set>",
+      "Translated": "<未设置图像路径>",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Individual Hypnotic Effects",
+      "Translated": "个人催眠效果",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HypnoEffectsCache",
+      "Translated": "催眠效果缓存",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Final Blindfold: ",
+      "Translated": "最终蒙眼：",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Final Hypnotic Effect: ",
+      "Translated": "最终催眠效果：",
+      "Context": "OverlayCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "IndividualTraitsRows",
+      "Translated": "个人特质行",
+      "Context": "TraitsCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "TraitsCache",
+      "Translated": "特征缓存",
+      "Context": "TraitsCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Traits Included",
+      "Translated": "包含的特征",
+      "Context": "TraitsCache.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "HP Debugger",
+      "Translated": "惠普调试器",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "health-debug",
+      "Translated": "健康调试",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NameWorld",
+      "Translated": "名称世界",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Last HP",
+      "Translated": "最后生命值",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Curr HP",
+      "Translated": "当前HP",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Last MaxHp",
+      "Translated": "最后最大马力",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Curr MaxHp",
+      "Translated": "当前最大马力",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Hp",
+      "Translated": "马力",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " MaxHp",
+      "Translated": "最大马力",
+      "Context": "HealthMonitor.DrawDebug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visible Folder",
+      "Translated": "可见文件夹",
+      "Context": "DDSPrefs..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Offline Folder",
+      "Translated": "离线文件夹",
+      "Context": "DDSPrefs..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Prefer Nicknames",
+      "Translated": "喜欢昵称",
+      "Context": "DDSPrefs..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Prefer FocusTarget",
+      "Translated": "更喜欢焦点目标",
+      "Context": "DDSPrefs..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open the Main Window UI upon plugin startup.",
+      "Translated": "插件启动时打开主窗口 UI。",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Privacy Radar DTR Entry",
+      "Translated": "隐私雷达 DTR 条目",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Actions Notifier DTR Entry",
+      "Translated": "操作通知程序 DTR 条目",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vibe Status DTR Entry",
+      "Translated": "Vibe 状态 DTR 条目",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Display [Kinkster-XXX] over [Kinkster-XXXX] in Global Chat",
+      "Translated": "在全局聊天中在 [Kinkster-XXXX] 上显示 [Kinkster-XXX]",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show GagSpeak profiles on hover",
+      "Translated": "悬停时显示 GagSpeak 个人资料",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hover Delay",
+      "Translated": "悬停延迟",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable right-click context menu for visible pairs",
+      "Translated": "为可见对启用右键单击上下文菜单",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Overlay Opacity %",
+      "Translated": "叠加不透明度%",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gag Glamours",
+      "Translated": "搞笑魅力",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Expired Timer Gag Removal",
+      "Translated": "过期定时器堵嘴移除",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wardrobe Features",
+      "Translated": "衣柜特点",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Puppeteer Features",
+      "Translated": "木偶师特点",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Globally Allow Sit Requests",
+      "Translated": "全局允许坐席请求",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Globally Allow Motion Requests",
+      "Translated": "全局允许动作请求",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Globally Allow Alias Requests",
+      "Translated": "全局允许别名请求",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Globally Allow All Requests",
+      "Translated": "全局允许所有请求",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toybox Features",
+      "Translated": "玩具盒特点",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Spatial Audio Features",
+      "Translated": "空间音频功能",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displayed Name in VibeRooms™",
+      "Translated": "VibeRooms™ 中显示的名称",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto-Connect to Intiface",
+      "Translated": "自动连接到 Intiface",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Intiface Download Page",
+      "Translated": "打开界面下载页面",
+      "Context": "ConfigOptions..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Middle-Click to apply to assign in GagSpeak Editor  (Right Finger).",
+      "Translated": "单击中键以在 GagSpeak 编辑器中应用分配（右指）。",
+      "Context": "PenumbraTooltips.CreateTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " CTRL + Middle-Click to assign in GagSpeak Editor (Left Finger).",
+      "Translated": "CTRL + 中键单击可在 GagSpeak 编辑器中进行分配（左指）。",
+      "Context": "PenumbraTooltips.CreateTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Middle-Click to apply to selected Restraint Set.",
+      "Translated": "单击中键以应用到选定的约束集。",
+      "Context": "PenumbraTooltips.CreateTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "[GagSpeak] ",
+      "Translated": "[插科打诨]",
+      "Context": "PenumbraTooltips.OnPenumbraTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CameraManagerValid?: ",
+      "Translated": "相机管理器有效吗？：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "IsActiveCameraValid?: ",
+      "Translated": "活动相机是否有效？：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera Zoom: ",
+      "Translated": "相机变焦：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera Min Zoom: ",
+      "Translated": "相机最小变焦：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera Max Zoom: ",
+      "Translated": "相机最大变焦：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera FoV: ",
+      "Translated": "相机视场角：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera Min FoV: ",
+      "Translated": "相机最小视场角：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Camera Max FoV: ",
+      "Translated": "相机最大视场角：",
+      "Context": "AddonCameraManager.PrintToUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Give a nickname..",
+      "Translated": "给个昵称吧..",
+      "Context": "WhitelistDrawer.DrawNameEditor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "BasicExpandedTable",
+      "Translated": "基本扩展表",
+      "Context": "WhitelistDrawer.DrawFilterConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displays",
+      "Translated": "显示器",
+      "Context": "WhitelistDrawer.DrawFilterConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Preferences",
+      "Translated": "偏好设置",
+      "Context": "WhitelistDrawer.DrawFilterConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visible",
+      "Translated": "可见的",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by rendered status.",
+      "Translated": "按渲染状态排序。",
+      "Context": "Rendered.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by online status.",
+      "Translated": "按在线状态排序。",
+      "Context": "Online.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by favorite status.",
+      "Translated": "按最喜欢的状态排序。",
+      "Context": "Favorite.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by date added.",
+      "Translated": "按添加日期排序。",
+      "Context": "DateAdded.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by name.",
+      "Translated": "按名称排序。",
+      "Context": "PairName.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort by request time.",
+      "Translated": "按请求时间排序。",
+      "Context": "ByRequestTime.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort temporary pairs.",
+      "Translated": "对临时对进行排序。",
+      "Context": "Temporary.get_Tooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Alarm:",
+      "Translated": "重命名警报：",
+      "Context": "AlarmFileSelector.RenameAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a new name here to rename the changed alarm.",
+      "Translated": "在此输入新名称以重命名更改的警报。",
+      "Context": "AlarmFileSelector.RenameAlarm",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all alarms by their name, with favorites first.",
+      "Translated": "按名称对所有闹钟进行排序，最喜欢的闹钟在前。",
+      "Context": "AlarmSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clone Alias",
+      "Translated": "克隆别名",
+      "Context": "AliasesFileSelector.CloneAlias",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Alias:",
+      "Translated": "重命名别名：",
+      "Context": "AliasesFileSelector.RenameAlias",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename SexToy:",
+      "Translated": "重命名 SexToy：",
+      "Context": "BuzzToyFileSelector.RenameSexToy",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename CursedItem:",
+      "Translated": "重命名被诅咒的物品：",
+      "Context": "CursedLootFileSelector.RenameCursedItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<Invalid Item Type>",
+      "Translated": "<无效的项目类型>",
+      "Context": "CursedLootFileSelector.DrawLeafInner",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all cursed loot by their name, with favorites first.",
+      "Translated": "按名字对所有被诅咒的战利品进行排序，最喜欢的在前。",
+      "Context": "CursedLootSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all gags by their name, with favorites first.",
+      "Translated": "按名称对所有笑话进行排序，最喜欢的排在前面。",
+      "Context": "GagSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Pattern:",
+      "Translated": "重命名模式：",
+      "Context": "PatternFileSelector.RenamePattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a new name here to rename the changed pattern.",
+      "Translated": "在此输入新名称以重命名更改后的模式。",
+      "Context": "PatternFileSelector.RenamePattern",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all Pattern by their name, with favorites first.",
+      "Translated": "按名称对所有模式进行排序，最喜欢的排在前面。",
+      "Context": "PatternSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clone Restraint Set",
+      "Translated": "克隆人束缚套装",
+      "Context": "RestraintSetFileSelector.CloneRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Restraint Set:",
+      "Translated": "重命名约束集：",
+      "Context": "RestraintSetFileSelector.RenameRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a new name here to rename the changed restraintSet.",
+      "Translated": "在此处输入新名称以重命名更改后的约束集。",
+      "Context": "RestraintSetFileSelector.RenameRestraintSet",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all RestraintSets by their name, with favorites first.",
+      "Translated": "按名称对所有 RestraintSet 进行排序，最喜欢的位于最前面。",
+      "Context": "RestraintSetSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clone Restriction",
+      "Translated": "克隆限制",
+      "Context": "RestrictionFileSelector.CloneRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Restriction:",
+      "Translated": "重命名限制：",
+      "Context": "RestrictionFileSelector.RenameRestriction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter New Name...",
+      "Translated": "输入新名称...",
+      "Context": "RestrictionFileSelector.OpenRestrictionNameField",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all Restrictions by their name, with favorites first.",
+      "Translated": "按名称对所有限制进行排序，最喜欢的位于最前面。",
+      "Context": "RestrictionSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clone Trigger",
+      "Translated": "克隆触发器",
+      "Context": "TriggerFileSelector.CloneTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rename Trigger:",
+      "Translated": "重命名触发器：",
+      "Context": "TriggerFileSelector.RenameTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a new name here to rename the changed trigger.",
+      "Translated": "在此处输入新名称以重命名更改的触发器。",
+      "Context": "TriggerFileSelector.RenameTrigger",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Sort all Triggers by their name, with favorites first.",
+      "Translated": "按名称对所有触发器进行排序，最喜欢的位于最前面。",
+      "Context": "TriggerSorter.get_Description",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s Details:",
+      "Translated": "的详细信息：",
+      "Context": "PairAlarmCombo.DrawItemTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " has this Gag's Visuals Enabled!",
+      "Translated": "此堵嘴的视觉效果已启用！",
+      "Context": "PairGagCombo.DrawItemTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Slot",
+      "Translated": "投币口",
+      "Context": "PairGagCombo.DrawItemTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<None Provided>",
+      "Translated": "<未提供>",
+      "Context": "PairPatternCombo.DrawItemTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No Valid CacheInfo for active Restraint Set!",
+      "Translated": "活动约束集没有有效的缓存信息！",
+      "Context": "PairRestraintCombo.DrawApplyLayersComboButton",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " is available for download. Update to recieve its latest features.",
+      "Translated": "可供下载。更新以获取其最新功能。",
+      "Context": "AlertService.PrintVersionUpdateMessage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GagSpeak Has Updated",
+      "Translated": "GagSpeak 已更新",
+      "Context": "AlertService.PrintVersionUpdateMessage",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Arousal Cache",
+      "Translated": "唤醒缓存",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ArousalCache",
+      "Translated": "唤醒缓存",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Static Arousal: ",
+      "Translated": "静态唤醒：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current Arousal: ",
+      "Translated": "当前唤醒：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Arousal Percent: ",
+      "Translated": "唤醒百分比：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Generation Rate: ",
+      "Translated": "发电率：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Generation Frequency: ",
+      "Translated": "生成频率：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Degeneration Rate: ",
+      "Translated": "退化率：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Arousal Effects:",
+      "Translated": "唤醒效果：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Blur:",
+      "Translated": "模糊：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Blush:",
+      "Translated": "脸红：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stutter:",
+      "Translated": "口吃：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pulse:",
+      "Translated": "脉冲：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Limited Words:",
+      "Translated": "字数限制：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "GCD Delay:",
+      "Translated": "GCD 延迟：",
+      "Context": "ArousalService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Selected Key:",
+      "Translated": "选定的键：",
+      "Context": "RemoteService.DrawCacheTable",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Client RemoteDataCache",
+      "Translated": "客户端远程数据缓存",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Owner: ",
+      "Translated": "所有者：",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Being Controlled?",
+      "Translated": "被控制？",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ControlTime:",
+      "Translated": "控制时间：",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Devices:",
+      "Translated": "设备：",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " (TYPE-UNKNOWN)",
+      "Translated": "（类型未知）",
+      "Context": "RemoteService.DrawClient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "'s RemoteDataCache",
+      "Translated": "的远程数据缓存",
+      "Context": "RemoteService.DrawParticipants",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MotorIdx",
+      "Translated": "电机IDx",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dragging",
+      "Translated": "拖拽",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Floating",
+      "Translated": "漂浮的",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Looping",
+      "Translated": "循环播放",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Steps/Interval",
+      "Translated": "步数/间隔",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Data Recorded",
+      "Translated": "记录数据",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ref Idx/Length/Loop",
+      "Translated": "参考 IDx/长度/环",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Shows additional details about each step for anyone curious.",
+      "Translated": "为好奇的人显示有关每个步骤的更多详细信息。",
+      "Context": "Tutorial.DrawPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Go to the next Step.",
+      "Translated": "转到下一步。",
+      "Context": "Tutorial.DrawPopup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No Title Set",
+      "Translated": "没有标题集",
+      "Context": "ClientAchievements.GetTitleById",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
