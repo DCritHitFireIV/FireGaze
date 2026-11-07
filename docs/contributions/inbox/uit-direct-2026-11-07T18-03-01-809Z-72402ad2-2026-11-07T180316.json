@@ -1,0 +1,5752 @@
+{
+  "issue": "direct-2026-11-07T18-03-01-809Z-72402ad2",
+  "receivedAt": "2026-11-07 18:03:16",
+  "author": "匿名直传",
+  "plugin": "StarfallStudio",
+  "fingerprint": "96851afe012bdf47",
+  "packFile": "StarfallStudio@user-96851a.json",
+  "accepted": 684,
+  "filled": 684,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "StarfallStudio",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Starfall Studio",
+        "Translated": "星落工作室",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "ms",
+        "Translated": "多发性硬化症",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Starfall Studio AUTO-SAVE###starfall_autosaves_window",
+        "Translated": "Starfall Studio 自动保存",
+        "Context": "[StarfallStudio] AutoSaveWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Starfall Studio LIBRARY###starfall_library_window",
+        "Translated": "星落工作室图书馆",
+        "Context": "[StarfallStudio] LibraryWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Import ",
+        "Translated": "进口",
+        "Context": "[StarfallStudio] LibraryWindow.DrawModal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Browse for a file",
+        "Translated": "浏览文件",
+        "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add to favorites",
+        "Translated": "添加到收藏夹",
+        "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Remove from favorites",
+        "Translated": "从收藏夹中删除",
+        "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Import Options",
+        "Translated": "导入选项",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Import",
+        "Translated": "进口",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Scan all library sources and refresh the view",
+        "Translated": "扫描所有库源并刷新视图",
+        "Context": "[StarfallStudio] LibraryWindow.DrawPath",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "plus ",
+        "Translated": "加",
+        "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " more tags...",
+        "Translated": "更多标签...",
+        "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Press TAB to filter by tag \"",
+        "Translated": "按 T​​AB 键按标签过滤“",
+        "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Start typing to search...",
+        "Translated": "开始输入搜索...",
+        "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Icon Size: ",
+        "Translated": "图标大小：",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "px",
+        "Translated": "像素",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Scanning...",
+        "Translated": "扫描...",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "found ",
+        "Translated": "成立",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " items in ",
+        "Translated": "中的项目",
+        "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Open GPose to use StarfallStudio!",
+        "Translated": "打开GPose即可使用StarfallStudio！",
+        "Context": "[StarfallStudio] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawPropSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": " selected",
+        "Translated": "已选择",
+        "Context": "[StarfallStudio] MainWindow.DrawEntitySelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "DrawProjectPopup",
+        "Translated": "绘制项目弹出窗口",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Library",
+        "Translated": "图书馆",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Information & Changelog",
+        "Translated": "信息和变更日志",
+        "Context": "[StarfallStudio] MainWindow.DrawHeaderButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "[StarfallStudio] MainWindow.DrawHeaderButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Starfall Studio MCDF ###starfall_mcdf_window",
+        "Translated": "星落工作室 MCDF",
+        "Context": "[StarfallStudio] MCDFWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Starfall Studio PROJECT BETA###starfall_project_window",
+        "Translated": "Starfall Studio 项目测试版",
+        "Context": "[StarfallStudio] ProjectWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Project System is in Beta.",
+        "Translated": "项目系统处于测试阶段。",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "ATTENTION: Projects made in this version will be incompatible with the next version of StarfallStudio!",
+        "Translated": "注意：此版本中制作的项目将与 StarfallStudio 的下一版本不兼容！",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Load",
+        "Translated": "加载",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Save",
+        "Translated": "节省",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Save New Project",
+        "Translated": "保存新项目",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Project Name###starfall_popup_name",
+        "Translated": "项目名称",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Project Description###starfall_popup_dis",
+        "Translated": "项目描述",
+        "Context": "[StarfallStudio] ProjectWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Override Current Scene",
+        "Translated": "覆盖当前场景",
+        "Context": "[StarfallStudio] ProjectWindow.DrawLoad",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "No Name Source",
+        "Translated": "无名称来源",
+        "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Created: ",
+        "Translated": "创建：",
+        "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "No Description",
+        "Translated": "无描述",
+        "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Starfall Studio SETTINGS###starfall_settings_window",
+        "Translated": "星落工作室设置",
+        "Context": "[StarfallStudio] SettingsWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "General",
+        "Translated": "一般的",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "IPC",
+        "Translated": "工控机",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Posing",
+        "Translated": "摆姿势",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Auto-Save",
+        "Translated": "自动保存",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Input",
+        "Translated": "输入",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Advanced",
+        "Translated": "先进的",
+        "Context": "[StarfallStudio] SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Use the Library when importing a file",
+        "Translated": "导入文件时使用库",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Open Library to the last Location I was previously",
+        "Translated": "打开图书馆到我之前所在的最后一个位置",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Use the Character Filename as the Actor Name",
+        "Translated": "使用角色文件名作为演员名称",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Display",
+        "Translated": "展示",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Transform Slider Speed",
+        "Translated": "变换滑块速度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Open StarfallStudio",
+        "Translated": "打开StarfallStudio",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOpenStarfallStudioSetting",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Show in GPose",
+        "Translated": "在 GPose 中显示",
+        "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show in Cutscenes",
+        "Translated": "在过场动画中显示",
+        "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show when UI Hidden",
+        "Translated": "UI 隐藏时显示",
+        "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Censor Actor Names Across StarfallStudio",
+        "Translated": "StarfallStudio 中的演员名字审查",
+        "Context": "[StarfallStudio] SettingsWindow.DrawDisplaySettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide Name in 'Group Pose Settings' Window",
+        "Translated": "在“团体姿势设置”窗口中隐藏名称",
+        "Context": "[StarfallStudio] SettingsWindow.DrawDisplaySettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable StarfallStudio Color",
+        "Translated": "启用 StarfallStudio 颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawDisplaySettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable StarfallStudio Scale",
+        "Translated": "启用 StarfallStudio 规模",
+        "Context": "[StarfallStudio] SettingsWindow.DrawDisplaySettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Third-Party",
+        "Translated": "第三者",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Please Install Penumbra",
+        "Translated": "请安装半影",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Allow Penumbra Integration",
+        "Translated": "允许半影集成",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Penumbra Status: ",
+        "Translated": "半影状态：",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Refresh Penumbra Status",
+        "Translated": "刷新半影状态",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Allow Glamourer Integration",
+        "Translated": "允许魅力整合",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Glamourer Status: ",
+        "Translated": "魅力者状态：",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Refresh Glamourer Status",
+        "Translated": "刷新魅力者状态",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Allow Customize+ Integration",
+        "Translated": "允许自定义+集成",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Customize+ Status: ",
+        "Translated": "定制+状态：",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Refresh Customize+ Status",
+        "Translated": "刷新自定义+状态",
+        "Context": "[StarfallStudio] SettingsWindow.DrawThirdPartyIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Auto-Save Enabled",
+        "Translated": "自动保存已启用",
+        "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save Individual Poses",
+        "Translated": "保存个人姿势",
+        "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-Save Interval",
+        "Translated": "自动保存间隔",
+        "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "%d seconds",
+        "Translated": "%d 秒",
+        "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Max Auto-Saves",
+        "Translated": "最大自动保存数",
+        "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "StarfallStudio",
+        "Translated": "星落工作室",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Enable StarfallStudio IPC",
+        "Translated": "启用S​​tarfallStudio IPC",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "StarfallStudio IPC Status: ",
+        "Translated": "StarfallStudio IPC状态：",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Inactive",
+        "Translated": "不活跃",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Active",
+        "Translated": "积极的",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Enable StarfallStudio API",
+        "Translated": "启用 StarfallStudio API",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "StarfallStudio API Status: ",
+        "Translated": "StarfallStudio API 状态：",
+        "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Appearance",
+        "Translated": "外貌",
+        "Context": "[StarfallStudio] SettingsWindow.DrawNPCAppearanceHack",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Allow NPC Appearance on Players",
+        "Translated": "允许 NPC 出现在玩家身上",
+        "Context": "[StarfallStudio] SettingsWindow.DrawNPCAppearanceHack",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Enable Tinting",
+        "Translated": "启用着色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawNPCAppearanceHack",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "GPose",
+        "Translated": "姿态",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Disable GPose Mouse Select",
+        "Translated": "禁用 Gpose 鼠标选择",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "StarfallStudio Target Changes with GPose Target",
+        "Translated": "StarfallStudio 目标随 Gpose 目标而变化",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "GPose Target Changes with StarfallStudio Target",
+        "Translated": "GPoose 目标随 StarfallStudio Target 的变化",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Select Model Transform Bone/Origin on Entity Select",
+        "Translated": "在实体选择上选择模型变换骨骼/原点",
+        "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Overlay",
+        "Translated": "覆盖",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Overlay Defaults On",
+        "Translated": "覆盖默认开启",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Make the [Model Transform] Bone Standout",
+        "Translated": "让[模型转换]骨骼脱颖而出",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "[Model Transform] Bone Standout Color",
+        "Translated": "[模型变换]骨骼突出颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Allow Gizmo Axis Flip",
+        "Translated": "允许 Gizmo 轴翻转",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide Gizmo while Advanced Posing",
+        "Translated": "高级姿势时隐藏小发明",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide Toolbar while Advanced Posing",
+        "Translated": "高级姿势时隐藏工具栏",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show Skeleton Lines",
+        "Translated": "显示骨架线",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show Bone Circles",
+        "Translated": "显示骨圈",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Draw skeleton line to edge of bone circle",
+        "Translated": "将骨架线绘制到骨圆的边缘",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide Skeleton when Gizmo Active",
+        "Translated": "Gizmo 活动时隐藏骨架",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Line Thickness",
+        "Translated": "线粗细",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Circle Size",
+        "Translated": "圆圈大小",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Light Normal Color",
+        "Translated": "浅色正常颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Light Hovered Color",
+        "Translated": "浅色悬停颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Light Selected Color",
+        "Translated": "浅色选择",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Bone Circle Normal Color",
+        "Translated": "骨圈正常颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Bone Circle Inactive Color",
+        "Translated": "骨圈非活动颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Bone Circle Hovered Color",
+        "Translated": "骨圈悬停颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Bone Circle Selected Color",
+        "Translated": "骨圈已选颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Skeleton Active Color",
+        "Translated": "骨架活性颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Skeleton Inactive Color",
+        "Translated": "骨架非活动颜色",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Undo History",
+        "Translated": "撤消历史记录",
+        "Context": "[StarfallStudio] SettingsWindow.DrawPosingGeneralSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragInt"
+      },
+      {
+        "Original": "Transform Movement Speed",
+        "Translated": "变换移动速度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOffsetSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Bone Transform Movement Speed",
+        "Translated": "骨骼变换移动速度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOffsetSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Free Camera Movement Speed",
+        "Translated": "自由相机移动速度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOffsetSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Free Camera Mouse Sensitivity",
+        "Translated": "免费相机鼠标灵敏度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawOffsetSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Copy Support Info to Clipboard",
+        "Translated": "将支持信息复制到剪贴板",
+        "Context": "[StarfallStudio] SettingsWindow.DrawAdvancedTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy Log to Clipboard",
+        "Translated": "将日志复制到剪贴板",
+        "Context": "[StarfallStudio] SettingsWindow.DrawAdvancedTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Scene Manager",
+        "Translated": "场景经理",
+        "Context": "[StarfallStudio] SettingsWindow.DrawAdvancedTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Enable [ Reset Settings to Default ] Button",
+        "Translated": "启用 [将设置重置为默认值] 按钮",
+        "Context": "[StarfallStudio] SettingsWindow.DrawAdvancedTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Settings to Default",
+        "Translated": "将设置重置为默认值",
+        "Context": "[StarfallStudio] SettingsWindow.DrawAdvancedTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Environment",
+        "Translated": "环境",
+        "Context": "[StarfallStudio] SettingsWindow.DrawEnvironmentSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Reset Time on GPose Exit",
+        "Translated": "Gpose 退出时重置时间",
+        "Context": "[StarfallStudio] SettingsWindow.DrawEnvironmentSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Weather on GPose Exit",
+        "Translated": "在 Gpose 退出时重置天气",
+        "Context": "[StarfallStudio] SettingsWindow.DrawEnvironmentSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Water on GPose Exit",
+        "Translated": "在 Gpose 退出时重置水",
+        "Context": "[StarfallStudio] SettingsWindow.DrawEnvironmentSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Advanced Environment on GPose Exit",
+        "Translated": "在 Gpose 退出时重置高级环境",
+        "Context": "[StarfallStudio] SettingsWindow.DrawEnvironmentSection",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable keyboard shortcuts",
+        "Translated": "启用键盘快捷键",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Consume [SPACE], [Shift], [Ctrl] & [Alt] when moving a FreeCam",
+        "Translated": "移动 FreeCam 时消耗 [SPACE]、[Shift]、[Ctrl] 和 [Alt]",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Consume all game input when in G-Pose",
+        "Translated": "处于 G 姿势时消耗所有游戏输入",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show prompts in GPose",
+        "Translated": "在 Gpose 中显示提示",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Flip Free Camera Keybinds Past -90/90 Degrees",
+        "Translated": "自由翻转相机按键绑定过去 -90/90 度",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable scroll wheel for input boxes and gizmos",
+        "Translated": "禁用输入框和小工具的滚轮",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Free Camera",
+        "Translated": "免费相机",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Interface",
+        "Translated": "界面",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "XAT Cutscene",
+        "Translated": "XAT过场动画",
+        "Context": "[StarfallStudio] SettingsWindow.DrawKeysTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Support on Ko-fi",
+        "Translated": "支持 Ko-fi",
+        "Context": "[StarfallStudio] UpdateWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "View on GitHub",
+        "Translated": "在 GitHub 上查看",
+        "Context": "[StarfallStudio] UpdateWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Submit Feedback",
+        "Translated": "提交反馈",
+        "Context": "[StarfallStudio] UpdateWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": " Changelog ",
+        "Translated": "变更日志",
+        "Context": "[StarfallStudio] UpdateWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": " About ",
+        "Translated": "关于",
+        "Context": "[StarfallStudio] UpdateWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "  -  by Ehno",
+        "Translated": "——埃诺",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "A combined GPose toolkit built on the foundations of Brio and Ktisis.",
+        "Translated": "建立在 Brio 和 Ktisis 基础上的组合 GPose 工具包。",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Built on:",
+        "Translated": "建立在：",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Brio by Minmoose (AsgardXIV)",
+        "Translated": "Minmoose 的 Brio (AsgardXIV)",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Ktisis by Ashadow700",
+        "Translated": "Ktisis 由 Ashadow700 提供",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Original Brio Contributors:",
+        "Translated": "Brio 原始贡献者：",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Original Ktisis Contributors:",
+        "Translated": "Ktisis 原始贡献者：",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Ashadow700",
+        "Translated": "影影700",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "BobTheBob9",
+        "Translated": "鲍勃TheBob9",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Fayti1703",
+        "Translated": "菲蒂1703",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "perchbirdd",
+        "Translated": "稳定的",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Emyka",
+        "Translated": "埃米卡",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "sudojunior",
+        "Translated": "南少年",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Caraxi",
+        "Translated": "卡拉西",
+        "Context": "[StarfallStudio] UpdateWindow.DrawAbout",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Starfall Studio - ANIMATION CONTROL###starfall_action_timelines_window",
+        "Translated": "Starfall Studio - 动画控制",
+        "Context": "[StarfallStudio] ActionTimelineWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Starfall Studio - APPEARANCE###starfall_character_editor_window",
+        "Translated": "Starfall Studio - 外观",
+        "Context": "[StarfallStudio] ActorAppearanceWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Equipment",
+        "Translated": "设备",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Customize",
+        "Translated": "定制",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Redraw",
+        "Translated": "重画",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Toggle Advanced Menu",
+        "Translated": "切换高级菜单",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Load MCDF",
+        "Translated": "加载MCDF",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Can not load a MCDF on your Player Character. Spawn an Actor to load a MCDF.",
+        "Translated": "无法在您的玩家角色上加载 MCDF。生成一个 Actor 来加载 MCDF。",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Another MCDF is loading, Please wait for it to finish.",
+        "Translated": "另一个 MCDF 正在加载，请等待其完成。",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Save MCDF",
+        "Translated": "保存MCDF",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Can not save a MCDF of a Actor that has a MCDF loaded. Reset this Actor to save a MCDF.",
+        "Translated": "无法保存已加载 MCDF 的 Actor 的 MCDF。重置此 Actor 以保存 MCDF。",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Import Character",
+        "Translated": "导入字符",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save Character File",
+        "Translated": "保存角色文件",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Gear",
+        "Translated": "齿轮",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Weapons",
+        "Translated": "武器",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Extended",
+        "Translated": "扩展",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Shaders",
+        "Translated": "着色器",
+        "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "★ Starfall Studio - Camera###starfall_camera_window",
+        "Translated": "★ Starfall Studio - 相机",
+        "Context": "[StarfallStudio] CameraWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Current Camera",
+        "Translated": "当前相机",
+        "Context": "[StarfallStudio] CameraWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Create new camera",
+        "Translated": "创建新相机",
+        "Context": "[StarfallStudio] CameraWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enter free camera",
+        "Translated": "输入免费相机",
+        "Context": "[StarfallStudio] CameraWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Exit free camera",
+        "Translated": "退出自由相机",
+        "Context": "[StarfallStudio] CameraWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Key Bind Prompt Window",
+        "Translated": "按键绑定提示窗口",
+        "Context": "[StarfallStudio] KeyBindPromptWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Starfall Studio - LIGHT###starfall_light_window",
+        "Translated": "Starfall Studio - 灯光",
+        "Context": "[StarfallStudio] LightWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Select Light to Edit:",
+        "Translated": "选择要编辑的灯光：",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current Light",
+        "Translated": "当前的光",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Spawn New Light",
+        "Translated": "产生新光",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Clone Light",
+        "Translated": "克隆光",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Destroy Light",
+        "Translated": "毁灭之光",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rename Light",
+        "Translated": "重命名光",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No valid light Available.",
+        "Translated": "没有可用的有效灯光。",
+        "Context": "[StarfallStudio] LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Body Page",
+        "Translated": "正文页",
+        "Context": "[StarfallStudio] PosingGraphicalWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Face Page",
+        "Translated": "面页",
+        "Context": "[StarfallStudio] PosingGraphicalWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Starfall Studio - POSING###starfall_posing_graphical_window",
+        "Translated": "Starfall Studio - 摆姿势",
+        "Context": "[StarfallStudio] PosingGraphicalWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Freeze Physics",
+        "Translated": "冻结物理",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Freeze Character",
+        "Translated": "冻结角色",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Show Overlay",
+        "Translated": "显示叠加",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Close Overlay",
+        "Translated": "关闭叠加",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Transform Window",
+        "Translated": "显示变换窗口",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Close Transform Window",
+        "Translated": "关闭变换窗口",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Bone Search",
+        "Translated": "骨头搜索",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Undo",
+        "Translated": "撤消",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Redo",
+        "Translated": "重做",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Reset Pose",
+        "Translated": "重置姿势",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Hide Control Pane",
+        "Translated": "隐藏控制面板",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Control Pane",
+        "Translated": "显示控制面板",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Select Parent",
+        "Translated": "选择父级",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Clear Selection",
+        "Translated": "清除选择",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "DrawImportPoseMenuPopup",
+        "Translated": "绘制导入姿势菜单弹出",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Switch to World",
+        "Translated": "切换到世界",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGizmo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Switch to Local",
+        "Translated": "切换到本地",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGizmo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Graphical posing is only available for humanoid characters.",
+        "Translated": "图形姿势仅适用于人形角色。",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGraphics",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Make Human",
+        "Translated": "造人",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGraphics",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Show Genitalia",
+        "Translated": "显示生殖器",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGraphics",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Swap",
+        "Translated": "交换",
+        "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGraphics",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "★ Starfall Studio###starfall_posing_overlay_toolbar_window",
+        "Translated": "★ 星落工作室",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Toggle Transform Window",
+        "Translated": "切换变换窗口",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Toggle Light Window",
+        "Translated": "切换灯光窗口",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Attention! No valid,",
+        "Translated": "注意力！没有有效的，",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Actor or Light Selected!",
+        "Translated": "演员或灯光选定！",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Please selected one,",
+        "Translated": "请选择一项，",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "in the Scene Manager!",
+        "Translated": "在场景管理器中！",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Position",
+        "Translated": "位置",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Rotation",
+        "Translated": "旋转",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Universal",
+        "Translated": "普遍的",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Undo last Light Action",
+        "Translated": "撤消上次轻操作",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Redo last Light Action",
+        "Translated": "重做上次轻动作",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Light Transform",
+        "Translated": "重置光变换",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Load Light from Clipboard",
+        "Translated": "从剪贴板加载灯光",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save Light to Clipboard",
+        "Translated": "将灯光保存到剪贴板",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Scale",
+        "Translated": "规模",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Inverse Kinematics",
+        "Translated": "逆运动学",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Bone Filter",
+        "Translated": "骨过滤器",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Set IK Changes",
+        "Translated": "设置 IK 更改",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": ". Enable IK & make a change with IK to 'Lock in' IK changes using this button.",
+        "Translated": "。启用 IK 并使用 IK 进行更改，以使用此按钮“锁定”IK 更改。",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Un-",
+        "Translated": "和-",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Bone",
+        "Translated": "重置骨骼",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Mirror Pose",
+        "Translated": "镜子姿势",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Body",
+        "Translated": "重置身体",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Reset Face",
+        "Translated": "重置脸部",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Import Pose",
+        "Translated": "导入姿势",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save Pose",
+        "Translated": "保存姿势",
+        "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Starfall Studio - TRANSFORM###starfall_transform_window",
+        "Translated": "Starfall Studio - 变换",
+        "Context": "[StarfallStudio] PosingTransformWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": " actors)",
+        "Translated": "演员）",
+        "Context": "[StarfallStudio] PosingTransformWindow.DrawGizmo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "isParticleSystemEnabled",
+        "Translated": "粒子系统已启用",
+        "Context": "[StarfallStudio] DebugEnvironmentWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "IsEnvironmentOverride",
+        "Translated": "是否环境覆盖",
+        "Context": "[StarfallStudio] DebugEnvironmentWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "customParticlesEnabled",
+        "Translated": "启用自定义粒子",
+        "Context": "[StarfallStudio] DebugEnvironmentWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Particles",
+        "Translated": "颗粒",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Rain",
+        "Translated": "雨",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Wind",
+        "Translated": "风",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Fog",
+        "Translated": "多雾路段",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset Particles",
+        "Translated": "重置粒子",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to open texture selector",
+        "Translated": "单击以打开纹理选择器",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Texture ID",
+        "Translated": "粒子纹理ID",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Count",
+        "Translated": "粒子计数",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Size",
+        "Translated": "粒径",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Color",
+        "Translated": "颗粒颜色",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Glow",
+        "Translated": "粒子发光",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Spread",
+        "Translated": "粒子扩散",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Weight",
+        "Translated": "颗粒重量",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Speed",
+        "Translated": "粒子速度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particle Spin",
+        "Translated": "粒子自旋",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Rain",
+        "Translated": "重置雨",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rain Intensity",
+        "Translated": "降雨强度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rain Line Thickness",
+        "Translated": "雨线厚度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rain Weight",
+        "Translated": "雨量",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rain Color",
+        "Translated": "雨色",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rain Scattering",
+        "Translated": "雨散射",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Raindrops",
+        "Translated": "雨滴",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Wind",
+        "Translated": "重置风",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Wind Direction",
+        "Translated": "风向",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Wind Angle",
+        "Translated": "风角",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Wind Speed",
+        "Translated": "风速",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Fog",
+        "Translated": "重置雾",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Fog Color",
+        "Translated": "雾色",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Fog Distance",
+        "Translated": "雾距",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Fog Thickness",
+        "Translated": "雾厚度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Fog Opacity",
+        "Translated": "雾不透明度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sky Opacity",
+        "Translated": "天空不透明度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sky Smoothness",
+        "Translated": "天空平滑度",
+        "Context": "[StarfallStudio] EnvironmentEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Spawn New",
+        "Translated": "产生新的",
+        "Context": "[StarfallStudio] EnvLifetimeWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "UnifiedSpawnMenuPopup",
+        "Translated": "统一SpawnMenuPopup",
+        "Context": "[StarfallStudio] SpawnMenuEditor.DrawUnifiedSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "XXXXXXX",
+        "Translated": "XXXXXX",
+        "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Add Festival",
+        "Translated": "添加节日",
+        "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Remove Festival",
+        "Translated": "删除节日",
+        "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset",
+        "Translated": "重置",
+        "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Search",
+        "Translated": "搜索",
+        "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Sky",
+        "Translated": "天空",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stars",
+        "Translated": "星星",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Clouds",
+        "Translated": "云",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset Stars",
+        "Translated": "重置星星",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Star Count",
+        "Translated": "星星数",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Star Intensity",
+        "Translated": "星光强度",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Moon Color",
+        "Translated": "月亮颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Moon Brightness",
+        "Translated": "月亮亮度",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Constellation Count",
+        "Translated": "星座计数",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Constellations Intensity",
+        "Translated": "星座强度",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Galaxy Intensity",
+        "Translated": "星系强度",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Sky",
+        "Translated": "重置天空",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sky Texture ID",
+        "Translated": "天空纹理ID",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sun Visibility",
+        "Translated": "太阳能见度",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Lighting",
+        "Translated": "重置照明",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Ambient Temperature Color",
+        "Translated": "环境温度 颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Ambient Saturation Color",
+        "Translated": "环境饱和度颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Ambient Color",
+        "Translated": "环境颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sunlight Color",
+        "Translated": "阳光颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Moonlight Color",
+        "Translated": "月光色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Clouds",
+        "Translated": "重置云",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to change Cloud Texture",
+        "Translated": "单击以更改云纹理",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Cloud Texture ID",
+        "Translated": "云纹理ID",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to change Cloud Side Texture",
+        "Translated": "单击可更改云侧纹理",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Cloud Side Texture ID",
+        "Translated": "云侧纹理ID",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Cloud Color",
+        "Translated": "云色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Cloud Side Color",
+        "Translated": "云侧颜色",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Shadow Stop",
+        "Translated": "影子停止",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Cloud Height",
+        "Translated": "云高",
+        "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lock Time",
+        "Translated": "锁定时间",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unlock Time",
+        "Translated": "解锁时间",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Time of Day",
+        "Translated": "一天中的时间",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Time of Day (In Minutes)",
+        "Translated": "一天中的时间（以分钟为单位）",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Day of Month",
+        "Translated": "每月的某一天",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lock Weather",
+        "Translated": "锁定天气",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unlock Weather",
+        "Translated": "解锁天气",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Weather ID",
+        "Translated": "天气ID",
+        "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Freeze Water",
+        "Translated": "冷冻水",
+        "Context": "[StarfallStudio] WorldRenderingWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Lights",
+        "Translated": "灯",
+        "Context": "[StarfallStudio] SpawnMenuEditor.DrawUnifiedSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Open Light Window###containerwidgetpopup_openWindow",
+        "Translated": "开光窗",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "New...###containerwidgetpopup_new",
+        "Translated": "新的...",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Spot Light###containerwidgetpopup_spawn_SpotLight",
+        "Translated": "聚光灯",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Area Light###containerwidgetpopup_spawn_SpotLight",
+        "Translated": "区域光",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Flat Light###containerwidgetpopup_spawn_SpotLight",
+        "Translated": "平面光",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Destroy All Lights###containerwidgetpopup_destroy",
+        "Translated": "摧毁所有灯",
+        "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "GPose State",
+        "Translated": "姿态状态",
+        "Context": "[StarfallStudio] LightDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "CurrentGPoseState is NUll!",
+        "Translated": "当前GPoseState 为空！",
+        "Context": "[StarfallStudio] LightDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "GameLight",
+        "Translated": "游戏灯",
+        "Context": "[StarfallStudio] LightDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "LightRenderObject",
+        "Translated": "光照渲染对象",
+        "Context": "[StarfallStudio] LightDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Move to Camera",
+        "Translated": "移至相机",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Light Window",
+        "Translated": "开光窗",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Close Light Window",
+        "Translated": "关闭光窗",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Move to Camera###actorlifetime_move_to_camera",
+        "Translated": "移至相机",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Clone###actorlifetime_clone",
+        "Translated": "克隆",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Destroy###actorlifetime_destroy",
+        "Translated": "破坏",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Open Light Window###actorlifetime_lightwindow",
+        "Translated": "开光窗",
+        "Context": "[StarfallStudio] LightLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Bone Categories",
+        "Translated": "骨骼类别",
+        "Context": "[StarfallStudio] PosingWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Bone List",
+        "Translated": "骨骼列表",
+        "Context": "[StarfallStudio] PosingWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Hide Overlay",
+        "Translated": "隐藏叠加层",
+        "Context": "[StarfallStudio] PosingWidget.DrawButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DebugTabBar",
+        "Translated": "调试标签栏",
+        "Context": "[StarfallStudio] DebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabBar"
+      },
+      {
+        "Original": "Misc",
+        "Translated": "杂项",
+        "Context": "[StarfallStudio] DebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Fake GPose",
+        "Translated": "假 GPose",
+        "Context": "[StarfallStudio] DebugWidget.DrawGPose",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enter GPose",
+        "Translated": "输入 GPose",
+        "Context": "[StarfallStudio] DebugWidget.DrawGPose",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Exit GPose",
+        "Translated": "退出 GPose",
+        "Context": "[StarfallStudio] DebugWidget.DrawGPose",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "IsPosing: ",
+        "Translated": "正在摆姿势：",
+        "Context": "[StarfallStudio] DebugWidget.DrawGPose",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "MapId - ",
+        "Translated": "地图 ID -",
+        "Context": "[StarfallStudio] DebugWidget.DrawMisc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "TerritoryType - ",
+        "Translated": "领土类型 -",
+        "Context": "[StarfallStudio] DebugWidget.DrawMisc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "CurrentWorld - ",
+        "Translated": "当前世界 -",
+        "Context": "[StarfallStudio] DebugWidget.DrawMisc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "HomeWorld - ",
+        "Translated": "家园-",
+        "Context": "[StarfallStudio] DebugWidget.DrawMisc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Advanced ",
+        "Translated": "先进的",
+        "Context": "[StarfallStudio] WidgetHelpers.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Camera Window",
+        "Translated": "打开相机窗口",
+        "Context": "[StarfallStudio] StarfallStudioCameraWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Open the Camera Window to edit play a Cutscene ",
+        "Translated": "打开相机窗口编辑播放过场动画",
+        "Context": "[StarfallStudio] StarfallStudioCameraWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Cameras",
+        "Translated": "相机",
+        "Context": "[StarfallStudio] SpawnMenuEditor.DrawUnifiedSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "New Camera",
+        "Translated": "新相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DrawSpawnMenuPopup",
+        "Translated": "绘制生成菜单弹出",
+        "Context": "[StarfallStudio] CameraEditor.DrawSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Clone Camera",
+        "Translated": "克隆相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Destroy Camera",
+        "Translated": "摧毁相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Target Camera",
+        "Translated": "目标相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Select in Hierarchy",
+        "Translated": "在层次结构中选择",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Destroy All",
+        "Translated": "摧毁全部",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Camera Editor###containerwidgetpopup_OpenAdvance",
+        "Translated": "打开相机编辑器",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "New Camera###containerwidgetpopup_newcamera",
+        "Translated": "新相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "New Free-Cam###containerwidgetpopup_newfreecamera",
+        "Translated": "新的自由摄像头",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Destroy All Cameras###containerwidgetpopup_destroyall",
+        "Translated": "摧毁所有相机",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Confirm Destruction###containerwidgetpopup_destroyall_confirm",
+        "Translated": "确认销毁",
+        "Context": "[StarfallStudio] CameraContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Rename",
+        "Translated": "重命名",
+        "Context": "[StarfallStudio] CameraLifetimeWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Target###CameraLifetime_target",
+        "Translated": "目标",
+        "Context": "[StarfallStudio] CameraLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Clone###CameraLifetime_clone",
+        "Translated": "克隆",
+        "Context": "[StarfallStudio] CameraLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Confirm Destruction###CameraLifetime_destroy_confirm",
+        "Translated": "确认销毁",
+        "Context": "[StarfallStudio] CameraLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Reload Prop",
+        "Translated": "重新加载道具",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawPropLoadAppearance",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Equipment",
+        "Translated": "重置设备",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawReset",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "XXXXX",
+        "Translated": "XXXXXX",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawPropSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Advanced Appearance",
+        "Translated": "先进的外观",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawLoadAppearance",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Import & Export",
+        "Translated": "进出口",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawLoadAppearance",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Import NPC",
+        "Translated": "导入NPC",
+        "Context": "[StarfallStudio] ActorAppearanceWidget.DrawLoadAppearance",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hide",
+        "Translated": "隐藏",
+        "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Show",
+        "Translated": "展示",
+        "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Actors",
+        "Translated": "演员",
+        "Context": "[StarfallStudio] SpawnMenuEditor.DrawUnifiedSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Spawn",
+        "Translated": "生成",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Spawn with Companion slot",
+        "Translated": "生成时带有同伴槽",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Spawn Prop",
+        "Translated": "生成道具",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Clone",
+        "Translated": "克隆",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Destroy",
+        "Translated": "破坏",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Release (remove from scene)",
+        "Translated": "释放（从场景中删除）",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Target",
+        "Translated": "目标",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Filter actors...",
+        "Translated": "筛选演员...",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Add to managed list",
+        "Translated": "添加到托管列表",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Remove from managed list",
+        "Translated": "从托管列表中删除",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Spawn###containerwidgetpopup_spawnbasic",
+        "Translated": "生成",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Spawn with Companion###containerwidgetpopup_spawncompanion",
+        "Translated": "与同伴一起生成",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Spawn Prop###containerwidgetpopup_spawnprop",
+        "Translated": "生成道具",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Destroy All Actors###containerwidgetpopup_destroy",
+        "Translated": "消灭所有演员",
+        "Context": "[StarfallStudio] ActorContainerWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Info",
+        "Translated": "信息",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "GameObject ",
+        "Translated": "游戏对象",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Character Base ",
+        "Translated": "角色基础",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "DrawObject",
+        "Translated": "绘图对象",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Skeleton ",
+        "Translated": "骨骼",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Skeleton",
+        "Translated": "骨骼",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Character Shader ",
+        "Translated": "角色着色器",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Refresh Skeleton Cache",
+        "Translated": "刷新骨架缓存",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Stacks",
+        "Translated": "堆栈",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Goop Demo",
+        "Translated": "古普演示",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Create Goop",
+        "Translated": "创建粘胶",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Destroy Goop",
+        "Translated": "摧毁粘液",
+        "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Enable Face Control",
+        "Translated": "启用人脸控制",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Camera",
+        "Translated": "相机",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Actor",
+        "Translated": "演员",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Reset Selected Actor",
+        "Translated": "重置所选演员",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawActor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Select an actor to track",
+        "Translated": "选择要追踪的演员",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawActor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Eyes",
+        "Translated": "眼睛",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawEyeSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Body",
+        "Translated": "身体",
+        "Context": "[StarfallStudio] ModelShaderEditor.DrawBodyColors",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Eyes###toggleButton_Eyes",
+        "Translated": "眼睛",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawPosition",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Set to camera value",
+        "Translated": "设置为相机值",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawPosition",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Body###toggleButton_Body",
+        "Translated": "身体",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawPosition",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Head###toggleButton_Head",
+        "Translated": "头",
+        "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawPosition",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Confirm Destruction###actorlifetime_destroy_confirm",
+        "Translated": "确认销毁",
+        "Context": "[StarfallStudio] ActorLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Target###actorlifetime_target",
+        "Translated": "目标",
+        "Context": "[StarfallStudio] ActorLifetimeWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Destroy Companion###companionowner_popup_destroy",
+        "Translated": "消灭同伴",
+        "Context": "[StarfallStudio] CompanionWidget.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Add Effect",
+        "Translated": "添加效果",
+        "Context": "[StarfallStudio] StatusEffectsWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Remove Effect",
+        "Translated": "移除效果",
+        "Context": "[StarfallStudio] StatusEffectsWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hide Status Effects that have no VFX.",
+        "Translated": "隐藏没有视觉特效的状态效果。",
+        "Context": "[StarfallStudio] StatusEffectsWidget.DrawBody",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Renaming:  [ ",
+        "Translated": "重命名：[",
+        "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Actor Name###starfall_renamemodal_popup_name",
+        "Translated": "演员姓名",
+        "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Reset Name",
+        "Translated": "重置名称",
+        "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Save/Load Project",
+        "Translated": "保存/加载项目",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Save or Load this Scene",
+        "Translated": "保存或加载该场景",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "View Auto-Saves",
+        "Translated": "查看自动保存",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "View Scene Auto-Saves",
+        "Translated": "查看场景自动保存",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Export Scene",
+        "Translated": "导出场景",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Export Scene Comming soon",
+        "Translated": "导出场景即将推出",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Import Scene",
+        "Translated": "导入场景",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import Scene Comming soon",
+        "Translated": "导入场景即将推出",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawProjectPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Freeze Actor on Import",
+        "Translated": "导入时冻结 Actor",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Smart Import",
+        "Translated": "智能导入",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Import Body",
+        "Translated": "进口车身",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import Expression",
+        "Translated": "导入表达式",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import A-Pose",
+        "Translated": "导入A-Pose",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import T-Pose",
+        "Translated": "导入 T 形",
+        "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hold Ctrl to spawn as a new actor",
+        "Translated": "按住 Ctrl 键生成新演员",
+        "Context": "[StarfallStudio] ImStarfallStudio.DrawApplyToActor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Unable to Spawn",
+        "Translated": "无法生成",
+        "Context": "[StarfallStudio] ImStarfallStudio.DrawSpawnActor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Spawn As New Actor",
+        "Translated": "作为新演员诞生",
+        "Context": "[StarfallStudio] ImStarfallStudio.DrawSpawnActor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Decrease ",
+        "Translated": "减少",
+        "Context": "[StarfallStudio] ImStarfallStudio.DragFloat",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Increase ",
+        "Translated": "增加",
+        "Context": "[StarfallStudio] ImStarfallStudio.DragFloat",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lock",
+        "Translated": "锁",
+        "Context": "[StarfallStudio] ImStarfallStudio.ToggleLock",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unlock",
+        "Translated": "开锁",
+        "Context": "[StarfallStudio] ImStarfallStudio.ToggleLock",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enable",
+        "Translated": "使能够",
+        "Context": "[StarfallStudio] ImStarfallStudio.ToggleSelecterStrip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Disable",
+        "Translated": "禁用",
+        "Context": "[StarfallStudio] ImStarfallStudio.ToggleSelecterStrip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "None",
+        "Translated": "没有任何",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawLips",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Pin to keep open",
+        "Translated": "保持打开状态",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawPinButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unpin (close window)",
+        "Translated": "取消固定（关闭窗口）",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawPinButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(Selector is pinned as separate window)",
+        "Translated": "（选择器固定为单独的窗口）",
+        "Context": "[StarfallStudio] ActionTimelineSelector.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Emotes",
+        "Translated": "表情",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "行动",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Timelines",
+        "Translated": "时间表",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show Non-Blend Animations",
+        "Translated": "显示非混合动画",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Draws Weapon",
+        "Translated": "拔出武器",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "All",
+        "Translated": "全部",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Sheathed",
+        "Translated": "带护套",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Drawn",
+        "Translated": "绘制",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Emote Category",
+        "Translated": "表情类别",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Special",
+        "Translated": "特别的",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Expressions",
+        "Translated": "表达式",
+        "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Minions",
+        "Translated": "小黄人",
+        "Context": "[StarfallStudio] CompanionSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Mounts",
+        "Translated": "坐骑",
+        "Context": "[StarfallStudio] CompanionSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Ornaments",
+        "Translated": "装饰品",
+        "Context": "[StarfallStudio] CompanionSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Show Unknown",
+        "Translated": "显示未知",
+        "Context": "[StarfallStudio] FestivalSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show Unsafe",
+        "Translated": "显示不安全",
+        "Context": "[StarfallStudio] FestivalSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Battle NPCs",
+        "Translated": "战斗 NPC",
+        "Context": "[StarfallStudio] NpcSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Event NPCs",
+        "Translated": "活动 NPC",
+        "Context": "[StarfallStudio] NpcSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Companions",
+        "Translated": "同伴",
+        "Context": "[StarfallStudio] NpcSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Remove Status Effects that do not have a VFX.",
+        "Translated": "删除没有视觉特效的状态效果。",
+        "Context": "[StarfallStudio] StatusEffectSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "\nVFX: ",
+        "Translated": "视觉特效：",
+        "Context": "[StarfallStudio] StatusEffectSelector.DrawItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Show Invalid Weathers",
+        "Translated": "显示无效天气",
+        "Context": "[StarfallStudio] WeatherSelector.DrawOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "XXXXXXXXXXXXXXXXXX",
+        "Translated": "XXXXXXXXXXXXXXX",
+        "Context": "[StarfallStudio] ActionTimelineEditor.get_MaxItemWidth",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Scrub",
+        "Translated": "擦洗",
+        "Context": "[StarfallStudio] ActionTimelineEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Slots",
+        "Translated": "老虎机",
+        "Context": "[StarfallStudio] ActionTimelineEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Cutscene Control",
+        "Translated": "过场动画控制",
+        "Context": "[StarfallStudio] ActionTimelineEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Actors  ▼",
+        "Translated": "演员▼",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawHeder",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset Animation",
+        "Translated": "重置动画",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawHeder",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Interrupt",
+        "Translated": "打断",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Base",
+        "Translated": "根据",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Play",
+        "Translated": "玩",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Stop",
+        "Translated": "停止",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Start Animation On Select",
+        "Translated": "选择时开始动画",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Blend",
+        "Translated": "混合",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawBlend",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Lips",
+        "Translated": "嘴唇",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawLips",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "ScrubX",
+        "Translated": "擦洗X",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawFirstScrub",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "XXXXXXXXXXXXXXXXXi",
+        "Translated": "XXXXXXXXXXXXXXXXXXi",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Reset Speed",
+        "Translated": "复位速度",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Pause",
+        "Translated": "暂停",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Delimit Speed",
+        "Translated": "限制速度",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawOverallSpeed",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Speed",
+        "Translated": "速度",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawOverallSpeed",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Camera Path",
+        "Translated": "相机路径",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Browse",
+        "Translated": "浏览",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Enable FOV",
+        "Translated": "启用视场",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disabling FOV will make for a less accurate Camera, but might provide for an easer way to support more character sizes without changing the Camera's Scale & Offset!",
+        "Translated": "禁用 FOV 会导致相机精度降低，但可能会提供一种更简单的方法来支持更多字符尺寸，而无需更改相机的比例和偏移！",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Camera Scale",
+        "Translated": "相机比例",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat3"
+      },
+      {
+        "Original": "Camera Offset",
+        "Translated": "相机偏移",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat3"
+      },
+      {
+        "Original": "Loop",
+        "Translated": "环形",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide StarfallStudio On Play  (Press 'Shift + B' to Stop Cutscene)",
+        "Translated": "播放时隐藏 StarfallStudio（按“Shift + B”停止过场动画）",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Start Delay",
+        "Translated": "启动延迟",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Start All Actors Animations On Play",
+        "Translated": "开始播放所有 Actor 动画",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Animation Start Delay",
+        "Translated": "动画开始延迟",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Animation Delay",
+        "Translated": "动画延迟",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "The time-scale for the delay functions are in Milliseconds!",
+        "Translated": "延迟函数的时间尺度以毫秒为单位！",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "1000 Milliseconds = 1 Second",
+        "Translated": "1000 毫秒 = 1 秒",
+        "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No overworld actors found",
+        "Translated": "未找到主世界演员",
+        "Context": "[StarfallStudio] ActorEditor.DrawSpawnMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Collection",
+        "Translated": "收藏",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.get__lableWidth",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Open Penumbra",
+        "Translated": "开放半影",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawPenumbraCollectionSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Apply Penumbra Collection.",
+        "Translated": "应用半影集合。",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawPenumbraCollectionSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Collection",
+        "Translated": "重置收藏",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawPenumbraCollectionSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Glamourer",
+        "Translated": "打开魅力者",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Design",
+        "Translated": "设计",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Apply Design",
+        "Translated": "应用设计",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Unable to apply Glamourer Design while a MCDF is applied!",
+        "Translated": "应用 MCDF 时无法应用魅力设计！",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Apply Glamourer Design.",
+        "Translated": "应用魅力设计。",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Design",
+        "Translated": "重置设计",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawGlamourerDesignSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Customize+",
+        "Translated": "打开自定义+",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawCustomizePlusProfileSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Profile",
+        "Translated": "轮廓",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawCustomizePlusProfileSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Unable to apply Customize+ profile while a MCDF is applied!",
+        "Translated": "应用 MCDF 时无法应用自定义+ 配置文件！",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawCustomizePlusProfileSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Apply Customize+ profile.",
+        "Translated": "应用自定义+配置文件。",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawCustomizePlusProfileSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset C+ Profile",
+        "Translated": "重置 C+ 配置文件",
+        "Context": "[StarfallStudio] AppearanceEditorCommon.DrawCustomizePlusProfileSwitcher",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "启用",
+        "Context": "[StarfallStudio] BoneIKEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enforce Constraints",
+        "Translated": "强制约束",
+        "Context": "[StarfallStudio] BoneIKEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Solver",
+        "Translated": "求解器",
+        "Context": "[StarfallStudio] BoneIKEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Two Joint",
+        "Translated": "两关节",
+        "Context": "[StarfallStudio] BoneIKEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Depth",
+        "Translated": "深度",
+        "Context": "[StarfallStudio] Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Iterations",
+        "Translated": "迭代",
+        "Context": "[StarfallStudio] Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Model",
+        "Translated": "模型",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TreeNode"
+      },
+      {
+        "Original": "Character",
+        "Translated": "特点",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Main Hand",
+        "Translated": "主手",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Off Hand",
+        "Translated": "副手",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Prop",
+        "Translated": "支柱",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TreeNode"
+      },
+      {
+        "Original": "Ornament",
+        "Translated": "装饰品",
+        "Context": "[StarfallStudio] BoneSearchControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "No skeleton available.",
+        "Translated": "没有可用的骨架。",
+        "Context": "[StarfallStudio] BoneTreeControl.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "XXXXXXXx",
+        "Translated": "XXXXXXX",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Enable Movement",
+        "Translated": "启用移动",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset Camera",
+        "Translated": "重置相机",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Pan",
+        "Translated": "平底锅",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "Reset Pivot",
+        "Translated": "重置枢轴",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Movement Speed",
+        "Translated": "重置移动速度",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset MouseSensitivity",
+        "Translated": "重置鼠标灵敏度",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Delimit Camera Angle",
+        "Translated": "界定相机角度",
+        "Context": "[StarfallStudio] CameraEditor.DrawFreeCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "XXXXXXXXXx",
+        "Translated": "XXXXXXXXXX",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Offset",
+        "Translated": "抵消",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat3"
+      },
+      {
+        "Original": "Reset Offset",
+        "Translated": "复位偏移",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Angle",
+        "Translated": "角度",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "Reset Angle",
+        "Translated": "复位角度",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Pan",
+        "Translated": "重置平移",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Delimit camera",
+        "Translated": "划定相机",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable collision",
+        "Translated": "禁用碰撞",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Camera Path ",
+        "Translated": "相机路径",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Disabling FOV will make for a less accurate Camera, but might",
+        "Translated": "禁用 FOV 会降低相机的精确度，但可能会",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "provide for an easer way to support more character sizes without",
+        "Translated": "提供了一种更简单的方式来支持更多的字符尺寸，而无需",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "changing the Camera's Scale & Offset!",
+        "Translated": "改变相机的比例和偏移！",
+        "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCutscene",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "XXXXXXXXXX",
+        "Translated": "XXXXXXXXX",
+        "Context": "[StarfallStudio] CustomizeEditor.get_MaxItemWidth",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Reset Customize",
+        "Translated": "重置 自定义",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawReset",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Race",
+        "Translated": "种族",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawRaceSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Enable Hair Highlights",
+        "Translated": "启用头发亮点",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawHairSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Eye Shape",
+        "Translated": "眼睛形状",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawEyeSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Small Iris",
+        "Translated": "小鸢尾",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawEyeSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Enable Lip Color",
+        "Translated": "启用唇色",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawMouth",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Flipped",
+        "Translated": "翻转",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawFacePaintSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Features",
+        "Translated": "特征",
+        "Context": "[StarfallStudio] CustomizeEditor.DrawFeatureSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Reset Extended",
+        "Translated": "重置扩展",
+        "Context": "[StarfallStudio] ExtendedAppearanceEditor.DrawReset",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Alpha",
+        "Translated": "阿尔法",
+        "Context": "[StarfallStudio] ExtendedAppearanceEditor.DrawTransparency",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Wet",
+        "Translated": "湿的",
+        "Context": "[StarfallStudio] ExtendedAppearanceEditor.DrawWetness",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Wet Depth",
+        "Translated": "湿深度",
+        "Context": "[StarfallStudio] ExtendedAppearanceEditor.DrawWetness",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tints",
+        "Translated": "色调",
+        "Context": "[StarfallStudio] ExtendedAppearanceEditor.DrawTints",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Remove all Equipment",
+        "Translated": "移除所有设备",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Equip NPC Smallclothes",
+        "Translated": "装备NPC小衣服",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Equip Emperor's Set",
+        "Translated": "装备皇帝套装",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Equip Invisible Clothes",
+        "Translated": "装备隐形衣",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Replaces Main Hand with a Prop###weaponsprops",
+        "Translated": "用道具代替主手",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Replace main weapon with a prop.",
+        "Translated": "用道具替换主武器。",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Replaces Off-Hand with a Prop###offweaponsprops",
+        "Translated": "用道具代替副手",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Replaces the off-hand weapon with a prop.",
+        "Translated": "用道具代替副手武器。",
+        "Context": "[StarfallStudio] GearEditor.DrawGear",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Visor",
+        "Translated": "遮阳板",
+        "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Viera Ears Hidden",
+        "Translated": "维埃拉耳朵被隐藏",
+        "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Remove Equipment",
+        "Translated": "移除设备",
+        "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Attach Weapon",
+        "Translated": "附加武器",
+        "Context": "[StarfallStudio] GearEditor.DrawWeaponSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Facewear: ",
+        "Translated": "面罩：",
+        "Context": "[StarfallStudio] GearEditor.DrawFacewearSlot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Remove the selected source",
+        "Translated": "删除选定的源",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Toggle the selected source on or off",
+        "Translated": "打开或关闭所选源",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Edit the selected source",
+        "Translated": "编辑选定的来源",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add a new source",
+        "Translated": "添加新来源",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Name###settings_edit_source_name",
+        "Translated": "姓名",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Path",
+        "Translated": "小路",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Browse for Folder",
+        "Translated": "浏览文件夹",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "OK",
+        "Translated": "好的",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Unnamed Source",
+        "Translated": "未命名来源",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.DrawSourceItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "This directory does not exist",
+        "Translated": "该目录不存在",
+        "Context": "[StarfallStudio] LibrarySourcesEditor.DrawSource",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Light Falloff Type",
+        "Translated": "光衰减类型",
+        "Context": "[StarfallStudio] LightEditor.DrawAdvancedSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Light Falloff Power",
+        "Translated": "光衰减功率",
+        "Context": "[StarfallStudio] LightEditor.DrawAdvancedSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Light Range",
+        "Translated": "光照范围",
+        "Context": "[StarfallStudio] LightEditor.DrawAdvancedSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Light Properties",
+        "Translated": "重置灯光属性",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Spot",
+        "Translated": "点",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Point",
+        "Translated": "观点",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Flat",
+        "Translated": "平坦的",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "World",
+        "Translated": "世界",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Spot Light Angle",
+        "Translated": "聚光灯角度",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Spot Light Smothing",
+        "Translated": "聚光灯平滑",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Flat Light X",
+        "Translated": "平光X",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Flat Light Y",
+        "Translated": "平光Y",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Flat Light Falloff",
+        "Translated": "平面光衰减",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Light Color",
+        "Translated": "浅色",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Intensity",
+        "Translated": "强度",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Object",
+        "Translated": "目的",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Dynamic",
+        "Translated": "动态的",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Shadows",
+        "Translated": "阴影",
+        "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open Overlay",
+        "Translated": "打开叠加层",
+        "Context": "[StarfallStudio] LightEditor.DrawLightTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Reset Shaders",
+        "Translated": "重置着色器",
+        "Context": "[StarfallStudio] ModelShaderEditor.DrawReset",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Muscle",
+        "Translated": "肌肉",
+        "Context": "[StarfallStudio] ModelShaderEditor.DrawMuscleTone",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Other",
+        "Translated": "其他",
+        "Context": "[StarfallStudio] ModelShaderEditor.DrawOtherColors",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hair",
+        "Translated": "头发",
+        "Context": "[StarfallStudio] ModelShaderEditor.DrawHairColors",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "This bone's transform values are frozen.",
+        "Translated": "该骨骼的变换值被冻结。",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawSelectionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "This actor's transform values are frozen.",
+        "Translated": "该 actor 的变换值被冻结。",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawSelectionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Model Transform",
+        "Translated": "模型转换",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawImportOptionEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Select All",
+        "Translated": "选择全部",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawBoneFilterEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Select None",
+        "Translated": "选择无",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawBoneFilterEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Link: None",
+        "Translated": "链接：无",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawMirrorModeSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Link: Copy",
+        "Translated": "链接：复制",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawMirrorModeSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Link: Mirror",
+        "Translated": "链接：镜子",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawMirrorModeSelect",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "IK",
+        "Translated": "我",
+        "Context": "[StarfallStudio] PosingEditorCommon.DrawIKSelect",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "transformOffset",
+        "Translated": "变换偏移量",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawTransformOffset",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Adjusts the speed of the transform controls",
+        "Translated": "调整变换控件的速度",
+        "Context": "[StarfallStudio] PosingTransformEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Propagate",
+        "Translated": "传播",
+        "Context": "[StarfallStudio] PosingTransformEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copy & Paste Transform",
+        "Translated": "复制粘贴变换",
+        "Context": "[StarfallStudio] PosingTransformEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "CopyPastePopup",
+        "Translated": "复制粘贴弹出窗口",
+        "Context": "[StarfallStudio] ClipboardServices.DrawCopyPastePopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Copy & Paste is currently only available for Model Transform",
+        "Translated": "复制和粘贴目前仅适用于模型转换",
+        "Context": "[StarfallStudio] PosingTransformEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Freeze Transforms",
+        "Translated": "冻结变换",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawTransformOffset",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "P###propagate_position",
+        "Translated": "磷",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawPropagateCheckboxes",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Propagate Positions",
+        "Translated": "传播立场",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawPropagateCheckboxes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "R###propagate_rotation",
+        "Translated": "右",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawPropagateCheckboxes",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Propagate Rotations",
+        "Translated": "传播旋转",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawPropagateCheckboxes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Propagate Scales",
+        "Translated": "传播规模",
+        "Context": "[StarfallStudio] PosingTransformEditor.DrawPropagateCheckboxes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Author: ",
+        "Translated": "作者：",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Version: ",
+        "Translated": "版本：",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tags:",
+        "Translated": "标签：",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Author",
+        "Translated": "作者",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tag name:",
+        "Translated": "标签名称：",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "New tag name:",
+        "Translated": "新标签名称：",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Edit details (coming soon)",
+        "Translated": "编辑详细信息（即将推出）",
+        "Context": "[StarfallStudio] ItemEntryBase.DrawActions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Open folder",
+        "Translated": "打开文件夹",
+        "Context": "[StarfallStudio] DirectoryEntry.DrawActions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Open containing folder",
+        "Translated": "打开包含文件夹",
+        "Context": "[StarfallStudio] FileEntry.DrawActions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Details",
+        "Translated": "细节",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Author:",
+        "Translated": "作者：",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Version:",
+        "Translated": "版本：",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Description:",
+        "Translated": "描述：",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Image:",
+        "Translated": "图像：",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " px",
+        "Translated": "像素",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " KB",
+        "Translated": "知识库",
+        "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Minions from FFXIV",
+        "Translated": "FFXIV 中的小黄人",
+        "Context": "[StarfallStudio] GameDataCompanionSource.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounts from FFXIV",
+        "Translated": "FFXIV 坐骑",
+        "Context": "[StarfallStudio] GameDataMountSource.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Non Player Characters from FFXIV",
+        "Translated": "FFXIV 中的非玩家角色",
+        "Context": "[StarfallStudio] GameDataNpcSource.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "BNpc ",
+        "Translated": "国家石油公司",
+        "Context": "[StarfallStudio] GameDataNpcSource.Scan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "ENpc ",
+        "Translated": "欧洲石油公司",
+        "Context": "[StarfallStudio] GameDataNpcSource.Scan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Fashion Accessories from FFXIV",
+        "Translated": "FFXIV 的时尚配饰",
+        "Context": "[StarfallStudio] GameDataOrnamentSource.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Copy",
+        "Translated": "复制",
+        "Context": "[StarfallStudio] ClipboardServices.DrawCopyPastePopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Paste",
+        "Translated": "粘贴",
+        "Context": "[StarfallStudio] ClipboardServices.DrawCopyPastePopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Control",
+        "Translated": "控制",
+        "Context": "[StarfallStudio] KeybindEditor.KeySelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对"
+      },
+      {
+        "Original": "Alt",
+        "Translated": "替代",
+        "Context": "[StarfallStudio] KeybindEditor.KeySelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Shift",
+        "Translated": "转移",
+        "Context": "[StarfallStudio] KeybindEditor.KeySelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Reset Key to Default",
+        "Translated": "将密钥重置为默认值",
+        "Context": "[StarfallStudio] KeybindEditor.KeySelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Toggles the StarfallStudio window.",
+        "Translated": "切换 StarfallStudio 窗口。",
+        "Context": "[StarfallStudio] CommandHandlerService..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Toggles StarfallStudio's MCDF window.",
+        "Translated": "切换 StarfallStudio 的 MCDF 窗口。",
+        "Context": "[StarfallStudio] CommandHandlerService..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Valid StarfallStudio Commands Are:",
+        "Translated": "有效的 StarfallStudio 命令是：",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "<none> - Toggle main StarfallStudio window",
+        "Translated": "<none> - 切换 StarfallStudio 主窗口",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "window - Toggle main StarfallStudio window",
+        "Translated": "window - 切换 StarfallStudio 主窗口",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "settings - Toggle StarfallStudio settings window",
+        "Translated": "设置 - 切换 StarfallStudio 设置窗口",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "about - Toggle StarfallStudio info window",
+        "Translated": "关于 - 切换 StarfallStudio 信息窗口",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "help - Print this help prompt",
+        "Translated": "help - 打印此帮助提示",
+        "Context": "[StarfallStudio] CommandHandlerService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "New Light",
+        "Translated": "新光",
+        "Context": "[StarfallStudio] EnvironmentContainerEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hide ",
+        "Translated": "隐藏",
+        "Context": "[StarfallStudio] LightEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show ",
+        "Translated": "展示",
+        "Context": "[StarfallStudio] LightEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lock Cameras",
+        "Translated": "锁定相机",
+        "Context": "[StarfallStudio] CameraContainerEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unlock Cameras",
+        "Translated": "解锁相机",
+        "Context": "[StarfallStudio] CameraContainerEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Set as Active Camera",
+        "Translated": "设置为活动相机",
+        "Context": "[StarfallStudio] CameraEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "New Actor",
+        "Translated": "新演员",
+        "Context": "[StarfallStudio] ActorContainerEntity.DrawContextButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
