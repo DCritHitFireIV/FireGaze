@@ -139,5 +139,42 @@ class ReviewTests(unittest.TestCase):
             self.assertEqual(2, stale.returncode)
             self.assertFalse(output.exists())
 
+
+    def test_official_source_preserves_identity_and_cannot_replace_third_party_entry(self):
+        official = entry(entry_id='nav-official')
+        official['target']['sourceUrl'] = 'OFFICIAL'
+        third_party = entry(entry_id='nav-third-party')
+        result = build_index(base(), batch([review(official), review(third_party)]), SHA)
+        added = {item['entryId']: item for item in result['entries']}
+        self.assertEqual('OFFICIAL', added['nav-official']['target']['sourceUrl'])
+        self.assertEqual('https://repo.example/index.json', added['nav-third-party']['target']['sourceUrl'])
+        self.assertEqual('Example', added['nav-official']['target']['internalName'])
+        self.assertEqual('Example', added['nav-third-party']['target']['internalName'])
+        existing = base()
+        replacement = entry('Unrelated', 'nav-keep')
+        replacement['target']['sourceUrl'] = 'OFFICIAL'
+        with self.assertRaisesRegex(ReviewError, 'entry-id-reused-for-new-identity'):
+            build_index(existing, batch([review(replacement)]), SHA)
+        unconfirmed = review(official)
+        unconfirmed['identityConfirmed'] = False
+        with self.assertRaisesRegex(ReviewError, 'explicit-review-required'):
+            build_index(base(), batch([unconfirmed]), SHA)
+
+    def test_official_marker_is_source_only_exact_and_never_fills_unknown_identity(self):
+        for source in ['official', 'Official', ' OFFICIAL', 'OFFICIAL ', 'OFFICIAL\n', 'OFFICIAL\t', 'LOCAL', '']:
+            item = review()
+            item['entry']['target']['sourceUrl'] = source
+            with self.subTest(source=source), self.assertRaises(ReviewError):
+                build_index(base(), batch([item]), SHA)
+        item = review()
+        item['entry']['target']['projectUrl'] = 'OFFICIAL'
+        with self.assertRaises(ReviewError):
+            build_index(base(), batch([item]), SHA)
+        for field in ['entryUrl', 'evidenceUrl', 'subscriptionUrl', 'sourceIssueUrl']:
+            item = review()
+            item['entry'][field] = 'OFFICIAL'
+            with self.subTest(field=field), self.assertRaises(ReviewError):
+                build_index(base(), batch([item]), SHA)
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

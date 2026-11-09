@@ -81,7 +81,8 @@ def validate_entry(value):
     identity = value.get('target')
     require(isinstance(identity, dict) and set(identity) == IDENTITY_FIELDS, 'invalid-target')
     require(bool(ID.fullmatch(identity.get('internalName', ''))), 'invalid-plugin-name')
-    public_url(identity['sourceUrl'])
+    if identity['sourceUrl'] != 'OFFICIAL':
+        public_url(identity['sourceUrl'])
     public_url(identity['projectUrl'], optional=True)
     public_text(identity['version'], 64)
     require(type(identity['apiLevel']) is int and 1 <= identity['apiLevel'] <= 1000 and identity['client'] == 'CN',

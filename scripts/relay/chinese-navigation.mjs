@@ -37,7 +37,8 @@ export function validateNavigationSubmission(input) {
     if (!identity || !identifier.test(identity.internalName ?? '') || !text(identity.version,64)
       || !Number.isSafeInteger(identity.apiLevel) || identity.apiLevel < 1 || identity.apiLevel > 1000
       || identity.client !== 'CN' || !text(input.clientVersion,64)) throw Error('invalid-identity');
-    const sourceUrl = identity.sourceUrl === '' ? '' : normalizePublicUrl(identity.sourceUrl);
+    const sourceUrl = identity.sourceUrl === '' || identity.sourceUrl === 'OFFICIAL'
+      ? identity.sourceUrl : normalizePublicUrl(identity.sourceUrl);
     const projectUrl = identity.projectUrl === '' ? '' : normalizePublicUrl(identity.projectUrl);
     const note = input.note ?? '';
     if (typeof note !== 'string' || note.length > 2000 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(note)) throw Error('invalid-note');

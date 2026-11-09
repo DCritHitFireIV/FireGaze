@@ -106,3 +106,38 @@ test('reconciliation accepts only the configured author and exact marker, with n
     assert.equal((payload.body.match(/```/g)??[]).length,2,'user notes cannot close the structured evidence fence');
   } finally {globalThis.fetch=original;}
 });
+
+test('official source reaches durable Issue receipt unchanged and duplicates do not create again',async()=>{
+  const original=globalThis.fetch;
+  const created=[];
+  globalThis.fetch=async(url,options={})=>{
+    assert.equal(String(url),'https://api.github.com/repos/mock/repo/issues');
+    assert.equal(options.method,'POST');
+    created.push(JSON.parse(options.body));
+    const number=80+created.length;
+    return reply({number,html_url:`https://github.com/mock/repo/issues/${number}`},201);
+  };
+  try {
+    const env=deployed();
+    const official={...draft(),identity:{...draft().identity,sourceUrl:'OFFICIAL'}};
+    const first=await entry.fetch(request(official,'192.0.2.31'),env);
+    const accepted=await first.json();
+    assert.equal(first.status,200); assert.equal(accepted.accepted,true);
+    assert.equal(accepted.issueUrl,'https://github.com/mock/repo/issues/81');
+    const repeated=await (await entry.fetch(request({...official,note:'same identity'},'192.0.2.32'),env)).json();
+    assert.equal(repeated.accepted,true); assert.equal(repeated.duplicate,true);
+    assert.equal(repeated.submissionId,accepted.submissionId);
+    assert.equal(repeated.issueUrl,accepted.issueUrl); assert.equal(created.length,1);
+    const report=await (await entry.fetch(request({...official,action:'report-broken',entryId:'nav-official',revision:'r2'},
+      '192.0.2.33'),env)).json();
+    assert.equal(report.accepted,true); assert.equal(report.issueUrl,'https://github.com/mock/repo/issues/82');
+    assert.notEqual(report.submissionId,accepted.submissionId); assert.equal(created.length,2);
+    for(const body of created){
+      assert.deepEqual(body.labels,['chinese-navigation','chinese-navigation-notify-pending']);
+      const structured=body.body.match(/```json\n([\s\S]*?)\n```/);
+      assert.ok(structured,'structured Issue payload missing');
+      assert.equal(JSON.parse(structured[1]).identity.sourceUrl,'OFFICIAL');
+    }
+  } finally {globalThis.fetch=original;}
+});
+

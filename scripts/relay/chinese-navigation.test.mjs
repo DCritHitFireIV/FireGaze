@@ -110,3 +110,28 @@ test('a creation claim must be durable before any GitHub side effect', async () 
   assert.equal(result.errorCode,'storage-unavailable');
   assert.equal(creates,0);
 });
+
+test('official source stays exact and distinct from unknown and third-party submission identities', async () => {
+  const official = validated(draft({identity:{...draft().identity,sourceUrl:'OFFICIAL'}}));
+  assert.equal(official.identity.sourceUrl, 'OFFICIAL');
+  assert.equal(official.verified, undefined);
+  const officialKey = await navigationSubmissionKey(official);
+  const unknownKey = await navigationSubmissionKey(validated(draft({identity:{...draft().identity,sourceUrl:''}})));
+  const thirdPartyKey = await navigationSubmissionKey(validated(draft()));
+  assert.equal(new Set([officialKey,unknownKey,thirdPartyKey]).size, 3);
+  const report = validated(draft({identity:{...draft().identity,sourceUrl:'OFFICIAL'},
+    action:'report-broken',entryId:'nav-official',revision:'r2'}));
+  assert.equal(report.identity.sourceUrl, 'OFFICIAL');
+  assert.notEqual(await navigationSubmissionKey(report), officialKey);
+});
+
+test('official marker is rejected in other URL fields and when source spelling is not exact', () => {
+  for (const sourceUrl of ['official','Official',' OFFICIAL','OFFICIAL ','OFFICIAL\n','OFFICIAL\t','LOCAL']) {
+    assert.equal(validateNavigationSubmission(draft({identity:{...draft().identity,sourceUrl}})).ok, false, sourceUrl);
+  }
+  assert.equal(validateNavigationSubmission(draft({identity:{...draft().identity,projectUrl:'OFFICIAL'}})).ok, false);
+  assert.equal(validateNavigationSubmission(draft({url:'OFFICIAL'})).ok, false);
+  assert.equal(validateNavigationSubmission(draft({identity:{...draft().identity,sourceUrl:'OFFICIAL'},
+    action:'report-broken'})).ok, false, 'official source does not remove the report identity requirements');
+});
+

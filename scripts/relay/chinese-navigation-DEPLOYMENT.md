@@ -38,7 +38,9 @@ Issue打开/加标签触发；每小时及手动运行扫描pending补漏。全�
 {"schema":1,"type":"chinese-navigation","action":"propose","identity":{"internalName":"ExamplePlugin","sourceUrl":"https://example.org/index.json","projectUrl":"https://github.com/example/plugin","version":"1.2.3","apiLevel":15,"client":"CN"},"url":"https://github.com/example/plugin-cn","note":"可选说明","clientVersion":"1.5.0.217"}
 ```
 
-`report-broken` 另需 `entryId` 和 `revision`。来源/项目网址未知可为空字符串，但不会由此获得“已核实”的结论。body最多16 KiB；URL最多2048字符，note最多2000字符，客户端/插件版本最多64字符。
+`report-broken` 另需 `entryId` 和 `revision`。`identity.sourceUrl` 可以是精确标记 `OFFICIAL`，表示卫月官方来源；原样保留，不是网址，不得清空或替换成推测的仓库地址。大小写变体、前后空白、控制符和其他标记均不接受。此例外仅用于来源；`projectUrl` 和投稿 `url` 仍只接受原有公共 HTTP(S) 网址规则。来源/项目网址未知可为空字符串，但不会由此获得“已核实”的结论。body最多16 KiB；URL最多2048字符，note最多2000字符，客户端/插件版本最多64字符。
+
+官方来源、空来源和第三方网址继续作为不同精确身份参与原去重键，不更改schema、DO或旧受理记录。审核索引仅在人工核实后允许 `target.sourceUrl: "OFFICIAL"`；空来源仍不能收录，官方标记也不豁免版本、覆盖、兼容性和证据核实。
 
 200必须有 `accepted:true`、正确目标仓库的 `issueUrl` 与一致的 `issueNumber` 才算受理。重复投稿返回原Issue；文字备注不改变去重键，版本/来源/URL/失效报告修订改变则是新身份。原始受理时 `notificationState:pending`；读取重复回执时为 `unknown`，因为受理记录不冒充独立通知工作流的当前状态。
 
