@@ -1,0 +1,3123 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-10-09-counts",
+  "allocationId": "2026-11-12-allocation",
+  "status": "final-user-allocation",
+  "counts": {
+    "AICompanion": 1,
+    "AIRoleplay": 1,
+    "ARoomReborn": 2,
+    "AcousticKitty": 3,
+    "ActionCamera": 1,
+    "AetherCompass": 3,
+    "AetherLovePlugin": 1,
+    "AetherRemoteClient": 1,
+    "Aetherphone": 1,
+    "AetherphoneCN": 2,
+    "AkuItemSets": 1,
+    "AllaganTranslator": 1,
+    "AlmondHousing": 1,
+    "AnatoliIliou": 1,
+    "Anemos": 2,
+    "AnimationWardrobe": 3,
+    "AnoMech": 2,
+    "AoAoEnergy": 1,
+    "Armoire": 3,
+    "ArmoireButlerPlugin": 2,
+    "Armoryeet": 1,
+    "AsMobPlate": 1,
+    "AutoFateGrind": 1,
+    "AutoFrontline": 3,
+    "AutoHunt": 1,
+    "AutoHuntGrinder": 1,
+    "AutoHuntTrain": 1,
+    "AutoKill": 2,
+    "AutoLoseVerminion": 1,
+    "AutoRaiseAccept": 1,
+    "AutoReactFFXIV": 1,
+    "AutoRezzer": 1,
+    "AygeaChat2": 2,
+    "BardToolbox": 1,
+    "BetterMountBGM": 1,
+    "BetterTargetingSystemPvP": 1,
+    "BigFishHelper": 1,
+    "Bunnies": 1,
+    "CombatStatistics": 1,
+    "CrescentIsleUsefulTool": 2,
+    "DawntrailReady": 1,
+    "DeepDungeonScore": 1,
+    "EurekaAggro": 1,
+    "Expedition": 1,
+    "FFXIVBetterFakeName": 2,
+    "FaloopMessenger": 1,
+    "Foretell": 1,
+    "GlamSource": 2,
+    "GlamourSaver": 1,
+    "GlamourThis": 1,
+    "Henchman": 1,
+    "HousingMarketShopper": 1,
+    "ICE-bld": 1,
+    "KupoCombo": 1,
+    "KupoTradeMaster": 1,
+    "LazyMarketCompanion": 2,
+    "LookyLoo": 1,
+    "Mahjong.Plugin.Dalamud": 1,
+    "MahjongHater": 1,
+    "MahjongSensei": 1,
+    "Meddle.Plugin": 1,
+    "Moirai": 3,
+    "Odysseus": 1,
+    "OnePiece": 1,
+    "OopsAllNudist": 2,
+    "Pawprint": 1,
+    "PoliteEorzea": 1,
+    "PotionSwapper": 1,
+    "ProperHousingEx": 1,
+    "PvpAutoLb": 1,
+    "RaidReplay": 1,
+    "RotationSolverLocalized": 2,
+    "SaucyGateLoop": 2,
+    "SentinelHunts": 1,
+    "SillyToolbox": 1,
+    "SimpleACR": 1,
+    "SmartRecipeRestockHelper": 2,
+    "SonarPlugin": 4,
+    "Theseus": 1,
+    "TreasureForecast": 3,
+    "TreasureHunt": 5,
+    "TreasureRoute": 1,
+    "UniversalModConverter": 1,
+    "Warcry": 1,
+    "WigglyQuest": 19,
+    "WondrousTailsCalculator": 1,
+    "XSZToolbox": 1,
+    "ascended-ezwondroustails": 1,
+    "bozjalone-Dev": 2,
+    "orchestrionaria": 2,
+    "seasonalevent": 1,
+    "visland_cn": 1
+  },
+  "countMapSha256": "da3b6d85e4a7ebba6648f8c7a46ceadb4d12759d332f4767a462702ce2c3bbe2",
+  "pluginCount": 92,
+  "recoveredCountSum": 148,
+  "meaning": "User-allocated historical recommendation increments replacing the previous 578-count repository-wide historical baseline. Live v2 recommendation counts are added separately and are not changed. Zero or blank allocation means no historical increment for that plugin.",
+  "replaces": {
+    "path": "discovery/recovery/2026-10-09-counts.json",
+    "countMapSha256": "6921291d39c3aea91f90aac027691604653c32cbd29261a480e5b3742b58ccdc",
+    "countSum": 578
+  },
+  "source": {
+    "workbookSha256": "661cdfd1e2eab9d8fdf5f66e86475f7ee85f16af7d1baa9db0129d2d2b0309c5",
+    "mappingSha256": "6c3944fa84a293e50f19752fb84603bfa70cdfb9791d67cd8acd0f9eceeb8cc3",
+    "extractedAtUtc": "2026-11-11T20:07:39.340516+00:00",
+    "inputMethod": "XLSX XML literal D-column inputs; formula cached values not used; blank plugin input equals zero."
+  },
+  "summary": {
+    "repositoryCount": 89,
+    "expectedRepositoryCount": 89,
+    "pluginCount": 239,
+    "expectedPluginCount": 239,
+    "sourceInputBlankCount": 145,
+    "budgetTotal": 150,
+    "allocatedTotal": 148,
+    "nonzeroPluginCount": 92,
+    "zeroPluginCount": 147,
+    "previousHistoricalTotal": 578,
+    "historicalDelta": -430,
+    "remainingTotal": 2,
+    "fullyAllocatedRepositoryCount": 88,
+    "unallocatedRepositoryCount": 1,
+    "overallocatedRepositoryCount": 0,
+    "invalidRepositoryCount": 0
+  },
+  "repositories": [
+    {
+      "id": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "pluginCount": 26,
+      "budget": 19,
+      "allocated": 19,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AethertekPluginManager",
+        "ADS",
+        "BFE",
+        "ChocoboColourized",
+        "ChokeAbo",
+        "DDuck",
+        "DhogGPT",
+        "DhogNav",
+        "DPS",
+        "FrenRider",
+        "botology",
+        "dad",
+        "dheacon",
+        "HelloFellowHuman",
+        "Influx",
+        "Krangler",
+        "LootGoblin",
+        "MOGTOME",
+        "mom",
+        "QSTCompanion",
+        "TTSL",
+        "VERMAXION",
+        "WigglyQuest",
+        "XADatabase",
+        "XAHudNavigator",
+        "XAZod"
+      ]
+    },
+    {
+      "id": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "pluginCount": 9,
+      "budget": 5,
+      "allocated": 5,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Aetherphone",
+        "AutoFateGrind",
+        "AutoHuntGrinder",
+        "AutoHuntTrain",
+        "AutoPvpSeriesGrind",
+        "AutoSightseeingLog",
+        "AutoTripleTriadGrind",
+        "Mahjong.Plugin.Dalamud",
+        "AutoDailyTribes"
+      ]
+    },
+    {
+      "id": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "pluginCount": 9,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AetherBars",
+        "AetherCompass2",
+        "AutoCollector",
+        "AutoJobQuest",
+        "bozjalone-Dev",
+        "DalamudCNAdapter",
+        "MaskedDalamud",
+        "TradeVendor",
+        "VIWIJP"
+      ]
+    },
+    {
+      "id": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "pluginCount": 16,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ArmoireAutoFill",
+        "AutoPotion",
+        "GluttonyCombo",
+        "LazyCrafter",
+        "LazyCrucible",
+        "LazyCurrencySpender",
+        "LazyFateAutomation",
+        "LazyFishSitter",
+        "LazyFoodBuff",
+        "LazyGearCollector",
+        "LazyHub",
+        "LazyMarketCompanion",
+        "LazyRetainerLive",
+        "LazySkywardTracker",
+        "LazyWTMath",
+        "PvPSolver"
+      ]
+    },
+    {
+      "id": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 8,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoFrontline",
+        "DTROverlay",
+        "EnhancedContextMenu",
+        "EnhancedQuickPanel",
+        "Goetia",
+        "Oracle",
+        "SlideGuide",
+        "Veilay"
+      ]
+    },
+    {
+      "id": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "pluginCount": 7,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoMakeTimeline",
+        "AutoStrategyBoardPagination",
+        "CrescentIsleUsefulTool",
+        "devLibra",
+        "FullCopyHudLayout",
+        "HappyTrigger",
+        "PhaseDpsChecker"
+      ]
+    },
+    {
+      "id": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 6,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ConditionCommandSender",
+        "DialogueInspect",
+        "DomanMahjongSolverDebug",
+        "MateriaExtractor",
+        "PetMove",
+        "SmartRecipeRestockHelper"
+      ]
+    },
+    {
+      "id": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "pluginCount": 5,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AetherCompass",
+        "CodexMonitor",
+        "CycleOpener",
+        "HotbarAtelier",
+        "MinimapZoom"
+      ]
+    },
+    {
+      "id": "R009",
+      "repoURL": "https://raw.githubusercontent.com/AlmerisBE/DalamudPlugins/main/repo.json",
+      "pluginCount": 4,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Armoire",
+        "Befriender",
+        "Marketeer",
+        "RolePlayer"
+      ]
+    },
+    {
+      "id": "R010",
+      "repoURL": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 3,
+      "budget": 4,
+      "allocated": 4,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ExtraChat-CN",
+        "JustBackup",
+        "SonarPlugin"
+      ]
+    },
+    {
+      "id": "R011",
+      "repoURL": "https://raw.githubusercontent.com/RoseOfficial/Olympus/main/repo.json",
+      "pluginCount": 4,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Komos",
+        "Mnemosyne",
+        "Moirai",
+        "Olympus"
+      ]
+    },
+    {
+      "id": "R012",
+      "repoURL": "https://raw.githubusercontent.com/tigurand/DalamudPlugins/main/repo.json",
+      "pluginCount": 4,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "HotKeyIt",
+        "MapFocus",
+        "OopsAllNudist",
+        "XIVAICompanion"
+      ]
+    },
+    {
+      "id": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "pluginCount": 7,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ArmouryCleaner",
+        "BagAssistant",
+        "CombatStatistics",
+        "MinimapPlugin",
+        "QuestNav",
+        "Slidecaster",
+        "UndercutterFFXIV"
+      ]
+    },
+    {
+      "id": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "pluginCount": 6,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BGMCommands",
+        "ChatColors",
+        "SaucyGateLoop",
+        "SearchInfoMenu",
+        "TwinkiMarket",
+        "VulcanToArtisan"
+      ]
+    },
+    {
+      "id": "R015",
+      "repoURL": "https://raw.githubusercontent.com/yimo0908/DalamudPlugin/main/repo.json",
+      "pluginCount": 3,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BlindBoxPlugin",
+        "SpecialWeaponProgressOverview",
+        "TreasureForecast"
+      ]
+    },
+    {
+      "id": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 5,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ChronoLog",
+        "Clarion",
+        "orchestrionaria",
+        "PartySorter",
+        "QuietTips"
+      ]
+    },
+    {
+      "id": "R017",
+      "repoURL": "https://raw.githubusercontent.com/anomek/MyDalamudPlugins/master/pluginmaster.json",
+      "pluginCount": 3,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AnoMech",
+        "AutoTravel",
+        "TomestoneViewer"
+      ]
+    },
+    {
+      "id": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "pluginCount": 5,
+      "budget": 2,
+      "allocated": 0,
+      "remaining": 2,
+      "overallocated": 0,
+      "status": "unallocated",
+      "plugins": [
+        "AvailableHousingSearch",
+        "BestGearAll",
+        "InNeedQueue",
+        "RetainerGearOptimizer",
+        "RetainerVentureAssigner"
+      ]
+    },
+    {
+      "id": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "pluginCount": 5,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Brio-CN",
+        "GatherBuddy",
+        "HyperboreaCN",
+        "PosePad",
+        "visland_cn"
+      ]
+    },
+    {
+      "id": "R020",
+      "repoURL": "https://raw.githubusercontent.com/wenliang110/TreasureHunt/main/repo.json",
+      "pluginCount": 1,
+      "budget": 5,
+      "allocated": 5,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "TreasureHunt"
+      ]
+    },
+    {
+      "id": "R021",
+      "repoURL": "https://raw.githubusercontent.com/BSoD38/dalamud-plugins/main/pluginmaster.json",
+      "pluginCount": 4,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AnalogKeyboard",
+        "FootIk",
+        "TysiTweaks",
+        "Warcry"
+      ]
+    },
+    {
+      "id": "R022",
+      "repoURL": "https://raw.githubusercontent.com/itsaygea/DalamudPlugins/main/repo.json",
+      "pluginCount": 2,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AygeaChat2",
+        "AygeaMarketInsight"
+      ]
+    },
+    {
+      "id": "R023",
+      "repoURL": "https://raw.githubusercontent.com/J1ntttao/FFXIVDalamudPlugins/master/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "FFXIVBetterFakeName",
+        "TriadBuddyAuto"
+      ]
+    },
+    {
+      "id": "R024",
+      "repoURL": "https://raw.githubusercontent.com/jkleinne/ascended-plugins/main/pluginmaster.json",
+      "pluginCount": 4,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ascended-dagobert",
+        "ascended-ezwondroustails",
+        "ascended-ledger",
+        "ascended-rotationsolverreborn"
+      ]
+    },
+    {
+      "id": "R025",
+      "repoURL": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+      "pluginCount": 4,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AetherCurrentUnlocker",
+        "AetherRadio",
+        "CharacterArchive",
+        "GlamourSaver"
+      ]
+    },
+    {
+      "id": "R026",
+      "repoURL": "https://raw.githubusercontent.com/VeeverSW/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 3,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "A-Realm-Recorded-Unrestricted",
+        "AetherphoneCN",
+        "TooltipNotes"
+      ]
+    },
+    {
+      "id": "R027",
+      "repoURL": "https://raw.githubusercontent.com/AHAKuo/ahadevtools/main/pluginmaster.json",
+      "pluginCount": 3,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BladUI",
+        "PoliteEorzea",
+        "XMapper"
+      ]
+    },
+    {
+      "id": "R028",
+      "repoURL": "https://raw.githubusercontent.com/Joshua-XIV/MyDalamudPlugin/main/repo.json",
+      "pluginCount": 3,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoScrip",
+        "Bunnies",
+        "TreasureMaps"
+      ]
+    },
+    {
+      "id": "R029",
+      "repoURL": "https://raw.githubusercontent.com/link-0402/DalamudPlugins/main/repo.json",
+      "pluginCount": 3,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "InstantEdit",
+        "UniversalModConverter",
+        "WindowResizePlus"
+      ]
+    },
+    {
+      "id": "R030",
+      "repoURL": "https://raw.githubusercontent.com/Marobotic/PfPresets/main/repo/repo.json",
+      "pluginCount": 3,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoRezzer",
+        "DutyDM",
+        "PfPresets"
+      ]
+    },
+    {
+      "id": "R031",
+      "repoURL": "https://raw.githubusercontent.com/selken-ixx/SelkenDalamud/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ArmoireButlerPlugin",
+        "FashionCheckHelperPlugin"
+      ]
+    },
+    {
+      "id": "R032",
+      "repoURL": "https://raw.githubusercontent.com/Shinoyami/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 3,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoRaiseAccept",
+        "MitPlan",
+        "MitPlanRecorder"
+      ]
+    },
+    {
+      "id": "R033",
+      "repoURL": "https://raw.githubusercontent.com/Stitch-26/Animation-Wardrobe/master/Animation Wardrobe/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AnimationWardrobe"
+      ]
+    },
+    {
+      "id": "R034",
+      "repoURL": "https://raw.githubusercontent.com/sunnie-sunday/AcousticKitty/main/repo.json",
+      "pluginCount": 1,
+      "budget": 3,
+      "allocated": 3,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AcousticKitty"
+      ]
+    },
+    {
+      "id": "R035",
+      "repoURL": "https://puni.sh/api/repository/knightmore",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Henchman",
+        "Knightshopper"
+      ]
+    },
+    {
+      "id": "R036",
+      "repoURL": "https://raw.githubusercontent.com/Angelways/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Anemos"
+      ]
+    },
+    {
+      "id": "R037",
+      "repoURL": "https://raw.githubusercontent.com/blackappleD/DalamudPlugins/main/repo.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ICE-bld",
+        "Pipi"
+      ]
+    },
+    {
+      "id": "R038",
+      "repoURL": "https://raw.githubusercontent.com/d12frosted/autokill/main/repo.json",
+      "pluginCount": 1,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoKill"
+      ]
+    },
+    {
+      "id": "R039",
+      "repoURL": "https://raw.githubusercontent.com/greenteakitkats/DalamudPlugins/main/repo.json",
+      "pluginCount": 1,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ARoomReborn"
+      ]
+    },
+    {
+      "id": "R040",
+      "repoURL": "https://raw.githubusercontent.com/hyirax/AlmondPlugins/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AlmondHousing",
+        "AlmondZoom"
+      ]
+    },
+    {
+      "id": "R041",
+      "repoURL": "https://raw.githubusercontent.com/MarshalTitan/SRankSentinel/main/repo.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "SentinelHunts",
+        "SRankSentinel"
+      ]
+    },
+    {
+      "id": "R042",
+      "repoURL": "https://raw.githubusercontent.com/Nero0421/Nero-dalamud/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AoAoEnergy",
+        "HoardFarmX"
+      ]
+    },
+    {
+      "id": "R043",
+      "repoURL": "https://raw.githubusercontent.com/NeXzRo/Repo/main/repo.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BetterTargetingSystemPvP",
+        "Dalamud.LoadingImage2"
+      ]
+    },
+    {
+      "id": "R044",
+      "repoURL": "https://raw.githubusercontent.com/Olympia-Guardian/codex-olympia-dalamud/main/repo.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoLoseVerminion",
+        "CodexOlympia"
+      ]
+    },
+    {
+      "id": "R045",
+      "repoURL": "https://raw.githubusercontent.com/Peterseer/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AICompanion",
+        "Simulant.MoodlesBridge"
+      ]
+    },
+    {
+      "id": "R046",
+      "repoURL": "https://raw.githubusercontent.com/pffxivtools/ffxiv-bard-plugins-linux/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BardToolbox",
+        "MasterOfPuppets"
+      ]
+    },
+    {
+      "id": "R047",
+      "repoURL": "https://raw.githubusercontent.com/Primov1x/GlamSource/main/repo.json",
+      "pluginCount": 1,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "GlamSource"
+      ]
+    },
+    {
+      "id": "R048",
+      "repoURL": "https://raw.githubusercontent.com/ShoOtaku/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 2,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "XSZRemoteChatBridge",
+        "XSZToolbox"
+      ]
+    },
+    {
+      "id": "R049",
+      "repoURL": "https://raw.githubusercontent.com/zheWn/RSRcnPU/localization-feature/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 2,
+      "allocated": 2,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "RotationSolverLocalized"
+      ]
+    },
+    {
+      "id": "R050",
+      "repoURL": "https://github.com/aetherremote/AetherRemote/raw/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AetherRemoteClient"
+      ]
+    },
+    {
+      "id": "R051",
+      "repoURL": "https://puni.sh/api/repository/aetherlove",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AetherLovePlugin"
+      ]
+    },
+    {
+      "id": "R052",
+      "repoURL": "https://raw.githubusercontent.com/a16239438/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Pawprint"
+      ]
+    },
+    {
+      "id": "R053",
+      "repoURL": "https://raw.githubusercontent.com/Akurosia/AkuItemSets/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AkuItemSets"
+      ]
+    },
+    {
+      "id": "R054",
+      "repoURL": "https://raw.githubusercontent.com/Arceuid731/Foretell/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Foretell"
+      ]
+    },
+    {
+      "id": "R055",
+      "repoURL": "https://raw.githubusercontent.com/Blackstar90210/Allagan-Translator--Local-AI---Online-/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AllaganTranslator"
+      ]
+    },
+    {
+      "id": "R056",
+      "repoURL": "https://raw.githubusercontent.com/dalamudx/onepiece/master/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "OnePiece"
+      ]
+    },
+    {
+      "id": "R057",
+      "repoURL": "https://raw.githubusercontent.com/grimgrum/action-cam-for-FFXIV/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ActionCamera"
+      ]
+    },
+    {
+      "id": "R058",
+      "repoURL": "https://raw.githubusercontent.com/HanamiGG/KupoTradeMaster/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "KupoTradeMaster"
+      ]
+    },
+    {
+      "id": "R059",
+      "repoURL": "https://raw.githubusercontent.com/hocng015/Expedition-xiv/claude/recipe-automation-plugin-f6HyG/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Expedition"
+      ]
+    },
+    {
+      "id": "R060",
+      "repoURL": "https://raw.githubusercontent.com/i-wrote-this-myself/PotionSwapper/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "PotionSwapper"
+      ]
+    },
+    {
+      "id": "R061",
+      "repoURL": "https://raw.githubusercontent.com/icehaku/BetterMountBGM/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BetterMountBGM"
+      ]
+    },
+    {
+      "id": "R062",
+      "repoURL": "https://raw.githubusercontent.com/IkHmTeJ/Wondrous-Tails-Solver/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "WondrousTailsCalculator"
+      ]
+    },
+    {
+      "id": "R063",
+      "repoURL": "https://raw.githubusercontent.com/jshade2710/faloop-messenger/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "FaloopMessenger"
+      ]
+    },
+    {
+      "id": "R064",
+      "repoURL": "https://raw.githubusercontent.com/Korokatto/Armoryeet/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Armoryeet"
+      ]
+    },
+    {
+      "id": "R065",
+      "repoURL": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "EurekaAggro"
+      ]
+    },
+    {
+      "id": "R066",
+      "repoURL": "https://raw.githubusercontent.com/Mayo66/moon/refs/heads/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AnatoliIliou"
+      ]
+    },
+    {
+      "id": "R067",
+      "repoURL": "https://raw.githubusercontent.com/MintakaSeiran/AsMobPlate/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AsMobPlate"
+      ]
+    },
+    {
+      "id": "R068",
+      "repoURL": "https://raw.githubusercontent.com/Miraco33/seasonal-event/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "seasonalevent"
+      ]
+    },
+    {
+      "id": "R069",
+      "repoURL": "https://raw.githubusercontent.com/ofnature/Odysseus/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Odysseus"
+      ]
+    },
+    {
+      "id": "R070",
+      "repoURL": "https://raw.githubusercontent.com/ofnature/Theseus/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Theseus"
+      ]
+    },
+    {
+      "id": "R071",
+      "repoURL": "https://raw.githubusercontent.com/PassiveModding/Meddle/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "Meddle.Plugin"
+      ]
+    },
+    {
+      "id": "R072",
+      "repoURL": "https://raw.githubusercontent.com/Rasil23/DeepDungeonScore/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "DeepDungeonScore"
+      ]
+    },
+    {
+      "id": "R073",
+      "repoURL": "https://raw.githubusercontent.com/Sansflaire/AutoReactFFXIV/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoReactFFXIV"
+      ]
+    },
+    {
+      "id": "R074",
+      "repoURL": "https://raw.githubusercontent.com/Sevii77/properhousing/master/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "ProperHousingEx"
+      ]
+    },
+    {
+      "id": "R075",
+      "repoURL": "https://raw.githubusercontent.com/sfy20001220-collab/simpleacr/main/dist/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "SimpleACR"
+      ]
+    },
+    {
+      "id": "R076",
+      "repoURL": "https://raw.githubusercontent.com/shifusen329/raid-replay/master/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "RaidReplay"
+      ]
+    },
+    {
+      "id": "R077",
+      "repoURL": "https://raw.githubusercontent.com/ShiraisumiKiyoshi/AutoHunt/main/repo/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AutoHunt"
+      ]
+    },
+    {
+      "id": "R078",
+      "repoURL": "https://raw.githubusercontent.com/ShoValentine/KupoCombo/master/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "KupoCombo"
+      ]
+    },
+    {
+      "id": "R079",
+      "repoURL": "https://raw.githubusercontent.com/sleousis/DawntrailReady/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "DawntrailReady"
+      ]
+    },
+    {
+      "id": "R080",
+      "repoURL": "https://raw.githubusercontent.com/smolzy/LookyLoo/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "LookyLoo"
+      ]
+    },
+    {
+      "id": "R081",
+      "repoURL": "https://raw.githubusercontent.com/Sojiroh/SojirohPlugins/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "TreasureRoute"
+      ]
+    },
+    {
+      "id": "R082",
+      "repoURL": "https://raw.githubusercontent.com/stoni89/DalamudPlugins/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "BigFishHelper"
+      ]
+    },
+    {
+      "id": "R083",
+      "repoURL": "https://raw.githubusercontent.com/sweatpotato13/FFXIV-MahjongSensei/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "MahjongSensei"
+      ]
+    },
+    {
+      "id": "R084",
+      "repoURL": "https://raw.githubusercontent.com/Tiberius1OOO/glamour_this/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "GlamourThis"
+      ]
+    },
+    {
+      "id": "R085",
+      "repoURL": "https://raw.githubusercontent.com/Tihlyn/MahjongHater/main/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "MahjongHater"
+      ]
+    },
+    {
+      "id": "R086",
+      "repoURL": "https://raw.githubusercontent.com/u86cd/DalamudPlugins/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "SillyToolbox"
+      ]
+    },
+    {
+      "id": "R087",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/FFXIV-AutoPVPLimitBreak/master/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "PvpAutoLb"
+      ]
+    },
+    {
+      "id": "R088",
+      "repoURL": "https://raw.githubusercontent.com/Yodhrin13/HousingMarketShopper/main/pluginmaster.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "HousingMarketShopper"
+      ]
+    },
+    {
+      "id": "R089",
+      "repoURL": "https://raw.githubusercontent.com/YuuNoce/AIRoleplay/master/repo.json",
+      "pluginCount": 1,
+      "budget": 1,
+      "allocated": 1,
+      "remaining": 0,
+      "overallocated": 0,
+      "status": "fully_allocated",
+      "plugins": [
+        "AIRoleplay"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "internalName": "AethertekPluginManager",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 19
+    },
+    {
+      "internalName": "ADS",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 18
+    },
+    {
+      "internalName": "BFE",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "ChocoboColourized",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "ChokeAbo",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "DDuck",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "DhogGPT",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "DhogNav",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "DPS",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "FrenRider",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 12
+    },
+    {
+      "internalName": "botology",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "dad",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "dheacon",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "HelloFellowHuman",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "Influx",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "Krangler",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "LootGoblin",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "MOGTOME",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "mom",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "QSTCompanion",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "TTSL",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "VERMAXION",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "WigglyQuest",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 19,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "XADatabase",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "XAHudNavigator",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "XAZod",
+      "repoGroupId": "R001",
+      "repoURL": "https://aethertek.io/x.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 7
+    },
+    {
+      "internalName": "Aetherphone",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoFateGrind",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoHuntGrinder",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoHuntTrain",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoPvpSeriesGrind",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoSightseeingLog",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoTripleTriadGrind",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "Mahjong.Plugin.Dalamud",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AutoDailyTribes",
+      "repoGroupId": "R002",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 4
+    },
+    {
+      "internalName": "AetherBars",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AetherCompass2",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoCollector",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoJobQuest",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "bozjalone-Dev",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "DalamudCNAdapter",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "MaskedDalamud",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "TradeVendor",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "VIWIJP",
+      "repoGroupId": "R003",
+      "repoURL": "https://raw.githubusercontent.com/rioriopu/PrivateReleaseRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ArmoireAutoFill",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoPotion",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "GluttonyCombo",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyCrafter",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyCrucible",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyCurrencySpender",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyFateAutomation",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyFishSitter",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyFoodBuff",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyGearCollector",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyHub",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyMarketCompanion",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyRetainerLive",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazySkywardTracker",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LazyWTMath",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PvPSolver",
+      "repoGroupId": "R004",
+      "repoURL": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoFrontline",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "DTROverlay",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "EnhancedContextMenu",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "EnhancedQuickPanel",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Goetia",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Oracle",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "SlideGuide",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Veilay",
+      "repoGroupId": "R005",
+      "repoURL": "https://raw.githubusercontent.com/exatrines/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoMakeTimeline",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoStrategyBoardPagination",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "CrescentIsleUsefulTool",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "devLibra",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "FullCopyHudLayout",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "HappyTrigger",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "PhaseDpsChecker",
+      "repoGroupId": "R006",
+      "repoURL": "https://raw.githubusercontent.com/Rowsai/Rowsai-Plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ConditionCommandSender",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "DialogueInspect",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "DomanMahjongSolverDebug",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "MateriaExtractor",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "PetMove",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "SmartRecipeRestockHelper",
+      "repoGroupId": "R007",
+      "repoURL": "https://raw.githubusercontent.com/Qmeko/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AetherCompass",
+      "repoGroupId": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "CodexMonitor",
+      "repoGroupId": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "CycleOpener",
+      "repoGroupId": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "HotbarAtelier",
+      "repoGroupId": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "MinimapZoom",
+      "repoGroupId": "R008",
+      "repoURL": "https://raw.githubusercontent.com/Aleqsd/dalamud-plugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Armoire",
+      "repoGroupId": "R009",
+      "repoURL": "https://raw.githubusercontent.com/AlmerisBE/DalamudPlugins/main/repo.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "Befriender",
+      "repoGroupId": "R009",
+      "repoURL": "https://raw.githubusercontent.com/AlmerisBE/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Marketeer",
+      "repoGroupId": "R009",
+      "repoURL": "https://raw.githubusercontent.com/AlmerisBE/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "RolePlayer",
+      "repoGroupId": "R009",
+      "repoURL": "https://raw.githubusercontent.com/AlmerisBE/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ExtraChat-CN",
+      "repoGroupId": "R010",
+      "repoURL": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 4
+    },
+    {
+      "internalName": "JustBackup",
+      "repoGroupId": "R010",
+      "repoURL": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "SonarPlugin",
+      "repoGroupId": "R010",
+      "repoURL": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 4,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Komos",
+      "repoGroupId": "R011",
+      "repoURL": "https://raw.githubusercontent.com/RoseOfficial/Olympus/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "Mnemosyne",
+      "repoGroupId": "R011",
+      "repoURL": "https://raw.githubusercontent.com/RoseOfficial/Olympus/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Moirai",
+      "repoGroupId": "R011",
+      "repoURL": "https://raw.githubusercontent.com/RoseOfficial/Olympus/main/repo.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Olympus",
+      "repoGroupId": "R011",
+      "repoURL": "https://raw.githubusercontent.com/RoseOfficial/Olympus/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "HotKeyIt",
+      "repoGroupId": "R012",
+      "repoURL": "https://raw.githubusercontent.com/tigurand/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "MapFocus",
+      "repoGroupId": "R012",
+      "repoURL": "https://raw.githubusercontent.com/tigurand/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "OopsAllNudist",
+      "repoGroupId": "R012",
+      "repoURL": "https://raw.githubusercontent.com/tigurand/DalamudPlugins/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "XIVAICompanion",
+      "repoGroupId": "R012",
+      "repoURL": "https://raw.githubusercontent.com/tigurand/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ArmouryCleaner",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BagAssistant",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "CombatStatistics",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MinimapPlugin",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "QuestNav",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Slidecaster",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "UndercutterFFXIV",
+      "repoGroupId": "R013",
+      "repoURL": "https://raw.githubusercontent.com/Aschmies/AschyQOL/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BGMCommands",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ChatColors",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SaucyGateLoop",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SearchInfoMenu",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TwinkiMarket",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "VulcanToArtisan",
+      "repoGroupId": "R014",
+      "repoURL": "https://raw.githubusercontent.com/MaJoRX0/MyDalamudPlugins/main/plugins.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BlindBoxPlugin",
+      "repoGroupId": "R015",
+      "repoURL": "https://raw.githubusercontent.com/yimo0908/DalamudPlugin/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "SpecialWeaponProgressOverview",
+      "repoGroupId": "R015",
+      "repoURL": "https://raw.githubusercontent.com/yimo0908/DalamudPlugin/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "TreasureForecast",
+      "repoGroupId": "R015",
+      "repoURL": "https://raw.githubusercontent.com/yimo0908/DalamudPlugin/main/repo.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ChronoLog",
+      "repoGroupId": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "Clarion",
+      "repoGroupId": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "orchestrionaria",
+      "repoGroupId": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PartySorter",
+      "repoGroupId": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "QuietTips",
+      "repoGroupId": "R016",
+      "repoURL": "https://raw.githubusercontent.com/AemiliusXIV/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AnoMech",
+      "repoGroupId": "R017",
+      "repoURL": "https://raw.githubusercontent.com/anomek/MyDalamudPlugins/master/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AutoTravel",
+      "repoGroupId": "R017",
+      "repoURL": "https://raw.githubusercontent.com/anomek/MyDalamudPlugins/master/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "TomestoneViewer",
+      "repoGroupId": "R017",
+      "repoURL": "https://raw.githubusercontent.com/anomek/MyDalamudPlugins/master/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AvailableHousingSearch",
+      "repoGroupId": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "BestGearAll",
+      "repoGroupId": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "InNeedQueue",
+      "repoGroupId": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "RetainerGearOptimizer",
+      "repoGroupId": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "RetainerVentureAssigner",
+      "repoGroupId": "R018",
+      "repoURL": "https://raw.githubusercontent.com/WowLookThatGuy/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Brio-CN",
+      "repoGroupId": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "GatherBuddy",
+      "repoGroupId": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "HyperboreaCN",
+      "repoGroupId": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PosePad",
+      "repoGroupId": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "visland_cn",
+      "repoGroupId": "R019",
+      "repoURL": "https://raw.githubusercontent.com/endfish/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TreasureHunt",
+      "repoGroupId": "R020",
+      "repoURL": "https://raw.githubusercontent.com/wenliang110/TreasureHunt/main/repo.json",
+      "allocatedCount": 5,
+      "previousHistoricalCount": 5
+    },
+    {
+      "internalName": "AnalogKeyboard",
+      "repoGroupId": "R021",
+      "repoURL": "https://raw.githubusercontent.com/BSoD38/dalamud-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "FootIk",
+      "repoGroupId": "R021",
+      "repoURL": "https://raw.githubusercontent.com/BSoD38/dalamud-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TysiTweaks",
+      "repoGroupId": "R021",
+      "repoURL": "https://raw.githubusercontent.com/BSoD38/dalamud-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Warcry",
+      "repoGroupId": "R021",
+      "repoURL": "https://raw.githubusercontent.com/BSoD38/dalamud-plugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AygeaChat2",
+      "repoGroupId": "R022",
+      "repoURL": "https://raw.githubusercontent.com/itsaygea/DalamudPlugins/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AygeaMarketInsight",
+      "repoGroupId": "R022",
+      "repoURL": "https://raw.githubusercontent.com/itsaygea/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "FFXIVBetterFakeName",
+      "repoGroupId": "R023",
+      "repoURL": "https://raw.githubusercontent.com/J1ntttao/FFXIVDalamudPlugins/master/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "TriadBuddyAuto",
+      "repoGroupId": "R023",
+      "repoURL": "https://raw.githubusercontent.com/J1ntttao/FFXIVDalamudPlugins/master/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ascended-dagobert",
+      "repoGroupId": "R024",
+      "repoURL": "https://raw.githubusercontent.com/jkleinne/ascended-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ascended-ezwondroustails",
+      "repoGroupId": "R024",
+      "repoURL": "https://raw.githubusercontent.com/jkleinne/ascended-plugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ascended-ledger",
+      "repoGroupId": "R024",
+      "repoURL": "https://raw.githubusercontent.com/jkleinne/ascended-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ascended-rotationsolverreborn",
+      "repoGroupId": "R024",
+      "repoURL": "https://raw.githubusercontent.com/jkleinne/ascended-plugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AetherCurrentUnlocker",
+      "repoGroupId": "R025",
+      "repoURL": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AetherRadio",
+      "repoGroupId": "R025",
+      "repoURL": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "CharacterArchive",
+      "repoGroupId": "R025",
+      "repoURL": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "GlamourSaver",
+      "repoGroupId": "R025",
+      "repoURL": "https://raw.githubusercontent.com/Roxyz0501/DalamudPluginRepo/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "A-Realm-Recorded-Unrestricted",
+      "repoGroupId": "R026",
+      "repoURL": "https://raw.githubusercontent.com/VeeverSW/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AetherphoneCN",
+      "repoGroupId": "R026",
+      "repoURL": "https://raw.githubusercontent.com/VeeverSW/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TooltipNotes",
+      "repoGroupId": "R026",
+      "repoURL": "https://raw.githubusercontent.com/VeeverSW/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BladUI",
+      "repoGroupId": "R027",
+      "repoURL": "https://raw.githubusercontent.com/AHAKuo/ahadevtools/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PoliteEorzea",
+      "repoGroupId": "R027",
+      "repoURL": "https://raw.githubusercontent.com/AHAKuo/ahadevtools/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "XMapper",
+      "repoGroupId": "R027",
+      "repoURL": "https://raw.githubusercontent.com/AHAKuo/ahadevtools/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoScrip",
+      "repoGroupId": "R028",
+      "repoURL": "https://raw.githubusercontent.com/Joshua-XIV/MyDalamudPlugin/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Bunnies",
+      "repoGroupId": "R028",
+      "repoURL": "https://raw.githubusercontent.com/Joshua-XIV/MyDalamudPlugin/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TreasureMaps",
+      "repoGroupId": "R028",
+      "repoURL": "https://raw.githubusercontent.com/Joshua-XIV/MyDalamudPlugin/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "InstantEdit",
+      "repoGroupId": "R029",
+      "repoURL": "https://raw.githubusercontent.com/link-0402/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "UniversalModConverter",
+      "repoGroupId": "R029",
+      "repoURL": "https://raw.githubusercontent.com/link-0402/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "WindowResizePlus",
+      "repoGroupId": "R029",
+      "repoURL": "https://raw.githubusercontent.com/link-0402/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoRezzer",
+      "repoGroupId": "R030",
+      "repoURL": "https://raw.githubusercontent.com/Marobotic/PfPresets/main/repo/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "DutyDM",
+      "repoGroupId": "R030",
+      "repoURL": "https://raw.githubusercontent.com/Marobotic/PfPresets/main/repo/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PfPresets",
+      "repoGroupId": "R030",
+      "repoURL": "https://raw.githubusercontent.com/Marobotic/PfPresets/main/repo/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ArmoireButlerPlugin",
+      "repoGroupId": "R031",
+      "repoURL": "https://raw.githubusercontent.com/selken-ixx/SelkenDalamud/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "FashionCheckHelperPlugin",
+      "repoGroupId": "R031",
+      "repoURL": "https://raw.githubusercontent.com/selken-ixx/SelkenDalamud/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoRaiseAccept",
+      "repoGroupId": "R032",
+      "repoURL": "https://raw.githubusercontent.com/Shinoyami/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MitPlan",
+      "repoGroupId": "R032",
+      "repoURL": "https://raw.githubusercontent.com/Shinoyami/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MitPlanRecorder",
+      "repoGroupId": "R032",
+      "repoURL": "https://raw.githubusercontent.com/Shinoyami/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AnimationWardrobe",
+      "repoGroupId": "R033",
+      "repoURL": "https://raw.githubusercontent.com/Stitch-26/Animation-Wardrobe/master/Animation Wardrobe/pluginmaster.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "AcousticKitty",
+      "repoGroupId": "R034",
+      "repoURL": "https://raw.githubusercontent.com/sunnie-sunday/AcousticKitty/main/repo.json",
+      "allocatedCount": 3,
+      "previousHistoricalCount": 3
+    },
+    {
+      "internalName": "Henchman",
+      "repoGroupId": "R035",
+      "repoURL": "https://puni.sh/api/repository/knightmore",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Knightshopper",
+      "repoGroupId": "R035",
+      "repoURL": "https://puni.sh/api/repository/knightmore",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Anemos",
+      "repoGroupId": "R036",
+      "repoURL": "https://raw.githubusercontent.com/Angelways/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ICE-bld",
+      "repoGroupId": "R037",
+      "repoURL": "https://raw.githubusercontent.com/blackappleD/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Pipi",
+      "repoGroupId": "R037",
+      "repoURL": "https://raw.githubusercontent.com/blackappleD/DalamudPlugins/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoKill",
+      "repoGroupId": "R038",
+      "repoURL": "https://raw.githubusercontent.com/d12frosted/autokill/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "ARoomReborn",
+      "repoGroupId": "R039",
+      "repoURL": "https://raw.githubusercontent.com/greenteakitkats/DalamudPlugins/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AlmondHousing",
+      "repoGroupId": "R040",
+      "repoURL": "https://raw.githubusercontent.com/hyirax/AlmondPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AlmondZoom",
+      "repoGroupId": "R040",
+      "repoURL": "https://raw.githubusercontent.com/hyirax/AlmondPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SentinelHunts",
+      "repoGroupId": "R041",
+      "repoURL": "https://raw.githubusercontent.com/MarshalTitan/SRankSentinel/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SRankSentinel",
+      "repoGroupId": "R041",
+      "repoURL": "https://raw.githubusercontent.com/MarshalTitan/SRankSentinel/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AoAoEnergy",
+      "repoGroupId": "R042",
+      "repoURL": "https://raw.githubusercontent.com/Nero0421/Nero-dalamud/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "HoardFarmX",
+      "repoGroupId": "R042",
+      "repoURL": "https://raw.githubusercontent.com/Nero0421/Nero-dalamud/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BetterTargetingSystemPvP",
+      "repoGroupId": "R043",
+      "repoURL": "https://raw.githubusercontent.com/NeXzRo/Repo/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Dalamud.LoadingImage2",
+      "repoGroupId": "R043",
+      "repoURL": "https://raw.githubusercontent.com/NeXzRo/Repo/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoLoseVerminion",
+      "repoGroupId": "R044",
+      "repoURL": "https://raw.githubusercontent.com/Olympia-Guardian/codex-olympia-dalamud/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "CodexOlympia",
+      "repoGroupId": "R044",
+      "repoURL": "https://raw.githubusercontent.com/Olympia-Guardian/codex-olympia-dalamud/main/repo.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AICompanion",
+      "repoGroupId": "R045",
+      "repoURL": "https://raw.githubusercontent.com/Peterseer/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Simulant.MoodlesBridge",
+      "repoGroupId": "R045",
+      "repoURL": "https://raw.githubusercontent.com/Peterseer/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BardToolbox",
+      "repoGroupId": "R046",
+      "repoURL": "https://raw.githubusercontent.com/pffxivtools/ffxiv-bard-plugins-linux/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MasterOfPuppets",
+      "repoGroupId": "R046",
+      "repoURL": "https://raw.githubusercontent.com/pffxivtools/ffxiv-bard-plugins-linux/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "GlamSource",
+      "repoGroupId": "R047",
+      "repoURL": "https://raw.githubusercontent.com/Primov1x/GlamSource/main/repo.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "XSZRemoteChatBridge",
+      "repoGroupId": "R048",
+      "repoURL": "https://raw.githubusercontent.com/ShoOtaku/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 0,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "XSZToolbox",
+      "repoGroupId": "R048",
+      "repoURL": "https://raw.githubusercontent.com/ShoOtaku/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "RotationSolverLocalized",
+      "repoGroupId": "R049",
+      "repoURL": "https://raw.githubusercontent.com/zheWn/RSRcnPU/localization-feature/pluginmaster.json",
+      "allocatedCount": 2,
+      "previousHistoricalCount": 2
+    },
+    {
+      "internalName": "AetherRemoteClient",
+      "repoGroupId": "R050",
+      "repoURL": "https://github.com/aetherremote/AetherRemote/raw/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AetherLovePlugin",
+      "repoGroupId": "R051",
+      "repoURL": "https://puni.sh/api/repository/aetherlove",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Pawprint",
+      "repoGroupId": "R052",
+      "repoURL": "https://raw.githubusercontent.com/a16239438/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AkuItemSets",
+      "repoGroupId": "R053",
+      "repoURL": "https://raw.githubusercontent.com/Akurosia/AkuItemSets/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Foretell",
+      "repoGroupId": "R054",
+      "repoURL": "https://raw.githubusercontent.com/Arceuid731/Foretell/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AllaganTranslator",
+      "repoGroupId": "R055",
+      "repoURL": "https://raw.githubusercontent.com/Blackstar90210/Allagan-Translator--Local-AI---Online-/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "OnePiece",
+      "repoGroupId": "R056",
+      "repoURL": "https://raw.githubusercontent.com/dalamudx/onepiece/master/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ActionCamera",
+      "repoGroupId": "R057",
+      "repoURL": "https://raw.githubusercontent.com/grimgrum/action-cam-for-FFXIV/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "KupoTradeMaster",
+      "repoGroupId": "R058",
+      "repoURL": "https://raw.githubusercontent.com/HanamiGG/KupoTradeMaster/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Expedition",
+      "repoGroupId": "R059",
+      "repoURL": "https://raw.githubusercontent.com/hocng015/Expedition-xiv/claude/recipe-automation-plugin-f6HyG/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PotionSwapper",
+      "repoGroupId": "R060",
+      "repoURL": "https://raw.githubusercontent.com/i-wrote-this-myself/PotionSwapper/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BetterMountBGM",
+      "repoGroupId": "R061",
+      "repoURL": "https://raw.githubusercontent.com/icehaku/BetterMountBGM/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "WondrousTailsCalculator",
+      "repoGroupId": "R062",
+      "repoURL": "https://raw.githubusercontent.com/IkHmTeJ/Wondrous-Tails-Solver/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "FaloopMessenger",
+      "repoGroupId": "R063",
+      "repoURL": "https://raw.githubusercontent.com/jshade2710/faloop-messenger/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Armoryeet",
+      "repoGroupId": "R064",
+      "repoURL": "https://raw.githubusercontent.com/Korokatto/Armoryeet/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "EurekaAggro",
+      "repoGroupId": "R065",
+      "repoURL": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AnatoliIliou",
+      "repoGroupId": "R066",
+      "repoURL": "https://raw.githubusercontent.com/Mayo66/moon/refs/heads/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AsMobPlate",
+      "repoGroupId": "R067",
+      "repoURL": "https://raw.githubusercontent.com/MintakaSeiran/AsMobPlate/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "seasonalevent",
+      "repoGroupId": "R068",
+      "repoURL": "https://raw.githubusercontent.com/Miraco33/seasonal-event/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Odysseus",
+      "repoGroupId": "R069",
+      "repoURL": "https://raw.githubusercontent.com/ofnature/Odysseus/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Theseus",
+      "repoGroupId": "R070",
+      "repoURL": "https://raw.githubusercontent.com/ofnature/Theseus/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "Meddle.Plugin",
+      "repoGroupId": "R071",
+      "repoURL": "https://raw.githubusercontent.com/PassiveModding/Meddle/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "DeepDungeonScore",
+      "repoGroupId": "R072",
+      "repoURL": "https://raw.githubusercontent.com/Rasil23/DeepDungeonScore/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoReactFFXIV",
+      "repoGroupId": "R073",
+      "repoURL": "https://raw.githubusercontent.com/Sansflaire/AutoReactFFXIV/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "ProperHousingEx",
+      "repoGroupId": "R074",
+      "repoURL": "https://raw.githubusercontent.com/Sevii77/properhousing/master/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SimpleACR",
+      "repoGroupId": "R075",
+      "repoURL": "https://raw.githubusercontent.com/sfy20001220-collab/simpleacr/main/dist/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "RaidReplay",
+      "repoGroupId": "R076",
+      "repoURL": "https://raw.githubusercontent.com/shifusen329/raid-replay/master/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AutoHunt",
+      "repoGroupId": "R077",
+      "repoURL": "https://raw.githubusercontent.com/ShiraisumiKiyoshi/AutoHunt/main/repo/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "KupoCombo",
+      "repoGroupId": "R078",
+      "repoURL": "https://raw.githubusercontent.com/ShoValentine/KupoCombo/master/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "DawntrailReady",
+      "repoGroupId": "R079",
+      "repoURL": "https://raw.githubusercontent.com/sleousis/DawntrailReady/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "LookyLoo",
+      "repoGroupId": "R080",
+      "repoURL": "https://raw.githubusercontent.com/smolzy/LookyLoo/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "TreasureRoute",
+      "repoGroupId": "R081",
+      "repoURL": "https://raw.githubusercontent.com/Sojiroh/SojirohPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "BigFishHelper",
+      "repoGroupId": "R082",
+      "repoURL": "https://raw.githubusercontent.com/stoni89/DalamudPlugins/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MahjongSensei",
+      "repoGroupId": "R083",
+      "repoURL": "https://raw.githubusercontent.com/sweatpotato13/FFXIV-MahjongSensei/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "GlamourThis",
+      "repoGroupId": "R084",
+      "repoURL": "https://raw.githubusercontent.com/Tiberius1OOO/glamour_this/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "MahjongHater",
+      "repoGroupId": "R085",
+      "repoURL": "https://raw.githubusercontent.com/Tihlyn/MahjongHater/main/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "SillyToolbox",
+      "repoGroupId": "R086",
+      "repoURL": "https://raw.githubusercontent.com/u86cd/DalamudPlugins/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "PvpAutoLb",
+      "repoGroupId": "R087",
+      "repoURL": "https://raw.githubusercontent.com/XeldarAlz/FFXIV-AutoPVPLimitBreak/master/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "HousingMarketShopper",
+      "repoGroupId": "R088",
+      "repoURL": "https://raw.githubusercontent.com/Yodhrin13/HousingMarketShopper/main/pluginmaster.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    },
+    {
+      "internalName": "AIRoleplay",
+      "repoGroupId": "R089",
+      "repoURL": "https://raw.githubusercontent.com/YuuNoce/AIRoleplay/master/repo.json",
+      "allocatedCount": 1,
+      "previousHistoricalCount": 1
+    }
+  ],
+  "readyForApply": true,
+  "unallocatedBudget": 2,
+  "appliedBlankRule": "zero",
+  "readinessBasis": "Source workbook matches the extracted data; all 239 plugin inputs are valid and no repository is overallocated. Unused budget remains unused and is not a requirement to allocate.",
+  "authorizationBasis": "Apply the saved user-completed workbook exactly, using the previously authorized blank=zero rule. Do not infer a distribution for unused budget.",
+  "finalizedOn": "2026-11-12"
+}

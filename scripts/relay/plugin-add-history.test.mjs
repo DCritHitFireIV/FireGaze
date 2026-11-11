@@ -7,7 +7,7 @@ import test from 'node:test';
 // production table. Only Cloudflare KV/Cache are replaced; every request runs
 // the complete production Worker and its real routing, aggregation and reset.
 const history = JSON.parse(readFileSync(process.env.FIREGAZE_HISTORY_FIXTURE
-  || new URL('../../discovery/recovery/2026-10-09-counts.json', import.meta.url), 'utf8'));
+  || new URL('../../discovery/recovery/2026-11-12-allocation.json', import.meta.url), 'utf8'));
 const source = readFileSync(new URL('./worker.js', import.meta.url), 'utf8');
 const marker = `plugin-add-history-reset:${history.id}`;
 const admin = 'offline-test-admin';
@@ -93,12 +93,12 @@ test('adds every recovered plugin once, preserving live-only and overlapping cou
     .seed('padd:Obsolete', 900));
   const { status, body } = await s.request();
   assert.equal(status, 200);
-  assert.equal(Object.keys(history.counts).length, 239);
-  assert.equal(sum(history.counts), 578);
-  assert.deepEqual(body.adds, { ...history.counts, ADS: 22, LiveOnly: 3 });
-  assert.equal(sum(body.adds), 585);
+  assert.equal(Object.keys(history.counts).length, 92);
+  assert.equal(sum(history.counts), 148);
+  assert.deepEqual(body.adds, { ...history.counts, ADS: 4, LiveOnly: 3 });
+  assert.equal(sum(body.adds), 155);
   assert.deepEqual(body.history, { id: history.id, countMapSha256: history.countMapSha256,
-    applied: true, count: 239, sum: 578, currentAddsCount: 2, currentAddsSum: 7 });
+    applied: true, count: 92, sum: 148, currentAddsCount: 2, currentAddsSum: 7 });
 });
 
 test('empty live data still yields the historical values without writing to KV', async () => {
@@ -112,8 +112,8 @@ test('repeated reads and shared-cache reads from fresh isolates never add the ba
   const s = setup(memoryKV().seed('padd:v2:ADS', 4));
   for (const request of [s.request, s.request, s.isolate(), s.isolate()]) {
     const result = await request();
-    assert.equal(result.body.adds.ADS, 22);
-    assert.equal(sum(result.body.adds), 582);
+    assert.equal(result.body.adds.ADS, 4);
+    assert.equal(sum(result.body.adds), 152);
   }
   assert.equal(s.kv.values.get('padd:v2:ADS'), '4');
 });
@@ -123,27 +123,27 @@ test('legacy shared aggregation cannot hide or double the recovered baseline', a
   await s.cache.put('https://firegaze-relay.invalid/agg/plugin?week=2026-W46&v=2',
     Response.json({ builtAt: s.clock.now, body: { ok: true, week: '2026-W46', adds: { ADS: 777 } } }));
   const result = await s.request();
-  assert.equal(result.body.adds.ADS, 22);
-  assert.equal(result.body.history.sum, 578);
+  assert.equal(result.body.adds.ADS, 4);
+  assert.equal(result.body.history.sum, 148);
 });
 
 test('a real recommendation POST increments live state and remains visible after cache expiry', async () => {
   const s = setup(memoryKV().seed('padd:v2:ADS', 4));
-  assert.equal((await s.request()).body.adds.ADS, 22);
+  assert.equal((await s.request()).body.adds.ADS, 4);
   assert.equal((await s.request('/plugin-add', { plugins: ['ADS', 'NewPlugin'] })).status, 200);
   s.clock.now += 7 * 3600_000;
   const result = await s.request();
-  assert.equal(result.body.adds.ADS, 23);
+  assert.equal(result.body.adds.ADS, 5);
   assert.equal(result.body.adds.NewPlugin, 1);
   assert.equal(result.body.history.currentAddsSum, 6);
-  assert.equal(result.body.history.sum, 578);
+  assert.equal(result.body.history.sum, 148);
 });
 
 test('failed authentication and disabled administration cannot change counts or history state', async () => {
   const s = setup(memoryKV().seed('padd:v2:ADS', 4));
   assert.equal((await s.request('/plugin-add/reset', {}, 'wrong-key')).status, 403);
   assert.equal((await s.request('/plugin-add/reset', {}, admin, { ADMIN_KEY: undefined })).status, 503);
-  assert.equal((await s.request()).body.adds.ADS, 22);
+  assert.equal((await s.request()).body.adds.ADS, 4);
   assert.equal(s.kv.values.has(marker), false);
 });
 
@@ -178,7 +178,7 @@ test('history suppression write failure happens before destructive deletion and 
   assert.equal(reset.body.deleted, 0);
   assert.equal(reset.body.historySuppressed, false);
   assert.equal(s.kv.values.get('padd:v2:ADS'), '4');
-  assert.equal((await s.isolate()()).body.adds.ADS, 22);
+  assert.equal((await s.isolate()()).body.adds.ADS, 4);
 });
 
 test('partial delete failure reports the observed state and does not resurrect recovered history', async () => {
@@ -227,4 +227,28 @@ test('plugin likes, weekly likes and library counts keep their original independ
   const like = await s.request('/plugin-like', { plugin: 'ADS' });
   assert.equal(like.body.total, 9);
   assert.equal(like.body.weekly, 3);
+});
+
+// Catch reusing the previous 578-count L2 snapshot after replacing the baseline.
+test('allocation revision ignores the prior history-generation cache and does not stack the old baseline', async () => {
+  const s = setup(memoryKV().seed('padd:v2:ADS', 4).seed('padd:v2:WigglyQuest', 1));
+  await s.cache.put(`https://firegaze-relay.invalid/agg/plugin?week=2026-W46&v=2&history=${history.replaces.countMapSha256}`,
+    Response.json({ builtAt: s.clock.now, body: { ok: true, week: '2026-W46',
+      adds: { ADS: 22, WigglyQuest: 8 }, history: { sum: 578 } } }));
+  const result = await s.request();
+  assert.equal(result.body.adds.ADS, 4, 'a zero historical allocation preserves the live value');
+  assert.equal(result.body.adds.WigglyQuest, 20, '19 allocated plus one live recommendation');
+  assert.equal(result.body.adds.AethertekPluginManager, undefined);
+  assert.equal(sum(result.body.adds), 153);
+  assert.equal(result.body.history.sum, 148);
+});
+
+// Catch changing the restoration ID and silently bypassing an existing reset.
+test('a suppression marker created before the allocation revision still suppresses the revised baseline', async () => {
+  const s = setup(memoryKV().seed('plugin-add-history-reset:2026-10-09-counts', 1, false)
+    .seed('padd:v2:WigglyQuest', 2));
+  const result = await s.request();
+  assert.deepEqual(result.body.adds, { WigglyQuest: 2 });
+  assert.equal(result.body.history.applied, false);
+  assert.equal(result.body.history.sum, 0);
 });
