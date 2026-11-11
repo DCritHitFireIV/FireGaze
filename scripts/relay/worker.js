@@ -33,6 +33,8 @@
 //       推荐 = 玩家在发现页选中并安装成功的插件（不再是旧版「加库时把整库插件广播一遍」）。
 //       存储键前缀 `padd:<名>` → `padd:v2:<名>`：旧键不再读写，计数从 0 重新开始；L2 聚合缓存键同步带 v2。
 //       管理端点 POST /plugin-add/reset（要 ADMIN_KEY）：物理删掉全部 `padd:*` 键（新旧口径一起清）并清聚合缓存。
+//       2026-11-12 恢复已留证的旧计数作为固定基线；显示值=基线+实时v2。重复部署不重复累加。
+//       reset 同时持久抑制这份基线；旧基线不会在清空后复活。管理失败如实返回，不回滚删除。
 //   · 准点唤醒译文工作流（Cloudflare Cron Trigger）——2026-10-05 新增（v7）：
 //       GitHub 自带 schedule 实测延迟数小时（9/21、9/28 的周一跑晚了 5.8/6.8 小时），
 //       所以周一/周五 00:00 UTC（北京 08:00）由本 worker 发 repository_dispatch(translate-now)。
@@ -103,6 +105,253 @@ const LIBRARY_LIKE_PER_IP_LIMIT = 30; // 每分钟每 IP（点赞；没做去重
 const PLUGIN_LIKE_PER_IP_LIMIT = 60; // 每分钟每 IP（插件发现：给插件点赞）
 const PLUGIN_ADD_PER_IP_LIMIT = 120; // 每分钟每 IP（插件发现：加库推荐上报）
 const PLUGIN_ADD_PREFIX = 'padd:v2:'; // v13：旧 `padd:<名>` 键不再读写（重置推荐数）；reset 端点按 'padd:' 前缀清全部版本
+// 2026-11-12：恢复 10 月 9 日清零前已找回的推荐历史（239 项，共 578）。
+// 证据：discovery/recovery/2026-10-09-counts.json；同插件取最新旧快照，不跨日相加。
+// 历史是加库时连带计数，不是安装人数。只在读聚合时合成，绝不重写实时 padd:v2:。
+const PLUGIN_ADD_HISTORY_ID = "2026-10-09-counts";
+const PLUGIN_ADD_HISTORY_SHA256 = "6921291d39c3aea91f90aac027691604653c32cbd29261a480e5b3742b58ccdc";
+const PLUGIN_ADD_HISTORY_RESET_KEY = `plugin-add-history-reset:${PLUGIN_ADD_HISTORY_ID}`;
+const PLUGIN_ADD_HISTORY = Object.freeze({
+  "A-Realm-Recorded-Unrestricted": 2,
+  "ADS": 18,
+  "AICompanion": 1,
+  "AIRoleplay": 1,
+  "ARoomReborn": 2,
+  "AcousticKitty": 3,
+  "ActionCamera": 1,
+  "AetherBars": 2,
+  "AetherCompass": 3,
+  "AetherCompass2": 2,
+  "AetherCurrentUnlocker": 1,
+  "AetherLovePlugin": 1,
+  "AetherRadio": 1,
+  "AetherRemoteClient": 1,
+  "Aetherphone": 5,
+  "AetherphoneCN": 1,
+  "AethertekPluginManager": 19,
+  "AkuItemSets": 1,
+  "AllaganTranslator": 1,
+  "AlmondHousing": 1,
+  "AlmondZoom": 1,
+  "AnalogKeyboard": 1,
+  "AnatoliIliou": 1,
+  "Anemos": 2,
+  "AnimationWardrobe": 3,
+  "AnoMech": 2,
+  "AoAoEnergy": 1,
+  "Armoire": 3,
+  "ArmoireAutoFill": 2,
+  "ArmoireButlerPlugin": 2,
+  "Armoryeet": 1,
+  "ArmouryCleaner": 1,
+  "AsMobPlate": 1,
+  "AutoCollector": 2,
+  "AutoDailyTribes": 4,
+  "AutoFateGrind": 5,
+  "AutoFrontline": 3,
+  "AutoHunt": 1,
+  "AutoHuntGrinder": 5,
+  "AutoHuntTrain": 5,
+  "AutoJobQuest": 2,
+  "AutoKill": 2,
+  "AutoLoseVerminion": 1,
+  "AutoMakeTimeline": 2,
+  "AutoPotion": 1,
+  "AutoPvpSeriesGrind": 5,
+  "AutoRaiseAccept": 1,
+  "AutoReactFFXIV": 1,
+  "AutoRezzer": 1,
+  "AutoScrip": 1,
+  "AutoSightseeingLog": 5,
+  "AutoStrategyBoardPagination": 2,
+  "AutoTravel": 2,
+  "AutoTripleTriadGrind": 5,
+  "AvailableHousingSearch": 2,
+  "AygeaChat2": 2,
+  "AygeaMarketInsight": 2,
+  "BFE": 12,
+  "BGMCommands": 2,
+  "BagAssistant": 1,
+  "BardToolbox": 1,
+  "Befriender": 2,
+  "BestGearAll": 1,
+  "BetterMountBGM": 1,
+  "BetterTargetingSystemPvP": 1,
+  "BigFishHelper": 1,
+  "BladUI": 1,
+  "BlindBoxPlugin": 3,
+  "Brio-CN": 1,
+  "Bunnies": 1,
+  "CharacterArchive": 1,
+  "ChatColors": 1,
+  "ChocoboColourized": 12,
+  "ChokeAbo": 12,
+  "ChronoLog": 2,
+  "Clarion": 1,
+  "CodexMonitor": 2,
+  "CodexOlympia": 1,
+  "CombatStatistics": 1,
+  "ConditionCommandSender": 2,
+  "CrescentIsleUsefulTool": 2,
+  "CycleOpener": 2,
+  "DDuck": 12,
+  "DPS": 12,
+  "DTROverlay": 2,
+  "Dalamud.LoadingImage2": 1,
+  "DalamudCNAdapter": 2,
+  "DawntrailReady": 1,
+  "DeepDungeonScore": 1,
+  "DhogGPT": 12,
+  "DhogNav": 12,
+  "DialogueInspect": 2,
+  "DomanMahjongSolverDebug": 2,
+  "DutyDM": 1,
+  "EnhancedContextMenu": 2,
+  "EnhancedQuickPanel": 2,
+  "EurekaAggro": 1,
+  "Expedition": 1,
+  "ExtraChat-CN": 4,
+  "FFXIVBetterFakeName": 2,
+  "FaloopMessenger": 1,
+  "FashionCheckHelperPlugin": 1,
+  "FootIk": 1,
+  "Foretell": 1,
+  "FrenRider": 12,
+  "FullCopyHudLayout": 2,
+  "GatherBuddy": 1,
+  "GlamSource": 2,
+  "GlamourSaver": 1,
+  "GlamourThis": 1,
+  "GluttonyCombo": 1,
+  "Goetia": 2,
+  "HappyTrigger": 2,
+  "HelloFellowHuman": 7,
+  "Henchman": 1,
+  "HoardFarmX": 1,
+  "HotKeyIt": 2,
+  "HotbarAtelier": 2,
+  "HousingMarketShopper": 1,
+  "HyperboreaCN": 1,
+  "ICE-bld": 1,
+  "InNeedQueue": 1,
+  "Influx": 7,
+  "InstantEdit": 1,
+  "JustBackup": 2,
+  "Knightshopper": 1,
+  "Komos": 3,
+  "Krangler": 7,
+  "KupoCombo": 1,
+  "KupoTradeMaster": 1,
+  "LazyCrafter": 1,
+  "LazyCrucible": 1,
+  "LazyCurrencySpender": 1,
+  "LazyFateAutomation": 1,
+  "LazyFishSitter": 1,
+  "LazyFoodBuff": 1,
+  "LazyGearCollector": 1,
+  "LazyHub": 1,
+  "LazyMarketCompanion": 1,
+  "LazyRetainerLive": 1,
+  "LazySkywardTracker": 1,
+  "LazyWTMath": 1,
+  "LookyLoo": 1,
+  "LootGoblin": 7,
+  "MOGTOME": 7,
+  "Mahjong.Plugin.Dalamud": 5,
+  "MahjongHater": 1,
+  "MahjongSensei": 1,
+  "MapFocus": 2,
+  "Marketeer": 2,
+  "MaskedDalamud": 2,
+  "MasterOfPuppets": 1,
+  "MateriaExtractor": 2,
+  "Meddle.Plugin": 1,
+  "MinimapPlugin": 1,
+  "MinimapZoom": 2,
+  "MitPlan": 1,
+  "MitPlanRecorder": 1,
+  "Mnemosyne": 2,
+  "Moirai": 2,
+  "Odysseus": 1,
+  "Olympus": 1,
+  "OnePiece": 1,
+  "OopsAllNudist": 2,
+  "Oracle": 2,
+  "PartySorter": 1,
+  "Pawprint": 1,
+  "PetMove": 2,
+  "PfPresets": 1,
+  "PhaseDpsChecker": 2,
+  "Pipi": 1,
+  "PoliteEorzea": 1,
+  "PosePad": 1,
+  "PotionSwapper": 1,
+  "ProperHousingEx": 1,
+  "PvPSolver": 1,
+  "PvpAutoLb": 1,
+  "QSTCompanion": 7,
+  "QuestNav": 1,
+  "QuietTips": 1,
+  "RaidReplay": 1,
+  "RetainerGearOptimizer": 1,
+  "RetainerVentureAssigner": 1,
+  "RolePlayer": 2,
+  "RotationSolverLocalized": 2,
+  "SRankSentinel": 1,
+  "SaucyGateLoop": 1,
+  "SearchInfoMenu": 1,
+  "SentinelHunts": 1,
+  "SillyToolbox": 1,
+  "SimpleACR": 1,
+  "Simulant.MoodlesBridge": 1,
+  "SlideGuide": 2,
+  "Slidecaster": 1,
+  "SmartRecipeRestockHelper": 2,
+  "SonarPlugin": 2,
+  "SpecialWeaponProgressOverview": 2,
+  "TTSL": 7,
+  "Theseus": 1,
+  "TomestoneViewer": 2,
+  "TooltipNotes": 1,
+  "TradeVendor": 2,
+  "TreasureForecast": 2,
+  "TreasureHunt": 5,
+  "TreasureMaps": 1,
+  "TreasureRoute": 1,
+  "TriadBuddyAuto": 2,
+  "TwinkiMarket": 1,
+  "TysiTweaks": 1,
+  "UndercutterFFXIV": 1,
+  "UniversalModConverter": 1,
+  "VERMAXION": 7,
+  "VIWIJP": 2,
+  "Veilay": 2,
+  "VulcanToArtisan": 1,
+  "Warcry": 1,
+  "WigglyQuest": 7,
+  "WindowResizePlus": 1,
+  "WondrousTailsCalculator": 1,
+  "XADatabase": 7,
+  "XAHudNavigator": 7,
+  "XAZod": 7,
+  "XIVAICompanion": 2,
+  "XMapper": 1,
+  "XSZRemoteChatBridge": 1,
+  "XSZToolbox": 1,
+  "ascended-dagobert": 1,
+  "ascended-ezwondroustails": 1,
+  "ascended-ledger": 1,
+  "ascended-rotationsolverreborn": 1,
+  "botology": 7,
+  "bozjalone-Dev": 2,
+  "dad": 7,
+  "devLibra": 2,
+  "dheacon": 7,
+  "mom": 7,
+  "orchestrionaria": 1,
+  "seasonalevent": 1,
+  "visland_cn": 1
+});
 const REPO_SUBMIT_PER_IP_LIMIT = 10; // 每分钟每 IP（插件发现：库链投稿）
 const PACK_ID_PATTERN = /^[A-Za-z0-9_.\-]+$/;
 
@@ -546,8 +795,34 @@ async function handlePluginAdd(data, env, ip) {
   return json({ ok: true, count: names.length });
 }
 
-/// 插件发现：重置推荐计数——删掉全部 `padd:*` 键（含旧 `padd:<名>` 与 `padd:v2:<名>`），并清聚合缓存。
-/// 要 ADMIN_KEY；计数从 0 开始由 PLUGIN_ADD_PREFIX 保证，这里负责把旧数据物理清干净。
+/// 历史基线版本进入缓存身份，避免读取恢复前的六小时共享缓存。
+function pluginStatsAggregationKey(week) {
+  return `https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2&history=${PLUGIN_ADD_HISTORY_SHA256}`;
+}
+
+/// 清本实例与当前数据中心缓存；其他地区/实例仍按原有 TTL 收敛。
+async function clearPluginStatsCaches() {
+  keyListCache = { at: 0, keys: [] };
+  pluginStatsCache = { at: 0, body: null };
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  if (cache) {
+    const week = beijingISOWeek();
+    for (const key of [
+      pluginStatsAggregationKey(week),
+      `https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2`,
+      `https://firegaze-relay.invalid/agg/plugin?week=${week}`,
+    ]) {
+      try {
+        await cache.delete(key);
+      } catch {
+        // 缓存删除失败仍会按 TTL 过期，不改变持久存储操作结果。
+      }
+    }
+  }
+}
+
+/// 管理重置：删除全部 padd:*，并持久抑制本次恢复基线。
+/// 抑制标记不在 padd: 前缀，重复 reset 不会误删标记并使历史复活。
 async function handlePluginAddReset(data, request, env, ip) {
   if (!env.ADMIN_KEY) {
     return json({ ok: false, error: 'admin disabled', detail: 'set ADMIN_KEY secret' }, 503);
@@ -566,49 +841,42 @@ async function handlePluginAddReset(data, request, env, ip) {
     return json({ ok: false, error: 'no kv binding', detail: 'LIBRARY_COUNTS' }, 503);
   }
 
-  // 先把键收齐再删（边列边删会让 KV 游标错位、漏键）
   const names = [];
   let deleted = 0;
+  let historySuppressed = false;
   try {
+    // 列表先完整读取；列失败时不更改任何持久状态。
     let cursor;
     do {
       const page = await store.list({ prefix: 'padd:', limit: 1000, cursor });
-      for (const entry of page.keys) {
-        names.push(entry.name);
-      }
+      for (const entry of page.keys) names.push(entry.name);
       cursor = page.list_complete ? undefined : page.cursor;
     } while (cursor);
 
+    // 必须先确认基线抑制写入，再开始删实时数据。写失败不声称 reset 完成。
+    await store.put(PLUGIN_ADD_HISTORY_RESET_KEY, '1');
+    historySuppressed = true;
     for (let i = 0; i < names.length; i += AGG_READ_CONCURRENCY) {
-      await Promise.all(names.slice(i, i + AGG_READ_CONCURRENCY).map((name) => store.delete(name)));
-      deleted += Math.min(AGG_READ_CONCURRENCY, names.length - i);
-    }
-  } catch (error) {
-    return json({ ok: false, error: 'reset failed', deleted, detail: String(error).slice(0, 160) }, 500);
-  }
-
-  // 旧数字别再从缓存里被读出来：本实例内存 + 当周两个 L2 键（新/旧格式）
-  keyListCache = { at: 0, keys: [] };
-  pluginStatsCache = { at: 0, body: null };
-  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
-  if (cache) {
-    const week = beijingISOWeek();
-    for (const key of [
-      `https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2`,
-      `https://firegaze-relay.invalid/agg/plugin?week=${week}`,
-    ]) {
-      try {
-        await cache.delete(key);
-      } catch {
-        // 删不掉不阻塞
+      const outcomes = await Promise.allSettled(
+        names.slice(i, i + AGG_READ_CONCURRENCY).map((name) => store.delete(name)),
+      );
+      // 等整批操作结束并计算确实成功的删除，失败返回的 partial 数量不虚报。
+      deleted += outcomes.filter((outcome) => outcome.status === 'fulfilled').length;
+      if (outcomes.some((outcome) => outcome.status === 'rejected')) {
+        throw new Error('counter deletion failed');
       }
     }
+  } catch {
+    return json({ ok: false, error: 'reset failed', deleted, historySuppressed }, 500);
+  } finally {
+    // 部分失败也清缓存，避免继续显示本实例已经删除的值。
+    await clearPluginStatsCaches();
   }
 
-  return json({ ok: true, deleted });
+  return json({ ok: true, deleted, historySuppressed });
 }
 
-/// 插件发现：统计（周赞 / 总赞 / 加库推荐）。工作流定时拉这个写进仓库归档。
+/// 插件发现统计：点赞不变；推荐 = 实时 v2 + 有来源的不可变历史基线。
 async function handlePluginStats(env) {
   const store = env.LIBRARY_COUNTS;
   if (!store) {
@@ -621,15 +889,33 @@ async function handlePluginStats(env) {
     return json(pluginStatsCache.body);
   }
 
-  // 缓存键带周号：跨周时不拿旧周的周赞
-  const body = await readAggregationCache(`https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2`, async () => {
-    const total = await readAllByPrefix(store, 'plike_total:');
-    const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
-    const adds = await readAllByPrefix(store, PLUGIN_ADD_PREFIX);
-    return { ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() };
-  });
-  pluginStatsCache = { at: now, week, body };
-  return json(body);
+  try {
+    const body = await readAggregationCache(pluginStatsAggregationKey(week), async () => {
+      // 读失败必须传播；不能把无法读取的 reset 标记当作不存在而恢复旧数。
+      const applied = (await store.get(PLUGIN_ADD_HISTORY_RESET_KEY)) === null;
+      const total = await readAllByPrefix(store, 'plike_total:');
+      const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
+      const currentAdds = await readAllByPrefix(store, PLUGIN_ADD_PREFIX);
+      const adds = { ...currentAdds };
+      let count = 0;
+      let sum = 0;
+      if (applied) {
+        for (const [name, recovered] of Object.entries(PLUGIN_ADD_HISTORY)) {
+          adds[name] = (adds[name] ?? 0) + recovered;
+          count++;
+          sum += recovered;
+        }
+      }
+      const history = { id: PLUGIN_ADD_HISTORY_ID, countMapSha256: PLUGIN_ADD_HISTORY_SHA256,
+        applied, count, sum, currentAddsCount: Object.keys(currentAdds).length,
+        currentAddsSum: Object.values(currentAdds).reduce((a, b) => a + b, 0) };
+      return { ok: true, week, total, weekly, adds, history, updatedAt: new Date().toISOString() };
+    });
+    pluginStatsCache = { at: now, week, body };
+    return json(body);
+  } catch {
+    return json({ ok: false, error: 'plugin stats unavailable' }, 503);
+  }
 }
 
 /// 插件发现：库链投稿（客户端已做过卫月契约检测；这里只做形状检查，真正的收录由仓库工作流定）。
