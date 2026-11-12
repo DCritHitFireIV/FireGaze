@@ -105,23 +105,22 @@ const LIBRARY_LIKE_PER_IP_LIMIT = 30; // 每分钟每 IP（点赞；没做去重
 const PLUGIN_LIKE_PER_IP_LIMIT = 60; // 每分钟每 IP（插件发现：给插件点赞）
 const PLUGIN_ADD_PER_IP_LIMIT = 120; // 每分钟每 IP（插件发现：加库推荐上报）
 const PLUGIN_ADD_PREFIX = 'padd:v2:'; // v13：旧 `padd:<名>` 键不再读写（重置推荐数）；reset 端点按 'padd:' 前缀清全部版本
-// 2026-11-12：按用户逐插件分配修正历史基线（92 项正增量，共 148）。
+// 2026-11-12：按用户逐插件分配修正历史基线（93 项正增量，共 150）。
 // 证据：discovery/recovery/2026-11-12-allocation.json；替换原 578 基线，不重复叠加。
 // 分配为 0 的插件没有历史增量，实时 padd:v2: 保留；旧 reset 标记仍抑制此基线。
 const PLUGIN_ADD_HISTORY_ID = "2026-10-09-counts";
-const PLUGIN_ADD_HISTORY_SHA256 = "da3b6d85e4a7ebba6648f8c7a46ceadb4d12759d332f4767a462702ce2c3bbe2";
+const PLUGIN_ADD_HISTORY_SHA256 = "c3150edac0c4ff32e7a6825af02f0f22a1119ec44ea38e46445a5bcdaffc75de";
 const PLUGIN_ADD_HISTORY_RESET_KEY = `plugin-add-history-reset:${PLUGIN_ADD_HISTORY_ID}`;
 const PLUGIN_ADD_HISTORY = Object.freeze({
-  "AICompanion": 1,
-  "AIRoleplay": 1,
-  "ARoomReborn": 2,
   "AcousticKitty": 3,
   "ActionCamera": 1,
   "AetherCompass": 3,
   "AetherLovePlugin": 1,
-  "AetherRemoteClient": 1,
   "Aetherphone": 1,
   "AetherphoneCN": 2,
+  "AetherRemoteClient": 1,
+  "AICompanion": 1,
+  "AIRoleplay": 1,
   "AkuItemSets": 1,
   "AllaganTranslator": 1,
   "AlmondHousing": 1,
@@ -133,6 +132,8 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "Armoire": 3,
   "ArmoireButlerPlugin": 2,
   "Armoryeet": 1,
+  "ARoomReborn": 2,
+  "ascended-ezwondroustails": 1,
   "AsMobPlate": 1,
   "AutoFateGrind": 1,
   "AutoFrontline": 3,
@@ -144,11 +145,13 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "AutoRaiseAccept": 1,
   "AutoReactFFXIV": 1,
   "AutoRezzer": 1,
+  "AvailableHousingSearch": 2,
   "AygeaChat2": 2,
   "BardToolbox": 1,
   "BetterMountBGM": 1,
   "BetterTargetingSystemPvP": 1,
   "BigFishHelper": 1,
+  "bozjalone-Dev": 2,
   "Bunnies": 1,
   "CombatStatistics": 1,
   "CrescentIsleUsefulTool": 2,
@@ -156,12 +159,12 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "DeepDungeonScore": 1,
   "EurekaAggro": 1,
   "Expedition": 1,
-  "FFXIVBetterFakeName": 2,
   "FaloopMessenger": 1,
+  "FFXIVBetterFakeName": 2,
   "Foretell": 1,
-  "GlamSource": 2,
   "GlamourSaver": 1,
   "GlamourThis": 1,
+  "GlamSource": 2,
   "Henchman": 1,
   "HousingMarketShopper": 1,
   "ICE-bld": 1,
@@ -177,6 +180,7 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "Odysseus": 1,
   "OnePiece": 1,
   "OopsAllNudist": 2,
+  "orchestrionaria": 2,
   "Pawprint": 1,
   "PoliteEorzea": 1,
   "PotionSwapper": 1,
@@ -185,6 +189,7 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "RaidReplay": 1,
   "RotationSolverLocalized": 2,
   "SaucyGateLoop": 2,
+  "seasonalevent": 1,
   "SentinelHunts": 1,
   "SillyToolbox": 1,
   "SimpleACR": 1,
@@ -195,15 +200,11 @@ const PLUGIN_ADD_HISTORY = Object.freeze({
   "TreasureHunt": 5,
   "TreasureRoute": 1,
   "UniversalModConverter": 1,
+  "visland_cn": 1,
   "Warcry": 1,
   "WigglyQuest": 19,
   "WondrousTailsCalculator": 1,
-  "XSZToolbox": 1,
-  "ascended-ezwondroustails": 1,
-  "bozjalone-Dev": 2,
-  "orchestrionaria": 2,
-  "seasonalevent": 1,
-  "visland_cn": 1
+  "XSZToolbox": 1
 });
 const REPO_SUBMIT_PER_IP_LIMIT = 10; // 每分钟每 IP（插件发现：库链投稿）
 const PACK_ID_PATTERN = /^[A-Za-z0-9_.\-]+$/;

@@ -93,12 +93,13 @@ test('adds every recovered plugin once, preserving live-only and overlapping cou
     .seed('padd:Obsolete', 900));
   const { status, body } = await s.request();
   assert.equal(status, 200);
-  assert.equal(Object.keys(history.counts).length, 92);
-  assert.equal(sum(history.counts), 148);
+  assert.equal(Object.keys(history.counts).length, 93);
+  assert.equal(sum(history.counts), 150);
+  assert.equal(body.adds.AvailableHousingSearch, 2, 'the confirmed R018 remainder belongs to this exact plugin');
   assert.deepEqual(body.adds, { ...history.counts, ADS: 4, LiveOnly: 3 });
-  assert.equal(sum(body.adds), 155);
+  assert.equal(sum(body.adds), 157);
   assert.deepEqual(body.history, { id: history.id, countMapSha256: history.countMapSha256,
-    applied: true, count: 92, sum: 148, currentAddsCount: 2, currentAddsSum: 7 });
+    applied: true, count: 93, sum: 150, currentAddsCount: 2, currentAddsSum: 7 });
 });
 
 test('empty live data still yields the historical values without writing to KV', async () => {
@@ -113,7 +114,7 @@ test('repeated reads and shared-cache reads from fresh isolates never add the ba
   for (const request of [s.request, s.request, s.isolate(), s.isolate()]) {
     const result = await request();
     assert.equal(result.body.adds.ADS, 4);
-    assert.equal(sum(result.body.adds), 152);
+    assert.equal(sum(result.body.adds), 154);
   }
   assert.equal(s.kv.values.get('padd:v2:ADS'), '4');
 });
@@ -124,7 +125,7 @@ test('legacy shared aggregation cannot hide or double the recovered baseline', a
     Response.json({ builtAt: s.clock.now, body: { ok: true, week: '2026-W46', adds: { ADS: 777 } } }));
   const result = await s.request();
   assert.equal(result.body.adds.ADS, 4);
-  assert.equal(result.body.history.sum, 148);
+  assert.equal(result.body.history.sum, 150);
 });
 
 test('a real recommendation POST increments live state and remains visible after cache expiry', async () => {
@@ -136,7 +137,7 @@ test('a real recommendation POST increments live state and remains visible after
   assert.equal(result.body.adds.ADS, 5);
   assert.equal(result.body.adds.NewPlugin, 1);
   assert.equal(result.body.history.currentAddsSum, 6);
-  assert.equal(result.body.history.sum, 148);
+  assert.equal(result.body.history.sum, 150);
 });
 
 test('failed authentication and disabled administration cannot change counts or history state', async () => {
@@ -229,18 +230,18 @@ test('plugin likes, weekly likes and library counts keep their original independ
   assert.equal(like.body.weekly, 3);
 });
 
-// Catch reusing the previous 578-count L2 snapshot after replacing the baseline.
+// Catch reusing the previous 148-count L2 snapshot after the confirmed final allocation.
 test('allocation revision ignores the prior history-generation cache and does not stack the old baseline', async () => {
   const s = setup(memoryKV().seed('padd:v2:ADS', 4).seed('padd:v2:WigglyQuest', 1));
-  await s.cache.put(`https://firegaze-relay.invalid/agg/plugin?week=2026-W46&v=2&history=${history.replaces.countMapSha256}`,
+  await s.cache.put(`https://firegaze-relay.invalid/agg/plugin?week=2026-W46&v=2&history=${history.previousAllocation.countMapSha256}`,
     Response.json({ builtAt: s.clock.now, body: { ok: true, week: '2026-W46',
-      adds: { ADS: 22, WigglyQuest: 8 }, history: { sum: 578 } } }));
+      adds: { ADS: 22, WigglyQuest: 8 }, history: { sum: 148 } } }));
   const result = await s.request();
   assert.equal(result.body.adds.ADS, 4, 'a zero historical allocation preserves the live value');
   assert.equal(result.body.adds.WigglyQuest, 20, '19 allocated plus one live recommendation');
   assert.equal(result.body.adds.AethertekPluginManager, undefined);
-  assert.equal(sum(result.body.adds), 153);
-  assert.equal(result.body.history.sum, 148);
+  assert.equal(sum(result.body.adds), 155);
+  assert.equal(result.body.history.sum, 150);
 });
 
 // Catch changing the restoration ID and silently bypassing an existing reset.
