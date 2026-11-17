@@ -29,6 +29,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import validate_contribution as rules  # noqa: E402
+import metadata_contribution_policy as metadata_policy  # noqa: E402
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUT = os.path.join(REPO_ROOT, "docs", "contributions", "inbox")
@@ -44,6 +45,11 @@ def check(record: dict) -> tuple[list[str], list[str]]:
     field = str(record.get("Field") or "")
     original = str(record.get("Original") or "")
     translated = str(record.get("Translated") or "")
+
+    metadata_rejection = metadata_policy.reject_player_metadata_field(field)
+    if metadata_rejection is not None:
+        hard.append(metadata_rejection)
+        return hard, soft
 
     if not translated.strip():
         soft.append("译文为空（等于清除这条）")

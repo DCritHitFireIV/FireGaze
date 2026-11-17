@@ -40,6 +40,11 @@ try:
     import validate_contribution as rules   # 「同一套口径」：长度 / 控制字符 / 网址 / HTML / 违规词
 except Exception:  # noqa: BLE001
     rules = None
+# This policy is a write-back safety boundary, not an optional validator.  If
+# it cannot be imported, stop before parsing or writing any contribution;
+# silently treating the module as unavailable would allow player metadata to
+# reach the maintained table.
+import metadata_contribution_policy as metadata_policy
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_TABLE = os.path.join(REPO_ROOT, "translations.json")
@@ -148,12 +153,14 @@ def push_to_github(paths: list[str], message: str, proxy: str = "http://127.0.0.
     return False
 
 
-def check_record(record: dict) -> tuple[list[str], list[str]]:
+def check_record(record: dict, *, allow_maintainer_metadata: bool = False) -> tuple[list[str], list[str]]:
     """按「硬规则 / 软提醒」两层体检一条投稿（与 validate_contribution.py 同一套口径）。
 
     硬：内部名不合法、字段名不认识、译文超长（40/99/999）、控制字符、占位值（测试1/test/xxx/123…）、
         改后与改前一样（空操作）。——要 --force 才肯收。
     软：译文为空（=清除这条）、网址、HTML、违规词、译文只有一两个字 —— 只打印提醒。
+    `Name` / `Punchline` / `Description` are rejected here for player
+    submissions; an explicit maintainer import may use the same path.
     审查 2026-09-22 指出的就是这里以前“零校验”。
     """
     hard: list[str] = []
@@ -167,6 +174,10 @@ def check_record(record: dict) -> tuple[list[str], list[str]]:
         hard.append("插件内部名不合法")
     if rules is not None and field not in rules.FIELDS:
         hard.append(f"字段名不认识：{field}")
+    if not allow_maintainer_metadata:
+        metadata_rejection = metadata_policy.reject_player_metadata_field(field)
+        if metadata_rejection is not None:
+            hard.append(metadata_rejection)
 
     if not translated.strip():
         soft.append("译文为空（等于清除这条译文）")
@@ -439,7 +450,7 @@ def main(argv=None) -> int:
     # 两层体检（审查 P0-2 / P1-2）：硬问题要 --force 才过；软提醒只打印。
     problem_rows: list[tuple[dict, list[str], list[str]]] = []
     for record in records:
-        hard, soft = check_record(record)
+        hard, soft = check_record(record, allow_maintainer_metadata=source_kind == "maintainer")
         if hard or soft:
             problem_rows.append((record, hard, soft))
 
@@ -501,6 +512,18 @@ def main(argv=None) -> int:
         if not key or field not in FIELDS:
             skipped.append(f"{key or '?'} / {field or '?'}：字段名不认识")
             skipped_rows.append({"plugin": key, "field": field, "to": translated, "reason": "字段名不认识"})
+            continue
+
+        metadata_rejection = (
+            None
+            if source_kind == "maintainer"
+            else metadata_policy.reject_player_metadata_field(field)
+        )
+        if metadata_rejection is not None:
+            # Keep the raw archive/history path intact, but never write a
+            # player metadata contribution into the maintained table.
+            skipped.append(f"{key} / {field}：{metadata_rejection}")
+            skipped_rows.append({"plugin": key, "field": field, "to": translated, "reason": metadata_rejection})
             continue
 
         entry = table.setdefault(key, {})

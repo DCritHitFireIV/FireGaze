@@ -31,6 +31,8 @@ import os
 import re
 import sys
 
+import metadata_contribution_policy as metadata_policy
+
 FIELD_LIMITS = {"Name": 40, "Punchline": 99, "Description": 999}
 FIELDS = set(FIELD_LIMITS)
 
@@ -73,6 +75,9 @@ def check_one(item: dict) -> tuple[dict | None, str | None]:
         return None, "插件内部名不合法"
     if field not in FIELDS:
         return None, f"字段名不认识：{field!r}"
+    metadata_rejection = metadata_policy.reject_player_metadata_field(field)
+    if metadata_rejection is not None:
+        return None, metadata_rejection
     if not isinstance(original, str) or not isinstance(translated, str):
         return None, "原文或译文不是字符串"
     if not translated.strip():
