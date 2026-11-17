@@ -1,0 +1,245 @@
+{
+  "issue": "direct-2026-11-17T04-38-46-387Z-0dccf2f7",
+  "receivedAt": "2026-11-17 04:38:59",
+  "author": "匿名直传",
+  "plugin": "Gearsetter",
+  "fingerprint": "6f435092295dc98b",
+  "packFile": "Gearsetter@user-6f4350.json",
+  "accepted": 25,
+  "filled": 25,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Gearsetter",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Show possible gear upgrades for all gearsets",
+        "Translated": "显示所有齿轮组可能的齿轮升级",
+        "Context": "GearsetterPlugin..ctor",
+        "Source": "ai:google",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Toggle the equipment browser window",
+        "Translated": "切换设备浏览器窗口",
+        "Context": "GearsetterPlugin..ctor",
+        "Source": "ai:google",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Checking only gearsets for your current class/job...",
+        "Translated": "仅检查您当前班级/工作的齿轮组...",
+        "Context": "GearsetterPlugin.ShowUpgrades",
+        "Source": "ai:google",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "All your gearsets are OK.",
+        "Translated": "您的所有齿轮组都正常。",
+        "Context": "ShowUpgrades",
+        "Source": "ai:google",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Gearsetter - Config###GearsetterConfig",
+        "Translated": "汇编器 - 配置",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ LWindow..ctor"
+      },
+      {
+        "Original": "Show recommendations when entering Grand Company area",
+        "Translated": "进入大公司区域时显示推荐",
+        "Context": "ConfigWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Equipment Browser###GearsetterBrowser",
+        "Translated": "设备浏览器",
+        "Context": "EquipmentBrowserWindow..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ LWindow..ctor"
+      },
+      {
+        "Original": "Class/Job",
+        "Translated": "班级/工作",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Category",
+        "Translated": "类别",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Only show items matching your level",
+        "Translated": "只显示符合您级别的项目",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Only show owned items",
+        "Translated": "只显示拥有的物品",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide normal quality items",
+        "Translated": "隐藏普通品质物品",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Name",
+        "Translated": "姓名",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Level",
+        "Translated": "等级",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Damage",
+        "Translated": "损害",
+        "Context": "EquipmentBrowserWindow.DrawContent",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Crit",
+        "Translated": "暴击",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Det",
+        "Translated": "这",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "SkS",
+        "Translated": "SKS",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "SpS",
+        "Translated": "斯普斯",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Tenacity",
+        "Translated": "韧性",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "CMS",
+        "Translated": "内容管理系统",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Control",
+        "Translated": "控制",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "GP",
+        "Translated": "全科医生",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Gathering",
+        "Translated": "采集",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Perception",
+        "Translated": "洞察力",
+        "Context": "GameDataHolder..ctor",
+        "Source": "ai:google",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
