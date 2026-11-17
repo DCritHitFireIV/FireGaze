@@ -421,8 +421,9 @@ def main(argv=None) -> int:
     parser.add_argument("--contrib-log", default=CONTRIB_LOG, help="公开留档 markdown")
     parser.add_argument("--dry-run", action="store_true", help="只报告会改什么，不写文件")
     parser.add_argument("--push", action="store_true", help="收录后直接提交并推上 GitHub（维护者桌面端用）")
-    parser.add_argument("--maintainer", action="store_true", help="这批是维护者自己改的（留档里归到「维护者修正」，不算玩家投稿）")
-    parser.add_argument("--player", action="store_true", help="这批确实是玩家投稿（当你本机留下的 JSON 缺 Id/TimeLocal 时用）")
+    source_flags = parser.add_mutually_exclusive_group()
+    source_flags.add_argument("--maintainer", action="store_true", help="这批是维护者自己改的（留档里归到「维护者修正」，不算玩家投稿）")
+    source_flags.add_argument("--player", action="store_true", help="这批确实是玩家投稿（当你本机留下的 JSON 缺 Id/TimeLocal 时用）")
     parser.add_argument("--force", action="store_true", help="即使有硬问题（测试值 / 超长 / 控制字符 / 空操作）也照样收录")
     args = parser.parse_args(argv)
 
@@ -450,7 +451,8 @@ def main(argv=None) -> int:
     # 两层体检（审查 P0-2 / P1-2）：硬问题要 --force 才过；软提醒只打印。
     problem_rows: list[tuple[dict, list[str], list[str]]] = []
     for record in records:
-        hard, soft = check_record(record, allow_maintainer_metadata=source_kind == "maintainer")
+        # Payload notes may classify history, but cannot authorize write-back.
+        hard, soft = check_record(record, allow_maintainer_metadata=args.maintainer)
         if hard or soft:
             problem_rows.append((record, hard, soft))
 
@@ -516,7 +518,7 @@ def main(argv=None) -> int:
 
         metadata_rejection = (
             None
-            if source_kind == "maintainer"
+            if args.maintainer
             else metadata_policy.reject_player_metadata_field(field)
         )
         if metadata_rejection is not None:

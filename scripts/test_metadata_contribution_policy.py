@@ -1,12 +1,16 @@
-import metadata_contribution_policy as policy
-import importlib.util
+"""Metadata submission boundaries exercised through the real importer."""
+
 import contextlib
+import importlib.util
 import io
 import json
 import subprocess
 import sys
 import tempfile
+import unittest
 from pathlib import Path
+
+import metadata_contribution_policy as policy
 
 ROOT = Path(__file__).parent
 
@@ -18,170 +22,132 @@ def load(name):
     return module
 
 
-def test_public_metadata_fields_are_rejected():
-    for field in ("Name", "Punchline", "Description"):
-        assert policy.reject_player_metadata_field(field) is not None
-
-
-def test_ui_contribution_is_not_rejected_by_metadata_policy():
-    assert policy.reject_player_metadata_field("entries") is None
-
-
-def test_validator_rejects_metadata_payload():
-    validator = load("validate_contribution")
-    clean, reason = validator.check_one({
-        "InternalName": "Example",
-        "Field": "Description",
-        "Original": "English description",
-        "Translated": "中文详情",
-    })
-    assert clean is None
-    assert "维护" in reason
-
-
-def test_inbox_rejects_metadata_payload():
-    inbox = load("inbox_contribution")
-    hard, soft = inbox.check({
-        "Field": "Punchline",
-        "Original": "English",
-        "Translated": "中文简介",
-    })
-    assert any("维护" in item for item in hard)
-
-
-def test_importer_requires_policy_module():
-    """The write-back importer must fail closed if its policy is unavailable."""
-    blocker = (
-        "import sys; "
-        "class Blocker: "
-        "  def find_spec(self, fullname, path=None, target=None): "
-        "    raise ImportError('blocked policy') if fullname == 'metadata_contribution_policy' else None; "
-        "sys.meta_path.insert(0, Blocker()); import import_contributions"
-    )
-    result = subprocess.run(
-        [sys.executable, "-c", blocker],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    assert result.returncode != 0
-    assert "blocked policy" in (result.stderr or "")
-
-
-def test_importer_never_writes_player_metadata_even_with_force():
-    """The importer keeps a rejected metadata record in the archive only."""
-    importer = load("import_contributions")
-    payload = {
-        "contributions": [
-            {
+class MetadataContributionPolicyTests(unittest.TestCase):
+    def run_import(self, flags, *, note="", field="Description"):
+        importer = load("import_contributions")
+        payload = {
+            "note": note,
+            "contributions": [{
                 "Id": "player-description-1",
                 "TimeLocal": "2026-11-18 12:00:00",
                 "InternalName": "Example",
-                "Field": "Description",
+                "Field": field,
                 "Original": "English description",
                 "Translated": "中文详情",
-            }
-        ]
-    }
-    with tempfile.TemporaryDirectory() as temp:
-        root = Path(temp)
-        contribution_file = root / "contributions.json"
-        table_file = root / "translations.json"
-        history_file = root / "history.jsonl"
-        archive_dir = root / "contributions"
-        log_file = root / "contributions.md"
+            }],
+        }
         original_table = {
             "_meta": {"updatedAt": "2026-11-17"},
-            "Example": {
-                "Description": {
-                    "Original": "English description",
-                    "Translated": "旧详情",
-                    "Source": "ai",
-                }
-            },
-        }
-        contribution_file.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-        table_file.write_text(json.dumps(original_table, ensure_ascii=False), encoding="utf-8")
-
-        with contextlib.redirect_stdout(io.StringIO()):
-            result = importer.main(
-                [
-                    str(contribution_file),
-                    "--table",
-                    str(table_file),
-                    "--history",
-                    str(history_file),
-                    "--contrib-dir",
-                    str(archive_dir),
-                    "--contrib-log",
-                    str(log_file),
-                    "--player",
-                    "--force",
-                ]
-            )
-
-        assert result == 0
-        assert json.loads(table_file.read_text(encoding="utf-8")) == original_table
-        archives = list(archive_dir.glob("*.json"))
-        assert len(archives) == 1
-        archived = json.loads(archives[0].read_text(encoding="utf-8"))
-        assert archived["import"]["applied"] == 0
-        assert archived["import"]["skipped"][0]["field"] == "Description"
-        assert "维护" in archived["import"]["skipped"][0]["reason"]
-
-
-def test_importer_allows_explicit_maintainer_metadata_update():
-    """The protection is for player submissions; maintainers keep the edit path."""
-    importer = load("import_contributions")
-    payload = {
-        "note": "维护者修正官方插件详情",
-        "contributions": [
-            {
-                "InternalName": "Example",
-                "Field": "Description",
+            "Example": {field: {
                 "Original": "English description",
-                "Translated": "维护者详情",
-            }
-        ],
-    }
-    with tempfile.TemporaryDirectory() as temp:
-        root = Path(temp)
-        contribution_file = root / "contributions.json"
-        table_file = root / "translations.json"
-        history_file = root / "history.jsonl"
-        archive_dir = root / "contributions"
-        log_file = root / "contributions.md"
-        original_table = {
-            "_meta": {"updatedAt": "2026-11-17"},
-            "Example": {
-                "Description": {
-                    "Original": "English description",
-                    "Translated": "旧详情",
-                    "Source": "ai",
-                }
-            },
+                "Translated": "旧详情",
+                "Source": "ai",
+            }},
         }
-        contribution_file.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-        table_file.write_text(json.dumps(original_table, ensure_ascii=False), encoding="utf-8")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            contribution_file = root / "contributions.json"
+            table_file = root / "translations.json"
+            archive_dir = root / "archives"
+            contribution_file.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            table_file.write_text(json.dumps(original_table, ensure_ascii=False), encoding="utf-8")
+            before_bytes = table_file.read_bytes()
+            argv = [
+                str(contribution_file), "--table", str(table_file),
+                "--history", str(root / "history.jsonl"),
+                "--contrib-dir", str(archive_dir),
+                "--contrib-log", str(root / "contributions.md"),
+                *flags,
+            ]
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                try:
+                    code = importer.main(argv)
+                except SystemExit as exc:
+                    code = exc.code
+            return {
+                "code": code,
+                "before": original_table,
+                "after": json.loads(table_file.read_text(encoding="utf-8")),
+                "bytes_unchanged": before_bytes == table_file.read_bytes(),
+                "archives": [json.loads(p.read_text(encoding="utf-8")) for p in archive_dir.glob("*.json")],
+            }
 
-        with contextlib.redirect_stdout(io.StringIO()):
-            result = importer.main(
-                [
-                    str(contribution_file),
-                    "--table",
-                    str(table_file),
-                    "--history",
-                    str(history_file),
-                    "--contrib-dir",
-                    str(archive_dir),
-                    "--contrib-log",
-                    str(log_file),
-                    "--maintainer",
-                ]
-            )
+    def assert_rejected_to_archive(self, result, field="Description"):
+        self.assertEqual(result["code"], 0)
+        self.assertEqual(result["after"], result["before"])
+        self.assertTrue(result["bytes_unchanged"])
+        self.assertEqual(len(result["archives"]), 1)
+        archive = result["archives"][0]["import"]
+        self.assertEqual(archive["applied"], 0)
+        self.assertEqual(archive["skipped"][0]["field"], field)
+        self.assertIn("维护", archive["skipped"][0]["reason"])
 
-        assert result == 0
-        updated = json.loads(table_file.read_text(encoding="utf-8"))
-        assert updated["Example"]["Description"]["Translated"] == "维护者详情"
-        assert updated["Example"]["Description"]["Source"] == "user"
+    def test_public_metadata_fields_are_rejected(self):
+        for field in ("Name", "Punchline", "Description"):
+            with self.subTest(field=field):
+                self.assertIsNotNone(policy.reject_player_metadata_field(field))
+
+    def test_ui_contribution_is_not_rejected_by_metadata_policy(self):
+        self.assertIsNone(policy.reject_player_metadata_field("entries"))
+
+    def test_validator_rejects_metadata_payload(self):
+        validator = load("validate_contribution")
+        clean, reason = validator.check_one({
+            "InternalName": "Example", "Field": "Description",
+            "Original": "English description", "Translated": "中文详情",
+        })
+        self.assertIsNone(clean)
+        self.assertIn("维护", reason)
+
+    def test_inbox_rejects_metadata_payload(self):
+        inbox = load("inbox_contribution")
+        hard, _ = inbox.check({"Field": "Punchline", "Original": "English", "Translated": "中文简介"})
+        self.assertTrue(any("维护" in item for item in hard))
+
+    def test_importer_requires_policy_module(self):
+        blocker = """import sys
+class Blocker:
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == 'metadata_contribution_policy':
+            raise ImportError('blocked policy')
+        return None
+sys.meta_path.insert(0, Blocker())
+import import_contributions
+"""
+        result = subprocess.run(
+            [sys.executable, "-c", blocker], cwd=str(ROOT),
+            capture_output=True, text=True, encoding="utf-8",
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertNotIn("SyntaxError", result.stderr)
+        self.assertEqual(result.stderr.strip().splitlines()[-1], "ImportError: blocked policy")
+
+    def test_importer_never_writes_player_metadata_even_with_force(self):
+        for field in ("Name", "Punchline", "Description"):
+            with self.subTest(field=field):
+                self.assert_rejected_to_archive(self.run_import(["--player", "--force"], field=field), field)
+
+    def test_note_cannot_grant_maintainer_access(self):
+        self.assert_rejected_to_archive(self.run_import(["--force"], note="maintainer 维护者修正"))
+
+    def test_player_flag_cannot_be_overridden_by_note(self):
+        self.assert_rejected_to_archive(self.run_import(["--player", "--force"], note="maintainer 维护者修正"))
+
+    def test_source_flags_are_mutually_exclusive(self):
+        for flags in (["--maintainer", "--player"], ["--player", "--maintainer"]):
+            with self.subTest(flags=flags):
+                result = self.run_import([*flags, "--force"])
+                self.assertEqual(result["code"], 2)
+                self.assertTrue(result["bytes_unchanged"])
+                self.assertEqual(result["archives"], [])
+
+    def test_importer_allows_explicit_maintainer_metadata_update(self):
+        result = self.run_import(["--maintainer"])
+        self.assertEqual(result["code"], 0)
+        self.assertEqual(result["after"]["Example"]["Description"]["Translated"], "中文详情")
+        self.assertEqual(result["after"]["Example"]["Description"]["Source"], "user")
+        self.assertEqual(result["archives"][0]["import"]["applied"], 1)
+
+
+if __name__ == "__main__":
+    unittest.main()

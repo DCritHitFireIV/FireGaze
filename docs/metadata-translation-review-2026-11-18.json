@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-18",
+  "scope": "插件名称、简介、详情；不修改玩家界面汉化数据。",
+  "metadataSourceCommit": "50553b0af1185bb0b2cfa03b8827167b5b8d30a6",
+  "integrationBaseCommit": "b41751f5f612ffc4328d9ad1b6a6fb0a99f8bab1",
+  "latestUpstreamMetadataIdenticalToFrozenSource": true,
+  "translationsSha256": "a543daec7a9cc22a993e876aaabb186dd6d6896038842a8b5f2dcd2d34d8419f",
+  "plugins": 3027,
+  "nonemptyMetadataFields": 8648,
+  "changedMetadataFieldsFromUpstream": 2976,
+  "changedPluginsFromUpstream": 2239,
+  "furtherCorrectedFieldsInGptRerun": 726,
+  "explicitTranslations": 8379,
+  "nativeChineseUsingOriginal": 265,
+  "review": {
+    "models": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "primaryFieldsIndependentlyReadByEachModel": 3990,
+    "finalAdditionalReviewRowsPerModel": 27,
+    "uniqueFieldsIndependentlyReadByEachModel": 4000,
+    "machineAuditedFields": 8648,
+    "unresolvedModelDisagreements": 0,
+    "deepseekRequestsInThisRerun": 0,
+    "note": "保留早期候选作为审阅输入，本轮剩余及可疑字段由三个 GPT 模型独立逐条审阅并裁定差异；全表另做结构、残留和术语检查，不把机器规则扫描计为模型语义审阅。",
+    "frozenInputSha256": {
+      "input-0.jsonl": "1a0c35612ff0d0ffd30a14690dfca38d0fcdd8e10ed39f300a23dccf070af2ad",
+      "input-1.jsonl": "8bdf07b7f2f7b6334448c305db61a4265052c417ef1aa42d9cee33a046d47752",
+      "extra-names.jsonl": "46c2bbe2a054c57c6c937110787e0343bdf2319d631586b9e7854dbf072bb20d",
+      "final-residual-review.json": "19c752ba7eec1f1c6c99c4aee2bcca725519be86f0589da9686ce5eb866be85b"
+    },
+    "reviewReportSha256": {
+      "review-astra-0.json": "11ab39724215c7abf9a4e35341d51157aed05adabdb972ddc41f622a58014c8d",
+      "review-astra-1.json": "efc6f5afbc914d1e7db714a8effa4efdc0b4f759993c8da2962b18ed46d8e5d2",
+      "review-extra-astra.json": "11d3e284e778ea059d2166d9ea44ed06bfc989e6653af5d11542c516c333863a",
+      "review-extra-sol.json": "e8308ea93454749ad37b2403b721d273b3c9e4383e8c24b4570e579590387d1e",
+      "review-extra-terra.json": "2e1d26d98021f3386c76f3c18b36a4139c86968173f1881c9a4a426fcd97c1f8",
+      "review-sol-0.json": "f3a52e8bf52abadcc92ba9fad8b376355ad7d7419eb145244663c24b45610497",
+      "review-sol-1.json": "4b506d9042d3e659ccf87cf7d1627d5bfebbc165fa2578b2b075aee71c90a6b4",
+      "review-terra-0.json": "fb15874b4da4bb2fc719e70309b3a46af8b9be455456f02c7d563ab672a6bf40",
+      "review-terra-1.json": "7a07778523e3ab348637d1762ce500c47790bd1ab6004b6ba003b780cc378696"
+    },
+    "finalReviewReportSha256": {
+      "final-review-sol.json": "3cf061a759bff220a17f3d0ef878e6811c8bcd5d55e44038b0b17932de05bfee",
+      "final-review-terra.json": "8d94f6dbff3a7168da661461a63e597982869e8e9e79e45f8d60bc3f0ba6bb56",
+      "final-review-astra.json": "c874698e6bdc755bb08d187bfb26b95385c7b12428082a83c501cd60c49b69ae"
+    }
+  },
+  "glossarySha256": {
+    "ffxiv-glossary.tsv": "a5cb48dd14689b991381020e94fb63605d8bf515d7218808e64569c0a1363a2a",
+    "scripts/ffxiv_glossary_extra.tsv": "89d3515634658da9de35a88c2fe805a1ef19af39e8b71abc3120971e2d098ae7"
+  },
+  "terminologySources": [
+    "https://ff14.huijiwiki.com/wiki/Action:41651",
+    "https://ff14.huijiwiki.com/wiki/Action:46606",
+    "https://ff14.huijiwiki.com/wiki/Data:Instance/20082.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/13586.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/47750.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/50059.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/50415.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/50974.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/51816.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Item/7766.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/67206.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/67783.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/69381.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/69484.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/69624.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/69631.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/69894.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/70262.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/70269.json",
+    "https://ff14.huijiwiki.com/wiki/Data:Quest/71041.json",
+    "https://ff14.huijiwiki.com/wiki/Shadowbringers/目覚めの御使い_〜ティターニア討滅戦〜",
+    "https://ff14.huijiwiki.com/wiki/The_Far_Edge_of_Fate/ライズ_〜機工城アレキサンダー：天動編〜",
+    "https://ff14.huijiwiki.com/wiki/两歧塔_力之塔",
+    "https://ff14.huijiwiki.com/wiki/临危受命",
+    "https://ff14.huijiwiki.com/wiki/临危受命:幸福的魔法罐",
+    "https://ff14.huijiwiki.com/wiki/任务:制作幻境武器",
+    "https://ff14.huijiwiki.com/wiki/任务:力量觉醒",
+    "https://ff14.huijiwiki.com/wiki/任务:大器晚成",
+    "https://ff14.huijiwiki.com/wiki/任务:天书奇谈",
+    "https://ff14.huijiwiki.com/wiki/任务:宝蓝色书本中的冒险故事",
+    "https://ff14.huijiwiki.com/wiki/任务:幻境中的武器",
+    "https://ff14.huijiwiki.com/wiki/任务:生命、魔晶石，万物的答案",
+    "https://ff14.huijiwiki.com/wiki/任务:锅嫌壶黑",
+    "https://ff14.huijiwiki.com/wiki/任务:黄道无双",
+    "https://ff14.huijiwiki.com/wiki/多变迷宫_商客奇谭",
+    "https://ff14.huijiwiki.com/wiki/天书奇谈",
+    "https://ff14.huijiwiki.com/wiki/天佑女王",
+    "https://ff14.huijiwiki.com/wiki/定型文列表",
+    "https://ff14.huijiwiki.com/wiki/战斗挑战笔记",
+    "https://ff14.huijiwiki.com/wiki/模板:Fate详细页",
+    "https://ff14.huijiwiki.com/wiki/版本时间表/7.x时间表",
+    "https://ff14.huijiwiki.com/wiki/物品:旅雀儿",
+    "https://ff14.huijiwiki.com/wiki/物品:神秘贝壳",
+    "https://ff14.huijiwiki.com/wiki/蜃景幻界新月岛_南征之章",
+    "https://ff14.huijiwiki.com/wiki/重建伊修加德",
+    "https://ff14.huijiwiki.com/wiki/音乐",
+    "https://ff14.huijiwiki.com/wiki/魔晶石",
+    "https://ff14.huijiwiki.com/wiki/黄道武器",
+    "https://ffxivteamcraft.com/db/en/item/2752",
+    "https://raw.githubusercontent.com/thewakingsands/ffxiv-datamining-cn/master/Item.csv"
+  ],
+  "preservation": {
+    "upstreamOriginalsAndNontranslationMetadataUnchanged": true,
+    "playerUiTranslationsAndContributionArchivesUnchanged": true,
+    "scheduledDeepSeekWorkflowUnchanged": true,
+    "approvedLegacyRemovals": [
+      [
+        "AQuestReborn",
+        "Description"
+      ],
+      [
+        "AQuestReborn",
+        "Name"
+      ]
+    ],
+    "removalNote": "仅删除经用户批准的 AQuestReborn.Name/Description 的 Translated/Source；Original 保留，不补写到已删除字段。",
+    "retentions": "品牌名、作者名、命令、参数、网址保留；功能标签附中文解释，原本为中文的字段可直接使用原文。",
+    "damagedOriginals": "MirageMirror、SGTProductionBox、PlayerTagsPlus 的译文参考可验证上游恢复；保留仓库原始字段，不静默更换原文。"
+  },
+  "verification": {
+    "metadataAudit": "pass",
+    "missingRequiredTranslations": 0,
+    "urlCommandOptionPlaceholderIssues": 0,
+    "unexpectedNonChineseProse": 0,
+    "policyTargetedTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "pythonRegressionSuite": {
+      "passed": 60,
+      "failed": 0
+    },
+    "pythonCompile": "pass",
+    "releaseScope": "Git 数据发布；不涉及 DLL 或游戏内实机验收。"
+  }
+}
