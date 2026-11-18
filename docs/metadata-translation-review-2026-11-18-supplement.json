@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-18",
+  "scope": "FireGaze 插件 Name/Punchline/Description 元数据；不涉及玩家提交的界面汉化。",
+  "sourceCommit": "50553b0af1185bb0b2cfa03b8827167b5b8d30a6",
+  "models": {
+    "gpt-6.2-astra": {
+      "fields": 4648,
+      "uniqueReviewedIds": 4648,
+      "unresolved": 0,
+      "reports": {
+        "remaining-review-astra62-0.json": "dc416c1a199080cddf5fa9bd5ef2768d3e54fbe624d2f224f2b036e4f027b1ff",
+        "remaining-review-astra62-1.json": "b4d394e85876dcaa0d7dc9b3657d17d8e650651012a5d395a15cb091f83881ad",
+        "remaining-review-astra62-2.json": "a4f35149c060da10c4e46b3def6f56a57bcc239ac04456a1e751a9b9e1b4d467"
+      }
+    },
+    "gpt-6.2-sol": {
+      "fields": 4648,
+      "uniqueReviewedIds": 4648,
+      "unresolved": 0,
+      "reports": {
+        "remaining-review-sol62-0.json": "d28e34aaab1cce6859dae2b48d71d578f927d65f59440a68eaa3a2fd3d632990",
+        "remaining-review-sol62-1.json": "9ccca33c1651cec0b28b98633c665bede9864424f8b20b6281d83156961e1375",
+        "remaining-review-sol62-2.json": "138b910a2634d1f11687256bc44151d5540cc9d0c39a950954bfbc08a42d7ee6"
+      }
+    },
+    "gpt-6.1-sol": {
+      "fields": 4648,
+      "uniqueReviewedIds": 4648,
+      "unresolved": 0,
+      "reports": {
+        "remaining-review-sol-0.json": "4286f479a1a8fba697b5f315bb96f7e1ada30487541b45157088c20b5689f426",
+        "remaining-review-sol-1.json": "17ad25bafcb1ed847f39953c538c412ea0204f40af7c8d860b6e57bd164b0987",
+        "remaining-review-sol-2.json": "fff5e2411edce56fe7ce099f5952f7635c321c4efce078a1bb6c1fdbfc8f6d49"
+      }
+    }
+  },
+  "remainingFields": 4648,
+  "remainingCoverage": "4648/4648 by each model",
+  "previousFourThousandCoverage": "4000/4000 by prior Sol/Terra/Astra pass",
+  "combinedDistinctCoverage": 8648,
+  "combinedMissingFields": 0,
+  "candidateSha256": "01e092045038cce8532b3cf9a844ac0ebac212cada21557ac5ec8af1808791a7",
+  "finalTranslationsSha256": "01e092045038cce8532b3cf9a844ac0ebac212cada21557ac5ec8af1808791a7",
+  "changedFieldsFromFrozenCandidate": 796,
+  "approvedRemovals": [
+    [
+      "AQuestReborn",
+      "Name"
+    ],
+    [
+      "AQuestReborn",
+      "Description"
+    ]
+  ],
+  "deepseekRequests": 0,
+  "validation": {
+    "audit": "pass",
+    "plugins": 3027,
+    "fields": 8648,
+    "missing": 0,
+    "tokenIssues": 0,
+    "nonChineseProse": 0,
+    "unresolved": 0
+  },
+  "notes": [
+    "新三模型逐条读取剩余 4648 个字段；模型提出的差异经过交叉裁决和 FF14 CN 术语复核后才合入。",
+    "Calypso 的 granary/exports 使用“屯货仓库/物资出口销售”；North Horn、Auroral Mirage、Future Rewritten 等术语按 FF14 CN 资料修正。",
+    "保留 Original、Repo、Author、Icon、Updated、ApiLevel 等非翻译字段；玩家 UI 翻译与投稿历史未改。"
+  ],
+  "changedFieldsFromPublishedBaseline": 61,
+  "changedPluginsFromPublishedBaseline": 57
+}
