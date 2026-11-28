@@ -1,0 +1,493 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DSREyeLocator",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "     will print would-be executed macro commands into chat if unchecked",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "     取消勾选时，原本要执行的宏命令会输出到聊天栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "   - Death of the Heavens's Gaze resolves at 34255 ms",
+      "Context": "TabEyeConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "   - 死刻的视线判定在 34255 毫秒时生效",
+      "Source": "library"
+    },
+    {
+      "Original": "   - Sanctity of the Ward's Gaze resolves at 17731 ms",
+      "Context": "TabEyeConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "   - 圣杖的视线判定在 17731 毫秒时生效",
+      "Source": "library"
+    },
+    {
+      "Original": " configuration",
+      "Context": "ConfigWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Add random delay between markings (recommended)",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在各次标记之间加入随机延迟（推荐）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blinking",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear markers",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands for no debuff players:",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无状态玩家的标记命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands for spreading players:",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "分散玩家的标记命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands for stacking players:",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "分摊玩家的标记命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration saved",
+      "Context": "ConfigWindow.OnClose",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "设置已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "DSR Toolbox",
+      "Context": "DSREyeLocator.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "绝龙诗工具箱",
+      "Source": "library"
+    },
+    {
+      "Original": "DSREye Overlay",
+      "Context": "OverlayWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "龙眼位置提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Death: ",
+      "Context": "TabMainConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "死刻： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug:",
+      "Context": "TabMainConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "调试：",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay displaying information (recommended)",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "延后显示提示（推荐）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay displaying tethers and banner until it actually matters (when going out in sanctity/returning to the middle in death)",
+      "Context": "TabEyeConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按机制进度延后显示连线和横幅：「圣杖」在向外跑时显示，「死刻」在返回中央时显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay since start of Death of the Heavens cast, ms",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "从「至天之阵：死刻」开始咏唱起计时（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay since start of Sanctity of the Ward cast, ms",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "从「苍穹之阵：圣杖」开始咏唱起计时（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable banner",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用横幅提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable module",
+      "Context": "TabChains.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable tether to eye and Thordan (requires Splatoon)",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用连接龙眼和托尔丹的指示线（需要 Splatoon）",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal offset",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark people with spread debuff",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "标记需要分散的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark people with stack debuff",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "标记需要分摊的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark people without debuff",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "标记没有对应状态的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Marker will be applied ONLY TO YOU. Uncheck \"Self only\" if you want to use plugin as automarker for the whole party.",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "仅给自己加标记。如需为全队自动标记，请取消勾选「仅自己可见」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Modules",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Must have at least 4 commands",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "至少需要 4 条命令",
+      "Source": "library"
+    },
+    {
+      "Original": "None command",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "无状态指令",
+      "Source": "library"
+    },
+    {
+      "Original": "Open configuration",
+      "Context": "DSREyeLocator..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Operational mode",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "运行模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh color",
+      "Context": "Debug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset delays to defaults",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "恢复默认延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Sanctity: ",
+      "Context": "TabMainConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "圣杖： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Self only",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅自己可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Splatoon was not found and tether feature was disabled",
+      "Context": "SplatoonManager.Get",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未找到 Splatoon，已停用连线功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread command",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "分散指令",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack command",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "分摊指令",
+      "Source": "library"
+    },
+    {
+      "Original": "Test mode",
+      "Context": "TabMainConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "测试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Test:",
+      "Context": "TabFlames.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "测试：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether color",
+      "Context": "TabChains.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "连线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether thickness",
+      "Context": "TabChains.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "连线粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "Use custom commands",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用自定义命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical offset",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "You can configure delays dependin on how much time you need for each mechanic:",
+      "Context": "TabEyeConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "可根据自己处理机制所需的时间调整延迟：",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have Splatoon installed",
+      "Context": "TabEyeConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "尚未安装 Splatoon",
+      "Source": "library"
+    },
+    {
+      "Original": "[P1/P5] Chain Tether",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "[P1/P5] 锁链连线",
+      "Source": "library"
+    },
+    {
+      "Original": "[P2/P5] Eye Locator",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "[P2/P5] 龙眼定位",
+      "Source": "library"
+    },
+    {
+      "Original": "[P6] Flames Automarker",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "[P6] 火焰自动标记",
+      "Source": "library"
+    },
+    {
+      "Original": "attack marker",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "攻击标记",
+      "Source": "library"
+    },
+    {
+      "Original": "bind marker",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "止步标记",
+      "Source": "library"
+    },
+    {
+      "Original": "ignore marker",
+      "Context": "TabFlames.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "禁止攻击标记",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

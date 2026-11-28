@@ -1,0 +1,425 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HDM",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "A Realm Reborn",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "重生之境",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Context": "MainWindow.Draw",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a catalog row first (a plain click selects it), then Disguise wears it.",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "先单击目录中的一项，再点击伪装，即可使用该外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a catalog row first (a plain click selects it), then Spawn drops a puppet wearing it.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "先单击目录中的一项，再点击生成，即可创建使用该外观的人偶。",
+      "Source": "library"
+    },
+    {
+      "Original": " on ",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear the search.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清空搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "minions",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply##ident",
+      "Context": "MainWindow.DrawDetailStrip",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Select##ident",
+      "Context": "MainWindow.DrawDetailStrip",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Minion: ",
+      "Context": "MainWindow.DrawDetailStrip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "宠物： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Active: ",
+      "Context": "MainWindow.DrawDetailStrip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "生效中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop all",
+      "Context": "MainWindow.DrawSpawnTab",
+      "Translated": "全部循环播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply ",
+      "Context": "MainWindow.DrawLiveSurface",
+      "Translated": "应用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "MainWindow.DrawLiveSurface",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "No puppets yet",
+      "Context": "MainWindow.DrawSpawnEmptyState",
+      "Translated": "暂无人偶",
+      "Source": "library"
+    },
+    {
+      "Original": "no local player.",
+      "Context": "MainWindow.CommandRevert",
+      "Translated": "找不到本机角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "spawn failed (no local player, or the object table is full).",
+      "Context": "MainWindow.CommandSpawn",
+      "Translated": "生成失败（找不到本机角色，或对象列表已满）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.SetupMobColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "MainWindow.SetupMobColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Favourites",
+      "Context": "MainWindow.DrawMobRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "加入收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfavourite",
+      "Context": "MainWindow.DrawMobRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "取消收藏",
+      "Source": "library"
+    },
+    {
+      "Original": " minions",
+      "Context": "MainWindow.DrawLocationTree",
+      "Translated": " 宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Normal",
+      "Context": "MainWindow.DrawAnimTab",
+      "Translated": "重置为常规状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "MainWindow.DrawAnimTab",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "MainWindow.DrawSubjectBar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "MainWindow.DrawAnimTab",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "No emotes loaded.",
+      "Context": "MainWindow.DrawAnimTab",
+      "Translated": "尚未载入任何情感动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Theme · accent",
+      "Context": "MainWindow.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "主题强调色",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to gold",
+      "Context": "MainWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重置为金色",
+      "Source": "library"
+    },
+    {
+      "Original": "all ",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "全部 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop",
+      "Context": "MainWindow.LoopReserve",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "MainWindow.SearchBox",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear the search",
+      "Context": "MainWindow.SearchBox",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清空搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide from lists",
+      "Context": "MainWindow.DrawRows",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "从列表中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "In hand: nothing",
+      "Context": "MainWindow.HandLabel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "手持物：无",
+      "Source": "library"
+    },
+    {
+      "Original": "In hand: auto",
+      "Context": "MainWindow.HandLabel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "手持物：自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear##clearfilter",
+      "Context": "MainWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert##bar",
+      "Context": "MainWindow.DrawBarSelf",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset##bar",
+      "Context": "MainWindow.DrawBarSelf",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog##bar",
+      "Context": "MainWindow.DrawBarSelf",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel##spawnq",
+      "Context": "MainWindow.DrawCastStrip",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert",
+      "Context": "MainWindow.DrawSubjectBar",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset##stage_reset",
+      "Context": "MainWindow.DrawSubjectBar",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Play##st_tid",
+      "Context": "MainWindow.DrawSubjectControls",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop##st_tid",
+      "Context": "MainWindow.DrawSubjectControls",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "循环",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

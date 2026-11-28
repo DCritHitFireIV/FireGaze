@@ -1,0 +1,839 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EurekaHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " local time",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 本地时间",
+      "Source": "library"
+    },
+    {
+      "Original": "(Night)",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（夜间）",
+      "Source": "library"
+    },
+    {
+      "Original": "A sound que will be played whenever an NM pops.",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恶名精英出现时播放提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "About:",
+      "Context": "PluginWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "关于：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Alarm",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "添加提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Known Elemental Map Markers",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在地图上标记已知的元素精灵",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Clear Elementals",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终清空元素精灵列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Always clear the Elemental list whenever you join a Eureka zone",
+      "Context": "PluginWindow.DrawElementalTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每次进入优雷卡区域时清空元素精灵列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Anemos",
+      "Context": "RelicWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "常风之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Assist to crowdsource for Elemental locations",
+      "Context": "PluginWindow.DrawElementalTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "协助收集元素精灵的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Create Tracker",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动创建追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Mark Elementals",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动标记元素精灵",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto creates tracker when joining an instance and prints the tracker link to chat",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "进入副本实例时自动创建追踪器，并将链接发到聊天栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bunny Sound Effect",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "幸运兔提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Channels",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Sound Effect to be played when an NM pops.",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恶名精英出现时播放的聊天提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Elementals",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空元素精灵列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Map Markers",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除所有地图标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "PluginWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy tracker link to clipboard",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制追踪器链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy tracker password to clipboard",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制追踪器密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Anemos Tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建常风之地追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Hydatos Tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建丰水之地追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Pagos Tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建恒冰之地追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Pyros Tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建涌火之地追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a new tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "创建追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Crowdsource Locations",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "共享发现的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Elemental",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示元素精灵",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Elemental Toast",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示元素精灵弹出提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Display NM Pop",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示恶名精英出现提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Toast",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示弹出提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Display fate progress",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示临危受命进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays a toast whenever an Elemental appears near the player",
+      "Context": "PluginWindow.DrawElementalTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "有元素精灵出现在你附近时，弹出提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays a toast whenever an NM pops",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恶名精英出现时弹出提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays in chat whenever an Elemental appears near the player",
+      "Context": "PluginWindow.DrawElementalTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "有元素精灵出现在你附近时，在聊天栏提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays the NM that popped in chat",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在聊天栏显示刚出现的恶名精英。",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "RelicWindow.DrawRelicTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Elemental",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "元素精灵",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable NM pop sound",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用恶名精英出现提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable bunny fates",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用幸运兔临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable display for bunny fates",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示幸运兔临危受命。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ends in ",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距结束还有 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter 6 digit code",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入六位代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter tracker password",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入追踪器密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Exports the current tracker to a new one",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前追踪器的数据导出到新追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Green",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "Hydatos",
+      "Context": "RelicWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "丰水之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Information:",
+      "Context": "PluginWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "信息：",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventories:",
+      "Context": "RelicWindow.DrawRelicTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "库存：",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "RelicWindow.DrawRelicTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上次发现",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave the current tracker",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "离开当前追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark",
+      "Context": "PluginWindow.DrawElementalTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标记",
+      "Source": "library"
+    },
+    {
+      "Original": "NM Sound Effect",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "恶名精英提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "EurekaWeatherExtensions.ToFriendlyString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Note:",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "备注：",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the tracker in a browser",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在浏览器中打开追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Pagos",
+      "Context": "RelicWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "恒冰之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Context": "DrawTrackerTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Password:",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "密码：",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the NM progress in chat",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在聊天栏显示恶名精英讨伐进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pyros",
+      "Context": "RelicWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "涌火之地",
+      "Source": "library"
+    },
+    {
+      "Original": "RESET",
+      "Context": "PluginWindow.DrawTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Randomize Map Coords",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "随机微调地图坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Randomizes map coords to range of +- 0.5 (recommended to enable)",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 ±0.5 的范围内随机调整地图坐标（建议启用）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Red",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "红色",
+      "Source": "library"
+    },
+    {
+      "Original": "Requirements:",
+      "Context": "RelicWindow.DrawRelicTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "要求：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All",
+      "Context": "PluginWindow.DrawTrackerTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Respawn time may be wrong due to other conditions",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "其他条件可能会影响预计刷新时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers:",
+      "Context": "RelicWindow.DrawRelicTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "雇员：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set the channel which the plugin messages will display. Default: Echo",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择插件发送消息的频道。默认为默语。",
+      "Source": "library"
+    },
+    {
+      "Original": "Set tracker to private",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将追踪器设为私密",
+      "Source": "library"
+    },
+    {
+      "Original": "Set tracker to public",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将追踪器设为公开",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings:",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Level On Tracker",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在追踪器中显示等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound Effect to be played when an NM pops.",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恶名精英出现时播放的音效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound Effect to be played when bunny spawns.",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "幸运兔出现时播放的音效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start:",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "开始：",
+      "Source": "library"
+    },
+    {
+      "Original": "TIME",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Time:",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Type:",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "EurekaElementExtensions.ToFriendlyString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Chat Sound Effects",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用聊天提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Context": "PluginWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather Forecast:",
+      "Context": "DrawTrackerTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "天气预报：",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather:",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "天气：",
+      "Source": "library"
+    },
+    {
+      "Original": "Will show the level of a given NM in the tracker table.",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在追踪表中显示各恶名精英的等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone:",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "区域：",
+      "Source": "library"
+    },
+    {
+      "Original": "minutes",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "settings",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns",
+      "Translated": "设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

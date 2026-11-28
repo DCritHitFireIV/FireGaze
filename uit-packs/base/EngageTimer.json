@@ -1,0 +1,939 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EngageTimer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "EngageTimer Countdown",
+      "Context": "CountDown.FirstDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "开战倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "SfxDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "Settings..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound effect finder",
+      "Context": "SfxDebug..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "音效查找器",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "AlarmsTab.AlarmElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "delete",
+      "Context": "AlarmsTab.AlarmElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "hue",
+      "Context": "CountdownTab.CountdownNumberColor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "色相",
+      "Source": "library"
+    },
+    {
+      "Original": "left",
+      "Context": "Components.LeftRight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "right",
+      "Context": "Components.LeftRight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Active",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Active",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables / disables this alarm",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Active_Tooltip",
+      "Translated": "启用或停用此提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Add",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Blink",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Blink",
+      "Translated": "闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Makes the floating window stopwatch blink during the alarm",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Blink_Tooltip",
+      "Translated": "提醒期间让悬浮窗的秒表闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Clear",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Do you really want to remove all the alarms?",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Clear_Confirm",
+      "Translated": "确定要删除所有提醒吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Duration",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Export",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Select file to export",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Export_File",
+      "Translated": "选择导出文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Exports the active alarms to a file",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Export_Tooltip",
+      "Translated": "将当前启用的提醒导出至文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Import",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Select file to import",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Import_File",
+      "Translated": "选择导入文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Sound",
+      "Translated": "声音",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Sound_None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Plays a game sound effect at the alarm time",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Sound_Tooltip",
+      "Translated": "到达提醒时间时播放游戏音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Start time",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_StartTime",
+      "Translated": "开始时间",
+      "Source": "library"
+    },
+    {
+      "Original": "The alarm will start at this specified combat time",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_StartTime_Tooltip",
+      "Translated": "战斗计时达到此值时触发提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text",
+      "Translated": "文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Clear",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "No text",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_NoText",
+      "Translated": "无文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Test",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Text",
+      "Translated": "文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Type",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Type:",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Type_Colon",
+      "Translated": "类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat log",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Type_ChatLog",
+      "Translated": "聊天记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud Notification",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Type_DalamudNotification",
+      "Translated": "Dalamud 通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Game toast",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Type_GameToast",
+      "Translated": "游戏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "An empty or invalid alarm list was imported",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "CombatAlarm_ImportedEmpty",
+      "Translated": "导入的提醒列表为空或无效",
+      "Source": "library"
+    },
+    {
+      "Original": "The alarms file format is incompatible or incorrect",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "CombatAlarm_IncorrectFormat",
+      "Translated": "提醒文件格式不兼容或有误",
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while trying to read the alarms in {0}: {1}.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "CombatAlarm_ReadGeneric",
+      "Translated": "从 {0} 读取提醒时出错：{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while trying to save the alarms to {0}: {1}.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "CombatAlarm_SaveGeneric",
+      "Translated": "将提醒保存到 {0} 时出错：{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unrecognized argument for {0}: {1}",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Error_InvalidArgument",
+      "Translated": "无法识别 {0} 的参数：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Unrecognized subcommand: {0}",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Error_InvalidSubcommand",
+      "Translated": "无法识别的子命令：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown is now {0}",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_Countdown_Success",
+      "Translated": "倒计时现为 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "open the settings menu",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_Settings",
+      "Translated": "打开设置菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Status_Off",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Status_On",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Modal_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Modal_Confirm",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_AboutTab_Title",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "A common use is to notify you of the potion window.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_AlarmsTab_Line2",
+      "Translated": "例如，可以提醒你爆发药的使用时机。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarms",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_AlarmsTab_Title",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable accurate countdown mode (countdown - 1)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_AccurateMode",
+      "Translated": "启用精确倒计时（倒计时减 1）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable animation",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Animate",
+      "Translated": "启用动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Light effect",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_AnimateOpacity",
+      "Translated": "光效",
+      "Source": "library"
+    },
+    {
+      "Original": "Scaling effect",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_AnimateScale",
+      "Translated": "缩放效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Play a ticking sound for all numbers",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Audio_Enable",
+      "Translated": "为倒计时的每个数字播放滴答声",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound volume",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Audio_LegacyVolume",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Use duty pop timer sound",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Audio_UseAlternativeSound",
+      "Translated": "使用副本匹配倒计时音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Alignment",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownAlign",
+      "Translated": "对齐方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Display",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownDecimals_Left",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "decimals in countdown",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownDecimals_Right",
+      "Translated": "倒计时小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Display threshold",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownDisplayThreshold",
+      "Translated": "显示阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownScale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Center countdown window",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownWindowCentered",
+      "Translated": "将倒计时窗口居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't overlap with game countdown (default)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_DefaultOriginalCountDown",
+      "Translated": "避开游戏原生倒计时（默认）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable big countdown",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Enable",
+      "Translated": "启用大号倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_FloatingWindowScale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide original countdown",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_HideOriginalCountDown",
+      "Translated": "隐藏原生倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Also replace numbers before 5",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_HideOriginalCountDown_Help",
+      "Translated": "一并替换倒计时 5 秒前的数字",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw even if original countdown is visible",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_IgnoreOriginalCountDown",
+      "Translated": "游戏原生倒计时可见时仍显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed width",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Monospaced",
+      "Translated": "固定宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "hue",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberHue",
+      "Translated": "色相",
+      "Source": "library"
+    },
+    {
+      "Original": "brightness",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberLuminance",
+      "Translated": "亮度",
+      "Source": "library"
+    },
+    {
+      "Original": "saturation",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberSaturation",
+      "Translated": "饱和度",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberStyleTitle",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "More options",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberStyle_Advanced",
+      "Translated": "更多选项",
+      "Source": "library"
+    },
+    {
+      "Original": "pixels",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberStyle_CustomNegativeMargin",
+      "Translated": "像素",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a leading 0",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberStyle_LeadingZero",
+      "Translated": "补齐前导零",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown offset",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_OffsetText",
+      "Translated": "倒计时偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Position and size",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_PositioningTitle",
+      "Translated": "位置与大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable test mode",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Test_Start",
+      "Translated": "启用测试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable test mode",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Test_Stop",
+      "Translated": "停用测试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Number style",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Texture",
+      "Translated": "数字样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Texture_Custom_Load",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture Folder",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Texture_Custom_Path",
+      "Translated": "纹理文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Texture_custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Start playing from",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_TickFrom",
+      "Translated": "起播位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Big countdown",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Title",
+      "Translated": "大号倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Always hide when not bound by duty",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_AlwaysDisableOutsideDuty",
+      "Translated": "副本外始终隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Milliseconds to show",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_DecimalPrecision",
+      "Translated": "显示的毫秒位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_Defaults",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Server Info Bar integration",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_Enable",
+      "Translated": "启用服务器信息栏集成",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_HideAfter",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefix",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_Prefix",
+      "Translated": "前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Suffix",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_Suffix",
+      "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Info Bar",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrTab_Title",
+      "Translated": "服务器信息栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable accurate countdown in floating window",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_AccurateCountdown",
+      "Translated": "在悬浮窗中启用精确倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_AutoHide_Left",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Background color and opacity",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_BackgroundColor",
+      "Translated": "背景颜色与不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Display the \"-\" sign",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_CountdownNegativeSign",
+      "Translated": "显示负号",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the current countdown value (e.g. -13)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_CountdownPrecision_Help",
+      "Translated": "显示当前倒计时数值（如 -13）",
+      "Source": "library"
+    },
+    {
+      "Original": "Display countdown",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_CountdownPrecision_Left",
+      "Translated": "显示倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "decimals",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_CountdownPrecision_Right",
+      "Translated": "小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable floating window",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Display",
+      "Translated": "启用悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide combat time when not bound by duty",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_DisplayStopwatchOnlyInDuty",
+      "Translated": "副本外隐藏战斗计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Font size",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_FontSize",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide window border",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_ForceHideWindowBorder",
+      "Translated": "隐藏窗口边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in cutscenes",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_HideInCutscenes",
+      "Translated": "过场动画中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in combat cutscenes",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_HideWhileOccupiedInCombat",
+      "Translated": "战斗过场动画中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock floating window",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Lock",
+      "Translated": "锁定悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables clicking and moving the window.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Lock_Help",
+      "Translated": "禁止点击和移动窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset in seconds",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_PrePullOffset",
+      "Translated": "偏移（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable pre-pull warning",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_ShowPrePulling",
+      "Translated": "启用提前开怪提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Display combat time in seconds instead of time format",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_StopwatchAsSeconds",
+      "Translated": "以秒数显示战斗时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the current combat duration",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_StopwatchPrecision_Help",
+      "Translated": "显示本次战斗的持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Display combat timer",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_StopwatchPrecision_Left",
+      "Translated": "显示战斗计时",
+      "Source": "library"
+    },
+    {
+      "Original": "decimals",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_StopwatchPrecision_Right",
+      "Translated": "小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Styling",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Styling",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Text align",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_TextAlign",
+      "Translated": "文字对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Center",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_TextAlign_Center",
+      "Translated": "居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_TextAlign_Left",
+      "Translated": "左对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_TextAlign_Right",
+      "Translated": "右对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Text color",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_TextColor",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Floating window",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Title",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "EngageTimer settings",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Title",
+      "Translated": "EngageTimer 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended window size is 300x100.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_HelpSize",
+      "Translated": "推荐窗口大小为 300×100。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide overlay",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_Hide_Left",
+      "Translated": "隐藏叠加层",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

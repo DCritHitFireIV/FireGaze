@@ -1,0 +1,458 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "NotificationMaster",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " minutes",
+      "Context": "NotificationMaster.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": " 分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Approaching map flag",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "接近地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Bring FFXIV to foreground",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将游戏切换到前台",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat message",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration saved",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "设置已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection error",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "连接错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Content:",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "内容：",
+      "Source": "library"
+    },
+    {
+      "Original": "Cutscene ending",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "过场动画即将结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Display an in-game toast",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示游戏内弹出提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance to marker",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "距旗标的距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance: ",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距离： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty pop",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "任务匹配成功",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "SelectFile",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute actions even if game is active",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "游戏处于前台时也执行操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Notify",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "鱼儿咬钩提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Flash taskbar icon",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "闪烁任务栏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "GP replenish",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "采集力恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavy bite (!!!)",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "重杆（!!!）",
+      "Source": "library"
+    },
+    {
+      "Original": "Light bite (!)",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "轻杆（!）",
+      "Source": "library"
+    },
+    {
+      "Original": "Medium bite (!!)",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "中杆（!!）",
+      "Source": "library"
+    },
+    {
+      "Original": "Message",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Message log",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "消息记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Mob pulled",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "怪物进入战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "ConfigGui.DrawLoginErrorConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "None available",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有可用项",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification options:",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "通知选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "NotificationMaster configuration",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "NotificationMaster 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify if the party is delisted",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "招募下架时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify upon reaching this amount of GP",
+      "Context": "ConfigGui.DrawGpNotify",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "采集力恢复到此值时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Only notify when 15 seconds are left",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在还剩 15 秒时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Only selected",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Only trigger in MSQ roulette dungeons",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在随机任务：主线剧情中触发",
+      "Source": "library"
+    },
+    {
+      "Original": "Only when the party fills up",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在队伍招满时",
+      "Source": "library"
+    },
+    {
+      "Original": "PartyFinder",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "队员招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "播放声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重复",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Defaults",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search mode",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show chat message",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "发送聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Show tray notification",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示系统托盘通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "AudioPlayer.BeginThread",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop playing once game is focused",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切回游戏时停止播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类型",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

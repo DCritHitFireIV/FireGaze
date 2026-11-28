@@ -1,0 +1,985 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Chronofoil.Plugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " will be available at the following times:",
+      "Context": "UploadModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " ，将于以下时间开放：",
+      "Source": "library"
+    },
+    {
+      "Original": ". Please see the log for more information.",
+      "Context": "BackgroundUpload.Error",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "。详情请查看日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "MainWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Authenticated as ",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前登录身份： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Authentication with the Chronofoil server was successful!",
+      "Context": "LoginModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已成功通过 Chronofoil 服务器验证。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Upload Warning",
+      "Context": "AutoUploadService.Begin",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "自动上传提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture ID",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "采集记录 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture session finalized: ",
+      "Context": "CaptureSessionManager.End",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "采集已结束： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture session started: ",
+      "Context": "CaptureSessionManager.Begin",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "开始采集： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Captures",
+      "Context": "MainWindow.DrawCaptureTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "采集记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Captures are available for upload",
+      "Context": "CaptureManager.Notify",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "有可上传的采集记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Captures in progress must be finished before they can be uploaded.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "进行中的采集必须先结束才能上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "Censoring capture...",
+      "Context": "UploadModal.DrawCensorProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在对采集记录做脱敏处理…",
+      "Source": "library"
+    },
+    {
+      "Original": "Censoring upload...",
+      "Context": "BackgroundUpload.SetStep",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "正在对上传内容做脱敏处理…",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil Error",
+      "Context": "CaptureHookManager.PacketsFromFrame2",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "Chronofoil 错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil Login",
+      "Context": "LoginModal..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "登录 Chronofoil",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil Registration",
+      "Context": "RegisterModal..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "注册 Chronofoil",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil Storage Directory:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Chronofoil 存储目录：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil encountered an error during login.",
+      "Context": "LoginModal.DrawError",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "登录 Chronofoil 时发生错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil encountered an error during registration.",
+      "Context": "NewTosModal.DrawError",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "注册 Chronofoil 时发生错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil encountered an error while uploading the capture.",
+      "Context": "UploadModal.DrawError",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Chronofoil 上传采集记录时发生错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil registration is only necessary if you would like to contribute packet captures to the central capture repository.",
+      "Context": "RegisterModal.DrawTos",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "只有向中央采集仓库贡献数据时，才需要注册 Chronofoil。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chronofoil tracks these on your game client - if you've sent a censorable packet, Chronofoil will know its opcode and censor it accordingly.",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Chronofoil 会在本地客户端跟踪这些操作码。如果你发送过需要脱敏的数据包，Chronofoil 就能识别其操作码并进行脱敏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Default 'public' time for uploads: ",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "默认公开上传内容的时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Default metrics time for uploads: ",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "默认提供统计数据的时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete from Server",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "从服务器删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持续时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Effective date: ",
+      "Context": "NewTosModal.DrawTos",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "生效日期： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Notifications:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用通知：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Quick Upload:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用快速上传：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Uploading:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用上传：",
+      "Source": "library"
+    },
+    {
+      "Original": "End Time",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "结束时间",
+      "Source": "library"
+    },
+    {
+      "Original": "End of Service",
+      "Context": "Util.GetTimeString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务终止",
+      "Source": "library"
+    },
+    {
+      "Original": "End: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "结束： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to get capture list.",
+      "Context": "UploadsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取采集记录列表失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to upload capture ",
+      "Context": "BackgroundUpload.Upload",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "采集记录上传失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Faq",
+      "Context": "MainWindow.DrawFaqTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "常见问题",
+      "Source": "library"
+    },
+    {
+      "Original": "File Size",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文件大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "NewTosModal.DrawTos",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "First contribution start: ",
+      "Context": "UploadsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "首次贡献的起始时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "For download: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可下载时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "For metrics: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可查询统计数据的时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Left Shift and Left Control at the same time to delete this capture from the server. This is not reversible.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "同时按住左 Shift 和左 Ctrl，可从服务器永久删除这份采集记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Left Shift and Left Control at the same time to delete this capture. This is not reversible.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "同时按住左 Shift 和左 Ctrl，可永久删除这份采集记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Left Shift and click to quick upload.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住左 Shift 并单击可快速上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "However, you can opt to not upload now and try again later when all censorable opcodes are known.",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "你也可以暂缓上传，等所有需要脱敏的操作码均已确认后再试。",
+      "Source": "library"
+    },
+    {
+      "Original": "I do not understand, or do not agree, to the terms and conditions",
+      "Context": "NewTosModal.DrawTos",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "我不理解或不同意这些条款",
+      "Source": "library"
+    },
+    {
+      "Original": "I understand and agree to the terms and conditions",
+      "Context": "NewTosModal.DrawTos",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "我理解并同意这些条款",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignores this capture. Chronofoil will not notify you about non-uploaded, ignored captures, nor will it let you upload ignored captures.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "忽略这份记录后，Chronofoil 将不再提醒上传，也不会允许上传这份记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "In Progress",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Last contribution end: ",
+      "Context": "UploadsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "最近一次贡献的结束时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Length",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading FAQ...",
+      "Context": "FaqTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在加载常见问题…",
+      "Source": "library"
+    },
+    {
+      "Original": "Log in with:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "登录方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Logged Out",
+      "Context": "AuthManager.RefreshToken",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "已退出登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Metrics Time",
+      "Context": "UploadsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "统计数据开放时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Metrics time for this capture: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此记录的统计数据开放时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Metrics: ",
+      "Context": "UploadModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "统计数据： ",
+      "Source": "library"
+    },
+    {
+      "Original": "New Chronofoil ToS",
+      "Context": "NewTosModal..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Chronofoil 新版服务条款",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "RegisterModal.DrawTos",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "On Capture End:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "采集结束时：",
+      "Source": "library"
+    },
+    {
+      "Original": "On Capture Start:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开始采集时：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Chronofoil UI.",
+      "Context": "Chronofoil..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Chronofoil 界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Override my normal settings for this capture upload: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "为本次上传单独设置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Please authorize the application with Discord in your web browser.",
+      "Context": "LoginModal.DrawAuth",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请在浏览器中通过 Discord 为此应用授权。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please read and accept the new Chronofoil Terms of Service.",
+      "Context": "NewTosModal.DrawTos",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请阅读并接受新版 Chronofoil 服务条款。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please read the terms and conditions carefully. It contains important information regarding your privacy as a Chronofoil user.",
+      "Context": "RegisterModal.DrawTos",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请仔细阅读条款，其中包含关于 Chronofoil 用户隐私的重要信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait...",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请稍候…",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing for upload...",
+      "Context": "UploadModal.DrawPrepare",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在准备上传…",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing to upload capture ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在准备上传采集记录 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing upload...",
+      "Context": "BackgroundUpload.SetStep",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "正在准备上传…",
+      "Source": "library"
+    },
+    {
+      "Original": "Public Time",
+      "Context": "UploadsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文件公开时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Public time for this capture: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此记录的文件公开时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Public: ",
+      "Context": "UploadModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "公开下载： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Upload allows you to bypass the upload user interface and perform uploads in one click by holding Left Shift when clicking upload. The entire upload process will run in the background and use your default privacy settings. If all opcodes are not available for censoring, the warning will not appear, and the upload will continue.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "快速上传允许你按住左 Shift 并点击上传，跳过上传界面。上传会在后台进行，并使用默认隐私设置。即便部分操作码未知而无法脱敏，系统也不会显示警告，仍会继续上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "Register with:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "注册方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Registration is not necessary for capturing packets for your own purposes.",
+      "Context": "RegisterModal.DrawTos",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅为自己采集数据时，无需注册。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remind me on startup if I have non-ignored, non-uploaded captures:",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "若有尚未上传且未被忽略的记录，启动时提醒我：",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings are invalid.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "设置无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Some sensitive packet opcodes that Chronofoil censors are not available from your client or the server.",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "有些需要脱敏的数据包操作码，当前无法从你的客户端或服务器获取。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Time",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "开始时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Start: ",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开始： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Successfully uploaded ",
+      "Context": "BackgroundUpload.SetStep",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "已成功上传 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Successfully uploaded capture ",
+      "Context": "BackgroundUpload.Upload",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "采集记录上传成功： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Thank you for accepting the new Chronofoil Terms of Service (effective ",
+      "Context": "NewTosModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "感谢你接受新版 Chronofoil 服务条款（生效日期： ",
+      "Source": "library"
+    },
+    {
+      "Original": "The 'metrics time' is how long from the time of upload that it will take for the capture to appear in the\r\nChronofoil metrics system for developers to query.\r\nThis does not prevent an individual from querying the metrics system and recreating your capture, but it\r\nmakes it incredibly difficult, while still providing useful information to developers.",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "「统计公开延迟」指从上传记录到可在\r\nChronofoil 统计系统中查询它之间的时间。\r\n他人仍有可能通过查询统计系统还原你的记录，但这样做的难度很高。\r\n开发者仍可从统计数据获得所需信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "The 'metrics time' is how long from the time of upload that it will take for your captures to appear in the Chronofoil metrics system for developers to query. This does not prevent an individual from querying the metrics system and recreating your capture, but it makes it incredibly difficult, while still providing useful information to developers. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "「统计公开延迟」是指从上传到开发者可在 Chronofoil 统计系统中查询这份采集数据之间的时间。他人仍有可能通过查询统计系统还原你的记录，但难度很高。开发者仍可利用其中的信息。每次上传默认使用此项设置，上传时可以单独调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "The 'public time' is how long from the time of upload that it will take for the capture to be available for raw download.\r\nThis provides the full capture file to individuals, which allows them to do whatever - extract information, places visited,\r\nor even replay the packet capture on their own machine if they so choose.",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "「文件公开延迟」指从上传到他人可以下载原始采集文件之间的时间。\r\n下载者能获得完整文件，提取其中的信息，查看你去过的地点，\r\n甚至在自己的设备上重放记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "The 'public time' is how long from the time of upload that it will take for your captures to be available for raw download. This provides the full capture file to individuals, which allows them to do whatever - extract information, places visited, or even replay the packet capture on their own machine if they have that capability. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "「文件公开延迟」是指从上传到他人可直接下载原始采集文件之间的时间。届时任何人都能获得完整文件、提取其中的信息、查看你去过的地点，具备条件的人甚至可以在自己的设备上重放记录。每次上传默认使用此项设置，上传时可以单独调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "The error is as follows:",
+      "Context": "LoginModal.DrawError",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "错误如下：",
+      "Source": "library"
+    },
+    {
+      "Original": "The minimum Metrics time is 7 days from the date of upload.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "统计数据最早可于上传满 7 天后开放。",
+      "Source": "library"
+    },
+    {
+      "Original": "The minimum Public time is 14 days from the date of upload.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "原始文件最早可于上传满 14 天后公开。",
+      "Source": "library"
+    },
+    {
+      "Original": "To upload, please Log In to the Chronofoil Service.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先登录 Chronofoil 服务再上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "To upload, turn off ignore for this capture.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请取消忽略这份记录再上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "To upload, turn on uploading in the settings tab.",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先在设置页启用上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "Total time contributed: ",
+      "Context": "UploadsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已贡献的总时长： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Upload",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上传",
+      "Source": "library"
+    },
+    {
+      "Original": "Upload Capture",
+      "Context": "UploadModal..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "上传采集记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Upload successful!",
+      "Context": "UploadModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "上传成功！",
+      "Source": "library"
+    },
+    {
+      "Original": "Uploaded",
+      "Context": "CaptureTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已上传",
+      "Source": "library"
+    },
+    {
+      "Original": "Uploading ",
+      "Context": "BackgroundUpload.Upload",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "正在上传 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Uploading capture...",
+      "Context": "UploadModal.DrawUploadProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在上传采集记录…",
+      "Source": "library"
+    },
+    {
+      "Original": "Uploading...",
+      "Context": "BackgroundUpload.SetStep",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "正在上传…",
+      "Source": "library"
+    },
+    {
+      "Original": "Uploads",
+      "Context": "MainWindow.DrawUploadsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "上传记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: You have auto-upload enabled, but you are not logged in to the Chronofoil Service.",
+      "Context": "AutoUploadService.Begin",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已启用自动上传，但你尚未登录 Chronofoil 服务。",
+      "Source": "library"
+    },
+    {
+      "Original": "What this means is that nobody on the current game version has performed a certain task (for example, sending a letter) - including you.",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这意味着，包括你在内，目前尚无人在此游戏版本中执行过某项操作（例如投递信件）。",
+      "Source": "library"
+    },
+    {
+      "Original": "With your settings, these captures will be available:",
+      "Context": "UploadModal.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "根据当前设置，这些记录将在以下时间开放：",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "CaptureTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "You have been logged out of the Chronofoil Service.",
+      "Context": "AuthManager.RefreshToken",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "你已退出 Chronofoil 服务。",
+      "Source": "library"
+    },
+    {
+      "Original": "You should be safe to upload, considering if you've performed one of these censorable actions, Chronofoil would know the opcode.",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按此机制，如果你执行过需要脱敏的操作，Chronofoil 应已识别其操作码，因此通常可以上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your capture ",
+      "Context": "UploadModal.DrawDone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "你的采集记录 ",
+      "Source": "library"
+    },
+    {
+      "Original": "by perchbird",
+      "Context": "MainWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "作者：perchbird",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "XivMediaPlayer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the Watch Party community directory",
+      "Context": "Plugin.UpdateMediaCommandHelp",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开集体观影社区目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid ",
+      "Context": "Plugin.DrawOutdoorGridDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "网格 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Screen Placement###ScreenPlacement",
+      "Context": "ScreenSettingsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "屏幕位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Watch Party community directory to browse or host events:",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开集体观影社区目录，即可浏览或发起活动：",
+      "Source": "library"
+    },
+    {
+      "Original": "Created: ",
+      "Context": "SettingsWindow.DrawDiscordTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "创建时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Watch Party Directory",
+      "Context": "WatchPartyWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "集体观影目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse Watch Parties",
+      "Context": "WatchPartyWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "浏览观影活动",
+      "Source": "library"
+    },
+    {
+      "Original": "Host a Watch Party",
+      "Context": "WatchPartyWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "发起观影活动",
+      "Source": "library"
+    },
+    {
+      "Original": "Upcoming and active community watch parties:",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "即将开始和正在进行的社区观影活动：",
+      "Source": "library"
+    },
+    {
+      "Original": "No active watch parties at the moment. Host one in the next tab!",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "目前没有正在进行的活动。你可以前往下一个标签页发起活动！",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "left",
+      "Context": "LocalMediaWindow.DrawPlotRegistry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "right",
+      "Context": "LocalMediaWindow.DrawPlotRegistry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "delete",
+      "Context": "LocalMediaWindow.DrawPlotRegistry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "next",
+      "Context": "LocalMediaWindow.DrawTransport",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "remove",
+      "Context": "LocalMediaWindow.DrawQueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

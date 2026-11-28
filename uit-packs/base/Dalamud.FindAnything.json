@@ -1,0 +1,544 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Dalamud.FindAnything",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Buy ",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "购买 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot teleport in this situation.",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "当前状态下无法传送。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot teleport to that destination.",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法传送到该目的地。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not render Wotsit UI. Please report this error.",
+      "Context": "Finder.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法显示 Wotsit 界面，请反馈此错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting recipes",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "制作配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Display name",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "显示名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote",
+      "Context": "EmoteSearchResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "SettingsWindow.DrawIpcDetailConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Fashion Accessory",
+      "Context": "FashionAccessoryResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Fuzzy search mode prefix",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "模糊搜索前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "FuzzyParts search mode prefix",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "分词模糊搜索前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset",
+      "Context": "Gearset.ToString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "How to open",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "打开方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Inputting one of the prefixes below as the first character of your search text will temporarily change the search mode for that search.",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "将下列前缀放在搜索词开头，可临时切换本次搜索的模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "WikiLookup.Lookup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Just start typing to search!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "直接输入就能搜索！",
+      "Source": "library"
+    },
+    {
+      "Original": "Key Double Tap",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "双击按键",
+      "Source": "library"
+    },
+    {
+      "Original": "Keyboard Combo",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "组合键",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "种类",
+      "Source": "library"
+    },
+    {
+      "Original": "Line scroll repeat delay",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按行连续滚动延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Line scroll repeat interval",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按行连续滚动间隔",
+      "Source": "library"
+    },
+    {
+      "Original": "Link macros to search in \"wotsit settings\"!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "在 Wotsit 设置中关联宏后，即可搜索这些宏！",
+      "Source": "library"
+    },
+    {
+      "Original": "Macros",
+      "Context": "MacroLinkSearchResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount",
+      "Context": "MountResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "GameWindow.DrawCityTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Wotsit settings.",
+      "Context": "FindAnythingPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Wotsit 设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Other Plugins",
+      "Context": "PluginSettingsSearchResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "其他插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Other plugins",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "其他插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Page scroll repeat delay",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按页连续滚动延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Page scroll repeat interval",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按页连续滚动间隔",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Press enter to select results!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "按回车键选中结果！",
+      "Source": "library"
+    },
+    {
+      "Original": "Press the up and down buttons to scroll!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "用上下方向键浏览结果！",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent passthrough to game",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "阻止按键同时传给游戏",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest",
+      "Context": "WikiLookup.Lookup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Run chat commands by typing them here!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "在这里输入即可执行聊天指令！",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and Close",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrolling",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "滚动",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for aetherytes or zone names!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可搜索以太之光或区域名称！",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for emotes or duties!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可搜索情感动作或副本！",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for game commands, like timers!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可搜索游戏指令，例如「任务情报」！",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for names of gearsets, jobs or roles!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可按套装、职业或职能名称搜索！",
+      "Source": "library"
+    },
+    {
+      "Original": "Search mode",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "搜索模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Search prefixes",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "搜索前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "FilterCombo`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已分享",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple search mode prefix",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "精确搜索前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport failed.",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "传送失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleported to ",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已传送至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type mathematical expressions into the search bar!",
+      "Context": "HintResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "在搜索框中输入算式即可计算！",
+      "Source": "library"
+    },
+    {
+      "Original": "Type to search...",
+      "Context": "ModuleLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入文字搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "When using fuzzy search modes, results are shown in order from best match to worst match.",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "模糊搜索结果按匹配程度从高到低排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "When using the keyboard to scroll through results, customise the scroll delay and speed.",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用键盘浏览结果时，可调整滚动延迟和速度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "GameWindow.DrawCityTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

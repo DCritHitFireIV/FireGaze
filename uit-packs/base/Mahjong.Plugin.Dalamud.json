@@ -1,0 +1,498 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Mahjong.Plugin.Dalamud",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "    left: ",
+      "Context": "StatusTab.DrawPolicyPickCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "    左： ",
+      "Source": "library"
+    },
+    {
+      "Original": "    right: ",
+      "Context": "StatusTab.DrawPolicyPickCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "    右： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Character",
+      "Context": "Theme.TileFriendlyName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 角色",
+      "Source": "library"
+    },
+    {
+      "Original": "\"Hints\" mode only shows advice — never clicks for you.",
+      "Context": "MainWindow.DrawTosGate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "“提示”模式仅给出打牌建议。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "MainWindow.DrawHeaderIcons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Across",
+      "Context": "MainWindow.DrawSeatRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "对家",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "DebugOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Addon name",
+      "Context": "AddonTab.DrawLayoutCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "游戏窗口名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Context": "AboutWindow.DrawDetailsTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Best move",
+      "Context": "MainWindow.DrawSuggestion",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "推荐打法",
+      "Source": "library"
+    },
+    {
+      "Original": "Bug report",
+      "Context": "DebugOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "问题报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "MainWindow.DrawAutoPlayConfirmModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Click for you",
+      "Context": "MainWindow.DrawModeCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "自动点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open · right-click to copy",
+      "Context": "AboutWindow.DrawLinkRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击打开，右键复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to clipboard:\n",
+      "Context": "DevHelpers.CopyButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制到剪贴板：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "BugReportTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "DISCARD",
+      "Context": "HandOverlay.DrawHighlightArrow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "打牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Developer",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Context": "DebugOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Context": "MainWindow.FriendlyActionVerb",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Do nothing",
+      "Context": "MainWindow.DrawModeCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "不执行操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Doman Mahjong Solver###domanmahjong-main",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "多玛方城战助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Doman Mahjong Solver: About###domanmahjong-about",
+      "Context": "AboutWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "关于多玛方城战助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto-play",
+      "Context": "MainWindow.DrawAutoPlayConfirmModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "启用自动对局",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto-play?##autoplay-confirm",
+      "Context": "MainWindow.DrawAutoPlayConfirmModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "启用自动对局？",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "DiagnosticsTab.DrawTelemetryCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Event log",
+      "Context": "StatusTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "事件日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Files",
+      "Context": "BugReportTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Green Dragon",
+      "Context": "Theme.TileFriendlyName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "发财",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight best move",
+      "Context": "MainWindow.DrawModeCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "高亮推荐打法",
+      "Source": "library"
+    },
+    {
+      "Original": "Hints",
+      "Context": "MainWindow.DrawModeCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hints — outline the best discard in the mahjong window.",
+      "Context": "MainWindow.DrawEmptyLive",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "提示模式会在麻将界面中用边框标出推荐打出的牌。",
+      "Source": "library"
+    },
+    {
+      "Original": "I understand — continue",
+      "Context": "MainWindow.DrawTosGate",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "我已了解，继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Last event",
+      "Context": "AddonTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "上次事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "MainWindow.DrawSeatRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "上家",
+      "Source": "library"
+    },
+    {
+      "Original": "Live game",
+      "Context": "MainWindow.DrawLiveCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前对局",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "MainWindow.DrawModeCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "AddonTab.DrawLayoutCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "OFF",
+      "Context": "BugReportTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "ON",
+      "Context": "BugReportTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "MainWindow.DrawModeCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Open folder:\n",
+      "Context": "BugReportTab.DrawDirRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开文件夹：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Path: ",
+      "Context": "MjAutoCommand.HandleLog",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Red Dragon",
+      "Context": "Theme.TileFriendlyName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "红中",
+      "Source": "library"
+    },
+    {
+      "Original": "Report a bug",
+      "Context": "AboutWindow.DrawDetailsTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "反馈问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "MainWindow.DrawSeatRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "下家",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.DrawHeaderIcons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "BugReportTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "DebugOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "TSUMOGIRI",
+      "Context": "HandOverlay.DrawHighlightArrow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "摸切",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "AddonTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for a Doman Mahjong table.",
+      "Context": "MainWindow.DrawEmptyLive",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等候多玛方城战对局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to Doman Mahjong Solver",
+      "Context": "MainWindow.DrawTosGate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "欢迎使用多玛方城战助手",
+      "Source": "library"
+    },
+    {
+      "Original": "White Dragon",
+      "Context": "Theme.TileFriendlyName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "白板",
+      "Source": "library"
+    },
+    {
+      "Original": "You",
+      "Context": "MainWindow.DrawSeatRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "自己",
+      "Source": "library"
+    },
+    {
+      "Original": "total",
+      "Context": "MjAutoCommand.DumpAddons",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "总计",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

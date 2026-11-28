@@ -1,0 +1,610 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WaymarkStudio",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " for ",
+      "Context": "BaseWindow.PresetImportButton",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "(Drag to reorder)",
+      "Context": "BaseWindow.PresetTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（拖动可调整顺序）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Enter area to complete import)",
+      "Context": "BaseWindow.PresetTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（进入对应区域后完成导入）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Get closer to complete import)",
+      "Context": "BaseWindow.PresetTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（靠近后完成导入）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Preset height adjustment failed - please report this issue)",
+      "Context": "BaseWindow.PresetTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（预设高度调整失败，请反馈此问题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "TriggerEditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Circle Guide",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "圆形辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全部清空",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Draft",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清空草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear waymark when beginning placement",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "开始放置时清除已有的同名标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Clone to WMS library",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "复制到 WMS 预设库",
+      "Source": "library"
+    },
+    {
+      "Original": "Combine Equivalent Duty Presets (V&C Dungeons)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并同一多变迷宫及其衍生难度的预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Community",
+      "Context": "LibraryWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "社区",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Core",
+      "Context": "StudioWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "核心",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable World Preset Placement Safety Checks",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用野外放置预设时的安全检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Draft",
+      "Context": "StudioWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "StudioWindow.DrawTriggerList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Error Notifications",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "错误通知",
+      "Source": "library"
+    },
+    {
+      "Original": "FFLogs Report URL:",
+      "Context": "BaseWindow.ImguiFFLogsImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "FFLogs 报告网址：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fight:",
+      "Context": "BaseWindow.ImguiFFLogsImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "战斗：",
+      "Source": "library"
+    },
+    {
+      "Original": "Guide",
+      "Context": "StudioWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide ",
+      "Context": "ConfigWindow.VisibilityToggleButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "隐藏 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Guide",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "隐藏辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Import From FFLogs (Disabled for API updates)",
+      "Context": "BaseWindow.ImguiFFLogsImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从 FFLogs 导入（因 API 更新暂不可用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Preset",
+      "Context": "BaseWindow.PresetImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导入预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Import in progress. Please wait.",
+      "Context": "BaseWindow.ImguiFFLogsImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在导入，请稍候。",
+      "Source": "library"
+    },
+    {
+      "Original": "Libraries",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设库",
+      "Source": "library"
+    },
+    {
+      "Original": "Load as Draft",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "载入为草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Move preset here",
+      "Context": "MyGui.EndRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将预设移至此处",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "TriggerEditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Native",
+      "Context": "LibraryWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "游戏原生",
+      "Source": "library"
+    },
+    {
+      "Original": "No Presets Found",
+      "Context": "LibraryWindow.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Only place draft markers if real waymarks are unavailable, such as while in combat, duty recorder, or while character is occupied.",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "只在无法放置实际标记时使用草稿标记，例如战斗、回放或角色忙碌时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open/close main window",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay Rendering",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "叠加层绘制",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite (From Draft)",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "用草稿覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Circle draft markers on guide cardinals",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在辅助线的四个正方向放置圆形草稿标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Draft",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "放置草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Guide",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "放置辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Preset",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "放置预设标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Square draft markers on guide intercardinals\nRight click to swap",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在辅助线的四个斜方向放置方形草稿标记\n右键可对调",
+      "Source": "library"
+    },
+    {
+      "Original": "Position:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset copied to clipboard for sharing.",
+      "Context": "DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "预设已复制到剪贴板，可直接分享。",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset:",
+      "Context": "BaseWindow.PresetImportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设：",
+      "Source": "library"
+    },
+    {
+      "Original": "Primary",
+      "Context": "MyGui.BeginList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "主库",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "半径：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rectangle Guide",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "矩形辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace Native Waymarks UI",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "替换游戏原生场地标记界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace draft markers with real waymarks",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将草稿标记替换为实际场地标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Draft",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "保存草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and Close",
+      "Context": "TriggerEditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Save current draft to saved presets",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将当前草稿保存为预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved Presets",
+      "Context": "StudioWindow.DrawSavedPresets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已保存的预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Seen",
+      "Context": "LibraryWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "已见过",
+      "Source": "library"
+    },
+    {
+      "Original": "Share",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "分享",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ",
+      "Context": "ConfigWindow.VisibilityToggleButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Guide",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "显示辅助线",
+      "Source": "library"
+    },
+    {
+      "Original": "Show V&C Dungeon presets in all forms of the content (variant, advanced, criterion, criterion savage).",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "同一迷宫各难度共用场地标记预设（含多变、进阶、异闻及零式异闻）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Snap marker, trigger, and guide cursor to the grid.\nIf you have placed a guide, this will also snap cursor to helpful points on the guide.",
+      "Context": "StudioWindow.DrawDraftSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将标记、触发器和辅助光标吸附到网格。\n已放置辅助线时，光标也会吸附到辅助线上的关键位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Snap to grid",
+      "Context": "StudioWindow.DrawDraftSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "吸附到网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Success Notifications",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "成功通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Successfully imported ",
+      "Context": "BaseWindow.PresetImportButton",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已成功导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "This preset is linked to a Trigger. Delete anyway?",
+      "Context": "BaseWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此预设已关联触发器。仍要删除吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers",
+      "Context": "StudioWindow.DrawTriggerList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Use real waymarks",
+      "Context": "StudioWindow.DrawDraftSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用实际场地标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymark Studio Config",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Waymark Studio 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymark Studio Library",
+      "Context": "LibraryWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Waymark Studio 预设库",
+      "Source": "library"
+    },
+    {
+      "Original": "Width:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "宽度：",
+      "Source": "library"
+    },
+    {
+      "Original": "[TESTING] Enable waymark VFX tracking",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "［测试中］启用场地标记特效追踪",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

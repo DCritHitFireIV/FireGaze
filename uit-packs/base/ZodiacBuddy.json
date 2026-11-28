@@ -1,0 +1,370 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ZodiacBuddy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Server Time)",
+      "Context": "ConfigWindow.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 服务器时间）",
+      "Source": "library"
+    },
+    {
+      "Original": "Atma",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "魂晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Bonus Light",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "灵魂定着度加成",
+      "Source": "library"
+    },
+    {
+      "Original": "Bonus light window could not be found, this is a bug.",
+      "Context": "InformationWindow.DisplayBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法找到灵魂定着度加成时段，请报告此问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Brave",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "黄道武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat channel",
+      "Context": "ConfigWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Brave books territory",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "检查黄道十二文书所在区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Light Bonus territory",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "检查有定着度加成的区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Click through relic information",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "古武信息窗口允许鼠标穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy name of target to clipboard automatically",
+      "Context": "ConfigWindow.DrawAtma",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动将目标名称复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Current bonus light window: ",
+      "Context": "ConfigWindow.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前灵魂定着度加成时段： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Teleport",
+      "Context": "ConfigWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Novus relic information when equipped",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装备新星武器时显示其信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Zodiac Brave relic information when equipped",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装备黄道武器时显示其信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Display duty with the bonus of light in relic info windows",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在古武信息窗口中显示当前有定着度加成的副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Display target selection in chat",
+      "Context": "ConfigWindow.DrawAtma",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏显示所选目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Info: The bonus light is crowdsourced.",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "灵魂定着度加成信息由玩家共同提供。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interface",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Light progress color",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "灵魂定着度进度条颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Light progress size ",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "灵魂定着度进度条大小 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual size for relic information",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "手动设置古武信息窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "No bonus light window found, check logs",
+      "Context": "ConfigWindow.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到当前的定着度加成时段，请查看日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify duty with bonus only when an applicable relic is equipped",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在装备相应古武时提醒加成副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Novus",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "新星武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Novus Zodiac Information",
+      "Context": "NovusWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "新星武器信息",
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Open a window to edit various settings.",
+      "Context": "ZodiacBuddyPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound when notifying about light bonus",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "灵魂定着度加成提醒播放音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Pro tip: Use the Sonar plugin to track Fate uptime across your entire datacenter.\n",
+      "Context": "ConfigWindow.DrawAtma",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "提示：可使用 Sonar 追踪整个数据中心的临危受命刷新情况。\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Server status: ",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "服务器状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show light numbers in the relic glass",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在灵魂透镜中显示具体定着度数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Show light numbers in the relic magicite",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在魔晶石中显示具体定着度数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip text animation from the relic glass",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过灵魂透镜的文字动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip text animation from the relic magicite",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过魔晶石的文字动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Zodiac Brave Information",
+      "Context": "BraveWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "黄道武器信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Zodiac Buddy Setup",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "黄道武器助手设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

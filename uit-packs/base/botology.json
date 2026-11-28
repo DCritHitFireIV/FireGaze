@@ -1,0 +1,1196 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "botology",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "UI styling",
+      "Context": "Plugin.DrawUiWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "界面样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock window movement and resizing",
+      "Context": "Plugin.DrawUiWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定窗口的位置和大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause backdrop for screenshots",
+      "Context": "Plugin.DrawGlassStatusAndScreenshots",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "截图时暂停背景",
+      "Source": "library"
+    },
+    {
+      "Original": "UI fonts failed to load. See the plugin log.",
+      "Context": "Plugin.DrawFontStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "界面字体加载失败，请查看插件日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading UI fonts...",
+      "Context": "Plugin.DrawFontStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在加载界面字体……",
+      "Source": "library"
+    },
+    {
+      "Original": "Hindi UI fonts are unavailable. Use English to continue.",
+      "Context": "Plugin.DrawFontStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "印地语字体不可用，请使用英语继续。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin disabled.",
+      "Context": "Plugin.SetPluginEnabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "插件已禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin enabled.",
+      "Context": "Plugin.SetPluginEnabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "插件已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not open link: ",
+      "Context": "Plugin.OpenUrl",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法打开链接： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not run command: ",
+      "Context": "Plugin.RunTextCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法执行命令： ",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "Plugin.ToggleTrackedPlugin",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact visible on main window",
+      "Context": "Plugin.DrawWindowAppearanceSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在主窗口显示紧凑模式选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency visible on main window",
+      "Context": "Plugin.DrawWindowAppearanceSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在主窗口显示透明度选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Language visible on main window",
+      "Context": "Plugin.DrawWindowAppearanceSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在主窗口显示语言选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-fade when unfocused",
+      "Context": "Plugin.DrawTransparencySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "窗口失去焦点时自动淡出",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin enabled",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Context": "DtrManagerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "MainWindow.DrawInstallerProfile",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse",
+      "Context": "MainWindow.DrawPinnedGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "Use English",
+      "Context": "Plugin.DrawFontStatus",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "使用英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "DtrManagerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.DrawInstallerTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Plugin enabled",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Plugin enabled",
+      "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Transparency",
+      "Translated": "透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Exporting log...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Exporting log...",
+      "Translated": "正在导出日志…",
+      "Source": "library"
+    },
+    {
+      "Original": "Image file",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Image file",
+      "Translated": "图像文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Available",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Available",
+      "Translated": "可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch back to Auto to use the automatic theme.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Switch back to Auto to use the automatic theme.",
+      "Translated": "切回「自动」以使用自动主题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Author",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Log export failed.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Log export failed.",
+      "Translated": "导出日志失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Text only",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Text only",
+      "Translated": "仅文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Manage",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Manage",
+      "Translated": "管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Blocked",
+      "Translated": "已阻止",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Ignore",
+      "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "The image fills the window. Blur (%) applies to the image.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "The image fills the window. Blur (%) applies to the image.",
+      "Translated": "图片将填满窗口，模糊强度（%）会应用于图片。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lights",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Lights",
+      "Translated": "光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Loaded",
+      "Translated": "已加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Update",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Background blur",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Background blur",
+      "Translated": "背景模糊",
+      "Source": "library"
+    },
+    {
+      "Original": "Background mode",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Background mode",
+      "Translated": "背景模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Makes controls and selection states more distinct.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Makes controls and selection states more distinct.",
+      "Translated": "让控件和选中状态更容易辨认。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop preview",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Stop preview",
+      "Translated": "停止预览",
+      "Source": "library"
+    },
+    {
+      "Original": "UI styling",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "UI styling",
+      "Translated": "界面样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Light colour 3",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Light colour 3",
+      "Translated": "光源颜色 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Light colour 2",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Light colour 2",
+      "Translated": "光源颜色 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Light colour 1",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Light colour 1",
+      "Translated": "光源颜色 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose background image",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Choose background image",
+      "Translated": "选择背景图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Remove",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Reload",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Patch Notes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Patch Notes",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock windows",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Unlock windows",
+      "Translated": "解锁窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Source",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Use native UI",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Use native UI",
+      "Translated": "使用原生界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Not installed.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Not installed.",
+      "Translated": "未安装。",
+      "Source": "library"
+    },
+    {
+      "Original": "SEARCH",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "SEARCH",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Plugin",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Display name",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Display name",
+      "Translated": "显示名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Category",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Animation",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Show titlebar status",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Show titlebar status",
+      "Translated": "在标题栏显示状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshing...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Refreshing...",
+      "Translated": "正在刷新…",
+      "Source": "library"
+    },
+    {
+      "Original": "Repository",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Repository",
+      "Translated": "仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation speed (0.1–10x; default 1x)",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Animation speed (0.1–10x; default 1x)",
+      "Translated": "动画速度（0.1–10 倍，默认 1 倍）",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact visible on main window",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Compact visible on main window",
+      "Translated": "在主窗口显示紧凑模式选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Columns",
+      "Translated": "列",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloads",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Downloads",
+      "Translated": "下载量",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Overview",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfocused delay (seconds)",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Unfocused delay (seconds)",
+      "Translated": "窗口失去焦点后的延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Release notes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Release notes",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Catalog",
+      "Translated": "目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable plugin",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Disable plugin",
+      "Translated": "停用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Language",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Background",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Background",
+      "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Installed",
+      "Translated": "已安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview unavailable",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Preview unavailable",
+      "Translated": "预览不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Not installed",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Not installed",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfocused opacity (%)",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Unfocused opacity (%)",
+      "Translated": "窗口失去焦点时的不透明度（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading UI fonts...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Loading UI fonts...",
+      "Translated": "正在加载界面字体……",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Disable",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Theme colour",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Theme colour",
+      "Translated": "主题颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Export Folder",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Open Export Folder",
+      "Translated": "打开导出文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Update Date",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Last Update Date",
+      "Translated": "上次更新日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Required",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Required",
+      "Translated": "必需",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Wave colours",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Wave colours",
+      "Translated": "波形颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity (%)",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Opacity (%)",
+      "Translated": "不透明度（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blur (%)",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Blur (%)",
+      "Translated": "模糊（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Image could not be loaded.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Image could not be loaded.",
+      "Translated": "无法加载图像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon only",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Icon only",
+      "Translated": "仅图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Red",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Red",
+      "Translated": "红色",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Yes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Green",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Green",
+      "Translated": "绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Image",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Image",
+      "Translated": "图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Notes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Notes",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Never",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "Table",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Table",
+      "Translated": "表格",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Reset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "State",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Controls",
+      "Translated": "控制选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Light colours",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Light colours",
+      "Translated": "光源颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Disabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio output is unavailable.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Audio output is unavailable.",
+      "Translated": "音频输出不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Load image",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Load image",
+      "Translated": "加载图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency visible on main window",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Transparency visible on main window",
+      "Translated": "在主窗口显示透明度选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock window movement and resizing",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Lock window movement and resizing",
+      "Translated": "锁定窗口的位置和大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Version",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Version",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Wave colour 1",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Wave colour 1",
+      "Translated": "波形颜色 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Wave colour 2",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Wave colour 2",
+      "Translated": "波形颜色 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Wave colour 3",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Wave colour 3",
+      "Translated": "波形颜色 3",
+      "Source": "library"
+    },
+    {
+      "Original": "All Categories",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "All Categories",
+      "Translated": "所有分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable plugin",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Enable plugin",
+      "Translated": "启用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset wave colours",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Reset wave colours",
+      "Translated": "重置波形颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Authors",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Authors",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Visible",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock windows",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Lock windows",
+      "Translated": "锁定窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Browse...",
+      "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Working...",
+      "Translated": "运行中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Window appearance",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Window appearance",
+      "Translated": "窗口外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Background, controls and text follow your theme.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Background, controls and text follow your theme.",
+      "Translated": "背景、控件和文字均使用主题配色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Refresh",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact mode",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Compact mode",
+      "Translated": "紧凑模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Add repository",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Add repository",
+      "Translated": "添加仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight contrast",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Highlight contrast",
+      "Translated": "高亮对比度",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset light colours",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Reset light colours",
+      "Translated": "重置光源颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear filter",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Clear filter",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-fade when unfocused",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Auto-fade when unfocused",
+      "Translated": "窗口失去焦点时自动淡出",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Description",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset colours",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Reset colours",
+      "Translated": "重置颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Install",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Install",
+      "Translated": "安装",
+      "Source": "library"
+    },
+    {
+      "Original": "DTR mode",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "DTR mode",
+      "Translated": "服务器信息栏模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Light effect",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Light effect",
+      "Translated": "光照效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Language visible on main window",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Language visible on main window",
+      "Translated": "在主窗口显示语言选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to Picker to set each colour yourself.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Switch to Picker to set each colour yourself.",
+      "Translated": "切换到取色器以分别指定各种颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Image backgrounds remain visible to screenshots.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Image backgrounds remain visible to screenshots.",
+      "Translated": "截图中仍会显示图片背景。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use styled UI",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Use styled UI",
+      "Translated": "使用自定义样式界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Completed",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Ignored",
+      "Translated": "已忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose an image file.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Choose an image file.",
+      "Translated": "选择图像文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause backdrop for screenshots",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Pause backdrop for screenshots",
+      "Translated": "截图时暂停背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom RGB",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Custom RGB",
+      "Translated": "自定义 RGB",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose each colour independently.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Choose each colour independently.",
+      "Translated": "分别设置各项颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Detailed titlebar status",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Detailed titlebar status",
+      "Translated": "在标题栏显示详细状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Mouse-following glow",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Mouse-following glow",
+      "Translated": "跟随鼠标的光晕",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Auto",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Data",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Move",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Blue",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Blue",
+      "Translated": "蓝色",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Copy",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Name",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Text",
+      "Translated": "文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Teal",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Teal",
+      "Translated": "蓝绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Show",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Pink",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Pink",
+      "Translated": "粉色",
+      "Source": "library"
+    },
+    {
+      "Original": "UI fonts failed to load. See the plugin log.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "UI fonts failed to load. See the plugin log.",
+      "Translated": "界面字体加载失败，请查看插件日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading image...",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Loading image...",
+      "Translated": "正在加载图片…",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TreasureHunt",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "OK",
+      "Context": "Plugin.DebugDependencies",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud API Level: 13",
+      "Context": "ConfigWindow.DrawAdvancedTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Dalamud 接口版本：13",
+      "Source": "library"
+    },
+    {
+      "Original": "vnavmesh OK",
+      "Context": "MainWindow.DrawStatusPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "vnavmesh 可用",
+      "Source": "library"
+    },
+    {
+      "Original": "LazyLoot OK",
+      "Context": "MainWindow.DrawStatusPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "LazyLoot 可用",
+      "Source": "library"
+    },
+    {
+      "Original": " Gil##price",
+      "Context": "MainWindow.DrawFeatureToggles",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputInt",
+      "Translated": " 金币",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

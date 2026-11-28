@@ -1,0 +1,184 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "JobAutoSwitcher",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " (ilvl ",
+      "Context": "PluginUI.BuildComboLabels",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": " （物品品级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto (highest ilvl)",
+      "Context": "PluginUI.BuildComboLabels",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "自动（选择物品品级最高者）",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled.",
+      "Context": "CommandHandler.SetEnabled",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "PluginUI.DrawGeneralSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled.",
+      "Context": "CommandHandler.SetEnabled",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "First Delay (ms)",
+      "Context": "PluginUI.DrawTimingSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "首次延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset Preferences",
+      "Context": "PluginUI.DrawGearsetPreferencesSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "套装偏好",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "PluginUI.DrawGeneralSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "通用",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "PluginUI.DrawGearsetTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Auto Switcher",
+      "Context": "Plugin.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "职业自动切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Auto Switcher — /jas [on|off|config]",
+      "Context": "CommandHandler..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "职业自动切换 — /jas [on|off|config]",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop Delay (ms)",
+      "Context": "PluginUI.DrawTimingSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "重试间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "No gearsets found.",
+      "Context": "PluginUI.DrawGearsetPreferencesSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "Preferred Gearset",
+      "Context": "PluginUI.DrawGearsetTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "首选套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "PluginUI.DrawGearsetPreferencesSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry Count",
+      "Context": "PluginUI.DrawTimingSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "重试次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a preferred gearset per job, or leave as Auto.",
+      "Context": "PluginUI.DrawGearsetPreferencesSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "为各职业指定首选套装，或保留「自动」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "PluginUI.DrawKofiButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Switching to ",
+      "Context": "JobManager.SwitchAndCommence",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在切换至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Timing",
+      "Context": "PluginUI.DrawTimingSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "时序",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

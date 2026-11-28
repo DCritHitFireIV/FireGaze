@@ -1,0 +1,955 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "CashFlow",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " from being created in future.\n\nHold SHIFT and CTRL and click this button.",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 。\n\n同时按住 Shift 和 Ctrl，再点击此按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": " from the database, and will prevent any entries for ",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " ，今后也不再为以下角色写入新记录： ",
+      "Source": "library"
+    },
+    {
+      "Original": " from the plugin and IRRECOVERABLY DELETE ALL PREVIOUSLY RECORDED DATA FOR IT. \n\nThis will completely remove all the data associated with ",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " ，并永久删除此前为其记录的所有数据。\n\n这会从数据库中彻底移除以下角色的所有相关数据： ",
+      "Source": "library"
+    },
+    {
+      "Original": " minutes",
+      "Context": "TradeOverlay.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 分钟内",
+      "Source": "library"
+    },
+    {
+      "Original": "April",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "四月",
+      "Source": "library"
+    },
+    {
+      "Original": "August",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "八月",
+      "Source": "library"
+    },
+    {
+      "Original": "Availability",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "供应情况",
+      "Source": "library"
+    },
+    {
+      "Original": "Average per day",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "日均",
+      "Source": "library"
+    },
+    {
+      "Original": "Average per month",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "月均",
+      "Source": "library"
+    },
+    {
+      "Original": "Average per week",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "周均",
+      "Source": "library"
+    },
+    {
+      "Original": "Averages",
+      "Context": "TabGilHistory.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "平均值",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist ",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将此角色加入黑名单： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Buyer",
+      "Context": "TabRetainerSales.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "买家",
+      "Source": "library"
+    },
+    {
+      "Original": "Censor Names",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Change arrows directions",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "反转箭头方向",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open help",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "点击查看帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Color1",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "染色 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Color2",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "染色 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Counterparty",
+      "Context": "TabTradeLog..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "交易对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom time format",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "自定义时间格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Types",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "数据类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Date format:",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "日期格式：",
+      "Source": "library"
+    },
+    {
+      "Original": "December",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "十二月",
+      "Source": "library"
+    },
+    {
+      "Original": "Diff",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "差额",
+      "Source": "library"
+    },
+    {
+      "Original": "Display NPC purchases",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示从 NPC 购买的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display NPC sales",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示向 NPC 出售的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display UTC time",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示 UTC 时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Display gil history",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示金币收支",
+      "Source": "library"
+    },
+    {
+      "Original": "Display mannequinn sales",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示通过模特出售的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display normal Market Board purchases",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示从市场布告板购买的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display normal Retainer Sales",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示雇员的一般销售记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display purchases from Mannequinn",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示从模特购买的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Display trade log",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示交易记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Does not affects how trades are stored in database, only affects view",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "仅影响显示方式，数据库中的交易记录保持原样。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export as CSV",
+      "Context": "BaseTab`1.DrawDateFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "导出为 CSV",
+      "Source": "library"
+    },
+    {
+      "Original": "February",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "二月",
+      "Source": "library"
+    },
+    {
+      "Original": "Fri",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期五",
+      "Source": "library"
+    },
+    {
+      "Original": "Gave",
+      "Context": "TradeOverlay.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "给出",
+      "Source": "library"
+    },
+    {
+      "Original": "Gave gil",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "交付的金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Gave item",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "交付的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil History",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "金币收支记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil given to, top-5:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "付出金币最多的五名角色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil received from, top-5:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "收到金币最多的五个来源：",
+      "Source": "library"
+    },
+    {
+      "Original": "Here you can select certain data to be hidden for certain characters. Please note that even if you will hide it, entries will still be recorded unless the character is fully blacklisted from data creation.",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "可在这里为指定角色隐藏指定类型的数据。隐藏只影响显示，记录仍会继续写入。要停止记录某个角色的数据，需将其完全加入黑名单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Input",
+      "Context": "DateWidget.DatePickerWithInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "TradeOverlay.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "ItemID",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "物品 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Items purchased, gil, top-5:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "购入金额最高的五种物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Items sold, gil, top-5:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "售出金额最高的五种物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "January",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "一月",
+      "Source": "library"
+    },
+    {
+      "Original": "July",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "七月",
+      "Source": "library"
+    },
+    {
+      "Original": "June",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "六月",
+      "Source": "library"
+    },
+    {
+      "Original": "Last purchased",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "上次购买",
+      "Source": "library"
+    },
+    {
+      "Original": "Lesser Censor Mode",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "简化姓名遮挡",
+      "Source": "library"
+    },
+    {
+      "Original": "Load trades",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载交易记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading, please wait...",
+      "Context": "BaseTab`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "正在加载，请稍候…",
+      "Source": "library"
+    },
+    {
+      "Original": "March",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "三月",
+      "Source": "library"
+    },
+    {
+      "Original": "May",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "五月",
+      "Source": "library"
+    },
+    {
+      "Original": "Merchant",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "商人",
+      "Source": "library"
+    },
+    {
+      "Original": "Merge sequential gil-only trades with the same player into one",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并与同一玩家连续进行的纯金币交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Mon",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期一",
+      "Source": "library"
+    },
+    {
+      "Original": "Month/Day",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "月／日",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Purchase Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "从 NPC 购买的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Sale Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "向 NPC 出售的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "November",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "十一月",
+      "Source": "library"
+    },
+    {
+      "Original": "October",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "十月",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Gil",
+      "Context": "TabTradeLog.DrawExtraFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Paid",
+      "Context": "TabNpcPurchases.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "已支付",
+      "Source": "library"
+    },
+    {
+      "Original": "Press enter load the data",
+      "Context": "BaseTab`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "按回车加载数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "购买记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Context": "SqliteDataProvider.GetRetainerHistory",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Received",
+      "Context": "TradeOverlay.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "收到",
+      "Source": "library"
+    },
+    {
+      "Original": "Received gil",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "收到的金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Received item",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "收到的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Records per page",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderInt",
+      "Translated": "每页记录数",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Censor Seed",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "重置姓名遮挡的随机种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Context": "TabShopPurchases.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Sale Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "出售记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Sat",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期六",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Item...",
+      "Context": "BaseTab`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索物品…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Player's Name...",
+      "Context": "BaseTab`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索玩家名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Player's/Retainer's Name...",
+      "Context": "TabRetainerSales..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索玩家或雇员名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected items: ",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已选物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "September",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "九月",
+      "Source": "library"
+    },
+    {
+      "Original": "Set fixed graph start date",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "固定图表起始日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show history when trading",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "交易时显示历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "TOTAL:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "合计：",
+      "Source": "library"
+    },
+    {
+      "Original": "This is a buyback",
+      "Context": "TabNpcPurchases.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "这是一笔回购交易",
+      "Source": "library"
+    },
+    {
+      "Original": "This purchase was done via Mannequinn",
+      "Context": "TabShopPurchases.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "此次购买通过模特完成",
+      "Source": "library"
+    },
+    {
+      "Original": "This sale was done via Mannequinn",
+      "Context": "TabRetainerSales.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "此次出售通过模特完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Thu",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期四",
+      "Source": "library"
+    },
+    {
+      "Original": "Time format error",
+      "Context": "Utils.ToPreferredTimeString",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "时间格式错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Time limit for merging trades, minutes",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "交易合并时限（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Time, minutes",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "时间（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Total profit/loss per last year:",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "过去一年的总盈亏：",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "交易记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade partner: ",
+      "Context": "TabDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "交易对象： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tue",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期二",
+      "Source": "library"
+    },
+    {
+      "Original": "Unblacklist character",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "将角色移出黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Use custom time format",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用自定义时间格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Wed",
+      "Context": "DateWidget..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星期三",
+      "Source": "library"
+    },
+    {
+      "Original": "Within last ",
+      "Context": "TradeOverlay.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "最近 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Your Retainer",
+      "Context": "TabRetainerSales.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "你的雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Your local time will still be used for internal calculations",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "内部计算仍会使用本地时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "~Character",
+      "Context": "TabExclusions.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "～角色",
+      "Source": "library"
+    },
+    {
+      "Original": "~Gil",
+      "Context": "TabTradeLog..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "～金币",
+      "Source": "library"
+    },
+    {
+      "Original": "~Item",
+      "Context": "TabTradeLog.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "～物品",
+      "Source": "library"
+    },
+    {
+      "Original": "~Item Name",
+      "Context": "TabNpcPurchases.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "～物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "~Total Gil",
+      "Context": "TabGilHistory.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "～金币总额",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

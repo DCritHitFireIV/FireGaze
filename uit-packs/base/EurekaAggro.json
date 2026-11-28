@@ -1,0 +1,405 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EurekaAggro",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " is casting: ",
+      "Context": "CastAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 正在咏唱： ",
+      "Source": "library"
+    },
+    {
+      "Original": "%d levels below",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "低于自身 %d 级",
+      "Source": "library"
+    },
+    {
+      "Original": "Activate only inside Eureka expedition zones",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在禁地优雷卡内启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Elemental Level: ",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前元素等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds an extra safety buffer to aggro circles to account for network ping and server tick latency.",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为仇恨范围增加安全余量，以补偿网络和服务器判定的延迟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show Sleeping Dragons (regardless of level)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示沉睡的龙，无视等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show Undead / Ashkin (Blood aggro)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示会感知生命值下降的不死生物",
+      "Source": "library"
+    },
+    {
+      "Original": "Anemos (20)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "常风地带（20）",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-detect & sync Elemental Level (Memory & Zone cap)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动检测并按区域上限同步元素等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-synced",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已自动同步",
+      "Source": "library"
+    },
+    {
+      "Original": "BREAK LINE OF SIGHT (HIDE)!",
+      "Context": "CastAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "躲到掩体后，避开视线！",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Day",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "白天",
+      "Source": "library"
+    },
+    {
+      "Original": "Detection range",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "探测范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Elemental Level & Safe Mob Filtering (Anti-Clutter):",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "元素等级与安全怪物过滤：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Eureka Aggro Radar",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用优雷卡仇恨雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy Actions & Counters",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "敌方技能与应对方法",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Aggro Radar",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "优雷卡仇恨雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Monsters",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "优雷卡怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter out lower-level monsters that cannot aggro you",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "过滤等级太低、不会主动攻击你的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter out monsters on cliffs / ledges / caves (different elevation)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "过滤悬崖、岩架和洞穴等不同高度的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Hydatos (60)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "丰水地带（60）",
+      "Source": "library"
+    },
+    {
+      "Original": "INTERRUPT / SILENCE AVAILABLE!",
+      "Context": "CastAlertWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可打断或沉默！",
+      "Source": "library"
+    },
+    {
+      "Original": "In Eureka Pagos/Pyros, monsters cannot aggro across vertical drop-offs. Filters false alarms.",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在恒冰地带和涌火地带，怪物不会隔着高低落差进入战斗。勾选可减少误报。",
+      "Source": "library"
+    },
+    {
+      "Original": "In FFXIV Eureka, standard sight/proximity monsters 2 or more levels below you will never aggro. (Default: 2)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在优雷卡，依靠视线或距离感知的普通怪物低于你至少 2 级时，就不会主动攻击你。（默认值：2）",
+      "Source": "library"
+    },
+    {
+      "Original": "Latency / Safety margin buffer",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "延迟补偿 / 安全余量",
+      "Source": "library"
+    },
+    {
+      "Original": "Location: ",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual Elemental Level",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "手动设置元素等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster",
+      "Context": "MainWindow.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.DrawMonstersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Eureka Aggro configuration and radar window.",
+      "Context": "EurekaAggroPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开优雷卡仇恨设置及雷达窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pagos (35)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "恒冰地带（35）",
+      "Source": "library"
+    },
+    {
+      "Original": "Pyros (50)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "涌火地带（50）",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Level Presets:",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "快速选择等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "STUN REQUIRED!",
+      "Context": "CastAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "需要眩晕！",
+      "Source": "library"
+    },
+    {
+      "Original": "Safe level difference threshold",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "安全等级差",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Changes##Actions",
+      "Context": "MainWindow.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Changes##Mobs",
+      "Context": "MainWindow.DrawMonstersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Short command to open the Eureka Aggro radar.",
+      "Context": "EurekaAggroPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开优雷卡仇恨雷达的简短命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "MainWindow.DrawMonstersTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical elevation tolerance",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "允许的高度差",
+      "Source": "library"
+    },
+    {
+      "Original": "[!] ENEMY ACTION ALERT",
+      "Context": "CastAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[!] 敌方技能警报",
+      "Source": "library"
+    },
+    {
+      "Original": "[!] ENEMY ACTION ALERT (Drag to move)",
+      "Context": "CastAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[!] 敌方技能警报（拖动以移动）",
+      "Source": "library"
+    },
+    {
+      "Original": "[Auto-synced from Eureka]",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "［已从优雷卡同步］",
+      "Source": "library"
+    },
+    {
+      "Original": "[Manual override]",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "［手动指定］",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

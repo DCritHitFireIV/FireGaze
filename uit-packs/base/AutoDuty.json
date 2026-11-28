@@ -1,0 +1,2039 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoDuty",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Action ID",
+      "Context": "PathActionConditionActionStatus.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "技能 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Type",
+      "Context": "PathActionConditionActionStatus.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "技能类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Add/Edit Action###AddActionUI",
+      "Context": "ActionEditWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "添加或编辑操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds more dungeons into the leveling list\nThese dungeons are currently in testing for reliability\nPlease report if you have issues with them",
+      "Context": "MainTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "将更多副本加入练级列表。\n这些副本仍在进行稳定性测试。\n遇到问题时请反馈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire",
+      "Context": "ArmoireHelper.HelperUpdate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "ExecuteCommandsLoopActionConfig.OnGuiSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "MainTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Discarding Items",
+      "Context": "DiscardHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在丢弃物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "PathActionConditionDistance.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "EXP",
+      "Context": "MainTab.DrawCrucibleFamiliarTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "经验值",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables leveling mode (0 = disabled)",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "启用练级模式（0 表示禁用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy: ",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "敌人： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Entry",
+      "Context": "MainTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Recommended Gear",
+      "Context": "AutoEquipHelper.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "装备推荐装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "AutoDuty.StartNavigation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.IsPopupOpen",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Exiting Duty",
+      "Context": "ExitDutyHelper.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在退出副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Extracting Materia",
+      "Context": "ExtractHelper.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear:",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "装备：",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear: ",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "装备： ",
+      "Source": "library"
+    },
+    {
+      "Original": "GearSet",
+      "Context": "AutoEquipLoopActionConfig.OnGuiSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.RequiresPlugin",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Chest",
+      "Context": "GlamourChestHelper.HelperUpdate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "幻化收藏箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Include Testing/Unstable Dungeons",
+      "Context": "MainTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含测试中或不稳定的副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Input",
+      "Context": "ConfigTab.MakeSliderOrInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Instance Type",
+      "Context": "PathActionConditionCollision.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "副本类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Item:",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Item: ",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Logs and copies your target's dataid to clipboard",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "记录目标的数据 ID 并复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "InfoTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "No.",
+      "Context": "MainTab.DrawCrucibleFamiliarTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "否。",
+      "Source": "library"
+    },
+    {
+      "Original": "No. ",
+      "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "BossMod_IPCSubscriber.StayCloseToTank",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective",
+      "Context": "PathActionConditionToDo.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening Coffers",
+      "Context": "CofferHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在开启装备箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Path: ",
+      "Context": "CrucibleBoardWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "MainWindow.StopResumePause",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Sound",
+      "Context": "PlaySoundLoopActionConfig..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "播放音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installer",
+      "Context": "PluginInstaller..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "插件安装器",
+      "Source": "library"
+    },
+    {
+      "Original": "Property",
+      "Context": "PathActionConditionObjectData.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Context": "PathActionConditionItemCount.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputUint",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Queueing ",
+      "Context": "QueueHelper.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在排队： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank",
+      "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Registering Cards",
+      "Context": "TripleTriadCardUseHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在登记卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "Repair Gear",
+      "Context": "RepairHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "修理装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Results:",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "结果：",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "MainWindow.StopResumePause",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Selling TTT Cards",
+      "Context": "TripleTriadCardSellHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在出售九宫幻卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop: ",
+      "Context": "ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "商店： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Battle Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用战斗指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Engineering Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用工程学指南第三卷",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Enlistment Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用征兵指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Gear Maintenance Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用工具指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Rationing Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用营养学指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Spiritbonding Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用精神学指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Survival Manual",
+      "Context": "ConsumeItemsLoopActionConfig..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "军用生存学指南第三卷",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "Overlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Code",
+      "Context": "PathActionConditionActionStatus.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "状态码",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop###Stop1",
+      "Context": "MainWindow.GotoAndActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop###Stop2",
+      "Context": "MainWindow.StopResumePause",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Submit Issue",
+      "Context": "LogTab.DrawIssuePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "反馈问题",
+      "Source": "library"
+    },
+    {
+      "Original": "This dungeon is currently in testing for reliability.\nDo report any issues with it",
+      "Context": "MainTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "此副本仍在进行稳定性测试。\n遇到问题时请反馈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to load content for Territory",
+      "Context": "AutoDuty.StartNavigation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "无法加载此区域的内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "Extensions.ToName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Updating Portrait",
+      "Context": "PortraitHelper..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "正在更新肖像",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "PathActionConditionObjectData.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "config",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "item ",
+      "Context": "CrucibleItemData.NameOf",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "moves to the flag map marker",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "前往地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "opens config window / modifies config",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口或修改设置",
+      "Source": "library"
+    },
+    {
+      "Original": "opens overlay",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "opens packs, registers cards and sells the rest",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开卡包，登记获得的卡片，并出售剩余卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "pause",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "pause route",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "暂停路线",
+      "Source": "library"
+    },
+    {
+      "Original": "queues duty",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "登记进入副本",
+      "Source": "library"
+    },
+    {
+      "Original": "resume",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "resume route",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "继续路线",
+      "Source": "library"
+    },
+    {
+      "Original": "skips the current step",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "跳过当前步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "start",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "starts auto duty in territory type specified",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "在指定区域中启动 AutoDuty",
+      "Source": "library"
+    },
+    {
+      "Original": "starts autoduty when in a Duty",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "在副本内启动 AutoDuty",
+      "Source": "library"
+    },
+    {
+      "Original": "stop",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "stops everything",
+      "Context": "AutoDuty..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "停止全部操作",
+      "Source": "library"
+    },
+    {
+      "Original": "target",
+      "Context": "PathActionConditionDistance.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "目标",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Disable Party Coherency",
+      "Container": "file:Localization/zh-CN/BuildTab.json",
+      "Key": "/BuildTab/NoPartyCoherency",
+      "Translated": "禁用队伍集结",
+      "Source": "library"
+    },
+    {
+      "Original": "Will entrust items to the armoire between loops.",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/ArmoireEntrustHelp",
+      "Translated": "将在两轮之间把物品存入收藏柜。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable AutoRetainer Integration",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainer",
+      "Translated": "启用 AutoRetainer 联动",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable AutoRetainer MultiMode",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainerMultiMode",
+      "Translated": "启用 AutoRetainer 多角色模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Will cycle through all your characters in ARs MultiMode once and then return to running the duty",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainerMultiModeHelp",
+      "Translated": "通过 AutoRetainer 的多角色模式轮流处理所有角色一次，然后继续执行副本任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Entrust to Glamour Chest",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/GlamourEntrust",
+      "Translated": "存入投影台",
+      "Source": "library"
+    },
+    {
+      "Original": "Will entrust items to the glamour chest between loops.",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/GlamourEntrustHelp",
+      "Translated": "将在两轮之间把物品存入投影台。",
+      "Source": "library"
+    },
+    {
+      "Original": "Between Loop Settings",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/Header",
+      "Translated": "轮次间设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Register Triple Triad Cards",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/RegisterTripleTriadCards",
+      "Translated": "收录九宫幻卡卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "Run on last Loop",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/RunOnLastLoop",
+      "Translated": "最后一轮也执行",
+      "Source": "library"
+    },
+    {
+      "Original": "Sell Triple Triad Cards",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/BetweenLoop/SellTripleTriadCards",
+      "Translated": "出售九宫幻卡卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable rendering",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Duty/DisableRenderWhileActive",
+      "Translated": "禁用画面渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables rendering the 3D world while AutoDuty is active",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Duty/DisableRenderWhileActiveHelp",
+      "Translated": "AutoDuty 运行期间禁用三维场景渲染。",
+      "Source": "library"
+    },
+    {
+      "Original": "Wait x milliseconds before leaving a duty",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Duty/WaitBeforeLeaving",
+      "Translated": "离开副本前等待 x 毫秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Can in most cases be kept to 0",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Duty/WaitBeforeLeavingHelp",
+      "Translated": "大多数情况下可保持为 0。",
+      "Source": "library"
+    },
+    {
+      "Original": "And",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/And",
+      "Translated": "且",
+      "Source": "library"
+    },
+    {
+      "Original": "Collision",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/Collision",
+      "Translated": "碰撞",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition Flag",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/ConditionFlag",
+      "Translated": "状态标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/Distance",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/ItemCount",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/Job",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Not",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/Not",
+      "Translated": "非",
+      "Source": "library"
+    },
+    {
+      "Original": "Object",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/ObjectData",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Or",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/Or",
+      "Translated": "或",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/VariantPath",
+      "Translated": "路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/DistanceLocationTypes/Location",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Object",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/DistanceLocationTypes/Object",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/DistanceLocationTypes/Player",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Everything",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/MultiModeType/Everything",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/MultiModeType/Retainers",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Submersibles",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/MultiModeType/Submersibles",
+      "Translated": "潜水艇",
+      "Source": "library"
+    },
+    {
+      "Original": "Targetable",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ObjectDataProperty/IsTargetable",
+      "Translated": "可选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/Positional/Any",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Flank",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/Positional/Flank",
+      "Translated": "侧面",
+      "Source": "library"
+    },
+    {
+      "Original": "Front",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/Positional/Front",
+      "Translated": "正面",
+      "Source": "library"
+    },
+    {
+      "Original": "Rear",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/Positional/Rear",
+      "Translated": "背面",
+      "Source": "library"
+    },
+    {
+      "Original": "The following are buttons available in Overlay/Maintab",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Overlay/ButtonsHeader",
+      "Translated": "以下按钮可显示在悬浮窗／主页面中",
+      "Source": "library"
+    },
+    {
+      "Original": "Open enabled Loop Actions by default",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Overlay/LoopActionsOpenByDefault",
+      "Translated": "默认展开已启用的循环操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Actions from Between Loop",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/ActionsCopyFromBetweenLoop",
+      "Translated": "从轮次间设置复制操作",
+      "Source": "library"
+    },
+    {
+      "Original": "The following are also done between loop, if Between Loop is enabled (currently {0})",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/BetweenLoopNote",
+      "Translated": "如果已启用轮次间操作（当前为 {0}），以下操作也会在两轮之间执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute commands on start of all loops",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/ExecuteCommands",
+      "Translated": "全部循环开始前执行命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute commands on start of all loops\nFor example {0}",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/ExecuteCommandsHelp",
+      "Translated": "全部循环开始前执行命令\n例如 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pre-Loop Initialization Settings",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/Header",
+      "Translated": "循环开始前的初始化设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Retire To ",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PreLoop/RetireTo",
+      "Translated": "返回地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Config is locked while IPC config overrides are active. Stop AutoDuty to edit again.",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Profile/ConfigOverridesActiveNote",
+      "Translated": "IPC 配置覆盖生效期间，配置已锁定。停止 AutoDuty 后即可继续编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute commands on termination of all loops\nFor example {0}",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/ExecuteCommandsOnTerminationHelp",
+      "Translated": "全部循环结束后执行命令\n例如 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Looping will stop when these conditions are reached, so long as an adequate number of loops have been allocated.",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/Help",
+      "Translated": "达到这些条件时将停止循环，前提是所设置的循环次数足够。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Looping @ Item Level",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopAtILevel",
+      "Translated": "达到指定品级后停止循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Looping when all Glam is Gathered",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopWhenDutyGathered",
+      "Translated": "收集齐全部外观后停止循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Looping will stop when the glam of the current duty is gathered.",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopWhenDutyGatheredHelp",
+      "Translated": "收集齐当前副本的装备外观后停止循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets only",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopWhenDutyGatheredSetsOnly",
+      "Translated": "仅限套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Looping when Inventory is full",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopWhenInventoryFull",
+      "Translated": "背包已满时停止循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Slots left: ",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Termination/StopWhenInventoryFullSlots",
+      "Translated": "剩余空位： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Manage Glamour Dresser and Armoire",
+      "Container": "file:Localization/zh-CN/InfoTab.json",
+      "Key": "/InfoTab/PluginDesc/GlamourLog",
+      "Translated": "管理投影台和收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Will entrust items to the armoire",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Armoire/Help",
+      "Translated": "将物品存入收藏柜。",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoDuty will open gear coffers (like paladin arms)",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Coffers/Help",
+      "Translated": "AutoDuty 会打开装备箱（如骑士武器箱）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Protect Gearsetter upgrades from Auto Desynth",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Desynth/ProtectGearsetterUpgrades",
+      "Translated": "自动分解时保护 Gearsetter 推荐的升级装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Also protects items that Gearsetter recommends as an upgrade for any of your gearsets, even if they aren't equipped in one yet. Requires the Gearsetter plugin.",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Desynth/ProtectGearsetterUpgradesHelp",
+      "Translated": "同时保护 Gearsetter 为任意装备套装推荐的升级装备，即使这些物品尚未加入任何装备套装。需要安装 Gearsetter 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will entrust items to the glamour chest",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Glamour/Help",
+      "Translated": "将物品存入投影台。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to delete an entry",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Hint",
+      "Translated": "按住 CTRL 可删除条目",
+      "Source": "library"
+    },
+    {
+      "Original": "If in playlist mode, changes gear set to the first entry's specified gearset",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/PlaylistPreLoop/Help",
+      "Translated": "在任务列表模式下，切换到首个条目指定的装备套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "If in playlist mode, changes gear set to the next entry's specified gearset, and switches the active loop to the next playlist entry, if applicable",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/PlaylistSwitchLoop/Help",
+      "Translated": "在任务列表模式下，切换到下一个条目指定的装备套装；如适用，同时将当前循环切换到任务列表的下一个条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start typing NPC or zone name to search",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Repair/NPCSearchHint",
+      "Translated": "输入 NPC 或区域名称以搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Adjust for active Duty Mode",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Retire/AdjustForDutyModes",
+      "Translated": "根据当前副本模式调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron will retire to barracks.\nCrucible will do absolutely nothing",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Retire/AdjustForDutyModesHelp",
+      "Translated": "冒险者分队模式会返回兵营。\n斗兽奇弈模式不执行任何操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "not registered in Lifestream",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Retire/LifestreamNotRegistered",
+      "Translated": "尚未在 Lifestream 中登记",
+      "Source": "library"
+    },
+    {
+      "Original": "Waits on the specified plugins to be done with their actions",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Wait/WaitOnPlugins",
+      "Translated": "等待指定插件完成其操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Classification",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Classification",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear saved ranks",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearRanks",
+      "Translated": "清除已保存的等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Forget saved ranks\nHold Ctrl and click",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearRanksHelp",
+      "Translated": "清除已保存的等级信息\n按住 Ctrl 并点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear order",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearShopOrder",
+      "Translated": "重置顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Put this list back in the default order\nHold Ctrl and click",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearShopOrderHelp",
+      "Translated": "将此列表恢复为默认顺序\n按住 Ctrl 并点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/CopyShopList",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a copy of this shop list",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/CopyShopListHelp",
+      "Translated": "为此购买列表创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Team is full ({0} max)\nUntick one to pick another",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/CustomFull",
+      "Translated": "队伍已满（最多 {0} 只）\n取消勾选一只后才能选择其他魔兽。",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/DamageItem",
+      "Translated": "伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Standard",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Degrees/Standard",
+      "Translated": "标准",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/DeleteShopList",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this shop list\nHold Ctrl and click\nThe last list can't be deleted",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/DeleteShopListHelp",
+      "Translated": "删除此购买列表\n按住 Ctrl 并点击。\n不能删除最后一个列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportShopOrder",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop list copied to clipboard.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportShopOrderDone",
+      "Translated": "购买列表已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy this shop list to the clipboard",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportShopOrderHelp",
+      "Translated": "将此购买列表复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/FeedItem",
+      "Translated": "饲料",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/GearItem",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Healing",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/HealingItem",
+      "Translated": "治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportShopOrder",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop list \"{0}\" imported.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportShopOrderDone",
+      "Translated": "已导入购买列表“{0}”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to import the shop order from the clipboard.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportShopOrderFailed",
+      "Translated": "无法从剪贴板导入购买顺序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new shop list from the clipboard\nTakes an exported list or plain item IDs\nItems it leaves out are added at the end",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportShopOrderHelp",
+      "Translated": "从剪贴板添加新的购买列表\n支持已导出的列表或纯物品 ID\n未包含的条目会追加到末尾。",
+      "Source": "library"
+    },
+    {
+      "Original": "Board Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/BoardItem",
+      "Translated": "棋盘道具",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/CombatItem",
+      "Translated": "战斗道具",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/Feed",
+      "Translated": "饲料",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/Gear",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/HealItem",
+      "Translated": "治疗道具",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemCategory/Item",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ItemItem",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Carry -2 Cap",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModes/Carry_Minus_2",
+      "Translated": "高等级带队（人数上限减 2）",
+      "Source": "library"
+    },
+    {
+      "Original": "Full team",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModes/Full",
+      "Translated": "满编队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "-3 Cap",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModes/Minus_3",
+      "Translated": "人数上限减 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Only 3",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModes/Only_3",
+      "Translated": "仅 3 只",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses the entire team size",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModesHelp/Full",
+      "Translated": "使用全部队伍名额。",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses 3 less than the maximum amount",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/LevelingModesHelp/Minus_3",
+      "Translated": "队伍人数比上限少 3。",
+      "Source": "library"
+    },
+    {
+      "Original": "Board Menus",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Menus",
+      "Translated": "棋盘菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible requires at least 3 beasts selected",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/MinimumTeamCount",
+      "Translated": "斗兽奇弈至少需要选择 3 只魔兽。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Modes/Custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Leveling",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Modes/Leveling",
+      "Translated": "练级",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Modes/Recommended",
+      "Translated": "推荐",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NewShopList",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a shop list with the default order",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NewShopListHelp",
+      "Translated": "按默认顺序添加一个购买列表",
+      "Source": "library"
+    },
+    {
+      "Original": "All kins",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NoClassificationLock",
+      "Translated": "全部种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank not read yet\nRead from the bestiary at the next team setup",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NotSeen",
+      "Translated": "尚未读取等级\n将在下次编队时从魔兽图鉴中读取。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Rank",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Team size",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/RecommendedTeamCap",
+      "Translated": "队伍人数",
+      "Source": "library"
+    },
+    {
+      "Original": "Uncap",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/RecommendedTeamCapClear",
+      "Translated": "取消上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename this shop list",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/RenameShopListHelp",
+      "Translated": "重命名此购买列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopItem",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Block",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopItemBlocked",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Won't be bought or used.\nHold Ctrl to set everything in the category",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopItemBlockedHelp",
+      "Translated": "不会购买或使用。\n按住 Ctrl 可同时设置此类别的所有条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopItemType",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "The shop list AutoDuty buys from",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopListHelp",
+      "Translated": "AutoDuty 购买物品时使用的列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Top is bought first · Drag the handle or type a new # to move an item · Hover a name for details",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopOrderHelp",
+      "Translated": "越靠上越优先购买 · 拖动手柄或输入新的序号 # 来移动条目 · 悬停于名称上查看详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop Settings",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ShopSettings",
+      "Translated": "商店设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Shaded: the team this mode takes · Hover a name for stats",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TableLegend",
+      "Translated": "底色标记：此模式选择的队伍 · 悬停于名称上查看属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Ticked: the team you take · Hover a name for stats",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TableLegendCustom",
+      "Translated": "勾选标记：你选择的队伍 · 悬停于名称上查看属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible Team",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Team",
+      "Translated": "斗兽奇弈队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "Fight picks",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/FightPicks",
+      "Translated": "选择出战魔兽",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal items",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/Items",
+      "Translated": "使用治疗道具",
+      "Source": "library"
+    },
+    {
+      "Original": "Loot",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/Loot",
+      "Translated": "领取战利品",
+      "Source": "library"
+    },
+    {
+      "Original": "Run menus without AutoDuty (testing)",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/MenusWithoutRun",
+      "Translated": "不启动 AutoDuty，仅自动操作菜单（测试用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent items with detrimental effect without immunity to said effect",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/RespectGearRequirements",
+      "Translated": "无对应负面效果免疫时，禁用带该效果的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Rest at camps",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/Rest",
+      "Translated": "在营地休息",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/Shop",
+      "Translated": "商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/Toggles/Treasure",
+      "Translated": "领取宝物",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses healing items when your HP is low\nIn battle: under 40%  ·  On the board: under 60%",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TogglesHelp/Items",
+      "Translated": "体力较低时使用治疗道具\n战斗中：低于 40% · 棋盘上：低于 60%。",
+      "Source": "library"
+    },
+    {
+      "Original": "Takes all loot after a battle",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TogglesHelp/Loot",
+      "Translated": "战斗后领取全部战利品。",
+      "Source": "library"
+    },
+    {
+      "Original": "For testing without paths\nTalking to Lauda sets up the team, challenges the board and commences\nOn a board, the menus above run while you walk it yourself",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TogglesHelp/MenusWithoutRun",
+      "Translated": "用于不依赖路线的测试\n与劳妲交谈后会编组队伍、挑战棋盘并开始行动\n进入棋盘后，由你自行移动，上方所选菜单操作会自动执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Spends coins on healing items, then Beast Gear, then one feed\nLeaves the shop when done",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TogglesHelp/Shop",
+      "Translated": "优先花费硬币购买治疗道具，然后购买魔兽装备，最后购买一份饲料\n完成后离开商店。",
+      "Source": "library"
+    },
+    {
+      "Original": "Takes one treasure: healing first, then defense, then damage",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TogglesHelp/Treasure",
+      "Translated": "选择一件宝物：治疗优先，其次防御，最后伤害。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible can only be run by Beastmaster",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/CrucibleRestriction",
+      "Translated": "斗兽奇弈仅限驯兽师参与。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current variant path",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/CurrentVariantPath",
+      "Translated": "当前多变迷宫路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeons Remaining: {0}",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/DungeonsRemaining",
+      "Translated": "剩余副本次数：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "An estimate of how many more dungeons you can still run before reaching the daily limit of 100 duties.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/DungeonsRemainingExplanation",
+      "Translated": "估算达到每日 100 次任务上限前，还能进入多少次副本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/DutyModes/Crucible",
+      "Translated": "斗兽奇弈",
+      "Source": "library"
+    },
+    {
+      "Original": "Limited Jobs cannot run Trust, Duty Support, Squadron or Variant dungeons. Please switch jobs or select a different category.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/LimitedJobRestriction",
+      "Translated": "设限特职无法使用亲信战友、任务支援、冒险者分队，也无法进入多变迷宫。请更换职业或选择其他类别。",
+      "Source": "library"
+    },
+    {
+      "Original": "Deletes the saved Playlist\nHold ctrl to enable",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Playlist/DeleteHelp",
+      "Translated": "删除已保存的任务列表\n按住 ctrl 可启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Saves the current Playlist with the name written\nHold ctrl to enable",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Playlist/SaveHelp",
+      "Translated": "以输入的名称保存当前任务列表\n按住 ctrl 可启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible",
+      "Container": "file:Localization/zh-CN/MainWindow.json",
+      "Key": "/MainWindow/Goto/Crucible",
+      "Translated": "斗兽奇弈",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/Armoire",
+      "Translated": "收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/AutoRetainer",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Consume",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/ConsumeItems",
+      "Translated": "使用物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/Discard",
+      "Translated": "丢弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/ExecuteCommands",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/Glamour",
+      "Translated": "投影",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/PlaySound",
+      "Translated": "声音",
+      "Source": "library"
+    },
+    {
+      "Original": "TT Use",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/TripleTriadUse",
+      "Translated": "收录幻卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Wait(?)",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/Wait",
+      "Translated": "等待(?)",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute until Conditions fulfilled:",
+      "Container": "file:Localization/zh-CN/BuildTab.json",
+      "Key": "/BuildTab/ConditionsUntil",
+      "Translated": "执行，直到满足以下条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute while Conditions fulfilled:",
+      "Container": "file:Localization/zh-CN/BuildTab.json",
+      "Key": "/BuildTab/ConditionsWhile",
+      "Translated": "满足以下条件时持续执行：",
+      "Source": "library"
+    },
+    {
+      "Original": "ActionStatus",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/ActionStatus",
+      "Translated": "技能状态",
+      "Source": "library"
+    },
+    {
+      "Original": "ToDo",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ConditionType/ToDo",
+      "Translated": "待办事项",
+      "Source": "library"
+    },
+    {
+      "Original": "EventState",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/ObjectDataProperty/EventState",
+      "Translated": "事件状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream Auto",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/Enums/RetireLocation/Lifestream_Auto",
+      "Translated": "Lifestream 自动选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Other Plugins using AD",
+      "Container": "file:Localization/zh-CN/ConfigTab.json",
+      "Key": "/ConfigTab/PluginConfig/Header",
+      "Translated": "调用 AutoDuty 的其他插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Currency",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Shop/CurrencySelection",
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Will buy items from various shops as configured in Knightshopper",
+      "Container": "file:Localization/zh-CN/LoopActions.json",
+      "Key": "/LoopActions/Shop/Help",
+      "Translated": "按照 Knightshopper 的配置，从各个商店购买物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fight Blocked",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/BeastTierFightBlocked",
+      "Translated": "禁止出战",
+      "Source": "library"
+    },
+    {
+      "Original": "Won't be used in fights unless no other 3 are available.\nHold Ctrl to set everything in the category",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/BeastTierFightBlockedHelp",
+      "Translated": "不用于战斗，除非无法凑齐另外 3 只可用魔兽。\n按住 Ctrl 可同时设置此类别的所有条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "The order of beasts AutoDuty picks from",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/BeastTierListHelp",
+      "Translated": "AutoDuty 选择魔兽时采用的优先顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick Blocked",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/BeastTierPickBlocked",
+      "Translated": "禁止编入队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "Won't be picked.\nHold Ctrl to set everything in the category",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/BeastTierPickBlockedHelp",
+      "Translated": "不会编入队伍。\n按住 Ctrl 可同时设置此类别的所有条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear order",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearBeastTierOrder",
+      "Translated": "重置顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Put this list back in the default order\nHold Ctrl and click",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ClearBeastTierOrderHelp",
+      "Translated": "将此列表恢复为默认顺序\n按住 Ctrl 并点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/CopyBeastTierList",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a copy of this beast tier list",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/CopyBeastTierListHelp",
+      "Translated": "为此魔兽优先级列表创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/DeleteBeastTierList",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this beast tier list\nHold Ctrl and click\nThe last list can't be deleted",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/DeleteBeastTierListHelp",
+      "Translated": "删除此魔兽优先级列表\n按住 Ctrl 并点击。\n不能删除最后一个列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportBeastTierList",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast tier list copied to clipboard.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportBeastTierListDone",
+      "Translated": "魔兽优先级列表已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy this beast tier list to the clipboard",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ExportBeastTierListHelp",
+      "Translated": "将此魔兽优先级列表复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportBeastTierList",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast tier list \"{0}\" imported.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportBeastTierListDone",
+      "Translated": "已导入魔兽优先级列表“{0}”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to import the beast tier order from the clipboard.",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/ImportBeastTierListFailed",
+      "Translated": "无法从剪贴板导入魔兽优先顺序。",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NewBeastTierList",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a beast tier list with the default order",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/NewBeastTierListHelp",
+      "Translated": "按默认顺序添加一个魔兽优先级列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename this beast tier list",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/RenameBeastTierListHelp",
+      "Translated": "重命名此魔兽优先级列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast Tier List",
+      "Container": "file:Localization/zh-CN/MainTab.json",
+      "Key": "/MainTab/Crucible/TierList",
+      "Translated": "魔兽优先级列表",
+      "Source": "library"
+    },
+    {
+      "Original": "AR Multi",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/AutoRetainerMulti",
+      "Translated": "AR 多角色",
+      "Source": "library"
+    },
+    {
+      "Original": "TT Sell",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Button/TripleTriadSell",
+      "Translated": "出售幻卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to buy items from configured shops",
+      "Container": "file:Localization/zh-CN/Overlay.json",
+      "Key": "/Overlay/Tooltip/Shop",
+      "Translated": "点击以从已配置的商店购买物品。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

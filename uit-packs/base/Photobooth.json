@@ -1,0 +1,175 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Photobooth",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the Photobooth portrait editor window.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Photobooth 肖像编辑器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Freely movable",
+      "Context": "ConfigWindow.get_AttachmentNames",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "自由移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Left side",
+      "Context": "ConfigWindow.get_AttachmentNames",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Right side",
+      "Context": "ConfigWindow.get_AttachmentNames",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "ConfigWindow.get_AttachmentNames",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Photobooth Options",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Photobooth 选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Open window automatically",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动打开窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "You can open the window manually with /pb.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "也可使用 /pb 手动打开窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show camera coordinates",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示相机坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "This can be useful for reproducing a portrait later.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "显示坐标有助于日后重现同一张肖像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Attach to portrait window?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "贴靠肖像窗口？",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Photobooth Debug",
+      "Context": "DebugWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Photobooth 调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Adventurer Plate",
+      "Context": "MainWindow.Unopened",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "冒险者铭牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "ImPB.ColorConfirm4",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Previous",
+      "Context": "ImPB.ColorConfirm4",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "ImPB.ColorConfirm4",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Rotation",
+      "Context": "CameraPanel.ResetRotationButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置旋转角度",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

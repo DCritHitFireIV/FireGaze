@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PvpSeriesAutopilot",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "PVP Series Autopilot",
+      "Context": "HeaderBar.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "PvP 系列赛自动排队",
+      "Source": "library"
+    },
+    {
+      "Original": "Stops after a fixed number of completed matches.",
+      "Context": "MatchCountMode.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "完成指定场数后停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stops once your PvP Series (Malmstones) rank reaches the target.",
+      "Context": "SeriesRankMode.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "PvP 系列等级升至目标等级后停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Runs for a set number of minutes, finishing the current match first.",
+      "Context": "TimeBoxedMode.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "运行指定分钟数。时间到后会先打完当前对局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps queueing matches until you press Stop.",
+      "Context": "EndlessMode.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "持续排队，直到你点击停止。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

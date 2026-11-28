@@ -1,0 +1,90 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "vfaux",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Current game board",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "当前棋盘",
+      "Source": "library"
+    },
+    {
+      "Original": "Current pattern: ",
+      "Context": "PluginWindow.DrawBoardTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前布局： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug board",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "调试棋盘",
+      "Source": "library"
+    },
+    {
+      "Original": "Easier Faux Hollows is not compatible with ezFauxHollows",
+      "Context": "Plugin.ShowEzFauxHollowsError",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Easier Faux Hollows 与 ezFauxHollows 不兼容",
+      "Source": "library"
+    },
+    {
+      "Original": "Pattern not found!",
+      "Context": "PluginWindow.DrawBoardTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未找到匹配的布局！",
+      "Source": "library"
+    },
+    {
+      "Original": "Randomize!",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "随机生成！",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset tiles",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置格子",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plugin window",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示插件窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Solver strategy: always find swords first",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "解谜策略：始终优先寻找双剑",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

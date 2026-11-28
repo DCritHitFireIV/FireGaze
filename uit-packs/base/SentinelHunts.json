@@ -1,0 +1,387 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SentinelHunts",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " is disabled",
+      "Context": "[SentinelHunts] HuntCoordinator.Observe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": " on ",
+      "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": "%.0f yalms",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%.0f 星里",
+      "Source": "library"
+    },
+    {
+      "Original": "A Realm Reborn",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重生之境",
+      "Source": "library"
+    },
+    {
+      "Original": "ALERT SOURCES",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "提醒来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Active hunt skipped by user",
+      "Context": "[SentinelHunts] HuntCoordinator.SkipCurrent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已按玩家要求跳过当前狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Active: ",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "生效中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation stopped; reports continue to queue",
+      "Context": "[SentinelHunts] HuntCoordinator.StopAutomation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动操作已停止，仍将继续接收报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear queued reports",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空队列中的报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Dawntrail",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "金曦之遗辉",
+      "Source": "library"
+    },
+    {
+      "Original": "EXPANSIONS",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable live travel, movement, and combat",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用实际传送、移动和战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Endwalker",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "晓月之终途",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavensward",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "苍穹之禁城",
+      "Source": "library"
+    },
+    {
+      "Original": "Hitbox clearance",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "与目标判定圈的距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt territory reached",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已抵达狩猎目标所在区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Last event: ",
+      "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "上次事件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Observation mode; waiting for reports",
+      "Context": "[SentinelHunts] HuntCoordinator..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "观察模式，正在等待报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Off by default. Observation mode still receives, filters, deduplicates, and displays reports without controlling the character.",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "默认关闭。观察模式仍会接收、筛选、合并重复报告并显示结果，角色由你自行控制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Sentinel Hunts. Subcommands: test, stop, retry, skip.",
+      "Context": "[SentinelHunts] Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Sentinel Hunts。子命令：test、stop、retry、skip。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player died; all movement and combat stopped",
+      "Context": "[SentinelHunts] HuntCoordinator.Tick",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "角色已战斗不能，所有移动与战斗均已停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued hunts cleared; active hunt was not changed",
+      "Context": "[SentinelHunts] HuntCoordinator.ClearQueue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已清空队列，当前狩猎保持不变",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued hunts: ",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "排队中的狩猎： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry current",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重试当前狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "SAFETY",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "安全设置",
+      "Source": "library"
+    },
+    {
+      "Original": "STOP NOW",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "立即停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected ",
+      "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已选中 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowbringers",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "暗影之逆焰",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip current",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过当前狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar structured map links",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "Sonar 地图链接",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "阶段： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stormblood",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "红莲之狂潮",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory and instance verified",
+      "Context": "[SentinelHunts] HuntCoordinator.TickChangeInstance",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已确认区域与副本分区",
+      "Source": "library"
+    },
+    {
+      "Original": "Tomahawk HP threshold",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "飞斧触发体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting at Ul'dah for an eligible S-rank report",
+      "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在乌尔达哈等待符合条件的 S 级狩猎报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for current travel to finish",
+      "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待当前移动结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for the player and zone to become ready",
+      "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待角色和区域加载完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for the player to log in",
+      "Context": "[SentinelHunts] HuntCoordinator.Tick",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待玩家登录",
+      "Source": "library"
+    },
+    {
+      "Original": "World Visit to ",
+      "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "跨界前往 ",
+      "Source": "library"
+    },
+    {
+      "Original": "busy",
+      "Context": "[SentinelHunts] LifestreamService.get_Activity",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "忙碌",
+      "Source": "library"
+    },
+    {
+      "Original": "not ready",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "ready",
+      "Context": "[SentinelHunts] Plugin.DrawUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "ready (idle)",
+      "Context": "[SentinelHunts] LifestreamService.get_Activity",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已就绪（空闲）",
+      "Source": "library"
+    },
+    {
+      "Original": "unavailable",
+      "Context": "[SentinelHunts] LifestreamService.get_Activity",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不可用",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

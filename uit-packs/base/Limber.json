@@ -1,0 +1,790 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Limber",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(none)",
+      "Context": "Hotkey.get_Label",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "（无）",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor name",
+      "Context": "AppearanceTab.DrawLooks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "角色名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Add###gp_rule_add",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply###app_apply",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a character at the top of the window.",
+      "Context": "AnimationsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请在窗口上方选择角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear###lmb_bs_log_clear",
+      "Context": "BodyShapeTab.DrawBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected.",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接。",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected. VLC isn't playing a video.",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接。VLC 当前没有播放视频。",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected. Waiting for NLF's first frames...",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接，正在等待 NLF 输出第一帧……",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting to VLC...",
+      "Context": "LiveTracker.Start",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在连接 VLC……",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy###fk_copy",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy###lmb_bs_copy",
+      "Context": "BodyShapeTab.DrawPresets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Couldn't read the game's animation list.",
+      "Context": "AnimationsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无法读取游戏动画列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete###delete",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete###lmb_bs_delete",
+      "Context": "BodyShapeTab.DrawPresets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Detail",
+      "Context": "BodyShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance###cam_dist",
+      "Context": "CameraTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion###lanim_expansion",
+      "Context": "LimberAnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter###lmb_bs_filter",
+      "Context": "BodyShapeTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Following VLC",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "跟随 VLC",
+      "Source": "library"
+    },
+    {
+      "Original": "Following VLC (NLF)",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "跟随 VLC（NLF）",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear###app_gear",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Global preset",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "全局预设",
+      "Source": "library"
+    },
+    {
+      "Original": "How fast it plays (0 = paused on this frame).",
+      "Context": "AnimationsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "播放速度，设为 0 可暂停在当前帧。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "AppearanceTab.DrawGear",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Its own race",
+      "Context": "AnimationsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "使用角色自身种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Its own race###anim_race_own",
+      "Context": "AnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "使用角色自身种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind###anim_group",
+      "Context": "AnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "种类",
+      "Source": "library"
+    },
+    {
+      "Original": "Koikatsu link off.",
+      "Context": "Plugin.OnKoiCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "恋活联动已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Koikatsu link on.",
+      "Context": "Plugin.OnKoiCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "恋活联动已开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "Koikatsu link: '/koilink on' / '/koilink off' start or stop all links; '/koilink pause' pauses or resumes Koikatsu's animation.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "恋活联动：输入 /koilink on 或 /koilink off 可开启或关闭所有联动，输入 /koilink pause 可暂停或继续播放恋活动画。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limber is off.",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Limber 已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limber is on.",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Limber 已开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limber: another plugin already uses /limber. Use /lmb to open Limber.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Limber：/limber 已被其他插件占用，请使用 /lmb 打开 Limber。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limber: characters back where the game has them.",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Limber：已将角色恢复到游戏设定的位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limber: window opened (",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Limber：窗口已打开（",
+      "Source": "library"
+    },
+    {
+      "Original": "Load###lmb_bs_load",
+      "Context": "BodyShapeTab.DrawPresets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading the tracking model...",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "正在加载追踪模型……",
+      "Source": "library"
+    },
+    {
+      "Original": "Main hand",
+      "Context": "AppearanceTab.DrawGear",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror pose###fk_mirror_all",
+      "Context": "FkPosingTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "镜像姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "AppearanceTab.DrawGear",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Model ",
+      "Context": "AppearanceTab.ItemName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "模型 ",
+      "Source": "library"
+    },
+    {
+      "Original": "NLF isn't running (trying again in 10 s)",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "NLF 未运行（10 秒后重试）",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "LiveTracker..ctor",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "关",
+      "Source": "library"
+    },
+    {
+      "Original": "Off hand",
+      "Context": "AppearanceTab.DrawGear",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste###app_paste",
+      "Context": "AppearanceTab.DrawLooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste###fk_paste",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste###lmb_bs_paste",
+      "Context": "BodyShapeTab.DrawPresets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Playing: ",
+      "Context": "AnimationsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在播放： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Position###cam_offset",
+      "Context": "CameraTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Position###position",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets:",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设：",
+      "Source": "library"
+    },
+    {
+      "Original": "Race's version###anim_race",
+      "Context": "AnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "种族动画版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo###fk_redo",
+      "Context": "FkPosingTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove all###housing_remove_all",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全部移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename###gp_rename_btn",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset all###lmb_bs_reset_all",
+      "Context": "BodyShapeTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset face###face_reset_all",
+      "Context": "FacePosingTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置脸部",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset###cam_offset_reset",
+      "Context": "CameraTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart###restart",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Same as /limber.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "与 /limber 相同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "DrawNpcs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save###gp_save",
+      "Context": "GlobalPresetsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save###lmb_bs_save",
+      "Context": "BodyShapeTab.DrawPresets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale###face_scale",
+      "Context": "FacePosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale###scale",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Search ",
+      "Context": "AppearanceTab.DrawNpcPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "AppearanceTab.DrawGear",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "LimberTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "AppearanceTab.DrawGear",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed###anim_speed",
+      "Context": "AnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Start###go",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting NLF in WSL (the first time takes a while)...",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在 WSL 中启动 NLF（首次启动需要一些时间）……",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "LimberTab.DrawGoalTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop (back to its own)###anim_stop",
+      "Context": "AnimationsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止并恢复原动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop all###lanim_ex_all_off",
+      "Context": "LimberAnimationsTab.DrawExpansion",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全部停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop###go",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped.",
+      "Context": "LiveTracker.SafeLoop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo###fk_undo",
+      "Context": "FkPosingTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "VLC is paused - holding the pose",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "VLC 已暂停，保持当前姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible###visible",
+      "Context": "HousingPropsTab.DrawPlaced",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for VLC...",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在等待 VLC……",
+      "Source": "library"
+    },
+    {
+      "Original": "Weapon ",
+      "Context": "AppearanceTab.ItemName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "武器 ",
+      "Source": "library"
+    },
+    {
+      "Original": "fast model - the accurate one isn't installed",
+      "Context": "LiveTracker.Loop",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "使用快速模型，尚未安装精确模型",
+      "Source": "library"
+    },
+    {
+      "Original": "off",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "on",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "size ",
+      "Context": "BustShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "大小 ",
+      "Source": "library"
+    },
+    {
+      "Original": "stopped",
+      "Context": "LimberAnimationsTab.DrawTwerk",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "已停止",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

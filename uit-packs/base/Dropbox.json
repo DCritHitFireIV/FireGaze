@@ -1,0 +1,374 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Dropbox",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Accept trades only from whitelisted characters",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅接受白名单角色的交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Add target",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "添加当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-clear focus target when finished trade",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "交易完成后自动清除焦点目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-confirm on incoming gil offering, >=",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "对方支付的金币达到此数额时自动确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-confirm once 5 item slots are filled",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "填满 5 个物品栏后自动确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Begin trading with ",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "开始与以下玩家交易： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Character ",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear focus target",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "清除焦点目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Crystals",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay before accepting, s",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderIntAsFloat",
+      "Translated": "接受交易前的延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay between trades, frames",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "交易间隔（帧）",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not confirm outgoing trades",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不自动确认自己发起的交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable auto-accept trades",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动接受交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Focus target your trade partner to begin trading.",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "将交易对象设为焦点目标即可开始交易。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Game Files",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "从游戏文件导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Trade Queue",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "物品交易队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click - all\nRight click - none",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HoveredAndClicked",
+      "Translated": "左键：全选\n右键：全不选",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Not operational",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "当前未运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin is paused by ",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "已暂停此插件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Processing task: \n",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "正在处理任务： \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Save enabled state through game restarts",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重启游戏后保留启用状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Select items to trade:",
+      "Context": "ItemQueueUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "选择要交易的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only selected",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已选物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Silent operation",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "静默运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Step",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Tasks",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade canceled",
+      "Context": "Dropbox.Chat_ChatMessage",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "交易已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade open command throttle, ms",
+      "Context": "Dropbox.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "发起交易命令的最短间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tradeable gear",
+      "Context": "ItemQueueUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "可交易的装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist",
+      "Context": "Dropbox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "You begin trade with ",
+      "Context": "Dropbox.Chat_ChatMessage",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "开始与以下玩家交易： ",
+      "Source": "library"
+    },
+    {
+      "Original": "You finished trade with ",
+      "Context": "Dropbox.Chat_ChatMessage",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "已与以下玩家完成交易： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

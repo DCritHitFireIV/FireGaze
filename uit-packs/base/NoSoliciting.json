@@ -1,0 +1,676 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "NoSoliciting",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Cancel",
+      "Context": "[NoSoliciting] Report.SetUpReportModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the NoSoliciting configuration",
+      "Context": "[NoSoliciting] Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 NoSoliciting 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the NoSoliciting configuration (deprecated)",
+      "Context": "[NoSoliciting] Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 NoSoliciting 设置（此命令已弃用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Party (Cross-world)",
+      "Context": "[NoSoliciting] ChatTypeExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨服小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Finder",
+      "Context": "[NoSoliciting] ChatTypeExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "队员招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Tell (Incoming)",
+      "Context": "[NoSoliciting] ChatTypeExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "悄悄话（收到）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tell (Outgoing)",
+      "Context": "[NoSoliciting] ChatTypeExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "悄悄话（发出）",
+      "Source": "library"
+    },
+    {
+      "Original": "] The /prmt command is deprecated and will be removed. Please use /nosol instead.",
+      "Context": "[NoSoliciting] Commands.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "] /prmt 命令已弃用，未来将移除。请改用 /nosol。",
+      "Source": "library"
+    },
+    {
+      "Original": "chat",
+      "Context": "[NoSoliciting] Settings.DrawOtherFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "聊天",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Advanced mode",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "AdvancedMode",
+      "Translated": "高级模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not change advanced settings unless you know what you are doing.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "AdvancedWarning1",
+      "Translated": "请在了解各项设置作用后再修改高级设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "The machine learning model was trained with certain channels in mind.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "AdvancedWarning2",
+      "Translated": "机器学习模型在训练时针对特定聊天频道做了适配。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ChatFilters",
+      "Translated": "聊天筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Community ads",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "CommunityCategory",
+      "Translated": "社群广告",
+      "Source": "library"
+    },
+    {
+      "Original": "Advertisements for general-purpose communities, generally Discord servers",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "CommunityDescription",
+      "Translated": "综合社群的广告，通常是 Discord 服务器广告。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable custom chat filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "EnableCustomChatFilters",
+      "Translated": "启用自定义聊天筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable custom Party Finder filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "EnableCustomPartyFinderFilters",
+      "Translated": "启用自定义队员招募筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter PFs with item level above maximum",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FilterIlvlPfs",
+      "Translated": "过滤物品品级要求高于上限的招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply filters to private Party Finder listings",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FilterPrivatePfs",
+      "Translated": "对私人队员招募也使用筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FiltersTab",
+      "Translated": "筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Messages that don't fall into other categories and are not for content (Party Finder)",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FluffDescription",
+      "Translated": "与副本招募无关且不属于其他分类的队员招募信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company ads",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FreeCompanyCategory",
+      "Translated": "部队招募广告",
+      "Source": "library"
+    },
+    {
+      "Original": "Advertisements for Free Companies",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "FreeCompanyDescription",
+      "Translated": "部队招募相关广告",
+      "Source": "library"
+    },
+    {
+      "Original": "Log filtered messages",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "LogFilteredMessages",
+      "Translated": "记录被过滤的聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Log filtered PFs",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "LogFilteredPfs",
+      "Translated": "记录被过滤的招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading model manifest",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusDownloadingManifest",
+      "Translated": "正在下载模型清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading model",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusDownloadingModel",
+      "Translated": "正在下载模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Initialised",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusInitialised",
+      "Translated": "已初始化",
+      "Source": "library"
+    },
+    {
+      "Original": "Initialising model and classifier",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusInitialising",
+      "Translated": "正在初始化模型和分类器",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing to update model",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusPreparing",
+      "Translated": "正在准备更新模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Uninitialised",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelStatusUninitialised",
+      "Translated": "尚未初始化",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelTab",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Last error: {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelTabError",
+      "Translated": "最近一次错误：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Model status: {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelTabStatus",
+      "Translated": "模型状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ModelTabVersion",
+      "Translated": "版本：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal messages",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "NormalCategory",
+      "Translated": "普通消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal messages that should not be filtered",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "NormalDescription",
+      "Translated": "应当放行的普通消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Other filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "OtherFiltersTab",
+      "Translated": "其他筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the game's language setting instead of Dalamud's",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "OtherGameLanguage",
+      "Translated": "使用游戏的语言设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "OtherTab",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Finder filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "PartyFinderFilters",
+      "Translated": "队员招募筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Phishing messages",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "PhishingCategory",
+      "Translated": "钓鱼消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Messages trying to trick you into revealing your account details in order to steal your account",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "PhishingDescription",
+      "Translated": "诱骗玩家泄露账号信息、借此盗号的消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Regular expressions to filter",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RegularExpressionsToFilter",
+      "Translated": "要过滤的正则表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportChatTab",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Channel",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnChannel",
+      "Translated": "频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnDescription",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Host",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnHost",
+      "Translated": "招募者",
+      "Source": "library"
+    },
+    {
+      "Original": "Message",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnMessage",
+      "Translated": "消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnReason",
+      "Translated": "原因",
+      "Source": "library"
+    },
+    {
+      "Original": "Sender",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnSender",
+      "Translated": "发送者",
+      "Source": "library"
+    },
+    {
+      "Original": "Timestamp",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportColumnTimestamp",
+      "Translated": "时间戳",
+      "Source": "library"
+    },
+    {
+      "Original": "Click on one of the entries below to report it to the developer as miscategorised.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportHelp",
+      "Translated": "点击下方任一条目，可向开发者上报分类错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalCancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalClassificationOther",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Messages that don't fall under any of the other categories.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalClassificationOtherDescription",
+      "Translated": "其他类别均不适用的消息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to clipboard",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalCopy",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Reporting is disabled because your ML model was not functioning when you saw this message.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalDisabledBadModel",
+      "Translated": "你看到这条消息时机器学习模型尚未正常工作，因此无法上报。",
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot report messages filtered because of a custom filter.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalDisabledCustom",
+      "Translated": "自定义筛选器拦截的消息无法上报。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reporting is disabled because you weren't filtering for this kind of message at the time you saw it.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalDisabledFilterNotEnabled",
+      "Translated": "你看到这条消息时并未对此类消息启用筛选，因此无法上报。",
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot report messages filtered because of item level.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalDisabledItemLevel",
+      "Translated": "因物品品级被筛选的消息无法上报。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reporting is disabled because you must choose a different classification than the original.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalDisabledSameClassification",
+      "Translated": "请先选择与原分类不同的类别，然后再上报。",
+      "Source": "library"
+    },
+    {
+      "Original": "Go to custom filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalGoToCustomButton",
+      "Translated": "前往自定义筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Reporting this message will let the developer know that you think this message was incorrectly classified.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalHelp1",
+      "Translated": "上报这条消息可通知开发者，你认为它的分类有误。",
+      "Source": "library"
+    },
+    {
+      "Original": "NoSoliciting only works for English messages. Do not report non-English messages.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalHelp2",
+      "Translated": "NoSoliciting 仅支持英语消息。请勿上报非英语消息。",
+      "Source": "library"
+    },
+    {
+      "Original": "This message's original classification: {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalOriginalClassification",
+      "Translated": "此消息原先的分类：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Report",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalReport",
+      "Translated": "上报",
+      "Source": "library"
+    },
+    {
+      "Original": "How do you think this message should have been classified?",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalSuggestedClassification",
+      "Translated": "你认为这条消息应归入哪一类？",
+      "Source": "library"
+    },
+    {
+      "Original": "Report to {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportModalTitle",
+      "Translated": "上报给 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Finder",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportPartyFinderTab",
+      "Translated": "队员招募",
+      "Source": "library"
+    },
+    {
+      "Original": "failed to send",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportStatusFailure",
+      "Translated": "发送失败",
+      "Source": "library"
+    },
+    {
+      "Original": "sending",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportStatusInProgress",
+      "Translated": "正在发送",
+      "Source": "library"
+    },
+    {
+      "Original": "Last report status: {0}",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportStatusMessage",
+      "Translated": "最近一次上报状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "sent successfully",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportStatusSuccessful",
+      "Translated": "发送成功",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportStatusUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Report to NoSoliciting",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportToNoSoliciting",
+      "Translated": "上报给 NoSoliciting",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Finder listing hosted by {0} reported successfully.",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ReportToastSuccess",
+      "Translated": "已上报 {0} 发布的招募。",
+      "Source": "library"
+    },
+    {
+      "Original": "RMT (content)",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RmtContentCategory",
+      "Translated": "现金交易（副本代打）",
+      "Source": "library"
+    },
+    {
+      "Original": "Real-money trade involving content (also known as content sellers)",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RmtContentDescription",
+      "Translated": "以现实货币买卖副本通关等服务的消息",
+      "Source": "library"
+    },
+    {
+      "Original": "RMT (gil)",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RmtGilCategory",
+      "Translated": "现金交易（金币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Real-money trade involving gil or items (also known as RMT bots)",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RmtGilDescription",
+      "Translated": "用现实货币交易金币或物品（如卖金广告）",
+      "Source": "library"
+    },
+    {
+      "Original": "Roleplaying ads",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RoleplayingCategory",
+      "Translated": "角色扮演广告",
+      "Source": "library"
+    },
+    {
+      "Original": "Advertisements for personal RP, RP communities, venues, or anything else related to roleplaying",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "RoleplayingDescription",
+      "Translated": "与角色扮演有关的广告，包括个人招募、角色扮演社群和活动场所。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save filters",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "SaveFilters",
+      "Translated": "保存筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Show reporting window",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "ShowReportingWindow",
+      "Translated": "显示上报窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Static recruitment",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "StaticCategory",
+      "Translated": "固定队招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Statics looking for members or players looking for a static",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "StaticDescription",
+      "Translated": "固定队招人，或玩家寻找固定队的消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Static substitutes",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "StaticSubCategory",
+      "Translated": "固定队替补招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Statics looking for fill-ins of missing members for clears",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "StaticSubDescription",
+      "Translated": "固定队为通关临时招募替补的消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Substrings to filter",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "SubstringsToFilter",
+      "Translated": "要过滤的文本片段",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade ads",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "TradeCategory",
+      "Translated": "交易广告",
+      "Source": "library"
+    },
+    {
+      "Original": "Messages advertising trading items or services for gil, such as omnicrafters looking for work or people selling rare items off the market board",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "TradeDescription",
+      "Translated": "以金币为对价买卖物品或服务的广告，例如全职业工匠接单，或玩家绕过市场布告板出售稀有物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Update model",
+      "Container": "NoSoliciting.Resources.Language.resources",
+      "Key": "UpdateModel",
+      "Translated": "更新模型",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

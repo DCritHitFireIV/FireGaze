@@ -1,0 +1,1142 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoHook",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "No fish found matching \"",
+      "Context": "AutoHook.OpenFishData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未找到匹配的鱼：“",
+      "Source": "library"
+    },
+    {
+      "Original": "Minor Changes",
+      "Context": "PluginUi.DrawChangelog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "小幅调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Support AutoHook",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "支持 AutoHook",
+      "Source": "library"
+    },
+    {
+      "Original": "- Preset",
+      "Context": "DrawStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "- 预设",
+      "Source": "library"
+    },
+    {
+      "Original": "will be used.",
+      "Context": "DrawStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "将被使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty - groups combined with AND/OR",
+      "Context": "ConditionExpressionUi.DrawFrame",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "为空时用 AND/OR 组合各组条件",
+      "Source": "library"
+    },
+    {
+      "Original": "\nInvalid - falling back to ",
+      "Context": "ConditionExpressionUi.DrawFrame",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "\n无效，将改用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current result of the expression",
+      "Context": "ConditionExpressionUi.DrawFrame",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "表达式当前的结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Insert:",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "插入：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select tokens (shift+click to extend) to wrap them in parentheses",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择元素（按住 Shift 点击可扩选），即可用括号括起它们",
+      "Source": "library"
+    },
+    {
+      "Original": "Wrap selection in parentheses",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "用括号括起所选内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete last token",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "删除最后一个元素",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete selection",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "删除所选内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear expression",
+      "Context": "ConditionExpressionUi.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "清空表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit as text",
+      "Context": "ConditionExpressionUi.DrawTextModeToggle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "编辑文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Back to token editor",
+      "Context": "ConditionExpressionUi.DrawTextModeToggle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "返回元素编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced (groups, expression)",
+      "Context": "ConditionUi.DrawConditionSet",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "高级（条件组和表达式）",
+      "Source": "library"
+    },
+    {
+      "Original": "Back to simple view",
+      "Context": "ConditionUi.DrawSlimAdvancedEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "返回简易视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable group",
+      "Context": "ConditionUi.DrawSlimAdvancedEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "启用条件组",
+      "Source": "library"
+    },
+    {
+      "Original": "Click: clear conditions in this group\nShift+Click: delete group",
+      "Context": "ConditionUi.DrawSlimAdvancedEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "点击：清除此组条件\n按住 Shift 点击：删除此组",
+      "Source": "library"
+    },
+    {
+      "Original": "Evaluate: ",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "求值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "all",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Add condition",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "添加条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add group",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "添加分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Notes",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Range: ",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "范围： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "PresetCreator.GetBiteType",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Markers: ",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "标记： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration: ",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "持续时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset: ",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Detail",
+      "Context": "ReplayDetailsWindow.DrawDecisions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Start recording",
+      "Context": "ReplayManagementWindow.DrawRecordingRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop recording",
+      "Context": "ReplayManagementWindow.DrawRecordingRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Open file",
+      "Context": "ReplayManagementWindow.DrawNewEntry",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "ReplayManagementWindow.DrawNewEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Unselect all",
+      "Context": "ReplayManagementWindow.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select all",
+      "Context": "ReplayManagementWindow.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Unload selected",
+      "Context": "ReplayManagementWindow.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "卸载选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Unload all",
+      "Context": "ReplayManagementWindow.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部卸载",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish caught: ",
+      "Context": "DrawFishTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "已钓获的鱼： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import ",
+      "Context": "TabCommunity.DrawHeaderList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "TabDebug.get_TabName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Tools",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "TabDebug.DrawWorldState",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "TabDebug.DrawSpectralHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "TabDebug.DrawFishCaughtData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "TabDebug.DrawKnownItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "TabDebug.DrawKvTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "TabDebug.DrawFshActionInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Context": "TabDebug.DrawFshActionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Context": "TabDebug.DrawFshActionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Route",
+      "Context": "TabOceanFishing.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "路线",
+      "Source": "library"
+    },
+    {
+      "Original": " left",
+      "Context": "TabOceanFishing.DrawTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 左",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing",
+      "Context": "TabOceanFishing.DrawCaught",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "缺失",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "TabSettings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing",
+      "Context": "TabSettings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "出海垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Language###currentLanguage",
+      "Context": "TabSettings.DrawLanguageSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat message",
+      "Context": "DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Default: ",
+      "Context": "BaseActionCast.DrawGpThreshold",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "默认： ",
+      "Source": "library"
+    },
+    {
+      "Original": "select an item",
+      "Context": "ActionCooldownCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds",
+      "Context": "IntuitionTimerCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Context": "OceanMissionProgressCD.DrawParams",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Time of day",
+      "Context": "OceanTimeOfDayCD.DrawParams",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "当天时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Minutes",
+      "Context": "SessionTimeCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "ConditionUi.DrawChipRow",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Context": "FishDataWindow.DrawWeathers",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextDisabled",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "PresetCreator.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Text",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "ReplayDetailsWindow.DrawDecisions",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Context": "TabDebug.DrawWorldState",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.CollapsingHeader",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Context": "TabDebug.DrawWorldState",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.CollapsingHeader",
+      "Translated": "捕鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "TabDebug.DrawFshActionInfo",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Support me on Ko-fi",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Support_me_on_Ko_fi",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Folder",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "CreateFolder",
+      "Translated": "创建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an item",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_SelectItem",
+      "Translated": "选择物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Name",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetName",
+      "Translated": "预设名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Delete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Presets_",
+      "Translated": "预设：",
+      "Source": "library"
+    },
+    {
+      "Original": "Previous",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Previous",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Create",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Import",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "FC house",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_HomeFreeCompany",
+      "Translated": "部队房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Global Preset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "GlobalPreset",
+      "Translated": "全局预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Caught",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "FishCaught",
+      "Translated": "已钓获的鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_HomeApartment",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Rename",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanFishGoal_Achievements",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeout",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Timeout",
+      "Translated": "超时",
+      "Source": "library"
+    },
+    {
+      "Original": "busy",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ReasonBusy",
+      "Translated": "忙碌",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "SettingsTab",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Conditions",
+      "Translated": "条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Search_Hint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Testing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawHeader_Testing",
+      "Translated": "测试中",
+      "Source": "library"
+    },
+    {
+      "Original": "Sell to vendor",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_SellToVendor",
+      "Translated": "售予商店",
+      "Source": "library"
+    },
+    {
+      "Original": "New Preset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "New_Preset",
+      "Translated": "新建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "New Preset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "NewPreset",
+      "Translated": "新建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DefaultSubTab",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawImportExport_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Current",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawHeader_GeneralSettings",
+      "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Name",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "FolderName",
+      "Translated": "文件夹名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PluginUi_Language",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Min.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawConfigs_Min_",
+      "Translated": "最小值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Max.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawConfigs_Max_",
+      "Translated": "最大值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Tab_Description",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Min.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Min",
+      "Translated": "最小值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Max.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Max",
+      "Translated": "最大值。",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "TabnameGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Extra",
+      "Translated": "附加选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Speed",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Cooldown",
+      "Translated": "冷却时间",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AboutTab",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "not logged in",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ReasonNotLoggedIn",
+      "Translated": "尚未登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Disabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Complete",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Enabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Plugin_Enabled",
+      "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Changelog",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Private house",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_HomePrivate",
+      "Translated": "个人房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_StepCommand",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Moving_",
+      "Translated": "移动中：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Folder",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "RenameFolder",
+      "Translated": "重命名文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Repair",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_Repair",
+      "Translated": "修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Fishing",
+      "Translated": "捕鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "min",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_Min",
+      "Translated": "最小值",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "BaitName_Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_Character",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanFishing",
+      "Translated": "出海垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Next",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Size",
+      "Translated": "大小",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

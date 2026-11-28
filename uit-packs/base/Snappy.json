@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Snappy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Opens main Snappy interface",
+      "Context": "Snappy..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Snappy 主界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Snapshot migration complete.",
+      "Context": "BackupAndMigrateOldSnapshots.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "快照迁移完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Working directory is not set or does not exist. Cannot run migration.",
+      "Context": "PerformMigrationAsync.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "工作目录未设置或不存在，无法迁移。",
+      "Source": "library"
+    },
+    {
+      "Original": "No old snapshots found to migrate or update.",
+      "Context": "PerformMigrationAsync.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "未找到可迁移或更新的旧快照。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not selected",
+      "Context": "WorldSelector.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "WorldSelector.DrawInternal",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Snappy Settings",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Snappy 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to delete the history entry because the snapshot is no longer selected.",
+      "Context": "MainWindow.HandlePopups",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "快照已取消选中，无法删除此历史记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Files",
+      "Context": "MainWindow.DrawPmpItemList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "MainWindow.DrawPmpItemList",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

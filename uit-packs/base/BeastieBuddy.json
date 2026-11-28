@@ -1,0 +1,743 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BeastieBuddy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "About",
+      "Context": "MainWindow.DrawSearchTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "About BeastieBuddy",
+      "Context": "AboutWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "关于 BeastieBuddy",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "AetherBlackbox, AetherDraw, OBStoABB, and more.",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "包括 AetherBlackbox、AetherDraw、OBStoABB 等。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply/Close",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Teleport on Click",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "点击时自动传送",
+      "Source": "library"
+    },
+    {
+      "Original": "BEASTMASTER JOURNAL",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "魔兽使图鉴",
+      "Source": "library"
+    },
+    {
+      "Original": "BeastieBuddy Standalone App",
+      "Context": "Plugin.AnnounceStandaloneApp",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "BeastieBuddy 独立应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Beastmaster Journal",
+      "Context": "BestiaryUIV2.DrawEmptyDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "魔兽使图鉴",
+      "Source": "library"
+    },
+    {
+      "Original": "Bestiary",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "怪物图鉴",
+      "Source": "library"
+    },
+    {
+      "Original": "Blue Mage Spellbook",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "青魔法书",
+      "Source": "library"
+    },
+    {
+      "Original": "Captured",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "已捕获",
+      "Source": "library"
+    },
+    {
+      "Original": "Cards",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "Check",
+      "Context": "BestiaryUIV2.DrawList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Check out my other projects on github.com/rail2025/",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "其他项目见 github.com/rail2025/",
+      "Source": "library"
+    },
+    {
+      "Original": "Classification",
+      "Context": "BestiaryUIV2.DrawList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Classifications",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Collected: ",
+      "Context": "BestiaryUIV2.DrawCollectionStats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已收集： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection",
+      "Context": "BestiaryUIV2.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Lab",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "战斗实验室",
+      "Source": "library"
+    },
+    {
+      "Original": "Coordinates: (",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "坐标：（",
+      "Source": "library"
+    },
+    {
+      "Original": "Created by: rail",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者：rail",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "BestiaryUIV2.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance at which the pillar turns into a small star.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "光柱在此距离外改为星形标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Donate (Ko-fi)",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "赞助（Ko-fi）",
+      "Source": "library"
+    },
+    {
+      "Original": "Elements",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty",
+      "Context": "BestiaryCombatLab.DrawTimeline",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "空",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Map Beacons",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用地图信标",
+      "Source": "library"
+    },
+    {
+      "Original": "Experienced Hunter",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "老练猎手",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters (",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "筛选（",
+      "Source": "library"
+    },
+    {
+      "Original": "Find Spawn Locations",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "查找出现地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Habitat",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "栖息地",
+      "Source": "library"
+    },
+    {
+      "Original": "INT",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "智力",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Kin",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Learned",
+      "Context": "BlueMageUI.DrawListView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "已习得",
+      "Source": "library"
+    },
+    {
+      "Original": "List",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Living Bestiary",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "活体图鉴",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading Beastmaster Journal...",
+      "Context": "BestiaryUIV2.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在加载魔兽使图鉴……",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading Combat Lab data...",
+      "Context": "BestiaryCombatLab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在加载战斗实验室数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Location: ",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Magic",
+      "Context": "BestiaryCombatLab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "Master Beastmaster",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "魔兽使大师",
+      "Source": "library"
+    },
+    {
+      "Original": "Movable Config Window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许移动设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Mult",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "倍率",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No monsters found.",
+      "Context": "MainWindow.DrawSearchTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有找到怪物。",
+      "Source": "library"
+    },
+    {
+      "Original": "No. ",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "编号 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Learned",
+      "Context": "BlueMageUI.DrawListView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "未习得",
+      "Source": "library"
+    },
+    {
+      "Original": "Novice Tracker",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "初级追踪者",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the BeastieBuddy monster search window.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 BeastieBuddy 的怪物搜索窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the GitHub Issues page in your browser.",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在浏览器中打开 GitHub 问题页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Page ",
+      "Context": "BestiaryUIV2.DrawCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "页码 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Physical",
+      "Context": "BestiaryCombatLab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "物理",
+      "Source": "library"
+    },
+    {
+      "Original": "Pillar Min Distance",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "光柱最小距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Release Date: 7/22/2025",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "发布日期：2025 年 7 月 22 日",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "STR",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "力量",
+      "Source": "library"
+    },
+    {
+      "Original": "Search beasts...",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索魔兽……",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for a monster...",
+      "Context": "MainWindow.DrawSearchTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索怪物……",
+      "Source": "library"
+    },
+    {
+      "Original": "Search spells...",
+      "Context": "BlueMageUI.DrawListView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索青魔法……",
+      "Source": "library"
+    },
+    {
+      "Original": "Searching...",
+      "Context": "MainWindow.GetFooterMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在搜索……",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a creature card to view its habitat, abilities, and collection details.",
+      "Context": "BestiaryUIV2.DrawEmptyDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择一张魔兽卡片，查看它的栖息地、技能和收集情况。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.DrawSearchTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot ",
+      "Context": "BestiaryCombatLab.DrawTimeline",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "栏位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Star Draw Distance",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "星形标记显示距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Star Height Offset",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "星形标记高度偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Support the developer!",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "支持开发者！",
+      "Source": "library"
+    },
+    {
+      "Original": "Switches to the Beastie Search tab to find possible spawn locations.",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换至魔兽搜索页，查看可能出现的地点。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport Settings (Teleporter plugin required)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "传送设置（需要 Teleporter 插件）",
+      "Source": "library"
+    },
+    {
+      "Original": "The minimum distance you must be from the target to see the large Pillar.\nIf you are closer than this, the small Star will be shown instead.\n(Lower value = Pillar stays visible longer as you approach)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "与目标的距离达到此值时，显示大型光柱。\n距离更近时，改为显示小星星。\n（数值越小，接近目标时光柱保留得越久。）",
+      "Source": "library"
+    },
+    {
+      "Original": "Title",
+      "Context": "BestiaryUIV2.DrawAbilityCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Uncaptured",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "未捕获",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Zone",
+      "Context": "MobData..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未知区域",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Beacon Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "特效信标设置",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Beacon system adapted from NorthStar by Pistachio Herald.",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "特效信标系统改编自 Pistachio Herald 的 NorthStar。",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Vulns (",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "弱点（",
+      "Source": "library"
+    },
+    {
+      "Original": "Weakness",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "弱点",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, clicking a search result will automatically teleport you to the nearest aetheryte in that zone. Requires the Teleporter plugin.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用后，点击搜索结果会自动传送至该区域距目标最近的以太之光。需要 Teleporter 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "With special thanks to the Dalamud Discord community.",
+      "Context": "AboutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "特别感谢 Dalamud Discord 社区。",
+      "Source": "library"
+    },
+    {
+      "Original": "← Back to Spell List",
+      "Context": "BlueMageUI.DrawDetailView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "← 返回青魔法列表",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

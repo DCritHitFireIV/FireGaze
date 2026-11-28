@@ -1,0 +1,868 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "QoLBar",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nCondition: ",
+      "Context": "ConditionSetUI.DrawConditionSetEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "\n条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nMaximum: ",
+      "Context": "MiscConditionHelpers.DrawTimespanInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n最大值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Alignment",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Visible",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "始终显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Font Size",
+      "Context": "PluginUI.DrawSettingsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "条形文字字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Titles",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "首领称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Bozja UI",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "博兹雅界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Width",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按钮宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Character ID",
+      "Context": "CharacterCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "角色 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo Racing",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "陆行鸟竞赛",
+      "Source": "library"
+    },
+    {
+      "Original": "Classes/Jobs",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Data",
+      "Context": "CharacterCondition.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Through",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标点击穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "ConfigEditorUI.EditShortcutColor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "列",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "ConfigEditorUI.EditShortcutConfigBase",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains:",
+      "Context": "IconBrowserUI.BeginIconList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "包含：",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown Action ID",
+      "Context": "ConfigEditorUI.EditShortcutIconOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ExcelSheetCombo",
+      "Translated": "用于显示冷却的技能 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmic Exploration",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "宇宙探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Context": "ShortcutUI.DrawAddShortcut",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Currencies",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Job",
+      "Context": "CurrentJobPreset.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "当前职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "PluginUI.DrawPluginConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "ConfigEditorUI.EditShortcutMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Default: ",
+      "Context": "PluginUI.DrawSettingsMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "默认： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "Keybind.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables the hotkey from blocking the game input.",
+      "Context": "Keybind.KeybindInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "启用后，快捷键不会拦截游戏输入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Double right click this button to delete ",
+      "Context": "PluginUI.DrawBackupManager",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "鼠标右键双击此按钮即可删除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Mode",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "编辑模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "BarUI.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "附加选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed running macro",
+      "Context": "Game.RunCommandQueue",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "宏执行失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to import from clipboard! Import string is invalid or incomplete.",
+      "Context": "Importing.TryImport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法从剪贴板导入：导入字符串无效或不完整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "捕鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing Log",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "钓鱼笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Scale",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "字体缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "集体动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardening Log",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "园艺记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Glasses",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "眼镜",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "PluginUI.DrawBarManager",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hotkey",
+      "Context": "Keybind.KeybindInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "Hotkey ",
+      "Context": "Keybind.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "快捷键 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunts",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "I UNDERSTAND",
+      "Context": "Configuration.DrawUpdateWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "我已了解",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "ShortcutUI.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Browser",
+      "Context": "IconBrowserUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "图标浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "PluginUI.DrawBarManager",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Japanese Popup Texts",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "日文弹窗文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "JobCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Context": "PluginUI.DrawBackupManager",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Position",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Macros",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Macros do not support item usage.",
+      "Context": "Game.RunCommandQueue",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "宏不支持使用物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Map Markers",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "地图标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Markers",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Minions",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "ConfigEditorUI.EditShortcutMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "NO, I AM FINE",
+      "Context": "Configuration.DrawUpdateWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保留",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "ConfigEditorUI.EditShortcutName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No Background",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "无背景",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "ConfigEditorUI.EditShortcutIconOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "ConfigEditorUI.EditShortcutIconOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "PluginUI.DrawSettingsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Folder",
+      "Context": "PluginUI.DrawBackupManager",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Icon Folder",
+      "Context": "IconBrowserUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开图标文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "PluginUI.DrawBarManager",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Out of Combat",
+      "Context": "OutOfCombatPreset.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "脱战",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass Input to Game",
+      "Context": "Keybind.KeybindInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将按键输入传给游戏",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Enabled",
+      "Context": "PluginCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup Texts",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "弹窗文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Press escape to clear the hotkey.",
+      "Context": "Keybind.KeybindInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "按 Esc 清除快捷键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Images",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "任务图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Quests",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Context": "ConfigEditorUI.EditShortcutMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "随机",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Custom Icons",
+      "Context": "IconBrowserUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新自定义图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Reveal Area Scale",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "唤出区域缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation",
+      "Context": "ConfigEditorUI.EditShortcutIconOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "PluginUI.DrawPluginConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Spacing",
+      "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Splash Logos",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "启动标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Context": "BarUI.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Subcategory",
+      "Context": "Keybind.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "子分类",
+      "Source": "library"
+    },
+    {
+      "Original": "System",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "ConfigEditorUI.EditShortcutConfigBase",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "World Map",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "世界地图",
+      "Source": "library"
+    },
+    {
+      "Original": "YES, DELETE THEM",
+      "Context": "Configuration.DrawUpdateWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确认删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "ZoneCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Maps",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "区域地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "ConfigEditorUI.EditShortcutIconOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "icon",
+      "Context": "ShortcutUI.DrawIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "图标",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

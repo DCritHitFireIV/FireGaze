@@ -1,0 +1,345 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PeepingTom",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Alias for /ppeepingtom",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "/ppeepingtom 的别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Use with no arguments to show the list. Use with \"c\" or \"config\" to show the config",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "不加参数可显示列表，使用 c 或 config 可打开设置。",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Click to link, Alt-click to examine, or right click to target.",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "MainHelpExamine",
+      "Translated": "单击发送链接，按住 Alt 单击查看角色信息，右键选为目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to link or right click to target.",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "MainHelpNoExamine",
+      "Translated": "单击发送链接，右键选为目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Targeting you",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "MainTargetingYou",
+      "Translated": "正在选中你",
+      "Source": "library"
+    },
+    {
+      "Original": "Poll frequency in milliseconds",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsAdvancedPollFrequency",
+      "Translated": "悬停时设为焦点目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsAdvancedTab",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Open examine window on Alt-click",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsBehaviourExamineEnabled",
+      "Translated": "按住 Alt 单击时打开角色信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Focus target on hover",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsBehaviourFocusHover",
+      "Translated": "允许按 Esc 关闭主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Behaviour",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsBehaviourTab",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Log alliance members",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterLogAlliance",
+      "Translated": "记录团队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Log blacklisted players",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterLogBlacklistedPlayers",
+      "Translated": "记录黑名单中的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Log targeters engaged in combat",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterLogCombat",
+      "Translated": "记录战斗中选中我的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Log party members",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterLogParty",
+      "Translated": "记录小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Log yourself",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterLogSelf",
+      "Translated": "记录自己",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsFilterTab",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Number of previous targeters to keep",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsHistoryAmount",
+      "Translated": "保留的历史目标玩家数",
+      "Source": "library"
+    },
+    {
+      "Original": "Show previous targeters",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsHistoryEnabled",
+      "Translated": "显示之前选中过我的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Record history when window is closed",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsHistoryRecordClosed",
+      "Translated": "窗口关闭时记录历史",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsHistoryTab",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Show timestamps",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsHistoryTimestamps",
+      "Translated": "显示时间戳",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark your target",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTarget",
+      "Translated": "标记当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target mark colour",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTargetColour",
+      "Translated": "当前目标标记颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Target mark size",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTargetSize",
+      "Translated": "当前目标标记大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark targeting you",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTargeting",
+      "Translated": "标记正在选中我的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Targeting mark colour",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTargetingColour",
+      "Translated": "选中我的玩家标记颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Targeting mark size",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersMarkTargetingSize",
+      "Translated": "选中我的玩家标记大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Markers",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsMarkersTab",
+      "Translated": "标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown for sound (seconds)",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundCooldown",
+      "Translated": "提示音冷却时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundDefaultDevice",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound when targeted",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundEnabled",
+      "Translated": "被选为目标时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid device",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundInvalidDevice",
+      "Translated": "无效的设备",
+      "Source": "library"
+    },
+    {
+      "Original": "Output device",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundOutputDevice",
+      "Translated": "副本内显示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Path to audio file",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundPath",
+      "Translated": "音频文件路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave this blank to use a built-in sound.",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundPathHelp",
+      "Translated": "留空将使用内置提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound when window is closed",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundPlayWhenClosed",
+      "Translated": "窗口关闭时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundTab",
+      "Translated": "声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume of sound",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsSoundVolume",
+      "Translated": "提示音音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow moving the main window",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowAllowMovement",
+      "Translated": "允许移动主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow resizing the main window",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowAllowResize",
+      "Translated": "允许调整主窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Open on login",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowOpenLogin",
+      "Translated": "登录时打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Show window while in combat",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowShowCombat",
+      "Translated": "战斗中显示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show settings button",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowShowConfigButton",
+      "Translated": "显示设置按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Show window while in cutscenes",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowShowCutscene",
+      "Translated": "播放过场动画时显示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show window while in instance",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowShowInstance",
+      "Translated": "查询间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SettingsWindowTab",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not play sound file: {0}",
+      "Container": "PeepingTom.Resources.Language.resources",
+      "Key": "SoundChatError",
+      "Translated": "无法播放音频文件：{0}",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

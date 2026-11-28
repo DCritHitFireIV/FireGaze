@@ -1,0 +1,208 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PriceInsight",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Always display NQ and HQ prices",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示普通品质和高品质的价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Datacenter",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "数据中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Home world",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所属服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Include all datacenters available via datacenter traveling.",
+      "Context": "ConfigUI.TooltipRegion",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "包含通过跨大区旅行可前往的全部数据中心。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefetch prices for all items in inventory, chocobo saddlebag and retainer when logging in.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "登录时预先获取背包、陆行鸟鞍囊和雇员持有物品的价格。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefetch prices for items in inventory",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "预先获取背包物品价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Price Insight Config",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Price Insight 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Price Insight Configuration Menu",
+      "Context": "PriceInsightPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "Price Insight 设置菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Region",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Show age of data",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示数据更新时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show cheapest price in:",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最低价格的查询范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show datacenter for foreign worlds",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示其他大区服务器所属的数据中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Show most recent purchase in:",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最近成交记录的查询范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show stack sale price",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示整组成交价",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the average sale price based on sales of the last 4 days.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "根据过去 4 天的成交记录显示平均成交价。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the average sales per day based on sales of the last 4 days.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "根据过去 4 天的成交记录显示日均成交量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the datacenter for worlds from other datacenters when displaying prices for the entire region.\nCan be turned off to reduce tooltip bloat.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "查询整个区域的价格时，显示其他大区服务器所属的数据中心。\n关闭后可精简物品提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the price of the hovered stack if sold at the given unit price.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "悬停时，按指定单价显示整组物品的总售价。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the prices for both NQ and HQ of an item.\nWhen turned off will only display price for the current quality (use Ctrl to switch between NQ and HQ).",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "同时显示普通品质和高品质的价格。\n关闭后只显示当前品质的价格（按 Ctrl 切换品质）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show when the price info was last refreshed.\nCan be turned off to reduce tooltip bloat.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示价格信息的上次刷新时间。\n关闭后可精简物品提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tap Alt to refresh prices",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "轻按 Alt 刷新价格",
+      "Source": "library"
+    },
+    {
+      "Original": "The current world you're on will be considered your \"home world\".\nUseful if you're datacenter travelling and want to see prices there.",
+      "Context": "ConfigUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前所在的服务器视为「所属服务器」。\n跨大区旅行时可用它查看目的地物价。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use current world as home world",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将当前服务器视为所属服务器",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

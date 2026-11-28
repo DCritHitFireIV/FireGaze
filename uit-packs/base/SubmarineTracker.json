@@ -1,0 +1,869 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SubmarineTracker",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Search",
+      "Context": "ExcelSheetSelector`1.ExcelSheetSearchInput",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "All###overlayAll",
+      "Context": "ReturnOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": " time",
+      "Context": "LootWindow.AnalyseTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection:",
+      "Context": "LootWindow.CustomLootTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "收藏：",
+      "Source": "library"
+    },
+    {
+      "Original": "Accounts:",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "账户：",
+      "Source": "library"
+    },
+    {
+      "Original": "New account name ...",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新账户名称……",
+      "Source": "library"
+    },
+    {
+      "Original": "Accounts",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "账户",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide this FC from all UIs.",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在所有界面上隐藏此部队。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove this FC from the account.",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从账户中移除此部队。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add this FC to an account.",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将此部队添加到账户。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unhide this FC.",
+      "Context": "ConfigWindow.AccountManagement",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "取消隐藏此部队。",
+      "Source": "library"
+    },
+    {
+      "Original": "Optimal",
+      "Context": "BuilderWindow.InfoTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "最佳",
+      "Source": "library"
+    },
+    {
+      "Original": "Tier",
+      "Context": "BuilderWindow.LootTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "档位",
+      "Source": "library"
+    },
+    {
+      "Original": "Poor",
+      "Context": "BuilderWindow.LootTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "差",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "BuilderWindow.LootTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Predict Future",
+      "Context": "BuilderWindow.ShipTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "预测后续情况",
+      "Source": "library"
+    },
+    {
+      "Original": "Surveillance:",
+      "Context": "BuilderWindow.ShipTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "探查性能：",
+      "Source": "library"
+    },
+    {
+      "Original": "Min %d",
+      "Context": "BuilderWindow.ShipTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最低 %d",
+      "Source": "library"
+    },
+    {
+      "Original": "Max %d",
+      "Context": "BuilderWindow.ShipTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最高 %d",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculated Stats:",
+      "Context": "BuilderWindow.BuildStats",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "计算得出的性能：",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Assigned",
+      "Context": "ConfigWindow.AccountManagement",
+      "Role": "UI",
+      "RoleReason": "direct string argument 1 to Dalamud.Bindings.ImGui.ImGui.TextColored",
+      "Translated": "尚未分配",
+      "Source": "library"
+    },
+    {
+      "Original": "Hidden",
+      "Context": "ConfigWindow.AccountManagement",
+      "Role": "UI",
+      "RoleReason": "direct string argument 1 to Dalamud.Bindings.ImGui.ImGui.TextColored",
+      "Translated": "已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "BuilderWindow.CommonRoutes",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Selectable",
+      "Translated": "无",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Overlay",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabOverlay",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "FavorTermYes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermSearch",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "RetTermNormal",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "HelpyTabInfo",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Poor",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "RetTermPoor",
+      "Translated": "差",
+      "Source": "library"
+    },
+    {
+      "Original": "Not unlocked",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "HelpyTabInfoRedText",
+      "Translated": "未解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderWindowButtonReset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryColors",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsDuration",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsTime",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsItem",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsName",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsDone",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Date",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsDate",
+      "Translated": "日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsCost",
+      "Translated": "花费",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryAuthor",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Example: ",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabNamingExample",
+      "Translated": "示例： ",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabAbout",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Localization",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuLocalization",
+      "Translated": "本地化",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "WindowNameTracker",
+      "Translated": "追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryOverview",
+      "Translated": "概览：",
+      "Source": "library"
+    },
+    {
+      "Original": "Window:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryWindow",
+      "Translated": "窗口：",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "NameOptionDefault",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Localization:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryLocalization",
+      "Translated": "本地化：",
+      "Source": "library"
+    },
+    {
+      "Original": "Optimal",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "RetTermOptimal",
+      "Translated": "最佳",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuDiscordThread",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Join Discord",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermJoinDiscord",
+      "Translated": "加入 Discord",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "hours",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "Termshours",
+      "Translated": "小时",
+      "Source": "library"
+    },
+    {
+      "Original": "Website",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuEntryWebsite",
+      "Translated": "网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Route",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsRoute",
+      "Translated": "路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsRange",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsPrice",
+      "Translated": "价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Tanks",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsTanks",
+      "Translated": "防护职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsSpeed",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Options:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryOptions",
+      "Translated": "选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsProgress",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderWindowButtonSave",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderWindowButtonLoad",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Export:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "LootTabEntryExport",
+      "Translated": "导出：",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsUnlocked",
+      "Translated": "已解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsLoading",
+      "Translated": "加载中",
+      "Source": "library"
+    },
+    {
+      "Original": "Pink",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ColorsPink",
+      "Translated": "粉色",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabTracker",
+      "Translated": "追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MainWindowEntryResources",
+      "Translated": "资源：",
+      "Source": "library"
+    },
+    {
+      "Original": "Manage",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabManage",
+      "Translated": "管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderTabInfo",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuEntryDiscordThread",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Green",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ColorsGreen",
+      "Translated": "绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "White",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ColorsWhite",
+      "Translated": "白色",
+      "Source": "library"
+    },
+    {
+      "Original": "General:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryGeneral",
+      "Translated": "常规：",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "LootTabHistory",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabHelpHeader",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Submarines",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsSubmarines",
+      "Translated": "潜水艇",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "WindowNameOverlay",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryNotifications",
+      "Translated": "通知：",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Red",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ColorsRed",
+      "Translated": "红色",
+      "Source": "library"
+    },
+    {
+      "Original": "Website",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermWebsite",
+      "Translated": "网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Repair",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsRepair",
+      "Translated": "修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Ko-Fi Tip",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuEntryKoFi",
+      "Translated": "在 Ko-fi 上打赏",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuIssues",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Ko-Fi Tip",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuKoFi",
+      "Translated": "在 Ko-fi 上打赏",
+      "Source": "library"
+    },
+    {
+      "Original": "No Data",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "WarningNoStorageCount",
+      "Translated": "暂无数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "LootTabCustom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "LootTabExport",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryVersion",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsOptions",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Optimal",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsOptimal",
+      "Translated": "最佳",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "WindowNameConfig",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "No Selection",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderStatsRouteNoSelection",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsNormal",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "DurationLimitCustom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Localization",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuEntryLocalization",
+      "Translated": "本地化",
+      "Source": "library"
+    },
+    {
+      "Original": "Submarines:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntrySubmarines",
+      "Translated": "潜水艇：",
+      "Source": "library"
+    },
+    {
+      "Original": "Route",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "BuilderTabRoute",
+      "Translated": "路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabEntryBehavior",
+      "Translated": "行为：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Current Character",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsAddCurrentCharacter",
+      "Translated": "添加当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsCustom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermType",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsMap",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsAll",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Exp",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsExp",
+      "Translated": "经验值",
+      "Source": "library"
+    },
+    {
+      "Original": "Full Name",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "NameOptionFullName",
+      "Translated": "全名",
+      "Source": "library"
+    },
+    {
+      "Original": "No data available.",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "HelpyStorageTabWarning",
+      "Translated": "没有可用数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "No Voyage",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "TermsNoVoyage",
+      "Translated": "无航程",
+      "Source": "library"
+    },
+    {
+      "Original": "Highest Rank",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "ConfigTabSliderRank",
+      "Translated": "最高排名",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MenuEntryIssues",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "MainWindowTabOverview",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "LootTabButtonFile",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors:",
+      "Container": "SubmarineTracker.Resources.Language.resources",
+      "Key": "HelpyTabInfoColors",
+      "Translated": "颜色：",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

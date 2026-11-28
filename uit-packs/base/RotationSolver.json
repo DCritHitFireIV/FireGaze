@@ -1,0 +1,4004 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "RotationSolver",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Action Column",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能列",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "[RotationSolver] MaterialGallery.DrawNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Test Warning",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加测试警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Add repository",
+      "Context": "[RotationSolver] MainWindow.DrawAutoduty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "添加仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Already at target",
+      "Context": "[RotationSolver] MainWindow.GetMovementSafetyStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已到达目标位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation Lock",
+      "Context": "[RotationSolver] ChurinMNK.DisplayRotationStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "动画锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto",
+      "Context": "[RotationSolver] FullControlWindow.AutoLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "[RotationSolver] FullControlWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "返回",
+      "Source": "library"
+    },
+    {
+      "Original": "Both Boss Mods cannot be installed and enabled at the same time. Please disable Boss Mod.",
+      "Context": "[RotationSolver] MainWindow.DrawAutoduty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "两个 Boss Mod 插件无法同时安装并启用。请禁用 Boss Mod。",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst",
+      "Context": "[RotationSolver] FullControlWindow.DrawModeChips",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "爆发",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[RotationSolver] MainWindow.DrawResetDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Time: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咏唱时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Type: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咏唱类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Context": "[RotationSolver] UpdateNotesWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Trace",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除追踪记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Weakness Data",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除弱点数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear search",
+      "Context": "[RotationSolver] M3Widgets.SearchField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除搜索内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy",
+      "Context": "[RotationSolver] MainWindow.DrawThanksToSupporters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "[RotationSolver] MainWindow.DrawWindowBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied ",
+      "Context": "[RotationSolver] MaterialGallery.DrawColorRoles",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已复制 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard",
+      "Context": "[RotationSolver] MaterialGallery.DrawFeedback",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[RotationSolver] MainWindow.DrawNotices",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy as Curated List Entries",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制为整理后的列表条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Pet: ",
+      "Context": "[RotationSolver] BeastmasterRotation.DisplayBaseStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前宠物： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Id: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数据 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "[RotationSolver] ImGuiHelper..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DrawHotKeysPopup",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete every actiontrace_*.log file in the Traces folder and clear the buffered last-frame data.",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "删除 Traces 文件夹中的所有 actiontrace_*.log 文件，并清除已缓存的上一帧数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "[RotationSolver] MainWindow.DrawNotices",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Context": "[RotationSolver] MaterialGallery.DrawDialogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "[RotationSolver] MainWindow.DrawAboutCompatibility",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "[RotationSolver] MainWindow.GetMovementSafetyStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Esprit Threshold",
+      "Context": "[RotationSolver] ChurinDNC.DisplayRotationStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "伶俐阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Event Type: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "事件类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Fail",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate ID: ",
+      "Context": "[RotationSolver] MainWindow.DrawDutyInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "危命任务 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Game version: ",
+      "Context": "[RotationSolver] DrawRotationCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "游戏版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Context": "[RotationSolver] MaterialGallery.DrawFeedback",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it!",
+      "Context": "[RotationSolver] UpdateNotesWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "知道了！",
+      "Source": "library"
+    },
+    {
+      "Original": "Height: ",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "高度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "[RotationSolver] MaterialGallery..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Context": "[RotationSolver] MaterialGallery..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Hostiles in Range Without Weakness Data",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "范围内缺少弱点数据的敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Job: ",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Join the Discord",
+      "Context": "[RotationSolver] MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "加入 Discord",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep editing",
+      "Context": "[RotationSolver] MaterialGallery.DrawDialogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "继续编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "种类： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Context": "[RotationSolver] MaterialGallery..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Level ",
+      "Context": "[RotationSolver] MaterialGallery.DrawElevation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Break: ",
+      "Context": "[RotationSolver] MainWindow.DrawParty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "极限技： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Macros",
+      "Context": "[RotationSolver] FirstStartTutorialWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "[RotationSolver] FullControlWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Message",
+      "Context": "[RotationSolver] MaterialGallery.DrawFeedback",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving: ",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "移动中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Name: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "NPC 名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "[RotationSolver] MainWindow.DrawParty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "[RotationSolver] MaterialGallery.DrawFeedback",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "[RotationSolver] MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "No target",
+      "Context": "[RotationSolver] MainWindow.GetMovementSafetyStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有目标",
+      "Source": "library"
+    },
+    {
+      "Original": "No trace file yet — enable the tracer and enter combat to create one.",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暂无追踪文件。开启追踪并进入战斗后才会生成。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "None.",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not installed",
+      "Context": "[RotationSolver] MainWindow.DrawAutoduty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Not loaded",
+      "Context": "[RotationSolver] MainWindow.DrawAboutCompatibility",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing queued",
+      "Context": "[RotationSolver] FullControlWindow.DrawQueuedCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "队列为空",
+      "Source": "library"
+    },
+    {
+      "Original": "Number of Party Members: ",
+      "Context": "[RotationSolver] MainWindow.DrawParty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队成员数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Data",
+      "Context": "[RotationSolver] MainWindow.DrawParty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对象数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Open ",
+      "Context": "[RotationSolver] MainWindow.DrawAboutCompatibility",
+      "Role": "UI",
+      "RoleReason": "→ ImguiTooltips.HoveredTooltip",
+      "Translated": "打开 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Action Trace File",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开技能追踪文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Weakness Data Folder",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开弱点数据文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Context": "[RotationSolver] MaterialGallery..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Members:",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队成员：",
+      "Source": "library"
+    },
+    {
+      "Original": "Party only",
+      "Context": "[RotationSolver] MaterialGallery..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "仅小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Path: ",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Player not available",
+      "Context": "[RotationSolver] MainWindow.GetMovementSafetyStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "玩家数据不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview scale",
+      "Context": "[RotationSolver] MaterialGallery.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "预览缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "QUEUED",
+      "Context": "[RotationSolver] FullControlWindow.DrawQueuedCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "已加入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise",
+      "Context": "[RotationSolver] FullControlWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Range: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "范围： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "原因： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove ",
+      "Context": "[RotationSolver] M3Widgets.InputChip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed ",
+      "Context": "[RotationSolver] MaterialGallery.DrawSelection",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "[RotationSolver] EasterEggWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Action Configs",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置技能设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Action Configs: ",
+      "Context": "[RotationSolver] MainWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "重置技能设置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset all plugin settings?",
+      "Context": "[RotationSolver] MainWindow.DrawResetDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重置所有插件设置？",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default Value.",
+      "Context": "[RotationSolver] ImGuiHelper.PrepareGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DrawHotKeysPopup",
+      "Translated": "恢复默认值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default##",
+      "Context": "[RotationSolver] MainWindow.DrawJobPriorityList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to defaults",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawAppearance",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "资源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore",
+      "Context": "[RotationSolver] M3Widgets.DrawWindowActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation Solver Actions",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "Rotation Solver 技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawSettingsTour",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search settings",
+      "Context": "[RotationSolver] MaterialGallery.DrawInputs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[RotationSolver] MaterialGallery.DrawNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings Window",
+      "Context": "[RotationSolver] FirstStartTutorialWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "[RotationSolver] FullControlWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "[RotationSolver] MainWindow.DrawStatusList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DrawHotKeysPopup",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status ID",
+      "Context": "[RotationSolver] MaterialGallery.DrawInputs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "状态 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Statuses:",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "步骤 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "[RotationSolver] FirstStartTutorialWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Moving: ",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "停止移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Targetable: ",
+      "Context": "[RotationSolver] MainWindow.DrawTargetData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可选为目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Teaching mode",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawOverlaysStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "教学模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Teal",
+      "Context": "[RotationSolver] FirstStartTutorialWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "蓝绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "Text size",
+      "Context": "[RotationSolver] FirstStartTutorialWindow.DrawTextScaleRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "These are the plugins AutoDuty relies on, and their current state.",
+      "Context": "[RotationSolver] MainWindow.DrawAutoduty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "以下是 AutoDuty 所需的插件及其当前状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "[RotationSolver] MainWindow.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "[RotationSolver] MaterialGallery.DrawSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "[RotationSolver] MainWindow.DrawActions",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown movement type",
+      "Context": "[RotationSolver] MainWindow.GetMovementSafetyStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知移动类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown tab selected.",
+      "Context": "[RotationSolver] MainWindow.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选中了未知的标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Notes",
+      "Context": "[RotationSolver] UpdateNotesWindow.DrawIdentity",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "[RotationSolver] ChurinMNK.DisplayRotationStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning has been hidden.",
+      "Context": "[RotationSolver] LoadAsync",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "警告已隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Weaknesses",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "弱点",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome",
+      "Context": "[RotationSolver] FirstStartTutorialWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "欢迎",
+      "Source": "library"
+    },
+    {
+      "Original": "What's New",
+      "Context": "[RotationSolver] UpdateNotesWindow.DrawWhatsNew",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "更新内容",
+      "Source": "library"
+    },
+    {
+      "Original": "What's new",
+      "Context": "[RotationSolver] MainWindow.DrawAbout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "更新内容",
+      "Source": "library"
+    },
+    {
+      "Original": "With icon",
+      "Context": "[RotationSolver] MaterialGallery.DrawSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "带图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "[RotationSolver] ChurinDNC.BoolRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "[RotationSolver] MainWindow.DrawOccultWeaknesses",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "off",
+      "Context": "[RotationSolver] MaterialGallery.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "on",
+      "Context": "[RotationSolver] MaterialGallery.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "plugin",
+      "Context": "[RotationSolver] MainWindow.DrawAboutCompatibility",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.NoPaddingNoColorImageButton",
+      "Translated": "插件",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "(Do not set too low, can rip newly aggro'd dungeon mobs off tanks).",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::TargetDelay",
+      "Translated": "不宜设得过低，否则可能抢走坦克刚刚拉住的副本小怪。",
+      "Source": "library"
+    },
+    {
+      "Original": "0 GCD (0.0s)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.BeirutaRDM/OpenWindowGcd::ZeroGcd",
+      "Translated": "0 个 GCD（0.0 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "1 GCD (2.2s)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST/OpenWindowGcd::OneGcd",
+      "Translated": "1 个 GCD（2.2 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "1 GCD (2.5s)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.BeirutaRDM/OpenWindowGcd::OneGcd",
+      "Translated": "1 个 GCD（2.5 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "12 remaining",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST/MovingCombustRefreshOption::Twelve",
+      "Translated": "剩余 12",
+      "Source": "library"
+    },
+    {
+      "Original": "2 GCD (5.0s)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.BeirutaRDM/OpenWindowGcd::TwoGcd",
+      "Translated": "2 个 GCD（5.0 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "3-6-9 Cycle - 2.49 or 2.5 GCD ideal",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD/SongTiming::Cycle369",
+      "Translated": "3-6-9 循环，适合 2.49 或 2.50 秒 GCD",
+      "Source": "library"
+    },
+    {
+      "Original": "6 remaining",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST/MovingCombustRefreshOption::Six",
+      "Translated": "剩余 6",
+      "Source": "library"
+    },
+    {
+      "Original": "9 remaining",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST/MovingCombustRefreshOption::Nine",
+      "Translated": "剩余 9",
+      "Source": "library"
+    },
+    {
+      "Original": "A scrolling record of the actions you use: GCDs on the top lane with their cast and recast, oGCDs beneath them with their animation lock.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showActionTimelineWindow",
+      "Translated": "滚动显示你使用过的技能。上方显示公共复唱技能及其咏唱和复唱时间，下方显示能力技及其动作硬直。",
+      "Source": "library"
+    },
+    {
+      "Original": "A small Auto / Manual / Off switch for the autorotation state. /rotation Control shows and hides it too.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showStateControlWindow",
+      "Translated": "用于切换自动、手动或关闭状态的小窗口。也可使用 /rotation Control 切换显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ActionAbility",
+      "Translated": "能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Ahead (Percent of your GCD time remaining on a GCD cycle before RSR will try to queue the next GCD)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_action6head",
+      "Translated": "提前输入技能（以本轮公共复唱剩余时间的百分比指定何时将下一技能加入队列）",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_ActionSet",
+      "Translated": "技能条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Name",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Events_ActionName",
+      "Translated": "技能名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Usage and Control",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_ActionUsage",
+      "Translated": "技能使用与控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Action and Setting Macros",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_SettingMacros",
+      "Translated": "技能和设置宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Action name or ID",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_ActionNameOrId",
+      "Translated": "技能名称或 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_Actions",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Activate auto mode when countdown starts",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_startOnCountdown",
+      "Translated": "倒计时开始时启用自动模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Action",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_AddAction",
+      "Translated": "添加技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Events",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Events_AddEvent",
+      "Translated": "添加事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Status",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_AddStatus",
+      "Translated": "添加状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Add beneficial AoE location",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_AddPosition",
+      "Translated": "添加友方地面技能施放位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Add targeting priority",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Target_AddPriority",
+      "Translated": "添加选敌优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Adjusted Standard Cycle - 2.48 GCD ideal",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD/SongTiming::AdjustedStandard",
+      "Translated": "调整版标准循环，适合 2.48 秒 GCD",
+      "Source": "library"
+    },
+    {
+      "Original": "Adloquium - Deployment Tactics",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH/CountdownOpenerStrategy::AdloquiumDeploymentTactics",
+      "Translated": "鼓舞激励之策与展开战术",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets that are in range for any abilities (Tanks/Autoduty)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetHostileType::AllTargetsCanAttack",
+      "Translated": "技能范围内的全部目标（面向防护职业及 AutoDuty）",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets when solo in duty (includes Occult Crescent), or previously engaged.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetHostileType::AllTargetsWhenSoloInDuty",
+      "Translated": "单人进入副本时可选全部目标（含新月岛），其他情况仅选已交战目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets when solo, or previously engaged.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetHostileType::AllTargetsWhenSolo",
+      "Translated": "单人时可选全部目标，其他情况仅选已交战目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance Raid",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Duty_Alliance",
+      "Translated": "团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Sacred Soil while moving if fighting a boss",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::SacredSoilBossExemption",
+      "Translated": "与首领战斗时允许移动中使用野战治疗阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Sprint when no target is set even if youre in range of hostiles (Experimental).",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_pvpAllowSprintWithoutTarget",
+      "Translated": "未选中目标时，即使附近有敌人也允许使用冲刺（实验功能）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow action to be intercepted by the intercept system",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_IsIntercepted",
+      "Translated": "允许技能拦截系统接管此技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow action to be restricted by the minimum HP feature",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_MinHPFeature",
+      "Translated": "对此技能应用最低体力限制",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow intercepting Abilities.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interceptAbility3",
+      "Translated": "允许接管能力技。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow intercepting Spells.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interceptSpell3",
+      "Translated": "允许接管魔法。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow intercepting Weaponskills.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interceptWeaponskill3",
+      "Translated": "允许接管战技。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow intercepting actions in macros.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interceptMacro",
+      "Translated": "允许接管宏中的技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow intercepting actions that are currently on cooldown.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interceptCooldown",
+      "Translated": "允许接管冷却中的技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow rotations that use this config to use abilities defined in the rotation as burst",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoBurst",
+      "Translated": "允许使用此配置的循环施放列为爆发技能的能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow the use of AOEs against priority-marked targets.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_canAttackMarkAOE",
+      "Translated": "对带优先标记的目标也允许使用范围攻击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow the use of high jump if there are enemies in melee range.",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.PVPRotations.Melee.DRG_DefaultPvP::JumpYeet",
+      "Translated": "近战范围内有敌人时允许使用高跳。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alternative Flare Opener",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.Rabbs_BLM/Openchoice::AltFlare",
+      "Translated": "另一套核爆起手",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Show Cooldowns",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showCooldownsAlways",
+      "Translated": "始终显示冷却时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Analyzes PvE combat information in every frame and finds the best action.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Punchline",
+      "Translated": "逐帧分析 PvE 战斗信息，选择适合当前情况的技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Angle Unit, in degrees.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Attributes.ConfigUnitType::Degree",
+      "Translated": "角度单位为度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation lock delay smoothing factor",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::AnimLockDelaySmoothing",
+      "Translated": "动作硬直延迟平滑系数",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation lock max. simulated delay (read tooltip!)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::AnimationLockDelayMax2",
+      "Translated": "动作硬直模拟延迟上限（请阅读提示）",
+      "Source": "library"
+    },
+    {
+      "Original": "Anti-Knockback",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_AntiKnockback",
+      "Translated": "防击退",
+      "Source": "library"
+    },
+    {
+      "Original": "Anti-Knockback Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_AntiKnockbackConditionSet",
+      "Translated": "强制防击退的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Any charges",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn/EssentialPrioStrategy::AnyCharges",
+      "Translated": "任意充能层数",
+      "Source": "library"
+    },
+    {
+      "Original": "AoE",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_HostileCastingArea",
+      "Translated": "范围攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Army's Paeon Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.BRD_Reborn::ARMYTime",
+      "Translated": "「军神的赞美歌」的持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Attack",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ActionAttack",
+      "Translated": "攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Attacks the target first if it has one of these statuses",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_PriorityDesc",
+      "Translated": "优先攻击带有下列任一状态的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Switch",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Basic_AutoSwitch",
+      "Translated": "自动切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Target",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Smart",
+      "Translated": "自动选择目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto True North (Melee DPS)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoUseTrueNorth",
+      "Translated": "自动使用真北（近战职业）",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto at 3000+ MP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/MpStrategy::Auto3K",
+      "Translated": "魔力不低于 3000 时自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto at 6000+ MP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/MpStrategy::Auto6K",
+      "Translated": "魔力不低于 6000 时自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto at 9000+ MP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/MpStrategy::Auto9K",
+      "Translated": "魔力不低于 9000 时自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto automatic mode conditions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Basic_SwitchAutoConditionSet",
+      "Translated": "自动切换至自动模式的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto manual mode conditions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Basic_SwitchManualConditionSet",
+      "Translated": "自动切换至手动模式的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto provoke when there is another tank in party",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoProvokeForTank",
+      "Translated": "队内有其他防护职业时也自动挑衅",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off RSR when combat is over for more than...",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::AutoOffAfterCombatTime",
+      "Translated": "脱战超过指定时间后自动关闭 RSR",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off RSR when combat is over for more than:",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffAfterCombat",
+      "Translated": "脱战超过此时间后自动关闭 RSR：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off when PvP match ends.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffPvPMatchEnd",
+      "Translated": "PvP 对局结束时自动关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off when dead in PvE.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffWhenDead",
+      "Translated": "PvE 中陷入无法战斗时自动关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off when dead in PvP.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffWhenDeadPvP",
+      "Translated": "PvP 中陷入无法战斗时自动关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off when duty is completed.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffWhenDutyCompleted",
+      "Translated": "副本完成时自动关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn off when switching jobs",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffSwitchClass",
+      "Translated": "切换职业时自动关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn on auto mode when alliance is in combat.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_startOnAllianceIsInCombat2",
+      "Translated": "团队成员进入战斗时开启自动模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn on auto mode when in combat in Bozja/Eureka/Occult Fate/CE",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_startOnFieldOpInCombat2",
+      "Translated": "在博兹雅、优雷卡或新月岛的临危受命、紧急遭遇战中进入战斗时开启自动模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn on auto mode when party is in combat.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_startOnPartyIsInCombat2",
+      "Translated": "小队成员进入战斗时开启自动模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn on manual mode when attacked.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_startOnAttackedBySomeone2",
+      "Translated": "受到攻击时开启手动模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn on when PvP match starts.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOnPvPMatchStart",
+      "Translated": "PvP 对局开始时自动启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto turn-off conditions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Basic_SwitchCancelConditionSet",
+      "Translated": "自动关闭的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto when about to cap",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/MpStrategy::AutoRefresh",
+      "Translated": "即将达到上限时自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-target in teaching mode while in combat",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_teachingModeAutoTarget",
+      "Translated": "教学模式中，进入战斗后自动选择目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-use duty actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useDutyActions",
+      "Translated": "自动使用任务指令",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-use oGCD abilities",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useAbility",
+      "Translated": "自动使用能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/BloodStrategy::Automatic",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic Healing Thresholds",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoHeal",
+      "Translated": "自动治疗阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically activate tank stance",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoTankStance",
+      "Translated": "自动开启防护姿态",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically turn off combat state during cutscenes.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffCutScene",
+      "Translated": "过场动画期间自动关闭战斗状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically turn off combat state when a duty (instance) ends.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffWhenDutyCompleted",
+      "Translated": "副本结束时自动关闭战斗状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically turn off combat state when moving between different areas.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffBetweenArea",
+      "Translated": "切换区域时自动关闭战斗状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically turn off combat state when you change your job/class.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffSwitchClass",
+      "Translated": "切换职业时自动关闭战斗状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically turn off combat state when your character dies.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoOffWhenDead",
+      "Translated": "自身陷入无法战斗时自动关闭战斗状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically upgrade Horoscope with Helios/Aspected Helios",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST::AutoUpgradeHoroscope",
+      "Translated": "使用阳星或阳星相位强化天星冲日",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use AOE defensive actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useAOEDefense",
+      "Translated": "自动使用群体减伤技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Anti-Knockback role actions (Arms Length, Surecast)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useKnockback",
+      "Translated": "自动使用防击退的职能技能（亲疏自行、沉稳咏唱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use HP Potions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useHpPotions",
+      "Translated": "自动使用体力恢复药",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use MP Potions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useMpPotions",
+      "Translated": "自动使用魔力恢复药",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Phoenix Down",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_usePhoenixDown",
+      "Translated": "自动使用不死鸟之尾",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Single Target defensive actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useSTDefense",
+      "Translated": "自动使用单体减伤技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use provoke when an enemy is attacking a non-tank member of the party while there is more than one tank in party.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoProvokeForTank",
+      "Translated": "队内有多名防护职业时，自动对正在攻击非防护队员的敌人使用挑衅。",
+      "Source": "library"
+    },
+    {
+      "Original": "Average HP in party members.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::PartyMembersAverHP",
+      "Translated": "小队平均体力。",
+      "Source": "library"
+    },
+    {
+      "Original": "Average health threshold party members need to be to use Holos",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::HolosHeal",
+      "Translated": "使用「整体论」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average health threshold party members need to be to use Pneuma as an AOE heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::PneumaAOEPartyHeal",
+      "Translated": "使用「魂灵风息」群体治疗的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent needed to use Occult Elixir",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::OccultElixirThreshold",
+      "Translated": "使用「魔圣灵药」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to predict to heal instead of damage things",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::PredictBlessingThreshold",
+      "Translated": "根据小队平均体力预测是否优先治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to predict to heal with judgement instead of damage things",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::PredictJudgementThreshold",
+      "Translated": "根据小队平均体力判断是否用「制裁」治疗而非攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to prioritize Indomitability and instant heals over heal-over-time effects",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::EmergencyHealPercent",
+      "Translated": "优先使用不屈不挠之策等即时治疗、暂缓持续治疗的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Accession in HealAreaGCD",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::HealAreaGcdAccessionHeal",
+      "Translated": "群体治疗 GCD 使用「降临之章」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Accession in HealAreaGCD while moving and not under Emergency Tactics",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::HealAreaGcdMovingAccessionHeal",
+      "Translated": "移动中且未处于应急战术状态时，群体治疗 GCD 使用「降临之章」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Consolation",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::ConsolationHeal",
+      "Translated": "使用「慰藉」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Emergency Tactics Succor in HealAreaGCD",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::HealAreaGcdEmergencyTacticsHeal",
+      "Translated": "群体治疗 GCD 使用应急战术配合士气高扬之策的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Fey Blessing when Whispering Dawn or Angel's Whisper is missing",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::FeyBlessingHeal",
+      "Translated": "无「仙光的低语」或「天使的低语」时使用「异想的祥光」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Indomitability",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::IndomitabilityHeal",
+      "Translated": "使用「不屈不挠之策」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Recitation with Indomitability (must be below AoE heal threshold)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::ReciteIndomitability",
+      "Translated": "使用秘策配合不屈不挠之策的小队平均体力百分比（须低于群体治疗阈值）",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP percent to use Whispering Dawn or Angel's Whisper",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::WhisperingDawnHeal",
+      "Translated": "使用「仙光的低语」或「天使的低语」的小队平均体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Druochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::HealSingleDruocholeHeal",
+      "Translated": "使用「灵橡清汁」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Ixochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::IxocholeHeal",
+      "Translated": "使用「寄生清汁」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Pepsis",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::PepsisHeal",
+      "Translated": "使用「消化」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Physis",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::PhysisHeal",
+      "Translated": "使用「自生」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Pneuma in Multi Targets",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::PneumaDyskrasiaHeal",
+      "Translated": "多目标时使用「魂灵风息」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Pneuma in Single Target",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::PneumaHeal",
+      "Translated": "单目标时使用「魂灵风息」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Taurochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::HealSingleTaurocholeHeal",
+      "Translated": "使用「白牛清汁」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Average party HP threshold to use Zoe on Pneuma (if lower) or Eukrasian Prognosis (if higher)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::ZoePneumaHeal",
+      "Translated": "「活化」的用法取决于小队平均体力：低于阈值时配合「魂灵风息」，高于阈值时配合「均衡预后」",
+      "Source": "library"
+    },
+    {
+      "Original": "Average time to kill",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::AverageTTK",
+      "Translated": "平均预计击杀时间",
+      "Source": "library"
+    },
+    {
+      "Original": "BMR has active module",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRActive",
+      "Translated": "BMR 有正在生效的副本模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Beneficial AoE locations",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_BeneficialPositions",
+      "Translated": "友方地面技能施放位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Big",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetingType::Big",
+      "Translated": "大",
+      "Source": "library"
+    },
+    {
+      "Original": "Black List",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::BlackList",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Block targeting quest mobs belonging to other players.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::targetQuestThings3",
+      "Translated": "排除其他玩家任务专属的怪物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Blood Gauge Strategy",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK::BloodSpendingStrategy",
+      "Translated": "暗血量谱使用策略",
+      "Source": "library"
+    },
+    {
+      "Original": "Bloodwhetting/Raw intuition heal threshold",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.WAR_Reborn::HealIntuition",
+      "Translated": "使用原初的血气或原初的直觉治疗的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Spawn",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::BossSpawn",
+      "Translated": "首领出现",
+      "Source": "library"
+    },
+    {
+      "Original": "Both Leylines and Xenoglossy",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.Rabbs_BLM/Burstchoice::Both",
+      "Translated": "黑魔纹和异言均使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Buff Alignment Timer (Experimental, do not touch if you don't understand it)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.BRD_Reborn::BuffAlignment",
+      "Translated": "增益对齐计时器（实验功能）",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Burst",
+      "Translated": "爆发",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst Actions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::BurstActions",
+      "Translated": "爆发技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Can heal area ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::CanHealAreaAbility",
+      "Translated": "允许用能力技进行群体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Can heal area spell",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::CanHealAreaSpell",
+      "Translated": "允许用魔法进行群体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Can heal single ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::CanHealSingleAbility",
+      "Translated": "允许用能力技进行单体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Can heal single spell",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::CanHealSingleSpell",
+      "Translated": "允许用魔法进行单体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel auto mode if combat starts early during countdown",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_cancelStateOnCombatBeforeCountdown",
+      "Translated": "倒计时结束前提前开怪时，取消自动模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel cast in PvP if the target gains Guard and the action does not ignore Guard.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_pvpGuardCancel",
+      "Translated": "PvP 中目标获得防御，且当前技能无法无视防御时，中断咏唱。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot find the action. Please check the action name.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::CommandsInsertActionFailure",
+      "Translated": "找不到该技能，请检查技能名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot properly execute the behavior that RSR wants to perform.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Compatibility_Mistake",
+      "Translated": "无法执行 RSR 当前选择的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Casting cost requirement for Thin Air to be used",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.WHM_Reborn::ThinAirNeed",
+      "Translated": "使用无中生有所需的最低咏唱魔力消耗",
+      "Source": "library"
+    },
+    {
+      "Original": "Change how RSR automatically uses actions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_Description",
+      "Translated": "调整 RSR 自动施放技能的方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaotic Alliance Raid",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Duty_ChaoticAlliance",
+      "Translated": "零式难度团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Charges",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ActionSequencer_Charges",
+      "Translated": "充能层数",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Bard Song Timing Preset",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD::SongTimings",
+      "Translated": "选择吟游诗人乐曲时长预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Opener Variation",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Melee.ChurinMNK::ChosenVariation",
+      "Translated": "选择起手变体",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Opener.",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Melee.ChurinMNK::ChosenOpener",
+      "Translated": "选择起手。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a Fight",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Magical.ChurinSMN::FightPresets",
+      "Translated": "选择战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanse all dispellable debuffs regardless of healing.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_dispelAll",
+      "Translated": "无论是否需要治疗，都驱散所有可解除的弱化状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to execute the command",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Helper_RunCommand",
+      "Translated": "点击执行命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to make it reverse.\nIs reversed: {0}",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ActionSequencer_NotDescription",
+      "Translated": "点击反转。\n当前反转状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to switch rotations",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Helper_SwitchRotation",
+      "Translated": "点击切换循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Clicking actions random delay range.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::ClickingDelay",
+      "Translated": "执行技能时的随机延迟范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "Color disabled actions on hotbars",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_reddenDisabledHotbarActions",
+      "Translated": "在热键栏上为禁用的技能着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat time",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::CombatTime",
+      "Translated": "战斗时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo time",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::LiveComboTime",
+      "Translated": "连击剩余时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Compatibility",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Compatibility",
+      "Translated": "兼容性",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition Name",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Condition_ConditionName",
+      "Translated": "条件名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition Value",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_ConditionSet",
+      "Translated": "条件值",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions for forced automatic use of action",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_ForcedConditionSet_Description",
+      "Translated": "强制自动使用此技能的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions that disable automatic use of an action",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_DisabledConditionSet_Description",
+      "Translated": "禁止自动使用此技能的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Configurable amount of time before the cast finishes that RSR stops taking actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::CastingStopTime",
+      "Translated": "设置在咏唱结束前多久让 RSR 停止执行技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Rotation_Configuration",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration you are trying to set is already set.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::Duplicate",
+      "Translated": "已是要设置的值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure AutoDuty settings and view related information.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::AutoDuty",
+      "Translated": "配置 AutoDuty 设置并查看相关信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure Duty Rotation.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::DutyRotation",
+      "Translated": "配置副本专用循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure abilities and custom conditions for your current job.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Actions",
+      "Translated": "配置当前职业的技能和自定义条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure basic settings.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Basic",
+      "Translated": "配置基本设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure general action usage and control settings.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Auto",
+      "Translated": "配置技能使用与控制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure optional helpful features.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Extra",
+      "Translated": "配置可选的辅助功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure reactive actions and status effect lists.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::List",
+      "Translated": "配置响应技能和状态效果列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure targeting settings.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Target",
+      "Translated": "配置目标选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure user interface settings.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::UI",
+      "Translated": "配置界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Conflicts with RSR decision-making",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Compatibility_Mislead",
+      "Translated": "与 RSR 的技能选择冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "Conserve for burst",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/BloodStrategy::Conserve",
+      "Translated": "留到爆发期使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_Copy",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::Countdown",
+      "Translated": "倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown Cancel",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::CountdownCancel",
+      "Translated": "取消倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown opener configuration",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSCH::CountdownOpener",
+      "Translated": "倒计时起手设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Log",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::CraftingLog",
+      "Translated": "制作笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Current duty logic.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_DutyRotationDesc",
+      "Translated": "当前副本的循环逻辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD/SongTiming::Custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Army's Paeon Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD::CustomArmyTime",
+      "Translated": "自定义军神的赞美歌持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Mage's Ballad Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD::CustomMageTime",
+      "Translated": "自定义贤者的叙事谣持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom State Condition (Unsupported)",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_StateCondition",
+      "Translated": "自定义状态条件（暂不支持）",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Wanderer's Minuet Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinBRD::CustomWandTime",
+      "Translated": "自定义放浪神的小步舞曲持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycle between Auto and Off",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CycleType::CycleAuto",
+      "Translated": "在自动和关闭之间切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycle between Manual and Auto",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CycleType::CycleManualAuto",
+      "Translated": "在手动和自动之间切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycle between Manual and Off",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CycleType::CycleManual",
+      "Translated": "在手动和关闭之间切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycle between each Auto, Manual, and Off",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CycleType::CycleAllAuto",
+      "Translated": "依次切换自动、手动和关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Deep Dungeon",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Duty_DeepDungeon",
+      "Translated": "深层迷宫",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Rotation_Description",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST/MovingCombustRefreshOption::Disable",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Duty_Dungeon",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_EventItem",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_friendlyBattleNPCHeal",
+      "Translated": "实验性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fashion Report",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::FashionReport",
+      "Translated": "时尚品鉴",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Caught",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::FishCaught",
+      "Translated": "已钓获的鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Guardian HP Threshold",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.PVPRotations.Tank.PLD_DefaultPvP::GuardianThreshold",
+      "Translated": "「卫护」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "HP%% needed to use single/self targetted mitigation on Tanks",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_healthForAutoDefense",
+      "Translated": "防护职业使用单体或自身减伤的体力阈值（HP%%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hard Target for all actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_switchTargetFriendly2",
+      "Translated": "全部技能均选用硬目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Hard cast Raise logic",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_HardCastRaiseType",
+      "Translated": "咏唱复活的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Has Chocobo",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasChocobo",
+      "Translated": "有陆行鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Has Swift",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasSwift",
+      "Translated": "有即刻咏唱",
+      "Source": "library"
+    },
+    {
+      "Original": "Has companion",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasCompanion",
+      "Translated": "有搭档",
+      "Source": "library"
+    },
+    {
+      "Original": "Has hostiles in 25 yalms",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasHostilesInMaxRange",
+      "Translated": "25 星码内有敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Has hostiles in Range",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasHostilesInRange",
+      "Translated": "范围内有敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Has tank stance",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HasTankStance",
+      "Translated": "已开启防护姿态",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Area",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_HealArea",
+      "Translated": "群体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Area Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::HealAreaAbility",
+      "Translated": "群体治疗能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Area Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_HealAreaConditionSet",
+      "Translated": "强制群体治疗的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Area GCD",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::HealAreaGCD",
+      "Translated": "群体治疗公共复唱技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Single",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_HealSingle",
+      "Translated": "单体治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Single Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::HealSingleAbility",
+      "Translated": "单体治疗能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Single Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_HealSingleConditionSet",
+      "Translated": "强制单体治疗的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal Single GCD",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::HealSingleGCD",
+      "Translated": "单体治疗公共复唱技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal and raise Party NPCs.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_friendlyPartyNPCHealRaise3",
+      "Translated": "治疗并复活队内 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal healer first if their HP is lower than this.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::HealthHealerRatio",
+      "Translated": "治疗职业队员的体力低于此值时优先治疗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal party members when not in combat.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_healOutOfCombat",
+      "Translated": "脱战时也治疗队员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal party members with GCD if there is nothing to do in combat.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_healWhenNothingTodo",
+      "Translated": "战斗中没有其他操作时，使用公共复唱技能治疗队员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal self first if your HP is lower than this.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::HealthSelfRatio",
+      "Translated": "自身体力低于此值时优先治疗自己。",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal solo instance NPCs (Only enable as needed)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_friendlyBattleNPCHeal",
+      "Translated": "治疗单人副本中的 NPC（按需开启）",
+      "Source": "library"
+    },
+    {
+      "Original": "Heal tank first if their HP is lower than this.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::HealthTankRatio",
+      "Translated": "防护职业队员的体力低于此值时优先治疗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Healers first, then lowest HP party member",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Tank.WAR_Reborn/NascentFlashTargetStrategy::HealerFirst",
+      "Translated": "优先治疗职业，其次选择体力最低的队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Healers only",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Tank.WAR_Reborn/NascentFlashTargetStrategy::HealerOnly",
+      "Translated": "仅治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Healing Usage and Control",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_HealingCondition",
+      "Translated": "治疗技能使用与控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of Area Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthAreaAbility",
+      "Translated": "群体治疗能力技的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of Area Ability Hot",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthAreaAbilityHot",
+      "Translated": "群体持续治疗能力技的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of Area spell",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthAreaSpell",
+      "Translated": "群体治疗魔法的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of Area spell Hot",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthAreaSpellHot",
+      "Translated": "群体持续治疗魔法的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of dying tank",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthForDyingTanks",
+      "Translated": "判定坦克濒死的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of single ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthSingleAbility",
+      "Translated": "单体治疗能力技的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of single ability Hot",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthSingleAbilityHot",
+      "Translated": "单体持续治疗能力技的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of single spell",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthSingleSpell",
+      "Translated": "单体治疗魔法的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health of single spell Hot",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::HealthSingleSpellHot",
+      "Translated": "单体持续治疗魔法的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold Kardion target needs to be to use Soteria",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::SoteriaHeal",
+      "Translated": "对心关目标使用「拯救」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold for Cover (Set to 0 to disable)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::CoverRatio",
+      "Translated": "使用保护的体力阈值（设为 0 则停用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold for Intervention (Set to 0 to disable)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::InterventionRatio",
+      "Translated": "使用干预的体力阈值（设为 0 则停用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold for using Intervention to attempt to save someone",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::InterventionClutch",
+      "Translated": "队员体力低于此值时尝试使用干预救援",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold needed to use Tengentsu/ThirdEye outside of AOE mit scenarios.",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.SAM_Reborn::TengentsuHealth",
+      "Translated": "非群体减伤场景下使用天眼通或心眼的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold party member needs to be to use Krasis",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::KrasisHeal",
+      "Translated": "对队员使用「混合」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold party member needs to be to use Pneuma as a ST heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::PneumaSTPartyHeal",
+      "Translated": "对队员使用「魂灵风息」进行单体治疗的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold party member needs to be to use Soteria",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::SoteriaHeal",
+      "Translated": "对队员使用「拯救」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold party member needs to be to use Taurochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::TaurocholeHeal",
+      "Translated": "对队员使用「白牛清汁」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold party member needs to be to use an OGCD Heal while not holding addersgal stacks",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::OGCDHeal",
+      "Translated": "无需预留蛇胆时，用能力技治疗队员的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold tank party member needs to use Krasis",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::KrasisTankHeal",
+      "Translated": "对防护职业队员使用「混合」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold tank party member needs to use Pneuma as a ST heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::PneumaSTTankHeal",
+      "Translated": "对坦克使用「魂灵风息」进行单体治疗的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold tank party member needs to use Pneuma as an AOE heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::PneumaAOETankHeal",
+      "Translated": "为坦克使用「魂灵风息」进行群体治疗的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold tank party member needs to use Zoe",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::ZoeHeal",
+      "Translated": "对防护职业队员使用「活化」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold tank party member needs to use an OGCD Heal on Tanks while not holding addersgal stacks",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::OGCDTankHeal",
+      "Translated": "无需预留蛇胆时，用能力技治疗坦克的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold target needs to be to use Druochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::DruocholeHeal",
+      "Translated": "对目标使用「灵橡清汁」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health threshold target needs to be to use Taurochole",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::TaurocholeHeal",
+      "Translated": "对目标使用「白牛清汁」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Health thresholds",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_HealingThresholds",
+      "Translated": "体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide all warnings",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_hideWarning",
+      "Translated": "隐藏所有警告",
+      "Source": "library"
+    },
+    {
+      "Original": "High HP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetingType::HighHP",
+      "Translated": "体力较高",
+      "Source": "library"
+    },
+    {
+      "Original": "High HP%",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetingType::HighHPPercent",
+      "Translated": "剩余体力百分比较高",
+      "Source": "library"
+    },
+    {
+      "Original": "High Max HP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetingType::HighMaxHP",
+      "Translated": "体力上限较高",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight color.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::TeachingModeColor",
+      "Translated": "高亮颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Finish only if no targets in range",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC/HoldStrategy::HoldFinishOnly",
+      "Translated": "范围内无目标时仅保留舞步结束技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Step and Finish if no targets in range",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC/HoldStrategy::HoldStepAndFinish",
+      "Translated": "范围内无目标时保留舞步及其结束技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Step only if no targets in range",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC/HoldStrategy::HoldStepOnly",
+      "Translated": "范围内无目标时仅保留舞步",
+      "Source": "library"
+    },
+    {
+      "Original": "Hostile",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_Hostile",
+      "Translated": "敌对目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Hostile target selection condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Param_HostileCondition",
+      "Translated": "敌对目标选择条件",
+      "Source": "library"
+    },
+    {
+      "Original": "How RSR should use healing abilities",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_HealingCondition_Description",
+      "Translated": "RSR 使用治疗能力技的方式",
+      "Source": "library"
+    },
+    {
+      "Original": "How early before next GCD should RSR use swiftcast for raise",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::SwiftcastBuffer",
+      "Translated": "为复活使用即刻咏唱时，提前下一次公共复唱多少时间施放",
+      "Source": "library"
+    },
+    {
+      "Original": "How far ahead (in seconds) to look up upcoming Cooldown Planner actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::BMRPlanLookAheadSeconds",
+      "Translated": "提前多少秒查找冷却规划中即将施放的技能",
+      "Source": "library"
+    },
+    {
+      "Original": "How long the player has been alive.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::AliveTime",
+      "Translated": "角色已存活的时长。",
+      "Source": "library"
+    },
+    {
+      "Original": "How long the player has been dead.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::DeadTime",
+      "Translated": "角色已处于无法战斗的时长。",
+      "Source": "library"
+    },
+    {
+      "Original": "How many seconds before combat starts to use Standard Finish?",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC::OpenerStandardFinishTime",
+      "Translated": "开战前多少秒使用「标准舞步结束」",
+      "Source": "library"
+    },
+    {
+      "Original": "How many seconds before combat starts to use Standard Step?",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC::OpenerStandardStepTime",
+      "Translated": "开战前多少秒使用「标准舞步」",
+      "Source": "library"
+    },
+    {
+      "Original": "How many seconds before combat starts to use Technical Finish?",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC::OpenerTechFinishTime",
+      "Translated": "开战前多少秒使用「技巧舞步结束」",
+      "Source": "library"
+    },
+    {
+      "Original": "How many seconds before combat starts to use Technical Step?",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC::OpenerTechTime",
+      "Translated": "开战前多少秒使用「技巧舞步」",
+      "Source": "library"
+    },
+    {
+      "Original": "How soon before countdown is finished to start casting or attacking.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::CountDownAhead",
+      "Translated": "倒计时结束前多久开始咏唱或攻击。",
+      "Source": "library"
+    },
+    {
+      "Original": "In Combat",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::InCombat",
+      "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Information",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_UI_Information",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Break",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_LimitBreak",
+      "Translated": "极限技",
+      "Source": "library"
+    },
+    {
+      "Original": "Links",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Links",
+      "Translated": "链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Mage's Ballad Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.BRD_Reborn::MAGETime",
+      "Translated": "「贤者的叙事谣」的持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Max distance you need to be from the target for Dragonfire Dive useage",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.DRG_Reborn::DragonfireDiveDistance",
+      "Translated": "使用「龙炎冲」时与目标的最大距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Max distance you need to be from the target for Stardiver useage",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.DRG_Reborn::StardiverDistance",
+      "Translated": "使用「坠星冲」时与目标的最大距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_RangeUpper",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "Member Name",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_MemberName",
+      "Translated": "成员姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Min HP in party members.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::PartyMembersMinHP",
+      "Translated": "队员的最低体力。",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_RangeLower",
+      "Translated": "最小值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Fairy Gauge required before prioritizing Fey Union (link)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::LinkFairyGauge",
+      "Translated": "优先使用以太契约前所需的最低异想以太",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP percent to use Excogitation as a heal instead of a defensive buff",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::ExcogHeal",
+      "Translated": "将深谋远虑之策用于治疗而非提前减伤的最低体力百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold among party member needed to pop Horoscope)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST::HoroscopeHeal",
+      "Translated": "触发天星冲日时，小队体力最低成员的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold among party member needed to pop Microcosmos",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST::MicrocosmosHeal",
+      "Translated": "触发小宇宙时，小队体力最低成员的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold among party member needed to use Horoscope",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::HoroscopeHeal",
+      "Translated": "使用天星冲日时，小队体力最低成员的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Afflatus Solace at 0 Blood Lily stacks",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::SolaceHeal0",
+      "Translated": "鲜血百合为 0 层时，对队员使用安慰之心的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Afflatus Solace at 1 Blood Lily stack",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::SolaceHeal1",
+      "Translated": "鲜血百合为 1 层时，对队员使用安慰之心的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Afflatus Solace at 2 Blood Lily stacks",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::SolaceHeal2",
+      "Translated": "鲜血百合为 2 层时，对队员使用安慰之心的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Aspected Benefic",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::AspectedBeneficHeal",
+      "Translated": "对队员使用「吉星相位」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Benediction",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::BenedictionHeal",
+      "Translated": "对队员使用「天赐祝福」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum HP threshold party member needs to be to use Synastry",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::SynastryHeal",
+      "Translated": "对队员使用「星位合图」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum average HP threshold among party members needed to use Asylum",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::AsylumHeal",
+      "Translated": "使用「庇护所」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum average HP threshold among party members needed to use Cure III",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::CureIIIHeal",
+      "Translated": "使用「愈疗」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum average HP threshold among party members needed to use Lady Of Crowns",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::LadyOfHeals",
+      "Translated": "使用「王冠之贵妇」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum average HP threshold among party members needed to use Medica III / Medica II",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::MedicaHeal",
+      "Translated": "使用「医养或医济」的小队平均体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum health threshold party member needs to be to use Benediction",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.WHM_Reborn::BenedictionHeal",
+      "Translated": "对队员使用「天赐祝福」的体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum movement time before allowing movement-based actions",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Magical.BeirutaRDM::MovementTimeThreshold",
+      "Translated": "允许使用移动相关技能前，需持续移动的最短时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum target distance for disengage fallback",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Melee.BeirutaNIN::RaitonFallbackMinDistance",
+      "Translated": "撤退后备方案所需的最短目标距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Modify {0} to {1}",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::CommandsChangeSettingsValue",
+      "Translated": "将 {0} 改为 {1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::InfoWindowMove",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Back",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_MoveBack",
+      "Translated": "后退",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Back Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::MoveBackAbility",
+      "Translated": "后退能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Back Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_MoveBackConditionSet",
+      "Translated": "强制后退的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Down",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_MoveDown",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Forward",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_MoveForward",
+      "Translated": "前进",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Forward Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::MoveForwardAbility",
+      "Translated": "前进能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Forward Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_MoveForwardConditionSet",
+      "Translated": "强制前进的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Forward GCD",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::MoveForwardGCD",
+      "Translated": "前进公共复唱技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Up",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_MoveUp",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Magical.Rabbs_BLM/OpenWhen::Never",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Melee.ChurinMNK/Nadi::None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Off",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_UI_Overlay",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Stats",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.OpCode::PlayerStats",
+      "Translated": "玩家属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Player object is not available.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::PlayerNotAvailable",
+      "Translated": "玩家对象不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize enemy parts",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_prioEnemyParts",
+      "Translated": "优先攻击敌人的可选部位",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize mob/object targets with attack markers",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_chooseAttackMark",
+      "Translated": "优先攻击带有攻击标记的怪物或物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize raising dead players over Healing/Defense.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_raisePlayerFirst",
+      "Translated": "优先复活无法战斗的玩家，其次才治疗或减伤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_Priority",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Raise",
+      "Translated": "复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise All In Duty.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::All",
+      "Translated": "复活副本内所有玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise All.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::AllOutOfDuty",
+      "Translated": "复活所有玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise Red Mage and Summoners first if no Tanks or Healers are dead",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_offRaiserRaise",
+      "Translated": "防护职业和治疗职业均存活时，优先复活赤魔法师和召唤师",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise non-Healers from bottom of party list to the top (Light Party 2 Healer Behavior)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_h2",
+      "Translated": "从队伍列表末尾向上复活非治疗职业（四人小队有两名治疗时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise only party healers.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::PartyHealersOnly",
+      "Translated": "仅复活队内治疗职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise only party members.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::PartyOnly",
+      "Translated": "仅复活本队成员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise party members and alliance healers.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::PartyAndAllianceHealers",
+      "Translated": "复活本队成员及团队中的治疗职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise party members and alliance supports.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.RaiseType::PartyAndAllianceSupports",
+      "Translated": "复活本队成员及团队中的防护和治疗职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise player by using Swiftcast/Dualcast if available",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_raisePlayerBySwift",
+      "Translated": "可用时用即刻咏唱或连续咏唱复活玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise players that have the Brink of Death debuff",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_raiseBrinkOfDeath",
+      "Translated": "复活带有衰弱（强）状态的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise styles",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_RaiseType",
+      "Translated": "复活方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise while Swiftcast is on cooldown",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.HardCastRaiseType::HardCastNormal",
+      "Translated": "即刻咏唱冷却期间也允许复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise while Swiftcast is on cooldown and cooldown is higher than raise cast time",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.HardCastRaiseType::HardCastSwiftCooldown",
+      "Translated": "即刻咏唱剩余冷却长于复活咏唱时间时允许咏唱复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise while Swiftcast is on cooldown and cooldown is higher than raise cast time and other healers are dead",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.HardCastRaiseType::HardCastOnlyHealerSwiftCooldown",
+      "Translated": "其他治疗均已倒地，且即刻咏唱剩余冷却长于复活咏唱时间时允许咏唱复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise while Swiftcast is on cooldown and other healers are dead",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.HardCastRaiseType::HardCastOnlyHealer",
+      "Translated": "其他治疗均已倒地时，即刻咏唱冷却期间也允许复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise/Shirk Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_RaiseShirkConditionSet",
+      "Translated": "强制复活或退避的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_Remove",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove extra framerate-induced cooldown delay",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_removeCooldownDelay",
+      "Translated": "消除帧率导致的额外复唱延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds before tankbuster to use single mitigation",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::BMRTankbusterMitWindow",
+      "Translated": "单体重击前多少秒使用单体减伤",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until downtime ends",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRDowntimeEndIn",
+      "Translated": "距离无法攻击阶段结束的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until next downtime",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRDowntimeIn",
+      "Translated": "距离下次无法攻击阶段的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until next knockback",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRKnockbackIn",
+      "Translated": "距离下次击退的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until next predicted damage",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRDamageIn",
+      "Translated": "距离下次预测伤害的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until next raidwide",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRRaidwideIn",
+      "Translated": "距离下次全屏攻击的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until next tankbuster",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRTankbusterIn",
+      "Translated": "距离下次坦克重击的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until vulnerability ends",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRVulnerableEndIn",
+      "Translated": "距离易伤结束的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds until vulnerability window",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::BMRVulnerableIn",
+      "Translated": "距离易伤窗口开始的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds you must be stationary before Sacred Soil can be used",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::SacredSoilTimeStill",
+      "Translated": "使用「野战治疗阵」前需静止的秒数",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an opener",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC::ChosenOpener",
+      "Translated": "选择起手循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Blue Mage Actions Automatically",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_setBluActions2",
+      "Translated": "自动设置青魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting Search",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Searching",
+      "Translated": "搜索设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowbringer Threshold",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.PVPRotations.Tank.DRK_DefaultPvP::ShadowbringerThreshold",
+      "Translated": "暗影使者阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Should this action check needed status effects",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_CheckStatus",
+      "Translated": "检查自身是否具有技能要求的状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Should this action check targets needed status effects",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Actions_CheckTargetStatus",
+      "Translated": "检查目标是否具有技能要求的状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Action Context Menu Enable/Disable toggle",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showContext",
+      "Translated": "在技能右键菜单中显示启用或停用开关",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Action Timeline Window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showActionTimelineWindow",
+      "Translated": "显示技能时间轴窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Control Window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showControlWindow",
+      "Translated": "显示控制窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Intercepted Action Window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showInterceptedActionWindow",
+      "Translated": "显示被接管的技能窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Keybind (Experiemental)",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showNextActionKeybind",
+      "Translated": "显示键位（实验功能）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Next Action Window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showNextActionWindow",
+      "Translated": "显示下一技能窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Original Cooldown",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useOriginalCooldown",
+      "Translated": "显示原始冷却时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show State Window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showStateControlWindow",
+      "Translated": "显示状态窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a popup window with the changelog when the plugin updates.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_changelogPopup",
+      "Translated": "插件更新时弹出更新日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a toast notification with the combat state when changed.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showInfoOnToast",
+      "Translated": "战斗状态改变时弹出提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show auto-attacks in timeline",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_actionTimelineShowAutoAttack",
+      "Translated": "在时间轴中显示自动攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Show oGCD actions in timeline",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_actionTimelineShowOGCD",
+      "Translated": "在时间轴中显示能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plugin status in DTR bar.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showInfoOnDtr",
+      "Translated": "在服务器信息栏显示插件状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show random usage hints at top of configuration window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showHints",
+      "Translated": "在设置窗口顶部显示随机使用提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show setting descriptions inline",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_uiInlineDescriptions",
+      "Translated": "在设置项旁显示说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Show special buttons",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showControlWindowSpecials",
+      "Translated": "显示特殊操作按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Show target hint in Next Action window",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_teachingModeShowTargetHint",
+      "Translated": "在下一技能窗口中显示目标提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the keybind of the hotbar slot that holds the next action. Only visible hotbars are checked.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showNextActionKeybind",
+      "Translated": "显示下一技能所在热键栏格子的按键，仅检查可见热键栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the status",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation::ShowStatus",
+      "Translated": "显示状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Show toggled setting and new value in chat.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_ShowToggledSettingInChat",
+      "Translated": "在聊天栏显示切换的设置及其新值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show tooltips",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_showTooltips",
+      "Translated": "显示悬停提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip AoE check",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::SkipAoeCheck",
+      "Translated": "跳过范围攻击判定",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip casting and moving check",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::SkipCastingCheck",
+      "Translated": "跳过咏唱和移动检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip clipping check",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::SkipClippingCheck",
+      "Translated": "跳过卡公共复唱检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip combo check",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::SkipComboCheck",
+      "Translated": "跳过连击检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip status provide check",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::SkipStatusProvideCheck",
+      "Translated": "跳过技能赋予状态的检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Small",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.TargetingType::Small",
+      "Translated": "小",
+      "Source": "library"
+    },
+    {
+      "Original": "Special button size",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::ControlWindowSpecialsScale",
+      "Translated": "特殊操作按钮大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Speed",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed Ability",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.DescType::SpeedAbility",
+      "Translated": "加速能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed Forced Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Auto_SpeedConditionSet",
+      "Translated": "强制加速的条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Standard Opener",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Ranged.ChurinDNC/DancerOpener::Standard",
+      "Translated": "标准起手",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_Start",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Start RSR combat rotation state",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::Commands_Start",
+      "Translated": "启动 RSR 战斗循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Start in Target-Only mode. RSR will auto-select targets per normal logic but will not perform any actions.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.StateCommandType::TargetOnly",
+      "Translated": "以仅选敌模式启动。RSR 会按正常规则选择目标，所有技能均由你自行施放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Rotation_Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Statuses",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_Statuses",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "System Warnings",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Warnings",
+      "Translated": "系统警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Tank Buster",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_HostileCastingTank",
+      "Translated": "坦克重击",
+      "Source": "library"
+    },
+    {
+      "Original": "Tank Stance",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::SpecialCommandType_TankStance",
+      "Translated": "防护姿态",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_TargetSet",
+      "Translated": "目标条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Fate priority",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_targetFatePriority",
+      "Translated": "临危受命目标优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Target color",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::TargetColor",
+      "Translated": "目标颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets with Heal-over-Time",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::HotTargets",
+      "Translated": "带有持续治疗状态的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets with attack markers will be prioritized for actions.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_chooseAttackMark",
+      "Translated": "技能优先选取带有攻击标记的目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets with stop markers will not be attacked.",
+      "Context": "[属性] UIAttribute.Description [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_filterStopMark2",
+      "Translated": "不攻击带有止步标记的目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teaching mode",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_teachingMode",
+      "Translated": "教学模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory Condition",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Territoryset",
+      "Translated": "区域条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory Name",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Condition_TerritoryName",
+      "Translated": "区域名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Text size",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::UiTextScale",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "The HP for using Guard.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::HealthForGuard",
+      "Translated": "使用防御的体力阈值。",
+      "Source": "library"
+    },
+    {
+      "Original": "The HP%% for tank to use invulnerability",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_healthForDyingTanks",
+      "Translated": "坦克使用无敌技能的体力阈值（HP%%）",
+      "Source": "library"
+    },
+    {
+      "Original": "The configuration was set successfully.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::Okay",
+      "Translated": "设置已生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "The configuration will be set, it is working asynchronously.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::OkayWorking",
+      "Translated": "设置将在后台应用。",
+      "Source": "library"
+    },
+    {
+      "Original": "The configuration you are trying to set is not available.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::InvalidConfiguration",
+      "Translated": "此设置当前不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "The value you are trying to set is invalid.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.IPC.Wrath_IPCSubscriber/SetResult::InvalidValue",
+      "Translated": "要设置的值无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Timer",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Basic_Timer",
+      "Translated": "计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ASAP",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.ExtraRotations.Tank.ChurinDRK/BloodStrategy::Asap",
+      "Translated": "尽快使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Adloquium during the countdown opener",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::AdloquiumDuringCountdown",
+      "Translated": "倒计时期间使用「鼓舞激励之策」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aquaveil on other players",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.PVPRotations.Healer.WHM_DefaultPVP::AquaveilEsuna",
+      "Translated": "对其他玩家使用「水流幕」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Basic Instinct",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.BLU_Reborn::UseBasicInstinct",
+      "Translated": "使用「斗争本能」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Bioblaster while moving",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.MCH_Reborn::BioMove",
+      "Translated": "移动时使用「毒菌冲击」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Blessing",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::BlessingUseage",
+      "Translated": "使用「天之恩典」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cleansing",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::CleansingUseage",
+      "Translated": "使用「天崩地裂」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Clemency with Requiescat",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::RequiescatHealBot",
+      "Translated": "配合「安魂祈祷」使用「深仁厚泽」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Clemency without Requiescat",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::HealBot",
+      "Translated": "没有「安魂祈祷」时使用「深仁厚泽」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Crimson Cyclone when moving",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.SMN_Reborn::AddCrimsonCycloneMoving",
+      "Translated": "移动时使用「深红旋风」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dissipation during burst phases",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::ShouldDissipate",
+      "Translated": "爆发期使用「转化」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Divine Veil during countdown",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::DivineVeilCountdown",
+      "Translated": "倒计时期间使用「圣光幕帘」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dragonfire Dive while moving",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.DRG_Reborn::DragonfireDiveMoving",
+      "Translated": "移动时使用「龙炎冲」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Drain Touch for DPS",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::DrainTouchDPS",
+      "Translated": "使用「吸血触」造成伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Drain Touch for Heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::DrainTouchHeal",
+      "Translated": "使用「吸血触」治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Earthly Star during countdown timer.",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::UseEarthlyStarTime",
+      "Translated": "倒计时期间使用「地星」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eukrasia when out of combat",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::OOCEukrasia",
+      "Translated": "脱战时使用「均衡」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eukrasian Prognosis during the countdown opener",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::EukrasianPrognosisDuringCountdown",
+      "Translated": "倒计时期间使用「均衡预后」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Form Shift",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.MNK_Reborn::AutoFormShift",
+      "Translated": "使用「演武」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use GCDs to heal. (Ignored if there are no healers alive in party)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::GCDHeal",
+      "Translated": "用公共复唱技能治疗。队内所有治疗职业均已倒地时忽略此设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use GCDs to heal. (Ignored if you are the only healer in party)",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.AST_Reborn::GCDHeal",
+      "Translated": "用公共复唱技能治疗。你是队内唯一治疗职业时忽略此设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use HP Potions when HP% is lower than this",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::UseHpPotionsPercent",
+      "Translated": "体力百分比低于此值时使用体力恢复药",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Hallowed Ground with Cover",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::HallowedWithCover",
+      "Translated": "配合「保护」使用「神圣领域」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Hide",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.NIN_Reborn::UseHide",
+      "Translated": "使用「隐遁」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Holy Spirit when out of melee range",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.PLD_Reborn::UseHolyWhenAway",
+      "Translated": "超出近战范围时使用「圣灵」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Immediately",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Melee.MNK_Reborn/MasterfulBlitzUse::UseAsAble",
+      "Translated": "立即使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Inner Release while moving",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.WAR_Reborn::InnerReleaseMoving",
+      "Translated": "移动时使用「原初的解放」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use MP Potions when MP% is lower than this",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::UseMpPotionsPercent",
+      "Translated": "魔力百分比低于此值时使用魔力恢复药",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Mighty Guard",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.BLU_Reborn::UseMightyGuard",
+      "Translated": "使用「强力守护」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Recitation during the countdown opener",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SCH_Reborn::UseRecitationInOpener",
+      "Translated": "倒计时期间使用「秘策」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Rhizomata when out of combat",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Healer.SGE_Reborn::OOCRhizomata",
+      "Translated": "脱战时使用「根素」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Shadowstride",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Tank.DRK_Reborn/OpenerActionStrategy::Shadowstride",
+      "Translated": "使用「暗影步」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Sprint when a party tank is sprinting (non-tanks only).",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoSprintWithTank",
+      "Translated": "队内坦克冲刺时跟随使用冲刺（仅限非防护职业）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Stardiver while moving",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Melee.DRG_Reborn::StardiverMoving",
+      "Translated": "移动时使用「坠星冲」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Starfall",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.PhantomDefault::StarfallUseage",
+      "Translated": "使用「陨石」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Swiftcast for movement",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaAST::UseSwiftcastForMovement",
+      "Translated": "移动时使用「即刻咏唱」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Swiftcast on ressurection",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.SMN_Reborn::AddSwiftcastOnRaise",
+      "Translated": "使用即刻咏唱配合复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Swiftcast on resurrection",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Magical.ChurinSMN::AddSwiftcastOnRaise",
+      "Translated": "使用即刻咏唱配合复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Transfusion to heal",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.BLU_Reborn::UseTransfusion",
+      "Translated": "使用「融合」治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Unmend",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.RebornRotations.Tank.DRK_Reborn/OpenerActionStrategy::Unmend",
+      "Translated": "使用「伤残」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Variant Rampart on cooldown",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Duty.VariantDefault::VariantRampartSpam",
+      "Translated": "「多变铁壁」冷却完毕后立即使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Warden's Paean on other players",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.BRD_Reborn::BRDEsuna",
+      "Translated": "对其他玩家使用「光阴神的礼赞凯歌」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Zoe during the countdown opener",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.BeirutaSGE::UseZoeInOpener",
+      "Translated": "倒计时期间使用「活化」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use beneficial ground-targeted actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useGroundBeneficialAbility",
+      "Translated": "使用友方地面技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Use beneficial ground-targeted actions on party Tank if present, skipping other logic.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useTargetTankForGroundHeal",
+      "Translated": "有防护职业队员时，直接以其为中心施放友方地面技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use beneficial ground-targeted actions only on self, skipping other logic.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useGroundBeneficialAbilityOnlySelf",
+      "Translated": "只向自身脚下施放友方地面技能，忽略其他选点规则。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use beneficial ground-targeted actions when moving.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useGroundBeneficialAbilityWhenMoving",
+      "Translated": "允许移动中施放友方地面技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use custom potion timings",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation/PotionStrategy::Custom",
+      "Translated": "自定义用药时机",
+      "Source": "library"
+    },
+    {
+      "Original": "Use defensive actions",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useDefenseAbility",
+      "Translated": "使用防御技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Use healing abilities when playing a non-healer role.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_useHealWhenNotAHealer",
+      "Translated": "担任非治疗职业时也可使用治疗能力技。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use interrupt abilities if possible.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_interruptibleMoreCheck",
+      "Translated": "尽可能使用打断技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use knockback prevention abilities if the target is casting any of these actions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_HostileCastingKnockbackDesc",
+      "Translated": "目标咏唱列表中的技能时使用防击退技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Use movement actions towards the object/mob in the center of the screen",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_moveTowardsScreenCenter",
+      "Translated": "向屏幕中央的物体或怪物使用位移技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Use movement speed increase abilities when out of combat and in duty.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoSpeedOutOfCombat",
+      "Translated": "在副本内脱战时使用加速移动技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use movement speed increase abilities when out of combat and out of duty.",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::_autoSpeedOutOfCombatNoDuty",
+      "Translated": "在副本外脱战时使用加速移动技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use potions at 2 and 8 minutes",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation/PotionStrategy::TwoEight",
+      "Translated": "在第 2 分钟和第 8 分钟用药",
+      "Source": "library"
+    },
+    {
+      "Original": "Use potions in the opener and at 6 minutes",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation/PotionStrategy::ZeroSix",
+      "Translated": "起手和第 6 分钟用药",
+      "Source": "library"
+    },
+    {
+      "Original": "Use potions in the opener, at 5 minutes and at 10 minutes",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Rotations.CustomRotation/PotionStrategy::ZeroFiveTen",
+      "Translated": "起手、第 5 分钟和第 10 分钟用药",
+      "Source": "library"
+    },
+    {
+      "Original": "Use provoke in opening if tank stance is on",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Tank.DRK_Reborn::UseProvokeInOpening",
+      "Translated": "已开启防护姿态时，起手使用挑衅",
+      "Source": "library"
+    },
+    {
+      "Original": "Use swiftcast for movement",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.ExtraRotations.Healer.WHM_Reborn::UseSwiftcastForMovement",
+      "Translated": "移动时使用「即刻咏唱」",
+      "Source": "library"
+    },
+    {
+      "Original": "Use tank personal damage mitigation abilities if the target is casting any of these actions",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_List_HostileCastingTankDesc",
+      "Translated": "目标咏唱列表中的技能时使用坦克个人减伤",
+      "Source": "library"
+    },
+    {
+      "Original": "Use this if there's no other raid buff in your party",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Magical.SMN_Reborn::SecondTypeOpenerLogic",
+      "Translated": "队内没有其他团辅增益时使用此项",
+      "Source": "library"
+    },
+    {
+      "Original": "Use up all stacks",
+      "Context": "[属性] DescriptionAttribute [RotationSolver.Basic] RotationSolver.Basic.Data.CanUseOption::UsedUp",
+      "Translated": "消耗所有层数",
+      "Source": "library"
+    },
+    {
+      "Original": "Useful information and macro list.",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.UI.MainWindowTab::Main",
+      "Translated": "实用信息与宏列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Variant Dungeon",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_Duty_VariantDungeon",
+      "Translated": "多变迷宫",
+      "Source": "library"
+    },
+    {
+      "Original": "Wanderer's Minuet Uptime",
+      "Context": "[属性] RotationConfigAttribute.Name [RotationSolver] RotationSolver.RebornRotations.Ranged.BRD_Reborn::WANDTime",
+      "Translated": "「战歌」的持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning Message",
+      "Context": "[属性] DescriptionAttribute [RotationSolver] RotationSolver.Data.UiString::ConfigWindow_About_Warnings_Warning",
+      "Translated": "警告消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Size",
+      "Context": "[属性] UIAttribute [RotationSolver.Basic] RotationSolver.Basic.Configuration.Configs::NextActionWindowScale",
+      "Translated": "窗口大小",
+      "Source": "library"
+    }
+  ]
+}

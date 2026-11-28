@@ -1,0 +1,256 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "OhHey",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "General##ohhey_config_tab_general",
+      "Context": "ConfigurationWindow.GeneralConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Window Settings:",
+      "Context": "ConfigurationWindow.GeneralConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主窗口设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable closing the main window with ESC",
+      "Context": "ConfigurationWindow.GeneralConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许按 Esc 关闭主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Bar Settings:",
+      "Context": "ConfigurationWindow.GeneralConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务器信息栏设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the number of people targeting you in the server bar",
+      "Context": "ConfigurationWindow.GeneralConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏中显示有多少人选中了你",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets##ohhey_config_tab_target",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification Settings:",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "通知设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable target notifications",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用目标提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Settings:",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "战斗设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable target notifications while in combat",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中仍接收目标提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Self-target settings:",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选中自身时的设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show self-targeting in target list",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在目标列表中显示自己选中自己的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify on self-target",
+      "Context": "ConfigurationWindow.TargetConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "选中自己时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable sound notification on target",
+      "Context": "ConfigurationWindow.TargetSoundConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "被选为目标时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play the selected sound effect",
+      "Context": "ConfigurationWindow.TargetSoundConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "试听所选音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes##ohhey_config_tab_emote",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable emote notifications",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用情感动作提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable emote notifications while in combat",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中仍接收情感动作提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Self-emote settings:",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自身情感动作设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show self-emote in history",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将自己发出的情感动作记入历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify on self-emote",
+      "Context": "ConfigurationWindow.EmoteConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自己发出情感动作时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable sound notification on emote",
+      "Context": "ConfigurationWindow.EmoteSoundConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "收到情感动作时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes##ohhey_emotes_tab",
+      "Context": "MainWindow.DrawEmoteUi",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote History",
+      "Context": "MainWindow.DrawEmoteUi",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "情感动作历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets##ohhey_targets_tab",
+      "Context": "MainWindow.DrawTargetUi",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target History",
+      "Context": "MainWindow.DrawTargetUi",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin settings",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "插件设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

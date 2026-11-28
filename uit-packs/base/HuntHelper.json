@@ -1,0 +1,305 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HuntHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Click a Fate to see it on the map.",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HoveredToolTip",
+      "Translated": "点击临危受命即可在地图上查看位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown reset.",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "倒计时已重置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Countdown: ",
+      "Context": "CounterUI.DrawNunCountdownString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "倒计时： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "HuntManager.GetDatabaseAsString",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_CentreText",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "FAIL",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Fates",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "File ",
+      "Context": "HuntManager.LoadFilesIntoDic",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文件 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt Helper",
+      "Context": "Plugin.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "狩猎助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Map: ",
+      "Context": "DebugUI.PositionalInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText",
+      "Translated": "地图： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby Mob List",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "附近怪物列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby Mobs",
+      "Context": "DebugUI.LocalObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "附近的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Found",
+      "Context": "DebugUI.UpdateLocalStuff",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未找到",
+      "Source": "library"
+    },
+    {
+      "Original": "Options Window",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "选项窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Other nearby mobs:",
+      "Context": "DebugUI.PositionalInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText",
+      "Translated": "附近的其他怪物：",
+      "Source": "library"
+    },
+    {
+      "Original": "Path Colour",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "路线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority Mob:",
+      "Context": "DebugUI.PositionalInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText",
+      "Translated": "优先目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select which Rank to display Spawn Points for",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HoveredToolTip",
+      "Translated": "选择要显示哪一级恶名精英的出现位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Alpha (A) to zero to disable.",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HelpMarker",
+      "Translated": "将不透明度（A）设为零即可隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Map Name",
+      "Context": "HuntTrainUI.DrawHuntTrainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示地图名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Spawn Point Filter",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "出现位置筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "DebugUI.LocalObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use High-Contrast Colour",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用高对比度颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Size: ",
+      "Context": "DebugUI.PositionalInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "窗口大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "You can opt in / out from the settings on the main map ui.",
+      "Context": "SubmitDataPrompt.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可以在地图主界面的设置中随时更改是否参与。",
+      "Source": "library"
+    },
+    {
+      "Original": "count",
+      "Context": "CounterUI.DrawCounter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Context": "CounterUI.DrawCounter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "no :(, never show me this again",
+      "Context": "SubmitDataPrompt.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "不同意，以后不再提示",
+      "Source": "library"
+    },
+    {
+      "Original": "opt in",
+      "Context": "MapUI.DrawOptionsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同意提交",
+      "Source": "library"
+    },
+    {
+      "Original": "priority:",
+      "Context": "DebugUI.LocalObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "优先级：",
+      "Source": "library"
+    },
+    {
+      "Original": "reset",
+      "Context": "CounterUI.DrawNunResetButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "submit found hunt position data?",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "提交已发现的狩猎目标位置？",
+      "Source": "library"
+    },
+    {
+      "Original": "territory:",
+      "Context": "DebugUI.Aetherytes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域：",
+      "Source": "library"
+    },
+    {
+      "Original": "yes, never show me this again",
+      "Context": "SubmitDataPrompt.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "同意，以后不再提示",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

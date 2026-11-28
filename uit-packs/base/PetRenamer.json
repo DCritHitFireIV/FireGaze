@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PetRenamer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Pet Dev Window",
+      "Context": "PetDevWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "宠物调试窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "No Missing Translations",
+      "Context": "PetDevWindow.DrawTranslatorHelp",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有缺失的译文",
+      "Source": "library"
+    },
+    {
+      "Original": "No Local User",
+      "Context": "PetDevWindow.DrawModelCharaSniffer",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "找不到本机用户",
+      "Source": "library"
+    },
+    {
+      "Original": "No Target",
+      "Context": "PetDevWindow.DrawModelCharaSniffer",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "PetDevWindow.DrawModelCharaSniffer",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Create quick clipboard copy",
+      "Context": "PetDevWindow.DrawModelCharaSniffer",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "快速复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "No island user found!",
+      "Context": "PetDevWindow.DrawIsland",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到无人岛用户！",
+      "Source": "library"
+    },
+    {
+      "Original": "No Player",
+      "Context": "PetDevWindow.GetUserText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "没有玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Last Data",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除上次的数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Data",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Pet Dev Window",
+      "Context": "PetDevCommand.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开宠物调试窗口",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

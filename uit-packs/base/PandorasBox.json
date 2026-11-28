@@ -1,0 +1,507 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PandorasBox",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Abort pending Peloton use during countdown",
+      "Context": "AutoPeloton.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "开始倒计时时取消待使用的速行",
+      "Source": "library"
+    },
+    {
+      "Original": "Aliases",
+      "Context": "MainWindow.DrawCommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Confirm",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Commendation after Duty",
+      "Context": "AutoVoteMvp.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "任务结束后自动投最优队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Join Party Finder Groups",
+      "Context": "AutoJoinPF.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动加入招募队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Sprint on Island Sanctuary",
+      "Context": "SanctuarySprint.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在无人岛上自动冲刺",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-select Gardening Soil/Seeds",
+      "Context": "AutoSelectGardening.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "种植时自动选择土壤和种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-select Turn-ins",
+      "Context": "AutoSelectTurnin.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动选择交纳物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically fill in gardening windows with seeds and soil.",
+      "Context": "AutoSelectGardening.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动在种植窗口填入种子和土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically give a commendation to a random player in your party at the end of a duty.",
+      "Context": "AutoVoteMvp.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "副本结束时，在队伍中随机选择一位玩家投最优队员票。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically uses Isle Sprint.",
+      "Context": "SanctuarySprint.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动使用海岛冲刺。",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "MainWindow.DrawCommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Disabled",
+      "Context": "BaseFeature.DrawAutoConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "当前已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Vendor Buy Amount",
+      "Context": "DefaultVendorValue..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "商店默认购买数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "MainWindow.DrawCommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Desynthing. Click to Abort.",
+      "Context": "Desynth.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在分解，点击可中止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Known Glamours in Glamour Creation",
+      "Context": "DisableKnownGlam.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "投影台中已有的外观不可重复放入",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Theme",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "停用主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled Reason: ",
+      "Context": "MainWindow.DrawFeatures",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "停用原因： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables items from being transferred to the glamour dresser if it already exists in it",
+      "Context": "DisableKnownGlam.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "投影台中已有同款物品时，阻止再次放入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Theme",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "启用主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Housing Zones",
+      "Context": "AutoPeloton.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除住宅区",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Party Members That Die",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除战斗不能的队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Fertilizer",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Function only in a duty",
+      "Context": "AutoPeloton.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在副本中生效",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Chat Message",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "How Many Times?",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "战斗不能多少次后排除？",
+      "Source": "library"
+    },
+    {
+      "Original": "Include Fertilizing",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包括施肥",
+      "Source": "library"
+    },
+    {
+      "Original": "Interact with Target",
+      "Context": "InteractCommand.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "与目标交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave Duty",
+      "Context": "LeaveDuty.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "退出副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Moved to YesAlready",
+      "Context": "AutoSelectGardening.get_DisabledReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已移至 YesAlready",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.DrawCommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No Priority",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "无优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Pandora menu.",
+      "Context": "PandorasBox.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Pandora 菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Parameters",
+      "Context": "MainWindow.DrawCommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Preserve Map Links in Clipboard",
+      "Context": "CoordsToMapLink.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在剪贴板中保留地图链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Preserves the formatting for map links so they can be interacted with after pasting.",
+      "Context": "CoordsToMapLink.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "保留地图链接的格式，使粘贴后的链接仍可点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize DPS Vote",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "优先投给进攻职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize Healer Vote",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "优先投给治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize Tank Vote",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "优先投给防护职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Death Tracker on Wipe",
+      "Context": "AutoVoteMvp.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "团灭后重置死亡次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Results",
+      "Context": "DrawFeatures",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Searches feature names and descriptions for a given word or phrase.",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在功能名称和说明中搜索指定的词句。",
+      "Source": "library"
+    },
+    {
+      "Original": "Seed",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Category",
+      "Context": "GCVendorDefault.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Delay (seconds)",
+      "Context": "AutoPeloton.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "设置延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the default amount for items to buy from vendors",
+      "Context": "DefaultVendorValue..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "设置从商店购买物品的默认数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only Inventory Items",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示背包中的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "土壤",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil/Seed Fallback",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "备用土壤／种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ",
+      "Context": "PandoraGathering.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use whilst walk status is toggled",
+      "Context": "AutoPeloton.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切换到步行时也使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses Peloton automatically outside of combat. (Physical Ranged only)",
+      "Context": "AutoPeloton.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在战斗外自动使用速行，仅限远程物理职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, this will select the first soil/seed found in your inventory if the\nprimary ones chosen are not found.",
+      "Context": "AutoSelectGardening.get_DrawConfigTree",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "找不到首选土壤或种子时，\n使用背包中的第一份土壤或种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "Whenever you click a Party Finder listing, this will bypass the description window and auto click the join button.",
+      "Context": "AutoJoinPF.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "点击招募条目时，跳过详情窗口并自动加入队伍。",
+      "Source": "library"
+    },
+    {
+      "Original": "Whenever you have to select an item to turn in, it will automatically fill in the interface.",
+      "Context": "AutoSelectTurnin.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "需要选择交纳物品时，自动将物品填入交纳栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "You are mounted, please dismount",
+      "Context": "Desynth.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请先从坐骑上下来",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

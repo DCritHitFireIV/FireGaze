@@ -1,0 +1,192 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BOCCHI",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Area",
+      "Context": "MainWindow.DrawCommandBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "MainWindow.DrawCommandBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Activity Targets",
+      "Context": "ActivityTargetPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "活动目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Carrot Hunt Helper",
+      "Context": "CarrotHuntPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "胡萝卜寻宝助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Run again",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "再运行一次",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chain Manager",
+      "Context": "ChainManagerPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "操作链管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Encounters",
+      "Context": "CriticalEncountersPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "临界遭遇战",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby Enemies",
+      "Context": "EnemyPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "附近的敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Fates",
+      "Context": "FatesPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Level",
+      "Context": "JobLevelPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "职业等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Statuses",
+      "Context": "StatusPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "No target selected.",
+      "Context": "Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure Hunt Helper",
+      "Context": "TreasureHuntPanel.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "寻宝助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Pending",
+      "Context": "VnavmeshPanel.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "待处理",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "VnavmeshPanel.Render",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextUnformatted",
+      "Translated": "运行中",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

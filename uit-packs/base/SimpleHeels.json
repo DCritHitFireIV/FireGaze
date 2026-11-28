@@ -1,0 +1,475 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SimpleHeels",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Pose ",
+      "Context": "EmoteIdentifier.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.IconTextFrame",
+      "Translated": " 姿势 ",
+      "Source": "library"
+    },
+    {
+      "Original": " other",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.IconTextFrame",
+      "Translated": " 其他",
+      "Source": "library"
+    },
+    {
+      "Original": " | Temp Offset",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " | 临时偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Character",
+      "Context": "ConfigWindow.DrawCharacterList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Average",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均值",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Data:",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "角色数据：",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Override for Self",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除自己的覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Override for Target",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除目标的覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Value",
+      "Context": "SimpleJsonViewer.DrawObject",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Identity:",
+      "Context": "ConfigWindow.DrawCharacterList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前身份：",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Voice",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "自定义语音",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Information",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Type",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "显示类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw Offset: ",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "显示偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote Override",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "情感动作偏移覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Expected Offset: ",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预期偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to save config: ",
+      "Context": "Plugin.SaveConfig",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "保存设置失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Feet Model: ",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "脚部装备模型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Height: ",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "高度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hits per Second",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "每秒命中次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Argument: ",
+      "Context": "Plugin.DoEmoteSync",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "参数无效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Check",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上次检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Live-Posing",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "实时摆姿",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minion",
+      "Context": "ExtraDebug.TabStaticMinions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Model Invalid",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "模型无效",
+      "Source": "library"
+    },
+    {
+      "Original": "No Emote",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未使用情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "No Skeleton",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无骨架",
+      "Source": "library"
+    },
+    {
+      "Original": "Non-Human",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "非人形",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Visible",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "不可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset applied.",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已应用偏移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Per Second",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "每秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Pitch",
+      "Context": "ExtraDebug.TabStaticMinions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "俯仰",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "ExtraDebug.TabStaticMinions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Position Error:",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置误差：",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "ConfigWindow.DrawCharacterList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Roll",
+      "Context": "ExtraDebug.TabStaticMinions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "侧倾",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation: ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "旋转： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "ExtraDebug.TabIPC",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Emote",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Override for Self",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为自己设置覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Override for Target",
+      "Context": "ExtraDebug.TabIPC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为目标设置覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple Heels WILL NOT work for this character.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "Simple Heels 无法对此角色生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Options",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "特殊选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync All",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to apply offset. Not performing a looping emote.",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法应用偏移。请先使用一个循环播放的情感动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Yaw",
+      "Context": "ExtraDebug.TabStaticMinions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "水平旋转",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

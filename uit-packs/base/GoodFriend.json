@@ -1,0 +1,286 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GoodFriend",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [],
+  "resources": [
+    {
+      "Original": "Failed to fetch metadata, will try again later.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_InstanceInfoModule_MetadataFetch_Failed",
+      "Translated": "获取元数据失败，稍后将重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_Button_Debug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Send",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_SendAnnouncement_Send",
+      "Translated": "发送",
+      "Source": "library"
+    },
+    {
+      "Original": "Login message",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_LoginMessage",
+      "Translated": "上线消息",
+      "Source": "library"
+    },
+    {
+      "Original": "The authentication token to use for requests that require authentication. Only instance administrators will need to set this.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_SettingsScreen_Api_AuthToken_Description",
+      "Translated": "此令牌用于需要身份验证的请求。只有实例管理员需要填写。",
+      "Source": "library"
+    },
+    {
+      "Original": "Modules",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_Button_Modules",
+      "Translated": "模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection Statistics",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatistics",
+      "Translated": "连接统计",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-attempt authentication",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_SendAnnouncement_Reauth",
+      "Translated": "重新验证",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_CurrentFriendsOnlineModule_UI_SendFriendCount_Delay",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Auth Token",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_SettingsScreen_Api_AuthToken",
+      "Translated": "身份验证令牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Heartbeats received: {0}",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatistics_HeartbeatsTotal",
+      "Translated": "已收到的心跳包数：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "The amount of seconds to wait after logging in to display the message. If online friends are not correctly shown on login then increase this value.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_CurrentFriendsOnlineModule_UI_SendFriendCount_Delay_Description",
+      "Translated": "登录后等待多少秒再显示消息。若登录时在线好友显示不全，请调高此值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Announcement: {0}",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_AnnouncementText",
+      "Translated": "公告：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Get notifications about the friends that are currently online. These notifications work regardless of whether not they have the plugin installed.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_CurrentFriendsOnlineModule_Description",
+      "Translated": "好友当前在线时收到通知。对方无需安装此插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore events from friends that logged outside of your current territory.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_HideDiffTerritory_Description",
+      "Translated": "忽略在当前区域以外上线或下线的好友事件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Key",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_SettingsScreen_Setting_GroupKey",
+      "Translated": "群组密钥",
+      "Source": "library"
+    },
+    {
+      "Original": "Donate (Opens in browser)",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_Button_Donate",
+      "Translated": "赞助（在浏览器中打开）",
+      "Source": "library"
+    },
+    {
+      "Original": "Your message must contain {0} for the player's name.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_LogoutMessage_Tooltip",
+      "Translated": "消息中必须包含 {0} 以插入玩家姓名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Announcements",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_Name",
+      "Translated": "公告",
+      "Source": "library"
+    },
+    {
+      "Original": "You have no friends online.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_CurrentFriendsOnlineModule_NoFriendsOnline",
+      "Translated": "当前没有好友在线。",
+      "Source": "library"
+    },
+    {
+      "Original": "Receive Events",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_EventSettings_ReceieveEvents",
+      "Translated": "接收事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Stream Connection",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_Name",
+      "Translated": "玩家事件流连接",
+      "Source": "library"
+    },
+    {
+      "Original": "There are currently {0} players online",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_InstanceInfoModule_ConnectedClients_Count",
+      "Translated": "当前共有 {0} 名玩家在线",
+      "Source": "library"
+    },
+    {
+      "Original": "Last heartbeat: {0}",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatistics_LastHeartbeat",
+      "Translated": "上次心跳：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore events from friends that logged outside of your current world.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_HideDiffWorld_Description",
+      "Translated": "忽略在当前服务器以外上线或下线的好友事件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatus_Connected",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatus_Exception",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_ConnectionState_Disconnected",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_ConnectionState_Exception",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatus_Connecting",
+      "Translated": "正在连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_InstanceInfoModule_Description_Title",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_ConnectionState_Connecting",
+      "Translated": "正在连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection State:",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatus",
+      "Translated": "连接状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_ResetToDefault",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_PlayerStreamConnectionModule_ConnectionStatus_Disconnected",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "UI_MainWindow_Button_Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection State:",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_ConnectionStatus",
+      "Translated": "连接状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_AnnouncementModule_ConnectionState_Connected",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Your message must contain {0} for the player's name.",
+      "Container": "GoodFriend.Plugin.Localization.Resources.Strings.resources",
+      "Key": "Modules_LoginStateModule_UI_LoginMessage_Tooltip",
+      "Translated": "消息中必须包含 {0} 以插入玩家姓名。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

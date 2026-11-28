@@ -1,0 +1,638 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "YesAlready",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Conditions List",
+      "Context": "ConditionsListWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 条件列表",
+      "Source": "library"
+    },
+    {
+      "Original": "(none)",
+      "Context": "Bothers.DrawGardeningItemCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "（无）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Folder",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Last Seen",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加最近出现的条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add New",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加新条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new entry",
+      "Context": "Custom.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "添加新条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Addon Name:",
+      "Context": "Custom.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "窗口名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "All Different",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "类型各不相同",
+      "Source": "library"
+    },
+    {
+      "Original": "All Same",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "类型全部相同",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto confirm##GardeningConfirm",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-select fertilizer",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动选择肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist materia (",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "排除的魔晶石（",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted: ",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已加入黑名单： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bothers",
+      "Context": "Bothers.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "自动操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear search",
+      "Context": "Bothers.DrawFilterInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "清除搜索内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to configure",
+      "Context": "BotherBadges.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Core",
+      "Context": "CoreTab.get_TabName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "核心功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Conditions: ",
+      "Context": "ConditionsListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Quantity##",
+      "Context": "Numerics.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "默认数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "MainWindow.TextNodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Fallback to first available",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "找不到时选用第一个匹配物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Fertilizer",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by name",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide when already enabled",
+      "Context": "BotherBadges.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "If enabled, stop instead of padding with duplicate types when fewer than five unique materia are available.",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "启用后，如果不同种类的魔晶石不足五种，就停止操作，不用重复种类补足。",
+      "Source": "library"
+    },
+    {
+      "Original": "If the preferred soil/seed is missing, use the first matching item in inventory.",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "找不到首选土壤或种子时，使用背包中第一个符合条件的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "List",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "列表",
+      "Source": "library"
+    },
+    {
+      "Original": "List Dialogs",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "列表对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "List Selection",
+      "Context": "CoreTab.DrawAddNewEntryPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "列表选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode##TransmuteMode",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "ConditionsListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Note:",
+      "Context": "Custom.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "备注：",
+      "Source": "library"
+    },
+    {
+      "Original": "Numeric Dialogs",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "数值对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "Numeric Input",
+      "Context": "CoreTab.DrawAddNewEntryPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "数值输入",
+      "Source": "library"
+    },
+    {
+      "Original": "OK Dialog",
+      "Context": "CoreTab.DrawAddNewEntryPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "确定对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "OK Dialogs",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "确定对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show the badge on windows where none of its bothers are turned on.",
+      "Context": "BotherBadges.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "只在窗口相关自动操作均未启用时显示标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Parameters:",
+      "Context": "Custom.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "参数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent of Max##",
+      "Context": "Numerics.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最大值的百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant the seeds after selecting them.",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "选择种子后自动播种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin is currently off or paused",
+      "Context": "BotherBadges.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "插件已关闭或暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Rate limiter (pause after N items, 0 to disable).",
+      "Context": "Bothers.DrawBother",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "限速：每处理指定数量的物品后暂停，设为 0 可禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Require all different",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "要求类型各不相同",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "Bothers.DrawFilterInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextEx",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Seed",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Select",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Select type and preview:",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对话类型与预览：",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.DisplayMiscOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Disabled",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Enabled",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Invalid",
+      "Context": "CoreTab.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示无效条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only inventory items##GardeningOnlyInv",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示背包内物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "土壤",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by Name",
+      "Context": "ZoneListWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按名称排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "页签",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk Dialog",
+      "Context": "CoreTab.DrawAddNewEntryPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "交谈对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk Dialogs",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "交谈对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "This is not used for anything, it's just a note to help remember what this bother does.",
+      "Context": "Custom.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "此备注仅用于记录该自动操作的用途。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "NodeTypeExtensions.GetDisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "When the fertilize inventory opens, select the preferred fertilizer.",
+      "Context": "Bothers.DrawAutoSelectGardeningSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "打开施肥物品窗口时，自动选择首选肥料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to submit all of the same materia at once or try to use all different.",
+      "Context": "Bothers.DrawTradeMultipleSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "选择一次提交同种魔晶石，或尽量提交不同种类的魔晶石。",
+      "Source": "library"
+    },
+    {
+      "Original": "Window badges",
+      "Context": "BotherBadges.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "窗口标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes/No Dialog",
+      "Context": "CoreTab.DrawAddNewEntryPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "是非对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes/No Dialogs",
+      "Context": "CoreTab.DrawAddLastSeenPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "是非对话框",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

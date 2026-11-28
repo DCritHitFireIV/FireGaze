@@ -1,0 +1,346 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AkuTrack",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Opens the main menu with debug information.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开包含调试信息的主菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the map window.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开地图窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the configuration window.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": "BottomBar.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "BottomBar.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Cursor  ",
+      "Context": "BottomBar.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "光标  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw remote?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示远端数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw BNpc?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示战斗 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw ENpc?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示事件 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw EObj?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示事件物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw GatheringPoint?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "绘制采集点？",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw camera cone?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示相机视锥",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw debug squares?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示调试方框",
+      "Source": "library"
+    },
+    {
+      "Original": "Center on Player when opening",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开地图时以玩家为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Map Text Color:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "地图文字颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "AkuTrack - Details for ",
+      "Context": "DetailsWindow..ctor",
+      "PreserveID": false,
+      "Translated": "AkuTrack - 详细信息 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "DetailsWindow.DrawGatheringPointDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "PlaceName: ",
+      "Context": "DetailsWindow.DrawGatheringPointDetails",
+      "PreserveID": false,
+      "Translated": "地名： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ",
+      "Context": "DetailsWindow.DrawGatheringPointDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": ") | EventItem",
+      "Context": "DetailsWindow.DrawGatheringPointDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": ") | 事件物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Seen List",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空已发现对象列表",
+      "Source": "library"
+    },
+    {
+      "Original": "I have seen ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自上次重置以来 ",
+      "Source": "library"
+    },
+    {
+      "Original": " objects since last reset.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 我已见到对象。",
+      "Source": "library"
+    },
+    {
+      "Original": "Our local player is currently not logged in.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前角色尚未登录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Our current job is currently not valid.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前职业无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects still to upload [",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "待上传对象 [",
+      "Source": "library"
+    },
+    {
+      "Original": "Seen objects [",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已见对象 [",
+      "Source": "library"
+    },
+    {
+      "Original": "BaseId: ",
+      "Context": "MainWindow.DrawAkuGameObject",
+      "PreserveID": false,
+      "Translated": "基础 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "MainWindow.DrawAkuGameObject",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "This is an ICharacter!",
+      "Context": "MainWindow.DrawAkuGameObject",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "这是一个 ICharacter！",
+      "Source": "library"
+    },
+    {
+      "Original": "NameId: ",
+      "Context": "MainWindow.DrawAkuGameObject",
+      "PreserveID": false,
+      "Translated": "名称 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Flag",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "设置地图标旗",
+      "Source": "library"
+    },
+    {
+      "Original": "AkuTrack - Map##akutrack_map",
+      "Context": "MapWindow..ctor",
+      "PreserveID": false,
+      "Translated": "AkuTrack - 地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Created: ",
+      "Context": "MapWindow.DrawTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "创建时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nLastSeen: ",
+      "Context": "MapWindow.DrawTooltip",
+      "PreserveID": false,
+      "Translated": "\n上次见到： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nBaseID: ",
+      "Context": "MapWindow.DrawTooltip",
+      "PreserveID": false,
+      "Translated": "\n基础ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "AkuTrack - Search##akutrack_search",
+      "Context": "SearchWindow..ctor",
+      "PreserveID": false,
+      "Translated": "AkuTrack - 搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Itemsearch",
+      "Context": "SearchWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "搜索物品",
+      "Source": "library"
+    },
+    {
+      "Original": "<downloaded>",
+      "Context": "AkuGameObject..ctor",
+      "PreserveID": false,
+      "Translated": "<已下载>",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

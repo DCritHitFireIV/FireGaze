@@ -1,0 +1,348 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Orbwalker",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "About",
+      "Context": "UI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "UI.Jobs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Always",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Bind a key to fully block any character movement.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "绑定一个按键以完全锁定角色移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bind a key to instantly unlock player movement and cancel any channeling cast. Note that movement is only enabled whilst the key is held, therefore a mouse button is recommended.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "绑定一个按键，按住即可立即解除移动锁定并取消当前咏唱。只有按住时才能移动，因此建议绑定鼠标按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Block All Movement",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定所有移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocks all movement when holding down a specified key.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按住指定按键时阻止所有移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buffer Initial Cast",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "首发咏唱加入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Classes/Jobs",
+      "Context": "UI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "职业与特职",
+      "Source": "library"
+    },
+    {
+      "Original": "Controller Mode",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "手柄模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Current: ",
+      "Context": "UI.Jobs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "UI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "UI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Orbwalker",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 Orbwalker",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable this to configure Controller specific options instead.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "启用后可配置手柄专用选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Extras",
+      "Context": "UI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "其他功能",
+      "Source": "library"
+    },
+    {
+      "Original": "In Combat",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Jobs",
+      "Context": "UI.Jobs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Movement (Active)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "锁定移动（已启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Movement (Click to enable)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "锁定移动（点击启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Now press new key...",
+      "Context": "UI.DrawKeybind",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "请按下新按键…",
+      "Source": "library"
+    },
+    {
+      "Original": "Orbwalking Mode",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "移动控制模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Permanently Release",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "持续解除锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Disabled (Click to enable)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "插件已禁用（点击启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Enabled (Click to disable)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "插件已启用（点击禁用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Releases player movement - used primarily by the release key setting above.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "解除角色的移动锁定，主要用于上述解除锁定按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select key manually:",
+      "Context": "UI.DrawKeybind",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "手动选择按键：",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "UI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "滑步咏唱",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast Mode (Active)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "滑步咏唱模式（已启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast Mode (Click to enable)",
+      "Context": "ImGuiOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "滑步咏唱模式（点击启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast Window Calibration",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "滑步时机校准",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidelock",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "滑步锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch between automatic slidecast window calibration or manually setting a value.\n\n\"Automatic\" mode is fully reliable, but will always result in smaller slidecast windows. You may also need to manually configure based on current spell speed or network latency.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "选择自动校准滑步时机或手动设定时长。\n\n自动模式较为保守，可滑步的时间会更短。根据当前咏唱速度和网络延迟，可能需要手动调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock at, s",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "解除锁定时机（秒）",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

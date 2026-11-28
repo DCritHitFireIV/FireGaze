@@ -1,0 +1,317 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoTripleTriadGrind",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " MGP to challenge ",
+      "Context": "PlayNpc.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 金碟币才能挑战 ",
+      "Source": "library"
+    },
+    {
+      "Original": " You need ",
+      "Context": "PlayNpc.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 需要 ",
+      "Source": "library"
+    },
+    {
+      "Original": " is nearby!",
+      "Context": "FireAlerts",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 位于附近！",
+      "Source": "library"
+    },
+    {
+      "Original": ", so the run stops.",
+      "Context": "PlayNpc.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "，本次已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "Shell..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Context": "Shell..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied {0} line to the clipboard",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "已复制 {0} 行到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied {0} lines to the clipboard",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "已复制 {0} 行到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Each NPC is played {0} time.",
+      "Context": "Triad..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "与每名 NPC 对局 {0} 次。",
+      "Source": "library"
+    },
+    {
+      "Original": "Each NPC is played {0} times.",
+      "Context": "Triad..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "与每名 NPC 对局 {0} 次。",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "Settings..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Context": "LogPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Join the Discord",
+      "Context": "About..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加入 Discord",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused while you are in content",
+      "Context": "AutoTriadController.get_Status",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "进入副本时暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Patreon",
+      "Context": "About..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "在 Patreon 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] A goto is already running. /attg goto stop cancels it.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 寻路正在进行，输入 /attg goto stop 可取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Cannot start: install all required plugins first (",
+      "Context": "AutoTriadController.RequiredPluginsReady",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 无法开始，请先安装所有必需插件（",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Goto needs the pathfinding plugin listed on the Plugins page.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 使用 goto 需要安装「插件」页列出的寻路插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Goto stopped.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 寻路已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] No goto is running.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 当前没有寻路任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] None of the picked NPCs can be played right now.",
+      "Context": "Farm.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 选中的 NPC 目前都无法对局。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Nothing to pause.",
+      "Context": "AutoTriadController.Pause",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 当前没有可暂停的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Paused. Your run and session stats are kept until you resume or stop.",
+      "Context": "AutoTriadController.Pause",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 已暂停。本次任务和统计将保留，直至你继续或停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Paused: you are in instanced content. The run resumes once you are back outside.",
+      "Context": "AutoTriadController.Pause",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 你已进入副本，任务已暂停。离开副本后自动继续。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Resuming the run.",
+      "Context": "AutoTriadController.Resume",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ATTG] 正在继续任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Stop the run before using goto.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 请先结束当前任务，再使用 goto。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] The run stopped on an unexpected error. The log has the details.",
+      "Context": "AutoTriadController.OnRunEnded",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 发生意外错误，任务已停止。详见日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Usage: /attg goto <territoryId> <x> <y> <z>, or /attg goto stop.",
+      "Context": "AutoGoto.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 用法：/attg goto <territoryId> <x> <y> <z>，或 /attg goto stop。",
+      "Source": "library"
+    },
+    {
+      "Original": "[ATTG] Your bags are nearly full, so the run stops. Free a few slots and start again.",
+      "Context": "PlayNpc.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[ATTG] 背包空间即将用尽，已停止。请腾出几个空位后重新开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "last {0} run  ·  oldest to newest",
+      "Context": "History..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "最近 {0} 次任务 · 按时间从早到晚",
+      "Source": "library"
+    },
+    {
+      "Original": "last {0} runs  ·  oldest to newest",
+      "Context": "History..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "最近 {0} 次任务 · 按时间从早到晚",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} NPCs",
+      "Context": "Triad..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "{0} 名 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} card",
+      "Context": "Triad..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "{0} 张卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} cards",
+      "Context": "Triad..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "{0} 张卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} line in the buffer",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "缓冲区有 {0} 行",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} line selected",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已选 {0} 行",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} lines in the buffer",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "缓冲区有 {0} 行",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} lines selected",
+      "Context": "Log..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已选 {0} 行",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,135 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SoundFilter",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " config",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the ",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "切换 ",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Invalid subcommand.",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "CommandInvalidSubcommand",
+      "Translated": "无效的子命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "No such filter.",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "CommandNoSuchFilter",
+      "Translated": "找不到该过滤器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not enough arguments.",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "CommandNotEnoughArguments",
+      "Translated": "参数不足。",
+      "Source": "library"
+    },
+    {
+      "Original": "Due to the way FFXIV's resource loading works, {0} has to hear a sound once before it can filter it after a fresh install or update. Restart your game after installing or updating if this is a problem for you.",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LoadWarning",
+      "Translated": "受游戏资源加载方式影响，首次安装或更新后，{0} 必须先听到某个声音一次才能过滤它。若遇到此问题，可在安装或更新后重启游戏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable logging",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LogEnableLogging",
+      "Translated": "启用日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Log filtered",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LogLogFiltered",
+      "Translated": "记录已过滤的声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Max sounds",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LogMaxRecentSounds",
+      "Translated": "最大声音数",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LogSearch",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound log",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "LogWindowTitle",
+      "Translated": "声音日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Add filter",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsAddFilter",
+      "Translated": "添加过滤器",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter name",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsAddFilterName",
+      "Translated": "过滤器名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound path to filter",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsAddPathToFilter",
+      "Translated": "要过滤的声音路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit filter",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsEditFilter",
+      "Translated": "编辑过滤器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable sound filter",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsEnableSoundFilter",
+      "Translated": "启用声音过滤器",
+      "Source": "library"
+    },
+    {
+      "Original": "Show sound log window",
+      "Container": "SoundFilter.Resources.Language.resources",
+      "Key": "SettingsShowSoundLogWindow",
+      "Translated": "显示声音日志窗口",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

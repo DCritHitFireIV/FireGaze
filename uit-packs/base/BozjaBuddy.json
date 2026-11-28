@@ -1,0 +1,817 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BozjaBuddy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nExp:  \t\t\t\t",
+      "Context": "Fate.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n经验值：  \t\t\t\t",
+      "Source": "library"
+    },
+    {
+      "Original": "\nFATE:  \t",
+      "Context": "FieldNote.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n危命任务：  \t",
+      "Source": "library"
+    },
+    {
+      "Original": "\nFATE:  \t\t\t\t",
+      "Context": "Fragment.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n危命任务：  \t\t\t\t",
+      "Source": "library"
+    },
+    {
+      "Original": " \nLocation:          ",
+      "Context": "Quest.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " \n地点：          ",
+      "Source": "library"
+    },
+    {
+      "Original": "  ANY JOB  ",
+      "Context": "LoadoutTableSection.DrawOverlayBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "  任意职业  ",
+      "Source": "library"
+    },
+    {
+      "Original": " All CEs.",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 全部临界遭遇战。",
+      "Source": "library"
+    },
+    {
+      "Original": " All FATEs.",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 全部危命任务。",
+      "Source": "library"
+    },
+    {
+      "Original": " All Fate/CE.",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 全部危命任务和临界遭遇战。",
+      "Source": "library"
+    },
+    {
+      "Original": " CURRENT",
+      "Context": "LoadoutTableSection.DrawOverlayBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 当前",
+      "Source": "library"
+    },
+    {
+      "Original": " Only in: ",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 仅限： ",
+      "Source": "library"
+    },
+    {
+      "Original": "+ Teleport",
+      "Context": "UtilsGUI.LocationLinkButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "并传送",
+      "Source": "library"
+    },
+    {
+      "Original": "- Syrcus Tower",
+      "Context": "RelicSection.DrawTopic_LawsOrder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "- 希尔科斯塔",
+      "Source": "library"
+    },
+    {
+      "Original": "- The World of Darkness",
+      "Context": "RelicSection.DrawTopic_LawsOrder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "- 暗之世界",
+      "Source": "library"
+    },
+    {
+      "Original": "Action filter",
+      "Context": "AuxiliaryViewerSection.GUITextFilterAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "技能筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Action-running-out Alert",
+      "Context": "LostActionTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "失传技能存量提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Loadout",
+      "Context": "LoadoutTableSection.DrawOverlayBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前技能组",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm Name",
+      "Context": "GUIAlarm.ResetFields",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "提醒名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm notification bar.",
+      "Context": "AlarmWindow.DrawAlarmNotificationBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "提醒通知栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarms (",
+      "Context": "AlarmWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "提醒（",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Context": "ConfigWindow.Draw_LoadoutPairingButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio path ",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "音频文件路径 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio volume ",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "音量 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bozja Questline",
+      "Context": "RelicSection.DrawTopicList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupContextItem",
+      "Translated": "博兹雅任务线",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache",
+      "Context": "ExtGui_MycItemBagTrade.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast time",
+      "Context": "AuxNode.DrawDetailPackage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "咏唱时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Cluster",
+      "Context": "CharStatsWindow.Draw_CharStatsCompact",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "战果集群",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Context": "Node.DrawNodeEditPU_Fields",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact mode",
+      "Context": "LostActionTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "紧凑模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": "NodeGraphViewer.DrawExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Context": "BasicNode.DrawNodeEditPU_Fields",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard",
+      "Context": "UtilsGUI.SypnosisClipboardButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy quick info",
+      "Context": "UtilsGUI.SypnosisClipboardButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制摘要",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the current entry to clipboard",
+      "Context": "AuxiliaryViewerSection.DrawTabHeaderLoadout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前条目复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Current view mode: ",
+      "Context": "FieldNoteTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前视图： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Loadout",
+      "Context": "LoadoutTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "自定义技能组",
+      "Source": "library"
+    },
+    {
+      "Original": "Default duration ",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "默认持续时间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Default offset ",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "默认提前量 ",
+      "Source": "library"
+    },
+    {
+      "Original": "EXP reward",
+      "Context": "AuxNode.DrawDetailPackage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "经验值奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Expired Alarms (",
+      "Context": "AlarmWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已过期提醒（",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Note",
+      "Context": "FieldNoteTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "战果记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Notes (",
+      "Context": "AuxiliaryViewerSection.DrawTabContent_Source",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "战果记录（",
+      "Source": "library"
+    },
+    {
+      "Original": "For all CEs",
+      "Context": "GUIAlarm.DrawACPU_FateCe",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "用于所有临界遭遇战",
+      "Source": "library"
+    },
+    {
+      "Original": "For all Fates",
+      "Context": "GUIAlarm.DrawACPU_FateCe",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "用于所有危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "For specific location: ",
+      "Context": "GUIAlarm.DrawACPU_FateCe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "对于指定地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Fortitude",
+      "Context": "CharStatsWindow.Draw_CharStatsCompact",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "坚守彗星勋章",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "GeneralSection.DrawHelper",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "HIDDEN",
+      "Context": "GeneralSection.DrawGUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Healer",
+      "Context": "UtilsGUI.DrawRoleFlagAsIconString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "NodeGraphViewer.DrawViewerExtraOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Job of the relic you are working on",
+      "Context": "RelicSection.DrawTopicList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在制作义军武器的职业",
+      "Source": "library"
+    },
+    {
+      "Original": "LIST",
+      "Context": "FieldNoteTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Link item",
+      "Context": "UtilsGUI.ItemLinkButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "发送物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Links",
+      "Context": "AuxNode.DrawInnerHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark on map + Link to Chat ",
+      "Context": "UtilsGUI.LocationLinkButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在地图上标记并将位置发送到聊天栏 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Misc",
+      "Context": "ConfigWindow.DrawTabMisc",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "杂项",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute alarm sound when game window is focused.",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "游戏窗口处于前台时将提醒静音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:\t",
+      "Context": "FieldNote.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称：\t",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:\t\t\t\t",
+      "Context": "LostAction.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称：\t\t\t\t",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:\t\t\t   ",
+      "Context": "Fragment.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称：\t\t\t   ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: \t\t\t",
+      "Context": "Fate.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称： \t\t\t",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:               ",
+      "Context": "Quest.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称：               ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "FilterNextQuests..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "Fragment.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Node",
+      "Context": "NodeGraphViewer.DrawExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Node graph",
+      "Context": "ConfigWindow.Draw_GeneralConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "节点图",
+      "Source": "library"
+    },
+    {
+      "Original": "Once",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "仅一次",
+      "Source": "library"
+    },
+    {
+      "Original": "Open config window.",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the main menu",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开主菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Context": "AuxNode.DrawInnerHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Permanently delete alarm.",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "永久删除提醒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Permanently delete alarm. (NOT moving to expired list)",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "永久删除提醒，不移至已过期列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player's Cache:",
+      "Context": "CharStatsWindow.Draw_CharStats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "持有的失传技能：",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest",
+      "Context": "QuestTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "RARITY ",
+      "Context": "FilterRarity.DrawFilterGUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "稀有度 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Context": "UtilsGUI.DrawRoleFlagAsIconString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank",
+      "Context": "CharStatsWindow.Draw_CharStatsCompact",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "抗争军等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended loadouts",
+      "Context": "LoadoutTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "推荐技能组",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "重复",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore to default. (",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "恢复默认值（",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore to default. (song: Epic Sax Guy)",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "恢复默认音效（Epic Sax Guy）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save changes",
+      "Context": "AuxiliaryViewerSection.DrawTabHeaderLoadout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Save the audio path.\nThe audio path setting only applies after pressing save.\nClear the audio path to restore to the previous one.",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "保存音频文件路径。\n点击保存后才会生效。\n清空路径可还原上次设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan for obtained Notes:",
+      "Context": "FieldNoteTableSection.DrawOptionBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "扫描已获得的战果记录：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on map.",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在地图上显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Succor",
+      "Context": "CharStatsWindow.Draw_CharStatsCompact",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "救命彗星勋章",
+      "Source": "library"
+    },
+    {
+      "Original": "Test the audio.",
+      "Context": "ConfigWindow.DrawTabAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "试听。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn alarm on/off. Turned-off alarms will not be triggered until they're on again.",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开启或关闭提醒。关闭后将暂停触发，直到再次开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Assist",
+      "Context": "ConfigWindow.DrawTabUiHint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "界面辅助",
+      "Source": "library"
+    },
+    {
+      "Original": "Un-expired this alarm with the same setting. (not applicable for Time Alarm)",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用原设置重新启用此提醒（定时提醒除外）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Valor",
+      "Context": "CharStatsWindow.Draw_CharStatsCompact",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "勇猛彗星勋章",
+      "Source": "library"
+    },
+    {
+      "Original": "Vendor:",
+      "Context": "RelicSection.DrawTopic_Resistance",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "商人：",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "Fragment.GenReprUiTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "[A] General configs",
+      "Context": "ConfigWindow.DrawTabMisc",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "[A] 常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "location",
+      "Context": "FilterLocation..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "status",
+      "Context": "FilterStatus..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Context": "AlarmWindow.DrawAlarmInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未知",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

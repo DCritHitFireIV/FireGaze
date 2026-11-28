@@ -1,0 +1,300 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "CameraLoader",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Toggles LCAction's main window",
+      "Context": "CameraLoader..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭 LCAction 主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Settings:",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "窗口设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock window position",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable manual resizing",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁止手动调整窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Lights, Camera, Action...",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开 Lights, Camera, Action…",
+      "Source": "library"
+    },
+    {
+      "Original": "Height Settings",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "高度设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sorting Settings",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "排序设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hey there! Happy GPosing!",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "集体动作拍照愉快！",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset selection box height:",
+      "Context": "PluginWindow.DrawHeightSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "预设选择框高度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera",
+      "Context": "PluginWindow.DrawHeightSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "相机",
+      "Source": "library"
+    },
+    {
+      "Original": "Number of rows shown when selecting a camera preset.",
+      "Context": "PluginWindow.DrawHeightSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择相机预设时显示的行数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lighting",
+      "Context": "PluginWindow.DrawHeightSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "灯光",
+      "Source": "library"
+    },
+    {
+      "Original": "Number of rows shown when selecting a lighting preset.",
+      "Context": "PluginWindow.DrawHeightSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择灯光预设时显示的行数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sorting mode when selecting a preset. Default is Creation Date.",
+      "Context": "PluginWindow.DrawSortingSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择预设时的排序方式。默认按创建日期排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite imported presets'\n Creation Date",
+      "Context": "PluginWindow.DrawSortingSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖导入预设的\n创建日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable outside of Group Pose",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅在集体动作模式下可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Import preset from clipboard",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "从剪贴板导入预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to import preset. Check you've copied the preset correctly and that you're on the right tab.",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法导入预设。请确认已复制完整预设，并检查当前标签页是否正确。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a new preset",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.ColoredIconButton",
+      "Translated": "新建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Name",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "预设名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Preset",
+      "Context": "PresetTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to create preset: Name is taken.",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法创建预设：该名称已被使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to Clipboard",
+      "Context": "PresetTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Preset",
+      "Context": "PresetTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.ColoredButton",
+      "Translated": "载入预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "PresetTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.ColoredButton",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "PresetTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.ColoredButton",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "模式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "缩放： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "PresetTab.DrawLightingPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconText",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Type",
+      "Context": "PresetTab.DrawLightingPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconText",
+      "Translated": "光源类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings##SettingsTab",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

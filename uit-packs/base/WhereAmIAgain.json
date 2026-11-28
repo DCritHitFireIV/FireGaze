@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WhereAmIAgain",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Where am I again? - Settings",
+      "Context": "ConfigurationWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "我在哪里？设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Instance Number",
+      "Context": "ConfigurationWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示副本区编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the instance number for the current instance at the end of the string",
+      "Context": "ConfigurationWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在位置文字末尾显示当前所在的副本区编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Precise Housing Location",
+      "Context": "ConfigurationWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示详细的住宅区位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces 'Ward 14' with `Ward 14 Subdivision Plot 23`",
+      "Context": "ConfigurationWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "将「第 14 区」细化为「第 14 区扩建区 23 号」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open configuration window",
+      "Context": "WhereAmIAgainPlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EasyZoomReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Settings",
+      "Context": "EasyZoomRebornPlugin.CreateWindows",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable camera collision",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁用镜头碰撞",
+      "Source": "library"
+    },
+    {
+      "Original": "FOV",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "FOV Max",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最大视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "FOV Min",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最小视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "通用",
+      "Source": "library"
+    },
+    {
+      "Original": "Look At Height Offset",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "镜头注视点高度偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the EasyZoomReborn configuration window.",
+      "Context": "EasyZoomRebornPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 EasyZoomReborn 的设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support the developer on Ko-fi",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "前往 Ko-fi 支持开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Max",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最大镜头距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Min",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最小镜头距离",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

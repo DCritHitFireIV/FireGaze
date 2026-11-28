@@ -1,0 +1,779 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Collections",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Subaquatic Voyages - ",
+      "Context": "SubmarineSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "潜水艇探索 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Collections window",
+      "Context": "CommandsInitializer.get_mainWindowCmdMessage",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开收藏窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find description",
+      "Context": "BlueMageCollectible.GetDescription",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未找到说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast: ",
+      "Context": "BlueMageCollectible.GetPrimaryHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咏唱时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Recast: ",
+      "Context": "BlueMageCollectible.GetSecondaryHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "复唱时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Patch",
+      "Context": "Collectible`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "Collectible`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Events",
+      "Context": "Collectible`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除活动奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Mog Station",
+      "Context": "Collectible`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除道具商城物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Unknown",
+      "Context": "Collectible`1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除获取途径不明的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Patch ",
+      "Context": "Collectible`1.GetPrimaryHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "Collectible`1.GetDisplayPatch",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Channels",
+      "Context": "GlamourCollectible..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "染色区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "GlamourCollectible..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "GlamourCollectible..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Identical to: ",
+      "Context": "GlamourCollectible.DrawAdditionalTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "外观相同： ",
+      "Source": "library"
+    },
+    {
+      "Original": " dye slots)",
+      "Context": "GlamourCollectible.DrawAdditionalTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个染色槽）",
+      "Source": "library"
+    },
+    {
+      "Original": "Eternal Bonding",
+      "Context": "HairstyleCollectible.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "永结同心",
+      "Source": "library"
+    },
+    {
+      "Original": "Seats",
+      "Context": "MountCollectible..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "可乘人数",
+      "Source": "library"
+    },
+    {
+      "Original": "Card ",
+      "Context": "TripleTriadCollectible.GetSecondaryHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "卡牌 ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "TripleTriadCollectible.GetSecondaryHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftable",
+      "Context": "CraftingSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Mog Station Item",
+      "Context": "MogStationSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "道具商城物品",
+      "Source": "library"
+    },
+    {
+      "Original": "PvP Series ",
+      "Context": "PvPSeriesSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "PvP 系列 ",
+      "Source": "library"
+    },
+    {
+      "Original": " - Level ",
+      "Context": "PvPSeriesSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " - 等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Shop",
+      "Context": "ShopSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知商店",
+      "Source": "library"
+    },
+    {
+      "Original": "at ",
+      "Context": "ShopSource.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "于 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "PreviewExecutor.Preview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Collections",
+      "Context": "Plugin.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Content Filters",
+      "Context": "CollectionTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "内容筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Patch",
+      "Context": "FullCollectionTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择版本",
+      "Source": "library"
+    },
+    {
+      "Original": "View All Items",
+      "Context": "FullCollectionTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "查看全部物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Slots",
+      "Context": "GlamourTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "装备部位",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "GlamourTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "获取途径",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "GlamourTab.DrawTimer",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets",
+      "Context": "GlamourTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Context": "GlamourTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Can only be viewed in an Instance",
+      "Context": "InstanceTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "只能在副本内查看",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Obtained",
+      "Context": "InstanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已获得的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "outfits preview",
+      "Context": "OutfitsTab..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "套装预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipped By",
+      "Context": "OutfitsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "可装备职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Separate Preview and Add to Equip Slot",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将“预览”和“添加到装备栏”设为独立操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto open Instance tab when entering an instance",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入副本时自动打开副本标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "padding",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Only open Instance tab if there are uncollected items ",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在有未收集物品时打开副本标签页 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto hide obtained items from Instance tab",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动在副本标签页隐藏已获得物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Show additional item information for these collections",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "为以下收藏类别显示额外物品信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude these collections from the Instance tab",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在副本标签页中排除以下收藏类别",
+      "Source": "library"
+    },
+    {
+      "Original": "No items in Wish List",
+      "Context": "WishlistTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "心愿单为空",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By",
+      "Context": "CollectionWidget..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "CollectionWidget.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Show:",
+      "Context": "CollectionWidget.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "显示：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "收藏夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview items on your character. Resets on window closing.\nDisabled for Mog Station items.",
+      "Context": "CollectionWidget.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在角色身上预览物品，关闭窗口即会还原。\n道具商城物品不支持预览。",
+      "Source": "library"
+    },
+    {
+      "Original": "Try On",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Preview",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Reapply Preview",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新应用预览",
+      "Source": "library"
+    },
+    {
+      "Original": "More Filters",
+      "Context": "CollectionWidget.DrawAdvancedFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更多筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click To Interact",
+      "Context": "CollectionWidget.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "右键点击查看操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Glamour Slot",
+      "Context": "CollectionWidget.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到投影栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click to interact...",
+      "Context": "EquipSlotsWidget.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "右键点击查看操作…",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from Slot",
+      "Context": "EquipSlotsWidget.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从栏位移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "GlamourTreeWidget..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "主",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "GlamourTreeWidget..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Directory",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Set",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Glamour Plate",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "添加到投影模板",
+      "Source": "library"
+    },
+    {
+      "Original": "Only usable in Plate Creation window.",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "仅在编辑投影模板时可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy from Examine window",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从调查窗口复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Only usable in Examine window.",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "仅在调查窗口中可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##directory-delete",
+      "Context": "GlamourTreeWidget.DrawGlamourTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##",
+      "Context": "GlamourTreeWidget.DrawGlamourTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable All",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Job",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "当前职业",
+      "Source": "library"
+    },
+    {
+      "Original": "All Classes",
+      "Context": "JobSelectorWidget.JobSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所有职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Artifact Gear",
+      "Context": "JobSelectorWidget.JobSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业专属装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click for Dye 1 | Right click for Dye 2",
+      "Context": "PaletteWidget.DrawPalette",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "左键选择染色 1，右键选择染色 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Picker:\nLeft click to select the closest Dye to the highlighted color\nHold shift and left click to do the above for Dye 2",
+      "Context": "PaletteWidget.DrawPalette",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "颜色选择器：\n左键选择最接近高亮颜色的染剂\n按住 Shift 并左键可为染剂 2 执行上述操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap Dyes",
+      "Context": "PaletteWidget.DrawPalette",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "交换两处染色",
+      "Source": "library"
+    },
+    {
+      "Original": "one",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "一",
+      "Source": "library"
+    },
+    {
+      "Original": "two",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "二",
+      "Source": "library"
+    },
+    {
+      "Original": " Copy Name ",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 复制名称 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sources",
+      "Context": "TooltipWidget.DrawSources",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "获取途径",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Link",
+      "Context": "TooltipWidget.DrawSources",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Marketboard price",
+      "Context": "TooltipWidget.DrawTradeableHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "市场布告板价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Untradeable",
+      "Context": "TooltipWidget.DrawTradeableHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "不可交易",
+      "Source": "library"
+    },
+    {
+      "Original": "ignore",
+      "Context": "UiHelper.GroupWithMinWidth",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter New Name...",
+      "Context": "UiHelper.InputText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入新名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "-additional-tooltip",
+      "Context": "MinionCollectible.DrawAdditionalTooltip",
+      "Translated": "-附加提示",
+      "Source": "library"
+    },
+    {
+      "Original": "filters",
+      "Context": "GlamourTab.Draw",
+      "Translated": "筛选",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,376 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ICE",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Job ",
+      "Context": "Ui_ClassInfo.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "职业 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Missing Fishing Holes",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加遗漏的钓场",
+      "Source": "library"
+    },
+    {
+      "Original": "Export All Fishing Data",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出全部捕鱼数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing Hole Selector",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "钓场选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "All Missions for this hole",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "此钓场的所有任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to Flag",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移至地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Fishing Spot",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加钓场",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing Position",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "捕鱼位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Total: ",
+      "Context": "Ui_GatherEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "总计： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: ",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "半径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Distance",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最近距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Distance",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "最远距离",
+      "Source": "library"
+    },
+    {
+      "Original": "No route file exist. Do you want to create one?",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "路线文件不存在。是否创建？",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Mission: ",
+      "Context": "Ui_TestButtons.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Mission Timer: ",
+      "Context": "Ui_TestButtons.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任务计时： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected: ",
+      "Context": "Ui_TestButtons.DrawIconSelector",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已选中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "(optional custom name)",
+      "Context": "Ui_TestButtons.DrawIconSelector",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（可选的自定义名称）",
+      "Source": "library"
+    },
+    {
+      "Original": "(select to add optional name)",
+      "Context": "Ui_TestButtons.DrawIconSelector",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（选择后可添加名称）",
+      "Source": "library"
+    },
+    {
+      "Original": "Class Selection",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderUInt",
+      "Translated": "职业选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Scores",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制评分",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Fishing Missions",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出捕鱼任务",
+      "Source": "library"
+    },
+    {
+      "Original": "No fishing missions found!",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "未找到捕鱼任务！",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear stored scores",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除已保存的分数",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "2nd Job",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第二职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Activate Mission",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "启动任务",
+      "Source": "library"
+    },
+    {
+      "Original": "All Jobs",
+      "Context": "Table_MissionSelect..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "所有特职",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Mission:",
+      "Context": "Hud_MissionInfo.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Score:",
+      "Context": "Hud_MissionInfo.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前评分：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current State",
+      "Context": "Hud_MissionInfo.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Items",
+      "Context": "Hud_ShopExchange.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "所需物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Jobs",
+      "Context": "Table_MissionInfo.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "Table_MissionInfo.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Score",
+      "Context": "Table_MissionInfo.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "得分",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter##JobFilter",
+      "Context": "Table_MissionSelect.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SliderInt",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "Hud_ShopExchange.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

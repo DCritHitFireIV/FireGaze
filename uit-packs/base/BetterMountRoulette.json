@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BetterMountRoulette",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\" not found.",
+      "Context": "ActionHandler.HandleMountCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "\" 不存在。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid command: ",
+      "Context": "BetterMountRoulettePlugin.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无效命令： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Modes:",
+      "Context": "CharacterManagementRenderer.PluginSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "模式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount a random mount from the specified group, e.g. \"/pmount My Group\" summons a mount from the \"My Group\" group",
+      "Context": "BetterMountRoulettePlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "从指定分组中随机召唤坐骑。例如，输入 \"/pmount My Group\" 会从 \"My Group\" 分组中随机召唤一匹坐骑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount group \"",
+      "Context": "ActionHandler.HandleMountCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "坐骑分组 \"",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the config window.",
+      "Context": "BetterMountRoulettePlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please specify a mount group",
+      "Context": "ActionHandler.HandleMountCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请指定坐骑分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to summon mount from group \"",
+      "Context": "ActionHandler.HandleMountCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法从此分组召唤坐骑：\"",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

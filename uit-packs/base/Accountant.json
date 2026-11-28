@@ -1,0 +1,466 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Accountant",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " on ",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": "All Crops Growing (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "全部作物生长中（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "All Objects Underway",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "全部外出中",
+      "Source": "library"
+    },
+    {
+      "Original": "All Objects Underway (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "全部外出中（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Already",
+      "Context": "[Accountant] CropCache.TimeSpanString2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已经",
+      "Source": "library"
+    },
+    {
+      "Original": "Background",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy to clipboard.",
+      "Context": "[Accountant] ConfigWindow.CopyOnClickSelectable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Collapsed Header Border",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "折叠标题的边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Growing",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "作物生长中",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Grown Out",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "作物已成熟",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Self-Sufficient",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "作物无需照料",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Wilted",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "作物已枯萎",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Withered",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "作物已枯死",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Name",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "自定义名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "[Accountant] ImGuiRaii.ColorPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Header",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "默认标题",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Text",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "默认文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled Text",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "已禁用的文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Plugin",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "成熟时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave blank for default...",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "留空使用默认值…",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Allowances Capped",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "理符限额已满",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Allowances Capped (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "理符限额已满（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Allowances Nearing Cap",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "理符限额即将满额",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Allowances Nearing Cap (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "理符限额即将满额（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Context": "[Accountant] CropCache.TimeSpanString2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "No Full Free Company Data",
+      "Context": "[Accountant] TimerWindow.DrawCompanyWarning",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "部队数据不完整",
+      "Source": "library"
+    },
+    {
+      "Original": "No Objects Underway",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "全部待命",
+      "Source": "library"
+    },
+    {
+      "Original": "No Objects Underway (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "全部待命（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Accountant config. Use '/acct' or '/accountant timers' to toggle the timer window.",
+      "Context": "[Accountant] Accountant..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Accountant 设置。使用 /acct 或 /accountant timers 可显示或隐藏计时器窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planted:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "种植时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Name",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "玩家姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Position:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "[Accountant] ConfigWindow.DrawOrderNamesTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Crops Grown Out (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分作物已成熟（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Crops Self-Sufficient (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分作物无需照料（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Crops Wilted (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分作物已枯萎（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Crops Withered (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分作物已枯死（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Objects Underway",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分外出中",
+      "Source": "library"
+    },
+    {
+      "Original": "Some Objects Underway (Header)",
+      "Context": "[Accountant] ColorIdExtensions.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "部分外出中（标题）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tended:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "照料时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Timers###Accountant.Timers",
+      "Context": "[Accountant] TimerWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the timer window.",
+      "Context": "[Accountant] Accountant..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏计时器窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Used by player or free company names if all their retainers, airships or submersibles are available.",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "当玩家或部队的全部雇员、飞空艇或潜水艇均待命时，名称使用此颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Used by player or free company names if all their retainers, airships or submersibles are away.",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "当玩家或部队的全部雇员、飞空艇或潜水艇均已外出时，名称使用此颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Used by player or free company names if some their retainers, airships or submersibles are away and some are available.",
+      "Context": "[Accountant] ColorIdExtensions.Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
+      "Translated": "当玩家或部队的部分雇员、飞空艇或潜水艇外出、部分待命时，名称使用此颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Wilting:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "枯萎时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Withering:",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "枯死时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Worlds",
+      "Context": "[Accountant] ConfigWindow.DrawWorldsCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "[Accountant] ConfigWindow.SetupPlotHeaders",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zones",
+      "Context": "[Accountant] ConfigWindow.DrawZonesCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii/Id.Push",
+      "Translated": "区域",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

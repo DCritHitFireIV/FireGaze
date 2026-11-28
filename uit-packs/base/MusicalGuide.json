@@ -1,0 +1,220 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MusicalGuide",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open settings for Musical Guide",
+      "Context": "MusicalGuide..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Musical Guide 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Musical Guide commands:",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide 命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Compatibility Notice",
+      "Context": "MusicalGuide.OnPluginsChanged",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "兼容性提示",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable plugin",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "First Person Settings",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "第一人称设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable real first person",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用真实第一人称",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduce motion",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "减少动态效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow full motion in emotes",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "情感动作期间保留完整动作幅度",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow first person tracking in Gpose",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许在集体动作中使用第一人称跟踪",
+      "Source": "library"
+    },
+    {
+      "Original": "First Person Adjustments",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "第一人称调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Field of view in first person",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "第一人称视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera offset forward",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头前后偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera offset up",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头上下偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera offset sideways",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头左右偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Head rotation pitch adjustment",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "头部俯仰角调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum vertical angle",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最大垂直角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum horizontal angle",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最大水平角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera culling distance",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头剔除距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Force objects closer than this to be rendered in real first person view. This includes the player character.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在真实第一人称视角中，强制渲染此距离以内的物体，包括玩家角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable third person camera control",
+      "Context": "ConfigWindow.DrawThirdPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用第三人称镜头控制",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

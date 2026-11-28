@@ -1,0 +1,382 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PassportCheckerReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "% left",
+      "Context": "OverlayWidgets.DrawBestPull",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "% 剩余",
+      "Source": "library"
+    },
+    {
+      "Original": "API key saved.",
+      "Context": "MainWindow.DrawTomestonePage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "API 密钥已保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Activity Hidden",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "活动记录已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "An open-source alternative to the PFFinder plugin. It shows a member info overlay beside Party Finder listings, looks up prog points on Tomestone.gg and FFLogs, and adds quality-of-life improvements to the Party Finder.",
+      "Context": "MainWindow.DrawAboutPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "PFFinder 的开源替代插件。在招募详情旁显示成员信息，可查询 Tomestone.gg 和 FFLogs 上的攻略进度，并提供小队招募便利功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Average overall parse ",
+      "Context": "OverlayWidgets.FFLogsCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "综合平均评分 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Best pull ",
+      "Context": "OverlayWidgets.DrawBestPull",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "最佳尝试 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Best:",
+      "Context": "OverlayWidgets.DrawBestParseOnDifferentJob",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "最佳：",
+      "Source": "library"
+    },
+    {
+      "Original": "Best: ",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "最佳： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking your credentials with FFLogs…",
+      "Context": "MainWindow.DrawFFLogsPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在向 FFLogs 验证凭据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleared",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已通关",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleared ",
+      "Context": "OverlayWidgets.FFLogsCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已通关 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleared (",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已通关（",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty",
+      "Context": "PartyListWindow.DrawDutySelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "副本",
+      "Source": "library"
+    },
+    {
+      "Original": "FFLogs accepted these credentials.",
+      "Context": "TestFFLogsCredentialsAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "FFLogs 已验证这组凭据。",
+      "Source": "library"
+    },
+    {
+      "Original": "FFLogs rejected these credentials.",
+      "Context": "TestFFLogsCredentialsAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "FFLogs 拒绝了这组凭据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hidden Profile",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "资料已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep your token private. It grants access to your Tomestone account data.",
+      "Context": "MainWindow.DrawTomestonePage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请妥善保管令牌，它可用于访问你的 Tomestone 账户数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading FFLogs & Tomestone data…",
+      "Context": "PartyListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载 FFLogs 和 Tomestone 数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading FFLogs data…",
+      "Context": "PartyListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载 FFLogs 数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading Tomestone data…",
+      "Context": "PartyListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载 Tomestone 数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Lookup Failed",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "查询失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Member Info",
+      "Context": "PFWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "成员信息",
+      "Source": "library"
+    },
+    {
+      "Original": "N/A",
+      "Context": "OverlayWidgets.FFLogsCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No Logs",
+      "Context": "OverlayWidgets.TomestoneCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无战斗记录",
+      "Source": "library"
+    },
+    {
+      "Original": "No logs",
+      "Context": "OverlayWidgets.DrawNoLogsWithAverage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无战斗记录",
+      "Source": "library"
+    },
+    {
+      "Original": "No logs - Average percentage parse ",
+      "Context": "OverlayWidgets.DrawNoLogsWithAverage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无记录，平均百分位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "No party finder listing selected.",
+      "Context": "PFWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择招募条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not a high-end duty.",
+      "Context": "PFWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "非高难度副本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Passport Check Reborn menu.",
+      "Context": "PassportCheckerReborn.LoadAsync",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Passport Checker Reborn 菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open a PF detail window to see member info.",
+      "Context": "PFWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开招募详情窗口即可查看成员信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 No logs",
+      "Context": "OverlayWidgets.DrawMultiPhase",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "第一阶段无记录",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 No logs",
+      "Context": "OverlayWidgets.DrawMultiPhase",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "第二阶段无记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Members",
+      "Context": "PartyListWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Passport Checker Reborn – Settings###PassportCheckerRebornSettings",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Passport Checker Reborn 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Player ",
+      "Context": "PFWindow.DrawMemberRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "玩家 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Private Player ",
+      "Context": "PFWindow.DrawMemberRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "隐藏资料的玩家 ",
+      "Source": "library"
+    },
+    {
+      "Original": "The client secret is only shown once. Keep it private.",
+      "Context": "MainWindow.DrawFFLogsPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "客户端密钥只显示一次，请妥善保管。",
+      "Source": "library"
+    },
+    {
+      "Original": "The test failed: ",
+      "Context": "TestFFLogsCredentialsAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "测试失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the Party List Overlay on or off.",
+      "Context": "PassportCheckerReborn.LoadAsync",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏小队列表悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unresolved Player ",
+      "Context": "PFWindow.DrawMemberRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未识别的玩家 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsaved changes.",
+      "Context": "MainWindow.DrawFFLogsPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "有未保存的更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for party data…",
+      "Context": "PartyListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在等待小队数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "[PassportChecker] Party List Overlay ",
+      "Context": "PassportCheckerReborn.OnPartyListCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PassportChecker] 小队列表悬浮窗 ",
+      "Source": "library"
+    },
+    {
+      "Original": "[PassportChecker] Unable to request this player's Party Finder listing.",
+      "Context": "PartyFinderManager.OnViewRecruitmentClicked",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PassportChecker] 无法获取该玩家的招募信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "shown",
+      "Context": "PassportCheckerReborn.OnPartyListCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已显示",
+      "Source": "library"
+    },
+    {
+      "Original": "x No Current Job Logs",
+      "Context": "OverlayWidgets.FFLogsCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "次，当前职业无记录",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

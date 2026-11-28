@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WExtras",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "WExtras configuration",
+      "Context": "ConfigGui..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "WExtras 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable all zones for time adjust",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "允许在所有区域调整时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable all zones for weather adjust",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "允许在所有区域调整天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-enable all zones for time adjust",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动为所有区域启用时间调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-enable all zones for weather adjust",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动为所有区域启用天气调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Select weather...",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择天气…",
+      "Source": "library"
+    },
+    {
+      "Original": "Override true weather value...",
+      "Context": "ConfigGui.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "覆盖实际天气值…",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

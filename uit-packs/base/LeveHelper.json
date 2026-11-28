@@ -1,0 +1,937 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LeveHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Sponsor",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.DrawLink",
+      "Translated": "赞助",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveHelperTabs",
+      "Context": "[LeveHelper] MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "理符助手标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Items",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "采集物品",
+      "Source": "library"
+    },
+    {
+      "Original": "RowId",
+      "Context": "[LeveHelper] DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "行ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "GatheringPoints",
+      "Context": "[LeveHelper] DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "采集点",
+      "Source": "library"
+    },
+    {
+      "Original": " Gathering Points###GatheringPoints_",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": " 采集点",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveHelper",
+      "Context": "[LeveHelper] DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "理符助手",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveListTable",
+      "Context": "[LeveHelper] LeveListTable.Initialize",
+      "PreserveID": false,
+      "Translated": "理符列表表格",
+      "Source": "library"
+    },
+    {
+      "Original": ".Label",
+      "Context": "[HaselCommon] Column`1..ctor",
+      "PreserveID": false,
+      "Translated": ".标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset###Reset",
+      "Context": "[LeveHelper] LevelColumn.DrawFilter",
+      "PreserveID": false,
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "LevelColumn.DrawFilter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "LevemeteTable",
+      "Context": "[LeveHelper] LevemeteColumn.DrawFilter",
+      "PreserveID": false,
+      "Translated": "理符委托人表格",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve",
+      "Context": "[LeveHelper] NameColumn.DrawColumn",
+      "PreserveID": false,
+      "Translated": "理符",
+      "Source": "library"
+    },
+    {
+      "Original": "ContextMenu",
+      "Context": "[LeveHelper] NameColumn.DrawColumn",
+      "PreserveID": false,
+      "Translated": "右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "PopupTable",
+      "Context": "[LeveHelper] NameColumn.DrawLeveTooltip",
+      "PreserveID": false,
+      "Translated": "弹出表格",
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Context": "NameColumn.DrawLeveTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "NameColumn.DrawLeveTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "leve",
+      "Context": "DrawColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiContextMenuBuilder.AddOpenOnGarlandTools",
+      "Translated": "理符",
+      "Source": "library"
+    },
+    {
+      "Original": "_Selectable",
+      "Context": "[LeveHelper] CraftQueueState.DrawItem",
+      "PreserveID": false,
+      "Translated": "_可选",
+      "Source": "library"
+    },
+    {
+      "Original": "_Tooltip",
+      "Context": "[LeveHelper] CraftQueueState.DrawItem",
+      "PreserveID": false,
+      "Translated": "_提示",
+      "Source": "library"
+    },
+    {
+      "Original": "item",
+      "Context": "DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiContextMenuBuilder.AddOpenOnGarlandTools",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[HaselCommon] SimpleDebugWindow.DrawSidebar",
+      "PreserveID": false,
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "WindowManager",
+      "Context": "[HaselCommon] WindowManagerTab.get_Name",
+      "PreserveID": false,
+      "Translated": "窗口管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "WindowManagerTable",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "PreserveID": false,
+      "Translated": "窗口管理器表格",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "PreserveID": false,
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Closed",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "PreserveID": false,
+      "Translated": "已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "PreserveID": false,
+      "Translated": "已打开",
+      "Source": "library"
+    },
+    {
+      "Original": "SimpleWindow",
+      "Context": "[HaselCommon] SimpleWindow..ctor",
+      "PreserveID": false,
+      "Translated": "简单窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to clear filters.",
+      "Context": "[HaselCommon] ColumnFlags`2.DrawFilter",
+      "PreserveID": false,
+      "Translated": "右键点击清除筛选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Context": "[HaselCommon] ColumnFlags`2.DrawFilter",
+      "PreserveID": false,
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Table",
+      "Context": "[HaselCommon] Table`1.DrawTableInternal",
+      "PreserveID": false,
+      "Translated": "表格",
+      "Source": "library"
+    },
+    {
+      "Original": "ColumnHeader",
+      "Context": "[HaselCommon] Table`1.DrawTableInternal",
+      "PreserveID": false,
+      "Translated": "列标题",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "LeveHelper",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Plugin.DisplayName",
+      "Translated": "理符助手",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveHelper",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "MainWindow.Title",
+      "Translated": "理符助手",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveHelper - Licenses",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LicensesWindow.Title",
+      "Translated": "LeveHelper - 许可协议",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveHelper Configuration",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ConfigWindow.Title",
+      "Translated": "LeveHelper 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the LeveHelper window",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LeveHelper.CommandHandlerHelpMessage",
+      "Translated": "打开 LeveHelper 窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the LeveHelper configuration window",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LeveHelper.CommandHandler.Config.HelpMessage",
+      "Translated": "打开 LeveHelper 设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Visit the LeveHelper GitHub Repository",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ConfigWindow.GitHubLink.Tooltip",
+      "Translated": "访问 LeveHelper GitHub 仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Support me on GitHub Sponsors",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ConfigWindow.SponsorLink.Tooltip",
+      "Translated": "在 GitHub Sponsors 上支持我",
+      "Source": "library"
+    },
+    {
+      "Original": "Licenses",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ConfigWindow.Licenses",
+      "Translated": "许可协议",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify when Wanted Target is found",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Config.NotifyWantedTarget",
+      "Translated": "发现通缉目标时通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify when Treasure is found",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Config.NotifyTreasure",
+      "Translated": "发现宝藏时通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Show button to import the crafting list to TeamCraft",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Config.ShowImportOnTeamCraftButton.Label",
+      "Translated": "显示将制作清单导入 TeamCraft 的按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Displayed under the Queue tab.",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Config.ShowImportOnTeamCraftButton.Description",
+      "Translated": "显示在队列页签中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Configuration",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "TitleBarButton.ToggleConfig.Tooltip.OpenConfig",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Configuration",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "TitleBarButton.ToggleConfig.Tooltip.CloseConfig",
+      "Translated": "关闭设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Levequests",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Tabs.Levequest",
+      "Translated": "理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Queue",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Tabs.Queue",
+      "Translated": "队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Recipe Tree",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Tabs.RecipeTree",
+      "Translated": "配方树",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "Tabs.Configuration",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Accepted Leves: {0}/16",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.AcceptedLeves",
+      "Translated": "已接受理符：{0}/16",
+      "Source": "library"
+    },
+    {
+      "Original": ", {0} missing, {1} days total",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.MissingText",
+      "Translated": "，缺少 {0}，共 {1} 天",
+      "Source": "library"
+    },
+    {
+      "Original": "Allowances: {0}/100 (need {1}{2}, next 3 in {3})",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Allowances",
+      "Translated": "理符配额：{0}/100（需要 {1}{2}，接下来 3 个在 {3}）",
+      "Source": "library"
+    },
+    {
+      "Original": "Completion: {0}/{1} ({2}%)",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Completion",
+      "Translated": "完成度：{0}/{1}（{2}%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Column.Level",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Column.Type",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Column.Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Column.Name",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Levemete",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Column.Levemete",
+      "Translated": "行会理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to reset filter.",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.ColumnFilter.RightClickToResetFilters",
+      "Translated": "右键点击重置筛选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Middle-click to select {0}.",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.ColumnFilter.MiddleClickToSelect",
+      "Translated": "中键点击选择 {0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.ColumnFilter.EnableAll",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.ColumnFilter.EnableAny",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready for turn in",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.ReadyForTurnIn",
+      "Translated": "可以交付",
+      "Source": "library"
+    },
+    {
+      "Original": "Started",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.Started",
+      "Translated": "已开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.Failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Accepted",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.Accepted",
+      "Translated": "已接受",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.Complete",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.Status.Incomplete",
+      "Translated": "未完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Only available to characters that started in {0}.",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.Tooltip.TownLocked",
+      "Translated": "仅限在 {0} 开始的角色可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Journal",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.ContextMenu.OpenInJournal",
+      "Translated": "在任务日志中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open on GarlandTools",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Leve.ContextMenu.OpenOnGarlandTools",
+      "Translated": "在 GarlandTools 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Left Click: Open Map\nRight Click: Filter by Levemete",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Levemete.ContextMenu.Tooltip",
+      "Translated": "左键：打开地图\n右键：按行会理符筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click: Filter by Levemete",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "ListTab.Levemete.ContextMenu.TooltipNoMap",
+      "Translated": "右键点击按理符发行人筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "No accepted Levequests",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.NoActiveLevequests",
+      "Translated": "没有已接受的理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Import List on TeamCraft",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.ImportOnTeamCraft",
+      "Translated": "在 TeamCraft 中导入列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Crystals:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.Category.Crystals",
+      "Translated": "水晶：",
+      "Source": "library"
+    },
+    {
+      "Original": "Gather:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.Category.Gather",
+      "Translated": "采集：",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.Category.Craft",
+      "Translated": "制作：",
+      "Source": "library"
+    },
+    {
+      "Original": "Other:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.Category.Other",
+      "Translated": "其他：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready for turn in!",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.ReadyForTurnIn",
+      "Translated": "可以交付！",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Uptime:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Title",
+      "Translated": "下次出现：",
+      "Source": "library"
+    },
+    {
+      "Original": "Day",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Day",
+      "Translated": "日",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Time",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Starts in",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.StartsIn",
+      "Translated": "开始于",
+      "Source": "library"
+    },
+    {
+      "Original": "Ends in",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.EndsIn",
+      "Translated": "结束于",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Duration",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Downtime",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Downtime",
+      "Translated": "消失时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "QueueTab.FishUptimeTable.Active",
+      "Translated": "出现中",
+      "Source": "library"
+    },
+    {
+      "Original": "No accepted Levequests",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "RecipeTreeTab.NoActiveLevequests",
+      "Translated": "没有已接受的理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "RecipeTreeTab.Refresh",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "FilterManager.Title",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Filters",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "FilterManager.ClearFilters",
+      "Translated": "清除筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Levemete:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LevemeteFilter.Label",
+      "Translated": "行会理符：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LevemeteFilter.Selectable.All",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Level:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LevelFilter.MinLevel.Label",
+      "Translated": "最低等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Level:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LevelFilter.MaxLevel.Label",
+      "Translated": "最高等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Location:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LocationFilter.Label",
+      "Translated": "地点：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LocationFilter.Selectable.All",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Current Zone",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "LocationFilter.SetCurrentZone",
+      "Translated": "设为当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "NameFilter.Label",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Status:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Label",
+      "Translated": "状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Any",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready for turn in",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.ReadyForTurnIn",
+      "Translated": "可以交付",
+      "Source": "library"
+    },
+    {
+      "Original": "Started",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Started",
+      "Translated": "已开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Accepted",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Accepted",
+      "Translated": "已接受",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Complete",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "StatusFilter.Status.Incomplete",
+      "Translated": "未完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Type:",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "TypeFilter.Label",
+      "Translated": "类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "TypeFilter.Selectable.All",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Set {0}",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "TypeFilter.SetSuggestion",
+      "Translated": "设为 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Wanted target {0} discovered.",
+      "Container": "json:LeveHelper.Translations.json",
+      "Key": "WantedTargetScanner.WantedTarget.Notification",
+      "Translated": "发现通缉目标 {0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "USAGE: ",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.Usage",
+      "Translated": "用法： ",
+      "Source": "library"
+    },
+    {
+      "Original": ">>Subcommands:",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.Subcommands",
+      "Translated": ">>子命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "No description.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.NoDescription",
+      "Translated": "无描述。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load the configuration file. Creating a new one.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "Notification.CouldNotLoadConfig",
+      "Translated": "无法加载配置文件。正在创建新文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open on Garland Tools",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.OpenOnGarlandTools",
+      "Translated": "在 Garland Tools 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Fish Guide",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.OpenInFishGuide",
+      "Translated": "在捕鱼图鉴中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Search the markets",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.SearchTheMarkets",
+      "Translated": "查询市场",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to clear filters.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnFlags.Filter.RightClickToClear",
+      "Translated": "右键点击清除筛选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnFlags.Filter.EnableAll",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "False",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnBool.False",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "True",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnBool.True",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnYesNo.No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnYesNo.Yes",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

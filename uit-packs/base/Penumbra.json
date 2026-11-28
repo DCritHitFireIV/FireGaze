@@ -1,0 +1,228 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Penumbra",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Extracting '",
+      "Context": "[Penumbra] ArchiveExtractionNotification.get_NotificationMessage",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "正在提取「",
+      "Source": "library"
+    },
+    {
+      "Original": "Extraction complete.",
+      "Context": "[Penumbra] ArchiveExtractionNotification.NotificationActions",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "提取完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Material Editor",
+      "Context": "[Penumbra] MaterialEditorFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 材质编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Model Editor",
+      "Context": "[Penumbra] ModelEditorFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 模型编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Pre Bone Deformer Editor",
+      "Context": "[Penumbra] DeformerEditorFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 预骨骼变形器编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Shader Package Editor",
+      "Context": "[Penumbra] ShaderPackageEditorFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 着色器包编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Shader Parameter Viewer",
+      "Context": "[Penumbra] ShaderParameterViewerFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 着色器参数查看器",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Texture Editor and Combiner",
+      "Context": "[Penumbra] CombiningTextureEditorFactory.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "Penumbra 纹理编辑与合成工具",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Create a persistent Direct3D device object on the first texture compression operation and keep it until Penumbra is unloaded or when this setting is changed.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Singleton",
+      "Translated": "首次压缩纹理时创建一个 Direct3D 设备对象，并保留到 Penumbra 被卸载或此设置发生变更。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create an ephemeral Direct3D device object per texture compression operation.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Transient",
+      "Translated": "每次压缩纹理时创建一个临时 Direct3D 设备对象。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter, including the Alpha channel.\nThis mode is commutative.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightRgba",
+      "Translated": "叠加层较暗处会压暗输入层，较亮处会提亮输入层。透明度通道也参与计算。\n两层的顺序不影响结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the input over the result.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightUnder",
+      "Translated": "叠加层较暗处会压暗输入层，较亮处会提亮输入层。\n将输入层合成到结果上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the result over the input.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightOver",
+      "Translated": "叠加层较暗处会压暗输入层，较亮处会提亮输入层。\n将结果合成到输入层上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter, including the Alpha channel.\nThis mode is commutative.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayRgba",
+      "Translated": "输入层较暗处会压暗叠加层，较亮处会提亮叠加层。透明度通道也参与计算。\n两层的顺序不影响结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the input over the result.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayUnder",
+      "Translated": "输入层较暗处会压暗叠加层，较亮处会提亮叠加层。\n将输入层合成到结果上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the result over the input.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayOver",
+      "Translated": "输入层较暗处会压暗叠加层，较亮处会提亮叠加层。\n将结果合成到输入层上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable this mod.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Disabled",
+      "Translated": "停用此模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable this option. For single select groups, the first non-disabled, non-ignored option will be prioritized if there is no available enabled or toggled option.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Disabled",
+      "Translated": "停用此选项。在单选组中，若没有已启用或待切换的可用选项，优先选择第一个未停用且未忽略的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not create an auxiliary Direct3D device object, and use a software compression method instead.\nWill significantly slow down texture compression operations, and significantly degrade the output quality.\nONLY USE AS A LAST RESORT.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::None",
+      "Translated": "改用软件压缩，不创建辅助 Direct3D 设备。\n纹理压缩速度和输出质量都会明显下降。\n仅在其他方法均不可行时使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not create an auxiliary Direct3D device object, and use the game's main one instead.\nWill cause freezes while doing texture compression operations.\nPrefer the above options if possible.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Borrowed",
+      "Translated": "使用游戏的主 Direct3D 设备，不创建辅助设备。\n压缩纹理期间会导致游戏卡顿。\n如有可能，请优先选择上方选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable this mod.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Enabled",
+      "Translated": "启用此模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable this option. For single select groups, the first enabled option will be prioritized.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Enabled",
+      "Translated": "启用此选项。在单选组中，优先使用第一个已启用的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inverts the RGB channel values of the input and the overlay, multiplies them, and inverts them back.\nApplies the result over the input.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenOver",
+      "Translated": "将输入层与叠加层的 RGB 通道值分别取反，相乘后再次取反。\n将结果合成到输入层上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inverts the RGBA channel values of the input and the overlay, multiplies them, and inverts them back.\nThis mode is commutative.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenRgba",
+      "Translated": "将输入层与叠加层的 RGBA 通道值分别取反，相乘后再次取反。\n两层的顺序不影响结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep this mod's state as it is. If it is currently inherited, no other options will be applied.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Ignored",
+      "Translated": "保持此模组的当前状态。若当前使用继承设置，则不应用其他选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep this option's state as it is.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Ignored",
+      "Translated": "保持此选项的当前状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Multiplies the RGB channel values of the input and the overlay.\nApplies the input over the result.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyUnder",
+      "Translated": "将输入层与叠加层的 RGB 通道值相乘。\n将输入层合成到结果上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Multiplies the RGB channel values of the input and the overlay.\nApplies the result over the input.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyOver",
+      "Translated": "将输入层与叠加层的 RGB 通道值相乘。\n将结果合成到输入层上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Multiplies the RGBA channel values of the input and the overlay.\nThis mode is commutative.",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyRgba",
+      "Translated": "将输入层与叠加层的 RGBA 通道值相乘。\n两层的顺序不影响结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove temporary settings for this mod if there are any. Does nothing else.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::RemoveTemporary",
+      "Translated": "移除此模组已有的临时设置，不做其他更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Set this mod's state to be inherited. If temporary, uses forced inheritance. No other options will be applied.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Inherited",
+      "Translated": "将此模组设为继承。对于临时设置，强制继承。不会应用其他选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle this mod (if it is currently enabled, disable it and vice versa). Enables the mod if it is currently inherited.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Toggle",
+      "Translated": "切换此模组的启用状态。若当前为继承状态，则启用模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle this option (if it is currently enabled, disable it and vice versa). For single select groups, the first currently disabled option with toggle will be prioritized if there is no available enabled option.",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Toggle",
+      "Translated": "切换此选项的启用状态。在单选组中，若没有可用的已启用选项，优先选择第一个当前停用且待切换的选项。",
+      "Source": "library"
+    }
+  ]
+}

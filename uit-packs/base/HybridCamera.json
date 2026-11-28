@@ -1,0 +1,162 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HybridCamera",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " to use mode: ",
+      "Context": "ConfigWindow.DrawMoveModeConditionOption",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": " 使用以下模式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "- Under Character Configuration -> Camera Controls, set the option \"Standard Type Camera Auto-adjustment\" to \"Never\", and subsequently disable \"Enable Y-axis auto-adjustment\"",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "- 在角色设置的镜头操作中，将标准操作模式的镜头自动调整设为「不调整」，再关闭 Y 轴自动调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "- Under Character Configuration -> Legacy Type, toggle the option \"Disable camera pivot\" on",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "- 在角色设置的传统操作设置中，开启「禁用镜头转动」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Additionally, you should try using strafe over turn movement, and vice-versa.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "也可以交换试用横移和转向两种移动方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Before using this plugin, I suggest making the following changes to your character config:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用此插件前，建议先调整角色设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Force ",
+      "Context": "ConfigWindow.DrawMoveModeConditionOption",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "强制 ",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "通用设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Keybind Mode",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按键绑定模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Modern Mode",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "现代模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Ok!",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "知道了！",
+      "Source": "library"
+    },
+    {
+      "Original": "QoL",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "便利功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Smart Strafe",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "智能横移",
+      "Source": "library"
+    },
+    {
+      "Original": "This means going into your keybinds and changing your primary movement keys from turn to strafe, and decide which feels the best to use while under the influence of this plugin.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在快捷键设置中，把常用的左右转向键改为横移键，再试试哪种方式更适合搭配此插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the configuration window.",
+      "Context": "Commands.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, forces the selected movement mode while auto-running.",
+      "Context": "ConfigWindow.DrawOldConfig",
+      "Role": "UI",
+      "RoleReason": "→ DrawToolTipDelegate.Invoke",
+      "Translated": "自动奔跑时，强制使用选定的移动模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, forces the selected movement mode while rotating the camera. This is probably redundant.",
+      "Context": "ConfigWindow.DrawOldConfig",
+      "Role": "UI",
+      "RoleReason": "→ DrawToolTipDelegate.Invoke",
+      "Translated": "旋转镜头时，强制使用选定的移动模式。此设置可能并非必需。",
+      "Source": "library"
+    },
+    {
+      "Original": "auto-run",
+      "Context": "ConfigWindow.DrawOldConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动奔跑",
+      "Source": "library"
+    },
+    {
+      "Original": "camera rotation",
+      "Context": "ConfigWindow.DrawOldConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "旋转镜头",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

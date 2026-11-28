@@ -1,0 +1,2784 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AetherBlackbox",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Aether Blackbox v",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Translated": "以太黑匣子 v",
+      "Source": "library"
+    },
+    {
+      "Original": "Self",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "自身",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aether Blackbox",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Aether Blackbox",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Created by: rail",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者：rail",
+      "Source": "library"
+    },
+    {
+      "Original": "Credits & Acknowledgements:",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "制作人员与致谢：",
+      "Source": "library"
+    },
+    {
+      "Original": "DeathRecap by Kouzukii",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "DeathRecap 作者：Kouzukii",
+      "Source": "library"
+    },
+    {
+      "Original": "(Core logic, event capturing, and data structures)",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（核心逻辑、事件捕获和数据结构）",
+      "Source": "library"
+    },
+    {
+      "Original": "AetherDraw by rail",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "AetherDraw 作者：rail",
+      "Source": "library"
+    },
+    {
+      "Original": "(Canvas engine, drawing tools, network, and rendering)",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（画布引擎、绘图工具、网络和渲染）",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the GitHub Issues page in your browser.",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在浏览器中打开 GitHub 的问题页面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Donate & Support replay & planning features.",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "赞助回放和作战计划功能的开发。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy me a coffee!",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请我喝杯咖啡！",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click and drag to move this overlay. Moves full snapped group if top-left is dragged.",
+      "Context": "MainWindow.HandleAllianceSnappingAndDrag",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住鼠标右键拖动此叠加层。拖动左上角时会移动整组已吸附的元素。",
+      "Source": "library"
+    },
+    {
+      "Original": " - Powered by Death Recap by Kouzukii and AetherDraw by rail",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Translated": " - 由 Kouzukii 的 Death Recap 与 rail 的 AetherDraw 提供支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw >>",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "绘图 >>",
+      "Source": "library"
+    },
+    {
+      "Original": "<< Close",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "<< 关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture current state as a slide",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前状态保存为幻灯片",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Plan (",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "导出方案（",
+      "Source": "library"
+    },
+    {
+      "Original": "Live: HOST",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "实时：主持人",
+      "Source": "library"
+    },
+    {
+      "Original": "Live: VIEWER",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "实时：观众",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Ping View",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "标记视图位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Share your timeline position",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "共享当前时间轴位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Out",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "缩小",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom In",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "放大",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset View",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "重置视图",
+      "Source": "library"
+    },
+    {
+      "Original": "OpenAbout",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Translated": "打开关于",
+      "Source": "library"
+    },
+    {
+      "Original": "OpenConfig",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aether Blackbox Settings",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开 Aether Blackbox 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "ReplaySettings",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Translated": "回放设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Replay Visibility Settings",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "回放可见性设置",
+      "Source": "library"
+    },
+    {
+      "Original": "OpenMechanicLibrary",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Translated": "打开机制库",
+      "Source": "library"
+    },
+    {
+      "Original": "OpenSessionMechanics",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Translated": "打开副本机制",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Active Session Mechanics",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开当前副本机制",
+      "Source": "library"
+    },
+    {
+      "Original": "Party/Alliance Preview",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "小队/团队预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview and adjust the Party/Alliance overlay layout",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预览并调整小队/团队悬浮窗布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Replay Visualization",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "回放可视化",
+      "Source": "library"
+    },
+    {
+      "Original": "Show NPCs/Objects",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示NPC/物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP Bars",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示血条",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Statuses",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Show AoEs",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示AoE",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Loop on Select",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "选中时自动循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Nudge Left (-0.1s)",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "左移 (-0.1秒)",
+      "Source": "library"
+    },
+    {
+      "Original": "Nudge Right (+0.1s)",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "右移 (+0.1秒)",
+      "Source": "library"
+    },
+    {
+      "Original": "No slides staged. Open a replay and click the Camera icon to capture a slide.",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "暂无幻灯片。打开回放并点击相机图标以捕获幻灯片。",
+      "Source": "library"
+    },
+    {
+      "Original": "LOADING...",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "加载中...",
+      "Source": "library"
+    },
+    {
+      "Original": "Slide #",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "幻灯片 #",
+      "Source": "library"
+    },
+    {
+      "Original": " objs",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Send to AetherDraw",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "发送至AetherDraw",
+      "Source": "library"
+    },
+    {
+      "Original": "INTERACTIVE LOG",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "交互日志",
+      "Source": "library"
+    },
+    {
+      "Original": "(Click time to seek)",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "(点击时间跳转)",
+      "Source": "library"
+    },
+    {
+      "Original": "Search..",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索..",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns/Filters",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "列/筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "InteractiveLogOptionsPopup",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Translated": "交互日志选项弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Survival Calculator",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "生存计算器",
+      "Source": "library"
+    },
+    {
+      "Original": "Test if different mitigations could have prevented a death.",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "测试不同的减伤是否能避免死亡。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Time",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示HP",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Source",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Event",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Damaging Events",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅伤害事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Absolute Pull Time",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用绝对落潮密道时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an incident.",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选择一个事件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "(Crit)",
+      "Context": "MainWindow.DrawEventCell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "(暴击)",
+      "Source": "library"
+    },
+    {
+      "Original": "(DH)",
+      "Context": "MainWindow.DrawEventCell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "(直击)",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena Calibration:",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "场地校准：",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "守卫驻所",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Select",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Laser",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "激光",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave the Live Session",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "离开实时会话",
+      "Source": "library"
+    },
+    {
+      "Original": "Live",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "实时",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Next:",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "下一个：",
+      "Source": "library"
+    },
+    {
+      "Original": "Used:",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已使用：",
+      "Source": "library"
+    },
+    {
+      "Original": "Targeting:",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选定目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Entity",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知实体",
+      "Source": "library"
+    },
+    {
+      "Original": "No Target",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无目标",
+      "Source": "library"
+    },
+    {
+      "Original": "SESSION HISTORY",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "会话历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved Replays (Disk)",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "已保存回放（磁盘）",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh List",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All History",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空全部历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued...",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "排队中...",
+      "Source": "library"
+    },
+    {
+      "Original": "Created: ",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "创建时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No sessions recorded.",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "暂无会话记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed: ",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pull #",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Translated": "落潮密道 #",
+      "Source": "library"
+    },
+    {
+      "Original": " [TRUNC]",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " [截断]",
+      "Source": "library"
+    },
+    {
+      "Original": " [Synced]",
+      "Context": "MainWindow.DrawTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " [已同步]",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click and drag corner to scale overlay",
+      "Context": "MainWindow.HandlePartyPanelResizeHandle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "左键拖动角落以缩放悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click and drag to move this overlay",
+      "Context": "MainWindow.HandlePartyPanelDrag",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "右键拖动以移动此悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "AetherBlackbox Configuration",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "AetherBlackbox 配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Window Movable",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "主窗口可移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Brush Color:",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "默认画笔颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Brush Thickness",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "默认画笔粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Settings",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "网格设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Visible",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Spacing",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "网格间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Snap to Grid (Default On)",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "对齐网格（默认开启）",
+      "Source": "library"
+    },
+    {
+      "Original": "Live Session Setup",
+      "Context": "LiveSessionWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "实时会话设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait, may take up to a minute as server boots from inactivity. 24/7 uptime servers aren't free sadly.",
+      "Context": "LiveSessionWindow.DrawLoadingView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请稍候，服务器因闲置而启动，可能需要长达一分钟。很遗憾，24/7 全天候服务器并非免费。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "LiveSessionWindow.DrawLoadingView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Connection Method",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择连接方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Sync (Party)",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "快速同步（小队）",
+      "Source": "library"
+    },
+    {
+      "Original": "Creates a secure room for your current party using a hash of your Party ID. All party members must click this to be in the same quick sync room.",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用小队 ID 的哈希值为当前小队创建安全房间。所有小队成员都必须点击此项才能进入同一个快速同步房间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Sync##QuickSyncButton",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "快速同步",
+      "Source": "library"
+    },
+    {
+      "Original": "You must be in a party to use this option.",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "你必须处于小队中才能使用此选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Passphrase Connect",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "口令连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Create or join a session using a shared passphrase. For cross-world/alliance groups. The generated passphrase should give you plausible deniability if accidentaly typed in open chat. Or make up your own code/phrase.",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用共享口令创建或加入会话。适用于跨服/团队编组。生成的口令即使不小心在公开聊天中打出也能让你有合理的推脱理由。或者自己编一个代码/短语。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Passphrase##PassphraseButton",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "使用口令",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect with Passphrase",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "使用口令连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Address",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "服务器地址",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new & copy:",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "创建新的并复制：",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Join existing:",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "加入现有的：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter Passphrase",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "输入口令",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "返回",
+      "Source": "library"
+    },
+    {
+      "Original": "Manage Permanent Files",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "管理永久文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Folder",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by Tag",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "按标签筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "File Name",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "文件名",
+      "Source": "library"
+    },
+    {
+      "Original": "Load File",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete File",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除文件",
+      "Source": "library"
+    },
+    {
+      "Original": "No objects selected.",
+      "Context": "PropertiesWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未选择任何对象。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Memory:",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "活动内存：",
+      "Source": "library"
+    },
+    {
+      "Original": " (Action ID: ",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Translated": " （技能 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Editing: ",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前编辑： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Modify the shape using the Main Canvas and Properties Window. When finished, save the changes below.",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用主画布和属性窗口修改形状。完成后，在下方保存更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Canvas Modifications to Mechanic",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将画布修改保存到机制",
+      "Source": "library"
+    },
+    {
+      "Original": "Save File Name",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "保存文件名",
+      "Source": "library"
+    },
+    {
+      "Original": "Commit to Disk",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "提交到磁盘",
+      "Source": "library"
+    },
+    {
+      "Original": "WOULD SURVIVE BY ",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可存活余量 ",
+      "Source": "library"
+    },
+    {
+      "Original": "STILL LETHAL BY ",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "仍致命余量 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Effective HP: ",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有效 HP： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unmitigated:  ",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未减伤：  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Mitigated:    ",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已减伤：    ",
+      "Source": "library"
+    },
+    {
+      "Original": "TANKS",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "坦克",
+      "Source": "library"
+    },
+    {
+      "Original": "HEALERS",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "On cooldown at time of death.",
+      "Context": "SurvivalCalculatorOverlay.RenderAbilityList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "死亡时处于冷却中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Active at time of death.",
+      "Context": "SurvivalCalculatorOverlay.RenderAbilityList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "死亡时处于激活状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pen Tools",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "画笔工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Shape Tools",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "形状工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Placeable Shapes",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "可放置形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Role Icons",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "职能图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Number Icons",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "小队编号图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Colored Dots",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "彩色圆点",
+      "Source": "library"
+    },
+    {
+      "Original": "Mechanic Icons",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "机制图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Tool",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "文本工具",
+      "Source": "library"
+    },
+    {
+      "Original": "IMG",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Translated": "图片",
+      "Source": "library"
+    },
+    {
+      "Original": "TEXT",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Translated": "文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Eraser",
+      "Context": "ToolbarWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "橡皮擦",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Props",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "道具",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "网格",
+      "Source": "library"
+    },
+    {
+      "Original": "size",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Snap to Grid",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "对齐网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill Shape",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "填充形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness:",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "粗细：",
+      "Source": "library"
+    },
+    {
+      "Original": "Bugs",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "问题反馈",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy me a coffee if this plugin helped your prog!",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "如果这个插件对你的开荒有帮助，请我喝杯咖啡吧！",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "CommonProperties.DrawLock",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked objects cannot be selected or moved on the canvas.",
+      "Context": "CommonProperties.DrawLock",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已锁定的对象无法在画布上选中或移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity: %.2f",
+      "Context": "CommonProperties.DrawOpacity",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "不透明度：%.2f",
+      "Source": "library"
+    },
+    {
+      "Original": "Filled",
+      "Context": "CommonProperties.DrawFill",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已填充",
+      "Source": "library"
+    },
+    {
+      "Original": "Donut Properties",
+      "Context": "ContextProperties.DrawDonut",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "圆环属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Hole Size: %.1f",
+      "Context": "ContextProperties.DrawDonut",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "处罚室大小：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Properties",
+      "Context": "ContextProperties.DrawText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文本属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Size: %.1f",
+      "Context": "ContextProperties.DrawText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "大小：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Circle Properties",
+      "Context": "ContextProperties.DrawCircle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "圆形属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: %.1f",
+      "Context": "ContextProperties.DrawCircle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "半径：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Pie Properties",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "扇形属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation: %.1f deg",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "旋转：%.1f 度",
+      "Source": "library"
+    },
+    {
+      "Original": "Angle: %.1f deg",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "角度：%.1f 度",
+      "Source": "library"
+    },
+    {
+      "Original": "Starburst Properties",
+      "Context": "ContextProperties.DrawStarburst",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星爆属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Width: %.1f",
+      "Context": "ContextProperties.DrawStarburst",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "宽度: %.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Rectangle Properties",
+      "Context": "ContextProperties.DrawRectangle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "矩形属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Height: %.1f",
+      "Context": "ContextProperties.DrawRectangle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "高度: %.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Properties",
+      "Context": "ContextProperties.DrawCone",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "锥形属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Length: %.1f",
+      "Context": "ContextProperties.DrawCone",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "长度: %.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap Job Icon",
+      "Context": "JobSwapProperties.DrawJobSwap",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Text",
+      "Translated": "交换职业图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Layers",
+      "Context": "LayerList.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图层",
+      "Source": "library"
+    },
+    {
+      "Original": "Mechanic Definition",
+      "Context": "MechanicDefinition.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "机制定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Action ID",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "技能 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Source Type",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "来源类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan Last 5 Seconds",
+      "Context": "MechanicDefinition.DrawScanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "扫描最近 5 秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent Actions",
+      "Context": "MechanicDefinition.DrawRecent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最近技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Definition",
+      "Context": "MechanicDefinition.DrawSave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "MechanicDefinition..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Environment",
+      "Context": "MechanicDefinition..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "环境",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Aether Blackbox (",
+      "Context": "NotificationHandler.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "显示 Aether Blackbox (",
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Blackbox Config",
+      "Context": "RecapConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Aether Blackbox 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture Settings",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "捕获设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture ",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Translated": "捕获 ",
+      "Source": "library"
+    },
+    {
+      "Original": "On Death",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "死亡时",
+      "Source": "library"
+    },
+    {
+      "Original": "Only in instances",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅副本内",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable in PvP",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "PvP 中禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Streamer Mode (Anonymize Names)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "主播模式 (匿名化名称)",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces player names with their Job Abbreviation (e.g., 'WAR', 'WHM') in replays.",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在回放中将玩家名称替换为其职业缩写 (例如 'WAR'、'WHM')。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Party Member List",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示队员列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows or hides the draggable party member overlay in the main replay view.",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在主回放视图中显示或隐藏可拖动的队员悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message Type",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "聊天消息类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Show chat tip",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示聊天提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Events for (sec)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "保留事件 (秒)",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Replays for (days)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "保留回放 (天)",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically deletes replay files older than this (in days) upon plugin startup.\nSet to 0 to disable auto-cleanup.\nReplays are located in AppData-Roaming-XIVLauncher-pluginconfigs-AetherBlackbox",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "插件启动时自动删除早于该天数的回放文件。\n设为 0 以禁用自动清理。\n回放位于 AppData-Roaming-XIVLauncher-pluginconfigs-AetherBlackbox",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Deaths for (min)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "保留死亡记录 (分钟)",
+      "Source": "library"
+    },
+    {
+      "Original": "Interactive Log Settings",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "交互日志设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Time Column",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示时间列",
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP Column",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示 HP 列",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Source Column",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示来源列",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Event Column",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示事件列",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter category of the \"Chat Message\" death notification.\n\"Debug\" will show up in all chat tabs regardless of configuration.\nNote that this will only affect the way the notification is displayed to you. They will never be visible to others.",
+      "Context": "RecapConfigWindow.ChatMessageTypeTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "“聊天消息”死亡通知的过滤类别。\n无论配置如何，“调试”都会显示在所有聊天标签页中。\n注意，这只会影响通知向你显示的方式。其他人永远看不到它们。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the command in the chat to reopen the window the first time you close.",
+      "Context": "RecapConfigWindow.ChatTipTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "首次关闭窗口时，在聊天中输出可重新打开该窗口的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will only show a death notification when in an instance (e.g. a Dungeon)",
+      "Context": "RecapConfigWindow.OnlyInInstancesTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在副本中（例如迷宫）显示死亡通知",
+      "Source": "library"
+    },
+    {
+      "Original": "[AetherBlackbox] Buffs/debuffs are currently not being tracked due to patch updates, but positions and actions should work.",
+      "Context": "CombatEventCapture.InitializeHooks",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[AetherBlackbox] 由于版本更新，增益/减益目前无法追踪，但位置和动作应该可以正常工作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-attack",
+      "Context": "CombatEventFactory.CreateDamage",
+      "PreserveID": false,
+      "Translated": "自动攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Context": "InPlaceTextEditor.DrawEditorUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Rampart",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "铁壁",
+      "Source": "library"
+    },
+    {
+      "Original": "Reprisal",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "雪仇剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Guardian",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "卫护",
+      "Source": "library"
+    },
+    {
+      "Original": "Damnation",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "戮罪",
+      "Source": "library"
+    },
+    {
+      "Original": "Dark Mind",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "弃明投暗",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowed Vigil",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "暗影卫",
+      "Source": "library"
+    },
+    {
+      "Original": "Camouflage",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "伪装",
+      "Source": "library"
+    },
+    {
+      "Original": "Great Nebula",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "大星云",
+      "Source": "library"
+    },
+    {
+      "Original": "Bloodwhetting",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "原初的血气",
+      "Source": "library"
+    },
+    {
+      "Original": "Nascent Flash",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "原初的勇猛",
+      "Source": "library"
+    },
+    {
+      "Original": "Oblation",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "献奉",
+      "Source": "library"
+    },
+    {
+      "Original": "Heart of Corundum",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "刚玉之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Holy Sheltron",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "圣盾阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Intervention",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "干预",
+      "Source": "library"
+    },
+    {
+      "Original": "The Blackest Night",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "至黑之夜",
+      "Source": "library"
+    },
+    {
+      "Original": "Dark Missionary",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "暗黑布道",
+      "Source": "library"
+    },
+    {
+      "Original": "Heart of Light",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "光之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Shake It Off",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "摆脱",
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Veil",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "圣光幕帘",
+      "Source": "library"
+    },
+    {
+      "Original": "Passage of Arms",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "武装戍卫",
+      "Source": "library"
+    },
+    {
+      "Original": "Bulwark",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "壁垒",
+      "Source": "library"
+    },
+    {
+      "Original": "Thrill of Battle",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "战栗",
+      "Source": "library"
+    },
+    {
+      "Original": "Aquaveil",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "水幕帘",
+      "Source": "library"
+    },
+    {
+      "Original": "Temperance",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "节制",
+      "Source": "library"
+    },
+    {
+      "Original": "Sacred Soil",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "野战治疗阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Expedient",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "疾风怒涛之计",
+      "Source": "library"
+    },
+    {
+      "Original": "Exaltation",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "星极超流",
+      "Source": "library"
+    },
+    {
+      "Original": "Collective Unconscious",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "同调",
+      "Source": "library"
+    },
+    {
+      "Original": "Taurochole",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "牛胆",
+      "Source": "library"
+    },
+    {
+      "Original": "Kerachole",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "坚角清汁",
+      "Source": "library"
+    },
+    {
+      "Original": "Holos",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "整体论",
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Benison",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "神祝祷",
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Caress",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "神爱抚",
+      "Source": "library"
+    },
+    {
+      "Original": "Concitation",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "意气轩昂之策",
+      "Source": "library"
+    },
+    {
+      "Original": "Seraphic Veil",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "炽天的幕帘",
+      "Source": "library"
+    },
+    {
+      "Original": "The Spire",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "建筑神之塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Eukrasian Prognosis II",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "均衡预后II",
+      "Source": "library"
+    },
+    {
+      "Original": "Feint",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "牵制",
+      "Source": "library"
+    },
+    {
+      "Original": "Riddle of Earth",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "金刚极意",
+      "Source": "library"
+    },
+    {
+      "Original": "Tengentsu",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "天眼通",
+      "Source": "library"
+    },
+    {
+      "Original": "Shade Shift",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "残影",
+      "Source": "library"
+    },
+    {
+      "Original": "Arcane Crest",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "神秘纹",
+      "Source": "library"
+    },
+    {
+      "Original": "Improvised Finish",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "即兴表演结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Troubadour",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "行吟",
+      "Source": "library"
+    },
+    {
+      "Original": "Tactician",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "策动",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismantle",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "武装解除",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield Samba",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "防守之桑巴",
+      "Source": "library"
+    },
+    {
+      "Original": "Magick Barrier",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "抗死",
+      "Source": "library"
+    },
+    {
+      "Original": "Manaward",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "魔罩",
+      "Source": "library"
+    },
+    {
+      "Original": "Radiant Aegis",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "守护之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Tempera Coat",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "坦培拉涂层",
+      "Source": "library"
+    },
+    {
+      "Original": "Tempera Grassa",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Translated": "油性坦培拉涂层",
+      "Source": "library"
+    },
+    {
+      "Original": "Reading and decompressing file...",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "正在读取并解压文件...",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to parse replay file.",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "解析回放文件失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Exception occurred during load.",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "加载过程中发生异常。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pen",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "画笔",
+      "Source": "library"
+    },
+    {
+      "Original": "Line",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "直线",
+      "Source": "library"
+    },
+    {
+      "Original": "Dash",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "冲刺",
+      "Source": "library"
+    },
+    {
+      "Original": "Rect",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "矩形",
+      "Source": "library"
+    },
+    {
+      "Original": "Circle",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "圆形",
+      "Source": "library"
+    },
+    {
+      "Original": "Donut",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "圆环",
+      "Source": "library"
+    },
+    {
+      "Original": "Arrow",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "放浪神之箭",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "扇形",
+      "Source": "library"
+    },
+    {
+      "Original": "Triangle",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "三角形",
+      "Source": "library"
+    },
+    {
+      "Original": "Pie",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "饼形",
+      "Source": "library"
+    },
+    {
+      "Original": "Star",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "星形",
+      "Source": "library"
+    },
+    {
+      "Original": "Square",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "方形",
+      "Source": "library"
+    },
+    {
+      "Original": "CircleMark",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "圆形标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Plus",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "十字",
+      "Source": "library"
+    },
+    {
+      "Original": "Melee",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "近战",
+      "Source": "library"
+    },
+    {
+      "Original": "Caster",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "施法者",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 4",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 4",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 5",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 5",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 6",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 6",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 7",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 7",
+      "Source": "library"
+    },
+    {
+      "Original": "Party 8",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "小队 8",
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "绑定 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "绑定 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "绑定 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "忽略 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "忽略 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 4",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 4",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 5",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 5",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 6",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 6",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 7",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 7",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 8",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Translated": "持续伤害 8",
+      "Source": "library"
+    },
+    {
+      "Original": "SessionHistoryPane",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "会话历史面板",
+      "Source": "library"
+    },
+    {
+      "Original": "InteractiveLogPane",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "交互日志面板",
+      "Source": "library"
+    },
+    {
+      "Original": "RightPane",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "右侧面板",
+      "Source": "library"
+    },
+    {
+      "Original": "CanvasDrawingArea",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "画布绘制区域",
+      "Source": "library"
+    },
+    {
+      "Original": "ToolbarContainer",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "工具栏容器",
+      "Source": "library"
+    },
+    {
+      "Original": "ExportContainer",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "导出容器",
+      "Source": "library"
+    },
+    {
+      "Original": "SelectionInfoArea",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "选择信息区域",
+      "Source": "library"
+    },
+    {
+      "Original": "InteractiveLogTable",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Translated": "交互日志表格",
+      "Source": "library"
+    },
+    {
+      "Original": "SelectionInfoTable",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Translated": "选择信息表",
+      "Source": "library"
+    },
+    {
+      "Original": "TankHealerTable",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Translated": "坦克治疗表",
+      "Source": "library"
+    },
+    {
+      "Original": "DPSTable",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Translated": "DPS表",
+      "Source": "library"
+    },
+    {
+      "Original": "About Aether Blackbox",
+      "Context": "AboutWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "关于 Aether Blackbox",
+      "Source": "library"
+    },
+    {
+      "Original": "Bug report/\nFeature request",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "反馈问题 /\n提出功能建议",
+      "Source": "library"
+    },
+    {
+      "Original": "Properties###AetherBlackboxProperties",
+      "Context": "PropertiesWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "属性",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

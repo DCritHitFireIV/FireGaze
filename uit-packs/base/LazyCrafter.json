@@ -1,0 +1,1209 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LazyCrafter",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nMissing: ",
+      "Context": "CatalogTable.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n缺少： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nSome materials are unpriced - costs are a lower bound",
+      "Context": "CatalogTable.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n部分材料缺少价格，所列成本仅为下限。",
+      "Source": "library"
+    },
+    {
+      "Original": " done",
+      "Context": "RunTab.DrawSteps",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 完成",
+      "Source": "library"
+    },
+    {
+      "Original": " gathered item",
+      "Context": "DispatchService.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 采集物品",
+      "Source": "library"
+    },
+    {
+      "Original": " gil",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": " 金币",
+      "Source": "library"
+    },
+    {
+      "Original": " item",
+      "Context": "PlanReport.MarketLine",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "PrimeAndRefineAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " minutes",
+      "Context": "KnightshopperMessages.Timeout",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "Abort the run - retainer queue aborted, GBR off, Artisan stop request.",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "中止本次执行：取消雇员队列、关闭 GBR，并向 Artisan 请求停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Above level",
+      "Context": "MainWindow.DrawFilterBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "超出当前职业等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Add 1 to cart",
+      "Context": "CatalogTable.DrawRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "加入清单（1 件）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to cart",
+      "Context": "IngredientTree.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入清单",
+      "Source": "library"
+    },
+    {
+      "Original": "All jobs",
+      "Context": "MainWindow.DrawFilterBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "所有职业",
+      "Source": "library"
+    },
+    {
+      "Original": "AllaganTools not available - counting the current character's bags only.",
+      "Context": "MainWindow.DrawBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "AllaganTools 不可用，目前仅统计当前角色的背包。",
+      "Source": "library"
+    },
+    {
+      "Original": "Also show recipes above your job level and for jobs you have not unlocked.",
+      "Context": "MainWindow.DrawFilterBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "同时显示超出当前职业等级以及尚未解锁职业的配方。",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury chest and equipped gear",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "兵装库与身上装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Bags and crystals",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "背包与水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked",
+      "Context": "Fmt.TierName",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "受阻",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy from ",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "购买来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy from a gil vendor (no placed vendor found):",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "向使用金币交易的商人购买（未找到有固定位置的商人）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy on the market board (est. ",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在市场布告板购买（估算 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy vendor items through Knightshopper during a dispatch (one attempt, target totals)",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "执行清单时通过 Knightshopper 购买商店物品（按目标总量尝试一次）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cart (empty)",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "制作清单（空）",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog error: ",
+      "Context": "MainWindow.DrawBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "目录错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo saddlebag",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "陆行鸟鞍囊",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空",
+      "Source": "library"
+    },
+    {
+      "Original": "Computing the catalog...",
+      "Context": "CatalogTable.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在计算目录…",
+      "Source": "library"
+    },
+    {
+      "Original": "Copies a https://ffxivteamcraft.com/import/ link for the final items in the cart.",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将购物清单内成品的 https://ffxivteamcraft.com/import/ 链接复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy TeamCraft link",
+      "Context": "IngredientTree.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制 Teamcraft 链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy name",
+      "Context": "CatalogTable.DrawRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy report",
+      "Context": "RunTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "成本",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafts",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "制作次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Dispatch",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "执行计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Est.",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "估算值",
+      "Source": "library"
+    },
+    {
+      "Original": "Estimated desynth value (sum of drop chance x market price). Estimate.",
+      "Context": "CatalogTable.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预估分解收益，按各产物的掉落概率乘以市场价后求和。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to TeamCraft",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出到 Teamcraft",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch missing materials from your retainers before crafting (needs a summoning bell)",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作前从雇员处取回缺少的材料（需要传唤铃）",
+      "Source": "library"
+    },
+    {
+      "Original": "Filtering...",
+      "Context": "CatalogTable.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Free company chest (off by default - shared property)",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "部队储物柜（部队共有，默认关闭）",
+      "Source": "library"
+    },
+    {
+      "Original": "Game data failed to load - see /xllog.",
+      "Context": "MainWindow.DrawBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "游戏数据加载失败，请查看 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour dresser and armoire",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "投影台与收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Context": "ChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "Have/Need",
+      "Context": "IngredientTree.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "持有／所需",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide results that sell fewer than this many units per day at your scope.",
+      "Context": "MainWindow.DrawFilterBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "隐藏在当前查询范围内日销量低于此数量的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide untradeable",
+      "Context": "MainWindow.DrawFilterBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏不可交易物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Ingredient",
+      "Context": "IngredientTree.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Install/enable AllaganTools to count retainers, saddlebag, armoury chest and alts.",
+      "Context": "MainWindow.DrawBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请安装或启用 AllaganTools，以统计雇员、陆行鸟鞍囊、兵装库和其他角色的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory sources",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "物品统计来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "RunTab.DrawSteps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Knightshopper finished every purchase - those stops are done.",
+      "Context": "DispatchService.EndKnightshopper",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Knightshopper 已完成所有购买，对应的采购站点均已处理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Knightshopper is already busy with another purchase",
+      "Context": "KnightshopperMessages.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Knightshopper 正在处理另一项购买任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Knightshopper is not ready yet (still loading, or nobody is logged in)",
+      "Context": "KnightshopperMessages.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Knightshopper 尚未就绪，可能还在加载，或当前没有已登录角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is busy (another teleport / world change in progress).",
+      "Context": "LifestreamDispatch.GoToVendor",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Lifestream 正忙，正在传送或切换服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is busy - walk to a summoning bell yourself (they stand in every inn room).",
+      "Context": "LifestreamDispatch.GoToSummoningBell",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Lifestream 正忙，请自行前往传唤铃，每间旅馆客房均设有传唤铃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is busy.",
+      "Context": "LifestreamDispatch.GoToMarketBoard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Lifestream 正忙。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is not installed - open a market board manually.",
+      "Context": "LifestreamDispatch.GoToMarketBoard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未安装 Lifestream，请手动打开市场布告板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Listings",
+      "Context": "CatalogTable.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "在售记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading game data...",
+      "Context": "MainWindow.DrawBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载游戏数据…",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing material",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "缺少材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Need",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "需求量",
+      "Source": "library"
+    },
+    {
+      "Original": "No release notes were embedded in this build.",
+      "Context": "ChangelogWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此版本未附更新说明。",
+      "Source": "library"
+    },
+    {
+      "Original": "No steps recorded for this run.",
+      "Context": "RunTab.DrawSteps",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "本次运行尚无步骤记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Notes",
+      "Context": "ChangelogParser.Parse",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to resume - the plan is gone. Press Dispatch on the cart again.",
+      "Context": "RunTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "原计划已不存在，无法继续。请返回购物清单，再次点击执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Now",
+      "Context": "Fmt.TierName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "现在",
+      "Source": "library"
+    },
+    {
+      "Original": "Open changelog on GitHub",
+      "Context": "ChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 GitHub 上查看更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Run tab: every step, its reason, and the Resume / Copy report buttons.",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开执行页，查看各步骤和原因，或使用继续及复制报告按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Other characters (pool every character AllaganTools knows)",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "其他角色（汇总 AllaganTools 已记录的所有角色）",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefer a currency shop over the market board when you can already afford it",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "特殊货币余额足够时，优先在货币交易商店兑换，之后才考虑市场布告板",
+      "Source": "library"
+    },
+    {
+      "Original": "Price at home world only (instead of the whole data centre)",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅查询所在服的价格（不查询整个大区）",
+      "Source": "library"
+    },
+    {
+      "Original": "Price refresh interval (minutes)",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "价格刷新间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Prices",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the list and sends you to the nearest market board via Lifestream (/li mb).",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将清单输出到聊天栏，并通过 Lifestream（/li mb）前往最近的市场布告板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Context": "RunTab.DrawSteps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-plan from what is in your bags now and continue the same cart.",
+      "Context": "RunTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "根据当前背包重新规划，并继续执行同一购物清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason / status",
+      "Context": "RunTab.DrawSteps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "原因 / 状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Recipe",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Recount inventory and re-fetch stale prices for what is on screen.",
+      "Context": "MainWindow.DrawFilterBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "重新统计库存，并更新当前界面上已过期的价格。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "MainWindow.DrawFilterBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Report it: the plugin package is missing a dependency, reinstalling will not help.",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请向作者报告问题。插件包缺少依赖，重新安装也无法解决。",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "RunTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume is for a run that has stopped.",
+      "Context": "RunTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "只有在执行已停止时才能使用“继续”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers (bags, crystals, market listings)",
+      "Context": "SettingsTab.SourceLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "雇员（背包、水晶及市场在售物品）",
+      "Source": "library"
+    },
+    {
+      "Original": "Retrieve",
+      "Context": "IngredientTree.DrawFulfil",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "取回",
+      "Source": "library"
+    },
+    {
+      "Original": "Revenue ",
+      "Context": "IngredientTree.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "收入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Run shopping stops first (buy, press Resume, then unattended)",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "先执行采购（购买后点击继续，其余流程将自动执行）",
+      "Source": "library"
+    },
+    {
+      "Original": "Run tab",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "执行页",
+      "Source": "library"
+    },
+    {
+      "Original": "Search item name...",
+      "Context": "MainWindow.DrawFilterBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索物品名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a recipe to see its ingredients.",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择配方以查看所需材料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sends ventures to ARC, gathering to GBR, then crafts with Artisan (in that order).",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "依次将探险委托交给 ARC、采集交给 GBR，最后由 Artisan 制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show recipes above my job level / for jobs I have not unlocked",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示超出当前等级或属于尚未解锁职业的配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Some materials are unpriced; lower bound.",
+      "Context": "CatalogTable.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "部分材料缺少价格，此数值仅为下限。",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "RunTab.DrawSteps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Step",
+      "Context": "RunTab.DrawSteps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped - the run needs you before it can continue:",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已停止，请先处理以下事项再继续：",
+      "Source": "library"
+    },
+    {
+      "Original": "Then press Resume (or /lcraft resume).",
+      "Context": "RunTab.DrawBlocked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "然后点击继续，或输入 /lcraft resume。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tier",
+      "Context": "CartPanel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "档次",
+      "Source": "library"
+    },
+    {
+      "Original": "Undersupplied: max listings on the board",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "供应不足：市场布告板最大在售组数",
+      "Source": "library"
+    },
+    {
+      "Original": "Undersupplied: min sales per day",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "供应不足：每日最低销量",
+      "Source": "library"
+    },
+    {
+      "Original": "Unit",
+      "Context": "IngredientTree.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "单位",
+      "Source": "library"
+    },
+    {
+      "Original": "Untradeable - no market value.",
+      "Context": "IngredientTree.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "不可交易，无市场价格。",
+      "Source": "library"
+    },
+    {
+      "Original": "[LazyCrafter] TeamCraft import link copied to clipboard.",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[LazyCrafter] 已复制 Teamcraft 导入链接。",
+      "Source": "library"
+    },
+    {
+      "Original": "[LazyCrafter] TeamCraft link copied.",
+      "Context": "IngredientTree.Draw",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[LazyCrafter] 已复制 Teamcraft 链接。",
+      "Source": "library"
+    },
+    {
+      "Original": "[LazyCrafter] game data not loaded yet.",
+      "Context": "Plugin.PrimeSamplePrices",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[LazyCrafter] 游戏数据尚未加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "[LazyCrafter] nothing to fetch - every material the cart needs is already in your bags.",
+      "Context": "Plugin.FetchCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[LazyCrafter] 无需提取，清单所需材料已全部在背包中。",
+      "Source": "library"
+    },
+    {
+      "Original": "can craft ",
+      "Context": "IngredientTree.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可以制作 ",
+      "Source": "library"
+    },
+    {
+      "Original": "cash cost ",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "实际支出 ",
+      "Source": "library"
+    },
+    {
+      "Original": "copied",
+      "Context": "RunTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已复制",
+      "Source": "library"
+    },
+    {
+      "Original": "error: ",
+      "Context": "RunAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "fetching the cart's materials from your retainers in one pass - stay by the bell.",
+      "Context": "DispatchService.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在从雇员处一次取回购物清单所需的材料。请留在传唤铃旁。",
+      "Source": "library"
+    },
+    {
+      "Original": "heading to the summoning bell in the inn room so you can pull those listings.",
+      "Context": "DispatchService.WalkToBell",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在前往旅馆客房的传唤铃，以便取回这些在售物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "item ",
+      "Context": "IngredientTree.DrawNode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "loaded",
+      "Context": "Plugin.GuardCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已加载",
+      "Source": "library"
+    },
+    {
+      "Original": "loading game data",
+      "Context": "RunAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在加载游戏数据",
+      "Source": "library"
+    },
+    {
+      "Original": "missing",
+      "Context": "Plugin.GuardCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "缺少",
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Context": "Plugin.GuardCommand",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "not installed",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "not logged in",
+      "Context": "PlayerState.get_RetainerHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未登录",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing is running.",
+      "Context": "DispatchService.Stop",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "当前没有正在执行的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing running.",
+      "Context": "VendorSpike.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "当前没有正在执行的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing to fetch.",
+      "Context": "DispatchService.RetrieveOnly",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "没有需要取回的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing to resume - dispatch a cart first.",
+      "Context": "DispatchService.Resume",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "没有可继续的任务，请先执行购物清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "on hand",
+      "Context": "IngredientTree.DrawNode",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "已持有",
+      "Source": "library"
+    },
+    {
+      "Original": "recipe ",
+      "Context": "CartPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "配方 ",
+      "Source": "library"
+    },
+    {
+      "Original": "refreshing counts",
+      "Context": "RefreshCountsAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在刷新数量",
+      "Source": "library"
+    },
+    {
+      "Original": "refreshing counts ",
+      "Context": "RefreshCountsAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在刷新数量 ",
+      "Source": "library"
+    },
+    {
+      "Original": "release notes",
+      "Context": "ChangelogWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "resuming - re-checking your bags.",
+      "Context": "DispatchService.Resume",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在继续，重新检查背包。",
+      "Source": "library"
+    },
+    {
+      "Original": "teleport",
+      "Context": "VendorSpike.StageOf",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "the cart has no craftable lines.",
+      "Context": "DispatchService.DispatchCart",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "购物清单中没有可制作的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "the cart is empty.",
+      "Context": "DispatchService.DispatchCart",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "购物清单为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "the purchase did not start",
+      "Context": "KnightshopperMessages.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "购买尚未开始",
+      "Source": "library"
+    },
+    {
+      "Original": "the purchase is still cancelling",
+      "Context": "KnightshopperMessages.Poll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在取消购买",
+      "Source": "library"
+    },
+    {
+      "Original": "the purchase is still running",
+      "Context": "KnightshopperMessages.Poll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "购买仍在进行",
+      "Source": "library"
+    },
+    {
+      "Original": "the purchase was cancelled",
+      "Context": "KnightshopperMessages.Poll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "购买已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "then press Resume (or /lcraft resume) to continue the same cart.",
+      "Context": "DispatchService.PrintBlockedBlock",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "然后点击继续或输入 /lcraft resume，继续执行同一购物清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "working...",
+      "Context": "MainWindow.DrawFilterBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在处理…",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

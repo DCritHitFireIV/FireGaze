@@ -1,0 +1,828 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Sceneweaver",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  Version: ",
+      "Context": "Plugin.DrawMods",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "  版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": " indexed resources",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 个已索引资源",
+      "Source": "library"
+    },
+    {
+      "Original": " results",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 个结果",
+      "Source": "library"
+    },
+    {
+      "Original": " total files",
+      "Context": "Plugin.DrawMods",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 文件总数",
+      "Source": "library"
+    },
+    {
+      "Original": "< Parent folder",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "< 上级文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Add group",
+      "Context": "Plugin.DrawScene",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to scene",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加到场景",
+      "Source": "library"
+    },
+    {
+      "Original": "All game assets",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "所有游戏素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambient lights do not project textures. The saved texture is retained if you change the shape back.",
+      "Context": "Plugin.DrawLightTexture",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "环境光不投射纹理。切换回原来的光源形状后，仍可使用已保存的纹理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Angular falloff",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "角度衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "Assets",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Base-color textures with preview lighting. Special shaders and animation may look different in game.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用基础颜色纹理和预览灯光。特殊着色器和动画在游戏中的效果可能有所不同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...",
+      "Context": "Plugin.Destination",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "浏览……",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog could not load: ",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "目录加载失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Character shadow range",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "角色阴影范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Characters / equipment",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "角色 / 装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a texture from this modpack",
+      "Context": "Plugin.DrawLightTexture",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "从此模组包中选择纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose an asset from the list to inspect it here.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "从列表中选择素材，即可在此查看。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear texture",
+      "Context": "Plugin.DrawLightTexture",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy ",
+      "Context": "Plugin.TransformMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy path",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Create: ",
+      "Context": "Plugin.DrawFiles",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "创建： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DISCOVER GAME ASSETS",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "浏览游戏素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Degrees",
+      "Context": "Plugin.DrawTransformToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "度",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "Plugin.DrawWorldPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "Plugin.DrawTransformToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Drag to orbit  |  Wheel to zoom",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "拖动以环绕观察，滚动滚轮可缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Environment / zones",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "环境 / 区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff factor",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "衰减因子",
+      "Source": "library"
+    },
+    {
+      "Original": "Fit model",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "适应面板",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Folders",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "GAME FOLDERS",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "游戏文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "GAME PATH",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "游戏内路径",
+      "Source": "library"
+    },
+    {
+      "Original": "ISOLATED PREVIEW",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "单独预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep editing",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Large models are automatically fitted to this panel. Browsing never places objects in your room.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "大型模型会自动缩放至适合预览面板。浏览素材不会在房间中放置物体。",
+      "Source": "library"
+    },
+    {
+      "Original": "Light color",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit3",
+      "Translated": "灯光颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading catalog...",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在加载目录……",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod texture",
+      "Context": "Plugin.DrawLightTexture",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "模组纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Mods",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "模组",
+      "Source": "library"
+    },
+    {
+      "Original": "NOTE",
+      "Context": "Plugin.DrawFiles",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby",
+      "Context": "Plugin.DrawWorldPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "附近",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "No matching assets. Try a shorter search, another type, or All game assets.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有匹配的素材。请缩短搜索词、更换类型，或选择「所有游戏素材」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects",
+      "Context": "Plugin.DrawWorldPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Intoner...",
+      "Context": "Plugin.DrawImportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Intoner……",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Stagehand...",
+      "Context": "Plugin.DrawImportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Stagehand……",
+      "Source": "library"
+    },
+    {
+      "Original": "Open project...",
+      "Context": "Plugin.DrawImportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开项目……",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste ",
+      "Context": "Plugin.TransformMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "粘贴 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Context": "Plugin.DrawVfxPlayback",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Place in game at my character",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在游戏中放到我的角色所在位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Point lights require a cubemap texture.",
+      "Context": "Plugin.DrawLightTexture",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "点光源需要立方体贴图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Press Enter to apply a path. See the projection using Show scene here.",
+      "Context": "Plugin.DrawLightTexture",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "输入路径后按回车应用。点击「在这里显示场景」可查看投影效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview scale",
+      "Context": "Plugin.DrawVfxPreview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "预览缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview unavailable",
+      "Context": "PreviewService.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "预览不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Projected texture (.tex)",
+      "Context": "Plugin.DrawLightTexture",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "投射纹理（.tex）",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent",
+      "Context": "Plugin.DrawWorldPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace: ",
+      "Context": "Plugin.DrawFiles",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "替换： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources",
+      "Context": "Plugin.DrawMods",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Save favorite",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved to favorites",
+      "Context": "Plugin.DrawAssets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "已添加到收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Scene",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Search name or path — e.g. gyr tree, bgparts, furniture",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索名称或路径，例如 gyr tree、bgparts、furniture",
+      "Source": "library"
+    },
+    {
+      "Original": "Select to inspect. Add to your scene only when you choose.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择素材可查看详情。只有手动添加后，素材才会进入场景。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shape",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared props / housing",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "共用道具 / 住宅",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound resource. Audio preview is not available; no sound is played.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此资源为音效，当前无法试听。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "Plugin.DrawMods",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Specular highlights",
+      "Context": "Plugin.DrawLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "镜面高光",
+      "Source": "library"
+    },
+    {
+      "Original": "Spot and flat lights require a 2D texture.",
+      "Context": "Plugin.DrawLightTexture",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "聚光灯和平面光源需要二维纹理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop preview",
+      "Context": "Plugin.DrawVfxPreview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture modpack",
+      "Context": "Plugin.DrawLightTexture",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "纹理模组包",
+      "Source": "library"
+    },
+    {
+      "Original": "These are indexed game paths, independent of the objects in your room. Some catalog entries may be absent in your installed game version.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这里列出的是已索引的游戏路径，独立于房间中的物体。部分条目可能不在你安装的游戏版本中。",
+      "Source": "library"
+    },
+    {
+      "Original": "This effect is indexed and can be added, but animated VFX cannot yet be rendered in this panel. No effect is spawned.",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可将此特效添加到场景，但面板暂不支持预览动画特效，浏览时不会生成特效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "Plugin.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown error.",
+      "Context": "Plugin.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use game example",
+      "Context": "Plugin.DrawLightTexture",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用游戏示例",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "Plugin.DrawInspector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Visual effects",
+      "Context": "Plugin.DrawAssets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Windows file picker is open...",
+      "Context": "Plugin.DrawImportButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "Windows 文件选择器已打开……",
+      "Source": "library"
+    },
+    {
+      "Original": "preview",
+      "Context": "PreviewService.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Context": "Plugin.DrawMods",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未知",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

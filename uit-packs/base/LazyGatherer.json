@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LazyGatherer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Displays GP alert configuration.\n/gpalert <On/Off> -> enable or disable the alert.\n/gpalert <1-9999> -> set the GP threshold.",
+      "Context": "GpAlertController..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示采集力提醒设置。\n/gpalert <On/Off> -> 开启或关闭提醒。\n/gpalert <1-9999> -> 设置采集力阈值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the configuration",
+      "Context": "LazyGathererPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

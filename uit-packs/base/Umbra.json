@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Umbra",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "An uncaught exception occurred in Umbra.",
+      "Context": "[Umbra.Common] CrashLogger..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Umbra 发生了未处理的异常。",
+      "Source": "library"
+    },
+    {
+      "Original": "Available profiles: ",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "可用的配置方案： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Available toolbars: ",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "可用的工具栏： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy error text",
+      "Context": "[Umbra.Common] CrashLogger.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制错误信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable custom plugins",
+      "Context": "[Umbra.Common] CrashLogger.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "禁用自定义插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw Bounding Boxes",
+      "Context": "[Umbra] Plugin.UpdateDevBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "绘制边界框",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw Reflow & Repaint Boxes",
+      "Context": "[Umbra] Plugin.UpdateDevBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "绘制重新布局和重绘区域",
+      "Source": "library"
+    },
+    {
+      "Original": "If you have any custom plugins installed, please disable them and try again. If the issue persists, please report it to the Umbra team by joining our Discord server and reporting the issue in the #support channel. Please include the following information:\n\n\t1. The error message displayed below.\n\t2. A description of what you were doing when the error occurred.\n\t3. Any steps you took to try to resolve the issue.\n\nThank you for your help!",
+      "Context": "[Umbra.Common] CrashLogger..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "如果安装了自定义插件，请先禁用它们，然后重试。如果问题仍然存在，请加入 Umbra 的 Discord 服务器，在 #support 频道向团队报告问题，并附上以下信息：\n\n\t1. 下方显示的错误信息。\n\t2. 出错时你正在执行的操作。\n\t3. 你为解决问题尝试过的步骤。\n\n感谢你的帮助！",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid auxiliary toolbar name: \"",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "辅助工具栏名称无效：\"",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid data.",
+      "Context": "[Umbra] WidgetManager.CreateProfileFromClipboard",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "数据无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid setting: \"",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无效的设置：\"",
+      "Source": "library"
+    },
+    {
+      "Original": "Migration Failed",
+      "Context": "[Umbra.Common] MigrationManager.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "迁移失败",
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Context": "[Umbra.Common] MigrationManager.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Open config directory",
+      "Context": "[Umbra] Plugin.UpdateDevBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开配置目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick from...",
+      "Context": "[Umbra] ColorInputPopupNode.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "从以下位置选取…",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Node Inspector",
+      "Context": "[Umbra] Plugin.UpdateDevBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示节点检查器",
+      "Source": "library"
+    },
+    {
+      "Original": "Umbra Error",
+      "Context": "[Umbra.Common] CrashLogger..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Umbra 出错",
+      "Source": "library"
+    },
+    {
+      "Original": "Usage: /umbra-aux <show|hide|toggle> [name].",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "用法：/umbra-aux <show|hide|toggle> [name]。",
+      "Source": "library"
+    },
+    {
+      "Original": "Usage: /umbra-toolbar-profile <profile name>.",
+      "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "用法：/umbra-toolbar-profile <profile name>。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

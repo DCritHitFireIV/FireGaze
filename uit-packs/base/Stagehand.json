@@ -1,0 +1,540 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Stagehand",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Stagehand Configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Stagehand 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open",
+      "Context": "ConfigWindow.DrawGeneralSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击打开",
+      "Source": "library"
+    },
+    {
+      "Original": "(leave blank for default)",
+      "Context": "ConfigWindow.DrawGeneralSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "（留空以使用默认值）",
+      "Source": "library"
+    },
+    {
+      "Original": "Press a key to set the new keybind, left click to cancel recording, or right click to clear the current binding.",
+      "Context": "ConfigWindow.DrawKeybindsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按键设置新快捷键。左键取消录制，右键清除当前绑定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click to record a new keybind, or right click to clear the current binding.",
+      "Context": "ConfigWindow.DrawKeybindsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "左键录制新的快捷键，右键清除当前绑定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Memory Resource Untouched",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录未处理的内存资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Memory Resource Handled",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录已处理的内存资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Modpack Resource Untouched",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录未处理的模组包资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Modpack Resource Handled",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录已处理的模组包资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Division",
+      "Context": "LibraryWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "主区",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision",
+      "Context": "LibraryWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": " location",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 地点",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Room",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "房间",
+      "Source": "library"
+    },
+    {
+      "Original": "Room ",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "房间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Editor",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "打开编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy",
+      "Context": "QuickPickerWindow.DrawDetailsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "ImGuiExtensions.DyeCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.FilterBox",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo ",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "撤销 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo ",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重做 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DropdownButton",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Space",
+      "Context": "TransformCoordinateSpaceExtensions.GetDisplayName",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "局部空间",
+      "Source": "library"
+    },
+    {
+      "Original": "World Space",
+      "Context": "TransformCoordinateSpaceExtensions.GetDisplayName",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "世界空间",
+      "Source": "library"
+    },
+    {
+      "Original": "Game Path",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "游戏路径",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Game path",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "游戏路径",
+      "Source": "library"
+    },
+    {
+      "Original": "File path",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "文件路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Options:",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawPenumbraImportTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Color",
+      "Context": "BgObjectDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "染色颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Specular Highlights",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "镜面高光",
+      "Source": "library"
+    },
+    {
+      "Original": "Angular Falloff",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "角度衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Factor",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "衰减因子",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Characters",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Dynamic",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "动态",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Shadow Range",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "角色阴影范围",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Path",
+      "Context": "VfxObjectDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "data",
+      "Context": "AssetLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "selected",
+      "Context": "AssetLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "AssetLibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "BookmarkTreeViewComponent.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "FolderItemOperations.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "LibraryWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "EmbeddedModpackDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Version",
+      "Context": "StageDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputText",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "StageDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "BgObjectDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SliderFloat",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Shape",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextUnformatted",
+      "Translated": "形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.DragFloat",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SliderFloat",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Name",
+      "Context": "ObjectDefinitionEditor`1.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputText",
+      "Translated": "显示名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "SoundObjectDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SliderFloat",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "SoundObjectDefinitionEditor.OnDrawProperties",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.DragFloat",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "New Folder",
+      "Context": "BookmarkTreeViewComponent.DrawContextMenu",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.MenuItem",
+      "Translated": "新建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "FolderItemOperations.DrawContextMenu",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.MenuItem",
+      "Translated": "复制",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

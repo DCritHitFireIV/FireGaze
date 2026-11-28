@@ -1,0 +1,1046 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MacroMate",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " macros ",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 宏 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Condition",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "添加条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Group",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Macro",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Adventurer Plate",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "冒险者铭牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Applied",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply###sort_apply/{node.Id}",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Translate Commands",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "转换命令为定型文",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Translation",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "定型文",
+      "Source": "library"
+    },
+    {
+      "Original": "Binding",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Titles",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "首领称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Bozja UI",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "博兹雅界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Bulk Delete###mainwindow/bulk_delete_popup",
+      "Context": "MainWindow.DrawBulkDeletePopupModel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal",
+      "Translated": "批量删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel###sort_cancel/{node.Id}",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo Racing",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "陆行鸟竞赛",
+      "Source": "library"
+    },
+    {
+      "Original": "Class/Job",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Convert to Auto-Translate",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "转换为定型文",
+      "Source": "library"
+    },
+    {
+      "Original": "Converts plain text words to Auto-Translate payloads if they match the Auto-Translate dictionary",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "将词典中有对应定型文的普通文本转换为定型文。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy URL to Clipboard",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "将 URL 复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load Macro Mate Cache",
+      "Context": "MacroMateCacheV1.Read",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法加载 Macro Mate 缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load Macro Mate Config",
+      "Context": "MacroMateSerializerV1.Read",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法加载 Macro Mate 配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Backup",
+      "Context": "BackupWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "创建备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Character",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Deliveries",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "老主顾交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete ",
+      "Context": "MainWindow.DrawDeleteUnownedPopupModal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete###mainwindow/delete_popup/",
+      "Context": "MainWindow.DrawDeletePopupModal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Double right click this button to delete ",
+      "Context": "BackupWindow.DrawBackups",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "鼠标右键双击此按钮即可删除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit All",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "全部编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Export this item to the clipboard as a Macro Mate preset",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将此项目作为 Macro Mate 预设导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to Clipboard",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "FileName",
+      "Context": "BackupWindow.DrawBackups",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文件名",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "SeStringAutoCompletePopup.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing Log",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "钓鱼笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardening Log",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "园艺记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "大国防联军",
+      "Source": "library"
+    },
+    {
+      "Original": "Greater Than",
+      "Context": "Gt.get_LongText",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "大于",
+      "Source": "library"
+    },
+    {
+      "Original": "Greater Than or Equal To",
+      "Context": "Gte.get_LongText",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "大于或等于",
+      "Source": "library"
+    },
+    {
+      "Original": "Group By",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "分组依据",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "HelpWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Code",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "导入代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Here",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "导入到此处",
+      "Source": "library"
+    },
+    {
+      "Original": "Import a Macro Mate preset into this group",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将 Macro Mate 预设导入此分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Game",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从游戏导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import###mainwindow/import_code_popup/",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import###mainwindow/import_from_game/",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Individual",
+      "Context": "MacroLink.Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "个人专用",
+      "Source": "library"
+    },
+    {
+      "Original": "Introduction",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "入门",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid import: 'Macro Slot Start' must be before 'Macro Slot End'",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "无法导入：起始宏栏位必须在结束宏栏位之前。",
+      "Source": "library"
+    },
+    {
+      "Original": "Island Sanctuary",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "无人岛",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Japanese Popup Texts",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "日文弹窗文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Less Than",
+      "Context": "Lt.get_LongText",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "小于",
+      "Source": "library"
+    },
+    {
+      "Original": "Less Than or Equal To",
+      "Context": "Lte.get_LongText",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "小于或等于",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Context": "BackupWindow.DrawBackups",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Mate config reloaded",
+      "Context": "BackupWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已重新加载 Macro Mate 配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Mate: Failed to bind macros on condition change",
+      "Context": "MacroMate.Refresh",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Macro Mate：条件变化后绑定宏失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Set",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "宏组",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Slot End",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "结束宏栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Slot Start",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "起始宏栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Macros",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Words:",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最大词数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Word Length:",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最短词长：",
+      "Source": "library"
+    },
+    {
+      "Original": "Minions",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "ModifiedDate",
+      "Context": "BackupWindow.DrawBackups",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "修改日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "No changes",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "无更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Node",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "出海垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Backup Folder",
+      "Context": "BackupWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开备份文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste a preset here and click 'Import'",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "将预设粘贴到此处，然后点击「导入」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "DebugWindow.DrawIpcCreateGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Paths",
+      "Context": "HelpWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup Texts",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "弹窗文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset string is invalid",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预设字符串无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Images",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "任务图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Quests",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload Config File",
+      "Context": "BackupWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重新加载配置文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename###mainwindow/rename_popup/",
+      "Context": "MainWindow.DrawRenamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "MainWindow.DrawNewSubscriptionGroupPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "MainWindow.DrawSearchBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search ",
+      "Context": "IconPickerDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared",
+      "Context": "MacroLink.Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "同账号共用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all macros",
+      "Context": "MainWindow.DrawSearchBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示所有宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip words shorter than this length to avoid replacing common short words",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "跳过更短的词，避免误替换常见短词。",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot ",
+      "Context": "MacroConfig.BulkImportFromXIV",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "栏位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排序依据",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort Direction",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排序方向",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort Subgroups",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对子分组排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort###mainwindow/sort_popup/",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Splash Logos",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "启动标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Subscription URL",
+      "Context": "MainWindow.DrawNewSubscriptionGroupPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "订阅地址",
+      "Source": "library"
+    },
+    {
+      "Original": "System",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "This will overwrite the current configuration",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "这将覆盖当前配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Unbound",
+      "Context": "MacroLink.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "未绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "World Map",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "世界地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Maps",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "区域地图",
+      "Source": "library"
+    },
+    {
+      "Original": "icon id",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "图标 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "icon id: ",
+      "Context": "IconAndName.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "图标 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "is",
+      "Context": "Is.get_Text",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等于",
+      "Source": "library"
+    },
+    {
+      "Original": "is not",
+      "Context": "IsNot.get_Text",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "不等于",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

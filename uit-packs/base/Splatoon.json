@@ -1,0 +1,1563 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Splatoon",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "   Zone ",
+      "Context": "ClipZoneSelector.PostDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "   区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": " configuration",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": " copied to clipboard.",
+      "Context": "Utils.ExportToClipboard",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": " 已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": " elements",
+      "Context": "CGui.DrawArchiveEntries",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": " 个元素",
+      "Source": "library"
+    },
+    {
+      "Original": "- Show All -",
+      "Context": "CGui.DislayLayouts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "- 显示全部 -",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Add New",
+      "Context": "DisplayGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "新增",
+      "Source": "library"
+    },
+    {
+      "Original": "Add layout",
+      "Context": "CGui.DislayLayouts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup",
+      "Translated": "添加布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Alive",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "存活",
+      "Source": "library"
+    },
+    {
+      "Original": "All Jobs",
+      "Context": "JlockSelector.DrawJlockSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.JobSelector",
+      "Translated": "所有职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Angle: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "角度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation Color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "动画颜色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "动画： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation:  ",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "动画：  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Any job",
+      "Context": "JobbedPlayer.DrawSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.JobSelector",
+      "Translated": "任意职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "CGui.DisplayRenderers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Archive group",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "归档分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Attributes:",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "属性：",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Context": "CGui.LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted",
+      "Context": "TabProjection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "已加入黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera angle X:",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "镜头 X 轴角度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera angle Y:",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "镜头 Y 轴角度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera zoom:",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "镜头缩放：",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast time",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "咏唱时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "LogWindow.PrintFiltered",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear List",
+      "Context": "PriorityPopupWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all",
+      "Context": "TabFind.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear list",
+      "Context": "CGui.DisplayLogger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Color:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "颜色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors:",
+      "Context": "PointerLineStyle.DrawDefaultsEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Configurations",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Contribute",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "参与贡献",
+      "Source": "library"
+    },
+    {
+      "Original": "Control",
+      "Context": "CGui.DrawArchiveEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied style:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已复制的样式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "CGui.DrawArchiveEntries",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy all",
+      "Context": "LogWindow.PrintFiltered",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy config",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy group",
+      "Context": "CGui.DrawArchive",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "复制分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy style",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "复制样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard",
+      "Context": "PriorityList.DrawModeSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to clipboard",
+      "Context": "SplatoonScript.DrawRegisteredElements",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize: ",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrappedCopy",
+      "Translated": "自定义： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "TabProjection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Dead",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "死亡",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default:",
+      "Context": "InternationalString.ImGuiEdit",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "默认：",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay: ",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "延迟： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "CGui.DrawArchiveEntries",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete group",
+      "Context": "CGui.DrawArchive",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "删除分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Deselect All",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance limit",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "距离上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration: ",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "持续时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Dynamic",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "动态",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "SplatoonScript.DrawRegisteredElements",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "SplatoonScript.Enable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CollectionCheckbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Rapid Import",
+      "Context": "RapidImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用快速导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable logger",
+      "Context": "CGui.DisplayLogger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用记录器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable logging",
+      "Context": "DisplayGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用日志记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable##TetherEnable",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "End Fill Color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "终点填充色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter new name...",
+      "Context": "CGui.DrawOldSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入新名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: empty names are not allowed",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "错误：名称不能为空",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: this name is already exists",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "错误：已有同名布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Group",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "导出分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Export:",
+      "Context": "CGui.LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "导出：",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra...",
+      "Context": "PointerLineStyle.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "附加选项…",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill Intensity: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "填充强度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "ZlockSelector.DrawZlockSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by Zone",
+      "Context": "CGui.DislayLayouts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "按区域筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "LogWindow.PrintFiltered",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter:",
+      "Context": "CGui.DisplayLogger",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "筛选：",
+      "Source": "library"
+    },
+    {
+      "Original": "Font scale:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "字体缩放：",
+      "Source": "library"
+    },
+    {
+      "Original": "Font size",
+      "Context": "CGui.DisplayRenderers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.DragFloat",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Game version: ",
+      "Context": "CGui.DisplayGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "游戏版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate donut",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成环形区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Enabled",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CollectionCheckbox",
+      "Translated": "已启用分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Height",
+      "Context": "ClipZoneSelector.PostDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL and click",
+      "Context": "PriorityList.DrawModeSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 并点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL+SHIFT+click",
+      "Context": "CGui.DrawOldSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl+Shift 并点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL+click",
+      "Context": "CGui.DrawOldSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 并点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Holding CTRL when clicking will also paste:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "按住 Ctrl 再点击时还会粘贴：",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon ID",
+      "Context": "Element.Init",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "图标 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from clipboard",
+      "Context": "CGui.DislayLayouts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Context": "CGui.DrawArchiveEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Information",
+      "Context": "CGui.DisplayGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.EnumCombo",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Context": "CGui.DisplayGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Context": "LayoutDrawSelector.DrawLayoutElementSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout Name",
+      "Context": "CGuiConfigurations.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout created: ??",
+      "Context": "CGui.DislayLayouts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "布局已创建：??",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout list",
+      "Context": "CGui.DislayLayouts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "布局列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout name",
+      "Context": "CGui.DislayLayouts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout name:",
+      "Context": "TranslationWorkspaceWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "布局名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Layouts",
+      "Context": "CGui.Update",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "List ",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "列表 ",
+      "Source": "library"
+    },
+    {
+      "Original": "List mode:",
+      "Context": "PriorityList.DrawModeSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "列表模式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror horizontally",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "水平镜像",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror vertically",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "垂直镜像",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "TabProjection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Name can't contain reserved characters: ,",
+      "Context": "CGui.AddEmptyLayout",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "名称不能包含保留字符：,",
+      "Source": "library"
+    },
+    {
+      "Original": "Name can't contain reserved characters: ~",
+      "Context": "CGui.AddEmptyLayout",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "名称不能包含保留字符：~",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "New group...",
+      "Context": "LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新建分组…",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "LineEnds..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.EnumCombo",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Effects",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "对象特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Object name",
+      "Context": "CGui.DisplayLogger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "对象名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Object table",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "对象列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Object table:",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "对象列表：",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "CGui.DisplayRenderers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset: ",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Only selected",
+      "Context": "ZlockSelector.DrawZlockSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Open configuration",
+      "Context": "LinuxWarningPopup.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open plugin installer",
+      "Context": "Loader.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开插件安装器",
+      "Source": "library"
+    },
+    {
+      "Original": "Origin Fill Color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "起点填充色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay BG color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "悬浮文字背景色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay text color: 0x",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "悬浮文字颜色：0x",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay vertical offset: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "悬浮文字垂直偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste from clipboard",
+      "Context": "SplatoonScript.DrawConfigurations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "从剪贴板粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste from clipboard##castinfo",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "从剪贴板粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste style",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "粘贴样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Placeholders",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "占位符",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "准备中",
+      "Source": "library"
+    },
+    {
+      "Original": "Projection",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "投影",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse Frequency: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "脉冲频率： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse Size: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "脉冲大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse:",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "脉冲：",
+      "Source": "library"
+    },
+    {
+      "Original": "Query",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "查询",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius:",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "半径：",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "半径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "TabFind.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove group and disband layouts",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "删除分组并解散其中的布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove group and it's layouts",
+      "Context": "CGui.DrawOldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "删除分组及组内布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "SplatoonScript.DrawConfigurations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Render",
+      "Context": "CGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "Utils.Reset",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore",
+      "Context": "CGui.DrawArchiveEntries",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore group",
+      "Context": "CGui.DrawArchive",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "还原分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "旋转 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Round coordinates to an integer",
+      "Context": "CGui.DrawRounding",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将坐标四舍五入为整数",
+      "Source": "library"
+    },
+    {
+      "Original": "Scene",
+      "Context": "CGui.Update",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Search layouts",
+      "Context": "CGui.DislayLayouts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputWithRightButtonsArea",
+      "Translated": "搜索布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "CGui.DislayLayouts",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Share:",
+      "Context": "CGui.LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "分享：",
+      "Source": "library"
+    },
+    {
+      "Original": "Size:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "大小：",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting Position:",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.SizedText",
+      "Translated": "起始位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.StyleEdit",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Targetable",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "可选为目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "连线： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Text color:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "文字颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness",
+      "Context": "PointerLineStyle.DrawVisualsEdits",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.DragFloat",
+      "Translated": "粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "粗细： ",
+      "Source": "library"
+    },
+    {
+      "Original": "This element is currently being rendered",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "此元素目前可见",
+      "Source": "library"
+    },
+    {
+      "Original": "This element is currently not being rendered",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "此元素目前未显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "To my pos",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移到我的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers:",
+      "Context": "TranslationWorkspaceWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "触发条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Path",
+      "Context": "Element.Init",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical offset:",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "垂直偏移：",
+      "Source": "library"
+    },
+    {
+      "Original": "Viewer mode",
+      "Context": "CGui.DisplayLogger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "查看模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "CGui.DisplayDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Context": "TabProjection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "White",
+      "Context": "TabProjection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "白色",
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist",
+      "Context": "CGui.LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Width",
+      "Context": "ClipZoneSelector.PostDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Width:",
+      "Context": "PointerLineStyle.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.DragFloat",
+      "Translated": "宽度：",
+      "Source": "library"
+    },
+    {
+      "Original": "X offset: ",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "水平偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "CGuiConfigurations.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "distance",
+      "Context": "Explorer.DrawGameObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "Triggers.DrawTriggers",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "offset",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "value",
+      "Context": "CGui.DisplayDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputUint",
+      "Translated": "数值",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

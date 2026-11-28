@@ -1,0 +1,1048 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PluginJPHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Plugin JP Helper を開きます。",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Plugin JP Helper。",
+      "Source": "library"
+    },
+    {
+      "Original": "● 操作待ち",
+      "Context": "Plugin.DrawBlinkingWorkflowWarning",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "● 等待操作",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳・取得",
+      "Context": "Plugin.DrawMainWindowContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "获取未翻译文本",
+      "Source": "library"
+    },
+    {
+      "Original": "ヘルプ",
+      "Context": "Plugin.DrawMainWindowContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "クレジット",
+      "Context": "Plugin.DrawMainWindowContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "制作人员",
+      "Source": "library"
+    },
+    {
+      "Original": "コミュニティ",
+      "Context": "Plugin.DrawDictionarySourcesTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "社区",
+      "Source": "library"
+    },
+    {
+      "Original": "パフォーマンス",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "性能",
+      "Source": "library"
+    },
+    {
+      "Original": "FPS低下や動作の重さを感じる場合だけONにしてください。初期値はOFFです。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "仅在帧率下降或操作卡顿时开启。默认关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "ON時は同じ文字列の再判定をキャッシュし、翻訳対象内の処理をさらに軽くします。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "开启后会缓存同一字符串的判定结果，减少处理待翻译文本所需的开销。",
+      "Source": "library"
+    },
+    {
+      "Original": "登録外プラグインの早期スキップは、この設定のON/OFFに関係なく常時有効です。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无论此项是否开启，插件都会提前跳过未登记的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳漏れなど相性問題が出た場合はOFFにしてください。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "若发生漏译等兼容性问题，请关闭此项。",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化け判定設定",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "乱码检测设置",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳結果だけを判定します。原文側の文字化けはこの設定では停止対象にしません。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "只检测译文。原文乱码不会触发此设置的停止条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "ホワイトリストと判定条件が同時に一致した場合は、ホワイトリストを最優先して警告しません。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "原文同时满足白名单和乱码规则时，优先使用白名单，不显示警告。",
+      "Source": "library"
+    },
+    {
+      "Original": "登録文字列は実際の文字を表示します。文字列・Unicode欄はドラッグ選択して Ctrl+C でコピーできます。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "下方会显示已登记的实际字符。拖选字符串或 Unicode 一栏的内容，再按 Ctrl+C 即可复制。",
+      "Source": "library"
+    },
+    {
+      "Original": "実際に登録されている文字列です。ドラッグ選択してコピーできます。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此处显示已登记的实际字符串。拖选即可复制。",
+      "Source": "library"
+    },
+    {
+      "Original": "左記文字列が ",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左侧字符串连续出现 ",
+      "Source": "library"
+    },
+    {
+      "Original": " 回繰り返したら検知",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 次时报告",
+      "Source": "library"
+    },
+    {
+      "Original": "判定ルールを追加",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加检测规则",
+      "Source": "library"
+    },
+    {
+      "Original": "文字列 または U+25A1",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "字符串或 U+25A1",
+      "Source": "library"
+    },
+    {
+      "Original": "入力を認識できません。実文字または U+XXXX 形式で入力してください。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无法识别输入。请输入实际字符或 U+XXXX 格式的码位。",
+      "Source": "library"
+    },
+    {
+      "Original": "制御文字を検知",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "检测控制字符",
+      "Source": "library"
+    },
+    {
+      "Original": "改行・タブ以外の制御文字を検知します。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "检测换行符和制表符以外的控制字符。",
+      "Source": "library"
+    },
+    {
+      "Original": "ここに一致した翻訳文字列は、他の文字化け判定ルールに一致しても正常扱いにします。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "匹配此处的译文将视为正常，即使它也匹配其他乱码规则。",
+      "Source": "library"
+    },
+    {
+      "Original": "ホワイトリストは文字化け判定ルールより優先されます。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "白名单优先于乱码检测规则。",
+      "Source": "library"
+    },
+    {
+      "Original": "ホワイトリストを追加",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加白名单规则",
+      "Source": "library"
+    },
+    {
+      "Original": "名前（例：フランス語 Âmes）",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "名称（例：法语 Âmes）",
+      "Source": "library"
+    },
+    {
+      "Original": "文字列 または U+XXXX",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "字符串或 U+XXXX",
+      "Source": "library"
+    },
+    {
+      "Original": "部分一致でホワイトリスト登録",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按部分匹配加入白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "ホワイトリストに追加",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化けを検知した項目は、その場では元Manifestの原文へ戻しています。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "检测到乱码的条目会立即恢复为原始清单中的文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "ここで保存するまでは、再翻訳・翻訳除外の指定は今回のPJH起動中だけの仮処理です。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "在此保存前，重新翻译和排除翻译的设置仅对本次 PJH 会话生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "最終的に『現在の翻訳ファイルへ上書き保存』を押すと、現在使用中のPlugin Installer翻訳ファイルへ確定保存します。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击“覆盖保存到当前译文文件”，将变更写入 Plugin Installer 当前使用的译文文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "修復履歴はありません。",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "暂无修复记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "現在の翻訳",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "当前译文",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳前の原文",
+      "Context": "Plugin.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "翻译前的原文",
+      "Source": "library"
+    },
+    {
+      "Original": "残り ",
+      "Context": "Plugin.GetGitHubApiRateLimitStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "剩余 ",
+      "Source": "library"
+    },
+    {
+      "Original": "・リセット ",
+      "Context": "Plugin.GetGitHubApiRateLimitStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "· 重置 ",
+      "Source": "library"
+    },
+    {
+      "Original": "ごろ",
+      "Context": "Plugin.GetGitHubApiRateLimitStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "左右",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub API（公式・コミュニティ共通）: ",
+      "Context": "Plugin.GetGitHubApiRateLimitStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "GitHub API（官方与社区共用）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "・レート制限中",
+      "Context": "Plugin.GetGitHubApiRateLimitStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "· 已触发速率限制",
+      "Source": "library"
+    },
+    {
+      "Original": "ユーザーが作成・共有したコミュニティ辞書を確認し、必要なものだけダウンロード／更新できます。",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "浏览用户创建和共享的社区词典，并按需下载或更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "自分の投稿名",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "我的投稿名",
+      "Source": "library"
+    },
+    {
+      "Original": "Web投稿時に入力した投稿者名と一致する辞書を [自分] として強調表示します。削除権限の判定には使用しません。",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "与网页投稿时填写的名称一致的词典将标记为“我的”。此名称不用于判定删除权限。",
+      "Source": "library"
+    },
+    {
+      "Original": "コミュニティ辞書一覧を取得",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取社区词典列表",
+      "Source": "library"
+    },
+    {
+      "Original": "コミュニティ辞書フォルダーを開く",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开社区词典文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "コミュニティ辞書をアップロード",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上传社区词典",
+      "Source": "library"
+    },
+    {
+      "Original": "「コミュニティ辞書一覧を取得」を押すとGitHub上の一覧を表示します。",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击“获取社区词典列表”，即可查看 GitHub 上的词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書名・プラグイン名・投稿者・備考で検索",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按词典名、插件名、投稿者或备注搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "検索をクリア",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除搜索内容",
+      "Source": "library"
+    },
+    {
+      "Original": "表示できるコミュニティ辞書がありません。",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有可显示的社区词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "選択した辞書をダウンロード／更新",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下载或更新所选词典",
+      "Source": "library"
+    },
+    {
+      "Original": "選択してください",
+      "Context": "Plugin.DrawPluginDropdown",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "请选择",
+      "Source": "library"
+    },
+    {
+      "Original": "日本語化が有効なプラグインは緑色で表示します。",
+      "Context": "Plugin.DrawPluginDropdown",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已启用日语翻译的插件将显示为绿色。",
+      "Source": "library"
+    },
+    {
+      "Original": "別ウィンドウの関連付け",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "关联独立窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "メイン画面とは別の独立ウィンドウを使うプラグイン向けです。関連付けたウィンドウでも、このプラグインの翻訳辞書を使用します。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "适用于使用独立窗口的插件。关联的窗口也将使用该插件的词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup / Combo / Tooltip は通常、自動で親ウィンドウを引き継ぎます。ここでは完全に別 Begin() されたウィンドウだけを追加してください。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "弹出菜单、下拉框和提示通常会自动继承父窗口。请在此只添加通过 Begin() 单独创建的窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "関連付け済みウィンドウ名：なし",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已关联的窗口名称：无",
+      "Source": "library"
+    },
+    {
+      "Original": "関連付け済み：",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已关联：",
+      "Source": "library"
+    },
+    {
+      "Original": "検出テストモード",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "检测测试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "押したあと、翻訳したい別ウィンドウをゲーム内で開いてください。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击后，请在游戏内打开需要翻译的独立窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "新しい独立ウィンドウはまだ検出されていません。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未检测到新的独立窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "新しく検出：",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "新检测到：",
+      "Source": "library"
+    },
+    {
+      "Original": "この新規ウィンドウを関連付け",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关联此新窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "ウィンドウ名 / 内部ID",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "窗口名 / 内部 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "現在表示中のウィンドウ",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前可见的窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "この一覧はリアルタイムです。対象ウィンドウを閉じると自動で消え、再度開くと戻ります。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "列表会实时更新。关闭窗口后，对应条目将消失，重新打开时会再次显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "内部UIも表示",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "也显示内部界面",
+      "Source": "library"
+    },
+    {
+      "Original": "UmbraのToolbar/AuxBarなど、画面部品として大量生成される内部ImGui Windowも表示します。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "也显示作为界面部件大量生成的内部 ImGui 窗口，例如 Umbra 的 Toolbar 和 AuxBar。",
+      "Source": "library"
+    },
+    {
+      "Original": "現在表示中で検索条件に一致するウィンドウはありません。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前可见的窗口中没有符合搜索条件的项目。",
+      "Source": "library"
+    },
+    {
+      "Original": "現在表示中の対象ウィンドウはありません。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前没有可见的目标窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "追加済み",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "已添加",
+      "Source": "library"
+    },
+    {
+      "Original": "開くコマンド：",
+      "Context": "Plugin.DrawOpenCommandControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "コマンドを保存",
+      "Context": "Plugin.DrawOpenCommandControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存命令",
+      "Source": "library"
+    },
+    {
+      "Original": "このプラグインを開くためのコマンドを保存します。プラグインごとに個別保存されます。",
+      "Context": "Plugin.DrawOpenCommandControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "保存打开此插件所用的命令。每个插件可以单独设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "開く",
+      "Context": "Plugin.DrawOpenCommandControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "先に開くコマンドを入力して「コマンドを保存」を押してください。",
+      "Context": "Plugin.DrawOpenCommandControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先输入打开命令，再点击“保存命令”。",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイル指定に失敗",
+      "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "指定词典文件失败",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイルが見つかりません",
+      "Context": "PluginInstallerModule.RevealDictionaryFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "找不到词典文件",
+      "Source": "library"
+    },
+    {
+      "Original": "PluginManager待ち",
+      "Context": "PluginInstallerModule.IsPluginInstallerReadyForTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待插件管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamudセーフモード中",
+      "Context": "PluginInstallerModule.IsPluginInstallerReadyForTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Dalamud 正处于安全模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud読み込み完了 / 翻訳安全待機中",
+      "Context": "PluginInstallerModule.IsPluginInstallerReadyForTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Dalamud 已加载，正在等待安全翻译时机",
+      "Source": "library"
+    },
+    {
+      "Original": "PluginManager状態確認エラー",
+      "Context": "PluginInstallerModule.IsPluginInstallerReadyForTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "检查插件管理器状态时出错",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud内部構造を取得できません",
+      "Context": "PluginInstallerModule.ScanAllInstallerManifests",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法获取 Dalamud 内部结构",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installerへ接続できません",
+      "Context": "PluginInstallerModule.ReacquireCommandDescriptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无法连接到 Plugin Installer",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamudのコマンド一覧を取得できません",
+      "Context": "PluginInstallerModule.ReacquireCommandDescriptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无法获取 Dalamud 命令列表",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳処理中です",
+      "Context": "PluginInstallerModule.StartPendingTranslations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在翻译",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳完了・辞書へ保存済み",
+      "Context": "PluginInstallerModule.ApplyCompletedTranslations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "翻译完成，已保存到词典",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳 0件 / すべて翻訳済み",
+      "Context": "PluginInstallerModule.StartChangelogTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未译 0 条 / 已全部翻译",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud内部Serviceを取得できません",
+      "Context": "PluginInstallerModule.TryResolvePluginInstaller",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法获取 Dalamud 内部服务",
+      "Source": "library"
+    },
+    {
+      "Original": "DalamudInterfaceを取得できません",
+      "Context": "PluginInstallerModule.TryResolvePluginInstaller",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法获取 DalamudInterface",
+      "Source": "library"
+    },
+    {
+      "Original": "ログ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "例：手配書 / 討伐手帳 / 製作 / リテイナー",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "示例：通缉令 / 讨伐笔记 / 制作 / 雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "日本語から検索",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用日语搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamudへ渡した英語: ",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "传给 Dalamud 的英语： ",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳の下に原文も表示",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在译文下方显示原文",
+      "Source": "library"
+    },
+    {
+      "Original": "差分チェック間隔（分）",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "差异检查间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "今すぐ差分チェック",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "立即检查差异",
+      "Source": "library"
+    },
+    {
+      "Original": "利用可能チェック",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "检查服务可用性",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳待ちを開始",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始处理待译条目",
+      "Source": "library"
+    },
+    {
+      "Original": "コマンド説明を再取得",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新获取命令说明",
+      "Source": "library"
+    },
+    {
+      "Original": "更新履歴を翻訳",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "翻译更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "更新履歴の翻訳を停止",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止翻译更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳ファイルを選択",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择译文文件",
+      "Source": "library"
+    },
+    {
+      "Original": "この辞書を使用",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用此词典",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイルを表示",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示词典文件",
+      "Source": "library"
+    },
+    {
+      "Original": "フォルダーを開く",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": " プラグイン",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 个插件",
+      "Source": "library"
+    },
+    {
+      "Original": "更新があったプラグイン",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "有更新的插件",
+      "Source": "library"
+    },
+    {
+      "Original": "一覧をクリア",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "列幅をリセット",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置列宽",
+      "Source": "library"
+    },
+    {
+      "Original": "詳細ログ",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "详细日志",
+      "Source": "library"
+    },
+    {
+      "Original": "ログをクリア",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除日志",
+      "Source": "library"
+    },
+    {
+      "Original": "ログをコピー",
+      "Context": "MainWindow.DrawLogTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制日志",
+      "Source": "library"
+    },
+    {
+      "Original": "[エラー/制限] ",
+      "Context": "MainWindow.DrawStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[错误/限制] ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

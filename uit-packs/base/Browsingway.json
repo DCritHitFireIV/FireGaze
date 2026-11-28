@@ -1,0 +1,511 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Browsingway",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Browsingway dependencies",
+      "Context": "[Browsingway] DependencyManager.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Browsingway 依赖组件",
+      "Source": "library"
+    },
+    {
+      "Original": "Browsingway requires additional dependencies to function.\nThese are not shipped with the plugin due to their size.\n\nThe files are hosted on GitHub and are verified with SHA256 checksums:\nhttps://github.com/Styr1x/Browsingway/releases/tag/cef-binaries\n\nCefSharp: ",
+      "Context": "[Browsingway] DependencyManager.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Browsingway 需要额外组件才能运行。\n由于体积较大，这些组件未随插件分发。\n\n文件托管在 GitHub 上，下载后会用 SHA256 校验：\nhttps://github.com/Styr1x/Browsingway/releases/tag/cef-binaries\n\nCefSharp： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Install missing dependencies",
+      "Context": "[Browsingway] DependencyManager.RenderConfirm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "安装缺少的依赖组件",
+      "Source": "library"
+    },
+    {
+      "Original": "Installing dependencies: ",
+      "Context": "[Browsingway] DependencyManager.RenderInstalling",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在安装依赖组件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "[Browsingway] DependencyManager.RenderComplete",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Context": "[Browsingway] DependencyManager.RenderFailed",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Extracting",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "正在解压",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while building the browser overlay texture:",
+      "Context": "[Browsingway] Overlay.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "生成浏览器悬浮窗纹理时出错：",
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while building the browser overlay texture. Check the log for more details.",
+      "Context": "[Browsingway] Overlay.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "生成浏览器悬浮窗纹理时出错，详情请查看日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Control Browsingway from the chat line! Type '/bw config' or open the settings for more info.",
+      "Context": "[Browsingway] Plugin.DependenciesReady",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "可通过聊天栏控制 Browsingway！输入 /bw config 或打开设置了解详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "No subcommand specified. Valid subcommands are: config,overlay.",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未指定子命令。可用子命令：config、overlay。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown subcommand '",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知子命令「",
+      "Source": "library"
+    },
+    {
+      "Original": "'. Valid subcommands are: config,overlay,inlay.",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "」。可用子命令：config、overlay、inlay。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid overlay command. Supported syntax: '[overlayCommandName] [setting] [value]'",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "悬浮窗命令无效。用法：'[overlayCommandName] [setting] [value]'",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown overlay '",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知悬浮窗「",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown setting '",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知设置「",
+      "Source": "library"
+    },
+    {
+      "Original": ". Valid settings are: url,hidden,locked,fullscreen,clickthrough,typethrough,muted,disabled,act.",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "。可用设置：url、hidden、locked、fullscreen、clickthrough、typethrough、muted、disabled、act。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown boolean value '",
+      "Context": "[Browsingway] Settings.CommandSettingBoolean",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知布尔值「",
+      "Source": "library"
+    },
+    {
+      "Original": ". Valid values are: on,off,toggle.",
+      "Context": "[Browsingway] Settings.CommandSettingBoolean",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "。可用值：on、off、toggle。",
+      "Source": "library"
+    },
+    {
+      "Original": "Browsingway Settings",
+      "Context": "[Browsingway] Settings.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Browsingway 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "[Browsingway] Settings.RenderPaneSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "- Overlays -",
+      "Context": "[Browsingway] Settings.RenderPaneSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "－ 悬浮窗 －",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an overlay on the left to edit its settings.",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从左侧选择悬浮窗以编辑设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Help",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "命令帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Open this configuration window.",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开此设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Change a setting for an overlay.\n\toverlayCommandName: The overlay to edit. Use the 'Command Name' shown in its config.\n\tsetting: Value to change. Accepted settings are:\n\t\turl: string\n\t\tdisabled: boolean\n\t\tmuted: boolean\n\t\tact: boolean\n\t\tlocked: boolean\n\t\thidden: boolean\n\t\ttypethrough: boolean\n\t\tclickthrough: boolean\n\t\tfullscreen: boolean\n\t\treload: -\n\tvalue: Value to set for the setting. Accepted values are:\n\t\tstring: any string value\n\t\tboolean: on, off, toggle",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "修改悬浮窗的一个设置。\n\toverlayCommandName：要编辑的悬浮窗，请填写其设置中的「命令名」。\n\tsetting：要修改的设置，可选项如下：\n\t\turl：文本\n\t\tdisabled：开关\n\t\tmuted：开关\n\t\tact：开关\n\t\tlocked：开关\n\t\thidden：开关\n\t\ttypethrough：开关\n\t\tclickthrough：开关\n\t\tfullscreen：开关\n\t\treload：无需参数\n\tvalue：要设置的值，可填写：\n\t\t文本：任意字符串\n\t\t开关：on、off、toggle",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Name",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "命令名",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Framerate",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables the overlay. Contrary to just hiding it this setting will stop it from ever being created.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停用后将不再创建此悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Muted",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables or disables audio playback.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开启或关闭声音播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "ACT/IINACT optimizations",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "ACT/IINACT 优化",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables ACT/IINACT specific optimizations. This will automatically disable the overlay if ACT/IINACT is not running.\n\nNOTE: This does NOT disable the overlay if the websocket is not reporting data.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用针对 ACT/IINACT 的优化。未运行 ACT/IINACT 时将自动停用悬浮窗。\n\n注意：仅 WebSocket 没有返回数据时，悬浮窗仍保持启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from being resized or moved. This is implicitly set by Click Through and Fullscreen.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "禁止调整悬浮窗大小及位置。启用鼠标穿透或全屏后会自动锁定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the overlay. This does not stop the overlay from executing, only from being displayed.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "隐藏悬浮窗。隐藏后它仍会在后台运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type Through",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "键盘穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from intercepting any keyboard events. Implicitly set by Click Through.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "让键盘输入直接传给游戏。启用鼠标穿透后自动开启此项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Through",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from intercepting any mouse events. Implicitly sets Locked and Type Through.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "让鼠标操作直接传给游戏，同时启用锁定和键盘穿透。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide out of combat",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "非战斗时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide this overlay when out-of-combat.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "脱离战斗时隐藏此悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in PvP",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "PvP 时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide this overlay when in a PvP area.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "进入 PvP 区域时隐藏此悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Delay",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "隐藏延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay to hide overlay when out-of-combat in seconds.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "脱离战斗后延迟多少秒隐藏悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental / Unsupported",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "实验性功能（不提供支持）",
+      "Source": "library"
+    },
+    {
+      "Original": "Fullscreen",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "全屏",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically makes this overlay cover the entire screen when enabled.",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用后悬浮窗将覆盖整个屏幕。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom CSS code:",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自定义 CSS 代码：",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom CSS code",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline",
+      "Translated": "自定义 CSS 代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Dev Tools",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开开发者工具",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

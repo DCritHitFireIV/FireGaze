@@ -1,0 +1,532 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoMarket",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open AutoMarket. Optionally pass an item name.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 AutoMarket，也可在命令后输入物品名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type at least two characters, then choose an item.",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请输入至少两个字符，再选择物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已选 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search all listings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "搜索所有在售商品",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking Universalis...",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在查询 Universalis…",
+      "Source": "library"
+    },
+    {
+      "Original": "Stage: ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "阶段： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel purchase",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "取消购买",
+      "Source": "library"
+    },
+    {
+      "Original": "Add optimized plan to list",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将优化后的方案加入购物清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Cart purchases whole stacks and may exceed the target on the final stack.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "购物车会整组购买，最后一组可能会使总量超过目标数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Dependencies",
+      "Context": "MainWindow.DrawDependencyStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "依赖插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Install or enable Lifestream, then return here. AutoMarket will detect it automatically.",
+      "Context": "MainWindow.DrawDependencyStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请安装或启用 Lifestream，再返回此处。AutoMarket 会自动检测。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search scope",
+      "Context": "MainWindow.DrawSearchOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Quality",
+      "Context": "MainWindow.DrawSearchOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "品质",
+      "Source": "library"
+    },
+    {
+      "Original": "Target quantity",
+      "Context": "MainWindow.DrawSearchOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "目标数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum unit price (0 = none)",
+      "Context": "MainWindow.DrawSearchOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最高单价（0 为不限）",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum budget (0 = none)",
+      "Context": "MainWindow.DrawSearchOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "预算上限（0 为不限）",
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "单价",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "每组数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总价",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Data center",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "更新时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "NQ",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "HQ",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "优质",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "处理中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Needs Lifestream",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel and purchase started for ",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已开始跨服采购： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer: ",
+      "Context": "MainWindow.DrawListings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "雇员： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose an item.",
+      "Context": "MainWindow.RefreshMatches",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请选择物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "No marketable item matched that search.",
+      "Context": "MainWindow.RefreshMatches",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未找到符合条件的可交易物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log in to a supported region before searching.",
+      "Context": "MainWindow.StartSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请先在受支持的区域登录，再进行搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Found ",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已找到 ",
+      "Source": "library"
+    },
+    {
+      "Original": " data centers.",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 大区。",
+      "Source": "library"
+    },
+    {
+      "Original": "Universalis returned no purchasable listings for this scope.",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Universalis 在当前范围内没有查到可购买的商品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search cancelled.",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "搜索已取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "Universalis search failed: ",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Universalis 查询失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No listings fit the quantity, unit-price, and budget limits.",
+      "Context": "MainWindow.AddToCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有商品同时符合数量、单价和预算限制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shopping list and grouped route",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "购物清单与分组路线",
+      "Source": "library"
+    },
+    {
+      "Original": "The shopping list is empty.",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "购物清单为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planned from Universalis; each listing is verified live before purchase.",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "方案依据 Universalis 数据生成，购买前会逐项核实实际在售信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Unit price",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "单价",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack total",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "整组总价",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Lifestream to start the route.",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请启用 Lifestream 以开始执行采购路线。",
+      "Source": "library"
+    },
+    {
+      "Original": "Route in progress...",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在执行采购路线…",
+      "Source": "library"
+    },
+    {
+      "Original": "Start grouped purchase route",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始分组采购",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear cart",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空购物车",
+      "Source": "library"
+    },
+    {
+      "Original": "No confirmed purchases yet.",
+      "Context": "MainWindow.DrawHistory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "暂无已确认的购买记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "MainWindow.DrawHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Context": "MainWindow.DrawHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Total + tax",
+      "Context": "MainWindow.DrawHistory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "含税总价",
+      "Source": "library"
+    },
+    {
+      "Original": "Any##Quality",
+      "Context": "MainWindow.DrawSearchOptions",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.RadioButton",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "HQ only##Quality",
+      "Context": "MainWindow.DrawSearchOptions",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.RadioButton",
+      "Translated": "仅高品质",
+      "Source": "library"
+    },
+    {
+      "Original": "NQ only##Quality",
+      "Context": "MainWindow.DrawSearchOptions",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.RadioButton",
+      "Translated": "仅普通品质",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoMarket###AutoMarketMain",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "自动市场采购",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

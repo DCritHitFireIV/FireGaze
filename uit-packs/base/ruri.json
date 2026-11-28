@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ruri",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "%d ms",
+      "Context": "CraftProgressWindow.DrawPacingControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "%d 毫秒",
+      "Source": "library"
+    },
+    {
+      "Original": "publish",
+      "Context": "MainWindow.DrawMarketplace",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "发布",
+      "Source": "library"
+    },
+    {
+      "Original": "browse",
+      "Context": "MainWindow.DrawMarketplace",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "  Lv.",
+      "Context": "MainWindow.DrawGameStateSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "  等级",
+      "Source": "library"
+    },
+    {
+      "Original": "detail",
+      "Context": "MainWindow.DrawOrderEditorBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "search",
+      "Context": "MainWindow.DrawOrderEditorBody",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "搜索",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

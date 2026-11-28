@@ -1,0 +1,1576 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Glamourer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "    》 If multiple design sets have the same name, the first one will be changed.",
+      "Context": "[Glamourer] CommandService.SetAutomation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "    》若多个设计集同名，仅更改第一个。",
+      "Source": "library"
+    },
+    {
+      "Original": "    》 If the design set name is a valid natural number it will be used as a index. Design names that are such numbers can not be dealt with.",
+      "Context": "[Glamourer] CommandService.SetAutomation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "    》若设计集名称是有效的自然数，则按序号处理，因此无法按名称指定此类设计集。",
+      "Source": "library"
+    },
+    {
+      "Original": "    》 The name is case-insensitive.",
+      "Context": "[Glamourer] CommandService.SetAutomation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "    》名称不区分大小写。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not copy state to clipboard: Failure to write to clipboard.",
+      "Context": "[Glamourer] CommandService.CopyState",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法复制外观状态：剪贴板写入失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "The compact equipment bar will only display when a valid state can be selected.",
+      "Context": "[Glamourer] CommandService.OnGlamourer",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "仅在有可选的有效外观状态时显示紧凑装备栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use without argument to toggle the main window.",
+      "Context": "[Glamourer] CommandService.OnGlamourer",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "不带参数执行可切换主窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Valid arguments for /glamour are:",
+      "Context": "[Glamourer] CommandService.PrintHelp",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "/glamour 支持以下参数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Everything",
+      "Context": "ActorFilter.DrawCombo",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Monster",
+      "Context": "ActorPanel.DrawMonsterPanel",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "未知怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Customization Data",
+      "Context": "ActorPanel.DrawMonsterPanel",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "角色外观数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipment Data",
+      "Context": "ActorPanel.DrawMonsterPanel",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "装备数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert to Game",
+      "Context": "ActorPanel.RevertButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "恢复游戏原始外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert the character to its actual state in the game.",
+      "Context": "ActorPanel.RevertButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "恢复角色在游戏中的实际外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reapply Automation",
+      "Context": "ActorPanel.RevertButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重新应用自动方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert to Automation",
+      "Context": "ActorPanel.RevertButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "恢复为自动方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Reapply",
+      "Context": "ActorPanel.RevertButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重新应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not apply non-human states.",
+      "Context": "ActorPanel.DrawApplyToSelf",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法应用非人形角色的状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your character is unavailable.",
+      "Context": "ActorPanel.DrawApplyToSelf",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前无法访问你的角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can not apply your own state onto yourself.",
+      "Context": "ActorPanel.DrawApplyToSelf",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法将自己的外观再次应用给自己。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Yourself",
+      "Context": "ActorPanel.DrawApplyToSelf",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用给自己",
+      "Source": "library"
+    },
+    {
+      "Original": "The current target can not be manipulated.",
+      "Context": "ActorPanel.DrawApplyToTarget",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法修改当前目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "No valid target selected.",
+      "Context": "ActorPanel.DrawApplyToTarget",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未选择有效目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not apply states to non-humans.",
+      "Context": "ActorPanel.DrawApplyToTarget",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法向非人形角色应用外观状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Target",
+      "Context": "ActorPanel.DrawApplyToTarget",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用给目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Actors",
+      "Context": "ActorTab.Label",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "The current state of this actor is locked by external tools.",
+      "Context": "LockedButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "外部工具已锁定此角色的当前外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select the local player character.",
+      "Context": "SelectPlayerButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "选中当前登录角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo the last change.",
+      "Context": "UndoButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "撤销上一次更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate the current Automatic Design Set.",
+      "Context": "AutomationButtons.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "复制当前自动外观方案组。",
+      "Source": "library"
+    },
+    {
+      "Original": "How does Automation work?",
+      "Context": "AutomationButtons.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "如何使用自动方案？",
+      "Source": "library"
+    },
+    {
+      "Original": "What is Automation?",
+      "Context": "AutomationButtons.DrawHelp",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "什么是自动方案？",
+      "Source": "library"
+    },
+    {
+      "Original": "Automated Design Sets",
+      "Context": "AutomationButtons.DrawHelp",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动外观方案组",
+      "Source": "library"
+    },
+    {
+      "Original": "Automated Designs",
+      "Context": "AutomationButtons.DrawHelp",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "No Automatic Design Set selected.",
+      "Context": "AutomationButtons.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未选择自动外观方案组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete the currently selected design set.",
+      "Context": "AutomationButtons.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "删除当前选中的方案组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter to only show enabled or disabled sets.",
+      "Context": "AutomationFilter.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "筛选启用或禁用的方案组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation",
+      "Context": "AutomationTab.Label",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Open a window to test your currently selected automation set against different jobs.",
+      "Context": "AutomationTesterButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开测试窗口，查看当前方案组在不同职业下的效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Matches the following designs:",
+      "Context": "RandomRestrictionDrawer.LookupTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "匹配以下外观方案：",
+      "Source": "library"
+    },
+    {
+      "Original": "Matches no currently existing designs.",
+      "Context": "RandomRestrictionDrawer.LookupTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "未匹配到现有外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Starts With",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "开头匹配",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "包含",
+      "Source": "library"
+    },
+    {
+      "Original": "Has Tag",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "具有标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Assigned Color",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "指定颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Exact Design",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "指定方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a single, specific design.",
+      "Context": "RandomRestrictionDrawer.DrawNewButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "添加一个指定的外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard Without Line Breaks",
+      "Context": "RandomRestrictionDrawer.DrawManualInput",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "复制到剪贴板并移除换行",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Chosen Design On Every Redraw",
+      "Context": "RandomRestrictionDrawer.DrawContent",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "每次重绘时重新选择外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "No Restrictions Set. Selects among all existing Designs.",
+      "Context": "RandomRestrictionDrawer.DrawContent",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未设置限制，将从全部现有方案中选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select among designs...",
+      "Context": "RandomRestrictionDrawer.DrawContent",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "从外观方案中选择……",
+      "Source": "library"
+    },
+    {
+      "Original": "Secondary Identifiers",
+      "Context": "SetPanel.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "次要标识",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control to add the identifier to the secondary identifiers of this set instead of setting the primary identifier.",
+      "Context": "SetPanel.IdentifierTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "按住 Ctrl 可将该标识追加到本组的次要标识中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite this design with your character's current state.",
+      "Context": "ApplyCharacterButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "用当前角色的外观覆盖此方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Description",
+      "Context": "DesignDetailTab.DrawDescription",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "编辑说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Editing",
+      "Context": "DesignDetailTab.DrawDescription",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "结束编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply All Customizations",
+      "Context": "DesignPanel.DrawCustomizeApplication",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用所有角色外观选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply All Crests",
+      "Context": "DesignPanel.DrawCrestApplication",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用所有部队队徽",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Everything",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "全部停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Everything",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipment Only",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "仅装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Customization Only",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "仅角色外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Application",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "默认应用规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Advanced",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "停用高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable all advanced dyes and customizations but keep everything else as is.",
+      "Context": "DesignPanel.DrawAllButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "停用所有高级染色和外观选项，保留其他设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply All Meta Changes",
+      "Context": "DesignPanel.DrawMetaApplication",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用所有附加状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply All Bonus Slots",
+      "Context": "DesignPanel.DrawBonusSlotApplication",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用所有额外栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply All Customize Parameters",
+      "Context": "DesignPanel.DrawParameterApplication",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用所有角色外观参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not apply non-human designs.",
+      "Context": "DesignPanel.DrawApplyToSelf",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法应用非人形外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not apply designs to non-humans.",
+      "Context": "DesignPanel.DrawApplyToTarget",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "无法向非人形角色应用外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to Dat",
+      "Context": "DesignPanel.DrawSaveToDat",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "导出为 DAT 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Designs",
+      "Context": "DesignTab.Label",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the current design to your clipboard.",
+      "Context": "ExportToClipboardButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将当前外观方案复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy All to Clipboard",
+      "Context": "ModAssociationsTab.DrawCopyButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "全部复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Add from Clipboard",
+      "Context": "ModAssociationsTab.DrawCopyButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "从剪贴板添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Set from Clipboard",
+      "Context": "ModAssociationsTab.DrawCopyButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "从剪贴板设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply Mod Associations",
+      "Context": "ModAssociationsTab.DrawApplyButton",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用关联模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Directory Name",
+      "Context": "ModAssociationsTab.DrawAssociatedModRow",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "目录名称",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "ModAssociationsTab.DrawAssociatedModRow",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "ModAssociationsTab.DrawAssociatedModRow",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored",
+      "Context": "ModAssociationsTab.DrawAssociatedModRow",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "已忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "ModAssociationsTab.DrawAssociatedModRow",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "No mod matching the stored mod name is currently installed.",
+      "Context": "ModAssociationsTab.DrawApplicationTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前未安装与记录名称匹配的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not connected to Penumbra.",
+      "Context": "ModAssociationsTab.DrawApplicationTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未连接 Penumbra。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "ModCombo.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Affected Design Items",
+      "Context": "ModCombo.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "受影响的方案物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Selected Designs in QDB",
+      "Context": "MultiDesignPanel.DrawMultiQuickDesignBar",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在快捷外观栏中显示所选方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Selected Designs in QDB",
+      "Context": "MultiDesignPanel.DrawMultiQuickDesignBar",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在快捷外观栏中隐藏所选方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn Write-Protected",
+      "Context": "MultiDesignPanel.DrawMultiLock",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用写保护",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Write-Protection",
+      "Context": "MultiDesignPanel.DrawMultiLock",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "解除写保护",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Reset Temp. Settings",
+      "Context": "MultiDesignPanel.DrawMultiResetSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用临时设置重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Reset Temp. Settings",
+      "Context": "MultiDesignPanel.DrawMultiResetSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "停用临时设置重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Reset Dyes",
+      "Context": "MultiDesignPanel.DrawMultiResetDyes",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用染色重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Reset Dyes",
+      "Context": "MultiDesignPanel.DrawMultiResetDyes",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "停用染色重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Redraws",
+      "Context": "MultiDesignPanel.DrawMultiForceRedraw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "强制重绘",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Forced Redraws",
+      "Context": "MultiDesignPanel.DrawMultiForceRedraw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "取消强制重绘",
+      "Source": "library"
+    },
+    {
+      "Original": "No color specified.",
+      "Context": "MultiDesignPanel.DrawMultiColor",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未指定颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the other button to set to automatic.",
+      "Context": "MultiDesignPanel.DrawMultiColor",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用另一个按钮设为自动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete All Advanced Dyes",
+      "Context": "MultiDesignPanel.DrawAdvancedButtons",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "删除全部高级染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter designs for those where their full paths or names contain the given strings, split by spaces.",
+      "Context": "DesignFilter.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "按完整路径或方案名筛选，多个关键词用空格隔开。",
+      "Source": "library"
+    },
+    {
+      "Original": "Regularly, a design has to match all supplied criteria separately.",
+      "Context": "DesignFilter.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "默认要求方案逐项满足所有条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "No design selected.",
+      "Context": "DuplicateDesignButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未选择外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clone the currently selected design to a duplicate.",
+      "Context": "DuplicateDesignButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "复制当前选中的外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Try to import a design from your clipboard.",
+      "Context": "ImportDesignButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尝试从剪贴板导入外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Design:",
+      "Context": "MoveDesignInput.DrawMenuItem",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "移动外观方案：",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a new design with default configuration.",
+      "Context": "NewDesignButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "用默认设置新建外观方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Design:",
+      "Context": "RenameDesignInput.DrawMenuItem",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重命名外观方案：",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle incognito mode off.",
+      "Context": "IncognitoButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "关闭匿名模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle incognito mode on.",
+      "Context": "IncognitoButton.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "开启匿名模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Messages",
+      "Context": "MessageTab.MessagesTab",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter NPC appearances for those where their names contain the given substring.",
+      "Context": "NpcFilter.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "根据名称包含的文字筛选 NPC 外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cheat Codes",
+      "Context": "CodeDrawer.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "隐藏口令",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Hints",
+      "Context": "CodeDrawer.DrawCodeHints",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "隐藏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Hints",
+      "Context": "CodeDrawer.DrawCodeHints",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Not attached to Penumbra.",
+      "Context": "CollectionOverrideDrawer.DrawNewOverride",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未连接 Penumbra。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "SettingsTab.SettingsTab",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto Designs",
+      "Context": "SettingsTab.DrawContent",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用自动外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamourer Behavior",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "Glamourer 行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Apply Entire Weapon for Mainhand",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "应用主手时总是替换整件武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Replacement Gear for Gear Unavailable to Your Race or Gender",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "为当前种族或性别无法穿戴的装备选择替代品",
+      "Source": "library"
+    },
+    {
+      "Original": "Do Not Apply Unobtained Items in Automation",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动方案不应用尚未获得的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Respect Manual Changes When Editing Automation",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "编辑自动方案时保留手动更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Festival Easter Eggs",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用节庆彩蛋",
+      "Source": "library"
+    },
+    {
+      "Original": "Ask for Each Festival Easter Egg",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "每次应用节庆彩蛋前询问",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert Manual Changes on Zone Change",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "切换区域时撤销手动更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent Random Design Repeats",
+      "Context": "SettingsTab.DrawBehaviorSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "避免连续选中同一个随机方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Reload Gear",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings1",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动重新加载装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Attach to PCP Handling",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings1",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "接入 PCP 处理流程",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete all PCP Designs",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings1",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "删除全部 PCP 方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Deletes all designs tagged with 'PCP' from the design list.",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings1",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "从方案列表中删除所有带有 PCP 标签的方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Apply Associated Mods",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings2",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "始终应用关联模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Temporary Mod Settings",
+      "Context": "SettingsTab.DrawPenumbraIntegrationSettings2",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用临时模组设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Design Defaults",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "方案默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked Designs",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "默认锁定方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Newly created designs will be locked to prevent unintended changes.",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "新建的方案会自动锁定，避免误改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in Quick Design Bar",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示在快捷外观栏中",
+      "Source": "library"
+    },
+    {
+      "Original": "Newly created designs will be shown in the quick design bar by default.",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "新建的方案默认显示在快捷外观栏中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Advanced Dyes",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重置高级染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Newly created designs will be configured to reset advanced dyes on application by default.",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "默认在应用新方案时重置高级染色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Force Redraw",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "始终强制重绘",
+      "Source": "library"
+    },
+    {
+      "Original": "Newly created designs will be configured to force character redraws on application by default.",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "默认在应用新方案时强制重绘角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Temporary Settings",
+      "Context": "SettingsTab.DrawDesignDefaultSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重置临时设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Interface",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Quick Design Bar",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示快捷外观栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Quick Design Bar",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "锁定快捷外观栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the quick design bar from being moved and lock it in place.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "固定快捷外观栏，防止误拖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Quick Design Bar in Main Window",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在主窗口显示快捷外观栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Game Context Menus",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用游戏右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to show a Try On via Glamourer button on context menus for equippable items.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在可穿戴物品的右键菜单中显示「用 Glamourer 试穿」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Window when UI is Hidden",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "隐藏游戏界面时仍显示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to show Glamourer windows even when the games UI is hidden.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "即使隐藏游戏界面，也显示 Glamourer 窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Window in Cutscenes",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "过场动画中隐藏窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Main Window",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "锁定主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the main window from being moved and lock it in place.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "固定主窗口，防止误拖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Main Window at Game Start",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "游戏启动时打开主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether the main Glamourer window should be open or closed after launching the game.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "决定启动游戏后是否打开 Glamourer 主窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Equipment Bar",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "锁定装备栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the equipment bar from being moved and lock it in place.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "固定装备栏，防止误拖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Smaller Equip Display",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "紧凑装备布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Use single-line display without icons and small dye buttons instead of double-line display.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用单行布局，隐藏图标并缩小染色按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Application Checkboxes",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示应用规则复选框",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Open Design Folders",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动展开方案文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the following panels in their respective tabs:",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在对应的选项卡中显示以下面板：",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Double-Clicking Designs to Apply",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "允许双击应用外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all Application Rule Checkboxes for Automation",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在自动方案中显示全部应用规则复选框",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Unobtained Item Warnings",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "提醒尚未获得的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Color Display Configuration",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示颜色显示设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the Color Display configuration options in the Advanced Customization panels.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在高级外观面板中显示颜色显示设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Palette+ Import Button",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示 Palette+ 导入按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Advanced Dye Window Attached",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "高级染色窗口保持吸附",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Mode",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "调试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the debug tab. Only useful for debugging or advanced use. Not recommended in general.",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示调试选项卡。仅供调试和高级操作使用，通常无需开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Design Filter Across Sessions",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "记住上次的方案筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Actor Filter Across Sessions",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "记住上次的角色筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Automation Filters Across Sessions",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "记住上次的自动方案筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember NPC Filter Across Sessions",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "记住上次的 NPC 筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Unlocks Filters Across Sessions",
+      "Context": "SettingsTab.DrawInterfaceSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "记住上次的解锁筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the Following Buttons in the Quick Design Bar:",
+      "Context": "SettingsTab.DrawQuickDesignBoxes",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在快捷外观栏中显示以下按钮：",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Palette+ to Designs",
+      "Context": "SettingsTab.PaletteImportButton",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将 Palette+ 数据导入外观方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags",
+      "Context": "SettingsTab.DrawPredefinedTags",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Not unlocked.",
+      "Context": "UnlockOverview.DrawCustomizations",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未解锁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Unlocked",
+      "Context": "UnlockOverview.DrawBonusItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "始终已解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "For Everyone",
+      "Context": "UnlockOverview.DrawItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "不限角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyable (2 Slots)",
+      "Context": "UnlockOverview.DrawItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "可染色（双染色区域）",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyable",
+      "Context": "UnlockOverview.DrawItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "可染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Tradable",
+      "Context": "UnlockOverview.DrawItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "可交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Can apply Crest",
+      "Context": "UnlockOverview.DrawItems",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "可加部队队徽",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Log",
+      "Context": "UnlocksTab.Label",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "物品记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview Mode",
+      "Context": "UnlocksTab.DrawTypeSelection",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "总览模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show tinted icons of sets of unlocks.",
+      "Context": "UnlocksTab.DrawTypeSelection",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "按解锁情况为图标着色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Detailed Mode",
+      "Context": "UnlocksTab.DrawTypeSelection",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "详情模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all unlockable data as a combined filterable and sortable table.",
+      "Context": "UnlocksTab.DrawTypeSelection",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "以可筛选和排序的表格显示全部可解锁内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Show One Item Per Model Type",
+      "Context": "UnlockTable.PostDraw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "每种模型仅显示一件物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore Variants",
+      "Context": "UnlockTable.PostDraw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "忽略变体",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Order available actors alphabetically by their name, but keep your own character at the top.",
+      "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::LexicographicalPlayerFirst",
+      "Translated": "按名称的字母顺序排列可用角色，并将自己的角色置顶。",
+      "Source": "library"
+    },
+    {
+      "Original": "Order available actors alphabetically by their name.",
+      "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::Lexicographical",
+      "Translated": "按名称的字母顺序排列可用角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the order given by the game's list of objects.",
+      "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::Default",
+      "Translated": "使用游戏对象列表的顺序。",
+      "Source": "library"
+    }
+  ]
+}

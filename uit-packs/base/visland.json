@@ -1,0 +1,637 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "visland",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Type: ",
+      "Context": "GatherDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply!",
+      "Context": "GranaryWindow.DrawMain",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用！",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Collect",
+      "Context": "PastureWindow.DrawMain",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "自动收取",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Reassign",
+      "Context": "GranaryWindow.DrawMain",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "自动重新派遣",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoRetainer Integration",
+      "Context": "GatherDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "AutoRetainer 联动",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear current cycle",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空当前周期",
+      "Source": "library"
+    },
+    {
+      "Original": "Collect all",
+      "Context": "PastureWindow.DrawGlobalOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部收取",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a New Route",
+      "Context": "GatherWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "新建路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "WorkshopWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Interaction Radius",
+      "Context": "GatherWindow.DrawRouteSettingsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "默认交互半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Waypoint Radius",
+      "Context": "GatherWindow.DrawRouteSettingsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "默认路径点半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "GatherWindow.ContextMenuWaypoint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Rapid Import",
+      "Context": "GatherWindow.RapidImport",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用快速导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "WorkshopOCImport.ImportRecsFromClipboard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expedition",
+      "Context": "GranaryWindow.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch demand",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取需求数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "WorkshopManual.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Automation",
+      "Context": "GatherWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "自动采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Global Route Editing Options",
+      "Context": "GatherWindow.DrawRouteSettingsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全局路线编辑选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Granary 1",
+      "Context": "GranaryWindow.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "探索据点 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Granary 2",
+      "Context": "GranaryWindow.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "探索据点 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Granary Automation",
+      "Context": "GranaryWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "探索自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold shift",
+      "Context": "Utils.DangerousItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Shift",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 4th Workshop",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "忽略第 4 间工坊",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Recommendations From Clipboard",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入推荐安排",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Route from Clipboard",
+      "Context": "GatherWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从剪贴板导入路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction Type",
+      "Context": "GatherWindow.DrawWaypoint",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "交互类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction type",
+      "Context": "GatherWindow.DrawMassEditContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "交互类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory is full!",
+      "Context": "PastureWindow.DrawGlobalOperations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "背包已满！",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Next Week",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载下周安排",
+      "Source": "library"
+    },
+    {
+      "Original": "Load This Week",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载本周安排",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "GatherWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "PastureWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Mammets not available!",
+      "Context": "PastureWindow.DrawMain",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "魔法人偶尚不可用！",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual schedule",
+      "Context": "WorkshopWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "手动排程",
+      "Source": "library"
+    },
+    {
+      "Original": "Move down",
+      "Context": "GatherWindow.ContextMenuWaypoint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move up",
+      "Context": "GatherWindow.ContextMenuWaypoint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "GatherWindow.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Week",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下周",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to collect!",
+      "Context": "PastureWindow.DrawGlobalOperations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "没有可收取的产物！",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Gathering Menu\n/",
+      "Context": "Plugin.get_HelpMessage",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开采集菜单\n/",
+      "Source": "library"
+    },
+    {
+      "Original": "Pasture Automation",
+      "Context": "PastureWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "牧场自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause Route",
+      "Context": "GatherWindow.get_PlayTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暂停路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin log is available via /xllog or Dalamud log window.",
+      "Context": "GatherWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用 /xllog 或打开 Dalamud 日志窗口可查看插件日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "GatherWindow.DrawWaypoint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reassign",
+      "Context": "GranaryWindow.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新派遣",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent items:",
+      "Context": "WorkshopManual.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最近的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh favours/demand",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新特产与需求数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume Route",
+      "Context": "GatherWindow.get_PlayTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "继续路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewards: ",
+      "Context": "PastureDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "奖励： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Route not running",
+      "Context": "GatherWindow.DrawExecution",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "路线未运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Schedule",
+      "Context": "WorkshopWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "排程",
+      "Source": "library"
+    },
+    {
+      "Original": "Schedule ",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "排程 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search: ",
+      "Context": "GatherWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "搜索： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Schedule:",
+      "Context": "WorkshopOCImport.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "设置排程：",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "WorkshopWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipping completed cycles: ",
+      "Context": "ScheduleApplier.ApplyRecommendations",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在跳过已结束的生产周期： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipping rest-day adjustment for this week — set rest days manually if needed",
+      "Context": "ScheduleApplier.ApplyRecommendations",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已跳过本周的休息日调整。如有需要，请手动设置休息日。",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "FarmWindow.DrawPlotOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Solve!",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "计算排程！",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: ",
+      "Context": "PastureDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "排序： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Route",
+      "Context": "GatherWindow.get_PlayTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开始路线",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "GatherRouteExec.SetState",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "GatherWindow.DrawExecution",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "WorkshopWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "GatherDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "This Week",
+      "Context": "WorkshopOCImport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "本周",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: some resources will overcap!",
+      "Context": "PastureWindow.DrawGlobalOperations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "提醒：部分资源将超出持有上限！",
+      "Source": "library"
+    },
+    {
+      "Original": "Workshop ",
+      "Context": "WorkshopDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "生产工坊 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Workshop automation",
+      "Context": "WorkshopWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "工坊自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "GatherWindow.DrawMassEditContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone ID",
+      "Context": "GatherWindow.DrawWaypoint",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "区域 ID",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Manual",
+      "Context": "[属性] DescriptionAttribute visland.CollectStrategy::Manual",
+      "Translated": "手动",
+      "Source": "library"
+    }
+  ]
+}

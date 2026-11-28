@@ -1,0 +1,643 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PlatePeek",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "[PlatePeek] Probe OFF.",
+      "Context": "DesignProbe.Disable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 探测已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Selftest complete - results in /xllog (filter: SELFTEST).",
+      "Context": "DiagnosticsService.RunSelfTest",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 自检完成，请在 /xllog 中用 SELFTEST 筛选结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open PlatePeek settings. \"/platepeek show\" toggles the inspector. \"/platepeek selftest\" runs diagnostics.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 PlatePeek 设置。使用 /platepeek show 显示或隐藏检查窗口，使用 /platepeek selftest 运行诊断。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Import failed - see /xllog.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 导入失败，请查看 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Clipboard does not contain a look code, design code or portrait preset.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 剪贴板中没有外观代码、设计代码或肖像预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Pasted look loaded. Use the Import buttons to apply it.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已载入粘贴的外观。点击导入按钮即可应用。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Portrait preset copied - paste in Portrait Helper or import directly.",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已复制肖像预设，可粘贴到 Portrait Helper 或直接导入。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Plate design copied as text.",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已将铭牌设计复制为文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Look code copied - design and portrait in one string.",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已复制外观代码，内含铭牌设计与肖像。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Could not open the fitting room for that item.",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 无法为此物品打开试穿窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "PlatePeek Settings###PlatePeekConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PlatePeek 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-open inspector when viewing a plate",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "查看冒险者铭牌时自动打开详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't auto-open for my own plate",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "查看自己的铭牌时不自动打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open next to the plate window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在铭牌窗口旁打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Places the inspector to the right of the plate each time it auto-opens. You can still drag it afterwards.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "自动打开时详情窗口会放在铭牌右侧，之后仍可拖动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Write debug dumps",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存调试数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Saves each captured plate as JSON in the plugin config folder (dumps/). Newest 20 are kept.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将每次读取的铭牌以 JSON 格式保存到插件设置目录的 dumps/ 文件夹中，仅保留最新的 20 份。",
+      "Source": "library"
+    },
+    {
+      "Original": "No plate captured yet. Open someone's adventurer plate.",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未读取铭牌。请先打开一张冒险者铭牌。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pin",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Plate was reset by Fantasia.",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "该铭牌已因使用幻想药而重置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Design",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设计",
+      "Source": "library"
+    },
+    {
+      "Original": "design pieces",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "设计部件",
+      "Source": "library"
+    },
+    {
+      "Original": "Invert Portrait Placement: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "反转肖像位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Portrait",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "肖像",
+      "Source": "library"
+    },
+    {
+      "Original": "portrait pieces",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "肖像部件",
+      "Source": "library"
+    },
+    {
+      "Original": "Pose frame: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "动作帧： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expression: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "表情： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera zoom: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "镜头缩放： ",
+      "Source": "library"
+    },
+    {
+      "Original": "   Rotation: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "   旋转： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Directional light: RGB(",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "方向光：RGB(",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambient light: RGB(",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "环境光：RGB(",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Profile",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "个人资料",
+      "Source": "library"
+    },
+    {
+      "Original": "Favored job: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "偏好职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "所属大国防联军： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "部队： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Playstyles: ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "游戏风格： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Weekdays",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "工作日",
+      "Source": "library"
+    },
+    {
+      "Original": "Weekends",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "周末",
+      "Source": "library"
+    },
+    {
+      "Original": "Comment",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "留言",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy.",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击复制。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Search comment copied.",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已复制搜索备注。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy portrait preset",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制肖像预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Import into my portrait editor",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入我的肖像编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Open your own portrait editor first:\nyour plate > Edit Plate > Portrait > Edit (plate portrait),\nor Portraits list > Edit (gearset portrait).\nThe import lands in whichever editor you opened; hit Save after.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先打开自己的肖像编辑器：\n编辑铭牌肖像，请在自己的铭牌中选择编辑铭牌 > 肖像 > 编辑；\n编辑套装肖像，请在肖像列表中选择编辑。\n预设将导入当前编辑器，导入后请点击保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy as text",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制为文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy look code",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制外观代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Copies design and portrait as one code. Other PlatePeek users paste it to see and import this look.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将设计和肖像合并为一份代码。其他 PlatePeek 用户可粘贴代码，查看并导入此外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste code",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Loads a look code, design code or Portrait Helper preset from your clipboard into this window.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从剪贴板读取外观代码、设计代码或 Portrait Helper 预设，并载入当前窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import design",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入设计",
+      "Source": "library"
+    },
+    {
+      "Original": "Open your plate design editor first: your plate > Edit Plate > Edit Design.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先打开自己的铭牌设计编辑器：我的铭牌 > 编辑铭牌 > 编辑设计。",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies this design to your open editor. Check the preview and hit Save after.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将此设计应用到当前编辑器。确认预览后请点击保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent plates",
+      "Context": "InspectorWindow.DrawRecentAndFavorites",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "最近查看的铭牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Save favorite",
+      "Context": "InspectorWindow.DrawFavorites",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "InspectorWindow.DrawFavorites",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "InspectorWindow.DrawFavorites",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "收藏夹",
+      "Source": "library"
+    },
+    {
+      "Original": "No favorites yet",
+      "Context": "InspectorWindow.DrawFavorites",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "暂无收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this favorite",
+      "Context": "InspectorWindow.DrawFavorites",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "删除此收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "icon",
+      "Context": "InspectorWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "category",
+      "Context": "InspectorWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Context": "InspectorWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "status",
+      "Context": "InspectorWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview this piece (with its dyes) in the fitting room.",
+      "Context": "InspectorWindow.DrawItemTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在试穿窗口预览此装备及其染色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to look up in your browser.",
+      "Context": "InspectorWindow.DrawNameLink",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击在浏览器中查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Owned",
+      "Context": "InspectorWindow.DrawStatusCell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已拥有",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing",
+      "Context": "InspectorWindow.DrawStatusCell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未拥有",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

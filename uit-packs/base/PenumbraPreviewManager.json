@@ -1,0 +1,343 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PenumbraPreviewManager",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Left-click: Open in Preview Manager.\nMiddle-click: Hold to zoom.",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左键：在预览管理器中打开。\n中键：按住放大。",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading...",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "正在下载…",
+      "Source": "library"
+    },
+    {
+      "Original": "Size: ",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab Preview for: ",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取预览： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab & Scale Image",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取并缩放图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "显示选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Middle-Click Preview Zoom Size:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按住中键预览时的缩放尺寸：",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Preview Import Crop Method:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主预览图导入时的裁剪方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "16:9 Aspect Ratio",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "16:9 宽高比",
+      "Source": "library"
+    },
+    {
+      "Original": "1:1 Aspect Ratio (Square)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "1:1 宽高比（正方形）",
+      "Source": "library"
+    },
+    {
+      "Original": "4:3 Aspect Ratio",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "4:3 宽高比",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod-Option Preview Crop Method:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模组选项预览图裁剪方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Eye / View Icon",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "眼睛图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Extend option hover previews to label text",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "悬停在选项文字上时也显示预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Integration Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "集成选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically sync selection with Penumbra",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动与 Penumbra 同步当前选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide mod list column in Preview Manager",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏预览管理器的模组列表列",
+      "Source": "library"
+    },
+    {
+      "Original": "Force PPM previews for Heliosphere mods",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为 Heliosphere 模组强制使用 PPM 预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide option previews from Penumbra File Redirections",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Penumbra 文件重定向列表中隐藏选项预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod Directory Path: ",
+      "Context": "PreviewWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模组目录路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "PreviewWindow.DrawModList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod list is hidden because auto-sync is enabled. Please select a mod inside Penumbra to load it here.",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "自动同步已开启，模组列表已隐藏。请在 Penumbra 中选择要在此处查看的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Author: ",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder: ",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件夹： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add an image to display a preview for this mod. It will automatically crop and scale it into a high-quality PNG preview according to your settings!",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "添加图像以预览此模组。插件会按设置自动裁剪、缩放，并生成高质量 PNG 预览图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab Image from URL / XIVModArchive",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从网址或 XIVModArchive 获取图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod Option Previews",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "模组选项预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Option:",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "1:1 Square",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "1:1 正方形",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab Option Image from URL",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从网址获取选项图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Folder##Explorer",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...##BrowseLocalImage",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...##BrowseOptionImg",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "浏览…",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

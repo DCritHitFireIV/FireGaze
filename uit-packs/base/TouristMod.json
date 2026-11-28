@@ -1,0 +1,219 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TouristMod",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Options",
+      "Context": "MainWindow.DrawOptionsMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by",
+      "Context": "MainWindow.DrawSortByMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show time until available",
+      "Context": "MainWindow.DrawTimesMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示距离可探索时段的时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show time left",
+      "Context": "MainWindow.DrawTimesMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示剩余时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Context": "MainWindow.DrawVisibilityMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Show current zone only",
+      "Context": "MainWindow.DrawVisibilityMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "只显示当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify 60 seconds before",
+      "Context": "MainWindow.DrawNotifyMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "提前 60 秒提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Add markers for ARR vistas",
+      "Context": "MainWindow.DrawArrVistasMenuItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "为重生之境探索地点添加标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "MainWindow.DrawHelpMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't unlock vistas 21 to 80",
+      "Context": "MainWindow.DrawHelpMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "无法解锁第 21 至 80 个探索地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Show vista on map",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在地图上标出探索地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop vnav (for if it gets stuck)",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停止 vnav 导航（用于寻路卡住时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Eorzea time",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "艾欧泽亚时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Comment",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "注释",
+      "Source": "library"
+    },
+    {
+      "Original": "Inside house, upstairs above door",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "进入屋内，上楼到门的正上方",
+      "Source": "library"
+    },
+    {
+      "Original": "Jump across weapon racks",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "从武器架上跳过去",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't land on the flag",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法落到旗帜上",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't land on the spike",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法落到尖顶上",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Context": "MainWindow.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextUnformatted",
+      "Translated": "任意",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

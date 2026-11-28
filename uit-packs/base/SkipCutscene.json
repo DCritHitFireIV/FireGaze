@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SkipCutscene",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "/sc: Roll your sanity check dice.",
+      "Context": "SkipCutscene..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "/sc：掷骰进行理智检定。",
+      "Source": "library"
+    },
+    {
+      "Original": ", Failed",
+      "Context": "SkipCutscene.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，失败",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

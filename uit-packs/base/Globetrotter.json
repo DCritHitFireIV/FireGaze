@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Globetrotter",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Globetrotter settings",
+      "Context": "PluginUi.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Globetrotter 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the map and place a flag at the location of your current treasure map",
+      "Context": "Globetrotter.dll 0x0600001F:IL_00F6",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开地图，在当前藏宝图的位置放置旗标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the map with a flag set after deciphering a map.",
+      "Context": "Globetrotter.dll 0x06000029:IL_0066",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "解读藏宝图后打开地图并放置旗标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the map with a flag set instead of the normal treasure map window.",
+      "Context": "Globetrotter.dll 0x06000029:IL_00B0",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开带有旗标的地图，替代普通藏宝图窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the map with a flag set when hovering over a deciphered map.",
+      "Context": "Globetrotter.dll 0x06000029:IL_00FA",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "鼠标移至已解读的藏宝图上时，打开地图并放置旗标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on decipher",
+      "Context": "Globetrotter.dll 0x06000029:IL_0061",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "解读后显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on hover",
+      "Context": "Globetrotter.dll 0x06000029:IL_00F5",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "鼠标悬停时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on open",
+      "Context": "Globetrotter.dll 0x06000029:IL_00AB",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开藏宝图时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the Globetrotter config",
+      "Context": "Globetrotter.dll 0x0600001F:IL_00C9",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开 Globetrotter 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use /tmap to open your current treasure map.",
+      "Context": "Globetrotter.dll 0x06000029:IL_003C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "使用 /tmap 打开当前藏宝图。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

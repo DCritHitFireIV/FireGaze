@@ -1,0 +1,543 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DalamudRepoBrowser",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Opens the repository browser.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开插件仓库浏览器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Repository cache updated.",
+      "Context": "FetchRepoMasters.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "仓库缓存已更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "Repository Browser",
+      "Context": "FetchRepoMasters.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "插件仓库浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "DO NOT INSTALL FROM REPOSITORIES YOU DO NOT TRUST.",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请仅从你信任的仓库安装插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search ",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索 ",
+      "Source": "library"
+    },
+    {
+      "Original": " Repos",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": " 个仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Link##",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "复制链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied!##",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "已复制！",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Branch: ",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "分支： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated: ",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "更新时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use new UI",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用新版界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Outdated Plugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示过期插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide non-English plugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏非英语插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide closed-source plugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏闭源插件",
+      "Source": "library"
+    },
+    {
+      "Original": "\tSort",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\t排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "所有者",
+      "Source": "library"
+    },
+    {
+      "Original": "# Plugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "插件数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Updated",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "最近更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Enabled Repos",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已启用的仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum Plugins###MaxPlugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "插件数量上限",
+      "Source": "library"
+    },
+    {
+      "Original": "∞ Plugins###MaxPlugins",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "不限插件数量",
+      "Source": "library"
+    },
+    {
+      "Original": " Repos...",
+      "Context": "RepoBrowserWindow.DrawModernFilterBar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": " 仓库...",
+      "Source": "library"
+    },
+    {
+      "Original": " repositories shown",
+      "Context": "RepoBrowserWindow.DrawModernFilterBar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 个仓库已显示",
+      "Source": "library"
+    },
+    {
+      "Original": "These plugin lists are dynamically generated and not vetted. They may contain malware or jeopardize your account. Proceed with caution. If you're installing plugins from custom repositories, DO NOT ask for help on the XIVLauncher discord. Please review the plugin's README for support.",
+      "Context": "RepoBrowserWindow.DrawModernWarning",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "这些插件列表为动态生成，未经审核。它们可能包含恶意软件或危及您的账号。请谨慎操作。如果您要从自定义仓库安装插件，请勿在 XIVLauncher 的 Discord 上寻求帮助。请查阅插件的 README 以获取支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed Browser",
+      "Context": "RepoBrowserWindow.DrawModernHeaderAurora",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Aetherfeed 浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "Discover repositories automatically scraped from GitHub",
+      "Context": "RepoBrowserWindow.DrawModernHeaderAurora",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "自动从 GitHub 抓取并发现仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "View on Aetherfeed",
+      "Context": "RepoBrowserWindow.DrawModernHeaderButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 Aetherfeed 上查看",
+      "Source": "library"
+    },
+    {
+      "Original": "Header",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Translated": "标题",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "主要",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "NEW",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "新",
+      "Source": "library"
+    },
+    {
+      "Original": "PRIORITY",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "优先",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority repos are hand-picked by Aetherfeed for deduplication.\nThese are usually trusted devs, but third-party plugins always carry risk.",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "优先仓库由 Aetherfeed 人工挑选以去重。\n这些通常是可信的开发者，但第三方插件始终存在风险。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Repository",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Repository",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "禁用仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Repo URL",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制仓库 URL",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Website",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugins: ",
+      "Context": "RepoBrowserWindow.BuildRepoInfoText",
+      "PreserveID": false,
+      "Translated": "插件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated: Unknown",
+      "Context": "RepoBrowserWindow.BuildRepoInfoText",
+      "PreserveID": false,
+      "Translated": "更新时间：未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed updated: unknown",
+      "Context": "RepoBrowserWindow.GetRemoteUpdateStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Aetherfeed 更新时间：未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed updated ",
+      "Context": "RepoBrowserWindow.GetRemoteUpdateStatusText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Aetherfeed 已更新 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next update soon",
+      "Context": "RepoBrowserWindow.GetApproximateNextUpdateText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "即将更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Next update in ~",
+      "Context": "RepoBrowserWindow.GetApproximateNextUpdateText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "下次更新约在",
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "m ago",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Translated": "分钟前",
+      "Source": "library"
+    },
+    {
+      "Original": "h ago",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Translated": "小时前",
+      "Source": "library"
+    },
+    {
+      "Original": "d ago",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Translated": "天前",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "RepoBrowserWindow.GetSortLabel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Closed Source",
+      "Context": "RepoBrowserWindow.ShowPluginTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "闭源",
+      "Source": "library"
+    },
+    {
+      "Original": "API Level: ",
+      "Context": "RepoBrowserWindow.ShowPluginTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "API 等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard:\n",
+      "Context": "RepoBrowserWindow.CopyUrl",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已复制到剪贴板：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh repositories",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "刷新仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "RepoList",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Translated": "仓库列表",
+      "Source": "library"
+    },
+    {
+      "Original": "RepoListModern",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Translated": "仓库列表",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,551 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Palantir",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Accursed Hoard",
+      "Context": "[Palantir] Renderer.DrawLabels",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "埋藏的宝藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Background opacity",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "背景不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Both categories must use the DirectX render mode. VFX omens are separate game objects and cannot be blended into one marker.",
+      "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "两类标记均须使用 DirectX 渲染模式。VFX 预兆是独立的游戏对象，无法合并。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bronze",
+      "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "铜",
+      "Source": "library"
+    },
+    {
+      "Original": "Built-in servers cannot be removed.",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "内置服务器无法移除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click-through",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Context": "[Palantir] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect on startup",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启动时连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting...",
+      "Context": "[Palantir] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "正在连接…",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Detach into its own window",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "分离为独立窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect",
+      "Context": "[Palantir] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect to change servers.",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请先断开连接再更改服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw Additional Debug Information",
+      "Context": "[Palantir] ConfigWindow.DrawRendering",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "绘制额外调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable both traps and the Accursed Hoard to merge them.",
+      "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请同时启用陷阱和埋藏的宝藏，才能合并标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Orthos",
+      "Context": "[Palantir] ConfigWindow.GroupName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "正统优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export...",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出……",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold",
+      "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "金",
+      "Source": "library"
+    },
+    {
+      "Original": "Heaven-on-High",
+      "Context": "[Palantir] ConfigWindow.GroupName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "天之御柱",
+      "Source": "library"
+    },
+    {
+      "Original": "How far from you markers are drawn. Large values cost frame time.",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "标记的最远显示距离。距离越大，绘制耗时越长。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import...",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入……",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported markers are never uploaded to a Palantir server.",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "导入的标记不会上传到 Palantir 服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Landmarks",
+      "Context": "[Palantir] Landmarks.ToString",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Header",
+      "Translated": "地标",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock position",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Merge Trap / Accursed Hoard Markers",
+      "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并陷阱和宝藏标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Mimic",
+      "Context": "[Palantir] Renderer.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "拟态怪",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimap",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "小地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Mob Aggro",
+      "Context": "[Palantir] ConfigWindow.DrawRendering",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Header",
+      "Translated": "怪物警戒范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Must not be already in a deep dungeon to import. Imported markers only load when you enter a floorset.",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请在进入深层迷宫前导入。导入的标记会在进入一组楼层时加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "No local cache. Palantir could not open its database.",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有本地缓存。Palantir 无法打开数据库。",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Only applies to the DirectX render mode. VFX omens are the game's own filled effects.",
+      "Context": "[Palantir] ConfigWindow.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅适用于 DirectX 渲染模式。VFX 标记使用游戏自带的填充特效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show active rooms",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "只显示已激活的房间",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Palantir window",
+      "Context": "[Palantir] Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Palantir 窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Palace of the Dead",
+      "Context": "[Palantir] ConfigWindow.GroupName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "死者宫殿",
+      "Source": "library"
+    },
+    {
+      "Original": "Passage",
+      "Context": "[Palantir] ConfigWindow.DrawLandMarkSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "转移",
+      "Source": "library"
+    },
+    {
+      "Original": "Patrol",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "巡逻",
+      "Source": "library"
+    },
+    {
+      "Original": "Proximity",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "接近感知",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnecting...",
+      "Context": "[Palantir] MainWindow.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "正在重新连接…",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove selected",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Rendering",
+      "Context": "[Palantir] ConfigWindow.DrawRendering",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Return",
+      "Context": "[Palantir] ConfigWindow.DrawLandMarkSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "再生",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Server",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Servers",
+      "Context": "[Palantir] ConfigWindow.DrawServers",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[Palantir] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show minimap",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示小地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Show party members",
+      "Context": "[Palantir] ConfigWindow.DrawMinimap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Sight",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "视觉感知",
+      "Source": "library"
+    },
+    {
+      "Original": "Silver",
+      "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "银",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "听觉感知",
+      "Source": "library"
+    },
+    {
+      "Original": "Traps",
+      "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Traps / Accursed Hoard",
+      "Context": "[Palantir] ConfigWindow.DrawRendering",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Header",
+      "Translated": "陷阱 / 埋藏的宝藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Traps must be filled to merge. The merged marker uses the trap colour as its body and the hoard colour as its outline.",
+      "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "陷阱标记需要启用填充。合并后以陷阱颜色填充，以宝藏颜色描边。",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure Coffers",
+      "Context": "[Palantir] ConfigWindow.DrawRendering",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Header",
+      "Translated": "宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Trust imported markers as my own discoveries",
+      "Context": "[Palantir] ConfigWindow.DrawData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将导入的标记视为我亲自发现的标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Vfx Type",
+      "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "特效类型",
+      "Source": "library"
+    },
+    {
+      "Original": "uses display settings of traps",
+      "Context": "[Palantir] ConfigWindow.DrawMimicRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "使用陷阱的显示设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

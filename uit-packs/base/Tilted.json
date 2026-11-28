@@ -1,0 +1,371 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Tilted",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Camera Distance",
+      "Context": "TiltedUI.DrawCameraDistanceSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "镜头距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Options",
+      "Context": "TiltedUI.DrawDebugSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Options\nUse these to test your settings.",
+      "Context": "TiltedUI.DrawDebugSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "调试选项\n在此测试设置效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duties",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable in Gpose",
+      "Context": "TiltedUI.DrawSectionMasterEnable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式中启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##TweakCameraDistance",
+      "Context": "TiltedUI.DrawCameraDistanceSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##TweakCameraTilt",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when entering a Duty such as Dungeons and Trials.\nDisables after leaving the Duty.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "进入迷宫或讨伐歼灭战等副本时启用。\n离开副本时停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when entering combat.\nWaits \"Timeout\" seconds after leaving combat before disabling.\nClick \"Set\" to copy Auto-sheathe timer.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "进入战斗时启用。\n脱战后等待「超时时间」所设的秒数再停用。\n点击「设置」可复制自动收起武器的等待时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when flying on a Mount.\nDisables when landed.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "骑乘坐骑飞行时启用。\n着陆时停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when riding a Mount.\nDisables when dismounting.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "骑上坐骑时启用。\n下坐骑时停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when un-sheathing weapons.\nDisables when sheathing weapons.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "拔出武器时启用。\n收起武器时停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables when zooming in past certain amount.\nDisables when zooming out.",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "镜头拉近超过指定距离时启用。\n拉远时停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flying",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "飞行",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Enabled",
+      "Context": "CameraTilter.GetEnabledStateAndTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "强制启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Interpolate by Distance##MappingTilt",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按距离插值",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum##MaximumDistance",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum##MinimumDistance",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "最小值",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounted",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "骑乘坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##InDistance",
+      "Context": "TiltedUI.DrawCameraDistanceSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##MaximumDistance",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##MinimumDistance",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##TriggerDistance",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Smoothing##SmoothingTilt",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "平滑过渡",
+      "Source": "library"
+    },
+    {
+      "Original": "These values alter the Character Configuration value:\n  \"3rd Person Camera Angle\".\nClick \"Set\" to copy the current camera tilt angle",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这些值会调整角色设置中的\n「第三人称视角俯仰角度」。\n点击「设置」可复制当前镜头倾角。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tilt Angle",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "镜头倾角",
+      "Source": "library"
+    },
+    {
+      "Original": "Tilted##ConfigWindow",
+      "Context": "TiltedUI..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Tilted 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeout##CombatTmeout",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "超时时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger##EnabledInCombat",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger##EnabledInDuties",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger##EnabledUnsheathed",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger##EnabledWhileFlying",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger##EnabledZoomed",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweaks",
+      "Context": "TiltedUI.DrawTweaksSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "镜头调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweaks the camera distance (Zoom).\nOnly happens when transitioning between states\nSmoothing is always applied.\nClick \"Set\" to copy the current camera distance.\n(Disabled when using Zoomed trigger.",
+      "Context": "TiltedUI.DrawCameraDistanceSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "调整镜头距离（缩放）。\n仅在切换状态时改变距离，\n始终使用平滑过渡。\n点击「设置」可复制当前镜头距离。\n（使用镜头拉近触发条件时停用。）",
+      "Source": "library"
+    },
+    {
+      "Original": "Weapon Sheathed",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "武器收拔",
+      "Source": "library"
+    },
+    {
+      "Original": "When this setting is enabled the Camera Tilt will be set to a value in-between the \"Enabled\" and \"Disabled\" values based on the camera's distance from your character.\nTriggers and Smoothing will have no effect while this setting is enabled.",
+      "Context": "TiltedUI.DrawTiltAngleSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "启用后，会根据镜头与角色的距离，在「启用」和「停用」的取值之间计算镜头倾角。\n此时触发条件和平滑过渡不生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoomed",
+      "Context": "TiltedUI.DrawTriggersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "镜头拉近",
+      "Source": "library"
+    },
+    {
+      "Original": "opens the configuration window",
+      "Context": "TiltedPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

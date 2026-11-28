@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AntiAfkKick-Dalamud",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "TimerLimit=",
+      "Context": "AntiAfkKick.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "计时上限=",
+      "Source": "library"
+    },
+    {
+      "Original": ", ThreadSleepInterval=",
+      "Context": "AntiAfkKick.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，线程休眠间隔=",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

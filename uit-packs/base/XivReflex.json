@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "XivReflex",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Sponsor",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "赞助开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the XivReflex configuration window",
+      "Context": "Localization..cctor (CommandHandlerHelpMessage)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开 XivReflex 设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "XivReflex Configuration",
+      "Context": "Localization..cctor (ConfigWindow.WindowName)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "XivReflex 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Visit the XivReflex GitHub Repository",
+      "Context": "Localization..cctor (ConfigWindow.GitHubLink.Tooltip)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "访问 XivReflex 的 GitHub 仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Support me on GitHub Sponsors",
+      "Context": "Localization..cctor (ConfigWindow.SponsorLink.Tooltip)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在 GitHub Sponsors 上赞助作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Visit Release Notes",
+      "Context": "Localization..cctor (ConfigWindow.ReleaseNotesLink.Tooltip)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "查看更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "NVIDIA Reflex is not available.",
+      "Context": "Localization..cctor (ConfigWindow.ReflexNotAvailable)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "NVIDIA Reflex 当前不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "NVIDIA Reflex Low Latency",
+      "Context": "Localization..cctor (Config.NVIDIAReflexLowLatency.Label)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "NVIDIA Reflex 低延迟模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "Localization..cctor (Config.NVIDIAReflexLowLatency.Option.Off)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "Localization..cctor (Config.NVIDIAReflexLowLatency.Option.On)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "On + Boost",
+      "Context": "Localization..cctor (Config.NVIDIAReflexLowLatency.Option.OnBoost)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "开启并增强",
+      "Source": "library"
+    },
+    {
+      "Original": "Off:\r\n     Standard rendering pipeline. May provide slightly\r\n     higher peak FPS, but higher system latency.\r\n     \r\nOn:\r\n     Optimizes system pipeline latency to align the CPU\r\n     and GPU, significantly reducing input lag.\r\n     Recommended for most players.\r\n     \r\nOn + Boost:\r\n     Further reduces latency by overriding GPU power-\r\n     saving features to force maximum clock speeds.\r\n     Increases GPU power draw and heat.",
+      "Context": "Localization..cctor (Config.NVIDIAReflexLowLatency.HelpMessage)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "关闭：\r\n     使用标准渲染管线。最高帧率可能略高，\r\n     但系统延迟也更高。\r\n     \r\n开启：\r\n     协调 CPU 与 GPU 的处理时机，\r\n     显著降低输入延迟。\r\n     推荐大多数玩家使用。\r\n     \r\n开启并增强：\r\n     关闭 GPU 节能以维持最高时钟频率，\r\n     进一步降低延迟。\r\n     GPU 的耗电量与发热会增加。",
+      "Source": "library"
+    },
+    {
+      "Original": "Frame Rate Limiter",
+      "Context": "Localization..cctor (Config.FrameRateLimiter.Label)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "帧率限制器",
+      "Source": "library"
+    },
+    {
+      "Original": "Frame Rate Limit",
+      "Context": "Localization..cctor (Config.FrameRateLimit.Label)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "帧率上限",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

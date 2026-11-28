@@ -1,0 +1,176 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PatMe",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Auto collapse counter",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动折叠计数窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Counter UI:",
+      "Context": "PluginWindowConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "计数窗口：",
+      "Source": "library"
+    },
+    {
+      "Original": "Dotes",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "飞吻",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes:",
+      "Context": "PluginWindowConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "情感动作：",
+      "Source": "library"
+    },
+    {
+      "Original": "Head pats",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "摸头",
+      "Source": "library"
+    },
+    {
+      "Original": "Hugs",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "拥抱",
+      "Source": "library"
+    },
+    {
+      "Original": "Include names in fly text",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在飘字中显示名字",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock counter position",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定计数窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Pat Config",
+      "Context": "PluginWindowConfig..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "摸头计数设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Pat Count",
+      "Context": "PluginWindowCounter..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "摸头次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewards:",
+      "Context": "PluginWindowConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "奖励：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show counters in chat",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "在聊天栏显示计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Show emote counter on screen",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在屏幕上显示情感动作计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle counter UI",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭计数窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Track: dote",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "统计飞吻",
+      "Source": "library"
+    },
+    {
+      "Original": "Track: hug & embrace",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "统计拥抱和深情拥抱",
+      "Source": "library"
+    },
+    {
+      "Original": "Use fly text",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用飘字",
+      "Source": "library"
+    },
+    {
+      "Original": "Use progress notify",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示进度通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Use splash screen",
+      "Context": "PluginWindowConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用全屏提示",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

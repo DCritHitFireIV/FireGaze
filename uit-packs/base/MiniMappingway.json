@@ -1,0 +1,260 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MiniMappingway",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  \"Everyone\" is always the lowest priority",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "  「所有人」的优先级始终最低",
+      "Source": "library"
+    },
+    {
+      "Original": " is already taken",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 已被占用",
+      "Source": "library"
+    },
+    {
+      "Original": "\"Everyone\" is always the lowest priority",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "「所有人」的优先级始终最低",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced###advanced",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Attempt to fix multi-monitor offset issues on some configurations",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "尝试修正在部分多显示器配置下出现的位置偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Border Brightness",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "边框亮度",
+      "Source": "library"
+    },
+    {
+      "Original": "Border Radius",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "边框半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Circle Size",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "圆形标记大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "For now FC members are found by comparing FC tags.",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "目前通过比较部队简称来识别同部队成员。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you have a common FC tag you may wish to disable this.",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "如果你的部队简称很常见，可以关闭此项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Marker Colour. Click the colored square for a picker.",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "标记颜色。点击色块可打开取色器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Marker settings, ordered by priority:",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "标记设置（按优先级排序）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mini-Mappingway Settings",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Mini-Mappingway 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Multi-monitor fix###multimonitorfix",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "多显示器修正",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens Mini-Mappingway settings",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Mini-Mappingway 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority ",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "优先级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority, higher shows on top of lower",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "优先级越高，标记越靠上显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Border",
+      "Context": "PluginUi.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示边框",
+      "Source": "library"
+    },
+    {
+      "Original": "circles ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_01BB",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "圆点数 ",
+      "Source": "library"
+    },
+    {
+      "Original": "islocked ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_015C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "旋转锁定 ",
+      "Source": "library"
+    },
+    {
+      "Original": "naviScale ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_004D",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "小地图比例 ",
+      "Source": "library"
+    },
+    {
+      "Original": "offsetX ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_00A7",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "横向偏移 ",
+      "Source": "library"
+    },
+    {
+      "Original": "offsetY ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_00D4",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "纵向偏移 ",
+      "Source": "library"
+    },
+    {
+      "Original": "people ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_025A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "人数 ",
+      "Source": "library"
+    },
+    {
+      "Original": "se ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_0189",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "标记源数 ",
+      "Source": "library"
+    },
+    {
+      "Original": "zoneScale ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_007A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "区域比例 ",
+      "Source": "library"
+    },
+    {
+      "Original": "zoom ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_0020",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "缩放 ",
+      "Source": "library"
+    },
+    {
+      "Original": "x ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_0101",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "横坐标 ",
+      "Source": "library"
+    },
+    {
+      "Original": "y ",
+      "Context": "MiniMappingway.dll 0x06000018:IL_012E",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "纵坐标 ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

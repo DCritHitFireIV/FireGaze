@@ -1,0 +1,237 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GraphicsUpscalerToggle",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Toggle upscaler auto-switch on/off or show status",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600001D:IL_006D",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用或停用升频方式自动切换，或查看当前状态",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Auto-toggle enabled.",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0043",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已启用自动切换。",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Auto-toggle disabled.",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_008E",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已停用自动切换。",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Auto-toggle is ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_00B5",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 自动切换状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_00C7",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_00CE",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Manual toggle sequence started.",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_00FA",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已开始手动切换。",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] GraphicsRezoScale = ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0192",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 3D 分辨率比例（GraphicsRezoScale）= ",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Usage: /pupscaler scale <1-200>  (3D resolution %)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_01D1",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 用法：/pupscaler scale <1-200>（3D 分辨率百分比）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Requested resolution change to ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0297",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已请求将分辨率改为 ",
+      "Source": "library"
+    },
+    {
+      "Original": " (window guard active)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_02C9",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": " （窗口保护已启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Requested resolution change (window guard active)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_02DC",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已请求更改分辨率（窗口保护已启用）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Config-path toggle with window guard started",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0328",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已在窗口保护启用时开始通过配置切换",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Sizes written to /xllog",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0354",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 尺寸已写入 /xllog",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Dumped struct + cfg values to /xllog",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0399",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 结构和配置值已写入 /xllog",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Set GraphicsRezoUpscaleType = ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0408",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 已设置超分辨率类型（GraphicsRezoUpscaleType）= ",
+      "Source": "library"
+    },
+    {
+      "Original": " (check /xllog)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0422",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": " （请查看 /xllog）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Usage: /pupscaler set <0-255>",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_0448",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 用法：/pupscaler set <0-255>",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] cfg GraphicsRezoUpscaleType = ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_04B7",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 超分辨率配置（GraphicsRezoUpscaleType）= ",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Usage: /pupscaler cfg <0|1>  (0=FSR, 1=DLSS)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_04EB",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 用法：/pupscaler cfg <0|1>  （0=FSR，1=DLSS）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] ScreenMode = ",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_055A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 显示模式（ScreenMode）= ",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Usage: /pupscaler mode <0|1|2>  (0=windowed, 1=borderless, 2=fullscreen)",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_058E",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 用法：/pupscaler mode <0|1|2>  （0=窗口，1=无边框窗口，2=全屏）",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] Usage: on|off|status|toggle|get|set <n>|cfg <n>|cfgseq|mode <n>|scale <pct>|reset [w h]|sizes",
+      "Context": "GraphicsUpscalerToggle.dll 0x0600002E:IL_05A8",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] 用法：on|off|status|toggle|get|set <n>|cfg <n>|cfgseq|mode <n>|scale <pct>|reset [w h]|sizes",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] cfgseq done — compare FPS / window / xllog",
+      "Context": "GraphicsUpscalerToggle.dll 0x06000061:IL_029D",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] cfgseq 已完成，请对比帧率、窗口及 xllog",
+      "Source": "library"
+    },
+    {
+      "Original": "[UpscalerToggle] reset finished — check window",
+      "Context": "GraphicsUpscalerToggle.dll 0x06000063:IL_0280",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "[UpscalerToggle] reset 已完成，请检查窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Graphics Upscaler Toggle Settings###GUTConfig",
+      "Context": "GraphicsUpscalerToggle.dll 0x06000037:IL_0001",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "Graphics Upscaler Toggle 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto-Toggle",
+      "Context": "GraphicsUpscalerToggle.dll 0x06000039:IL_000C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用自动切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Login Delay (s)",
+      "Context": "GraphicsUpscalerToggle.dll 0x06000039:IL_0042",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "登录后延迟（秒）",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,679 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Relicable",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "   Retainers: ",
+      "Context": "MainWindow.DrawAtmaTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "   雇员： ",
+      "Source": "library"
+    },
+    {
+      "Original": " gil",
+      "Context": "NovusWindow.Gil",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": " 金币",
+      "Source": "library"
+    },
+    {
+      "Original": "(select a job)",
+      "Context": "BaseRelicWindow.DrawRelicQuest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（选择职业）",
+      "Source": "library"
+    },
+    {
+      "Original": "A key item -- key items cannot be entrusted to a retainer.",
+      "Context": "BravesWindow.DrawFetchButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重要物品，无法交给雇员保管。",
+      "Source": "library"
+    },
+    {
+      "Original": "Active job (auto)",
+      "Context": "BaseRelicWindow.DrawJobSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "当前职业（自动）",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tomestones of Poetics: ",
+      "Context": "BravesWindow.DrawTotals",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "亚拉戈诗学神典石： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto",
+      "Context": "MainWindow.DrawStageSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy",
+      "Context": "NovusWindow.DrawScroll",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "购买",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy craft list",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the crafted items and their crafters to the clipboard.",
+      "Context": "BravesWindow.DrawCraftables",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将制作物品及其对应的制作职业复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "制作职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Current:",
+      "Context": "MainWindow.DrawMahatmaTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前：",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Context": "ConfigWindow.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon",
+      "Context": "MainWindow.KindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon drops to farm: ",
+      "Context": "BravesWindow.DrawTotals",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "需刷取的副本掉落： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeons",
+      "Context": "MainWindow.DrawBookWorkSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy",
+      "Context": "MainWindow.KindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE",
+      "Context": "MainWindow.KindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "FATEs",
+      "Context": "MainWindow.DrawBookWorkSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "取回",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch all from retainers",
+      "Context": "BravesWindow.DrawRetainerActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从雇员处取回全部所需物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch from Retainer",
+      "Context": "NovusWindow.DrawActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从雇员处取出",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company seals: ",
+      "Context": "BravesWindow.DrawTotals",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "大国防联军军票： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Have",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "持有",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Context": "BravesWindow.DrawRetainerActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "空闲",
+      "Source": "library"
+    },
+    {
+      "Original": "Install",
+      "Context": "ConfigWindow.DrawDependencies",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Context": "ConfigWindow.DrawInventory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Job: ",
+      "Context": "BaseRelicWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve",
+      "Context": "MainWindow.KindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "MainWindow.DrawStageSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Market",
+      "Context": "BravesWindow.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "市场",
+      "Source": "library"
+    },
+    {
+      "Original": "Market scope",
+      "Context": "BravesWindow.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "查价范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Materials (have / need)",
+      "Context": "BaseRelicWindow.DrawMaterials",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "材料（持有 / 所需）",
+      "Source": "library"
+    },
+    {
+      "Original": "Navmesh:",
+      "Context": "MainWindow.DrawNavmeshControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导航网格：",
+      "Source": "library"
+    },
+    {
+      "Original": "Need",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "所需",
+      "Source": "library"
+    },
+    {
+      "Original": "No relic job selected",
+      "Context": "BaseRelicWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择古武职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Not found",
+      "Context": "ConfigWindow.DrawStatusCell",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未找到",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Context": "ConfigWindow.DrawDependencies",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pull items automatically",
+      "Context": "BravesWindow.DrawRetainerActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动取回物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Context": "ConfigWindow.DrawBagPreview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest parts",
+      "Context": "BaseRelicWindow.DrawParts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "任务阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh prices",
+      "Context": "BravesWindow.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Relic quest",
+      "Context": "BaseRelicWindow.DrawRelicQuest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "古武任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Relicable - A Relic Reborn questmap",
+      "Context": "BaseRelicWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Relicable 古武任务图",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Context": "BravesWindow.DrawCraftables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers",
+      "Context": "BravesWindow.DrawRetainerActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "MainWindow.StatusLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save settings",
+      "Context": "NovusWindow.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a job to see its material list.",
+      "Context": "BaseRelicWindow.DrawMaterials",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选择职业以查看材料清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip Step",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "ConfigWindow.DrawDependencies",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "BravesWindow.DrawRetainerActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Step: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "步骤： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped",
+      "Context": "MainWindow.StatusLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Vendor",
+      "Context": "ConfigWindow.DrawBagPreview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "商人",
+      "Source": "library"
+    },
+    {
+      "Original": "View job",
+      "Context": "BaseRelicWindow.DrawJobSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "查看职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Weapon",
+      "Context": "NovusWindow.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "武器",
+      "Source": "library"
+    },
+    {
+      "Original": "[prerequisites not yet met]",
+      "Context": "BaseRelicWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[尚未满足前置条件]",
+      "Source": "library"
+    },
+    {
+      "Original": "[ready to begin]",
+      "Context": "BaseRelicWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[可开始]",
+      "Source": "library"
+    },
+    {
+      "Original": "completed",
+      "Context": "BaseRelicWindow.DrawRelicQuest",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "discard",
+      "Context": "ConfigWindow.DrawBagPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "done",
+      "Context": "BravesWindow.DrawFetchButton",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "dungeon drop",
+      "Context": "BravesWindow.NativeCost",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "副本掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "in progress",
+      "Context": "BaseRelicWindow.DrawRelicQuest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "items",
+      "Context": "MainWindow.DrawObjectiveProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "loading ",
+      "Context": "BravesWindow.DrawPriceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "加载中 ",
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Context": "MainWindow.SkipStepTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "not loaded",
+      "Context": "MainWindow.DrawNavmeshControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未加载",
+      "Source": "library"
+    },
+    {
+      "Original": "not started",
+      "Context": "BaseRelicWindow.DrawRelicQuest",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "尚未开始",
+      "Source": "library"
+    },
+    {
+      "Original": "price lookup failed",
+      "Context": "BravesWindow.DrawPriceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "查询价格失败",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Context": "MainWindow.SkipStepTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

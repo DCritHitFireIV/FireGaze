@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoTriadC",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "%d ms",
+      "Context": "CardCollectionWindow.DrawBattleOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "%d 毫秒",
+      "Source": "library"
+    },
+    {
+      "Original": "TRIPLE TRIAD  /  ",
+      "Context": "CardCollectionWindow.DrawCollectionCardDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "九宫幻卡  /  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Triad Buddy###AutoTriadC.Main",
+      "Context": "CardCollectionWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "九宫幻卡助手",
+      "Source": "library"
+    },
+    {
+      "Original": "%.1f px",
+      "Context": "CardCollectionWindow.DrawAppearance",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%.1f 像素",
+      "Source": "library"
+    },
+    {
+      "Original": "%.0f px",
+      "Context": "CardCollectionWindow.DrawAppearance",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%.0f 像素",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

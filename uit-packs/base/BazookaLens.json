@@ -1,0 +1,432 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BazookaLens",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Bazooka Lens: saved ",
+      "Context": "RunConfiguredCaptureAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens：已保存 ",
+      "Source": "library"
+    },
+    {
+      "Original": " capture failed: ",
+      "Context": "RunConfiguredCaptureAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 截图失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens###BazookaLensMain",
+      "Context": "BazookaLensWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Bazooka Lens 截图",
+      "Source": "library"
+    },
+    {
+      "Original": "ReShade addon exports detected: ",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "检测到 ReShade 插件导出： ",
+      "Source": "library"
+    },
+    {
+      "Original": "); modules scanned=",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "）；已扫描模块=",
+      "Source": "library"
+    },
+    {
+      "Original": "ReShade runtime candidate found, but addon exports are incomplete or unavailable: ",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "找到 ReShade 运行时候选，但插件导出不完整或不可用： ",
+      "Source": "library"
+    },
+    {
+      "Original": "; modules scanned=",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "；已扫描模块=",
+      "Source": "library"
+    },
+    {
+      "Original": "Partial ReShade addon exports found, but the required export set is incomplete: ",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "发现部分 ReShade 插件导出，但所需的导出集不完整： ",
+      "Source": "library"
+    },
+    {
+      "Original": "ReShade addon exports not detected; modules scanned=",
+      "Context": "ReShadeExportProbe.Format",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未检测到 ReShade 插件导出；已扫描模块=",
+      "Source": "library"
+    },
+    {
+      "Original": "<module-name-error:",
+      "Context": "ReShadeExportProbe.SafeModuleName",
+      "PreserveID": false,
+      "Translated": "<模块名错误：",
+      "Source": "library"
+    },
+    {
+      "Original": "<module-path-error:",
+      "Context": "ReShadeExportProbe.SafeModulePath",
+      "PreserveID": false,
+      "Translated": "<模块路径错误：",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens command failed: ",
+      "Context": "CommandRouter.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 命令失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens command failed: unexpected command.",
+      "Context": "CommandRouter.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 命令失败：意外的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens ReShade status failed: ",
+      "Context": "CommandRouter.RunReShadeStatusCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens ReShade 状态获取失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": " complete; details written to /xllog.",
+      "Context": "CommandRouter.RunReShadeEventsCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 完成；详情已写入 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": " failed: ",
+      "Context": "CommandRouter.RunReShadeEventsCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens: opened screenshot folder ",
+      "Context": "CommandRouter.RunOpenFolderCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens：已打开截图文件夹 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens open-folder failed: ",
+      "Context": "CommandRouter.RunOpenFolderCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 打开文件夹失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the settings window.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show this help.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "显示此帮助。",
+      "Source": "library"
+    },
+    {
+      "Original": "shoot [scale]",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "shoot [缩放]",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture with configured settings; optional scale overrides one shot.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "使用配置的设置进行捕获；可选缩放覆盖单次捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the screenshot folder.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "打开截图文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Write runtime status to /xllog.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "将运行时状态写入 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": "Print ReShade bridge availability.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "打印 ReShade 海将舰桥可用性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Control or inspect the ReShade event bridge.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "控制或检查 ReShade 事件海将舰桥。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug full-frame capture.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "调试全帧捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug scaled full-frame capture.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "调试缩放全帧捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug region capture.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "调试区域捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug scaled region capture.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "调试缩放区域捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Probe render target resizing.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "探测渲染目标尺寸调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore game UI visibility.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "恢复游戏 UI 可见性。",
+      "Source": "library"
+    },
+    {
+      "Original": "restore-display force",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "恢复显示 force",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore the configured display mode.",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Translated": "恢复配置的显示模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens commands:",
+      "Context": "CommandRouter..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens 命令：",
+      "Source": "library"
+    },
+    {
+      "Original": ". Use /blens open-folder to view captures.",
+      "Context": "RunCaptureCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "。使用 /blens open-folder 查看捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens capture failed: ",
+      "Context": "RunCaptureCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 捕获失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens resize-probe failed: ",
+      "Context": "RunResizeProbeCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 尺寸探测失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens: restore-display completed; details written to /xllog.",
+      "Context": "RunRestoreDisplayCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens：恢复显示完成；详情已写入 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens restore-display failed: ",
+      "Context": "RunRestoreDisplayCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 恢复显示失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens: restore-ui completed.",
+      "Context": "RunRestoreUiCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens：恢复界面完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens restore-ui failed: ",
+      "Context": "RunRestoreUiCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 恢复界面失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens shoot failed: ",
+      "Context": "RunShootCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 拍摄失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens: status written to /xllog.",
+      "Context": "RunStatusCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Bazooka Lens：状态已写入 /xllog。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens status failed: ",
+      "Context": "RunStatusCommandAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "Bazooka Lens 状态获取失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Overlay",
+      "Context": "BazookaLensWindow.DrawRegionControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "编辑叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Full frame capture",
+      "Context": "BazookaLensWindow.DrawRegionControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "全画面截图",
+      "Source": "library"
+    },
+    {
+      "Original": "SelectSavePathFolder",
+      "Context": "BazookaLensWindow.DrawSavePathControls",
+      "PreserveID": false,
+      "Translated": "选择保存路径文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Max = ",
+      "Context": "BazookaLensWindow.DrawScaleControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最大值 = ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bazooka Lens ",
+      "Context": "RunConfiguredCaptureAsync.MoveNext",
+      "PreserveID": false,
+      "Translated": "火箭筒镜头 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Shoot",
+      "Context": "BazookaLensWindow.DrawShootControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ BazookaLensWindow.DrawSectionTitle",
+      "Translated": "拍摄",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,1510 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WigglyQuest",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Not Found",
+      "Context": "QuestSequenceComponent.DrawQuestSequences",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 未找到",
+      "Source": "library"
+    },
+    {
+      "Original": " left",
+      "Context": "EventInfoComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 左",
+      "Source": "library"
+    },
+    {
+      "Original": " not found.",
+      "Context": "QuestEditorQuestManager.LoadQuest",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 未找到。",
+      "Source": "library"
+    },
+    {
+      "Original": " quests.",
+      "Context": "SavedPresetsComponent.SaveCurrentPreset",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 任务。",
+      "Source": "library"
+    },
+    {
+      "Original": " quests...",
+      "Context": "QuestEditorQuestManager.DrawQuestSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 任务…",
+      "Source": "library"
+    },
+    {
+      "Original": " selected",
+      "Context": "QuestEditorFieldDrawers.DrawRequiredClassJobField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "(unlimited)",
+      "Context": "FateSelectionWindow.DrawControlsStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（不限）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add FATE definitions to the FatePaths folder to get started.",
+      "Context": "FateSelectionWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.EmptyState",
+      "Translated": "请将临危受命定义文件放入 FatePaths 文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Step",
+      "Context": "QuestEditorSequenceManager.DrawSequenceStepButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced Options###Advanced",
+      "Context": "QuestEditorFieldDrawers.DrawDialogueChoicesField",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Current",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "风脉泉",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetheryte:",
+      "Context": "QuestEditorFieldDrawers.DrawAetheryteField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "以太之光：",
+      "Source": "library"
+    },
+    {
+      "Original": "Allied Societies",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Already farming a FATE",
+      "Context": "FateSelectionWindow.DrawFateRowActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已在进行临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Context": "QuestEditorQuestManager.DrawNewQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Author: ",
+      "Context": "QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Authors:",
+      "Context": "QuestEditorMetadataEditor.DrawQuestMetadata",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "OneTimeSetupWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Build Index",
+      "Context": "QuestEditorWindow.DrawCacheStatusInHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "构建索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "SavedPresetsComponent.DrawSaveSection",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message: ",
+      "Context": "QuestEditorFieldDrawers.DrawChatMessageField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "聊天消息： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Class/Job",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "ManualPriorityComponent.DrawCompact",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear ",
+      "Context": "QuestEditorFieldDrawers.DrawQuestWorkValueList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "ManualPriorityComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clipboard is empty.",
+      "Context": "QuestEditorQuestManager.ImportQuestFromClipboard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "剪贴板为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "OneTimeSetupWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Without Saving",
+      "Context": "QuestEditorWindow.DrawCloseConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "不保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Close window & don't enable Questionable",
+      "Context": "OneTimeSetupWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "关闭窗口并保持 Questionable 停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Comment",
+      "Context": "QuestEditorStepEditor.DrawStepEditorContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "注释",
+      "Source": "library"
+    },
+    {
+      "Original": "Comment:",
+      "Context": "QuestEditorMetadataEditor.DrawQuestMetadata",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注释：",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition:",
+      "Context": "QuestEditorFieldDrawers.DrawCombatItemUseField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Config - Questionable###QuestionableConfig",
+      "Context": "ConfigWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "Questionable 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Control",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Count:",
+      "Context": "DrawSummaryCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "数量：",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Deliveries",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "老主顾交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Delivery",
+      "Context": "ActiveQuestComponent.DrawCustomDeliveryActive",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.TruncateToWidth",
+      "Translated": "老主顾交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycle Configuration",
+      "Context": "FateSelectionWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.SectionHeader",
+      "Translated": "循环设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Cycles:",
+      "Context": "FateSelectionWindow.DrawControlsStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "循环次数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Data ID:",
+      "Context": "QuestEditorFieldDrawers.DrawDataIdField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数据 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "SavedPresetsComponent.DrawPresetEntry",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Description:",
+      "Context": "ValidationDetailsRenderer.DrawIssueDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "说明：",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard Changes",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "放弃更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance: ",
+      "Context": "CreationUtilsComponent.DrawTargetDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距离： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Sequence",
+      "Context": "QuestEditorQuestManager.FormatIssueType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "复制序列",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "QuestEditorWindow.DrawQuestTabContent",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote:",
+      "Context": "QuestEditorFieldDrawers.DrawEmoteField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "情感动作：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ends in ",
+      "Context": "EventInfoComponent.FormatRemainingFull",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "距结束还有 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Errors: ",
+      "Context": "QuestEditorQuestManager.DrawValidationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Context": "QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Events",
+      "Context": "EventInfoComponent.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion: ",
+      "Context": "QuestEditorQuestManager.DrawNewQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "资料片： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expired",
+      "Context": "FateSelectionWindow.DrawFateRowExpiry",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已过期",
+      "Source": "library"
+    },
+    {
+      "Original": "Explore",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "SavedPresetsComponent.DrawPresetEntry",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to clipboard",
+      "Context": "QuestEditorQuestManager.DrawJsonPreviewTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE Farming###QuestionableFateFarming",
+      "Context": "FateSelectionWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "反复参加临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE List",
+      "Context": "FateSelectionWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.SectionHeader",
+      "Translated": "临危受命列表",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE: ",
+      "Context": "ActiveQuestComponent.DrawFateActive",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.TruncateToWidth",
+      "Translated": "危命任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "File Path:",
+      "Context": "QuestEditorQuestManager.DrawLoadQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文件路径：",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish Setup",
+      "Context": "OneTimeSetupWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "完成设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Context": "ActiveQuestComponent.DrawFishingActive",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.TruncateToWidth",
+      "Translated": "捕鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing: ",
+      "Context": "ActiveQuestComponent.DrawFishingActive",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.TruncateToWidth",
+      "Translated": "捕鱼： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Gameplay",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "玩法",
+      "Source": "library"
+    },
+    {
+      "Original": "Gather",
+      "Context": "QuestValidationComponent.DrawValidationRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Points",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "采集点",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company",
+      "Context": "EssentialSettingsStep.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.SectionHeader",
+      "Translated": "大国防联军",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company: ",
+      "Context": "QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ThemeStatus.ChecklistItem",
+      "Translated": "大国防联军： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Duties",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "组队副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to enable this button.",
+      "Context": "ManualPriorityComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Ctrl 即可启用此按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hovered Item: ",
+      "Context": "CreationUtilsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedText",
+      "Translated": "鼠标指向的物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "SavedPresetsComponent.DrawBottomButtons",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import failed: ",
+      "Context": "QuestEditorQuestManager.ImportQuestFromJson",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "导入失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "In Combat",
+      "Context": "ActiveQuestComponent.DrawMinimizedQuest",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedText",
+      "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Interact with your current target.",
+      "Context": "CreationUtilsComponent.DrawInteractionButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "与当前目标交互。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction Type:",
+      "Context": "QuestEditorStepEditor.DrawStepEditorContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "交互类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Chat Message",
+      "Context": "QuestEditorQuestManager.FormatIssueType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "聊天消息无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Context": "QuestEditorWindow.GetValidationTabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ",
+      "Context": "QuestEditorFieldDrawers.DrawItemsToGatherField",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ID:",
+      "Context": "QuestEditorFieldDrawers.DrawItemIdField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Rewards",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "物品报酬",
+      "Source": "library"
+    },
+    {
+      "Original": "JSON Preview",
+      "Context": "QuestEditorWindow.DrawQuestTabContent",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "JSON 预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Journal Progress###QuestionableJournalProgress",
+      "Context": "JournalProgressWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "任务日志进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "QuestEditorFieldDrawers.DrawQuestIdSearchCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Quest",
+      "Context": "QuestEditorWindow.DrawLoadQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "加载任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "QuestValidationComponent.DrawValidationTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Location: ",
+      "Context": "QuestEditorQuestManager.DrawValidationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "UiUtils.GetQuestStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing Sequence",
+      "Context": "QuestEditorQuestManager.FormatIssueType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "缺少序列",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to player position",
+      "Context": "QuestEditorFieldDrawers.DrawLandingZonesEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "移动至玩家位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement Options",
+      "Context": "QuestEditorFieldDrawers.DrawAdvancedFields",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "移动选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "FateSelectionWindow.DrawFateTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "QuestEditorFieldDrawers.DrawQuestIdSearchCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Navigation",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导航",
+      "Source": "library"
+    },
+    {
+      "Original": "New Quest",
+      "Context": "QuestEditorWindow.DrawNewQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "新建任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "OneTimeSetupWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Quest",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "下一个任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: ",
+      "Context": "ActiveQuestComponent.DrawQuestCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "下一步： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No Active Quest",
+      "Context": "QuestSequenceComponent.DrawCurrentQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有进行中的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "No FATE Definitions",
+      "Context": "FateSelectionWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.EmptyState",
+      "Translated": "没有临危受命定义",
+      "Source": "library"
+    },
+    {
+      "Original": "No FATEs match your search.",
+      "Context": "FateSelectionWindow.DrawFateTable",
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.EmptyState",
+      "Translated": "没有匹配的临危受命。",
+      "Source": "library"
+    },
+    {
+      "Original": "No active quest",
+      "Context": "ActiveQuestComponent.DrawNoActiveQuest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有进行中的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "No changelog entries available.",
+      "Context": "ChangelogWindow.DrawChangelogEntries",
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.EmptyState",
+      "Translated": "暂无更新记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "No matches",
+      "Context": "QuestSelector.DrawSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "没有匹配项",
+      "Source": "library"
+    },
+    {
+      "Original": "Not used",
+      "Context": "QuestEditorFieldDrawers.DrawCombatItemUseField",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "未使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Configuration",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Path Editor",
+      "Context": "QuestEditorWindow.DrawCustomHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "路线编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Path Editor###QuestionableQuestEditor",
+      "Context": "QuestEditorWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "路线编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "ActiveQuestComponent.DrawQuestCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Position:",
+      "Context": "QuestEditorFieldDrawers.DrawPositionField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset name...",
+      "Context": "SavedPresetsComponent.DrawSaveSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "预设名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets:",
+      "Context": "QuestEditorFieldDrawers.DrawDialogueExcelSheetField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设：",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress:",
+      "Context": "DrawSummaryCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "进度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest ",
+      "Context": "QuestEditorQuestManager.CreateNewQuest",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "任务 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Battles",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "任务战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Chain",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "任务链",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Data",
+      "Context": "QuestEditorQuestManager.FormatIssueType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "任务数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest ID:",
+      "Context": "QuestEditorQuestManager.DrawQuestSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任务 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest ID: ",
+      "Context": "QuestEditorFieldDrawers.DrawQuestIdSearchCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任务 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Map",
+      "Context": "JournalProgressWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "任务地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest sim active (experimental)",
+      "Context": "ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedTextColored",
+      "Translated": "任务模拟运行中（实验性）",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest: ",
+      "Context": "ValidationDetailsRenderer.DrawIssueDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Questionable Changelog###QuestionableChangelog",
+      "Context": "ChangelogWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "Questionable 更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Questionable Setup###QuestionableOneTimeSetup",
+      "Context": "OneTimeSetupWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ThemedWindow..ctor",
+      "Translated": "Questionable 初始设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Queue",
+      "Context": "QuestWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.DrawTabBar",
+      "Translated": "队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Range:",
+      "Context": "DrawSummaryCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rebuild Index",
+      "Context": "QuestEditorWindow.DrawCacheStatusInHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重建索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Rebuild Navmesh",
+      "Context": "QuickAccessButtonsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "重新生成导航网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Required plugins",
+      "Context": "PluginsStep.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.SectionHeader",
+      "Translated": "必需插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires all:",
+      "Context": "QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要满足全部条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires one:",
+      "Context": "QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要满足任一条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires transformation",
+      "Context": "FateSelectionWindow.DrawFateRowName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "需要变身",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart Test",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Save As...",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "另存为…",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved",
+      "Context": "QuestWindow.DrawQueueTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.PillButton",
+      "Translated": "已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Search FATEs...",
+      "Context": "FateSelectionWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.SearchInput",
+      "Translated": "搜索临危受命…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "QuestEditorFieldDrawers.DrawTerritoryField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Sequence ",
+      "Context": "QuestEditorSequenceManager.DrawSequenceStepTree",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "序列 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sequence: ",
+      "Context": "ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedText",
+      "Translated": "序列： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "NavigationBarComponent.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulation",
+      "Context": "ActiveQuestComponent.DrawSimulationControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ThemeLayout.SectionHeader",
+      "Translated": "模拟",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip current step",
+      "Context": "ActiveQuestComponent.DrawQuestCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "跳过当前步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "QuestEditorQuestManager.DrawLoadQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Start ",
+      "Context": "ARealmRebornComponent.DrawStartButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开始 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Status:",
+      "Context": "QuestEditorFieldDrawers.DrawStatusField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Context": "OneTimeSetupWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "步骤 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Step: ",
+      "Context": "ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedText",
+      "Translated": "步骤： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Test",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop quest automation first",
+      "Context": "FateSelectionWindow.DrawFateRowActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先停止自动做任务",
+      "Source": "library"
+    },
+    {
+      "Original": "System",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ SidebarNav.Draw",
+      "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "CreationUtilsComponent.DrawTargetDetails",
+      "Role": "UI",
+      "RoleReason": "→ ThemeText.WrappedText",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets: ",
+      "Context": "FateSelectionWindow.DrawFateRowName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory ID:",
+      "Context": "QuestEditorFieldDrawers.DrawTerritoryField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Test From Start",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从头测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Text: ",
+      "Context": "QuestEditorFieldDrawers.GetExcelRefSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "文字： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type to search ",
+      "Context": "QuestEditorQuestManager.DrawNewQuestTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "输入文字搜索 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type to search...",
+      "Context": "QuestEditorFieldDrawers.DrawQuestIdSearchCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入文字搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Type:",
+      "Context": "QuestEditorFieldDrawers.DrawDialogueChoicesField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Type: ",
+      "Context": "ValidationDetailsRenderer.DrawIssueDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to load plugin, check /xllog for details",
+      "Context": "LoadAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "插件加载失败，详情请查看 /xllog",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Item",
+      "Context": "QuestEditorFieldDrawers.DrawItemIdField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "未知物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Quest",
+      "Context": "QuestEditorQuestManager.GetCurrentQuestName",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未知任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown error",
+      "Context": "QuestEditorQuestManager.ImportQuestFromJson",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未知错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ",
+      "Context": "QuestEditorFieldDrawers.DrawDialogueExcelSheetField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use /qst setup to review the required plugins.",
+      "Context": "DalamudInitializer.ReportRequiredPluginProblems",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "使用 /qst setup 查看所需插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Validation passed!",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "校验通过！",
+      "Source": "library"
+    },
+    {
+      "Original": "Value:",
+      "Context": "QuestEditorFieldDrawers.DrawCombatItemUseField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数值：",
+      "Source": "library"
+    },
+    {
+      "Original": "Warnings: ",
+      "Context": "QuestEditorQuestManager.DrawValidationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "警告： ",
+      "Source": "library"
+    },
+    {
+      "Original": "What's New",
+      "Context": "NavigationBarComponent.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "FateSelectionWindow.DrawFateTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "FateSelectionWindow.DrawFateRowName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "default",
+      "Context": "QuestEditorFieldDrawers.DrawChatMessageField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "error",
+      "Context": "QuestEditorWindow.DrawSaveExportButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "job",
+      "Context": "QuestEditorFieldDrawers.DrawRequiredClassJobField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "not used",
+      "Context": "QuestEditorFieldDrawers.DrawRequiredQuestVariablesField",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "未使用",
+      "Source": "library"
+    },
+    {
+      "Original": "quest",
+      "Context": "EventInfoComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "quests",
+      "Context": "EventInfoComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "任务",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

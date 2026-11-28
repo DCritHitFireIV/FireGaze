@@ -1,0 +1,528 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AnimSync",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(ADD DJ)",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "（添加 DJ）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Experimental)",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（实验功能）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Remove)",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "（移除）",
+      "Source": "library"
+    },
+    {
+      "Original": "1. Checks for players near each other within your selected distance.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "1. 查找彼此距离在指定范围内的玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "2. Checks that their animations have the same total frames, duration and playback speed.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "2. 检查动画的总帧数、时长和播放速度是否一致。",
+      "Source": "library"
+    },
+    {
+      "Original": "3. If they are on different frames, syncs their animations together.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "3. 如果动画进度不同，则将其同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Add target",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Sync Anims",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动同步动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Refresh Time",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "检查间隔",
+      "Source": "library"
+    },
+    {
+      "Original": "DJs (Sound Sync Exclusions)",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "DJ 名单（排除声音同步）",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable on each participant's client with exactly the same phrase (case-sensitive). Sending the phrase manually or with the buttons restarts animations on each client. Party syncs loaded party members; tells sync you and the other player. The sender waits 300 ms to approximate delivery time; latency varies. Sound and DJ settings apply. Perfect Frame Sync does not apply to this restart.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "参与者都须启用本功能，并设置相同口令（区分大小写）。手动或点击按钮发送口令，均会在参与者的客户端重新播放动画。队伍频道可同步已加载的队员；悄悄话只同步双方。发送方会等待 300 毫秒来估算消息送达时间，实际延迟可能不同。声音和 DJ 设置仍然生效，精确帧同步不适用于这次重新播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter up to 180 UTF-8 bytes without control characters or chat placeholders (<...>).",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "最多可输入 180 个 UTF-8 字节，不能含控制字符或聊天占位符（<...>）。",
+      "Source": "library"
+    },
+    {
+      "Original": "How it works:",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "同步原理",
+      "Source": "library"
+    },
+    {
+      "Original": "Instead of restarting from the beginning, matches the animation frame to the person furthest ahead. Applies to Auto Sync and Sync Groups. Sound playback stays unchanged.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "以进度最快的玩家为准，对齐动画帧。适用于自动同步与群组同步，声音会继续播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps DJs music uninterrupted when animations sync. This is only really needed when anim syncing everyone.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "同步动画时保持 DJ 音乐连续播放，主要用于同步所有人的场合。",
+      "Source": "library"
+    },
+    {
+      "Original": "Matches your position and facing to your target within 0.5 yalms. With no target, uses the closest player within 0.5 yalms. Unavailable in combat, duties or cutscenes.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当目标距离不超过 0.5 星码时，与其对齐位置和朝向。未选中目标时，使用此范围内最近的玩家。战斗、副本和过场动画中无法使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum distance between players for group sync, measured in yalms. Sync Near You uses this radius around you. Adjust it to preview the range circle.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "群组同步允许的最大玩家间距，单位为星码。「同步附近玩家」也使用此半径。调整时可预览范围圈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum wait before automatically syncing the same players again. At 0, checks run every game update with no added cooldown.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "再次自动同步同一批玩家前的最短等待时间。设为 0 时，每次游戏更新都会检查。",
+      "Source": "library"
+    },
+    {
+      "Original": "No local player is loaded.",
+      "Context": "PositionAlignment.Request",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "本机角色尚未加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "No matching players.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有匹配的玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "No player identities loaded yet.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未加载任何玩家信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Perfect Frame Sync",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "精确帧同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Position sync did not finish. Try again while standing still.",
+      "Context": "PositionAlignment.Update",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "位置同步未完成，请站稳后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position sync is unavailable during combat.",
+      "Context": "PositionAlignment.get_BlockReason",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "战斗中无法同步位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position sync is unavailable during cutscenes or GPose.",
+      "Context": "PositionAlignment.get_BlockReason",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "过场动画或集体动作模式中无法同步位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position sync is unavailable in duties.",
+      "Context": "PositionAlignment.get_BlockReason",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "副本中无法同步位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position synced with ",
+      "Context": "PositionAlignment.Update",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "位置已与以下玩家同步： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Restarts all loaded, allowed animations regardless of distance or matching frames. DJ sound exclusions still apply.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "重新播放所有已加载且允许同步的动画，忽略距离和帧数。DJ 声音排除设置仍然生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Same time sync",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同时启动同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Search players...",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索玩家……",
+      "Source": "library"
+    },
+    {
+      "Original": "Select another player, or clear your target to find the closest player.",
+      "Context": "PositionAlignment.Request",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "请选择另一名玩家，或取消目标以查找最近的玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sends your shared phrase in a tell to your targeted player. Both clients need Same time sync enabled with the same phrase.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "向目标玩家发送包含共享口令的悄悄话。双方须启用同时启动同步并使用相同口令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sends your shared phrase to party chat. Participants need Same time sync enabled with the same phrase.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "向队伍频道发送共享口令。参与者须启用同时启动同步并使用相同口令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared phrase...",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "共享口令……",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Everyone",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "同步所有人",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Groups",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "同步各组",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Near You",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "同步附近玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Position",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "同步位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Target",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "同步目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync sound",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Syncs nearby groups whose animations have matching frame counts and timing but are on different frames.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将附近帧数和播放时长相同、进度不同的动画同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "Syncs only your animation and your selected player's animation, regardless of distance or matching frames.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅同步你与所选玩家的动画，无距离和帧数限制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Syncs your animation and players inside your Distance radius, without requiring matching frames.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "同步你与设定半径内玩家的动画，无需帧数相同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target a player to add them",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选中玩家后可将其添加到名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Target a visible player, or clear your target to find the closest player.",
+      "Context": "PositionAlignment.Request",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "请选择可见的玩家，或取消目标以查找最近的玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target is already a DJ",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目标已在 DJ 名单中",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Sync Party",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "队伍定时同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Sync Target",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "目标定时同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Too far — move within 0.5 yalms of your target.",
+      "Context": "PositionAlignment.Request",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "距离太远，请靠近目标至 0.5 星码以内。",
+      "Source": "library"
+    },
+    {
+      "Original": "Too far — no player is within 0.5 yalms.",
+      "Context": "PositionAlignment.Request",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "距离太远，0.5 星码内没有玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Wait until you finish loading before syncing position.",
+      "Context": "PositionAlignment.get_BlockReason",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "请等角色加载完成后再同步位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "With this enabled, you should rarely need to use animsync manually.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "启用后，通常无需再手动同步动画。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] Both players must finish loading before syncing.",
+      "Context": "AnimSync.SyncTarget",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 双方均须加载完毕才能同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] Join a party to use Time Sync Party.",
+      "Context": "AnimSync.ProcessTimeSync",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 请先加入队伍再使用队伍定时同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] No local player is loaded.",
+      "Context": "AnimSync.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 本机角色尚未加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] One of the current animations is excluded from syncing.",
+      "Context": "AnimSync.SyncTarget",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 当前有一个动画已被排除，不参与同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] Select another loaded player to sync with.",
+      "Context": "AnimSync.SyncTarget",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 请选择另一名已加载的玩家进行同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] Select another player to sync with.",
+      "Context": "AnimSync.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 请选择另一名玩家进行同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "[AnimSync] Target another loaded player to send a time sync tell.",
+      "Context": "AnimSync.ProcessTimeSync",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[AnimSync] 请选中另一名已加载的玩家，再发送定时同步悄悄话。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

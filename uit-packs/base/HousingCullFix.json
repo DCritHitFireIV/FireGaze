@@ -1,0 +1,96 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HousingCullFix",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Housing Cull Fix",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "房屋场景剔除修正",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Cast Shadows",
+      "Context": "HousingCullFix.dll 0x0600000B:IL_0012",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用投射阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "This toggles Cast Shadows within housing.\nThe in-game setting can be found at Graphics Settings > Cast Shadows\nDisabling this may improve performance significantly in certain houses.",
+      "Context": "HousingCullFix.dll 0x0600000B:IL_0049",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "切换房屋内的投射阴影。\n游戏中的对应设置位于「图像设置 → 投射阴影」。\n在部分房屋中，关闭此选项可明显提升性能。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "HousingCullFix.dll 0x0600000C:IL_0040",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Culling Fix To Use",
+      "Context": "HousingCullFix.dll 0x0600000C:IL_0046",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "剔除修正方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Brings back vanilla behaviour.",
+      "Context": "HousingCullFix.dll 0x0600000C:IL_00CA",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "恢复游戏原有行为。",
+      "Source": "library"
+    },
+    {
+      "Original": "Manage Housing Cull Fix settings",
+      "Context": "HousingCullFix.dll 0x06000025:IL_007F",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "管理房屋场景剔除修正设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Some objects may have been reverted to their default state. Please re-enter the area to fix.",
+      "Context": "HousingCullFix.dll 0x06000029:IL_0014",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "部分物品可能已恢复默认状态。请重新进入该区域。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flips a \"IsInside\" boolean the game checks before running their new culling algorithm.\nThis has the side benefit of re-enabling void lighting.",
+      "Context": "FakeOutside..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "反转游戏在运行新剔除算法前检查的 IsInside 布尔值。\n同时可重新启用虚空区域的光照。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hooks the culling function and changes the Draw Object's visibility value.\nThis does not fix light culling, and may have other issues.",
+      "Context": "HookAndChange..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "钩取剔除函数并修改绘制对象的可见性值。\n此方法不会修复光照剔除，且可能存在其他问题。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

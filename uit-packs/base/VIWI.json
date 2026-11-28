@@ -1,0 +1,793 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "VIWI",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Active",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 生效中",
+      "Source": "library"
+    },
+    {
+      "Original": " Buy",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 购买",
+      "Source": "library"
+    },
+    {
+      "Original": " Gil",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": " 金币",
+      "Source": "library"
+    },
+    {
+      "Original": " Item",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "GlamourSetter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " items.",
+      "Context": "WorkshoppaGrindstoneShopWindow.StartPurchase",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 物品。",
+      "Source": "library"
+    },
+    {
+      "Original": " items...",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 物品…",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Craft...",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "添加制作项目…",
+      "Source": "library"
+    },
+    {
+      "Original": "Allied Societies",
+      "Context": "GlamourSetter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoLogin",
+      "Context": "AutoLoginPage.get_DisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自动登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Autofill",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "自动填充",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't switch characters (bound by duty or occupied)",
+      "Context": "CharacterSwitch.SwitchCharacter",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法切换角色（正在副本或角色正忙）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Index",
+      "Context": "CharacterSwitch..ctor",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get",
+      "Translated": "角色索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Inventory",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "检查背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands:",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Saved Character: ",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前保存的角色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Crafting:",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在制作：",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Visiting: ",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前造访： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Preset",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Description:",
+      "Context": "AoEasyPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "说明：",
+      "Source": "library"
+    },
+    {
+      "Original": "Detected Region: ",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "检测到的地区： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "WorkshoppaPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable QuickLaunch Menu (Title Screen)",
+      "Context": "AutoLoginPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在标题界面启用快速启动菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled:",
+      "Context": "AoEasyPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已启用：",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Material List to Clipboard",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "将材料清单导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Queue to Clipboard",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "将队列导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Queue to Preset",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "将队列导出为预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter characters (name/world)",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按角色名或服务器筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Slots: ",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "空余栏位： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Home Data Center: ",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "所属数据中心： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Queue from Clipboard",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从剪贴板导入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Queue from Preset",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从预设导入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported ",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Incorrect passkey.",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "口令不正确。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Items needed for all crafts in queue:",
+      "Context": "WorkshoppaWindow.CheckMaterial",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "队列中所有制作项目需要的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Items to Buy",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "待购物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "WorkshoppaPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Launch Arguments:",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启动参数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Launch Path:",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启动路径：",
+      "Source": "library"
+    },
+    {
+      "Original": "Logged in",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Login On Game Launch",
+      "Context": "AutoLoginPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启动游戏时登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Most Recent Character Per Region:",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "各地区最近登录的角色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No character entries yet.",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "暂无角色记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "No matches.",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有匹配项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "GlamourSetter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Not loaded",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Not logged in",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未登录",
+      "Source": "library"
+    },
+    {
+      "Original": "OFF",
+      "Context": "MainDashboardWindow.DrawPageEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "ON",
+      "Context": "MainDashboardWindow.DrawPageEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Passkey",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "口令",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Per-character settings",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "按角色设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Name...",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "预设名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Press Enter to submit.",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按回车提交。",
+      "Source": "library"
+    },
+    {
+      "Original": "Processing purchase...",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在购买…",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Context": "WorkshoppaPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Queue:",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "队列：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove ",
+      "Context": "WorkshoppaWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Repair Kits###WorkshoppaRepairKitWindow",
+      "Context": "WorkshoppaRepairKitWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "修理材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart Client",
+      "Context": "AutoLoginPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重启客户端",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart on Auth Error",
+      "Context": "AutoLoginPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "身份验证出错时重启",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Service Account Index: ",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务账号序号： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "WorkshoppaPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Special",
+      "Context": "GlamourSetter.DrawSpecialtyTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Crafting",
+      "Context": "WorkshoppaWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "开始制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Status:",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "GlamourSetter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "页签",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to Workshop after purchase.",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "购买后传送到部队工房。",
+      "Source": "library"
+    },
+    {
+      "Original": "This requires Lifestream to be enabled",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "需要启用 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Zone: ",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "时区： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "OverviewDashboardPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked!",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "已解锁！",
+      "Source": "library"
+    },
+    {
+      "Original": "Utilities",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "实用工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "AoEasyPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not in the Company Workshop.",
+      "Context": "WorkshoppaWindow.ShowErrorConditions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "你当前不在部队工房内。",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "BunnyBlessed.ProcessCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "WeatherForecast.ProcessCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "item",
+      "Context": "WorkshoppaModule.SafeItemName",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "♥ Donate ♥",
+      "Context": "MainDashboardWindow.DrawDonateButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "♥ 赞助 ♥",
+      "Source": "library"
+    },
+    {
+      "Original": "♥Unlocked♥",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "♥ 已解锁 ♥",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

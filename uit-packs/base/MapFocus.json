@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MapFocus",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Center on player",
+      "Context": "MapCenterButtonOverlay.OnDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "以角色为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Center the map",
+      "Context": "MapCenterButtonOverlay.OnDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将地图居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop the map from centering on you",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "阻止地图自动以角色为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "While on, the Area Map never automatically centers on your character.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用后，区域地图不会自动以角色为中心。",
+      "Source": "library"
+    },
+    {
+      "Original": "Center the map when it opens",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开时将地图居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Each time the map opens it is automatically centered on the map itself.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每次打开地图时，自动定位至地图本身的中心。",
+      "Source": "library"
+    },
+    {
+      "Original": "Center the map now",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "立即将地图居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Show center buttons on the map",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在地图上显示居中按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Button spacing (px)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "按钮间距（像素）",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal offset (px)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "水平偏移（像素）",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical offset (px)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "垂直偏移（像素）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset button position",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置按钮位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Puts both buttons back in their default bottom-right corner.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将两个按钮移回默认的右下角。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow moving this window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许移动此窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Support Me",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "支持作者",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

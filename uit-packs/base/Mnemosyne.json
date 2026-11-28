@@ -1,0 +1,456 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Mnemosyne",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " already exists. Replace it?",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 已存在。要替换吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "A role",
+      "Context": "[Mnemosyne] MyTasksSection.DrawFor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "某个身份组",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a task",
+      "Context": "[Mnemosyne] MyTasksSection.DrawForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "添加任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Also replace my settings",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "同时替换我的设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply import",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用导入内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[Mnemosyne] MainWindow.DrawCharacterMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "[Mnemosyne] MainWindow.DrawCharacterMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all",
+      "Context": "[Mnemosyne] SettingsWindow.DrawIgnored",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "[Mnemosyne] MyTasksSection.DrawDeleteModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete...",
+      "Context": "[Mnemosyne] MyTasksSection.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "删除…",
+      "Source": "library"
+    },
+    {
+      "Original": "Descending",
+      "Context": "[Mnemosyne] MainWindow.DrawMatrix",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "降序",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Context": "[Mnemosyne] SettingsWindow.DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit the selected task",
+      "Context": "[Mnemosyne] MyTasksSection.DrawForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "编辑所选任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Every character",
+      "Context": "[Mnemosyne] MyTasksSection.DrawFor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "所有角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Export cancelled; the existing file was kept.",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "导出已取消，原文件已保留。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export...",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出…",
+      "Source": "library"
+    },
+    {
+      "Original": "Forget this character...",
+      "Context": "[Mnemosyne] MainWindow.DrawCharacterMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移除此角色的记录…",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Context": "[Mnemosyne] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "HIDDEN",
+      "Context": "[Mnemosyne] TasksView.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide from the list",
+      "Context": "[Mnemosyne] MainWindow.DrawCharacterMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从列表中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore everywhere",
+      "Context": "[Mnemosyne] CharacterPage.DrawIgnoreMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "为所有角色忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore on this character",
+      "Context": "[Mnemosyne] CharacterPage.DrawIgnoreMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "为此角色忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Import failed: ",
+      "Context": "[Mnemosyne] Transfer.OnImportPicked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "导入失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import...",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep the old file",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保留旧文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind:",
+      "Context": "[Mnemosyne] MyTasksSection.DrawForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "种类：",
+      "Source": "library"
+    },
+    {
+      "Original": "Log into a character and it appears here.",
+      "Context": "[Mnemosyne] MainWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "登录角色后即可在此查看。",
+      "Source": "library"
+    },
+    {
+      "Original": "Make a role on the settings page.",
+      "Context": "[Mnemosyne] MainWindow.DrawRoleMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "可在设置页创建身份组。",
+      "Source": "library"
+    },
+    {
+      "Original": "New role",
+      "Context": "[Mnemosyne] RolesSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建身份组",
+      "Source": "library"
+    },
+    {
+      "Original": "No events running",
+      "Context": "[Mnemosyne] CharacterPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "暂无进行中的活动",
+      "Source": "library"
+    },
+    {
+      "Original": "No match",
+      "Context": "[Mnemosyne] CharacterPage.DrawTopGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "没有匹配项",
+      "Source": "library"
+    },
+    {
+      "Original": "No tasks yet.",
+      "Context": "[Mnemosyne] MyTasksSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "暂无任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing due this week",
+      "Context": "[Mnemosyne] CharacterPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "本周没有到期事项",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing due today",
+      "Context": "[Mnemosyne] CharacterPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "今天没有到期事项",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing ending soon",
+      "Context": "[Mnemosyne] CharacterPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "近期没有即将结束的事项",
+      "Source": "library"
+    },
+    {
+      "Original": "Picked characters",
+      "Context": "[Mnemosyne] MyTasksSection.DrawFor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "指定角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "[Mnemosyne] RolesSection.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "替换",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to 0",
+      "Context": "[Mnemosyne] CharacterPage.DrawCountItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重置为 0",
+      "Source": "library"
+    },
+    {
+      "Original": "Role",
+      "Context": "[Mnemosyne] MainWindow.DrawRoleMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "身份组",
+      "Source": "library"
+    },
+    {
+      "Original": "Save changes",
+      "Context": "[Mnemosyne] MyTasksSection.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[Mnemosyne] .ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: ",
+      "Context": "[Mnemosyne] MainWindow.DrawMatrix",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "排序： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch",
+      "Context": "[Mnemosyne] SwitchIcon.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "切换",
+      "Source": "library"
+    },
+    {
+      "Original": "count",
+      "Context": "[Mnemosyne] CharacterPage.DrawEntry",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.ContextPopupItem",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "last seen ",
+      "Context": "[Mnemosyne] TotalsView.DrawHolder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "上次出现时间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "no gil history yet",
+      "Context": "[Mnemosyne] GilHistorySection.DrawTicks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暂无金币历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "not unlocked yet",
+      "Context": "[Mnemosyne] CharacterPage.DrawEntry",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "search everything",
+      "Context": "[Mnemosyne] CharacterPage.DrawSearch",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索全部内容",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

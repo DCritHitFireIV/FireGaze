@@ -1,0 +1,186 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ReadyCheckHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Job: ",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\r\nName: ",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "\r\n名称： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Party and Alliance List Icon Size/Offset:",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigSectionIconSizeOffset",
+      "Translated": "小队和团队列表图标的大小及偏移：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the names of those not ready in the chat window.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionPrintNamesofUnreadyinChat",
+      "Translated": "在聊天窗口中显示尚未准备就绪的成员姓名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Ready: ",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "NotReadyBase",
+      "Translated": "尚未准备： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens a window containing the results of the last ready check to occur.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ResultsSubcommandHelpMessage",
+      "Translated": "打开窗口查看上一次准备确认的结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Party List Icon Offset",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionPartyListIconOffset",
+      "Translated": "小队列表图标偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens a debugging window containing party and ready check object data.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "DebugSubcommandHelpMessage",
+      "Translated": "打开调试窗口，查看小队和准备确认的数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Upon entering combat.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionClearPartyAllianceListuponEnteringCombat",
+      "Translated": "进入战斗时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Party List Icon Scale",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionPartyListIconScale",
+      "Translated": "小队列表图标缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance List Icon Offset",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionAllianceListIconOffset",
+      "Translated": "团队列表图标偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and Close",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ButtonSaveandClose",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw ready check on party/alliance lists.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionDrawonPartyAllianceLists",
+      "Translated": "在小队及团队列表中显示准备确认状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Upon entering combat while in instance.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionClearPartyAllianceListuponEnteringingCombatinInstance",
+      "Translated": "在副本内进入战斗时。",
+      "Source": "library"
+    },
+    {
+      "Original": "After a certain number of seconds:",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionClearPartyAllianceListafterXSeconds",
+      "Translated": "经过指定秒数后：",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ButtonClose",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready Check Helper Settings",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "WindowTitleConfig",
+      "Translated": "准备确认助手设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear ready check from party/alliance lists:",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionClearPartyAllianceListSettings",
+      "Translated": "从小队和团队列表清除准备确认状态的时机：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Log Channel:",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionChatMessageChannel",
+      "Translated": "聊天频道：",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum number of names to show in chat:",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionMaxNamesinChat",
+      "Translated": "聊天栏最多显示多少个名字：",
+      "Source": "library"
+    },
+    {
+      "Original": "Upon entering instance.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigOptionClearPartyAllianceListuponEnteringInstance",
+      "Translated": "进入副本时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use {0} to open the the configuration window.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "PluginTextCommandDescription",
+      "Translated": "使用 {0} 打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "other",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "NotReadyOther",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the settings window.",
+      "Container": "ReadyCheckHelper.Resources.Language.resources",
+      "Key": "ConfigSubcommandHelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

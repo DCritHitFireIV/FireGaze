@@ -1,0 +1,491 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GlamourThis",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  (Armoire)",
+      "Context": "MainWindow.DrawSetPiece",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "  （收藏柜）",
+      "Source": "library"
+    },
+    {
+      "Original": " (complete)",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": " （已集齐）",
+      "Source": "library"
+    },
+    {
+      "Original": " (inventory full, or you already own this unique item).",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " （背包已满或已持有此独有物品）。",
+      "Source": "library"
+    },
+    {
+      "Original": " (the dresser did not finish loading).",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " （投影台尚未加载完成）。",
+      "Source": "library"
+    },
+    {
+      "Original": " into your inventory.",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " 放入背包。",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "MainWindow.DrawItemsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 件物品",
+      "Source": "library"
+    },
+    {
+      "Original": " owned",
+      "Context": "MainWindow.DrawItemsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 件已持有",
+      "Source": "library"
+    },
+    {
+      "Original": " sets",
+      "Context": "MainWindow.DrawSetsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 套",
+      "Source": "library"
+    },
+    {
+      "Original": "(dresser closed - actions disabled)",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（投影台已关闭，无法操作）",
+      "Source": "library"
+    },
+    {
+      "Original": "A Realm Reborn",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "重生之境",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "MainWindow.DrawItemsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "All expansions",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "全部资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury",
+      "Context": "GlamourLocationExtensions.ToLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "兵装库",
+      "Source": "library"
+    },
+    {
+      "Original": "Bags",
+      "Context": "GlamourLocationExtensions.ToLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Bags / Armoury",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "背包及兵装库",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not pull ",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法取出 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "MainWindow.DrawItemsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Dawntrail",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "金曦之遗辉",
+      "Source": "library"
+    },
+    {
+      "Original": "Dresser",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "投影台",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicates",
+      "Context": "MainWindow.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重复物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Endwalker",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "晓月之终途",
+      "Source": "library"
+    },
+    {
+      "Original": "Everywhere",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "所有位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour This - Settings###GlamourThisConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Glamour This 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavensward",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "苍穹之禁城",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight duplicate items",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮重复物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon size",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Include Armoire (cabinet) items. Turn off to hide the endless armoire and focus on the dresser.",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "包含收藏柜内的物品。关闭后可隐藏大量收藏柜物品，只查看投影台。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "MainWindow.DrawItemsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "MainWindow.DrawItemsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "存放位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open automatically with the Glamour Dresser",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开投影台时自动打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Glamour Dresser to pull items out.",
+      "Context": "DresserActionService.RestoreItem",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "打开投影台后即可取出物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Glamour This browser.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Glamour This 浏览器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Glamour This browser. Use /gt as a shortcut.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Glamour This 浏览器。也可使用快捷命令 /gt。",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "SlotLabels.ForEquipSlotCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Outfit Glamour-ready Item",
+      "Context": "MainWindow.DrawItemRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "可作为套装投影的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Outfit-ready",
+      "Context": "MainWindow.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "可作为套装投影",
+      "Source": "library"
+    },
+    {
+      "Original": "Pull pulls one piece per click into your inventory.",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "每点一次“取出”，就会将一件装备放入背包。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulled ",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已取出 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "MainWindow.DrawToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Search by name...",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowbringers",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "暗影之逆焰",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only items you hold more than one of (across the dresser, bags and armoury).",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅显示在投影台、背包和兵装库中总数大于一件的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "MainWindow.DrawItemsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "部位",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: Dupes",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "按重复数量排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: Name",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "按名称排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: Slot",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "按部位排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort: iLvl",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "按品级排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Soul Crystal",
+      "Context": "SlotLabels.ForEquipSlotCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Special (Lv 1)",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "特殊（等级 1）",
+      "Source": "library"
+    },
+    {
+      "Original": "Stored as one outfit - restore it from the dresser window.",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已作为套装收纳，可在投影台窗口中还原。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stormblood",
+      "Context": "MainWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "红莲之狂潮",
+      "Source": "library"
+    },
+    {
+      "Original": "This set is currently condensed into a single outfit slot in your dresser.",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此套装目前已合并，占用投影台中的一个套装栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "Expansions.ToLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Waist",
+      "Context": "SlotLabels.ForEquipSlotCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "腰部",
+      "Source": "library"
+    },
+    {
+      "Original": "Which storage to list items from. Defaults to the Glamour Dresser.",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择要查看的存放位置，默认为投影台。",
+      "Source": "library"
+    },
+    {
+      "Original": "You own all pieces of this set.",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此套装的所有部件均已集齐。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

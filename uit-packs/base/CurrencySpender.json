@@ -1,0 +1,1709 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "CurrencySpender",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Currency Spender",
+      "Context": "Plugin.get_Name",
+      "PreserveID": false,
+      "Translated": "货币消费助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Short command. Also pairable with all arguments. Arguments: config, c, settings, s",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "短命令。可与所有参数搭配使用。参数：config、c、settings、s",
+      "Source": "library"
+    },
+    {
+      "Original": "Open plugin interface. Also pairable with all arguments. Arguments: config, c, settings, s",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开插件界面。可与所有参数搭配使用。参数：config、c、settings、s",
+      "Source": "library"
+    },
+    {
+      "Original": " Settings ",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Translated": " 设置 ",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "通用",
+      "Source": "library"
+    },
+    {
+      "Original": "Currencies",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Societies",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Display",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "ThirdParty",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Translated": "第三方",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": " - Configuration Wizard###",
+      "Context": "ConfigWizardWindow..ctor",
+      "PreserveID": false,
+      "Translated": " - 配置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "Changed in Version ",
+      "Context": "ConfigWizardWindow.DrawStep",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本变更 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to the Configuration Wizard!",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "欢迎使用配置向导！",
+      "Source": "library"
+    },
+    {
+      "Original": "This wizard will help you configure new options added since the latest patch. You can skip this setup and modify the settings later.",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "本向导将帮助你配置自最新补丁以来新增的选项。你可以跳过此设置，之后再修改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Review the new options or skip ahead if you're ready.",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "查看新选项，如果已准备好也可以直接跳过。",
+      "Source": "library"
+    },
+    {
+      "Original": "There are no new options to configure.",
+      "Context": "ConfigWizardWindow.DrawNothingNew",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有需要配置的新选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "You are already up to date with the latest plugin version. You can close this window.",
+      "Context": "ConfigWizardWindow.DrawNothingNew",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "你已是最新版本的插件。可以关闭此窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "步骤 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you want to see the following currencies:",
+      "Context": "ConfigWizardWindow.DrawCurrencySelection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你想要查看的以下货币：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you consider the following as collectable:",
+      "Context": "ConfigWizardWindow.DrawCollectableTypeSelection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你认为属于收藏品的以下内容：",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows you if you can buy collectables with it.",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "显示该货币能否用于购买收藏品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show collectables",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "You can have a little info in the main window when you are still missing collectables from that currency.",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当该货币仍有未收集的收藏品时，你可以在主窗口中看到一些提示信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show missing collectables in the main window",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在主窗口中显示未收集的收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "If you don't want to see specific item you can deselect them here and they won't show up.",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "如果你不想看到特定物品，可以在此取消选择，它们将不再显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you want to see sellable items:",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_2Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你想要查看的可出售物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show items eligible for sale",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_2Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示可出售的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Currency Spender automatically when you open the ingame Currency window:",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_3Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开游戏内货币窗口时自动打开货币消费助手：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open automatically with the Currency window",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_3Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "随货币窗口自动打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum sales for the sellable table (0 = disable)",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_4Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可出售物品列表的最低成交量（0 表示停用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum sales",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_4Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最低销售额",
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a loading screen.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "加载界面时会隐藏所有窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in loading screens",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载界面时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a duty.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "任务中时会隐藏所有窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in duties",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在任务中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in combat.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "战斗中时会隐藏所有窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in combat",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在战斗中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a cutscene.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "过场动画时会隐藏所有窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in cutscenes",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在过场动画中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Will highlight the NPC when marking the flag or teleporting.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "标记旗帜或传送时会高亮 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight NPC",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Will highlight the menus where to find the item when marking the flag or teleporting.",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "标记旗帜或传送时会高亮可找到该物品的菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight Menus",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add newest upgrade items and remove old ones to the \"Items of Interest\"",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动将最新的升级物品添加到“关注物品”并移除旧物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add/remove upgrade items",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "自动添加/移除升级物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Third party plugins detected. You can enable them here, to make use of them.",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "检测到第三方插件。你可以在此启用它们以使用其功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Lifestream to teleport closer to your target.",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 Lifestream 以传送到更靠近目标的位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable vnavmesh to path you to your target.",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 vnavmesh 以引导步廊至你的目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Societal currencies now have their own dedicated tab.",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "社会货币现在拥有独立的标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Societies tab",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示友好部族页签",
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide items that require an achievement or quest you have not completed yet.",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_1Steps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "隐藏需要完成尚未达成的成就或任务才能兑换的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide unobtainable items",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_1Steps",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏无法获得的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Please login before using this Plugin!",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "请先登录游戏再使用此插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cur.",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Currency",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing Collectables",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Translated": "缺少收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "% full",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "% 满",
+      "Source": "library"
+    },
+    {
+      "Original": "Spend it!##",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Translated": "花掉它！",
+      "Source": "library"
+    },
+    {
+      "Original": "Currency overlay",
+      "Context": "CurrencyOverlay..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "货币悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Currency Spender",
+      "Context": "CurrencyOverlay.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "打开货币消费",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Context": "DebugMainTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "DebugMainTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": " - Debug###",
+      "Context": "DebugWindow..ctor",
+      "PreserveID": false,
+      "Translated": " - 调试",
+      "Source": "library"
+    },
+    {
+      "Original": "DebugTabs",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Translated": "调试标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Debug Tab",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "主调试标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "1. Select the desired currency and click the button to open the spending window.",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "1. 选择要使用的货币，然后点击按钮打开兑换窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "2. Collectables, ventures, and sellable items will be displayed.",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "2. 将显示收藏品、探险和可出售物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "3. Ventures and collectables can be toggled in the settings.",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "3. 探险和收藏品可在设置中切换。",
+      "Source": "library"
+    },
+    {
+      "Original": "4. Button 'Flag' will open your map with a map marker to the vendor. Button 'TP' will teleport you to the nearest aetheryte and also places a flag marker on your map",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "4. 按钮“标记”将打开你的地图并在地图上标记商人位置。按钮“传送”将把你传送到最近的以太之光，并在地图上放置标记",
+      "Source": "library"
+    },
+    {
+      "Original": "If your current Shared FATE rank cannot be retrieved, a warning will appear in the main tab. Simply click the button to open the shared FATE rank screen to allow the plugin to gather the necessary information.",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "如果无法获取您当前的共享 FATE 等级，主标签页中会出现警告。只需点击按钮打开共享 FATE 等级界面，即可让插件收集所需信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "The current shared FATE ranks could not be fetched. Please click the button below:",
+      "Context": "MainTab.DrawPreamble",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "无法获取当前的共享FATE等级。请点击下方按钮：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open shared FATE window",
+      "Context": "MainTab.DrawPreamble",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开共享FATE窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "MainTabWindow",
+      "Context": "MainTabWindow..ctor",
+      "PreserveID": false,
+      "Translated": "主标签窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Instructions",
+      "Context": "MainTabWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "MainTabs",
+      "Context": "MainTabWindow.Draw",
+      "PreserveID": false,
+      "Translated": "主标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Open settings window",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "SpendingWindow",
+      "Context": "SpendingWindow..ctor",
+      "PreserveID": false,
+      "Translated": "消费窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: CurrencyId: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "调试：货币ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: CollectableItems: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "调试：收藏品： ",
+      "Source": "library"
+    },
+    {
+      "Original": " | SellableItems: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": " | 可出售物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "ItemsOfInterest: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "关注物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: Storm: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "调试：混沌波动： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Serpent: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": " 双蛇党： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Flame: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": " 恒辉队： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: GlueToMainWindow: ",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Translated": "调试：吸附到主窗口： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Some items cannot be purchased yet due to GC rankings... So they will not be displayed here.",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "部分物品因军队军衔无法购买……因此不会在此显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Some items cannot be purchased yet due to shared FATE rankings... So they will not be displayed here.",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "部分物品因共享FATE等级无法购买……因此不会在此显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing can be displayed. Please check your settings. Especially the minimum sales.",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "无法显示任何内容。请检查你的设置。尤其是最低销售额。",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement data not loaded yet. Some items may be hidden incorrectly.",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "成就数据尚未加载。部分物品可能会被错误隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Achievement Window",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开成就窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Context": "SpendingWindow.BeginItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "死亡诱惑",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "SpendingWindow.BeginItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy item name",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied item name to clipboard",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已复制物品名称到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Create item link",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "创建物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Item link created",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已创建物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "\nCat: ",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Translated": "\n类别： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopId: ",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Translated": "\n商店ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nNPCName: ",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Translated": "\nNPC名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Can buy items of interest:",
+      "Context": "SpendingWindow.DrawItemsOfInterest",
+      "PreserveID": false,
+      "Translated": "可购买的相关物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Can buy ventures:",
+      "Context": "SpendingWindow.DrawVentures",
+      "PreserveID": false,
+      "Translated": "可购买探险币：",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected collectables not yet registered:",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Translated": "已选收藏品尚未登记：",
+      "Source": "library"
+    },
+    {
+      "Original": "\nCollectableType: ",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Translated": "\n收藏品类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nIsUnlocked: ",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Translated": "\n是否解锁： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopType: ",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Translated": "\n商店类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopName: ",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Translated": "\n商店名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No sellable items found. Please also check your minimum sales setting.",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "未找到可出售的物品。请同时检查你的最低出售设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Items eligible for sale on the marketboard:",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Translated": "可在市场板出售的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Sales",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "出售",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Sells for",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "售价",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "\nName: ",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Translated": "\n名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShop:",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Translated": "\n商店：",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopType:",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Translated": "\n商店类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "\nNpcName: ",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Translated": "\nNPC名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Force refresh Universalis",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "强制刷新 Universalis",
+      "Source": "library"
+    },
+    {
+      "Original": "Glue to the main window",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "吸附到主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Unglue from the main window",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从主窗口取消吸附",
+      "Source": "library"
+    },
+    {
+      "Original": "If you have suggestions or feature requests, feel free to open an issue on the repository.",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "如果你有建议或功能需求，欢迎在仓库中提交 issue。",
+      "Source": "library"
+    },
+    {
+      "Original": "Developed with",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Special thanks to:",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "特别感谢：",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub repository",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "GitHub 仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "If you don't want to see specific currencies you can deselect them here and they won't show up.",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "如果你不想看到特定货币，可以在此取消勾选，它们将不再显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide currencies you currently don't own",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏你当前未持有的货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Select which currencies you want to see:",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你想看到的货币：",
+      "Source": "library"
+    },
+    {
+      "Original": "CurrentMapId: ",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "当前地图 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "CurrentTerritoryId: ",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "当前区域ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "GCRankings:",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "军衔排名：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Rank:",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "FATE 等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Debug Window",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "打开调试窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Current NpcId: ",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前 NPC ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy NpcId",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "复制 NPC ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Target",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "复制目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Locations without a target: ",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无目标的位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "TP##",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Will show a 'Open Currency Spender' button when the in-game currency window is opened.",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当游戏内货币窗口打开时，显示“打开货币消费”按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show button",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Will open Currency Spender when the in-game currency window is opened.",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当游戏内货币窗口打开时，自动打开货币消费。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open automatically",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Hightlight NPC",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Hightlight Menus",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Will glue the spending window to the main window.",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将消费窗口吸附到主窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Glue to main window",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "吸附到主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Will glue the spending window to the left or right side of the main window.",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将消费窗口吸附到主窗口的左侧或右侧。",
+      "Source": "library"
+    },
+    {
+      "Original": "Glue spending window to the side",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "吸附消费窗口到侧边",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the config wizard again for the last version.",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "重新打开最新版本的设置向导。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open config wizard",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开设置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows you if you can buy ventures with it.",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "显示是否可以用它购买探险币。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ventures",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示探险币",
+      "Source": "library"
+    },
+    {
+      "Original": "Select which items you see as collectables:",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你视为收藏品的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select the thousand separator",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择千位分隔符",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an Option",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "请选择一项",
+      "Source": "library"
+    },
+    {
+      "Original": "Dont turn it on, unless you know what you are doing...",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "除非你知道自己在做什么，否则不要开启……",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Mode",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "调试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays table if you can buy items of interest with current currency:",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "显示是否可以用当前货币购买关注的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show items of interest",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Translated": "显示关注的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add newest upgrade items and remove old ones.",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动添加最新的升级物品并移除旧的。",
+      "Source": "library"
+    },
+    {
+      "Original": "Items to add to the list:",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "要加入列表的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current items of interest:",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前关注的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove##",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Show societal currencies",
+      "Context": "SocietiesConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示社会货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Select which societal currencies you want to see:",
+      "Context": "SocietiesConfigTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择你想查看的社会货币：",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Lifestream when possible.",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尽可能使用 Lifestream。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Lifestream",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Use vnavmesh when possible.",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尽可能使用 vnavmesh。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use vnavmesh",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 vnavmesh",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest \"",
+      "Context": "ItemHelper.GetPrereqText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务“",
+      "Source": "library"
+    },
+    {
+      "Original": " and ",
+      "Context": "ItemHelper.GetPrereqText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 和 ",
+      "Source": "library"
+    },
+    {
+      "Original": "You need to spin the wheel to get the items.",
+      "Context": "UiHelper.RightAlignWithIcon",
+      "PreserveID": false,
+      "Translated": "你需要转动轮盘来获取物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement data not loaded yet. Open the Achievement window to check status.",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "成就数据尚未加载。请打开成就窗口查看状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Requirement already fulfilled:",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已满足条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement not yet completed:",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "成就尚未完成：",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest not yet completed:",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "任务尚未完成：",
+      "Source": "library"
+    },
+    {
+      "Original": "Flag##sellable-",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Translated": "标记",
+      "Source": "library"
+    },
+    {
+      "Original": "The flag will only show up, if you are here: ",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Translated": "仅当你位于此处时才会显示标记： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nShowing teleport point instead: ",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Translated": "\n改为显示传送点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "TP##sellable-",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "You need to travel there first manually.\nWill teleport to nearest Aetheryte instead.",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Translated": "你需要先手动前往那里。\n将改为传送至最近的以太之光。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you like ",
+      "Context": "KofiBanner.get_SmallPatreonButtonTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "如果你喜欢 ",
+      "Source": "library"
+    },
+    {
+      "Original": ",\nplease consider supporting its developer via Ko-fi.",
+      "Context": "KofiBanner.get_SmallPatreonButtonTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "，\n请考虑通过 Ko-fi 支持其开发者。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to read name",
+      "Context": "ShopItem.get_Name",
+      "PreserveID": false,
+      "Translated": "无法读取名称",
+      "Source": "library"
+    },
+    {
+      "Original": "About0",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于0",
+      "Source": "library"
+    },
+    {
+      "Original": "About1-1",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于1-1",
+      "Source": "library"
+    },
+    {
+      "Original": "About1-2",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于1-2",
+      "Source": "library"
+    },
+    {
+      "Original": "About1-3",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于1-3",
+      "Source": "library"
+    },
+    {
+      "Original": "About3",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于3",
+      "Source": "library"
+    },
+    {
+      "Original": "Thanks-",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "鸣谢-",
+      "Source": "library"
+    },
+    {
+      "Original": "About4",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Translated": "关于4",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PyonCam",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Create new preset.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "创建新预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Move selected preset up.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "将所选预设上移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Move selected preset down.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "将所选预设下移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the selected preset to clipboard.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "将所选预设复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste preset from clipboard.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "从剪贴板粘贴预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove selected preset.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "移除所选预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ctrl+LClick sliders to input values manually.",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "按住 Ctrl 并左键点击滑块，可手动输入数值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "\nMove: ",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "\n移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure Freecam Keybinds",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "设置自由镜头快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "ConfigWindow.DrawPresetList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "No Presets Available",
+      "Context": "ConfigWindow.DrawPresetList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "暂无可用预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Click the + button above to create a new preset.",
+      "Context": "ConfigWindow.DrawPresetList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "点击上方的加号创建新预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable this preset",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "启用此预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Name",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "预设名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera follows head rotation.",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "镜头跟随头部转动。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

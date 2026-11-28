@@ -1,0 +1,965 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ActionTimelineReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Support the developer on Ko-fi",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在 Ko-fi 上支持开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation Lock Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "动作硬直颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Background Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "时间条背景色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Canceled Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "咏唱中断颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Finished Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "咏唱完成颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast In Progress Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "咏唱进行中颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Bar Height",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloatRange2",
+      "Translated": "公共复唱条高度",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Color",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "公共复唱条边框颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Round",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "公共复唱条圆角",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Thickness",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "公共复唱条边框粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Animation Lock Time",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示动作硬直时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Status Line",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示状态线",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Line Height",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "状态线高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Any GCD clip longer than this will be capped",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "超过此时长的卡 GCD 记录将按上限显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Time (seconds)",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "时长上限（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "This can be used filter out \"false positives\" due to latency or other factors. Any GCD clipping detected that is shorter than this value will be ignored.\nIt is strongly recommended that you test out different values and find out what works best for your setup.",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "可设置阈值以过滤网络延迟等因素造成的误判。卡 GCD 时长低于该值的记录会被忽略。\n建议尝试不同阈值，找到适合当前环境的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "This only shown when timeline is not rotation.",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在时间轴未启用循环显示时可见。",
+      "Source": "library"
+    },
+    {
+      "Original": "Threshold (ms)",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "阈值（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add One Timeline",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新增时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Timeline Data",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除全部时间轴数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Clears all recorded timeline data and caches. This will free memory and reset the timeline.",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除所有时间轴记录和缓存，释放内存并重置时间轴。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clipping Range",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragIntRange2",
+      "Translated": "卡 GCD 范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't record these statuses.",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "忽略这些状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide In Cutscene",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "过场动画中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide In Quest Event",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "任务剧情中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Print Clipping Time On Chat",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将卡 GCD 时长输出到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Record Data",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Record Target Status",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录目标状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only In Combat",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在战斗中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only In Duty",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在副本中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Showed Statuses",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "显示的状态",
+      "Source": "library"
+    },
+    {
+      "Original": "[ActionTimelineReborn] All timeline data cleared.",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[ActionTimelineReborn] 已清除全部时间轴数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Drawing Center offset",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "绘制中心偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Horizonal",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "水平排列",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Reverse",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "反向排列",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Rotation",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "循环显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked Color",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "锁定时颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset Time (seconds)",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "时间偏移（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Size per second",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "每秒宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "The Offset time of rotation.",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "循环显示的时间偏移。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the advanced time about action using",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "技能提前显示的时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the width of every second drawn on the window.",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每秒在时间轴窗口上占用的宽度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked Color",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "解锁时颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Center Line Color",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "中心线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Center Line Width",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "中心线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Divide By Seconds",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按秒划分",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Line Color",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "网格线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Line Width",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "网格线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Center Line",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示中心线",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Text",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Line Color",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "起始线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Line Width",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "起始线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Divide By Seconds",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按秒细分",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Count",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "次刻度数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Line Color",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "次刻度线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Line Width",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "次刻度线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Attack Icon Size",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "自动攻击图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Attack Vertical Offset",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "自动攻击垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Color",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "暴击颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Direct Color",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "直击暴击颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct Color",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "直击颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Iff GCD Vertical Offset",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "非GCD垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Off GCD Icon Size",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "能力技图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Auto Attacks",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示自动攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Damage Type",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示伤害类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Off GCD",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示能力技",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Status Gain Lose",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示状态的获得与消失",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Gain Color",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "获得状态颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icon Alpha",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "状态图标不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icon Size",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "状态图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Lose Color",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "状态消失颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Offset",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "状态偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar##Timeline_Bar",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "时间条",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Clipping##Timeline_GCD",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "卡 GCD",
+      "Source": "library"
+    },
+    {
+      "Original": "General##Timeline_General",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Grid##Timeline_Grid",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Icons##Timeline_Icons",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure to remove this timeline?",
+      "Context": "SettingsWindow.RemoveValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "确定移除这条时间轴？",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to remove this timeline.",
+      "Context": "SettingsWindow.RemoveValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击移除这条时间轴。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait for a second.",
+      "Context": "SettingsWindow.RemoveValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请稍候。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clipping: ",
+      "Context": "TimelineManager.ActionFromSelf",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "卡 GCD 时长： ",
+      "Source": "library"
+    },
+    {
+      "Original": "ms (",
+      "Context": "TimelineManager.ActionFromSelf",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "毫秒 (",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline: ",
+      "Context": "TimelineWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "时间轴： ",
+      "Source": "library"
+    },
+    {
+      "Original": "ms",
+      "Context": "TimelineWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "毫秒",
+      "Source": "library"
+    },
+    {
+      "Original": " stacks",
+      "Context": "TimelineWindow.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 层",
+      "Source": "library"
+    },
+    {
+      "Original": "1 stack",
+      "Context": "TimelineWindow.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "1 层",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Timeline",
+      "Context": "SettingsWindow.DrawBrand",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "技能时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions show up here as you use them.",
+      "Context": "TimelineWindow.DrawEmpty",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "使用技能后，这里会显示技能记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Casting now",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在咏唱",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical direct hit",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "直击暴击",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical hit",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暴击",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct hit",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "直击",
+      "Source": "library"
+    },
+    {
+      "Original": "Gained ",
+      "Context": "TimelineWindow.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获得了 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Lost ",
+      "Context": "TimelineWindow.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "失去了 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown action",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知技能",
+      "Source": "library"
+    },
+    {
+      "Original": "an unknown status",
+      "Context": "TimelineWindow.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知状态",
+      "Source": "library"
+    },
+    {
+      "Original": "now",
+      "Context": "TimelineWindow.DrawNowLine",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "现在",
+      "Source": "library"
+    },
+    {
+      "Original": "s ago",
+      "Context": "TimelineWindow.DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "秒前",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Opens the ActionTimelineReborn configuration window.",
+      "Context": "[属性] CmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "打开 ActionTimelineReborn 设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock all windows",
+      "Context": "[属性] SubCmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "锁定所有窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock all windows",
+      "Context": "[属性] SubCmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "解锁所有窗口",
+      "Source": "library"
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EnemyListDebuffs",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Toggles config window.",
+      "Context": "EnemyListDebuffsPlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Interval (ms)",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "更新间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Interval between status updates in milliseconds",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "两次状态更新之间的间隔，以毫秒为单位",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Config to Defaults",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "While config is open, test nodes are displayed to help with configuration.",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设置窗口打开时会显示测试图标，方便调整效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Node Group",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "图标组",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill From Right",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从右向左排列",
+      "Source": "library"
+    },
+    {
+      "Original": "X Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Y Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Node Spacing",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "图标间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Scale",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "整体缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Node",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Try and maintain a 3:4 ratio of Icon Width:Icon Height for best results.",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "建议将图标的宽高比保持为 3:4。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon X Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "图标水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Y Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "图标垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Width",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "图标宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Height",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "图标高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration X Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "持续时间水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Y Offset",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "持续时间垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Font Size",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "持续时间字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Padding",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "持续时间文字边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Text Color",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "持续时间文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Edge Color",
+      "Context": "EnemyListDebuffsPluginUI.UiBuilder_OnBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "持续时间描边颜色",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

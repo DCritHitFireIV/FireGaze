@@ -1,0 +1,1427 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SonarPlugin-preview",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " minutes.",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 分钟。",
+      "Source": "library"
+    },
+    {
+      "Original": "* = required",
+      "Context": "SupportWindow.DrawForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "* 为必填项",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Logs or Additional Text",
+      "Context": "SupportWindow.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "添加日志或补充说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Add the following code into your chracter's lodestone profile bio:",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请在角色的 Lodestone 个人简介中添加以下代码：",
+      "Source": "library"
+    },
+    {
+      "Original": "All timers are in seconds. CTRL+Click to input directly.",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "所有时间均以秒计。按住 Ctrl 并点击可直接输入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "SupportWindow.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "SupportWindow.DrawResponseWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Count: ",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Report Jurisdiction",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "默认报告范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已断开",
+      "Source": "library"
+    },
+    {
+      "Original": "Exception details",
+      "Context": "SupportWindow.DrawResponseWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "异常详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Display Timers",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "临危受命显示时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Selection",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "选择临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Fates Display Limit",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "临危受命显示数量上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Granular Hunt Reporting Settings",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.Checkbox",
+      "Translated": "狩猎报告详细设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt Display Timers",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "狩猎显示时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt Report Notifications",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "狩猎报告通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunts Display Limit",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt",
+      "Translated": "狩猎显示数量上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunts: ",
+      "Context": "SonarTrackerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "狩猎： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Jurisdiction",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "报告范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Lodestone Verification is needed for your currently logged in character:",
+      "Context": "LodestoneVerifyWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前登录角色需要完成 Lodestone 验证：",
+      "Source": "library"
+    },
+    {
+      "Original": "Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请先公开 Lodestone 资料页以完成验证。验证完成后即可改回私密。",
+      "Source": "library"
+    },
+    {
+      "Original": "Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请将角色的 Lodestone 资料页设为公开并允许搜索。验证完成后即可改回私密。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Lodestone Profile",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Lodestone 角色资料页",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Lodestone Website",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Lodestone 网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Sounds",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Name",
+      "Context": "SupportWindow.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "玩家姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Please contact Sonar support for assistance.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请联系 Sonar 支持人员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Provide character and world name",
+      "Context": "SupportWindow.DrawForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请填写角色姓名和服务器名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnect",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Send",
+      "Context": "SupportWindow.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "发送",
+      "Source": "library"
+    },
+    {
+      "Original": "Send to chat",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "发送到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Separate Rank SS and Minions from Rank S",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.Checkbox",
+      "Translated": "将 SS 级及其随从与 S 级分开显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Signal Sonar to attempt reconnecting to server",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "让 Sonar 尝试重新连接服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Configuration",
+      "Context": "SonarConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Sonar 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Lodestone Verification",
+      "Context": "LodestoneVerifyWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Sonar Lodestone 身份验证",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Status",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Sonar 状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Tracker (UNDER DEVELOPMENT!!!)",
+      "Context": "SonarTrackerWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Sonar 追踪器（开发中）",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar will keep trying to reconnect automatically",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "Sonar 将持续自动尝试重连",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "声音",
+      "Source": "library"
+    },
+    {
+      "Original": "This verification is a requirement.",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "必须完成此项验证。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time since completion or failure",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "完成或失败后",
+      "Source": "library"
+    },
+    {
+      "Original": "Time since death (S and A)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt",
+      "Translated": "死亡后（S 级和 A 级）",
+      "Source": "library"
+    },
+    {
+      "Original": "Time since last update",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "上次更新后",
+      "Source": "library"
+    },
+    {
+      "Original": "Time since last update (B)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt",
+      "Translated": "上次更新后（B 级）",
+      "Source": "library"
+    },
+    {
+      "Original": "Time since last update (S and A)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt",
+      "Translated": "上次更新后（S 级和 A 级）",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "SupportWindow.DrawForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "VersionUtils.GetSonarPluginVersion",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unspecified Reason.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未说明原因。",
+      "Source": "library"
+    },
+    {
+      "Original": "Verification failed",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "验证失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Verification in progress",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在验证",
+      "Source": "library"
+    },
+    {
+      "Original": "Verification timeout",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "验证超时",
+      "Source": "library"
+    },
+    {
+      "Original": "Verify",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "验证",
+      "Source": "library"
+    },
+    {
+      "Original": "You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.",
+      "Context": "LodestoneVerifyWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可在 /sonarconfig 的「通用」页中通过 Lodestone 设置隐藏此对话框。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your character is currently not verified.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前角色尚未通过验证。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your character lodestone profile is not found.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未找到此角色的 Lodestone 资料页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your character lodestone profile is private.",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "角色的 Lodestone 资料页已设为私密。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "SonarConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "all",
+      "Context": "RelayTrackerViews..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} fate(s) not set to default jurisdiction",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有 {0} 个临危受命未使用默认报告范围",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} fate(s) selected to chat",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已为 {0} 个临危受命启用聊天提示",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} fate(s) selected to sound",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已为 {0} 个临危受命启用声音提示",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "A Rank Sounds",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntARankSounds",
+      "Translated": "A 级狩猎提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "A Realm Reborn",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::ARealmReborn",
+      "Translated": "重生之境",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AboutTab",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor ID",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::ActorId",
+      "Translated": "角色 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Advanced",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Alert Volume",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AlertVolume",
+      "Translated": "提示音量",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::AllTab; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::All",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetical",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Alphabetical",
+      "Translated": "按字母顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Alt Middle Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AltMiddleClick",
+      "Translated": "Alt + 鼠标中键",
+      "Source": "library"
+    },
+    {
+      "Original": "Alt Right Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::AltRightClick",
+      "Translated": "Alt + 鼠标右键",
+      "Source": "library"
+    },
+    {
+      "Original": "Always",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.SuppressVerification::Always",
+      "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "B Rank Sounds",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntBRankSounds",
+      "Translated": "B 级狩猎提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Reports Configuration",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatReportsConfig",
+      "Translated": "聊天报告设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Chinese",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Chinese",
+      "Translated": "中文",
+      "Source": "library"
+    },
+    {
+      "Original": "Chinese Simplified",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarLanguage::ChineseSimplified",
+      "Translated": "简体中文",
+      "Source": "library"
+    },
+    {
+      "Original": "Chinese Traditional",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarLanguage::ChineseTraditional",
+      "Translated": "繁体中文",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Settings",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ClickSettingsHeader",
+      "Translated": "点击操作设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Presets",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ColorPresets",
+      "Translated": "预设配色",
+      "Source": "library"
+    },
+    {
+      "Original": "Contact Sonar Support should this appear",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::UnknownTooltip",
+      "Translated": "若出现此提示，请联系 Sonar 支持人员",
+      "Source": "library"
+    },
+    {
+      "Original": "Contribute Fates",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeFates",
+      "Translated": "上报危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Contribute Hunts",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeHunts",
+      "Translated": "上报狩猎情报",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Flag",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Map",
+      "Translated": "设置地图标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Ctrl Middle Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CtrlMiddleClick",
+      "Translated": "Ctrl + 鼠标中键",
+      "Source": "library"
+    },
+    {
+      "Original": "Ctrl Right Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CtrlRightClick",
+      "Translated": "Ctrl + 鼠标右键",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom sound file",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFilePrompt",
+      "Translated": "自定义音效文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Datacenter",
+      "Translated": "大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center ID",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Datacenter",
+      "Translated": "大区 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DebugTab; [属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Debug; [属性] EnumLocAttribute Sonar.Enums.SonarBuildEnvironment::Debug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DefaultColorPreset; [属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Default; [属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Default; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Default; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Chat Alerts during Duties",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutyDisableChatAlerts",
+      "Translated": "副本中停用聊天提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Sounds Alerts during Duties",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutyDisableSoundAlerts",
+      "Translated": "副本中停用声音提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Duration",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Settings",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DutySettingsHeader",
+      "Translated": "副本设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable list clickthrough",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ListClickthrough",
+      "Translated": "允许鼠标穿透列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable tab bar clickthrough",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::TabsClickthrough",
+      "Translated": "允许鼠标穿透标签栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable window clickthrough",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::EnableClickthrough",
+      "Translated": "允许鼠标穿透窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Language; [属性] EnumLocAttribute Sonar.Localization.__LocMeta::Language; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::English; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::English",
+      "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Export",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Fallbacks",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::ExportFallbacks",
+      "Translated": "导出备用设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Export language file",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::ExportPrompt",
+      "Translated": "导出语言文件",
+      "Source": "library"
+    },
+    {
+      "Original": "FATEs",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FatesTab",
+      "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Complete",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::CompleteFateColor",
+      "Translated": "临危受命：已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Failed",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FailedFateColor",
+      "Translated": "临危受命：已失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Preparing",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PreparingFateColor",
+      "Translated": "临危受命：准备中",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Progress",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ProgressFateColor",
+      "Translated": "临危受命：进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Running",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::RunningFateColor",
+      "Translated": "临危受命：进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate - Unknown",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::UnknownFateColor",
+      "Translated": "临危受命：未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Sounds",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FateSounds",
+      "Translated": "临危受命提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Feature Unlocked",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResFeatureUnlocked",
+      "Translated": "功能已解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "French",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::French; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::French",
+      "Translated": "法语",
+      "Source": "library"
+    },
+    {
+      "Original": "Game sound effect",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::GameSound",
+      "Translated": "游戏音效",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::GeneralTab",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "German",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::German; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::German",
+      "Translated": "德语",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Title Bar",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HideTitleBar",
+      "Translated": "隐藏标题栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt - Dead",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DeadHuntColor",
+      "Translated": "狩猎目标：已死亡",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt - Healthy",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HealthyHuntColor",
+      "Translated": "狩猎目标：未交战",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt - Pulled",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PulledHuntColor",
+      "Translated": "狩猎目标：已开战",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunts",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntsTab",
+      "Translated": "狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Import",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import language file",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::ImportPrompt",
+      "Translated": "导入语言文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Incoming Tell 1",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResIncomingTell1",
+      "Translated": "收到悄悄话 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Incoming Tell 2",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResIncomingTell2",
+      "Translated": "收到悄悄话 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Japanese",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Japanese; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Japanese",
+      "Translated": "日语",
+      "Source": "library"
+    },
+    {
+      "Original": "Jurisdiction",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Jurisdiction",
+      "Translated": "报告范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Korean",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Korean; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Korean",
+      "Translated": "韩语",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Language",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Found",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::LastFound; [属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastFound",
+      "Translated": "上次发现",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Healthy",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastHealthy",
+      "Translated": "上次正常运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Killed",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastKilled",
+      "Translated": "上次击杀",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::LastSeen",
+      "Translated": "上次出现时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Updated",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::LastUpdated",
+      "Translated": "最近更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Legacy sound",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Resource",
+      "Translated": "旧版音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Level",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Break Charged",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLimitBreakCharged",
+      "Translated": "极限槽已充满",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Break Unlocked",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLimitBreakUnlocked",
+      "Translated": "极限技已解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Load",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Localization Settings",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LocalizationHeader",
+      "Translated": "语言设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::LocationDetail",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock overlays",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LockOverlays",
+      "Translated": "锁定悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Lodestone Verification Settings",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::LodestoneHeader",
+      "Translated": "Lodestone 验证设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Manual; [属性] EnumLocAttribute Sonar.Relays.RelayType::Manual",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Middle Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::MiddleClick",
+      "Translated": "鼠标中键",
+      "Source": "library"
+    },
+    {
+      "Original": "Minified export",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::MinifiedExport",
+      "Translated": "紧凑格式导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Name",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.SuppressVerification::None",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::None; [属性] EnumLocAttribute SonarPlugin.Config.KeyModifier::None; [属性] EnumLocAttribute Sonar.Enums.HuntRank::None; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Applicable",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::NotApplicable",
+      "Translated": "不适用",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResNotification",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::Opacity",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Original",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::OriginalColorPreset",
+      "Translated": "初始",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay Visible by default",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::OverlaysVisibleByDefault",
+      "Translated": "默认显示悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Sound",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::PlaySound",
+      "Translated": "播放音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Plugin",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Preferred City State",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PreferredCityState",
+      "Translated": "首选城邦",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Presets",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Progress",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Region",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Region",
+      "Translated": "地区",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Remove",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove hunt from the list until next update",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailRemoveToolTip",
+      "Translated": "暂时从列表移除该狩猎目标，直到下次更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::RightClick",
+      "Translated": "右键点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Run Setup",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::RunSetup",
+      "Translated": "运行设置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Running",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "S Rank Sounds",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HuntSRankSounds",
+      "Translated": "S 级狩猎提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Save",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Select file...",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFile",
+      "Translated": "选择文件…",
+      "Source": "library"
+    },
+    {
+      "Original": "Send to Chat",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Chat",
+      "Translated": "发送到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Set flag and open map",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailMapToolTip",
+      "Translated": "设置地图标记并打开地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Shift Middle Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ShiftMiddleClick",
+      "Translated": "Shift + 鼠标中键",
+      "Source": "library"
+    },
+    {
+      "Original": "Shift Right Click",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ShiftRightClick",
+      "Translated": "Shift + 鼠标右键",
+      "Source": "library"
+    },
+    {
+      "Original": "Show coordinates in chat window",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailFlagToolTip",
+      "Translated": "在聊天窗口中显示坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Show death reports",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableDeaths",
+      "Translated": "显示死亡报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Show reports in game chat",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatReportsEnabled",
+      "Translated": "在游戏聊天栏中显示报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Color Scheme",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ColorSettingsHeader",
+      "Translated": "Sonar 配色方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar Configuration",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::WindowTitle",
+      "Translated": "Sonar 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sorting Mode",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SortingMode",
+      "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound Alerts Configuration",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SoundAlertsConfig",
+      "Translated": "声音提醒设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound files",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::SelectFilePromptSoundFiles",
+      "Translated": "声音文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Sounds",
+      "Translated": "声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Teleport",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to Closest Aetheryte",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailTeleportToolTip",
+      "Translated": "传送至最近的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Track All Fates",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::TrackAllFates",
+      "Translated": "追踪所有危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Track All Hunts",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::TrackAllHunts",
+      "Translated": "追踪所有狩猎目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Undefined",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Undefined",
+      "Translated": "未定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayStatus::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayType::Unknown; [属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Use crossworld icon when report is in another world",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableCwIcon",
+      "Translated": "报告来自其他服务器时显示跨服图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Use italic font",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ChatEnableItalics",
+      "Translated": "使用斜体",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::World; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::World",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "World ID",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::World",
+      "Translated": "服务器 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Zone; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Zone",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone ID",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Zone",
+      "Translated": "区域 ID",
+      "Source": "library"
+    }
+  ]
+}

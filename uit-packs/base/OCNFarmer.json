@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "OCNFarmer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Debug",
+      "Context": "Plugin.DrawBDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Omni Verification",
+      "Context": "Plugin.DrawVerificationHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Omni 验证",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

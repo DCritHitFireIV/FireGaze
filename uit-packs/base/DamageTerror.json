@@ -1,0 +1,1608 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DamageTerror",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Accent Color",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "强调色",
+      "Source": "library"
+    },
+    {
+      "Original": "Accent color",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "强调色",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Color",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "启用时的颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "MeterTabBasicsSection..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "All done",
+      "Context": "ColumnWizardWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "全部完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance",
+      "Context": "MeterTabBasicsSection..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "团队",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount healed by the skill",
+      "Context": "SkillsTabRenderer.DrawSkillTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "该技能的治疗量",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Arrange order",
+      "Context": "ColumnWizardWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "调整顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Arrange the enabled columns - the top of this list is the leftmost column on the meter.",
+      "Context": "ColumnWizardWindow.DrawOrderStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "调整已启用列的顺序，列表顶端的列会显示在统计面板最左侧。",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "ColumnWizardWindow.DrawNavRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Background",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Background Image",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背景图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Background color",
+      "Context": "SelectionBarSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Font Size",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "条形文字字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar background",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "条形背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar font size",
+      "Context": "BarsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "条形文字字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Base Classes",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "基础职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse...",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Width",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "按钮宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "EncounterHeaderComponent.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic MiniParse style — sharp bars, dark background, compact layout.",
+      "Context": "BuiltInPresets.Kagerou",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "经典 MiniParse 样式，采用直角条形、深色背景和紧凑布局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Popout Window",
+      "Context": "MainWindow.DrawMeterTabButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "关闭弹出窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Window",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "关闭窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Colorful rounded bars with unique per-job colors and vibrant styling.",
+      "Context": "BuiltInPresets.MopiMopi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每种职业都有独立配色，条形圆润，色彩鲜明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors first - the preview meter beside this window updates as you pick.",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "先选颜色。选择时，旁边的统计预览会实时更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns",
+      "Context": "MeterTabContentSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "列",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns set. Per-column extras - custom labels, formats, value colors, and widths - live under Settings -> Appearance.",
+      "Context": "ColumnWizardWindow.DrawFinishStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "列已设置完成。各列的自定义名称、格式、数值颜色和宽度可在「设置 → 外观」中调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Context": "WizardFinishNav.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected (IPC)",
+      "Context": "DataService.MarkIpcConnected",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接（IPC）",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected (WebSocket)",
+      "Context": "DataService.ConnectWebSocketAsync",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接（WebSocket）",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting via IPC...",
+      "Context": "StartAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在通过 IPC 连接……",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting via WebSocket...",
+      "Context": "ConnectWebSocketAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在通过 WebSocket 连接……",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard!",
+      "Context": "EncounterHistoryTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已复制到剪贴板！",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard",
+      "Context": "EncounterHistoryTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "BuffsTabRenderer.DrawStatusTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical !",
+      "Context": "GraphRenderHelper.DrawCritMarkerLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "暴击！",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Direct Hit !!!",
+      "Context": "GraphRenderHelper.DrawCritMarkerLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "直暴！！！",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Direct Hit %",
+      "Context": "ColumnLabels..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "直暴率",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Hit %",
+      "Context": "ColumnLabels..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暴击率",
+      "Source": "library"
+    },
+    {
+      "Original": "Current: ",
+      "Context": "FontSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "FontService.ApplyFontSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom color for your name",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为自己的姓名指定颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cut encounter",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "分割战斗记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage %",
+      "Context": "ColumnLabels..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "伤害占比",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage Terror - Columns###DamageTerrorColumns",
+      "Context": "ColumnWizardWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Damage Terror 统计列",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage Terror - Customization###DamageTerrorCustomization",
+      "Context": "CustomizationWizardWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Damage Terror 外观设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage Terror — Setup###DamageTerrorSetup",
+      "Context": "FirstRunWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Damage Terror 初始设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage dealt by the skill",
+      "Context": "SkillsTabRenderer.DrawSkillTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "该技能造成的伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage numbers - the meter's bread and butter.",
+      "Context": "ColumnWizardWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "伤害数值是统计面板的主要内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "Data source",
+      "Context": "FirstRunWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "数据来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Data-dense table layout — all stats visible, compact rows, sharp edges.",
+      "Context": "BuiltInPresets.Ikegami",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "紧凑的数据表格，直角边框，同时显示全部统计。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Descending (highest first)",
+      "Context": "MeterTabSortSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "降序（从高到低）",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct Hit !!",
+      "Context": "GraphRenderHelper.DrawCritMarkerLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "直击！！",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct Hit %",
+      "Context": "ColumnLabels..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "直击率",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "MetricPicker.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Context": "DataService.Stop",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已断开",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeons",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration:",
+      "Context": "EncounterHistoryTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "持续时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable encounter replays",
+      "Context": "FirstRunWindow.DrawBehaviorStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用战斗回放",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to Clipboard",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "ColumnWizardWindow.DrawNavRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Finishing clears the sample data from the meter.",
+      "Context": "ColumnWizardWindow.DrawFinishStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "完成后将清除统计面板中的示例数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "First: where should combat data come from?",
+      "Context": "FirstRunWindow.DrawDataSourceStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "首先，选择战斗数据的来源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Font",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "字体",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Size",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Font size",
+      "Context": "GraphConfigBlock.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Found ",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已找到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Full Name",
+      "Context": "NameFormatSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "全名",
+      "Source": "library"
+    },
+    {
+      "Original": "Game-integrated look — desaturated per-job colors, subtle rounding, HUD-like feel.",
+      "Context": "BuiltInPresets.NextUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "贴近游戏界面的外观，采用低饱和度职业色和细微圆角。",
+      "Source": "library"
+    },
+    {
+      "Original": "Go to Live",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "返回实时统计",
+      "Source": "library"
+    },
+    {
+      "Original": "Header row",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "表头行",
+      "Source": "library"
+    },
+    {
+      "Original": "Healer",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Healing output and overheal.",
+      "Context": "ColumnWizardWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "治疗量与过量治疗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Height",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide delay (seconds)",
+      "Context": "FirstRunWindow.DrawHideOutOfCombatDemo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "隐藏延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide when out of combat",
+      "Context": "FirstRunWindow.DrawBehaviorStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "脱战后隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight local player bar",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "突出显示自己的统计条",
+      "Source": "library"
+    },
+    {
+      "Original": "Hit Count",
+      "Context": "SkillsTabRenderer.DrawSkillTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "命中次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Hits",
+      "Context": "ColumnLabels..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "命中次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Hover delay",
+      "Context": "TooltipSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "悬停延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Hovered Color",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "悬停颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "IINACT plugin (recommended)",
+      "Context": "FirstRunWindow.DrawDataSourceStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "IINACT 插件（推荐）",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon size",
+      "Context": "CustomizationWizardWindow.DrawIconsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon style",
+      "Context": "CustomizationWizardWindow.DrawIconsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "图标样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon-text padding",
+      "Context": "CustomizationWizardWindow.DrawIconsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标与文字间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Icons and Jobs",
+      "Context": "CustomizationWizardWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "图标与职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Image: ",
+      "Context": "AppearanceGeneralSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图像： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import File",
+      "Context": "EncounterHistoryTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入文件",
+      "Source": "library"
+    },
+    {
+      "Original": "In combat - meter visible",
+      "Context": "FirstRunWindow.DrawHideOutOfCombatDemo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "战斗中，统计面板可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "ItemsTabRenderer.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Job abbreviation before names",
+      "Context": "CustomizationWizardWindow.DrawIconsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在姓名前显示职业简称",
+      "Source": "library"
+    },
+    {
+      "Original": "Label offset X",
+      "Context": "GraphConfigBlock.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "标签水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Label offset Y",
+      "Context": "GraphConfigBlock.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "标签垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "PositionSizeSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Line thickness",
+      "Context": "GraphConfigBlock.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Window",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "锁定窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock meter position and size",
+      "Context": "FirstRunWindow.DrawPositionStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定统计面板的位置和大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock window position and size",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "锁定窗口的位置和大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimal horizontal bars — thin, rounded, highly transparent.",
+      "Context": "BuiltInPresets.Horizoverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "极简水平条，纤细、圆角且高度透明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Modern compact bars with warm tones and slight rounding.",
+      "Context": "BuiltInPresets.Ember",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暖色调的紧凑条形，边角略圆。",
+      "Source": "library"
+    },
+    {
+      "Original": "More stats",
+      "Context": "ColumnWizardWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更多统计",
+      "Source": "library"
+    },
+    {
+      "Original": "Name Color",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "名称颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Name color",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "姓名颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Name text",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "名称文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "ColumnWizardWindow.DrawNavRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "No columns enabled - go back and tick some first.",
+      "Context": "ColumnWizardWindow.DrawOrderStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未启用任何列。请返回上一步，先勾选要显示的列。",
+      "Source": "library"
+    },
+    {
+      "Original": "No combat data, go hit something!",
+      "Context": "MeterWindowHelper.RenderLayoutElements",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚无战斗数据，先去攻击一个目标吧！",
+      "Source": "library"
+    },
+    {
+      "Original": "No visible meter tabs found. Tabs are managed under Settings -> Tabs.",
+      "Context": "ColumnWizardWindow.NoTargetTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "找不到可见的统计标签页。请到「设置 → 标签页」管理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not connected",
+      "Context": "DataService..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Off: one color per role. On: a color for every job.",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭时按职能配色，开启时每个职业各用一种颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Window",
+      "Context": "MainWindow.DrawMeterTabButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在独立窗口中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open meter on plugin start",
+      "Context": "FirstRunWindow.DrawBehaviorStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "插件启动时打开统计面板",
+      "Source": "library"
+    },
+    {
+      "Original": "Open settings",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Padding bottom",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "下方边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Padding left",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "左侧边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Padding right",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "右侧边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Padding top",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "上方边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Only",
+      "Context": "MeterTabBasicsSection..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "仅小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste from Clipboard",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a look",
+      "Context": "FirstRunWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a tab",
+      "Context": "ColumnWizardWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Position & Size",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "位置与大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Position and size",
+      "Context": "FirstRunWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "位置与大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset",
+      "Context": "SampleDataPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "FormattingSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview:",
+      "Context": "ColumnFormatHelper.DrawColumnFormatPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "预览：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank number",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排名编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnect",
+      "Context": "FirstRunWindow.DrawDataSourceStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "EncounterHeaderComponent.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove this encounter?",
+      "Context": "EncounterHeaderComponent.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "移除此场战斗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Context": "FontSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore",
+      "Context": "GeneralTab.DrawRestoreConfirmPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "PositionSizeSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Separator color",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "分隔线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Separator line",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "分隔线",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Grid",
+      "Context": "GraphRenderHelper.DrawGraphContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Legend",
+      "Context": "GraphRenderHelper.DrawGraphContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示图例",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Value Labels",
+      "Context": "GraphRenderHelper.DrawGraphContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示数值标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Show header row",
+      "Context": "CustomizationWizardWindow.DrawMarkingsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示表头行",
+      "Source": "library"
+    },
+    {
+      "Original": "Show job icons",
+      "Context": "CustomizationWizardWindow.DrawIconsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示职业图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulate: in combat",
+      "Context": "FirstRunWindow.DrawHideOutOfCombatDemo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "模拟：战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "MeterTabSortSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by",
+      "Context": "MeterTabSortSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "BuffsTabRenderer.DrawStatusTable",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "FirstRunWindow.DrawDataSourceStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Context": "ColumnWizardWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "步骤 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stock DamageTerror appearance. Use this to reset to factory settings.",
+      "Context": "BuiltInPresets.Default",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "DamageTerror 的默认外观，可用来恢复初始设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Context": "SelectionBarSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap to Bar View",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "切换到条形视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap to Graph View",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "切换到图表视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to bars",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换到条形图",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to graph",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换到图表",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "ConfigWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "页签",
+      "Source": "library"
+    },
+    {
+      "Original": "Tank",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "防护职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Text & background",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "文字和背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Text color",
+      "Context": "SelectionBarSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "This cannot be undone.",
+      "Context": "EncounterHeaderComponent.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此操作无法撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "This tab is in graph mode - columns apply to its bars view.",
+      "Context": "ColumnWizardWindow.DrawTabPickStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此标签页当前使用图表模式。列设置会应用于条形视图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Timer",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Tint",
+      "Context": "AppearanceGeneralSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "色调",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle view mode",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换视图模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "GeneralTab.DrawBackupAndRecoverySection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "EncounterHistoryTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown/Other",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "未知或其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Window",
+      "Context": "MainWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "解锁窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Use per-job colors",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按职业配色",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "FormattingSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Value text",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "数值文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Variant Dungeons",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "多变迷宫",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for IINACT (WebSocket reconnecting...)",
+      "Context": "ConnectWebSocketAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在等待 IINACT（WebSocket 正在重新连接……）",
+      "Source": "library"
+    },
+    {
+      "Original": "Width",
+      "Context": "PositionSizeSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Window background",
+      "Context": "CustomizationWizardWindow.DrawColorsStep",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "窗口背景",
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Context": "GeneralTab.FormatRelativeTime",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "刚刚",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

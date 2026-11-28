@@ -1,0 +1,970 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Mappy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\t\tCenter on Open",
+      "Context": "MapFunctionsTab.DrawCenterModeRadio",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "\t\t打开时居中",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Click Interaction",
+      "Context": "IconConfigurationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许点击交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Tooltip",
+      "Context": "IconConfigurationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许显示提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Show",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Area Color",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "区域颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Area Outline Color",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "区域轮廓颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Area Style",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "区域样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Zoom",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Checkbox",
+      "Translated": "自动缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Zoom Scale Factor",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "自动缩放系数",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically sets zoom to a reasonable value relative to the map size.",
+      "Context": "MapFunctionsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Checkbox",
+      "Translated": "根据地图大小自动调整缩放比例。",
+      "Source": "library"
+    },
+    {
+      "Original": "Center on Flags",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "以旗标为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Center on Gathering Areas",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "以采集区域为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Center on Quest",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "以任务为中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Character  ",
+      "Context": "MapCoordinateBar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "角色  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Map",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "IconConfigurationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Color",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "扇形颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Options",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "视野扇形选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Outline Color",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "扇形轮廓颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Size",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "扇形大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure Marker #",
+      "Context": "IconConfigurationTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "设置标记 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Coordinates",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Cursor  ",
+      "Context": "MapCoordinateBar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "光标  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Mode",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "调试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Map Focus on Appear",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示地图时不自动获取焦点",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Mappy if you are not comfortable with this.",
+      "Context": "MapWindow.DrawSpoilerWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "介意剧透的玩家请谨慎使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Shift + Drag to Move Window Frame",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许按住 Shift 拖动窗口边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Exp Bonus!\t",
+      "Context": "FateListWindow.DrawFateInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "额外经验！\t",
+      "Source": "library"
+    },
+    {
+      "Original": "Fade Opacity",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "淡出时的不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Fade Options",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "淡出选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Flag is currently active",
+      "Context": "FlagHistoryWindow.DrawFlagData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前已有旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Focus",
+      "Context": "FlagHistoryWindow.DrawButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "聚焦",
+      "Source": "library"
+    },
+    {
+      "Original": "Follow On Open",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开时跟随角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Between Areas",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切换区域时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Icon",
+      "Context": "IconConfigurationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Window Background",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏窗口背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Window Frame",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏窗口边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide With Game GUI",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "随游戏界面隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in Combat",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift + Control while clicking activate button",
+      "Context": "MapWindow.DrawSpoilerWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Shift 和 Ctrl 并点击启用按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "I understand",
+      "Context": "MapWindow.DrawSpoilerWarning",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "我已了解",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Scale",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标缩放比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Open",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保持打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Large Label Scale",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "大标签缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Link Behaviors",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "链接行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Map on Center",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定地图中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Window Position",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Zoom",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "锁定缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Lv. ",
+      "Context": "FateListWindow.DrawFateInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Misc Options",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "其他选项",
+      "Source": "library"
+    },
+    {
+      "Original": "No FATE's available",
+      "Context": "FateListWindow.DrawContents",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "当前没有临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "No layers for this map",
+      "Context": "MapToolbar.DrawLayersContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此地图没有其他图层",
+      "Source": "library"
+    },
+    {
+      "Original": "No quests available",
+      "Context": "UnacceptedQuestsTabItem.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "暂无任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Fate List",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开临危受命列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Flag List",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开旗标列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Parent Map",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开上级地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Quest List",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开任务列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Settings",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Place",
+      "Context": "FlagHistoryWindow.DrawButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "放置",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Flag",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "放置旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Map Flag on Click",
+      "Context": "FateListWindow.DrawOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "点击时设置地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Icon Options",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "玩家图标选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Icon Size",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "玩家图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress: ",
+      "Context": "FateListWindow.DrawFateInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "进度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar Area Color",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "雷达区域颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar Options",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "雷达选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar Outline Color",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "雷达轮廓颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Flag",
+      "Context": "MapContextMenu.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移除旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Context": "IconConfigurationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale Player Cone",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "缩放角色视野扇形",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale icons with zoom",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "图标随地图缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale text labels with zoom",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "文字标签随地图缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for Map",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "搜索地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an Icon to Edit Settings",
+      "Context": "IconConfigurationTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "选择图标以编辑其设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Area Text",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示区域名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Coordinate Bar",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示坐标栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Fog of War",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示未探索区域的迷雾",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Map Layers",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示地图图层",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Map Text",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示地图名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Misc Tooltips",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示其他提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show On Hover",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "悬停时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Other Players",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示其他玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Player Icon",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示玩家图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Radar Radius",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示雷达半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Region Text",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示地区名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Sub-Area Text",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示子区域名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Text Labels",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示文字标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in Duties",
+      "Context": "PlayerOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在副本中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Small Label Scale",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "小标签缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress the native map's open/close sound effect.",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭原生地图的开关音效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.ColorEditWithDefault",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Follow Player",
+      "Context": "MapToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换角色跟随",
+      "Source": "library"
+    },
+    {
+      "Original": "Toolbar",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "工具栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Linear Zoom",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用线性缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning, Mappy does not protect you from spoilers and will show everything.",
+      "Context": "MapWindow.DrawSpoilerWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Mappy 会显示全部地图内容，包括可能涉及剧透的部分。",
+      "Source": "library"
+    },
+    {
+      "Original": "When Opening Map",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "打开地图时",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Hiding",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "隐藏窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Location",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Options",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "窗口选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Position",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "窗口坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Size",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Title",
+      "Context": "StyleOptionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "窗口标题",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Options",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTweaks.Header",
+      "Translated": "缩放选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Speed",
+      "Context": "MapFunctionsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "缩放速度",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Always",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.FadeMode::Always",
+      "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.CenterTarget::Disabled",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.CenterTarget::Map",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.CenterTarget::Player",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "When Focused",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.FadeMode::WhenFocused",
+      "Translated": "获得焦点时",
+      "Source": "library"
+    },
+    {
+      "Original": "When Moving",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.FadeMode::WhenMoving",
+      "Translated": "移动时",
+      "Source": "library"
+    },
+    {
+      "Original": "When Unfocused",
+      "Context": "[属性] DescriptionAttribute Mappy.Data.FadeMode::WhenUnFocused",
+      "Translated": "失去焦点时",
+      "Source": "library"
+    }
+  ]
+}

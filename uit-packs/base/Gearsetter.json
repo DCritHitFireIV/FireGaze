@@ -1,0 +1,234 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Gearsetter",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "All your gearsets are OK.",
+      "Context": "ShowUpgrades",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已检查全部套装，均无可替换的升级装备。",
+      "Source": "library"
+    },
+    {
+      "Original": "CMS",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "作业精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking only gearsets for your current class/job...",
+      "Context": "GearsetterPlugin.ShowUpgrades",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在检查当前职业的套装……",
+      "Source": "library"
+    },
+    {
+      "Original": "Class/Job",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Control",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "加工精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Crit",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "暴击",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "基本性能",
+      "Source": "library"
+    },
+    {
+      "Original": "Det",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "信念",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipment Browser###GearsetterBrowser",
+      "Context": "EquipmentBrowserWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ LWindow..ctor",
+      "Translated": "装备浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "GP",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "采集力",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "获得力",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearsetter - Config###GearsetterConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ LWindow..ctor",
+      "Translated": "Gearsetter 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide normal quality items",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏普通品质物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show items matching your level",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示符合当前等级的装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show owned items",
+      "Context": "EquipmentBrowserWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已拥有的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Perception",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "鉴别力",
+      "Source": "library"
+    },
+    {
+      "Original": "Show possible gear upgrades for all gearsets",
+      "Context": "GearsetterPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示所有套装可升级的装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Show recommendations when entering Grand Company area",
+      "Context": "ConfigWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入大国防联军驻地时显示推荐装备",
+      "Source": "library"
+    },
+    {
+      "Original": "SkS",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能速度",
+      "Source": "library"
+    },
+    {
+      "Original": "SpS",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "咏唱速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Tenacity",
+      "Context": "GameDataHolder..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "坚韧",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the equipment browser window",
+      "Context": "GearsetterPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭装备浏览器",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

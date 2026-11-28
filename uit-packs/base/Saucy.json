@@ -1,0 +1,707 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Saucy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Add repository",
+      "Context": "PluginDependenciesUi.DrawDependency",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-pick best deck",
+      "Context": "TriadSettingsUi.DrawDeckBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动选择最佳卡组",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache",
+      "Context": "PluginUI.DrawTriadPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Card resale value",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "卡牌回收价值",
+      "Source": "library"
+    },
+    {
+      "Original": "Cards won",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "获得的卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Character ",
+      "Context": "TriadOptimizedDeckCacheStore.ResolveCharacterDisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Header",
+      "Translated": "角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "TriadNpcStatsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Default##step",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Dependencies",
+      "Context": "PluginUI.DrawSliceIsRightPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "依赖插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Difficulty",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "难度",
+      "Source": "library"
+    },
+    {
+      "Original": "Draws",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "平局",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "TriadSettingsUi.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Fortemps Manor",
+      "Context": "FortempsManservantRoute..cctor",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "福尔唐伯爵府",
+      "Source": "library"
+    },
+    {
+      "Original": "GATES",
+      "Context": "PluginUI.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "机遇临门",
+      "Source": "library"
+    },
+    {
+      "Original": "Games",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "对局数",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold Saucer gate",
+      "Context": "PluginUI.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiLayout.DrawCollapsingSection",
+      "Translated": "金碟游乐场机遇临门",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl to reset stats.",
+      "Context": "PluginUI.DrawStatsToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按住 Ctrl 重置统计。",
+      "Source": "library"
+    },
+    {
+      "Original": "In match…",
+      "Context": "TriadSession.GetAutoPickDeckSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "对局中……",
+      "Source": "library"
+    },
+    {
+      "Original": "Install ",
+      "Context": "PluginDependenciesUi.DrawDependency",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "安装 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed",
+      "Context": "PluginDependenciesUi.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiLayout.DrawStatusIconText",
+      "Translated": "已安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave a ticket blank to randomize that purchase.",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "某张彩票不填号码即可随机购买。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading NPC data…",
+      "Context": "TriadCardSearchWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载 NPC 数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "MACHINES",
+      "Context": "PluginUI.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "游艺机",
+      "Source": "library"
+    },
+    {
+      "Original": "MGP won",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "赢得的金碟币",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "PluginUI.DrawTriadPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Metric",
+      "Context": "PluginUI.StatsHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "指标",
+      "Source": "library"
+    },
+    {
+      "Original": "Most played NPC",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "挑战次数最多的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Most won card",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "获得次数最多的卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC reward cards only",
+      "Context": "TriadCardSearchWindow.DrawCardsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示 NPC 奖励卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: ",
+      "Context": "LimbManager.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "下一步： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No stop condition — runs until automation is disabled.",
+      "Context": "GoldSaucerRunSettingsUi.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未设置停止条件，将持续运行直至停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "No. ",
+      "Context": "CardUtils.GetOrderDesc",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "否。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "TriadGameModifierNone..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Not available",
+      "Context": "TriadCardInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Not installed",
+      "Context": "PluginDependenciesUi.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiLayout.DrawStatusIconText",
+      "Translated": "尚未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications",
+      "Context": "TriadSettingsUi.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Number selection",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择号码",
+      "Source": "library"
+    },
+    {
+      "Original": "OTHER GAMES",
+      "Context": "PluginUI.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "其他游戏",
+      "Source": "library"
+    },
+    {
+      "Original": "Only request",
+      "Context": "LimbManager.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅请求",
+      "Source": "library"
+    },
+    {
+      "Original": "Open sound folder — drop MP3s here to add your own.",
+      "Context": "TriadSettingsUi.DrawSoundPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开音效文件夹，可将自己的 MP3 文件放入其中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open window when challenging an NPC",
+      "Context": "TriadSettingsUi.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "挑战 NPC 时打开窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Saucy menu.",
+      "Context": "Saucy..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Saucy 菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Optimized deck",
+      "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已优化的卡组",
+      "Source": "library"
+    },
+    {
+      "Original": "Optional integrations",
+      "Context": "PluginUI.DrawSliceIsRightPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "可选联动",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "LimbManager.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause when retainers are ready (bell nearby)",
+      "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "雇员就绪且附近有传唤铃时暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound when run completes",
+      "Context": "TriadSettingsUi.DrawNotificationsBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "运行结束时播放声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play time before break (minutes)",
+      "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "每次休息前的游玩时长（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Plays Mini Cactpot automatically when you open the daily scratcher at the Gold Saucer.",
+      "Context": "PluginUI.DrawMiniCactpotPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在金碟游乐场打开每日仙人微彩时自动刮奖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress: ",
+      "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "进度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest already accepted.",
+      "Context": "TriadNpcQuestUi.BuildSnapshot",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "已接取此任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Context": "TriadGameModifierRandom..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "随机",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "LimbManager.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Runs automatically when enabled at the Out on a Limb machine.",
+      "Context": "LimbManager.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "启用后，靠近伐木机即会自动开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select deck",
+      "Context": "TriadSettingsUi.DrawDeckBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择卡组",
+      "Source": "library"
+    },
+    {
+      "Original": "Session rate since the first counted game of this minigame.",
+      "Context": "PluginUI.StatsHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从本次会话首次计入统计的该小游戏起计算。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show deck automation messages in chat",
+      "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏显示卡组自动化消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in NPC tab",
+      "Context": "TriadCardInfoWindow.DrawNpcNameLink",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 NPC 选项卡中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on map",
+      "Context": "TriadCardInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在地图上显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Step",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop at next double down",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在下次翻倍时停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Ticket 1 (100 MGP)",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "第 1 张彩票（100 金碟币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ticket 2 (150 MGP)",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "第 2 张彩票（150 金碟币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ticket 3 (200 MGP)",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "第 3 张彩票（200 金碟币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Time left: ",
+      "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "剩余时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple Triad NPC menu",
+      "Context": "PluginUI.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiLayout.DrawCollapsingSection",
+      "Translated": "九宫幻卡对手菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for vnavmesh…",
+      "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在等待 vnavmesh……",
+      "Source": "library"
+    },
+    {
+      "Original": "Wins",
+      "Context": "PluginUI.DrawTriadRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "胜场",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "LimbManager.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] AutoRetainer finished; resuming automation.",
+      "Context": "AutoRetainerPause.TickClosingUi",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Saucy] AutoRetainer 已完成，继续自动执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Could not reach the aethernet hub. Walking to NPC instead.",
+      "Context": "TriadMapNavigation.TickApproachingAethernetHub",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Saucy] 无法到达都市传送网枢纽，将改为步行前往 NPC 处。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Could not resolve NPC map coordinates.",
+      "Context": "TriadMapNavigation.TryBeginNavigation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Saucy] 无法解析 NPC 的地图坐标。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Deck optimizer aborted; using best deck found so far.",
+      "Context": "TriadSession.FormatOptimizerAbortedFallbackMessage",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Saucy] 卡组优化已中止，使用目前找到的最佳卡组。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Farming all NPC cards once.",
+      "Context": "Saucy.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Saucy] 正在收集各 NPC 的奖励卡，每种一张。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Lifestream is busy. Try again in a moment.",
+      "Context": "TriadMapNavigation.TryBeginNavigation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Saucy] Lifestream 正忙，请稍后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Saucy] Using game recommended deck...",
+      "Context": "TriadDeckSelectAutomation.TryClickGameRecommendedButton",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Saucy] 正在使用游戏推荐的卡组……",
+      "Source": "library"
+    },
+    {
+      "Original": "daily 3×3 scratcher",
+      "Context": "PluginUI.DrawMiniCactpotPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "每日 3×3 刮刮乐",
+      "Source": "library"
+    },
+    {
+      "Original": "move down",
+      "Context": "AnyWayTheWindBlows.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "move left",
+      "Context": "AnyWayTheWindBlows.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "左移",
+      "Source": "library"
+    },
+    {
+      "Original": "move right",
+      "Context": "AnyWayTheWindBlows.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "向右移动",
+      "Source": "library"
+    },
+    {
+      "Original": "move up",
+      "Context": "AnyWayTheWindBlows.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "no games played",
+      "Context": "PluginUI.TriadHeadline",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚无对局记录",
+      "Source": "library"
+    },
+    {
+      "Original": "weekly 4-digit raffle",
+      "Context": "PluginUI.DrawJumboCactpotPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "每周四位数抽奖",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,623 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "vnavmesh",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " layout",
+      "Context": "DebugLayout.DrawLayout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 布局",
+      "Source": "library"
+    },
+    {
+      "Original": " position: ",
+      "Context": "DebugExtractedCollision.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": " scale: ",
+      "Context": "DebugExtractedCollision.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 缩放： ",
+      "Source": "library"
+    },
+    {
+      "Original": "0 = use all available; positive number = use that many cores; negative number = leave that many cores idle",
+      "Context": "Config.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "设为 0 使用全部可用核心。正数指定使用的核心数，负数指定要空闲的核心数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Agent: Height",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "寻路角色：高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Agent: Max Climb",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "寻路角色：最大攀爬高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Agent: Max Slope",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "寻路角色：最大坡度",
+      "Source": "library"
+    },
+    {
+      "Original": "Agent: Radius",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "寻路角色：半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Align camera to movement direction",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使镜头朝向移动方向",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Always visualize game collision",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示游戏碰撞体",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically load/build navigation data when changing zones",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切换区域时自动加载或生成导航数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera height (degrees)",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头仰角（度）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel current path on player movement input",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "手动移动角色时取消当前路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Collision",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "碰撞体",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Dump all polygons connected to player (to clipboard)",
+      "Context": "DebugNavmeshManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将与玩家位置连通的全部多边形导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable DTR bar",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to find path",
+      "Context": "AsyncMoveRequest.Update",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未找到路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "DebugExtractedCollision.DrawExtractor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Filtering",
+      "Context": "NavmeshSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate climb-down links",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "生成向下攀爬的连接",
+      "Source": "library"
+    },
+    {
+      "Original": "How long you can remain under the stuck threshold before stopping.",
+      "Context": "Navmesh.Config.Draw",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "移动速度低于阈值达到此时长后停止寻路。",
+      "Source": "library"
+    },
+    {
+      "Original": "If enabled, the agent will attempt to re-path after being considered stuck.",
+      "Context": "Navmesh.Config.Draw",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用后，角色因卡住而停止时会尝试重新规划路径。",
+      "Source": "library"
+    },
+    {
+      "Original": "Layer",
+      "Context": "NavmeshSettings.DrawConfigPartitioningCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "图层",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Level ",
+      "Context": "DebugGameCollision.DrawSceneQuadtree",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Max cores used during mesh build",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "生成导航网格时使用的最大核心数",
+      "Source": "library"
+    },
+    {
+      "Original": "Navmesh",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "导航网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Navmesh custom",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "导航网格自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Navmesh manager",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "导航网格管理",
+      "Source": "library"
+    },
+    {
+      "Original": "New: ",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "新建： ",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "DebugGameCollision.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Partitioning algorithm",
+      "Context": "NavmeshSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "区域划分算法",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "DebugLayout.DrawFileSectionLayerGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Path: ",
+      "Context": "DebugGameCollision.DrawCollider",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "DebugNavmeshManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Polygonization: Max Edge Length",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "多边形生成：最大边长",
+      "Source": "library"
+    },
+    {
+      "Original": "Polygonization: Max Edge Simplification Error",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "多边形生成：边界简化最大误差",
+      "Source": "library"
+    },
+    {
+      "Original": "Polygonization: Max Vertices per Polygon",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "多边形生成：每个多边形的最大顶点数",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: ",
+      "Context": "DebugGameCollision.DrawCollider",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "半径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Randomness Multiplier",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "随机程度倍率",
+      "Source": "library"
+    },
+    {
+      "Original": "Rasterization: Cell Height (#ch)",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "栅格化：单元高度（#ch）",
+      "Source": "library"
+    },
+    {
+      "Original": "Rasterization: Cell Size (#cs)",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "栅格化：单元宽度（#cs）",
+      "Source": "library"
+    },
+    {
+      "Original": "Record seed point",
+      "Context": "DebugNavmeshManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "记录种子点",
+      "Source": "library"
+    },
+    {
+      "Original": "Region ",
+      "Context": "DebugCompactHeightfield.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "地区 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Region: Merge Size",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "区域：合并尺寸",
+      "Source": "library"
+    },
+    {
+      "Original": "Region: Min Size",
+      "Context": "NavmeshSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "区域：最小尺寸",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Context": "DebugNavmeshManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry pathing after stop",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停止后重新寻路",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale: ",
+      "Context": "DebugGameCollision.DrawCollider",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "缩放： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "DebugGameCollision.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show active waypoints",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示当前路径点",
+      "Source": "library"
+    },
+    {
+      "Original": "Show detailed query status in DTR",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏显示详细查询状态",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "DebugNavmeshCustom.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop pathing when stuck",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "角色卡住时停止寻路",
+      "Source": "library"
+    },
+    {
+      "Original": "Stuck timeout (ms)",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "卡住超时（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Stuck tolerance (yalms/second)",
+      "Context": "Config.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "卡住判定的速度阈值（星码/秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "DebugNavmeshManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory ",
+      "Context": "DebugLayout.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "The minimum distance the object must move each frame to avoid being considered stuck.",
+      "Context": "Navmesh.Config.Draw",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "每帧移动距离低于此值时，判定为卡住。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type ",
+      "Context": "DebugLayout.DrawInstancesByType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "类型 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type: ",
+      "Context": "DebugLayout.DrawInstance",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "EffectMesh..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "export",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "left",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.DrawCompactToolPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "redo",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "right",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.DrawCompactToolPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "save",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "volume",
+      "Context": "[vnavmesh] CustomizationEditorToolbar.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "音量",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

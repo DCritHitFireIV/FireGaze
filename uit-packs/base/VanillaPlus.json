@@ -1,0 +1,765 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "VanillaPlus",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Oh, sorry, did you think a duty popped? Must have been the wind.",
+      "Context": "DutyReadyFools.OnFrameworkUpdate",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "咦，你以为排到任务了？大概是风声吧。",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Animations",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ConfigCategory_Animations",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "TextNodeConfig_TextColor",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a search bar to the inventory window.",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDescription_InventorySearchBar",
+      "Translated": "在背包窗口中添加搜索栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will only show once on each day a seasonal event occurs",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "SeasonEventNotice_DailyHint",
+      "Translated": "节日活动期间每天只显示一次",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterTeleportWindow_ModeHistory",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward {0}",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "LocationDisplay_WardFormat",
+      "Translated": "第 {0} 区",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Bar Aetheryte Names",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDisplay_CastBarAetheryteNames",
+      "Translated": "在咏唱栏中显示以太之光名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Search",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "WindowBackground_SearchTitle",
+      "Translated": "窗口搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory List",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_Title",
+      "Translated": "物品清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot {0}",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "LocationDisplay_PlotFormat",
+      "Translated": "第 {0} 号地",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterTeleportWindow_ModeAll",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetically",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterAlphabetically",
+      "Translated": "按字母排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Warn when below limit",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "CurrencyOverlay_LabelWarnBelowLimit",
+      "Translated": "低于下限时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Background Color",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "WindowBackground_CategoryBackgroundColor",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Special",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ForcedCutsceneSounds_CategorySpecial",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Error processing command for {0}, check the arguments and try again.",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "GameConfigCommand_ErrorOption",
+      "Translated": "处理 {0} 的命令时出错，请检查参数后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Dead Enemy Nameplates",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDisplay_HideDeadEnemyNamePlates",
+      "Translated": "隐藏已死亡敌人的姓名板",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro Tooltips",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDisplay_MacroTooltips",
+      "Translated": "宏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Player Tooltip",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ChatPlayerTooltip_DisplayName",
+      "Translated": "聊天中的玩家提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Redden Percentage",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "FadeUnavailableActions_LabelReddenPercentage",
+      "Translated": "红色叠加强度",
+      "Source": "library"
+    },
+    {
+      "Original": "A module for playing around and testing VanillaPlus features",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDescription_DebugGameModification",
+      "Translated": "用于试用和测试 VanillaPlus 功能的模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable when Unrestricted",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClearSelectedDuties_DisableWhenUnrestricted",
+      "Translated": "解除限制时禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Panel Adjustments",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuickPanelAdjustments_DisplayName",
+      "Translated": "指令面板调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Click save above before saving a new preset",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "HUDPresets_SaveTooltipDisabled",
+      "Translated": "保存新预设前，请先点击上方的保存按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetically",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuestListWindow_FilterAlphabetically",
+      "Translated": "按字母排序",
+      "Source": "library"
+    },
+    {
+      "Original": "A module for playing around and testing VanillaPlus features",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationDescription_DebugCustomAddon",
+      "Translated": "用于试用和测试 VanillaPlus 功能的模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationBrowser_TabDisabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Preset",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Button_SavePreset",
+      "Translated": "保存预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Common_Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Size",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "TextNodeConfig_FontSize",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ConfigCategory_Colors",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationType_Debug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Small",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "PetSize_OptionSmall",
+      "Translated": "小",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "LocationDisplay_SubdivisionLabel",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Common_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Font",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_LabelFont",
+      "Translated": "字体",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Time",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_ServerTime",
+      "Translated": "服务器时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetical",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "SortOption_Alphabetical",
+      "Translated": "按字母顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_LabelTextColor",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Alive",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ResourceBarPercentages_StatusAlive",
+      "Translated": "存活",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterCursor_CategoryStyle",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Medium",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "PetSize_OptionMedium",
+      "Translated": "中等",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Id",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterItemId",
+      "Translated": "物品 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterCursor_LabelSize",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "EnhancedWardNavigation_ButtonNext",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "MSQProgressBar_LabelMode",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Prev",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "EnhancedWardNavigation_ButtonPrevious",
+      "Translated": "上一个",
+      "Source": "library"
+    },
+    {
+      "Original": "Height",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "AddonConfig_WindowHeightLabel",
+      "Translated": "高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Time",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_LocalTime",
+      "Translated": "本地时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Font",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "TextNodeConfig_Font",
+      "Translated": "字体",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in Duties",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "CurrencyWarning_LabelHideInDuties",
+      "Translated": "在副本内隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "error ",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "WondrousTailsProbabilities_ErrorPlaceholder",
+      "Translated": "错误 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationBrowser_CategoryBehavior",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ResourceBarPercentages_CategoryExtra",
+      "Translated": "附加选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ChangelogButtonLabel",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "LogSubtitles_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "SystemConfigSearchBar_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Eorzea Time",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_EorzeaTime",
+      "Translated": "艾欧泽亚时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "LocationDisplay_ResetButton",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetical",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "GearsetRedirect_SortAlphabetical",
+      "Translated": "按字母顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationBrowser_TabEnabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Background color",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuickPanelAdjustments_BackgroundColor",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationBrowser_TabAll",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Width",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "AddonConfig_WindowWidthLabel",
+      "Translated": "宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterTeleportWindow_ModeFavorites",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ForcedCutsceneSounds_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "HUDPresets_ButtonDelete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Size",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ClockOverlay_LabelFontSize",
+      "Translated": "字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "CurrencyWarning_SortOptionName",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No results",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "DutyLoot_NoResultsMessage",
+      "Translated": "没有匹配结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Alphabetical",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "SortOptionAlphabetical",
+      "Translated": "按字母顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterLevel",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "FancyLoadingScreens_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Common_Confirm",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "MSQProgressBar_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Keybind",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "AddonConfig_KeybindLabel",
+      "Translated": "按键绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "HUDPresets_ButtonLoad",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "HUDPresets_ButtonSave",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "NodeStyle_PositionLabel",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Window Size",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "AddonConfig_WindowSizeLabel",
+      "Translated": "窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "SuppressDialogAdvance_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterItemLevel",
+      "Translated": "品级",
+      "Source": "library"
+    },
+    {
+      "Original": "No Presets Saved",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Preset_DefaultOption",
+      "Translated": "未保存预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "DutyLoot_Filter_Favorites",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "CurrencyOverlay_LabelScale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuestListWindow_FilterDistance",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "MSQProgressBar_ModeExpansion",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BiggerConfigWindows_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterQuantity",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Current",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ShowAetherCurrents_Tooltip",
+      "Translated": "风脉泉",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Visibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Chest",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "DutyLootPreview_SourceDungeonChest",
+      "Translated": "副本宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "BetterTeleportWindow_WindowTitle",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuestListWindow_FilterType",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipment",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "DutyLoot_Filter_Equipment",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "CurrencyWarning_CategoryGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Rarity",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ListInventory_FilterRarity",
+      "Translated": "稀有度",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "InstancedWaymarks_RenameMenuLabel",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Common_Disable",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Pending",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "FateEntry_StatusPending",
+      "Translated": "待处理",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ModificationBrowser_CategoryWindow",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "QuestListWindow_FilterLevel",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Dead",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "ResourceBarPercentages_StatusDead",
+      "Translated": "死亡",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Container": "VanillaPlus.Resources.Strings.resources",
+      "Key": "Icon",
+      "Translated": "图标",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

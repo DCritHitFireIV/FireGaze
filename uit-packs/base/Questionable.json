@@ -1,0 +1,605 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Questionable",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " not used",
+      "Context": "[Questionable] Validate.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 未使用",
+      "Source": "library"
+    },
+    {
+      "Original": " quests loaded",
+      "Context": "[Questionable] ActiveQuestComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 项任务已加载",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds.",
+      "Context": "[Questionable] QuestController.CheckAutoRefreshCondition",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "' to clipboard",
+      "Context": "[Questionable] QuestSelectionWindow.CopyToClipboard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "」复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Allied Societies",
+      "Context": "[Questionable] AlliedSocietyJournalComponent.DrawAlliedSocietyQuests",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Author: ",
+      "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Authors: ",
+      "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Available priority quests:",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可进行的优先任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel pathfinding",
+      "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消寻路",
+      "Source": "library"
+    },
+    {
+      "Original": "Certain priority quest (e.g. class quests) may be started/completed by\nthe plugin prior to continuing, usually at a teleport step.",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "部分优先任务（如职业任务）可能会在当前任务继续之前被接取或完成，\n通常发生在传送步骤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear sim",
+      "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除模拟",
+      "Source": "library"
+    },
+    {
+      "Original": "Close window & don't enable Questionable",
+      "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "关闭窗口并保持 Questionable 禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Collected",
+      "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Comment: ",
+      "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注释： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied '",
+      "Context": "[Questionable] QuestSelectionWindow.CopyToClipboard",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已将「",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy as file name",
+      "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制为文件名",
+      "Source": "library"
+    },
+    {
+      "Original": "Crystal Tower Raids",
+      "Context": "[Questionable] ARealmRebornComponent.DrawAllianceRaids",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "水晶塔系列任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Daily Quest ",
+      "Context": "[Questionable] CreationUtilsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "每日任务 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss",
+      "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance: ",
+      "Context": "[Questionable] CreationUtilsComponent.DrawTargetDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距离： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate sequence",
+      "Context": "[Questionable] BasicSequenceValidator.ValidateSequences",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "复制序列",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Fashion Accessories",
+      "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish Setup",
+      "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "完成设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "采集： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hard Mode Primals",
+      "Context": "[Questionable] ARealmRebornComponent.DrawPrimals",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "讨伐歼灭战（困难）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hovered Item: ",
+      "Context": "[Questionable] CreationUtilsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "鼠标指向的物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "In Combat",
+      "Context": "[Questionable] ActiveQuestComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Interact with your current target.",
+      "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "与当前目标交互。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid chat message: ",
+      "Context": "[Questionable] Validate.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "聊天消息无效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Journal",
+      "Context": "[Questionable] JournalProgressWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "任务日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing required plugins",
+      "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "缺少必需的插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing sequence",
+      "Context": "[Questionable] BasicSequenceValidator.ValidateSequences",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "缺少序列",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount ID: ",
+      "Context": "[Questionable] CommandHandler.PrintMountId",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "坐骑 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Quest: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "下一个任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "[Questionable] CommandHandler.PrintMountId",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "No active quest",
+      "Context": "[Questionable] ActiveQuestComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有进行中的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Notice",
+      "Context": "[Questionable] QuestWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show quests currently offered",
+      "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示当前可接取的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Orchestrion Rolls",
+      "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "管弦乐琴乐谱",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "[Questionable] SinglePlayerDutyConfigComponent.DrawOtherQuestConfigTable",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest",
+      "Context": "[Questionable] PriorityWindow.DrawQuestList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest ",
+      "Context": "[Questionable] QuestFunctions.GetMainScenarioQuest",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "任务 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Selection###QuestionableQuestSelection",
+      "Context": "[Questionable] QuestSelectionWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "任务选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Validation###QuestionableValidator",
+      "Context": "[Questionable] QuestValidationWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "任务校验",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest sim active (experimental)",
+      "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "任务模拟运行中（实验性）",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Questionable Debug Overlay###QuestionableDebugOverlay",
+      "Context": "[Questionable] DebugOverlay..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Questionable 调试悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Questionable Setup###QuestionableOneTimeSetup",
+      "Context": "[Questionable] OneTimeSetupWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Questionable 初始设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining: ",
+      "Context": "[Questionable] AlliedSocietyJournalComponent.DrawAlliedSocietyQuests",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "剩余： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires all:",
+      "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要满足全部条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires one:",
+      "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要满足任一条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Sequence: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "序列： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulate quest",
+      "Context": "[Questionable] QuestValidationWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "模拟任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulated Quest: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模拟任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip current task",
+      "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过当前任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Step: ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "步骤： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Conditions:",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "停止条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after completing any of these quests:",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "完成以下任一任务后停止：",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop at level ",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "达到此等级时停止： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "[Questionable] CreationUtilsComponent.DrawTargetDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "This quest is loaded from your 'pluginConfigs\\Questionable\\Quests' directory.\nThis gets loaded even if Questionable ships with a newer/different version of the quest.",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此任务从本地 pluginConfigs\\Questionable\\Quests 目录读取。\n即使 Questionable 自带更新或不同版本的任务，仍会优先加载这份本地任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "To Target",
+      "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "前往目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracked Quest ",
+      "Context": "[Questionable] CreationUtilsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "追踪中的任务 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracked Quest: ",
+      "Context": "[Questionable] CreationUtilsComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "追踪中的任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple Triad Cards",
+      "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "九宫幻卡卡片",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "[Questionable] CommandHandler.PrintMountId",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

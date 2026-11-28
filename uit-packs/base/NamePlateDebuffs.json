@@ -1,0 +1,316 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "NamePlateDebuffs",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Nameplate Debuffs Configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "姓名牌减益状态设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Test Statuses",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示测试用状态",
+      "Source": "library"
+    },
+    {
+      "Original": "While config is open, test nodes are displayed to help with configuration.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置窗口打开时，将显示测试节点，方便调整布局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Moodles",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示 Moodles 效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Show statuses from the Moodles plugin. Positive Moodle statuses show as Ally Buffs.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示 Moodles 插件的状态效果。增益类 Moodles 效果会归入友方增益。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Moodles whilst Bound to Duty",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入副本时停用 Moodles",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Moodles whilst in combat",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中停用 Moodles",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Moodles while you are in combat.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在战斗中隐藏 Moodles 效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Your Debuffs",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自己施加的减益状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Interval (ms)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "刷新间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Interval between status updates in milliseconds",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置状态刷新间隔，单位为毫秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Node Group",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "节点分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum Statuses per group",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "每组最多显示的状态数",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill From Right",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从右侧开始排列",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Node Spacing",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "节点间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Scale",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "分组缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Node",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Text Color (other statuses)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "其他状态：剩余时间文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Edge Color (other statuses)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "其他状态：剩余时间描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Text Color (your statuses)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "自己施加的状态：剩余时间文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Edge Color (your statuses)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "自己施加的状态：剩余时间描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Font Size",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "剩余时间字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration Offset",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "剩余时间文字偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Offset",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "图标偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Maintain a 3:4 ratio of Width:Height for best results.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "建议将宽高比设为 3∶4。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show statuses with time remaining less than this; 0 shows all.",
+      "Context": "ConfigWindow.DrawStatusVisibilityRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "只显示剩余时间低于此值的状态，设为 0 则显示全部。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Defaults##status",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Defaults##group",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Defaults##node",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

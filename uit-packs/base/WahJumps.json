@@ -1,0 +1,651 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WahJumps",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " data centers",
+      "Context": "OverviewTab.DrawSummaryStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 大区",
+      "Source": "library"
+    },
+    {
+      "Original": "1st Place",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第一名",
+      "Source": "library"
+    },
+    {
+      "Original": "2nd Place",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第二名",
+      "Source": "library"
+    },
+    {
+      "Original": "3rd Place",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第三名",
+      "Source": "library"
+    },
+    {
+      "Original": "4th Place",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第四名",
+      "Source": "library"
+    },
+    {
+      "Original": "5th Place",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "第五名",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to favorites",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加到收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "All Puzzles",
+      "Context": "MainWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "全部跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse puzzles and click ♡ to favorite them",
+      "Context": "MainWindow.DrawPuzzleTableView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "浏览跳跳乐时点击 ♡ 即可收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Builder",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "建造者",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to follow link",
+      "Context": "UiTheme.Hyperlink",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击打开链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Creative jump puzzles built by the FFXIV community",
+      "Context": "StrangeHousingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "FFXIV 社区建造的创意跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "DC Overview",
+      "Context": "MainWindow.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "数据中心概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数据中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Data loading completed successfully!",
+      "Context": "MainWindow.OnDataLoaded",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "数据加载成功！",
+      "Source": "library"
+    },
+    {
+      "Original": "Distribution",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分布",
+      "Source": "library"
+    },
+    {
+      "Original": "Download LifeStream",
+      "Context": "StrangeHousingTab.DrawLifestreamWarning",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下载 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Element",
+      "Context": "InformationTab.DrawSubTypeKeysTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "要素",
+      "Source": "library"
+    },
+    {
+      "Original": "Error saving favorites",
+      "Context": "MainWindow.SaveFavorites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "保存收藏时出错",
+      "Source": "library"
+    },
+    {
+      "Original": "Explanation",
+      "Context": "InformationTab.DrawDifficultyRatingsTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "MainWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Context": "MainWindow.DrawFilterPopupButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide sidebar",
+      "Context": "MainWindow.DrawControlRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "隐藏侧栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Initializing...",
+      "Context": "MainWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在初始化……",
+      "Source": "library"
+    },
+    {
+      "Original": "Jump Puzzle Directory",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "跳跳乐目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Key",
+      "Context": "InformationTab.DrawGenericTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "键",
+      "Source": "library"
+    },
+    {
+      "Original": "LifeStream not detected — travel buttons are disabled.",
+      "Context": "StrangeHousingTab.DrawLifestreamWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未检测到 Lifestream，旅行按钮已停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream connected",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已连接 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream not available - is it installed and enabled?",
+      "Context": "MainWindow.ExecuteTravel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Lifestream 不可用，请确认是否已安装并启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream not detected",
+      "Context": "MainWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未检测到 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading jump puzzle data",
+      "Context": "MainWindow.DrawLoadingState",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在加载跳跳乐数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Main City Aethernet Access Conditions",
+      "Context": "InformationTab.DrawPuzzleAccessibilityTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "主城都市传送网使用条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Means the puzzle:",
+      "Context": "InformationTab.DrawSubTypeKeysTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "此标记表示该跳跳乐：",
+      "Source": "library"
+    },
+    {
+      "Original": "More Info",
+      "Context": "InformationTab.DrawSubTypeKeysTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "更多信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No data loaded yet. Please wait for data to load or refresh.",
+      "Context": "OverviewTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未加载数据，请等待加载完成或手动刷新。",
+      "Source": "library"
+    },
+    {
+      "Original": "No favorites added yet",
+      "Context": "MainWindow.DrawPuzzleTableView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未收藏任何跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "No puzzles match the current filters",
+      "Context": "MainWindow.DrawPuzzleTableView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合筛选条件的跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the WahJumps UI.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 WahJumps 窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Puzzle Types:",
+      "Context": "UiHelpers.RenderCodesWithTooltips",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "跳跳乐类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Puzzle added to favorites",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已收藏此跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Puzzle removed from favorites",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已取消收藏此跳跳乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Ratings & puzzle code reference",
+      "Context": "MainWindow.DrawToolStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "评分与跳跳乐代码说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready",
+      "Context": "MainWindow.OnDataLoaded",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh puzzle data",
+      "Context": "MainWindow.DrawToolStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "刷新跳跳乐数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshing data...",
+      "Context": "MainWindow.RefreshData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在刷新数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshing puzzle data...",
+      "Context": "MainWindow.DrawToolStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在刷新跳跳乐数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Region",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from favorites",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从收藏中移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset filters",
+      "Context": "MainWindow.DrawFilterPopupButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry Loading",
+      "Context": "InformationTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Search name, builder, world...",
+      "Context": "MainWindow.DrawControlRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索名称、建造者或服务器……",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "MainWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索……",
+      "Source": "library"
+    },
+    {
+      "Original": "Section",
+      "Context": "InformationTab.DrawGenericTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "章节",
+      "Source": "library"
+    },
+    {
+      "Original": "Show sidebar",
+      "Context": "MainWindow.DrawControlRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示侧栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Puzzle Types:",
+      "Context": "OverviewTab.DrawSpecialPuzzleBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "特殊跳跳乐类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Special ☆",
+      "Context": "MainWindow.DrawRatingChips",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "特殊 ☆",
+      "Source": "library"
+    },
+    {
+      "Original": "Square-Enix Equivalent",
+      "Context": "InformationTab.DrawDifficultyRatingsTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "对应的官方等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Strange Housing community & credits",
+      "Context": "MainWindow.DrawToolStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "Strange Housing 社区与致谢",
+      "Source": "library"
+    },
+    {
+      "Original": "Thanks to the Strange Housing staff & community!",
+      "Context": "StrangeHousingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "感谢 Strange Housing 的工作人员和社区！",
+      "Source": "library"
+    },
+    {
+      "Original": "Top 5 Builders by Data Center",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "各数据中心前五名建造者",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Builders",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "建造者总数",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel command executed",
+      "Context": "MainWindow.ExecuteTravel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已执行旅行命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Try clearing the search or rating filter",
+      "Context": "MainWindow.DrawPuzzleTableView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "试试清除搜索或评分筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to load information data.",
+      "Context": "InformationTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法加载说明数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Value 1",
+      "Context": "InformationTab.DrawGenericTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "值 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Value 2",
+      "Context": "InformationTab.DrawGenericTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "值 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Value 3",
+      "Context": "InformationTab.DrawGenericTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "值 3",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "MainWindow.DrawFilterPopupButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "World / district filters",
+      "Context": "MainWindow.DrawFilterPopupButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "服务器及住宅区筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Worlds",
+      "Context": "OverviewTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "CommandHandler.HandleDebugCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "CommandHandler.HandleDebugCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

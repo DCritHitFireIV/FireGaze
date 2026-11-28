@@ -1,0 +1,872 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ItemSearchPlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " [Key Item]",
+      "Context": "ItemSearchWindow.DrawItemList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " [任务道具]",
+      "Source": "library"
+    },
+    {
+      "Original": ") (Rarity: ",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": ") (稀有度： ",
+      "Source": "library"
+    },
+    {
+      "Original": ", Cached]",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "，来自缓存]",
+      "Source": "library"
+    },
+    {
+      "Original": ", from Store]",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "，来自商城]",
+      "Source": "library"
+    },
+    {
+      "Original": "Add filters when copying results to clipboard",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将搜索结果复制到剪贴板时附带筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "EquipAsSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Any###optionNone",
+      "Context": "RaritySearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "不限",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto focus search box",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动将光标置于搜索框",
+      "Source": "library"
+    },
+    {
+      "Original": "Can Be HQ",
+      "Context": "ItemSearchWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可为优质品",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "ItemUICategorySearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Close window after linking item",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "发送物品链接后关闭窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Information",
+      "Context": "CopyItemAsJson.GetButtonText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制物品信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy results to clipboard",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将结果复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftable",
+      "Context": "CraftableSearchFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "RaceSexSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Class",
+      "Context": "EquipAsSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "当前职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Desynthable",
+      "Context": "DesynthableSearchFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可分解",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't show Ko-fi link",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏 Ko-fi 链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "EquipAsSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyeable",
+      "Context": "DyeableSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Housing Fixture Preview Feature",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用房屋装修预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Try On Feature",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用试穿功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabling FFXIV Store will cause Item Search Plugin to contact the FFXIV Store website to determine which items are available.",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "启用后，物品搜索插件将访问 FFXIV 商城网站，以获取可购买的物品列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Level",
+      "Context": "LevelEquipSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "装备等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip as",
+      "Context": "EquipAsSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可装备职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "SoldByNPCSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Error loading item list.",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未能加载物品列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "External Data Site",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "外部资料网站",
+      "Source": "library"
+    },
+    {
+      "Original": "FFXIV Store",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "FFXIV 商城",
+      "Source": "library"
+    },
+    {
+      "Original": "Favourite",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Favourites",
+      "Context": "ItemSearchWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "收藏夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetching Product List",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在获取商品列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetching Store Items: ",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在获取商城物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "ItemUICategorySearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "From Patch",
+      "Context": "PatchSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "加入版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Has HQ",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "有优质版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Has Stats",
+      "Context": "StatSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "具备属性",
+      "Source": "library"
+    },
+    {
+      "Original": "If this concerns you, you probably shouldn't enable it.",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "如果不希望插件访问该网站，请关闭此功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Language",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "物品语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level",
+      "Context": "LevelItemSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Search",
+      "Context": "ItemSearchPlugin.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "物品搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Search Config",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "物品搜索设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading item list...",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载物品列表…",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Context": "SoldByNPCSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在加载…",
+      "Source": "library"
+    },
+    {
+      "Original": "Market",
+      "Context": "MarketBoardActionButton.GetButtonText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "市场",
+      "Source": "library"
+    },
+    {
+      "Original": "Market Board Plugin Integration",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "联动市场布告板插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Match Any",
+      "Context": "StatSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "满足任一条件",
+      "Source": "library"
+    },
+    {
+      "Original": "No Dye Selected",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未选择染剂",
+      "Source": "library"
+    },
+    {
+      "Original": "No HQ",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "无优质版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal Item",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "普通物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Favourite",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "未收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Not On Store",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "商城无售",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Tradable",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不可交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Unique",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "可持有多件",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: To preview housing fixtures you must have the 'Remodel Interior' window open.",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预览房屋装修前，请先打开“更换内装”窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "On Store",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "商城有售",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use browser for Teamcraft",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅通过浏览器打开 Teamcraft",
+      "Source": "library"
+    },
+    {
+      "Original": "Open a window you can use to link any specific item to chat.",
+      "Context": "ItemSearchPlugin.SetupCommands",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开物品搜索窗口，可将指定物品的链接发送到聊天栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the fitting room.",
+      "Context": "ItemSearchPlugin.SetupCommands",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开试穿窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please select an item.",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请选择物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Housing",
+      "Context": "ItemSearchWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "预览房屋装修",
+      "Source": "library"
+    },
+    {
+      "Original": "Rarity",
+      "Context": "RaritySearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "稀有度",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Context": "ItemSearchWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click to clear selection.",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "右键单击可清除选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "ItemNameSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for Crafting Recipe",
+      "Context": "RecipeSearchActionButton.GetButtonText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "搜索制作配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All",
+      "Context": "EquipAsSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Dye (Slot #",
+      "Context": "ItemSearchWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "选择染剂（栏位 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Select None",
+      "Context": "EquipAsSearchFilter.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全不选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Store Product",
+      "Context": "FfxivStoreActionButton.DrawProductSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "选择商城商品",
+      "Source": "library"
+    },
+    {
+      "Original": "Sex / Race",
+      "Context": "RaceSexSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "性别 / 种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Filters: ",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "显示筛选条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Item IDs",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示物品 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Legacy Items",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示旧版物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Simplified Chinese",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "简体中文",
+      "Source": "library"
+    },
+    {
+      "Original": "Single-slot",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "单栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Sold by NPC",
+      "Context": "SoldByNPCSearchFilter.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "NPC 有售",
+      "Source": "library"
+    },
+    {
+      "Original": "Some items may link to incorrect pages due to using names.",
+      "Context": "GamerEscapeDatasite.get_Note",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "部分物品按名称匹配，可能会链接到错误的页面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort Item List",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "物品列表排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Start and end with '/' to search using regex.",
+      "Context": "ItemNameSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "用 '/' 将表达式首尾括起，即可使用正则表达式搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start input with '$' to search for an item by its description.",
+      "Context": "ItemNameSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "以 '$' 开头可搜索物品说明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Store Item",
+      "Context": "ItemSearchWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "商城物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-Fi",
+      "Context": "ItemSearchWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-Fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress Try On Message",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏试穿提示",
+      "Source": "library"
+    },
+    {
+      "Original": "This item is not linkable.",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法发送此物品的链接。",
+      "Source": "library"
+    },
+    {
+      "Original": "Try On",
+      "Context": "ItemSearchWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Type an item id to search for item by its ID.",
+      "Context": "ItemNameSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "输入物品 ID 即可按 ID 搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type an item name to search for items by name.",
+      "Context": "ItemNameSearchFilter.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "输入物品名称即可按名称搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Type to start searching...",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "输入关键词开始搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: FFXIV Store",
+      "Context": "ItemSearchPluginConfig.DrawConfigUI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "提醒：FFXIV 商城",
+      "Source": "library"
+    },
+    {
+      "Original": "[Cancelled] ",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "[已取消] ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Error] ",
+      "Context": "FfxivStoreActionButton.UpdateTask",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "[错误] ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Key Item]",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "[任务道具]",
+      "Source": "library"
+    },
+    {
+      "Original": "{0} Items",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "{0} 件物品",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Beast Tribe Currency",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.Filters.SoldByNPCSearchFilter/SpecialCurrency::BeastTribe",
+      "Translated": "友好部族货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Seal",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.Filters.SoldByNPCSearchFilter/SpecialCurrency::GrandCompany",
+      "Translated": "军票",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Equip Level [ASC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::EquipLevel",
+      "Translated": "装备等级 [升序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Equip Level [DESC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::EquipLevelDesc",
+      "Translated": "装备等级 [降序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ID [ASC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::ItemID",
+      "Translated": "物品 ID [升序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ID [DESC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::ItemIDDesc",
+      "Translated": "物品 ID [降序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level [ASC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::ItemLevel",
+      "Translated": "品级 [升序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level [DESC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::ItemLevelDesc",
+      "Translated": "品级 [降序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Name [ASC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::Name",
+      "Translated": "物品名称 [升序]",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Name [DESC]",
+      "Context": "[属性] DescriptionAttribute ItemSearchPlugin.SortType::NameDesc",
+      "Translated": "物品名称 [降序]",
+      "Source": "library"
+    }
+  ]
+}

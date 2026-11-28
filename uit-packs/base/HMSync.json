@@ -1,0 +1,511 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HMSync",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the HMapSync window.",
+      "Context": "HMSyncPlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 HMapSync 窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "[HMSync] Lost protection on a virtual map. Returning you to safety and ending the session.",
+      "Context": "HMSyncPlugin.OnFrameworkUpdate",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[HMSync] 虚拟地图保护已失效。正在将你送回安全位置并结束会话。",
+      "Source": "library"
+    },
+    {
+      "Original": "[HMSync] Not in a session. Use /hms start or /hms join <code> first.",
+      "Context": "HMSyncPlugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[HMSync] 尚未加入会话。请先使用 /hms start 或 /hms join <code>。",
+      "Source": "library"
+    },
+    {
+      "Original": "[HMSync] usage: /hms firecut <cutsceneRowId>",
+      "Context": "HMSyncPlugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[HMSync] 用法：/hms firecut <cutsceneRowId>",
+      "Source": "library"
+    },
+    {
+      "Original": "[HMSync] /hms cutprobe is a debug command. Enable debug mode in Config to use it.",
+      "Context": "HMSyncPlugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[HMSync] /hms cutprobe 是调试命令，需要先在设置中启用调试模式。",
+      "Source": "library"
+    },
+    {
+      "Original": " match(es) logged - search [SCENEPROBE] in /xllog.",
+      "Context": "HMSyncPlugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个匹配项已记录。请在 /xllog 中搜索 [SCENEPROBE]。",
+      "Source": "library"
+    },
+    {
+      "Original": " is a debug command. Enable debug mode in Config to use it.",
+      "Context": "HMSyncPlugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 是调试命令，需要先在设置中启用调试模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "ALL",
+      "Context": "HMSyncPlugin.DoPktCap",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Open ",
+      "Context": "HMSyncUI.DrawModuleRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开 ",
+      "Source": "library"
+    },
+    {
+      "Original": "  Installed",
+      "Context": "HMSyncUI.DrawModuleRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "  已安装",
+      "Source": "library"
+    },
+    {
+      "Original": "  Not installed",
+      "Context": "HMSyncUI.DrawModuleRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "  未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "HMSyncUI.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore",
+      "Context": "HMSyncUI.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Join",
+      "Context": "HMSyncUI.DrawSessionIdle",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Context": "HMSyncUI.DrawSessionHosting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone:",
+      "Context": "HMSyncUI.DrawGuestMapReadOnly",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "区域：",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather:",
+      "Context": "HMSyncUI.DrawGuestMapReadOnly",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "天气：",
+      "Source": "library"
+    },
+    {
+      "Original": "Music:",
+      "Context": "HMSyncUI.DrawGuestMapReadOnly",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "音乐：",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement",
+      "Context": "HMSyncUI.DrawMovementToggles",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "HMSyncUI.DrawAppearanceToggles",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable.",
+      "Context": "HMSyncUI.DrawTimeAndWeather",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather",
+      "Context": "HMSyncUI.DrawTimeAndWeather",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Search by name…",
+      "Context": "HMSyncUI.DrawBgmPickerWindowBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading ",
+      "Context": "HMSyncUI.DrawBgmPickerWindowBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "加载中 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Context": "HMSyncUI.DrawThisMapControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "HMSyncUI.DrawParticipantsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to",
+      "Context": "HMSyncUI.DrawParticipantsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "传送至",
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection:",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "连接：",
+      "Source": "library"
+    },
+    {
+      "Original": "custom",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Server info bar",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "服务器信息栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Modules",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Party",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Developer",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Add custom service",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "添加自定义服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Service name",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "服务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete selected",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Zones",
+      "Context": "HMSyncUI.DrawZonesTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Context": "HMSyncUI.DrawMapInventory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned",
+      "Context": "HMSyncUI.DrawMapInventory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "已固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest",
+      "Context": "HMSyncUI.DrawCutscenes",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "HMSyncUI.DrawPacketsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped",
+      "Context": "HMSyncUI.DrawPacketsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "HMSyncUI.DrawPacketsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent",
+      "Context": "HMSyncUI.DrawCollectibleBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "No matches.",
+      "Context": "HMSyncUI.DrawCollectibleBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有匹配项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to defaults",
+      "Context": "HMSyncUI.DrawCarpetTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear ",
+      "Context": "HMSyncUI.DrawFaceControlBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy##roompw",
+      "Context": "HMSyncUI.DrawSessionHosting",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "HMSyncUI.DrawParticipantsSection",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss",
+      "Context": "HMSyncUI.DrawConfigTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear##mapfilter",
+      "Context": "HMSyncUI.DrawMapInventory",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "HMSyncUI.DrawCollectibleBody",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextDisabled",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings##barset",
+      "Context": "HMSyncUI.DrawCarpetBar",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

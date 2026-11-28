@@ -1,0 +1,337 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PyonPix",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "PyonPix Browser###PyonPixBrowser",
+      "Context": "BrowserWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PyonPix 浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "后退",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click for history",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "右键查看历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Forward",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "前进",
+      "Source": "library"
+    },
+    {
+      "Original": "Abort",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "停止加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Home",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Google or enter a URI",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "通过 Google 搜索或输入网址",
+      "Source": "library"
+    },
+    {
+      "Original": "Submit",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "提交",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Theatre Mode",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "切换影院模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "BrowserWindow.DrawToolbar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "PyonPix Config###PyonPixConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PyonPix 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "ConfigWindow.DrawRendererTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Destination: ",
+      "Context": "ConfigWindow.DrawRendererTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "目的地： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "DataWindow.DrawCacheTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Cache",
+      "Context": "DataWindow.DrawUDFRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "清除缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Processing..",
+      "Context": "DataWindow.DrawUDFRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "处理中",
+      "Source": "library"
+    },
+    {
+      "Original": "Support me on Ko-fi!",
+      "Context": "MainWindow.DrawControlExtras",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "在 Ko-fi 上支持作者！",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "MainWindow.DrawPixRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconLabel",
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "PixConfigWindow.DrawInfoTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "PixConfigWindow.DrawInfoTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Type: ",
+      "Context": "PixConfigWindow.DrawLightTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "光源类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Type: ",
+      "Context": "PixConfigWindow.DrawLightTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "衰减类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Context": "PixConfigWindow.DrawSyncTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "PixMembersWindow.DrawContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconLabel",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Context": "PixMembersWindow.DrawContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconLabel",
+      "Translated": "所有者",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip",
+      "Context": "SetupWindow.DrawNavigationButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconTextButton",
+      "Translated": "跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Continue",
+      "Context": "SetupWindow.DrawNavigationButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconTextButton",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "SetupWindow.DrawNavigationButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconTextButton",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Join",
+      "Context": "SyncSearchWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Search..",
+      "Context": "SyncSearchWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "搜索..",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Filters",
+      "Context": "SyncSearchWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Subscribe",
+      "Context": "SyncSearchWindow.DrawRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "订阅",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsubscribe",
+      "Context": "SyncSearchWindow.DrawRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "取消订阅",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "UpdatesWindow.DrawChangelog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "UserWindow.DrawProperties",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconTextButton",
+      "Translated": "应用",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

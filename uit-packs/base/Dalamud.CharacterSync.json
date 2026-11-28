@@ -1,0 +1,259 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Dalamud.CharacterSync",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " on ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 所在服务器： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Backups to keep:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "保留的备份数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Data Sync has been installed, but it won't do anything until you configure it and restart your game. Please use /pcharsync to access the settings.",
+      "Context": "CharacterSyncPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已安装角色数据同步。请使用 /pcharsync 打开设置，完成配置并重启游戏后即可生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Data Sync has been loaded in the middle of gameplay so it has automatically disabled itself. It will not function until you restart your game.",
+      "Context": "CharacterSyncPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "角色数据同步在游戏运行期间加载，已自动停用。请重启游戏以启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Data Sync has been updated. It will not function until you restart your game.",
+      "Context": "CharacterSyncPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "角色数据同步已更新，重启游戏后生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Sync Config",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "角色数据同步设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Click the button below while being logged in on your main character - all logins from now on will use this character's save data!",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请登录主角色并点击下方按钮。此后登录的所有角色都会使用该角色的存档数据！",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently set to ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前选择： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No character was set as main character yet.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "尚未设置主角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "None of your save data will be modified.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "你现有的存档数据将保持原样。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Backups Folder",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开备份文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Character Sync configuration.",
+      "Context": "CharacterSyncPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开角色数据同步设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please click the button above while being logged in on your main character.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请登录主角色后点击上方按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please log in before using this plugin.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请登录角色后再使用此插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please note that it is recommended to restart your game after changing these settings.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "建议更改设置后重启游戏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart required!",
+      "Context": "CharacterSyncPlugin..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_MinimizedText",
+      "Translated": "需要重启游戏！",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Set save data to current character",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将当前角色设为存档数据来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Setup needed!",
+      "Context": "CharacterSyncPlugin..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_MinimizedText",
+      "Translated": "需要先完成设置！",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Card Sets and Verminion Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步九宫幻卡卡组及萌宠之王设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Character Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步角色设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Chatlog Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步聊天记录设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Gamepad Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步手柄设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Hotbars",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步热键栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Keybinds",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步键位绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Keyboard Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步键盘设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Macros",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同步宏",
+      "Source": "library"
+    },
+    {
+      "Original": "The logged in character is ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前登录角色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "This window allows you to configure Character Sync.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在此设置角色数据同步。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

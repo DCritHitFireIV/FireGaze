@@ -1,0 +1,220 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PortraitStealer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Toggle Portrait Stealer window",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏肖像获取窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to generate string!",
+      "Context": "MainWindow.PerformInitialCalculations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "生成文本失败！",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard!",
+      "Context": "MainWindow.DrawCopyButtonAndStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已复制到剪贴板！",
+      "Source": "library"
+    },
+    {
+      "Original": "Import the copied string using PortraitHelper's clipboard import feature while editing a portrait.",
+      "Context": "MainWindow.DrawExplanationAndWarning",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "编辑肖像时，使用 PortraitHelper 的剪贴板导入功能粘贴已复制的文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: This portrait was captured on ",
+      "Context": "MainWindow.DrawExplanationAndWarning",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "注意：获取此肖像时使用的是 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Portraits",
+      "Context": "MainWindow.DrawTabs",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "副本肖像",
+      "Source": "library"
+    },
+    {
+      "Original": "Open an Adventurer Plate to capture it's portrait.\nLast 10 captured plates are shown below.",
+      "Context": "MainWindow.DrawAdventurerPlateTabContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开冒险者铭牌以获取其中的肖像。\n下方列出最近获取的 10 张铭牌。",
+      "Source": "library"
+    },
+    {
+      "Original": "The Adventurer Plate window is open and ready. Last 10 captured plates are shown below.",
+      "Context": "MainWindow.DrawAdventurerPlateTabContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "冒险者铭牌窗口已就绪。下方列出最近获取的 10 张铭牌。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show capture button on plate",
+      "Context": "MainWindow.DrawAdventurerPlateTabContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在铭牌上显示获取按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Capturing adventurer plate portrait...",
+      "Context": "MainWindow.DrawAdventurerPlateListPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在获取冒险者铭牌肖像……",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture Error: ",
+      "Context": "MainWindow.DrawAdventurerPlateListPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取肖像失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No cached adventurer plates.\nCapture some plates to populate.",
+      "Context": "MainWindow.DrawAdventurerPlateListPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未缓存冒险者铭牌。\n请先获取一些铭牌。",
+      "Source": "library"
+    },
+    {
+      "Original": "Just Captured: ",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "刚刚获取： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Class/Job: ",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "职业／特职： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cached: ",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已缓存： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open your Adventurer Plate first, then capture to populate the list.",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "请先打开自己的冒险者铭牌，再获取肖像以填充列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click 'Capture Portrait' above to begin.",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "点击上方的「获取肖像」开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an adventurer plate from the list to view details.",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "从列表中选择冒险者铭牌以查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "Caches party member portraits when the 'Party Members' UI is open or updated.\nSelect an entry from the list below to view the portrait and copy its data.",
+      "Context": "MainWindow.DrawCachedDutyPortraitsTabContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开或更新小队成员列表时会缓存队员肖像。\n从下方列表选择一项即可查看肖像并复制其数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache is empty.\nOpen the Party Members UI\nin a duty to populate.",
+      "Context": "MainWindow.DrawListPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "缓存为空。\n请在副本中打开小队成员列表，\n以读取肖像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a cached portrait from the list.",
+      "Context": "MainWindow.DrawDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "请从列表中选择已缓存的肖像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected: Slot ",
+      "Context": "MainWindow.DrawDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已选中：栏位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Object ID: ",
+      "Context": "MainWindow.DrawDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "对象 ID： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

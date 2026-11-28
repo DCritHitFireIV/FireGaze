@@ -1,0 +1,525 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Glamaholic",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " window",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " 窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "-You can now move plates into folders via the right-click context menu in the list",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－可在列表中右键点击投影模板，将其移入文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added folder selection to plate creation (thanks @firstmagic)",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "新建投影模板时可选择文件夹（感谢 @firstmagic）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alternative Finder: ",
+      "Context": "AlternativeFinder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "查找替代装备： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "MainInterface.DrawPlateButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Body",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "身体",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "MainInterface.DrawPlateList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Click: link to chat",
+      "Context": "AlternativeFinder.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击：发送物品链接到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard!",
+      "Context": "MainInterface.DrawDyeListLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已复制到剪贴板！",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Context": "MainInterface.DrawPlateList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize",
+      "Context": "MainInterface.DrawRightPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "MainInterface.DrawPlateList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Ears",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "耳饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "MainInterface.DrawPlateButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Feet",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "脚部",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Name:",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件夹名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder:",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件夹：",
+      "Source": "library"
+    },
+    {
+      "Original": "Folders can now be renamed through the right-click context menu.",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "现在可以右键点击文件夹重命名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hands",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "手部",
+      "Source": "library"
+    },
+    {
+      "Original": "Head",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "头部",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from URL",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "从网址导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Importing...",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在导入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Left Ring",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左戒指",
+      "Source": "library"
+    },
+    {
+      "Original": "Legs",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "腿部",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Hand",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Mass Import",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "批量导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Neck",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "项链",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "New Folder",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "新建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "No valid plate data in clipboard.",
+      "Context": "MainInterface.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "剪贴板中没有有效的投影模板数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "MainInterface.DrawDyePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Off Hand",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Open ",
+      "Context": "EditorHelper.DrawDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "打开 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Plates and folders can now be dragged and reordered manually, and automatic sorting has been removed.",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "现可拖动投影模板和文件夹手动排序，已移除自动排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Folder:",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重命名文件夹：",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert",
+      "Context": "MainInterface.DrawRightPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Right Ring",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右戒指",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click: try on",
+      "Context": "AlternativeFinder.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右键：试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "MainInterface.DrawPlateDetail",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Share",
+      "Context": "MainInterface.DrawPlateButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "分享",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Ko-fi button",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示 Ko-fi 按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Show examine window menu",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示角色信息窗口菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plate editor menu",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示投影模板编辑菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Show try on menu",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示试穿菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Target:",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "To ",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "To Root",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移至根目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Troubleshooting mode",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "故障排查模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Try On",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Try On (Glamourer)",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "试穿（Glamourer）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unnamed Folder",
+      "Context": "FolderNode..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "未命名文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Unnamed Plate",
+      "Context": "PlateNode.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "未命名投影模板",
+      "Source": "library"
+    },
+    {
+      "Original": "Untitled Plate",
+      "Context": "MainInterface.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未命名投影模板",
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Context": "MainInterface.DrawChangelog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for URL to be copied...",
+      "Context": "MainInterface.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等待复制网址……",
+      "Source": "library"
+    },
+    {
+      "Original": "Wrists",
+      "Context": "PlateSlotExt.Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "手镯",
+      "Source": "library"
+    },
+    {
+      "Original": "preview ",
+      "Context": "MainInterface.DrawIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "预览 ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

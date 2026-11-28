@@ -1,0 +1,1108 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ActiveVenueFinder",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open Active Venue Finder. Use '/avf config' for settings.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开营业场所列表。输入 '/avf config' 可打开设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "District",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "住宅区",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "小区",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Has Apartment",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "设有公寓房间",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "From ffxivvenues.com (read-only):",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "来自 ffxivvenues.com（只读）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Local tags (your own):",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "本地标签（自己添加）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick add:",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "快速添加：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Tag",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Save as suggestion",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存为标签建议",
+      "Source": "library"
+    },
+    {
+      "Original": "Schedule (multiple slots per day allowed)",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "营业时间（每天可设置多个时段）",
+      "Source": "library"
+    },
+    {
+      "Original": "+ slot",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "+ 时段",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Day",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "次日",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "AddEditVenueWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "(none)",
+      "Context": "AddEditVenueWindow.DrawLocalTagChips",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（无）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no suggestions)",
+      "Context": "AddEditVenueWindow.DrawQuickAddTags",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（暂无建议）",
+      "Source": "library"
+    },
+    {
+      "Original": "SUN",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周日",
+      "Source": "library"
+    },
+    {
+      "Original": "MON",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周一",
+      "Source": "library"
+    },
+    {
+      "Original": "TUE",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周二",
+      "Source": "library"
+    },
+    {
+      "Original": "WED",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周三",
+      "Source": "library"
+    },
+    {
+      "Original": "THU",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周四",
+      "Source": "library"
+    },
+    {
+      "Original": "FRI",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周五",
+      "Source": "library"
+    },
+    {
+      "Original": "SAT",
+      "Context": "AddEditVenueWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周六",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Context": "PopoutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在加载…",
+      "Source": "library"
+    },
+    {
+      "Original": "No active venues",
+      "Context": "PopoutWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前没有营业中的场所",
+      "Source": "library"
+    },
+    {
+      "Original": "Really blacklist this venue?",
+      "Context": "PopoutWindow.DrawBlacklistConfirm",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定将这个场所加入黑名单？",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "PopoutWindow.DrawBlacklistConfirm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "PopoutWindow.DrawBlacklistConfirm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Venue Finder - Settings###AvfSettings",
+      "Context": "SettingsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "营业场所查询设置",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Tags",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "自定义标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Saving...",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在保存…",
+      "Source": "library"
+    },
+    {
+      "Original": " (Lifestream not installed)",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": " （未安装 Lifestream）",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream goto",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "使用 Lifestream 前往",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Venue Page",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "打开场所页面",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy address (/li)",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "复制地址（/li）",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy name",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "复制名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Venue Page URL",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "复制场所页面链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Info",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "打开详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Double-click action",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "双击时执行",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache refresh (s)",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "缓存刷新间隔（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Initial lookahead (h)",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "初始预览时长（小时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show venue info as popup",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在弹窗中显示场所信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace 'Open Venue Page' with an in-game info panel.",
+      "Context": "SettingsWindow.DrawGeneral",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "用游戏内信息面板替代“打开场所页面”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors — Timeline lines",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "颜色：时间轴线条",
+      "Source": "library"
+    },
+    {
+      "Original": "Current time line",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "当前时间线",
+      "Source": "library"
+    },
+    {
+      "Original": "Current line thickness",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "当前时间线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Midnight line",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "午夜分隔线",
+      "Source": "library"
+    },
+    {
+      "Original": "Midnight thickness",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "午夜分隔线宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "6-hour marker",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "每 6 小时刻度",
+      "Source": "library"
+    },
+    {
+      "Original": "Hourly marker",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "每小时刻度",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline background",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "时间轴背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors — Timeline bars",
+      "Context": "SettingsWindow.DrawColorsBars",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "颜色：时间轴条",
+      "Source": "library"
+    },
+    {
+      "Original": "Active bar",
+      "Context": "SettingsWindow.DrawColorsBars",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "营业中",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive (upcoming) bar",
+      "Context": "SettingsWindow.DrawColorsBars",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "尚未营业",
+      "Source": "library"
+    },
+    {
+      "Original": "Always-open bar",
+      "Context": "SettingsWindow.DrawColorsBars",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "全天营业",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors — Row backgrounds",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "颜色：列表行背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment cell bg",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "公寓场所的单元格底色",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "SettingsWindow.DrawFavorite",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorite icon (active)",
+      "Context": "SettingsWindow.DrawFavorite",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "已收藏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorite icon (inactive)",
+      "Context": "SettingsWindow.DrawFavorite",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "未收藏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorite cell bg",
+      "Context": "SettingsWindow.DrawFavorite",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "收藏单元格背景色",
+      "Source": "library"
+    },
+    {
+      "Original": "Text & sizes",
+      "Context": "SettingsWindow.DrawTextSizing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "文字和尺寸",
+      "Source": "library"
+    },
+    {
+      "Original": "Text scale",
+      "Context": "SettingsWindow.DrawTextSizing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "文字缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar height scale",
+      "Context": "SettingsWindow.DrawTextSizing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "时间条高度缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Line thickness scale",
+      "Context": "SettingsWindow.DrawTextSizing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "线宽缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream installed: no",
+      "Context": "SettingsWindow.DrawLifestreamTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已安装 Lifestream：否",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream installed: yes",
+      "Context": "SettingsWindow.DrawLifestreamTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已安装 Lifestream：是",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for Lifestream",
+      "Context": "SettingsWindow.DrawLifestreamTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "检测 Lifestream",
+      "Source": "library"
+    },
+    {
+      "Original": "Infer tags from venue description (fallback)",
+      "Context": "SettingsWindow.DrawAdvancedTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从场所说明中推断标签（备用）",
+      "Source": "library"
+    },
+    {
+      "Original": "New tag name",
+      "Context": "SettingsWindow.DrawTags",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新标签名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Timezone###AvfTimezonePicker",
+      "Context": "TimezonePickerWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "选择时区",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "TimezonePickerWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Venue Finder###ActiveVenueFinder",
+      "Context": "VenueFinderWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "营业场所查询",
+      "Source": "library"
+    },
+    {
+      "Original": "No venues found.",
+      "Context": "VenueFinderWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "找不到场所。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search... (T:tag)",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…（T:tag）",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Venue",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加场所",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Popout",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示独立窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Popout",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "隐藏独立窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose display timezone",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择显示时区",
+      "Source": "library"
+    },
+    {
+      "Original": "World: any",
+      "Context": "VenueFinderWindow.DrawWorldFilter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "服务器：不限",
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Context": "VenueFinderWindow.DrawWorldFilter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "不限",
+      "Source": "library"
+    },
+    {
+      "Original": "District: any",
+      "Context": "VenueFinderWindow.DrawDistrictFilter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "住宅区：不限",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot/Apt",
+      "Context": "VenueFinderWindow.DrawVenueTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地块 / 公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "VenueFinderWindow.DrawVenueTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "VenueFinderWindow.DrawVenueTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Timebar",
+      "Context": "VenueFinderWindow.DrawVenueTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间条",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel via Lifestream",
+      "Context": "VenueFinderWindow.DrawRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "通过 Lifestream 前往",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the configuration window",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Venue Info###AvfVenueInfo",
+      "Context": "VenueInfoWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "场所详情",
+      "Source": "library"
+    },
+    {
+      "Original": "No venue selected.",
+      "Context": "VenueInfoWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择场所。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading banner...",
+      "Context": "VenueInfoWindow.DrawBanner",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在加载横幅…",
+      "Source": "library"
+    },
+    {
+      "Original": "Banner failed: ",
+      "Context": "VenueInfoWindow.DrawBanner",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "横幅加载失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy address",
+      "Context": "VenueInfoWindow.DrawAddress",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击复制地址",
+      "Source": "library"
+    },
+    {
+      "Original": "(no description)",
+      "Context": "VenueInfoWindow.DrawDescription",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（暂无说明）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no tags)",
+      "Context": "VenueInfoWindow.DrawTagsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（暂无标签）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Local Tag",
+      "Context": "VenueInfoWindow.DrawTagsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加本地标签",
+      "Source": "library"
+    },
+    {
+      "Original": "ffxivvenues.com page",
+      "Context": "VenueInfoWindow.DrawVenuePageButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "ffxivvenues.com 页面",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading venues...",
+      "Context": "VenueStatusBar.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载场所列表…",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "VenueStatusBar.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy address",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制地址",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Lifestream command",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制 Lifestream 指令",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Name",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Add favorite",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "加入收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from Blacklist",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从黑名单移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Add##addCt",
+      "Context": "SettingsWindow.DrawTags",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Website##avfWeb",
+      "Context": "VenueInfoWindow.DrawLinkButtons",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry##statusRetry",
+      "Context": "VenueStatusBar.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.SmallButton",
+      "Translated": "重试",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

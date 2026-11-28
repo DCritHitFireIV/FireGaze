@@ -1,0 +1,4712 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BossMod",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  max ",
+      "Context": "[BossMod] TempMapViewer.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "  最大值 ",
+      "Source": "library"
+    },
+    {
+      "Original": " -> Spread",
+      "Context": "[BossMod.Modules] DaemoniacBonds.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": " → 分散",
+      "Source": "library"
+    },
+    {
+      "Original": " Meditation stack",
+      "Context": "[BossMod] ColumnPlayerGaugeSAM.AddMeditationRange",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 剑压层数",
+      "Source": "library"
+    },
+    {
+      "Original": " config",
+      "Context": "[BossMod] BossModuleConfigWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": " error",
+      "Context": "[BossMod] PacketDecoder.DecodePacket",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 错误",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "[BossMod] PacketDecoder.DecodePacket",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " timeline",
+      "Context": "[BossMod] StateMachineWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": " width ",
+      "Context": "[BossMod] AbilityInfo.DescribeShape",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " 宽度 ",
+      "Source": "library"
+    },
+    {
+      "Original": " will cast Trounce (Cone AOE) from the East and West wall. \nMake sure to stay near him to dodge the AOE. \n",
+      "Context": "[BossMod.Modules] Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": " 会从东西两侧场边使用「呵斥」（扇形范围攻击）。 \n贴近它，方便绕开扇形。 \n",
+      "Source": "library"
+    },
+    {
+      "Original": " will cast Trounce (Cone AOE) from the South and North wall. \nMake sure to stay near him to dodge the AOE. \n",
+      "Context": "[BossMod.Modules] Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": " 会从南北两侧场边使用「呵斥」（扇形范围攻击）。 \n贴近它，方便绕开扇形。 \n",
+      "Source": "library"
+    },
+    {
+      "Original": "\" at the top of the timeline.",
+      "Context": "[BossMod] ColumnPlannerTrackStrategy.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "”，位于时间轴顶部。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new...",
+      "Context": "[BossMod] UIPresetEditor.DrawSettingsList",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "新增…",
+      "Source": "library"
+    },
+    {
+      "Original": "Add tether (self + targeted object)",
+      "Context": "[BossMod] DebugVfx.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加连线（自身与当前选中的对象）",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to time specific abilities to cast at specific times.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可安排特定技能在指定时刻施放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always use AOE rotation, even on one target",
+      "Context": "[BossMod.Autorotation] Extendxan.DefineSharedTA",
+      "Role": "UI",
+      "RoleReason": "→ AOEStrategy>.AddOption",
+      "Translated": "即使只有一个目标也始终使用范围攻击循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena center",
+      "Context": "[BossMod] BoundsFromMesh.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "场地中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena test",
+      "Context": "[BossMod] MiniArenaTest..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "场地测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Automates movement during boss fights.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在首领战中自动走位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Abyssal Drain, regardless of targets nearby",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/CarveStrategy>.AddOption",
+      "Translated": "无论附近目标数量如何，均自动使用吸血深渊",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Battle Litany",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/BuffsStrategy>.AddOption",
+      "Translated": "自动使用战斗连祷",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Battle Litany with Lance Charge - will delay if necessary",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/BuffsStrategy>.AddOption",
+      "Translated": "自动配合猛枪使用战斗连祷，必要时延后",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Bloodfest",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/BloodfestStrategy>.AddOption",
+      "Translated": "自动使用血壤",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Bloodfest alongside No Mercy - will delay if necessary",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/BloodfestStrategy>.AddOption",
+      "Translated": "自动配合无情使用血壤，必要时延后",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Bloodspiller or Quietus optimally based on targets nearby",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/BloodStrategy>.AddOption",
+      "Translated": "根据附近目标自动选择血溅或寂灭",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Burst Strike or Fated Circle based on targets nearby",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/CartridgeStrategy>.AddOption",
+      "Translated": "根据附近目标自动选择爆发击或命运之环",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Carve and Spit or Abyssal Drain based on targets nearby",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/CarveStrategy>.AddOption",
+      "Translated": "根据附近目标自动选择精雕怒斩或吸血深渊",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Carve and Spit, regardless of targets nearby",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/CarveStrategy>.AddOption",
+      "Translated": "无论附近目标数量如何，均自动使用精雕怒斩",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Double Down",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/DoubleDownStrategy>.AddOption",
+      "Translated": "自动使用倍攻",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Dragonfire Dive",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "自动使用龙炎冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Dragonfire Dive if Battle Litany buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有战斗连祷增益时自动使用龙炎冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Dragonfire Dive if Lance Charge buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有猛枪增益时自动使用龙炎冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Fight or Flight on cooldown",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/BuffsStrategy>.AddOption",
+      "Translated": "战逃反应冷却完毕后自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Geirskogul",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "自动使用武神枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Geirskogul if Battle Litany buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有战斗连祷增益时自动使用武神枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Geirskogul if Lance Charge buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有猛枪增益时自动使用武神枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Jump",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "自动使用跳跃",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Jump if Battle Litany buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有战斗连祷增益时自动使用跳跃",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Jump if Lance Charge buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有猛枪增益时自动使用跳跃",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Lance Charge",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/BuffsStrategy>.AddOption",
+      "Translated": "自动使用猛枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Ley Lines",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "自动使用黑魔纹",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Life Surge",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/SurgeStrategy>.AddOption",
+      "Translated": "自动使用龙剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Manafont",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "自动使用魔泉",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use No Mercy",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/NoMercyStrategy>.AddOption",
+      "Translated": "自动使用无情",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Requiescat on cooldown",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/BuffsStrategy>.AddOption",
+      "Translated": "安魂祈祷冷却完毕后自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Shield Lob as ranged attack if outside melee range",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "超出近战范围时自动以投盾作为远程攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Sonic Break",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/SonicBreakStrategy>.AddOption",
+      "Translated": "自动使用音速破",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Stardiver",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "自动使用坠星冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Stardiver if Battle Litany buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有战斗连祷增益时自动使用坠星冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Stardiver if Lance Charge buff is currently active",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
+      "Translated": "有猛枪增益时自动使用坠星冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Average (current): ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "平均体力（当前）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Average (predicted): ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "平均体力（预测）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid puddles during lightning bolts.",
+      "Context": "[BossMod.Modules] WaterPuddles.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "在落雷期间避开地面伤害区。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait first any",
+      "Context": "[BossMod.Modules] AIExperiment.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AIExperiment/WNWitchHuntStrategy>.AddOption",
+      "Translated": "优先引导，位置不限",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait first near (first or second)",
+      "Context": "[BossMod.Modules] AIExperiment.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AIExperiment/WNWitchHuntStrategy>.AddOption",
+      "Translated": "优先引导近处的第一或第二次攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait the boss away from the middle of the arena. \n",
+      "Context": "[BossMod.Modules] Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "将首领引离场地中央。 \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait: ",
+      "Context": "[BossMod.Modules] FourLongNightsBait.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "引导： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Banana Codex: West-relative; stack paired with defam",
+      "Context": "[BossMod.Modules] Replication2Tethers.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "Banana Codex 打法：以西为基准，分摊与大圈两两配对",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss module hints",
+      "Context": "[BossMod] BossModuleHintsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "首领机制提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Break the tether!",
+      "Context": "[BossMod] Chains.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "拉断连线！",
+      "Source": "library"
+    },
+    {
+      "Original": "CD Planner",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "技能时间轴规划器",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Caro/wQc (EU): stack/defam alternate",
+      "Context": "[BossMod.Modules] Replication3Tethers.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "Caro/wQc（欧服）：分摊与大圈交替站位",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast end",
+      "Context": "[BossMod] StateMachineBuilder.ActorCastEnd",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "咏唱结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast start: ",
+      "Context": "[BossMod] StateMachineBuilder.ActorCastStart",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "开始咏唱： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cat stacks: ",
+      "Context": "[BossMod.Modules] Adds.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "猫的层数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "[BossMod] ModuleViewer.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Category: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "类别： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cell size",
+      "Context": "[BossMod] FloodFillVisualizer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "单元格大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "[BossMod] ConfigUI.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear filters",
+      "Context": "[BossMod] EventList.OpListContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear tether",
+      "Context": "[BossMod] DebugVfx.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除连线",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete",
+      "Context": "[BossMod] ModuleViewer.DrawModules",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[BossMod] ColumnPlayerDetails.DrawPlanSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Count: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Creates a CD plan for supported bosses.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "为支持的首领编排技能时间轴。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current state: ",
+      "Context": "[BossMod] ReplayDetailsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DN (NA): N group stacks, S group defams",
+      "Context": "[BossMod.Modules] Replication3Tethers.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "DN（美服）：北组分摊，南组放大圈",
+      "Source": "library"
+    },
+    {
+      "Original": "DN: true North; stack paired with stack",
+      "Context": "[BossMod.Modules] Replication2Tethers.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "DN 打法：以场地正北为基准，分摊与分摊配对",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "[BossMod] DebugGraphics.DrawWatchedMods",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "[BossMod] ColumnPlayerDetails.DrawPlanSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/BuffsStrategy>.AddOption",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay ",
+      "Context": "[BossMod.Autorotation] ToolsExtensions.DefineGCD",
+      "Role": "UI",
+      "RoleReason": "→ GCDStrategy>.AddOption",
+      "Translated": "延迟 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay dodge movement by 0.5s",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DelayMovementStrategy>.AddOption",
+      "Translated": "延迟 0.5 秒开始躲避",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay dodge movement by 1s",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DelayMovementStrategy>.AddOption",
+      "Translated": "延迟 1 秒开始躲避",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay movement by 0.5s",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DelayMovementStrategy>.AddOption",
+      "Translated": "延迟 0.5 秒移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay movement by 1s",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DelayMovementStrategy>.AddOption",
+      "Translated": "延迟 1 秒移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Biolysis",
+      "Context": "[BossMod.Autorotation] AkechiSCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSCH/BioStrategy>.AddOption",
+      "Translated": "延后使用蛊毒法",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Drill",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/DrillStrategy>.AddOption",
+      "Translated": "延后使用钻头",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Energy Drain",
+      "Context": "[BossMod.Autorotation] AkechiSCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSCH/EnergyStrategy>.AddOption",
+      "Translated": "延后使用能量吸收",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Hypercharge",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/HyperchargeStrategy>.AddOption",
+      "Translated": "延后使用超荷",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Reassemble",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/ReassembleStrategy>.AddOption",
+      "Translated": "延后使用整备",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay use of Wildfire",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/WildfireStrategy>.AddOption",
+      "Translated": "延后使用野火",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "[BossMod] ConfigChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable movement",
+      "Context": "[BossMod] AIWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁用移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable the current category (currently: ",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "停用当前分类（当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable the current module (currently: ",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "停用当前模块（当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Context": "[BossMod] UIPresetDatabaseEditor.DrawPendingSwitch",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance: ",
+      "Context": "[BossMod] QuestBattle.DrawDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "距离： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not delay dodge movement",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DelayMovementStrategy>.AddOption",
+      "Translated": "不延后躲避移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not end Guard early",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardEndStrategy>.AddOption",
+      "Translated": "不提前结束防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Afflatus Misery",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用苦难之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Analysis",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/AnalysisStrategy>.AddOption",
+      "Translated": "不使用分析",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Aquaveil",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/AquaveilStrategy>.AddOption",
+      "Translated": "不使用水流幕",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Bishop Autoturret",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用象式浮空炮塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Crimson Cyclone",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/CycloneStrategy>.AddOption",
+      "Translated": "不使用深红旋风",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Cure",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "不使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Elusive Jump",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/ElusiveDirection>.AddOption",
+      "Translated": "不使用回避跳跃",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Fight or Flight",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/BuffsStrategy>.AddOption",
+      "Translated": "不使用战逃反应",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Full Metal Field",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用全金属爆发",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Goring Blade",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/GoringBladeStrategy>.AddOption",
+      "Translated": "不使用沥血剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Intervene",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/DashStrategy>.AddOption",
+      "Translated": "不使用调停",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Limit Break",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/LBStrategy>.AddOption",
+      "Translated": "不使用极限技",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Miracle of Nature",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用自然的奇迹",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Mountain Buster",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/BusterStrategy>.AddOption",
+      "Translated": "不使用山崩",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Necrotize",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用坏死爆发",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Radiant Aegis",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/AegisStrategy>.AddOption",
+      "Translated": "不使用守护之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Requiescat",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/BuffsStrategy>.AddOption",
+      "Translated": "不使用安魂祈祷",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Ruin IV",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/Ruin4Strategy>.AddOption",
+      "Translated": "不使用毁绝",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Scattergun",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用霰弹枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Seraph Strike",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/SeraphStrategy>.AddOption",
+      "Translated": "不使用炽天强袭",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Slipstream",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用螺旋气流",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not use Wildfire",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "不使用野火",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't use",
+      "Context": "[BossMod.Autorotation] VeynWAR.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynWAR/FellCleaveStrategy>.AddOption",
+      "Translated": "不使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Drag boss to the arena center",
+      "Context": "[BossMod.Ultimate] FRUAI.Definition",
+      "Role": "UI",
+      "RoleReason": "→ FRUAI/MovementStrategy>.AddOption",
+      "Translated": "将首领拉到场地中心",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw raidwide nodes only",
+      "Context": "[BossMod] StateMachineWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅绘制全屏伤害节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw tankbuster nodes only",
+      "Context": "[BossMod] StateMachineWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅绘制坦克死刑节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw unnamed nodes",
+      "Context": "[BossMod] StateMachineWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "绘制未命名节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeons",
+      "Context": "[BossMod] ConfigUI.DrawNodesByCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "[BossMod] DebugObstacles.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit ",
+      "Context": "[BossMod] ModuleViewer.ModulePlansPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "编辑 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "[BossMod] ConfigChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "[BossMod] DefaultOnRenderer.DrawValue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled for supported bosses, visible in the \"Supported Bosses\" tab.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "对「支持的首领」页中列出的首领生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "End Guard 0.25 seconds early",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardEndStrategy>.AddOption",
+      "Translated": "提前 0.25 秒结束防御",
+      "Source": "library"
+    },
+    {
+      "Original": "End Guard 0.5 seconds early",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardEndStrategy>.AddOption",
+      "Translated": "提前 0.5 秒结束防御",
+      "Source": "library"
+    },
+    {
+      "Original": "End Guard 1 second early",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardEndStrategy>.AddOption",
+      "Translated": "提前 1 秒结束防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy ",
+      "Context": "[BossMod] ReplayDetailsWindow.DrawEnemyTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "敌人 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion",
+      "Context": "[BossMod] ModuleViewer.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "[BossMod] UIPresetDatabaseEditor.DrawPresetSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to clipboard",
+      "Context": "[BossMod] CooldownPlannerColumns.DrawCommonControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "For the radar to be the same size as it was before this update, you should set it to ",
+      "Context": "[BossMod] ArenaScaleNotice.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "若希望雷达大小与更新前相同，请将其设为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Blasting Zone entirely",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/ZoneStrategy>.AddOption",
+      "Translated": "禁止使用爆破领域",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Fated Circle entirely",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CommonStrategy>.AddOption",
+      "Translated": "禁止使用命运之环",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Gnashing Fang entirely",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CommonStrategy>.AddOption",
+      "Translated": "禁止使用烈牙",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Heart of Corundum entirely",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "禁止使用刚玉之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Limit Break entirely",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/LBStrategy>.AddOption",
+      "Translated": "禁止使用极限技",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Purify",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/DefensiveStrategy>.AddOption",
+      "Translated": "禁止使用净化",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Recuperate",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/ThresholdStrategy>.AddOption",
+      "Translated": "禁止使用自愈",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Rough Divide entirely",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/DivideStrategy>.AddOption",
+      "Translated": "禁止使用粗分斩",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Sprint",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/DefensiveStrategy>.AddOption",
+      "Translated": "禁止使用冲刺",
+      "Source": "library"
+    },
+    {
+      "Original": "Forbid use of Unmend",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/UnmendStrategy>.AddOption",
+      "Translated": "禁止使用伤残",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Battle Litany ASAP",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/BuffsStrategy>.AddOption",
+      "Translated": "强制尽快使用战斗连祷",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Bloodfest ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/BloodfestStrategy>.AddOption",
+      "Translated": "强制尽快使用血壤",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Double Down ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/DoubleDownStrategy>.AddOption",
+      "Translated": "强制尽快使用倍攻",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Gnashing Fang ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/GnashingStrategy>.AddOption",
+      "Translated": "强制尽快使用烈牙",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Lance Charge ASAP",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/BuffsStrategy>.AddOption",
+      "Translated": "强制尽快使用猛枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Ley Lines ASAP",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "强制尽快使用黑魔纹",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Life Surge ASAP",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/SurgeStrategy>.AddOption",
+      "Translated": "强制尽快使用龙剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Lion Heart ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/ReignStrategy>.AddOption",
+      "Translated": "强制尽快使用终结之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Manafont ASAP",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "强制尽快使用魔泉",
+      "Source": "library"
+    },
+    {
+      "Original": "Force No Mercy ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/NoMercyStrategy>.AddOption",
+      "Translated": "强制尽快使用无情",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Noble Blood ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/ReignStrategy>.AddOption",
+      "Translated": "强制尽快使用支配之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Reign of Beasts ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/ReignStrategy>.AddOption",
+      "Translated": "强制尽快使用崛起之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Savage Claw ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/GnashingStrategy>.AddOption",
+      "Translated": "强制尽快使用猛兽爪",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Sonic Break ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/SonicBreakStrategy>.AddOption",
+      "Translated": "强制尽快使用音速破",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Swiftcast ASAP",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "强制尽快使用即刻咏唱",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Triplecast ASAP",
+      "Context": "[BossMod.Autorotation] AkechiBLM.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiBLM/CommonStrategy>.AddOption",
+      "Translated": "强制尽快使用三连咏唱",
+      "Source": "library"
+    },
+    {
+      "Original": "Force True North ASAP",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/TrueNorthStrategy>.AddOption",
+      "Translated": "强制尽快使用真北",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Wicked Talon ASAP",
+      "Context": "[BossMod.Autorotation] AkechiGNB.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNB/GnashingStrategy>.AddOption",
+      "Translated": "强制尽快使用凶禽爪",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Abyssal Drain ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/CarveStrategy>.AddOption",
+      "Translated": "强制尽快使用吸血深渊",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Battle Voice ASAP",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/BuffsStrategy>.AddOption",
+      "Translated": "强制尽快使用战斗之声",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Carve and Spit ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/CarveStrategy>.AddOption",
+      "Translated": "强制尽快使用精雕怒斩",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Comeuppance ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/DeliriumComboStrategy>.AddOption",
+      "Translated": "强制尽快使用报应",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Impalement ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/DeliriumComboStrategy>.AddOption",
+      "Translated": "强制尽快使用刺穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Radiant Finale ASAP",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/BuffsStrategy>.AddOption",
+      "Translated": "强制尽快使用光明神的最终乐章",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Raging Strikes ASAP",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/BuffsStrategy>.AddOption",
+      "Translated": "强制尽快使用猛者强击",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Scarlet Delirium ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/DeliriumComboStrategy>.AddOption",
+      "Translated": "强制尽快使用血红乱",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use Torcleaver ASAP when available",
+      "Context": "[BossMod.Autorotation] AkechiDRK.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRK/DeliriumComboStrategy>.AddOption",
+      "Translated": "强制尽快使用戮山",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Bioblaster",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/DrillStrategy>.AddOption",
+      "Translated": "强制使用毒菌冲击",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Drill",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/DrillStrategy>.AddOption",
+      "Translated": "强制使用钻头",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Reassemble in next possible weave window",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/ReassembleStrategy>.AddOption",
+      "Translated": "强制在下一个可用插入时机使用整备",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Reassemble, regardless of weaving",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/ReassembleStrategy>.AddOption",
+      "Translated": "强制使用整备，不考虑能力技插入时机",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Wildfire in next possible weave window",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/WildfireStrategy>.AddOption",
+      "Translated": "强制在下一个可用插入时机使用野火",
+      "Source": "library"
+    },
+    {
+      "Original": "Force use of Wildfire, regardless of weaving",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/WildfireStrategy>.AddOption",
+      "Translated": "强制使用野火，不考虑能力技插入时机",
+      "Source": "library"
+    },
+    {
+      "Original": "Forced movement direction: ",
+      "Context": "[BossMod] MainDebugWindow.DrawStatuses",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "强制移动方向： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Forced movement: ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "强制移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "GTFO from forbidden stack!",
+      "Context": "[BossMod] UntelegraphedBait.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "离开不该参与的分摊！",
+      "Source": "library"
+    },
+    {
+      "Original": "GTFO from other stacks!",
+      "Context": "[BossMod] MultiLineStack.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "避开其他组的分摊！",
+      "Source": "library"
+    },
+    {
+      "Original": "Gaze!",
+      "Context": "[BossMod] DebugAutorotation.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "背对视线攻击！",
+      "Source": "library"
+    },
+    {
+      "Original": "Gazes 1: ",
+      "Context": "[BossMod.Ultimate] P4Debuffs.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "第一组视线： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Gazes 2: ",
+      "Context": "[BossMod.Ultimate] P4Debuffs.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "第二组视线： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Context": "[BossMod] PetData.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate arena bounds from navmesh",
+      "Context": "[BossMod] BoundsFromMesh..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "按导航网格生成场地边界",
+      "Source": "library"
+    },
+    {
+      "Original": "Get blinded by the Teary Twirl AOE from the mandragoras.\nBlindness makes you immune to all the gaze attacks.\nThe eyes in act 2 are weak to lightning damage.",
+      "Context": "[BossMod.Modules] Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "主动吃下蔓德拉战队的范围攻击「洋葱汁」，获得失明。\n失明后可免疫所有视线攻击。\n第二幕的眼怪弱雷。",
+      "Source": "library"
+    },
+    {
+      "Original": "Go to the \"Autorotation Presets\" tab to create a preset.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "前往「自动输出方案」页创建方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Groups",
+      "Context": "[BossMod.Modules] DaemoniacBonds.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the radar window",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "隐藏雷达窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Context": "[BossMod] DebugMapEffect.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.ListBox",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Hit by tankbuster",
+      "Context": "[BossMod] TankbusterTether.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "被死刑击中",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore any special conditions (knockbacks, pyretics, etc)",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/SpecialModesStrategy>.AddOption",
+      "Translated": "忽略击退、热病等特殊条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "[BossMod] UIPresetDatabaseEditor.DrawPresetSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from clipboard",
+      "Context": "[BossMod] CooldownPlannerColumns.DrawCommonControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Context": "[BossMod] StateMachine.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CompileSeStringWrapped",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Intercept: ",
+      "Context": "[BossMod.Modules] InversiveChlamys.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "拦截： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Context": "[BossMod] MainDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Kills: ",
+      "Context": "[BossMod.Modules] AutoClear.DrawExtra",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "击杀数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Knockback contour",
+      "Context": "[BossMod] MiniArenaTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "击退边界",
+      "Source": "library"
+    },
+    {
+      "Original": "Knockbacks pending, ",
+      "Context": "[BossMod] ReplayDetailsWindow.DrawCommonColumns",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "即将发生击退， ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "[BossMod] MainDebugWindow.DrawPlayerAttributes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "[BossMod] MainDebugWindow.DrawCastingEnemiesList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Lowest HP ally (current): ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "体力最低的队友（当前）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Lowest HP ally (predicted): ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "体力最低的队友（预测）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Context": "[BossMod] UIBitmapEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Modules:",
+      "Context": "[BossMod] UIRotationWindow.DrawActiveModules",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模块：",
+      "Source": "library"
+    },
+    {
+      "Original": "Modules: ",
+      "Context": "[BossMod] ReplayDetailsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "模块： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Move ",
+      "Context": "[BossMod.Ultimate] P3GrandOctet.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "移动 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Move: ",
+      "Context": "[BossMod.Ultimate] P2SanctityOfTheWard1Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement: ",
+      "Context": "[BossMod.Ultimate] P4FateCalibrationAlphaStillnessMotion.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next bait: ",
+      "Context": "[BossMod.Modules] WideningNarrowingWitchHuntBait.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "下次引导： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next mechanic: ",
+      "Context": "[BossMod.Modules] AzdajasShadow.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "下一个机制： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: ",
+      "Context": "[BossMod.Ultimate] P1UtopianSkySpreadStack.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "下一步： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: party stacks",
+      "Context": "[BossMod.Modules] ColorClash.OnCastStarted",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "接下来：小队分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: spread",
+      "Context": "[BossMod.Modules] EmberPyre.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "接下来：分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Next: stack",
+      "Context": "[BossMod.Modules] EmberPyre.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "接下来：分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "No automatic movement",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/DestinationStrategy>.AddOption",
+      "Translated": "不自动移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing queued",
+      "Context": "[BossMod] UIRotationWindow.DrawNextActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "队列为空",
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "[BossMod] UIStrategyValue.DrawEditorTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use Auto Crossbow, regardless of targets",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/HeatOption>.AddOption",
+      "Translated": "无论目标数量如何，只使用自动弩",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use Bioblaster, regardless of targets",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/DrillStrategy>.AddOption",
+      "Translated": "无论目标数量如何，只使用毒菌冲击",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use Drill, regardless of targets",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/DrillStrategy>.AddOption",
+      "Translated": "无论目标数量如何，只使用钻头",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use Heat Blast, regardless of targets",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/HeatOption>.AddOption",
+      "Translated": "无论目标数量如何，只使用热冲击",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "[BossMod] ReplayManager.DrawNewEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Replay Folder",
+      "Context": "[BossMod] AboutTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开回放文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open file",
+      "Context": "[BossMod] ReplayManager.DrawNewEntry",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Open folder",
+      "Context": "[BossMod] ReplayManager.DrawNewEntry",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open settings",
+      "Context": "[BossMod] Overlays.DrawPseudoTitlebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open wiki",
+      "Context": "[BossMod] AIMigrationNotice.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Wiki",
+      "Source": "library"
+    },
+    {
+      "Original": "Order: spread -> mid -> stack",
+      "Context": "[BossMod.Modules] VenomSquallSurge.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "顺序：分散 → 中场 → 分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Order: stack -> mid -> spread",
+      "Context": "[BossMod.Modules] VenomSquallSurge.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "顺序：分摊 → 中场 → 分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Out → star → cross → stack center",
+      "Context": "[BossMod.Modules] BladesOfCarnageCombo.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "远离 → 星形 → 十字 → 中场分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "[BossMod] DebugObjects.DrawObjectTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Party",
+      "Context": "[BossMod] MainDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Party health",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "小队体力",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Player pos",
+      "Context": "[BossMod] MiniArenaTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "玩家位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "[BossMod] DebugParty.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Prepare to stack in pairs",
+      "Context": "[BossMod.Modules] TetraOctaFlareConceptual.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "准备双人分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset",
+      "Context": "[BossMod] Preset.ToString",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets:",
+      "Context": "[BossMod] UIRotationWindow.DrawRotationSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "预设：",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "[BossMod] UIRotationWindow.DrawNextActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority: ",
+      "Context": "[BossMod] UIStrategyValue.Preview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "优先级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Provides an on-screen window that contains an area mini-map showing player positions, boss position(s), various imminent AoEs, and other mechanics.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在小地图窗口中显示玩家和首领的位置、即将出现的范围攻击及其他机制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Quests",
+      "Context": "[BossMod] MainDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius",
+      "Context": "[BossMod] MiniArenaTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: ",
+      "Context": "[BossMod] DebugObjects.DrawObjectTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "半径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Range: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "范围： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Context": "[BossMod] UIBitmapEditor.DrawUndoRedoButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "[BossMod] ReplayManagementWindow.DrawCull",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Context": "[BossMod] DebugObstacles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload: ",
+      "Context": "[BossMod.Modules] TrickReload.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "重新加载： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember my choice",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记住我的选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove all",
+      "Context": "[BossMod] DtrConfig.DrawCustom",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "全部移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Replay timeline: ",
+      "Context": "[BossMod] ReplayTimelineWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "回放时间轴： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Replays",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "回放",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "[BossMod] ShrinkTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default",
+      "Context": "[BossMod.Modules] DrawCustom",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Resolution",
+      "Context": "[BossMod] PathfindingTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "分辨率",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Context": "[BossMod.Modules] AutoClear.DrawWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Run to the middle of the arena! \n",
+      "Context": "[BossMod.Modules] Hints.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "跑到场地中央！ \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "[BossMod] DebugObstacles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save ",
+      "Context": "[BossMod] ReplayTimelineWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Save config",
+      "Context": "[BossMod] MainDevWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "[BossMod] ModuleViewer.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "See exactly whether you're getting clipped by incoming AoE or not.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可直接看出自己是否处在即将生效的范围攻击内。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select all",
+      "Context": "[BossMod] ReplayManager.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select...",
+      "Context": "[BossMod] DtrConfig.DrawCustom",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "选择…",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "[BossMod] ReplayManager.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ",
+      "Context": "[BossMod] MainDevWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all",
+      "Context": "[BossMod] ColumnPlayerActions.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Show changelog",
+      "Context": "[BossMod] AboutTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Show timeline",
+      "Context": "[BossMod] EventList.DrawTimelines",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Size: ",
+      "Context": "[BossMod] Editor.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip current step",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过当前步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip step",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Special movement: ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "特殊移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread -> ",
+      "Context": "[BossMod.Modules] DaemoniacBonds.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分散 → ",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread -> Stack",
+      "Context": "[BossMod.Modules] InvocationOfVengeance.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分散 → 分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack -> Spread",
+      "Context": "[BossMod.Modules] InvocationOfVengeance.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊 → 分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack all",
+      "Context": "[BossMod.Modules] Crystallize.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "全队分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack and knockback",
+      "Context": "[BossMod.Modules] Twister.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊并处理击退",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack boss & hand",
+      "Context": "[BossMod.Ultimate] P1HandOfPartingPrayer.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "将首领和手拉到一起",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack by: ",
+      "Context": "[BossMod.Modules] EventideFallTriad.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊分组依据： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack in fours",
+      "Context": "[BossMod.Modules] Crystallize.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "四人一组分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack with other tanks!",
+      "Context": "[BossMod] GenericSharedTankbuster.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "与其他坦克分摊！",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack with other targets!",
+      "Context": "[BossMod] StackTogether.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "与其他被点名者分摊！",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack with tank!",
+      "Context": "[BossMod] GenericSharedTankbuster.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "与坦克分摊！",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack: ",
+      "Context": "[BossMod.Modules] DirectorsBelone.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stacks: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "层数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Start recording",
+      "Context": "[BossMod] ReplayManagementWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Start recording###rec",
+      "Context": "[BossMod] ReplayManagementWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting position",
+      "Context": "[BossMod] PathfindingTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "起始位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "[BossMod] DebugAction.DrawActionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stay on edge of hitbox",
+      "Context": "[BossMod] FakeFloatRenderer.DrawValue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "站在目标圈边缘",
+      "Source": "library"
+    },
+    {
+      "Original": "Stay on edge of hitbox (+/- 1 unit)",
+      "Context": "[BossMod.Autorotation] StayCloseToPartyRole.Definition",
+      "Role": "UI",
+      "RoleReason": "→ StayCloseToPartyRole/RangeDefinition>.AddOption",
+      "Translated": "站在目标圈边缘（允许偏差 1 单位）",
+      "Source": "library"
+    },
+    {
+      "Original": "Stay within effective range as long as possible; try to ensure safety is reached before mechanic resolves",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/RangeStrategy>.AddOption",
+      "Translated": "尽量保持在有效距离内，并在机制结算前到达安全位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Context": "[BossMod] QuestBattle.DrawObjectives",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "步骤 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop moving!",
+      "Context": "[BossMod] StayMove.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "停止移动！",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop recording",
+      "Context": "[BossMod] ReplayManagementWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop recording###rec",
+      "Context": "[BossMod] ReplayManagementWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止录制",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap sides to drop moon stacks!",
+      "Context": "[BossMod.Modules] MoonStatus.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "换边以消除月亮层数！",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "[BossMod] UITabs.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "页签",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster",
+      "Context": "[BossMod.Modules] InfirmSoul..ctor",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster ",
+      "Context": "[BossMod.Ultimate] UCOBStates.P5AkhMorn",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "死刑 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster (multi-hit)",
+      "Context": "[BossMod.Modules] Surpanakha.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "连续死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster 5x",
+      "Context": "[BossMod.Modules] AetherialRay.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "五连死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster cleave",
+      "Context": "[BossMod.Modules] HeightOfChaos.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "范围死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster close",
+      "Context": "[BossMod.Modules] P1Smash.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "近距离死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster far",
+      "Context": "[BossMod.Modules] P1Smash.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "远距离死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster x",
+      "Context": "[BossMod.Modules] AkhMorn.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "死刑次数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster: shared",
+      "Context": "[BossMod.Ultimate] P6Wyrmsbreath.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Tankbuster: solo",
+      "Context": "[BossMod.Ultimate] P6Wyrmsbreath.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "单人死刑",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "[BossMod] ColumnPlannerTrackTarget.DescribeElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Targetable",
+      "Context": "[BossMod] StateMachineBuilder.ActorTargetable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "可选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets:",
+      "Context": "[BossMod] AbilityInfo.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether ID",
+      "Context": "[BossMod] DebugVfx.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "连线 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "The VBM radar now respects your global Dalamud UI scale.",
+      "Context": "[BossMod] ArenaScaleNotice.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "VBM 雷达现已跟随 Dalamud 的全局界面缩放。",
+      "Source": "library"
+    },
+    {
+      "Original": "This module does not expose any configuration",
+      "Context": "[BossMod] BossModuleConfigWindow.DrawEncounterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此模块没有可调整的设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "[BossMod] MainDebugWindow.DrawCastingEnemiesList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline",
+      "Context": "[BossMod] ReplayDetailsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Total: ",
+      "Context": "[BossMod] AIHintsVisualizer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "合计： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "[BossMod] UIBitmapEditor.DrawUndoRedoButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unload all",
+      "Context": "[BossMod] ReplayManager.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部卸载",
+      "Source": "library"
+    },
+    {
+      "Original": "Unload selected",
+      "Context": "[BossMod] ReplayManager.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "卸载选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Unselect all",
+      "Context": "[BossMod] ReplayManager.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Untargetable",
+      "Context": "[BossMod] StateMachineBuilder.ActorTargetable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "不可选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Untethered bait: ",
+      "Context": "[BossMod.Modules] AccursedEdge.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "无连线玩家引导： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ",
+      "Context": "[BossMod.Autorotation] GenericUtility.DefineSimpleConfig",
+      "Role": "UI",
+      "RoleReason": "→ GenericUtility/SimpleOption>.AddOption",
+      "Translated": "使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use AOE rotation if beneficial",
+      "Context": "[BossMod.Autorotation] Extendxan.DefineSharedTA",
+      "Role": "UI",
+      "RoleReason": "→ AOEStrategy>.AddOption",
+      "Translated": "适合时使用范围攻击循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ASAP",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/PotionStrategy>.AddOption",
+      "Translated": "尽快使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aetherpact",
+      "Context": "[BossMod.Autorotation] ClassSCHUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSCHUtility/AetherpactOption>.AddOption",
+      "Translated": "使用以太契约",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Afflatus Misery when available",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用苦难之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aquaveil when HP is below 100%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/AquaveilStrategy>.AddOption",
+      "Translated": "体力低于100%时使用水流幕",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aquaveil when HP is below 50%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/AquaveilStrategy>.AddOption",
+      "Translated": "体力低于50%时使用水流幕",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aquaveil when HP is below 75%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/AquaveilStrategy>.AddOption",
+      "Translated": "体力低于75%时使用水流幕",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aspected Helios",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/HeliosOption>.AddOption",
+      "Translated": "使用阳星相位",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Asylum",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ GenericUtility/SimpleOption>.AddOption",
+      "Translated": "使用庇护所",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Aurora",
+      "Context": "[BossMod.Autorotation] ClassGNBUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassGNBUtility/AuroraStrategy>.AddOption",
+      "Translated": "使用极光",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Bloodwhetting",
+      "Context": "[BossMod.Autorotation] ClassWARUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWARUtility/BWOption>.AddOption",
+      "Translated": "使用原初的血气",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Bravery when available",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用勇气",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Comet when available",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用彗星",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Concitation",
+      "Context": "[BossMod.Autorotation] ClassSCHUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSCHUtility/SuccorOption>.AddOption",
+      "Translated": "使用意气轩昂之策",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/CureOption>.AddOption",
+      "Translated": "使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure II",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/CureOption>.AddOption",
+      "Translated": "使用救疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure III",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/CureOption>.AddOption",
+      "Translated": "使用愈疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure on party members only",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureTargetStrategy>.AddOption",
+      "Translated": "仅对队友使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure on self only",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureTargetStrategy>.AddOption",
+      "Translated": "仅对自己使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure on self or party members",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureTargetStrategy>.AddOption",
+      "Translated": "对自己或队友使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure when HP is below 40%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "体力低于40%时使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure when HP is below 50%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "体力低于50%时使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure when HP is below 60%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "体力低于60%时使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure when HP is below 70%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "体力低于70%时使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Cure when HP is below 80%",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CureStrategy>.AddOption",
+      "Translated": "体力低于80%时使用治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Damnation",
+      "Context": "[BossMod.Autorotation] ClassWARUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWARUtility/VengOption>.AddOption",
+      "Translated": "使用戮罪",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Deployment Tactics",
+      "Context": "[BossMod.Autorotation] ClassSCHUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSCHUtility/DeployOption>.AddOption",
+      "Translated": "使用展开战术",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dervish when available",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用速度之星",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eagle Eye Shot when available",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用锐眼追击",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Earthly Star",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/StarOption>.AddOption",
+      "Translated": "使用地星",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eukrasian Diagnosis",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/DiagnosisOption>.AddOption",
+      "Translated": "使用均衡诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eukrasian Prognosis",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/PrognosisOption>.AddOption",
+      "Translated": "使用均衡预后",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eukrasian Prognosis II",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/PrognosisOption>.AddOption",
+      "Translated": "使用均衡预后II",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Full Swing when available",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用全力挥打",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Guardian",
+      "Context": "[BossMod.Autorotation] ClassPLDUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassPLDUtility/SentOption>.AddOption",
+      "Translated": "使用卫护",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Heart of Corundum",
+      "Context": "[BossMod.Autorotation] ClassGNBUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassGNBUtility/HoCOption>.AddOption",
+      "Translated": "使用刚玉之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Heart of Stone",
+      "Context": "[BossMod.Autorotation] ClassGNBUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassGNBUtility/HoCOption>.AddOption",
+      "Translated": "使用石之心",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Helios Conjunction",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/HeliosOption>.AddOption",
+      "Translated": "使用阳星合相",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Holy Sheltron",
+      "Context": "[BossMod.Autorotation] ClassPLDUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassPLDUtility/ShelOption>.AddOption",
+      "Translated": "使用圣盾阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Horoscope",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/HoroscopeOption>.AddOption",
+      "Translated": "使用天宫图",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Intervention",
+      "Context": "[BossMod.Autorotation] ClassPLDUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassPLDUtility/ShelOption>.AddOption",
+      "Translated": "使用干预",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Kardia",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/KardiaOption>.AddOption",
+      "Translated": "使用心关",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Limit Break when available",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/LBStrategy>.AddOption",
+      "Translated": "可用时使用极限技",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Liturgy of the Bell",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/LiturgyOption>.AddOption",
+      "Translated": "使用礼仪之铃",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Macrocosmos",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/MacrocosmosOption>.AddOption",
+      "Translated": "使用大宇宙",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Medica II",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/MedicaOption>.AddOption",
+      "Translated": "使用医济",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Medica III",
+      "Context": "[BossMod.Autorotation] ClassWHMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWHMUtility/MedicaOption>.AddOption",
+      "Translated": "使用医养",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Microcosmos",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/MacrocosmosOption>.AddOption",
+      "Translated": "使用小宇宙",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Miracle of Nature when available",
+      "Context": "[BossMod.Autorotation] AkechiWHMPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiWHMPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用自然的奇迹",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Nascent Flash",
+      "Context": "[BossMod.Autorotation] ClassWARUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWARUtility/BWOption>.AddOption",
+      "Translated": "使用原初的勇猛",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Necrotize when available",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用坏死爆发",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Oblation",
+      "Context": "[BossMod.Autorotation] ClassDRKUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassDRKUtility/OblationStrategy>.AddOption",
+      "Translated": "使用献奉",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Phantom Dart when available",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用幻影弹",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Physis",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/PhysisOption>.AddOption",
+      "Translated": "使用自生",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Physis II",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/PhysisOption>.AddOption",
+      "Translated": "使用自生II",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Radiant Aegis",
+      "Context": "[BossMod.Autorotation] ClassSMNUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSMNUtility/AegisStrategy>.AddOption",
+      "Translated": "使用守护之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Rampart when available",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用铁壁",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Raw Intuition",
+      "Context": "[BossMod.Autorotation] ClassWARUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWARUtility/BWOption>.AddOption",
+      "Translated": "使用原初的直觉",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Recitation",
+      "Context": "[BossMod.Autorotation] ClassSCHUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSCHUtility/RecitationOption>.AddOption",
+      "Translated": "使用秘策",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Rust when available",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/RoleActionStrategy>.AddOption",
+      "Translated": "可用时使用武装削弱",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Sacred Soil",
+      "Context": "[BossMod.Autorotation] ClassSCHUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSCHUtility/SacredSoilOption>.AddOption",
+      "Translated": "使用野战治疗阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Scattergun when available",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用霰弹枪",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Sentinel",
+      "Context": "[BossMod.Autorotation] ClassPLDUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassPLDUtility/SentOption>.AddOption",
+      "Translated": "使用预警",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Shadow Wall",
+      "Context": "[BossMod.Autorotation] ClassDRKUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassDRKUtility/WallOption>.AddOption",
+      "Translated": "使用暗影墙",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Shadowed Vigil",
+      "Context": "[BossMod.Autorotation] ClassDRKUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassDRKUtility/WallOption>.AddOption",
+      "Translated": "使用暗影卫",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Sheltron",
+      "Context": "[BossMod.Autorotation] ClassPLDUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassPLDUtility/ShelOption>.AddOption",
+      "Translated": "使用盾阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Slipstream when available",
+      "Context": "[BossMod.Autorotation] AkechiSMNPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiSMNPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用螺旋气流",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Soteria",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/KardiaOption>.AddOption",
+      "Translated": "使用拯救",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Stellar Detonation",
+      "Context": "[BossMod.Autorotation] ClassASTUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassASTUtility/StarOption>.AddOption",
+      "Translated": "使用星体爆轰",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Tengentsu",
+      "Context": "[BossMod.Autorotation] ClassSAMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSAMUtility/EyeOption>.AddOption",
+      "Translated": "使用天眼通",
+      "Source": "library"
+    },
+    {
+      "Original": "Use The Blackest Night",
+      "Context": "[BossMod.Autorotation] ClassDRKUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassDRKUtility/TBNStrategy>.AddOption",
+      "Translated": "使用至黑之夜",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Third Eye",
+      "Context": "[BossMod.Autorotation] ClassSAMUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSAMUtility/EyeOption>.AddOption",
+      "Translated": "使用心眼",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Vengeance",
+      "Context": "[BossMod.Autorotation] ClassWARUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassWARUtility/VengOption>.AddOption",
+      "Translated": "使用复仇",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Wildfire when available",
+      "Context": "[BossMod.Autorotation] AkechiMCHPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCHPvP/CommonStrategy>.AddOption",
+      "Translated": "可用时使用野火",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Zoe",
+      "Context": "[BossMod.Autorotation] ClassSGEUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ ClassSGEUtility/ZoeOption>.AddOption",
+      "Translated": "使用活化",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 30%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于30%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 40%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于40%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 50%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于50%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 60%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于60%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 70%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于70%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use when HP is at or below 80%",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/CorundumStrategy>.AddOption",
+      "Translated": "体力不高于80%时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Useful because you don't have to remember what ability names mean.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无需记住每个技能名代表的机制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Value: ",
+      "Context": "[BossMod] MainDebugWindow.DrawLimitBreak",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "数值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "WIP: some mechanics may be missing or wrong. Only loaded with \"Allow WIP modules\" enabled.",
+      "Context": "[BossMod] ModuleViewer.DrawModules",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开发中：部分机制可能缺失或有误。仅在开启「允许加载开发中的模块」后加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Warnings: ",
+      "Context": "[BossMod] ClassDefinitions.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "警告： ",
+      "Source": "library"
+    },
+    {
+      "Original": "What would you like to do?",
+      "Context": "[BossMod] BossModuleMainWindow.DrawRadarClosePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请选择操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Window: ",
+      "Context": "[BossMod] ColumnPlannerTrack.HoverElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "窗口： ",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "[BossMod] DebugParty.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Your saved radar scale was ",
+      "Context": "[BossMod] ArenaScaleNotice.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "上次保存的雷达缩放为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone ",
+      "Context": "[BossMod] Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "[BossMod] QuestBattle.DrawDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "auto",
+      "Context": "[BossMod] ReplayManagementWindow.DrawRecordingStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "[BossMod] MovementOverride.UpdateLegacyMode",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "[BossMod] MovementOverride.UpdateLegacyMode",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "icon",
+      "Context": "[BossMod] ModuleViewer.DrawFiltersTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "in -> spread",
+      "Context": "[BossMod.Modules] AzdajasShadow.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "靠近 → 分散",
+      "Source": "library"
+    },
+    {
+      "Original": "item ",
+      "Context": "[BossMod] PacketDecoder.DecodeMarketBoardItemHistory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "knockback",
+      "Context": "[BossMod.Modules] EnaeroEndeath.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "击退",
+      "Source": "library"
+    },
+    {
+      "Original": "load",
+      "Context": "[BossMod] Editor.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "manual",
+      "Context": "[BossMod] ReplayManagementWindow.DrawRecordingStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "move",
+      "Context": "[BossMod] AIWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Context": "[BossMod] DebugParty.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Context": "[BossMod] DebugObjects.DumpObjectTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "out -> stack",
+      "Context": "[BossMod.Modules] AzdajasShadow.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "远离 → 分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "range ",
+      "Context": "[BossMod] AbilityInfo.DescribeShape",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "范围 ",
+      "Source": "library"
+    },
+    {
+      "Original": "save",
+      "Context": "[BossMod] Editor.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "spread",
+      "Context": "[BossMod.Modules] TrickReload.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分散",
+      "Source": "library"
+    },
+    {
+      "Original": "stack",
+      "Context": "[BossMod.Modules] TrickReload.AddGlobalHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "target",
+      "Context": "[BossMod] StatusData.AppliedToString",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "width ",
+      "Context": "[BossMod] AbilityInfo.DescribeShape",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "宽度 ",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Context": "[BossMod] DebugParty.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "2+0: first towers are soaked by short color and 0 unstable; they both then go north for second towers",
+      "Context": "[属性] PropertyComboAttribute [BossMod.Modules] BossMod.Endwalker.Savage.P12S2PallasAthena.P12S2PallasAthenaConfig::PangenesisFirstStack",
+      "Translated": "2+0：短颜色和不安定 0 层的人踩第一轮塔，之后两人都去北侧踩第二轮塔。",
+      "Source": "library"
+    },
+    {
+      "Original": "2+1: first towers are soaked by short color and 1 unstable; they both then go to different second towers",
+      "Context": "[属性] PropertyComboAttribute [BossMod.Modules] BossMod.Endwalker.Savage.P12S2PallasAthena.P12S2PallasAthenaConfig::PangenesisFirstStack",
+      "Translated": "2+1：短颜色和不安定 1 层的人踩第一轮塔，之后分别去不同的第二轮塔。",
+      "Source": "library"
+    },
+    {
+      "Original": "AI Configuration",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.AI.AIConfig",
+      "Translated": "AI 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Absolute Authority: ignore flares, stack together",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Extreme.Ex3Sphene.Ex3SpheneConfig::AbsoluteAuthorityIgnoreFlares",
+      "Translated": "绝对君权：忽略核爆点名，全队集中",
+      "Source": "library"
+    },
+    {
+      "Original": "Act 4: go 1/8 CCW to soak tower with dark debuff",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Endwalker.Savage.P4S2Hesperos.P4S2Config::Act4DarkSoakCCW",
+      "Translated": "第四幕：逆时针移动八分之一圈，带暗属性减益踩塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Act 4: go 3/8 CCW to break water tether",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Endwalker.Savage.P4S2Hesperos.P4S2Config::Act4WaterBreakCCW",
+      "Translated": "第四幕：逆时针移动八分之三圈，拉断水线",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Tweaks",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.ActionTweaksConfig",
+      "Translated": "动作调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor indicator scale factor",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ActorScale",
+      "Translated": "角色标记缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor indicator size scales with arena size",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ActorDynamicScale",
+      "Translated": "角色标记随场地大小缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Add opaque background to the arena in the radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::OpaqueArenaBackground",
+      "Translated": "给雷达上的场地添加不透明背景",
+      "Source": "library"
+    },
+    {
+      "Original": "All prey roles rotate clockwise",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2PreySwapDirection::RotateCW",
+      "Translated": "所有被点名的职能顺时针轮转",
+      "Source": "library"
+    },
+    {
+      "Original": "All prey roles rotate counterclockwise",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2PreySwapDirection::RotateCCW",
+      "Translated": "所有被点名的职能逆时针轮转",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance assignment for hints",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Foray.ForkedTower.ForkedTowerConfig::PlayerAlliance",
+      "Translated": "按所选团队分组显示提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow WIP modules",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::AllowIncompleteModules",
+      "Translated": "允许加载开发中的模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow drawing non-party players on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowAllPlayers",
+      "Translated": "允许在雷达上显示队外玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow modules to automatically interact with objects",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::AllowAutomaticInteract",
+      "Translated": "允许模块自动与物体交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow modules to automatically use actions",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::AllowAutomaticActions",
+      "Translated": "允许模块自动使用技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Also enables in-world movement hints (see Settings -> Boss Modules and Radar -> Show movement hints in world)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM11STheTyrant.RM11STheTyrantConfig::WeaponHints",
+      "Translated": "同时启用场景中的移动提示（见「设置 → 首领模块与雷达 → 在场景中显示移动提示」）",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show W->NE hints",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Shadowbringers.Ultimate.TEA.TEAConfig/P2Intermission::AlwaysFirst",
+      "Translated": "始终显示从西到东北的提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show all alive party members",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowIrrelevantPlayers",
+      "Translated": "始终显示所有存活队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show focus targeted party member",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowFocusTargetPlayer",
+      "Translated": "始终显示被设为焦点目标的队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Always use preferred direction",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2OuterTowers::AlwaysPreferred",
+      "Translated": "始终使用首选方向",
+      "Source": "library"
+    },
+    {
+      "Original": "Anemos",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod.Modules] BossMod.Stormblood.Foray.Anemos.AnemosConfig",
+      "Translated": "常风地带",
+      "Source": "library"
+    },
+    {
+      "Original": "Anonymize replays",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ReplayManagementConfig::Anonymize",
+      "Translated": "回放匿名化",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: N cardinal highlight",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaHighlightN",
+      "Translated": "场地：正北方位高亮",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: background",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaBackground",
+      "Translated": "场地：背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: border",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaBorder",
+      "Translated": "场地：边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: enemy",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaEnemy",
+      "Translated": "场地：敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant caster",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericCaster",
+      "Translated": "场地：普通或与机制无关的魔法职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant focus target",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericFocus",
+      "Translated": "场地：普通或与机制无关的焦点目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant healer",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericHealer",
+      "Translated": "场地：普通或与机制无关的治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant melee",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericMelee",
+      "Translated": "场地：普通或与机制无关的近战职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant phys. ranged",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericPhysRanged",
+      "Translated": "场地：普通或与机制无关的远程物理职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant player (can be overridden by role-specific colors, depending on settings)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGeneric",
+      "Translated": "场地：普通或与机制无关的玩家（可按设置改用职能颜色）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: generic/irrelevant tank",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerGenericTank",
+      "Translated": "场地：普通或与机制无关的坦克",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: interesting player, important for a mechanic",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerInteresting",
+      "Translated": "场地：需重点关注的机制相关玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: melee range indicator",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaMeleeRing",
+      "Translated": "场地：近战范围提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: non-enemy important object (untargetable origin of a tether, interactible object, etc)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaObject",
+      "Translated": "场地：需关注的非敌方物体（如不可选中的连线起点、可交互物体）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: player character",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPC",
+      "Translated": "场地：玩家自身",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: player not in current party/alliance (usually not drawn on map)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerReallyGeneric",
+      "Translated": "场地：队外或团队外的玩家（通常不显示在地图上）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: typical danger foreground element (tether, etc)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaDanger",
+      "Translated": "场地：危险标记（如连线）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: typical danger zone (AOE)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaAOE",
+      "Translated": "场地：危险区域（范围攻击）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: typical safe foreground element (tether, etc)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaSafe",
+      "Translated": "场地：安全标记（如连线）",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: typical safe zone",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaSafeFromAOE",
+      "Translated": "场地：安全区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Arena: vulnerable player, needs special attention",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ColorConfig::ArenaPlayerVulnerable",
+      "Translated": "场地：处于危险中、需要重点关注的玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign closest unambiguous inner tower",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2InnerTowers::Closest",
+      "Translated": "分配最近且归属明确的内侧塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign first CW tower that is not assigned to someone closer",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2InnerTowers::CW",
+      "Translated": "顺时针分配第一个尚未分给较近玩家的塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Assume G1 left, G2 right when looking at boss from arena center",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM08SHowlingBlade.RM08SHowlingBladeConfig/ReignStrategy::Standard",
+      "Translated": "从场地中心面向首领时，默认 1 组在左、2 组在右",
+      "Source": "library"
+    },
+    {
+      "Original": "Assume G1 right, G2 left when looking at boss from arena center",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM08SHowlingBlade.RM08SHowlingBladeConfig/ReignStrategy::Inverse",
+      "Translated": "从场地中心面向首领时，默认 1 组在右、2 组在左",
+      "Source": "library"
+    },
+    {
+      "Original": "Assume the AOE is circular, with no inner safe spot",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.AIHintsConfig/DonutFallbackBehavior::AssumeCircle",
+      "Translated": "按实心圆范围处理，内部没有安全点",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto misdirection: prevent movement under misdirection if angle between normal movement and misdirected is greater than this threshold (set to 180 to disable).",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::MisdirectionThreshold",
+      "Translated": "方向错乱：实际移动方向与输入方向的夹角超过此阈值时停止移动。设为 180 可关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Autorotation",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.Autorotation.AutorotationConfig",
+      "Translated": "自动输出循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid known trap locations sourced from PalacePal data. (Traps revealed by a Pomander of Sight will always be avoided regardless of this setting.)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Global.DeepDungeon.AutoDDConfig::TrapHints",
+      "Translated": "避开 PalacePal 记录的已知陷阱。已被「魔陶器：全景」揭示的陷阱始终会绕开，不受此设置影响。",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Modules and Radar",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.BossModuleConfig",
+      "Translated": "首领模块与雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Change arena border color if player is at risk",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowBorderRisk",
+      "Translated": "玩家可能受击时改变场地边框颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes the white border to red when you are standing somewhere you are likely to be hit by a mechanic",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowBorderRisk",
+      "Translated": "站在可能被机制命中的位置时，将场地的白色边框改为红色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clocks - stack marker goes to N/NE safe spot, spreads adjust",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM08SHowlingBlade.RM08SHowlingBladeConfig/TerrestrialRageStrategy::Clock",
+      "Translated": "时钟站位：分摊点名去北／东北安全点，分散玩家自行调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable current module (and hide radar)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig/RadarCloseBehavior::DisableActiveModule",
+      "Translated": "停用当前模块并隐藏雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable current module and all modules in the same category",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig/RadarCloseBehavior::DisableActiveModuleCategory",
+      "Translated": "停用当前模块及同分类下的所有模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable movement",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.AI.AIConfig::ForbidMovement",
+      "Translated": "禁用移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.Autorotation.AutorotationConfig/DtrStatus::None",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't assume any order",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM10STheXtremes.RM10STheXtremesConfig/CleanseOrder::None",
+      "Translated": "不预设顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't show any hints",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Shadowbringers.Ultimate.TEA.TEAConfig/P2Intermission::None",
+      "Translated": "不显示任何提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't try to assign inner towers",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2InnerTowers::None",
+      "Translated": "不尝试分配内侧塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't try to assign outer towers",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config/P2OuterTowers::None",
+      "Translated": "不尝试分配外侧塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw N cardinal in a different color",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::HighlightN",
+      "Translated": "使用不同颜色绘制正北标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw pet on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowPet",
+      "Translated": "在雷达上显示宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.AI.AIConfig::Enabled",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::Enable",
+      "Translated": "启用雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.OutOfCombatActionsConfig::Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod.Modules] BossMod.Stormblood.Foray.EurekaConfig",
+      "Translated": "优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Give radar extra space for rotations",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::AddSlackForRotations",
+      "Translated": "为雷达旋转预留空间",
+      "Source": "library"
+    },
+    {
+      "Original": "Globally scales the outline thickness of radar elements",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ThicknessScale",
+      "Translated": "统一调整雷达元素的轮廓线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig/RadarCloseBehavior::DisableRadar",
+      "Translated": "隐藏雷达",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold to allow movement while casting",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::MoveEscapeHatch",
+      "Translated": "按住以允许咏唱时移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Intermission tower/bait assignments (clockwise, starting from north)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Extreme.Ex8Enuo.Ex8EnuoConfig::IntermissionTower",
+      "Translated": "转场阶段踩塔／引导分工（从正北顺时针排列）",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock radar and hint window movement and mouse interaction",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::Lock",
+      "Translated": "锁定雷达和提示窗口，并禁止鼠标与其交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Meteorain: meteor tether assignments",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM11STheTyrant.RM11STheTyrantConfig::ForegoneFatalityAssignments",
+      "Translated": "陨石雨：陨石连线分工",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig/ModifierKey::None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "North",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Clockspot::N",
+      "Translated": "北",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Bound of Faith (light party tethers): group assignments & flex priority (lower number flexes)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1BoundOfFaithAssignment",
+      "Translated": "P1 罪壤刺（四人连线）：分组及补位优先级，数字较小者补位。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Cyclonic Break (proteans): bait clock spots (supports should be near dd to resolve pairs)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1CyclonicBreakSpots",
+      "Translated": "P1 暴风破（扇形引导）：按八方站位引导，坦克和治疗靠近输出职业，方便两人分摊。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Cyclonic Break (proteans): pairs dodge direction",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1CyclonicBreakStackSupportsCCW",
+      "Translated": "P1 暴风破（扇形引导）：双人分摊时的躲避方向",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Cyclonic Break (proteans): spread dodge direction for DD",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1CyclonicBreakSpreadDDCCW",
+      "Translated": "P1 暴风破（扇形引导）：分散时输出职业的躲避方向",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Cyclonic Break (proteans): spread dodge direction for supports",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1CyclonicBreakSpreadSupportsCCW",
+      "Translated": "P1 暴风破（扇形引导）：分散时坦克和治疗的躲避方向",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Explosions: have tanks stack on tankbuster (survivable with saves, simplifies uptime)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1ExplosionsTankbusterCheese",
+      "Translated": "P1 爆炸：双坦分摊死刑（开启足够减伤即可承受，方便保持输出）",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Fall of Faith (cone tethers): conga priority (two people without tethers with lower priorities join odd group)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1FallOfFaithAssignment",
+      "Translated": "P1 罪壤断（扇形连线）：排队优先级；未连线的四人中，优先级较低的两人加入奇数组。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Fall of Faith (cone tethers): odd groups go W (rather than N)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1FallOfFaithEW",
+      "Translated": "P1 罪壤断（扇形连线）：奇数组去西侧，代替北侧。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Fireball 1: add stack-avoid hints for tanks and healer",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Stormblood.Ultimate.UCOB.UCOBConfig::P1Fireball1LBHints",
+      "Translated": "P1 第一次火球：为坦克和治疗显示避开分摊的提示",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Gravitas: Spread destinations",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.UMAD.UMADConfig::P1GravityPuddleSpread",
+      "Translated": "P1 重力弹：分散位置",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Utopian Sky: initial clock spots (MT should be near OT to resolve tankbuster)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1UtopianSkyInitialSpots",
+      "Translated": "P1 乐园绝技：初始八方站位。主坦应靠近副坦，方便处理死刑。",
+      "Source": "library"
+    },
+    {
+      "Original": "P1 Utopian Sky: spread spots (G1 CCW from N, G2 CW from NE)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P1UtopianSkySpreadSpots",
+      "Translated": "P1 乐园绝技：分散站位。1 组从正北逆时针排，2 组从东北顺时针排。",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Banish after Light Rampant: role that moves from their default spread spot to resolve pairs",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2Banish2SupportsMoveToStack",
+      "Translated": "P2 光之失控后的 Banish：需要离开默认分散位去双人分摊的职能",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Banish after Light Rampant: spread clock spots (supports should be near dd to resolve pairs)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2Banish2SpreadSpots",
+      "Translated": "P2 光之失控后的 Banish：分散的八方站位。坦克和治疗靠近输出职业，方便两人分摊。",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Diamond Dust: knockback groups",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2DiamondDustKnockbacks",
+      "Translated": "P2 钻石星尘：击退分组",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Intermission: clock spots (cardinals prioritize their crystals, intercardinals bait)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2IntermissionClockSpots",
+      "Translated": "P2 转场：八方站位。正方向玩家优先处理自己的水晶，斜方向玩家负责引导。",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Mirror Mirror: spread spots for first proteans (looking from boss toward blue mirror)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2MirrorMirror1SpreadSpots",
+      "Translated": "P2 Mirror Mirror：第一轮扇形的分散站位（从首领面向蓝镜）",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Mirror Mirror: spread spots for second proteans (looking toward red mirror, if both red mirrors are symmetrical assume CW rotation)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P2MirrorMirror2SpreadSpots",
+      "Translated": "P2 Mirror Mirror：第二轮扇形的分散站位（面向红镜；两面红镜对称时按顺时针处理）",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Party Synergy: G2 order for Remote Glitch (far tether)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P2PartySynergyG2ReverseAll",
+      "Translated": "P2 协作程序PT：2 组处理「故障：远」时的站位顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Party Synergy: Swap priority if both stacks are in the same group",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P2PartySynergyStackSwapSouth",
+      "Translated": "P2 协作程序PT：若两处分摊点名在同组，按此优先级换位",
+      "Source": "library"
+    },
+    {
+      "Original": "P2 Sanctity of the Ward (meteors): force preferred cardinals even for 120-degree pattern (simpler swaps, but trickier movement)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.DSW2.DSW2Config::P2Sanctity2ForcePreferredPrey",
+      "Translated": "P2 苍穹之阵：圣杖（陨石）：即使出现 120 度阵型也使用首选正方向，换位更简单但走位更难。",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Apocalypse: ignore swaps and use initial static positions for spreads",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P3ApocalypseStaticSpreads",
+      "Translated": "P3 启示：不换位，按起始固定站位分散",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Blackhole tether assignments",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.UMAD.UMADConfig::P3BlackholeStrategy",
+      "Translated": "P3 黑洞连线分工",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Darkest Dance: baiter",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P3DarkestDanceOTBait",
+      "Translated": "P3 暗夜舞蹈：引导者",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Intermission: spread/stack position",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P3IntermissionStacksNorth",
+      "Translated": "P3 转场：分散／分摊位置",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Intermission: spread/stack spot assignments, from West to East",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P3IntermissionAssignments",
+      "Translated": "P3 转场：分散／分摊站位分配，从西向东排列",
+      "Source": "library"
+    },
+    {
+      "Original": "P3 Slap Happy: show movement hints",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.UMAD.UMADConfig::P3SlapHappyHints",
+      "Translated": "P3 Slap Happy：显示走位提示",
+      "Source": "library"
+    },
+    {
+      "Original": "P4 Somber Dance: baiter",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P4SomberDanceOTBait",
+      "Translated": "P4 真夜舞蹈：引导者",
+      "Source": "library"
+    },
+    {
+      "Original": "P5 Maddening Orchestra: treat Chaotic Holy as a spread",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.UMAD.UMADConfig::P5MaddeningSpreadAll",
+      "Translated": "P5 Maddening Orchestra：将混沌神圣按分散处理",
+      "Source": "library"
+    },
+    {
+      "Original": "P5 Polarizing Strikes: bait order",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.FRU.FRUConfig::P5PolarizingStrikesAssignments",
+      "Translated": "P5 星灵之剑：引导顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent melees and tanks from hitting untethered rays",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM06SSugarRiot.RM06SSugarRiotConfig::ForbiddenManta",
+      "Translated": "防止近战和坦克攻击未连线的鳐鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent movement and action execution when pyretic-like mechanics are imminent (set to 0 to disable, otherwise increase threshold depending on your ping).",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::PyreticThreshold",
+      "Translated": "热病等机制即将生效时停止移动和使用技能。设为 0 可关闭，延迟较高时可适当调大阈值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent movement while casting",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::PreventMovingWhileCasting",
+      "Translated": "咏唱期间禁止移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar arena scale factor",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ArenaScale",
+      "Translated": "雷达场地缩放比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Radar element thickness scale factor",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ThicknessScale",
+      "Translated": "雷达元素线宽缩放比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove extra framerate-induced cooldown delay",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::RemoveCooldownDelay",
+      "Translated": "消除帧率导致的额外复唱延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Removes the black window around the radar; this will not work if you move the radar to a different monitor",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::TrishaMode",
+      "Translated": "移除雷达周围的黑色窗体。将雷达移到另一台显示器后，此设置不生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Replays",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.ReplayManagementConfig",
+      "Translated": "回放",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate radar to match camera orientation",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::RotateArena",
+      "Translated": "雷达随镜头朝向旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale of the arena inside of the radar window",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ArenaScale",
+      "Translated": "雷达窗口内的场地缩放比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds in advance to show spotlight safe spots (default: 15)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM05SDancingGreen.RM05SDancingGreenConfig::SpotlightHintSeconds",
+      "Translated": "提前多少秒显示聚光灯安全点（默认 15 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Separates the radar window from the hints window, allowing you to reposition the hints window",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::HintsInSeparateWindow",
+      "Translated": "将雷达窗口与提示窗口分开，以便单独移动提示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Server info bar",
+      "Context": "[属性] ConfigDisplayAttribute.Name [BossMod] BossMod.DtrConfig",
+      "Translated": "服务器信息栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show arena border in radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowBorder",
+      "Translated": "在雷达上显示场地边界",
+      "Source": "library"
+    },
+    {
+      "Original": "Show cardinal direction names on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowCardinals",
+      "Translated": "在雷达上标注东南西北",
+      "Source": "library"
+    },
+    {
+      "Original": "Show mechanic sequence and timer hints",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowMechanicTimers",
+      "Translated": "显示机制顺序和倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Show melee range indicator on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowMeleeRange",
+      "Translated": "在雷达上显示近战范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Show movement hints in world",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowWorldArrows",
+      "Translated": "在游戏场景中显示移动提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show outlines and shadows on various radar markings",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowOutlinesAndShadows",
+      "Translated": "为雷达标记添加轮廓和阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Show predicted mob movements (based on aggro and pull distance)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowPullDebug",
+      "Translated": "显示预测的怪物移动路线（根据仇恨及引怪距离计算）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show role-based colors on otherwise uncolored players in the radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ColorPlayersBasedOnRole",
+      "Translated": "给雷达上未指定颜色的玩家按职能着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Show signs on radar ('attack', 'bind', 'ignore', and shape markers)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowSigns",
+      "Translated": "在雷达上显示目标标记（攻击、止步、禁止和图形标记）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show testing radar and hint window",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowDemo",
+      "Translated": "显示测试用雷达及提示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show waymark shapes on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::StrokeWaymarks",
+      "Translated": "在雷达上显示场地标记的形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Show waymarks on radar",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowWaymarks",
+      "Translated": "在雷达上显示场地标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Soak assignments for Gaze of the Void (clockwise, starting from tank orbs)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Extreme.Ex8Enuo.Ex8EnuoConfig::VoidGaze",
+      "Translated": "混沌激流的承伤分工（从坦克球开始，按顺时针排列）",
+      "Source": "library"
+    },
+    {
+      "Original": "South",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Clockspot::S",
+      "Translated": "南",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack (CCW)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication2Role::Stack2",
+      "Translated": "逆时针分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack (CW)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication2Role::Stack1",
+      "Translated": "顺时针分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack N1",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication3Role::Stack1",
+      "Translated": "分摊：北 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack N2",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication3Role::Stack2",
+      "Translated": "分摊：北 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack S1",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication3Role::Stack3",
+      "Translated": "分摊：南 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Stack S2",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM12S2TheLindwurm.Replication3Role::Stack4",
+      "Translated": "分摊：南 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Stacks N, spreads S",
+      "Context": "[属性] PropertyComboAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P3IntermissionStacksNorth",
+      "Translated": "北侧分摊，南侧分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Stacks S, spreads N",
+      "Context": "[属性] PropertyComboAttribute [BossMod.Ultimate] BossMod.Endwalker.Ultimate.TOP.TOPConfig::P3IntermissionStacksNorth",
+      "Translated": "南侧分摊，北侧分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Text only",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.Autorotation.AutorotationConfig/DtrStatus::TextOnly",
+      "Translated": "仅文字",
+      "Source": "library"
+    },
+    {
+      "Original": "This mechanic can be ignored using tank LB or mit. Disable if you want less clutter on the minimap.",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Extreme.Ex4Zelenia.Ex4ZeleniaConfig::ShowHolyHazard",
+      "Translated": "这个机制可以用坦克极限技或减伤硬吃。若觉得小地图标记太多，可关闭此项。",
+      "Source": "library"
+    },
+    {
+      "Original": "This option only affects certain categories of content, like adventuring forays.",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowAllPlayers",
+      "Translated": "此设置只影响部分内容，例如特殊场景探索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time before gaze activation to start avoiding",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.SmartRotationConfig::MinTimeToAvoid",
+      "Translated": "提前多少秒开始躲避视线攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Titan gaols priorities (close < far)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Stormblood.Ultimate.UWU.UWUConfig::P3GaolPriorities",
+      "Translated": "泰坦石牢优先级（近 < 远）",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparent background for text hints window",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::HintsFloating",
+      "Translated": "文字提示窗口背景透明",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparent radar window background",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::TrishaMode",
+      "Translated": "雷达窗口背景透明",
+      "Source": "library"
+    },
+    {
+      "Original": "Trophy Weapons: protean bait positions (relative to boss facing direction)",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM11STheTyrant.RM11STheTyrantConfig::WeaponHintsScythe",
+      "Translated": "战利品兵装：扇形引导位置（以首领面向为准）",
+      "Source": "library"
+    },
+    {
+      "Original": "Trophy Weapons: show positioning hints on minimap",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM11STheTyrant.RM11STheTyrantConfig::WeaponHints",
+      "Translated": "战利品兵装：在小地图显示站位提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Trophy Weapons: sword bait positions",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM11STheTyrant.RM11STheTyrantConfig::WeaponHintsSword",
+      "Translated": "战利品兵装：剑的引导位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Try to avoid traps",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Global.DeepDungeon.AutoDDConfig::TrapHints",
+      "Translated": "尝试避开陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Try to prevent dashing into AOEs",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.ActionTweaksConfig::DashSafety",
+      "Translated": "尽量避免突进范围攻击区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Try to use terrain to LOS attacks",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Global.DeepDungeon.AutoDDConfig::AutoLOS",
+      "Translated": "尝试利用地形遮挡攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Useful for configuring your radar and hint windows without being inside of a boss encounter",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.BossModuleConfig::ShowDemo",
+      "Translated": "可在首领战以外测试和调整雷达、提示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Whole party stack on A/C marker",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Ultimate] BossMod.Dawntrail.Ultimate.UMAD.UMADConfig/P1GravityPuddlePlacement::StackAll",
+      "Translated": "全队在 A／C 标记处分摊",
+      "Source": "library"
+    },
+    {
+      "Original": "Windfang/Stonefang clock spots",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod.Modules] BossMod.Dawntrail.Savage.RM08SHowlingBlade.RM08SHowlingBladeConfig::WindfangStonefangSpots",
+      "Translated": "风牙／石牙的八方站位",
+      "Source": "library"
+    },
+    {
+      "Original": "With icon",
+      "Context": "[属性] PropertyDisplayAttribute [BossMod] BossMod.Autorotation.AutorotationConfig/DtrStatus::Icon",
+      "Translated": "带图标",
+      "Source": "library"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LazyLoot",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Is Item Unlocked?",
+      "Context": "ConfigUi.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "是否已解锁此物品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Value Tester",
+      "Context": "ConfigUi.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "调试值测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Unlocked: ",
+      "Context": "ConfigUi.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "解锁状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loot",
+      "Context": "ConfigUi.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "战利品",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Untradeables",
+      "Context": "ConfigUi.DrawOnlyUntradeableCheckbox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅限不可交易物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to import on your clipboard",
+      "Context": "ConfigUi.ImportFromClipboard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "剪贴板中没有可导入的内容",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

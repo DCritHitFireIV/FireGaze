@@ -1,0 +1,529 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Yourcraft",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Close",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "List Mode",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "列表模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose Actor Mode",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "集体动作角色模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Config",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Danger Zone",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "危险操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Export JSON",
+      "Context": "MainWindow.DrawMapPresetImportExportSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出 JSON",
+      "Source": "library"
+    },
+    {
+      "Original": "Select JSON File",
+      "Context": "MainWindow.DrawMapPresetImportExportSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择 JSON 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Import File",
+      "Context": "MainWindow.DrawMapPresetImportExportSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "导入文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "MainWindow.DrawSceneEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Snap Step",
+      "Context": "MainWindow.DrawSceneEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "移动吸附步长",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale Snap Step",
+      "Context": "MainWindow.DrawSceneEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "缩放吸附步长",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Selection",
+      "Context": "MainWindow.DrawSceneEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "MainWindow.DrawSceneEditorRecordSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "MainWindow.DrawSceneEditorRecordSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind: ",
+      "Context": "MainWindow.DrawSceneEditorNativePanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "种类： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "MainWindow.DrawSceneEditorNativePanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy MDL Path",
+      "Context": "MainWindow.DrawSceneEditorNativePanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制 MDL 模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "MainWindow.DrawDeleteAllActorsConfirmationPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to Player Position",
+      "Context": "MainWindow.DrawSelectedActorTransformEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移动至玩家位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "MainWindow.DrawSelectedActorTransformEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Lips",
+      "Context": "MainWindow.DrawSelectedActorBehaviorEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "嘴唇",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply Lips Once",
+      "Context": "MainWindow.DrawSelectedActorBehaviorEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "单次应用唇部设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Step",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Up",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Down",
+      "Context": "MainWindow.DrawSelectedActorActionSequenceEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Stay In Pose",
+      "Context": "MainWindow.DrawActorActionStepAnimationOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保持姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Move Yaw",
+      "Context": "MainWindow.DrawActorActionStepMoveOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用移动偏航角",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "MainWindow.DrawBgPartSelectionControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory",
+      "Context": "MainWindow.DrawProtectedResourcePathTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Note",
+      "Context": "MainWindow.DrawProtectedResourcePathTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "MainWindow.DrawProtectedResourcePathTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Position",
+      "Context": "MainWindow.DrawSelectedLocalLayoutObjectControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Rotation",
+      "Context": "MainWindow.DrawSelectedLocalLayoutObjectControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置旋转角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply MDL Path",
+      "Context": "MainWindow.DrawSelectedLocalLayoutObjectControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用 MDL 模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore MDL Path",
+      "Context": "MainWindow.DrawSelectedLocalLayoutObjectControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "还原 MDL 模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Move To Player",
+      "Context": "MainWindow.DrawLocalLights",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移动到玩家位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Selected",
+      "Context": "MainWindow.DrawLocalLights",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Type",
+      "Context": "MainWindow.DrawLocalLightFalloffCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "衰减类型",
+      "Source": "library"
+    },
+    {
+      "Original": "total",
+      "Context": "MainWindow.DrawBgPartPool",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "state",
+      "Context": "MainWindow.DrawStandaloneObjectList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "model",
+      "Context": "MainWindow.DrawStandaloneObjectList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "last error",
+      "Context": "MainWindow.DrawStandaloneObjectList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最近一次错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported",
+      "Context": "MainWindow.DisplayActorSpawnKind",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不支持",
+      "Source": "library"
+    },
+    {
+      "Original": "World: ",
+      "Context": "SceneEditorOverlayWindow.DrawMarkerTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务器： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Context": "MainWindow.DrawSceneEditorRecordSection",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextWrapped",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "all",
+      "Context": "MainWindow.DrawProtectedSlotTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextUnformatted",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "source",
+      "Context": "MainWindow.DrawBgPartPool",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "visible",
+      "Context": "MainWindow.DrawBgPartPool",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Protected",
+      "Context": "MainWindow.DrawBgPartPool",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "受保护",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

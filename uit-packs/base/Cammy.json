@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Cammy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Search",
+      "Context": "ImGuiEx.ExcelSheetSearchInput",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": " Right click to go to ",
+      "Context": "ImGuiEx.AddDonationHeader",
+      "PreserveID": false,
+      "Translated": " 右键前往 ",
+      "Source": "library"
+    },
+    {
+      "Original": "One or more modules failed to load,\nplease check /xllog for more info",
+      "Context": "DalamudPlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "一个或多个模块加载失败。\n请使用 /xllog 查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed loading ",
+      "Context": "DalamudPlugin..ctor",
+      "PreserveID": false,
+      "Translated": "加载失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error loading config! Renaming old file and resetting...",
+      "Context": "PluginConfiguration.LoadConfig",
+      "PreserveID": false,
+      "Translated": "加载设置失败！正在重命名旧文件并重置设置……",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced Controls",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "高级控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Position",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Fade Window",
+      "Context": "FreeCam.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "淡化窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Delta##Zoom",
+      "Context": "PluginUI.DrawPresetEditor",
+      "PreserveID": false,
+      "Translated": "缩放变化量",
+      "Source": "library"
+    },
+    {
+      "Original": "Delta##FoV",
+      "Context": "PluginUI.DrawPresetEditor",
+      "PreserveID": false,
+      "Translated": "视野变化量",
+      "Source": "library"
+    },
+    {
+      "Original": "None##ConditionSet",
+      "Context": "PluginUI.DrawPresetEditor",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Selectable",
+      "Translated": "无",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

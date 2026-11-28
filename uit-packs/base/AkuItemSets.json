@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AkuItemSets",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " candidates, ",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 个候选项， ",
+      "Source": "library"
+    },
+    {
+      "Original": " shown",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 条已显示",
+      "Source": "library"
+    },
+    {
+      "Original": " slots",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 个部位",
+      "Source": "library"
+    },
+    {
+      "Original": " visible sets complete | ",
+      "Context": "MainWindow.DrawSetTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 组可见套装已集齐 | ",
+      "Source": "library"
+    },
+    {
+      "Original": " with source",
+      "Context": "MainWindow.DrawSetTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 条有获取途径",
+      "Source": "library"
+    },
+    {
+      "Original": " | Item #",
+      "Context": "MainWindow.DrawPieceIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " | 物品编号",
+      "Source": "library"
+    },
+    {
+      "Original": ". Check /xllog for '[AkuItemSets] Outfit source' debug lines.",
+      "Context": "MainWindow.DrawSetTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "。请在 /xllog 中查找包含“[AkuItemSets] Outfit source”的调试日志。",
+      "Source": "library"
+    },
+    {
+      "Original": ": 0 matches for current territory #",
+      "Context": "MainWindow.DrawSetTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "：当前区域无匹配项，区域编号",
+      "Source": "library"
+    },
+    {
+      "Original": "AkuItemSets: no slot rectangles found",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "AkuItemSets：未找到装备部位栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "MainWindow.DrawScanStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Class/Job",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "MainWindow.DrawSetRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "No sources are attached to the visible rows. Check /xllog for '[AkuItemSets] Outfit source matching summary'.",
+      "Context": "MainWindow.DrawSetTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前显示的条目均无对应获取途径。请在 /xllog 中查看“[AkuItemSets] Outfit source matching summary”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open AkuItemSets and scan this character's item set collection.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 AkuItemSets，扫描此角色的套装收藏。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

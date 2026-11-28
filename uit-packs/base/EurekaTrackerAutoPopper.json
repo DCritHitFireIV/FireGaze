@@ -1,0 +1,757 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EurekaTrackerAutoPopper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "$n = Full Name",
+      "Context": "MainWindow.TabChat",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$n = 全名",
+      "Source": "library"
+    },
+    {
+      "Original": "$p = MapFlag",
+      "Context": "MainWindow.TabChat",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$p = 地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "$sN = Short Name",
+      "Context": "MainWindow.TabChat",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$sN = 简称",
+      "Source": "library"
+    },
+    {
+      "Original": "- Critical Encounter Spawns",
+      "Context": "MainWindow.UploadCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "- 临界遭遇战出现时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Context": "MainWindow.AboutCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy tracker instance id to clipboard.",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将追踪器副本 ID 复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Fate: ",
+      "Context": "MainWindow.TabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前临危受命： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug##DebugTab",
+      "Context": "MainWindow.TabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Context": "MainWindow.AboutCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops",
+      "Context": "OccultWindow.TabTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka##EurekaCategory",
+      "Context": "MainWindow.EurekaCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "禁地优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate: ",
+      "Context": "ShoutWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "危命任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Context": "MainWindow.AboutCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Killed Bunnies: ",
+      "Context": "MainWindow.TabStats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已击杀的幸运兔： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Kills",
+      "Context": "OccultWindow.TabTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "击杀数",
+      "Source": "library"
+    },
+    {
+      "Original": "Ko-Fi Tip",
+      "Context": "MainWindow.AboutCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-fi 上打赏",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Context": "OccultWindow.TabTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上次出现",
+      "Source": "library"
+    },
+    {
+      "Original": "Level ",
+      "Context": "QuestHelper.AttuneTip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Log##EurekaLinker",
+      "Context": "LogWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Post Window",
+      "Context": "MainWindow.TabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开通告窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open tracker website.",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开追踪网站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "MainWindow.TabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Searching active tracker...",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在查找活跃的追踪器…",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Timer On Server Info Bar",
+      "Context": "MainWindow.TabPot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏显示计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting",
+      "Context": "OccultWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker ID: ",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "追踪器 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker###TrackerTab",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger",
+      "Context": "OccultWindow.TabTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "触发器",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "EnumExtensions.ToName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Upload Permission",
+      "Context": "MainWindow.UploadCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "上传权限",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Context": "MainWindow.AboutCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "版本：",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Author:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "AboutEntryAuthor",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "AboutEntryVersion",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Alive",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "BunnyWindowStatusAlive",
+      "Translated": "存活",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "BunnyWindowStatusUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Helper Window",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ButtonOpenHelper",
+      "Translated": "打开助手窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "CEStateInactive",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not in Eureka, this command is unavailable.",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ChatErrorNotInEureka",
+      "Translated": "当前不在禁地优雷卡中，无法使用此命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Markers",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonAddMapMarkers",
+      "Translated": "添加标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonCirclePreview",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonDiscordForumThread",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonGithubIssues",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Markers",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonRemoveMapMarkers",
+      "Translated": "移除标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Start New Tracker",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigButtonStartNew",
+      "Translated": "新建追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Format:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderFormat",
+      "Translated": "格式：",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Known Locations",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderKnownLocations",
+      "Translated": "已知位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Map Marker",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderMarkerSetHeader",
+      "Translated": "地图标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Proximity Notification",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderProximityNotification",
+      "Translated": "接近时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Stats:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderTotalStats",
+      "Translated": "总计属性：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigHeaderTracker",
+      "Translated": "追踪器：",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigInputPW",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Window on Entry",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionBunnyWindow",
+      "Translated": "进入时显示窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Shout Message",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionCopyShoutMessage",
+      "Translated": "复制喊话内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide In Critical Encounters",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionEngagementsHide",
+      "Translated": "在临界遭遇战中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Fate Window On Entry",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionFateWindow",
+      "Translated": "进入时显示临危受命窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Map Flag",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionFlag",
+      "Translated": "设置地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Shout Window",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionOpenShoutWindow",
+      "Translated": "显示喊话窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Short Names",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionShortNames",
+      "Translated": "使用简称",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Critical Encounter Sound",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionSoundCESpawn",
+      "Translated": "播放临界遭遇战提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Fate Sound",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionSoundFateSpawn",
+      "Translated": "播放临危受命提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Sound",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionSoundNM",
+      "Translated": "播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Spawn Sound",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionSpawnNotification",
+      "Translated": "播放出现提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eorzea Time instead",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigOptionUseET",
+      "Translated": "使用艾欧泽亚时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Tracker in Browser",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigTooltipOpenTracker",
+      "Translated": "在浏览器中打开追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Only available while in eureka",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ConfigTooltipStartNew",
+      "Translated": "仅可在禁地优雷卡中使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen: {0} ago",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "FateInfoLastSeen",
+      "Translated": "上次出现于 {0} 前",
+      "Source": "library"
+    },
+    {
+      "Original": "Respawn Times: [{0}]",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "FateInfoRespawnTimes",
+      "Translated": "再次出现时间：[{0}]",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "FateProgress",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Remaining",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "FateTimeRemaining",
+      "Translated": "剩余时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Players on Platform (Level ≥ {0}): {1}",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ForkedTowerInfoPlayerCount",
+      "Translated": "平台上的玩家（等级 ≥ {0}）：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Player List",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ForkedTowerInfoPlayerListCollapseable",
+      "Translated": "玩家列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Critical Encounter:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "HeaderActiveCE",
+      "Translated": "进行中的临界遭遇战：",
+      "Source": "library"
+    },
+    {
+      "Original": "Active FATE:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "HeaderActiveFate",
+      "Translated": "进行中的临危受命：",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Encounter:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "HeaderCE",
+      "Translated": "临界遭遇战：",
+      "Source": "library"
+    },
+    {
+      "Original": "FATEs:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "HeaderFates",
+      "Translated": "危命任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "MarkerSetEureka",
+      "Translated": "优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "QuestLogTabItemQuestLevel",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk to Drake",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "QuestLogTalkToDrake",
+      "Translated": "与德雷克交谈",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk to Krile",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "QuestLogTalkToKrile",
+      "Translated": "与可露儿交谈",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ShoutButtonClose",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Shout will be available 20s after spawn.",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "ShoutWindowLimit",
+      "Translated": "出现 20 秒后即可喊话。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time in Eureka:",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "StatsEntryTime",
+      "Translated": "在禁地优雷卡的时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderAbout",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderChat",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderMap",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderNotification",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracker",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TabHeaderTracker",
+      "Translated": "追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TableLabelDone",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy Level",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TableLabelEnemyLvl",
+      "Translated": "敌人等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TableLabelMonster",
+      "Translated": "怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy tracker instance id to clipboard.",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerCopy",
+      "Translated": "将追踪器副本 ID 复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerDrops",
+      "Translated": "掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Kills",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerKills",
+      "Translated": "击杀数",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerLast",
+      "Translated": "上次出现",
+      "Source": "library"
+    },
+    {
+      "Original": "Open tracker website.",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerOpenLink",
+      "Translated": "打开追踪网站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Searching active tracker...",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerSearch",
+      "Translated": "正在查找活跃的追踪器…",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerStarting",
+      "Translated": "正在启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerTrigger",
+      "Translated": "触发器",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

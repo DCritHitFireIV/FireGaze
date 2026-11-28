@@ -1,0 +1,283 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Pathfinder",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Pathfinder Settings",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Pathfinder 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Radius circle:",
+      "Context": "ConfigWindow.DrawOverlayTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "半径圆：",
+      "Source": "library"
+    },
+    {
+      "Original": "Object dots:",
+      "Context": "ConfigWindow.DrawOverlayTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对象标记点：",
+      "Source": "library"
+    },
+    {
+      "Original": "Object lines:",
+      "Context": "ConfigWindow.DrawOverlayTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对象连线：",
+      "Source": "library"
+    },
+    {
+      "Original": "Dim color when hovering",
+      "Context": "ConfigWindow.DrawDotSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标悬停时降低亮度",
+      "Source": "library"
+    },
+    {
+      "Original": "Override dot color",
+      "Context": "ConfigWindow.DrawDotSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖标记点颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Override line color",
+      "Context": "ConfigWindow.DrawLineSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖线条颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Color object table",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为对象列表着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Color overlay dots",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为叠加显示的标记点着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Dim table when hovering dot",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标悬停在标记点时淡化列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight color when hovering",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "鼠标悬停高亮颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects:",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对象：",
+      "Source": "library"
+    },
+    {
+      "Original": "Characters:",
+      "Context": "ConfigWindow.DrawColorsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "角色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default (Hold shift to press)",
+      "Context": "ConfigWindow.ResetToDefault",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恢复默认值（按住 Shift 点击）",
+      "Source": "library"
+    },
+    {
+      "Original": "Developer Mode",
+      "Context": "ConfigWindow.DrawAdvancedTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "开发者模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay disabled",
+      "Context": "MainWindow.DrawContextControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已停用叠加显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay enabled",
+      "Context": "MainWindow.DrawContextControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用叠加显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Context": "MainWindow.DrawSearchFilter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Search paths...",
+      "Context": "MainWindow.DrawSearchFilter",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索路径……",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw item dots",
+      "Context": "MainWindow.DrawOverlayPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "绘制物品标记点",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Types",
+      "Context": "FiltersPopup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "对象类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Models",
+      "Context": "FiltersPopup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle rendering for the outer line.",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换外圈线条的显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle rendering for the inner line.",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换内圈线条的显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "ResultsTable.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "ResultsTable.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Paths",
+      "Context": "ResultsTable.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "路径",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

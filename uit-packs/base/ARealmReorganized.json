@@ -1,0 +1,369 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ARealmReorganized",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " [active]",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": " [当前]",
+      "Source": "library"
+    },
+    {
+      "Original": " ago",
+      "Context": "MainWindow.DescribeCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": " 前",
+      "Source": "library"
+    },
+    {
+      "Original": " eligible, refreshed ",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": " 件符合条件，刷新于 ",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 件物品",
+      "Source": "library"
+    },
+    {
+      "Original": " pieces",
+      "Context": "CompressTab.DrawSetSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 件",
+      "Source": "library"
+    },
+    {
+      "Original": " stored",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 件已收藏",
+      "Source": "library"
+    },
+    {
+      "Original": ", cached ",
+      "Context": "MainWindow.DescribeCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "，缓存于 ",
+      "Source": "library"
+    },
+    {
+      "Original": ": not seen yet",
+      "Context": "MainWindow.DescribeCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "：尚未查看",
+      "Source": "library"
+    },
+    {
+      "Original": "Already in the armoire",
+      "Context": "DuplicatesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已存入收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete sets",
+      "Context": "CompressTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "完整套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Dresser → Armoire (",
+      "Context": "ArmoireTab.get_TabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "幻化台 → 收藏柜（",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicates (",
+      "Context": "DuplicatesTab.get_TabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "重复物品（",
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete sets",
+      "Context": "CompressTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "不完整套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory → Armoire (",
+      "Context": "InventoryTab.get_TabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "背包 → 收藏柜（",
+      "Source": "library"
+    },
+    {
+      "Original": "Item #",
+      "Context": "ItemNames.Resolve",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "物品 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Multiple copies",
+      "Context": "DuplicatesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "持有多件",
+      "Source": "library"
+    },
+    {
+      "Original": "No detected sets. Add gear to your dresser and re-scan.",
+      "Context": "CompressTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未找到套装。向幻化台放入装备后重新扫描。",
+      "Source": "library"
+    },
+    {
+      "Original": "No duplicates detected.",
+      "Context": "DuplicatesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未发现重复物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "No retainer data yet. Open each retainer's inventory once at the summoning bell to populate this list.",
+      "Context": "RetainersTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "暂无雇员数据。请在传唤铃处分别打开每位雇员的背包，以填充此清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing in your dresser is currently armoire-eligible.",
+      "Context": "ArmoireTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "幻化台里暂无可移入收藏柜的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing in your inventory, armoury, or saddlebag is currently armoire-eligible.",
+      "Context": "InventoryTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包、兵装库或陆行鸟鞍囊中暂无可移入收藏柜的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open A Realm Reorganized.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 A Realm Reorganized。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Armoire once this session to load stored-item data. Until then, items already in the armoire may show in the lists below.",
+      "Context": "MainWindow.DrawCabinetUnavailableBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请在本次登录后打开一次收藏柜以读取已收藏的物品。在此之前，已收藏的物品可能仍会出现在下列清单中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open your dresser / bags / armoury / saddlebag / retainer, slots in these colors:",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开幻化台、背包、兵装库、陆行鸟鞍囊或雇员背包，格子颜色代表：",
+      "Source": "library"
+    },
+    {
+      "Original": "Press Scan to populate results.",
+      "Context": "MainWindow.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "点击「扫描」以显示结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer #",
+      "Context": "RetainersTab.DrawRetainerSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "雇员 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers → Armoire (",
+      "Context": "RetainersTab.get_TabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "雇员 → 收藏柜（",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan",
+      "Context": "MainWindow.DrawScanRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "Set ",
+      "Context": "SetCompression.Analyze",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "套装 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets (",
+      "Context": "CompressTab.get_TabLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "套装（",
+      "Source": "library"
+    },
+    {
+      "Original": "The armoire keeps one forever; these copies just take up space. Dyed bag or retainer copies may be worth keeping.",
+      "Context": "DuplicatesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "收藏柜可以永久保存一件。这些重复物品会占用空间，但背包或雇员背包中染过色的物品可能值得保留。",
+      "Source": "library"
+    },
+    {
+      "Original": "Undyed",
+      "Context": "DuplicatesTab.DrawDyeSwatch",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "未染色",
+      "Source": "library"
+    },
+    {
+      "Original": "You own these more than once, pick which to keep.",
+      "Context": "DuplicatesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "以下物品持有多件，请选择要保留的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "armoire",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "armoury",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库",
+      "Source": "library"
+    },
+    {
+      "Original": "bags",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "dresser",
+      "Context": "MainWindow.DrawServiceStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "幻化台",
+      "Source": "library"
+    },
+    {
+      "Original": "in bags / armoury / saddlebag / retainer, can move to the armoire",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "位于背包、兵装库、陆行鸟鞍囊或雇员背包，可移入收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "in your dresser, can move to the armoire",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "位于幻化台，可移入收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "retainer",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "retainer #",
+      "Context": "DuplicatesTab.DescribeLocations",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "雇员 #",
+      "Source": "library"
+    },
+    {
+      "Original": "saddlebag",
+      "Context": "DuplicatesTab.SourceLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "陆行鸟鞍囊",
+      "Source": "library"
+    },
+    {
+      "Original": "would complete a partial dresser set if put into the dresser",
+      "Context": "MainWindow.DrawHighlightLegend",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "放进幻化台即可补齐一套现有套装",
+      "Source": "library"
+    },
+    {
+      "Original": "♥ Support on Ko-fi",
+      "Context": "MainWindow.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "♥ 在 Ko-fi 上支持作者",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

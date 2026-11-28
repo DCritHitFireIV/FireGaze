@@ -1,0 +1,265 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LazyCrucible",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(no fight in focus)",
+      "Context": "GuideWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（当前未选中战斗）",
+      "Source": "library"
+    },
+    {
+      "Original": "Announce picks in chat",
+      "Context": "HubAdapter.Declare",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏公布所选搭配",
+      "Source": "library"
+    },
+    {
+      "Original": "Before this fight",
+      "Context": "GuideWindow.DrawFight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "战前准备",
+      "Source": "library"
+    },
+    {
+      "Original": "Campsite",
+      "Context": "SelectionScreens.CampPass",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "营地",
+      "Source": "library"
+    },
+    {
+      "Original": "Campsite: select who rests (you press Rest)",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "营地：选择休息对象（需手动点击休息）",
+      "Source": "library"
+    },
+    {
+      "Original": "Crucible fight guide###LazyCrucibleGuide",
+      "Context": "GuideWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "战斗攻略",
+      "Source": "library"
+    },
+    {
+      "Original": "Dangerous hits",
+      "Context": "GuideWindow.DrawFight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "危险攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Follow the next fight",
+      "Context": "GuideWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跟随下一场战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Context": "ChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "Guide: ",
+      "Context": "GuideWindow.DrawIncoming",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "指南： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Kill order",
+      "Context": "GuideWindow.DrawFight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "击杀顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Mechanics",
+      "Context": "GuideWindow.DrawFight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "战斗机制",
+      "Source": "library"
+    },
+    {
+      "Original": "No guide entry for this fight.",
+      "Context": "GuideWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这场战斗暂无攻略。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open changelog on GitHub",
+      "Context": "ChangelogWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 GitHub 上查看更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the fight guide",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开战斗攻略",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the fight guide on the upcoming fight",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开下一场战斗的攻略",
+      "Source": "library"
+    },
+    {
+      "Original": "Report a problem",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "报告问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop",
+      "Context": "SelectionScreens.ShopPass",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop: buy what the fights ahead call for",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "商店：购买后续战斗所需物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Spoils",
+      "Context": "SelectionScreens.BootyPass",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "战利品",
+      "Source": "library"
+    },
+    {
+      "Original": "Spoils: Take all when everything fits",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战利品：背包放得下时全部领取",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped: ",
+      "Context": "SelectionScreens.Fail",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "已停止： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure",
+      "Context": "SelectionScreens.TreasurePass",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure: suggest the best choice",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "宝箱：推荐最优选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Weak to  ",
+      "Context": "GuideWindow.DrawFight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "弱点：  ",
+      "Source": "library"
+    },
+    {
+      "Original": "What LazyCrucible chose this session",
+      "Context": "GuideWindow.DrawRecent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "查看本次选择记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Worth capturing: ",
+      "Context": "MainWindow.DrawAdvisor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "值得捕获： ",
+      "Source": "library"
+    },
+    {
+      "Original": "no ",
+      "Context": "BST_CrucibleNeedFirst.WhyUncovered",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "否 ",
+      "Source": "library"
+    },
+    {
+      "Original": "petrification",
+      "Context": "CrucibleGuide.ThreatLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "石化",
+      "Source": "library"
+    },
+    {
+      "Original": "release notes",
+      "Context": "ChangelogWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更新说明",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

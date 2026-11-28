@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GposeCameraSaver",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open Gpose Camera Saver window. /gcs settings to open settings tab.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开集体动作相机存档窗口。输入 /gcs settings 可直接打开设置页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gpose Camera Saver###GCSCameraPanel",
+      "Context": "CameraPanelWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "集体动作相机存档",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

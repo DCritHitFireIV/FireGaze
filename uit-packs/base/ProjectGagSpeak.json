@@ -1,0 +1,930 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ProjectGagSpeak",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Slot",
+      "Context": "PairGagCombo.DrawItemTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements",
+      "Context": "DebugPersonalDataUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements###AchievementsUI",
+      "Context": "AchievementsUI..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Favorites",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "加入收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias..",
+      "Context": "SettingsHubProfile.DrawVanityOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Aliases",
+      "Context": "AliasesTab.get_Label",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment",
+      "Context": "SidePanelPair.DrawAddressConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment Division:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "公寓分区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "SidePanelPair.DrawGagActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog UI###Gagspeak_ChangelogUI",
+      "Context": "ChangelogUI..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Confinement",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawFrameColumn",
+      "Translated": "限制活动范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting",
+      "Context": "MainUI.DrawTopBar",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "连接中",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls",
+      "Context": "BuzzToyRemoteUI.DrawInteractableRow",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "控制选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "DataCenter:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "大区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "SettingsModulesToybox.GetCurrentDeviceName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "DebugStorageUI.DrawPattern",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Details: ",
+      "Context": "MainUI.DisplayHelpForInvalidState",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "详情： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Name..",
+      "Context": "AliasesTab.DrawAliasEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "显示名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Context": "DebugPersonalDataUI.DrawKinksterPatternCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawFrameColumn",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote ID:",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "情感动作 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "SettingsDataDebug.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enactor",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "执行者",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter New Name...",
+      "Context": "RestrictionFileSelector.OpenRestrictionNameField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入新名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Final State",
+      "Context": "GlamourCache.DrawCacheTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawFrameColumn",
+      "Translated": "最终状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Follow",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "跟随",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Cache",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "投影缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Global Settings",
+      "Context": "SidePanelPair.DrawKinksterPermissions",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "全局设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hardcore State",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "硬核模式状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Head",
+      "Context": "GlamourCache.DrawCacheTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "头部",
+      "Source": "library"
+    },
+    {
+      "Original": "Height",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing Area:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "住宅区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing Type:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "住宅类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Hover Delay",
+      "Context": "ConfigOptions..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "悬停延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Identifier",
+      "Context": "DebugPersonalDataUI.DrawAliasTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "标识符",
+      "Source": "library"
+    },
+    {
+      "Original": "Imprisonment",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "禁闭",
+      "Source": "library"
+    },
+    {
+      "Original": "In Housing District:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "是否位于住宅区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Indoors:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "室内：",
+      "Source": "library"
+    },
+    {
+      "Original": "Information",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Input",
+      "Context": "HypnoEffectEditor.DrawEditorArea",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "SidePanelPair.DrawShockActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Layer ",
+      "Context": "RestraintEditorLayers.DrawExistingLayer",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "图层 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Layers",
+      "Context": "RestraintEditorLayers.get_Label",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "图层",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave blank for default...",
+      "Context": "SettingsModulesToybox.DrawMyToys",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "留空使用默认值…",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Context": "VerificationUi.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加载中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Location Data",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "位置数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Location Service",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "位置服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Message ",
+      "Context": "HybridChatDrawer.GetChatInputHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "消息 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Message...",
+      "Context": "HybridChatDrawer.GetChatInputHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "消息…",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod Name",
+      "Context": "ModCache.DrawCacheTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "模组名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Profile",
+      "Context": "HybridChatDrawer.DrawContentMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "打开个人资料",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "CompactConfigTab.get_Label",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview:",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "概览：",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "RemoteService.DrawClient",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "DebugPersonalDataUI.DrawPlayerCharacterDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地块：",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "CompactPresetsTab.get_Label",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Previous",
+      "Context": "DebugActiveStateUI.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上一次",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "DebugStorageUI.DrawTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse:",
+      "Context": "ArousalService.DrawCacheTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "脉冲：",
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Context": "CompactConfigTab.DrawContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "随机",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from Favorites",
+      "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "取消收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Reverts all active features. For emergency uses.",
+      "Context": "CommandManager..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "紧急解除所有正在生效的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reverts all hardcore settings. For emergency uses.",
+      "Context": "CommandManager..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "紧急重置所有硬核模式设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Service",
+      "Context": "SettingsHubService.DrawHubSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "选择服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Shorthand for /gagspeak.",
+      "Context": "CommandManager..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "/gagspeak 的简写。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shorthand for /globalchat",
+      "Context": "CommandManager..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "/globalchat 的简写",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Timestamps",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示时间戳",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in cutscenes",
+      "Context": "SettingsMainChat.DrawRules",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在过场动画中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by name.",
+      "Context": "PairName.get_Tooltip",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "按名称排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Temporary",
+      "Context": "SettingsMainNotifications.DrawOnlineUserOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "临时",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory Intended Use:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域用途：",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory:",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域：",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "InteractionEventsUI.DrawInteractionsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Left",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "剩余时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeout",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "超时",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggles the GagSpeak UI.",
+      "Context": "CommandManager..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏 GagSpeak 界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers ###GagSpeakTriggers",
+      "Context": "TriggersUI..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "触发条件 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "DebugPersonalDataUI.DrawGagData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Type:",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Type: ",
+      "Context": "ImageImportTool.DrawImportContent",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Item",
+      "Context": "DebugStorageUI.DrawRestraintEquipment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "未知物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Verified:",
+      "Context": "SettingsHubService.DrawReputation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已验证：",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "RemoteService.DrawDevicePlotState",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume: ",
+      "Context": "SettingsMainChat.DrawMentionsOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "音量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward:",
+      "Context": "DebugActiveStateUI.DebugArea",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome",
+      "Context": "IntroUi.DrawProgressDisplay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "欢迎",
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist",
+      "Context": "AliasesTab.DrawWhitelist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Width",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "World:",
+      "Context": "PermHelper.DrawHardcoreStatus",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "服务器：",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "DebugStorageUI.DrawRestraintSet",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "ProfilePictureEditor.DrawNewProfileDisplay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

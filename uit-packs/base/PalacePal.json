@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PalacePal",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " known hoard coffer",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个已知的埋藏宝藏",
+      "Source": "library"
+    },
+    {
+      "Original": " known trap",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个已知陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": " silver coffer",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个银宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": " visible on current floor",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个在当前楼层可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not query current trap/coffer count.",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法查询当前的陷阱和宝箱数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Orthos",
+      "Context": "StatisticsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "正统优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Heaven on High",
+      "Context": "StatisticsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "天之御柱",
+      "Source": "library"
+    },
+    {
+      "Original": "Palace of the Dead",
+      "Context": "StatisticsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "死者宫殿",
+      "Source": "library"
+    },
+    {
+      "Original": "Pomander of Intuition: ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "「魔陶器：感知宝藏」： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pomander of Sight: ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "「魔陶器：全景」： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync State = ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "同步状态 = ",
+      "Source": "library"
+    },
+    {
+      "Original": "Traps and coffers may not be discovered even after using a pomander if they're far away (around 1,5-2 rooms).",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "即使使用了魔陶器，也可能找不到远处的陷阱和宝箱（约相隔一个半到两个房间）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "You are in a deep dungeon, territory type ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前位于深层迷宫，区域类别为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "value",
+      "Context": "PalaceObject.set_NetworkId",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "数值",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

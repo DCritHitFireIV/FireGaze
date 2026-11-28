@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Inspecto",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the main window",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Inspecto History",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "装备查看历史",
+      "Source": "library"
+    },
+    {
+      "Original": "You haven't inspected yet.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未查看过其他角色的装备。",
+      "Source": "library"
+    },
+    {
+      "Original": "History is not yet stored to disk, but planned for the future.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "历史记录目前仅保存在内存中，后续计划支持保存到磁盘。",
+      "Source": "library"
+    },
+    {
+      "Original": " Level ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level: ",
+      "Context": "MainWindow.GenerateItemTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "平均品级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "ConfigWindow.About",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Context": "ConfigWindow.About",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Context": "ConfigWindow.About",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Context": "ConfigWindow.About",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Context": "ConfigWindow.About",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Ko-Fi Tip",
+      "Context": "ConfigWindow.About",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-fi 上打赏",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Try Refresh Image After X ms",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等待指定毫秒数后尝试刷新图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By Last Updated",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按上次更新时间排序",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

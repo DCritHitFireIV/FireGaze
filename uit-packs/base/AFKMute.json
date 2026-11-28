@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AFKMute",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Toggles active state of plugin.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "切换 AFKMute 的启用状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggled AFKMute ",
+      "Context": "Plugin.ToggleStateCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "AFKMute 已切换为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "off",
+      "Context": "Plugin.ToggleStateCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "on",
+      "Context": "Plugin.ToggleStateCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "开启",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

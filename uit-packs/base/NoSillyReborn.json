@@ -1,0 +1,345 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "NoSillyReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  No intercept rules for this job.",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "  该职业没有拦截规则。",
+      "Source": "library"
+    },
+    {
+      "Original": " [Level ",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " ［等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": " active.",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 已生效。",
+      "Source": "library"
+    },
+    {
+      "Original": " intercept rule",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 条拦截规则",
+      "Source": "library"
+    },
+    {
+      "Original": " rule",
+      "Context": "[NoSillyReborn] ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 条规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Acceleration → Blocked (Acceleration or Grand Impact Ready active)",
+      "Context": "[NoSillyReborn] RedMageRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "促进 → 拦截（促进或显贵冲击预备已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Rules",
+      "Context": "[NoSillyReborn] ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "生效的规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Rules for Current Job",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前职业生效的规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Apex Arrow → Blast Arrow (Blast Arrow Ready active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "绝峰箭 → 爆破箭（可发动爆破箭）",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst Shot → Refulgent Arrow (Barrage active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "爆发射击 → 辉煌箭（纷乱箭已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst Shot → Refulgent Arrow (Hawk's Eye active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "爆发射击 → 辉煌箭（鹰眼已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Current job:",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前职业：",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable No Silly Reborn (intercept wrong actions)",
+      "Context": "[NoSillyReborn] ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 No Silly Reborn（拦截误用技能）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Intercepted Action",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "上次拦截的技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Life Surge → Blocked (Life Surge active)",
+      "Context": "[NoSillyReborn] DragoonRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "龙剑 → 拦截（龙剑已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Lightspeed → Blocked (Lightspeed active)",
+      "Context": "[NoSillyReborn] AstrologianRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "光速 → 拦截（光速已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading job data...",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在加载职业数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Meikyo Shisui → Blocked (Meikyo Shisui active)",
+      "Context": "[NoSillyReborn] SamuraiRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "明镜止水 → 拦截（明镜止水已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Movable config window",
+      "Context": "[NoSillyReborn] ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许移动设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "No Silly Reborn Configuration###NoSillyRebornConfig",
+      "Context": "[NoSillyReborn] ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "No Silly Reborn 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "No intercepts recorded yet.",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚无拦截记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "No rules registered for this job.",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未为该职业登记规则。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not logged in or between zones.",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未登录，或正在切换区域。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the No Silly Reborn window. Use /nosilly to toggle.",
+      "Context": "[NoSillyReborn] Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 No Silly Reborn 窗口，输入 /nosilly 切换显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Original ID : ",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "原技能 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Per-Job Intercept Toggle",
+      "Context": "[NoSillyReborn] ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "按职业启用技能拦截",
+      "Source": "library"
+    },
+    {
+      "Original": "Radiant Aegis → Blocked (Radiant Aegis active)",
+      "Context": "[NoSillyReborn] SummonerRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "守护之光 → 拦截（守护之光已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason      : ",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "原因： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reassemble → Blocked (Reassembled active)",
+      "Context": "[NoSillyReborn] MachinistRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "整备 → 拦截（整备已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaced by : ",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "替换为： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield Samba → Blocked (Physranged mit already active)",
+      "Context": "[NoSillyReborn] DancerRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "防守之桑巴 → 拦截（已有远程物理职业的减伤效果）",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "[NoSillyReborn] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tactician → Blocked (Physranged mit already active)",
+      "Context": "[NoSillyReborn] MachinistRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "策动 → 拦截（已有远程物理职业的减伤效果）",
+      "Source": "library"
+    },
+    {
+      "Original": "Thin Air → Blocked (Thin Air active)",
+      "Context": "[NoSillyReborn] WhiteMageRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "无中生有 → 拦截（无中生有已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Triplecast → Blocked (Triplecast active)",
+      "Context": "[NoSillyReborn] BlackMageRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "三连咏唱 → 拦截（三连咏唱已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Troubadour → Blocked (Physranged mit already active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "行吟 → 拦截（已有远程物理职业的减伤效果）",
+      "Source": "library"
+    },
+    {
+      "Original": "Wide Volley → Shadowbite (Barrage active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "广域群射 → 影噬箭（纷乱箭已生效）",
+      "Source": "library"
+    },
+    {
+      "Original": "Wide Volley → Shadowbite (Hawk's Eye active)",
+      "Context": "[NoSillyReborn] BardRules..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "广域群射 → 影噬箭（鹰眼已生效）",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

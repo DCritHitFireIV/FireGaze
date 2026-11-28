@@ -1,0 +1,315 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Doorbell",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Play a Sound",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "播放声音",
+      "Source": "library"
+    },
+    {
+      "Original": "Test Sound",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "试听",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Doorbell",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "默认门铃",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound File",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "声音文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a chat message",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "发送聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Message",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Use <link> as a placeholder to link to the player.",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "使用 <link> 插入可点击的玩家链接。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use <name> as a placeholder for the players name.",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "使用 <name> 插入玩家姓名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use <world> as a placeholder for the players world.",
+      "Context": "ConfigWindow.DrawAlertConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "使用 <world> 插入玩家所在服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Silenced for ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "已静音，时长： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Silenced until leaving a house.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "离开房屋前保持静音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsilence Doorbell",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消门铃静音",
+      "Source": "library"
+    },
+    {
+      "Original": "For ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "持续 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Until leaving a house,",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "直到离开房屋，",
+      "Source": "library"
+    },
+    {
+      "Original": "Silence Doorbell",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将门铃静音",
+      "Source": "library"
+    },
+    {
+      "Original": "When a player enters a house: ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有玩家进入房屋时： ",
+      "Source": "library"
+    },
+    {
+      "Original": "When a player leaves a house: ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有玩家离开房屋时： ",
+      "Source": "library"
+    },
+    {
+      "Original": "When entering a house with people already inside: ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自己进屋时屋内已有其他玩家： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save & Close",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Doorbell",
+      "Context": "Plugin.get_Name",
+      "PreserveID": false,
+      "Translated": "门铃",
+      "Source": "library"
+    },
+    {
+      "Original": " Config",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the ",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "切换 ",
+      "Source": "library"
+    },
+    {
+      "Original": " config window.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " 设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable alerts until leaving a house.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "离开房屋前禁用警报。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable alerts for # minutes.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "禁用警报 # 分钟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Doorbell Command - Available Options:",
+      "Context": "Plugin.HandleCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无效的门铃命令 - 可用选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "  - /doorbell  - Toggle Config Window",
+      "Context": "Plugin.HandleCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "  - /doorbell  - 切换设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "  - /doorbell silence   - Disables Doorbell until you next leave a house.",
+      "Context": "Plugin.HandleCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "  - /doorbell silence   - 禁用门铃，直到你下次离开房屋。",
+      "Source": "library"
+    },
+    {
+      "Original": "  - /doorbell silence [minutes]   - Disables Doorbell for a specified number of minutes.",
+      "Context": "Plugin.HandleCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "  - /doorbell silence [minutes]   - 禁用门铃指定的分钟数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Doorbell has been silenced until you next leave a house.",
+      "Context": "Plugin.Silence",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "门铃已封技，直到你下次离开房屋。",
+      "Source": "library"
+    },
+    {
+      "Original": "Doorbell has been silenced until ",
+      "Context": "Plugin.Silence",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "门铃已封技，直到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Doorbell has been unsilenced.",
+      "Context": "Plugin.UnSilence",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "门铃已解除封技。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,761 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DisPlacePlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "DisPlace Plugin",
+      "Context": "DisPlacePlugin.get_Name",
+      "PreserveID": false,
+      "Translated": "DisPlace 插件",
+      "Source": "library"
+    },
+    {
+      "Original": "load config window.",
+      "Context": "DisPlacePlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Grounds",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "地面",
+      "Source": "library"
+    },
+    {
+      "Original": "Paths",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Slopes",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "斜坡",
+      "Source": "library"
+    },
+    {
+      "Original": "Facility",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "设施",
+      "Source": "library"
+    },
+    {
+      "Original": "Facility ",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设施 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Landmark",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "地标",
+      "Source": "library"
+    },
+    {
+      "Original": "Landmark ",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地标 ",
+      "Source": "library"
+    },
+    {
+      "Original": "District",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "住宅区",
+      "Source": "library"
+    },
+    {
+      "Original": "Mist",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "海雾村",
+      "Source": "library"
+    },
+    {
+      "Original": "Lavender Beds",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "薰衣草苗圃",
+      "Source": "library"
+    },
+    {
+      "Original": "Goblet",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "高脚孤丘",
+      "Source": "library"
+    },
+    {
+      "Original": "Shirogane",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "白银乡",
+      "Source": "library"
+    },
+    {
+      "Original": "Empyreum",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "穹顶皓天",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimalist",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "极简",
+      "Source": "library"
+    },
+    {
+      "Original": "Dark Minimalist",
+      "Context": "SaveLayoutManager.LoadInteriorFixtures",
+      "PreserveID": false,
+      "Translated": "暗色极简",
+      "Source": "library"
+    },
+    {
+      "Original": "Overgrown",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "蔓生",
+      "Source": "library"
+    },
+    {
+      "Original": "Dirt",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "泥土",
+      "Source": "library"
+    },
+    {
+      "Original": "Stone",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "石材",
+      "Source": "library"
+    },
+    {
+      "Original": "Tiled Brick",
+      "Context": "SaveLayoutManager.LoadIslandFixtures",
+      "PreserveID": false,
+      "Translated": "瓷砖",
+      "Source": "library"
+    },
+    {
+      "Original": "Roof",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "屋顶",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior Wall",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "外墙",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "窗户",
+      "Source": "library"
+    },
+    {
+      "Original": "Door",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "门",
+      "Source": "library"
+    },
+    {
+      "Original": "Roof Decor",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "屋顶装饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior Wall Decor",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "外墙装饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Placard",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "门牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Fence",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "围栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Wall",
+      "Context": "Utils.GetInteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "墙壁",
+      "Source": "library"
+    },
+    {
+      "Original": "Floor",
+      "Context": "Utils.GetInteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地板",
+      "Source": "library"
+    },
+    {
+      "Original": "Light",
+      "Context": "Utils.GetInteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "灯光",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground Floor",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "1层",
+      "Source": "library"
+    },
+    {
+      "Original": "Basement",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "兵武塔底层",
+      "Source": "library"
+    },
+    {
+      "Original": "Upper Floor",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上层",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "主",
+      "Source": "library"
+    },
+    {
+      "Original": "Interior Furniture",
+      "Context": "ConfigurationWindow.DrawAllUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "室内家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior Furniture",
+      "Context": "ConfigurationWindow.DrawAllUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "室外家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Interior Fixtures",
+      "Context": "ConfigurationWindow.DrawAllUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "室内设施",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior Fixtures",
+      "Context": "ConfigurationWindow.DrawAllUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "室外设施",
+      "Source": "library"
+    },
+    {
+      "Original": "Unused Furniture",
+      "Context": "ConfigurationWindow.DrawAllUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "未使用家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Label Furniture",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "家具标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Show furniture names on the screen",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在屏幕上显示家具名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Tooltips",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Current file location: ",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前文件位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save layout to current file location",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将布局保存到当前文件位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Save As",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "另存为",
+      "Source": "library"
+    },
+    {
+      "Original": "Save layout to file",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将布局保存到文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Load layout from current file location",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从当前文件位置加载布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Load From",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从文件加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Load layout from file",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从文件加载布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply Layout",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "应用布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Placement Interval (ms)",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "放置间隔 (毫秒)",
+      "Source": "library"
+    },
+    {
+      "Original": "Time interval between furniture placements when applying a layout. If this is too low (e.g. 200 ms), some placements may be skipped over.",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "应用布局时家具放置之间的时间间隔。如果此值过低（例如 200 毫秒），部分放置可能会被跳过。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Floors",
+      "Context": "ConfigurationWindow.DrawGeneralSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已选楼层",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##",
+      "Context": "ConfigurationWindow.DrawRow",
+      "PreserveID": false,
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "ConfigurationWindow.DrawFixtureList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "FixtureList",
+      "Context": "ConfigurationWindow.DrawFixtureList",
+      "PreserveID": false,
+      "Translated": "设施列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "ConfigurationWindow.DrawFixtureList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "楼层",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixture",
+      "Context": "ConfigurationWindow.DrawFixtureList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设施",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "ConfigurationWindow.DrawFixtureList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: Missing items, incorrect dyes, and items on unselected floors are grayed out",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注意：缺失的物品、染色错误的物品以及未选楼层上的物品会显示为灰色",
+      "Source": "library"
+    },
+    {
+      "Original": "ItemList",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Translated": "物品列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Position (X,Y,Z)",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置 (X,Y,Z)",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye/Material",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "染色/材质",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Position",
+      "Context": "ConfigurationWindow.DrawItemList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设置位置",
+      "Source": "library"
+    },
+    {
+      "Original": "HousingItem",
+      "Context": "ConfigurationWindow.DrawItemOnScreen",
+      "PreserveID": false,
+      "Translated": "房屋物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Set##ScreenItem",
+      "Context": "ConfigurationWindow.DrawItemOnScreen",
+      "PreserveID": false,
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": " is already correctly placed",
+      "Context": "DisPlacePlugin.RecursivelyPlaceItems",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已在正确的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Scheduling next item placement, ",
+      "Context": "DisPlacePlugin.RecursivelyPlaceItems",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在安排下一件家具的摆放， ",
+      "Source": "library"
+    },
+    {
+      "Original": " remains",
+      "Context": "DisPlacePlugin.RecursivelyPlaceItems",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 件待摆放",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished applying layout",
+      "Context": "DisPlacePlugin.RecursivelyPlaceItems",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已应用布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "DisPlacePlugin.RecursivelyPlaceItems",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to set position outside of Rotate Layout mode",
+      "Context": "DisPlacePlugin.SetItemPosition",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "仅在旋转布局模式下才能设置位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Placing ",
+      "Context": "DisPlacePlugin.SetItemPosition",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在摆放 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Already placing items",
+      "Context": "DisPlacePlugin.ApplyLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在摆放家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Applying layout with interval of ",
+      "Context": "DisPlacePlugin.ApplyLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在应用布局，摆放间隔为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "ms",
+      "Context": "DisPlacePlugin.ApplyLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "毫秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Not inside a valid Plot",
+      "Context": "DisPlacePlugin.GetPlotLocation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "当前位置不在有效的住宅用地内",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Cannot identify territory",
+      "Context": "DisPlacePlugin.GetPlotLocation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法识别当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded {0} furniture items",
+      "Context": "DisPlacePlugin.GetGameLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已载入 {0} 件家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished exporting layout",
+      "Context": "SaveLayoutManager.ExportLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "布局导出完成",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

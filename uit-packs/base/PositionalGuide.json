@@ -1,0 +1,393 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PositionalGuide",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Action may be any of the following:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可用操作如下：",
+      "Source": "library"
+    },
+    {
+      "Original": "As above but only for the outer circle.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "同上，仅作用于外圈。",
+      "Source": "library"
+    },
+    {
+      "Original": "As above but only for the target circle.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "同上，仅作用于目标圈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse the github repo",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "浏览 GitHub 仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Help",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "命令帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "For both: circles",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "两种圆圈：circles",
+      "Source": "library"
+    },
+    {
+      "Original": "For the outer circle: co, outer-circle, outer",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "外圈：co、outer-circle、outer",
+      "Source": "library"
+    },
+    {
+      "Original": "For the target circle: c, circle, target-circle",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标圈：c、circle、target-circle",
+      "Source": "library"
+    },
+    {
+      "Original": "Guideline size modifier",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "引导线长度倍率",
+      "Source": "library"
+    },
+    {
+      "Original": "Guidelines will always be drawn to at least this length, even if they would ordinarily have been smaller.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "引导线至少延伸到此长度，即使按目标大小本应更短。",
+      "Source": "library"
+    },
+    {
+      "Original": "Guidelines will never be longer than this, no matter how big the target's hitbox is.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "无论目标的判定范围有多大，引导线都不会超过此长度。",
+      "Source": "library"
+    },
+    {
+      "Original": "How big should the outer circle be?\n\nValue is an offset to the target circle, and a value of 10 corresponds to 1 yalm.\nA value of 35 very closely resembles the max melee range.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "外圈要画多大？\n\n此值为相对于目标圈的偏移量，每 10 点对应 1 星码。\n设为 35 时接近近战攻击的最大距离。",
+      "Source": "library"
+    },
+    {
+      "Original": "How wide/thick do you want the lines to be?",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "设置线条的粗细。",
+      "Source": "library"
+    },
+    {
+      "Original": "If enabled, the tether will be drawn entirely on the same plane as your target, even if your height is different. This is recommended if you intend to limit the tether length.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "启用后，即使你与目标高度不同，连线也会绘制在目标所在的平面上。若限制连线长度，建议开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "Line colour for the tether",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "目标连线颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Line thickness",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum guideline size",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "引导线最长长度",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum guideline size",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "引导线最短长度",
+      "Source": "library"
+    },
+    {
+      "Original": "Most of the above toggle settings can be changed via command:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "以上大部分开关均可通过命令更改：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Positional Assistant's config window",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开身位助手设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Outer circle range",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "外圈范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Should a line be drawn connecting you to your target?",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "是否绘制连接自身与目标的线？",
+      "Source": "library"
+    },
+    {
+      "Original": "Support me on ko-fi",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets for circles are:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "圆圈相关目标如下：",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether inner max length",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "连线内侧最大长度",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether line?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示目标连线",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether outer max length",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderScalar",
+      "Translated": "连线外侧最大长度",
+      "Source": "library"
+    },
+    {
+      "Original": "The inner tether will never extend beyond the centre of the target's hitbox.\n\nSet to -1 to always go to the centre of the target's hitbox.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "内侧连线不会超过目标判定圈的中心。\n\n设为 -1 时始终延伸至目标中心。",
+      "Source": "library"
+    },
+    {
+      "Original": "The outer tether CAN extend beyond your hitbox.\n\nSet to -1 to always go to the centre of the your hitbox.\nSet to -2 to always go to the edge of your hitbox.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "外侧连线可以超出自身判定圈。\n\n设为 -1 时始终延伸至自身中心。\n设为 -2 时始终延伸至自身判定圈边缘。",
+      "Source": "library"
+    },
+    {
+      "Original": "The positional guidelines normally extend from the target's centre point out to the size of their hitbox. This allows you to make them longer or shorter.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "身位引导线默认从目标中心延伸到目标圈边缘。此处可调整引导线的长短。",
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin does not function in PvP.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此插件在 PvP 中不生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "This setting will cause the circle colours to be always the defined ones and disable the automatic colouring of the circle based on the guidelines.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "固定圆圈颜色，始终使用指定颜色，不再根据引导线自动着色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Two dimensional?",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "投影到目标所在平面",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to draw any lines at all",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "是否绘制引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "You are currently in a PvP zone.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前位于 PvP 区域。",
+      "Source": "library"
+    },
+    {
+      "Original": "back guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "背面引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "back left guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "左后方引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "back right guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "右后方引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "front guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "正面引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "front left guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "左前方引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "front right guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "右前方引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "left guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "左侧引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "outer circle",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "外圈",
+      "Source": "library"
+    },
+    {
+      "Original": "right guideline",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "右侧引导线",
+      "Source": "library"
+    },
+    {
+      "Original": "target circle",
+      "Context": "Configuration..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuitils.Tooltip",
+      "Translated": "目标圈",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

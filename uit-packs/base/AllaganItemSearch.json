@@ -1,0 +1,3723 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AllaganItemSearch",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Filter Search:",
+      "Context": "MainWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ StringFilter/Factory.Invoke",
+      "Translated": "搜索筛选条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Type in the name of the filter you are looking for.",
+      "Context": "MainWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ StringFilter/Factory.Invoke",
+      "Translated": "输入要查找的筛选条件名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ StringFilter/Factory.Invoke",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "The name of the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ StringFilter/Factory.Invoke",
+      "Translated": "物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "The category of the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "物品类别",
+      "Source": "library"
+    },
+    {
+      "Original": "The equip level of the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintRangeFilter/Factory.Invoke",
+      "Translated": "装备此物品所需的等级",
+      "Source": "library"
+    },
+    {
+      "Original": "The item's iLvl",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintRangeFilter/Factory.Invoke",
+      "Translated": "物品的品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Rarity",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "稀有度",
+      "Source": "library"
+    },
+    {
+      "Original": "The rarity of the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "物品的稀有度",
+      "Source": "library"
+    },
+    {
+      "Original": "Class Role",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "职业定位",
+      "Source": "library"
+    },
+    {
+      "Original": "The class/job role",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "职业/特职定位",
+      "Source": "library"
+    },
+    {
+      "Original": "Race",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "种族",
+      "Source": "library"
+    },
+    {
+      "Original": "The race required to equip the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "装备该物品所需的种族",
+      "Source": "library"
+    },
+    {
+      "Original": "Sex",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "性别",
+      "Source": "library"
+    },
+    {
+      "Original": "The sex required to equip the item",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintChoiceFilter/Factory.Invoke",
+      "Translated": "装备该物品所需的性别",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be HQ?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "可高品质？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be high quality?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否为高品质？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Unique?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "唯一？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item unique?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否唯一？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Tradable?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "可交易？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item tradable?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否可交易？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Equippable?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "可装备？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be equipped?",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否装备？",
+      "Source": "library"
+    },
+    {
+      "Original": "Source - ",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "来源 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use - ",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "用途 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement",
+      "Context": "ItemAchievementSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be earned via an achievement?",
+      "Context": "ItemAchievementSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过成就获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Airship Exploration",
+      "Context": "ItemAirshipDropSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "飞空艇探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be earned from a airship exploration route?",
+      "Context": "ItemAirshipDropSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过飞空艇探索路线获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at an anima shop?",
+      "Context": "ItemAnimaShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在魂武商店消费？",
+      "Source": "library"
+    },
+    {
+      "Original": "Anima Shop",
+      "Context": "ItemAnimaShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "魂武商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from a anima currency shop?",
+      "Context": "ItemAnimaShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从魂武货币商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Aquarium",
+      "Context": "ItemAquariumUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "水族箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in aquariums?",
+      "Context": "ItemAquariumUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放入水族箱？",
+      "Source": "library"
+    },
+    {
+      "Original": "Stored in Armoire",
+      "Context": "ItemArmoireSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "存放于衣柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the armoire?",
+      "Context": "ItemArmoireSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放入衣柜？",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle Leve",
+      "Context": "ItemBattleLeveSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "战斗理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item obtained from a battle leve?",
+      "Context": "ItemBattleLeveSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从战斗理符中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Used on Chocobo Companion",
+      "Context": "ItemBuddySourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "用于陆行鸟搭档",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be used on your chocobo companion?",
+      "Context": "ItemBuddySourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否用于你的陆行鸟搭档？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at the calamity salvager?",
+      "Context": "ItemCalamitySalvagerShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在灾祸天翔回收商处使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Calamity Salvager",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "灾祸天翔回收商",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from the Calamity Salvager?",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从灾祸天翔回收商处购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Bought on SQ Store(real money)",
+      "Context": "ItemCashShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "在SQ商店购买（真实货币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased through the mogstation?",
+      "Context": "ItemCashShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过莫古站购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a collectables exchange shop?",
+      "Context": "ItemCollectablesShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在收藏品兑换商店使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectables Exchange Shop",
+      "Context": "ItemCollectablesShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "收藏品兑换商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from a collectables exchange shop?",
+      "Context": "ItemCollectablesShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从收藏品兑换商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Company Craft Prototype",
+      "Context": "ItemCompanyCraftDraftSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "部队制作原型",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item used in the creation of a company craft prototype?",
+      "Context": "ItemCompanyCraftDraftSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否用于制作部队制作原型？",
+      "Source": "library"
+    },
+    {
+      "Original": "Company Craft Ingredient",
+      "Context": "ItemCompanyCraftRequirementSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "部队制作材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item a material in a company craft recipe?",
+      "Context": "ItemCompanyCraftRequirementSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为部队制作配方的材料？",
+      "Source": "library"
+    },
+    {
+      "Original": "Company Craft",
+      "Context": "ItemCompanyCraftResultSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "部队制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item crafted at the company workshop as a company craft recipe?",
+      "Context": "ItemCompanyCraftResultSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否作为部队制作配方在部队工房制作？",
+      "Source": "library"
+    },
+    {
+      "Original": "Company Leve",
+      "Context": "ItemCompanyLeveSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "部队理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item obtained from a company leve?",
+      "Context": "ItemCompanyLeveSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从部队理符中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Leve",
+      "Context": "ItemCraftLeveSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "制作理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be used in a craft leve?",
+      "Context": "ItemCraftLeveSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否用于制作理符？",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Ingredient",
+      "Context": "ItemCraftRequirementSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "制作材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be used as a material in a craft recipe?",
+      "Context": "ItemCraftRequirementSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否作为制作配方的材料使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Recipe",
+      "Context": "ItemCraftResultSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "制作配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be crafted via a craft recipe?",
+      "Context": "ItemCraftResultSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过制作配方制作？",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Soul Crystal",
+      "Context": "ItemCraftSoulCrystalUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "制作灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this soul crystal equipped to specialize in a crafting class?",
+      "Context": "ItemCraftSoulCrystalUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该灵魂水晶是否已装备以专精某个制作职业？",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Delivery",
+      "Context": "ItemCustomDeliverySourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "定制交货",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be delivered in a custom delivery quest?",
+      "Context": "ItemCustomDeliverySourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在定制交货任务中交付？",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Boss Chest",
+      "Context": "ItemDungeonBossChestSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "迷宫首领宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item appear in a dungeon boss chest?",
+      "Context": "ItemDungeonBossChestSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否出现在迷宫首领宝箱中？",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Boss Drop",
+      "Context": "ItemDungeonBossDropSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "迷宫首领掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be drop from a dungeon boss?",
+      "Context": "ItemDungeonBossDropSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从迷宫首领处掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Chest",
+      "Context": "ItemDungeonChestSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "迷宫宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item appear in a dungeon chest?",
+      "Context": "ItemDungeonChestSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否出现在迷宫宝箱中？",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Drop",
+      "Context": "ItemDungeonDropSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "迷宫掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be dropped from monsters in dungeons?",
+      "Context": "ItemDungeonDropSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从次元城地下牢狱的怪物身上掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior Furniture",
+      "Context": "ItemExteriorFurnitureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "室外家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed outside houses?",
+      "Context": "ItemExteriorFurnitureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋外？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a bicolor gemstone shop?",
+      "Context": "ItemFateShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在双色宝石商店消费？",
+      "Source": "library"
+    },
+    {
+      "Original": "Bicolor Gemstone Shop",
+      "Context": "ItemFateShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "双色宝石商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from a bicolour gem shop?",
+      "Context": "ItemFateShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从双色宝石商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained by completing a fate?",
+      "Context": "ItemFateSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过完成FATE获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate",
+      "Context": "ItemFateSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a free company shop?",
+      "Context": "ItemFccShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在部队商店消费？",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company Shop",
+      "Context": "ItemFccShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "部队商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from a free company shop?",
+      "Context": "ItemFccShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从部队商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Pagos (Treasure Coffer)",
+      "Context": "ItemPagosTreasureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡恒冰之地（怪宝箱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a pagos treasure coffer?",
+      "Context": "ItemPagosTreasureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从恒冰之地的怪宝箱掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Pyros (Treasure Coffer)",
+      "Context": "ItemPyrosTreasureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡涌火之地（怪宝箱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a pyros treasure coffer?",
+      "Context": "ItemPyrosTreasureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从涌火之地的怪宝箱掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Hydatos (Treasure Coffer)",
+      "Context": "ItemHydatosTreasureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡丰水之地（怪宝箱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a hydatos treasure coffer?",
+      "Context": "ItemHydatosTreasureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从丰水之地的怪宝箱掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Crescent (Treasure Coffer)",
+      "Context": "ItemOccultTreasureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "新月岛（怪宝箱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a occult crescent treasure coffer?",
+      "Context": "ItemOccultTreasureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从新月岛的怪宝箱掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Crescent (Pot)",
+      "Context": "ItemOccultPotSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "新月岛（壶）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a occult crescent pot?",
+      "Context": "ItemOccultPotSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从新月岛的壶掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Crescent (Golden Coffer)",
+      "Context": "ItemOccultGoldenCofferSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "新月岛（金宝箱）",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item drop from a occult crescent golden coffer?",
+      "Context": "ItemOccultGoldenCofferSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从新月岛的金宝箱掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered via fishing?",
+      "Context": "ItemFishingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过钓鱼获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Context": "ItemFishingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "钓鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Folklore Tome",
+      "Context": "ItemFolkloreTomeSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "传承录",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item unlock additional gathering items when read?",
+      "Context": "ItemFolkloreTomeSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "阅读后能否解锁额外的采集物品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Interior Furniture",
+      "Context": "ItemFurnitureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "室内家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed inside houses?",
+      "Context": "ItemFurnitureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋内？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardening Crossbreed",
+      "Context": "ItemGardeningCrossbreedSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "园艺杂交",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item created by crossbreeding 2 seeds?",
+      "Context": "ItemGardeningCrossbreedSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否由2个种子杂交产生？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardening Crossbreed Seed",
+      "Context": "ItemGardeningCrossbreedSourceUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "园艺杂交种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item part of a crossbreed when gardening?",
+      "Context": "ItemGardeningCrossbreedSourceUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品在园艺中是否参与杂交？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Leve",
+      "Context": "ItemGatheringLeveSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采集理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item obtained from a gathering leve?",
+      "Context": "ItemGatheringLeveSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否从采集理符获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a regular mining node?",
+      "Context": "ItemMiningSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从普通采矿点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Mining",
+      "Context": "ItemMiningSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采矿",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a regular quarrying node?",
+      "Context": "ItemQuarryingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从普通采石点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Quarrying",
+      "Context": "ItemQuarryingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采石",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a regular logging node?",
+      "Context": "ItemLoggingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从普通伐木点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging",
+      "Context": "ItemLoggingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "伐木",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a regular harvesting node?",
+      "Context": "ItemHarvestingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从普通采集点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvesting",
+      "Context": "ItemHarvestingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a hidden mining node?",
+      "Context": "ItemHiddenMiningSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从隐藏采矿点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Mining (Hidden)",
+      "Context": "ItemHiddenMiningSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采矿（隐藏）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a hidden quarrying node?",
+      "Context": "ItemHiddenQuarryingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从隐藏采石点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Quarrying (Hidden)",
+      "Context": "ItemHiddenQuarryingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采石（隐藏）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a hidden logging node?",
+      "Context": "ItemHiddenLoggingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从隐藏伐木点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging (Hidden)",
+      "Context": "ItemHiddenLoggingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "伐木（隐藏）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a hidden harvesting node?",
+      "Context": "ItemHiddenHarvestingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从隐藏采集点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvesting (Hidden)",
+      "Context": "ItemHiddenHarvestingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采集（隐藏）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a timed mining node?",
+      "Context": "ItemTimedMiningSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时采矿点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Mining (Timed)",
+      "Context": "ItemTimedMiningSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采矿（限时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a timed quarrying node?",
+      "Context": "ItemTimedQuarryingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时采石点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Quarrying (Timed)",
+      "Context": "ItemTimedQuarryingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采石（限时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a timed logging node?",
+      "Context": "ItemTimedLoggingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时伐木点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging (Timed)",
+      "Context": "ItemTimedLoggingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "伐木（限时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a timed harvesting node?",
+      "Context": "ItemTimedHarvestingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时采集点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvesting (Timed)",
+      "Context": "ItemTimedHarvestingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采集（限时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Mining (Ephemeral)",
+      "Context": "ItemEphemeralMiningSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采矿（限时矿脉）",
+      "Source": "library"
+    },
+    {
+      "Original": "Quarrying (Ephemeral)",
+      "Context": "ItemEphemeralQuarryingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采石（限时矿脉）",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging (Ephemeral)",
+      "Context": "ItemEphemeralLoggingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "伐木（限时矿脉）",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvesting (Ephemeral)",
+      "Context": "ItemEphemeralHarvestingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "采集（限时矿脉）",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Expert Delivery",
+      "Context": "ItemGcExpertDeliverySourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "大国防联军专家交付",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be handed in for 'Expert Delivery' at your grand company?",
+      "Context": "ItemGcExpertDeliverySourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在大国防联军处用于“专家交付”？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a grand company shop?",
+      "Context": "ItemGcShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在大国防联军商店使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Shop",
+      "Context": "ItemGcShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "大国防联军商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased at your grand company shop?",
+      "Context": "ItemGcShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在大国防联军商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Supply & Provisioning",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "大国防联军补给与筹备",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be handed in for 'Supply & Provisioning' at your grand company?",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在大国防联军处用于“补给与筹备”？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset",
+      "Context": "ItemGearsetUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item part of a gearset?",
+      "Context": "ItemGearsetUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否属于某个套装？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a gil shop?",
+      "Context": "ItemGilShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在金币商店使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil Shop",
+      "Context": "ItemGilShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "金币商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased at a gil shop?",
+      "Context": "ItemGilShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在金币商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Ready Set",
+      "Context": "ItemGlamourReadySetSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "幻化套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item the combined item of a glamour ready item set?",
+      "Context": "ItemGlamourReadySetSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为幻化套装的组合物品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Ready Set Item",
+      "Context": "ItemGlamourReadySetItemSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "幻化套装物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item part of a 'Glamour Ready' outfit?",
+      "Context": "ItemGlamourReadySetItemSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否属于“幻化套装”的一部分？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Door)",
+      "Context": "ItemHouseDoorSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（门）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the door fixture slot in houses?",
+      "Context": "ItemHouseDoorSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的门配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Flooring)",
+      "Context": "ItemHouseFlooringSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（地板）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the floor fixture slot in houses?",
+      "Context": "ItemHouseFlooringSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的地板配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Lighting)",
+      "Context": "ItemHouseLightingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（照明）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the lighting fixture slot in houses?",
+      "Context": "ItemHouseLightingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的照明配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Roof)",
+      "Context": "ItemHouseRoofSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（屋顶）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the roof fixture slot in houses?",
+      "Context": "ItemHouseRoofSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的屋顶配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Wallpaper)",
+      "Context": "ItemHouseWallpaperSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（壁纸）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the interior wall fixture slot in houses?",
+      "Context": "ItemHouseWallpaperSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的内墙配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Wall)",
+      "Context": "ItemHouseWallSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（墙壁）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the exterior wall fixture slot in houses?",
+      "Context": "ItemHouseWallSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的外墙配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "House Fixture (Window)",
+      "Context": "ItemHouseWindowSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "房屋配件（窗户）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed in the window fixture slot in houses?",
+      "Context": "ItemHouseWindowSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否放置在房屋的窗户配件槽位？",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Soul Crystal",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "职业灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipped to either switch from a Class to Job or used by a Job?",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "装备后可从职业转为特职，或由特职使用？",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster Drop",
+      "Context": "ItemMonsterDropSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "怪物掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item dropped from monsters?",
+      "Context": "ItemMonsterDropSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否由怪物掉落？",
+      "Source": "library"
+    },
+    {
+      "Original": "PVP Series",
+      "Context": "ItemPvpSeriesSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "PVP系列",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item rewarded from a PVP series?",
+      "Context": "ItemPvpSeriesSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为PVP系列奖励？",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest",
+      "Context": "ItemQuestSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item come from a quest?",
+      "Context": "ItemQuestSourceRenderer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否来自任务？",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Venture",
+      "Context": "ItemQuickVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "快速探险",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from quick ventures?",
+      "Context": "ItemQuickVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否由雇员通过快速探险带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Mastercraft Tool",
+      "Context": "ItemMastercraftToolSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "名匠工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Mastercraft Tool?",
+      "Context": "ItemMastercraftToolSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是名匠工具吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Skysteel Tool",
+      "Context": "ItemSkysteelToolSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "天钢工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Skysteel Tool?",
+      "Context": "ItemSkysteelToolSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是天钢工具吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Resplendent Tool",
+      "Context": "ItemResplendentToolSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "辉煌工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Resplendent Tool?",
+      "Context": "ItemResplendentToolSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是辉煌工具吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Splendorous Tool",
+      "Context": "ItemSplendorousToolSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "灿烂工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Splendorous Tool?",
+      "Context": "ItemSplendorousToolSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是灿烂工具吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmic Tool",
+      "Context": "ItemCosmicToolSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "宇宙工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Cosmic Tool?",
+      "Context": "ItemCosmicToolSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是宇宙工具吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Zodiac Weapon",
+      "Context": "ItemZodiacWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "黄道武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Zodiac Weapon?",
+      "Context": "ItemZodiacWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是黄道武器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Anima Weapon",
+      "Context": "ItemAnimaWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "魂武",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Anima Weapon?",
+      "Context": "ItemAnimaWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是魂武吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eurekan Weapon",
+      "Context": "ItemEurekanWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Eurekan Weapon?",
+      "Context": "ItemEurekanWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是优雷卡武器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Resistance Weapon",
+      "Context": "ItemResistanceWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "义军武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Resistance Weapon?",
+      "Context": "ItemResistanceWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是义军武器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Manderville Weapon",
+      "Context": "ItemMandervilleWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "曼德维尔武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Manderville Weapon?",
+      "Context": "ItemMandervilleWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是曼德维尔武器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Phantom Weapon",
+      "Context": "ItemPhantomWeaponSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "幻境武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a Phantom Weapon?",
+      "Context": "ItemPhantomWeaponSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "这是幻境武器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Master Recipe Book",
+      "Context": "ItemSecretRecipeBookUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "学习秘籍配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item used to unlock master recipes?",
+      "Context": "ItemSecretRecipeBookUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否用于解锁秘籍配方？",
+      "Source": "library"
+    },
+    {
+      "Original": "Sky Builder Hand In",
+      "Context": "ItemSkybuilderHandInSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "天穹街交纳",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be handed in at the firmament for skybuilders' scrip?",
+      "Context": "ItemSkybuilderHandInSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在天穹街交纳以换取天穹街票据？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is the item the approved form of a item that must be inspected at the firmament?",
+      "Context": "ItemSkybuilderInspectionUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为需在天穹街鉴定的物品的合格形态？",
+      "Source": "library"
+    },
+    {
+      "Original": "Sky Builder Inspection",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "天穹街鉴定",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be inspected at the firmament to convert it into the approved form?",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在天穹街鉴定以转换为认可形态？",
+      "Source": "library"
+    },
+    {
+      "Original": "Spearfishing",
+      "Context": "ItemSpearfishingSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "刺鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered via spearfishing?",
+      "Context": "ItemSpearfishingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过刺鱼采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be spent at a special currency shop?",
+      "Context": "ItemSpecialShopUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否在特殊货币商店消费？",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Shop",
+      "Context": "ItemSpecialShopSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "特殊商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased from a special currency shop?",
+      "Context": "ItemSpecialShopSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从特殊货币商店购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye",
+      "Context": "ItemStainUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be used to dye an item?",
+      "Context": "ItemStainUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否用于给物品染色？",
+      "Source": "library"
+    },
+    {
+      "Original": "Submarine Exploration",
+      "Context": "ItemSubmarineDropSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "潜水艇探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be earned from a submarine exploration route?",
+      "Context": "ItemSubmarineDropSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从潜水艇探索路线中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Desynthesis",
+      "Context": "ItemDesynthSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "精炼",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained via desynthesis?",
+      "Context": "ItemDesynthSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过精炼获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduction",
+      "Context": "ItemReductionSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "分解",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained via reduction?",
+      "Context": "ItemReductionSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过分解获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Loot",
+      "Context": "ItemLootSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from another item(normally a chest/material container/coffer)?",
+      "Context": "ItemLootSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从其他物品中获得（通常是宝箱/材料容器/储物箱）？",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardening",
+      "Context": "ItemGardeningSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "园艺",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be grown via gardening?",
+      "Context": "ItemGardeningSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过园艺种植？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be desynthesized?",
+      "Context": "ItemDesynthUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否精炼？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be reduced?",
+      "Context": "ItemReductionUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否分解？",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item contain other items?",
+      "Context": "ItemLootUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否包含其他物品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be used for gardening?",
+      "Context": "ItemGardeningUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否用于园艺？",
+      "Source": "library"
+    },
+    {
+      "Original": "Card Pack",
+      "Context": "ItemCardPackSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "卡牌包",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a card pack?",
+      "Context": "ItemCardPackSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从卡牌包中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Does this item contain cards?",
+      "Context": "ItemCardPackUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否包含卡牌？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a coffer?",
+      "Context": "ItemCofferSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从宝箱中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this an item coffer that contains other items?",
+      "Context": "ItemCofferUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为包含其他物品的宝箱？",
+      "Source": "library"
+    },
+    {
+      "Original": "Palace of the Dead",
+      "Context": "ItemPalaceOfTheDeadSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "死者宫殿",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in the Palace of the Dead?",
+      "Context": "ItemPalaceOfTheDeadSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从死者宫殿的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Palace of the Dead?",
+      "Context": "ItemPalaceOfTheDeadUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为死者宫殿中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Heaven on High",
+      "Context": "ItemHeavenOnHighSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "大扇风",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in the Heaven on High?",
+      "Context": "ItemHeavenOnHighSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从大扇风的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Heaven on High?",
+      "Context": "ItemHeavenOnHighUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为大扇风中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Orthos",
+      "Context": "ItemEurekaOrthosSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "正统优雷卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in the Eureka Orthos?",
+      "Context": "ItemEurekaOrthosSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从正统优雷卡的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Eureka Orthos?",
+      "Context": "ItemEurekaOrthosUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为正统优雷卡中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Anemos",
+      "Context": "ItemAnemosSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡常风之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Eureka Anemos?",
+      "Context": "ItemAnemosSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从优雷卡常风之地的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Eureka Anemos?",
+      "Context": "ItemAnemosUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为优雷卡常风之地中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Pagos",
+      "Context": "ItemPagosSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡恒冰之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Eureka Pagos?",
+      "Context": "ItemPagosSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从优雷卡恒冰之地的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Eureka Pagos?",
+      "Context": "ItemPagosUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为优雷卡恒冰之地中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Pyros",
+      "Context": "ItemPyrosSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡涌火之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Eureka Pyros?",
+      "Context": "ItemPyrosSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从优雷卡涌火之地的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Eureka Pyros?",
+      "Context": "ItemPyrosUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为优雷卡涌火之地中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Hydatos",
+      "Context": "ItemHydatosSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "优雷卡丰水之地",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Eureka Hydatos?",
+      "Context": "ItemHydatosSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从优雷卡丰水之地的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Eureka Hydatos?",
+      "Context": "ItemHydatosUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为优雷卡丰水之地中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Bozja",
+      "Context": "ItemBozjaSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "博兹雅",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Bozja?",
+      "Context": "ItemBozjaSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从博兹雅的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this a loot item obtained in the Bozja?",
+      "Context": "ItemBozjaUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为博兹雅中获得的战利品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Logogram",
+      "Context": "ItemLogogramSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "文理技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a logogram?",
+      "Context": "ItemLogogramSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从文理技能中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item a logogram?",
+      "Context": "ItemLogogramUseRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否为文理技能？",
+      "Source": "library"
+    },
+    {
+      "Original": "Pilgrim's Traverse",
+      "Context": "ItemPilgrimsTraverseSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "朝圣交错路",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Pilgrim's Traverse?",
+      "Context": "ItemPilgrimsTraverseSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从朝圣交错路的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Oizys",
+      "Context": "ItemOizysSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "奥伊泽斯",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be obtained from a loot item in Oizys?",
+      "Context": "ItemOizysSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从奥伊泽斯的战利品中获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple Triad Card",
+      "Context": "ItemTripleTriadSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "九宫幻卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Is this item acquired from playing triple triad?",
+      "Context": "ItemTripleTriadSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品是否通过游玩九宫幻卡获得？",
+      "Source": "library"
+    },
+    {
+      "Original": "Woodland Exploration Venture (Botany)",
+      "Context": "ItemWoodlandExplorationVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "森林探索委托（园艺）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from botany exploration ventures?",
+      "Context": "ItemWoodlandExplorationVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否由雇员通过园艺探索委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Waterside Exploration Venture (Fishing)",
+      "Context": "ItemWatersideExplorationVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "水边探索委托（捕鱼）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from fishing exploration ventures?",
+      "Context": "ItemWatersideExplorationVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员钓鱼探索委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Highland Exploration Venture (Mining)",
+      "Context": "ItemHighlandExplorationVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "高地探索委托（采矿）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from mining exploration ventures?",
+      "Context": "ItemHighlandExplorationVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员采矿探索委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Exploration Venture (Combat)",
+      "Context": "ItemFieldExplorationVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "野外探索委托（战斗）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from combat exploration ventures?",
+      "Context": "ItemFieldExplorationVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员战斗探索委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Venture (Botany)",
+      "Context": "ItemBotanistVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "委托（园艺）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from botany ventures?",
+      "Context": "ItemBotanistVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员园艺委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Venture (Fishing)",
+      "Context": "ItemFishingVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "委托（钓鱼）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from fishing ventures?",
+      "Context": "ItemFishingVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员钓鱼委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Venture (Mining)",
+      "Context": "ItemMiningVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "委托（采矿）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from mining ventures?",
+      "Context": "ItemMiningVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员采矿委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Venture (Combat)",
+      "Context": "ItemHuntingVentureSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "委托（战斗）",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be returned by retainers from combat ventures?",
+      "Context": "ItemHuntingVentureSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否通过雇员战斗委托带回？",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Item Search - Configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "亚拉戈物品搜索设置",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Report a Issue",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "报告问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Wizard",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "设置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure New Features",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "配置新功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconfigure All Features",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重新配置所有功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Item Search##AllaganItemSearch",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "亚拉戈物品搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "View",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter Pane Position",
+      "Context": "MainWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "筛选面板位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Top",
+      "Context": "MainWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "顶部",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Dressing Mode",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "试穿模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the dresser window and clicking an item automatically tries it on.",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开试穿窗口，点击物品即可自动试穿。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Garland Tools",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Garland Tools 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Teamcraft",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Teamcraft 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Universalis",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Universalis 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Gamer Escape",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Gamer Escape 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Console Games Wiki",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Console Games Wiki 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Name",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Link",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "发送物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "More Information",
+      "Context": "MainWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "更多信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Only equippable by ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可装备职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be HQ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可获得高品质物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Unique",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "独有",
+      "Source": "library"
+    },
+    {
+      "Original": "Untradable",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不可交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Available From: ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取途径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Used In: ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "用途： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ctrl: Link",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Ctrl：发送物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Shift: Try on",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Shift：试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Click/Alt: More information",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击或按 Alt：查看详情",
+      "Source": "library"
+    },
+    {
+      "Original": "TabBar",
+      "Context": "MainWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "标签栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Basic",
+      "Context": "MainWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "基本信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Sources",
+      "Context": "MainWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses",
+      "Context": "MainWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "用途",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "MainWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Pin",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Unpin",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "取消固定",
+      "Source": "library"
+    },
+    {
+      "Original": "When searching the following operators can be used to compare: ",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "搜索时可使用以下运算符： ",
+      "Source": "library"
+    },
+    {
+      "Original": "=, for exact comparisons",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "=，完全相等",
+      "Source": "library"
+    },
+    {
+      "Original": "!, for inequality comparisons",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "!，不相等",
+      "Source": "library"
+    },
+    {
+      "Original": "||, search multiple expressions using OR",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "||，任一表达式匹配即可",
+      "Source": "library"
+    },
+    {
+      "Original": "&&, search multiple expressions using AND",
+      "Context": "MainWindow.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "&&，必须满足全部表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Item Search - Wizard",
+      "Context": "WizardWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "亚拉戈物品搜索设置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools was not detected, please install it to get more information about this item.",
+      "Context": "ATService.OpenMoreInformationSub",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未检测到 Allagan Tools。安装后可查看更多物品信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the Allagan Item Search main window. Text arguments after the command will be put into the name search field.",
+      "Context": "CommandService.StartAsync",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开亚拉戈物品搜索主窗口。命令后的文字会填入名称搜索框。",
+      "Source": "library"
+    },
+    {
+      "Original": "Water Type: ",
+      "Context": "ItemAquariumUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "水体类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Category: ",
+      "Context": "ItemArmoireSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "分类： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "理符： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Class: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "职业： ",
+      "Source": "library"
+    },
+    {
+      "Original": "EXP Reward: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "经验奖励： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Allowance Cost: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "理符配额消耗： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loot Chance: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "掉落概率： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle: Increases EXP earned by your chocobo companion.",
+      "Context": "ItemBuddySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "战斗：增加陆行鸟搭档获得的经验值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stable: Training food for a stabled Chocobo companion.",
+      "Context": "ItemBuddySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "鸟棚：用于鸟棚中陆行鸟搭档的训练食物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Dying: Used in Chocobo Dyeing.",
+      "Context": "ItemBuddySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "染色：用于陆行鸟染色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement Required: ",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要成就： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Required: ",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Maps:",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地图：",
+      "Source": "library"
+    },
+    {
+      "Original": "Price(USD): ",
+      "Context": "ItemCashShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "价格(USD)： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set: ",
+      "Context": "ItemCashShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "套装： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains:",
+      "Context": "ItemCashShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "包含：",
+      "Source": "library"
+    },
+    {
+      "Original": "Items that can be purchased:",
+      "Context": "ItemCollectablesShopUseRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可购买的物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "ItemCompanyCraftDraftSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ingredients:",
+      "Context": "ItemCompanyCraftDraftSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "材料：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ingredient of Craft Recipe:",
+      "Context": "ItemCompanyCraftRequirementSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "制作配方的材料：",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Type: ",
+      "Context": "ItemCompanyCraftResultSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Parts: ",
+      "Context": "ItemCompanyCraftResultSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "部件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Yield: ",
+      "Context": "ItemCraftResultSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "产量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Difficulty: ",
+      "Context": "ItemCraftResultSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "难度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Craftsmanship: ",
+      "Context": "ItemCraftResultSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需作业精度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip to specialize as ",
+      "Context": "ItemCraftSoulCrystalUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "装备后专精于 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectability (Low): ",
+      "Context": "ItemCustomDeliverySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "收藏价值（低）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectability (Mid): ",
+      "Context": "ItemCustomDeliverySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "收藏价值（中）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectability (High): ",
+      "Context": "ItemCustomDeliverySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "收藏价值（高）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Npc",
+      "Context": "ItemCustomDeliverySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon: ",
+      "Context": "ItemDungeonBossChestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "迷宫： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop: ",
+      "Context": "ItemFateShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "商店： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost: Company Credit x ",
+      "Context": "ItemFccShopSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "花费：军票 x ",
+      "Source": "library"
+    },
+    {
+      "Original": "(Drops 1)",
+      "Context": "ItemFieldOpCofferSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（掉落 1）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Drops ",
+      "Context": "ItemFieldOpCofferSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（掉落 ",
+      "Source": "library"
+    },
+    {
+      "Original": "N/A",
+      "Context": "ItemFishingSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocks: ",
+      "Context": "ItemFolkloreTomeSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "解锁： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Patch Added: ",
+      "Context": "ItemFurnitureSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "加入版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Result: ",
+      "Context": "ItemGardeningCrossbreedSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "结果： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reward Items: ",
+      "Context": "ItemGatheringLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "奖励物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stars:",
+      "Context": "ItemGatheringSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Perception Required:",
+      "Context": "ItemGatheringSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需鉴别力：",
+      "Source": "library"
+    },
+    {
+      "Original": " up for ",
+      "Context": "ItemGatheringSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 可采集 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank Required: ",
+      "Context": "ItemGcShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需军衔： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Exp: ",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "经验： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Seals: ",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "军票： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown rewards",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Items:",
+      "Context": "ItemGlamourReadySetSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "套装物品：",
+      "Source": "library"
+    },
+    {
+      "Original": "Not default in any house.",
+      "Context": "get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "不是任何房屋的默认。",
+      "Source": "library"
+    },
+    {
+      "Original": "Default in ",
+      "Context": "get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "默认于 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Converts ",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将 ",
+      "Source": "library"
+    },
+    {
+      "Original": " into ",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 转化为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Provides the ",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "提供 ",
+      "Source": "library"
+    },
+    {
+      "Original": " job",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster: ",
+      "Context": "ItemMonsterDropSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "怪物： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reward in PVP Series ",
+      "Context": "ItemPvpSeriesSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "PVP 系列奖励 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocks at level ",
+      "Context": "ItemPvpSeriesSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "解锁等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion: ",
+      "Context": "ItemQuestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Allied Society: ",
+      "Context": "ItemQuestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "友好部族： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Only available from ",
+      "Context": "ItemQuestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅可从此处获得 ",
+      "Source": "library"
+    },
+    {
+      "Original": " (Optional)",
+      "Context": "ItemQuestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " （可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Venture Cost: ",
+      "Context": "ItemQuickVentureSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "探险币消耗： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "ItemQuickVentureSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "forms",
+      "Context": "ItemRelicToolSourceRenderer`1.DrawForms",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "形态",
+      "Source": "library"
+    },
+    {
+      "Original": "Forms:",
+      "Context": "ItemRelicToolSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "形态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Level: ",
+      "Context": "ItemSkybuilderHandInSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最高等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Script: ",
+      "Context": "ItemSkybuilderHandInSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "脚本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Points: ",
+      "Context": "ItemSkybuilderHandInSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "点数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Required: ",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Required: ",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour: ",
+      "Context": "ItemStainUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "颜色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "ColorPreview",
+      "Context": "ItemStainUseRenderer.get_DrawTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "颜色预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Match Cost: ",
+      "Context": "ItemTripleTriadSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "匹配消耗： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses Regional Rules: ",
+      "Context": "ItemTripleTriadSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用地区规则： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "ItemTripleTriadSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "ItemTripleTriadSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Level: ",
+      "Context": "ItemVentureSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Gathering: ",
+      "Context": "ItemVentureSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求群狼大厅： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Item Level: ",
+      "Context": "ItemVentureSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求物品等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Experience: ",
+      "Context": "ItemVentureSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "经验值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements",
+      "Context": "ItemAchievementSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Anima Shops",
+      "Context": "ItemAnimaShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "魂武商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Aquariums",
+      "Context": "ItemAquariumUseRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "水族箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle Leves",
+      "Context": "ItemBattleLeveSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "战斗理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Calamity Salvagers",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "灾祸天翔回收员",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectables Exchange Shops",
+      "Context": "ItemCollectablesShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "收藏品兑换商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Company Leves",
+      "Context": "ItemCompanyLeveSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "部队理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Leves",
+      "Context": "ItemCraftLeveSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "制作理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Soul Crystals",
+      "Context": "ItemCraftSoulCrystalUseRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "制作灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Deliveries",
+      "Context": "ItemCustomDeliverySourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "老主顾交易",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Boss Chests",
+      "Context": "ItemDungeonBossChestSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "迷宫首领宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Boss Drops",
+      "Context": "ItemDungeonBossDropSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "迷宫首领掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Chests",
+      "Context": "ItemDungeonChestSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "迷宫宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon Drops",
+      "Context": "ItemDungeonDropSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "迷宫掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Bicolor Gemstone Shops",
+      "Context": "ItemFateShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "双色宝石商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company Shops",
+      "Context": "ItemFccShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "部队商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Folklore Tomes",
+      "Context": "ItemFolkloreTomeSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "传承录",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Leves",
+      "Context": "ItemGatheringLeveSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "采集理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Shops",
+      "Context": "ItemGcShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "大国防联军商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil Shops",
+      "Context": "ItemGilShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "金币商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Soul Crystals",
+      "Context": "ItemJobSoulCrystalUseRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "职业灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster Drops",
+      "Context": "ItemMonsterDropSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "怪物掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Master Recipe Books",
+      "Context": "ItemSecretRecipeBookUseRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "秘籍",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Shops",
+      "Context": "ItemSpecialShopSourceRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "特殊商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyeing",
+      "Context": "ItemStainUseRenderer.get_PluralName",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Level",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintRangeFilter/Factory.Invoke",
+      "Translated": "装备等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level",
+      "Context": "FilterService.AddFilters",
+      "Role": "UI",
+      "RoleReason": "→ UintRangeFilter/Factory.Invoke",
+      "Translated": "物品品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a ephemeral mining node?",
+      "Context": "ItemEphemeralMiningSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时矿脉点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a ephemeral quarrying node?",
+      "Context": "ItemEphemeralQuarryingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时矿脉点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a ephemeral logging node?",
+      "Context": "ItemEphemeralLoggingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时矿脉点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered from a ephemeral harvesting node?",
+      "Context": "ItemEphemeralHarvestingSourceRenderer.get_HelpText",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "该物品能否从限时矿脉点采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Coffer",
+      "Context": "ItemCofferSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ YesNoChoiceFilter/Factory.Invoke",
+      "Translated": "宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "MainWindow.Draw",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "物品品级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Level ",
+      "Context": "MainWindow.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "装备等级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Costs:",
+      "Context": "ItemCalamitySalvagerShopSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "花费：",
+      "Source": "library"
+    },
+    {
+      "Original": "Seals Rewarded: ",
+      "Context": "ItemCompanyLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "奖励军票： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewards:",
+      "Context": "ItemFateShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "奖励：",
+      "Source": "library"
+    },
+    {
+      "Original": " coffer",
+      "Context": "ItemFieldOpCofferSourceRenderer`1.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Level:",
+      "Context": "ItemFishingSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Seals rewarded: ",
+      "Context": "ItemGcExpertDeliverySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "奖励军票： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost: ",
+      "Context": "ItemGcShopSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "花费： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "ItemGcSupplyDutySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Locations: ",
+      "Context": "ItemMonsterDropSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Locations:",
+      "Context": "ItemMonsterDropSourceRenderer.get_DrawTooltipGrouped",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Required:",
+      "Context": "ItemQuestSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reward: ",
+      "Context": "ItemSkybuilderInspectionUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "奖励： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Required: ",
+      "Context": "ItemSkybuilderInspectionUseRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需求： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "RelicToolTypeLocalizer.Format",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Item",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知物品",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

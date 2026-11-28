@@ -1,0 +1,603 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TitleEdit",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " preset",
+      "Context": "GuiUtils.DrawDisplayTypeTooltipPresetInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 预设",
+      "Source": "library"
+    },
+    {
+      "Original": " presets",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个预设",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "AboutTab.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Author: ",
+      "Context": "GuiUtils.DrawDisplayTypeTooltipPresetInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Available expansion ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可用资料片 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "GroupTab.DrawGroupActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Certain BGM tracks will not loop",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "部分背景音乐不会循环播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character select companion support",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在角色选择画面显示宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Character select emote support",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在角色选择画面播放情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Character select ornament support",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在角色选择画面显示时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Config button overlay",
+      "Context": "ConfigButtonOverlay.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "设置按钮叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains ",
+      "Context": "GuiUtils.DrawDisplayTypeTooltipGroupInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "包含 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Couldn't find v2 config",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "找不到 V2 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Song ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前音乐 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current character ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current layout ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前布局 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current lobbymap ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前登录界面地图 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current weather ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前天气 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current zone: ",
+      "Context": "PresetTab.DrawPresetControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Dawntrail: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "金曦之遗辉： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "GroupTab.DrawGroupActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Edge color",
+      "Context": "GuiUtils.DrawUiColorPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "边缘颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Endwalker: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "晓月之终途： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to clipboard",
+      "Context": "PresetTab.DrawPresetListControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Festival selector for presets",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "为预设选择节庆活动",
+      "Source": "library"
+    },
+    {
+      "Original": "File path: ",
+      "Context": "DrawBgmTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Game version: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "游戏版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Groups",
+      "Context": "GroupTab.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavensward: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "苍穹之禁城： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing test",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "住宅测试",
+      "Source": "library"
+    },
+    {
+      "Original": "If you're looking for more presets head over to Dalamud's official discord and check out the #preset-sharing channel.",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在 Dalamud 官方 Discord 的 #preset-sharing 频道中可以找到更多预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore seasonal date checks",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "忽略季节活动日期限制",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from clipboard",
+      "Context": "PresetTab.DrawPresetListControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Info: ",
+      "Context": "DrawBgmTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "信息： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last location",
+      "Context": "DisplayTypeTab.DrawSelectPresetCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "上次位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout editor allowing you to turn off/on certain parts of the map",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "布局编辑器，可显示或隐藏指定地图片段",
+      "Source": "library"
+    },
+    {
+      "Original": "Location: ",
+      "Context": "DrawBgmTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Migrated ",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已迁移 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Migrated v2 config",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已迁移 V2 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "GroupTab.DrawGroupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "GroupTab.DrawDeleteConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Title Edit configuration",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Title Edit 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "PresetTab.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload title screen",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载标题画面",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload title screen UI",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载标题界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload title screen colors",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载标题画面颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Remigrate title screens",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新迁移标题画面",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "GroupTab.DrawGroupActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "FilterCombo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected character ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已选角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "SettingsTab.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowbringers: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暗影之逆焰： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Info",
+      "Context": "DrawBgmTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "曲目信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Stormblood: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "红莲之狂潮： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Text color",
+      "Context": "GuiUtils.DrawUiColorPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Title Edit Configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Title Edit 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Unless specifically otherwise said, these issues only affect the character or title screen",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "除非另有说明，这些问题只影响角色选择画面或标题画面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Update time ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "更新时间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Versions",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to Title Edit V3, a full remake of the original plugin.",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "欢迎使用 Title Edit V3，本版全面重制了原插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "World and character takes longer to load in when in housing zones",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在住宅区加载场景和角色会耗费更长时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "GroupTab.DrawDeleteConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "You can alt+drag most drag inputs to change values slowly",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按住 Alt 拖动大多数数值框可微调。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can ctrl+click most sliders/drag inputs to enter values manually",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按住 Ctrl 点击大多数滑块或拖动输入框，即可手动输入数值。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can press ctrl+T to open this window while not logged in",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "未登录时按 Ctrl+T 即可打开此窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can shift+drag most drag inputs to change values rapidly",
+      "Context": "AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按住 Shift 拖动大多数数值框可快速调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "PresetTab.DrawPresetControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "区域： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

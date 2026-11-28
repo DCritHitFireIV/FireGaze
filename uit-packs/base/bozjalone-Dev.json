@@ -1,0 +1,410 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "bozjalone-Dev",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(Inactive)",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（未激活）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Starting)",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（即将开始）",
+      "Source": "library"
+    },
+    {
+      "Original": "Activity Targets",
+      "Context": "ActivityTargetPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "活动目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Bronze Treasure Coffer",
+      "Context": "Treasure.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "青铜宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Button##ApplyBuffs",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Carrot Hunt Helper",
+      "Context": "CarrotHuntPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "胡萝卜寻宝助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Chain Manager",
+      "Context": "ChainManagerPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "连锁管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Encounters",
+      "Context": "CriticalEncountersPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "紧急遭遇战",
+      "Source": "library"
+    },
+    {
+      "Original": "Event Data##",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "事件数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Fates",
+      "Context": "FatesPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Level",
+      "Context": "JobLevelPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "职业等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Map Marker Data##",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "地图标记数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby Enemies",
+      "Context": "EnemyPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "附近的敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "No target selected.",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pending",
+      "Context": "VnavmeshPanel.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等待中",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset##Exp",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset##Gold",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset##Silver",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Run",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "VnavmeshPanel.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Silver Treasure Coffer",
+      "Context": "Treasure.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "白银宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Statuses",
+      "Context": "StatusPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "TargetObject: None",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标对象：无",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to ",
+      "Context": "Teleporter.TeleportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "传送至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporter",
+      "Context": "TeleporterPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Test Return",
+      "Context": "Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "测试返回",
+      "Source": "library"
+    },
+    {
+      "Original": "This includes your character",
+      "Context": "HandleTower",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "包含你自己的角色",
+      "Source": "library"
+    },
+    {
+      "Original": "This is unique to you.",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅你可见。",
+      "Source": "library"
+    },
+    {
+      "Original": "Treasure Hunt Helper",
+      "Context": "TreasureHuntPanel.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "寻宝助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Fate",
+      "Context": "Fate.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未知临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Treasure Coffer",
+      "Context": "Treasure.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "You must be near an aetheryte to teleport",
+      "Context": "Teleporter.TeleportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "必须靠近以太之光才能传送",
+      "Source": "library"
+    },
+    {
+      "Original": "You're already at this aetheryte",
+      "Context": "Teleporter.TeleportButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "你已在此以太之光旁",
+      "Source": "library"
+    },
+    {
+      "Original": "※ ボズヤ南方前線／ザトゥノル高原でのみ動作します。",
+      "Context": "MainWindow.Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "※ 仅在南方博兹雅战线和扎杜诺尔高原生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "▶  自動周回を開始",
+      "Context": "MainWindow.DrawStatusAndToggle",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "▶  开始自动循环",
+      "Source": "library"
+    },
+    {
+      "Original": "なし",
+      "Context": "Panel.DrawCeDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "アクティブなCEなし",
+      "Context": "Panel.DrawCeDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前没有进行中的紧急遭遇战",
+      "Source": "library"
+    },
+    {
+      "Original": "マウント",
+      "Context": "MainWindow.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "マウントルーレット",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "随机坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "存在しない（未表示）",
+      "Context": "Panel.DrawCeDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "不存在（未显示）",
+      "Source": "library"
+    },
+    {
+      "Original": "表示中（確認ダイアログあり）",
+      "Context": "Panel.DrawCeDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在显示（含确认窗口）",
+      "Source": "library"
+    },
+    {
+      "Original": "（まだ何も押していません）",
+      "Context": "DrawCeDebugInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（尚未点击任何按钮）",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Elapsed",
+      "Container": "file:Translations/zh/hunter.json",
+      "Key": "/hunter/elapsed",
+      "Translated": "已用时间",
+      "Source": "library"
+    },
+    {
+      "Original": "bozjalone Status",
+      "Container": "file:Translations/zh/modules.automator.json",
+      "Key": "/modules/automator/panel/lens/title",
+      "Translated": "bozjalone 状态",
+      "Source": "library"
+    }
+  ],
+  "attributes": [
+    {
+      "Original": "enabled",
+      "Context": "[属性] TooltipAttribute bozjalone.Modules.Automator.AutomatorConfig::Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    }
+  ]
+}

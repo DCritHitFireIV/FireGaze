@@ -1,0 +1,435 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "JustBackup",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  (otherwise only config files will be saved, screenshots, logs, etc will be skipped)",
+      "Context": "ConfigWindow.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "  （否则仅保存配置文件，跳过截图、日志等内容）",
+      "Source": "library"
+    },
+    {
+      "Original": " minutes did not passed yet since last backup",
+      "Context": "JustBackup.DoBackup",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": " 分钟的备份间隔尚未到达",
+      "Source": "library"
+    },
+    {
+      "Original": "(not recommended) Run new backup anyway",
+      "Context": "ModalWindowAskBackup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "（不推荐）仍然开始新的备份",
+      "Source": "library"
+    },
+    {
+      "Original": "7-zip archives are taking up to 15 times less space!",
+      "Context": "ConfigWindow.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "使用 7-Zip 最多可将备份缩小到原来的十五分之一！",
+      "Source": "library"
+    },
+    {
+      "Original": "Add identification info",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加角色标识信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Added identification info for current character",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已为当前角色添加标识信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds an empty file into character's config directory\ncontaining character's name and home world",
+      "Context": "ConfigWindow.Tools",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "在角色配置目录中添加空文件，\n以角色名称和所属服务器命名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always keep at least this number of backup regardless of their date",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "始终保留至少此数量的备份，不限日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Another backup is already in progress. \nAttempting to create new backup while old \n  is not yet finished may result both backups not being done properly.",
+      "Context": "ModalWindowAskBackup.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "另一个备份任务正在运行。\n在原任务结束前开始新备份，\n可能导致两份备份都不完整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically remove old backups",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动清理旧备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup created successfully!",
+      "Context": "DoBackupInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "备份创建成功！",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup skipped because ",
+      "Context": "JustBackup.DoBackup",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "已跳过备份，原因是 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup will not be created if previous backup was created less than this amount of minutes. Note that only successfully completed backups will update interval.",
+      "Context": "ConfigWindow.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "距上次成功备份不足设定分钟数时，跳过本次备份。只有成功完成的备份才会重置计时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration saved",
+      "Context": "ConfigWindow.OnClose",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "设置已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not create backup:\n",
+      "Context": "DoBackupInternal",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法创建备份：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not terminate old backup",
+      "Context": "ModalWindowAskBackup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法停止旧备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom backup path (by default: %localappdata%\\JustBackup):",
+      "Context": "ConfigWindow.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "自定义备份路径（默认：%localappdata%\\JustBackup）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom temporary files path (by default: %temp%):",
+      "Context": "ConfigWindow.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "自定义临时文件路径（默认：%temp%）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete backups older than, days",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "删除超过此天数的备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete to recycle bin, if available.",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "可用时将文件移到回收站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not restrict amount of resources 7-zip can use",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许 7-Zip 使用全部可用资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't start new backup and let old backup finish",
+      "Context": "ModalWindowAskBackup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "等待当前备份完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Error deleting temp files:\n",
+      "Context": "DoBackupInternal",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "删除临时文件时出错：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Error while adding identification info for current character:\n",
+      "Context": "Tools",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "添加当前角色标识信息时出错：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude replays from backup",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从备份中排除战斗回放",
+      "Source": "library"
+    },
+    {
+      "Original": "Expert options",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Force stop old backup and create new backup",
+      "Context": "ModalWindowAskBackup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "强制停止旧备份并创建新备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored (partial) Path",
+      "Context": "ConfigWindow.Ignored",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "要忽略的路径（支持部分匹配）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored pathes (beta)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "忽略路径（测试版）",
+      "Source": "library"
+    },
+    {
+      "Original": "Include ALL files inside FFXIV's data folder into backup",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "备份 FFXIV 数据目录中的全部文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Include plugin configurations",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含插件配置",
+      "Source": "library"
+    },
+    {
+      "Original": "JustBackup - another instance is already running",
+      "Context": "ModalWindowAskBackup..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "JustBackup 已有一个备份任务在运行",
+      "Source": "library"
+    },
+    {
+      "Original": "JustBackup configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "JustBackup 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum threads",
+      "Context": "ConfigWindow.Expert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最大线程数",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimal interval between backups, minutes",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最短备份间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Open FFXIV configuration folder",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 FFXIV 配置文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open backup folder",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开备份文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open current character's config directory",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开当前角色的配置文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open plugins configuration folder",
+      "Context": "ConfigWindow.Tools",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开插件配置文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Override game configuration folder path:",
+      "Context": "ConfigWindow.Expert",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "手动指定游戏配置文件夹：",
+      "Source": "library"
+    },
+    {
+      "Original": "Read how to restore a backup",
+      "Context": "Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "查看备份恢复说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "The higher this value, the longer backup creation will take but the less loaded your SSD/HDD will be. Increase this value if you're experiencing lag during backup process.",
+      "Context": "ConfigWindow.Expert",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "数值越大，备份所需时间越长，但硬盘负载越低。备份期间有卡顿时可适当调高。",
+      "Source": "library"
+    },
+    {
+      "Original": "There were errors while creating backup, please check log",
+      "Context": "DoBackupInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "创建备份时出错，请查看日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Throttle copying, ms",
+      "Context": "ConfigWindow.Expert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "复制间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tools",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Use built-in zip method instead of 7-zip",
+      "Context": "ConfigWindow.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用内置 ZIP 压缩方式",
+      "Source": "library"
+    },
+    {
+      "Original": "default",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "do a manual backup",
+      "Context": "JustBackup..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "手动备份",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

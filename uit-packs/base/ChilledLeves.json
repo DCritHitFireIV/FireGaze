@@ -1,0 +1,1656 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ChilledLeves",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Auto-select Turn-ins",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自动选择交纳物品",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoConfirm",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自动确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Accepted",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已接取",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Add items to your worklist first",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请先将物品加入委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Favorites",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加到收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to WorkList",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加到任务清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional Filters",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "更多筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Alchemist",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "炼金术士",
+      "Source": "library"
+    },
+    {
+      "Original": "Alchemist: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "炼金术士： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Alert Settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "提醒设置",
+      "Source": "library"
+    },
+    {
+      "Original": "All Available Leves:",
+      "Context": "DebugWindow.LeveVendor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所有可接取的理符任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "All leves have been completed on for this class, topping the process",
+      "Context": "SchedulerMain.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "此职业的理符任务均已完成，流程已停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Allowances: ",
+      "Context": "GatherModeUi.GatheringMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "理符受理限额： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount of Accepted Leves: ",
+      "Context": "SettingsWindow.MainPlanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已接取的理符任务数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount that is currently set to run",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前设置的执行次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount that you want the notification to go off on.",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "达到此理符限额时发出提醒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Armorer",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "铸甲匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Armorer: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "铸甲匠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan Final Items",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Artisan 成品清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan Pre-Crafts",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Artisan 中间材料清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Context": "AlertSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacksmith",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "锻铁匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacksmith: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "锻铁匠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Botanist",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "园艺工",
+      "Source": "library"
+    },
+    {
+      "Original": "Botanist: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "园艺工： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Carpenter",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "刻木匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Carpenter: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "刻木匠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Notification",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "聊天栏提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Chilled Leves Alert Settings ###ChilledLevesAlertSettings",
+      "Context": "AlertSettings..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Chilled Leves 提醒设置 ",
+      "Source": "library"
+    },
+    {
+      "Original": "ChilledLeves Settings Window",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "ChilledLeves 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Class",
+      "Context": "GatherModeUi.DrawGatheringTableRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Class Change",
+      "Context": "DebugWindow.MainDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "切换职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all active filters",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "清除所有已启用的筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear current worklist and start a new one",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "清空当前委托清单并新建清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete?###GatheringLeveComplete",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已完成？",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Teamcraft Link",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "复制 Teamcraft 链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Worklist as JSON",
+      "Context": "WorkListUi.DrawImportSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将委托清单复制为 JSON",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy as formatted JSON for sharing with others",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "复制为排版后的 JSON，以便分享",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafters:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作职业：",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Debug",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "制作调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Create New List",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Created",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Culinarian",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "烹调师",
+      "Source": "library"
+    },
+    {
+      "Original": "Culinarian: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "烹调师： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Amount",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "当前数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Integrity: ",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前采集次数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Leve Amount: ",
+      "Context": "AlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前理符数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Number of queued task: ",
+      "Context": "DebugWindow.TaskManagerDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前队列中的任务数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Task:",
+      "Context": "DebugWindow.TaskManagerDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current number of active task: ",
+      "Context": "DebugWindow.TaskManagerDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前执行中的任务数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "DebugWindow.LeveVendor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "WorkListUi.DrawFilteredWorklistTableRows",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismount",
+      "Context": "DebugWindow.TeleportTest",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "下坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "EXP Reward",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "经验奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "EXP Reward:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "经验奖励：",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Current Worklist",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "编辑当前委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter a name for the worklist to save",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "输入要保存的委托清单名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Current Worklist to Clipboard",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将当前委托清单导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter Leves",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter Options",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Fisher: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "捕鱼人： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Gatherers:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "采集职业：",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Chance: ",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "采集成功率： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Debug",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "采集调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Point: ",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "采集点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil Input",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "输入金币数",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil Reward",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "金币奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil Reward:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "金币奖励：",
+      "Source": "library"
+    },
+    {
+      "Original": "Goldsmith",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "雕金匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Goldsmith: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "雕金匠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab multiple leve's from vendor",
+      "Context": "SettingsWindow.MainPlanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从理符发行人处一次接取多个委托",
+      "Source": "library"
+    },
+    {
+      "Original": "Have###GatheringCompleteCheck",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已持有",
+      "Source": "library"
+    },
+    {
+      "Original": "Have: ",
+      "Context": "SettingsWindow.DrawWorklistRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已持有： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Popup",
+      "Context": "AlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "隐藏弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Worklist from Clipboard",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从剪贴板导入委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Import a worklist from clipboard in JSON format",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从剪贴板导入 JSON 格式的委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Context": "WorkListUi.DrawImportSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import/Export Worklists",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "导入 / 导出委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Importing: ",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在导入： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Increase delay between leves",
+      "Context": "SettingsWindow.MainPlanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "延长两个理符任务之间的等待时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Interacting with Gathering Node",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "正在与采集点交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Interacting with Gathering Node/Using Buffs",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "正在与采集点交互并使用增益技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Complete:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "是否完成：",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Name",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Turnin###GatheringTurninItems",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "交纳物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Exp: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业经验值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Filters",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "职业筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "JobType",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "职业类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep list after completion?",
+      "Context": "SettingsWindow.MainPlanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "完成后保留清单？",
+      "Source": "library"
+    },
+    {
+      "Original": "Leatherworker",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制革匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Leatherworker ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制革匠 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click to copy item to clipboard",
+      "Context": "WorkListUi.DrawWorklistRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "左键点击可将物品复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve",
+      "Context": "DebugWindow.LeveVendor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Int32>.Get",
+      "Translated": "理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Cost",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "消耗的理符限额",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve NPC Search",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "搜索发放理符的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Name",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "理符任务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Name Search",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "搜索理符任务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Name###GatheringLeveName",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "理符任务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Notification Amount",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "理符限额提醒阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Turnin Vendor Name",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "交纳物品的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Vendor Info",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "理符任务 NPC 信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve Vendor Name",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "发放理符的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Leve: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "理符任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Level###CrafterLevels",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Level###GatheringLeveLevel",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Level:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Levequest NPC:",
+      "Context": "GatherModeUi.DrawGatheringTableRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "发放理符的 NPC：",
+      "Source": "library"
+    },
+    {
+      "Original": "Link copied to clipboard",
+      "Context": "Utils.ExportSelectedListToTC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "链接已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Level",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最低等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Miner",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "采矿工",
+      "Source": "library"
+    },
+    {
+      "Original": "Miner: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "采矿工： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to NPC",
+      "Context": "DebugWindow.TeleportTest",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "前往 NPC 所在位置",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Name",
+      "Context": "DebugWindow.TeleportTest",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "NPC 名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "DebugWindow.TargetingDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Need###GatheringAmountNecessary",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "需求数量",
+      "Source": "library"
+    },
+    {
+      "Original": "No Leve Selected",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未选择理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "No more potentional leves, stopping gathering mode",
+      "Context": "TaskGrabPrioLeve.CheckLeve",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "没有可继续的理符任务，已停止采集模式",
+      "Source": "library"
+    },
+    {
+      "Original": "No saved worklists found",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未找到已保存的委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "No target selected.",
+      "Context": "DebugWindow.TargetingDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "SoundAlert.ToName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Not a valid turnin vendor!",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "该 NPC 不接受此任务的交货！",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification Alert | Chilled Leves ###ChilledLevesNotifPopup",
+      "Context": "AlertWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Chilled Leves 理符提醒 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open NPC Selection",
+      "Context": "GatherModeUi.DrawGatheringTableRows",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 NPC 选择窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Priority Leve Grind",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开理符任务优先级窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Worklist",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开任务清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the worklists folder in file explorer",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在文件资源管理器中打开委托清单文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Prio###GatheringLevePrio",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority Leve Grind Window ",
+      "Context": "GatherModeUi..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "理符任务优先级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Checker",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "任务检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Status:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "任务状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rapid Import Leves",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "快速导入理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove From LeveList",
+      "Context": "WorkListUi.DrawWorklistRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "从理符清单中移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from Favorites",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从收藏移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from WorkList",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从任务清单移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove###CrafterLevesRemoveWorkList",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat Last Leve",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "再次执行上一个理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Items",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All Filters",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置所有筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewards",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Run Until:",
+      "Context": "GatherModeUi.DrawGatheringTableRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "运行至：",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Changes",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Save New Worklist",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存新的委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and load worklists from JSON files",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将委托清单保存为 JSON 文件，或从文件加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a leve from the list to view details",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "从列表中选择理符任务以查看详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Leve Details",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所选理符任务详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Alert Window",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "显示提醒窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Completed Only",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已完成的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Favorites Only",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Incomplete Only",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示未完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only completed leves",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅显示已完成的理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only incomplete leves",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅显示未完成的理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only leves marked as favorites",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅显示已收藏的理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound Effect",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Gathering Leves",
+      "Context": "GatherModeUi.DrawGatheringButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始执行采集理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Statuses",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Gathering Leves",
+      "Context": "GatherModeUi.DrawGatheringButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止执行采集理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Teamcraft Link",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Teamcraft 链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Context": "DebugWindow.TeleportTest",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "This will replace your current worklist with data from clipboard. Continue?",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此操作将用剪贴板中的数据替换当前委托清单。继续吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "This will replace your current worklist. Are you sure?",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此操作将替换当前委托清单。确定继续吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Auto-Select Turn-ins",
+      "Context": "DebugWindow.MainDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "切换自动选择交纳物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Turnin Amount",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "交纳数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Turnin NPC Search",
+      "Context": "DebugWindow.LeveItAloneTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "搜索交纳物品的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Turnin NPC:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "交纳物品的 NPC：",
+      "Source": "library"
+    },
+    {
+      "Original": "Type: ",
+      "Context": "DebugWindow.GatheringTest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Item List",
+      "Context": "DebugWindow.CraftingDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新物品列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Ice Theme",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用冰晶主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Using worklist: ",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前使用的清单： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Weaver",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "裁衣匠",
+      "Source": "library"
+    },
+    {
+      "Original": "Weaver: ",
+      "Context": "DebugWindow.MainDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "裁衣匠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "When you left click a leve, will immediately add it to your worklist",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "左键点击理符任务即可将其加入委托清单",
+      "Source": "library"
+    },
+    {
+      "Original": "While this is disabled, you can also double click to add a leve as well!",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "关闭此选项后，仍可以双击添加理符任务！",
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist",
+      "Context": "AlertSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Will ONLY alert for the characters in the whitelist",
+      "Context": "AlertSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅对白名单内的角色发出提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Will alert you when your current leves is at or above this amount.",
+      "Context": "AlertSettings.NotificationAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前理符受理限额达到或超过此值时提醒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will have it alert for all characters except the ones in the blacklist",
+      "Context": "AlertSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对黑名单以外的所有角色启用提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Worklist Name:",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "委托清单名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Worklist Planner",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "委托清单规划",
+      "Source": "library"
+    },
+    {
+      "Original": "Worklist is empty. Add items before saving.",
+      "Context": "WorkListUi.DrawSaveWorklistSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "委托清单为空。请先添加物品再保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "You have hit the level set, stopping the farming process",
+      "Context": "SchedulerMain.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已达到设定等级，停止重复执行",
+      "Source": "library"
+    },
+    {
+      "Original": "blacklist",
+      "Context": "AlertSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "whitelist",
+      "Context": "AlertSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto enable/disable getting notifications for new characters that get added",
+      "Context": "SettingsUi.Leve_AutoAlert",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "为新加入的角色自动开启或关闭通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will only setup upon first login ever of the character. If you would like to enable/disable per character after, please visit the user info tab",
+      "Context": "SettingsUi.Leve_AutoAlert",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "此设置仅在角色首次登录时应用。之后可在「角色信息」页为各角色单独开启或关闭通知。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

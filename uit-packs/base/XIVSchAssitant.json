@@ -1,0 +1,280 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "XIVSchAssitant",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  Territory ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "  区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "(custom center active)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（已使用自定义中心）",
+      "Source": "library"
+    },
+    {
+      "Original": "(using default 100, 100)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（使用默认坐标 100, 100）",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-place at center",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动移至场地中央",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-summon",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动召唤",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically summons Eos on login, instance entry, and after a full wipe.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "登录、进入副本或团灭后，自动召唤朝日小仙女。",
+      "Source": "library"
+    },
+    {
+      "Original": "Button position: default (screen center).",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按钮位于默认位置（屏幕中央）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Button saved at: (",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按钮位置已保存：（",
+      "Source": "library"
+    },
+    {
+      "Original": "Chain Stratagem — Countdown",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "连环计倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Arena Centers",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自定义场地中心",
+      "Source": "library"
+    },
+    {
+      "Original": "DoT Alert — Biolysis",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "持续伤害提醒：蛊毒法",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter an 8-player raid to configure its arena center.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请先进入一个八人团本，再设置其场地中心。",
+      "Source": "library"
+    },
+    {
+      "Original": "Eos could not reach the default position (100, 100) — this arena has a non-standard center. Use /xivsch → Custom Arena Centers to configure the correct position.",
+      "Context": "Plugin.VerifyEosCenterReached",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "朝日小仙女无法抵达默认坐标（100, 100）。此场地的中心位置特殊，请在 /xivsch 的“自定义场地中心”中设置正确位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill X/Z fields with Eos's current position.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将朝日小仙女的当前位置填入 X/Z 坐标栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill X/Z fields with your current in-game position.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将角色的当前位置填入 X/Z 坐标栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you manually reposition Eos during a raid, auto-repositioning pauses. A placement target button (⊙) will appear on screen — click it to send Eos back to the arena center and resume auto-placement. Drag it to position it next to your pet action bar.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在团本中手动移动朝日小仙女后，自动定位会暂停。点击屏幕上出现的归位按钮（⊙），即可让她回到场地中央并恢复自动定位。可将按钮拖到宠物指令栏旁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual override",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "手动接管",
+      "Source": "library"
+    },
+    {
+      "Original": "Move the button back to the center of the screen.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将按钮移回屏幕中央。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open XIVSchAssistant settings.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 XIVSchAssistant 设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Play alert sound when Biolysis falls off",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "蛊毒法效果消失时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound each second",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "每秒播放一次提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove custom center and revert to default (100, 100).",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "移除自定义中心并恢复默认坐标（100, 100）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Repositions Eos to the arena center in 8-player raids. Triggers automatically when you target the boss.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在八人团本中选中首领时，自动将朝日小仙女移至场地中央。",
+      "Source": "library"
+    },
+    {
+      "Original": "Return Eos to arena center\nDrag to reposition",
+      "Context": "Plugin.DrawReturnToCenterButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "让朝日小仙女回到场地中央\n拖动可调整按钮位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved custom centers:",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已保存的自定义中心：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show visual countdown",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Test countdown (5s)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "测试倒计时（5 秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Eos position",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用朝日小仙女的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use my position",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用我的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "[XIVSchAssistant] No target selected — please target the boss first, then click again to return Eos to the arena center.",
+      "Context": "Plugin.DrawReturnToCenterButton",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[XIVSchAssistant] 未选择目标。请先选中首领，再点一次让朝日小仙女回到场地中央。",
+      "Source": "library"
+    },
+    {
+      "Original": "[XIVSchAssistant] ⚠ Arena center unreachable for territory ",
+      "Context": "Plugin.VerifyEosCenterReached",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[XIVSchAssistant] ⚠ 无法抵达此区域的场地中心： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

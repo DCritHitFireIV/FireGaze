@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PosePad",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Settings",
+      "Context": "UiText.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search by name or ID",
+      "Context": "UiText.SearchHint",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称或编号搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "UiText.Emotes",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "UiText.Favorites",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent",
+      "Context": "UiText.Recent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "No recent emotes.",
+      "Context": "UiText.NoRecent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "最近没有使用情感动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "No actions match the current filter.",
+      "Context": "UiText.NoFilterResults",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有符合当前筛选条件的动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added to favorites: ",
+      "Context": "UiText.AddedToFavorites",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已加入收藏： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Context": "UiText.Language",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep UI visible in GPose",
+      "Context": "UiText.DisableGposeUiHide",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式下保留界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for Penumbra to initialize.",
+      "Context": "UiText.PenumbraWaiting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在等待 Penumbra 完成初始化。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra is not available.",
+      "Context": "UiText.PenumbraUnavailable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Penumbra 当前不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra is installed but currently disabled.",
+      "Context": "UiText.PenumbraDisabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已安装 Penumbra，但当前未启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to read Penumbra mod actions.",
+      "Context": "UiText.PenumbraRefreshFailed",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "读取 Penumbra 模组动作失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra integration is unavailable.",
+      "Context": "NullPenumbraIntegration.get_StatusMessage",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Penumbra 联动不可用。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

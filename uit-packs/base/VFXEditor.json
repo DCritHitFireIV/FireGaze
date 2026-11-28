@@ -1,0 +1,2647 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "VFXEditor",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "-1 if no sound",
+      "Context": "AvfxEmitter.DrawParameters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无声音时填 -1",
+      "Source": "library"
+    },
+    {
+      "Original": ".atex to PNG",
+      "Context": "UtilitiesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将 .atex 转为 PNG",
+      "Source": "library"
+    },
+    {
+      "Original": ".png Import Settings",
+      "Context": "TextureDrawable.DrawSettingsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "PNG 导入设置",
+      "Source": "library"
+    },
+    {
+      "Original": "3D Preview",
+      "Context": "Configuration.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "3D 预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to node library",
+      "Context": "IUiNodeView`1.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加到节点库",
+      "Source": "library"
+    },
+    {
+      "Original": "Aliases",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "All Files",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "所有文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambient Color",
+      "Context": "Configuration.DrawDirectXMaterial",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit3",
+      "Translated": "环境光颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation",
+      "Context": "PenumbraImportDialog.DrawExtensionsBasic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation name must start with a valid prefix, such as cbbm_",
+      "Context": "PapAnimation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "动画名称须以有效前缀开头，例如 cbbm_",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation to Import",
+      "Context": "PapGltfImportModal.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "要导入的动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Context": "PapFile.DrawAnimations",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Append",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "追加",
+      "Source": "library"
+    },
+    {
+      "Original": "Append Mod",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "追加模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Append to Workspace",
+      "Context": "PenumbraImportDialog.DrawButtonsDesc",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "追加到工作区",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "AvfxManager.DrawEditMenuItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Attributes",
+      "Context": "ScdFile.DrawAttributes",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio player settings. These do not have any effect on the .scd file",
+      "Context": "ScdFile.DrawAudio",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "音频播放器设置。此处的更改不会影响 .scd 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Context": "ExportDialog.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Autosave Time (seconds)",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "自动保存间隔（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Autosave Workspace",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动保存工作区",
+      "Source": "library"
+    },
+    {
+      "Original": "Background",
+      "Context": "Configuration.DrawEditorSpecific",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Background Color",
+      "Context": "Configuration.DrawDirectXCommon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup Count",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "备份数",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup Instead of Overwriting",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "备份旧文件后再覆盖",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Color",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "条形颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Base Preview Color",
+      "Context": "PapMotionMaterial.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit3",
+      "Translated": "基础预览颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Blend Group:",
+      "Context": "PapAnimation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "混合组：",
+      "Source": "library"
+    },
+    {
+      "Original": "Block Game Inputs When VFXEditor is Focused",
+      "Context": "Configuration.DrawKeybinds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "VFXEditor 获得焦点时屏蔽游戏输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone List",
+      "Context": "SklbFile.DrawBoneList",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "骨骼列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone Name",
+      "Context": "ExcludedBoneConfiguration.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "骨骼名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone Tables",
+      "Context": "MdlFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "骨骼表",
+      "Source": "library"
+    },
+    {
+      "Original": "Bones",
+      "Context": "SklbFile.DrawBones",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Bones can be re-ordered by dragging them",
+      "Context": "SklbBoneListView.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "拖动骨骼可调整顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Bones in the skeleton not driven by this animation (shown in red):",
+      "Context": "PapMotionSkeleton.DrawUnanimatedBonesIndicator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "骨架中未受此动画驱动的骨骼（以红色显示）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Bounding Boxes",
+      "Context": "MdlFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "包围盒",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "Modal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chair Sit",
+      "Context": "CharacterTabPap.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "坐在椅子上",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes to the temp file location may require a restart to take effect",
+      "Context": "Configuration.DrawConfiguration",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更改临时文件位置后，可能需要重启才能生效",
+      "Source": "library"
+    },
+    {
+      "Original": "Channels",
+      "Context": "AudioPlayer.DrawChannels",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "声道",
+      "Source": "library"
+    },
+    {
+      "Original": "Child Object",
+      "Context": "LoadedTab.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "子对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Clean Up",
+      "Context": "AvfxManager.DrawEditMenuItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "清理",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to view more information on the VFXEditor wiki",
+      "Context": "UiUtils.WikiButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击前往 VFXEditor Wiki 查看详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Close Window",
+      "Context": "FileManagerGroup`4.DrawCloseWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "关闭窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Collision",
+      "Context": "PhybFile.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "碰撞",
+      "Source": "library"
+    },
+    {
+      "Original": "Collision Objects",
+      "Context": "PhybSimulator.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "碰撞物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Ring Width",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "色环宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Sets",
+      "Context": "MtrlFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "颜色组",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Table",
+      "Context": "MtrlFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "颜色表",
+      "Source": "library"
+    },
+    {
+      "Original": "Compress Animation",
+      "Context": "PapGltfImportModal.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "压缩动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Convert Textures",
+      "Context": "AvfxManager.DrawEditMenuItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "转换纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "LoadedTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Emitters",
+      "Context": "AvfxEmitter.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "创建发射器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Particles",
+      "Context": "AvfxEmitter.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "创建粒子",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new bone at root",
+      "Context": "SklbBones.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在根节点新建骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new deformer at root",
+      "Context": "PbdFile.DrawEntries",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在根节点新建变形器",
+      "Source": "library"
+    },
+    {
+      "Original": "Create sub-bone",
+      "Context": "SklbBones.DrawTree",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "新建子骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Ctrl+Left Click",
+      "Context": "LineEditorGroup.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Ctrl + 鼠标左键",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "AvfxCurveKey.DrawPalettePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Value",
+      "Context": "LuaTab.DrawPool",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "当前值",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Weapons: ",
+      "Context": "AtchFile.DrawCurrentWeapons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前武器： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Curve Editor",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "曲线编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "UldComponent.DrawData",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Date  ",
+      "Context": "FileBrowserDialog.DrawFileList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "日期  ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Information",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "PenumbraOption.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Mod Author",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "默认模组作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Degrees",
+      "Context": "LineEditorGroup.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "度",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay",
+      "Context": "AvfxDocument.DrawExtraColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "CollapsingHeaders`1.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "NodeLeaf.DrawEditing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't add or remove entries in this file",
+      "Context": "TmbFile.DontAddRemoveWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请勿在此文件中添加或移除条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Context": "IUiNodeView`1.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye",
+      "Context": "MtrlColorRowBase.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Ears",
+      "Context": "CharacterTabMdl.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "耳朵",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "LibraryLeaf.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Emitter Vertices",
+      "Context": "AvfxModel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "发射器顶点",
+      "Source": "library"
+    },
+    {
+      "Original": "Entries",
+      "Context": "ScdSoundEntry.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Error Reading File at ",
+      "Context": "FileManagerDocument`2.LoadGame",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "读取以下文件失败 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error reading file",
+      "Context": "FileManagerDocument`2.LoadLocal",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "读取文件失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Bones",
+      "Context": "PapGltfImportModal.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Expand all tree nodes",
+      "Context": "SklbBones.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "展开全部树节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export All Motions",
+      "Context": "PapMotions.DrawExportAll",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出所有动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Dependencies",
+      "Context": "AvfxExport.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "导出依赖文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Export as a raw file",
+      "Context": "FileManagerDocument`2.DisplayFileControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导出为原始文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Exported to ",
+      "Context": "FileManagerDocument`2.DisplaySourceBar",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已导出到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra",
+      "Context": "ScdSoundEntry.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "附加选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra Data",
+      "Context": "C094.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "额外数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Extract Raw Game File",
+      "Context": "UtilitiesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "提取游戏原始文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Fade Out Duration",
+      "Context": "AvfxTimelineClip.DrawKill",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "淡出时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Fashion Accessory",
+      "Context": "CharacterTabPap.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "FileBrowserSideBar.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "File Browser",
+      "Context": "Configuration.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "文件浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "File Editors",
+      "Context": "Configuration.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "文件编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Fit To Contents",
+      "Context": "UiModelUvView.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "适应内容大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Flip Horizontally",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "水平翻转",
+      "Source": "library"
+    },
+    {
+      "Original": "Flip Vertically",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "垂直翻转",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Color",
+      "Context": "Configuration.DrawFileBrowser",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Format",
+      "Context": "TextureView.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Game Items",
+      "Context": "SelectDialog.DrawGameTabs",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "游戏物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Game Path",
+      "Context": "UtilitiesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "游戏路径",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "JobTab.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Context": "SklbMapping.DrawSimpleMappings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Geometry Shaders",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "几何着色器",
+      "Source": "library"
+    },
+    {
+      "Original": "Gloss: %.1f",
+      "Context": "StmDyeData.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "光泽度：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab Distance",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "抓取距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Groups",
+      "Context": "SkpLookAt.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Hair",
+      "Context": "CharacterTabSkeleton.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "头发",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok data added",
+      "Context": "PapAddModal.OnOk",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已添加 Havok 数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok data exported",
+      "Context": "PapGltfExportModal.OnOk",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Havok 数据已导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok data imported",
+      "Context": "PapGltfImportModal.OnOk",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Havok 数据已导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok data removed",
+      "Context": "PapAnimationDropdown.OnDelete",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Havok 数据已移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok data replaced",
+      "Context": "PapReplaceModal.OnOk",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Havok 数据已替换",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "AvfxTimelineClip.DrawKill",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide with Game UI",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "随游戏界面隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides this group from Penumbra's own mod configuration window",
+      "Context": "PenumbraGroup.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 Penumbra 自带的模组设置窗口中隐藏此分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides this option from Penumbra's own mod configuration window",
+      "Context": "PenumbraOption.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 Penumbra 自带的模组设置窗口中隐藏此选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Image Conversion",
+      "Context": "UtilitiesTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "图像转换",
+      "Source": "library"
+    },
+    {
+      "Original": "Image File Color",
+      "Context": "Configuration.DrawFileBrowser",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "图像文件颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "NodeLeaf.DrawImport",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import and edit items by right-clicking them",
+      "Context": "LibraryManager.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右键点击项目即可导入并编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Penumbra",
+      "Context": "PenumbraImportDialog..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "从 Penumbra 导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import into Workspace",
+      "Context": "PenumbraImportDialog.DrawButtonsDesc",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入到工作区",
+      "Source": "library"
+    },
+    {
+      "Original": "Import missing textures",
+      "Context": "AvfxDocument.DisplayFileControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导入缺少的纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "AvfxScheduler.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Layers",
+      "Context": "SklbFile.DrawLayers",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "图层",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Context": "ScdSoundEntry.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Left Click",
+      "Context": "LineEditorGroup.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "左键点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Levels of Detail",
+      "Context": "MdlFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "细节层次",
+      "Source": "library"
+    },
+    {
+      "Original": "Light 1",
+      "Context": "Configuration.DrawDirectXMaterial",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "光源 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Color",
+      "Context": "LightConfiguration.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit3",
+      "Translated": "灯光颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Falloff",
+      "Context": "LightConfiguration.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "光照衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Position",
+      "Context": "LightConfiguration.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "光源位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Radius",
+      "Context": "LightConfiguration.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "光照半径",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Shafts",
+      "Context": "MdlExtraLod.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "体积光束",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Overlay by Distance",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按距离限制叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Line Color",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "线条颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Line Width",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Lips:",
+      "Context": "PapAnimation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "嘴唇：",
+      "Source": "library"
+    },
+    {
+      "Original": "Load a local file",
+      "Context": "SkeletonSelector.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "加载本地文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded ",
+      "Context": "FileManagerDocument`2.DrawInputTextColumn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已加载 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded Files",
+      "Context": "ToolsDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "已加载的文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading Workspace...",
+      "Context": "Plugin.DrawLoadingDialog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "正在加载工作区…",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Path",
+      "Context": "SelectDialog.DrawPaths",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "本地路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Main Windows",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Log all files",
+      "Context": "SelectDialog.DrawPaths",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录所有文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop",
+      "Context": "AvfxDocument.DrawExtraColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop Music",
+      "Context": "ScdFile.DrawAudio",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "循环播放音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop Sound Effects",
+      "Context": "ScdFile.DrawAudio",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "循环播放音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop Time",
+      "Context": "AudioPlayer.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "循环时长",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop:",
+      "Context": "PapAnimation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "循环：",
+      "Source": "library"
+    },
+    {
+      "Original": "Lua Variables",
+      "Context": "ToolsDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "Lua 变量",
+      "Source": "library"
+    },
+    {
+      "Original": "Manually enter a string value to be converted to Crc32",
+      "Context": "ParsedCrc.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "手动输入要转换为 CRC32 的字符串",
+      "Source": "library"
+    },
+    {
+      "Original": "Markers",
+      "Context": "ScdAudioEntry.DrawTabs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Material Change",
+      "Context": "MdlExtraLod.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "材质更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Material Parameters",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "材质参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod Name",
+      "Context": "ExportDialog.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "模组名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "PenumbraImportDialog.DrawExtensionsBasic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Mods",
+      "Context": "PenumbraImportDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Music",
+      "Context": "AudioPlayer.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "NEW",
+      "Context": "FileManager`3.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Navigate to selected node",
+      "Context": "AvfxNodeSelect`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "前往选中的节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Never ask me again",
+      "Context": "FileBrowserDialog.DrawOverwrite",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不再询问",
+      "Source": "library"
+    },
+    {
+      "Original": "New",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "New Folder Name",
+      "Context": "FileBrowserDialog.DrawDirectoryCreation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新文件夹名称",
+      "Source": "library"
+    },
+    {
+      "Original": "New List",
+      "Context": "PapGltfImportModal.DrawExclude",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "新建列表",
+      "Source": "library"
+    },
+    {
+      "Original": "New Sub-Folder",
+      "Context": "LibraryFolder.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "新建子文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "No File to Preview",
+      "Context": "FileBrowserPreview.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有可预览的文件",
+      "Source": "library"
+    },
+    {
+      "Original": "No Havok data",
+      "Context": "PapFile.DrawAnimations",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有 Havok 数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No data found",
+      "Context": "SelectTab`2.DrawInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No nodes saved...",
+      "Context": "NodeRoot.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未保存任何节点…",
+      "Source": "library"
+    },
+    {
+      "Original": "No textures have been replaced...",
+      "Context": "TextureView.DrawLeftColumn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未替换任何纹理…",
+      "Source": "library"
+    },
+    {
+      "Original": "No textures saved...",
+      "Context": "TextureRoot.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未保存纹理…",
+      "Source": "library"
+    },
+    {
+      "Original": "Node Graph",
+      "Context": "UiNodeGraphView.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "节点图",
+      "Source": "library"
+    },
+    {
+      "Original": "Nodes Being Imported",
+      "Context": "PapGltfImportModal.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "正在导入节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Nodes referencing this component: ",
+      "Context": "UldComponent.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "引用此组件的节点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "AvfxModel.DrawModel3D",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "法线",
+      "Source": "library"
+    },
+    {
+      "Original": "Npc file list provided by ResLogger",
+      "Context": "SelectUiUtils.NpcThankYou",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "NPC 文件清单由 ResLogger 提供",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Mod",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay Remove Delay",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "叠加层移除延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Parameters",
+      "Context": "UldWidget.DrawParameters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Parentheses Color",
+      "Context": "Configuration.DrawTmb",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "括号颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Parsing Issues",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "解析问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Partially Verified",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已部分验证",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "CopyManager.DrawInternal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "ResourceTab.DrawResourceMap",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Paths",
+      "Context": "SelectDialog.DrawPaths",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned",
+      "Context": "FileBrowserSideBar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Shaders",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "像素着色器",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "TmbDocument.DrawExtraColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Point Color",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "控制点颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Point Size",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "控制点大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Poses",
+      "Context": "JobTab.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Post Behavior",
+      "Context": "LineEditorGroup.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "结束后的行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Power: %.1f",
+      "Context": "StmDyeData.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "强度：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "MdlSubMesh.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Channel 1",
+      "Context": "AudioPlayer.DrawChannels",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "预览声道 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Channel 2",
+      "Context": "AudioPlayer.DrawChannels",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "预览声道 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Dye",
+      "Context": "MtrlTableBase`1.DrawDyeCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "预览染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Previous",
+      "Context": "AvfxCurveKey.DrawPalettePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Primary Selected Color",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "主选中项颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Primary Selected Size",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "主选中项大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "PenumbraGroup.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Properties",
+      "Context": "AvfxBinder.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Access",
+      "Context": "FileBrowserSideBar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "快速访问",
+      "Source": "library"
+    },
+    {
+      "Original": "Random Type",
+      "Context": "LineEditorGroup.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "随机类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent",
+      "Context": "FileBrowserSideBar.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent File Limit",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最近文件数量上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Context": "CommandManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "SkeletonSelector.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "AvfxDocument.DrawExtraColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed ",
+      "Context": "AvfxFile.Cleanup",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace",
+      "Context": "SklbBones.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "替换",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace Emitters",
+      "Context": "AvfxModel.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "替换发射器",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace Skeleton",
+      "Context": "SklbMapping.DrawSimpleMappings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "替换骨架",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace sound file",
+      "Context": "AudioPlayer.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "替换音效文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Report an Issue",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "报告问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Report issue on Github",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 GitHub 上报告问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "TmbDocument.DrawExtraColumn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to the default game skeleton",
+      "Context": "SkeletonSelector.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重置为游戏默认骨架",
+      "Source": "library"
+    },
+    {
+      "Original": "Resize",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "调整大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources",
+      "Context": "ToolsDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Result",
+      "Context": "ScdAttributeEntry.DrawResult",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate Left",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "向左旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate Right",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "向右旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "SELECT",
+      "Context": "SelectDialog.DrawPaths",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save As",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "另存为",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved item to library",
+      "Context": "AvfxFile.AddToNodeLibrary",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已将物品保存至库中",
+      "Source": "library"
+    },
+    {
+      "Original": "Saving",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "保存设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Scene",
+      "Context": "ShpkFile.DrawKeys",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "ResourceTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All",
+      "Context": "PenumbraImportDialog.DrawExtensionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a mod or double click it to import all options...",
+      "Context": "PenumbraImportDialog.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择一个模组，或双击该模组以导入全部选项…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an item...",
+      "Context": "Dropdown`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择物品…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select the index of the animation being imported",
+      "Context": "PapAddModal.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择待导入动画的索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Color",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "选中项颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Size",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "选中项大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Self",
+      "Context": "VfxSpawn.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "自身",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Setup Parameters",
+      "Context": "SkpLookAt.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadows",
+      "Context": "MdlLod.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Bone Names",
+      "Context": "SkeletonView.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示骨骼名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Edges",
+      "Context": "AvfxModel.DrawModel3D",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示边缘",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Emitter Vertices",
+      "Context": "AvfxModel.DrawModel3D",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示发射器顶点",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Icons in Select Dialog",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在选择对话框中显示图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Tab Bar",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示选项卡栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Show source column",
+      "Context": "FileManagerDocumentWindow`3.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示来源列",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple Mappings",
+      "Context": "SklbMapping.DrawSimpleMappings",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "简单映射",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulation",
+      "Context": "PhybFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "模拟",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Context": "FileBrowserDialog.DrawFileList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Skeleton",
+      "Context": "Configuration.Draw3DView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "骨架",
+      "Source": "library"
+    },
+    {
+      "Original": "Skeleton not loaded, cannot export",
+      "Context": "PapMotions.DrawExportAll",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "骨架尚未加载，无法导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip Bones Unanimated in Original Motion",
+      "Context": "PapGltfImportModal.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过原动作中没有动画的骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip Unanimated Bones",
+      "Context": "PapGltfExportModal.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过没有动画的骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "LineEditorGroup.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Context": "PenumbraImportDialog.DrawExtensionsBasic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Context": "ScdFile.DrawSounds",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds: ",
+      "Context": "ScdAudioEntry.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "音效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Hidden",
+      "Context": "AvfxTimelineClip.DrawKill",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启动时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "String to be converted",
+      "Context": "ParsedCrc.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "要转换的字符串",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch between degrees and radians",
+      "Context": "UiUtils.DrawAngleToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在角度和弧度之间切换",
+      "Source": "library"
+    },
+    {
+      "Original": "System",
+      "Context": "ShpkFile.DrawKeys",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "Table",
+      "Context": "LuaTab.DrawPool",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "表格",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "Configuration.DrawBody",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "选项卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags (comma-separated)",
+      "Context": "PenumbraDialog.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "标签（用逗号分隔）",
+      "Source": "library"
+    },
+    {
+      "Original": "Terrain Shadows",
+      "Context": "MdlLod.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "地形阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture",
+      "Context": "MtrlColorRow.DrawTabs",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture is missing",
+      "Context": "TextureMissing.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "缺少纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline Editor",
+      "Context": "Configuration.DrawVfx",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "时间轴编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Tmb data imported",
+      "Context": "PapAnimation.DrawTmb",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已导入 TMB 数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle replacement",
+      "Context": "FileManagerDocument`2.DrawInputTextColumn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "切换替换状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Tools",
+      "Context": "Plugin.DrawFileMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers",
+      "Context": "AvfxScheduler.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "触发条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "FileBrowserDialog.DrawFileList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "UPDATE",
+      "Context": "FileManagerDocument`2.DisplayFileControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "UV Sets",
+      "Context": "AvfxParticle.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "UV 集",
+      "Source": "library"
+    },
+    {
+      "Original": "UV View",
+      "Context": "AvfxModel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "UV 视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "CommandManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unselect All",
+      "Context": "PenumbraImportDialog.DrawExtensionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Context": "AudioPlayer.DrawChannels",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Existing",
+      "Context": "SklbMapping.DrawSimpleMappings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更新已有条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Utilities",
+      "Context": "ToolsDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "实用工具",
+      "Source": "library"
+    },
+    {
+      "Original": "VFXEditor Settings",
+      "Context": "ConfigurationWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "VFXEditor 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "AvfxCurveKey.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "值",
+      "Source": "library"
+    },
+    {
+      "Original": "Verification is not supported for this file or file type",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此文件或文件类型不支持校验",
+      "Source": "library"
+    },
+    {
+      "Original": "Version",
+      "Context": "ExportDialog.DrawBody",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Context": "AvfxMain.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "SkpFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertex Order",
+      "Context": "AvfxModel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "顶点顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertex Shaders",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "顶点着色器",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical Fog",
+      "Context": "MdlFile.DrawBoxes",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "垂直雾效",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertices: ",
+      "Context": "AvfxModel.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "顶点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Vfx",
+      "Context": "Configuration.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Vfx Debug Information",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "特效调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Vfx Triggers",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "特效触发器",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "ScdFile.DrawAudio",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "WARNING: Add a selectable item first!",
+      "Context": "AvfxNodeSelectList`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请先添加一个可选项！",
+      "Source": "library"
+    },
+    {
+      "Original": "WARNING: Add an item!",
+      "Context": "AvfxNodeSelectList`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请先添加一个条目！",
+      "Source": "library"
+    },
+    {
+      "Original": "Weapon",
+      "Context": "AvfxManager.DrawEditMenuItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Website",
+      "Context": "PenumbraDialog.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Wiki + Guides",
+      "Context": "FileManagerDocument`2.DisplayBeginHelpText",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "Wiki 与指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Write Location",
+      "Context": "Configuration.DrawConfiguration",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "写入位置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

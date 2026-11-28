@@ -1,0 +1,511 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "XIVComboExpanded",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " SET",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已启用",
+      "Source": "library"
+    },
+    {
+      "Original": " UNSET",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Accessibility",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "辅助",
+      "Source": "library"
+    },
+    {
+      "Original": "Accessibility Combos",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "辅助连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Accessibility adds previously hidden features which aim at increasing\naccessibility for every player and remove more buttons.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "辅助分类收录了原先隐藏的功能，\n用于简化操作，进一步减少所需按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "All SET",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "All UNSET",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已全部关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically switch to your current job's tab upon opening the UI.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开界面时自动切换到当前职业的标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Better be safe than sorry!",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "检查一下总归更放心！",
+      "Source": "library"
+    },
+    {
+      "Original": "By default, icons are small for low-resolution users.\n2k & 4k enjoyers have options for bigger icons.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "默认使用小图标以适应低分辨率。\n使用 2K 或 4K 分辨率时，可选择较大图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "经典",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic mirrors the Vanilla XIVCombo features.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "经典分类与原版 XIVCombo 的功能一致。",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo categories: Classic, Expanded, Accessibility and Secrets.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "连击分类：经典、扩展、辅助、隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Combos",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Conflicts with ",
+      "Context": "ConfigWindow.DrawPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "冲突项 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable accessibility combos.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用辅助连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable secret forbidden knowledge.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "解锁隐藏连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable the expanded features for XIVCombo.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 XIVCombo 的扩展功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enforce the custom theme.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "强制使用自定义主题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Expanded",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "扩展",
+      "Source": "library"
+    },
+    {
+      "Original": "Expanded Combos",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "扩展连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Expanded follows the set of rules that XIVCombo Expanded used to follow.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "扩展分类沿用 XIVCombo Expanded 原有的规则。",
+      "Source": "library"
+    },
+    {
+      "Original": "First of all, it is recommended to open up the main interface and check it out.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "建议先打开主界面查看。",
+      "Source": "library"
+    },
+    {
+      "Original": "General options",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "常规选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide icons for combos and features.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏连击和功能图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icons may cause a loss of FPS when the Combos tab is open.\nThat shouldn't happen when it matters, right?",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "打开连击标签页时，显示图标可能会降低帧率。\n关键时刻应该不会遇到吧？",
+      "Source": "library"
+    },
+    {
+      "Original": "Increase the size of icons for combos and features.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "放大连击和功能图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Increase the size of icons for the jobs on the side bar.",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "放大侧栏的职业图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "New UI & settings",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "新版界面和设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: Each combo category requires the previous one to be enabled.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "注意：需启用上一类连击，才能启用下一类。",
+      "Source": "library"
+    },
+    {
+      "Original": "One last thing. If you used to use XIVCombo Expanded before,\nyou should check whether your previous settings correctly imported or not.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "如果你用过旧版 XIVCombo Expanded，\n请确认之前的设置是否已正确导入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Main Interface",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开主界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the XIV Combo Expanded main interface.",
+      "Context": "XIVComboExpandedPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 XIVCombo Expanded 主界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please set up your ideal configuration.\nDo not worry, you will be able to change those later.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请先设置合适的选项。\n之后可以随时修改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and Close",
+      "Context": "OneTimeModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Secret",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Secret Combos",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "隐藏连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Secret combos are now locked away.",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "隐藏连击已锁定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Secret combos are now unlocked.",
+      "Context": "XIVComboExpandedPlugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "隐藏连击已解锁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Secrets adds the rest of the previously hidden features which were\neither unintuitive or forcing specific rotations for small benefits.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "隐藏分类收录了其余原先隐藏的功能。\n这些功能通常不够直观，或要求特定循环才能获得小幅收益。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar",
+      "Translated": "标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "They are also designed to bring QoL improvements to some jobs.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "部分功能也可让某些职业的操作更方便。",
+      "Source": "library"
+    },
+    {
+      "Original": "They are intuitive, and aim at considerably reducing button bloating.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "它们更直观，可以大幅减少按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "They are meant to be used by anyone, whatever their reasons may be.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "任何玩家都可按需使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "They are meant to be used to give accessibility options to everyone.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "任何有简化操作需求的玩家都可使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "They are niche options, and probably pointless for most players.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "它们适用于特定场合，多数玩家无需启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "They generally require a heavy knowledge of your job.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "通常需要深入了解自己的职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "They often lead to an unintuitive behavior or specific rotation routes.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "操作可能不直观，或需使用特定技能循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "They usually aim at further reducing button bloating.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "这些功能通常能进一步减少按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "They will often lower your ability to perform well in high-end content.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "这些选项通常会限制你在高难度副本中的表现。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the first time you're using the new version of XIVCombo Expanded.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "这是你第一次使用新版 XIVCombo Expanded。",
+      "Source": "library"
+    },
+    {
+      "Original": "Those combos are additional features absent in original XIVCombo.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "这些额外的连击功能在原版 XIVCombo 中没有提供。",
+      "Source": "library"
+    },
+    {
+      "Original": "Those combos are non-optimal routes which simplify a rotation overall.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "这些连击用简化后的技能循环换取更容易的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Those combos are optimization routes which give little benefits.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "这些连击针对特定循环作出优化，收益较小。",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to XIVCombo Expanded v",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "欢迎使用 XIVCombo Expanded v",
+      "Source": "library"
+    },
+    {
+      "Original": "What's new?",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "更新内容",
+      "Source": "library"
+    },
+    {
+      "Original": "With the introduction of new combos and features, an ever-growing list of jobs,\nthis plugin ended up having to be reworked for better UI & clarity.",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "随着连击功能和支持职业逐渐增多，\n插件重新设计了界面，方便查找和使用各项功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can check them out below, actually. How neat!",
+      "Context": "OneTimeModal.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "可以在下方预览这些变化。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

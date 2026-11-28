@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HuntTrainAssistant",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "[HTA] Set as conductor",
+      "Context": "Chat2IPC.Invoke",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "[HTA] 设为车头",
+      "Source": "library"
+    },
+    {
+      "Original": "- Be in one of Endwalker hunt zones;",
+      "Context": "MainWindow.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "- 身处晓月之终途的狩猎区域之一；",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Select group",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Int32>.Get",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Fake Sonar message",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "模拟 Sonar 消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch instance",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "切换场景分流",
+      "Source": "library"
+    },
+    {
+      "Original": "Killed mobs: ",
+      "Context": "TabDebug.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已击杀的怪物： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add killed mob",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加已击杀的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "区域",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

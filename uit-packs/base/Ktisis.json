@@ -1,0 +1,433 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Ktisis",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " on ",
+      "Context": "CameraWindow.DrawTracking",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", please try and load it manually.",
+      "Context": "SceneDataService.SetupActor",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "，请尝试手动加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor #",
+      "Context": "Spawn.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "角色编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Balloon ",
+      "Context": "OverlayBuilder.BuildBalloon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "气泡 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone Name",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "骨骼名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Light ",
+      "Context": "LightModule.AddLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "相机光源 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "EntityRenameModal.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot open Ktisis workspace outside of GPose.",
+      "Context": "CommandService.OnMainCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请先进入集体动作模式，再打开 Ktisis 工作区。",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Context": "EntityRenameModal.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Couldn't find the MCDF linked to the actor ",
+      "Context": "SceneDataService.SetupActor",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "找不到该角色关联的 MCDF 文件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug info copied to clipboard",
+      "Context": "CommandService.OnMainCommand",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "调试信息已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Default: ",
+      "Context": "DialogHelpers.BuildDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "默认： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Dialog ",
+      "Context": "OverlayBuilder.BuildTalk",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对话 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty",
+      "Context": "EquipmentEditorTab.PrepareItemLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "空",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter GPose to complete legacy config setup.",
+      "Context": "CommandService.OnMainCommandLegacy",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请进入集体动作模式以完成旧版设置迁移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Example Value",
+      "Context": "ConfigWindow.DrawAutoSaveFormatting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "示例值",
+      "Source": "library"
+    },
+    {
+      "Original": "Example folder name: ",
+      "Context": "ConfigWindow.DrawAutoSaveTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "文件夹名称示例： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expressions",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "表情",
+      "Source": "library"
+    },
+    {
+      "Original": "Formatter",
+      "Context": "ConfigWindow.DrawAutoSaveFormatting",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "格式化规则",
+      "Source": "library"
+    },
+    {
+      "Original": "GameObject Index",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "游戏对象索引",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "BasePropertyList.Invoke",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate expressions",
+      "Context": "DebugWindow.DrawExpressionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成表情",
+      "Source": "library"
+    },
+    {
+      "Original": "Generating: ",
+      "Context": "DebugWindow.DrawExpressionsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在生成： ",
+      "Source": "library"
+    },
+    {
+      "Original": "History: ",
+      "Context": "OverlayWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "历史记录： ",
+      "Source": "library"
+    },
+    {
+      "Original": "IPC Manager",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "IPC 管理",
+      "Source": "library"
+    },
+    {
+      "Original": "IPC Provider",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "IPC 提供方",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore",
+      "Context": "SceneMCDFModal.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Light",
+      "Context": "LightModule.CreateLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Lights ",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "光源 ",
+      "Source": "library"
+    },
+    {
+      "Original": "New Status",
+      "Context": "StatusOverlay..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "新建状态",
+      "Source": "library"
+    },
+    {
+      "Original": "New dialog...",
+      "Context": "BalloonOverlay..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "新建对话……",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects ",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "对象 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "DialogHelpers.BuildDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "关",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "DialogHelpers.BuildDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "开",
+      "Source": "library"
+    },
+    {
+      "Original": "Orbiting: ",
+      "Context": "CameraWindow.DrawOrbitTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "环绕目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Context": "V2MigratorWindow.DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Pose",
+      "Context": "PoseBuilder..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadows",
+      "Context": "LightWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Skeleton",
+      "Context": "SceneTree.DrawVisibilityButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "骨架",
+      "Source": "library"
+    },
+    {
+      "Original": "Skeleton: ",
+      "Context": "OffsetEditor.DrawSkeletonCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "骨架： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Speaker",
+      "Context": "TalkOverlay..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "说话者",
+      "Source": "library"
+    },
+    {
+      "Original": "Status ",
+      "Context": "OverlayBuilder.BuildStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "DebugWindow.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture",
+      "Context": "ParticlesEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracking mode: ",
+      "Context": "CameraWindow.DrawOrbitTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "追踪模式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency",
+      "Context": "ParamColorSelectPopup.DrawAlphaToggle",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather #",
+      "Context": "WeatherInfo..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "天气编号",
+      "Source": "library"
+    },
+    {
+      "Original": "World Light",
+      "Context": "LightModule.AddFromOverworld",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "场景光源",
+      "Source": "library"
+    },
+    {
+      "Original": "[Warning] Ktisis",
+      "Context": "Ktisis.WarningNotification",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "［警告］Ktisis",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

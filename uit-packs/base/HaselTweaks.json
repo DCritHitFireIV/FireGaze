@@ -1,0 +1,1465 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "HaselTweaks",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Icon",
+      "Context": "AetherCurrentHelperWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Context": "AetherCurrentHelperWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "AetherCurrentHelperWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "GearsetContext",
+      "Context": "GearSetGridWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiContextMenu.Draw",
+      "Translated": "套装菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "ItemTooltip",
+      "Context": "GearSetGridWindow.DrawItemIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.IsPopupOpen",
+      "Translated": "物品提示",
+      "Source": "library"
+    },
+    {
+      "Original": "item",
+      "Context": "DrawItemIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiContextMenuBuilder.AddOpenOnGarlandTools",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "CabinetStorableItems",
+      "Context": "GlamourDresserAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "收藏柜可存物品",
+      "Source": "library"
+    },
+    {
+      "Original": "OutfitConvertibleItems",
+      "Context": "GlamourDresserAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "可投影套装物品",
+      "Source": "library"
+    },
+    {
+      "Original": "DuplicateItemsInExistingSets",
+      "Context": "GlamourDresserAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "现有套装中的重复物品",
+      "Source": "library"
+    },
+    {
+      "Original": "DuplicateItems",
+      "Context": "GlamourDresserAlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "重复物品",
+      "Source": "library"
+    },
+    {
+      "Original": "TreeNode",
+      "Context": "GlamourDresserAlertWindow.DrawItems",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "树节点",
+      "Source": "library"
+    },
+    {
+      "Original": "ItemContextMenu",
+      "Context": "GlamourDresserAlertWindow.DrawItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiContextMenu.Draw",
+      "Translated": "物品菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Language...",
+      "Context": "MJICraftScheduleSettingSearchBar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "语言……",
+      "Source": "library"
+    },
+    {
+      "Original": "Sponsor",
+      "Context": "PluginWindow.DrawHomeScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.DrawLink",
+      "Translated": "赞助",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Context": "AdvancedEditOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "AdvancedEditOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "值",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All",
+      "Context": "AdvancedImportOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Deselect All",
+      "Context": "AdvancedImportOverlay.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Design",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.DrawSection",
+      "Translated": "设计",
+      "Source": "library"
+    },
+    {
+      "Original": "Background",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Frame",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Accent",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Pose",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Expression",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "表情",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Position",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "相机位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambient Lighting",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.DrawSection",
+      "Translated": "环境光",
+      "Source": "library"
+    },
+    {
+      "Original": "Brightness",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "亮度",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Directional Lighting",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.DrawSection",
+      "Translated": "平行光",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical Angle",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "垂直角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal Angle",
+      "Context": "AdvancedImportOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "水平角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "AdvancedImportOverlay.DrawColor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup",
+      "Context": "PresetBrowserOverlay.DrawSidebarTag",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.ContextPopupItem",
+      "Translated": "弹出窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "ToggleAdvancedEditMode",
+      "Context": "AdvancedEditButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "切换高级编辑模式",
+      "Source": "library"
+    },
+    {
+      "Original": "ToggleAdvancedImportMode",
+      "Context": "AdvancedImportButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "切换高级导入模式",
+      "Source": "library"
+    },
+    {
+      "Original": "ToggleAlignmentTool",
+      "Context": "AlignmentToolButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "切换对齐工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "CopyButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "PasteButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "TogglePresetBrowser",
+      "Context": "PresetBrowserButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "切换预设浏览器",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "ResetButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "SaveAsPreset",
+      "Context": "SaveAsPresetButton.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "另存为预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not delete preset",
+      "Context": "DeletePresetDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "无法删除预设",
+      "Source": "library"
+    },
+    {
+      "Original": "AlignmentTool",
+      "Context": "AlignmentToolRenderer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "对齐工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Adventurer Plate",
+      "Context": "MenuBarState.SaveInitialPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "冒险者铭牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear Set",
+      "Context": "MenuBarState.SaveInitialPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "TweakStatusExtensions.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "TweakStatusExtensions.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "TweakStatusExtensions.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Outdated",
+      "Context": "TweakStatusExtensions.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已过期",
+      "Source": "library"
+    },
+    {
+      "Original": "Disposed",
+      "Context": "TweakStatusExtensions.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已释放",
+      "Source": "library"
+    },
+    {
+      "Original": "_Execute",
+      "Context": "AutoSorter.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "_处决",
+      "Source": "library"
+    },
+    {
+      "Original": "Channel Name and Format",
+      "Context": "CustomChatMessageFormats.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "频道名称和格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid",
+      "Context": "CustomChatMessageFormats.DrawEditMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无效",
+      "Source": "library"
+    },
+    {
+      "Original": "LogKind #",
+      "Context": "CustomChatMessageFormats.GetLogKindlabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "日志类型 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "LockWindowPosition.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "LockWindowPosition.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Windows Picker",
+      "Context": "LockWindowPosition.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "守卫驻所窗口选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Checkbox",
+      "Context": "ConfigGui.DrawBool",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "复选框",
+      "Source": "library"
+    },
+    {
+      "Original": "WindowManager",
+      "Context": "[HaselCommon] WindowManagerTab.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "窗口管理",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Closed",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "[HaselCommon] WindowManagerTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to clear filters.",
+      "Context": "[HaselCommon] ColumnFlags`2.DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "右键清除筛选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Context": "[HaselCommon] ColumnFlags`2.DrawFilter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Stain",
+      "Context": "CompanionColorPreviewWindow.Draw",
+      "Translated": "染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset_",
+      "Context": "GearSetGridWindow.Draw",
+      "Translated": "套装_",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "GearSetGridWindow.Draw",
+      "Translated": "部位",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "GlamourDresserAlertWindow.DrawItem",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "CameraOrientation",
+      "Context": "AdvancedEditOverlay.DrawCameraOrientation",
+      "Translated": "相机朝向",
+      "Source": "library"
+    },
+    {
+      "Original": "CameraPosition",
+      "Context": "AdvancedEditOverlay.DrawCameraPosition",
+      "Translated": "相机位置",
+      "Source": "library"
+    },
+    {
+      "Original": "ZoomRotation",
+      "Context": "AdvancedEditOverlay.DrawZoomRotation",
+      "Translated": "缩放转向",
+      "Source": "library"
+    },
+    {
+      "Original": "EyeDirection",
+      "Context": "AdvancedEditOverlay.DrawEyeDirection",
+      "Translated": "视线方向",
+      "Source": "library"
+    },
+    {
+      "Original": "HeadDirection",
+      "Context": "AdvancedEditOverlay.DrawHeadDirection",
+      "Translated": "头部方向",
+      "Source": "library"
+    },
+    {
+      "Original": "AnimationTimestamp",
+      "Context": "AdvancedEditOverlay.DrawAnimationControl",
+      "Translated": "动画时间戳",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting[",
+      "Context": "CustomChatMessageFormats.DrawConfig",
+      "Translated": "设置[",
+      "Source": "library"
+    },
+    {
+      "Original": "Table",
+      "Context": "[HaselCommon] Table`1.DrawTableInternal",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "表格",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "HaselTweaks - Licenses",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "LicensesWindow.Title",
+      "Translated": "HaselTweaks - 许可",
+      "Source": "library"
+    },
+    {
+      "Original": "Open configuration",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "TitleBarButton.OpenConfig",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Close configuration",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "TitleBarButton.CloseConfig",
+      "Translated": "关闭设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Licenses",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "HaselTweaks.Config.Licenses",
+      "Translated": "许可",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for Tweaks...",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "HaselTweaks.Config.Search.Hint",
+      "Translated": "搜索调整...",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Window Job Switcher",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "HaselTweaks.Config.IncompatibilityWarning.Plugin.SimpleTweaksPlugin.Config.CharacterWindowJobSwitcher",
+      "Translated": "角色窗口职业切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Timestamp Format",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "HaselTweaks.Config.IncompatibilityWarning.Plugin.SimpleTweaksPlugin.Config.CustomTimestampFormat",
+      "Translated": "自定义时间戳格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Experience Percentage",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "HaselTweaks.Config.IncompatibilityWarning.Plugin.SimpleTweaksPlugin.Config.ShowExperiencePercentage",
+      "Translated": "显示经验百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Click here to open the Plugin Installer.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "ClickToOpenPluginInstaller",
+      "Translated": "点击此处打开插件安装器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Face Camera",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "AlwaysFaceCamera.Tweak.Name",
+      "Translated": "始终面向镜头",
+      "Source": "library"
+    },
+    {
+      "Original": "This tweak makes your character look at the camera when facing it, mimicking the behavior of the \"/facecamera\" command, with the position updated every frame. Does not work in combat or when you have a target.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "AlwaysFaceCamera.Tweak.Description",
+      "Translated": "此调整会让你的角色在面向镜头时看向镜头，模仿“/facecamera”命令的行为，并每帧更新位置。战斗中或你有目标时无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-select Soil and Seed",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "AutoSelectSoilAndSeed.Tweak.Name",
+      "Translated": "自动选择土壤和种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically selects the first available soil and seed from your inventory when opening the \"Gardening\" window.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "AutoSelectSoilAndSeed.Tweak.Description",
+      "Translated": "打开“园艺”窗口时，自动从背包中选择第一个可用的土壤和种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bigger Character Previews",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Tweak.Name",
+      "Translated": "更大的角色预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Increases the size of the character preview in various window.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Tweak.Description",
+      "Translated": "增大各种窗口中角色预览的尺寸。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable in Character",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableCharacter.Label",
+      "Translated": "在角色窗口中启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Only to the bottom edge. Window is 36px wider.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableCharacter.Description",
+      "Translated": "仅扩展到底部边缘。窗口加宽 36px。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sharper preview image",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.SharpenCharacter.Label",
+      "Translated": "更清晰的预览图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable in examine character window",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableCharacterInspect.Label",
+      "Translated": "在查看角色窗口中启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Window is 86px wider and 174px taller.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableCharacterInspect.Description",
+      "Translated": "窗口加宽 86px，加高 174px。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sharper preview image",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.SharpenCharacterInspect.Label",
+      "Translated": "更清晰的预览图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable in Item Dyeing",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableColorantColoring.Label",
+      "Translated": "在物品染色中启用",
+      "Source": "library"
+    },
+    {
+      "Original": "From top to bottom. Window is 106px wider.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableColorantColoring.Description",
+      "Translated": "从上到下。窗口加宽 106px。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sharper preview image",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.SharpenColorantColoring.Label",
+      "Translated": "更清晰的预览图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable in Fitting Room",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableTryon.Label",
+      "Translated": "在试穿中启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Window is 94px wider and 160px taller.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.EnableTryon.Description",
+      "Translated": "窗口加宽 94px，加高 160px。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sharper preview image",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "BiggerCharacterPreviews.Config.SharpenTryon.Label",
+      "Translated": "更清晰的预览图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmic Research in Duty List",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CosmicResearchTodo.Tweak.Name",
+      "Translated": "任务列表中的宇宙研究",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays the progress of Cosmic Research in the Duty List during Cosmic Exploration.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CosmicResearchTodo.Tweak.Description",
+      "Translated": "在宇宙探索期间，于任务列表中显示宇宙研究的进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show class score for achievements after completing Cosmic Research",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CosmicResearchTodo.Config.ShowCosmicToolScore.Label",
+      "Translated": "完成宇宙研究后显示成就的职业分数",
+      "Source": "library"
+    },
+    {
+      "Original": "Show completed datasets",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CosmicResearchTodo.Config.ShowCompletedAnalysis.Label",
+      "Translated": "显示已完成的数据集",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Quick Store",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CabinetQuickStore.Tweak.Name",
+      "Translated": "衣柜快速存放",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows a button above the \"Armoire\" window to place the first item in the list into the armoire.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CabinetQuickStore.Tweak.Description",
+      "Translated": "在“衣柜”窗口上方显示一个按钮，将列表中的第一件物品放入衣柜。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore items in gearsets",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CabinetQuickStore.Config.IgnoreItemsInGearsets.Label",
+      "Translated": "忽略套装中的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Item",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CabinetQuickStoreWindow.Button.Label",
+      "Translated": "下一件物品",
+      "Source": "library"
+    },
+    {
+      "Original": "No more items to store.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CabinetQuickStoreWindow.NoMoreItems",
+      "Translated": "没有更多可存放的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Reputation Teleport",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CharacterReputeTeleport.Tweak.Name",
+      "Translated": "角色声望传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Clicking an Allied Society in the Character window teleports you to the nearest Aetheryte instead of opening the map. Hold Shift to open the map normally.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "CharacterReputeTeleport.Tweak.Description",
+      "Translated": "在角色窗口中点击友好部族会传送到最近的以太之光，而不是打开地图。按住 Shift 可正常打开地图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reloads the games UI. This is helpful for applying texture changes without using the Aesthetician or relogging.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "Commands.Config.EnableReloadUICommand.Description",
+      "Translated": "重新加载游戏 UI。这有助于在不使用美容师或重新登录的情况下应用纹理更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target is not mounted.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "Commands.TargetIsNotMounted",
+      "Translated": "目标未搭乘坐骑。",
+      "Source": "library"
+    },
+    {
+      "Original": "The mount of your target is not a chocobo.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "Commands.TargetsMountIsNotAChocobo",
+      "Translated": "你目标的坐骑不是陆行鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Reward Popups",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "DisableRewardPopups.Tweak.Name",
+      "Translated": "禁用奖励弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables reward popups from appearing after completing activities.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "DisableRewardPopups.Tweak.Description",
+      "Translated": "完成活动后不再显示奖励弹窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide for FATE rewards",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "DisableRewardPopups.Config.DisableFateReward.Label",
+      "Translated": "对 FATE 奖励隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide for MGP rewards in the Gold Saucer",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "DisableRewardPopups.Config.DisableGoldSaucerReward.Label",
+      "Translated": "隐藏金碟游乐场的MGP奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide for Stellar Mission rewards in the Cosmic Exploration",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "DisableRewardPopups.Config.DisableWKSReward.Label",
+      "Translated": "隐藏宇宙探索中星芒任务的奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide PvP Series Bar when all meaningful rewards were claimed",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedExpBar.Config.HidePvPSeriesBarAfterClaimingAllRewards.Label",
+      "Translated": "领取所有有意义奖励后隐藏PvP系列进度条",
+      "Source": "library"
+    },
+    {
+      "Original": "This will hide the PvP Series Bar when rank <num(lnum1)> was claimed.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedExpBar.Config.HidePvPSeriesBarAfterClaimingAllRewards.MaxRankHint",
+      "Translated": "当领取到军衔<num(lnum1)>时，将隐藏PvP系列进度条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Isleworks \"Set Agenda\" window.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedIsleworksAgenda.Tweak.Description",
+      "Translated": "增强无人岛工坊的“设置日程”窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop emote",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedLoginLogout.Config.LoopEmote.Label",
+      "Translated": "循环表情动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhanced Glamour Dresser",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMiragePrismBox.Tweak.Name",
+      "Translated": "增强幻化柜",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Glamour Dresser.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMiragePrismBox.Tweak.Description",
+      "Translated": "增强幻化柜功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select missing items from the inventory when opening the Outfit Glamour Creation",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMiragePrismBox.Config.EnableAutoFillHandIn.Label",
+      "Translated": "打开套装幻化制作时，自动从背包中选择缺失的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhanced Hunting Log",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Tweak.Name",
+      "Translated": "增强讨伐笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Hunting Log.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Tweak.Description",
+      "Translated": "增强讨伐笔记功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember last selected class",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Config.RememberTabSelection.Label",
+      "Translated": "记住上次选择的职业",
+      "Source": "library"
+    },
+    {
+      "Original": "For the record, the game's default behaviour is to reset the window to the first tab.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Config.RememberTabSelection.Description",
+      "Translated": "顺带一提，游戏的默认行为是将窗口重置到第一个标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select the current class",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Config.OpenWithCurrentClass.Label",
+      "Translated": "自动选择当前职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Only works if a matching class was found. Overrides the option \"Remember last selected class\" in that case.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Config.OpenWithCurrentClass.Description",
+      "Translated": "仅在找到匹配的职业时生效。此时会覆盖“记住上次选择的职业”选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically set the filter to \"Show Incomplete\"",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedMonsterNote.Config.OpenWithIncompleteFilter.Label",
+      "Translated": "自动将筛选条件设为“显示未完成”",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhanced Crafting Log",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Tweak.Name",
+      "Translated": "增强制作笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Crafting Log.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Tweak.Description",
+      "Translated": "增强制作笔记功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember search history",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Config.RememberSearchHistory.Label",
+      "Translated": "记住搜索历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Saves search terms between game sessions and restores them upon login.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Config.RememberSearchHistory.Description",
+      "Translated": "在游戏会话之间保存搜索词，并在登录时恢复。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear search history",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Config.ClearSearchHistory",
+      "Translated": "清除搜索历史",
+      "Source": "library"
+    },
+    {
+      "Original": "The saved search history is already empty.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Config.ClearSearchHistory.Tooltip.Empty",
+      "Translated": "已保存的搜索历史为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please close the Crafting Log to clear the search history.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedRecipeNote.Config.ClearSearchHistory.Tooltip.AgentActive",
+      "Translated": "请关闭制作笔记以清除搜索历史。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Target Info.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedTargetInfo.Tweak.Description",
+      "Translated": "增强目标信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhanced Fitting Room",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedTryon.Tweak.Name",
+      "Translated": "增强试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhancements for the Fitting Room.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedTryon.Tweak.Description",
+      "Translated": "增强试穿功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Facewear on",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedTryon.Config.KeepFacewearOn.Label",
+      "Translated": "保持面部配饰显示",
+      "Source": "library"
+    },
+    {
+      "Original": "When hiding your gear with the \"Display Gear\" button, your facewear remains visible.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "EnhancedTryon.Config.KeepFacewearOn.Description",
+      "Translated": "使用“显示装备”按钮隐藏装备时，面部配饰仍保持可见。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flash Taskbar",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Tweak.Name",
+      "Translated": "任务栏闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Flashes the window on the taskbar when specific events are triggered.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Tweak.Description",
+      "Translated": "当触发特定事件时，使任务栏上的窗口闪烁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flash on alarm",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnAlarm.Label",
+      "Translated": "闹钟时闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers when a notification from the game's /alarm feature is printed in chat.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnAlarm.Description",
+      "Translated": "当聊天栏显示由游戏 /alarm 功能发出的通知时触发。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flash on combat",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnCombat.Label",
+      "Translated": "进入战斗时闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers when your character is drawn into combat.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnCombat.Description",
+      "Translated": "当你的角色进入战斗时触发。",
+      "Source": "library"
+    },
+    {
+      "Original": "Flash on synthesis completion",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnCraftEnd.Label",
+      "Translated": "制作完成时闪烁",
+      "Source": "library"
+    },
+    {
+      "Original": "Triggers when your character completes Synthesis or Quick Synthesis.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "FlashTaskbar.Config.FlashOnCraftEnd.Description",
+      "Translated": "当你的角色完成制作或快速制作时触发。",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Dresser Alert",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Tweak.Name",
+      "Translated": "幻化柜提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens a small window next to the Glamour Dresser, displaying a list of items that can be combined into outfits, as well as items that can be stored in the Armoire (only visible if qualified items were found).",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Tweak.Description",
+      "Translated": "在幻化柜旁打开一个小窗口，显示可组合成套装的物品列表，以及可存入衣柜的物品（仅在找到符合条件的物品时显示）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore items that are part of an outfit",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Config.IgnoreOutfits.Label",
+      "Translated": "忽略已属于套装的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Useful if you want to collect outfits rather than storing items in the amoire.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Config.IgnoreOutfits.Description",
+      "Translated": "如果你想收藏套装而非将物品存入收藏柜，此选项很有用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore items that are dyed",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Config.IgnoreDyedGlamour.Label",
+      "Translated": "忽略已染色的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore items that are already present in the armoire",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Config.IgnoreDuplicates.Label",
+      "Translated": "忽略收藏柜中已有的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Useful if you want to collect duplicates.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlert.Config.IgnoreDuplicates.Description",
+      "Translated": "如果你想收集复制品，此选项很有用。",
+      "Source": "library"
+    },
+    {
+      "Original": "<string(lnum1)> <if([lnum1==1],item,items)> placeable in the armoire",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlertWindow.CabinetStorableItemsTreeNodeLabel",
+      "Translated": "<string(lnum1)> <if([lnum1==1],件物品,件物品)>可放入收藏柜",
+      "Source": "library"
+    },
+    {
+      "Original": "<string(lnum1)> <if([lnum1==1],item,items)> Outfit Glamour-ready",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlertWindow.OutfitConvertibleItemsTreeNodeLabel",
+      "Translated": "<string(lnum1)> <if([lnum1==1],件物品,件物品)>可转换为套装幻影",
+      "Source": "library"
+    },
+    {
+      "Original": "<string(lnum1)> <if([lnum1==1],item already part of a set,items already part of sets)>",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlertWindow.DuplicateItemsInExistingSetsTreeNodeLabel",
+      "Translated": "<string(lnum1)> <if([lnum1==1],件物品已属于某套装,件物品已属于某套装)>",
+      "Source": "library"
+    },
+    {
+      "Original": "<string(lnum1)> duplicate <if([lnum1==1],item,items)>",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlertWindow.DuplicateItemsTreeNodeLabel",
+      "Translated": "<string(lnum1)> 件复制<if([lnum1==1],物品,物品)>",
+      "Source": "library"
+    },
+    {
+      "Original": "The following items are stored in the armoire, and part of this set:",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserAlertWindow.DuplicateSetItemsTooltip",
+      "Translated": "以下物品已存入收藏柜，且属于此套装：",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Dresser Keyboard Navigation",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserKeyboardNavigation.Tweak.Name",
+      "Translated": "幻影衣柜键盘导航",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables using arrow keys to select items in the Glamour Dresser.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "GlamourDresserKeyboardNavigation.Tweak.Description",
+      "Translated": "允许使用方向键在幻影衣柜中选择物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "In order for notifications and portrait updates to work properly, please make sure Glamourer is not automatically changing the facewear, the visibility of the weapon, headgear or viera ears or the state of the visor.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PortraitHelper.Config.IncompatibilityWarning.Glamourer",
+      "Translated": "为使通知和肖像更新正常工作，请确保 Glamourer 未自动更改面部配饰、武器、头部装备或维埃拉耳朵的可见性，以及面罩的状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "The preset code, which is also used for clipboard import/export, is written to the metadata as comment.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PortraitHelper.Config.EmbedPresetStringInThumbnails.Description",
+      "Translated": "预设代码（也用于剪贴板导入/导出）将作为注释写入元数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically update portrait when the Gearset was updated",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PortraitHelper.Config.AutoUpdatePotraitOnGearUpdate.Label",
+      "Translated": "当套装更新时自动更新肖像",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Alignment Tool\nShift: Open/close Settings",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PortraitHelperWindows.MenuBar.ToggleAlignmentTool.Label",
+      "Translated": "切换对齐工具\nShift：打开/关闭设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent Reel-In from Movement",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PreventMovementReelIn.Tweak.Name",
+      "Translated": "防止移动时收杆",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents reeling in your fishing rod if you accidentally move.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "PreventMovementReelIn.Tweak.Description",
+      "Translated": "当你意外移动时，防止收起鱼竿。",
+      "Source": "library"
+    },
+    {
+      "Original": "Saving...",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "ConfirmationButtonWindow.Saving",
+      "Translated": "保存中...",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrollable Tabs is now a standalone plugin on the Dalamud main repository.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "ScrollableTabs.ObsoleteMessage",
+      "Translated": "可滚动标签页现已成为 Dalamud 主仓库中的独立插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop Item Icons is now a standalone plugin on the Dalamud main repository.",
+      "Container": "json:HaselTweaks.Translations.json",
+      "Key": "ShopItemIcons.ObsoleteMessage",
+      "Translated": "商店物品图标现已成为 Dalamud 主仓库中的独立插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "USAGE: ",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.Usage",
+      "Translated": "用法： ",
+      "Source": "library"
+    },
+    {
+      "Original": ">>Subcommands:",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.Subcommands",
+      "Translated": ">>子命令：",
+      "Source": "library"
+    },
+    {
+      "Original": "No description.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "CommandManager.NoDescription",
+      "Translated": "无描述。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load the configuration file. Creating a new one.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "Notification.CouldNotLoadConfig",
+      "Translated": "无法加载配置文件。正在创建新文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open on Garland Tools",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.OpenOnGarlandTools",
+      "Translated": "在 Garland Tools 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Fish Guide",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.OpenInFishGuide",
+      "Translated": "在鱼类图鉴中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Search the markets",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ItemContextMenu.SearchTheMarkets",
+      "Translated": "搜索市场",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to clear filters.",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnFlags.Filter.RightClickToClear",
+      "Translated": "右键清除筛选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnFlags.Filter.EnableAll",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "False",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnBool.False",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "True",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnBool.True",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnYesNo.No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "json:HaselCommon.Translations.json",
+      "Key": "ImGuiTable.ColumnYesNo.Yes",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

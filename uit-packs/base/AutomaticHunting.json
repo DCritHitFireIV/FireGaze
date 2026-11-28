@@ -1,0 +1,1133 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutomaticHunting",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Flag: (",
+      "Context": "ConfigWindow.•",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地图标记：(",
+      "Source": "library"
+    },
+    {
+      "Original": "新增多線地圖設定",
+      "Context": "AdvancedPage.Method_870",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "添加多线地图配置",
+      "Source": "library"
+    },
+    {
+      "Original": "新增一條多線地圖設定",
+      "Context": "AdvancedPage.Method_870",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "添加一条多线地图配置",
+      "Source": "library"
+    },
+    {
+      "Original": "檢查 國際服 切線前置",
+      "Context": "AdvancedPage.Method_870",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "检查国际服切线条件",
+      "Source": "library"
+    },
+    {
+      "Original": "使用 Lifestream 切線；需靠近水晶",
+      "Context": "AdvancedPage.Method_870",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用 Lifestream 切换副本区，需要靠近以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "準備設定",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "准备设置",
+      "Source": "library"
+    },
+    {
+      "Original": "傳送門檻",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "传送阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "等待時間",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "等待时间",
+      "Source": "library"
+    },
+    {
+      "Original": "傳送讀條結束後等待的時間，用於等待地圖狀態穩定",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "传送读条结束后的等待时间，用于等待地图加载完成",
+      "Source": "library"
+    },
+    {
+      "Original": "車頭監聽頻道",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "车头指令监听频道",
+      "Source": "library"
+    },
+    {
+      "Original": "右鍵選單",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "在玩家右鍵選單中顯示「AH 新增為車頭」",
+      "Context": "AdvancedPage.Method_849",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在玩家右键菜单中显示「AH 添加为车头」",
+      "Source": "library"
+    },
+    {
+      "Original": "多線地圖",
+      "Context": "AdvancedPage.Method_850",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "多线地图",
+      "Source": "library"
+    },
+    {
+      "Original": "僅設定了地圖ID的地圖會啟用多線流程",
+      "Context": "AdvancedPage.Method_850",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "仅在已设置地图 ID 的区域启用多线处理",
+      "Source": "library"
+    },
+    {
+      "Original": "切線兜底",
+      "Context": "AdvancedPage.Method_850",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "切线失败时重试",
+      "Source": "library"
+    },
+    {
+      "Original": "傳送切線命令5秒後真實線未變化，先傳送到最近以太之光再重發一次",
+      "Context": "AdvancedPage.Method_850",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "发出切线命令 5 秒后若仍未切换，先传送到最近的以太之光，再重试一次",
+      "Source": "library"
+    },
+    {
+      "Original": "坐騎",
+      "Context": "AdvancedPage.Method_851",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "選擇導航使用的坐騎",
+      "Context": "AdvancedPage.Method_851",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "选择自动寻路时使用的坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "重新整理",
+      "Context": "AdvancedPage.Method_851",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "重新讀取可用坐騎列表",
+      "Context": "AdvancedPage.Method_851",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重新获取可用坐骑列表",
+      "Source": "library"
+    },
+    {
+      "Original": "狩獵招募",
+      "Context": "AdvancedPage.Method_852",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "狩猎招募",
+      "Source": "library"
+    },
+    {
+      "Original": "建立招募時使用的描述",
+      "Context": "AdvancedPage.Method_852",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "创建招募时使用的招募说明",
+      "Source": "library"
+    },
+    {
+      "Original": "建立狩獵招募",
+      "Context": "AdvancedPage.Method_852",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "创建狩猎招募",
+      "Source": "library"
+    },
+    {
+      "Original": "立即建立一次狩獵招募",
+      "Context": "AdvancedPage.Method_852",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "立即创建一条狩猎招募",
+      "Source": "library"
+    },
+    {
+      "Original": "輸出日誌",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "输出日志",
+      "Source": "library"
+    },
+    {
+      "Original": "把插件執行日誌輸出到聊天框",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将插件运行日志输出到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "A怪計數",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "A 级怪计数",
+      "Source": "library"
+    },
+    {
+      "Original": "切線",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "切换副本区",
+      "Source": "library"
+    },
+    {
+      "Original": "切到下一條副本線",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "切换至下一个副本区",
+      "Source": "library"
+    },
+    {
+      "Original": "目前線路",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前副本区",
+      "Source": "library"
+    },
+    {
+      "Original": "在聊天框列印目前與目標線路號",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "在聊天栏显示当前与目标副本区的编号",
+      "Source": "library"
+    },
+    {
+      "Original": "召喚坐騎",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "召唤坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "立即召喚目前設定的坐騎",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "立即召唤当前设置的坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "下坐騎",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "下坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "立即下坐騎",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "立即下坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "選中A怪",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "选中 A 级怪",
+      "Source": "library"
+    },
+    {
+      "Original": "掃描並選中附近的 A 怪",
+      "Context": "AdvancedPage.Method_853",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "搜索并选中附近的 A 级怪",
+      "Source": "library"
+    },
+    {
+      "Original": "診斷與匯出",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "诊断与导出",
+      "Source": "library"
+    },
+    {
+      "Original": "複製診斷資訊",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "复制诊断信息",
+      "Source": "library"
+    },
+    {
+      "Original": "把狀態 / 前置 / 設定摘要複製到剪貼簿",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将运行状态、依赖插件和设置摘要复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "匯出日誌",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "导出日志",
+      "Source": "library"
+    },
+    {
+      "Original": "把 Dalamud 日誌匯出到插件目錄",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将 Dalamud 日志导出到插件目录",
+      "Source": "library"
+    },
+    {
+      "Original": "匯出設定",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "导出设置",
+      "Source": "library"
+    },
+    {
+      "Original": "把目前設定匯出為 JSON 檔案",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将当前设置导出为 JSON 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "恢復預設",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "只重置行為開關（不影響已儲存的設定與步驟）",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "仅重置功能开关，保留已保存的配置和步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "清空全部",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "清空全部设置",
+      "Source": "library"
+    },
+    {
+      "Original": "清空所有設定（含已儲存的跨服與連車設定）",
+      "Context": "AdvancedPage.Method_854",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "清空所有设置，包括已保存的跨服和连续狩猎配置",
+      "Source": "library"
+    },
+    {
+      "Original": "確定",
+      "Context": "ChainPage.Method_904",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "連車設定",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "连续狩猎设置",
+      "Source": "library"
+    },
+    {
+      "Original": "讀取資料中心中...",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "正在读取数据中心……",
+      "Source": "library"
+    },
+    {
+      "Original": "啟用連車",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用连续狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "關閉後無法開始連車；執行中關閉會立即停止",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "关闭后无法开始连续狩猎，运行中关闭会立即停止",
+      "Source": "library"
+    },
+    {
+      "Original": "到站建招募",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "到站后创建招募",
+      "Source": "library"
+    },
+    {
+      "Original": "每站到達後等待 1 秒建立狩獵招募；描述取「高級」頁的招募描述",
+      "Context": "ChainPage.Draw",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "每站抵达后等待 1 秒创建狩猎招募，招募说明取自「高级」页",
+      "Source": "library"
+    },
+    {
+      "Original": "連車步驟",
+      "Context": "ChainPage.Method_877",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "连续狩猎步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "正在編輯：",
+      "Context": "ChainPage.Method_877",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "正在编辑：",
+      "Source": "library"
+    },
+    {
+      "Original": "新增連車步驟",
+      "Context": "ChainPage.Method_877",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "添加连续狩猎步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "更新連車設定",
+      "Context": "ChainPage.Method_877",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "更新连续狩猎配置",
+      "Source": "library"
+    },
+    {
+      "Original": "儲存為連車設定",
+      "Context": "ChainPage.Method_877",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "保存为连续狩猎配置",
+      "Source": "library"
+    },
+    {
+      "Original": "已儲存連車設定",
+      "Context": "ChainPage.Method_878",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "已保存的连续狩猎配置",
+      "Source": "library"
+    },
+    {
+      "Original": "跟車設定",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "跟车设置",
+      "Source": "library"
+    },
+    {
+      "Original": "車頭名用於識別指令與 地圖標記",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "通过车头名称识别指令和地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "車頭名稱",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "车头名称",
+      "Source": "library"
+    },
+    {
+      "Original": "快速設定",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "快速设置",
+      "Source": "library"
+    },
+    {
+      "Original": "目前目標",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "把目前選中的目標加進車頭列表並勾選",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将当前目标加入车头列表并勾选",
+      "Source": "library"
+    },
+    {
+      "Original": "設定自己",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将自己设为车头",
+      "Source": "library"
+    },
+    {
+      "Original": "把自己加進車頭列表並勾選",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将自己加入车头列表并勾选",
+      "Source": "library"
+    },
+    {
+      "Original": "確認清空",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "确认清空",
+      "Source": "library"
+    },
+    {
+      "Original": "清除車頭",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "清除车头",
+      "Source": "library"
+    },
+    {
+      "Original": "再點一次將刪除全部車頭（不可撤銷）",
+      "Context": "FollowPage.Method_912",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "再点一次将删除全部车头，此操作无法撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "導航與戰鬥",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "寻路与战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "自動傳送",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动传送",
+      "Source": "library"
+    },
+    {
+      "Original": "A 怪搜尋半徑",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "A 级怪搜索半径",
+      "Source": "library"
+    },
+    {
+      "Original": "飛行導航",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "飞行寻路",
+      "Source": "library"
+    },
+    {
+      "Original": "使用飛行坐騎導航；關閉則使用陸上移動",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用飞行坐骑寻路，关闭后改为地面移动",
+      "Source": "library"
+    },
+    {
+      "Original": "設定 地圖標記",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "设置地图旗标",
+      "Source": "library"
+    },
+    {
+      "Original": "導航時在地圖上標記目標點",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "寻路时在地图上标记目标位置",
+      "Source": "library"
+    },
+    {
+      "Original": "目標上空落地",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "抵达目标后着陆",
+      "Source": "library"
+    },
+    {
+      "Original": "到達目標後下坐騎；關閉則懸停在目標上方",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "抵达目标后下坐骑，关闭则悬停在目标上方",
+      "Source": "library"
+    },
+    {
+      "Original": "自動 BMR AI",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动切换 BMR AI",
+      "Source": "library"
+    },
+    {
+      "Original": "進戰鬥開 / 脫戰關",
+      "Context": "FollowPage.Method_913",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "进入战斗时开启，脱战后关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "S怪設定",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "S 级怪设置",
+      "Source": "library"
+    },
+    {
+      "Original": "血量達標後突進開怪",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "目标体力达到阈值时使用突进技能开怪",
+      "Source": "library"
+    },
+    {
+      "Original": "啟用 S怪",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "启用 S 级怪",
+      "Source": "library"
+    },
+    {
+      "Original": "先掃 A 怪，無 A 怪再掃 S 怪",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "优先查找 A 级怪，未找到时再查找 S 级怪",
+      "Source": "library"
+    },
+    {
+      "Original": "尋路開怪",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动寻路开怪",
+      "Source": "library"
+    },
+    {
+      "Original": "血量檢測",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "体力检测",
+      "Source": "library"
+    },
+    {
+      "Original": "檢測 S 怪血量，低於該百分比時執行突進技能",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "检测 S 级怪的剩余体力，低于设定百分比时使用突进技能",
+      "Source": "library"
+    },
+    {
+      "Original": "懸停距離",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "悬停距离",
+      "Source": "library"
+    },
+    {
+      "Original": "距 S 怪位置的 XZ 直線距離",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "与 S 级怪之间的水平直线距离（XZ 平面）",
+      "Source": "library"
+    },
+    {
+      "Original": "懸停高度",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "悬停高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Y 軸高度",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "Y 轴高度",
+      "Source": "library"
+    },
+    {
+      "Original": "突進技能",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "突进技能",
+      "Source": "library"
+    },
+    {
+      "Original": "血量達標時執行的技能，建議用突進技能",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "目标体力达到阈值时使用的技能，建议选择突进技能",
+      "Source": "library"
+    },
+    {
+      "Original": "檢查 國際服 前置",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "检查国际服依赖项",
+      "Source": "library"
+    },
+    {
+      "Original": "檢查 Lifestream 和 vnavmesh 的載入狀態",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "检查 Lifestream 和 vnavmesh 是否已加载",
+      "Source": "library"
+    },
+    {
+      "Original": "監控目前目標血量",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "监控当前目标体力",
+      "Source": "library"
+    },
+    {
+      "Original": "監控目前選中目標的血量，降到門檻後用突進技能開怪",
+      "Context": "FollowPage.Method_915",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "监控当前目标的体力，达到阈值后使用突进技能开怪",
+      "Source": "library"
+    },
+    {
+      "Original": "尚未完成首次設定",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未完成首次设置",
+      "Source": "library"
+    },
+    {
+      "Original": "自動化功能保持關閉，完成設定精靈後即可正常使用。",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动功能暂时关闭，完成设置向导后即可使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "開啟首次執行設定精靈",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开首次设置向导",
+      "Source": "library"
+    },
+    {
+      "Original": "4 步快速設定：免責宣告 → 前置檢查 → 車頭 → 完成",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "四步快速设置：免责声明 → 依赖检查 → 设置车头 → 完成",
+      "Source": "library"
+    },
+    {
+      "Original": "檢視免責宣告並恢復",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "查看免责声明并恢复功能",
+      "Source": "library"
+    },
+    {
+      "Original": "開啟設定精靈重新確認免責宣告",
+      "Context": "OverviewPage.Method_930",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开设置向导，重新确认免责声明",
+      "Source": "library"
+    },
+    {
+      "Original": "自動狩獵",
+      "Context": "OverviewPage.Method_931",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "自动狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "總開關",
+      "Context": "OverviewPage.Method_931",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "总开关",
+      "Source": "library"
+    },
+    {
+      "Original": "執行狀態",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "运行状态",
+      "Source": "library"
+    },
+    {
+      "Original": "目前區域",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "車頭",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "车头",
+      "Source": "library"
+    },
+    {
+      "Original": "導航狀態",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "寻路状态",
+      "Source": "library"
+    },
+    {
+      "Original": "S怪",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "S 级怪",
+      "Source": "library"
+    },
+    {
+      "Original": "車頭距離",
+      "Context": "OverviewPage.Method_932",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "与车头的距离",
+      "Source": "library"
+    },
+    {
+      "Original": "前置插件",
+      "Context": "OverviewPage.Method_933",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "依赖插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream / vnavmesh 必需",
+      "Context": "OverviewPage.Method_933",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "需要 Lifestream 和 vnavmesh",
+      "Source": "library"
+    },
+    {
+      "Original": "目標",
+      "Context": "OverviewPage.Method_935",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "狀態浮窗外觀",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "状态悬浮窗外观",
+      "Source": "library"
+    },
+    {
+      "Original": "常駐 狀態浮窗",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "常驻状态悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "面板底不透明度（0.62–1.00）",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "面板背景不透明度（0.62–1.00）",
+      "Source": "library"
+    },
+    {
+      "Original": "精簡模式",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "精简模式",
+      "Source": "library"
+    },
+    {
+      "Original": "常駐時只顯示一行摘要",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "常驻时仅显示一行摘要",
+      "Source": "library"
+    },
+    {
+      "Original": "位置鎖定",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "锁定位置",
+      "Source": "library"
+    },
+    {
+      "Original": "鎖定後 狀態浮窗 不可拖動",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "锁定后无法拖动状态悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "復位位置",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重置位置",
+      "Source": "library"
+    },
+    {
+      "Original": "把 狀態浮窗 位置復位到左上角",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将状态悬浮窗移回左上角",
+      "Source": "library"
+    },
+    {
+      "Original": "隱藏 狀態浮窗",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "隐藏状态悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "顯示 狀態浮窗",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示状态悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "顯示 / 隱藏狀態浮窗",
+      "Context": "OverviewPage.Method_936",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "显示或隐藏状态悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "幫助與診斷",
+      "Context": "OverviewPage.Method_937",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "帮助与诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "使用說明",
+      "Context": "OverviewPage.Method_937",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "使用说明",
+      "Source": "library"
+    },
+    {
+      "Original": "開啟內嵌的使用說明視窗",
+      "Context": "OverviewPage.Method_937",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开内置使用说明窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "一鍵跨服",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "一键跨服",
+      "Source": "library"
+    },
+    {
+      "Original": "伺服器",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "地圖",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "水晶",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "把目前的伺服器 / 地圖 / 水晶儲存到下方列表",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "将当前服务器、地图和以太之光保存到下方列表",
+      "Source": "library"
+    },
+    {
+      "Original": "請先完成選擇",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "请先完成选择",
+      "Source": "library"
+    },
+    {
+      "Original": "儲存目前選擇",
+      "Context": "TravelPage.Method_952",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "保存当前选择",
+      "Source": "library"
+    },
+    {
+      "Original": "已儲存設定",
+      "Context": "TravelPage.Method_956",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "已保存的设置",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

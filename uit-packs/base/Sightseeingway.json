@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Sightseeingway",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Error getting game directory from current process: ",
+      "Context": "GameEnvironment.GetGameDirectory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "从当前进程读取游戏目录时出错： ",
+      "Source": "library"
+    },
+    {
+      "Original": ". Falling back to plugin directory.",
+      "Context": "GameEnvironment.GetGameDirectory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "。将改用插件目录。",
+      "Source": "library"
+    },
+    {
+      "Original": "My Documents folder path is empty.",
+      "Context": "GameEnvironment.GetDefaultScreenshotFolder",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "“文档”文件夹的路径为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Error getting default screenshot folder (MyDocuments fallback)",
+      "Context": "GameEnvironment.GetDefaultScreenshotFolder",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "获取默认截图目录时出错（尝试使用“文档”目录）",
+      "Source": "library"
+    },
+    {
+      "Original": "Error reading ffxiv.cfg",
+      "Context": "GameEnvironment.GetScreenshotFolderFromConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "读取 ffxiv.cfg 时出错",
+      "Source": "library"
+    },
+    {
+      "Original": "Error reading OneDrive path from registry",
+      "Context": "GameEnvironment.GetOneDriveDocumentPathFromRegistry",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "从注册表读取 OneDrive 路径时出错",
+      "Source": "library"
+    },
+    {
+      "Original": "File not released in time for renaming: ",
+      "Context": "IO.OnFileCreated",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未能及时释放文件，无法重命名： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Map sheet not found or MapId is 0.",
+      "Context": "IO.ResolveNewFileName",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未找到地图数据表，或地图 ID 为 0。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown error renaming ",
+      "Context": "IO.RenameQueuedFiles",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "重命名时发生未知错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error during RenameFile for ",
+      "Context": "RenameFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "重命名文件时出错： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the configuration window for Sightseeingway.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Sightseeingway 设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert Changes",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "撤销更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Defaults",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Format",
+      "Context": "TimestampFormatSelector.Render",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact: ",
+      "Context": "TimestampFormatSelector.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "紧凑： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Error: ",
+      "Context": "Logger.Error",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 错误： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

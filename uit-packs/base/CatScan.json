@@ -1,0 +1,452 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "CatScan",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "A Rank",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "A级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "B Rank",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "B级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "CE Name",
+      "Context": "MainWindow.DrawOccultCETable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "临界遭遇战名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Dead NMs",
+      "Context": "MainWindow.DrawScanResults",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenterCursorForText",
+      "Translated": "清除已击杀的恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Log",
+      "Context": "MainWindow.DrawKillCounts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenterCursorForText",
+      "Translated": "清空日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy List",
+      "Context": "MainWindow.DrawTrainLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Count missing KC mobs",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "统计离开视野的触发怪",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "ClipRect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss",
+      "Context": "MainWindow.DrawNunyTime",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Dist.",
+      "Context": "MainWindow.DrawFateTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Sound Alerts",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用声音提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables special NM/CE tracker interface while inside Eureka or Occult Crescent zones.",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在禁地优雷卡或新月岛中启用恶名精英与临界遭遇战专用追踪界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed: ",
+      "Context": "MainWindow.DrawNunyTime",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Op tracker mode",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "野外探索追踪模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Force Enable Scanner",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "强制启用扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Window Automatically",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动隐藏窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide temporarily while in non-hunt zones.",
+      "Context": "ConfigWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在非狩猎区域暂时隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Minion",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Mob Name",
+      "Context": "MainWindow.DrawEurekaTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "怪物名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute notifications while in a CE",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在临界遭遇战中静音",
+      "Source": "library"
+    },
+    {
+      "Original": "NM Name",
+      "Context": "MainWindow.DrawEurekaTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "恶名精英名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MainWindow.DrawFateTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No kill count in this zone.",
+      "Context": "MainWindow.DrawKillCounts",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "当前区域没有击杀记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "North",
+      "Context": "MainWindow.DrawPotFateCooldown",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "北部",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Active",
+      "Context": "ConfigWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Crescent",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "新月岛",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Window Automatically",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动打开窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open hunt tracker UI",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开狩猎追踪窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste List",
+      "Context": "MainWindow.DrawTrainLog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress %",
+      "Context": "MainWindow.DrawFateTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "进度 %",
+      "Source": "library"
+    },
+    {
+      "Original": "Register",
+      "Context": "ConfigWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "报名",
+      "Source": "library"
+    },
+    {
+      "Original": "S Rank",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "S级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "Scanner disabled in this zone.",
+      "Context": "MainWindow.DrawFateTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "在此区域内已禁用扫描。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound Alerts",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "声音提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "South",
+      "Context": "MainWindow.DrawPotFateCooldown",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "南部",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress alerts while participating in a CE or large scale battle.",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "参加临界遭遇战或大规模战斗时暂停提醒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "MainWindow.DrawFateTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Time ",
+      "Context": "MainWindow.DrawEurekaTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "ConfigWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Context": "ConfigWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting",
+      "Context": "ConfigWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等待中",
+      "Source": "library"
+    },
+    {
+      "Original": "World ",
+      "Context": "ConfigWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "服务器 ",
+      "Source": "library"
+    },
+    {
+      "Original": "World Boss",
+      "Context": "ConfigWindow.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "世界首领",
+      "Source": "library"
+    },
+    {
+      "Original": "icon",
+      "Context": "MainWindow.DrawScanResults",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "kills",
+      "Context": "MainWindow.DrawKillCounts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "击杀数",
+      "Source": "library"
+    },
+    {
+      "Original": "max",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "min",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最小值",
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "status",
+      "Context": "ConfigWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

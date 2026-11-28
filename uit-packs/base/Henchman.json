@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Henchman",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Enabled",
+      "Context": "OnYourMarkUI.DrawAvailableBillsDebugTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion",
+      "Context": "OnYourMarkUI.DrawAvailableBillsDebugTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Bill",
+      "Context": "OnYourMarkUI.DrawAvailableBillsDebugTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "通缉令",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "OnYourMarkUI.DrawAvailableBillsDebugTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Reward",
+      "Context": "OnYourMarkUI.DrawAvailableBillsDebugTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "OnYourMarkUI.DrawAvailableBillDebugRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "OnYourMarkUI.DrawAvailableBillDebugRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No languages found",
+      "Context": "SettingsUI.DrawLanguageCombo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未找到语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to hunt",
+      "Context": "BumpOnALogUI.DrawCompletionAction",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击开始狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Buys Alexandrite maps with Poetics and digs them up. Can farm Poetics in duty support first.",
+      "Context": "AlexAndriteUI.get_Description",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "使用诗学神典石购买亚历山大变石地图并进行挖掘，也可先用亲信支援收集诗学神典石。",
+      "Source": "library"
+    },
+    {
+      "Original": "Maps to farm",
+      "Context": "AlexAndriteUI.DrawSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标地图数",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

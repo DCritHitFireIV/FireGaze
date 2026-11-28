@@ -1,0 +1,378 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Housemate",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Display the Housemate configuration interface.\nToggle the Housemate object overlay with '/housemate toggle'",
+      "Context": "Housemate..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示 Housemate 设置窗口。\n使用 '/housemate toggle' 切换住宅物件叠加层。",
+      "Source": "library"
+    },
+    {
+      "Original": "hou",
+      "Context": "HousemateUI.Render",
+      "PreserveID": false,
+      "Translated": "室友",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot ",
+      "Context": "HousemateUI.DrawPlotPlate",
+      "PreserveID": false,
+      "Translated": "地块 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Exterior: ",
+      "Context": "HousemateUI.DrawPlotPlate",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "外装： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Housemate",
+      "Context": "HousemateUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "室友",
+      "Source": "library"
+    },
+    {
+      "Original": "Outdoors",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "室外",
+      "Source": "library"
+    },
+    {
+      "Original": "You aren't in an outdoor housing zone!",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前不在住宅区的室外区域！",
+      "Source": "library"
+    },
+    {
+      "Original": "Homes",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "住宅",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Parts",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "部件",
+      "Source": "library"
+    },
+    {
+      "Original": "Walls: ",
+      "Context": "HousemateUI.OutdoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "墙壁： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "HousemateUI.RenderHousingObjectList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "HousemateUI.RenderHousingObjectList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Indoors",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "室内",
+      "Source": "library"
+    },
+    {
+      "Original": "You aren't in an indoor housing zone!",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "你不在室内住宅区！",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixtures",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "固定装置",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Part",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "部件",
+      "Source": "library"
+    },
+    {
+      "Original": "Light level: ",
+      "Context": "HousemateUI.IndoorTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "光照等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Display housing object overlay",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示住宅物体叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "View distance",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "视距",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort housing object lists",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排序住宅物体列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort objects by:",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排序方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "HousemateUI.SettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Roof",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "屋顶",
+      "Source": "library"
+    },
+    {
+      "Original": "Walls",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "墙壁",
+      "Source": "library"
+    },
+    {
+      "Original": "Windows",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "窗户",
+      "Source": "library"
+    },
+    {
+      "Original": "Door",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "门",
+      "Source": "library"
+    },
+    {
+      "Original": "Roof (opt)",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "屋顶（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Wall (opt)",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "墙壁（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Signboard (opt)",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "招牌（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Fence",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "围栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "Utils.GetExteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Floor",
+      "Context": "Utils.GetInteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "地板",
+      "Source": "library"
+    },
+    {
+      "Original": "Light",
+      "Context": "Utils.GetInteriorPartDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "灯光",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground Floor",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "1层",
+      "Source": "library"
+    },
+    {
+      "Original": "Basement Floor",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "兵武塔底层",
+      "Source": "library"
+    },
+    {
+      "Original": "2nd Floor",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "2层",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "Utils.GetFloorDescriptor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "主层",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby housing objects",
+      "Context": "HousemateUI.RenderHousingObjectList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "附近的住宅物件",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

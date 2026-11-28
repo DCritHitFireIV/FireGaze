@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Stylist",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Best items (no restriction): \n",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "最优装备（无限制）： \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Best items (restriction): \n",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "最优装备（有限制）： \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted Gearsets",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽的套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Check For Suggestions",
+      "Context": "MainWindow.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "检查装备建议",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure Notification Zones",
+      "Context": "MainWindow.DrawSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "设置提醒区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Consider gear from inventory",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将背包中的装备纳入考虑",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset module",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader",
+      "Translated": "套装模块",
+      "Source": "library"
+    },
+    {
+      "Original": "Jobs",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Move replaced items from armory chest to regular inventory",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将替换下来的装备从兵装库移入背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-equip current gearset if it was updated",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "当前套装更新后重新装备该套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Update ",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Update armory only ",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "仅更新兵装库 ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

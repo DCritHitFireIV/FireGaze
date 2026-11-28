@@ -1,0 +1,800 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Weatherman",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " weathers",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": " 种天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional offset, hours: ",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "额外偏移（小时）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Always display real weather",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示实际天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show plugin interface in gpose",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式中始终显示插件界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply weather changes",
+      "Context": "Gui.DrawTabBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用天气更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Area",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "地区",
+      "Source": "library"
+    },
+    {
+      "Original": "BGM override",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "替换背景音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't use now",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前无法使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Change time flow speed",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更改时间流速",
+      "Source": "library"
+    },
+    {
+      "Original": "Click action:",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "点击时：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current weather is yellow (normal)",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前天气以黄色表示（自然天气）",
+      "Source": "library"
+    },
+    {
+      "Original": "Current zone on top",
+      "Context": "Gui.DrawTabZone",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将当前区域置顶",
+      "Source": "library"
+    },
+    {
+      "Original": "Current zone: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cutscenes only",
+      "Context": "Gui.DrawTabBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "仅过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "Gui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "OrchestrionController..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Difference: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "差值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable \"Stop Time/Weather\" in gpose to control them with Weatherman.",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "要使用 Weatherman 控制时间和天气，请关闭集体动作模式中的「停止时间／天气」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable clock out of sync check",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭时钟不同步检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable plugin in cutscenes",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "过场动画中停用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Displayed weather: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示的天气： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Either click this button or change your zone for settings to become effective.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击此按钮或切换区域可使设置生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Either click this button or change your zone for weather settings to become effective.",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击此按钮或切换区域可使天气设置生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable music control",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用音乐控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable time control",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用时间控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable weather control",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用天气控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Everywhere",
+      "Context": "Gui.DrawTabBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "所有场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Everywhere except cutscenes",
+      "Context": "Gui.DrawTabBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "过场动画以外的场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter:",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "筛选：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Global setting",
+      "Context": "Gui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "全局设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Global time control: ",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全局时间控制： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hours:",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小时：",
+      "Source": "library"
+    },
+    {
+      "Original": "ID, partial area or zone name",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入 ID 或部分场所、区域名",
+      "Source": "library"
+    },
+    {
+      "Original": "If there will be no non-blacklisted weather left to choose from, original weather will be kept.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "若没有其他可选天气，则保留原天气。",
+      "Source": "library"
+    },
+    {
+      "Original": "InfiniDay",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "常昼",
+      "Source": "library"
+    },
+    {
+      "Original": "InfiniDay reversed",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "常昼（倒流）",
+      "Source": "library"
+    },
+    {
+      "Original": "InfiniNight",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "常夜",
+      "Source": "library"
+    },
+    {
+      "Original": "InfiniNight reversed",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "常夜（倒流）",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Minutes:",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "分钟：",
+      "Source": "library"
+    },
+    {
+      "Original": "Music is not enabled",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未启用音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "No override",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "不替换",
+      "Source": "library"
+    },
+    {
+      "Original": "No override - time controlled by game;\nNormal - time controlled by plugin, normal flow; \nFixed - time is fixed to specified value;\nInfiniDay - instead of night, another day cycle will begin\nInfiniDay reversed - instead of night, day cycle rewinds backward\nInfiniNight/InfiniNight reversed - same as day options",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不替换：时间由游戏控制。\n正常：插件接管时间，以正常速度流动。\n固定：时间停在指定时刻。\n常昼：白天结束时重新开始白天循环。\n常昼（倒流）：白天结束后逆向回放白天。\n常夜／常夜（倒流）：与常昼选项类似，但使用夜间循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "正常",
+      "Source": "library"
+    },
+    {
+      "Original": "Normally occurring weathers in current zone are highlighted green.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前区域自然出现的天气会以绿色标出。",
+      "Source": "library"
+    },
+    {
+      "Original": "Occurs normally",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "自然出现",
+      "Source": "library"
+    },
+    {
+      "Original": "Only fully customizable zones",
+      "Context": "Gui.DrawTabZone",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示可完全自定义的区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Only modified",
+      "Context": "Gui.DrawTabZone",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示已修改的区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Open plugin UI",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "打开插件界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Orchestrion not found",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未找到 Orchestrion",
+      "Source": "library"
+    },
+    {
+      "Original": "Original",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "原始",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause Weatherman",
+      "Context": "Gui.DrawTabQuickControl",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "暂停 Weatherman",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause plugin",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "暂停插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause plugin execution",
+      "Context": "Gui.DrawTabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "暂停插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Precise editing",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "精确调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Print configuration string",
+      "Context": "Gui.DrawTabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "输出配置字符串",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick control",
+      "Context": "Gui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "快捷控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Random normally occurring non-blacklisted weather will be selected to replace blacklisted one.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "遇到被屏蔽的天气时，将从该区域自然出现且未被屏蔽的天气中随机选择一种替代。",
+      "Source": "library"
+    },
+    {
+      "Original": "Real world time",
+      "Context": "Gui..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "现实时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload zone settings",
+      "Context": "Gui.DrawTabQuickControl",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载区域设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires Orchestrion plugin installed and enabled.",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "需要安装并启用 Orchestrion 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click me instead!",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请改用右键点击！",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds:",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "秒：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select weathers which you do not want to ever see again in any zone.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择不希望在任何区域出现的天气。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected weather: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "所选天气： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Server info bar:",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "服务器信息栏：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set desired time of day in seconds. Double-click to edit field manually.",
+      "Context": "Gui.DrawTabGlobal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "以秒为单位设置一天中的时间。双击输入框可直接编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show unnamed zones",
+      "Context": "Gui.DrawTabZone",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示未命名区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Supported weathers:",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "支持的天气：",
+      "Source": "library"
+    },
+    {
+      "Original": "These controls will allow you to temporarily adjust weather and time. They are reset on zone change.",
+      "Context": "Gui.DrawTabQuickControl",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在此临时调整天气和时间。切换区域后会重置。",
+      "Source": "library"
+    },
+    {
+      "Original": "This setting is not effective for zones that have their weathers overriden in zone-specific settings.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已在区域设置中单独指定天气的区域不受此项影响。",
+      "Source": "library"
+    },
+    {
+      "Original": "Time allowed zones",
+      "Context": "Gui.DrawTabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "可调整时间的区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Time control",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "时间控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Time flow speed multiplier",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "时间流速倍率",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: ",
+      "Context": "Gui.DrawTabQuickControl",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "To unblacklist specific zone without overriding it's weather, go to zone-specific settings and check \"Weather control\"",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "若要让某个区域忽略黑名单但不强制指定天气，请在区域设置中勾选「天气控制」",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle plugin settings",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "切换插件设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "True weather: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "实际天气： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unblacklisted weather: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未列入黑名单的天气： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Use local PC time",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "使用本机时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Use server time (GMT time)",
+      "Context": "Gui.DrawTabGlobal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "使用服务器时间（GMT）",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather allowed zones",
+      "Context": "Gui.DrawTabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "可调整天气的区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather blacklist",
+      "Context": "Gui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "天气黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather blacklist effective:",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "天气黑名单生效范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather control",
+      "Context": "Gui.DrawTabZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "天气控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather list",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "天气列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone has no supported weathers",
+      "Context": "Gui.PrintZoneRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此区域没有支持的天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone-specific settings",
+      "Context": "Gui.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "按区域设置",
+      "Source": "library"
+    },
+    {
+      "Original": "[custom]",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "[自定义]",
+      "Source": "library"
+    },
+    {
+      "Original": "checkbox on chosen zone without selecting any weathers for it.",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "，并让该区域的天气选项保持空白。",
+      "Source": "library"
+    },
+    {
+      "Original": "or red (abnormal).",
+      "Context": "Gui.DrawTabBlacklist",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "或红色表示（非自然天气）。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,264 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WhichMount",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Show mount database.",
+      "Context": "CommandHandler.RegisterCommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示坐骑数据库。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount ID: ",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "坐骑 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Number of seats: ",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "可搭乘人数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Has unique music: ",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "有专属背景音乐： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Added in patch ",
+      "Context": "ChatView.BindModel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "加入游戏的版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Context Menu",
+      "Context": "ConfigWindow.DrawWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Tooltip",
+      "Context": "ConfigWindow.DrawWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Context Menu",
+      "Context": "ConfigWindow.DrawContextMenuTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Mount ID",
+      "Context": "ConfigWindow.DrawContextMenuTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示坐骑 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Has Actions",
+      "Context": "ConfigWindow.DrawContextMenuTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示是否有专属动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Unique BGM",
+      "Context": "ConfigWindow.DrawContextMenuTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示是否有专属背景音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Available on MB",
+      "Context": "ConfigWindow.DrawContextMenuTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示能否在市场布告板购买",
+      "Source": "library"
+    },
+    {
+      "Original": "Character not found",
+      "Context": "ContextMenuHandler.FetchAndDisplayMountInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "找不到该角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot find mount",
+      "Context": "ContextMenuHandler.FetchAndDisplayMountInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "找不到此坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount ID",
+      "Context": "MountDatabaseTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "坐骑 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "MountDatabaseTab.DrawSearchBar",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "No mounts found",
+      "Context": "MountDatabaseTab.DrawTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未找到坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "MountDatabaseTab.SetupTableColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MountDatabaseTab.SetupTableColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by:",
+      "Context": "MountDatabaseTab.DrawSortDropdown",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排序方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion:",
+      "Context": "MountDatabaseTab.DrawExpansionDropdown",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "资料片：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "MountDatabaseTab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Collected: ",
+      "Context": "MountTracksTab.DrawMainReward",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已收藏： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory: ",
+      "Context": "MountTracksTab.AddTotemColumn",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "背包： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers: ",
+      "Context": "MountTracksTab.AddTotemColumn",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "雇员： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked",
+      "Context": "MountDatabaseTab.SetupTableColumns",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "已解锁",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

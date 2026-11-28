@@ -1,0 +1,2027 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AnoMech",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open AnoMech. Subcommands: config, start, reset, leave",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 AnoMech。子命令：config、start、reset、leave",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias for /anomech",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "/anomech 的简写",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn.",
+      "Context": "Plugin.StartSelectedScenario",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "只能在旅馆房间内启动场景。",
+      "Source": "library"
+    },
+    {
+      "Original": "AnoMech Settings###AnoMechConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "AnoMech 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Sim Menu when entering Inn",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入旅馆房间时打开模拟菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress scenario BGM",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭场景背景音乐",
+      "Source": "library"
+    },
+    {
+      "Original": "Show mechanic success/failure marks",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "标记机制处理成功或失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Resolve your own actions",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "结算自己的动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast window (s)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "滑步施法窗口（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable event logging",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录事件日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Open logs folder",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开日志文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios",
+      "Context": "MainWindow.DrawScenariosPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a scenario",
+      "Context": "MainWindow.DrawMainContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Setup###scenario-setup-v3",
+      "Context": "MainWindow.DrawMainContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "准备",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenario settings###scenario-config-v3",
+      "Context": "MainWindow.DrawMainContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "场景设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "空闲",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "No strat available for this region yet.",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "该地区暂无可用打法。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start while you are busy (cutscene, NPC event, crafting, trading, zoning, etc.).",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "忙碌时无法开始，例如观看过场动画、与 NPC 交互、制作、交易或切换区域时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "离开",
+      "Source": "library"
+    },
+    {
+      "Original": "Solo",
+      "Context": "MainWindow.DrawSoloOption",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "单人",
+      "Source": "library"
+    },
+    {
+      "Original": "Run without simulated party members or party AI.",
+      "Context": "MainWindow.DrawSoloOption",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "不模拟队友，也不启用队友 AI。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop the current scenario before changing the run mode.",
+      "Context": "MainWindow.DrawSoloOption",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先停止当前场景，再更改运行模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "God mode",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "无敌模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-restart",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动重新开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart the same scenario immediately after a successful run. A death turns this back off.",
+      "Context": "MainWindow.DrawRunOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "成功完成后立即重新开始同一场景，死亡时关闭此选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Streak: ",
+      "Context": "MainWindow.DrawRunOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "连续成功次数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymarks:",
+      "Context": "MainWindow.DrawWaymarkSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "场地标记：",
+      "Source": "library"
+    },
+    {
+      "Original": "Role:",
+      "Context": "MainWindow.DrawRoleSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "职责：",
+      "Source": "library"
+    },
+    {
+      "Original": "Strategy:",
+      "Context": "MainWindow.DrawStratSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打法：",
+      "Source": "library"
+    },
+    {
+      "Original": "Region:",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "地区：",
+      "Source": "library"
+    },
+    {
+      "Original": "(no strats for this region yet)",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（该地区暂无打法）",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios only run in an inn",
+      "Context": "MainWindow.DrawLocationHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "场景只能在旅馆房间内运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn — return to one to run a scenario.",
+      "Context": "MainWindow.DrawLocationHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "只能在旅馆房间内启动场景，请先返回旅馆房间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-collapse while running: ",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "运行时自动折叠： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "The Weapon's Refrain",
+      "Context": "UwuZone.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "武器之诗",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "UwuZone..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Suppression",
+      "Context": "UltimateSuppressionScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "乱击之究极幻想",
+      "Source": "library"
+    },
+    {
+      "Original": "Assignment (Non-Tank Only):",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开始测验（仅非坦克）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Pillar##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "光柱",
+      "Source": "library"
+    },
+    {
+      "Original": "Mistral Song##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "寒风之歌",
+      "Source": "library"
+    },
+    {
+      "Original": "Eruption##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "地火喷发",
+      "Source": "library"
+    },
+    {
+      "Original": "Gaol##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "监狱",
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Predation",
+      "Context": "UltimatePredationScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "追击之究极幻想",
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Positions:",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Boss 位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Random##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "随机",
+      "Source": "library"
+    },
+    {
+      "Original": "Center Dodge##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "中央回避",
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken Null",
+      "Context": "UmadP5ForsakenNull.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "遗弃虚无",
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken",
+      "Context": "UmadReplayData..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "遗弃末世",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole",
+      "Context": "UmadReplayData..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "原子：吸引",
+      "Source": "library"
+    },
+    {
+      "Original": "Celestriad",
+      "Context": "UmadReplayData..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "三星",
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says",
+      "Context": "UmadReplayData..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "凯夫卡说",
+      "Source": "library"
+    },
+    {
+      "Original": "Dancing Mad",
+      "Context": "UmadZone.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "魔发狂舞",
+      "Source": "library"
+    },
+    {
+      "Original": "Diamond Waymarks",
+      "Context": "UmadZone..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "菱形标点",
+      "Source": "library"
+    },
+    {
+      "Original": "DN Zenith Waymarks",
+      "Context": "UmadZone..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "DN 天顶标点",
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Big Box",
+      "Context": "UmadZone..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[LPDU] 大盒子",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread",
+      "Context": "UmadP5ExaflaresAi.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "分散",
+      "Source": "library"
+    },
+    {
+      "Original": "Exaflares",
+      "Context": "UmadP5ExaflaresScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "地火喷发",
+      "Source": "library"
+    },
+    {
+      "Original": "Left order:",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左侧下令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Right order:",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右侧下令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Context": "UmadP5ExaflaresSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "随机",
+      "Source": "library"
+    },
+    {
+      "Original": "Standard",
+      "Context": "UmadP5CelestriadAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "标准",
+      "Source": "library"
+    },
+    {
+      "Original": "Your element:",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你的属性：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set 1 variant:",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第 1 组变体：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set 3 variant:",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第3组变体：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fire",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "火",
+      "Source": "library"
+    },
+    {
+      "Original": "Ice",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "冰",
+      "Source": "library"
+    },
+    {
+      "Original": "Lightning",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "雷光",
+      "Source": "library"
+    },
+    {
+      "Original": "Free",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "自由",
+      "Source": "library"
+    },
+    {
+      "Original": "Aero (green)",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "风（绿）",
+      "Source": "library"
+    },
+    {
+      "Original": "Earth (brown)",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "土（棕）",
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says (WIP)",
+      "Context": "UmadP4KefkaSaysAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "凯夫卡说（开发中）",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 1:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "艾克斯迪司 1：",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 3:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "艾克斯迪司 3：",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 4:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "艾克斯迪司 4：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 1:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "混沌 1：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 2:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "混沌 2：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Real##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "真",
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "假",
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 2:",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "艾克斯迪司 2：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Real##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "真",
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "假",
+      "Source": "library"
+    },
+    {
+      "Original": "Opposite to 1##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "与1相反",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: S>D>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "原子：吸引：S>D>A",
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: D>S>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "原子：吸引：D>S>A",
+      "Source": "library"
+    },
+    {
+      "Original": "Line:",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "防线：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "First##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "第一防线",
+      "Source": "library"
+    },
+    {
+      "Original": "Second##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "第二防线",
+      "Source": "library"
+    },
+    {
+      "Original": "Third##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "第三防线",
+      "Source": "library"
+    },
+    {
+      "Original": "Accretion:",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "混沌之泥土：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Supports:",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "支援：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Chariot##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "人马战车",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "锥形",
+      "Source": "library"
+    },
+    {
+      "Original": "Support Stack:",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "支援分摊：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Dps Stack:",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "DPS分摊：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dpsstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Kroxy-Rinon 341 (melee flex)",
+      "Context": "UmadP2ForsakenKroxyRinonAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "Kroxy-Rinon 341（近战灵活）",
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] Kroxy-Rinon 341 (melee flex)",
+      "Context": "UmadP2ForsakenKroxyRinonOldAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[旧站位] Kroxy-Rinon 341（近战灵活）",
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Buddies",
+      "Context": "UmadP2ForsakenLpduBuddiesAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[LPDU] 搭档",
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] p3Z Buddy Meow",
+      "Context": "UmadP2ForsakenP3ZBuddyMeowAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[旧] p3Z 搭档喵",
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] South Flex 341",
+      "Context": "UmadP2ForsakenSouthFlex341OldAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[旧站位] 南灵活 341",
+      "Source": "library"
+    },
+    {
+      "Original": "South Flex 341",
+      "Context": "UmadP2ForsakenSouthFlexAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "南灵活 341",
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] zP6 South adjust",
+      "Context": "UmadP2ForsakenZP6SouthAdjustAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "[旧] zP6 南调整",
+      "Source": "library"
+    },
+    {
+      "Original": "The Unending Coil of Bahamut",
+      "Context": "UcobZone.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "巴哈姆特绝境战",
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Markers",
+      "Context": "UcobZone..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "以太标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Dodge",
+      "Context": "UcobP5ExaflaresAi.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "躲避",
+      "Source": "library"
+    },
+    {
+      "Original": "Rolls toward:",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "滚动方向：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##exadir",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "The Omega Protocol",
+      "Context": "TopZone.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "欧米茄绝境战",
+      "Source": "library"
+    },
+    {
+      "Original": "Ring",
+      "Context": "TopZone..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "圆环",
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmo Arrow:",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "宇宙天箭：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "In##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "内",
+      "Source": "library"
+    },
+    {
+      "Original": "Out##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "外",
+      "Source": "library"
+    },
+    {
+      "Original": "Sigma",
+      "Context": "TopP5SigmaScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "西格玛",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether range:",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "连线距离：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "中",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "远",
+      "Source": "library"
+    },
+    {
+      "Original": "Tower-north flip:",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "北塔翻转：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Spinner rotation:",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "纺蛛转向：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "CW##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "顺时针",
+      "Source": "library"
+    },
+    {
+      "Original": "CCW##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "逆时针",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-F form:",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "欧米茄F形态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Leg blades##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "腿部刀刃",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "杖",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World:",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你好世界：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "近",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "远",
+      "Source": "library"
+    },
+    {
+      "Original": "None##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Start with Dynamis:",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "以潜能量开始：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega",
+      "Context": "TopP5OmegaScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "欧米茄",
+      "Source": "library"
+    },
+    {
+      "Original": "First F attack:",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第一次F攻击：",
+      "Source": "library"
+    },
+    {
+      "Original": "Legs",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "腿",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "杖",
+      "Source": "library"
+    },
+    {
+      "Original": "First M attack:",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第一次M攻击：",
+      "Source": "library"
+    },
+    {
+      "Original": "Sword",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "盾",
+      "Source": "library"
+    },
+    {
+      "Original": "Second F attack:",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第二次F攻击：",
+      "Source": "library"
+    },
+    {
+      "Original": "Second M attack:",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "第二次M攻击：",
+      "Source": "library"
+    },
+    {
+      "Original": "Diffuse Wave Cannon:",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "扩散波动炮：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "水平",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "垂直",
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor side:",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "监视器方向：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Left##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Right##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Beetle spawn:",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "甲虫生成：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##beetle",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra dynamis stack:",
+      "Context": "TopP5OmegaSettingsWindow.DrawExtraDynamis",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "额外潜能量层数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World order:",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你好世界下令：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Any##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "任意",
+      "Source": "library"
+    },
+    {
+      "Original": "First##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "第一",
+      "Source": "library"
+    },
+    {
+      "Original": "Second##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "第二",
+      "Source": "library"
+    },
+    {
+      "Original": "None##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World type:",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你好世界类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "近",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "远",
+      "Source": "library"
+    },
+    {
+      "Original": "Force take monitor",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "强制接取监控",
+      "Source": "library"
+    },
+    {
+      "Original": "Force take tether",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "强制接取连线",
+      "Source": "library"
+    },
+    {
+      "Original": "Delta",
+      "Context": "TopP5DeltaScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "德尔塔",
+      "Source": "library"
+    },
+    {
+      "Original": "Tether:",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "连线：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Close any##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "任意近战",
+      "Source": "library"
+    },
+    {
+      "Original": "Close inner##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "内侧近战",
+      "Source": "library"
+    },
+    {
+      "Original": "Close outer##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "外侧近战",
+      "Source": "library"
+    },
+    {
+      "Original": "Far any##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "任意远程",
+      "Source": "library"
+    },
+    {
+      "Original": "Far inner##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "内侧远程",
+      "Source": "library"
+    },
+    {
+      "Original": "Far outer##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "外侧远程",
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor:",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "监控：",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "No##hw",
+      "Context": "TopP5DeltaSettingsWindow.DrawHelloWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Beyond Defence:",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "超越防御：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Synergy",
+      "Context": "TopP2PartySynergyScenario.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "协作程序PT",
+      "Source": "library"
+    },
+    {
+      "Original": "Glitch:",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "故障：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "故障：中",
+      "Source": "library"
+    },
+    {
+      "Original": "Far##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "故障：远",
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-M form:",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "欧米茄 M 的形态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Sword##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "盾",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "法杖",
+      "Source": "library"
+    },
+    {
+      "Original": "Legs##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "腿部",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み",
+      "Context": "UmadReplayData..cctor",
+      "Translated": "原子：吸引",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み：S>D>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Translated": "原子：吸引：S>D>A",
+      "Source": "library"
+    },
+    {
+      "Original": "アトモス：吸い込み：D>S>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "Translated": "原子：吸引：D>S>A",
+      "Source": "library"
+    },
+    {
+      "Original": "\nLast error: ",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n最近一次错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting...",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "正在连接…",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection failed: ",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "连接失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect###leave-session",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining ",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在加入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last error: ",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "最近一次错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "[AnoMech] ScenarioSettingsSummary.Format",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "North",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "北",
+      "Source": "library"
+    },
+    {
+      "Original": "Party",
+      "Context": "[AnoMech] PartyPanelWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Party ",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "小队 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Server :",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "服务器：",
+      "Source": "library"
+    },
+    {
+      "Original": "South",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "南",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "[AnoMech] UmadP1TeleTrouncingSettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "[AnoMech] ScenarioSettingsSummary.Format",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Context": "[AnoMech] PartyPanelWindow.DrawSeats",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

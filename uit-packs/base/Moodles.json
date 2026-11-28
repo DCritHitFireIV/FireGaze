@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Moodles",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Version: ",
+      "Context": "IPCTester.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply (name)",
+      "Context": "IPCTester.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用（按名称）",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear (name)",
+      "Context": "IPCTester.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除（按名称）",
+      "Source": "library"
+    },
+    {
+      "Original": "Target a player",
+      "Context": "IPCTester.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "请选择一名玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon: ",
+      "Context": "TabFuckup.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "图标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Target (Synced)",
+      "Context": "TabMoodles.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到目标（同步）",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX: ",
+      "Context": "TabMoodles.DrawMoodleEssentials",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "视觉特效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Title can not be empty",
+      "Context": "TabMoodlesShare.DrawMoodleEssentials",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "标题不能为空",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow applying moodles from everyone.",
+      "Context": "TabSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许所有人为自己施加 Moodles 效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow applying moodles from friends.",
+      "Context": "TabSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许好友为自己施加 Moodles 效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow applying moodles from party members.",
+      "Context": "TabSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许队员为自己施加 Moodles 效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible party",
+      "Context": "UI.DrawDebugger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "当前可见的队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Flytext debugger",
+      "Context": "UI.DrawDebugger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "飘字调试",
+      "Source": "library"
+    },
+    {
+      "Original": "From me",
+      "Context": "UI.DrawDebugger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "由我施加",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable UI modifications",
+      "Context": "UI.DrawDebugger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用界面调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Status debugging",
+      "Context": "UI.DrawDebugger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "状态调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "UI.DrawIpcHandles",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Add##collap",
+      "Context": "TabFuckup.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.CollapsingHeader",
+      "Translated": "添加",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

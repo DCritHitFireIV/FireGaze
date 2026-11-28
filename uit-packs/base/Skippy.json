@@ -1,0 +1,237 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Skippy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "[Skippy] Your configuration was from an older version and has been reset to defaults. Please re-apply your settings.",
+      "Context": "Skippy..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 旧版本设置已重置为默认值，请重新设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Auto-Party: Queue popped without a premade party of 4 — cutscenes will not be skipped on this run.",
+      "Context": "Skippy.OnCfPop",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 自动组队：匹配成功时未检测到 4 人预组小队，本轮不会跳过过场动画。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Auto-Party: Entered MSQ Instance with a Premade Light Party - MSQ Roulette Skip will be active.",
+      "Context": "Skippy.OnTerritoryChanged",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 自动组队：已与四人预组小队进入主线副本，本轮将启用主线随机任务过场跳过。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Auto-Party: Entered MSQ Instance — Waiting for the Party Plugin Check to complete...",
+      "Context": "Skippy.OnTerritoryChanged",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 自动组队：已进入主线副本，正在等待队员插件检查完成……",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Auto-Party: Left MSQ Instance - MSQ Roulette Skip is back to being disabled.",
+      "Context": "Skippy.OnTerritoryChanged",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 自动组队：已离开主线副本，主线随机任务过场跳过已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Plugin has been enabled.",
+      "Context": "Skippy.TogglePlugin",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 插件已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Skippy] Plugin has been disabled.",
+      "Context": "Skippy.TogglePlugin",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Skippy] 插件已禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Party Mode",
+      "Context": "Menu.UIAutoParty",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "自动组队模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Enable MSQ Roulette Skip in 4-man Party",
+      "Context": "Menu.UIAutoParty",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "四人预组时自动开启主线随机任务过场跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Party Members for Skippy",
+      "Context": "Menu.UIAutoParty",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "检查队员是否安装 Skippy",
+      "Source": "library"
+    },
+    {
+      "Original": "Only enable the skip when every party member has Skippy installed. Requires Auto-Party Mode to function.",
+      "Context": "Menu.UIAutoParty",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "仅在全体队员均安装 Skippy 时启用跳过。需要开启自动组队模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "This feature requires Auto-Party Mode to be enabled in order to function. Enable it in the section above first.",
+      "Context": "Menu.UIAutoParty",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此功能需要自动组队模式，请先在上方启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "Menu.UICommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Parameters",
+      "Context": "Menu.UICommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "Menu.UICommands",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the settings window.",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "Menu.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "Menu.DrawTesterPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": " Warning",
+      "Context": "Menu.DrawPopup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "Menu.DrawDevPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Context": "Menu.DrawDevPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing",
+      "Context": "Menu.UIRiskySkips",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "出海垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Crystalline Conflict",
+      "Context": "Menu.UIRiskySkips",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "水晶冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "ON",
+      "Context": "Menu.DrawPowerButton",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "开启",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

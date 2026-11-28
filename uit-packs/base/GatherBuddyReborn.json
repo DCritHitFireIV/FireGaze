@@ -1,0 +1,278 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GatherBuddyReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nDurability: ",
+      "Context": "CraftingListEditor.DrawValidationMarker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n耐久： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nQuality: ",
+      "Context": "CraftingListEditor.DrawValidationMarker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n品质： ",
+      "Source": "library"
+    },
+    {
+      "Original": " and ",
+      "Context": "VendorBuyListManager.FinishCurrentRun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 与 ",
+      "Source": "library"
+    },
+    {
+      "Original": " macro(s) are predicted to FAIL their craft.",
+      "Context": "CraftingListEditor.DrawQueuePane",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 个宏预计无法完成对应的制作。",
+      "Source": "library"
+    },
+    {
+      "Original": " macro(s) will fail this craft. Click to confirm and start anyway.",
+      "Context": "CraftingListEditor.DrawQueuePane",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 个宏预计无法完成制作。点击确认仍要开始。",
+      "Source": "library"
+    },
+    {
+      "Original": " selected)",
+      "Context": "CraftingListEditor.DrawRecipeListSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 项已选）",
+      "Source": "library"
+    },
+    {
+      "Original": " to list",
+      "Context": "CraftingListEditor.DrawAddRecipeSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 加入清单",
+      "Source": "library"
+    },
+    {
+      "Original": " — click to cancel",
+      "Context": "VulcanWindow.DrawVendorGoButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " — 点击取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Botanist",
+      "Context": "BuildConfigPages",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "园艺工",
+      "Source": "library"
+    },
+    {
+      "Original": "Click +/- to adjust quantity by 1.\nHold Ctrl: ±10\nHold Shift: ±100",
+      "Context": "CraftingListEditor.DrawRecipeListRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击 +/- 调整 1 个。\n按住 Ctrl：±10\n按住 Shift：±100",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectables Setup Guide###GatherBuddyCollectablesSetupGuide",
+      "Context": "CollectablesWindow.DrawExecutionControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "收藏品设置指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectables###GatherBuddyCollectablesWindow",
+      "Context": "GatherBuddy..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafted",
+      "Context": "VulcanWindow.DrawResultsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "已制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "ConfigPreset.MakeDefault",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this list automatically after crafting completes.\nCan be disabled later in the list editor.",
+      "Context": "DrawResultsList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "制作完毕后自动删除此清单。\n可在清单编辑器中关闭此选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fisher",
+      "Context": "BuildConfigPages",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "捕鱼人",
+      "Source": "library"
+    },
+    {
+      "Original": "Item #",
+      "Context": "MarketboardService.GetItemName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "物品 #",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "Interface.DrawConfigPresetHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Context": "VulcanWindow.DrawResultsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro: PASS\nProgress: ",
+      "Context": "CraftingListEditor.DrawValidationMarker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "宏：通过\n进展： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Materials###CraftingMaterials",
+      "Context": "CraftingMaterialsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Miner",
+      "Context": "BuildConfigPages",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "采矿工",
+      "Source": "library"
+    },
+    {
+      "Original": "Recipe ID: ",
+      "Context": "VulcanWindow.DrawDetailsPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "配方 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "VulcanWindow.DrawResultsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory ",
+      "Context": "MobDropInfoCache.ResolveZoneName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown zone",
+      "Context": "MobDropInfoCache.BuildZonesForMob",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "未知区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Use all HQ-capable ingredients as the list default for planning and Raphael warmup.\nItem and precraft settings can still override this.",
+      "Context": "CraftingListConsumablesPopup.DrawListDefaults",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "规划清单和预热 Raphael 时，默认将所有可选用高品质素材的项目设为高品质。\n仍可为单个物品或中间素材单独修改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Vendor data is still loading.",
+      "Context": "VendorBuyListManager.ImportTeamCraftList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "商店数据仍在加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Vendor lists cannot be modified while a purchase is running.",
+      "Context": "VendorBuyListManager.ImportTeamCraftList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "购买进行中，无法修改商店购物清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Quest]",
+      "Context": "VulcanWindow.DrawDetailsPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[任务]",
+      "Source": "library"
+    },
+    {
+      "Original": "currency",
+      "Context": "VendorCurrencyAvailabilityResolver.Resolve",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "currency ",
+      "Context": "VendorCurrencyAvailabilityResolver.Resolve",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "货币 ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,321 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ItemVendorLocation",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Vendor list:",
+      "Context": "VendorResultsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 商人列表：",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes the Results View Type when held.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按住此键时临时切换结果显示方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied vendor info to clipboard",
+      "Context": "VendorResultsWindow.DrawTableRow",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已将商人信息复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays the Item Vendor Location config window",
+      "Context": "EntryPoint..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开物品商人位置的设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Exchange Rate",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "兑换比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter Duplicates",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "筛除重复商人",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter GC Results",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "筛选大国防联军商人",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter Results With No Location",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏位置未知的结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight Color",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "高亮颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight menu selections",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮菜单选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight selected npc",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高亮选中的 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "How the plugin displays vendor location results.\n\nSingle will pick the first result and print it to your chat window.\n\nMultiple will display the results in a popup window. If you leave it as this the plugin will function as it did before with no changes.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "选择商人位置的显示方式。\n\n单条：将首个搜索结果发送到聊天栏。\n\n多条：在弹窗中列出搜索结果。这是插件原先的显示方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, will filter duplicate vendors by location",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按地点合并重复的商人。",
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, will highlight npcs that sell last item searched for once they are visible on-screen",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "出售上次所查物品的 NPC 出现在画面中时，将其高亮显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, will only show npcs with a location",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "仅显示有已知位置的 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, will only show your own GC vendor",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "仅显示自己所属大国防联军的商人。",
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, will show shop name info e.g. 'Purchase Disciple of Magic Gear - Purchase Gear (Lv. 20-29)'",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "显示商店名称，例如“购买魔法导师装备 - 购买装备（20～29级）”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Vendor Location",
+      "Context": "VendorResultsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "物品商人位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Vendor Location Settings",
+      "Context": "SettingsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "物品商人位置设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Vendor Search",
+      "Context": "ItemSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "查找出售物品的商人",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Search Results",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最多显示的搜索结果",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Name",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "NPC 名称",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Name Text Color",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "NPC 名称文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "No location",
+      "Context": "VendorResultsWindow.DrawTableRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Obtain Requirement",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "获取条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Housing",
+      "Context": "VendorResultsWindow.DrawTableRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "玩家住宅",
+      "Source": "library"
+    },
+    {
+      "Original": "Results View Type",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "结果显示方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Results View Type Modifier",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "切换结果显示方式的修饰键",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "ItemSearchWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "Shop Name",
+      "Context": "VendorResultsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "商店名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Shop Info",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示商店信息",
+      "Source": "library"
+    },
+    {
+      "Original": "The chat text color of the NPC name when searching via /pvendor.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "使用 /pvendor 搜索时，聊天栏中 NPC 名称的颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "The max number of search results when using the text command to prevent chat spam.\n\nMax allowable is 50.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "使用文字命令搜索时限制显示的结果数，以免聊天刷屏。\n\n最多 50 条。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can right-click the button to copy vendor info to clipboard",
+      "Context": "VendorResultsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "右键点击按钮可将商人信息复制到剪贴板",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

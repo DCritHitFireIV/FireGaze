@@ -1,0 +1,557 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Hyperborea",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " No MapEffect slots found for this zone.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 未找到此区域的地图效果栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "(none in this zone)",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（此区域无节庆活动）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new MapEffect.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "添加地图效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "DebugWindow.DrawOpcodes",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the configured MapEffects for this phase.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "复制此阶段已设置的地图效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a new phase.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "新建阶段。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create override",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建覆盖设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Zone",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Spawn Point",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自定义出生点",
+      "Source": "library"
+    },
+    {
+      "Original": "Danger Zone",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiGroup.BeginGroupBox",
+      "Translated": "危险操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "DebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Hyperborea",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 Hyperborea",
+      "Source": "library"
+    },
+    {
+      "Original": "Failure",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Festivals:",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "节庆活动：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill phases based on supported weather",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "按支持的天气填充阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "CompassWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "General settings",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiGroup.BeginGroupBox",
+      "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to delete this phase.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 删除此阶段。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea Compass",
+      "Context": "CompassWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 罗盘",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea Overlay",
+      "Context": "Overlay..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea Zone Editor",
+      "Context": "EditorWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 区域编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea log",
+      "Context": "LogWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea settings",
+      "Context": "SettingsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Zone",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加载区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Map effect",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "地图效果",
+      "Source": "library"
+    },
+    {
+      "Original": "MapEffects:",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "地图效果：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mount:",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "坐骑：",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "No data found",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "未找到数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No mount",
+      "Context": "CompassWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "无坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste and override MapEffects into this phase.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "粘贴并替换此阶段的地图效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Phases:",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "阶段：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default (follow State)",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "恢复默认（跟随状态）",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a mount...",
+      "Context": "CompassWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择坐骑……",
+      "Source": "library"
+    },
+    {
+      "Original": "Select phase",
+      "Context": "CompassWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Set festivals",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置节庆活动",
+      "Source": "library"
+    },
+    {
+      "Original": "Set the zone spawn point to your character's current location.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将当前角色所在位置设为区域出生点。",
+      "Source": "library"
+    },
+    {
+      "Original": "Set weather",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot ",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "栏位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "State ",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "状态 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Story",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "剧情",
+      "Source": "library"
+    },
+    {
+      "Original": "Story Progress",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "剧情进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Success",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "成功",
+      "Source": "library"
+    },
+    {
+      "Original": "Tabs",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "选项卡",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to the configured coordinates.",
+      "Context": "CompassWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "传送至设定坐标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to the location of the camera.",
+      "Context": "CompassWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "传送至摄像机所在位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "This zone is unsupported",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "暂不支持此区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline override active (not following State).",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "时间轴覆盖已生效（不跟随状态）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather:",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "天气：",
+      "Source": "library"
+    },
+    {
+      "Original": "Which MapEffect slot to control.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "选择要控制的地图效果栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can not change settings while plugin is enabled",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "插件启用期间无法更改设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Data:",
+      "Context": "UI.DrawNeo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "区域数据：",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Editor",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.GetButtonSize",
+      "Translated": "区域编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone data is being loaded from your data overrides file.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "正在从自定义覆盖文件加载区域数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone data loaded from master data file.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "已从主数据文件加载区域数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "[DUPLICATE SLOT]",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "[栏位重复]",
+      "Source": "library"
+    },
+    {
+      "Original": "scene",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "场景",
+      "Source": "library"
+    },
+    {
+      "Original": "weather",
+      "Context": "DebugWindow.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "天气",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

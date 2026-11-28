@@ -1,0 +1,338 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MahjongHater",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nValue: ",
+      "Context": "MainWindow.CacheChoice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n数值： ",
+      "Source": "library"
+    },
+    {
+      "Original": " visible",
+      "Context": "TileDangerModel.Estimate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 可见",
+      "Source": "library"
+    },
+    {
+      "Original": "2 fu",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "2 符",
+      "Source": "library"
+    },
+    {
+      "Original": "4 fu",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "4 符",
+      "Source": "library"
+    },
+    {
+      "Original": "Close settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "关闭设置",
+      "Source": "library"
+    },
+    {
+      "Original": "DEFENSE",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "防守",
+      "Source": "library"
+    },
+    {
+      "Original": "DORA DISPLAY",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "宝牌显示",
+      "Source": "library"
+    },
+    {
+      "Original": "DOUBLE-WIND PAIR FU",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "连风牌作雀头的符数",
+      "Source": "library"
+    },
+    {
+      "Original": "Defense model v2",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "第二版防守模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "MainWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard",
+      "Context": "MainWindow.DrawAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "放弃",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard ",
+      "Context": "HandAnalyzer.BuildReasoning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "放弃 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Doman",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "多玛式",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Plugin",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "启用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable open tanyao except in the special kuitan-disabled room.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "除禁止食断的特殊牌桌外，允许副露断幺九。",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental learned policy",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "实验性学习策略",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental precomputed policy",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "实验性预计算策略",
+      "Source": "library"
+    },
+    {
+      "Original": "FFXIV does not document whether seat + round wind pairs grant 2 or 4 fu. Default is 4.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "FFXIV 未说明场风和自风相同的对子作雀头时计 2 符还是 4 符。默认计 4 符。",
+      "Source": "library"
+    },
+    {
+      "Original": "GENERAL",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Green Dragon",
+      "Context": "TileHelpers.GetDisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "发财",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide overlay",
+      "Context": "MainWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "隐藏悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Mahjong Hater – Settings",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Mahjong Hater 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Not logged in",
+      "Context": "MatchQueuer.Tick",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "AutoPlayer..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Opponents are human (calibration tag)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "对手为真人（校准标记）",
+      "Source": "library"
+    },
+    {
+      "Original": "Record situations for offline training",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "记录牌局局面用于离线训练",
+      "Source": "library"
+    },
+    {
+      "Original": "Red Dragon",
+      "Context": "TileHelpers.GetDisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "红中",
+      "Source": "library"
+    },
+    {
+      "Original": "SCORE",
+      "Context": "MainWindow.DrawSession",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "得分",
+      "Source": "library"
+    },
+    {
+      "Original": "Save public table snapshots locally to build a training corpus. Save and reload to apply.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将牌桌公开信息的快照保存到本地，用于建立训练语料。保存并重新加载后生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show overlay",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "显示悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "TABLE",
+      "Context": "MainWindow.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "表格",
+      "Source": "library"
+    },
+    {
+      "Original": "TABLE RULES",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "牌桌规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags the calibration CSV rows so human and NPC opponents are fitted separately.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "为校准用的 CSV 记录加上标记，以便分别拟合真人和 NPC 对手的数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the Mahjong Hater overlay. '/mhater config' opens the settings, '/mhater focus' logs why the table may not be taking clicks.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示或隐藏 Mahjong Hater 悬浮窗。使用 /mhater config 打开设置，使用 /mhater focus 查看牌桌可能无法接收点击的原因。",
+      "Source": "library"
+    },
+    {
+      "Original": "Traditional",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "传统式",
+      "Source": "library"
+    },
+    {
+      "Original": "Turned off in the settings.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已在设置中关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the trained discard/riichi policy and opponent predictions. Requires learned_policy.json. Save and reload to apply.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用训练好的舍牌、立直策略和对手预测。需要 learned_policy.json。保存并重新加载后生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "White Dragon",
+      "Context": "TileHelpers.GetDisplayName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "白板",
+      "Source": "library"
+    },
+    {
+      "Original": "state",
+      "Context": "OfflineDiscardTrainer.Unusable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "状态",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

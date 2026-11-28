@@ -1,0 +1,675 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Aurum",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " gil",
+      "Context": "DetailWindow.CopyToClipboard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 金币",
+      "Source": "library"
+    },
+    {
+      "Original": " minutes",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "API Rate Limit (Requests/Minute)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "API 请求频率上限（次/分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "API Request Timeout (Seconds)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "API 请求超时（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "API Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "API 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "All Jobs",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Aurum Configuration###AurumConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Aurum 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Batch Size (Items per Request)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "每次请求的物品数",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache: ",
+      "Context": "DashboardWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "缓存： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "DashboardWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories...",
+      "Context": "DashboardWindow.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "分类…",
+      "Source": "library"
+    },
+    {
+      "Original": "Category Filters",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "类别筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Market Data Cache",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除市场数据缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Selection",
+      "Context": "DashboardWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectable Only",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Column Visibility",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "选择显示的列",
+      "Source": "library"
+    },
+    {
+      "Original": "Columns...",
+      "Context": "DashboardWindow.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "列…",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Gear",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "DetailWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard",
+      "Context": "ShoppingListWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting & Gathering Gear",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作与采集装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "FilterWindow.DrawPresetsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Ears",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "耳朵",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Level:",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "装备等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "DetailWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Errors: ",
+      "Context": "DashboardWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Expansion:",
+      "Context": "DashboardWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "资料片：",
+      "Source": "library"
+    },
+    {
+      "Original": "Expired: ",
+      "Context": "DashboardWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已过期： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Filtering & Sorting",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选与排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters:",
+      "Context": "DashboardWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "筛选条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Head",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "头部",
+      "Source": "library"
+    },
+    {
+      "Original": "INGREDIENT BREAKDOWN",
+      "Context": "DetailWindow.DrawCostDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "素材明细",
+      "Source": "library"
+    },
+    {
+      "Original": "Ingredients",
+      "Context": "ShoppingListWindow.DrawCraftingPlan",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level: ",
+      "Context": "DashboardWindow.DrawProfitRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "品级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Name:",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物品名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave as 'Auto' to use your current world, or specify a world name.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设为“Auto”可使用当前服务器，也可以填写服务器名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Level:",
+      "Context": "DashboardWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "FilterWindow.DrawPresetsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Context": "DashboardWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加载中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Hand",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Market Data Cache Duration (Minutes)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "市场数据缓存时长（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Concurrent API Requests",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最大并发 API 请求数",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Recipes to Analyze",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最多分析的配方数",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Profit (Gil)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最低利润（金币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Movable Config Window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许移动设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "No presets saved.",
+      "Context": "FilterWindow.DrawPresetsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未保存预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "ShoppingListWindow.DrawCraftingPlan",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Off Hand",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aurum crafting profit calculator",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Aurum 制作收益计算器",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Preferred World",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "首选服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Name:",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "FilterWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Context": "DetailWindow.DrawCurrentListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Context": "ShoppingListWindow.DrawCraftingPlan",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Rate Limited: ",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请求过于频繁： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Last World Selection",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记住上次选择的服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Context": "DetailWindow.DrawCurrentListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Rows Per Page",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "每页行数",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save ",
+      "Context": "DetailWindow.DrawMarketSnapshot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "保存 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Score: ",
+      "Context": "DetailWindow.DrawRiskAnalysis",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "得分： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only Profitable Items",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "只显示有利润的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by:",
+      "Context": "DashboardWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排序方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "ShoppingListWindow.DrawMaterialsTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "DetailWindow.DrawIngredientColumns",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Step",
+      "Context": "ShoppingListWindow.DrawCraftingPlan",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "TOTAL",
+      "Context": "ShoppingListWindow.DrawMaterialsTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "DetailWindow.DrawCostDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total: ",
+      "Context": "DashboardWindow.DrawStatusBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "总计： ",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Scale",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "界面缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Warnings:",
+      "Context": "DashboardWindow.DrawProfitRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "警告：",
+      "Source": "library"
+    },
+    {
+      "Original": "Work Offline (Disable API)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "离线使用（禁用 API）",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "DetailWindow.DrawCurrentListings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

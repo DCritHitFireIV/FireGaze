@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AudibleCharacterStatus",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Allows the sound from this plugin to play when the game is in the background.",
+      "Context": "PluginConfiguriation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "允许游戏在后台时播放本插件的提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Sound Outside of Combat",
+      "Context": "PluginConfiguriation.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "脱战时也播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable to make sounds play even while not in combat.",
+      "Context": "PluginConfiguriation.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启用后，非战斗状态也会播放提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "File is not supported. Use MP3, WAV, or OGG.",
+      "Context": "PluginConfiguriation.FindSoundMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "不支持此文件格式。请选择 MP3、WAV 或 OGG 文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "File not found.",
+      "Context": "PluginConfiguriation.FindSoundMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "找不到文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Low HP",
+      "Context": "PluginConfiguriation.LowHpSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "低 HP",
+      "Source": "library"
+    },
+    {
+      "Original": "Low MP",
+      "Context": "PluginConfiguriation.LowMpSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "低 MP",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent To Trigger Low HP",
+      "Context": "PluginConfiguriation.LowHpSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "低 HP 触发阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent To Trigger Low MP",
+      "Context": "PluginConfiguriation.LowMpSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "低 MP 触发阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Plays a sound when HP is low, based on the set percentage.",
+      "Context": "PluginConfiguriation.LowHpSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "HP 低于设定百分比时播放提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plays a sound when MP is low, based on the set percentage.",
+      "Context": "PluginConfiguriation.LowMpSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "MP 低于设定百分比时播放提示音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "PluginConfiguriation.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the timer for when the sound will play again. (In Seconds)\nEx: 0.4 will play the sound every 0.4 seconds.\nSet to -100 for no looping",
+      "Context": "PluginConfiguriation.LowHpSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设置提示音的重复播放间隔（秒）。\n例如，0.4 表示每 0.4 秒播放一次。\n设为 -100 可关闭循环播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound File Path",
+      "Context": "PluginConfiguriation.LowHpSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "音频文件路径",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,327 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PvPSentinel",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open PvP Sentinel development diagnostics. Use '/pvpsentinel config' for settings.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 PvP Sentinel 开发诊断。使用 /pvpsentinel config 打开设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "PvP Sentinel - Configuration###PvPSentinelConfiguration",
+      "Context": "ConfigurationWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PvP Sentinel 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics and testing display",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "诊断与测试显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement and clustering",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "移动与聚集",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced combat policy",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "高级战斗策略",
+      "Source": "library"
+    },
+    {
+      "Original": "Native PvP combat (experimental)",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "原生 PvP 战斗（实验性）",
+      "Source": "library"
+    },
+    {
+      "Original": "Frontline lifecycle and allowed maps",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "纷争前线流程和允许的地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Save configuration",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes are also saved as they are made.",
+      "Context": "ConfigurationWindow.DrawClassic",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更改时也会自动保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "EMERGENCY STOP",
+      "Context": "ConfigurationWindow.DrawCore",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "紧急停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear emergency-stop latch",
+      "Context": "ConfigurationWindow.DrawCore",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "解除紧急停止锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Frontline: ",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "纷争前线： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Navigation: ",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "导航： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已阻止",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Not connected",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Context": "ConfigurationWindow.DrawCoreStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "not loaded",
+      "Context": "ConfigurationWindow.DrawCombatProvider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "UNAVAILABLE",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Players",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "附近",
+      "Source": "library"
+    },
+    {
+      "Original": "Targetable",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "可选为目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Destination",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Final state",
+      "Context": "DiagnosticWindow.DrawBattlefield",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "最终状态",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "DiagnosticWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextDisabled",
+      "Translated": "无",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

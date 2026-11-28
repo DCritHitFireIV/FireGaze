@@ -1,0 +1,271 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "QuestShare",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting...",
+      "Context": "MainWindow.DrawConnectionState",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在连接…",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Context": "MainWindow.DrawConnectionState",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Context": "MainWindow.DrawConnectionState",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnecting...",
+      "Context": "MainWindow.DrawConnectionState",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在重新连接…",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy to clipboard.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows new players to join the group.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "允许新玩家加入小组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sends quest updates to the server.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "向服务器发送任务进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "No quest selected.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter Share Code:",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "输入分享码：",
+      "Source": "library"
+    },
+    {
+      "Original": "Join",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining...",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在加入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Joined Groups",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已加入的小组",
+      "Source": "library"
+    },
+    {
+      "Original": "No groups joined.",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未加入任何小组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Context": "MainWindow.DrawSessionDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new API server configuration.",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加 API 服务器配置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Name",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "显示名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "MainWindow.DrawSupportButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Quest Share window.",
+      "Context": "CommandService.Initialize",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开任务共享窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid argument ",
+      "Context": "CommandService.NextQuestObjective",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "参数无效 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "ShareService.GetShareCodeOwner",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "MainWindow.DrawHostTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "No active quest.",
+      "Context": "MainWindow.DrawSessionDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextUnformatted",
+      "Translated": "没有进行中的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "添加",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,695 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DamageInfoPlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Action Text",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "技能文本",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "April Fools 2023 (Rare Damage Types)",
+      "Context": "Fools2023.DrawConfigDisabled",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "2023 年愚人节（稀有伤害类型）",
+      "Source": "library"
+    },
+    {
+      "Original": "Bunny",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "兔子",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Carrot",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "胡萝卜",
+      "Source": "library"
+    },
+    {
+      "Original": "Castbar Gauge Border Colors:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咏唱条边框颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Castbar Gauge Colors:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咏唱条颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Castbars",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "咏唱条",
+      "Source": "library"
+    },
+    {
+      "Original": "Chest Coffer",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "宝箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Continue",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Hit to Miss",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将命中配色复制到未命中",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Miss to Hit",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将未命中配色复制到命中",
+      "Source": "library"
+    },
+    {
+      "Original": "Crab",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "螃蟹",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage Info",
+      "Context": "DamageInfoPlugin.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "伤害信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage Info Config",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "伤害信息设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Damage type information",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "伤害类型信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable vanilla damage type icons",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁用原版伤害类型图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Display the Damage Info configuration interface.",
+      "Context": "DamageInfoPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开伤害信息设置界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable new rare damage types",
+      "Context": "Fools2023.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用新的稀有伤害类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable positional hit color",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "为命中身位的攻击着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable positional miss color",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "为未命中身位的攻击着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable vanilla damage icons under the Flytext category to use this feature.",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在飘字设置中启用原版伤害图标，即可使用此功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##hitSound",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##missSound",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "FT Options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns",
+      "Translated": "飘字选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Flytext Colors",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "飘字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Flytext Options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "飘字选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Focus target",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "焦点目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Heals",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Hit",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "命中",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon ID",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "图标 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Incoming Damage",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "受到的伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Indifferent",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "冷漠",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Icon ID",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无效的图标 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Magical##bg",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "Magical##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "Magical##gauge",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "Main target",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Miner",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "采矿工",
+      "Source": "library"
+    },
+    {
+      "Original": "Namazu",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "鲶鱼精",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Note that sounds are the same as chat <se.X> sound effects.",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "与聊天音效 <se.X> 使用相同的声音。",
+      "Source": "library"
+    },
+    {
+      "Original": "Outgoing Damage",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "造成的伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Penguin",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "企鹅",
+      "Source": "library"
+    },
+    {
+      "Original": "Pet",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Physical##bg",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "物理",
+      "Source": "library"
+    },
+    {
+      "Original": "Physical##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "物理",
+      "Source": "library"
+    },
+    {
+      "Original": "Physical##gauge",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "物理",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Attack Text options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "身位攻击文本选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Color options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "身位颜色选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Hit##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "命中身位",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Log Enabled",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用身位日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Miss##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "未命中身位",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Sound options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "身位提示音选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional Text overrides Attack Text options",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "身位文本会覆盖攻击文本设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional hit:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "命中身位：",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional miss:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未命中身位：",
+      "Source": "library"
+    },
+    {
+      "Original": "Positionals",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "身位",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefix",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefix##positionalhittext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefix##positionalmisstext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Print Positional Report to Chat",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将身位报告发送到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "QoLBar's Icon Browser (/qolicons) is recommended for finding icon IDs.",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "建议使用 QoLBar 的图标浏览器（/qolicons）查找图标 ID。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rare damage type occurrence chance:",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "稀有伤害类型出现概率：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set colors to match vanilla damage type icons",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用与原版伤害类型图标一致的颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Shiba",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "柴犬",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound ID:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "音效 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Source Text",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "来源文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Sprout",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "豆芽",
+      "Source": "library"
+    },
+    {
+      "Original": "Suffix",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Suffix##positionalhittext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Suffix##positionalmisstext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Unique##bg",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Unique##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Unique##gauge",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock this feature by using the command '/dmginfo fools2023' in chat.",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在聊天栏输入“/dmginfo fools2023”即可解锁此功能。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,200 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PvpStatsCN",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "name",
+      "Context": "DrawAutoPlayerLink",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "time",
+      "Context": "RivalWingsRecords.DrawMechTime",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "description",
+      "Context": "CrystallineConflictPvPProfile.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "rank graph",
+      "Context": "CrystallineConflictRankGraph.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Plot",
+      "Translated": "排名图表",
+      "Source": "library"
+    },
+    {
+      "Original": "Ranked match tier is determined by the highest ranked player in each match.",
+      "Context": "TierFilter.get_HelpMessage",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HelpMarker",
+      "Translated": "每场排位赛的段位由该场段位最高的玩家决定。",
+      "Source": "library"
+    },
+    {
+      "Original": " on ",
+      "Context": "CrystallineConflictMatchDetail.DrawEvent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Targets",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "目标总数",
+      "Source": "library"
+    },
+    {
+      "Original": "Average Targets",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均目标数",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Damage",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Average Damage",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Heal",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总治疗量",
+      "Source": "library"
+    },
+    {
+      "Original": "Average Heal",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均治疗量",
+      "Source": "library"
+    },
+    {
+      "Original": "Total MP Drain",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总魔力消耗量",
+      "Source": "library"
+    },
+    {
+      "Original": "Total MP Gain",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总魔力恢复量",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Hits",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态命中次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Success Rate",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态成功率",
+      "Source": "library"
+    },
+    {
+      "Original": "player",
+      "Context": "CrystallineConflictMatchDetail.DrawTargetTableTooltip",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Comma-separate tags. Hit enter to save and close.",
+      "Context": "WindowManager.SetTagsPopup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HelpMarker",
+      "Translated": "使用逗号分隔标签。按 Enter 保存并关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support the dev",
+      "Context": "ImGuiHelper.DonateButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.WrappedTooltip",
+      "Translated": "支持开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Button",
+      "Context": "ConfigWindow.DrawManualPlayerLinkSettings",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "value",
+      "Context": "CrystallineConflictMatchDetail.DrawTargetTableTooltip",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

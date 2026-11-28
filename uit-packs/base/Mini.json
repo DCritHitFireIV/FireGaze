@@ -1,0 +1,292 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Mini",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Failed to minimize game",
+      "Context": "Mini.TryMinimize",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法最小化游戏",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not minimize to tray",
+      "Context": "Mini.TryMinimizeToTray",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法最小化到系统托盘",
+      "Source": "library"
+    },
+    {
+      "Original": "Mini configuration",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Mini 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable minimize button",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示最小化按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Button transparent unless hovered",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鼠标未悬停时按钮透明",
+      "Source": "library"
+    },
+    {
+      "Original": "Button always visible",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按钮始终可见",
+      "Source": "library"
+    },
+    {
+      "Original": "X offset",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Y offset",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click behavior",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "左键操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click behavior",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "右键操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't activate while restoring from tray",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从托盘还原时不激活窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Create permanent tray icon",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示托盘图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit FPS while minimized to taskbar",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最小化到任务栏时限制帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit FPS while minimized to tray",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最小化到托盘时限制帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "FPS when limiter active",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderInt",
+      "Translated": "启用帧率限制时的帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimize button always on top",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最小化按钮始终置顶",
+      "Source": "library"
+    },
+    {
+      "Original": "Test minimization muting",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "测试最小化静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute audio when minimized",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最小化时静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute only when in tray",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅缩至托盘时静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute all channels",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "静音所有声道",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable rendering while minimized",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最小化时停止渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Render every Xth frame",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderInt",
+      "Translated": "每 X 帧渲染一次",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderInt",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Also disable render when window is inactive",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "窗口失去焦点时也停止渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration saved",
+      "Context": "Mini.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "设置已保存",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

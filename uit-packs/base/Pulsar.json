@@ -1,0 +1,936 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Pulsar",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " converted, ",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 个已转换， ",
+      "Source": "library"
+    },
+    {
+      "Original": " failed.",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 个失败。",
+      "Source": "library"
+    },
+    {
+      "Original": " or no one (until you re-log).",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " ，或暂不播放（重新登录后复原）。",
+      "Source": "library"
+    },
+    {
+      "Original": " skipped, ",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 个已跳过， ",
+      "Source": "library"
+    },
+    {
+      "Original": "(Reminder: beefweb component must be installed. See setup guide.)",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（请参阅设置指南并安装所需的 beefweb 组件。）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no folder)",
+      "Context": "[Pulsar] BroadcastTab.DrawFolder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（未选择文件夹）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no mod selected)",
+      "Context": "[Pulsar] BroadcastTab.DrawMod",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "（未选择模组）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no track)",
+      "Context": "[Pulsar] ListeningTab.DescribeTrack",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "（无曲目）",
+      "Source": "library"
+    },
+    {
+      "Original": "(unknown)",
+      "Context": "[Pulsar] Watcher.Label",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（未知）",
+      "Source": "library"
+    },
+    {
+      "Original": ". Stacks with master (ex: 50% master + 50% here == 25% volume).",
+      "Context": "[Pulsar] ListeningTab.DrawMixer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "。此项会与主音量相乘（例如，主音量和此处均为 50% 时，实际音量为 25%）。",
+      "Source": "library"
+    },
+    {
+      "Original": "; still broadcasting from ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "；仍在使用以下来源广播： ",
+      "Source": "library"
+    },
+    {
+      "Original": "; switching to ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "；正在切换至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "A Beefweb source cannot be synchronized",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "无法同步 Beefweb 来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "All Files",
+      "Context": "[Pulsar] BroadcastTab.DrawModGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "全部文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Autoplay nearby",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "自动播放附近广播",
+      "Source": "library"
+    },
+    {
+      "Original": "BROADCAST",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "广播",
+      "Source": "library"
+    },
+    {
+      "Original": "Broadcasting from ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前广播来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "CD audio",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "音频 CD",
+      "Source": "library"
+    },
+    {
+      "Original": "CONFIG",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "CONTROLS",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "播放控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel conversion",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消转换",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancelled.",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "清空",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear manual queue (source playback continues)",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清空手动队列（来源曲目继续播放）",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected to localhost:",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已连接至 localhost：",
+      "Source": "library"
+    },
+    {
+      "Original": "Conversion error: ",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "转换错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Convert SCD files",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "转换 SCD 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Converting...",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在转换…",
+      "Source": "library"
+    },
+    {
+      "Original": "Couldn't prepare ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "准备失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Mode",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "调试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Extract Ogg audio from all SCD files, including subfolders. The output keeps the same folder structure. Existing files are skipped.",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "提取所有 SCD 文件中的 Ogg 音频，包括子文件夹。输出保留原目录结构，已存在的文件会跳过。",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished.",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Information",
+      "Context": "[Pulsar] DebugTab.DrawNotificationTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Input folder",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "输入文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Is foobar2000/DeaDBeeF running on localhost:",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请确认 foobar2000 或 DeaDBeeF 已在本机运行，端口为",
+      "Source": "library"
+    },
+    {
+      "Original": "Is playing",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "正在播放",
+      "Source": "library"
+    },
+    {
+      "Original": "LIBRARY",
+      "Context": "[Pulsar] BroadcastTab.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "媒体库",
+      "Source": "library"
+    },
+    {
+      "Original": "Last file error: ",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "上一个文件的错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Library load failed: ",
+      "Context": "[Pulsar] BroadcastTab.DrawBrowserStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "媒体库加载失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading library...",
+      "Context": "[Pulsar] BroadcastTab.DrawBrowserStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在加载媒体库…",
+      "Source": "library"
+    },
+    {
+      "Original": "Local player (Foobar2000 or DeaDBeeF via beefweb API)",
+      "Context": "[Pulsar] BroadcastTab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "本地播放器（通过 beefweb API 连接 Foobar2000 或 DeaDBeeF）",
+      "Source": "library"
+    },
+    {
+      "Original": "Loopback broadcast locally",
+      "Context": "[Pulsar] DebugTab.DrawMonitor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在本地监听自己的广播",
+      "Source": "library"
+    },
+    {
+      "Original": "Master",
+      "Context": "[Pulsar] ListeningTab.DrawMixer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "主音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Move down",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move up",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute",
+      "Context": "[Pulsar] BroadcastTab.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute in-game BGM:",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "将游戏背景音乐静音：",
+      "Source": "library"
+    },
+    {
+      "Original": "NOTIFICATIONS",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "下一首",
+      "Source": "library"
+    },
+    {
+      "Original": "No one nearby is broadcasting.",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "附近无人广播。",
+      "Source": "library"
+    },
+    {
+      "Original": "Normally",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "正常情况下",
+      "Source": "library"
+    },
+    {
+      "Original": "Not currently broadcasting",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前未在广播",
+      "Source": "library"
+    },
+    {
+      "Original": "Not detected.",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未检测到。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not playing",
+      "Context": "[Pulsar] BroadcastTab.DrawNowPlaying",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Not ready.",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未就绪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing loaded.",
+      "Context": "[Pulsar] BroadcastTab.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未加载任何内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification tester",
+      "Context": "[Pulsar] DebugTab.DrawNotificationTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "测试通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify when nearby broadcaster is detected:",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "检测到附近有广播时提醒：",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "On Air",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "正在直播",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Vorbis SCDs are supported. (This is what most plugins use, except for sound effects.)",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅支持使用 Vorbis 编码的 SCD 文件（大多数插件的非音效文件均使用此格式）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Pulsar UI",
+      "Context": "[Pulsar] Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Pulsar 界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Output folder",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "输出文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Override Autoplay: play ",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "替代自动播放，指定播放 ",
+      "Source": "library"
+    },
+    {
+      "Original": "PLAYER",
+      "Context": "[Pulsar] BroadcastTab.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "播放器",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra isn't installed or hasn't finished loading.",
+      "Context": "[Pulsar] BroadcastTab.DrawMod",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "Penumbra 尚未安装或仍在加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Play a folder",
+      "Context": "[Pulsar] BroadcastTab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "播放文件夹中的曲目",
+      "Source": "library"
+    },
+    {
+      "Original": "Play files from a Penumbra mod",
+      "Context": "[Pulsar] BroadcastTab..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "播放 Penumbra 模组中的文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Play whoever's nearby, one at a time.",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "自动播放附近的广播，每次只播放一个。",
+      "Source": "library"
+    },
+    {
+      "Original": "Playback starts while listening volume is muted or zero",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在收听音量静音或为零时开始播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Port",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "端口",
+      "Source": "library"
+    },
+    {
+      "Original": "Position (s)",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "播放位置（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Previous",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "上一首",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulsar queue",
+      "Context": "[Pulsar] BroadcastTab.ProviderLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "Pulsar 播放队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "[Pulsar] BroadcastTab.DrawFolder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from manual queue",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从手动队列中移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from queue",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从队列移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "[Pulsar] BroadcastTab.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "继续播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Retrying ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在重试 ",
+      "Source": "library"
+    },
+    {
+      "Original": "SCD TO OGG",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "SCD 转 Ogg",
+      "Source": "library"
+    },
+    {
+      "Original": "SOURCE",
+      "Context": "[Pulsar] BroadcastTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "播放来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "[Pulsar] BroadcastTab.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Folder",
+      "Context": "[Pulsar] BroadcastTab.DrawFolder",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "选择文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Set as Active",
+      "Context": "[Pulsar] BroadcastTab.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.GetIconButtonWithTextWidth",
+      "Translated": "设为当前来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Shuffle source tracks (doesn't affect manual queue)",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打乱来源曲目（不影响手动队列）",
+      "Source": "library"
+    },
+    {
+      "Original": "Shuffle upcoming",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "打乱后续曲目",
+      "Source": "library"
+    },
+    {
+      "Original": "Silence. Ignore nearby broadcasters.",
+      "Context": "[Pulsar] ListeningTab.DrawSourceCards",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "静音。忽略附近的广播。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped.",
+      "Context": "[Pulsar] ConfigTab.DrawScdConverter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unmute",
+      "Context": "[Pulsar] BroadcastTab.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "取消静音",
+      "Source": "library"
+    },
+    {
+      "Original": "Use SSE (recommended)",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 SSE（推荐）",
+      "Source": "library"
+    },
+    {
+      "Original": "Username",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "用户名",
+      "Source": "library"
+    },
+    {
+      "Original": "VOLUME",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume control just for ",
+      "Context": "[Pulsar] ListeningTab.DrawMixer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "单独调整以下来源的音量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Context": "[Pulsar] DebugTab.DrawNotificationTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "When Auto-play is Off",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭自动播放时",
+      "Source": "library"
+    },
+    {
+      "Original": "When the song changes",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "曲目切换时",
+      "Source": "library"
+    },
+    {
+      "Original": "While broadcasting or monitoring locally",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自己广播或在本地监听时",
+      "Source": "library"
+    },
+    {
+      "Original": "While listening to someone else",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "收听他人广播时",
+      "Source": "library"
+    },
+    {
+      "Original": "While you are broadcasting",
+      "Context": "[Pulsar] ConfigTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自己正在广播时",
+      "Source": "library"
+    },
+    {
+      "Original": "[queued]",
+      "Context": "[Pulsar] BroadcastTab.DrawUpNext",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "[已加入队列]",
+      "Source": "library"
+    },
+    {
+      "Original": "inside an archive",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "位于压缩包中",
+      "Source": "library"
+    },
+    {
+      "Original": "internet radio",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "网络电台",
+      "Source": "library"
+    },
+    {
+      "Original": "mute",
+      "Context": "[Pulsar] UiUtil.Fader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "静音",
+      "Source": "library"
+    },
+    {
+      "Original": "not a local file",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "不是本地文件",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

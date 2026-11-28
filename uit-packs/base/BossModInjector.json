@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BossModInjector",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open BossModInjector window or manage injected modules",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 BossModInjector 窗口或管理已注入的模块",
+      "Source": "library"
+    },
+    {
+      "Original": "BossMod Injector###BossModInjectorMainWindow",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "BossMod 模块管理",
+      "Source": "library"
+    },
+    {
+      "Original": "[✗] BossModReborn assembly not found in memory",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "[✗] 内存中未找到 BossModReborn 程序集",
+      "Source": "library"
+    },
+    {
+      "Original": "[✓] BossModReborn is loaded in memory",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "[✓] BossModReborn 已载入内存",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-Scan & Inject",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新扫描并注入",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Injected Modules (",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已启用的注入模块（",
+      "Source": "library"
+    },
+    {
+      "Original": "Module Name",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "模块名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Module Class",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "模块类",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

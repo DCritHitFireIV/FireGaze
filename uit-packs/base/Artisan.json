@@ -1,0 +1,2377 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Artisan",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Relic Tool — ",
+      "Context": "RelicToolPremadeLists.ListName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "遗物工具 — ",
+      "Source": "library"
+    },
+    {
+      "Original": " (Hold CTRL)",
+      "Context": "ExpertSolverSettingsUI.DrawGlobalSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ButtonCtrl",
+      "Translated": " （按住 Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": " Actions",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 个动作",
+      "Source": "library"
+    },
+    {
+      "Original": " left.",
+      "Context": "ExpertSolverSettingsUI.DrawFinisherSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": " 左。",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds",
+      "Context": "MacroEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Abort Collecting From Retainer",
+      "Context": "CraftingListUI.DrawListOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止从雇员处取回物品",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Add all visible (with sub-crafts)",
+      "Context": "ListEditor.DrawRecipeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "加入全部可见物品（含中间材料）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to List",
+      "Context": "ListEditor.DrawRecipeData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加到列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to List (with all sub-crafts)",
+      "Context": "ListEditor.DrawRecipeData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入清单（含全部中间材料）",
+      "Source": "library"
+    },
+    {
+      "Original": "Adjust all sub-crafts after changing quantities",
+      "Context": "ListEditor.DrawRecipeData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更改数量后调整所有中间材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Already Crafted Recipe",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已制作的配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Always",
+      "Context": "ExpertSolverSettings.GetPQPrimedManipSet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "An alternative solution will be used/generated when you start crafting.",
+      "Context": "RecipeConfig.DrawWarnings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCentered",
+      "Translated": "开始制作时会使用或生成其他方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply To all###QuickSynthAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all valid crafts",
+      "Context": "RaphaelSolverSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "应用到所有符合条件的配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###ExpertProfileOnAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###FoodApplyAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###ManualApplyAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###PotionApplyAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###SolverOnAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to all###SquadManualApplyAll",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Approximate Remaining Duration: ",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预计剩余时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan Crafting Window###CosmicCraftMenuWindow",
+      "Context": "RecipeWindowUI.AddCosmicCraftMenuWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Artisan 制作窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan Crafting Window###CraftMenuWindow",
+      "Context": "RecipeWindowUI.AddCraftMenuWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Artisan 制作窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan Crafting Window###MainCraftWindow",
+      "Context": "CraftingWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Artisan 制作窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign To All",
+      "Context": "AssignerUI.DrawAssignables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用到全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Assigned ",
+      "Context": "DrawAssignables",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已分配 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Assume Max Starting Quality (for simulator)",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在模拟器中假定初始品质为最高",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic Action Execution Mode",
+      "Context": "CraftMenuWindowUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动执行动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic Repairs",
+      "Context": "ListEditor.DrawListSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic Usage",
+      "Context": "RaphaelSolverSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic action execution mode",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动执行技能模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically Extract Materia",
+      "Context": "ListEditor.DrawListSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically adjust all sub-crafts after changing quantities",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更改数量后自动调整所有中间材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically extract materia from spiritbonded gear",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动从精炼度已满的装备中精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically generate a Raphael macro if a valid one hasn't been created",
+      "Context": "RaphaelSolverSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "尚无可用宏时自动生成 Raphael 宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically generate on expert recipes",
+      "Context": "RaphaelSolverSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "遇到高难度配方时自动生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically repair gear",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动修理装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically switch to the Raphael macro once one has been created",
+      "Context": "RaphaelSolverSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "Raphael 宏生成后自动切换到该宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use each recommended action instead of highlighting them.",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "自动执行每个推荐技能，而非只高亮提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Begin Crafting List",
+      "Context": "Draw.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.GetButtonSize",
+      "Translated": "开始执行制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Build List (with subcrafts)",
+      "Context": "SpecialLists.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成清单（含中间材料）",
+      "Source": "library"
+    },
+    {
+      "Original": "Building Craftable Items List: ",
+      "Context": "ListEditor.DrawRecipeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在生成可制作物品清单： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Building Retainer Cache: ",
+      "Context": "ListEditor.DrawRecipeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在建立雇员物品缓存： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "ProcessingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel Queue",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Current Craft To Raphael (Temp)",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "临时切换当前制作为 Raphael 求解",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Current Craft To Raphael Only (Permanent)",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将当前配方永久设为仅使用 Raphael",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Filters",
+      "Context": "IngredientTable.DrawFilterOnCrafts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Click here to be taken to the Crafting List menu.",
+      "Context": "PluginUI.DrawOverview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextUnderlined",
+      "Translated": "点击此处打开制作清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clipboard is empty.",
+      "Context": "CraftingListUI.DrawListOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "剪贴板为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectable Recipe",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "收藏品配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition: ",
+      "Context": "SimulatorUI.DrawSimulation",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft ",
+      "Context": "RecipeWindowUI.DrawCounter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "制作 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft All (",
+      "Context": "RecipeWindowUI.DrawCounter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部制作（",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft Level",
+      "Context": "RaphaelCacheTable..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "制作等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft X Times:",
+      "Context": "RecipeWindowUI.DrawCosmicEnduranceCounter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "制作次数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft did not finish (solver failed to return any more steps before finishing).",
+      "Context": "Simulator.SimulatorResult",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "制作未完成，求解器未能给出后续步骤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft only X times",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅制作指定次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafted",
+      "Context": "CraftableColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafted by: ",
+      "Context": "ListEditor.DrawRecipeOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter Stats",
+      "Context": "DrawStatInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextUnderlined",
+      "Translated": "生产职业属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's HQ food in inventory",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背包中的生产用 HQ 食物",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's HQ pots in inventory",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背包中的生产用 HQ 药品",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's food",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "生产用食物",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's food in inventory",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背包中的生产用食物",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's pots",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "生产用药品",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter's pots in inventory",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "背包中的生产用药品",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting List Created",
+      "Context": "RecipeWindowUI.CreateGCListAgent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已创建制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Lists",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Modes",
+      "Context": "DrawOverview",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextUnderlined",
+      "Translated": "制作模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting State: ",
+      "Context": "DebugTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Stats",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "制作属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting in progress. Macro settings will be unavailable until you stop crafting.",
+      "Context": "MacroUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在制作。停止制作后才能更改宏设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting: ",
+      "Context": "ProcessingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "正在制作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftsmanship",
+      "Context": "RaphaelCacheTable..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "作业精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftsmanship:",
+      "Context": "SimulatorUI.DrawGearSetDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGUIMethods.InputIntBound",
+      "Translated": "作业精度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftsmanship: ",
+      "Context": "DebugTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作业精度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List (Star only)",
+      "Context": "RecipeWindowUI.DrawSupplyMissionOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建制作清单（仅限星级配方）",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List (with subcrafts)",
+      "Context": "RecipeWindowUI.DrawSupplyMissionOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建制作清单（含中间素材）",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List (with subcrafts) (Star only)",
+      "Context": "RecipeWindowUI.DrawSupplyMissionOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建制作清单（仅限星级配方，含中间素材）",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List for this Part",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为此部件创建制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List for this Part (Including pre-crafts)",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为此部件创建制作清单（含中间材料）",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List for this Project",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为此工程创建制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Crafting List for this Project (Including pre-crafts)",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为此工程创建制作清单（含中间材料）",
+      "Source": "library"
+    },
+    {
+      "Original": "Create crafting list for this phase (including precrafts)",
+      "Context": "RecipeWindowUI.DrawWorkshopOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "为本阶段创建制作清单（含中间素材）",
+      "Source": "library"
+    },
+    {
+      "Original": "Criteria",
+      "Context": "AssignerUI.DrawCriteria",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCentered",
+      "Translated": "筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay between list crafts (seconds)",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "清单中两次制作之间的等待时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "ScriptSolverSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete ",
+      "Context": "RaphaelCacheUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ButtonCtrl",
+      "Translated": "删除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Difficulty: ",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "难度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Allagan Tools integration with crafting lists",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "取消制作清单与 Allagan Tools 的联动",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Custom Theme",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁用自定义主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Endurance",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭连续制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Endurance Mode Upon Crafting an NQ item",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作出 NQ 物品时停止连续制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Endurance Mode Upon Failed Craft",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作失败时停止连续制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Endurance and pause lists when Duty Finder is ready",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "任务搜索器配对成功时，停止连续制作并暂停清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Endurance if unable to repair",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "无法修理时停止连续制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable auto-equipping required items for special recipes",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不自动装备特殊配方所需的装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable context menu options",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "禁用右键菜单选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable highlighting box",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不显示高亮提示框",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable recommendation toasts",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不显示推荐技能的弹出提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "RecipeConfig.get_FoodName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Do Next ",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "接下来执行 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock mini-menu position to Crafting Log",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将迷你菜单固定到制作笔记旁",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't use ",
+      "Context": "ExpertSolverSettings.GetMidKeepHighDuraSettingName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "不使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Emergency Cancel Button",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "紧急取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Colour Validation",
+      "Context": "ListEditor.DrawTotalIngredientsTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用颜色校验",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Endurance Mode",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用连续制作模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable hover preview in manual mode",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在手动模式下启用悬停预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Endurance Mode Toggle",
+      "Context": "CraftMenuWindowUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切换连续制作模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute recommended action",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "执行推荐动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Exit Crafting Stance After Completion",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "完成后退出制作姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Expanded Crafting Log search bar",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加宽制作笔记搜索栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Expert Recipe",
+      "Context": "DrawRecipeInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "高难度配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Expert Recipe Solver Settings",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "高难度配方求解器设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Expert recipes have this icon in the crafting log:",
+      "Context": "ExpertProfilesUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "高难度配方在制作笔记中带有此图标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "Teamcraft.DrawTeamCraftListButtons",
+      "Role": "UI",
+      "RoleReason": "→ IconButtons.IconTextButton",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Extract First Materia",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "精制第一件装备的魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "FC Workshop List Created",
+      "Context": "RecipeWindowUI.DrawWorkshopOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已创建部队工房清单",
+      "Source": "library"
+    },
+    {
+      "Original": "FC Workshops",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "部队工房",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch From Retainer",
+      "Context": "IngredientTable.DrawRestockFromRetainer",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "从雇员处取回",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch From Retainer (please stand by a bell)",
+      "Context": "IngredientTable.DrawRestockFromRetainer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "从雇员处取回（请站在传唤铃旁）",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetch Recommendation",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取推荐动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing",
+      "Context": "CraftableColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "捕鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "GC Supply List (",
+      "Context": "RecipeWindowUI.CreateGCListAgent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "大国防联军筹备清单（",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset",
+      "Context": "SimulatorUI.DrawGearSetDropdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset ",
+      "Context": "DebugTab.DrawGearset",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "套装 ",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "HQable Recipe",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可制作 HQ 成品的配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide action tooltips in manual mode",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在手动模式下隐藏技能说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Include Retainers",
+      "Context": "ListEditor.DrawRecipeData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "包括雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Ingredients",
+      "Context": "Draw.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Interact with RepairNPC",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "与修理 NPC 交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Context": "ListEditor.DrawRecipeSubTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click a profile to edit. Right click a profile to select it without editing.",
+      "Context": "ExpertProfilesUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "左键点击配置可编辑；右键点击可仅选用该配置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Level-based Recipes",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按等级分类的配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Level:",
+      "Context": "SimulatorUI.DrawGearSetDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGUIMethods.InputIntBound",
+      "Translated": "等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Link copied to clipboard",
+      "Context": "Teamcraft.ExportSelectedListToTC",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "链接已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "List Name",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "列表名称",
+      "Source": "library"
+    },
+    {
+      "Original": "List Name###listName",
+      "Context": "CraftingListUI.DrawNewListPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "列表名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro has completed. Please continue to manually craft.",
+      "Context": "MacroSolver.Solve",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "宏已执行完毕，请手动完成后续制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual Mode",
+      "Context": "SimulatorUI.DrawGUISim",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "手动模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual...",
+      "Context": "SimulatorUIVeynVersion.DrawSimulatorStepRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "手动…",
+      "Source": "library"
+    },
+    {
+      "Original": "Material",
+      "Context": "SimulatorUI.DrawIngredientLayout",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Max",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "Max ",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "最大值 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Level",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "最高等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Quantity Mode",
+      "Context": "Endurance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最大数量模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Max out Cosmic Exploration recipes instead of hitting third breakpoint",
+      "Context": "ExpertSolverSettingsUI.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "宇宙探索配方尽量做到满品质，而非仅达到第三档",
+      "Source": "library"
+    },
+    {
+      "Original": "Max out Ishgard Restoration recipes instead of just hitting max breakpoint",
+      "Context": "ExpertSolverSettingsUI.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "天穹街振兴配方尽量做到满品质，而非仅达到最高奖励档",
+      "Source": "library"
+    },
+    {
+      "Original": "Min. Craftsmanship",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "最低作业精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Craftsmanship",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最低作业精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Misc.",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "杂项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Monster Drop",
+      "Context": "CraftableColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "怪物掉落",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "Draw.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Context": "ExpertSolverSettings.GetPQPrimedManipSet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "IsExpertColumn.ToName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "No Recipe Selected",
+      "Context": "Endurance.get_RecipeName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未选择配方",
+      "Source": "library"
+    },
+    {
+      "Original": "No recipe selected",
+      "Context": "Endurance.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "未选择配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Restock Non-Crafted Items",
+      "Context": "Draw.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅补充无法制作的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show HQ crafts",
+      "Context": "ListEditor.DrawTotalIngredientsTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示 HQ 成品",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Config",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetTooltip",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Materia Window",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开魔晶石窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Recipe",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Recipe Log",
+      "Context": "CraftingListContextMenu.AddChat2Menu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "打开制作笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Other Plugins",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "其他插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "ProcessingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait...",
+      "Context": "SimulatorUIVeynVersion.DrawStatistics",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "请稍候…",
+      "Source": "library"
+    },
+    {
+      "Original": "Premade Lists",
+      "Context": "CraftingListUI.DrawListOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "预设清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Processing action ",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "正在处理动作 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Only Recipe",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "任务专用配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Quests",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Synth applied to all list items.",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已对清单内所有物品启用简易制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Synth: ",
+      "Context": "DebugTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "简易制作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Synthesis this item",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "对此物品使用简易制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Raphael is generating. Please wait...",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "Raphael 正在生成方案，请稍候……",
+      "Source": "library"
+    },
+    {
+      "Original": "Raw Ingredients",
+      "Context": "ListEditor.DrawRecipeData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "基础素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Raw Ingredients Required",
+      "Context": "ListEditor.DrawRecipeData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需基础素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-order Action",
+      "Context": "MacroEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "调整技能顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Rebuild",
+      "Context": "RaphaelCache.DrawRaphaelDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新生成",
+      "Source": "library"
+    },
+    {
+      "Original": "Recipe: ",
+      "Context": "Endurance.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "配方： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Recipes",
+      "Context": "Draw.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining Crafts: ",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "剩余制作次数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Required",
+      "Context": "ListEditor.DrawRecipeSubTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "必需",
+      "Source": "library"
+    },
+    {
+      "Original": "Requirements:",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "要求：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "SimulatorUI.DrawSimulation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart and solve",
+      "Context": "SimulatorUIVeynVersion.DrawSimulatorRestartRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新开始并求解",
+      "Source": "library"
+    },
+    {
+      "Original": "Restart!",
+      "Context": "SimulatorUIVeynVersion.DrawSimulatorRestartRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新启动！",
+      "Source": "library"
+    },
+    {
+      "Original": "Restock From Retainers",
+      "Context": "Draw.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.GetButtonSize",
+      "Translated": "从雇员处补充物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Restock Inventory From Retainers",
+      "Context": "CraftingListUI.DrawListOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从雇员处补充背包库存",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "ProcessingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume Endurance and unpause lists when done",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "完成后恢复连续制作并继续执行清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers",
+      "Context": "ListEditor.DrawRecipeSubTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Right clicking on a header will allow you to show/hide different columns or resize columns.",
+      "Context": "ListEditor.DrawTotalIngredientsTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "右键点击表头可显示、隐藏各列或调整列宽。",
+      "Source": "library"
+    },
+    {
+      "Original": "Right clicking on an ingredient name opens a context menu with further options.",
+      "Context": "ListEditor.DrawTotalIngredientsTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "右键点击材料名称可打开更多操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Run Simulated Solver",
+      "Context": "SimulatorUI.DrawSolverActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "运行求解器模拟",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and Close",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "ListEditor.DrawRecipeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for Item",
+      "Context": "IngredientTable.DrawSearchItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "搜索物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Secondary Recipe",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "备选配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Food",
+      "Context": "SimulatorUI.DrawFoodDropdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择食物",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Gearset",
+      "Context": "SimulatorUI.DrawGearSetDropdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Job(s)",
+      "Context": "SpecialLists.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Select List",
+      "Context": "ListEditor.DrawCopyFromList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "选择清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Medicine",
+      "Context": "SimulatorUI.DrawMedicineDropdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择药品",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Solver",
+      "Context": "SimulatorUI.DrawSolverCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "选择求解器",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected ",
+      "Context": "DebugTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "已选中 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Action: ",
+      "Context": "MacroEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CenterColumnText",
+      "Translated": "已选技能： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Macro: ",
+      "Context": "MacroEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已选宏： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected project:",
+      "Context": "FCWorkshopUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已选工程：",
+      "Source": "library"
+    },
+    {
+      "Original": "Semi-Manual Mode",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "半手动模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Ingredients",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Max HQ",
+      "Context": "DebugTab.DrawRecipeEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将 HQ 数量设为最大",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Max NQ",
+      "Context": "DebugTab.DrawRecipeEntry",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将 NQ 数量设为最大",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Quantity",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "设置数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Set delay (ms)",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "设置延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Set new items added to list as Quick Synth",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "新加入清单的物品默认使用简易制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Set new items added to list as quick synth",
+      "Context": "ListEditor.DrawListSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "新加入清单的物品默认使用简易制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the scale of the action images in the simulator.",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "设置模拟器中技能图标的缩放比例。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ingredients used for this",
+      "Context": "IngredientTable.DrawFilterOnCrafts",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "显示此物品用到的材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Show leveling category completion in Crafting Log",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在制作笔记中显示各等级分类的完成情况",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only recipes you have materials for (toggle to refresh)",
+      "Context": "ListEditor.DrawRecipeData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅显示已有材料的配方（切换可刷新）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show other categories' completion in Crafting Log",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在制作笔记中显示其他分类的完成情况",
+      "Source": "library"
+    },
+    {
+      "Original": "Show which crafts have been assigned as a notification",
+      "Context": "AssignerUI.DrawAssignables",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "通过通知显示已分配的制作项目",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulated Starting Quality",
+      "Context": "AtkResNodeFunctions.DrawQualitySlider",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "模拟初始品质",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulator UI",
+      "Context": "PluginUI.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "模拟器界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Simulator action image size",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "模拟器技能图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip Crafting Unnecessary Materials",
+      "Context": "ListEditor.DrawListSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过无需制作的材料",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip crafting items you already have enough of",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已有足够数量的物品不再制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip macro step if unable to use action",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "技能不可用时跳过该宏步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip on these conditions",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CenterColumnText",
+      "Translated": "满足以下条件时跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip quality actions if at 100%",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "品质达到 100% 时跳过提高品质的技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "ListEditor.DrawRecipeData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "ListEditor.DrawRecipeOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Statistics",
+      "Context": "SimulatorUIVeynVersion.DrawStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "统计",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "SimulatorUIVeynVersion.DrawSimulatorStepRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Target ",
+      "Context": "QuestHelper.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标 ",
+      "Source": "library"
+    },
+    {
+      "Original": "This character has not unlocked materia extraction. This setting will be ignored.",
+      "Context": "ListEditor.DrawListSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "此角色尚未解锁精制魔晶石，此设置将被忽略。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is a current level master recipe. Your success rate may vary so it is recommended to use an Artisan macro or manually solve this.",
+      "Context": "CraftingWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "这是当前等级的秘籍配方，成功率可能不稳定。建议使用 Artisan 宏或手动制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "This item cannot be quick synthed.",
+      "Context": "ListEditor.DrawRecipeSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此物品无法简易制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "This tab allows you to quickly assign solvers and consumables to recipes based on recipe criteria.",
+      "Context": "AssignerUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "可在此按配方条件批量指定求解器和消耗品。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will also automatically assign the macro to this recipe.",
+      "Context": "SimulatorUI.DrawExports",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "这也会将宏自动分配给此配方。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will toggle all items in this list between being skipped and being enabled.",
+      "Context": "ListEditor.DrawRecipeData",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "切换清单中所有物品的启用或跳过状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will try to maximise quality to earn more Skyward points.",
+      "Context": "ExpertSolverSettingsUI.DrawGeneralSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "尽量提高品质，以获得更多振兴天穹点数。",
+      "Source": "library"
+    },
+    {
+      "Original": "To change Raphael solver usage, go to Settings > Raphael Solver Settings.",
+      "Context": "CraftMenuWindowUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "如需更改 Raphael 求解器的用法，请前往设置中的「Raphael 求解器设置」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Required",
+      "Context": "FCWorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "所需总量",
+      "Source": "library"
+    },
+    {
+      "Original": "Total number of phases:",
+      "Context": "FCWorkshopUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "工程阶段总数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Touch Combo",
+      "Context": "MacroEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "加工连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Track expert conditions",
+      "Context": "DebugTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跟踪高难度配方的制作状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Trial Craft Repeat",
+      "Context": "CraftingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重复模拟制作",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Settings",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "界面设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to import.",
+      "Context": "MacroUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法导入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to select an expert solver profile. Please select from dropdown.",
+      "Context": "RecipeConfig.DrawExpertProfiles",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无法选择高难度配方求解配置，请从下拉菜单中选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "ListEditor.DrawRecipeData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Use ",
+      "Context": "CraftingWindow.ShowRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Global Settings",
+      "Context": "ExpertSolverProfiles.GetDefaultProfile",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "使用全局设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use after this many steps:",
+      "Context": "CraftMenuWindowUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "经过以下步数后使用：",
+      "Source": "library"
+    },
+    {
+      "Original": "Used in:\r\n",
+      "Context": "NameColumn.DrawColumn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "用途：\r\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "PluginUI.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "enable",
+      "Context": "RecipeSelector.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "finish",
+      "Context": "ExpertSolver.SolveNextStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "完成",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

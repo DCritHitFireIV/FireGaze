@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Aetherment",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " (Shift + Ctrl to toggle)",
+      "Context": "TexFinder.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " （按 Shift + Ctrl 切换）",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherment has encountered an unrecoverable error",
+      "Context": "Aetherment.DrawNative",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Aetherment 遇到无法恢复的错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to clipboard",
+      "Context": "TexFinder.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "High res",
+      "Context": "TexFinder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "高分辨率",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "TexFinder.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "No Error",
+      "Context": "Aetherment.DrawNative",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aetherment menu",
+      "Context": "Aetherment..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Aetherment 菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Texture Finder tool",
+      "Context": "Aetherment..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开纹理查找器",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture Finder",
+      "Context": "TexFinder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "纹理查找器",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked",
+      "Context": "TexFinder.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已解锁",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

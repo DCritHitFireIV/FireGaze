@@ -1,0 +1,459 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Honorific",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Reset",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Add current character",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Add targeted character",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加当前选中的角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Title is Hidden",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "称号已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear IPC Assignment",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除通过 IPC 指定的称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Coloured Titles",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示彩色称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow title animations",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许称号动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Vanilla Titles",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "隐藏游戏原有称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Condition",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear the forced title.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除强制指定的称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold SHIFT to delete.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Shift 删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle this title",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "切换此称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Select...",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Set to current title",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设为当前称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Player not visible",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "玩家不可见",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Room",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "房间",
+      "Source": "library"
+    },
+    {
+      "Original": "Room ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "房间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set to current location",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "设为当前位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Random Titles",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用随机称号",
+      "Source": "library"
+    },
+    {
+      "Original": "minutes",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear selected colour",
+      "Context": "ConfigWindow.DrawColorPicker",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除所选颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse",
+      "Context": "ConfigWindow.DrawGradientPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "脉冲",
+      "Source": "library"
+    },
+    {
+      "Original": "No Reported Data",
+      "Context": "IpcProvider.ShowDebugString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有上报的数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Reported IPC Data",
+      "Context": "IpcProvider.ShowDebugString",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "上报的 IPC 数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Type",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "显示类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Check",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上次检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Average",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均值",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最大值",
+      "Source": "library"
+    },
+    {
+      "Original": "Per Second",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "每秒",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Hits per Second",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "每秒命中次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Animation Style",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "预览动画样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Export JSON",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出 JSON",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview on Self",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在自己身上预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Self##HideVanillaSelf",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "自身",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Members##HideVanillaParty",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Friends##HideVanillaFriends",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "好友",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear##ClearOverride",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

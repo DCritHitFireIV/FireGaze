@@ -1,0 +1,178 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "WondrousTailsCalculator",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Line(s). Spending 1 point to shuffle is statistically worth it.",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 条线。按概率计算，花费 1 点重排更划算。",
+      "Source": "library"
+    },
+    {
+      "Original": "1 Line",
+      "Context": "CalculatorWindow.DrawShuffleTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "1 条线",
+      "Source": "library"
+    },
+    {
+      "Original": "1 Line Chance:",
+      "Context": "CalculatorWindow.DrawStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "1 条线概率：",
+      "Source": "library"
+    },
+    {
+      "Original": "2 Lines",
+      "Context": "CalculatorWindow.DrawShuffleTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "2 条线",
+      "Source": "library"
+    },
+    {
+      "Original": "2 Lines Chance:",
+      "Context": "CalculatorWindow.DrawStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "2 条线概率：",
+      "Source": "library"
+    },
+    {
+      "Original": "3 Lines",
+      "Context": "CalculatorWindow.DrawShuffleTracker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "3 条线",
+      "Source": "library"
+    },
+    {
+      "Original": "3 Lines Chance:",
+      "Context": "CalculatorWindow.DrawStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "3 条线概率：",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens or closes the Wondrous Tails Calculator.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭天书奇谈计算器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Out of Second Chance Points! Cannot shuffle.",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "奇想点不足，无法重排。",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommendation: KEEP",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "建议：保留布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommendation: SHUFFLE!",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "建议：重排印花！",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Grid",
+      "Context": "CalculatorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置格子",
+      "Source": "library"
+    },
+    {
+      "Original": "Second Chance Points:",
+      "Context": "CalculatorWindow.DrawShuffleTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "奇想点：",
+      "Source": "library"
+    },
+    {
+      "Original": "Shuffle advice is only available at exactly 7 stickers.",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "仅在恰有 7 枚印花时提供重排建议。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stickers Placed: ",
+      "Context": "CalculatorWindow.DrawStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已贴印花： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the stickers currently on your journal:",
+      "Context": "CalculatorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击格子，标记天书奇谈中已有的印花：",
+      "Source": "library"
+    },
+    {
+      "Original": "Wondrous Tails Calculator",
+      "Context": "Plugin.get_Name",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "天书奇谈计算器",
+      "Source": "library"
+    },
+    {
+      "Original": "Your Target Goal:",
+      "Context": "CalculatorWindow.DrawShuffleTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标连线数：",
+      "Source": "library"
+    },
+    {
+      "Original": "Your current layout is below average for ",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前布局达成以下目标的概率低于平均水平： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Your current sticker placement layout is above average. Keep placing stickers!",
+      "Context": "CalculatorWindow.DrawShuffleRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前印花布局优于平均水平，继续贴印花吧！",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

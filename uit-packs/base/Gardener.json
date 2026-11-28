@@ -1,0 +1,369 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Gardener",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Reset all",
+      "Context": "HubThemeEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the XIV Hub theme",
+      "Context": "HubThemeEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 XIV Hub 主题",
+      "Source": "library"
+    },
+    {
+      "Original": "copied to clipboard",
+      "Context": "DebugDump.Deliver",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Harvest",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Action_Harvest",
+      "Translated": "收获",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Crop",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Action_RemoveCrop",
+      "Translated": "移除作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Common_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Common_Confirm",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "empty",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Common_Empty",
+      "Translated": "空",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Common_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_Header",
+      "Translated": "自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop a run if I move",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_StopIfPlayerMoves",
+      "Translated": "移动时停止操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Developer",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Developer_Header",
+      "Translated": "开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Language_English",
+      "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "UI language",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Language_Label",
+      "Translated": "界面语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil for a crossbreed step",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Planting_SoilForCross",
+      "Translated": "杂交步骤用土",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil for a yield step",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Planting_SoilForYield",
+      "Translated": "增产步骤用土",
+      "Source": "library"
+    },
+    {
+      "Original": "Show reminder counts on the server info bar",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_ShowDtr",
+      "Translated": "在服务器信息栏显示提醒数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Theme_Header",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "every {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Duration_Every",
+      "Translated": "每 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "no fertilizer in your bags",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_NoLongerInBagChat",
+      "Translated": "背包里没有肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_ColCrop",
+      "Translated": "作物",
+      "Source": "library"
+    },
+    {
+      "Original": "When",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_ColWhen",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CopyButton",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "empty",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CropEmpty",
+      "Translated": "空",
+      "Source": "library"
+    },
+    {
+      "Original": "growing ({0} of 4)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_StageGrowing",
+      "Translated": "生长中（第 {0} 阶段，共 4 阶段）",
+      "Source": "library"
+    },
+    {
+      "Original": "Mature.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenMature",
+      "Translated": "已成熟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready now.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenReadyNow",
+      "Translated": "现已就绪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tend within {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenTendWithin",
+      "Translated": "请在 {0} 内照料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Wilted; tend now.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenWiltedTendNow",
+      "Translated": "正在枯萎，请立即照料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Withered.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenWithered",
+      "Translated": "已枯死。",
+      "Source": "library"
+    },
+    {
+      "Original": "Goal: {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CurrentGoal",
+      "Translated": "目标：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Later steps need {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_DemandLaterSteps",
+      "Translated": "后续步骤需要 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_MarkerDone",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Get the starting seeds",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ObtainTitle",
+      "Translated": "获取起始种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PickerSearchHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready to harvest in bed {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ReadyToHarvest",
+      "Translated": "种植位 {0} 的作物可以收获了。",
+      "Source": "library"
+    },
+    {
+      "Original": "Done.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StepDonePlain",
+      "Translated": "完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Done. You hold {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StepDoneWithSeed",
+      "Translated": "完成。你现有 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Step {0} of {1}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StepProgress",
+      "Translated": "第 {0} 步，共 {1} 步",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. Tend it within {1} hours or it wilts.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TendWithinHours_Other",
+      "Translated": "正在种植位 {0} 中生长。请在 {1} 小时内照料，否则作物会枯萎。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player is occupied ({0}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_OccupiedGeneric",
+      "Translated": "玩家正忙（{0}）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Log_TabLabel",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company estate",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Patch_EstateFreeCompany",
+      "Translated": "部队房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Private estate",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Patch_EstatePrivate",
+      "Translated": "个人房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "No soil available.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_NoSoilAvailableFallback",
+      "Translated": "没有可用的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing is ready to harvest yet.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_NothingReady",
+      "Translated": "还没有可以收获的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in the Garden tab",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_OpenInGardenButton",
+      "Translated": "在园艺标签页中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Planting time unknown ({0})",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_TimingUnknownHeader",
+      "Translated": "播种时间未知（{0}）",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_StoppedNoReason",
+      "Translated": "已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Sweep_StopButton",
+      "Translated": "停止",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

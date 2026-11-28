@@ -1,0 +1,610 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Automaton",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Territory: ",
+      "Context": "FlagTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": " is disabled",
+      "Context": "HaselWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": " 已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": " is disabled.",
+      "Context": "HaselWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": " 已禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": " left",
+      "Context": "GemstoneGrindMode.GetRemainingDisplay",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 左",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "MultiboxTools.DrawDutySection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Currency",
+      "Context": "SimpleCurrencyAlert.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.AddCustomItemPopupButton",
+      "Translated": "添加货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Alert when above threshold",
+      "Context": "SimpleCurrencyAlert.DrawAlertList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "高于阈值时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Alert when under threshold",
+      "Context": "SimpleCurrencyAlert.DrawAlertList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "低于阈值时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "MultiboxTools.DrawCommands",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation: ",
+      "Context": "FateToolKitWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自动化： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Beep Count",
+      "Context": "GMAlert.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "提示音次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Beep Frequency",
+      "Context": "GMAlert.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "提示音频率",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't switch characters (bound by duty or occupied)",
+      "Context": "ARSwitcher.SwitchCharacter",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法切换角色（正在副本或角色正忙）",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "AchievementTrackerWindow.DrawContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Channels",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Index",
+      "Context": "ARSwitcher.OnEnable",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get",
+      "Translated": "角色索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Channels",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message Pattern",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "聊天消息格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Checkbox",
+      "Context": "HaselWindow.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "复选框",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "MultiboxTools.DrawDutySection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Context": "CharacterBlacklistConfigAttribute.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed: ",
+      "Context": "FateToolKitWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "已完成： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "Tweak.DrawGeneratedConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection",
+      "Context": "MultiboxTools.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Dead",
+      "Context": "MultiboxTools.DrawClientLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.Icon",
+      "Translated": "死亡",
+      "Source": "library"
+    },
+    {
+      "Original": "Descending (highest first)",
+      "Context": "FateToolKit.DrawCustomConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "降序（从高到低）",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "TweakStatusExtensions.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't repeat relays",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不重复转发",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable sending to this channel",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "允许发送到此频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "TweakStatusExtensions.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Current Character",
+      "Context": "CharacterBlacklistConfigAttribute.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "排除当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute Commands",
+      "Context": "GMAlert.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "执行命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Exit",
+      "Context": "PowerCommand.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "退出",
+      "Source": "library"
+    },
+    {
+      "Original": "Format: ",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "格式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Incompatibility Warning",
+      "Context": "HaselWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "兼容性警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ",
+      "Context": "Commands.OnCommmandDesynth",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "StringListConfigAttribute.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave duty",
+      "Context": "LeaveCommand.Tooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "退出副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded",
+      "Context": "InstalledPluginsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading icon…",
+      "Context": "AsciiSplash.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在加载图标…",
+      "Source": "library"
+    },
+    {
+      "Original": "Logout",
+      "Context": "PowerCommand.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "登出",
+      "Source": "library"
+    },
+    {
+      "Original": "Misc",
+      "Context": "AchievementTrackerWindow.DrawAchievements",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "杂项",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing ",
+      "Context": "HaselWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TextV",
+      "Translated": "缺失 ",
+      "Source": "library"
+    },
+    {
+      "Original": "No alerts configured",
+      "Context": "SimpleCurrencyAlert.DrawAlertList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未设置提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "No fates match the current filters.",
+      "Context": "FateToolKitWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "没有符合当前筛选条件的临危受命。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Logged In",
+      "Context": "MultiboxTools.RefreshIdentity",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Only send local hunts to local channels",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "本服频道仅转发本服狩猎消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Position: ",
+      "Context": "FlagTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Relay Type Configuration",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "转发类型设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Context": "HaselWindow.DrawReposModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining: ",
+      "Context": "FateToolKitWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "剩余： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "AchievementTrackerWindow.DrawContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Alert",
+      "Context": "SimpleCurrencyAlert.DrawAlertList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "删除提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Character Exclusion",
+      "Context": "CharacterBlacklistConfigAttribute.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "取消排除此角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Dependencies",
+      "Context": "HaselWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "必需的前置插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset To Default: ",
+      "Context": "ImGuiExtensions.ResetButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "恢复默认值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Context": "FateToolKit.DrawCustomConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "AchievementTrackerWindow.DrawSearch",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "FateToolKitWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "FateToolKitWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop current task",
+      "Context": "TasksTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止当前任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Tab Name",
+      "Context": "DebugWindow.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签页名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "FlagTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak Name",
+      "Context": "HaselWindow.DrawSidebar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "功能名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "HubClient..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Context": "HaselWindow.DrawReposModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to croizat's bundled tweaks",
+      "Context": "HaselWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "欢迎使用 croizat 的功能合集",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "TravelCommand.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "TravelCommand.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "not installed",
+      "Context": "HaselWindow.DrawReposModal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "value",
+      "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "{0:P} Complete ({1} / {2})",
+      "Context": "ImGuiExtensions.DrawProgressBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已完成 {0:P}（{1} / {2}）",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

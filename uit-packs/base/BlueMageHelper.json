@@ -1,0 +1,522 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BlueMageHelper",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Opens a small guide book",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开简易指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Unknown",
+      "Context": "Plugin.GetHintText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "暂时未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "ClippedCombo`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索……",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration##BlueMageHelper",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Vanilla Spellbook:",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "原版青魔法书：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add hint even if a spell is already unlocked.",
+      "Context": "ConfigWindow.General",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已学会的青魔法也显示提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Spellbook:",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "魔法书：",
+      "Source": "library"
+    },
+    {
+      "Original": "List only unlearned spells.",
+      "Context": "ConfigWindow.General",
+      "PreserveID": false,
+      "Translated": "仅列出未学会的技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Head Markers:",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "目标标记：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark mobs that drop unlearned Blue mage spells.",
+      "Context": "ConfigWindow.General",
+      "PreserveID": false,
+      "Translated": "标记掉落未学会青魔法师技能的怪物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark mobs all the time",
+      "Context": "ConfigWindow.General",
+      "PreserveID": false,
+      "Translated": "始终标记怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Will mark mobs even if you learned the spell, and on any job!",
+      "Context": "ConfigWindow.General",
+      "PreserveID": false,
+      "Translated": "即使已学会该技能，且在任何职业下都会标记怪物！",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "ConfigWindow.About",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Context": "ConfigWindow.About",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Context": "ConfigWindow.About",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Sources:",
+      "Context": "ConfigWindow.About",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "数据来源：",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Context": "ConfigWindow.About",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "Discord 帖子",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Context": "ConfigWindow.About",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "问题反馈",
+      "Source": "library"
+    },
+    {
+      "Original": "Grimoire##BlueMageHelper",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Translated": "魔典",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only unlearned spells.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "仅显示未学会的技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "All spells learned, nothing to show!",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "已学会所有技能，无内容可显示！",
+      "Source": "library"
+    },
+    {
+      "Original": "[Disable 'Show only unlearned' if you want to see them.]",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "［关闭「仅显示尚未学会的」即可查看。］",
+      "Source": "library"
+    },
+    {
+      "Original": "Render Error.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "渲染错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Spell not learned",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "技能未学会",
+      "Source": "library"
+    },
+    {
+      "Original": "Spell learned",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "技能已学会",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Level: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最低等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to nearest aetheryte",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "传送至最近的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Place map marker",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在地图上标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Same location:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "同一地点：",
+      "Source": "library"
+    },
+    {
+      "Original": "Acquisition Tips##",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "获取提示",
+      "Source": "library"
+    },
+    {
+      "Original": " spells learned",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": " 已学技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in duty finder",
+      "Context": "MainWindow.DrawOpenDutyButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在任务搜索器中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Config",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "[BlueMageHelper] Teleport plugin is not responding",
+      "Context": "TeleportConsumer.UseTeleport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[BlueMageHelper] 传送插件无响应",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Context": "ConfigWindow.About",
+      "PreserveID": false,
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "BottomBar",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "底栏",
+      "Source": "library"
+    },
+    {
+      "Original": " learned",
+      "Context": "DataRenderer`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 已学会",
+      "Source": "library"
+    },
+    {
+      "Original": " learned, nothing to show!",
+      "Context": "DataRenderer`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 均已学会，没有可显示的内容！",
+      "Source": "library"
+    },
+    {
+      "Original": "All ",
+      "Context": "DataRenderer`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "全部 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast",
+      "Context": "MainWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "野兽",
+      "Source": "library"
+    },
+    {
+      "Original": "Beasts",
+      "Context": "MainWindow.Beastmaster",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "野兽",
+      "Source": "library"
+    },
+    {
+      "Original": "Blue Mage",
+      "Context": "MainWindow.Blue",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "青魔法师",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable head markers.",
+      "Context": "ConfigWindow.General",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用目标标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "List only unlearned spells/pets.",
+      "Context": "ConfigWindow.General",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅列出尚未学会的魔法或尚未获得的宠物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark mobs on ALL jobs",
+      "Context": "ConfigWindow.General",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有职业都标记怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark mobs you no longer need",
+      "Context": "ConfigWindow.General",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "标记已无需讨伐的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "No Sources!",
+      "Context": "DataRenderer`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有已知来源！",
+      "Source": "library"
+    },
+    {
+      "Original": "OC Blue Mage",
+      "Context": "MainWindow.OcBlue",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "新月岛青魔法师",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only unlearned ",
+      "Context": "DataRenderer`1.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅显示尚未学会的 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Spell",
+      "Context": "MainWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "青魔法",
+      "Source": "library"
+    },
+    {
+      "Original": "This will only show markers when you are on the correct job, and need the spell",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "仅在职业符合要求且尚未学会对应魔法时显示标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will show mobs if you already have the spell/pet.",
+      "Context": "ConfigWindow.General",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "即使已学会对应魔法或获得宠物，也显示相关怪物。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Mob",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::OpenWorld",
+      "Translated": "怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Totem Purchase",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Buy",
+      "Translated": "图腾兑换",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Dungeon",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Mob",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Fate",
+      "Translated": "危命任务怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Default",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "A Rank",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::ARank",
+      "Translated": "A级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "B Rank",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::BRank",
+      "Translated": "B级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "S Rank",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::SRank",
+      "Translated": "S级恶名精英",
+      "Source": "library"
+    },
+    {
+      "Original": "Masked Carnivale",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::MaskedCarnivale",
+      "Translated": "假面狂欢",
+      "Source": "library"
+    },
+    {
+      "Original": "Raid",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Raid",
+      "Translated": "大型任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Trial",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::Trial",
+      "Translated": "讨伐歼灭战",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Cressent",
+      "Context": "[属性] DisplayAttribute BlueMageHelper.RegionType::OcZone",
+      "Translated": "新月岛",
+      "Source": "library"
+    }
+  ]
+}

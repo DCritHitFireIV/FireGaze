@@ -1,0 +1,332 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "EdgeTTS.Dalamud",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Gender.",
+      "Context": "MainWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "性别。",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Open EdgeTTS Settings",
+      "Context": "Lang.Get(Command.Main.Help)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Command.Main.Help",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开 EdgeTTS 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "<text> Read the specified text aloud",
+      "Context": "Lang.Get(Command.Speak.Help)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Command.Speak.Help",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "<text> 朗读指定文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Female",
+      "Context": "Lang.Get(Gender.Female)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Gender.Female",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "女声",
+      "Source": "library"
+    },
+    {
+      "Original": "Male",
+      "Context": "Lang.Get(Gender.Male)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Gender.Male",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "男声",
+      "Source": "library"
+    },
+    {
+      "Original": "Add",
+      "Context": "Lang.Get(Window.AddReplacement)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.AddReplacement",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio Device",
+      "Context": "Lang.Get(Window.AudioDevice)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.AudioDevice",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "音频设备",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Voice",
+      "Context": "Lang.Get(Window.CurrentVoice)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.CurrentVoice",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "当前语音",
+      "Source": "library"
+    },
+    {
+      "Original": "System Default Device",
+      "Context": "Lang.Get(Window.DefaultDevice)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.DefaultDevice",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "系统默认设备",
+      "Source": "library"
+    },
+    {
+      "Original": "No replacement rules",
+      "Context": "Lang.Get(Window.NoReplacements)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.NoReplacements",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "暂无替换规则",
+      "Source": "library"
+    },
+    {
+      "Original": "No voice selected",
+      "Context": "Lang.Get(Window.NoVoiceSelected)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.NoVoiceSelected",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "尚未选择语音",
+      "Source": "library"
+    },
+    {
+      "Original": "Original Text",
+      "Context": "Lang.Get(Window.OriginalText)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.OriginalText",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "原文",
+      "Source": "library"
+    },
+    {
+      "Original": "Phoneme Replacements",
+      "Context": "Lang.Get(Window.PhonemeReplacements)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.PhonemeReplacements",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "读音替换",
+      "Source": "library"
+    },
+    {
+      "Original": "Pitch",
+      "Context": "Lang.Get(Window.Pitch)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Pitch",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "音高",
+      "Source": "library"
+    },
+    {
+      "Original": "Read",
+      "Context": "Lang.Get(Window.ReadTest)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.ReadTest",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "朗读",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Voices",
+      "Context": "Lang.Get(Window.RefreshVoices)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.RefreshVoices",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "刷新语音列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to fetch voice list: {message}.",
+      "Context": "Lang.Get(Window.RefreshVoicesFailed)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.RefreshVoicesFailed",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "获取语音列表失败：{message}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "Lang.Get(Window.Remove)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Remove",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Replacement",
+      "Context": "Lang.Get(Window.ReplacementText)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.ReplacementText",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "替换为",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "Lang.Get(Window.Reset)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Reset",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search (name, region, gender)...",
+      "Context": "Lang.Get(Window.SearchVoice)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.SearchVoice",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "搜索名称、地区或性别……",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "Lang.Get(Window.Speed)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Speed",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "语速",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "Lang.Get(Window.Stop)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Stop",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Synthesis",
+      "Context": "Lang.Get(Window.TabDashboard)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.TabDashboard",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "语音合成",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "Lang.Get(Window.TabSettings)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.TabSettings",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Voices",
+      "Context": "Lang.Get(Window.TabVoices)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.TabVoices",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "语音列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Test Text",
+      "Context": "Lang.Get(Window.TestText)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.TestText",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "试听文本",
+      "Source": "library"
+    },
+    {
+      "Original": "EdgeTTS Settings",
+      "Context": "Lang.Get(Window.Title)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Title",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "EdgeTTS 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Basic Parameters",
+      "Context": "Lang.Get(Window.VoiceOptions)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.VoiceOptions",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "基本参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Voices",
+      "Context": "Lang.Get(Window.Voices)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Voices",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "语音列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Volume",
+      "Context": "Lang.Get(Window.Volume)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Volume",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "音量",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Context": "Lang.Get(Window.Language)",
+      "Container": "file:Assets/Langs/ChineseSimplified.json",
+      "Key": "/Window.Language",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "语言",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

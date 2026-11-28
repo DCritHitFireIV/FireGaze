@@ -1,0 +1,438 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ProxyPlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "ProxyPlugin Settings###ProxyPluginConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "ProxyPlugin 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Network Diagnostics###ProxyPluginDiagnostics",
+      "Context": "DiagnosticsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "网络诊断",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Dalamud server (ottercorp)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.ottercorp",
+      "Translated": "卫月服务器（ottercorp）",
+      "Source": "library"
+    },
+    {
+      "Original": "Game services",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.cat.services",
+      "Translated": "游戏服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Green = OK, Yellow = reachable (HTTP error), Red = failed (hover for details)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.legend",
+      "Translated": "绿色：正常。黄色：可连接但遇到 HTTP 错误。红色：连接失败。悬停查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "System proxy (follow OS, live)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mode.system",
+      "Translated": "使用系统代理（实时跟随系统设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "ProxyPlugin Settings",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "window.title",
+      "Translated": "ProxyPlugin 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy report",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.copy",
+      "Translated": "复制报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Network diagnostics",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.open",
+      "Translated": "网络诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Route: {0}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.mode",
+      "Translated": "路由：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror rules: {0} active / {1} total",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mirror.count",
+      "Translated": "镜像规则：共 {1} 条，已启用 {0} 条",
+      "Source": "library"
+    },
+    {
+      "Original": "Via proxy",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.col.proxy",
+      "Translated": "通过代理",
+      "Source": "library"
+    },
+    {
+      "Original": "Check whether the key services used by the game and plugins are reachable, comparing a direct connection against your configured proxy.",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.intro",
+      "Translated": "检查游戏和插件使用的关键服务是否可访问，并比较直连和配置的代理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Network Diagnostics",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.title",
+      "Translated": "网络诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Run all tests",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.runAll",
+      "Translated": "运行全部测试",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mirror.col.on",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "lang.english",
+      "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "system proxy -> {0}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.route.system",
+      "Translated": "系统代理 → {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "No proxy (use built-in mirrors)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mode.none",
+      "Translated": "不用代理（使用内置镜像）",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror rules",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mirror.header",
+      "Translated": "镜像规则",
+      "Source": "library"
+    },
+    {
+      "Original": "direct (no proxy)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.route.direct",
+      "Translated": "直连（无代理）",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mirror.col.target",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.col.direct",
+      "Translated": "直连",
+      "Source": "library"
+    },
+    {
+      "Original": "manual proxy -> {0}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.route.manual",
+      "Translated": "手动代理 → {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Proxy",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "flag.proxy",
+      "Translated": "代理",
+      "Source": "library"
+    },
+    {
+      "Original": "Code",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "log.col.code",
+      "Translated": "状态码",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "log.col.time",
+      "Translated": "耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed: {0}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "test.failed",
+      "Translated": "失败：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Baseline (gstatic 204)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.basic",
+      "Translated": "基准测试（gstatic 204）",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub raw files",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.ghRaw",
+      "Translated": "GitHub 原始文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Open ProxyPlugin settings. Use \"/proxyplugin diag\" for network diagnostics.",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "cmd.help",
+      "Translated": "打开 ProxyPlugin 设置，使用 /proxyplugin diag 进行网络诊断。",
+      "Source": "library"
+    },
+    {
+      "Original": "Drop query",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mirror.col.dropquery",
+      "Translated": "移除查询参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent requests",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "log.header",
+      "Translated": "最近请求",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.col.target",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "direct",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "upstream.direct",
+      "Translated": "直连",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub release assets",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.ghObjects",
+      "Translated": "GitHub 发行版附件",
+      "Source": "library"
+    },
+    {
+      "Original": "direct",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "flag.direct",
+      "Translated": "直连",
+      "Source": "library"
+    },
+    {
+      "Original": "XIVAPI (game data)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.xivapi",
+      "Translated": "XIVAPI（游戏数据）",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub source download",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.ghCodeload",
+      "Translated": "GitHub 源码下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.state.failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Timed out",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.err.timeout",
+      "Translated": "超时",
+      "Source": "library"
+    },
+    {
+      "Original": "Flags",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "log.col.flags",
+      "Translated": "标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Universalis (market board)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.universalis",
+      "Translated": "Universalis（市场布告板）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable ProxyPlugin",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "enable",
+      "Translated": "启用 ProxyPlugin",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "lang.auto",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid URL",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "test.invalid",
+      "Translated": "网址无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "lang.label",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Network mode",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mode.header",
+      "Translated": "网络模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud / Plugins",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.cat.dalamud",
+      "Translated": "卫月与插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual proxy (http / socks5)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "mode.manual",
+      "Translated": "手动代理（HTTP 或 SOCKS5）",
+      "Source": "library"
+    },
+    {
+      "Original": "Connectivity",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.cat.basic",
+      "Translated": "连通性",
+      "Source": "library"
+    },
+    {
+      "Original": "Testing...",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "test.testing",
+      "Translated": "测试中……",
+      "Source": "library"
+    },
+    {
+      "Original": "error: {0}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "upstream.error",
+      "Translated": "错误：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "OK ({0}) via {1}",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "test.ok",
+      "Translated": "正常（{0}），通过 {1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Version",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "log.col.ver",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub site",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.ghMain",
+      "Translated": "GitHub 网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Crowdin (translations)",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "diag.t.crowdin",
+      "Translated": "Crowdin（翻译）",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewrite",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "flag.rewrite",
+      "Translated": "重写",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Container": "ProxyPlugin.Resources.Strings.resources",
+      "Key": "test",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Container": "ProxyPlugin.Resources.StringsZh.resources",
+      "Key": "lang.english",
+      "Translated": "英语",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

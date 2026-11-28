@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoRaiseAccept",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open Auto Raise Accept settings, or use: on, off, status.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开自动接受复活设置，或指定 on、off、status。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Auto Raise Accept] Usage: /ara [on|off|status]. Use /ara with no argument for settings.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Auto Raise Accept] 用法：/ara [on|off|status]。直接输入 /ara 可打开设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "Plugin.SetEnabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "Plugin.SetEnabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已开启",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已开启",
+      "Source": "library"
+    },
+    {
+      "Original": "; raise accept delay ",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "；接受复活的延迟为 ",
+      "Source": "library"
+    },
+    {
+      "Original": " ms; ",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 毫秒； ",
+      "Source": "library"
+    },
+    {
+      "Original": "return delay ",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "返回等待时间为 ",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds.",
+      "Context": "Plugin.PrintStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Raise Accept settings",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "自动接受复活设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto Raise Accept",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用自动接受复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Show DTR bar On/Off toggle",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏显示开关",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Raise accept delay (milliseconds)",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "接受玩家复活的延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "0 ms accepts the player Raise immediately.",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "设为 0 毫秒时立即接受玩家发来的复活。",
+      "Source": "library"
+    },
+    {
+      "Original": "Return wait after death (seconds)",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "倒下后等待返回的时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Current return wait: ",
+      "Context": "Plugin.DrawSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前返回等待时间： ",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

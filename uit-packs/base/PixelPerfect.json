@@ -1,0 +1,413 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PixelPerfect",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "- Added Cones for object drawing",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "- 对象绘制新增扇形。",
+      "Source": "library"
+    },
+    {
+      "Original": "- Added VPR and PCT.",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "- 新增蝰蛇剑士和绘灵法师。",
+      "Source": "library"
+    },
+    {
+      "Original": "- Added Z Editing",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "- 新增 Z 轴编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Doodle",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加标记图形",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy Haplo a Hot Chocolate",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "请 Haplo 喝杯热巧克力",
+      "Source": "library"
+    },
+    {
+      "Original": "Canvas",
+      "Context": "PixelPerfect.DrawDoodles",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "画布",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "扇形",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not import",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Dashed Ring",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "虚线圆环",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete the doodle",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "删除标记图形",
+      "Source": "library"
+    },
+    {
+      "Original": "Doodle",
+      "Context": "Drawing..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "标记图形",
+      "Source": "library"
+    },
+    {
+      "Original": "Dot",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "圆点",
+      "Source": "library"
+    },
+    {
+      "Original": "Each box is 1 Yalm by 1 Yalm",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每个格子为 1 星码 × 1 星码",
+      "Source": "library"
+    },
+    {
+      "Original": "Either export your current doodles to your clipboard, and then share the string with your friends, or import a currently copied exported string into your own doodles, by using the import button!",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "导出后可将剪贴板中的字符串分享给好友。也可复制好友发来的字符串，再点导入，将其添加到自己的标记图形中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Exports your current Doodles to your clipboard for sharing!",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前标记图形导出到剪贴板以便分享。",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "PixelPerfect.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Here you can see and edit your overlay in real time.",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在此可以实时查看并编辑叠加图形。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hey, and thanks for installing my plugin!",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "感谢你安装这个插件！",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Updates",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏更新提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported successfully",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已成功导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Imports your current clipboard to your Doodles!",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将剪贴板中的标记图形导入到自己的列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Line",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "线段",
+      "Source": "library"
+    },
+    {
+      "Original": "Name the doodle!",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "给标记图形命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Never show any messages.",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "不再显示任何消息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show when engaged in combat",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在战斗中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show when in an instance (a dungeon/raid etc)",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在副本中显示（如迷宫挑战、大型任务等）",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show when your weapon is unsheathed",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在拔武器时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Config",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Otherwise, player relative",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "否则以玩家为基准",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Perfect Config",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Pixel Perfect 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Perfect Editor",
+      "Context": "PixelPerfect.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Pixel Perfect 编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Perfect Editor Help",
+      "Context": "PixelPerfect.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Pixel Perfect 编辑器帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Perfect Update",
+      "Context": "PixelPerfect.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Pixel Perfect 更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Pixel Perfect config.",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "Pixel Perfect 设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ring",
+      "Context": "PixelPerfect..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "圆环",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "PixelPerfect.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Select the Doodle tab in the config, and the selected doodle will highlight in the editor.",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在设置中选择标记图形选项卡，选中的图形将在编辑器中高亮显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Editor",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "The dot in the centre is your player character.",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "中央的小点代表你的角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn the doodle on/off entirely",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用或停用整个标记图形",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated for 7.0!",
+      "Context": "PixelPerfect.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已适配 7.0！",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the config menu, and add a doodle to get started.",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请打开设置，添加一个标记图形即可开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to Pixel Perfect!",
+      "Context": "PixelPerfect.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "欢迎使用 Pixel Perfect！",
+      "Source": "library"
+    },
+    {
+      "Original": "You can export and import your doodles to share, by using the buttons below.",
+      "Context": "PixelPerfect.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用下方按钮，可以导出或导入标记图形，与他人分享。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

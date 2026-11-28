@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SkyEye",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "history",
+      "Context": "ConfigWindow.DrawCrowdCategory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Fate",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "危命任务",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

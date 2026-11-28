@@ -1,0 +1,675 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Avarice",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "  Color:",
+      "Context": "ConfigWindow.DrawUnfilledSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "  颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": " Job ",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 职业 ",
+      "Source": "library"
+    },
+    {
+      "Original": " Total ",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 总计 ",
+      "Source": "library"
+    },
+    {
+      "Original": "(no damage)",
+      "Context": "Memory.ReceiveActionEffectDetour",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "（无伤害）",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "PositionalDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "All Players",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "All players",
+      "Context": "TabSettings.DrawPlayer",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto",
+      "Context": "TabTank.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Avarice credits and support.",
+      "Context": "ConfigWindow.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "Avarice 制作人员与支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Avarice overlay",
+      "Context": "Canvas..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Avarice 叠加显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "PositionalDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear data",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "清除数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.DrawNavRail",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable on True North",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "真北生效时停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable anticipation pie",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用下一身位扇形提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable drawing",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用绘制",
+      "Source": "library"
+    },
+    {
+      "Original": "Feedback",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "反馈",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "TabTank.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Flank",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "侧面",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Scale",
+      "Context": "BoxCompass.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "字体缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Font scale",
+      "Context": "BoxCompass.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "字体缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the anticipation pie while True North is active.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "真北生效时隐藏下一身位的扇形提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon size",
+      "Context": "TabSettings.DrawFeedback",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "图标大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Context": "TabStatistics.DrawTotals",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Job options",
+      "Context": "TabSettings.DrawTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "职业选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps the enemy distance indicator on targets that do not have positionals.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "即使目标没有身位要求，也保留敌方距离指示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log",
+      "Context": "ConfigWindow.DrawNavRail",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Make default",
+      "Context": "TabProfiles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设为默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "TabTank.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name this profile, set the default, and assign jobs. Switch profiles from the list on the left.",
+      "Context": "TabProfiles.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "为方案命名、设为默认方案并指定职业。可从左侧列表切换方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ninja",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "忍者",
+      "Source": "library"
+    },
+    {
+      "Original": "No data",
+      "Context": ".cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "暂无数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No target",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无目标",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show for positional targets",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅对有身位要求的目标显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlays",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "叠加显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Members",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Party members",
+      "Context": "TabSettings.DrawPlayer",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "TabSettings.DrawOverlays",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional HIT!",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "身位判定成功！",
+      "Source": "library"
+    },
+    {
+      "Original": "Positional MISS!",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "身位判定失败！",
+      "Source": "library"
+    },
+    {
+      "Original": "Profile name...",
+      "Context": "TabProfiles.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "方案名称…",
+      "Source": "library"
+    },
+    {
+      "Original": "Profiles",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "配置方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Rear",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "背面",
+      "Source": "library"
+    },
+    {
+      "Original": "Select...",
+      "Context": "TabTank.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择…",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Failure",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示失败效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Success",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示成功效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the ring when the target has a non-positional buff",
+      "Context": "TabSettings.DrawTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "目标有免身位状态时显示圆环",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the distance indicator and positional ring when the target has a non-positional buff.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "目标有免身位状态时，显示距离指示和身位环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Statistics",
+      "Context": "ConfigWindow..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "统计",
+      "Source": "library"
+    },
+    {
+      "Original": "Still show distance indicator for non-positional targets",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "对无身位要求的目标仍显示距离指示",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "TabSettings.DrawOverlays",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Test Feedback:",
+      "Context": "ConfigWindow.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "测试反馈：",
+      "Source": "library"
+    },
+    {
+      "Original": "The last profile cannot be removed.",
+      "Context": "TabProfiles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "必须至少保留一个方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness:",
+      "Context": "ConfigWindow.DrawUnfilledSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "粗细：",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the default profile.",
+      "Context": "TabProfiles.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "这是默认方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle all overlay drawing. You can also use /avarice draw.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "切换所有叠加显示。也可使用 /avarice draw。",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "TabStatistics.DrawTotals",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total stats",
+      "Context": "TabStatistics..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiGroup.BeginGroupBox",
+      "Translated": "总计属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Unassign",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "取消分配",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Wrath Combo for the next positional",
+      "Context": "TabSettings.DrawTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 Wrath Combo 预测下一身位",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses Wrath Combo when it has a next positional. Otherwise your combo.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "优先使用 Wrath Combo 给出的下一身位，否则按当前连击判断。",
+      "Source": "library"
+    },
+    {
+      "Original": "Visual Feedback System:",
+      "Context": "ConfigWindow.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "视觉反馈系统：",
+      "Source": "library"
+    },
+    {
+      "Original": "What Avarice draws on the target, you, and the arena.",
+      "Context": "TabSettings.DrawOverlays",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "设置 Avarice 在目标、自己和场地上显示的内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, overlays only show when the target needs positionals.",
+      "Context": "TabSettings.DrawTarget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "启用后，仅在目标有身位要求时显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "TabSettings.DrawOverlays",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "场地",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "Avarice..ctor",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "Avarice..ctor",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Context": "PositionalDebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Context": "PositionalDebugWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "是",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

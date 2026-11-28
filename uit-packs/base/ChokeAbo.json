@@ -1,0 +1,2961 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ChokeAbo",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Automation stopped.",
+      "Context": "Plugin.StopAutomation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "自动操作已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading UI fonts...",
+      "Context": "ChokeAppearance.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在加载界面字体……",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Choke-abo. Use /chokeabo refresh, breed, dpopup, or config.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Choke-abo。可使用 /chokeabo refresh、breed、dpopup 或 config。",
+      "Source": "library"
+    },
+    {
+      "Original": "Training plan cleared.",
+      "Context": "Plugin.ClearPlan",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已清除训练计划。",
+      "Source": "library"
+    },
+    {
+      "Original": "UI fonts failed to load. See the plugin log.",
+      "Context": "ChokeAppearance.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "界面字体加载失败，请查看插件日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use English",
+      "Context": "ChokeAppearance.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用英语",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "1 star",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "1 star",
+      "Translated": "1 星",
+      "Source": "library"
+    },
+    {
+      "Original": "A Proof of Covering is present.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "A Proof of Covering is present.",
+      "Translated": "持有配种证明。",
+      "Source": "library"
+    },
+    {
+      "Original": "A free main-inventory slot is required for the breeding supply.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "A free main-inventory slot is required for the breeding supply.",
+      "Translated": "背包中至少要留一个空格存放繁育用品。",
+      "Source": "library"
+    },
+    {
+      "Original": "A required-supply purchase is unverified after reload; its matching pending confirmation or inventory result is required before another purchase.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "A required-supply purchase is unverified after reload; its matching pending confirmation or inventory result is required before another purchase.",
+      "Translated": "重新加载后仍未确认繁育用品是否买到。请先核对上次的购买确认或背包变动，再次购买。",
+      "Source": "library"
+    },
+    {
+      "Original": "A usable G{0} pair is already retained. Select owned parents or advance-pedigree permits before another covering.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "A usable G{0} pair is already retained. Select owned parents or advance-pedigree permits before another covering.",
+      "Translated": "已留有一对可用的 G{0} 种鸟。再次配种前，请先选择自有种鸟或提升血统等级的配种许可。",
+      "Source": "library"
+    },
+    {
+      "Original": "Acceleration",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Acceleration",
+      "Translated": "加速力",
+      "Source": "library"
+    },
+    {
+      "Original": "After",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "After",
+      "Translated": "之后",
+      "Source": "library"
+    },
+    {
+      "Original": "An unowned Proof of Covering is present; its exact start time cannot be inferred safely.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "An unowned Proof of Covering is present; its exact start time cannot be inferred safely.",
+      "Translated": "发现一份并非本次操作取得的配种证明，无法确定配种开始时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Another Choke-abo automation owns the feed/vendor services.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Another Choke-abo automation owns the feed/vendor services.",
+      "Translated": "另一个 Choke-abo 任务正在使用喂食或商店功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-fade when unfocused",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Auto-fade when unfocused",
+      "Translated": "窗口失去焦点时自动淡化",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation uses the session-capped plan and subtracts feed already on hand before buying.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Automation uses the session-capped plan and subtracts feed already on hand before buying.",
+      "Translated": "购买时以剩余训练次数为上限，并先扣除背包中已有的饲料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bias toward transparent deterministic flows.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Bias toward transparent deterministic flows.",
+      "Translated": "优先采用行为可预期、过程可查看的流程。",
+      "Source": "library"
+    },
+    {
+      "Original": "Blue",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Blue",
+      "Translated": "蓝色",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding UI mappings still require native inspection before automatic selection is available.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding UI mappings still require native inspection before automatic selection is available.",
+      "Translated": "尚需核对游戏配种界面，暂时无法自动选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding mode: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding mode: {0}",
+      "Translated": "配种模式：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding must be settled and G9 reached.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding must be settled and G9 reached.",
+      "Translated": "请先完成配种并达到 G9 血统。",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding service interaction captured; its native selection must be verified before dispatch.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding service interaction captured; its native selection must be verified before dispatch.",
+      "Translated": "已识别配种服务窗口。继续前需核实游戏内当前选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding status: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding status: {0}",
+      "Translated": "繁育状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding stock",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding stock",
+      "Translated": "种鸟储备",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding supply",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding supply",
+      "Translated": "繁育用品",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding supply is purchased, but the supplier interaction did not release; Resume to reconcile the retained item.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding supply is purchased, but the supplier interaction did not release; Resume to reconcile the retained item.",
+      "Translated": "已购买繁育用品，但与供应商的交互尚未结束。点击「继续」核对背包中的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Breeding, character or stock changed; cleanup stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Breeding, character or stock changed; cleanup stopped.",
+      "Translated": "繁育状态、角色或种鸟储备发生变化，已停止清理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy Needed Feed",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buy Needed Feed",
+      "Translated": "购买缺少的饲料",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy a G1 {0} registration form to raise a missing owned parent.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buy a G1 {0} registration form to raise a missing owned parent.",
+      "Translated": "购买 G1 {0} 登记书，培育缺少的自有种鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy status: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buy status: {0}",
+      "Translated": "购买状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy the opposite-sex G{0} permit within reserves to produce G{1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buy the opposite-sex G{0} permit within reserves to produce G{1}.",
+      "Translated": "在保留预留货币的前提下，购买异性 G{0} 配种许可，以培育 G{1} 后代。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buying feed...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buying feed...",
+      "Translated": "正在购买饲料……",
+      "Source": "library"
+    },
+    {
+      "Original": "Buying {0} feed across {1} items for {2} available training sessions.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buying {0} feed across {1} items for {2} available training sessions.",
+      "Translated": "正在购买 {0} 份饲料，共 {1} 种，对应可用的 {2} 次训练。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buying {0} for {1} {2} within reserves; awaiting its inventory result.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buying {0} for {1} {2} within reserves; awaiting its inventory result.",
+      "Translated": "正在以 {1} {2} 购买 {0}，未动用预留货币。等待背包更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buying {0}...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Buying {0}...",
+      "Translated": "正在购买 {0}……",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel cleanup",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cancel cleanup",
+      "Translated": "取消清理",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot skip feeding without a current racer snapshot.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cannot skip feeding without a current racer snapshot.",
+      "Translated": "尚未取得当前赛鸟数据，无法跳过喂食。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo progression",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Chocobo progression",
+      "Translated": "陆行鸟培育进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo stat refresh failed: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Chocobo stat refresh failed: {0}",
+      "Translated": "刷新陆行鸟能力值失败：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Choke-abo is disabled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Choke-abo is disabled.",
+      "Translated": "Choke-abo 已停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose the number of training sessions and feed grade for each stat.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Choose the number of training sessions and feed grade for each stat.",
+      "Translated": "为各项能力选择训练次数和饲料等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose your progression goal, reserves and feeding policy in VERMAXION settings, then Resume to begin.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Choose your progression goal, reserves and feeding policy in VERMAXION settings, then Resume to begin.",
+      "Translated": "在 VERMAXION 设置中选择培育目标、储备及喂食策略，再点击「继续」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clean up G1-G8 stock",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Clean up G1-G8 stock",
+      "Translated": "清理 G1 至 G8 的种鸟储备",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup cancelled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cleanup cancelled.",
+      "Translated": "已取消清理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup complete: no planned training remains.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cleanup complete: no planned training remains.",
+      "Translated": "清理完毕，没有待执行的训练。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup complete: session budget exhausted with {0} planned training deferred.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cleanup complete: session budget exhausted with {0} planned training deferred.",
+      "Translated": "清理完毕：本轮次数已用完，剩余 {0} 次训练待后续执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup did not start: load racing chocobo data first.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cleanup did not start: load racing chocobo data first.",
+      "Translated": "未开始清理。请先加载竞赛陆行鸟数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup status: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cleanup status: {0}",
+      "Translated": "清理状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Plan",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Clear Plan",
+      "Translated": "清空计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Collecting offspring",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Collecting offspring",
+      "Translated": "正在领取幼鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection occurred, but the exact new offspring and its trait must be reconciled before counting or another covering.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Collection occurred, but the exact new offspring and its trait must be reconciled before counting or another covering.",
+      "Translated": "幼鸟已领取。计入结果或再次配种前，请核实新幼鸟的身份和遗传特征。",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection requires the existing eligible covering, its retained-parent pedigree and exactly one Proof of Covering.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Collection requires the existing eligible covering, its retained-parent pedigree and exactly one Proof of Covering.",
+      "Translated": "领取前须确认本次配种已到领取时间、种鸟血统记录有效，且背包中恰有一份配种证明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection was requested; proof consumption and one matching fledgling must be reconciled before another request.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Collection was requested; proof consumption and one matching fledgling must be reconciled before another request.",
+      "Translated": "已申请领取。再次领取前，须确认配种证明已消耗且获得了一只符合条件的幼鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Colour",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour seeker",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Colour seeker",
+      "Translated": "寻找指定羽色",
+      "Source": "library"
+    },
+    {
+      "Original": "Commence window did not appear after selecting Feed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Commence window did not appear after selecting Feed.",
+      "Translated": "选择「喂食」后未出现开始窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact mode",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Compact mode",
+      "Translated": "紧凑模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact visible on main window",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Compact visible on main window",
+      "Translated": "在主窗口显示紧凑模式开关",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete Like Sire Like Fledgling before retiring this racer.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Complete Like Sire Like Fledgling before retiring this racer.",
+      "Translated": "请先完成任务 Like Sire Like Fledgling，再让这只赛鸟退役。",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete the registrar's initial racing training course.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Complete the registrar's initial racing training course.",
+      "Translated": "请先完成登记员提供的入门竞赛训练。",
+      "Source": "library"
+    },
+    {
+      "Original": "Concept recap",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Concept recap",
+      "Translated": "概念概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirming training...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Confirming training...",
+      "Translated": "正在确认训练……",
+      "Source": "library"
+    },
+    {
+      "Original": "Content ID mismatch: request {0}, current {1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Content ID mismatch: request {0}, current {1}.",
+      "Translated": "角色身份不符：请求为 {0}，当前为 {1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Context menu disappeared before Feed could be selected.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Context menu disappeared before Feed could be selected.",
+      "Translated": "尚未选择「喂食」，右键菜单就已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy / ZIP Dalamud log",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Copy / ZIP Dalamud log",
+      "Translated": "复制或打包 Dalamud 日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find Race Chocobo Trainer in Chocobo Square.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not find Race Chocobo Trainer in Chocobo Square.",
+      "Translated": "在陆行鸟广场未找到竞赛陆行鸟训练师。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find Tack & Feed Trader in Chocobo Square.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not find Tack & Feed Trader in Chocobo Square.",
+      "Translated": "在陆行鸟广场未找到鸟具和饲料商人。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not locate {0} in the main inventory pages.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not locate {0} in the main inventory pages.",
+      "Translated": "在背包各页中找不到 {0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not open '{0}' on Tack & Feed Trader.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not open '{0}' on Tack & Feed Trader.",
+      "Translated": "无法在鸟具和饲料商人处打开「{0}」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not open Race Chocobo Trainer. Move closer and try again.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not open Race Chocobo Trainer. Move closer and try again.",
+      "Translated": "无法与竞赛陆行鸟训练师交谈，请靠近后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not open Tack & Feed Trader. Move closer and try again.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not open Tack & Feed Trader. Move closer and try again.",
+      "Translated": "无法与鸟具和饲料商人交谈，请靠近后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not path near Race Chocobo Trainer. Move closer or check vnavmesh.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not path near Race Chocobo Trainer. Move closer or check vnavmesh.",
+      "Translated": "无法寻路至竞赛陆行鸟训练师附近。请走近或检查 vnavmesh。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not path near Tack & Feed Trader. Move closer or check vnavmesh.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not path near Tack & Feed Trader. Move closer or check vnavmesh.",
+      "Translated": "无法寻路至鸟具和饲料商人附近。请走近或检查 vnavmesh。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not reach the required breeding service for native UI inspection.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not reach the required breeding service for native UI inspection.",
+      "Translated": "无法到达所需繁育服务的位置，未能核对游戏界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not start Lifestream travel to Chocobo Square.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Could not start Lifestream travel to Chocobo Square.",
+      "Translated": "无法通过 Lifestream 前往陆行鸟广场。",
+      "Source": "library"
+    },
+    {
+      "Original": "Counterpart covering requires permit mode and a reached pedigree of G2 or higher.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Counterpart covering requires permit mode and a reached pedigree of G2 or higher.",
+      "Translated": "如需培育缺少性别的种鸟，请启用配种许可模式，并先达到 G2 或以上血统。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover matching G9 stock with its retained opposite-sex G9 parent.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover matching G9 stock with its retained opposite-sex G9 parent.",
+      "Translated": "将符合要求的 G9 后代与保留的异性 G9 亲鸟配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover retained G{0} parents; preserve their remaining capacity.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover retained G{0} parents; preserve their remaining capacity.",
+      "Translated": "让保留的 G{0} 亲鸟配种，并保留剩余配种次数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover the exact G{0} pair to advance toward G{1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover the exact G{0} pair to advance toward G{1}.",
+      "Translated": "将指定的一对 G{0} 亲鸟配种，向 G{1} 血统推进。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover the exact G{0} pair to produce the missing G{1} sex while the useful racer continues racing.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover the exact G{0} pair to produce the missing G{1} sex while the useful racer continues racing.",
+      "Translated": "将指定的一对 G{0} 亲鸟配种，培育缺少性别的 G{1} 后代。现役赛鸟继续参赛。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover the exact G{0} pair to produce the missing G{1} sex.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover the exact G{0} pair to produce the missing G{1} sex.",
+      "Translated": "将指定的一对 G{0} 亲鸟配种，培育缺少性别的 G{1} 后代。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cover the retained G{0} parent and matching opposite-sex permit to produce G{1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cover the retained G{0} parent and matching opposite-sex permit to produce G{1}.",
+      "Translated": "将保留的 G{0} 亲鸟与匹配的异性配种许可配对，培育 G{1} 后代。",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering Commence was dispatched; its exact confirmation or proof result must be reconciled before another covering.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering Commence was dispatched; its exact confirmation or proof result must be reconciled before another covering.",
+      "Translated": "已发出开始配种请求。请先核实确认结果或取得的配种证明，再次配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering in progress",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering in progress",
+      "Translated": "正在配种",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering is eligible; adoption is awaiting exact capture evidence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering is eligible; adoption is awaiting exact capture evidence.",
+      "Translated": "配种已到领取时间，正在等待核对幼鸟领取结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering is eligible; collection requires a verified native UI mapping.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering is eligible; collection requires a verified native UI mapping.",
+      "Translated": "配种已到领取时间，请先核对游戏内领取界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering proof",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering proof",
+      "Translated": "配种证明",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering ready in",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering ready in",
+      "Translated": "距离配种完成还有",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering wait has no valid eligibility evidence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering wait has no valid eligibility evidence.",
+      "Translated": "无法确认本次配种到达领取时间的依据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Covering wait until {0:u}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Covering wait until {0:u}.",
+      "Translated": "配种需等至 {0:u}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Coverings left",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Coverings left",
+      "Translated": "剩余配种次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Cunning",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Cunning",
+      "Translated": "适应力",
+      "Source": "library"
+    },
+    {
+      "Original": "Currency",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Currency",
+      "Translated": "货币",
+      "Source": "library"
+    },
+    {
+      "Original": "Current currency is below the planned purchase total. Adjust the plan or stock up before the buy loop is enabled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Current currency is below the planned purchase total. Adjust the plan or stock up before the buy loop is enabled.",
+      "Translated": "持有货币不足以支付计划总额。请先调整计划或补足货币。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current racer data could not be loaded: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Current racer data could not be loaded: {0}",
+      "Translated": "无法加载当前赛鸟的数据：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Current racer data has not been loaded.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Current racer data has not been loaded.",
+      "Translated": "尚未加载当前赛鸟的数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current racer pedigree, racing rank, or sex is unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Current racer pedigree, racing rank, or sex is unavailable.",
+      "Translated": "无法获取当前赛鸟的血统等级、竞赛等级或性别。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom RGB",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Custom RGB",
+      "Translated": "自定义 RGB 颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "DTR Bar",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "DTR Bar",
+      "Translated": "服务器信息栏",
+      "Source": "library"
+    },
+    {
+      "Original": "DTR disabled glyph",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "DTR disabled glyph",
+      "Translated": "停用时的信息栏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "DTR enabled glyph",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "DTR enabled glyph",
+      "Translated": "启用时的信息栏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "DTR mode",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "DTR mode",
+      "Translated": "信息栏显示方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Desired inherited ability",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Desired inherited ability",
+      "Translated": "期望遗传的能力",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard is permanent. G9 stock, covering proof and selected breeding inputs are protected.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Discard is permanent. G9 stock, covering proof and selected breeding inputs are protected.",
+      "Translated": "丢弃后无法恢复。G9 种鸟、配种证明和选作配种材料的物品受保护。",
+      "Source": "library"
+    },
+    {
+      "Original": "Discard selected stock",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Discard selected stock",
+      "Translated": "丢弃选中的种鸟储备",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Endurance",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Endurance",
+      "Translated": "持久力",
+      "Source": "library"
+    },
+    {
+      "Original": "Exact shopping list for the current plan.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Exact shopping list for the current plan.",
+      "Translated": "当前计划所需的采购清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export capped log anyway",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Export capped log anyway",
+      "Translated": "仍然导出已达容量上限的日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Exporting log...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Exporting log...",
+      "Translated": "正在导出日志……",
+      "Source": "library"
+    },
+    {
+      "Original": "FFXIV Dalamud Plugin",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "FFXIV Dalamud Plugin",
+      "Translated": "FFXIV 的 Dalamud 插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Fall back to Grade 1, then skip",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Fall back to Grade 1, then skip",
+      "Translated": "改用 1 级饲料，仍然不足则跳过",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed",
+      "Translated": "喂食",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed Planned Sessions",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed Planned Sessions",
+      "Translated": "按计划次数喂食",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed confirmation would cross the configured currency reserve.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed confirmation would cross the configured currency reserve.",
+      "Translated": "确认喂食会动用预留货币。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed cycle complete.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed cycle complete.",
+      "Translated": "本轮喂食已完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed cycle failed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed cycle failed.",
+      "Translated": "本轮喂食失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed did not appear to consume {0}. Check the trainer flow and inventory state.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed did not appear to consume {0}. Check the trainer flow and inventory state.",
+      "Translated": "未检测到 {0} 被消耗。请检查训练师的操作流程及背包状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed for the available training sessions cannot be purchased within the currency reserves.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed for the available training sessions cannot be purchased within the currency reserves.",
+      "Translated": "扣除预留货币后，余额不足以购齐剩余训练所需的饲料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed purchase completed without an exact item-ID quantity increase.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed purchase completed without an exact item-ID quantity increase.",
+      "Translated": "已完成饲料购买操作，但未检测到对应物品数量增加。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed purchase would cross the configured currency reserve.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed purchase would cross the configured currency reserve.",
+      "Translated": "购买饲料将动用预留货币。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed selection changed after purchase; exact purchase evidence cannot be reconciled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed selection changed after purchase; exact purchase evidence cannot be reconciled.",
+      "Translated": "购买后所选饲料发生变化，无法核实购买结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed status: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed status: {0}",
+      "Translated": "饲料状态：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed the target racer before declaring it ready.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed the target racer before declaring it ready.",
+      "Translated": "请先给目标赛鸟喂食，再将其标记为准备就绪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed: Grade {0}    If unavailable: {1}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feed: Grade {0}    If unavailable: {1}",
+      "Translated": "饲料等级：{0}　缺货时：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Feeding did not produce one exact feed-item decrease and one confirmed-session decrease.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feeding did not produce one exact feed-item decrease and one confirmed-session decrease.",
+      "Translated": "未能同时确认消耗一份对应饲料并扣除一次训练次数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feeding one {0}; awaiting exact item and session evidence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feeding one {0}; awaiting exact item and session evidence.",
+      "Translated": "正在使用一份 {0}，等待核实饲料数量和训练次数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feeding pass completed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feeding pass completed.",
+      "Translated": "本轮喂食已完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Feeding pass failed: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feeding pass failed: {0}",
+      "Translated": "本轮喂食失败：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Feeding the racer",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Feeding the racer",
+      "Translated": "正在给赛鸟喂食",
+      "Source": "library"
+    },
+    {
+      "Original": "Female",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Female",
+      "Translated": "雌",
+      "Source": "library"
+    },
+    {
+      "Original": "Finding feed...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Finding feed...",
+      "Translated": "正在查找饲料……",
+      "Source": "library"
+    },
+    {
+      "Original": "Finding {0}...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Finding {0}...",
+      "Translated": "正在查找 {0}……",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish the existing covering with its saved goal before changing the production target.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Finish the existing covering with its saved goal before changing the production target.",
+      "Translated": "如需更改培育目标，请先按已保存的目标完成当前配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fledglings",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Fledglings",
+      "Translated": "幼鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Gil",
+      "Translated": "金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Gil: {0:N0}",
+      "Translated": "金币：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Goal",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Goal",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold Saucer Info ready; waiting before Chocobo tab callback.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Gold Saucer Info ready; waiting before Chocobo tab callback.",
+      "Translated": "金碟游乐场信息已就绪，正等待切换至陆行鸟页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold Saucer Info ready; waiting before Chocobo tab callback...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Gold Saucer Info ready; waiting before Chocobo tab callback...",
+      "Translated": "金碟游乐场信息已就绪，正等待切换至陆行鸟页……",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold Saucer window did not appear in time.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Gold Saucer window did not appear in time.",
+      "Translated": "金碟游乐场窗口未在时限内出现。",
+      "Source": "library"
+    },
+    {
+      "Original": "Grade 1",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Grade 1",
+      "Translated": "1 级",
+      "Source": "library"
+    },
+    {
+      "Original": "Grade 2",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Grade 2",
+      "Translated": "2 级",
+      "Source": "library"
+    },
+    {
+      "Original": "Grade 3",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Grade 3",
+      "Translated": "3 级",
+      "Source": "library"
+    },
+    {
+      "Original": "G{0} has already been reached; the target cannot move backwards.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "G{0} has already been reached; the target cannot move backwards.",
+      "Translated": "已达到 G{0} 血统，目标血统不能向下调。",
+      "Source": "library"
+    },
+    {
+      "Original": "G{0} is missing a usable opposite-sex parent and no preceding-pedigree pair can produce it.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "G{0} is missing a usable opposite-sex parent and no preceding-pedigree pair can produce it.",
+      "Translated": "G{0} 缺少可用的异性亲鸟，且没有上一代种鸟能够配出它。",
+      "Source": "library"
+    },
+    {
+      "Original": "G{0} {1}: racing rank {2}/40 before retirement.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "G{0} {1}: racing rank {2}/40 before retirement.",
+      "Translated": "G{0} {1}：退役前竞赛等级 {2}/40。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon + text",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Icon + text",
+      "Translated": "图标和文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon only",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Icon only",
+      "Translated": "仅图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Idle",
+      "Translated": "空闲",
+      "Source": "library"
+    },
+    {
+      "Original": "Inherited ability",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Inherited ability",
+      "Translated": "遗传能力",
+      "Source": "library"
+    },
+    {
+      "Original": "Initial racing tutorial admitted; VERMAXION owns the race.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Initial racing tutorial admitted; VERMAXION owns the race.",
+      "Translated": "已进入初次竞赛教学，比赛由 VERMAXION 管理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid offspring production settings.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Invalid offspring production settings.",
+      "Translated": "后代培育设置无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid progression settings.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Invalid progression settings.",
+      "Translated": "培育进度设置无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory truth",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Inventory truth",
+      "Translated": "背包实际库存",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory window disappeared before the trainer-feed context menu became visible.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Inventory window disappeared before the trainer-feed context menu became visible.",
+      "Translated": "训练师的喂食菜单尚未出现，背包窗口就已消失。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Item",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Language",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Language visible on main window",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Language visible on main window",
+      "Translated": "在主窗口显示语言设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Learned ability",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Learned ability",
+      "Translated": "习得能力",
+      "Source": "library"
+    },
+    {
+      "Original": "Load racing chocobo data first so the purchase plan can compare against sessions available.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Load racing chocobo data first so the purchase plan can compare against sessions available.",
+      "Translated": "请先加载竞赛陆行鸟数据，再按可用训练次数计算采购计划。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded from RaceChocoboManager at {0:HH:mm:ss}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Loaded from RaceChocoboManager at {0:HH:mm:ss}.",
+      "Translated": "已于 {0:HH:mm:ss} 从 RaceChocoboManager 加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded from {0} at {1:HH:mm:ss}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Loaded from {0} at {1:HH:mm:ss}.",
+      "Translated": "已于 {1:HH:mm:ss} 从 {0} 加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading UI fonts...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Loading UI fonts...",
+      "Translated": "正在加载界面字体……",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading current racer data before selecting a breeding action.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Loading current racer data before selecting a breeding action.",
+      "Translated": "正在读取当前赛鸟数据，之后再选择繁育操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log ZIP ready. Share it manually; remove old exports when you no longer need them.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Log ZIP ready. Share it manually; remove old exports when you no longer need them.",
+      "Translated": "日志压缩包已就绪，请手动分享。不再需要时可删除旧的导出文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log export failed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Log export failed.",
+      "Translated": "日志导出失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log into a character before starting breeding automation.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Log into a character before starting breeding automation.",
+      "Translated": "请先登录角色再开始自动繁育。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log into a character to see chocobo progression.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Log into a character to see chocobo progression.",
+      "Translated": "登录角色后可查看陆行鸟培育进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "MGP: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "MGP: {0:N0}",
+      "Translated": "金碟币：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Male",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Male",
+      "Translated": "雄",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual training and feed purchases",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Manual training and feed purchases",
+      "Translated": "手动训练和购买饲料",
+      "Source": "library"
+    },
+    {
+      "Original": "Matching G9 offspring: {0:N0} / {1:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Matching G9 offspring: {0:N0} / {1:N0}",
+      "Translated": "符合要求的 G9 后代：{0:N0} / {1:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Matching offspring retained unregistered",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Matching offspring retained unregistered",
+      "Translated": "符合要求的后代已保留，尚未登记",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum Speed",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Maximum Speed",
+      "Translated": "最高速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing a usable opposite-sex G9 parent. Owned mode requires suitable G9 stock or an explicit switch to NPC permits.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Missing a usable opposite-sex G9 parent. Owned mode requires suitable G9 stock or an explicit switch to NPC permits.",
+      "Translated": "缺少可用的异性 G9 亲鸟。自有亲鸟模式需要合适的 G9 种鸟，或手动切换到 NPC 配种许可模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing an owned G{0} counterpart. No owned pair can produce G{1} or higher; select a permitted covering explicitly. Lower-generation rebuilding is stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Missing an owned G{0} counterpart. No owned pair can produce G{1} or higher; select a permitted covering explicitly. Lower-generation rebuilding is stopped.",
+      "Translated": "缺少自有的异性 G{0} 种鸟。现有亲鸟无法培育出 G{1} 或更高血统，已停止从低代重建。请手动选择配种许可。",
+      "Source": "library"
+    },
+    {
+      "Original": "Missing {0} in inventory.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Missing {0} in inventory.",
+      "Translated": "背包中缺少 {0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving to Race Chocobo Trainer...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Moving to Race Chocobo Trainer...",
+      "Translated": "正在前往竞赛陆行鸟训练师处……",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving to Tack & Feed Trader...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Moving to Tack & Feed Trader...",
+      "Translated": "正在前往鸟具和饲料商人处……",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC covering permits",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "NPC covering permits",
+      "Translated": "NPC 配种许可",
+      "Source": "library"
+    },
+    {
+      "Original": "Native racing unlock verified; reassessing feeding and racing.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Native racing unlock verified; reassessing feeding and racing.",
+      "Translated": "已在游戏内确认解锁竞赛，正在重新检查喂食和参赛条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Need MGP: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Need MGP: {0:N0}",
+      "Translated": "需要金碟币：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Need gil: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Need gil: {0:N0}",
+      "Translated": "需要金币：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Needs attention",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Needs attention",
+      "Translated": "需要处理",
+      "Source": "library"
+    },
+    {
+      "Original": "Next action",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Next action",
+      "Translated": "下一步操作",
+      "Source": "library"
+    },
+    {
+      "Original": "No breeding forms or covering proof in inventory.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No breeding forms or covering proof in inventory.",
+      "Translated": "背包中没有繁育登记书或配种证明。",
+      "Source": "library"
+    },
+    {
+      "Original": "No chocobo data loaded yet.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No chocobo data loaded yet.",
+      "Translated": "尚未加载陆行鸟数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "No eligible stock.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No eligible stock.",
+      "Translated": "没有符合条件的种鸟储备。",
+      "Source": "library"
+    },
+    {
+      "Original": "No free main-inventory slot is available for target feed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No free main-inventory slot is available for target feed.",
+      "Translated": "背包中没有空位存放目标饲料。",
+      "Source": "library"
+    },
+    {
+      "Original": "No logged-in Content ID is available.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No logged-in Content ID is available.",
+      "Translated": "无法获取已登录角色的身份标识。",
+      "Source": "library"
+    },
+    {
+      "Original": "No planned feed purchases.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No planned feed purchases.",
+      "Translated": "无需购买饲料。",
+      "Source": "library"
+    },
+    {
+      "Original": "No registered racing chocobo.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No registered racing chocobo.",
+      "Translated": "尚未登记竞赛陆行鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "No retained parent can produce G{0} or higher; lower-generation covering is stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No retained parent can produce G{0} or higher; lower-generation covering is stopped.",
+      "Translated": "保留的亲鸟均无法培育出 G{0} 或更高血统，已停止低代配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "No usable G{0} parent remains to produce a G{1} counterpart. Lower-generation covering is stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No usable G{0} parent remains to produce a G{1} counterpart. Lower-generation covering is stopped.",
+      "Translated": "没有可用的 G{0} 亲鸟可培育缺少性别的 G{1} 后代，已停止低代配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "No usable retired G9 parent has a confirmed requested trait. Retain offspring and replenish suitable G9 stock.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No usable retired G9 parent has a confirmed requested trait. Retain offspring and replenish suitable G9 stock.",
+      "Translated": "已退役的 G9 亲鸟中，未确认有符合指定特征的个体。请保留后代，并补充合适的 G9 种鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "No useful active racer, fledgling, or covering parents are available.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No useful active racer, fledgling, or covering parents are available.",
+      "Translated": "没有可用的现役赛鸟、幼鸟或配种亲鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "No visible inventory window was found while opening the trainer-feed context menu.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "No visible inventory window was found while opening the trainer-feed context menu.",
+      "Translated": "打开训练师喂食菜单时未找到可见的背包窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Not configured",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Not configured",
+      "Translated": "未设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Now",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Now",
+      "Translated": "现在",
+      "Source": "library"
+    },
+    {
+      "Original": "Offspring goal reached",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Offspring goal reached",
+      "Translated": "已达成后代培育目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Offspring printer",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Offspring printer",
+      "Translated": "批量培育后代",
+      "Source": "library"
+    },
+    {
+      "Original": "Offspring production requires G9 breeding stock; lower-generation racing is stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Offspring production requires G9 breeding stock; lower-generation racing is stopped.",
+      "Translated": "培育后代需要 G9 种鸟，已停止让较低世代的赛鸟参赛。",
+      "Source": "library"
+    },
+    {
+      "Original": "Offspring ready",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Offspring ready",
+      "Translated": "可领取幼鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Offspring sex is random. Two coverings do not guarantee a male and a female.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Offspring sex is random. Two coverings do not guarantee a male and a female.",
+      "Translated": "后代性别随机。配种两次也不一定能得到一雄一雌。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity (%)",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opacity (%)",
+      "Translated": "不透明度（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Export Folder",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Open Export Folder",
+      "Translated": "打开导出文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Folder",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Open Folder",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Open XA Slave log tools",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Open XA Slave log tools",
+      "Translated": "打开 XA Slave 日志工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening Gold Saucer window...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opening Gold Saucer window...",
+      "Translated": "正在打开金碟游乐场窗口……",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening Race Chocobo Trainer...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opening Race Chocobo Trainer...",
+      "Translated": "正在与竞赛陆行鸟训练师交谈……",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening Tack & Feed Trader...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opening Tack & Feed Trader...",
+      "Translated": "正在与鸟具和饲料商人交谈……",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening inventory context menu...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opening inventory context menu...",
+      "Translated": "正在打开背包右键菜单……",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens XA Slave's Utility > XA Mods panel, which contains Dalamud Log Cleaner.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Opens XA Slave's Utility > XA Mods panel, which contains Dalamud Log Cleaner.",
+      "Translated": "打开 XA Slave 的「Utility → XA Mods」面板，可在其中找到 Dalamud 日志清理工具。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overview",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Overview",
+      "Translated": "概览",
+      "Source": "library"
+    },
+    {
+      "Original": "Owned parents",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Owned parents",
+      "Translated": "自有亲鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: Chocobo stat refresh failed; retrying refresh in {1:0.0}s. {2}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: Chocobo stat refresh failed; retrying refresh in {1:0.0}s. {2}",
+      "Translated": "第 {0} 轮：刷新陆行鸟数据失败，{1:0.0} 秒后重试。{2}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: buying missing feed ({1} sessions remain).",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: buying missing feed ({1} sessions remain).",
+      "Translated": "第 {0} 轮：正在购买缺少的饲料（剩余 {1} 次训练）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: cleanup/retry in {1:0.0}s. {2}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: cleanup/retry in {1:0.0}s. {2}",
+      "Translated": "第 {0} 轮：正在清理，将于 {1:0.0} 秒后重试。{2}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: feeding ({1} sessions remain).",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: feeding ({1} sessions remain).",
+      "Translated": "第 {0} 轮：正在喂食（剩余 {1} 次训练）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: refreshing Chocobo stats. {1}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: refreshing Chocobo stats. {1}",
+      "Translated": "第 {0} 轮：正在刷新陆行鸟数据。{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pass {0}: waiting to verify caps in {1:0.0}s. {2}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pass {0}: waiting to verify caps in {1:0.0}s. {2}",
+      "Translated": "第 {0} 轮：将在 {1:0.0} 秒后核实上限。{2}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pause",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause Content ID does not match the current character.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pause Content ID does not match the current character.",
+      "Translated": "暂停记录中的角色身份与当前角色不符。",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused - Resume is required",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Paused - Resume is required",
+      "Translated": "已暂停，点击「继续」后恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused by VERMAXION at a safe boundary.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Paused by VERMAXION at a safe boundary.",
+      "Translated": "VERMAXION 已在当前操作结束后暂停。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pedigree",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pedigree",
+      "Translated": "血统等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Pedigree / sex",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pedigree / sex",
+      "Translated": "血统等级 / 性别",
+      "Source": "library"
+    },
+    {
+      "Original": "Pedigree G{0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pedigree G{0}",
+      "Translated": "血统 G{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Pedigree: G{0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pedigree: G{0}",
+      "Translated": "血统：G{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Permit objective: advance pedigree",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Permit objective: advance pedigree",
+      "Translated": "许可用途：提升血统等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Permit objective: produce G9 offspring",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Permit objective: produce G9 offspring",
+      "Translated": "许可用途：培育 G9 后代",
+      "Source": "library"
+    },
+    {
+      "Original": "Permit objective: produce a missing current-pedigree counterpart",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Permit objective: produce a missing current-pedigree counterpart",
+      "Translated": "许可用途：补齐当前血统缺少的异性种鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Persisted feed-purchase intent has no item baseline.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Persisted feed-purchase intent has no item baseline.",
+      "Translated": "保存的饲料购买记录缺少购买前的物品数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Persisted feeding intent has no item baseline.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Persisted feeding intent has no item baseline.",
+      "Translated": "保存的喂食记录缺少喂食前的物品数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Phase",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Phase",
+      "Translated": "阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Pink",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Pink",
+      "Translated": "粉红色",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Plan",
+      "Translated": "计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan exceeds sessions available: {0}/{1}. The shopping list below still reflects the full plan.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Plan exceeds sessions available: {0}/{1}. The shopping list below still reflects the full plan.",
+      "Translated": "计划次数超出可用次数：{0}/{1}。下方采购清单仍按完整计划显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan training sessions, use feed already in inventory, and buy the remaining feed in one visit.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Plan training sessions, use feed already in inventory, and buy the remaining feed in one visit.",
+      "Translated": "安排训练时优先使用已有饲料，并一次购齐缺少的部分。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Plan: {0}",
+      "Translated": "计划：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Planned trainings exceed sessions available: {0}/{1}. Extra planned trainings will not fit this cycle.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Planned trainings exceed sessions available: {0}/{1}. Extra planned trainings will not fit this cycle.",
+      "Translated": "计划训练次数超出可用次数：{0}/{1}。超出的部分无法在本轮完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planned trainings this cycle: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Planned trainings this cycle: {0}",
+      "Translated": "本轮计划训练次数：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Planning math",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Planning math",
+      "Translated": "训练计划计算",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin enabled",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Plugin enabled",
+      "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup Capture",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Popup Capture",
+      "Translated": "弹窗记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing covering",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Preparing covering",
+      "Translated": "正在准备配种",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview cleanup",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Preview cleanup",
+      "Translated": "预览清理内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Produced {0}/{1} matching G9 offspring; retained unregistered.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Produced {0}/{1} matching G9 offspring; retained unregistered.",
+      "Translated": "已培育出符合要求的 G9 后代 {0}/{1} 只，已保留且未登记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Progression complete",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Progression complete",
+      "Translated": "培育完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Projected",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Projected",
+      "Translated": "预计",
+      "Source": "library"
+    },
+    {
+      "Original": "Projected from current stats using {0} planned trainings.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Projected from current stats using {0} planned trainings.",
+      "Translated": "根据当前能力值和计划中的 {0} 次训练估算。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase Plan",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchase Plan",
+      "Translated": "采购计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase callback for {0} did not change inventory. Last attempted: {1}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchase callback for {0} did not change inventory. Last attempted: {1}",
+      "Translated": "购买 {0} 后背包没有变化。上次尝试：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase cycle complete.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchase cycle complete.",
+      "Translated": "本轮采购完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase cycle failed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchase cycle failed.",
+      "Translated": "本轮采购失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase pass failed: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchase pass failed: {0}",
+      "Translated": "本轮采购失败：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchased covering permissions",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchased covering permissions",
+      "Translated": "已购买的配种许可",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchased feed could not be resolved to an exact inventory slot.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchased feed could not be resolved to an exact inventory slot.",
+      "Translated": "无法确定已购饲料在背包中的具体位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchasing supplies",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Purchasing supplies",
+      "Translated": "正在采购用品",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty on hand",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Qty on hand",
+      "Translated": "持有数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Quantity",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Race the useful G{0} {1} candidate to rank {2}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Race the useful G{0} {1} candidate to rank {2}.",
+      "Translated": "让可用的 G{0} {1} 赛鸟参赛，升至 {2} 级。",
+      "Source": "library"
+    },
+    {
+      "Original": "RaceChocoboManager did not load within 30 seconds after selecting the native Chocobo tab.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "RaceChocoboManager did not load within 30 seconds after selecting the native Chocobo tab.",
+      "Translated": "切换至游戏内陆行鸟页后已过 30 秒，RaceChocoboManager 仍未就绪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Racing chocobo page detected; waiting for RaceChocoboManager data.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Racing chocobo page detected; waiting for RaceChocoboManager data.",
+      "Translated": "已找到竞赛陆行鸟页面，正在等待 RaceChocoboManager 返回数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Racing chocobo stat refresh cancelled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Racing chocobo stat refresh cancelled.",
+      "Translated": "已取消刷新竞赛陆行鸟能力值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Racing rank: {0}/50",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Racing rank: {0}/50",
+      "Translated": "竞赛等级：{0}/50",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise the matching G9 parent to retirement: racing rank {0}/40. Matching offspring stay unregistered.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Raise the matching G9 parent to retirement: racing rank {0}/40. Matching offspring stay unregistered.",
+      "Translated": "培育这只符合要求的 G9 亲鸟直到可退役：当前竞赛等级 {0}/40。符合要求的后代保留不登记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise this non-matching G9 offspring as the missing owned counterpart; retain matching outputs.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Raise this non-matching G9 offspring as the missing owned counterpart; retain matching outputs.",
+      "Translated": "将这只未满足目标条件的 G9 后代培育为缺少的自有异性亲鸟，并保留符合条件的后代。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Rank",
+      "Translated": "等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Rating: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Rating: {0}",
+      "Translated": "综合力：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Ready",
+      "Translated": "就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready for racing",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Ready for racing",
+      "Translated": "可以参赛",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready to plan the next action",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Ready to plan the next action",
+      "Translated": "可以安排下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconcile the existing Proof of Covering before another covering.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reconcile the existing Proof of Covering before another covering.",
+      "Translated": "再次配种前，请先核对现有的配种证明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconcile the existing covering before producing another offspring.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reconcile the existing covering before producing another offspring.",
+      "Translated": "培育下一只后代前，请先核对当前配种的结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Chocobo Data",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Refresh Chocobo Data",
+      "Translated": "刷新陆行鸟数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh requested; opening Gold Saucer window...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Refresh requested; opening Gold Saucer window...",
+      "Translated": "已请求刷新，正在打开金碟游乐场窗口……",
+      "Source": "library"
+    },
+    {
+      "Original": "Register G{0} {1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Register G{0} {1}.",
+      "Translated": "登记 G{0} {1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Register the exact G{0} fledgling in {1} slot {2}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Register the exact G{0} fledgling in {1} slot {2}.",
+      "Translated": "登记位于 {1} 的第 {2} 格中的指定 G{0} 幼鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Register the exact useful G{0} {1} fledgling.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Register the exact useful G{0} {1} fledgling.",
+      "Translated": "登记指定的可用 G{0} {1} 幼鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Registered racer data is unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Registered racer data is unavailable.",
+      "Translated": "无法获取已登记赛鸟的数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Registering offspring",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Registering offspring",
+      "Translated": "正在登记后代",
+      "Source": "library"
+    },
+    {
+      "Original": "Registrar race entry captured; initial training admission is awaiting verification.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Registrar race entry captured; initial training admission is awaiting verification.",
+      "Translated": "已记录登记员的参赛入口，正等待确认进入初次训练。",
+      "Source": "library"
+    },
+    {
+      "Original": "Registration confirmation was sent but matching form consumption and current racer evidence are unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Registration confirmation was sent but matching form consumption and current racer evidence are unavailable.",
+      "Translated": "已确认登记，但尚未核实对应登记书已消耗且赛鸟已登记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Registration name stage {0} captured; final registration evidence remains pending.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Registration name stage {0} captured; final registration evidence remains pending.",
+      "Translated": "已记录登记取名步骤 {0}，等待核实最终登记结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload found an unverified feed-purchase intent; it will not be replayed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reload found an unverified feed-purchase intent; it will not be replayed.",
+      "Translated": "重新加载后发现尚未核实的饲料购买记录，不会重复购买。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reload found an unverified feeding intent; it will not be replayed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reload found an unverified feeding intent; it will not be replayed.",
+      "Translated": "重新加载后发现尚未核实的喂食记录，不会重复喂食。",
+      "Source": "library"
+    },
+    {
+      "Original": "Required Lifestream/vnavmesh vendor interaction is unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Required Lifestream/vnavmesh vendor interaction is unavailable.",
+      "Translated": "当前无法通过 Lifestream/vnavmesh 与所需商人交互。",
+      "Source": "library"
+    },
+    {
+      "Original": "Required supply purchase stopped: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Required supply purchase stopped: {0}",
+      "Translated": "已停止购买繁育用品：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Required-supply shop closed before the purchase result was verified.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Required-supply shop closed before the purchase result was verified.",
+      "Translated": "尚未核实购买结果，繁育用品商店就已关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reserve stable and vendor automation seams.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reserve stable and vendor automation seams.",
+      "Translated": "为鸟房与商店的自动操作保留接口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reserves: {0:N0} gil    {1:N0} MGP",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Reserves: {0:N0} gil    {1:N0} MGP",
+      "Translated": "预留：金币 {0:N0}，金碟币 {1:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Resume",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Retain G{0}; racing rank {1}/50.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retain G{0}; racing rank {1}/50.",
+      "Translated": "保留 G{0}，竞赛等级为 {1}/50。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retire the active G{0} {1} racer exactly.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retire the active G{0} {1} racer exactly.",
+      "Translated": "让指定的现役 G{0} {1} 赛鸟退役。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retired registrations",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retired registrations",
+      "Translated": "退役赛鸟登记书",
+      "Source": "library"
+    },
+    {
+      "Original": "Retirement confirmation sent; awaiting the retired form and cleared current racer. Any further native prompt is captured before another action.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retirement confirmation sent; awaiting the retired form and cleared current racer. Any further native prompt is captured before another action.",
+      "Translated": "已确认退役。正在等待取得退役登记书并清除现役赛鸟。在继续前会先处理游戏内出现的后续提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retirement menu selected; the resulting native window is captured before confirming retirement.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retirement menu selected; the resulting native window is captured before confirming retirement.",
+      "Translated": "已选择退役菜单，正在读取游戏窗口，之后再确认退役。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retirement rank {0} is outside 40-50.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retirement rank {0} is outside 40-50.",
+      "Translated": "退役等级 {0} 超出 40 至 50 级的范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retirement requires an intermediate rank40 racer and room for its retained form.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retirement requires an intermediate rank40 racer and room for its retained form.",
+      "Translated": "用于过渡的赛鸟需要达到 40 级才能退役，并须预留背包格存放登记书。",
+      "Source": "library"
+    },
+    {
+      "Original": "Retiring the G9 breeding parent",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retiring the G9 breeding parent",
+      "Translated": "正在让 G9 亲鸟退役",
+      "Source": "library"
+    },
+    {
+      "Original": "Retiring the intermediate racer",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Retiring the intermediate racer",
+      "Translated": "正在让过渡赛鸟退役",
+      "Source": "library"
+    },
+    {
+      "Original": "Review the selected stock before discarding.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Review the selected stock before discarding.",
+      "Translated": "丢弃前请核对所选种鸟储备。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rollout phases",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Rollout phases",
+      "Translated": "上线阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Run Full Cycle",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Run Full Cycle",
+      "Translated": "执行完整流程",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Running",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved collection evidence is invalid; no collection will be replayed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Saved collection evidence is invalid; no collection will be replayed.",
+      "Translated": "保存的领取记录无效，不会重复领取。",
+      "Source": "library"
+    },
+    {
+      "Original": "Scroll down to \"The Dumpster Fire\" channel to discuss issues / suggestions for specific plugins.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Scroll down to \"The Dumpster Fire\" channel to discuss issues / suggestions for specific plugins.",
+      "Translated": "向下滚动到「The Dumpster Fire」频道，可讨论指定插件的问题或建议。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected registration form; the resulting registration window is captured for verification.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Selected registration form; the resulting registration window is captured for verification.",
+      "Translated": "已选择登记书，正在读取随后弹出的登记窗口以便核实。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selecting Feed...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Selecting Feed...",
+      "Translated": "正在选择「喂食」……",
+      "Source": "library"
+    },
+    {
+      "Original": "Selecting vendor page...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Selecting vendor page...",
+      "Translated": "正在选择商店页……",
+      "Source": "library"
+    },
+    {
+      "Original": "Session cap: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Session cap: {0}",
+      "Translated": "训练次数上限：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Sessions: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Sessions: {0}",
+      "Translated": "训练次数：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sex",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Sex",
+      "Translated": "性别",
+      "Source": "library"
+    },
+    {
+      "Original": "Shell and docs",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Shell and docs",
+      "Translated": "框架和文档",
+      "Source": "library"
+    },
+    {
+      "Original": "Show DTR bar entry",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Show DTR bar entry",
+      "Translated": "显示服务器信息栏条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip this feeding round",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Skip this feeding round",
+      "Translated": "跳过本轮喂食",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipped this feeding round: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Skipped this feeding round: {0}",
+      "Translated": "已跳过本轮喂食：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Stable loop",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stable loop",
+      "Translated": "鸟房循环流程",
+      "Source": "library"
+    },
+    {
+      "Original": "Stamina",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stamina",
+      "Translated": "体力",
+      "Source": "library"
+    },
+    {
+      "Original": "Stars",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stars",
+      "Translated": "星数",
+      "Source": "library"
+    },
+    {
+      "Original": "Start / Resume Breeding",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start / Resume Breeding",
+      "Translated": "开始／继续配种",
+      "Source": "library"
+    },
+    {
+      "Original": "Start a new offspring batch only after the existing action, queue and covering have settled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start a new offspring batch only after the existing action, queue and covering have settled.",
+      "Translated": "请等待当前操作、队列和配种全部结束，再开始新一批后代培育。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start/Stop Adoption",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start/Stop Adoption",
+      "Translated": "开始／停止领取幼鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Start/Stop Covering Selector",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start/Stop Covering Selector",
+      "Translated": "开始／停止选择配种对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Start/Stop Fledgling Selector",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start/Stop Fledgling Selector",
+      "Translated": "开始／停止选择幼鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Start/Stop Retirement",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Start/Stop Retirement",
+      "Translated": "开始／停止退役",
+      "Source": "library"
+    },
+    {
+      "Original": "Stat",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stat",
+      "Translated": "能力值",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Content ID does not match the current character.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Status Content ID does not match the current character.",
+      "Translated": "状态记录中的角色身份与当前角色不符。",
+      "Source": "library"
+    },
+    {
+      "Original": "Status to chat",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Status to chat",
+      "Translated": "在聊天栏显示状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Stock cleanup completed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stock cleanup completed.",
+      "Translated": "已清理种鸟储备。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stock cleanup is active; stop it before starting breeding.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stock cleanup is active; stop it before starting breeding.",
+      "Translated": "正在清理种鸟储备，请先停止清理再开始配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stock cleanup: {0:N0} / {1:N0} removed.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stock cleanup: {0:N0} / {1:N0} removed.",
+      "Translated": "种鸟储备清理：已移除 {0:N0} / {1:N0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stop",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop until Resume",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stop until Resume",
+      "Translated": "停止并等待手动继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped manually.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Stopped manually.",
+      "Translated": "已手动停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Support on Ko-fi",
+      "Translated": "在 Ko-fi 上支持开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Suspend identity mismatch.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Suspend identity mismatch.",
+      "Translated": "暂停记录的身份不符。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target cycle paused at a safe boundary.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target cycle paused at a safe boundary.",
+      "Translated": "当前步骤结束后已暂停目标培育。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target feed purchase blocked: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target feed purchase blocked: {0}",
+      "Translated": "目标饲料购买受阻：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Target feeding blocked: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target feeding blocked: {0}",
+      "Translated": "目标喂食受阻：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Target feeding purchase: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target feeding purchase: {0}",
+      "Translated": "目标喂食采购：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Target feeding: {0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target feeding: {0}",
+      "Translated": "目标喂食：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Target inputs changed while an immediate feed action was awaiting evidence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target inputs changed while an immediate feed action was awaiting evidence.",
+      "Translated": "正在等待确认本次喂食结果时，目标条件发生了变化。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target pedigree G{0} is outside G2-G9.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Target pedigree G{0} is outside G2-G9.",
+      "Translated": "目标血统 G{0} 超出 G2 至 G9 的范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teal",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Teal",
+      "Translated": "青绿色",
+      "Source": "library"
+    },
+    {
+      "Original": "Text only",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Text only",
+      "Translated": "仅文字",
+      "Source": "library"
+    },
+    {
+      "Original": "The /goldsaucer command was not accepted.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The /goldsaucer command was not accepted.",
+      "Translated": "游戏未接受 /goldsaucer 命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "The Tack & Feed Trader is unavailable for interaction.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The Tack & Feed Trader is unavailable for interaction.",
+      "Translated": "暂时无法与鸟具和饲料商人交谈。",
+      "Source": "library"
+    },
+    {
+      "Original": "The acceptable colours are unavailable in current game data.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The acceptable colours are unavailable in current game data.",
+      "Translated": "当前游戏数据中找不到可选羽色。",
+      "Source": "library"
+    },
+    {
+      "Original": "The active G{0} racer is above target G{1}.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The active G{0} racer is above target G{1}.",
+      "Translated": "现役 G{0} 赛鸟的血统已高于目标 G{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "The active G{0} racer is target-ready.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The active G{0} racer is target-ready.",
+      "Translated": "现役 G{0} 赛鸟已达到目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "The active G{0} {1} duplicates an owned usable parent and no productive pair is available.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The active G{0} {1} duplicates an owned usable parent and no productive pair is available.",
+      "Translated": "现役 G{0} {1} 与已有的可用亲鸟重复，且当前无法配成合适的一对。",
+      "Source": "library"
+    },
+    {
+      "Original": "The active racer's sex is unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The active racer's sex is unavailable.",
+      "Translated": "无法获取现役赛鸟的性别。",
+      "Source": "library"
+    },
+    {
+      "Original": "The completed feed batch does not contain the current training selection.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The completed feed batch does not contain the current training selection.",
+      "Translated": "已完成的饲料批次中没有当前所选训练的饲料。",
+      "Source": "library"
+    },
+    {
+      "Original": "The covering confirmation would cross the gil reserve. Explicit Resume is required.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The covering confirmation would cross the gil reserve. Explicit Resume is required.",
+      "Translated": "确认配种将动用预留金币。请手动点击「继续」。",
+      "Source": "library"
+    },
+    {
+      "Original": "The current racer exceeds the selected target pedigree; retain it.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The current racer exceeds the selected target pedigree; retain it.",
+      "Translated": "当前赛鸟的血统高于所选目标，请保留。",
+      "Source": "library"
+    },
+    {
+      "Original": "The desired inherited ability is unavailable in current game data.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The desired inherited ability is unavailable in current game data.",
+      "Translated": "当前游戏数据中找不到期望遗传的能力。",
+      "Source": "library"
+    },
+    {
+      "Original": "The feed batch is not fully present in inventory; reconcile its pending purchases before another vendor visit.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The feed batch is not fully present in inventory; reconcile its pending purchases before another vendor visit.",
+      "Translated": "背包中尚未收齐本批饲料。再次前往商人处之前，请先核对待确认的购买记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "The initial racing tutorial awaits the next daily allowance.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The initial racing tutorial awaits the next daily allowance.",
+      "Translated": "初次竞赛教学正等待下一次每日参赛额度。",
+      "Source": "library"
+    },
+    {
+      "Original": "The native Select Chocobo list entry is unavailable or disabled.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The native Select Chocobo list entry is unavailable or disabled.",
+      "Translated": "游戏内「选择陆行鸟」选项不可用或已停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "The native gil-shop purchase could not be dispatched safely.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The native gil-shop purchase could not be dispatched safely.",
+      "Translated": "未能确认金币商店的购买条件，未下单。",
+      "Source": "library"
+    },
+    {
+      "Original": "The observed Chocobo tab is not ready for its native button event.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The observed Chocobo tab is not ready for its native button event.",
+      "Translated": "当前陆行鸟页尚不能接受游戏按钮操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "The observed retirement confirmation button is unavailable.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The observed retirement confirmation button is unavailable.",
+      "Translated": "当前无法使用退役确认按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "The registered G9 racer does not have a confirmed requested trait. Retain it and select suitable breeding stock.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The registered G9 racer does not have a confirmed requested trait. Retain it and select suitable breeding stock.",
+      "Translated": "尚未确认已登记的 G9 赛鸟具备指定特征。请保留它，并另选合适的种鸟。",
+      "Source": "library"
+    },
+    {
+      "Original": "The registered G{0} racer is below the retained G{1} pedigree; lower-generation racing is stopped.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The registered G{0} racer is below the retained G{1} pedigree; lower-generation racing is stopped.",
+      "Translated": "已登记的 G{0} 赛鸟低于保留的 G{1} 血统，已停止让低代赛鸟参赛。",
+      "Source": "library"
+    },
+    {
+      "Original": "The required breeding supply was not found in the verified native shop.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The required breeding supply was not found in the verified native shop.",
+      "Translated": "在已核对的游戏商店中未找到所需繁育用品。",
+      "Source": "library"
+    },
+    {
+      "Original": "The required breeding supply would cross the {0} reserve.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The required breeding supply would cross the {0} reserve.",
+      "Translated": "购买所需繁育用品将动用预留的{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "The required covering fee would cross the gil reserve. Explicit Resume is required.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The required covering fee would cross the gil reserve. Explicit Resume is required.",
+      "Translated": "配种费将动用预留金币。请手动点击「继续」。",
+      "Source": "library"
+    },
+    {
+      "Original": "The required supply does not match the selected breeding mode and supplier.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The required supply does not match the selected breeding mode and supplier.",
+      "Translated": "所需用品与所选配种模式及供应商不符。",
+      "Source": "library"
+    },
+    {
+      "Original": "The retained covering parent changed before native selection.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The retained covering parent changed before native selection.",
+      "Translated": "在游戏内选择之前，保留的配种亲鸟发生了变化。",
+      "Source": "library"
+    },
+    {
+      "Original": "The selected covering stock is captured; native selected-parent evidence and the fee require verification before Commence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The selected covering stock is captured; native selected-parent evidence and the fee require verification before Commence.",
+      "Translated": "已记录所选种鸟。开始配种前，须核对游戏内选中的亲鸟及费用。",
+      "Source": "library"
+    },
+    {
+      "Original": "The selected registration form changed before opening its context menu.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The selected registration form changed before opening its context menu.",
+      "Translated": "打开右键菜单前，所选登记书发生了变化。",
+      "Source": "library"
+    },
+    {
+      "Original": "The selected target feed item could not be resolved.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The selected target feed item could not be resolved.",
+      "Translated": "无法确定选中的目标饲料是哪件物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "The verified required-supply shop closed before purchase.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "The verified required-supply shop closed before purchase.",
+      "Translated": "已核对的繁育用品商店在下单前关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "This log has reached Dalamud's 100 MiB limit. Logging may have stopped, so recent activity may be missing and this log may not help troubleshoot your current issue.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "This log has reached Dalamud's 100 MiB limit. Logging may have stopped, so recent activity may be missing and this log may not help troubleshoot your current issue.",
+      "Translated": "此日志已达到 Dalamud 的 100 MiB 上限，可能已停止记录。近期操作可能缺失，因而可能无法据此排查当前问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "This progression requires V3; older callers cannot remove its spending limits.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "This progression requires V3; older callers cannot remove its spending limits.",
+      "Translated": "当前培育流程要求使用 V3。旧版调用方无法取消其支出限制。",
+      "Source": "library"
+    },
+    {
+      "Original": "This target cycle is owned by VERMAXION; use its Target Pedigree controls.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "This target cycle is owned by VERMAXION; use its Target Pedigree controls.",
+      "Translated": "此轮目标培育由 VERMAXION 管理，请使用其中的目标血统设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Timed out moving near Race Chocobo Trainer.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Timed out moving near Race Chocobo Trainer.",
+      "Translated": "前往竞赛陆行鸟训练师附近超时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Timed out moving near Tack & Feed Trader.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Timed out moving near Tack & Feed Trader.",
+      "Translated": "前往鸟具和饲料商人附近超时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Timed out waiting to arrive in Chocobo Square.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Timed out waiting to arrive in Chocobo Square.",
+      "Translated": "等待抵达陆行鸟广场超时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Total",
+      "Translated": "合计",
+      "Source": "library"
+    },
+    {
+      "Original": "Total MGP needed: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Total MGP needed: {0:N0}",
+      "Translated": "所需金碟币总计：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Total gil needed: {0:N0}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Total gil needed: {0:N0}",
+      "Translated": "所需金币总计：{0:N0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Track current stats and feed plans.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Track current stats and feed plans.",
+      "Translated": "查看当前能力值和喂食计划。",
+      "Source": "library"
+    },
+    {
+      "Original": "Trainer feed flow stayed unstable after {0} recovery attempts. Last issue: {1}",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Trainer feed flow stayed unstable after {0} recovery attempts. Last issue: {1}",
+      "Translated": "尝试恢复 {0} 次后，训练师喂食流程仍不稳定。上次问题：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Trainer feed inventory did not open after selecting the trainer menu entry.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Trainer feed inventory did not open after selecting the trainer menu entry.",
+      "Translated": "选择训练师菜单项后，未打开喂食用的背包窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Training Plan",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Training Plan",
+      "Translated": "训练计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Training confirmation window did not appear after Commence.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Training confirmation window did not appear after Commence.",
+      "Translated": "点击开始后未出现训练确认窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Training plan cleared.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Training plan cleared.",
+      "Translated": "已清除训练计划。",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Transparency",
+      "Translated": "透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency visible on main window",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Transparency visible on main window",
+      "Translated": "在主窗口显示透明度设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Traveling to Chocobo Square...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Traveling to Chocobo Square...",
+      "Translated": "正在前往陆行鸟广场……",
+      "Source": "library"
+    },
+    {
+      "Original": "UI fonts failed to load. See the plugin log.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "UI fonts failed to load. See the plugin log.",
+      "Translated": "界面字体加载失败，请查看插件日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Unavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfocused delay (seconds)",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Unfocused delay (seconds)",
+      "Translated": "失去焦点后等待时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfocused opacity (%)",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Unfocused opacity (%)",
+      "Translated": "失去焦点时的不透明度（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Refresh Chocobo Data or /chokeabo refresh to load racing chocobo stats.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Use Refresh Chocobo Data or /chokeabo refresh to load racing chocobo stats.",
+      "Translated": "点击「刷新陆行鸟数据」或输入 /chokeabo refresh，以加载竞赛陆行鸟能力值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the active racer's remaining training sessions before retirement.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Use the active racer's remaining training sessions before retirement.",
+      "Translated": "请在退役前用完现役赛鸟的剩余训练次数。",
+      "Source": "library"
+    },
+    {
+      "Original": "VERMAXION owns progression settings and the daily racing allowance. Choke-abo carries out feeding and breeding.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "VERMAXION owns progression settings and the daily racing allowance. Choke-abo carries out feeding and breeding.",
+      "Translated": "VERMAXION 管理培育设置及每日参赛额度，Choke-abo 负责喂食和配种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Vendor flow",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Vendor flow",
+      "Translated": "商店采购流程",
+      "Source": "library"
+    },
+    {
+      "Original": "Verifying the registered racer",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Verifying the registered racer",
+      "Translated": "正在核实已登记的赛鸟",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for Commence...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for Commence...",
+      "Translated": "正在等待开始……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for Feed context menu...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for Feed context menu...",
+      "Translated": "正在等待喂食菜单……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for discard result...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for discard result...",
+      "Translated": "正在等待丢弃结果……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for feed inventory...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for feed inventory...",
+      "Translated": "正在等待打开喂食背包……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for purchase result...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for purchase result...",
+      "Translated": "正在等待购买结果……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for racing chocobo data...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for racing chocobo data...",
+      "Translated": "正在等待竞赛陆行鸟数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for training to complete...",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Waiting for training to complete...",
+      "Translated": "正在等待训练完成……",
+      "Source": "library"
+    },
+    {
+      "Original": "Window appearance",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "Window appearance",
+      "Translated": "窗口外观",
+      "Source": "library"
+    },
+    {
+      "Original": "XA Slave log tools could not be opened.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "XA Slave log tools could not be opened.",
+      "Translated": "无法打开 XA Slave 日志工具。",
+      "Source": "library"
+    },
+    {
+      "Original": "remaining plan reached zero",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "remaining plan reached zero",
+      "Translated": "剩余计划次数已用完",
+      "Source": "library"
+    },
+    {
+      "Original": "session budget reached zero",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "session budget reached zero",
+      "Translated": "可用训练次数已用完",
+      "Source": "library"
+    },
+    {
+      "Original": "vnavmesh is unavailable or not ready for target feeding.",
+      "Container": "ChokeAbo.Localization.Strings_en.resources",
+      "Key": "vnavmesh is unavailable or not ready for target feeding.",
+      "Translated": "vnavmesh 不可用或尚未就绪，无法执行目标喂食。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

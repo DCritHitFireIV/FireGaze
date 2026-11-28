@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "FPSPlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "FPS Display",
+      "Context": "FPSPlugin.OnFrameworkUpdate",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get",
+      "Translated": "帧率显示",
+      "Source": "library"
+    },
+    {
+      "Original": "FPS Plugin",
+      "Context": "FPSPlugin.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "帧率插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Open config window for ",
+      "Context": "FPSPlugin.dll 0x06000011:IL_001C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开设置窗口： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracking Timespan (Seconds)",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_0116",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "统计时段（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Display##fpsPluginEnabledSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_003A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "显示帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Tooltip##fpsPluginDtrTooltip",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_0066",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用悬停提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open settings##fpsPluginDtrOpenSettings",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_007E",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "点击打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Decimals##fpsPluginDecimalsSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_0096",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "显示小数位",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Average##fpsPluginShowAverageSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_00AE",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "显示平均帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Minimum##fpsPluginShowMinimumSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_00C6",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "显示最低帧率",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Labels##fpsPluginNoLabelsSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_00DE",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "隐藏标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Alternative FPS Label##fpsPluginAlternativeFPSLabelSetting",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_00FE",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "使用另一种帧率标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore Default##fpsPluginDefaultsButton",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_0140",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Context": "FPSPlugin.dll 0x0600001C:IL_01D7",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "在 Ko-fi 上赞助",
+      "Source": "library"
+    },
+    {
+      "Original": "Average:",
+      "Context": "FPSPlugin.dll 0x06000010:IL_00AB",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "平均：",
+      "Source": "library"
+    },
+    {
+      "Original": "\nMinimum:",
+      "Context": "FPSPlugin.dll 0x06000010:IL_00C1",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "\n最低：",
+      "Source": "library"
+    },
+    {
+      "Original": "Avg:",
+      "Context": "FPSPlugin.dll 0x06000010:IL_0277",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "平均：",
+      "Source": "library"
+    },
+    {
+      "Original": "Min:",
+      "Context": "FPSPlugin.dll 0x06000010:IL_02ED",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "最低：",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

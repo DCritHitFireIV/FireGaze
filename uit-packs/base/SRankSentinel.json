@@ -1,0 +1,422 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SRankSentinel",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " enabled.",
+      "Context": "Plugin.DrawPluginsPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": " removed ",
+      "Context": "Plugin.InvalidateExternalDeath",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 已移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": " settings: ",
+      "Context": "Plugin.DrawCompanionActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 设置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior profiles are independent from the expansion hunting checkboxes.",
+      "Context": "Plugin.DrawDistanceControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "行为方案可独立于各资料片的狩猎开关设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic",
+      "Context": "Plugin..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "经典",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic uses the compact one-page layout. Sentinel Modern groups the same settings into pages.",
+      "Context": "Plugin.DrawAppearanceControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "经典主题在一页中显示全部设置，现代主题将相同的设置分到不同页面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current hunt skipped manually",
+      "Context": "Plugin.DrawRecoveryControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已手动跳过当前狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Current: ",
+      "Context": "Plugin.DrawHuntStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "DISTANCE PROFILES",
+      "Context": "Plugin.DrawClassicUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "距离方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance Profiles",
+      "Context": "Plugin.CreateModernNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "距离方案",
+      "Source": "library"
+    },
+    {
+      "Original": "EXPANSION HUNTING",
+      "Context": "Plugin.DrawClassicUi",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按资料片选择狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Emergency clearance##",
+      "Context": "Plugin.DrawDistanceProfileValues",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "紧急避让距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable vnavmesh. SRankSentinel requests navigation when needed.",
+      "Context": "CompanionPlugins..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "请启用 vnavmesh。SRankSentinel 会在需要时请求寻路。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "Plugin.DrawEnabledControl",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Engage only at/below HP %##",
+      "Context": "Plugin.DrawDistanceProfileValues",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "仅在目标生命值百分比不高于此值时交战",
+      "Source": "library"
+    },
+    {
+      "Original": "Future placeholder — hunt data not available",
+      "Context": "Plugin.DrawExpansionControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "预留位置，尚无可用的狩猎数据",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Context": "Plugin.CreateModernNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "InFlight was lost before or during the long-distance flying route",
+      "Context": "Plugin.TickApproachAlertCoordinates",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "开始长距离飞行前或途中失去了飞行状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Incidental aggro ended; confirming combat is clear before resuming",
+      "Context": "Plugin.TickAvoidIncidentalAggro",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已解除意外仇恨，确认脱战后继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Initial coordinate stop##",
+      "Context": "Plugin.DrawDistanceProfileValues",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "初始坐标停靠点",
+      "Source": "library"
+    },
+    {
+      "Original": "Internal error while idle; no hunt was active",
+      "Context": "Plugin.OnFrameworkUpdate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "空闲时发生内部错误，当时没有进行中的狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Context": "Plugin.CreateModernNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual reset requested",
+      "Context": "Plugin.DrawRecoveryControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已请求手动重置",
+      "Source": "library"
+    },
+    {
+      "Original": "No ",
+      "Context": "Plugin.TickPostKillSsGrace",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "否 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Parking candidate rejected: validated flight route was lost",
+      "Context": "Plugin.PollCrowdParkingPath",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已放弃该停留点：先前确认的飞行路线已失效",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Context": "Plugin.DrawCompanionCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugins",
+      "Context": "Plugin.CreateModernNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued-alert freshness (minutes)",
+      "Context": "Plugin.DrawRecoveryControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "队列提醒的有效期（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued: ",
+      "Context": "Plugin.DrawHuntStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已加入队列： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed ",
+      "Context": "Plugin.RemoveKilledQueuedAlerts",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Return confirmed; waiting for zone transition",
+      "Context": "Plugin.TickResetToUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已确认返回，等待切换区域",
+      "Source": "library"
+    },
+    {
+      "Original": "S Rank Sentinel###SRankSentinel",
+      "Context": "Plugin.DrawUi",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "S 级恶名精英哨兵",
+      "Source": "library"
+    },
+    {
+      "Original": "SKIP CURRENT + KEEP QUEUE",
+      "Context": "Plugin.DrawRecoveryControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跳过当前目标并保留队列",
+      "Source": "library"
+    },
+    {
+      "Original": "STOP + RESET THROUGH UL'DAH",
+      "Context": "Plugin.DrawRecoveryControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止并经由乌尔达哈重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Safe parking clearance##",
+      "Context": "Plugin.DrawDistanceProfileValues",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "安全停留距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Save settings",
+      "Context": "Plugin.DrawModernContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Sentinel Modern",
+      "Context": "Plugin..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "哨兵现代版",
+      "Source": "library"
+    },
+    {
+      "Original": "Sonar alert could not be parsed; no travel was started",
+      "Context": "Plugin.OnSonarChatMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法解析 Sonar 提醒，未开始移动",
+      "Source": "library"
+    },
+    {
+      "Original": "State: ",
+      "Context": "Plugin.DrawHuntStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "Plugin.DrawCompanionCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "Plugin.DrawHuntStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped manually",
+      "Context": "Plugin.DrawRecoveryControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已手动停止",
+      "Source": "library"
+    },
+    {
+      "Original": "The game rejected the Return action; retrying later",
+      "Context": "Plugin.TickDeadReturnRecovery",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "游戏拒绝了返回操作，将稍后再试",
+      "Source": "library"
+    },
+    {
+      "Original": "Theme",
+      "Context": "Plugin.CreateModernNavigation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Traveling normally through Prologue Gate to the Dravanian Hinterlands",
+      "Context": "Plugin.TickSelectHinterlandsGateway",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正经由序言大门（Prologue Gate）前往龙堡内陆低地",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the button below to switch to Classic Theme.",
+      "Context": "Plugin.DrawModernContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "点击下方按钮切换为经典主题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Validating the return leg to the exact parked position",
+      "Context": "Plugin.PollParkingFacingSettleReturnPath",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在检查返回原停留点的路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Window theme",
+      "Context": "Plugin.DrawAppearanceControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "窗口主题",
+      "Source": "library"
+    },
+    {
+      "Original": "World Visit to ",
+      "Context": "Plugin.TickWorldVisit",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "跨界前往 ",
+      "Source": "library"
+    },
+    {
+      "Original": "in combat",
+      "Context": "Plugin.TickSafeWait",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "战斗中",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

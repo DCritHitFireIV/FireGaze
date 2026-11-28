@@ -1,0 +1,657 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Armoryeet",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nItem ID: ",
+      "Context": "PluginUI.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n物品 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "   Free slots: ",
+      "Context": "PluginUI.DrawSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "   空余栏位： ",
+      "Source": "library"
+    },
+    {
+      "Original": "   Protected: ",
+      "Context": "PluginUI.DrawSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "   受保护： ",
+      "Source": "library"
+    },
+    {
+      "Original": "250 ms is the recommended default. Move retries still use their own safety interval.",
+      "Context": "ConfigUI.DrawMovement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "推荐默认值为 250 毫秒。转移重试使用单独的安全间隔。",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "ConfigUI.DrawMovement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "ConfigUI.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoryeet Settings###ArmoryeetSettings",
+      "Context": "ConfigUI..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Armoryeet 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Body",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "身体",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "PluginUI.DrawConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All###",
+      "Context": "ConfigUI.Group",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全部清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Copy beside any row, then paste the command into chat.",
+      "Context": "CommandReferenceUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击对应行旁的复制，再将命令粘贴到聊天栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Closes only after completion has been reconciled safely.",
+      "Context": "ConfigUI.DrawBehavior",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "确认转移完成后才会关闭窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "CommandReferenceUI.DrawSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm move###ArmoryeetConfirm",
+      "Context": "PluginUI.DrawConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "确认转移",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm or cancel the pending move first.",
+      "Context": "PluginUI.GetDisabledReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请先确认或取消待执行的转移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Control what happens after a reviewed move finishes.",
+      "Context": "ConfigUI.DrawBehavior",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "设置完成已核对物品的转移后要执行的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "CommandReferenceUI.DrawSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Count",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay between items",
+      "Context": "ConfigUI.DrawMovement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "逐件转移间隔",
+      "Source": "library"
+    },
+    {
+      "Original": "Ears",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "耳饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Feet",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "脚部",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by item name...",
+      "Context": "PluginUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按物品名称筛选……",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter items",
+      "Context": "PluginUI.DrawReview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "筛选物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Group",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Head",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "头部",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide skipped details",
+      "Context": "PluginUI.DrawProgress",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "隐藏跳过详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Immediate expert commands",
+      "Context": "CommandReferenceUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "立即执行的高级命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ",
+      "Context": "ArmouryScanner.Scan",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ID: ",
+      "Context": "PluginUI.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "物品 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Hand",
+      "Context": "PluginUI.FormatInventoryType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Context": "PluginUI.DrawConfirmation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Move ",
+      "Context": "PluginUI.DrawConfirmation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "移动 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Move reviewed selections without confirmation",
+      "Context": "ConfigUI.DrawMovement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过确认并转移已核对的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Neck",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "项链",
+      "Source": "library"
+    },
+    {
+      "Original": "No unregistered armoury items found.",
+      "Context": "PluginUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "兵装库中没有尚未登记的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Off Hand",
+      "Context": "PluginUI.FormatInventoryType",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Open reviewed results",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "打开已核对的结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Open settings",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening and scanning",
+      "Context": "ConfigUI.DrawBehavior",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开与扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused: ",
+      "Context": "ItemMover.FormatStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已暂停： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Prepares results as soon as your character becomes available.",
+      "Context": "ConfigUI.DrawBehavior",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "角色加载完成后立即准备扫描结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purpose",
+      "Context": "CommandReferenceUI.DrawSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "用途",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshes every Armoury group after the final item is processed.",
+      "Context": "ConfigUI.DrawBehavior",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "处理最后一件物品后，刷新兵装库中的所有分组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rings",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "戒指",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan after login",
+      "Context": "ConfigUI.DrawBehavior",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "登录后扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan scope",
+      "Context": "ConfigUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "扫描范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan when the main window opens",
+      "Context": "ConfigUI.DrawBehavior",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开主窗口时扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All###",
+      "Context": "ConfigUI.Group",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select at least one item.",
+      "Context": "PluginUI.GetDisabledReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请至少选择一件物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected ",
+      "Context": "PluginUI.DrawSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已选中 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection",
+      "Context": "PluginUI.DrawGroup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection or capacity changed. Cancel and review again.",
+      "Context": "PluginUI.DrawConfirmation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "所选物品或剩余容量已变化，请取消并重新核对。",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipping confirmation starts moves immediately. Capacity and selection checks still apply.",
+      "Context": "ConfigUI.DrawMovement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "跳过确认后会立即转移。仍会检查选择和背包容量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Some items are selected. Click to select the whole group.",
+      "Context": "PluginUI.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已选中部分物品。点击可选中整组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop the active queue",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "停止当前队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Timing",
+      "Context": "ConfigUI.DrawMovement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "时间设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use /yeet help for aliases and the full list.",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "使用 /yeet help 查看命令别名和完整列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use /yeet scan for the reviewed workflow with selection and capacity checks.",
+      "Context": "CommandReferenceUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用 /yeet scan 检查物品，确认选择并核对背包容量后再转移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waist",
+      "Context": "ConfigUI.DrawScanScope",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "腰部",
+      "Source": "library"
+    },
+    {
+      "Original": "clear",
+      "Context": "PluginUI.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "main hand",
+      "Context": "Plugin.OnYeetCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "off hand",
+      "Context": "Plugin.OnYeetCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "select",
+      "Context": "PluginUI.DrawGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "the item in the Armoury slot changed",
+      "Context": "PluginUI.FormatSkipReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "兵装库栏位中的物品已更换",
+      "Source": "library"
+    },
+    {
+      "Original": "the move did not complete after repeated attempts",
+      "Context": "PluginUI.FormatSkipReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "多次尝试后仍未完成转移",
+      "Source": "library"
+    },
+    {
+      "Original": "the scanned Armoury slot is now empty",
+      "Context": "PluginUI.FormatSkipReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "扫描到的兵装库栏位已清空",
+      "Source": "library"
+    },
+    {
+      "Original": "the transfer could not be confirmed; rescan before retrying",
+      "Context": "PluginUI.FormatSkipReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "无法确认转移结果，请重新扫描后再试",
+      "Source": "library"
+    },
+    {
+      "Original": "↻  Rescan",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "↻ 重新扫描",
+      "Source": "library"
+    },
+    {
+      "Original": "■  Stop",
+      "Context": "PluginUI.DrawActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "■ 停止",
+      "Source": "library"
+    },
+    {
+      "Original": "✓  Select All",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "✓ 全选",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

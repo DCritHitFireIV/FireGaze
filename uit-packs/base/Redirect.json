@@ -1,0 +1,178 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Redirect",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Role Actions",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": " 职能技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "PluginUI.DrawActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions from macros",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "通过宏使用的技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow these actions to queue:",
+      "Context": "PluginUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "允许以下技能进入技能队列：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground targeted actions",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "地面目标技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore range and target type errors",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "忽略距离与目标类型错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Include friendly target models",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包括鼠标指向的友方角色模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Include hostile target models",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包括鼠标指向的敌方角色模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the configuration menu",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Place all ground targets at the cursor",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将所有地面技能放在鼠标指针位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "PluginUI.DrawActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Redirect",
+      "Context": "Plugin.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "技能目标重定向",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "PluginUI.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a job to get started!",
+      "Context": "PluginUI.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请选择一个职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target redirection options:",
+      "Context": "PluginUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标重定向选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "Treat all friendly actions as mouseovers",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有友方技能都作用于鼠标指向的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Treat all ground-targeted actions as mouseovers",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有地面技能都作用于鼠标指向的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Treat all hostile actions as mouseovers",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所有敌对技能都作用于鼠标指向的目标",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

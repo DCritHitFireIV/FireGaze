@@ -1,0 +1,591 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Deliveroo",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the configuration",
+      "Context": "DeliverooPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Deliveroo - Configuration###DeliverooConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ LWindow..ctor",
+      "Translated": "Deliveroo 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Items for Auto-Buy",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "自动购买物品",
+      "Source": "library"
+    },
+    {
+      "Original": " (Limit: ",
+      "Context": "ConfigWindow.DrawBuyList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": " (上限: ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use same quantity for global and character-specific lists",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "通用清单和角色专用清单使用相同数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove ",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item...",
+      "Context": "ConfigWindow.DrawBuyList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "添加物品…",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "ConfigWindow.DrawBuyList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Settings",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "角色设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Character: ",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前角色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable plugin for this character",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为此角色禁用插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Use custom purchase list for this character",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为此角色使用自定义购买清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "清空",
+      "Source": "library"
+    },
+    {
+      "Original": "Use 'Hide Armoury Chest Items' filter",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用“不显示兵装库内的物品”筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "The default filter for all characters is 'Hide Gear Set Items', but you may want to override this to hide all Armoury Chest items (regardless of whether they're part of a gear set) e.g. for your main character.",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "所有角色的默认筛选为“隐藏套装物品”，但你可能希望覆盖此设置以隐藏所有兵装库物品（无论它们是否属于套装），例如为你的主角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 'Minimum Seals to keep' setting",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "忽略“保留的最低军票数”设置",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, all GC seals will be spent. This is effectively the same as setting 'Minimum Seals to keep' to 0.",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "启用后可以花光全部军票，等同于将“保留的最低军票数”设为 0。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove character-specific settings",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "移除角色专用设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to remove the configuration for ",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 CTRL 以移除以下角色的设置 ",
+      "Source": "library"
+    },
+    {
+      "Original": " (non-reversible).",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " （不可撤销）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable character-specific settings",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "启用角色专用设置",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not currently logged in.",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前尚未登录角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional Settings",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "其他设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Seals to keep (e.g. for Squadron Missions)",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "保留的最低军票数（例如用于冒险者分队任务）",
+      "Source": "library"
+    },
+    {
+      "Original": "Use a different amount at max rank",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "满军衔时使用另一保留数",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum seals to keep at max rank",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "满军衔时保留的最低军票数",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Turn-In Key",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "快速交纳按键",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat channel for status updates",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "发送状态消息的聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause when reaching selected FC Rank",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "部队达到指定等级时暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Warning",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "显示警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Turn-In",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "禁止交纳",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior when not on Home World",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "造访其他服务器时的操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable the game setting 'Limit frame rate when client is inactive'",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭游戏内“窗口处于非激活状态时限制帧率”设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set frame rate to uncapped",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将帧率设为无限制",
+      "Source": "library"
+    },
+    {
+      "Original": "GC Delivery###DeliverooTurnIn",
+      "Context": "TurnInWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ LWindow..ctor",
+      "Translated": "大国防联军筹备",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have the required rank for Expert Delivery.",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "你的军衔尚未达到筹备稀有品的要求。",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn-in disabled, you are not on your home world.",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前不在所属服务器，交纳已停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Handle GC turn ins/exchange automatically",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动处理大国防联军交纳与兑换",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not on your home world and will not earn FC points.",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前不在所属服务器，无法获得部队战绩。",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have an active seal buff.",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前没有生效的军票加成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Buff: ",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前加成： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Priority Seal Allowance (15%)",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "使用军票提高（15%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Click an item to turn it in without confirmation",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "点击物品即可跳过确认并交纳",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold '",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "按住“",
+      "Source": "library"
+    },
+    {
+      "Original": "' when clicking an item to turn it in without confirmation.",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "”并点击物品即可直接交纳，无需确认。",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug (State): ",
+      "Context": "TurnInWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "调试（状态）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "You meet all requirements to rank up to ",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已满足全部晋升条件，下一军衔： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ranking up to ",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "晋升至 ",
+      "Source": "library"
+    },
+    {
+      "Original": " requires:",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 需要：",
+      "Source": "library"
+    },
+    {
+      "Original": " GC seals",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": " 军票",
+      "Source": "library"
+    },
+    {
+      "Original": "Complete Hunting Log #",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "完成讨伐笔记第",
+      "Source": "library"
+    },
+    {
+      "Original": "Items to buy (",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "要购买的物品（",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "添加物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure available Items",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "设置可购买的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##Enabled",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Check Retainer Inventory for items (requires AllaganTools)",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "检查雇员持有的物品（需要 AllaganTools）",
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining items to buy",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "剩余待购数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum items to buy",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "购买数量上限",
+      "Source": "library"
+    },
+    {
+      "Original": "This item will be skipped, as you are in the wrong Grand Company.",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "所属大国防联军不符，将跳过此物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "This item will be skipped, your rank isn't high enough to buy it.",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "军衔不足，无法购买，将跳过此物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase Once",
+      "Context": "TurnInWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "购买一次",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep in Stock",
+      "Context": "TurnInWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "补足库存",
+      "Source": "library"
+    },
+    {
+      "Original": "all characters",
+      "Context": "GlobalItemsToPurchase.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所有角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Configuration",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Wrong tab selected",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选中的标签页不正确",
+      "Source": "library"
+    },
+    {
+      "Original": "Wrong filter selected (expected ",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选择了错误的筛选条件（应为 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", but is ",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "，但实际为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to refresh item list",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无法刷新物品列表",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

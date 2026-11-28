@@ -1,0 +1,333 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TriadBuddy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(Collection filtering is active)",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（正在按收藏情况筛选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Abort",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "中止",
+      "Source": "library"
+    },
+    {
+      "Original": "CPU usage for Deck Optimizer",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "卡组优化器的 CPU 占用",
+      "Source": "library"
+    },
+    {
+      "Original": "Card Info",
+      "Context": "PluginWindowCardInfo..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "卡牌信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Card Search",
+      "Context": "PluginWindowCardSearch..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "搜索卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Cards",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "PluginWindowNpcStats.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Deck Eval",
+      "Context": "PluginWindowDeckEval..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "评估卡组",
+      "Source": "library"
+    },
+    {
+      "Original": "Deck Optimizer",
+      "Context": "PluginWindowDeckOptimize..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "卡组优化器",
+      "Source": "library"
+    },
+    {
+      "Original": "Deck Search",
+      "Context": "PluginWindowDeckSearch..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "搜索卡组",
+      "Source": "library"
+    },
+    {
+      "Original": "Deck score:",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "卡组评分：",
+      "Source": "library"
+    },
+    {
+      "Original": "Evaluating decks...",
+      "Context": "PluginWindowDeckEval.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在评估卡组…",
+      "Source": "library"
+    },
+    {
+      "Original": "Game data:",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "游戏数据：",
+      "Source": "library"
+    },
+    {
+      "Original": "Game stats:",
+      "Context": "PluginWindowNpcStats.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对局统计：",
+      "Source": "library"
+    },
+    {
+      "Original": "Guess",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "推测",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide beaten once",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已战胜过的对手",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide completed",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已完成的对手",
+      "Source": "library"
+    },
+    {
+      "Original": "MGP per match:",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "每场对局的金碟币：",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC matches only",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示 NPC 对局",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC reward:",
+      "Context": "PluginWindowCardInfo.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "NPC 对局奖励：",
+      "Source": "library"
+    },
+    {
+      "Original": "No.",
+      "Context": "CardUtils.GetOrderDesc",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiTextFilter.PassFilter",
+      "Translated": "否。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not available",
+      "Context": "PluginWindowCardInfo.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Not owned only",
+      "Context": "PluginWindowCardSearch.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示未持有的卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Npc:",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "对手 NPC：",
+      "Source": "library"
+    },
+    {
+      "Original": "PvP match",
+      "Context": "PluginWindowDeckEval.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "玩家对战",
+      "Source": "library"
+    },
+    {
+      "Original": "Region rules:",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地区规则：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "PluginWindowNpcStats.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show debug details",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "显示调试详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Show highlights in deck edit",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "编辑卡组时高亮推荐卡牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Show on map",
+      "Context": "PluginWindowCardInfo.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在地图上显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show solver hints in game",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在游戏中显示出牌建议",
+      "Source": "library"
+    },
+    {
+      "Original": "Show state of {0} plugin",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示 {0} 插件的状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Status:",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "状态：",
+      "Source": "library"
+    },
+    {
+      "Original": "Time remaining:",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "剩余时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Win chance:",
+      "Context": "PluginWindowDeckOptimize.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "胜率：",
+      "Source": "library"
+    },
+    {
+      "Original": "center",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "中央",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "missing! solver disabled",
+      "Context": "PluginWindowStatus.UpdateLocalizationCache",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "缺失！已停用求解器",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

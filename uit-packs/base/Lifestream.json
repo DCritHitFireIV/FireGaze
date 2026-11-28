@@ -1,0 +1,2462 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Lifestream",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\r\n    Territory: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "\r\n    区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\r\nTerritory: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "\r\n区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": " no data found",
+      "Context": "CharaSelectOverlay.DrawAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 未找到数据",
+      "Source": "library"
+    },
+    {
+      "Original": "\"/li auto\" command priority:",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "/li auto 命令优先级：",
+      "Source": "library"
+    },
+    {
+      "Original": "\"/li\" command behavior",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "/li 命令行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "GameCloseWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Color",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "启用时的颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Add New",
+      "Context": "DrawBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new",
+      "Context": "TabCustomAlias.DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias kind",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "别名类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "别名：",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "Utils.DrawWorldSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CollectionCheckbox",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "All Worlds",
+      "Context": "UIHouseReg..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ WorldSelector.set_EmptyName",
+      "Translated": "所有服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow alternative world during DC transfer",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨大区旅行时允许选择其他服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Allowed Tenants",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "获授权的房客",
+      "Source": "library"
+    },
+    {
+      "Original": "Already in this world",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "已在此服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Always On Top",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "始终置顶",
+      "Source": "library"
+    },
+    {
+      "Original": "An error occurred while retrieving element coordinates",
+      "Context": "Utils.DrawVector2Selector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "获取界面元素坐标时发生错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Anchor",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "锚点",
+      "Source": "library"
+    },
+    {
+      "Original": "Another task is in progress",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "另一个任务正在执行",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply Badge Overlay Settings",
+      "Context": "UISettings.DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "应用浮层按钮设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Approach before interacting to this distance",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "交互前靠近至此距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-open Aethernet Badge when coming close to aetheryte",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "接近以太之光时自动展开都市传送网按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-open Cosmic Exploration Planet Badge when coming close to aetheryte",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "接近以太之光时自动展开宇宙探索星球按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-open Instance Badge when coming close to aetheryte",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "接近以太之光时自动展开副本区按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Autodetect",
+      "Context": "Utils.GetInnNameFromTerritory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "自动检测",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically leave non cross-world party upon changing world",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨服时自动退出本服小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Background Color",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Badge Font Scale",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "浮层按钮字体缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Badge Trigger",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "浮层按钮触发方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Begin path calculation",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始计算路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Border Color",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "边框颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Border Thickness",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "边框粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculate",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "计算",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not travel to ",
+      "Context": "Utils.GoTo",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法前往 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not travel while character is not available",
+      "Context": "Utils.GoTo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "当前无法操作角色，不能开始旅行",
+      "Source": "library"
+    },
+    {
+      "Original": "Censor character names.",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "隐藏角色名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chara name",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "角色名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Chara world",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "角色所在服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Character name",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "角色名",
+      "Source": "library"
+    },
+    {
+      "Original": "Character name and world",
+      "Context": "TabTravelBan.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色名称及服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Character not found: ",
+      "Context": "CharaSelectOverlay.DrawAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "找不到角色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Aethernet Shard on map for quick teleport",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "点击地图上的都市传送网水晶即可快速传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Click on badge or hover to another badge to close overlay.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "点击浮层按钮或将鼠标移至其他按钮可关闭浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click or Ctrl+1-9 to complete",
+      "Context": "SearchHelperOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "点击或按 Ctrl+1–9 补全",
+      "Source": "library"
+    },
+    {
+      "Original": "Clone",
+      "Context": "DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "复制一份",
+      "Source": "library"
+    },
+    {
+      "Original": "Clone this command and put it to the end of the list",
+      "Context": "DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "复制此命令并添加到列表末尾",
+      "Source": "library"
+    },
+    {
+      "Original": "Command ",
+      "Context": "TabCustomAlias.DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader",
+      "Translated": "命令 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "紧凑显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Coords",
+      "Context": "UIHouseReg.DrawPathEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy chat-friendly name to clipboard",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "将适合发送到聊天栏的名称复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy free company registration data to clipboard",
+      "Context": "UIHouseReg.DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将部队房屋登记数据复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy private registration data to clipboard",
+      "Context": "UIHouseReg.DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将私人房屋登记数据复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy target",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy this property to adjacent commands...",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "将此属性复制到相邻的指令…",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find requested friend ",
+      "Context": "Enqueue",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "找不到指定的好友： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find this friend",
+      "Context": "Utils.EnqueueFriendTeleport",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "找不到这位好友",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not move",
+      "Context": "AddressBookFileSystemManager.Selector_OnAfterDrawLeafName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not move to the same folder",
+      "Context": "AddressBookFileSystemManager.Selector_OnAfterDrawLeafName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法移动到同一文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not paste from clipboard",
+      "Context": "DrawBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法从剪贴板粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Create move command after this command with player's position and territory",
+      "Context": "DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "在当前指令后插入移动指令，使用角色当前位置和区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Create path from house entrance to workshop/private chambers entrance.",
+      "Context": "DrawHousingData_DrawPath",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "创建从房门到部队工房或个人房间入口的路径。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Alias",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "自定义别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom aethernet",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自定义都市传送网",
+      "Source": "library"
+    },
+    {
+      "Original": "Data ID",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputUint",
+      "Translated": "数据 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Data center transfers are not enabled in the configuration.",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "尚未在设置中启用跨大区旅行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Data editor",
+      "Context": "UIDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "数据编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "DrawBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Default book automatically opens when you open plugin first time in a game session.",
+      "Context": "DrawBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "每次进入游戏后首次打开插件时，会自动打开默认地址簿。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Destination",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Destination: ",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "目的地： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable entering an apartment",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不进入公寓室内",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable pathing to a plot",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不自动寻路至目标地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "TabUtility..cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ WorldSelector.set_EmptyName",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Aethernet Badge",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示都市传送网按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Aethernet menu",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示都市传送网菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Housing Ward Badge",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示住宅小区按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Housing Ward buttons",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示住宅小区编号按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Instance Badge",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示副本区按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Instance changer menu",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示副本区切换菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Display World Visit Badge",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示跨界传送按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Display World Visit menu",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示跨界传送菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Display overlay near Miniature Aetherytes",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在以太之光碎片附近显示浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Display popup window at fixed position",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在固定位置显示弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance limit: ",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "距离限制： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Division: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "分区： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not log in after transfer",
+      "Context": "CharaSelectOverlay.DrawAction",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "大区转移完成后不登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Double-click to input custom value",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "双击输入自定义值",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit...",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "编辑…",
+      "Source": "library"
+    },
+    {
+      "Original": "Editing Global Settings:",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "正在编辑全局设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Element is not selected",
+      "Context": "Utils.DrawVector2Selector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "未选择界面元素",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty space between badge and popout window or between two popout windows.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "浮层按钮与弹出窗口之间，或两个弹出窗口之间的间距。",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty space from the beginning of the alignment grid.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "从对齐网格起点预留的间距。",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty space from the docking side.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "从停靠侧预留的间距。",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty space from the end of the alignment grid.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "从对齐网格终点预留的间距。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Alias: ",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "启用别名： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Badge Overlay",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用浮层按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Legacy Overlay",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用旧版浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Wotsit Integration for teleporting to Aethernet destinations",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "联动 Wotsit，可从搜索结果传送到都市传送网节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable tray notifications upon travel completion",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "旅行完成时显示系统托盘通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "TabCustomAlias.DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Entrance to plot",
+      "Context": "UIHouseReg.DrawPathEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "地块入口",
+      "Source": "library"
+    },
+    {
+      "Original": "Entrance to the house",
+      "Context": "UIHouseReg.DrawPathEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "房屋入口",
+      "Source": "library"
+    },
+    {
+      "Original": "Entries: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "条目： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Error!",
+      "Context": "PaissaUtils.GetStatusStringFromStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "出错了！",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute",
+      "Context": "TabMultipath.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "执行",
+      "Source": "library"
+    },
+    {
+      "Original": "Exit point: ",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "出口位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to Clipboard",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra Points:",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "附加路径点：",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra button height",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "按钮额外高度",
+      "Source": "library"
+    },
+    {
+      "Original": "FC house",
+      "Context": "UIHouseReg.DrawCustom",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "部队房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "FC house plot",
+      "Context": "ImportFromClipboard",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "部队房屋地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorite",
+      "Context": "Overlay.Popup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CollectionCheckbox",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ String>.Get",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish by walking to exit point",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最后步行到出口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Firmament",
+      "Context": "BadgeOverlayManager.DrawNormalAethernet",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "天穹街",
+      "Source": "library"
+    },
+    {
+      "Original": "First available",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "首个可用项",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Lifestream Overlay position",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "固定 Lifestream 悬浮窗位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company",
+      "Context": "PaissaUtils.GetAllowedTenantsStringFromPurchaseSystem",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "From bottom",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "从底部",
+      "Source": "library"
+    },
+    {
+      "Original": "From left",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "从左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "From right",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "从右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "From selected Splatoon element",
+      "Context": "Utils.DrawVector2Selector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "使用选中的 Splatoon 元素",
+      "Source": "library"
+    },
+    {
+      "Original": "From top",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "从顶部",
+      "Source": "library"
+    },
+    {
+      "Original": "Full Reset - All Badge Overlay Settings (Hold CTRL+SHIFT)",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "重置全部浮层按钮设置（按住 CTRL+SHIFT）",
+      "Source": "library"
+    },
+    {
+      "Original": "Get service account data from AutoRetainer",
+      "Context": "UIServiceAccount.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从 AutoRetainer 获取服务账号数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Go",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "前往",
+      "Source": "library"
+    },
+    {
+      "Original": "Go to registered plot to edit path",
+      "Context": "UIHouseReg.DrawHousingData_DrawPath",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "前往已登记的地块以编辑路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Go to your plot to register the data.",
+      "Context": "UIHouseReg.DrawHousingData",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "请先前往自己的地块登记数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Height of the badge. 0 - autosize.",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "浮层按钮高度，设为 0 则自动调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide progress bar",
+      "Context": "DrawExpert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏进度条",
+      "Source": "library"
+    },
+    {
+      "Original": "Hiding progress bar leaves you with no way to stop Lifestream from executing it's tasks.",
+      "Context": "DrawExpert",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "隐藏进度条后，将无法手动停止 Lifestream 正在执行的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL and click",
+      "Context": "TabMultipath.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 CTRL 并点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL and click to delete",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 CTRL 并点击可删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal base position",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "水平基准位置",
+      "Source": "library"
+    },
+    {
+      "Original": "House Registration",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "登记房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing aethernet",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "住宅区传送网",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing teleport",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "住宅传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Hovered Color",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "悬停颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive, select target world",
+      "Context": "GameCloseWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "尚未启动，请选择目标服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Include address book entries",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含通讯录中的地址",
+      "Source": "library"
+    },
+    {
+      "Original": "Include auto-teleport to aethernet destinations",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含都市传送网目的地的自动传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include auto-teleport to property",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往住宅的自动传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include custom aliases",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含自定义别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to apartment",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往公寓的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to free company estate",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往部队房屋的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to grand company",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含大国防联军驻地传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to inn room",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往旅馆客房的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to island sanctuary",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往无人岛的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to market board",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往市场布告板的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include teleport to private estate",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含前往私人房屋的传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Include world select window",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含服务器选择窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Inner Padding",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "内边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Left-align text on buttons",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按钮文字左对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream Commands",
+      "Context": "SearchHelperOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Lifestream 命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream Edit Path",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Lifestream 路径编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream Overlay",
+      "Context": "Overlay..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Lifestream 悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is busy",
+      "Context": "Lifestream.ProcessCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "Lifestream 正忙",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream is busy!",
+      "Context": "CustomAlias.Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "Lifestream 正忙！",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream progress overlay",
+      "Context": "ProgressOverlay..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Lifestream 进度悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Lifestream: Select World",
+      "Context": "SelectWorldWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Lifestream：选择服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "List entries that you would like to select/confirm:",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "列出需要选择或确认的条目：",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已锁定： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Managed by AutoRetainer",
+      "Context": "UIServiceAccount.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "由 AutoRetainer 管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to other folder",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "移至其他文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Name (A-Z)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "名称（A 到 Z）",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No available destinations",
+      "Context": "CharaSelectOverlay.DrawAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无可用目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "No data found. ",
+      "Context": "UIHouseReg.DrawHousingData",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "未找到数据。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "No matching commands found",
+      "Context": "SearchHelperOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有匹配的命令",
+      "Source": "library"
+    },
+    {
+      "Original": "No player",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "没有玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Not registered",
+      "Context": "UIHouseReg.DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "尚未登记",
+      "Source": "library"
+    },
+    {
+      "Original": "Not selected",
+      "Context": "UIServiceAccount.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Only mount up if enabled in configuration",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在设置中启用时骑乘坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Only teleport from command but not from overlay",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅通过命令传送，不接受浮窗传送操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Open estate teleport",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开住宅传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Override teleport behavior",
+      "Context": "UIHouseReg.DrawHousingData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自定义传送行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "DrawBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot (9-1)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "房号（降序）",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "房号：",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Press CTRL and click",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 并点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress overlay at top of the sreen",
+      "Context": "DrawExpert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在屏幕顶端显示进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Property Type:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "住宅类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Public worlds:",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "公开服务器：",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Requirement",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "移除条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove path to workshop. Hold CTRL and click.",
+      "Context": "UIHouseReg.DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 并点击以移除前往部队工房的路径。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove registration",
+      "Context": "UIHouseReg.DrawHousingData",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "取消登记",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename:",
+      "Context": "Overlay.Popup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "重命名：",
+      "Source": "library"
+    },
+    {
+      "Original": "Residential District:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "住宅区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Retrieving...",
+      "Context": "PaissaUtils.GetStatusStringFromStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在获取……",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry data center transfer if destination world is not available",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨大区旅行时若目标服务器不可用，则重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry same-world failed world visits",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨界传送失败后重试同一服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click to stop all tasks and movement",
+      "Context": "ProgressOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "右键点击以停止所有任务和移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Room:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "房间号：",
+      "Source": "library"
+    },
+    {
+      "Original": "Run",
+      "Context": "TabCustomAlias.DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Run and continue",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "运行并继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save and close",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "保存并关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Screen Margin",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "屏幕边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Select",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Select aethernet shard to teleport to",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择要传送到的以太之光碎片",
+      "Source": "library"
+    },
+    {
+      "Original": "Select aetheryte to teleport to",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Combo",
+      "Translated": "选择传送目的地的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Select sort mode for this address book",
+      "Context": "DrawBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "选择此地址簿的排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Select with mouse",
+      "Context": "Utils.DrawVector2Selector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "用鼠标选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Select world",
+      "Context": "TabCustomAlias.DrawCommand",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "选择服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected chara: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已选角色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set target",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设为目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting saved to AutoRetainer",
+      "Context": "UIServiceAccount.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "设置已保存至 AutoRetainer",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only worlds from current virtual data center",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示当前逻辑数据中心的服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Show pathes",
+      "Context": "UIDebug.Housing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Show teleport destination in chat",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏显示传送目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Show teleport destination in popup notifications",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在弹出通知中显示传送目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip teleport if already at aetheryte within this range",
+      "Context": "TabCustomAlias.DrawCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "位于目标以太之光的此范围内时跳过传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Slow down aetheryte teleporting",
+      "Context": "DrawExpert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "延长以太之光传送间隔",
+      "Source": "library"
+    },
+    {
+      "Original": "Slows down aethernet teleportation by specified amount.",
+      "Context": "DrawExpert",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "按指定时间延长都市传送网的传送等待。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort",
+      "Context": "TabMultipath.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Source ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "来源 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Source: ",
+      "Context": "UIDebug.Reader",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Spacing",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Specified player is located in different world.",
+      "Context": "Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "指定的玩家位于其他服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision",
+      "Context": "InputWardDetailDialog.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision Apartment",
+      "Context": "PaissaImporter.DrawPaissaBook",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "扩建区公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Success!",
+      "Context": "PaissaUtils.GetStatusStringFromStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "成功！",
+      "Source": "library"
+    },
+    {
+      "Original": "Suggest autocompletion when typing Lifestream commands in chat",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "在聊天栏输入 Lifestream 命令时显示自动补全建议",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "TaskChangeWorld.RetryWorldVisit",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport delay (ms)",
+      "Context": "DrawExpert",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "传送延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to gateway aetheryte after completing data center travel",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨大区旅行完成后传送到跨界传送用的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to gateway aetheryte before switching data center if not in sanctuary",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "若不在休息区，跨大区前先传送到跨界传送用的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport to specific aethernet destination after world/dc visit",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跨界或跨大区旅行后传送至指定的都市传送网目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport world change gateway",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "切换服务器时使用的传送枢纽",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to Apartment.",
+      "Context": "Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "正在传送到公寓。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to Apartment. Will not enter, as access has been denied.",
+      "Context": "Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "正在传送到公寓。因没有访问权限，将不进入室内。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to Free company.",
+      "Context": "Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "正在传送到部队房屋。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to Private house.",
+      "Context": "Enqueue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "正在传送到私人房屋。",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Context": "UIHouseReg.DrawPathEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Context": "DrawOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness",
+      "Context": "DrawOverlay",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.InputFloat",
+      "Translated": "粗细",
+      "Source": "library"
+    },
+    {
+      "Original": "To begin, select an address book to use.",
+      "Context": "TabAddressBook.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "请先选择要使用的地址簿。",
+      "Source": "library"
+    },
+    {
+      "Original": "To begin, select an alias you want to edit or create a new one.",
+      "Context": "TabCustomAlias.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "选择要编辑的别名，或新建一个别名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel destination",
+      "Context": "TabTravelBan.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "旅行目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to display world selection.",
+      "Context": "CharaSelectOverlay.DrawAction",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "无法显示服务器选择界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock all worlds",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "解锁所有服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Global Settings",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "使用全局设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use sprint",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用冲刺",
+      "Source": "library"
+    },
+    {
+      "Original": "Utility",
+      "Context": "MainGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "实用工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Visualisation:",
+      "Context": "TabCustomAlias.DrawAlias",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "预览：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "小区",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward (1-9)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "小区（升序）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward (9-1)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "小区（降序）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "小区：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "小区： ",
+      "Source": "library"
+    },
+    {
+      "Original": "When teleporting to your own apartment, enter inside",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "传送到自己的公寓时进入室内",
+      "Source": "library"
+    },
+    {
+      "Original": "When teleporting to your/fc house, perform this action",
+      "Context": "DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "传送到自己的房屋或部队房屋时执行此操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Where would you like to teleport for world changes",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "跨界传送时要前往哪个以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Workshop",
+      "Context": "UIHouseReg.DrawOverview",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "部队工房",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "UIDebug.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "World (A-Z)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "服务器（A–Z）",
+      "Source": "library"
+    },
+    {
+      "Original": "World (Z-A)",
+      "Context": "TabAddressBook..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "服务器（Z–A）",
+      "Source": "library"
+    },
+    {
+      "Original": "World button top/bottom padding",
+      "Context": "DrawLegacyOverlay",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "服务器按钮上下内边距",
+      "Source": "library"
+    },
+    {
+      "Original": "World:",
+      "Context": "InputWardDetailDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "服务器：",
+      "Source": "library"
+    },
+    {
+      "Original": "Worlds: ",
+      "Context": "UIDebug.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy",
+      "Translated": "服务器： ",
+      "Source": "library"
+    },
+    {
+      "Original": "You must disband party in order to switch worlds",
+      "Context": "Lifestream.TPAndChangeWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "请先解散小队，再切换服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "You will be left at a closest aetheryte to the ward",
+      "Context": "DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "最终会停在离目标小区最近的以太之光旁",
+      "Source": "library"
+    },
+    {
+      "Original": "debug",
+      "Context": "UIDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "free company",
+      "Context": "UIHouseReg.DrawHousingData",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "private house",
+      "Context": "UIHouseReg.DrawCustom",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "个人房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "sort",
+      "Context": "UIDebug.Editor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "target",
+      "Context": "Utils.DrawVector2Selector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "目标",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

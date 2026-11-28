@@ -1,0 +1,5484 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "LightlessSync",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Target formats",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标格式列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Target format",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Files to change",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "待更改的文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected size",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "所选文件大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Current",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Context": "DrawModelBatchPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Context": "EditProfileUi.DrawProfileImageEditorContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason...",
+      "Context": "SyncshellAdminUI.DrawBannedRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "原因…",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "SettingsHelper.DrawEnabledDisabledText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": " min",
+      "Context": "DebugSettingsTab.DrawShardHealthPanel",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 最小值",
+      "Source": "library"
+    },
+    {
+      "Original": "\nVisible: ",
+      "Context": "DebugSettingsTab.DrawPairDebugColumns",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n可见： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "DebugSettingsTab.DrawPairDebugColumns",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Loaded ",
+      "Context": "TransfersSettingsTab.DrawSpeedTestPage",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已加载 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "ToggleSwitchControl.DrawControl",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "OptimizationSettingsPanel.DrawTextureSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "OptimizationSummaryCard.DrawOptimizationPopupHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining",
+      "Context": "SyncshellJoinConfirmation.DrawDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "SyncshellJoinConfirmation.DrawPermissionDifferences",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "New Group",
+      "Context": "TagMembershipPopup`1.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新建分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Context": "DataAnalysisUi.DrawTextureCompressionReviewTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Context": "DataAnalysisUi.DrawTextureTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Format",
+      "Context": "DataAnalysisUi.DrawTextureTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended",
+      "Context": "DataAnalysisUi.DrawTextureTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "推荐",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "DataAnalysisUi.<DrawTextureDetail>g__DrawExpandableList|208_3",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Context": "PerformanceGraphUi.DrawGraphControls",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "View",
+      "Context": "PerformanceGraphUi.DrawGraphControls",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "SettingsHelper.DrawEnabledDisabledText",
+      "Role": "UI",
+      "RoleReason": "direct string argument 1 to Dalamud.Bindings.ImGui.ImGui.TextColored",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Button",
+      "Context": "OptimizationSummaryCard.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Context": "SyncshellJoinConfirmation.DrawPermissionDifference",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TextDisabled",
+      "Translated": "已启用",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Load MCDF",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "LoadMcdf",
+      "Translated": "加载 MCDF",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Update",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "LastUpdateLabel",
+      "Translated": "上次更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "DescriptionLabel",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Not set",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "NotSet",
+      "Translated": "尚未设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_Delete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Files",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_ColumnFiles",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "TabSettings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Update Date",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_LastUpdateDate",
+      "Translated": "上次更新日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_Appearance",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Created",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_ColumnCreated",
+      "Translated": "已创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Creation Date",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_CreationDate",
+      "Translated": "创建日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Never",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_ColumnDescription",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_ColumnUpdated",
+      "Translated": "已更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "ApplyButton",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose Target",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "GposeTargetLabel",
+      "Translated": "集体动作目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_DescriptionHint",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Nearby_Description",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains:",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_ContainsLabel",
+      "Translated": "包含：",
+      "Source": "library"
+    },
+    {
+      "Original": "Poses",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "PosesLabel",
+      "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "ShareTypeShared",
+      "Translated": "已分享",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_General",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Poses",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_Poses",
+      "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Filters",
+      "Translated": "筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_DescriptionLabel",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "TabFavorites",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Container": "LightlessSync.Resources.CharaDataHub.CharaDataHubStrings.resources",
+      "Key": "Mcd_Undo",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Settings_History",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tab_Visibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tab_Window",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Chat_ZoneFallbackName",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Label_Emotes",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Emotes",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Hint_SearchEmotes",
+      "Translated": "搜索情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Button_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Send",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Button_Send",
+      "Translated": "发送",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to enable this button",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Settings_HoldCtrlToEnable",
+      "Translated": "按住 Ctrl 即可启用此按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tab_General",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in cutscenes",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Settings_ShowInCutscenes",
+      "Translated": "在过场动画中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Label_Zone",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Context_NameLabel",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tab_Notifications",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tooltip_Pinned",
+      "Translated": "已固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Tooltip_Owner",
+      "Translated": "所有者",
+      "Source": "library"
+    },
+    {
+      "Original": "Note:",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Context_NoteLabel",
+      "Translated": "备注：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "FallbackChat",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Label_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Visibility_ZonePrefix",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": " content ",
+      "Container": "LightlessSync.Resources.Chat.ChatStrings.resources",
+      "Key": "Ui_Rule_Mature_Content",
+      "Translated": " 内容 ",
+      "Source": "library"
+    },
+    {
+      "Original": "TAGS",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionTags",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "StatusOpen",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "PreviewLabel",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining…",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionJoining",
+      "Translated": "正在加入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "DescriptionLabel",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Save changes",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "FooterSaveChanges",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionTagsLabel",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionCancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "NsfwShowAll",
+      "Translated": "显示全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "HouseKindApartment",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionDelete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshing…",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "Refreshing",
+      "Translated": "正在刷新…",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetheryte",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LocKindAetheryte",
+      "Translated": "以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionVisibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Image",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionImage",
+      "Translated": "图像",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionWorld",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "HouseLocked",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "FooterConfirm",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleport",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionTeleport",
+      "Translated": "传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "AetheryteVenueLabel",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionLocation",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LabelStatus",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Image",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ImageSlotLabel",
+      "Translated": "图像",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LabelLocation",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "AssetClear",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "This cannot be undone.",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "DeleteConfirmDisabledNote",
+      "Translated": "此操作无法撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "FooterCreate",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "PasswordHint",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "HouseKindCombo",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Room",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "HouseRoomLabel",
+      "Translated": "房间",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LocKindCustom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Continue",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionContinue",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Join",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionJoin",
+      "Translated": "加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "ActionEdit",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "DETAILS",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "SectionDetails",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "Refresh",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LabelVisibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "All worlds",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "FilterAllWorlds",
+      "Translated": "所有服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LocKindNone",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "LabelWorld",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.CommunityBoard.CommunityBoardStrings.resources",
+      "Key": "FilterReset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "New folder name",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_PairList_NewFolderHint",
+      "Translated": "新文件夹名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Create folder",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_PairList_CreateFolder",
+      "Translated": "创建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_PairList_Resume",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Required plugins",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_Banner_Deps_FallbackList",
+      "Translated": "必需插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_Disconnect",
+      "Translated": "断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_PairList_Pause",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_Connect",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "MISSING ESSENTIAL PLUGINS",
+      "Container": "LightlessSync.Resources.CompactUi.CompactUiStrings.resources",
+      "Key": "CompactUi_Banner_Deps_Title",
+      "Translated": "缺少必需的插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Search icons...",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "FolderIconPicker_SearchHint",
+      "Translated": "搜索图标…",
+      "Source": "library"
+    },
+    {
+      "Original": "Move down",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_MoveDown",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Components_Filter",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_Name_Visible",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Not installed",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_StatusNotInstalled",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_Sort_Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Temporary",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_Name_Temporary",
+      "Translated": "临时",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawUserPair_SoundSource_Player",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Popup_Common_Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Fashion Accessory",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawUserPair_FashionAccessory",
+      "Translated": "时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Move up",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_MoveUp",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawUserPair_SoundAge_JustNow",
+      "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_Working",
+      "Translated": "运行中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Subdivision",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_Subdivision",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "ProfileAvailability_Unavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Subscribe",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_Subscribe",
+      "Translated": "订阅",
+      "Source": "library"
+    },
+    {
+      "Original": "Locations",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Intoner_Locations",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Available",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "ProfileAvailability_Available",
+      "Translated": "可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder color",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawFolderTag_FolderColor",
+      "Translated": "文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "New Group",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "Components_NewGroup",
+      "Translated": "新建分组",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawUserPair_UnknownUser",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Profile",
+      "Container": "LightlessSync.Resources.Components.ComponentsStrings.resources",
+      "Key": "DrawUserPair_OpenProfile",
+      "Translated": "打开个人资料",
+      "Source": "library"
+    },
+    {
+      "Original": "Targets",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Targets",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Pending",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Pending",
+      "Translated": "待处理",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Label_On",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Label_Warning",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Running",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Label_Off",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Disabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental.",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Tooltip_Experimental",
+      "Translated": "实验性。",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_On",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Off",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved",
+      "Container": "LightlessSync.Resources.Components.OptimizationStrings.resources",
+      "Key": "Summary_Label_Saved",
+      "Translated": "已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Working",
+      "Translated": "运行中…",
+      "Source": "library"
+    },
+    {
+      "Original": "saved",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "SizeSaved",
+      "Translated": "已节省",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Format",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Format",
+      "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Object",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Object",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Texture",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Texture",
+      "Translated": "纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Target",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Recommended",
+      "Translated": "推荐",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Category",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading preview...",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "LoadingPreview",
+      "Translated": "正在加载预览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Pending",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Pending",
+      "Translated": "待处理",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview unavailable.",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "PreviewUnavailable",
+      "Translated": "预览不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "No change",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "NoChange",
+      "Translated": "无更改",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "On",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Map",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Off",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Job",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Model",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Owner",
+      "Translated": "所有者",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "State",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Saved",
+      "Translated": "已保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to copy to clipboard",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "ClickToCopyToClipboard",
+      "Translated": "点击复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Game Path",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "GamePath",
+      "Translated": "游戏路径",
+      "Source": "library"
+    },
+    {
+      "Original": "All Jobs",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "AllJobs",
+      "Translated": "所有职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing...",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Preparing",
+      "Translated": "准备中…",
+      "Source": "library"
+    },
+    {
+      "Original": "All Categories",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "AllCategories",
+      "Translated": "所有分类",
+      "Source": "library"
+    },
+    {
+      "Original": "File Path",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "FilePath",
+      "Translated": "文件路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Refresh",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Target format",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "TargetFormat",
+      "Translated": "目标格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Selected",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Filters",
+      "Translated": "筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Character",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Textures",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Textures",
+      "Translated": "纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Slot",
+      "Translated": "栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Container": "LightlessSync.Resources.DataAnalysis.DataAnalysisStrings.resources",
+      "Key": "Path",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "failed",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyFailed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "downloading",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyDownloading",
+      "Translated": "正在下载",
+      "Source": "library"
+    },
+    {
+      "Original": "queued",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyQueued",
+      "Translated": "已加入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancelled",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "StatusCancelled",
+      "Translated": "已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "StatusCompleted",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "StatusFailed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "cancelled",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyCancelled",
+      "Translated": "已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "completed",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyCompleted",
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "StatusDownloading",
+      "Translated": "正在下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "StatusWaiting",
+      "Translated": "等待中",
+      "Source": "library"
+    },
+    {
+      "Original": "waiting",
+      "Container": "LightlessSync.Resources.DownloadUi.DownloadUiStrings.resources",
+      "Key": "NotifyWaiting",
+      "Translated": "等待中",
+      "Source": "library"
+    },
+    {
+      "Original": "OFF",
+      "Container": "LightlessSync.Resources.DtrEntry.DtrEntryStrings.resources",
+      "Key": "LightfinderOff",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "Filter",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "ColumnTime",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Filters",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "ClearFilters",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "ColumnSource",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "ColumnCharacter",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Container": "LightlessSync.Resources.EventViewer.EventViewerStrings.resources",
+      "Key": "ColumnEvent",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Agreement of Usage of Service",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "ToS_AgreementLabel",
+      "Translated": "服务使用协议",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced Options",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "AdvancedOptions",
+      "Translated": "高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "READ THIS CAREFULLY",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "ToS_ReadLabel",
+      "Translated": "请仔细阅读",
+      "Source": "library"
+    },
+    {
+      "Original": "Language",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "ToS_LanguageLabel",
+      "Translated": "语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "ButtonSave",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Container": "LightlessSync.Resources.IntroUI.IntroUiStrings.resources",
+      "Key": "ButtonNext",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Compact",
+      "Translated": "紧凑",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Status_Inactive",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Players",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Status_ColumnPlayers",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "ENABLED",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Help_PairEnabledWord",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Perm_Sounds",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Time_Cooldown",
+      "Translated": "冷却时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Status_ColumnStatus",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Join",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Button_Join",
+      "Translated": "加入",
+      "Source": "library"
+    },
+    {
+      "Original": "SET UP",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_SetUp",
+      "Translated": "进行设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Status_ColumnTime",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Home World",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_HomeWorldTooltip",
+      "Translated": "所属服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Yes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "ON",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_Status_ON",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Current:",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Perm_Current",
+      "Translated": "当前：",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_UnknownWorld",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Tab_Help",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Button_Target",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Expired",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Debug_Expired",
+      "Translated": "已过期",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Tab_Debug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Disable",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Dropdown_None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearby",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_Nearby",
+      "Translated": "附近",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Status_Active",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Enable",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "None Available",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Dropdown_NoneAvailable",
+      "Translated": "没有可用项",
+      "Source": "library"
+    },
+    {
+      "Original": "Temporary",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_Temporary",
+      "Translated": "临时",
+      "Source": "library"
+    },
+    {
+      "Original": "OFF",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_Status_OFF",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "DISABLED",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Help_PairDisabledWord",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Perm_Vfx",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "OPEN",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Panel_Status_OPEN",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_JoinModal_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Time left",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Time_TimeLeft",
+      "Translated": "剩余时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Container": "LightlessSync.Resources.LightFinder.LightFinderStrings.resources",
+      "Key": "LightFinder_Perm_Animations",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "Blocked",
+      "Translated": "已阻止",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "Reason",
+      "Translated": "原因",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode:",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "ModeLabel",
+      "Translated": "模式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Bones",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "Bones",
+      "Translated": "骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Container": "LightlessSync.Resources.Misc.AnimationValidationStrings.resources",
+      "Key": "Data",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard",
+      "Container": "LightlessSync.Resources.Misc.CommandStrings.resources",
+      "Key": "PerfStatsCopied",
+      "Translated": "已复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Window",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Presets",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Apply",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Value",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "View",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "View",
+      "Translated": "视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "LightlessSync.Resources.Misc.PerformanceGraphStrings.resources",
+      "Key": "Time",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "LightlessSync.Resources.Misc.StorageValidationStrings.resources",
+      "Key": "Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss",
+      "Container": "LightlessSync.Resources.Misc.TitleScreenStrings.resources",
+      "Key": "Dismiss",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionBlacklist",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionRetry",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionPause",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionDismiss",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Decline",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionDecline",
+      "Translated": "拒绝",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: ",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ChatWarningLabel",
+      "Translated": "警告： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Folder",
+      "Container": "LightlessSync.Resources.Notifications.NotificationStrings.resources",
+      "Key": "ActionOpenFolder",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Container": "LightlessSync.Resources.OAuth2Panel.OAuth2PanelStrings.resources",
+      "Key": "Retry",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Container": "LightlessSync.Resources.OAuth2Panel.OAuth2PanelStrings.resources",
+      "Key": "Refresh",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Container": "LightlessSync.Resources.OAuth2Panel.OAuth2PanelStrings.resources",
+      "Key": "TimeJustNow",
+      "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Radial_ShowObjects",
+      "Translated": "显示对象",
+      "Source": "library"
+    },
+    {
+      "Original": "World Space",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Radial_WorldSpace",
+      "Translated": "世界空间",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Label_Scale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Space",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Radial_LocalSpace",
+      "Translated": "局部空间",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Label_Rotate",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Label_Move",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.GizmoStrings.resources",
+      "Key": "Radial_HideObjects",
+      "Translated": "隐藏对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Shadow Range",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_CharacterShadowRange",
+      "Translated": "角色阴影范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Spot Light",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_SpotLight",
+      "Translated": "聚光灯",
+      "Source": "library"
+    },
+    {
+      "Original": "Outline Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Furniture_OutlineColor",
+      "Translated": "描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Preview_LoadingShort",
+      "Translated": "加载中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection Enabled",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_SelectionEnabled",
+      "Translated": "已启用选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_AssignFolder",
+      "Translated": "分配文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_Duplicate",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Place VFX",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_PlaceVfx",
+      "Translated": "放置特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_Target",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview unavailable",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Preview_Unavailable",
+      "Translated": "预览不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_Redo",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_Undo",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_EditSelected",
+      "Translated": "编辑选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadow Near",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_ShadowNear",
+      "Translated": "近处阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Shape",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "SurfaceAlign_TargetShape",
+      "Translated": "目标形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_StateUpdated",
+      "Translated": "已更新",
+      "Source": "library"
+    },
+    {
+      "Original": "No VFX entries match the current filter.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_NoVfx",
+      "Translated": "没有符合当前筛选条件的特效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock folder objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_LockObjects",
+      "Translated": "锁定文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bool_No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "on",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bool_On",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Status_Ready",
+      "Translated": "就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "active",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Meta_Active",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Copy",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Mods",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_PenumbraMods",
+      "Translated": "Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Selected",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Update",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Action_UnlockSelected",
+      "Translated": "解锁选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "locked",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Meta_Locked",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "No folders available",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_NoFoldersAvailable",
+      "Translated": "没有可用的文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "apartment",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_Apartment",
+      "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Object",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_PlaceObject",
+      "Translated": "放置物体",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Path",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_VfxPath",
+      "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "No bgobject entries match the current filter.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_NoBgObject",
+      "Translated": "没有符合当前筛选条件的背景物体。",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Kind_Vfx",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Subscribe",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Subscribe",
+      "Translated": "订阅",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Transparency",
+      "Translated": "透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "None selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_Mod_NoneSelected",
+      "Translated": "未选中任何项",
+      "Source": "library"
+    },
+    {
+      "Original": "Layouts",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_Title",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_Create",
+      "Translated": "创建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Model Path",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "BgObject_ModelPath",
+      "Translated": "模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "search light type or description",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_SearchLightTypes",
+      "Translated": "搜索光源类型或描述",
+      "Source": "library"
+    },
+    {
+      "Original": "No selection",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_NoSelection",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Result",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_LastResult",
+      "Translated": "上次结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Select option",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_Mod_SelectOption",
+      "Translated": "选择选项",
+      "Source": "library"
+    },
+    {
+      "Original": "%.0f Degrees",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_DegreesFormat",
+      "Translated": "%.0f 度",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Status_Paused",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "search name, row, source, or path",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_SearchGeneric",
+      "Translated": "按名称、行号、来源或路径搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "building object catalog",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Warmup_BuildingObjectCatalog",
+      "Translated": "正在生成物件目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Placed Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "PlacedObjects_Title",
+      "Translated": "已放置的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Placed Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_PlacedObjects",
+      "Translated": "已放置的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "filter installed mods",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_ModFilterHint",
+      "Translated": "筛选已安装的模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_ShowObjects",
+      "Translated": "显示对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Add installed Penumbra mods",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_AddInstalledMods",
+      "Translated": "添加已安装的 Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Scale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_State",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading preview...",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Preview_Loading",
+      "Translated": "正在加载预览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_RenameFolder",
+      "Translated": "重命名文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the movement gizmo.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Move_Tooltip",
+      "Translated": "显示或隐藏移动操作手柄。",
+      "Source": "library"
+    },
+    {
+      "Original": "Layouts",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Layouts",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Badge_Active",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_Falloff",
+      "Translated": "衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "visible",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Meta_Visible",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_Rename",
+      "Translated": "重命名文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Furniture",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_PlaceFurniture",
+      "Translated": "放置家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin State",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_PluginState",
+      "Translated": "插件状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Shadow",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_ObjectShadow",
+      "Translated": "物体阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_StateName",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_ModInvalid",
+      "Translated": "无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the top",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Dock_Top",
+      "Translated": "将工具栏停靠在顶部",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a checkpoint on the current history state",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "HistoryPanel_CreateCheckpointTooltip",
+      "Translated": "为当前历史状态创建还原点",
+      "Source": "library"
+    },
+    {
+      "Original": "error",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_StatusError",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Created",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_StateCreated",
+      "Translated": "已创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that affects the entire zone globally.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_WorldLight_Desc",
+      "Translated": "照亮整个区域的全局光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "collection name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_CreateNameHint",
+      "Translated": "收藏集名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Dynamic Lighting",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_DynamicLighting",
+      "Translated": "动态光照",
+      "Source": "library"
+    },
+    {
+      "Original": "No installed mods match the current filter.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_NoModsMatchFilter",
+      "Translated": "没有符合当前筛选条件的已安装模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "select to preview",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Preview_Select",
+      "Translated": "选择以预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Action_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Status_Unavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Mode_History",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Apply",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "layout name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_LayoutNameHint",
+      "Translated": "布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Status_Active",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Folder Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_SetFolderColor",
+      "Translated": "设置文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "search placed objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "PlacedObjects_SearchHint",
+      "Translated": "搜索已放置的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "default",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_DefaultBadge",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Angle",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_Angle",
+      "Translated": "光源角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_Range",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "HistoryPanel_Remove",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Selected Object",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_LoadSelectedObject",
+      "Translated": "加载选中对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the right",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Dock_Right",
+      "Translated": "将工具栏停靠在右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the rotation gizmo.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Rotate_Tooltip",
+      "Translated": "显示或隐藏旋转操作手柄。",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the bottom",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Dock_Bottom",
+      "Translated": "将工具栏停靠在底部",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "BgObject_DyeColor",
+      "Translated": "染色颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadow Far",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_ShadowFar",
+      "Translated": "远处阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Search object settings",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_SearchHint",
+      "Translated": "搜索对象设置",
+      "Source": "library"
+    },
+    {
+      "Original": "locked",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Tooltip_Locked",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "No furniture entries match the current filter.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_NoFurniture",
+      "Translated": "没有符合当前筛选条件的家具。",
+      "Source": "library"
+    },
+    {
+      "Original": "object id",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_ObjectIdHint",
+      "Translated": "对象 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Outline Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_OutlineColor",
+      "Translated": "描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "no input",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_NoInput",
+      "Translated": "没有输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Every {0}",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_IntervalEvery",
+      "Translated": "每 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Path",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Vfx_Path",
+      "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Tint",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Vfx_Tint",
+      "Translated": "色调",
+      "Source": "library"
+    },
+    {
+      "Original": "layout id",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_LayoutIdHint",
+      "Translated": "布局 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Temporary",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Temporary",
+      "Translated": "临时",
+      "Source": "library"
+    },
+    {
+      "Original": "Layouts",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Mode_Layouts",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Penumbra Mods",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_AddModsPopupTitle",
+      "Translated": "添加 Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "HistoryPanel_History",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_HideObjects",
+      "Translated": "隐藏对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock folder objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_UnlockObjects",
+      "Translated": "解锁文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Type",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_FalloffType",
+      "Translated": "衰减类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_DyeColor",
+      "Translated": "染色颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Selected Only",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_ShowSelectedOnly",
+      "Translated": "仅显示选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "search name, row, category, or path",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_SearchVfx",
+      "Translated": "按名称、行号、类别或路径搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Redo",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Undo",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Move",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "furniture stain load failed",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Warmup_FurnitureStainLoadFailed",
+      "Translated": "加载家具染色数据失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit checkpoint on the current history state",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "HistoryPanel_EditCheckpointTooltip",
+      "Translated": "编辑当前历史状态的还原点",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Visible",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "success",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_StatusSuccess",
+      "Translated": "成功",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Rotate",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits in the shape of a cone with a spherical base.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_SpotLight_Desc",
+      "Translated": "呈锥状发光，底面为球面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsubscribe",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Unsubscribe",
+      "Translated": "取消订阅",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Snap_Position",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the left",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Dock_Left",
+      "Translated": "将工具栏停靠在左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_LockObjects",
+      "Translated": "锁定对象",
+      "Source": "library"
+    },
+    {
+      "Original": "inactive",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Meta_Inactive",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Default Layout Id",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_UseDefaultLayoutId",
+      "Translated": "使用默认布局 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "No light types match the current filter.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_NoLightTypes",
+      "Translated": "没有符合当前筛选条件的光源类型。",
+      "Source": "library"
+    },
+    {
+      "Original": "grid layout",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_GridLayout",
+      "Translated": "网格布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_WorkspaceMode_Normal",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_StateObjects",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "building furniture stains",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Warmup_BuildingFurnitureStains",
+      "Translated": "正在生成家具染色数据",
+      "Source": "library"
+    },
+    {
+      "Original": "subdivision",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_Subdivision",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "list layout",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_Catalog_ListLayout",
+      "Translated": "列表布局",
+      "Source": "library"
+    },
+    {
+      "Original": "no selection",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_ListStatusNoSelection",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "No change is available to undo.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_NoUndoAvailable",
+      "Translated": "没有可撤销的更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Shadow",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_CharacterShadow",
+      "Translated": "角色阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "1 folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "PlacedObjects_FolderCountSingular",
+      "Translated": "1 个文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Action_DuplicateSelected",
+      "Translated": "复制选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Layouts",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_Tab_Layouts",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_Delete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits in a flat box-like shape.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_FlatLight_Desc",
+      "Translated": "以扁平盒状区域发光的光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Default Layout",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_ClearDefault",
+      "Translated": "清除默认布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Material Reflection",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_MaterialReflection",
+      "Translated": "材质反射",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an object to inspect and edit it.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_EmptyState",
+      "Translated": "选择对象以查看和编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_PriorityTooltip",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "SurfaceAlign_ShapeUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Show folder objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_ShowObjects",
+      "Translated": "显示文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_CreateFolder",
+      "Translated": "创建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout Name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_LayoutName",
+      "Translated": "布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_Vfx",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_All",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment (150)",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Settings_HousingSize_Apartment",
+      "Translated": "公寓（150）",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Action_RemoveSelected",
+      "Translated": "移除选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Kind",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Kind",
+      "Translated": "种类",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Name",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Surface Align",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "SurfaceAlign_Title",
+      "Translated": "对齐表面",
+      "Source": "library"
+    },
+    {
+      "Original": "Area Light",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_AreaLight",
+      "Translated": "面光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Position",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "No installed Penumbra mods are currently available.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_NoModsAvailable",
+      "Translated": "目前没有可用的已安装 Penumbra 模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Angle",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_FalloffAngle",
+      "Translated": "衰减角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Last Result",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_CopyLastResult",
+      "Translated": "复制上次结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Import",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bool_Yes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "off",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bool_Off",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Mode_Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_Intensity",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_UnlockObjects",
+      "Translated": "解锁对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Create",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Export To Clipboard",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Context_ExportToClipboard",
+      "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide folder objects",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_HideObjects",
+      "Translated": "隐藏文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Badge_Inactive",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Folder",
+      "Translated": "文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_Mod_DefaultTooltip",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Selected Layout",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Layout_DeleteSelected",
+      "Translated": "删除所选布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Format",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Format",
+      "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Stain_CustomColor",
+      "Translated": "自定义颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "folder name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_NameHint",
+      "Translated": "文件夹名称",
+      "Source": "library"
+    },
+    {
+      "Original": "warnings:",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "CollectionStatus_Warnings",
+      "Translated": "警告：",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings for gizmo surface dragging.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "SurfaceAlign_PopupSubtitle",
+      "Translated": "表面拖动操作手柄设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Bounds_None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Folder Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_ClearFolderColor",
+      "Translated": "清除文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Snap_Scale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_Scale",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Toolbar_World",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Counters",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_ResetCounters",
+      "Translated": "重置计数",
+      "Source": "library"
+    },
+    {
+      "Original": "No change is available to redo.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "History_NoRedoAvailable",
+      "Translated": "没有可重做的更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "No editable settings for this mod.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Collection_Mod_NoEditableSettings",
+      "Translated": "此模组没有可编辑的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "saved layout name",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_SavedLayoutNameHint",
+      "Translated": "已保存的布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits spherically from a single point.",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_AreaLight_Desc",
+      "Translated": "从一点向四周发光的球形光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Selected",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Action_LockSelected",
+      "Translated": "锁定选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Events",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Debug_Events",
+      "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Light",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Create_PlaceLight",
+      "Translated": "放置光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Color",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Folder_Color",
+      "Translated": "文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Locked",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Inspector_Layout",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Type",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Light_Type",
+      "Translated": "光源类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "Mode_Debug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear recorded history",
+      "Container": "LightlessSync.Resources.ObjectEditor.ObjectEditorStrings.resources",
+      "Key": "HistoryPanel_ClearRecordedHistory",
+      "Translated": "清除已有历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert",
+      "Container": "LightlessSync.Resources.PermissionWindow.PermissionWindowStrings.resources",
+      "Key": "Revert",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Container": "LightlessSync.Resources.PermissionWindow.PermissionWindowStrings.resources",
+      "Key": "ResetToDefault",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.PermissionWindow.PermissionWindowStrings.resources",
+      "Key": "Save",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SaveDescription",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "EditorDone",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Available",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "DayAvailable",
+      "Translated": "可用",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StyleOn",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: {0}",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "GroupSnapshot_Owner",
+      "Translated": "所有者：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "Editor_VanityColors",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ResetColors",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "Working",
+      "Translated": "运行中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ResetButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SaveWorldServer",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TabDetails",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "GroupDescription_Preview",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ComboDataCenter",
+      "Translated": "大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ResetWorldServer",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "PreviewLabel",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "DayUnavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Standard",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "LayoutStandard",
+      "Translated": "标准",
+      "Source": "library"
+    },
+    {
+      "Original": "Move up",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "MoveUp",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ComboWorldServer",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Style:",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StyleLabel",
+      "Translated": "样式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror horizontally",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameMirrorHorizontal",
+      "Translated": "水平镜像",
+      "Source": "library"
+    },
+    {
+      "Original": "Save changes",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ToolbarSaveChanges",
+      "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StatusDisabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TabPreview",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TagRemove",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SaveHouseAddress",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TagColumnPreview",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Background Color",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "BackgroundColor",
+      "Translated": "背景颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Medium",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "HousingSizeMedium",
+      "Translated": "中等",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StackEdge",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Zone",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SectionTimeZone",
+      "Translated": "时区",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SaveTimeZone",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TabVisibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "EditorPageAppearance",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "EditorPageAbout",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SideLeft",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SectionVisibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ResetHouseAddress",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "HousingUnlocked",
+      "Translated": "已解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StatusActive",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "Default",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StyleOff",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Accent Color",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "AccentColor",
+      "Translated": "强调色",
+      "Source": "library"
+    },
+    {
+      "Original": "Color:",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ColorLabel",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Small",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "HousingSizeSmall",
+      "Translated": "小",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameUndo",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameRedo",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "LabelDescription",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon ID:",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "IconLabel",
+      "Translated": "图标 ID：",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "GroupSection_Visibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Zone",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "GroupSection_TimeZone",
+      "Translated": "时区",
+      "Source": "library"
+    },
+    {
+      "Original": "Tools",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameTools",
+      "Translated": "工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameRetry",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "GroupVisibility_Reset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "HousingLocked",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SectionLayout",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: {0}",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "OwnerLabel",
+      "Translated": "所有者：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror vertically",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "FrameMirrorVertical",
+      "Translated": "垂直镜像",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "Editor_TextColor",
+      "Translated": "文字颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TabStyle",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StackColor",
+      "Translated": "恢复默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ResetTimeZone",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "PlayTimeStart",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Move down",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "MoveDown",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "StatusVisible",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SaveColors",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "SideRight",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Notes",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "LabelNotes",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "TabLocation",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by name...",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "IconFilterHint",
+      "Translated": "按名称筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ClearDescription",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert",
+      "Container": "LightlessSync.Resources.Profile.ProfileStrings.resources",
+      "Key": "ToolbarRevert",
+      "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Container": "LightlessSync.Resources.ServerState.ServerStateStrings.resources",
+      "Key": "UidDisconnected",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnecting",
+      "Container": "LightlessSync.Resources.ServerState.ServerStateStrings.resources",
+      "Key": "UidReconnecting",
+      "Translated": "正在重新连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.ServerState.ServerStateStrings.resources",
+      "Key": "UidOffline",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Rate Limited",
+      "Container": "LightlessSync.Resources.ServerState.ServerStateStrings.resources",
+      "Key": "UidRateLimited",
+      "Translated": "请求过于频繁",
+      "Source": "library"
+    },
+    {
+      "Original": "Connecting",
+      "Container": "LightlessSync.Resources.ServerState.ServerStateStrings.resources",
+      "Key": "UidConnecting",
+      "Translated": "正在连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Score",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "ScoreColumn",
+      "Translated": "得分",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "VisibleLabel",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "DetailsColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "NoLabel",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Note",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "NoteLabel",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "never",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "NeverLabel",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "Running...",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "RunningLabel",
+      "Translated": "运行中…",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "OnLabel",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "PausedLabel",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "OffLabel",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Groups",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "GroupsLabel",
+      "Translated": "分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "DownloadingLabel",
+      "Translated": "正在下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Id",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "CharacterIdLabel",
+      "Translated": "角色 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "YesLowerLabel",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "TypeColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "NoLowerLabel",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Players",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "PlayersLabel",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "YesLabel",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Level",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "LogLevelLabel",
+      "Translated": "日志级别",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Name",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "PlayerNameLabel",
+      "Translated": "玩家姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "ActiveLabel",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "AliasLabel",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "StateColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "DebugTabTitle",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "GposeLabel",
+      "Translated": "集体动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "TimeColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted",
+      "Container": "LightlessSync.Resources.Settings.DebugTabUI.DebugSettings.resources",
+      "Key": "BlacklistedColumn",
+      "Translated": "已加入黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "missing",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValidationFailureMissing",
+      "Translated": "缺失",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "DiagnosticsErrorResultPrefix",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Files",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "LabelTotalFiles",
+      "Translated": "文件总数",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueUnknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection State",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "LabelConnectionState",
+      "Translated": "连接状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueYes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnected",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueDisconnected",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Not available",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueNotAvailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueEnabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Server",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "LabelServer",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "errors",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValidationFailureErrors",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "JustNow",
+      "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueDisabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Testing",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueTesting",
+      "Translated": "测试中",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueConnected",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValueNo",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "DiagnosticsTabTitle",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "error",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "ValidationFailureError",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Property",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "TablePropertyColumn",
+      "Translated": "属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Container": "LightlessSync.Resources.Settings.Diagnostics.DiagnosticsSettings.resources",
+      "Key": "TableValueColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "ResetButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SubcategoryLfVisibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "Custom",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Shaders",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionShaders",
+      "Translated": "着色器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfDtrEnabledLabel",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionNameplate",
+      "Translated": "名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SubcategoryLfLabel",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "AlignmentLeft",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "ThemeOverrideCategoryColors",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "AnimValidationOffLabel",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Name color",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "NameplateNameColorLabel",
+      "Translated": "名称颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate Colors",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SubcategoryNameplateColors",
+      "Translated": "名牌颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "English",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LanguageDisplay_English",
+      "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfDtrDisabledLabel",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfDtrCooldownLabel",
+      "Translated": "冷却时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "GridColumnDescription",
+      "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Import & Export",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionImportExport",
+      "Translated": "导入与导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Localization",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "Localization",
+      "Translated": "本地化",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "GridColumnColor",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "GridColumnReset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "GridColumnValue",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "AlignmentRight",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionBehavior",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Hover Delay",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "ProfileHoverDelaySlider",
+      "Translated": "悬停延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "ApplyButton",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SubcategoryLfConnection",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LightfinderPresetGil",
+      "Translated": "金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Note",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "TableColumnNote",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionBlacklist",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "GridColumnStatus",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Label Offset X",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfLabelOffsetX",
+      "Translated": "标签水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Label Offset Y",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfLabelOffsetY",
+      "Translated": "标签垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "LfDtrUnavailableLabel",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Info Bar",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionServerInfoBar",
+      "Translated": "服务器信息栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SectionColors",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "BlacklistButton",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Repair",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "AnimValidationRepairLabel",
+      "Translated": "修复",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Container": "LightlessSync.Resources.Settings.General.GeneralSettings.resources",
+      "Key": "SibDefaultStatusLabel",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SoundTableTypeColumn",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Timestamps",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "ShowTimestamps",
+      "Translated": "显示时间戳",
+      "Source": "library"
+    },
+    {
+      "Original": "Sound",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SoundTableSoundColumn",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Test",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "TableTest",
+      "Translated": "测试",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "CornerLeft",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical Offset",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SearchVerticalOffsetTitle",
+      "Translated": "垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "downloading",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "DemoDownloadStatus",
+      "Translated": "正在下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SoundTypeInfo",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SoundTypeError",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal Offset",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SearchHorizontalOffsetTitle",
+      "Translated": "水平偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "SoundTypeWarning",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "PositionCardTitle",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "NotificationsTabTitle",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "LocChat",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "TableLocation",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "CornerRight",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "%d seconds",
+      "Container": "LightlessSync.Resources.Settings.Notifications.NotificationsSettings.resources",
+      "Key": "DurationSecondsFormat",
+      "Translated": "%d 秒",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Performance.PerformanceSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Warnings",
+      "Container": "LightlessSync.Resources.Settings.Performance.PerformanceSettings.resources",
+      "Key": "SectionWarnings",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear History",
+      "Container": "LightlessSync.Resources.Settings.Performance.PerformanceSettings.resources",
+      "Key": "ClearHistoryButton",
+      "Translated": "清除历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Service Name",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "SearchSvcNameTitle",
+      "Translated": "服务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Service Name",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "ServiceNameLabel",
+      "Translated": "服务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "Connect",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "UnknownWorld",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Add custom service",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "SearchSvcAddCustomTitle",
+      "Translated": "添加自定义服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Name",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "SearchCharNameTitle",
+      "Translated": "角色名",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "WorldComboLabel",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Add custom service",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "AddCustomServiceTitle",
+      "Translated": "添加自定义服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Name",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "CharacterNameLabel",
+      "Translated": "角色名",
+      "Source": "library"
+    },
+    {
+      "Original": "Add current character",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "AddCurrentCharacter",
+      "Translated": "添加当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnect",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "Reconnect",
+      "Translated": "重新连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Custom Service",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "AddCustomServiceButton",
+      "Translated": "添加自定义服务",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Container": "LightlessSync.Resources.Settings.Service.ServiceSettings.resources",
+      "Key": "SearchWorldTitle",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Optional",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "PluginsColumnOptional",
+      "Translated": "可选",
+      "Source": "library"
+    },
+    {
+      "Original": "No matches",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "SearchNoMatches",
+      "Translated": "没有匹配项",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "TabGeneral",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "ServiceUnavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "unavailable",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "InfoUnavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "SearchPlaceholder",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "TabDebug",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "disconnected",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "StatusPillDisconnected",
+      "Translated": "已断开连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Join Discord",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "CommunityJoinDiscord",
+      "Translated": "加入 Discord",
+      "Source": "library"
+    },
+    {
+      "Original": "Diagnostics",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "TabDiagnostics",
+      "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Required",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "PluginsColumnRequired",
+      "Translated": "必需",
+      "Source": "library"
+    },
+    {
+      "Original": "connected",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "StatusPillConnected",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Notifications",
+      "Container": "LightlessSync.Resources.Settings.SettingsUi.SettingsUi.resources",
+      "Key": "TabNotifications",
+      "Translated": "通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.Settings.Storage.StorageSettings.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "clear cache",
+      "Container": "LightlessSync.Resources.Settings.Storage.StorageSettings.resources",
+      "Key": "SearchTargetClearingDisclaimerKw",
+      "Translated": "清除缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Storage.StorageSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Container": "LightlessSync.Resources.Settings.Storage.StorageSettings.resources",
+      "Key": "BtrfsOptOffLabel",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to enable this button",
+      "Container": "LightlessSync.Resources.Settings.Storage.StorageSettings.resources",
+      "Key": "StopMonitoringTooltipCtrlSuffix",
+      "Translated": "按住 Ctrl 即可启用此按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloads",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "DownloadsTitle",
+      "Translated": "下载量",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "InfoTitle",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Files",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "TableColumnFiles",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Results",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "ResultsTitle",
+      "Translated": "结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Server",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "TableColumnServer",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "File",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "TableColumnFile",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "User",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "TableColumnUser",
+      "Translated": "用户",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "TableColumnSize",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Results",
+      "Container": "LightlessSync.Resources.Settings.Transfers.TransfersSettings.resources",
+      "Key": "SearchResultsTitle",
+      "Translated": "结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Service_Connect",
+      "Translated": "连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Available",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Plugin_IpcAvailable",
+      "Translated": "可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Reconnect",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Service_Reconnect",
+      "Translated": "重新连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Progress:",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Scanner_CurrentProgress",
+      "Translated": "当前进度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Custom Service",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Service_AddCustomService",
+      "Translated": "添加自定义服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Service",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Service_SelectService",
+      "Translated": "选择服务",
+      "Source": "library"
+    },
+    {
+      "Original": "Success",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "OAuth_Success",
+      "Translated": "成功",
+      "Source": "library"
+    },
+    {
+      "Original": "INFO",
+      "Container": "LightlessSync.Resources.SharedUi.SharedUiStrings.resources",
+      "Key": "Label_Info",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_RoleOwner",
+      "Translated": "所有者",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_JoiningLabel",
+      "Translated": "正在加入",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_Save",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Reason...",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_ReasonHint",
+      "Translated": "原因…",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Create_Close",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "disabled",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Disabled",
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Apply",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Vfx",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Animations",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_Pinned",
+      "Translated": "已固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to enable this button",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_HoldCtrlToEnable",
+      "Translated": "按住 Ctrl 即可启用此按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Create_Vfx",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Password",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_PasswordLabel",
+      "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "User",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_HeaderUser",
+      "Translated": "用户",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Create_Sounds",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "enabled",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Enabled",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Sounds",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Sounds",
+      "Translated": "音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Admin_Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Create_Animations",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Joining...",
+      "Container": "LightlessSync.Resources.Syncshell.SyncshellStrings.resources",
+      "Key": "Join_Joining",
+      "Translated": "正在加入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Animations",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "GlobalModFilterAnimations",
+      "Translated": "动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to enable this button",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "HoldCtrlToEnable",
+      "Translated": "按住 Ctrl 即可启用此按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "Player",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Just now",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "JustNow",
+      "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "Clear",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX",
+      "Container": "LightlessSync.Resources.TopMenu.TopMenuStrings.resources",
+      "Key": "GlobalModFilterVFX",
+      "Translated": "视觉特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Notes",
+      "Container": "LightlessSync.Resources.UpdateNotes.UpdateNotesStrings.resources",
+      "Key": "HeaderSubtitle",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Container": "LightlessSync.Resources.UpdateNotes.UpdateNotesStrings.resources",
+      "Key": "TabChangelog",
+      "Translated": "更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it!",
+      "Container": "LightlessSync.Resources.UpdateNotes.UpdateNotesStrings.resources",
+      "Key": "GotIt",
+      "Translated": "知道了！",
+      "Source": "library"
+    },
+    {
+      "Original": "What's New",
+      "Container": "LightlessSync.Resources.UpdateNotes.UpdateNotesStrings.resources",
+      "Key": "WhatsNew",
+      "Translated": "更新内容",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

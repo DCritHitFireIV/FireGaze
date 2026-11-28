@@ -1,0 +1,293 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "QuestMap",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Actions",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast tribe",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Beast tribes",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Condense final MSQ quests",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "合并尾段主线任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Exp: ",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "经验值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Generating map...",
+      "Context": "PluginUi.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在生成关系图……",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Jobs",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Level: ",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark issuer on map",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在地图上标记任务发放人",
+      "Source": "library"
+    },
+    {
+      "Original": "Minions",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "No quest selected",
+      "Context": "PluginUi.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "尚未选择任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Open quest in Journal",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在任务日志中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Optional rewards",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可选奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Options",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest Map",
+      "Context": "Plugin.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "任务关系图",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest list",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "任务列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Quest map",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "任务关系图",
+      "Source": "library"
+    },
+    {
+      "Original": "Reward/unlock visibility",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "显示的奖励和解锁内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewards",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Quest Map",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示任务关系图",
+      "Source": "library"
+    },
+    {
+      "Original": "Show arrowheads",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示箭头",
+      "Source": "library"
+    },
+    {
+      "Original": "Show completed quests",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示已完成的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Show graph for a specified quest by name or id",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "按名称或 ID 查看任务关系图",
+      "Source": "library"
+    },
+    {
+      "Original": "Show information for a specified quest by name or id",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "按名称或 ID 查看任务信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Show quest graph",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示任务关系图",
+      "Source": "library"
+    },
+    {
+      "Original": "Show redundant arrows",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示冗余连线",
+      "Source": "library"
+    },
+    {
+      "Original": "Show seasonal quests",
+      "Context": "PluginUi.DrawMainWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示季节活动任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Task did not complete successfully",
+      "Context": "PluginUi.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务未能完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Task did not complete successfully (null)",
+      "Context": "PluginUi.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务未能完成（返回空值）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "PluginUi.DrawInfoWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

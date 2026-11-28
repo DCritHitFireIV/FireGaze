@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "vfallguy",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " (autoleave: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " （自动退出： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto leave if not solo",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "非单人副本时自动退出",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto register",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动报名",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay###j",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay###l",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "退出",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Num players in duty: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "副本内玩家人数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Path: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "路线： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pos: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Queue",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "参加匹配",
+      "Source": "library"
+    },
+    {
+      "Original": "Show AOE debug text",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示范围攻击的调试文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Show AOE zones",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示范围攻击区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Show proposed path",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示建议路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "速度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "inner",
+      "Context": "Map3.Strats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "内侧",
+      "Source": "library"
+    },
+    {
+      "Original": "never",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "outer",
+      "Context": "Map3.Strats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "外侧",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

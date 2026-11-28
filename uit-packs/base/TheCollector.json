@@ -1,0 +1,869 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TheCollector",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " done",
+      "Context": "MainWindow.DrawStatusRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 完成",
+      "Source": "library"
+    },
+    {
+      "Original": "(Artisan not ready)",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（Artisan 尚未就绪）",
+      "Source": "library"
+    },
+    {
+      "Original": "(no lists in Artisan)",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（Artisan 中没有清单）",
+      "Source": "library"
+    },
+    {
+      "Original": ". Acknowledge it in the main window before retrying.",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "。请在主窗口确认后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "添加物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Add command",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton",
+      "Translated": "添加命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan List:",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Artisan 清单：",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation halted: ",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "自动操作已中止： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation is already running.",
+      "Context": "AutomationHandler.InvokeBuy",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "自动操作已在运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation running",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "自动操作进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Automation stopped: ",
+      "Context": "AutomationHandler.TripHardFail",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "自动操作已停止： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start automation while in a duty.",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "副本中无法启动自动操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start automation while in combat.",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "战斗中无法启动自动操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes",
+      "Context": "DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "DrawCharactersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Characters",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for available ventures between runs",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在两轮之间检查有无完成的雇员探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Chest to scratch:",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "刮开哪个宝箱：",
+      "Source": "library"
+    },
+    {
+      "Original": "Collect on finish crafting an Artisan list",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "Artisan 制作清单完成后交纳收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Collect on finished fishing",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "捕鱼结束后交纳收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectable Shop",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "收藏品交易员",
+      "Source": "library"
+    },
+    {
+      "Original": "Collectable Turn-in Options",
+      "Context": "MainWindow.DrawPlannerCollectables",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel",
+      "Translated": "收藏品交纳选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied!",
+      "Context": "MainWindow.DrawCopyTroubleshootingButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已复制！",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy troubleshooting info",
+      "Context": "MainWindow.DrawCopyTroubleshootingButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制故障排查信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost: ",
+      "Context": "DrawItemsList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "花费： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Craft selected Artisan list on autogather finish",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动采集结束后开始制作选中的 Artisan 清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Commands",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "自定义命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Done",
+      "Context": "DrawPlannerCostBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Autogather on finish",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "完成后启用自动采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Firmament turn-ins stalling on the second item",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "修复了天穹街交纳在第二件物品处停滞的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Kupo of Fortune crashing the game",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "修复了库啵好运道可能导致游戏崩溃的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed resource inspection looping forever",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "修复了资源检验无限循环的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Free inv slots",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "背包空余栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Goal Automation",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "目标自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Goal complete (purchase list done)",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "达成目标（购物清单已完成）",
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Context": "ChangelogWindow.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton",
+      "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "Heads up",
+      "Context": "DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide collectables above your job level",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏等级高于当前职业等级的收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide fishing collectables from planner",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在规划器中隐藏捕鱼收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Integrations",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "集成",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory near full — pausing Artisan to turn collectables in.",
+      "Context": "AutomationHandler.OnArtisanInventoryFull",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "背包即将满，暂停 Artisan 以交纳收藏品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "DrawItemsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Item ",
+      "Context": "CurrencyHelper.GetCurrencyName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Never show on launch",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "启动时不显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify on:",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "发送通知的时机：",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show important updates",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "仅显示重要更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause when free slots ≤",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "空余栏位数不大于此值时暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Kupo of Fortune to spend held cards",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用持有的抽奖券参与库啵好运道",
+      "Source": "library"
+    },
+    {
+      "Original": "Play when cards held reach:",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持有抽奖券达到此数量时开始：",
+      "Source": "library"
+    },
+    {
+      "Original": "Please configure your preferred shop territory in the Settings tab!",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请到「设置」页选择首选商店所在的区域。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin state",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "插件状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress",
+      "Context": "DrawItemsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase list complete! Stopping automation.",
+      "Context": "AutomationHandler.OnFinishedTradingCore",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "购物清单已完成，自动操作已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Context": "DrawItemsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining",
+      "Context": "DrawPlannerCostBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "剩余",
+      "Source": "library"
+    },
+    {
+      "Original": "Reserve scrips:",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "预留票据：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset each quantity after completing the list",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "清单完成后重置各项数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Resource inspection done — starting Artisan list.",
+      "Context": "AutomationHandler.TryStartStage",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "资源检验完毕，开始执行 Artisan 清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Run Deliveroo GC turn-ins between runs",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在两轮之间使用 Deliveroo 交纳军需品",
+      "Source": "library"
+    },
+    {
+      "Original": "Run resource inspection on autogather finish",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动采集完成后进行资源检验",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrip Cost Breakdown",
+      "Context": "MainWindow.DrawPlannerCostBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel",
+      "Translated": "票据花费明细",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrip cap reached",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "票据已达上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrip turn-ins, purchases, and gathering loops",
+      "Context": "MainWindow.DrawHero",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner",
+      "Translated": "交纳收藏品、购买物品和循环采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a territory",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an item...",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择物品…",
+      "Source": "library"
+    },
+    {
+      "Original": "Send Discord notifications",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "发送 Discord 通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show new updates",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "显示新更新",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Still scanning Firmament data — try again in a few seconds.",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在扫描天穹街数据，请稍后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Still scanning vendor data — try again in a few seconds.",
+      "Context": "AutomationHandler.Invoke",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在扫描商店数据，请稍后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "StopUi.DrawStopButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DangerButton",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Conditions",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "停止条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after buy cycles",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "完成指定次数的购买后停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after full loops",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "完成指定轮数后停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after scrips earned",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "获得指定数量的票据后停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after session minutes",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "运行指定分钟数后停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop condition met",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已满足停止条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop condition met: ",
+      "Context": "AutomationHandler.TryStartStage",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已满足停止条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop gathering when purchase list is complete",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "购物清单完成后停止采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Support Me",
+      "Context": "MainWindow.DrawSupportButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton",
+      "Translated": "支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "System",
+      "Context": "MainWindow.DrawSystemToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "DrawPlannerCostBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "触发器",
+      "Source": "library"
+    },
+    {
+      "Original": "Troubleshooting",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "故障排查",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn in collectables on autogather finish",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动采集完成后交纳收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn-in done — resuming Artisan list.",
+      "Context": "AutomationHandler.TryStartStage",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "交纳完毕，继续执行 Artisan 清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Delay",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "界面操作延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "View changelog",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "查看更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Webhook URL:",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Webhook 网址：",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "DrawCharactersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "服务器",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

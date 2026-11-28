@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "FriendLoginNotifier",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Friend Login Notifier",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "好友上线提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "All-world automatic polling enabled.",
+      "Context": "Plugin.SetAutomaticPollingMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用全服务器自动轮询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic polling disabled.",
+      "Context": "Plugin.SetAutomaticPollingMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已关闭自动轮询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world status request ",
+      "Context": "Plugin.ProcessCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "跨服状态请求 ",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds.",
+      "Context": "Plugin.ScheduleNextCrossWorldRequest",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic all-world polling cycle",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "自动轮询所有服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual cross-world sync",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "手动同步跨服状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual sync in progress. ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在手动同步。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic polling is disabled.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动轮询已停用。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,1249 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "StarfallStudio",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nVFX: ",
+      "Context": "[StarfallStudio] StatusEffectSelector.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "\n视觉特效： ",
+      "Source": "library"
+    },
+    {
+      "Original": " About ",
+      "Context": "[StarfallStudio] UpdateWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 关于 ",
+      "Source": "library"
+    },
+    {
+      "Original": " Changelog ",
+      "Context": "[StarfallStudio] UpdateWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 更新日志 ",
+      "Source": "library"
+    },
+    {
+      "Original": " items in ",
+      "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 个项目，位于 ",
+      "Source": "library"
+    },
+    {
+      "Original": " more tags...",
+      "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 个标签……",
+      "Source": "library"
+    },
+    {
+      "Original": " selected",
+      "Context": "[StarfallStudio] MainWindow.DrawEntitySelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 项已选",
+      "Source": "library"
+    },
+    {
+      "Original": "%d seconds",
+      "Context": "[StarfallStudio] SettingsWindow.DrawImportScene",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "%d 秒",
+      "Source": "library"
+    },
+    {
+      "Original": "ATTENTION: Projects made in this version will be incompatible with the next version of StarfallStudio!",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注意：此版本创建的项目将无法在下一版 Starfall Studio 中使用！",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Actor Name###starfall_renamemodal_popup_name",
+      "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "角色名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to favorites",
+      "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加到收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced ",
+      "Context": "[StarfallStudio] WidgetHelpers.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "高级 ",
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambient Color",
+      "Context": "[StarfallStudio] SkyEditorWidget.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "环境光颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Angle",
+      "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "[StarfallStudio] SettingsWindow.DrawNPCAppearanceHack",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Area Light###containerwidgetpopup_spawn_SpotLight",
+      "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "面光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Author: ",
+      "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "作者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Save",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自动保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone List",
+      "Context": "[StarfallStudio] PosingWidget.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "骨骼列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse for a file",
+      "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "浏览文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[StarfallStudio] RenameActorModal.DrawModal",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Context": "[StarfallStudio] BoneSearchControl.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Selection",
+      "Context": "[StarfallStudio] PosingGraphicalWindow.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "取消选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[StarfallStudio] ClipboardServices.DrawCopyPastePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Created: ",
+      "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "创建时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "[StarfallStudio] ItemEntryBase.DrawTags",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Description:",
+      "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "说明：",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "[StarfallStudio] ImStarfallStudio.ToggleSelecterStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Display",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Dynamic",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "动态",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes",
+      "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "[StarfallStudio] ImStarfallStudio.ToggleSelecterStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "[StarfallStudio] BoneIKEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipment",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGPoseSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "集体动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Gear",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装备",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Hair",
+      "Context": "[StarfallStudio] ModelShaderEditor.DrawHairColors",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "头发",
+      "Source": "library"
+    },
+    {
+      "Original": "Head###toggleButton_Head",
+      "Context": "[StarfallStudio] ActorDynamicPoseWidget.DrawPosition",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "头部",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide ",
+      "Context": "[StarfallStudio] LightEntity.DrawContextButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "隐藏 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Overlay",
+      "Context": "[StarfallStudio] PosingWidget.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "隐藏悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size: ",
+      "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "图标大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "[StarfallStudio] FileUIHelpers.DrawImportPoseMenuPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import ",
+      "Context": "[StarfallStudio] LibraryWindow.DrawModal",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import & Export",
+      "Context": "[StarfallStudio] ActorAppearanceWidget.DrawLoadAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "导入与导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Options",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "导入选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactive",
+      "Context": "[StarfallStudio] SettingsWindow.DrawStarfallStudioIPC",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Context": "[StarfallStudio] ActorDebugWidget.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Information & Changelog",
+      "Context": "[StarfallStudio] MainWindow.DrawHeaderButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "信息与更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Input",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Library",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "资源库",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Color",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "灯光颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Lights",
+      "Context": "[StarfallStudio] SpawnMenuEditor.DrawUnifiedSpawnMenu",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Line Thickness",
+      "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "线宽",
+      "Source": "library"
+    },
+    {
+      "Original": "Lips",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawLips",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "嘴唇",
+      "Source": "library"
+    },
+    {
+      "Original": "Load",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Load MCDF",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "加载 MCDF",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawCutscene",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Hand",
+      "Context": "[StarfallStudio] BoneSearchControl.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Minions",
+      "Context": "[StarfallStudio] CompanionSelector.DrawOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "Mirror Pose",
+      "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "镜像姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Context": "[StarfallStudio] BoneSearchControl.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "模型",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts",
+      "Context": "[StarfallStudio] CompanionSelector.DrawOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Name###settings_edit_source_name",
+      "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "New...###containerwidgetpopup_new",
+      "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "新建…",
+      "Source": "library"
+    },
+    {
+      "Original": "No Description",
+      "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有说明",
+      "Source": "library"
+    },
+    {
+      "Original": "No Name Source",
+      "Context": "[StarfallStudio] ProjectWindow.DrawSourceItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未命名来源",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawLips",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Object",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Off Hand",
+      "Context": "[StarfallStudio] BoneSearchControl.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset",
+      "Context": "[StarfallStudio] CameraEditor.DrawStarfallStudioCam",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat3",
+      "Translated": "偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Open GPose to use StarfallStudio!",
+      "Context": "[StarfallStudio] MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "请进入集体动作模式以使用 Starfall Studio！",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Library to the last Location I was previously",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "重新打开资源库时回到上次位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Penumbra",
+      "Context": "[StarfallStudio] AppearanceEditorCommon.DrawPenumbraCollectionSwitcher",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开 Penumbra",
+      "Source": "library"
+    },
+    {
+      "Original": "Open StarfallStudio",
+      "Context": "[StarfallStudio] SettingsWindow.DrawOpenStarfallStudioSetting",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "打开 Starfall Studio",
+      "Source": "library"
+    },
+    {
+      "Original": "Open folder",
+      "Context": "[StarfallStudio] DirectoryEntry.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "[StarfallStudio] ModelShaderEditor.DrawOtherColors",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay",
+      "Context": "[StarfallStudio] SettingsWindow.DrawOverlaySection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Override Current Scene",
+      "Context": "[StarfallStudio] ProjectWindow.DrawLoad",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖当前场景",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "[StarfallStudio] ClipboardServices.DrawCopyPastePopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Path",
+      "Context": "[StarfallStudio] LibrarySourcesEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawSlot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Posing",
+      "Context": "[StarfallStudio] SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "姿势编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawLightButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Press TAB to filter by tag \"",
+      "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "按 Tab 键按此标签筛选：“",
+      "Source": "library"
+    },
+    {
+      "Original": "Project Description###starfall_popup_dis",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "项目说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Project Name###starfall_popup_name",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "项目名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Project System is in Beta.",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "项目功能仍在测试中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from favorites",
+      "Context": "[StarfallStudio] LibraryWindow.DrawLibrary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "取消收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "[StarfallStudio] CameraLifetimeWidget.DrawQuickIcons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Face",
+      "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "重置脸部",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save New Project",
+      "Context": "[StarfallStudio] ProjectWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "保存为新项目",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "[StarfallStudio] PosingOverlayToolbarWindow.DrawButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Scan all library sources and refresh the view",
+      "Context": "[StarfallStudio] LibraryWindow.DrawPath",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "扫描所有资源库来源并刷新视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning...",
+      "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在扫描……",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Context": "[StarfallStudio] FestivalWidget.DrawControls",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Select All",
+      "Context": "[StarfallStudio] PosingEditorCommon.DrawBoneFilterEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select None",
+      "Context": "[StarfallStudio] PosingEditorCommon.DrawBoneFilterEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全部取消选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[StarfallStudio] MainWindow.DrawHeaderButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Shaders",
+      "Context": "[StarfallStudio] ActorAppearanceWindow.DrawImportOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "着色器",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadows",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "[StarfallStudio] GearEditor.DrawGearSlot",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ",
+      "Context": "[StarfallStudio] LightEntity.DrawContextButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in Cutscenes",
+      "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "播放过场动画时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in GPose",
+      "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show when UI Hidden",
+      "Context": "[StarfallStudio] SettingsWindow.DrawHideSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏游戏界面时仍显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Special",
+      "Context": "[StarfallStudio] ActionTimelineSelector.DrawOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "特殊",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawOverallSpeed",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Spot Light###containerwidgetpopup_spawn_SpotLight",
+      "Context": "[StarfallStudio] LightContainerWidget.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "聚光灯",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Studio AUTO-SAVE###starfall_autosaves_window",
+      "Context": "[StarfallStudio] AutoSaveWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Starfall Studio 自动存档",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Studio LIBRARY###starfall_library_window",
+      "Context": "[StarfallStudio] LibraryWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Starfall Studio 资源库",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Studio MCDF ###starfall_mcdf_window",
+      "Context": "[StarfallStudio] MCDFWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Starfall Studio MCDF 文件 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Studio PROJECT BETA###starfall_project_window",
+      "Context": "[StarfallStudio] ProjectWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Starfall Studio 项目（测试版）",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Studio SETTINGS###starfall_settings_window",
+      "Context": "[StarfallStudio] SettingsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Starfall Studio 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Start typing to search...",
+      "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "输入关键词搜索……",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Context": "[StarfallStudio] ActionTimelineEditor.DrawBaseOverride",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Support on Ko-fi",
+      "Context": "[StarfallStudio] UpdateWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags:",
+      "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "标签：",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "[StarfallStudio] ActorContainerWidget.DrawQuickIcons",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target###CameraLifetime_target",
+      "Context": "[StarfallStudio] CameraLifetimeWidget.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target###actorlifetime_target",
+      "Context": "[StarfallStudio] ActorLifetimeWidget.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Time of Day",
+      "Context": "[StarfallStudio] TimeWeatherWidget.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当天时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Transform Slider Speed",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "变换滑块速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "[StarfallStudio] PosingGraphicalWindow.DrawGlobalButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "[StarfallStudio] ActorAppearanceWidget.DrawPropSlot",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the Character Filename as the Actor Name",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "以角色文件名作为角色名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the Library when importing a file",
+      "Context": "[StarfallStudio] SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "导入文件时使用资源库",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Context": "[StarfallStudio] FileEntry.EditDetailsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "[StarfallStudio] ItemEntryBase.DrawInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "[StarfallStudio] LightEditor.DrawLightProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "found ",
+      "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "找到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "plus ",
+      "Context": "[StarfallStudio] LibraryWindow.DrawSearchSuggest",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "另有 ",
+      "Source": "library"
+    },
+    {
+      "Original": "px",
+      "Context": "[StarfallStudio] LibraryWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "像素",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

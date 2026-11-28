@@ -1,0 +1,818 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ContactsTracker",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Analyze",
+      "Context": "AnalyzeWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "分析",
+      "Source": "library"
+    },
+    {
+      "Original": "Some results are not up-to-date. Please click Query again.",
+      "Context": "AnalyzeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "部分结果已过期，请再次点击「查询」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Roulette: High-level Dungeons",
+      "Context": "AnalyzeWindow.DrawByRouletteQuery",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "随机任务：高级迷宫探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Total ",
+      "Context": "AnalyzeWindow.DrawByRouletteQuery",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "共 ",
+      "Source": "library"
+    },
+    {
+      "Original": " entries",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Translated": " 条记录",
+      "Source": "library"
+    },
+    {
+      "Original": " of ",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 共 ",
+      "Source": "library"
+    },
+    {
+      "Original": " to ",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Filters",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Date Range:",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "日期范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Format: YYYY-MM-DD",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "格式：YYYY-MM-DD",
+      "Source": "library"
+    },
+    {
+      "Original": "From:",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "从：",
+      "Source": "library"
+    },
+    {
+      "Original": "Showing ",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在显示 ",
+      "Source": "library"
+    },
+    {
+      "Original": "This Month",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "本月",
+      "Source": "library"
+    },
+    {
+      "Original": "This Week",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "本周",
+      "Source": "library"
+    },
+    {
+      "Original": "Today",
+      "Context": "AnalyzeWindow.DrawDateFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "今天",
+      "Source": "library"
+    },
+    {
+      "Original": "Data changed. Please click Query to refresh this result.",
+      "Context": "AnalyzeWindow.DrawTopXQuery",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "数据已变动，点击「查询」刷新结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Map",
+      "Context": "AnalyzeWindow.DrawTopXQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Roulette",
+      "Context": "AnalyzeWindow.DrawTopXQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "随机任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Times",
+      "Context": "AnalyzeWindow.DrawTopXQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Average",
+      "Context": "AnalyzeWindow.DrawTotalDurationQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "平均",
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Context": "AnalyzeWindow.DrawTotalDurationQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "总计",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "AnalyzeWindow.DrawTotalDurationQuery",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableHeader",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Exported to ",
+      "Context": "Database.Export",
+      "PreserveID": false,
+      "Translated": "已导出到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Logging Disabled For this Entry",
+      "Context": "EntryLogic.EndRecord",
+      "PreserveID": false,
+      "Translated": "此记录已禁用小队记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Solo",
+      "Context": "EntryLogic.EndRecord",
+      "PreserveID": false,
+      "Translated": "单人",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "ExcelHelper.GetPoppedContentType",
+      "PreserveID": false,
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "ExcelHelper.GetTerritoryName",
+      "PreserveID": false,
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Contacts Tracker",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "联系人追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "MainTabBar",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Translated": "主标签栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed Only",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "HistoryColumns",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": false,
+      "Translated": "历史列",
+      "Source": "library"
+    },
+    {
+      "Original": "No entries match your search criteria.",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "没有符合搜索条件的记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration Version: ",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "配置版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm Delete ALL",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Translated": "确认删除全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Database Version: ",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "数据库版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Version: ",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "插件版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Working: ",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "处理中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data operation failed.",
+      "Context": "MainWindow.ProcessDataOperationCompletion",
+      "PreserveID": false,
+      "Translated": "数据操作失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Another data operation is still running.",
+      "Context": "MainWindow.StartDataOperation",
+      "PreserveID": false,
+      "Translated": "另一个数据操作仍在运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Plugin\n/ctracker analyze -> AnalyzeWindow",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开插件\n/ctracker analyze -> AnalyzeWindow",
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": false,
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Sidebar",
+      "Context": "MainWindow.DrawHistoryTab",
+      "PreserveID": false,
+      "Translated": "侧边栏",
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Original": "Also record their class.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLogPartyClassTooltip",
+      "Translated": "同时记录其职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Join via",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "RouletteName",
+      "Translated": "加入方式",
+      "Source": "library"
+    },
+    {
+      "Original": "This action is irreversible.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DeleteHistoryEntryWarning",
+      "Translated": "此操作不可撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "SettingTabData",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable to record solo duty.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableRecordSoloTooltip",
+      "Translated": "启用以记录单人任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Place",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TerritoryName",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep record regardless of completion.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableKeepEntryTooltip",
+      "Translated": "无论是否完成都保留记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DurationOfEntry",
+      "Translated": "时长",
+      "Source": "library"
+    },
+    {
+      "Original": "No record yet.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "NotAnyRecord",
+      "Translated": "暂无记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "You can ping me at the Dalamud Discord server. Or open an issue at the GitHub repository.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "PluginHowToFeedback",
+      "Translated": "你可以在 Dalamud Discord 服务器上联系我，或在 GitHub 仓库提交 issue。",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TabNameHistory",
+      "Translated": "历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TextYes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TextNo",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Logging",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "WhenLogging",
+      "Translated": "当前记录中",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Party Class",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLogPartyClass",
+      "Translated": "记录小队职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable to log party members on completion.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLogPartyTooltip",
+      "Translated": "启用以在完成时记录小队成员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable to only record duty joined by roulette.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableRecordRouletteTooltip",
+      "Translated": "启用以仅记录通过死亡轮盘加入的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Record Solo",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableRecordSolo",
+      "Translated": "记录单人",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Delete at Data Tab",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonDeleteAll",
+      "Translated": "在数据标签页启用删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Incomplete Entry",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableKeepEntry",
+      "Translated": "保留未完成记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "EntryTimeFromTo",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonSelectNo",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "No Active Log. Display Last Entry Instead.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "NotActiveButHaveHistory",
+      "Translated": "无活动记录。改为显示最后一条记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Logging Disabled. Read-Only Mode.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "WarningWhenDisableLogging",
+      "Translated": "记录已禁用。只读模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "No data available.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "QueryNoResult",
+      "Translated": "无可用数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported successfully.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DataImportSuccess",
+      "Translated": "导入成功。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to CSV",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DataExport",
+      "Translated": "导出为 CSV",
+      "Source": "library"
+    },
+    {
+      "Original": "It will add entries and remove duplicates.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonImportWarning",
+      "Translated": "将添加记录并移除重复项。",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TabNameAbout",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Query",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonQuery",
+      "Translated": "查询",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonReset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "SettingTabAdvance",
+      "Translated": "高级",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "EntrySettings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from CSV",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DataImport",
+      "Translated": "从 CSV 导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Members",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "EntryParty",
+      "Translated": "小队成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Log Party",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLogParty",
+      "Translated": "启用记录小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to delete ALL? This action is irreversible.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonDeleteAllWarning",
+      "Translated": "确定要删除全部吗？此操作不可撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CancelIgnore",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonSelectYes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "Processing...",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "QueryInProcess",
+      "Translated": "处理中...",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "PlayerJob",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Top X pair of Roulette and Map",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "QueryTopX",
+      "Translated": "死亡轮盘与藏宝图的前 X 组",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DeleteHistoryEntry",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Analyze",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "OpenAnalyzeWindow",
+      "Translated": "打开分析",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable to start recording data.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLoggingTooltip",
+      "Translated": "启用以开始记录数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to import.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DataImportFail",
+      "Translated": "导入失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "How much time for each roulette",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "QuerySpentTime",
+      "Translated": "每场死亡轮盘耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Logging",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableLogging",
+      "Translated": "启用记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Confim Ignore",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DoubleConfirmIgnore",
+      "Translated": "确认忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed?",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "IsEntryCompleted",
+      "Translated": "已完成？",
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin is in early development. Please report any bugs or suggestions to the developer.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "PluginAboutInfo",
+      "Translated": "此插件处于早期开发阶段。如有任何 bug 或建议，请反馈给开发者。",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TabNameActive",
+      "Translated": "进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to Delete.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "DeleteHistoryEntryCtrl",
+      "Translated": "按住 CTRL 删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you have a suggestion for a new query, please let me know.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "AnalyzeFeedback",
+      "Translated": "如果你有新的查询建议，请告诉我。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete ALL Active Entries",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonDeleteAllAction",
+      "Translated": "删除全部进行中的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Frequency of Maps of each Roulette",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "QueryRouletteFrequency",
+      "Translated": "各死亡轮盘的藏宝图出现频率",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "TabNameSetting",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "SettingTabGeneral",
+      "Translated": "通用",
+      "Source": "library"
+    },
+    {
+      "Original": "Log duty with custom Settings",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableRecordSettings",
+      "Translated": "使用自定义设置记录任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "IgnoreCurrentEntry",
+      "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Record Duty Roulette",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "CheckboxEnableRecordRoulette",
+      "Translated": "仅记录任务搜索器",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the button to delete all active entries at Data Tab.",
+      "Container": "ContactsTracker.Resources.Language.resources",
+      "Key": "ButtonDeleteAllTooltip",
+      "Translated": "在数据标签页显示删除全部进行中记录的按钮。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

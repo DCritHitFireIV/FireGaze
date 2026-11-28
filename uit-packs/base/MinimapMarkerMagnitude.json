@@ -1,0 +1,278 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "MinimapMarkerMagnitude",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Opens the Minimap Marker Magnitude config window.",
+      "Context": "MinimapMarkerMagnitude.dll 0x06000007:IL_006A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开 Minimap Marker Magnitude 的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimap Marker Magnitude Settings",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "小地图标记大小设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Name:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_00A9",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "分组名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Group Name",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_00C7",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "编辑分组名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Marker Scale:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_00F5",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "分组标记缩放：",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Preview Size:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_013A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "图标预览大小：",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort Order:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_02B9",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "排序方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Newest First",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_02EF",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "最新优先",
+      "Source": "library"
+    },
+    {
+      "Original": "Internal Icon ID",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_02F6",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "图标内部编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Selected Icons",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_0377",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "隐藏所选图标",
+      "Source": "library"
+    },
+    {
+      "Original": "This will hide icons that are already part of this group.\nIcons from other groups are always hidden, because an icon cannot belong to more than one group.",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_0399",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "隐藏已加入当前分组的图标。\n其他分组中的图标始终隐藏，因为同一图标只能属于一个分组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Icon Group",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_03D5",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "删除图标组",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL+SHIFT to allow deletion",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002C:IL_0451",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "按住 Ctrl+Shift 后可删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_0069",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Marker Scale:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_00C4",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "默认标记缩放：",
+      "Source": "library"
+    },
+    {
+      "Original": "Resize Off-map Markers",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_0117",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "调整地图外标记的大小",
+      "Source": "library"
+    },
+    {
+      "Original": "This affects icons that are anchored to the edge of the minimap.\nFor example, quests in progress that have objectives on the map you're on but are out of minimap range.",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_0143",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "调整固定在小地图边缘的图标。\n例如，进行中的任务目标位于当前地图，但超出了小地图的显示范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "Off-map Marker Scalar:",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_016C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "地图外标记缩放系数：",
+      "Source": "library"
+    },
+    {
+      "Original": "New Icon Group Name",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_01D0",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "新图标组名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Group",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_028C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "图标分组",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Scale",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_02A2",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "分组大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_02CD",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600002D:IL_02F8",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Guilds",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0027",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "行会",
+      "Source": "library"
+    },
+    {
+      "Original": "FATEs",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_015E",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "临危受命",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Scenario Quests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0229",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "主线任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Feature/Job Quests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0318",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "功能与职业任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Side Quests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_041F",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "支线任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Levequests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0526",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Guildhests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_05E5",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "行会令",
+      "Source": "library"
+    },
+    {
+      "Original": "Hall of the Novice Quests",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_06A4",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "初学者学堂",
+      "Source": "library"
+    },
+    {
+      "Original": "Lore 'Quests'",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0763",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "背景故事相关任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple Triad & GATEs",
+      "Context": "MinimapMarkerMagnitude.dll 0x0600003D:IL_0822",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "九宫幻卡与机遇临门",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

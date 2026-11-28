@@ -1,0 +1,594 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PlayerTrack",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [],
+  "resources": [
+    {
+      "Original": "No players found.",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NoPlayersFound",
+      "Translated": "未找到玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unavailable",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Unavailable",
+      "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "from last 90 days",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "KeepEncountersFromLast90Days",
+      "Translated": "最近 90 天",
+      "Source": "library"
+    },
+    {
+      "Original": "Alerts",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Alerts",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Delete",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Manual",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Blocked",
+      "Translated": "已阻止",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Cancel",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Name Color",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NameColor",
+      "Translated": "名称颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate Colors",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NameplateColors",
+      "Translated": "名牌颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Nameplate",
+      "Translated": "名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "General",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Thread",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AboutDiscordThread",
+      "Translated": "Discord 讨论串",
+      "Source": "library"
+    },
+    {
+      "Original": "Verified",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Verified",
+      "Translated": "已验证",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Window",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Integrations",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Integrations",
+      "Translated": "集成",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to Clipboard",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "CopyToClipboard",
+      "Translated": "复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Status",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Search",
+      "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "No icons enabled.",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NoIconsEnabledMessage",
+      "Translated": "没有启用的图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Player",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "FreeCompany",
+      "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Unknown",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "No history found.",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NoHistoryMessage",
+      "Translated": "未找到历史记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Window Size",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "LockWindowSize",
+      "Translated": "锁定窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Content",
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Context Menu",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "ContextMenu",
+      "Translated": "右键菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "How to Search",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "HowToSearchTitle",
+      "Translated": "搜索方法",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Stats",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "PlayerStats",
+      "Translated": "玩家属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "BlackList",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Homeworld",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Homeworld",
+      "Translated": "所属服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "No Change",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NoChange",
+      "Translated": "无更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Created",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Created",
+      "Translated": "已创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Category",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "SelectCategory",
+      "Translated": "选择分类",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "No",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Players",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Players",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Ko-Fi Tip",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AboutKoFi",
+      "Translated": "在 Ko-fi 上打赏",
+      "Source": "library"
+    },
+    {
+      "Original": "Issues",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AboutIssues",
+      "Translated": "问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Location",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "LastLocation",
+      "Translated": "上次位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Job",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Job",
+      "Translated": "职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Yes",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "About",
+      "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Icons",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Icons",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Notes",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Notes",
+      "Translated": "备注",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Reset",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "LastSeen",
+      "Translated": "上次出现时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Contains",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Contains",
+      "Translated": "包含",
+      "Source": "library"
+    },
+    {
+      "Original": "Author:",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AboutAuthor",
+      "Translated": "作者：",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Execute",
+      "Translated": "执行",
+      "Source": "library"
+    },
+    {
+      "Original": "All Players",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AllPlayers",
+      "Translated": "所有玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Appearance",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "enter a new tag",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "NewTagHint",
+      "Translated": "输入新标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Settings",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Settings",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "OpenSettings",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Players by Tag",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "PlayersByTag",
+      "Translated": "按标签查看玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Updated",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "LastUpdated",
+      "Translated": "最近更新",
+      "Source": "library"
+    },
+    {
+      "Original": "is nearby.",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "ProximityAlertMessage",
+      "Translated": "位于附近。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Name",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "PlayerName",
+      "Translated": "玩家姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Locations",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Locations",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "search icons",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "SearchIconsHint",
+      "Translated": "搜索图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Automatic",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Version:",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "AboutVersion",
+      "Translated": "版本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Categories",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Whitelist",
+      "Translated": "白名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Never",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "LastUpdatedNever",
+      "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Search Box",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "ShowSearchBox",
+      "Translated": "显示搜索框",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancelled",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Cancelled",
+      "Translated": "已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Show in Content",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "ShowInContent",
+      "Translated": "在副本内显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Visibility",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Duration",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Duration",
+      "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "History",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Location",
+      "Translated": "地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Data",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Data",
+      "Translated": "数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Chat",
+      "Translated": "聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Icon",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "None",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Name",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Help",
+      "Translated": "帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Type",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Tags",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Tags",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Time",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Container": "PlayerTrack.Resource.Language.resources",
+      "Key": "Size",
+      "Translated": "大小",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}

@@ -1,0 +1,545 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "DeathRecap",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Open the death recap window",
+      "Context": "DeathRecapPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开死亡回顾窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Death Recap Config",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "死亡回顾设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "记录设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录 ",
+      "Source": "library"
+    },
+    {
+      "Original": "On Death",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "战斗不能时",
+      "Source": "library"
+    },
+    {
+      "Original": "Only in instances",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在副本中",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable in PvP",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 PvP 中停用",
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "通用设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message Type",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "聊天消息类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Show chat tip",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示聊天提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Events for (sec)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "事件记录保留时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Deaths for (min)",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "死亡记录保留时间（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter category of the \"Chat Message\" death notification.\n\"Debug\" will show up in all chat tabs regardless of configuration.\nNote that this will only affect the way the notification is displayed to you. They will never be visible to others.",
+      "Context": "ConfigWindow.ChatMessageTypeTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "「聊天消息」死亡通知的消息类别。\n选择「调试」后，无论聊天设置如何，通知均会出现在所有聊天页。\n此选项只影响你看到通知的方式，其他玩家始终看不到这些通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the command in the chat to reopen the window the first time you close the Death Recap.",
+      "Context": "ConfigWindow.ChatTipTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "首次关闭死亡回顾时，在聊天栏提示重新打开窗口的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Will only show a death notification when in an instance (e.g. a Dungeon)",
+      "Context": "ConfigWindow.OnlyInInstancesTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅在副本等任务区域内发送死亡提醒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Death Recap",
+      "Context": "DeathRecapWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "死亡回顾",
+      "Source": "library"
+    },
+    {
+      "Original": "FilterButton",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "筛选按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter events",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "筛选事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Row filters",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "行筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Show damage",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Show healing",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示治疗",
+      "Source": "library"
+    },
+    {
+      "Original": "Show debuffs",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示减益效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Show buffs",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示增益效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Histogram Button",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "直方图按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to histogram (experimental)",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换到直方图（实验性）",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to detailed view",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换到详细视图",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Button",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "清除全部按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all events",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "清除所有事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure?",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "DeathRecapWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Deaths",
+      "Context": "DeathRecapWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "死亡记录",
+      "Source": "library"
+    },
+    {
+      "Original": "[DeathRecap] Tip: You can reopen this window using /dr or /deathrecap",
+      "Context": "DeathRecapWindow.OnClose",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[DeathRecap] 提示：可使用 /dr 或 /deathrecap 重新打开此窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Context": "DeathRecapWindow.DrawPlayerSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Ability",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "HP Before",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "受击前 HP",
+      "Source": "library"
+    },
+    {
+      "Original": "Regen",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持续恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "DoT damage",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持续伤害",
+      "Source": "library"
+    },
+    {
+      "Original": " Damage",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Hit",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暴击",
+      "Source": "library"
+    },
+    {
+      "Original": "Direct Hit (+25%)",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "直击（+25%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Parried (-20%)",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "招架（-20%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked (-15%)",
+      "Context": "DeathRecapWindow.DrawCombatEventTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "格挡（-15%）",
+      "Source": "library"
+    },
+    {
+      "Original": "HoT",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "持续恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "DoT",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "持续伤害",
+      "Source": "library"
+    },
+    {
+      "Original": "Healed for",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "治疗量",
+      "Source": "library"
+    },
+    {
+      "Original": "from",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "来自",
+      "Source": "library"
+    },
+    {
+      "Original": "by ",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "由 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Took",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "受到",
+      "Source": "library"
+    },
+    {
+      "Original": "from damage over time effect.",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "来自持续伤害效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Recovered",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "HP from healing over time effect.",
+      "Context": "DeathRecapWindow.DrawCombatHistogram",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "由持续恢复效果回复的 HP。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overkill by ",
+      "Context": "DeathRecapWindow.DrawHpColumn",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "溢出伤害： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Death Recap (",
+      "Context": "NotificationHandler.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示死亡回顾（",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-attack",
+      "Context": "CombatEventCapture.ProcessPacketActionEffectDetour",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "自动攻击",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds ago",
+      "Context": "Death.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": " 秒前",
+      "Source": "library"
+    },
+    {
+      "Original": "about a minute ago",
+      "Context": "Death.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "约一分钟前",
+      "Source": "library"
+    },
+    {
+      "Original": " minutes ago",
+      "Context": "Death.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": " 分钟前",
+      "Source": "library"
+    },
+    {
+      "Original": "about an hour ago",
+      "Context": "Death.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "约一小时前",
+      "Source": "library"
+    },
+    {
+      "Original": " hours ago",
+      "Context": "Death.get_Title",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": " 小时前",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

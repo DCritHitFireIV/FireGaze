@@ -1,0 +1,2000 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Intoner",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " Catalog",
+      "Context": "[Intoner] CreateWorkspace.DrawCreateBrowserActionButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": " 目录",
+      "Source": "library"
+    },
+    {
+      "Original": " Color",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryGroupContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 颜色",
+      "Source": "library"
+    },
+    {
+      "Original": " is required.",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": " 或更高。",
+      "Source": "library"
+    },
+    {
+      "Original": " item",
+      "Context": "[Intoner] SceneListRow.DrawFolderMetadata",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " items",
+      "Context": "[Intoner] Gizmo.DrawGizmoLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " locked",
+      "Context": "[Intoner] SceneWorkspace.BuildPlacedObjectCountLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": " 已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": " name",
+      "Context": "[Intoner] ObjectLibraryBrowser.OpenRenameLibraryGroupDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": " 名称",
+      "Source": "library"
+    },
+    {
+      "Original": " saved",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 已保存",
+      "Source": "library"
+    },
+    {
+      "Original": " saved presets",
+      "Context": "[Intoner] CatalogLibraryTooltip.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 已保存的预设",
+      "Source": "library"
+    },
+    {
+      "Original": " selected",
+      "Context": "[Intoner] CollectionModSettingsEditor.BuildObjectCollectionMultiModGroupPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": " 已选中",
+      "Source": "library"
+    },
+    {
+      "Original": " settings",
+      "Context": "[Intoner] Toolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "%.0f Degrees",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat2",
+      "Translated": "%.0f 度",
+      "Source": "library"
+    },
+    {
+      "Original": "%d seconds",
+      "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "%d 秒",
+      "Source": "library"
+    },
+    {
+      "Original": "1 folder",
+      "Context": "[Intoner] ObjectEditorCatalog.BuildFolderCountLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "1 个文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "[Intoner] SceneItemControls.DrawPlacedObjectCard",
+      "Role": "UI",
+      "RoleReason": "→ SceneListRow.DrawTooltip",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Penumbra Mods",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionAddModPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "添加 Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Add installed Penumbra mods",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionModsHeaderActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "添加已安装的 Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "All ",
+      "Context": "[Intoner] CollectionModSettingsEditor.DrawObjectCollectionModSettingsToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "全部 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Always",
+      "Context": "[Intoner] CoreSettingFactory.ResolveOutsideEditorStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Apartment (150)",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "公寓（150）",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterTemporarySection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign Folder",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryFolderAssignmentMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "分配文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "[Intoner] EditorDialog.DrawActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories",
+      "Context": "[Intoner] SettingsChrome.SetupBodyColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Category",
+      "Context": "[Intoner] FurnitureDataTooltip.BuildProperties",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Changed ",
+      "Context": "[Intoner] CollectionModSettingsEditor.DrawObjectCollectionModSettingsToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已更改 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Shadow",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "角色阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Shadow Range",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "角色阴影范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking",
+      "Context": "[Intoner] DependencyUi.ResolveLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "检查中",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking for Penumbra...",
+      "Context": "[Intoner] PenumbraDependency..ctor",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "正在检查 Penumbra……",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "清空",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Default Layout",
+      "Context": "[Intoner] LayoutWorkspace.DrawLayoutListEntryContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "清除默认布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Folder Color",
+      "Context": "[Intoner] SceneEditorCommands.TrySetFolderColorWithHistory",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "清除文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear History",
+      "Context": "[Intoner] HistoryWorkspace.OpenClearHistoryDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清除历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear filter: ",
+      "Context": "[Intoner] CollectionPanel.DrawObjectCollectionPanelSearch",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "清除筛选条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear recorded history",
+      "Context": "[Intoner] HistoryWorkspace.DrawHistoryHeroActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "清除已有历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "[Intoner] ObjectModelEditor.DrawFurnitureRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected",
+      "Context": "[Intoner] DependencyUi.ResolveLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已连接",
+      "Source": "library"
+    },
+    {
+      "Original": "Connection Failed",
+      "Context": "[Intoner] DependencyUi.ResolveLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "连接失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Content",
+      "Context": "[Intoner] CollectionModSettingsEditor.DrawObjectCollectionModSettingsPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[Intoner] EditorShortcuts..cctor",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy ",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryGroupContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "复制 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a checkpoint on the current history state",
+      "Context": "[Intoner] HistoryWorkspace.DrawHistoryHeroActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "为当前历史状态创建还原点",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Color: ",
+      "Context": "[Intoner] SceneItemControls.TryGetPlacedObjectColorMarker",
+      "Role": "UI",
+      "RoleReason": "→ SceneListRow.DrawTooltip",
+      "Translated": "自定义颜色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center",
+      "Context": "[Intoner] SceneItemInspector.DrawInspectorWorldChoices",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "[Intoner] DebugWorkspace.DrawDebugWorkspace",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Selected Layout",
+      "Context": "[Intoner] LayoutWorkspace.DrawLayoutHeaderActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "删除所选布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the bottom",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarDockPad",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "将工具栏停靠在底部",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the left",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarDockPad",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "将工具栏停靠在左侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the right",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarDockPad",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "将工具栏停靠在右侧",
+      "Source": "library"
+    },
+    {
+      "Original": "Dock toolbar to the top",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarDockPad",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "将工具栏停靠在顶部",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Selected",
+      "Context": "[Intoner] SceneItemControls.DrawDuplicateSelectedButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "复制选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Color",
+      "Context": "[Intoner] ObjectModelEditor.DrawBgObjectRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "染色颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Color: ",
+      "Context": "[Intoner] SceneItemControls.TryGetPlacedObjectColorMarker",
+      "Role": "UI",
+      "RoleReason": "→ SceneListRow.DrawTooltip",
+      "Translated": "染色颜色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Dynamic Lighting",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "动态光照",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Selected",
+      "Context": "[Intoner] SceneItemInspector.DrawInspectorHero",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "编辑选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit checkpoint on the current history state",
+      "Context": "[Intoner] HistoryWorkspace.DrawHistoryHeroActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "编辑当前历史状态的还原点",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Mods in Penumbra to use its mods in Intoner's object collections.",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "请在 Penumbra 中启用模组，以便在 Intoner 对象的合集内使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Penumbra to use its mods in Intoner's object collections.",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "启用 Penumbra 后，即可在 Intoner 对象的合集内使用模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "衰减",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Angle",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "衰减角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Falloff Type",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "衰减类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter installed mods",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionAddModPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选已安装的模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryGroupContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Color",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide",
+      "Context": "[Intoner] Gizmo.ExecuteWheelAction",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "隐藏对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide folder objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "隐藏文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "History",
+      "Context": "[Intoner] EditorWorkspaceHost..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon",
+      "Context": "[Intoner] DrawTransformSnapSectionCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Info",
+      "Context": "[Intoner] EditorCard.DrawCardHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Information",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Initial State",
+      "Context": "[Intoner] SceneHistoryManager.ResetTimeline",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "初始状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Install Penumbra to use its mods in Intoner's object collections.",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "安装 Penumbra 后，即可在 Intoner 对象的合集内使用模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Intensity",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "强度",
+      "Source": "library"
+    },
+    {
+      "Original": "Intoner Dev Build (",
+      "Context": "[Intoner] IntonerBuildInfoService..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Intoner 开发版（",
+      "Source": "library"
+    },
+    {
+      "Original": "Intoner Unavailable",
+      "Context": "[Intoner] EditorStartupView.DrawEditorLoadingScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Intoner 不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Intoner loading failed",
+      "Context": "[Intoner] EditorStartupView.DrawEditorLoadingScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "Intoner 加载失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "[Intoner] Gizmo.ExecuteWheelAction",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Context": "[Intoner] Gizmo.ExecuteWheelAction",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Label",
+      "Context": "[Intoner] IntonerTooltipContent.Property",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Layout name",
+      "Context": "[Intoner] LayoutWorkspace.DrawLayoutCreationSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "布局名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Context": "[Intoner] EditorDockShell.SetupCenterColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "左",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左键点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Angle",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "光源角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Color: ",
+      "Context": "[Intoner] SceneItemControls.TryGetPlacedObjectColorMarker",
+      "Role": "UI",
+      "RoleReason": "→ SceneListRow.DrawTooltip",
+      "Translated": "灯光颜色： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Light Type",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "光源类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that affects the entire zone globally.",
+      "Context": "[Intoner] ObjectEditorCatalog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "照亮整个区域的全局光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits in a flat box-like shape.",
+      "Context": "[Intoner] ObjectEditorCatalog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "以扁平盒状区域发光的光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits in the shape of a cone with a spherical base.",
+      "Context": "[Intoner] ObjectEditorCatalog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "呈锥状发光，底面为球面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Light that emits spherically from a single point.",
+      "Context": "[Intoner] ObjectEditorCatalog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "从一点向四周发光的球形光源。",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading preview...",
+      "Context": "[Intoner] ObjectPreviewRenderer.DrawViewport",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在加载预览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading...",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogGridTile",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加载中…",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "锁定对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Selected",
+      "Context": "[Intoner] SceneItemControls.DrawToggleLockSelectedButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "锁定选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock folder objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "锁定文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Context": "[Intoner] SceneItemInspector.DrawCommonInspector",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop",
+      "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual",
+      "Context": "[Intoner] CoreSettingFactory.ResolveSplashScreenStartupStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Material Reflection",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "材质反射",
+      "Source": "library"
+    },
+    {
+      "Original": "Model Path",
+      "Context": "[Intoner] SceneItemInspector.DrawBgObjectInspector",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Move",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to Folder",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryGroupFolderMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "移至文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "[Intoner] SceneItemInspector.DrawCommonInspector",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "New Folder...",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryFolderAssignmentMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "新建文件夹…",
+      "Source": "library"
+    },
+    {
+      "Original": "No VFX entries match the current filter.",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合当前筛选条件的特效。",
+      "Source": "library"
+    },
+    {
+      "Original": "No bgobject entries match the current filter.",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合当前筛选条件的背景物体。",
+      "Source": "library"
+    },
+    {
+      "Original": "No change is available to redo.",
+      "Context": "[Intoner] DrawToolbarHistoryTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有可重做的更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "No change is available to undo.",
+      "Context": "[Intoner] DrawToolbarHistoryTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有可撤销的更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "No editable settings for this mod.",
+      "Context": "[Intoner] CollectionModSettingsEditor.DrawObjectCollectionModSettingsPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "此模组没有可编辑的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "No folders available",
+      "Context": "[Intoner] FolderSelectionMenu.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有可用的文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "No furniture entries match the current filter.",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合当前筛选条件的家具。",
+      "Source": "library"
+    },
+    {
+      "Original": "No installed Penumbra mods are currently available.",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionAddModPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "目前没有可用的已安装 Penumbra 模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "No installed mods match the current filter.",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionAddModPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合当前筛选条件的已安装模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "No light types match the current filter.",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawLightCatalogBrowser",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有符合当前筛选条件的光源类型。",
+      "Source": "library"
+    },
+    {
+      "Original": "No recent layouts",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有最近使用的布局",
+      "Source": "library"
+    },
+    {
+      "Original": "No selection",
+      "Context": "[Intoner] SceneItemInspector.ResolveInspectorHeroSubtitle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未选择",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "[Intoner] EditorToolbar.BuildBoundsFilterSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "None selected",
+      "Context": "[Intoner] CollectionModSettingsEditor.BuildObjectCollectionMultiModGroupPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "未选中任何项",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Installed",
+      "Context": "[Intoner] DependencyUi.ResolveLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Shadow",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "物体阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "[Intoner] CoreSettingFactory.FormatAntiAliasing",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "[Intoner] EditorToolbarTooltip.BuildStatusValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Intoner.",
+      "Context": "[Intoner] LoadAsync.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Intoner。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Penumbra",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionActionsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "打开 Penumbra",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Penumbra",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionModContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "在 Penumbra 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open..",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "打开……",
+      "Source": "library"
+    },
+    {
+      "Original": "Organization",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "整理",
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenActions",
+      "Role": "UI",
+      "RoleReason": "→ SplashScreenActionList.DrawSectionTitle",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Outline Color",
+      "Context": "[Intoner] ObjectModelEditor.DrawFurnitureRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Context": "[Intoner] EditorShortcuts..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "粘贴",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste ",
+      "Context": "[Intoner] TransformClipboardControls.Draw",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "粘贴 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Context": "[Intoner] CoreSettingFactory.ResolveLayoutAutosaveStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Mods",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionViewSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra is connected and ready to use.",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "已连接 Penumbra，可以开始使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Furniture",
+      "Context": "[Intoner] ObjectEditorCatalog.ResolvePlacementActionLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "放置家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Light",
+      "Context": "[Intoner] ObjectEditorCatalog.ResolvePlacementActionLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "放置光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Place Object",
+      "Context": "[Intoner] ObjectEditorCatalog.ResolvePlacementActionLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "放置物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Place VFX",
+      "Context": "[Intoner] ObjectEditorCatalog.ResolvePlacementActionLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "放置特效",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "[Intoner] EditorToolbar.DrawTransformSnapToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing Intoner",
+      "Context": "[Intoner] EditorStartupView.DrawEditorLoadingScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在准备 Intoner",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview unavailable",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogGridTile",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "预览不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Priority",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionModPriority",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Range",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent Layouts",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenActions",
+      "Role": "UI",
+      "RoleReason": "→ SplashScreenActionList.DrawSectionTitle",
+      "Translated": "最近使用的布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Recover Last Session",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "恢复上次会话",
+      "Source": "library"
+    },
+    {
+      "Original": "Redo",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarHistoryGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "重做",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove ",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryEntryContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "移除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Item",
+      "Context": "[Intoner] HistoryCoordinator.TryRemoveSceneItems",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "移除物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Selected",
+      "Context": "[Intoner] SceneItemControls.DrawRemoveSelectedButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "移除选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "[Intoner] ObjectLibraryBrowser.OpenRenameLibraryEntryDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename ",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryGroupContextMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "重命名 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Context": "[Intoner] EditorDockShell.SetupCenterColumns",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "右",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右键点击",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarGizmoGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarGizmoGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Search object settings",
+      "Context": "[Intoner] Toolbar.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索对象设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Search placed objects",
+      "Context": "[Intoner] DrawPlacedObjectsHero",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索已放置的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Select an object to inspect and edit it.",
+      "Context": "[Intoner] DrawInspectorDetailsCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "选择对象以查看和编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select option",
+      "Context": "[Intoner] CollectionModSettingsEditor.ResolveSelectedObjectCollectionSingleModOptionLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "选择选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcObjectIdInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection Enabled",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsOptionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "已启用选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Folder Color",
+      "Context": "[Intoner] SceneEditorCommands.TrySetFolderColorWithHistory",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "设置文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings for gizmo surface dragging.",
+      "Context": "[Intoner] EditorToolbar.DrawSurfaceAlignPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "表面拖动操作手柄设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadow Far",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "远处阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadow Near",
+      "Context": "[Intoner] ObjectModelEditor.DrawLightRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "近处阴影",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "[Intoner] Gizmo.ExecuteWheelAction",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "显示对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Selected Only",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsOptionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "仅显示选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Show folder objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "显示文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Context": "[Intoner] IntonerConfigurationNormalizer.NormalizeUi",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed",
+      "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "速度",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting",
+      "Context": "[Intoner] DependencyUi.ResolveLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Status",
+      "Context": "[Intoner] EditorHeroCard.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Step",
+      "Context": "[Intoner] DrawTransformSnapSectionCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Surface Align",
+      "Context": "[Intoner] EditorToolbar.DrawSurfaceAlignToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "对齐表面",
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Shape",
+      "Context": "[Intoner] EditorToolbar.DrawSceneSurfaceTargetShapeRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "目标形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Target shape",
+      "Context": "[Intoner] EditorToolbar.DrawSurfaceAlignToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标形状",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory",
+      "Context": "[Intoner] SceneItemInspector.ResolveInspectorMetadata",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Tint",
+      "Context": "[Intoner] SceneItemInspector.DrawDisplaySettings",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "色调",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the movement gizmo.",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarGizmoGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "显示或隐藏移动操作手柄。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the rotation gizmo.",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarGizmoGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "显示或隐藏旋转操作手柄。",
+      "Source": "library"
+    },
+    {
+      "Original": "Transform",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "变换",
+      "Source": "library"
+    },
+    {
+      "Original": "Transparency",
+      "Context": "[Intoner] ObjectModelEditor.DrawBgObjectRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Context": "[Intoner] EditorToolbar.DrawToolbarHistoryGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "撤销",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Context": "[Intoner] EditorToolbar.FormatSceneSurfaceTargetShape",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown ",
+      "Context": "[Intoner] FurnitureStainSelector.Find",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "未知 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "解锁对象",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Selected",
+      "Context": "[Intoner] SceneItemControls.DrawToggleLockSelectedButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "解锁选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock folder objects",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "解锁文件夹中的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Update",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterMutationSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Penumbra to use it with Intoner. API ",
+      "Context": "[Intoner] PenumbraDependency.EvaluateStatus",
+      "Role": "UI",
+      "RoleReason": "→ RowChrome.DrawTooltip",
+      "Translated": "请更新 Penumbra，Intoner 要求 API 版本为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "VFX Path",
+      "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "[Intoner] IntonerTooltipContent.Property",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "值",
+      "Source": "library"
+    },
+    {
+      "Original": "Visibility",
+      "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Visible",
+      "Context": "[Intoner] CreateWorkspace.DrawBgObjectCreateSettings",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Warnings",
+      "Context": "[Intoner] DrawObjectCollectionStatusTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Window",
+      "Context": "[Intoner] SceneItemPresentation.GetDisplaySourceKind",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Context": "[Intoner] EditorToolbar.GetBoundsSpaceToggleLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "all",
+      "Context": "[Intoner] CategoryRail.DrawCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "available",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可用",
+      "Source": "library"
+    },
+    {
+      "Original": "building furniture stains",
+      "Context": "[Intoner] FurnitureStainService..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在生成家具染色数据",
+      "Source": "library"
+    },
+    {
+      "Original": "building object catalog",
+      "Context": "[Intoner] ObjectCatalogService..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在生成物件目录",
+      "Source": "library"
+    },
+    {
+      "Original": "click anywhere to close",
+      "Context": "[Intoner] EditorStartupView.DrawSplashScreenBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "点击任意位置关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "collection name",
+      "Context": "[Intoner] CollectionsWorkspace.OpenRenameObjectCollectionDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "收藏集名称",
+      "Source": "library"
+    },
+    {
+      "Original": "create",
+      "Context": "[Intoner] CreateWorkspace.DrawBgObjectCreateSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "current",
+      "Context": "[Intoner] HistoryWorkspace.DrawHistoryEntryCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "default",
+      "Context": "[Intoner] EditorStartupView.CreateLayoutActionItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "error",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterResultSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "folder name",
+      "Context": "[Intoner] ObjectLibraryBrowser.OpenCreateLibraryFolderDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "文件夹名称",
+      "Source": "library"
+    },
+    {
+      "Original": "furniture stain load failed",
+      "Context": "[Intoner] FurnitureStainService..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "加载家具染色数据失败",
+      "Source": "library"
+    },
+    {
+      "Original": "grid layout",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogLayoutToggleButtons",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "网格布局",
+      "Source": "library"
+    },
+    {
+      "Original": "layout",
+      "Context": "[Intoner] LayoutWorkspace.BuildLayoutListBadges",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "布局",
+      "Source": "library"
+    },
+    {
+      "Original": "light",
+      "Context": "[Intoner] ObjectSnapshotUtility.GetAssetName",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "光源",
+      "Source": "library"
+    },
+    {
+      "Original": "list layout",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawCatalogLayoutToggleButtons",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "列表布局",
+      "Source": "library"
+    },
+    {
+      "Original": "locked",
+      "Context": "[Intoner] BuildObjectListMetaSegments.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "no autosave",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有自动存档",
+      "Source": "library"
+    },
+    {
+      "Original": "no layouts",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenUtilityActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "没有布局",
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Context": "[Intoner] WorldSurfaceRenderer.UpdateFrameTransfer",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "none saved",
+      "Context": "[Intoner] EditorStartupView.BuildSplashScreenActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "尚未保存",
+      "Source": "library"
+    },
+    {
+      "Original": "off",
+      "Context": "[Intoner] DebugWorkspace.FormatOnOff",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "on",
+      "Context": "[Intoner] DebugWorkspace.FormatOnOff",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "placed objects",
+      "Context": "[Intoner] LayoutWorkspace.BuildLayoutCreationBadges",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已放置的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "preparing Intoner",
+      "Context": "[Intoner] EditorStartupView.DrawEditorLoadingScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在准备 Intoner",
+      "Source": "library"
+    },
+    {
+      "Original": "preset name",
+      "Context": "[Intoner] ObjectLibraryBrowser.OpenRenameLibraryEntryDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "预设名称",
+      "Source": "library"
+    },
+    {
+      "Original": "scale ",
+      "Context": "[Intoner] Gizmo.BuildCurrentTransformMetricValueText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "缩放 ",
+      "Source": "library"
+    },
+    {
+      "Original": "search light type or description",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawLightCatalogBrowser",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索光源类型或描述",
+      "Source": "library"
+    },
+    {
+      "Original": "search name, row, category, or path",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawFurnitureCatalogBrowser",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称、行号、类别或路径搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "search name, row, source, or path",
+      "Context": "[Intoner] ObjectCatalogBrowser.DrawBgObjectCatalogBrowser",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称、行号、来源或路径搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "select to preview",
+      "Context": "[Intoner] ObjectPreviewRenderer.DrawViewport",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "选择以预览",
+      "Source": "library"
+    },
+    {
+      "Original": "selected",
+      "Context": "[Intoner] SceneItemInspector.DrawDisplaySnapshotEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "已选中",
+      "Source": "library"
+    },
+    {
+      "Original": "settings",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionModBadges",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "start",
+      "Context": "[Intoner] LoadProgress.Slice",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "开始",
+      "Source": "library"
+    },
+    {
+      "Original": "status: ",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterResultSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "time: ",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterResultSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "visible",
+      "Context": "[Intoner] SceneItemPresentation.BuildDisplayStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可见",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

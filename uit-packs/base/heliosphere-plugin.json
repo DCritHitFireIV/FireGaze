@@ -1,0 +1,2859 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "heliosphere-plugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Control ",
+      "Context": "CommandHandler..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "控制 ",
+      "Source": "library"
+    },
+    {
+      "Original": " - try \"",
+      "Context": "CommandHandler..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " - 尝试 \"",
+      "Source": "library"
+    },
+    {
+      "Original": "Fetching mod information...",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "正在获取模组信息…",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not check vanity URL.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "无法检查自定义网址。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid URL or ID.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "网址或 ID 无效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not fetch mod information.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "无法获取模组信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod had no variants.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "此模组没有可用的变体。",
+      "Source": "library"
+    },
+    {
+      "Original": "No such variant found.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "未找到此变体。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod had no versions.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "此模组没有可用的版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "No such version found.",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "未找到此版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "No special behaviour",
+      "Context": "UpdateSettingExt.Description",
+      "PreserveID": false,
+      "Translated": "无特殊行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Never update",
+      "Context": "UpdateSettingExt.Description",
+      "PreserveID": false,
+      "Translated": "从不更新",
+      "Source": "library"
+    },
+    {
+      "Original": ", Part ",
+      "Context": "DownloadTask.SplitGroup",
+      "PreserveID": false,
+      "Translated": "，分卷 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Adding mod",
+      "Context": "AddMod",
+      "PreserveID": false,
+      "Translated": "正在添加模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Install successful",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Translated": "安装成功",
+      "Source": "library"
+    },
+    {
+      "Original": " was installed in Penumbra.",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Translated": " 已安装到 Penumbra。",
+      "Source": "library"
+    },
+    {
+      "Original": "Install failed",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Translated": "安装失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to install ",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Translated": "安装失败 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Not started",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "未开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading package info",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在下载包信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking existing files",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在检查现有文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting up existing files",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在设置现有文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading files",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在下载文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Constructing mod pack",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在构建模组包",
+      "Source": "library"
+    },
+    {
+      "Original": "Removing old files",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "正在删除旧文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Errored",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "出错",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancelled",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Translated": "已取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Error starting download",
+      "Context": "AddDownloadAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "无法开始下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Already downloading that mod!",
+      "Context": "AddDownloadAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "此模组已在下载中！",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot install mod: Penumbra is not set up.",
+      "Context": "Server.HandleConnection",
+      "PreserveID": false,
+      "Translated": "无法安装模组：Penumbra 未设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Installing a mod...",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": "正在安装模组...",
+      "Source": "library"
+    },
+    {
+      "Original": "Error performing one-click install.",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": "一键安装时出错。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opening mod installer, please wait...",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": "正在打开模组安装器，请稍候...",
+      "Source": "library"
+    },
+    {
+      "Original": "Error opening installer prompt.",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "无法打开安装确认窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Installing a mod with ",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": "正在安装模组，使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": " variant",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": " 变体",
+      "Source": "library"
+    },
+    {
+      "Original": "Installing ",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": "正在安装 ",
+      "Source": "library"
+    },
+    {
+      "Original": " mod",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Translated": " 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "<deleted>",
+      "Context": "ImGuiHelper.CollectionChooser",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "<已删除>",
+      "Source": "library"
+    },
+    {
+      "Original": "Manager",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.BeginTabItem",
+      "Translated": "管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "Latest update",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.BeginTabItem",
+      "Translated": "最近更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Downloads",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.BeginTabItem",
+      "Translated": "下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.BeginTabItem",
+      "Translated": "支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Troubleshooting info copied to clipboard.",
+      "Context": "Support.CopyTroubleshootingInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "故障排查信息已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Config copied to clipboard.",
+      "Context": "Support.CopyConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "配置已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to copy file to clipboard",
+      "Context": "Support.CopyDalamudLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "复制文件到剪贴板失败",
+      "Source": "library"
+    },
+    {
+      "Original": "dalamud.log file copied to clipboard.",
+      "Context": "Support.CopyDalamudLog",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "dalamud.log 文件已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Breaking changes after mod updates",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "[HS] Mod 更新后的破坏性变更",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for breaking changes after mod updates",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "检查 Mod 更新后的破坏性变更",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent mod updates have breaking changes that have resulted in your saved settings potentially being reset or changed. You can review these changes below, and affected mods have text files containing the same information in their folders.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最近的 Mod 更新包含破坏性变更，可能导致你保存的设置被重置或更改。你可以在下方查看这些变更，受影响的 Mod 文件夹中也有包含相同信息的文本文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed option groups",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "已移除的选项组",
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups are no longer available (but may be available under a different name), which means your settings for this group are no longer applied.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这些选项组已不再可用（但可能以其他名称存在），这意味着你对此组的设置不再生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changed group type",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "已更改的组类型",
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have gone from single-select to multi-select or vice versa, which can change your selected options in unexpected ways.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这些选项组已从单选变为多选或反之，这可能会以意外的方式改变你选中的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed options",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "已移除的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had options removed from the end, which has unselected options you had enabled.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这些选项组已从末尾移除选项，导致你已启用的选项被取消选中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changed option names",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "已更改的选项名称",
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had their option names changed, which may have unexpectedly changed what options you have selected.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这些选项组的选项名称已更改，可能意外改变了你选中的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changed option order",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "已更改的选项顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had their options reordered, which may have unexpectedly changed what options you have selected.",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这些选项组的选项已重新排序，可能意外改变了你选中的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your old settings by collection:",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你按收藏集的旧设置：",
+      "Source": "library"
+    },
+    {
+      "Original": " downloads",
+      "Context": "DownloadStatusWindow.Draw",
+      "PreserveID": false,
+      "Translated": " 下载",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl and click to cancel.",
+      "Context": "DownloadStatusWindow.DrawRealDownloads",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "按住 Ctrl 并点击以取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "Example mod ",
+      "Context": "DownloadStatusWindow.DrawPreviewDownloads",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthProgressBar",
+      "Translated": "示例模组 ",
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Import external mods",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "[HS] 导入外部模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Mods that have been installed without using the Heliosphere plugin may be imported into Heliosphere and benefit from automatic updates. You can choose which mods you would like to import below.",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未通过 Heliosphere 插件安装的模组可以导入 Heliosphere 并享受自动更新。你可以在下方选择要导入的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select all",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Select none",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全不选",
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Translated": "处理中...",
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Find your mods on Heliosphere",
+      "Context": "FindMatchesWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "[HS] 在 Heliosphere 上查找你的模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere can scan your Penumbra mod library for non-Heliosphere mods and find matching mods that have been uploaded to Heliosphere. Mods found in this manner can be converted to Heliosphere mods, enabling automatic updates and images without manually reinstalling.",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Heliosphere 可以扫描你的 Penumbra 模组书库中的非 Heliosphere 模组，并查找已上传到 Heliosphere 的匹配模组。以此方式找到的模组可以转换为 Heliosphere 模组，无需手动重新安装即可启用自动更新和图片。",
+      "Source": "library"
+    },
+    {
+      "Original": "The conversion process should keep all your settings and hierarchy, but if anything goes wrong, mods could be left in an invalid state. Please consider backing up any important mods and settings.",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "转换过程应保留你所有的设置和层级，但如果出现问题，模组可能处于无效状态。请考虑备份任何重要的模组和设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "I acknowledge that I must back up any mods I do not want to lose.",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "我确认必须备份所有我不想丢失的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Continue",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning your Penumbra library...",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在扫描你的 Penumbra 书库...",
+      "Source": "library"
+    },
+    {
+      "Original": "Searching for matches...",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在搜索匹配项...",
+      "Source": "library"
+    },
+    {
+      "Original": "Did not find any matches on Heliosphere.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Heliosphere 上未找到任何匹配项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Did not find any exact matches on Heliosphere.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Heliosphere 上未找到任何精确匹配项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for non-exact matches",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "搜索非精确匹配项",
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Found these matches on Heliosphere. Please select which mods you would like to convert.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Heliosphere 上找到这些匹配项。请选择你想要转换的 Mod。",
+      "Source": "library"
+    },
+    {
+      "Original": "Found these exact matches on Heliosphere. Please select which mods you would like to convert, or, if you would like to search for non-exact matches, click the appropriate button.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Heliosphere 上找到这些完全匹配项。请选择你想要转换的 Mod，或者，如果你想搜索非完全匹配项，请点击相应的按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Converting mods is a destructive action that will delete any files not referenced by the mod as uploaded to Heliosphere. If an error occurs at any point in the conversion process, mods may be left in an undefined, invalid state. Back up anything you can't afford to lose.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "转换模组是破坏性操作，会删除所有未被上传至 Heliosphere 的模组所引用的文件。如果转换过程中出现任何错误，模组可能会处于未定义、无效的状态。请备份任何你无法承受丢失的内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "I have made backups of any important mods listed above.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "我已备份上述任何重要模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "I acknowledge clicking the below button may permanently corrupt any of the mods above.",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "我确认点击下方按钮可能会永久损坏上述任何模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Convert these mods",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "转换这些 Mod",
+      "Source": "library"
+    },
+    {
+      "Original": "Converting mods...",
+      "Context": "FindMatchesWindow.DrawStep2",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在转换模组...",
+      "Source": "library"
+    },
+    {
+      "Original": "Conversion finished! Downloads may still be ongoing.",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "转魔完成！下载可能仍在进行中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Some conversions encountered errors:",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "部分转魔遇到错误：",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown error",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未知错误",
+      "Source": "library"
+    },
+    {
+      "Original": "The Dalamud log may have more information.",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Dalamud 日志可能有更多信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "% match)",
+      "Context": "FindMatchesWindow.GetMatchLabel",
+      "PreserveID": false,
+      "Translated": "% 匹配）",
+      "Source": "library"
+    },
+    {
+      "Original": " first-time setup",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Translated": " 首次设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere update",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedCentred",
+      "Translated": "Heliosphere 更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to Heliosphere!",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedCentred",
+      "Translated": "欢迎来到 Heliosphere！",
+      "Source": "library"
+    },
+    {
+      "Original": "To get everything set up, open the first-time setup window by clicking the button below. It will open in your default web browser.",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "要进行全部设置，请点击下方按钮打开首次设置窗口。它将在你的默认网络浏览器中打开。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open first-time setup",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "打开首次设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip (not recommended)",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.GetButtonSize",
+      "Translated": "跳过（不推荐）",
+      "Source": "library"
+    },
+    {
+      "Original": "Do you want to install these mods?",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你想要安装这些模组吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "MultiPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Context": "MultiPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Include tags in Penumbra",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Penumbra 中包含标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Open first mod in Penumbra after install",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "安装后在 Penumbra 中打开第一个模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically enable in collection",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在收藏中自动启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Install",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Do you want to install this mod?",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "你想要安装这个模组吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Penumbra after install",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "安装后在 Penumbra 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy error information",
+      "Context": "UpdateNotif",
+      "PreserveID": false,
+      "Translated": "复制错误信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied!",
+      "Context": "UpdateNotif",
+      "PreserveID": false,
+      "Translated": "已复制！",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open this image. Hold right-click to zoom.",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击打开此图片。按住右键缩放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for and download updates",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.WideButton",
+      "Translated": "检查并下载更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Heliosphere",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.WideButton",
+      "Translated": "在 Heliosphere 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Update settings",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "更新设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Login update behaviour",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "登录更新行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls if this mod should be checked for updates/have updates applied on login. Overrides the global setting.",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "控制此模组在登录时是否检查更新/应用更新。覆盖全局设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual update behaviour",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "手动更新行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls what this mod will do when you manually run updates.",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "控制此模组在手动运行更新时的行为。",
+      "Source": "library"
+    },
+    {
+      "Original": "context",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Translated": "上下文",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra sort folder",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 排序文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.IconButton",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.IconButton",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "folder-options",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Translated": "文件夹选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced options",
+      "Context": "PromptWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Set up Penumbra",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "[HS] 设置 Penumbra",
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere cannot function if Penumbra is not set up. Please set a root directory in Penumbra, then try again.",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "如果未设置 Penumbra，Heliosphere 将无法运行。请在 Penumbra 中设置根目录，然后重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Penumbra settings",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthButton",
+      "Translated": "打开 Penumbra 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to remove from history.",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击从历史记录中移除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click on errored downloads to copy error information.",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右键点击出错的下载以复制错误信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Error information copied to clipboard.",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "错误信息已复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "No mod updates yet.",
+      "Context": "LatestUpdate.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暂无模组更新。",
+      "Source": "library"
+    },
+    {
+      "Original": " mods",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": " 个模组",
+      "Source": "library"
+    },
+    {
+      "Original": "one mod",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": "个模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Started: ",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开始： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Finished: ",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "完成： ",
+      "Source": "library"
+    },
+    {
+      "Original": " variants",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": " 个变体",
+      "Source": "library"
+    },
+    {
+      "Original": "one variant",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": "个变体",
+      "Source": "library"
+    },
+    {
+      "Original": "Renamed from ",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重命名自 ",
+      "Source": "library"
+    },
+    {
+      "Original": " versions",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": " 个版本",
+      "Source": "library"
+    },
+    {
+      "Original": "one version",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Translated": "个版本",
+      "Source": "library"
+    },
+    {
+      "Original": "No changelog",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无更新日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Mods",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh list",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "刷新列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for updates",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "检查更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Heliosphere for installed mods",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "在 Heliosphere 中搜索已安装的模组",
+      "Source": "library"
+    },
+    {
+      "Original": "content",
+      "Context": "Manager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "幸福",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选...",
+      "Source": "library"
+    },
+    {
+      "Original": "Import ",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Translated": "导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": " new ",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Translated": " 新 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Detected Heliosphere mods installed without using the plugin. Click here for import options.",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "检测到未通过插件安装的 Heliosphere 模组。点击此处查看导入选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning - ",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthProgressBar",
+      "Translated": "扫描中 - ",
+      "Source": "library"
+    },
+    {
+      "Original": " new updates are available",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": " 有新的更新可用",
+      "Source": "library"
+    },
+    {
+      "Original": "A new update is available",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "有新的更新可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Download updates",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "下载更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete mod",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "删除模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl + Shift to enable this button.",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按住 Ctrl + Shift 以启用此按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Context": "Manager.DrawDescriptionTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "描述",
+      "Source": "library"
+    },
+    {
+      "Original": "Versions",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": " (installed)",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Translated": " （已安装）",
+      "Source": "library"
+    },
+    {
+      "Original": "-variant-",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Translated": "-变体-",
+      "Source": "library"
+    },
+    {
+      "Original": "Reinstall",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新安装",
+      "Source": "library"
+    },
+    {
+      "Original": "No changelog.",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Markdown",
+      "Translated": "无更新日志。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": " mods have updates.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个模组有更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "One mod has an update.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "一个模组有更新。",
+      "Source": "library"
+    },
+    {
+      "Original": " updates",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个更新",
+      "Source": "library"
+    },
+    {
+      "Original": "One update",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "一个更新",
+      "Source": "library"
+    },
+    {
+      "Original": " ignored based on your settings.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已根据你的设置忽略。",
+      "Source": "library"
+    },
+    {
+      "Original": " updates are",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个更新已",
+      "Source": "library"
+    },
+    {
+      "Original": "One update is",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "一个更新已",
+      "Source": "library"
+    },
+    {
+      "Original": " being installed based on your settings.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 根据你的设置正在安装。",
+      "Source": "library"
+    },
+    {
+      "Original": "No updates available.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无可用更新。",
+      "Source": "library"
+    },
+    {
+      "Original": " ignored based on your settings.)",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " 已根据你的设置忽略。）",
+      "Source": "library"
+    },
+    {
+      "Original": "): failed - you may need to manually update",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Translated": "）：失败 - 你可能需要手动更新",
+      "Source": "library"
+    },
+    {
+      "Original": " auto-updated successfully.",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " 自动更新成功。",
+      "Source": "library"
+    },
+    {
+      "Original": "Update installer",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "更新安装程序",
+      "Source": "library"
+    },
+    {
+      "Original": "Show mod image previews in Penumbra",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Penumbra 中显示模组图片预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Heliosphere buttons in Penumbra",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Penumbra 中显示 Heliosphere 按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Expand Heliosphere mod settings by default",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "默认展开 Heliosphere 模组设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview image size",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "预览图片大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra mod title prefix",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.InputTextVertical",
+      "Translated": "Penumbra 模组标题前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra folder",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.InputTextVertical",
+      "Translated": "Penumbra 文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "The folder in Penumbra to install new mods into. This can be set to blank for no folder, as well.\n\nNote that this is just the initial folder for newly-installed mods; you can move mods out of this folder after install.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.InputTextVertical",
+      "Translated": "在 Penumbra 中安装新模组的文件夹。也可以设为空白以不使用文件夹。\n\n注意，这只是新安装模组的初始文件夹；安装后你可以将模组移出此文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "User interface",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "用户界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview download status window",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "预览下载状态窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows fake mod downloads so you can position the status window where you like.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "显示模拟的模组下载，方便你调整状态窗口的位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dalamud notifications for download progress",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 Dalamud 通知显示下载进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Start progress notifications minimised",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进度通知以最小化启动",
+      "Source": "library"
+    },
+    {
+      "Original": "Show preview images in Heliosphere Manager tab",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Heliosphere 管理标签页中显示预览图",
+      "Source": "library"
+    },
+    {
+      "Original": "Installs and updates",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "安装与更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Controls if mods should be checked for updates/have updates applied on login.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "控制登录时是否检查模组更新/应用更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "Include tags in Penumbra by default",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "默认在 Penumbra 中包含标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Open mods in Penumbra after fresh install",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "全新安装后在 Penumbra 中打开模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Display breaking change summaries after updates",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更新后显示破坏性变更摘要",
+      "Source": "library"
+    },
+    {
+      "Original": "This option will cause a window to open with information about if an update to a mod caused Penumbra to reset your option choices.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "启用此选项后，当模组更新导致 Penumbra 重置你的选项时会弹出窗口显示相关信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite mod path name in Penumbra on updates",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更新时覆盖 Penumbra 中的模组引导步廊名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Uncheck this if you change the name in the mod path to re-order your mods. Most users should keep this checked.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "如果你通过修改模组引导步廊中的名称来重新排序模组，请取消勾选。大多数用户应保持勾选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite mod name in Penumbra on updates",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更新时覆盖 Penumbra 中的模组名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Uncheck this if you change the names of mods and would like them to be left alone on updates.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "如果你修改了模组名称并希望在更新时保留，请取消勾选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide variant names in Penumbra when they are \"Default\"",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "当变体名称为“Default”时在 Penumbra 中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "This only affects mods installed after changing the setting.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "此设置仅影响更改后安装的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Default install collection",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "默认安装收藏夹",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the collection that will be selected by default in the installation prompt.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "这是安装提示中默认选中的收藏夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Recycle Bin when deleting old files",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "删除旧文件时使用回收站",
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere permanently deletes unused files from the files folder inside all of the mods it manages. Check this box to make it send those files to your Recycle Bin instead.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "Heliosphere 会永久删除其管理的所有模组文件夹中未使用的文件。勾选此项可改为将这些文件移入回收站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installing mods with chat commands",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许通过聊天命令安装模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installs without confirmation with chat commands",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许通过聊天命令免确认安装",
+      "Source": "library"
+    },
+    {
+      "Original": "This is disabled by default to prevent malicious plugins, scripts, or instructions from having an easy way to install mods automatically.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "默认禁用此项，以防止恶意插件、脚本或指令轻易自动安装 Mod。",
+      "Source": "library"
+    },
+    {
+      "Original": "Download speed limits",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "下载速度限制",
+      "Source": "library"
+    },
+    {
+      "Original": "Max download speed in KiB/s (0 for unlimited)",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.InputULongVertical",
+      "Translated": "最大下载速度（KiB/s，0 为超越极限）",
+      "Source": "library"
+    },
+    {
+      "Original": "Alternate max download speed in KiB/s (0 for unlimited)",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.InputULongVertical",
+      "Translated": "备用最大下载速度（KiB/s，0 为超越极限）",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (default)",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "速度限制（默认）",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in instance)",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "速度限制（副本中）",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in combat)",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "速度限制（战斗中）",
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in party)",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "速度限制（小队中）",
+      "Source": "library"
+    },
+    {
+      "Original": "One-click install",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "一键安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "You may hold Shift when clicking install on the Heliosphere website to temporarily turn off one-click installs.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Heliosphere 网站点击安装时按住 Shift 可临时关闭一键安装。",
+      "Source": "library"
+    },
+    {
+      "Original": "One-click installs require you to generate a code in this window, then paste it into the Heliosphere website.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "一键安装需要你在本窗口生成一个代码，然后将其粘贴到 Heliosphere 网站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate new code",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成新代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate code",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成代码",
+      "Source": "library"
+    },
+    {
+      "Original": "Code copied to clipboard. Paste it on the Heliosphere website.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "代码已复制到剪贴板。请粘贴到 Heliosphere 网站。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Heliosphere website",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 Heliosphere 网站",
+      "Source": "library"
+    },
+    {
+      "Original": "One-click default collection",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "一键默认收藏集",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the collection that mods installed via one-click will be enabled in by default. This overrides the default collection setting above.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Help",
+      "Translated": "通过一键安装的模组将默认启用到此收藏集。这会覆盖上方的默认收藏集设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nerd info",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "技术信息",
+      "Source": "library"
+    },
+    {
+      "Original": "One-click installs use a password system. The button above will generate a password, hash it, then copy the password to your clipboard. The plugin doesn't store the password. By pasting the password into the Heliosphere website, the website can provide it to the plugin during install requests. If the hash of the provided password is the same as the stored hash in the plugin, one-click installs will proceed. Otherwise, the normal download prompt will be shown. This is to prevent other, unauthorised programs from issuing install requests that will automatically go through.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "一键安装使用密码系统。上方按钮会生成密码、对其进行哈希处理，然后将密码复制到你的剪贴板。插件不会存储密码。将密码粘贴到 Heliosphere 网站后，网站可在安装请求期间将其提供给插件。如果提供的密码哈希与插件中存储的哈希一致，一键安装将继续进行。否则，将显示正常的下载提示。这是为了防止其他未经授权的程序发出会自动通过的安装请求。",
+      "Source": "library"
+    },
+    {
+      "Original": "Miscellaneous",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "杂项",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset first-time setup",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "重置首次设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Try starting server",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "尝试启动服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not start server",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Translated": "无法启动服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not start server. Heliosphere will not be able to work with the website.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法启动服务器。Heliosphere 将无法与网站配合使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported options",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "不受支持的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Hic svnt leones!",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此处有狮！",
+      "Source": "library"
+    },
+    {
+      "Original": "The options here are not supported. No support will be provided to you if you choose to use any of these options. In order to receive support for Heliosphere, you must turn these options off and continue to reproduce any issue.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此处选项不受支持。如果你选择使用其中任何选项，将不会为你提供任何支持。若要获得 Heliosphere 的支持，你必须关闭这些选项并继续生成分裂体任何问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installing mods in networked locations",
+      "Context": "Settings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许在网络位置安装模组",
+      "Source": "library"
+    },
+    {
+      "Original": "This option is known to cause hard-to-diagnose filesystem issues, sync errors, and mod corruption. Expect access denied and other IO errors, unstable mods, and potentially crashes if you choose to install mods into a networked location.",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已知此选项会导致难以诊断的文件系统问题、同步错误和模组异端者隧道。如果你选择将模组安装到网络位置，可能会遇到访问被拒绝和其他 IO 错误、不稳定模组，甚至崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": " - unsupported options enabled",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Translated": " - 已启用不受支持的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Support is offered on our official forums. Click the button below to open them.",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "我们在官方论坛提供支持。点击下方按钮打开论坛。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Heliosphere Forums",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "打开 Heliosphere 论坛",
+      "Source": "library"
+    },
+    {
+      "Original": "When getting support, you may be asked to click these buttons and send what they copy to your clipboard.",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取支持时，可能会要求你点击这些按钮，并将复制到剪贴板的内容发送出去。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy troubleshooting info",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "复制故障排除信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy dalamud.log file",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "复制 dalamud.log 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Reveal dalamud.log file",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "显示 dalamud.log 文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy config",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "复制配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable tracing",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "启用追踪",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable tracing",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "禁用追踪",
+      "Source": "library"
+    },
+    {
+      "Original": "Support location (changes what is copied to clipboard)",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "支持位置（更改复制到剪贴板的内容）",
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere migration##short-variant",
+      "Context": "ShortVariantMigration..ctor",
+      "PreserveID": false,
+      "Translated": "Heliosphere 迁移",
+      "Source": "library"
+    },
+    {
+      "Original": " needs to change the naming scheme used for mods managed by it. This will not impact your mods. If you do not run this change, ",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 需要更改其管理的模组所使用的命名方案。这不会影响你的模组。如果你不运行此更改， ",
+      "Source": "library"
+    },
+    {
+      "Original": " will cease to work, disabling auto-updates and other features, though your mods will continue to load in Penumbra.",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 将停止工作，禁用自动更新和其他功能，不过你的模组仍会在 Penumbra 中加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Running this migration may take a few minutes depending on the amount of mods you have installed. If you need to, you can do this later by opening ",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "运行此迁移可能需要几分钟，具体取决于你安装的模组数量。如有需要，你可以稍后通过打开 ",
+      "Source": "library"
+    },
+    {
+      "Original": " and navigating to the Manager tab. While running, the migration may slow your game down and make it difficult to play. It is recommended that you leave the game alone while the migration is running.",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 并导航到管理标签页来执行此操作。运行期间，迁移可能会拖慢你的游戏速度并使其难以游玩。建议在迁移运行时不要操作游戏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Would you like to run the migration now?",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.ChooseYesNo",
+      "Translated": "是否立即运行迁移？",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.ChooseYesNo",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.ChooseYesNo",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "Migration successfully completed.",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "迁移已成功完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Migration failed.",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "迁移失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy exception info",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "复制异常信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "重试",
+      "Source": "library"
+    },
+    {
+      "Original": "Close (try again later)",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "关闭（稍后再试）",
+      "Source": "library"
+    },
+    {
+      "Original": "Migrating - ",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthProgressBar",
+      "Translated": "迁移中 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedCentred",
+      "Translated": "警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Your antivirus program is most likely interfering with Heliosphere's operation.",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "您的杀毒软件很可能正在干扰 Heliosphere 的运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Please allowlist or make an exception for Dalamud and Heliosphere.",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "请将 Dalamud 和 Heliosphere 加入白名单或设置例外。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open instructions",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开说明",
+      "Source": "library"
+    },
+    {
+      "Original": "After following those instructions, please reinstall Heliosphere.",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按照说明操作后，请重新安装 Heliosphere。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you do not reinstall, Heliosphere will not work correctly.",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "如果不重新安装，Heliosphere 将无法正常工作。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you have made exceptions and this warning still appears, please contact us on our forums.",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "如果你已添加例外但此警告仍然出现，请在我们的论坛上联系我们。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open forums",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开论坛",
+      "Source": "library"
+    },
+    {
+      "Original": "While installing ",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "安装时 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", Heliosphere encountered two or more directories already present for that mod. This is an indication that something has gone wrong.",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "，Heliosphere 发现该模组已存在两个或更多目录。这表明出现了问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "To fix this, you will need to delete all but one directory. Usually this means deleting directories for old versions.",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "要修复此问题，您需要删除除一个以外的所有目录。通常这意味着删除旧版本的目录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open##",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Permanently delete##",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Translated": "永久删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift to enable this button.",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "按住 Shift 以启用此按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "] Crash warning##v",
+      "Context": "PapCrashWarning..ctor",
+      "PreserveID": false,
+      "Translated": "] 崩溃警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Crash warning",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedCentred",
+      "Translated": "崩溃警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra cannot currently handle PAP files with paths that are longer than 260 characters. If any of the files below are loaded by the game, you will crash.",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 目前无法处理路径超过 260 个字符的 PAP 文件。如果游戏加载了以下任何文件，您将会崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crashing paths (",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Translated": "导致崩溃的路径 (",
+      "Source": "library"
+    },
+    {
+      "Original": "This is likely caused because your Penumbra root is nested too deeply.",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "这很可能是因为您的 Penumbra 根目录嵌套过深。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your Penumbra root at the time of this warning was ",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此警告出现时你的 Penumbra 根目录为 ",
+      "Source": "library"
+    },
+    {
+      "Original": "I understand",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CentredWideButton",
+      "Translated": "我明白了",
+      "Source": "library"
+    },
+    {
+      "Original": "Version mismatch",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedCentred",
+      "Translated": "版本不匹配",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud thinks you have version ",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Dalamud 认为您安装的版本是 ",
+      "Source": "library"
+    },
+    {
+      "Original": " installed, but this is actually version ",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 但实际版本是 ",
+      "Source": "library"
+    },
+    {
+      "Original": "To fix this, open the plugin installer and disable, delete, and reinstall ",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "要修复此问题，请打开插件安装器并禁用、删除，然后重新安装 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Import from existing mod",
+      "Context": "Importer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "从现有模组导入",
+      "Source": "library"
+    },
+    {
+      "Original": "does not have",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有",
+      "Source": "library"
+    },
+    {
+      "Original": "has",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "有",
+      "Source": "library"
+    },
+    {
+      "Original": "This mod needs one file, and the selected mod ",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此模组需要一个文件，而所选模组 ",
+      "Source": "library"
+    },
+    {
+      "Original": " it. Proceed?",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 它。是否继续？",
+      "Source": "library"
+    },
+    {
+      "Original": "Of the ",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 ",
+      "Source": "library"
+    },
+    {
+      "Original": " files this mod needs, the selected mod has ",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 此模组需要的文件中，所选模组有 ",
+      "Source": "library"
+    },
+    {
+      "Original": " of them. Proceed?",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 个。是否继续？",
+      "Source": "library"
+    },
+    {
+      "Original": "Proceed",
+      "Context": "Importer.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthButton",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning! Clicking Proceed will permanently convert the selected mod to a Heliosphere mod, renaming all needed files and deleting all files inside of it that Heliosphere does not need.",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "警告！点击“继续”将永久把所选 Mod 转换为 Heliosphere Mod，重命名所有需要的文件，并删除其中所有 Heliosphere 不需要的文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "If you already have this mod installed, you can use this to attempt to convert it to a Heliosphere mod, skipping most or all of the download.",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.TextUnformattedColour",
+      "Translated": "如果你已经安装了此 Mod，你可以用它尝试将其转换为 Heliosphere Mod，跳过大部分或全部下载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra is not installed or is not set up properly.",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 未安装或未正确设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra mod",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索...",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking ",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "正在检查 ",
+      "Source": "library"
+    },
+    {
+      "Original": " for updates...",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": " 更新...",
+      "Source": "library"
+    },
+    {
+      "Original": " is already up-to-date.",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": " 已是最新版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Update for ",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": "更新 ",
+      "Source": "library"
+    },
+    {
+      "Original": " found - starting download.",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content",
+      "Translated": " 已找到 - 开始下载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Translated": "已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Check only",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Translated": "仅检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically update",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Translated": "自动更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not check for or automatically apply mod updates on login",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "登录时不检查或自动更新模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for but do not automatically apply mod updates on login",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "登录时检查模组更新，由我手动安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Check for and automatically apply mod updates on login",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "登录时检查并自动更新模组",
+      "Source": "library"
+    },
+    {
+      "Original": "mod-info-install-",
+      "Context": "PromptWindow.Draw",
+      "PreserveID": false,
+      "Translated": "模组信息安装-",
+      "Source": "library"
+    },
+    {
+      "Original": "manager-table",
+      "Context": "Manager.Draw",
+      "PreserveID": false,
+      "Translated": "管理表格",
+      "Source": "library"
+    },
+    {
+      "Original": " help\"",
+      "Context": "CommandHandler..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " “帮助”",
+      "Source": "library"
+    },
+    {
+      "Original": "notification-progress-sub",
+      "Context": "Settings.Draw",
+      "Translated": "通知 - 进度 - 子",
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Context": "BuildCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting changed.",
+      "Context": "BuildSetCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "设置已更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Starting install process. See notifications for more information.",
+      "Context": "BuildInstallCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已开始安装，详情请查看通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the global login update behaviour setting for this mod",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Tooltip",
+      "Translated": "此模组沿用全局登录更新设置",
+      "Source": "library"
+    },
+    {
+      "Original": "<none>",
+      "Context": "ImGuiHelper.CollectionChooser",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "<无>",
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Penumbra",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.FullWidthButton",
+      "Translated": "在 Penumbra 中打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Version",
+      "Context": "MultiPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "版本",
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "value",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

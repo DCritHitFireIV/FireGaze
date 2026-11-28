@@ -1,0 +1,587 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "PartyIcons",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Add context menu command to save a role as static",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在右键菜单中添加“保存为固定站位”",
+      "Source": "library"
+    },
+    {
+      "Original": "Add context menu commands to assign roles",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "添加用于分配站位的右键菜单项",
+      "Source": "library"
+    },
+    {
+      "Original": "Affects all presets, except Game Default.",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "影响除游戏默认以外的所有预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance Raid",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "团队任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow party members to self-assign roles via party chat",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "允许队员通过小队聊天自行认领站位",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies settings to any player, contrary to only the ones that are in the party.",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "将设置应用于所有玩家。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "UpgradeGuideTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaotic Raid",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "混沌团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Chaotic:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "混沌团队任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Names",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "聊天栏姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure nameplate appearance",
+      "Context": "AppearanceTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "设置姓名牌外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure status icon visibility based on location",
+      "Context": "StatusTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按场景设置状态图标可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy to new list",
+      "Context": "StatusTab.DrawStatusConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制到新列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom scale",
+      "Context": "NameplateTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "自定义缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.ButtonEnabledWhen",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Display chat message when entering duty",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "进入副本时发送聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "迷宫挑战",
+      "Source": "library"
+    },
+    {
+      "Original": "Dungeon:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "迷宫挑战：",
+      "Source": "library"
+    },
+    {
+      "Original": "Eastern role naming convention",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "日服站位命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable testing mode",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启用测试模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Examples",
+      "Context": "NameplateTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "示例",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Operation",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "野外探索",
+      "Source": "library"
+    },
+    {
+      "Original": "Field Operations",
+      "Context": "NameplateTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "野外探索",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "通用",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide own nameplate",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "隐藏自己的姓名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control and click a slider to input an exact value",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按住 Ctrl 并点击滑块可输入精确数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control and click the slider to input an exact value",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "按住 Ctrl 并点击滑块可输入精确数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control to allow deletion",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "按住 Ctrl 才能删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control to allow reset",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "按住 Ctrl 才能重置",
+      "Source": "library"
+    },
+    {
+      "Original": "How would you like status icons to be displayed?",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "希望如何显示状态图标？",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon set",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.DrawIconSetCombo",
+      "Translated": "图标组",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon set:",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图标组：",
+      "Source": "library"
+    },
+    {
+      "Original": "Important",
+      "Context": "ImGuiExt.DrawIconSetCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "重要",
+      "Source": "library"
+    },
+    {
+      "Original": "Instances",
+      "Context": "ChatNameTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Job Icon",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "职业图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Context": "StatusTab.DrawStatusConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplate size:",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "姓名牌大小：",
+      "Source": "library"
+    },
+    {
+      "Original": "Nameplates",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "姓名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Occupations are reset, roles are auto assigned.",
+      "Context": "CommandHandler.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已清空已认领的位置，并自动分配站位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Occupations/assignments are reset.",
+      "Context": "CommandHandler.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已清空认领与分配记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset X/Y",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "X/Y 偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Only job icons will be displayed.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "只显示职业图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Other actions",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "其他操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Others:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "其他玩家：",
+      "Source": "library"
+    },
+    {
+      "Original": "Overworld",
+      "Context": "UiNames.GetName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "野外",
+      "Source": "library"
+    },
+    {
+      "Original": "Party:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队：",
+      "Source": "library"
+    },
+    {
+      "Original": "Place context menu commands (if enabled) in a dedicated submenu",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将已启用的右键菜单指令放到单独的子菜单中",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.SectionHeader",
+      "Translated": "预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Prioritize status icons",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "优先显示状态图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Raid",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "大型任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Raid:",
+      "Context": "ChatNameTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "大型任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Replace party numbers with role in Party List",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在小队列表中用站位替换队员编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.ButtonEnabledWhen",
+      "Translated": "恢复默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Role display style",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "站位显示样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Roles",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "队内站位",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Show",
+      "Context": "AppearanceTab.DrawJobIcon",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show upgrade guide again",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.ButtonEnabledWhen",
+      "Translated": "再次显示升级指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Static Roles",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "固定站位",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icon",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "状态图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icons",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "状态图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Status icon visibility by location",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "各类场景的状态图标可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin is intentionally disabled during PvP matches.",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此插件在玩家对战期间停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Japanese data center role naming convention (MT ST D1-D4 H1-2).",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "使用日服数据中心的站位名（MT、ST、D1～D4、H1～H2）。",
+      "Source": "library"
+    },
+    {
+      "Original": "User-created",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.SectionHeader",
+      "Translated": "用户创建",
+      "Source": "library"
+    },
+    {
+      "Original": "e.g. Eureka, Bozja",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "例如禁地优雷卡、博兹雅",
+      "Source": "library"
+    },
+    {
+      "Original": "opens configuration window; \"reset\" or \"r\" resets all assignments",
+      "Context": "CommandHandler..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。使用“reset”或“r”会重置所有分配。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

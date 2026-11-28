@@ -1,0 +1,211 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "CWLSLastSeenTool",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Advanced Actions (Hold CTRL)",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "高级操作（按住 Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup and Restore (Hold CTRL)",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "备份与还原（按住 Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Active CWLS Data",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除当前跨界通讯贝数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Create CWLS Data Internal Backup",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建跨界通讯贝数据的内部备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Backed Up CWLS\t(Last Synced)",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已备份的跨界通讯贝\t（上次同步）",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Active Linkshell Data",
+      "Context": "ConfigWindow.DrawLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除当前通讯贝数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Linkshell Data Internal Backup",
+      "Context": "ConfigWindow.DrawLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建通讯贝数据的内部备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Backed Up Linkshells\t(Last Synced)",
+      "Context": "ConfigWindow.DrawLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已备份的通讯贝\t（上次同步）",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.DrawDebugTabContents",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "跨界选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Cache Members",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "缓存成员",
+      "Source": "library"
+    },
+    {
+      "Original": "State",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Seen",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上次出现时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Days Since",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "距今天数",
+      "Source": "library"
+    },
+    {
+      "Original": "Cached ",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已缓存 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current World (DC): ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前服务器（大区）： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current World (DC): Unavailable",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前服务器（大区）：不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced Options",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "高级选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world Linkshells",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "跨界通讯贝",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world Linkshell info written successfully.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "跨界通讯贝信息已保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world Linkshell List Empty.",
+      "Context": "ShellTools.RemoveShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "跨界通讯贝列表为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world Linkshell info removed successfully.",
+      "Context": "ShellTools.RemoveShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "跨界通讯贝信息已移除。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "TeleporterPlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "No attuned Aetheryte found for '",
+      "Context": "CommandManager.CommandHandlerMaps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未找到已交感的以太之光：'",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to ",
+      "Context": "CommandManager.CommandHandlerMaps",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在传送至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have the required GC Tickets.",
+      "Context": "CommandManager.CommandHandler",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "你没有所需的军用传送网使用券。",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have the Eternity Ring.",
+      "Context": "CommandManager.CommandHandler",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "你没有同心戒指。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporting to Partner.",
+      "Context": "CommandManager.CommandHandler",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "正在传送至伴侣身边。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Alias: ",
+      "Context": "CommandManager.CommandHandler",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "别名无效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to Teleport to ",
+      "Context": "TeleportManager.Teleport",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法传送至 ",
+      "Source": "library"
+    },
+    {
+      "Original": " while visiting other Worlds.",
+      "Context": "TeleportManager.Teleport",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " （跨界访问其他服务器期间）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Teleporter Config",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "传送设置",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Alias",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetheryte",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Search##aetheryteFilter",
+      "Context": "ConfigWindow.DrawAliasTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "精确消费者合同 → ImGui.InputText",
+      "Translated": "搜索",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

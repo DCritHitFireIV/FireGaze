@@ -1,0 +1,518 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Culprit",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": ". See the Live tab.",
+      "Context": "[Culprit] Notifier.ShowReducedMode",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "。请查看「实时」页。",
+      "Source": "library"
+    },
+    {
+      "Original": "5 s avg",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "5 秒平均",
+      "Source": "library"
+    },
+    {
+      "Original": "Alerts",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Attribution",
+      "Context": "[Culprit] Roster..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "来源分析",
+      "Source": "library"
+    },
+    {
+      "Original": "Attribution: indexing plugin assemblies",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "来源分析：正在索引插件程序集",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown per plugin and rule (min)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "每个插件和每条规则的冷却时间（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy report",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "复制报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not save the report: ",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无法保存报告： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Detail",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Detection",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "检测",
+      "Source": "library"
+    },
+    {
+      "Original": "Detection and the incident log keep running.",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "检测和异常记录仍会继续运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw last",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最近绘制耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw max",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最长绘制耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw time tracking is off in /xlstats",
+      "Context": "[Culprit] Sampler.get_TrackingWarnings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "/xlstats 中的绘制耗时统计已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Error window (s)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "错误统计时段（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Errors",
+      "Context": "[Culprit] ReportBuilder.RuleName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Errors before warning",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "达到多少次错误时警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by plugin",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按插件筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Frame time",
+      "Context": "[Culprit] FrameProbe..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "每帧耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Framework update tracking is off in /xlstats",
+      "Context": "[Culprit] Sampler.get_TrackingWarnings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "/xlstats 中的框架更新耗时统计已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Incidents",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "异常事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Live",
+      "Context": "[Culprit] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "实时",
+      "Source": "library"
+    },
+    {
+      "Original": "Logged only (cooldown, mute, or unattributed)",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "仅作记录（冷却中、已静音或原因未明）",
+      "Source": "library"
+    },
+    {
+      "Original": "Mute all toasts",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将所有弹窗通知静音",
+      "Source": "library"
+    },
+    {
+      "Original": "No plugin has caused a hiccup yet.",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未发现引发卡顿的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Only plugins with an incident, an error, or a 5 s average of 1 ms or more are listed.",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "仅列出发生过异常、报告过错误或 5 秒内平均耗时至少为 1 毫秒的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset counters",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "重置计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Resume",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "继续",
+      "Source": "library"
+    },
+    {
+      "Original": "Rule",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "规则",
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Running in reduced mode. Unavailable: ",
+      "Context": "[Culprit] Notifier.ShowReducedMode",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "正在精简模式下运行。不可用的功能： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Save report",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "保存报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Saved to ",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已保存到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Context": "[Culprit] MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show all plugins",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示所有插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Shown as a toast",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已弹窗提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Stall",
+      "Context": "[Culprit] ReportBuilder.RuleName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "单帧卡顿",
+      "Source": "library"
+    },
+    {
+      "Original": "Stall (ms in one frame)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "单帧卡顿（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Context": "[Culprit] SettingsTab.DrawKofiButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Sustained",
+      "Context": "[Culprit] ReportBuilder.RuleName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持续高耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Sustained (ms per frame average)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "持续高耗时（每帧平均毫秒数）",
+      "Source": "library"
+    },
+    {
+      "Original": "Sustained window (s)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "持续耗时的统计时段（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "弹窗通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Unattributed",
+      "Context": "[Culprit] ReportBuilder.RuleName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "原因未明",
+      "Source": "library"
+    },
+    {
+      "Original": "Unattributed frame (ms)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "原因未明的帧耗时（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Update last",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最近更新耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Update max",
+      "Context": "[Culprit] LiveTab.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "最长更新耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Value",
+      "Context": "[Culprit] IncidentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Warn on the first incident",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "首次出现异常即警告",
+      "Source": "library"
+    },
+    {
+      "Original": "[Culprit] Could not save the report: ",
+      "Context": "[Culprit] Plugin.SaveReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Culprit] 无法保存报告： ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Culprit] Report saved to ",
+      "Context": "[Culprit] Plugin.SaveReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Culprit] 报告已保存到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "no plugin",
+      "Context": "[Culprit] ReportBuilder.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无关联插件",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

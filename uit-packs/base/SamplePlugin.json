@@ -1,0 +1,803 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "SamplePlugin",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "\nDurabilité: ",
+      "Context": "RepairGaugeWindow.DrawIconsStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n耐久度： ",
+      "Source": "library"
+    },
+    {
+      "Original": " entrées, le plus récent en bas)",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 条，最新记录在底部）",
+      "Source": "library"
+    },
+    {
+      "Original": " ou une autre pièce prête - ",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 或另一件已可精制的装备，尚有 ",
+      "Source": "library"
+    },
+    {
+      "Original": " restante(s)).",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 件）。",
+      "Source": "library"
+    },
+    {
+      "Original": "%\nLien matéria: ",
+      "Context": "RepairGaugeWindow.DrawIconsStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "%\n精炼度： ",
+      "Source": "library"
+    },
+    {
+      "Original": ", seuil : ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "，阈值： ",
+      "Source": "library"
+    },
+    {
+      "Original": "...en combat",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "…战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "...en craft / récolte / pêche",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "…制作、采集或捕鱼时",
+      "Source": "library"
+    },
+    {
+      "Original": "...en instance/donjon",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "…进入副本时",
+      "Source": "library"
+    },
+    {
+      "Original": "...pendant une cinématique",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "…播放过场动画时",
+      "Source": "library"
+    },
+    {
+      "Original": "Actif",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Activer l'extraction automatique de matéria",
+      "Context": "ConfigWindow.DrawMateriaTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用自动精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Activer la réparation automatique",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用自动修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Afficher la jauge de durabilité",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示装备耐久度",
+      "Source": "library"
+    },
+    {
+      "Original": "Annuler",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Annulé.",
+      "Context": "AutoRepairManager.Cancel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "Aucun PNJ enregistré pour cette zone",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "本区域尚未登记修理 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Aucun PNJ réparateur enregistré pour cette zone. Ciblez-en un et utilisez \"Enregistrer la cible\" dans la config.",
+      "Context": "AutoRepairManager.StartNpcRepair",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "本区域尚未登记修理 NPC。请选中 NPC，再在设置中点击登记当前目标的按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Aucun équipement.",
+      "Context": "RepairGaugeWindow.DrawIconsStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "未装备任何物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Aucune matière sombre trouvée dans l'inventaire.",
+      "Context": "AutoRepairManager.StartDarkMatterRepair",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "背包中没有暗物质。",
+      "Source": "library"
+    },
+    {
+      "Original": "Aucune pièce à 100% de lien avec matéria mélangée.",
+      "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "没有已镶嵌魔晶石且精炼度达到 100% 的装备。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Repair###AutoRepairConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "自动修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Barre (globale + détail par pièce)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "进度条（总览及各部位明细）",
+      "Source": "library"
+    },
+    {
+      "Original": "Barre d'XP (fine, façon barre d'expérience)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "经验条样式（细条）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cible: ",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ciblez un PNJ capable de réparer votre équipement (généralement un vendeur de la Guilde des artisans/marchands ambulants), puis cliquez sur le bouton ci-dessous pour l'enregistrer comme réparateur pour la zone actuelle.",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "先选中能修理装备的 NPC（通常是行会商人或流动商人），再点击下方按钮，将其登记为当前区域的修理 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copier les informations de debug",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "DalamudApiLevel : ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Dalamud API 版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Divers",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "其他",
+      "Source": "library"
+    },
+    {
+      "Original": "Déplacement vers ",
+      "Context": "AutoRepairManager.StartNpcRepair",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在前往 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enregistrer la cible actuelle comme PNJ réparateur",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将当前目标登记为修理 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Erreur interne.",
+      "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "内部错误。",
+      "Source": "library"
+    },
+    {
+      "Original": "Extraction Matéria",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Extraction en cours sur ",
+      "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在精制魔晶石： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Extraire maintenant",
+      "Context": "ConfigWindow.DrawMateriaTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "立即精制",
+      "Source": "library"
+    },
+    {
+      "Original": "Extrait automatiquement la matéria de chaque pièce équipée qui atteint 100% de lien (avec matéria sertie). Confirmé sans risque pour l'équipement : la pièce n'est pas détruite, seul le lien redescend et vous gagnez la matéria.",
+      "Context": "ConfigWindow.DrawMateriaTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当镶嵌了魔晶石的穿戴装备精炼度达到 100% 时，自动精制魔晶石。精制会降低精炼度并获得魔晶石，装备本身会保留。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fenêtre de configuration déplaçable",
+      "Context": "ConfigWindow.DrawMiscTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许移动设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Fermer la fenêtre",
+      "Context": "ConfigWindow.DrawMateriaTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Historique récent",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最近记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Icônes (une rangée par pièce d'équipement)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "图标（每件装备一行）",
+      "Source": "library"
+    },
+    {
+      "Original": "Impossible d'accéder au module de réparation.",
+      "Context": "AutoRepairManager.StartDarkMatterRepair",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无法使用修理功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Impossible d'atteindre le PNJ réparateur (chemin bloqué ?).",
+      "Context": "AutoRepairManager.TickMovingToNpc",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法到达修理 NPC 所在位置，请检查道路是否受阻。",
+      "Source": "library"
+    },
+    {
+      "Original": "Impossible d'ouvrir la fenêtre d'extraction de matéria (action générale refusée).",
+      "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法打开精制魔晶石窗口，通用技能未能执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction avec ",
+      "Context": "AutoRepairManager.TickMovingToNpc",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在与以下目标交互： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Jauge",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "耐久度显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Journal extraction matéria (",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "魔晶石精制日志（",
+      "Source": "library"
+    },
+    {
+      "Original": "Journal réparation (",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "修理日志（",
+      "Source": "library"
+    },
+    {
+      "Original": "La fenêtre de réparation ne s'est pas ouverte, réessai plus tard.",
+      "Context": "AutoRepairManager.OnFrameworkUpdate",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "修理窗口未能打开，稍后将重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "La réparation directe a échoué (matière sombre incompatible avec l'ilvl de l'équipement ?).",
+      "Context": "AutoRepairManager.StartDarkMatterRepair",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法直接修理。请检查暗物质是否适用于该装备的品级。",
+      "Source": "library"
+    },
+    {
+      "Original": "La réparation ne se déclenche que si au moins une pièce d'équipement\npasse sous ce seuil. Rien n'est réparé (ni consommé) au-dessus.",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "至少一件装备的耐久度低于此值时才会修理。\n所有装备达到此值时，不会修理或消耗材料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Le PNJ n'a pas proposé de réparation dans le délai imparti, réparation manuelle nécessaire cette fois-ci.",
+      "Context": "AutoRepairManager.OnFrameworkUpdate",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "等待 NPC 提供修理服务超时，本次请手动修理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Le clic n'a extrait aucune matéria (aucun changement détecté).",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "此操作未能精制魔晶石，未检测到变化。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lien: ",
+      "Context": "RepairGaugeWindow.DrawBarStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "精炼度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Matière sombre (sur soi)",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "使用随身携带的暗物质",
+      "Source": "library"
+    },
+    {
+      "Original": "Matéria extraite (",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已精制魔晶石（",
+      "Source": "library"
+    },
+    {
+      "Original": "Matéria extraite.",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已精制魔晶石。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode configuré : ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前模式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Méthode de réparation",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "修理方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Ne fait rien si aucun PNJ n'est enregistré pour la zone actuelle (voir l'onglet \"PNJ réparateurs\").",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "若当前区域未登记修理 NPC，将不执行修理。可在“修理 NPC”页登记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ne jamais réparer automatiquement...",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在以下情况下暂停自动修理…",
+      "Source": "library"
+    },
+    {
+      "Original": "Nom",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Ouvre la fenêtre de configuration de la réparation automatique.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开自动修理设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "PNJ enregistrés",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已登记的修理 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "PNJ réparateur (déplacement automatique via vnavmesh)",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "由 NPC 修理（通过 vnavmesh 自动移动）",
+      "Source": "library"
+    },
+    {
+      "Original": "PNJ réparateur introuvable à l'endroit enregistré.",
+      "Context": "AutoRepairManager.TickMovingToNpc",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "在登记的位置未找到修理 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "PNJ réparateurs",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "修理 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "PNJ à utiliser dans cette zone",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "本区域使用的修理 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Pas de seuil à régler : c'est une règle fixe du jeu (100% de lien). Traite les pièces\nune par une, quelques secondes d'écart entre chacune.",
+      "Context": "ConfigWindow.DrawMateriaTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "游戏规定精炼度达到 100% 才能精制，无需设置阈值。\n插件会逐件精制，每件之间间隔数秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Position",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Repli sur le PNJ réparateur (matière sombre indisponible/incompatible).",
+      "Context": "AutoRepairManager.TryFallBackToNpc",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "缺少可用的暗物质，改由 NPC 修理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Réparation automatique",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "自动修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Réparation en cours...",
+      "Context": "AutoRepairManager.StartRepair",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在修理…",
+      "Source": "library"
+    },
+    {
+      "Original": "Réparer maintenant",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "立即修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Seuil de déclenchement (%)",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "触发阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Seuil orange (%)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "橙色阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Seuil rouge (%)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "红色阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Si plus de matière sombre, se replier sur le PNJ réparateur",
+      "Context": "ConfigWindow.DrawRepairTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "暗物质用尽后改由 NPC 修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Style (comme RepairMe)",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示样式（类似 RepairMe）",
+      "Source": "library"
+    },
+    {
+      "Original": "Trajet vers le PNJ réparateur trop long, abandon.",
+      "Context": "AutoRepairManager.TickMovingToNpc",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "前往修理 NPC 的路程过长，已放弃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Verrouiller la position de la jauge",
+      "Context": "ConfigWindow.DrawGaugeTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定耐久度显示位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Version du plugin : ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "插件版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Vider les journaux",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone ",
+      "Context": "ConfigWindow.GetTerritoryName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone actuelle : ",
+      "Context": "ConfigWindow.DrawNpcTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "non",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "否",
+      "Source": "library"
+    },
+    {
+      "Original": "oui",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "是",
+      "Source": "library"
+    },
+    {
+      "Original": "vnavmesh détecté : ",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已检测到 vnavmesh： ",
+      "Source": "library"
+    },
+    {
+      "Original": "vnavmesh est introuvable ou non chargé, impossible de se déplacer automatiquement.",
+      "Context": "AutoRepairManager.StartNpcRepair",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未找到或尚未加载 vnavmesh，无法自动移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Échec de l'ouverture.",
+      "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "打开失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Échec du clic.",
+      "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Équipement ",
+      "Context": "RepairGaugeWindow.DrawBarStyle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar",
+      "Translated": "装备 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Équipement réparé automatiquement.",
+      "Context": "AutoRepairManager.StartDarkMatterRepair",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "装备已自动修理。",
+      "Source": "library"
+    },
+    {
+      "Original": "Équipement réparé.",
+      "Context": "AutoRepairManager.StartDarkMatterRepair",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "装备已修理。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

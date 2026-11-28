@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "BigPlayerDebuffs",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "BigPlayerDebuffs",
+      "Context": "BigPlayerDebuffs.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "放大玩家减益",
+      "Source": "library"
+    },
+    {
+      "Original": "Open config window for ",
+      "Context": "BigPlayerDebuffs.dll 0x06000024:IL_001C",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "打开设置窗口： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Config",
+      "Context": "BigPlayerDebuffsConfig.DrawConfigUI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": " 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Own Buff/Debuff Scale",
+      "Context": "BigPlayerDebuffs.dll 0x0600002E:IL_0082",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "自身增益与减益图标缩放",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

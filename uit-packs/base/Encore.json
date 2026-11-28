@@ -1,0 +1,1060 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "Encore",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "(Top Level)",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "（顶层）",
+      "Source": "library"
+    },
+    {
+      "Original": "(none)",
+      "Context": "Plugin.OnMainCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "（无）",
+      "Source": "library"
+    },
+    {
+      "Original": "+ New Preset",
+      "Context": "MainWindow.DrawPresetList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "+ 新建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "+ New Routine",
+      "Context": "MainWindow.DrawRoutineList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "+ 新建动作编排",
+      "Source": "library"
+    },
+    {
+      "Original": "ALL",
+      "Context": "SettingsWindow.DrawQuickSetRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Align to Target",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "与目标对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic conflict resolution",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "自动解决冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "Between dance mods",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "在舞蹈模组之间",
+      "Source": "library"
+    },
+    {
+      "Original": "Board (Settings)",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "面板（设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "CANCEL",
+      "Context": "PresetEditorWindow.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "CREATE",
+      "Context": "HelpWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Context": "IconPickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories",
+      "Context": "IconPickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "分类",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose an icon",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "选择图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Color:",
+      "Context": "MainWindow.DrawNewFolderDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Command",
+      "Context": "MainWindow.DrawSortControlsInner",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Context": "IconPickerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Conflicting emote mods are temp-disabled",
+      "Context": "HelpWindow.DrawPlayPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "暂时禁用有冲突的情感动作模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Create",
+      "Context": "MainWindow.DrawNewFolderDialog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom",
+      "Context": "MainWindow.DrawSortControlsInner",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom chat commands",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "自定义聊天命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom:",
+      "Context": "MainWindow.DrawFolderHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自定义：",
+      "Source": "library"
+    },
+    {
+      "Original": "DONE",
+      "Context": "HelpWindow.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Date Modified",
+      "Context": "ImGuiFileBrowserWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "修改日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete",
+      "Context": "MainWindow.DrawRoutineCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Folder",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable",
+      "Context": "MainWindow.DrawRoutineCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismount first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先下坐骑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't own the emote?",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "尚未习得该情感动作？",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate",
+      "Context": "MainWindow.DrawRoutineCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Context": "MainWindow.DrawRoutineCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote",
+      "Context": "PresetEditorWindow.DrawModifierOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes: ",
+      "Context": "MainWindow.DrawPinnedModsPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "情感动作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Context": "MainWindow.DrawRoutineCard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Encore Guide###EncoreHelp",
+      "Context": "HelpWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Encore 使用指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Encore manages your dance mod presets. Swap between modded animations with one click or a chat command. No more fiddling with Penumbra priorities mid-party.",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Encore 可以管理舞蹈模组预设。点击一次或输入聊天命令即可切换动画，跳舞时无需手动调整 Penumbra 优先级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Error: ",
+      "Context": "RefreshEmoteModsAsync",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Everything restores when you switch or reset",
+      "Context": "HelpWindow.DrawPlayPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换或重置时还原所有设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Context": "MainWindow.DrawSortControlsInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "File not found",
+      "Context": "ImGuiFileBrowserWindow.DrawPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未找到文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Files",
+      "Context": "ImGuiFileBrowserWindow.DrawFileListHeader",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Color",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "文件夹颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder Name:",
+      "Context": "MainWindow.DrawNewFolderDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文件夹名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "Go up one directory",
+      "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "返回上一级目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground sit",
+      "Context": "MainWindow.DrawSortControlsInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "席地而坐",
+      "Source": "library"
+    },
+    {
+      "Original": "HEADS UP",
+      "Context": "SettingsWindow.DrawEmotesChannel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon ID: ",
+      "Context": "IconPickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图标 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Picker###EncoreIconPicker",
+      "Context": "IconPickerWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "图标选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle, sit, groundsit, doze",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "待机、坐下、席地而坐和打盹",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading preview...",
+      "Context": "ImGuiFileBrowserWindow.DrawPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在加载预览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Loop an emote (e.g., /loop stomp). Use /loop to stop.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "循环播放情感动作（例如 /loop stomp）。再次使用 /loop 可停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Make your target play a preset (e.g., /do wiggle). Use /do stop to end it.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "让目标播放预设（例如 /do wiggle），使用 /do stop 停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mod settings",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "模组设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Down",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "下移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move Up",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "上移",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to Folder",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "移至文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "NONE",
+      "Context": "SettingsWindow.DrawQuickSetRow",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Context": "ImGuiFileBrowserWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Name your preset",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "给预设命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Context": "PresetEditorWindow.DrawModifiersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "New Folder",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "新建文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "New Preset",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "新建预设",
+      "Source": "library"
+    },
+    {
+      "Original": "New...###draftTab",
+      "Context": "PresetEditorWindow.DrawModifiersSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "新建…",
+      "Source": "library"
+    },
+    {
+      "Original": "Next up",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "下一步",
+      "Source": "library"
+    },
+    {
+      "Original": "No changes to restore",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有需要还原的更改",
+      "Source": "library"
+    },
+    {
+      "Original": "No files found",
+      "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "没有找到文件",
+      "Source": "library"
+    },
+    {
+      "Original": "No presets to pick from",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "暂无可供选择的预设",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "IconPickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "OPTIONAL",
+      "Context": "HelpWindow.DrawStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "可选",
+      "Source": "library"
+    },
+    {
+      "Original": "One-click switching",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "一键切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Open",
+      "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Playbook",
+      "Context": "MainWindow.DrawPresetList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开使用指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Encore dance preset manager",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Encore 舞蹈预设管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "PATCH NOTES",
+      "Context": "PatchNotesWindow.DrawRibbon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "更新说明",
+      "Source": "library"
+    },
+    {
+      "Original": "PLAY",
+      "Context": "HelpWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Patch Notes (What's New)",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "更新说明（新内容）",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra priority handling",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "管理 Penumbra 优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick the emote",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "选择情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Pin to Quick Access",
+      "Context": "ImGuiFileBrowserWindow.DrawFileListContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "固定到快速访问",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned",
+      "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已固定",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Random",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "随机播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Play Random Preset",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "播放随机预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Play an emote with vanilla animation, or use a modded animation you don't have the emote for (e.g., /vanilla beesknees)",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "按原版动画播放情感动作，或使用尚未习得对应动作的模组动画（例如 /vanilla beesknees）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Playbook (Guide)",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "使用手册",
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait...",
+      "Context": "PresetEditorWindow.DrawContentInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请稍候…",
+      "Source": "library"
+    },
+    {
+      "Original": "Pose presets",
+      "Context": "HelpWindow.DrawWelcomePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "姿势预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Context": "ImGuiFileBrowserWindow.DrawPreview",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Access",
+      "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "快速访问",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready to align!",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可以对齐了！",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent",
+      "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduce Motion",
+      "Context": "PatchNotesWindow.DrawVersion1010Notes",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "减少动态效果",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "PresetEditorWindow.DrawDependenciesSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename",
+      "Context": "MainWindow.DrawFolderHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Priorities",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "重置优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset all mod priorities to their original values",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "将所有模组优先级重置为原始值",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to favorite",
+      "Context": "IconPickerWindow.DrawIconGrid",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "右键点击加入收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to unfavorite",
+      "Context": "IconPickerWindow.DrawIconGrid",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "右键点击取消收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "SAVE",
+      "Context": "PresetEditorWindow.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "STOP",
+      "Context": "UIStyles.DrawStopButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Context": "IconPickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "搜索：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select",
+      "Context": "ImGuiFileBrowserWindow.DrawBottomBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a file to preview",
+      "Context": "ImGuiFileBrowserWindow.DrawPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选择文件以预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a target first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select your mod",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "选择模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected:",
+      "Context": "IconPickerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已选中：",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected: ",
+      "Context": "ImGuiFileBrowserWindow.DrawBottomBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已选择： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set a chat command",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "设置聊天命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Size",
+      "Context": "ImGuiFileBrowserWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Stand up first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先站起来。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop performing first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先停止乐器演奏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop what you're doing first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先结束当前操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop your emote first.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "请先停止情感动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "THE PLAYBOOK",
+      "Context": "HelpWindow.DrawRibbon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "使用手册",
+      "Source": "library"
+    },
+    {
+      "Original": "Target: ",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Context": "ImGuiFileBrowserWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Type a path and press Enter to navigate",
+      "Context": "ImGuiFileBrowserWindow.DrawPathBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "输入路径后按 Enter 前往",
+      "Source": "library"
+    },
+    {
+      "Original": "Type: ",
+      "Context": "PresetEditorWindow.DrawContentInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unpin from Quick Access",
+      "Context": "ImGuiFileBrowserWindow.DrawQuickAccess",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "从快速访问中移除",
+      "Source": "library"
+    },
+    {
+      "Original": "WELCOME",
+      "Context": "HelpWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "欢迎",
+      "Source": "library"
+    },
+    {
+      "Original": "Walk to your target's position for alignment",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "走到目标位置以对齐站位",
+      "Source": "library"
+    },
+    {
+      "Original": "Your mod's priority is boosted in Penumbra",
+      "Context": "HelpWindow.DrawPlayPage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在 Penumbra 中提高所选模组的优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "command",
+      "Context": "RoutineEditorWindow.DrawMarquee",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "delay:",
+      "Context": "RoutineEditorWindow.DrawExpressionEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "延迟：",
+      "Source": "library"
+    },
+    {
+      "Original": "emote:",
+      "Context": "RoutineEditorWindow.DrawExpressionEditor",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "情感动作：",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

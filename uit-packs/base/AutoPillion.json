@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "AutoPillion",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "AutoPillion Config",
+      "Context": "PluginUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "AutoPillion 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Only mount friends",
+      "Context": "AutoPillion.dll 0x06000026:IL_00AC",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "仅搭乘好友的坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Save",
+      "Context": "AutoPillion.dll 0x06000026:IL_0076",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Seconds to wait before trying to\nauto-pillion after dismounting:",
+      "Context": "AutoPillion.dll 0x06000026:IL_002F",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "下坐骑后等待多少秒\n再尝试自动搭乘：",
+      "Source": "library"
+    },
+    {
+      "Original": "Null UnitBase",
+      "Context": "AutoPillion.dll 0x0600001F:IL_000A",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "界面节点（UnitBase）为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to convert type ",
+      "Context": "AutoPillion.dll 0x0600001F:IL_01D4",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": "无法将类型 ",
+      "Source": "library"
+    },
+    {
+      "Original": " to AtkValue",
+      "Context": "AutoPillion.dll 0x0600001F:IL_01F0",
+      "Role": "UI",
+      "RoleReason": "FireGaze reviewed visible UI consumer",
+      "Translated": " 转换为 AtkValue",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Opens the Auto Pillion config menu",
+      "Context": "Plugin (HelpMessageAttribute)",
+      "Role": "UI",
+      "RoleReason": "作者界面代码或本地化资源",
+      "Translated": "打开自动搭乘设置菜单",
+      "Source": "library"
+    }
+  ]
+}

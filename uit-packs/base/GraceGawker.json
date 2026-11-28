@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "GraceGawker",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "BG Opacity",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "背景不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Percent",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为百分比着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "显示设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Format Settings",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "格式设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide for Wrong Jobs",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "职业不匹配时隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "No Grace buff has been used since starting plugin",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自插件启动后尚未使用过经验加成指南",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the configuration menu for Grace Gawker.",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Grace Gawker 设置菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Manual Name",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示指南名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Percent",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Percent On Bar",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在进度条上显示百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dalamud BG Style",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用 Dalamud 背景样式",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

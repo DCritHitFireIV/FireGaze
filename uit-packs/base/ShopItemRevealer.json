@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ShopItemRevealer",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": "Close",
+      "Context": "LandingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "No unrevealed items.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有尚未显示的商品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Shared FATEs",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开危命任务达成度",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Window For This NPC",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.Checkbox",
+      "Translated": "对这个 NPC 隐藏窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't Show for This NPC",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.Checkbox",
+      "Translated": "不对此 NPC 显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Context": "MainWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Cost",
+      "Context": "MainWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "花费",
+      "Source": "library"
+    },
+    {
+      "Original": "Requirements",
+      "Context": "MainWindow.DrawItemTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "要求",
+      "Source": "library"
+    },
+    {
+      "Original": "Quests needed to unlock: ",
+      "Context": "MainWindow.DrawRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "解锁所需任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Item Name",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Search Quest in Wiki",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在维基中搜索任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Quest Name",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制任务名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Beast Tribe Name",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制友好部族名称",
+      "Source": "library"
+    },
+    {
+      "Original": "No target selected.",
+      "Context": "CommandManager.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "尚未选择目标。",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

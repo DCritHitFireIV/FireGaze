@@ -1,0 +1,593 @@
+{
+  "_meta": {
+    "format": 2,
+    "source": "library",
+    "internalName": "ZodiacBuddyReborn",
+    "targetLanguage": "zh-CN",
+    "updatedAt": "2026-11-28"
+  },
+  "entries": [
+    {
+      "Original": " on ",
+      "Context": "AnimusManager.DriveLureAndKillLeve",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": " seconds.",
+      "Context": "AnimusManager.TickDungeonAutomation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Activity: ",
+      "Context": "TargetInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "活动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Atma",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "魂晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist",
+      "Context": "FateGrinderWindow.DrawBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Bonus Light",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "光辉加成",
+      "Source": "library"
+    },
+    {
+      "Original": "Brave",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "黄道",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat channel",
+      "Context": "ConfigWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Check duties territory",
+      "Context": "ConfigWindow.Debug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "检查副本所在区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Click through relic information",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "古武信息窗口允许鼠标穿透",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy name of target to clipboard automatically",
+      "Context": "ConfigWindow.DrawAtma",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动将目标名称复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Current: ",
+      "Context": "FateGrinderRsrPresetManager.AreDesiredSettingsActive",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Description: ",
+      "Context": "FateDebugWindow.DrawLiveFateHarness",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "说明： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Teleport",
+      "Context": "ConfigWindow.DrawGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Novus relic information when equipped",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装备新星武器时显示古武信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Zodiac Brave relic information when equipped",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "装备黄道武器时显示古武信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Display duty with the bonus of light in relic info windows",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在古武信息窗口显示有额外光辉加成的副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Atma Manager",
+      "Context": "TargetInfoWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用魂晶管理",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Chat Notifications of Step Progress",
+      "Context": "ConfigWindow.DrawAtma",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏提示阶段进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE ID",
+      "Context": "FateGrinderWindow.DrawBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "危命任务 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Info: The bonus light is crowdsourced.",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "说明：光辉加成信息由玩家共同提供。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interface",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Left ",
+      "Context": "AnimusManager.TickFateAutomation",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "左 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Light progress color",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "光辉进度颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Light progress size ",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "光辉进度显示大小 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual size for relic information",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "手动调整古武信息窗口大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Navigation: ",
+      "Context": "TargetInfoWindow.DrawNavigationStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "导航： ",
+      "Source": "library"
+    },
+    {
+      "Original": "No objective selected.",
+      "Context": "TargetInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "尚未选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "None",
+      "Context": "AnimusManager.GetFateRuleName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Notify duty with bonus only when an applicable relic is equipped",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在装备符合条件的古武时提醒有加成的副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Novus",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "新星",
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective: ",
+      "Context": "TargetInfoWindow.DrawBookAutomationSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective: Enemy - ",
+      "Context": "TargetInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标：敌人－ ",
+      "Source": "library"
+    },
+    {
+      "Original": "Objective: Leve - ",
+      "Context": "TargetInfoWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标：理符任务－ ",
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Context": "FateGrinderRsrPresetManager.OnOff",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Context": "FateGrinderRsrPresetManager.OnOff",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Open a window to edit various settings.",
+      "Context": "ZodiacBuddyPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the ZodiacBuddy target tracking window.",
+      "Context": "ZodiacBuddyPlugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Zodiac Buddy 目标追踪窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Overall: ",
+      "Context": "TargetInfoWindow.DrawBookAutomationSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "总体： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Play sound when notifying about light bonus",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "提醒光辉加成时播放提示音",
+      "Source": "library"
+    },
+    {
+      "Original": "Pro tip: Use the Sonar plugin to track Fate uptime across your entire datacenter.\n",
+      "Context": "ConfigWindow.DrawAtma",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "提示：使用 Sonar 插件可追踪整个大区的危命任务是否出现。\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress: ",
+      "Context": "TargetInfoWindow.DrawMonsterProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "进度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Progress: Complete",
+      "Context": "TargetInfoWindow.DrawMonsterProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "进度：已完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove",
+      "Context": "FateGrinderWindow.DrawBlacklist",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Context": "ConfigWindow.DrawInterface",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected: ",
+      "Context": "FateDebugWindow.DrawBookTargetDetails",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已选中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Selection",
+      "Context": "FateGrinderWindow.DrawSelectionPolicy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Server status: ",
+      "Context": "ConfigWindow.DrawBonusLight",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "服务器状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show light numbers in the relic glass",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在观测镜中显示光辉数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Show light numbers in the relic magicite",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在魔晶石中显示光辉数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip text animation from the relic glass",
+      "Context": "ConfigWindow.DrawNovus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过观测镜的文字动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip text animation from the relic magicite",
+      "Context": "ConfigWindow.DrawBrave",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "跳过魔晶石的文字动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Book",
+      "Context": "TargetInfoWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始当前文书",
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Context": "TargetInfoWindow.DrawBookAutomationSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Book",
+      "Context": "TargetInfoWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止当前文书",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory ",
+      "Context": "AnimusManager.StartExperimentalFiller",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "区域 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory: ",
+      "Context": "FateGrinderWindow.DrawControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for book credit: ",
+      "Context": "TargetInfoWindow.DrawMonsterProgress",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在等待文书记录进度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Zodiac Buddy Setup",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Zodiac Buddy 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "ZodiacBuddy Target Info",
+      "Context": "TargetInfoWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Zodiac Buddy 目标信息",
+      "Source": "library"
+    },
+    {
+      "Original": "default ",
+      "Context": "FateGrinderMultiPullWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "默认 ",
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Context": "FateCandidatePoolSummary.Describe",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "unknown",
+      "Context": "LeveExecutionProfiles.GetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未知",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
