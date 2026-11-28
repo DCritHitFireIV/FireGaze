@@ -40,12 +40,86 @@
       "Source": "library"
     },
     {
+      "Original": "'Completed' lists quests your current character has completed.",
+      "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "“已完成”列出当前角色已经完成的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "'Supported' lists quests that Questionable can do for you",
+      "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "“已支持”列出 Questionable 可以代为执行的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "(Next quest in story line not accepted)",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestWork",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（尚未接受剧情线中的下一个任务）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Not accepted)",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestWork",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（未接受）",
+      "Source": "library"
+    },
+    {
+      "Original": "(none)",
+      "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "（无）",
+      "Source": "library"
+    },
+    {
+      "Original": "A short configurable message from Settings, if set",
+      "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "来自设置的简短自定义消息（若已设置）",
+      "Source": "library"
+    },
+    {
       "Original": "Actions",
       "Context": "[Questionable] QuestSelectionWindow.DrawContent",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Active festivals: ",
+      "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "当前季节活动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add all to Priority Quests",
+      "Context": "[Questionable] QuestJournalUtils.ShowQuestGroupContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "全部加入优先任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Priority Quests",
+      "Context": "[Questionable] QuestJournalUtils.ShowContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "加入优先任务",
       "Source": "library"
     },
     {
@@ -343,6 +417,14 @@
       "Source": "library"
     },
     {
+      "Original": "No quest or category matches your search.",
+      "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有符合搜索条件的任务或分类。",
+      "Source": "library"
+    },
+    {
       "Original": "Notice",
       "Context": "[Questionable] QuestWindow.DrawContent",
       "Role": "UI",
@@ -467,6 +549,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "需要满足任一条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires:",
+      "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需条件：",
       "Source": "library"
     },
     {

@@ -116,6 +116,24 @@
       "Source": "library"
     },
     {
+      "Original": "First-Time Viewing",
+      "Context": "Menu.UIBehaviour",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "首次观看",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable your first-time viewing experience",
+      "Context": "Menu.UIBehaviour",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "停用首次观看保护",
+      "Source": "library"
+    },
+    {
       "Original": "Commands",
       "Context": "Menu.UICommands",
       "PreserveID": false,
@@ -161,6 +179,159 @@
       "Source": "library"
     },
     {
+      "Original": "Enables Skippy.",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "启用 Skippy。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables Skippy.",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "停用 Skippy。",
+      "Source": "library"
+    },
+    {
+      "Original": "Exports your Dalamud log to your Desktop.",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将 Dalamud 日志导出到桌面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the current territory ID and IntendedUse to chat.",
+      "Context": "Menu.UICommands",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在聊天栏输出当前区域 ID 与用途分类。",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Dialogue Cutscenes",
+      "Context": "Menu.UICustomTalk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "NPC 对话过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip all of the NPC Dialogue Cutscenes",
+      "Context": "Menu.UICustomTalk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过所有 NPC 对话过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip: Submarine & Workshop",
+      "Context": "Menu.UICustomTalk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过潜水艇与部队工房过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Exempt: Submarine & Workshop",
+      "Context": "Menu.UICustomTalk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "保留潜水艇与部队工房过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed Buddy Animation",
+      "Context": "Menu.UIFeedBuddy",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "喂食搭档陆行鸟动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip Feed Buddy Cutscene",
+      "Context": "Menu.UIFeedBuddy",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过喂食搭档陆行鸟的过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip all of the Gold Saucer Cutscenes",
+      "Context": "Menu.UIGoldSaucer",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过所有金碟游乐场过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Dalamud Log",
+      "Context": "Menu.UILogger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.GetIconButtonWithTextWidth",
+      "Translated": "导出 Dalamud 日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Your User ID",
+      "Context": "Menu.UILogger",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "你的用户 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Cutscene Research",
+      "Context": "Menu.UILogger",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "过场动画研究",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip all of the Large-Scale Content Cutscenes",
+      "Context": "Menu.UIMassivePC",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过所有大规模任务的过场动画",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC Dialogue",
+      "Context": "Menu.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "NPC 对话",
+      "Source": "library"
+    },
+    {
+      "Original": "Feed Buddy",
+      "Context": "Menu.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "喂食搭档陆行鸟",
+      "Source": "library"
+    },
+    {
       "Original": "About",
       "Context": "Menu.Draw",
       "PreserveID": false,
@@ -188,6 +359,15 @@
       "Source": "library"
     },
     {
+      "Original": "I Agree & Understand",
+      "Context": "Menu.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "我已了解并同意",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "Menu.DrawDevPopup",
       "PreserveID": true,
@@ -206,6 +386,24 @@
       "Source": "library"
     },
     {
+      "Original": "Skip Specific",
+      "Context": "Menu.UIMSQRoulette",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "跳过指定项目",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip all of the World & Quest Cutscenes",
+      "Context": "Menu.UINormalCutscenes",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "跳过所有野外与任务过场动画",
+      "Source": "library"
+    },
+    {
       "Original": "Ocean Fishing",
       "Context": "Menu.UIRiskySkips",
       "PreserveID": false,
@@ -221,6 +419,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "水晶冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Crystalline Conflict Skip",
+      "Context": "Menu.UIRiskySkips",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用水晶冲突动画跳过功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Inn Skip",
+      "Context": "Menu.UIRiskySkips",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "启用旅馆动画跳过功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Badge",
+      "Context": "Menu..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "显示徽章",
       "Source": "library"
     },
     {

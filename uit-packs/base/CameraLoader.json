@@ -251,6 +251,15 @@
       "Source": "library"
     },
     {
+      "Original": "Preset Mode:",
+      "Context": "PresetTab.DrawModeSelection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预设模式：",
+      "Source": "library"
+    },
+    {
       "Original": "Mode: ",
       "Context": "PresetTab.DrawCameraPresetInfo",
       "PreserveID": false,
@@ -266,6 +275,51 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "缩放： ",
+      "Source": "library"
+    },
+    {
+      "Original": ",  FoV: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "，视野角度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Angle",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconText",
+      "Translated": "镜头角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Pan: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "水平转动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Tilt: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "俯仰： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Roll: ",
+      "Context": "PresetTab.DrawCameraPresetInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "侧倾： ",
       "Source": "library"
     },
     {
@@ -287,11 +341,63 @@
       "Source": "library"
     },
     {
+      "Original": "Unable to rename preset: Name is taken.",
+      "Context": "PresetTab.DrawRename",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法重命名预设：名称已被占用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets are saved relative to your character's position and orientation.\nThis is equivalent to the \"Character Position\" setting in-game.",
+      "Context": "PresetModeEx.GetTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预设以角色的位置和朝向为基准保存。\n这与游戏中的「角色位置」设置相同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets are saved relative only to your character's position.\nThis is equivalent to the \"Camera Position\" setting in-game.",
+      "Context": "PresetModeEx.GetTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预设仅以角色位置为基准保存。\n这与游戏中的「镜头位置」设置相同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Presets are saved relative to the camera's position and orientation.",
+      "Context": "PresetModeEx.GetTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预设以镜头的位置和朝向为基准保存。",
+      "Source": "library"
+    },
+    {
       "Original": "Settings##SettingsTab",
       "Context": "PluginWindow.DrawSettingsTab",
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera##SortMode",
+      "Context": "PluginWindow.DrawSortingSettings",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginCombo",
+      "Translated": "镜头",
+      "Source": "library"
+    },
+    {
+      "Original": "Lighting##SortMode",
+      "Context": "PluginWindow.DrawSortingSettings",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginCombo",
+      "Translated": "光照",
       "Source": "library"
     }
   ],

@@ -1,0 +1,2364 @@
+{
+  "format": 1,
+  "baselineCommit": "966ebed8f85f7e86b913e5d861bffadddb2b7ea0",
+  "consumerMvid": "519b0df3-0a4b-465e-8ae1-0f80ca0d670c",
+  "scope": "依据公开发行件为所列版本建立身份。玩家原投稿没有提供构建指纹。原文匹配为对首次公开基础包的静态比对。",
+  "totals": {
+    "reviewed": 82,
+    "bound": 76,
+    "pending": 6,
+    "verifiedArchives": 79
+  },
+  "targets": [
+    {
+      "internalName": "Accountant",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.8.3.0",
+        "inspectedDllSha256": "5cff35dc139626ce8be43f98f52fc81a54a76ca7fb16eff21d958fd0516fae4a",
+        "sourceUrl": "https://raw.githubusercontent.com/decorwdyun/DalamudPlugins/refs/heads/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "2e4700855aea7f689245d941e9b4919ffe6d4784f9ae87d451291d211df341eb",
+        "dllSha256": "5cff35dc139626ce8be43f98f52fc81a54a76ca7fb16eff21d958fd0516fae4a",
+        "version": "1.8.3.0",
+        "internalName": "Accountant",
+        "pluginManifestProject": "https://github.com/Ottermandias/Accountant",
+        "archiveManifest": "Accountant.json",
+        "mainAssembly": "Accountant.dll",
+        "distinctOriginalsInBaseline": 55,
+        "foundOriginalsAtLeast4Characters": 43,
+        "examples": [
+          "Used by player or free company names if some their retainers, airships or submersibles are away and some are available.",
+          "Used by player or free company names if all their retainers, airships or submersibles are available."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/decorwdyun/DalamudPlugins/refs/heads/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/decorwdyun/Accountant/releases/download/1.8.3.0/latest.zip",
+        "reviewedPublisherProject": "https://github.com/decorwdyun/Accountant",
+        "provenanceNote": "目录指向 decorwdyun 的汉化分支。该分支维护者的仓库清单和同账号下该项目的发行包互相印证。 发行 ZIP 内 Accountant.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 39 个不同原文完全相同。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "ActionTimelineReplacement",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.0.4",
+        "inspectedDllSha256": "e9161d09d253a228e53d2be533aa4e83dbecf5371077d1e5883711f548359847",
+        "sourceUrl": "https://raw.githubusercontent.com/papapachin/ActionTimelineReplacement/Global/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "d8aaf16b14e02ae78e2ca337f97307f5709ed9818f402cd2c9a1707f61d53cc4",
+        "dllSha256": "e9161d09d253a228e53d2be533aa4e83dbecf5371077d1e5883711f548359847",
+        "version": "1.0.0.4",
+        "internalName": "ActionTimelineReplacement",
+        "pluginManifestProject": "https://github.com/papapachin/ActionTimelineReplacement/tree/Global",
+        "archiveManifest": "ActionTimelineReplacement.json",
+        "mainAssembly": "ActionTimelineReplacement.dll",
+        "distinctOriginalsInBaseline": 18,
+        "foundOriginalsAtLeast4Characters": 17,
+        "examples": [
+          "Toggle action timeline config window",
+          "ActionTimeline Replacement v"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/papapachin/ActionTimelineReplacement/Global/repo.json",
+        "artifactUrl": "https://github.com/papapachin/ActionTimelineReplacement/releases/download/1.0.0.4/latest.zip",
+        "reviewedPublisherProject": "https://github.com/papapachin/ActionTimelineReplacement/tree/Global",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "Aetherment",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.8.10.0",
+        "inspectedDllSha256": "0880330c57e15fb65d538b28263c1d4b11982db4ff260234c76c6f0079093ae7",
+        "sourceUrl": "https://aetherment.sevii.dev/plugin"
+      },
+      "evidence": {
+        "zipSha256": "942c4f82e25a300079cb87a490758d0a82f030df0304a43b4d512c2bfc002868",
+        "dllSha256": "0880330c57e15fb65d538b28263c1d4b11982db4ff260234c76c6f0079093ae7",
+        "version": "0.8.10.0",
+        "internalName": "Aetherment",
+        "pluginManifestProject": null,
+        "archiveManifest": "Aetherment.json",
+        "mainAssembly": "Aetherment.dll",
+        "distinctOriginalsInBaseline": 10,
+        "foundOriginalsAtLeast4Characters": 10,
+        "examples": [
+          "Aetherment has encountered an unrecoverable error",
+          "Open the Texture Finder tool"
+        ],
+        "distributionFeed": "https://aetherment.sevii.dev/plugin",
+        "artifactUrl": "https://aetherment.sevii.dev/plugin/install",
+        "reviewedPublisherProject": "https://github.com/Sevii77/aetherment",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=Aetherment 和版本 0.8.10.0，在主 DLL 静态匹配 10 条基础包原文。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "AkuItemSets",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.5",
+        "inspectedDllSha256": "edeb09471f4696b8f3e807ce413e1bcc794e945bf56c62435458f4ace85625df",
+        "sourceUrl": "https://raw.githubusercontent.com/Akurosia/AkuItemSets/main/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "da77fdd48637197f4701e9b8f9e522a33829f9baef7adb8616d6068849db2861",
+        "dllSha256": "edeb09471f4696b8f3e807ce413e1bcc794e945bf56c62435458f4ace85625df",
+        "version": "0.0.5",
+        "internalName": "AkuItemSets",
+        "pluginManifestProject": null,
+        "archiveManifest": "AkuItemSets.json",
+        "mainAssembly": "AkuItemSets.dll",
+        "distinctOriginalsInBaseline": 15,
+        "foundOriginalsAtLeast4Characters": 15,
+        "examples": [
+          "No sources are attached to the visible rows. Check /xllog for '[AkuItemSets] Outfit source matching summary'.",
+          "Open AkuItemSets and scan this character's item set collection."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Akurosia/AkuItemSets/main/repo.json",
+        "artifactUrl": "https://github.com/Akurosia/AkuItemSets/releases/download/v0.0.5/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Akurosia/AkuItemSets",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL AkuItemSets.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "AnimSync",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.4.22.0",
+        "inspectedDllSha256": "6ffb441445dd06d44c19f82a50c9fd7fb716be93db7dedd7a17fa475832867eb",
+        "sourceUrl": "https://github.com/CandyAppleUwU/ffxiv-animation-syncer-plus"
+      },
+      "evidence": {
+        "zipSha256": "4b77b5c7894b20f91f3d3a1387621c00d61bd810c8ea82c34c40746ba9fba5e7",
+        "dllSha256": "6ffb441445dd06d44c19f82a50c9fd7fb716be93db7dedd7a17fa475832867eb",
+        "version": "1.4.22.0",
+        "internalName": "AnimSync",
+        "pluginManifestProject": "https://github.com/CandyAppleUwU/ffxiv-animation-syncer-plus",
+        "archiveManifest": "AnimSync.json",
+        "mainAssembly": "AnimSync.dll",
+        "distinctOriginalsInBaseline": 62,
+        "foundOriginalsAtLeast4Characters": 60,
+        "examples": [
+          "Maximum distance between players for group sync, measured in yalms. Sync Near You uses this radius around you. Adjust it to preview the range circle.",
+          "Minimum wait before automatically syncing the same players again. At 0, checks run every game update with no added cooldown."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/CandyAppleUwU/ffxiv-animation-syncer-plus/main/repo.json",
+        "artifactUrl": "https://github.com/CandyAppleUwU/ffxiv-animation-syncer-plus/releases/download/v1.4.22.0/AnimationSyncerPlus.zip",
+        "reviewedPublisherProject": "https://github.com/CandyAppleUwU/ffxiv-animation-syncer-plus",
+        "provenanceNote": "当前 FireGaze 目录中的来源和作者名称与发行清单一致。 发行 ZIP 内 AnimSync.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 52 个不同原文完全相同。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "AQuestReborn",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.3.0.4",
+        "inspectedDllSha256": "2ec74082ed06dd632a1ec162fea4d424ffff53b2fdfd44b259a7bcbb83e33be1",
+        "sourceUrl": "https://raw.githubusercontent.com/Sebane1/AQuestReborn/master/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "2eb2a9b907f7cbd659cce877bc7e59fb586d2b24d95abe643c8a98356189022e",
+        "dllSha256": "2ec74082ed06dd632a1ec162fea4d424ffff53b2fdfd44b259a7bcbb83e33be1",
+        "version": "0.3.0.4",
+        "internalName": "AQuestReborn",
+        "pluginManifestProject": null,
+        "archiveManifest": "AQuestReborn.json",
+        "mainAssembly": "AQuestReborn.dll",
+        "distinctOriginalsInBaseline": 83,
+        "foundOriginalsAtLeast4Characters": 74,
+        "examples": [
+          "Player Position Is Locked During Events",
+          "Creating Appearance Please Wait"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Sebane1/AQuestReborn/master/repo.json",
+        "artifactUrl": "https://github.com/Sebane1/AQuestReborn/releases/download/0.3.0.4/AQuestReborn.zip",
+        "reviewedPublisherProject": "https://github.com/Sebane1/AQuestReborn",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "ARealmReorganized",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.2.0.0",
+        "inspectedDllSha256": "154d8df87e703c6a458defb879b4a5833f01f1baad998aac612bc598112120f3"
+      },
+      "evidence": {
+        "zipSha256": "73f95e27da1424896b2811f80b63f55b2d417eafb195b71831ea8b30fd8cdfa3",
+        "dllSha256": "154d8df87e703c6a458defb879b4a5833f01f1baad998aac612bc598112120f3",
+        "version": "0.2.0.0",
+        "internalName": "ARealmReorganized",
+        "pluginManifestProject": "https://github.com/Nepharyas/a_realm_reorganized",
+        "archiveManifest": "ARealmReorganized.json",
+        "mainAssembly": "ARealmReorganized.dll",
+        "distinctOriginalsInBaseline": 44,
+        "foundOriginalsAtLeast4Characters": 42,
+        "examples": [
+          "Open the Armoire once this session to load stored-item data. Until then, items already in the armoire may show in the lists below.",
+          "The armoire keeps one forever; these copies just take up space. Dyed bag or retainer copies may be worth keeping."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/ARealmReorganized?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Nepharyas/a_realm_reorganized",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=ARealmReorganized 和版本 0.2.0.0，在主 DLL 静态匹配 44 条基础包原文。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Armoryeet",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.1.1.0",
+        "inspectedDllSha256": "7d375d84d3347bdc7643e4a7283deedf7482b7ba48b0cfaab77c862ee4ade229",
+        "sourceUrl": "https://github.com/Pekururu/Armoryeet"
+      },
+      "evidence": {
+        "zipSha256": "1bd6255a5d5802dba6178a5e673e17f30578967e4e34e01830b8d58b675770d8",
+        "dllSha256": "7d375d84d3347bdc7643e4a7283deedf7482b7ba48b0cfaab77c862ee4ade229",
+        "version": "1.1.1.0",
+        "internalName": "Armoryeet",
+        "pluginManifestProject": "https://github.com/Pekururu/Armoryeet",
+        "archiveManifest": "Armoryeet.json",
+        "mainAssembly": "Armoryeet.dll",
+        "distinctOriginalsInBaseline": 77,
+        "foundOriginalsAtLeast4Characters": 58,
+        "examples": [
+          "Skipping confirmation starts moves immediately. Capacity and selection checks still apply.",
+          "Use /yeet scan for the reviewed workflow with selection and capacity checks."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Korokatto/Armoryeet/main/repo.json",
+        "artifactUrl": "https://github.com/Pekururu/Armoryeet/releases/download/v1.1.1/Armoryeet.zip",
+        "reviewedPublisherProject": "https://github.com/Pekururu/Armoryeet",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL Armoryeet.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "AudibleCharacterStatus",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.1.10",
+        "inspectedDllSha256": "63261110e6c520766f6a34b37f72a500fffe3a2d24535ac4d1d1f79ae6c0ba8d"
+      },
+      "evidence": {
+        "zipSha256": "3cf25e10cf49371928b741e854335414c8794470ff1bfe8793ffb8203bdd5d5e",
+        "dllSha256": "63261110e6c520766f6a34b37f72a500fffe3a2d24535ac4d1d1f79ae6c0ba8d",
+        "version": "1.0.1.10",
+        "internalName": "AudibleCharacterStatus",
+        "pluginManifestProject": "https://github.com/Arrenton/AudibleCharacterStatus",
+        "archiveManifest": "AudibleCharacterStatus.json",
+        "mainAssembly": "AudibleCharacterStatus.dll",
+        "distinctOriginalsInBaseline": 14,
+        "foundOriginalsAtLeast4Characters": 14,
+        "examples": [
+          "Sets the timer for when the sound will play again. (In Seconds)\nEx: 0.4 will play the sound every 0.4 seconds.\nSet to -100 for no looping",
+          "Allows the sound from this plugin to play when the game is in the background."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/AudibleCharacterStatus?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Arrenton/AudibleCharacterStatus",
+        "provenanceNote": "FireGaze 目录标为 Dalamud 官方收录，当前官方清单的 InternalName 和 Author 与目录相符。 发行 ZIP 内 AudibleCharacterStatus.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 14 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Aurum",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.16",
+        "inspectedDllSha256": "bc128711dddb46d90071801a4defcf609d805550d7c1d7152908b2ccaa78a95b",
+        "sourceUrl": "https://raw.githubusercontent.com/aniachan/anisplugins/main/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "61f7c59a9a94b49b6868cd9ed6850548707f6dc064ac81b2d1a97780c6b8af9a",
+        "dllSha256": "bc128711dddb46d90071801a4defcf609d805550d7c1d7152908b2ccaa78a95b",
+        "version": "0.0.16",
+        "internalName": "Aurum",
+        "pluginManifestProject": null,
+        "archiveManifest": "Aurum.json",
+        "mainAssembly": "Aurum.dll",
+        "distinctOriginalsInBaseline": 77,
+        "foundOriginalsAtLeast4Characters": 76,
+        "examples": [
+          "Leave as 'Auto' to use your current world, or specify a world name.",
+          "Open Aurum crafting profit calculator"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/aniachan/anisplugins/main/repo.json",
+        "artifactUrl": "https://github.com/aniachan/Aurum/releases/download/0.0.16/Aurum.zip",
+        "reviewedPublisherProject": "https://github.com/aniachan/Aurum",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "AutoJailMarker",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.4.3.1",
+        "inspectedDllSha256": "376d52a36ddd99786437d921ea79093d0281e79d2f05e3dd7199b40b55c677ae",
+        "sourceUrl": "https://github.com/LockonS483/AutoJailMarker"
+      },
+      "evidence": {
+        "zipSha256": "8d0f9172f84a9e3d4a3e95caf1db501eddd2be1c111f69b1dce114b5a9d49754",
+        "dllSha256": "376d52a36ddd99786437d921ea79093d0281e79d2f05e3dd7199b40b55c677ae",
+        "version": "3.4.3.1",
+        "internalName": "AutoJailMarker",
+        "pluginManifestProject": "https://github.com/LockonS483/AutoJailMarker",
+        "archiveManifest": "AutoJailMarker.json",
+        "mainAssembly": "AutoJailMarker.dll",
+        "distinctOriginalsInBaseline": 52,
+        "foundOriginalsAtLeast4Characters": 51,
+        "examples": [
+          "Duplicate character.\nIf you have two characters with the same name in your group,\nplease add the server for both so that the plugin works properly.\ne.g. Firstname Lastname@Server",
+          "Check if the party prio is working. 3 players are selected randomly."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/LockonS483/AutoJailMarker/master/AutoJailMarker/repo.json",
+        "artifactUrl": "https://github.com/LockonS483/AutoJailMarker/releases/download/3.4.3.1/AutoJailMarker.zip",
+        "reviewedPublisherProject": "https://github.com/LockonS483/AutoJailMarker",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=AutoJailMarker 和版本 3.4.3.1，在主 DLL 静态匹配 52 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "AutomaticHunting",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.5.0.2",
+        "inspectedDllSha256": "7669034abf6e21e73ebcdbd1f65408cc4d842431c2e2783ae25fea6ce8c44d6e",
+        "sourceUrl": "https://github.com/WayneXXDD/AutomaticHuntingGlobal"
+      },
+      "evidence": {
+        "zipSha256": "bbb67ae834d4119f831690f1613926b8d717889455487aaa1409609863726fd4",
+        "dllSha256": "7669034abf6e21e73ebcdbd1f65408cc4d842431c2e2783ae25fea6ce8c44d6e",
+        "version": "2.5.0.2",
+        "internalName": "AutomaticHunting",
+        "pluginManifestProject": "https://github.com/WayneXXDD/AutomaticHuntingGlobal",
+        "archiveManifest": "AutomaticHunting.json",
+        "mainAssembly": "AutomaticHunting.dll",
+        "distinctOriginalsInBaseline": 140,
+        "foundOriginalsAtLeast4Characters": 128,
+        "examples": [
+          "傳送切線命令5秒後真實線未變化，先傳送到最近以太之光再重發一次",
+          "每站到達後等待 1 秒建立狩獵招募；描述取「高級」頁的招募描述"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/WayneXXDD/DalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/WayneXXDD/AutomaticHuntingGlobal/releases/download/v2.5.0.2/AutomaticHunting.zip",
+        "reviewedPublisherProject": "https://github.com/WayneXXDD/AutomaticHuntingGlobal",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL AutomaticHunting.dll；包内清单版本交叉核对。选用 WayneXXDD 的 Global 繁中分支。本轮依据 Global 源码补取的 139 个界面原文在此发行主 DLL 中逐一命中，原投稿旧单条 Flag 仍未命中。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Automaton",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "69.237",
+        "inspectedDllSha256": "9b2ef4ffc757207b9e9f8fee5117dfec72ce258071d51bee06d562eff7872473",
+        "sourceUrl": "https://puni.sh/api/repository/croizat"
+      },
+      "evidence": {
+        "zipSha256": "a99baa5035486bb777649c3143dcd77e646d6274dd6c666d64a0d37d24a3201b",
+        "dllSha256": "9b2ef4ffc757207b9e9f8fee5117dfec72ce258071d51bee06d562eff7872473",
+        "version": "69.237",
+        "internalName": "Automaton",
+        "pluginManifestProject": "https://github.com/Jaksuhn/ffxiv-bundleoftweaks",
+        "archiveManifest": "Automaton.json",
+        "mainAssembly": "Automaton.dll",
+        "distinctOriginalsInBaseline": 72,
+        "foundOriginalsAtLeast4Characters": 71,
+        "examples": [
+          "Can't switch characters (bound by duty or occupied)",
+          "Only send local hunts to local channels"
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/croizat",
+        "artifactUrl": "https://puni.sh/api/plugins/download/34/Automaton/versions/69.237/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Jaksuhn/Automaton",
+        "provenanceNote": "FireGaze 发现列表所选源与作者发行清单的项目地址或发行件相同；以作者自己的清单为准。 发行 ZIP 内 Automaton.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 58 个不同原文完全相同。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "AutoRetainer",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "4.6.2.27",
+        "inspectedDllSha256": "70c7242b37d8c45f77b4ce3ad521cf0164534ecd509a3ba199a1291c8802f279",
+        "sourceUrl": "https://github.com/PunishXIV/AutoRetainer"
+      },
+      "evidence": {
+        "zipSha256": "a5d0620531740370ae6cec9435a03c56a6180b5b317247afca91df6fac755fad",
+        "dllSha256": "70c7242b37d8c45f77b4ce3ad521cf0164534ecd509a3ba199a1291c8802f279",
+        "version": "4.6.2.27",
+        "internalName": "AutoRetainer",
+        "pluginManifestProject": "https://github.com/PunishXIV/AutoRetainer",
+        "archiveManifest": "AutoRetainer.json",
+        "mainAssembly": "AutoRetainer.dll",
+        "distinctOriginalsInBaseline": 278,
+        "foundOriginalsAtLeast4Characters": 271,
+        "examples": [
+          "For some of your characters, teleportation options are customized. Hover to see list.",
+          "You are required to enable this function globally as well in order for it to work."
+        ],
+        "distributionFeed": "https://love.puni.sh/ment.json",
+        "artifactUrl": "https://puni.sh/api/plugins/download/24/AutoRetainer/versions/4.6.2.27/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/PunishXIV/AutoRetainer",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Avarice",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.2.0.13",
+        "inspectedDllSha256": "6dbaca1bfdf3085eeb0ab67086dfee214a385905f905241a35f4f93d16e1d824",
+        "sourceUrl": "https://github.com/PunishXIV/Avarice"
+      },
+      "evidence": {
+        "zipSha256": "4dd51eabebd8d25a28447a6d0368810168a9141dbbdb097eb6ad52294d21318c",
+        "dllSha256": "6dbaca1bfdf3085eeb0ab67086dfee214a385905f905241a35f4f93d16e1d824",
+        "version": "2.2.0.13",
+        "internalName": "Avarice",
+        "pluginManifestProject": "https://github.com/PunishXIV/Avarice",
+        "archiveManifest": "Avarice.json",
+        "mainAssembly": "Avarice.dll",
+        "distinctOriginalsInBaseline": 77,
+        "foundOriginalsAtLeast4Characters": 52,
+        "examples": [
+          "Still show distance indicator for non-positional targets",
+          "Only show for positional targets"
+        ],
+        "distributionFeed": "https://love.puni.sh/ment.json",
+        "artifactUrl": "https://puni.sh/api/plugins/download/11/Avarice/versions/2.2.0.13/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/PunishXIV/Avarice",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=Avarice 和版本 2.2.0.13，在主 DLL 静态匹配 57 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "BetterMountRoulette",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.8.1.32",
+        "inspectedDllSha256": "953a1e2e6ff864684ed4fd8a863988e27f796fb2b1edc792e37563dfcd27ba06"
+      },
+      "evidence": {
+        "zipSha256": "984f8b55ad78e47ab363db05317beb63e3eb6eaba176d3acb62988a640713d47",
+        "dllSha256": "953a1e2e6ff864684ed4fd8a863988e27f796fb2b1edc792e37563dfcd27ba06",
+        "version": "1.8.1.32",
+        "internalName": "BetterMountRoulette",
+        "pluginManifestProject": "https://github.com/CMDRNuffin/BetterMountRoulette",
+        "archiveManifest": "BetterMountRoulette.json",
+        "mainAssembly": "BetterMountRoulette.dll",
+        "distinctOriginalsInBaseline": 8,
+        "foundOriginalsAtLeast4Characters": 8,
+        "examples": [
+          "Mount a random mount from the specified group, e.g. \"/pmount My Group\" summons a mount from the \"My Group\" group",
+          "Unable to summon mount from group \""
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/BetterMountRoulette?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/CMDRNuffin/BetterMountRoulette",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL BetterMountRoulette.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "CashFlow",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.2.12",
+        "inspectedDllSha256": "22b80d419ac92708a89903be6ae941c196abe923302a64f4614f74f6f95ecae8"
+      },
+      "evidence": {
+        "zipSha256": "a2234cd26dc6c5e31a4e77a70381ba45d3483a38f8ab53d845390fee1085ba6b",
+        "dllSha256": "22b80d419ac92708a89903be6ae941c196abe923302a64f4614f74f6f95ecae8",
+        "version": "1.0.2.12",
+        "internalName": "CashFlow",
+        "pluginManifestProject": "https://github.com/NightmareXIV/CashFlow",
+        "archiveManifest": "CashFlow.json",
+        "mainAssembly": "CashFlow.dll",
+        "distinctOriginalsInBaseline": 115,
+        "foundOriginalsAtLeast4Characters": 107,
+        "examples": [
+          " from the plugin and IRRECOVERABLY DELETE ALL PREVIOUSLY RECORDED DATA FOR IT. \n\nThis will completely remove all the data associated with ",
+          " from being created in future.\n\nHold SHIFT and CTRL and click this button."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/CashFlow?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/NightmareXIV/CashFlow",
+        "provenanceNote": "FireGaze 目录标为 Dalamud 官方收录，当前官方清单的 InternalName 和 Author 与目录相符。 发行 ZIP 内 CashFlow.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 97 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "CatScan",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.9.12.5",
+        "inspectedDllSha256": "160cef535226846aa86939c7901b965252245607497259c994b1c762e1008a69",
+        "sourceUrl": "https://raw.githubusercontent.com/helpful-fox-senko-san/DalamudPlugins/plogon/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "c8859b1383051a30e33cbeb6c6141fee879277b8b622c92f0446d2a677b3c96b",
+        "dllSha256": "160cef535226846aa86939c7901b965252245607497259c994b1c762e1008a69",
+        "version": "0.9.12.5",
+        "internalName": "CatScan",
+        "pluginManifestProject": null,
+        "archiveManifest": "CatScan.json",
+        "mainAssembly": "CatScan.dll",
+        "distinctOriginalsInBaseline": 51,
+        "foundOriginalsAtLeast4Characters": 49,
+        "examples": [
+          "Enables special NM/CE tracker interface while inside Eureka or Occult Crescent zones.",
+          "Suppress alerts while participating in a CE or large scale battle."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/helpful-fox-senko-san/DalamudPlugins/plogon/repo.json",
+        "artifactUrl": "https://github.com/helpful-fox-senko-san/CatScan/releases/download/CatScan-v0.9.12.5/CatScan-v0.9.12.5.zip",
+        "reviewedPublisherProject": "https://github.com/helpful-fox-senko-san/CatScan",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "ChokeAbo",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.0.0.24",
+        "inspectedDllSha256": "6be0f71b29453282cfe3e3dd5982dae96780b8e521696eb1d5d45f9ecf438de3",
+        "sourceUrl": "https://raw.githubusercontent.com/McVaxius/ChokeAbo/main/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "1aceef0bfae5cc5faa64755277cc8f7e83d7df20f740016fdbecad2c4b56ea0a",
+        "dllSha256": "6be0f71b29453282cfe3e3dd5982dae96780b8e521696eb1d5d45f9ecf438de3",
+        "version": "2.0.0.24",
+        "internalName": "ChokeAbo",
+        "pluginManifestProject": null,
+        "archiveManifest": "ChokeAbo.json",
+        "mainAssembly": "ChokeAbo.dll",
+        "distinctOriginalsInBaseline": 417,
+        "foundOriginalsAtLeast4Characters": 411,
+        "examples": [
+          "This log has reached Dalamud's 100 MiB limit. Logging may have stopped, so recent activity may be missing and this log may not help troubleshoot your current issue.",
+          "Missing an owned G{0} counterpart. No owned pair can produce G{1} or higher; select a permitted covering explicitly. Lower-generation rebuilding is stopped."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/McVaxius/ChokeAbo/main/repo.json",
+        "artifactUrl": "https://github.com/McVaxius/ChokeAbo/releases/download/v2.0.0.24/latest.zip",
+        "reviewedPublisherProject": "https://github.com/McVaxius/ChokeAbo",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=ChokeAbo 和版本 2.0.0.24，在主 DLL 静态匹配 414 条基础包原文。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "Chronofoil.Plugin",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.4.20",
+        "inspectedDllSha256": "a8d246545042e761a8bedc41c546dee6da722a215a406d9922e654601227972d",
+        "sourceUrl": "https://github.com/ProjectChronofoil/Chronofoil.Plugin"
+      },
+      "evidence": {
+        "zipSha256": "3bcde09abebc7d75846491a65ea08f807a124002c1a01a89b132284a62797c6f",
+        "dllSha256": "a8d246545042e761a8bedc41c546dee6da722a215a406d9922e654601227972d",
+        "version": "1.0.4.20",
+        "internalName": "Chronofoil.Plugin",
+        "pluginManifestProject": "https://github.com/ProjectChronofoil/Chronofoil.Plugin",
+        "archiveManifest": "Chronofoil.Plugin.json",
+        "mainAssembly": "Chronofoil.Plugin.dll",
+        "distinctOriginalsInBaseline": 119,
+        "foundOriginalsAtLeast4Characters": 116,
+        "examples": [
+          "Chronofoil tracks these on your game client - if you've sent a censorable packet, Chronofoil will know its opcode and censor it accordingly.",
+          "What this means is that nobody on the current game version has performed a certain task (for example, sending a letter) - including you."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/ProjectChronofoil/Chronofoil.Plugin/main/repo.json",
+        "artifactUrl": "https://github.com/ProjectChronofoil/Chronofoil.Plugin/releases/download/1.0.4.20/Chronofoil.Plugin.zip",
+        "reviewedPublisherProject": "https://github.com/ProjectChronofoil/Chronofoil.Plugin",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL Chronofoil.Plugin.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Dalamud.CharacterSync",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {
+        "zipSha256": "77143d18690e575dc96829a3101b0ab79719f0e0cca6655cdc0c5bb3e859fee9",
+        "dllSha256": "955fa8c72f4fdea80dc3dc25f7a223d11b11cf7fb4dfc34a03546a71663a3bbf",
+        "version": "1.7.0.0",
+        "internalName": "Dalamud.CharacterSync",
+        "pluginManifestProject": null,
+        "archiveManifest": "Dalamud.CharacterSync.json",
+        "mainAssembly": "Dalamud.CharacterSync.dll",
+        "distinctOriginalsInBaseline": 29,
+        "foundOriginalsAtLeast4Characters": 21,
+        "examples": [
+          "Click the button below while being logged in on your main character - all logins from now on will use this character's save data!",
+          "Please note that it is recommended to restart your game after changing these settings."
+        ],
+        "distributionFeed": "https://github.com/Haplo064/DalamudPlugins/raw/refs/heads/master/pluginmaster.json",
+        "artifactUrl": "https://raw.githubusercontent.com/Haplo064/DalamudPlugins/fd5bc8a8941f6569ae52a083b574261f22005f6d/plugins/Dalamud.CharacterSync/latest.zip",
+        "reviewedPublisherProject": "https://github.com/goaaats/Dalamud.CharacterSync",
+        "provenanceNote": "当前项目目录引用 Haplo064 的原 DalamudPlugins 发行档案；发行 ZIP 的提交 fd5bc8a8941f6569ae52a083b574261f22005f6d 由原作者 goaaats 本人上传，包内清单与历史列表同为 1.7.0.0。 发行 ZIP 内 Dalamud.CharacterSync.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 19 个不同原文完全相同。"
+      },
+      "reason": "已从作者提交的旧仓库取得精确发行件。实际使用的是历史多作者仓库，包中没有项目地址；当前消费端不能把该第三方仓库限定到这一个旧构建。"
+    },
+    {
+      "internalName": "Dalamud.FindAnything",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.1.4.1",
+        "inspectedDllSha256": "dfc07fb151ff549fffee2d46a70c679ccb2bed0c4a60728423acad1d9f92bb40"
+      },
+      "evidence": {
+        "zipSha256": "04d7c40a3f1d7450ea347f767df3bc23314b380ea351b3855b8d5c4a4c2d442d",
+        "dllSha256": "dfc07fb151ff549fffee2d46a70c679ccb2bed0c4a60728423acad1d9f92bb40",
+        "version": "1.1.4.1",
+        "internalName": "Dalamud.FindAnything",
+        "pluginManifestProject": null,
+        "archiveManifest": "Dalamud.FindAnything.json",
+        "mainAssembly": "Dalamud.FindAnything.dll",
+        "distinctOriginalsInBaseline": 64,
+        "foundOriginalsAtLeast4Characters": 61,
+        "examples": [
+          "Inputting one of the prefixes below as the first character of your search text will temporarily change the search mode for that search.",
+          "When using fuzzy search modes, results are shown in order from best match to worst match."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/Dalamud.FindAnything?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/goaaats/Dalamud.FindAnything.git",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "DamageInfoPlugin",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.4.2.0",
+        "inspectedDllSha256": "8e4b3b0f512b0fbcb346da5f5c8a769eb19a3f523b61a1003dc3d771d708a399"
+      },
+      "evidence": {
+        "zipSha256": "3cf90a64fababb092c5619b3d017b0452939e494eb22d8768006f8bc2e3a8269",
+        "dllSha256": "8e4b3b0f512b0fbcb346da5f5c8a769eb19a3f523b61a1003dc3d771d708a399",
+        "version": "2.4.2.0",
+        "internalName": "DamageInfoPlugin",
+        "pluginManifestProject": "https://github.com/perchbirdd/DamageInfoPlugin",
+        "archiveManifest": "DamageInfoPlugin.json",
+        "mainAssembly": "DamageInfoPlugin.dll",
+        "distinctOriginalsInBaseline": 81,
+        "foundOriginalsAtLeast4Characters": 78,
+        "examples": [
+          "Enable vanilla damage icons under the Flytext category to use this feature.",
+          "QoLBar's Icon Browser (/qolicons) is recommended for finding icon IDs."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/DamageInfoPlugin?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/perchbirdd/DamageInfoPlugin",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=DamageInfoPlugin 和版本 2.4.2.0，在主 DLL 静态匹配 81 条基础包原文。 本记录只证明本行指定的发行来源可匹配；同内部名的其他分支需要分别核验，投稿原始分支未证实。",
+        "otherDistributions": {
+          "https://raw.githubusercontent.com/Haplo064/DalamudPlugins/master/pluginmaster.json": {
+            "version": "1.3.7.2",
+            "authorRepo": "https://github.com/lmcintyre/DamageInfoPlugin"
+          }
+        }
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "DSREyeLocator",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.0.1.10",
+        "inspectedDllSha256": "a6d2684ac71f477724c30b5eb38f5ab3fa4adac3e18228c23aa86eefba68cbd5",
+        "sourceUrl": "https://raw.githubusercontent.com/NightmareXIV/MyDalamudPlugins/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "9e963c22d5d4234893f472a330620c0975ded118274e235093b9782acf3c36da",
+        "dllSha256": "a6d2684ac71f477724c30b5eb38f5ab3fa4adac3e18228c23aa86eefba68cbd5",
+        "version": "2.0.1.10",
+        "internalName": "DSREyeLocator",
+        "pluginManifestProject": null,
+        "archiveManifest": "DSREyeLocator.json",
+        "mainAssembly": "DSREyeLocator.dll",
+        "distinctOriginalsInBaseline": 56,
+        "foundOriginalsAtLeast4Characters": 56,
+        "examples": [
+          "Delay displaying tethers and banner until it actually matters (when going out in sanctity/returning to the middle in death)",
+          "Marker will be applied ONLY TO YOU. Uncheck \"Self only\" if you want to use plugin as automarker for the whole party."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/NightmareXIV/MyDalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/NightmareXIV/DSREyeLocator/releases/download/2.0.1.10/latest.zip",
+        "reviewedPublisherProject": "https://github.com/NightmareXIV/DSREyeLocator",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL DSREyeLocator.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "EasyEyes",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.3.1.3",
+        "inspectedDllSha256": "bb29a52d795823ea7d0c805ae383f15904349fd487b98e2700a2744efe32a06c"
+      },
+      "evidence": {
+        "zipSha256": "ebf6c0946662174146f057f1d4da31bce00feca91cd97daa079b7d77e4c639b6",
+        "dllSha256": "bb29a52d795823ea7d0c805ae383f15904349fd487b98e2700a2744efe32a06c",
+        "version": "1.3.1.3",
+        "internalName": "EasyEyes",
+        "pluginManifestProject": "https://github.com/0ceal0t/EasyEyes",
+        "archiveManifest": "EasyEyes.json",
+        "mainAssembly": "EasyEyes.dll",
+        "distinctOriginalsInBaseline": 22,
+        "foundOriginalsAtLeast4Characters": 22,
+        "examples": [
+          "Press [Record] to view recent VFXs...",
+          "Select an item..."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/EasyEyes?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/0ceal0t/EasyEyes",
+        "provenanceNote": "当前目录引用的历史清单与新版官方 Dalamud 收录清单明确列出同一作者与同一项目 URL。 发行 ZIP 内 EasyEyes.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 8 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "EasyZoomReborn",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.0.3",
+        "inspectedDllSha256": "e4ba180339877af2294d090a337ee2180dbedaef3ba357fa84ccd56f3d35efe9",
+        "sourceUrl": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "cccc1332527265a756275a87d5be53208fe276b9be7af0523578b866c98f2fa7",
+        "dllSha256": "e4ba180339877af2294d090a337ee2180dbedaef3ba357fa84ccd56f3d35efe9",
+        "version": "7.5.0.3",
+        "internalName": "EasyZoomReborn",
+        "pluginManifestProject": null,
+        "archiveManifest": "EasyZoomReborn.json",
+        "mainAssembly": "EasyZoomReborn.dll",
+        "distinctOriginalsInBaseline": 12,
+        "foundOriginalsAtLeast4Characters": 11,
+        "examples": [
+          "Opens the EasyZoomReborn configuration window.",
+          "Support the developer on Ko-fi"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/FFXIV-CombatReborn/EasyZoomReborn/releases/download/7.5.0.3/EasyZoomReborn.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-CombatReborn/EasyZoomReborn",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "EdgeTTS.Dalamud",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.7.0",
+        "inspectedDllSha256": "013434dcc3a7d43698d7b4b642852986eb27088b881d5fe4daa3f9bac0bc1127",
+        "sourceUrl": "https://github.com/AtmoOmen/EdgeTTS.Dalamud"
+      },
+      "evidence": {
+        "zipSha256": "e276027a0f43f1a6d6e51a620cfa0b468e5a7e5692e5acff1ed61a93f49ce94f",
+        "dllSha256": "013434dcc3a7d43698d7b4b642852986eb27088b881d5fe4daa3f9bac0bc1127",
+        "version": "1.0.7.0",
+        "internalName": "EdgeTTS.Dalamud",
+        "pluginManifestProject": "https://github.com/AtmoOmen/EdgeTTS.Dalamud",
+        "archiveManifest": "EdgeTTS.Dalamud.json",
+        "mainAssembly": "EdgeTTS.Dalamud.dll",
+        "distinctOriginalsInBaseline": 31,
+        "foundOriginalsAtLeast4Characters": 11,
+        "examples": [
+          "Replacement",
+          "Language"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/AtmoOmen/DalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/AtmoOmen/EdgeTTS.Dalamud/releases/download/1.0.7.0/latest.zip",
+        "reviewedPublisherProject": "https://github.com/AtmoOmen/EdgeTTS.Dalamud",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=EdgeTTS.Dalamud 和版本 1.0.7.0，在主 DLL 静态匹配 12 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "EngageTimer",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.4.5.2",
+        "inspectedDllSha256": "3ba8dacb3cdbac04b3c6f326aad4dfcaced78ed8032875387357b53951b172e4"
+      },
+      "evidence": {
+        "zipSha256": "57340e800a205407dc877fd82e1dac70d20e96ce1bc0ef8438a2c4bc1088d5e9",
+        "dllSha256": "3ba8dacb3cdbac04b3c6f326aad4dfcaced78ed8032875387357b53951b172e4",
+        "version": "2.4.5.2",
+        "internalName": "EngageTimer",
+        "pluginManifestProject": "https://github.com/xorus/EngageTimer",
+        "archiveManifest": "EngageTimer.json",
+        "mainAssembly": "EngageTimer.dll",
+        "distinctOriginalsInBaseline": 123,
+        "foundOriginalsAtLeast4Characters": 122,
+        "examples": [
+          "An error occured while trying to read the alarms in {0}: {1}.",
+          "An error occured while trying to save the alarms to {0}: {1}."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/EngageTimer?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/xorus/EngageTimer",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL EngageTimer.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "EurekaAggro",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {
+        "zipSha256": "fe282fe46b14bcce1b4a85192c671b7a466153ea00a979f82ec09dd2711c3097",
+        "dllSha256": "fceee6e9e5221485432223f48e7b1c5ae6a1ee018581fde25da00cd1048076ac",
+        "version": "1.1.8.0",
+        "internalName": "EurekaAggro",
+        "pluginManifestProject": null,
+        "archiveManifest": "EurekaAggro.json",
+        "mainAssembly": "EurekaAggro.dll",
+        "distinctOriginalsInBaseline": 46,
+        "foundOriginalsAtLeast4Characters": 45,
+        "examples": [
+          "In FFXIV Eureka, standard sight/proximity monsters 2 or more levels below you will never aggro. (Default: 2)",
+          "Adds an extra safety buffer to aggro circles to account for network ping and server tick latency."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/b1f2cc934ca91a6ea3ecba6fae5bf78fbb3366f0/pluginmaster.json",
+        "artifactUrl": "https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/b1f2cc934ca91a6ea3ecba6fae5bf78fbb3366f0/plugins/EurekaAggro/EurekaAggro-v1.1.8.zip",
+        "reviewedPublisherProject": "https://github.com/Kyuuso/dalamud-plugins",
+        "provenanceNote": "作者 Kyuuso 仓库同提交的历史发行清单及 ZIP。该插件已从 main 清单撤下；此身份仅识别归档版本 1.1.8.0。 发行 ZIP 内 EurekaAggro.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 41 个不同原文完全相同。 原常规订阅地址为 https://raw.githubusercontent.com/Kyuuso/dalamud-plugins/main/pluginmaster.json。"
+      },
+      "reason": "作者已撤回 main 上的发行条目，留存的是固定提交的历史包。旧安装保存的 main 来源与归档 URL 不同，保留历史指纹供迁移核对。"
+    },
+    {
+      "internalName": "EurekaHelper",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.0.4.0",
+        "inspectedDllSha256": "4dde6585df5d86e9e4356032a3da692fea5091dd9630394109c4fffc5534e392"
+      },
+      "evidence": {
+        "zipSha256": "6bbdc1478f0fb36adf8791326e056b91da248484885d1f4b85f4fc53baca0562",
+        "dllSha256": "4dde6585df5d86e9e4356032a3da692fea5091dd9630394109c4fffc5534e392",
+        "version": "2.0.4.0",
+        "internalName": "EurekaHelper",
+        "pluginManifestProject": "https://github.com/KangasZ/EurekaHelper",
+        "archiveManifest": "EurekaHelper.json",
+        "mainAssembly": "EurekaHelper.dll",
+        "distinctOriginalsInBaseline": 98,
+        "foundOriginalsAtLeast4Characters": 97,
+        "examples": [
+          "Auto creates tracker when joining an instance and prints the tracker link to chat",
+          "Set the channel which the plugin messages will display. Default: Echo"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/EurekaHelper?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/KangasZ/EurekaHelper",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Gardener",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.14.15.0",
+        "inspectedDllSha256": "b868311ab378c0759aaa0da67cbb3cfc1e0a6b9546a1601e1a2fee4cf7eb124f",
+        "sourceUrl": "https://github.com/XivHub/Gardener"
+      },
+      "evidence": {
+        "zipSha256": "7f108a41f861f1fcd07df5316416c08ec209013a20a5c2121ceb30789377b8ac",
+        "dllSha256": "b868311ab378c0759aaa0da67cbb3cfc1e0a6b9546a1601e1a2fee4cf7eb124f",
+        "version": "0.14.15.0",
+        "internalName": "Gardener",
+        "pluginManifestProject": "https://github.com/XivHub/Gardener",
+        "archiveManifest": "Gardener.json",
+        "mainAssembly": "Gardener.dll",
+        "distinctOriginalsInBaseline": 49,
+        "foundOriginalsAtLeast4Characters": 48,
+        "examples": [
+          "Growing in bed {0}. Tend it within {1} hours or it wilts.",
+          "Show reminder counts on the server info bar"
+        ],
+        "distributionFeed": "https://plugins.xivhub.net/pluginmaster.json",
+        "artifactUrl": "https://edgl.dev/share/zhyra/gardener/0.14.15.0.zip",
+        "reviewedPublisherProject": "https://github.com/XivHub/Gardener",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=Gardener 和版本 0.14.15.0，在主 DLL 静态匹配 49 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Gearsetter",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "4.3",
+        "inspectedDllSha256": "6b5ac66e69be0f0f88351af06c431eb8e39e7f9406f5e47eca64d0da1a2f8fd6",
+        "sourceUrl": "https://puni.sh/api/repository/vera"
+      },
+      "evidence": {
+        "zipSha256": "1b1de524c2a17d935f7307066ecee4ff614eb5c182c5ff089cef50993b7b6f03",
+        "dllSha256": "6b5ac66e69be0f0f88351af06c431eb8e39e7f9406f5e47eca64d0da1a2f8fd6",
+        "version": "4.3",
+        "internalName": "Gearsetter",
+        "pluginManifestProject": "https://git.carvel.li/liza/Gearsetter",
+        "archiveManifest": "Gearsetter.json",
+        "mainAssembly": "Gearsetter.dll",
+        "distinctOriginalsInBaseline": 25,
+        "foundOriginalsAtLeast4Characters": 20,
+        "examples": [
+          "Show recommendations when entering Grand Company area",
+          "Checking only gearsets for your current class/job..."
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/vera",
+        "artifactUrl": "https://puni.sh/api/plugins/download/98/Gearsetter/versions/4.3/install/latest.zip",
+        "reviewedPublisherProject": "https://git.carvel.li/liza/Gearsetter",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL Gearsetter.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "GraceGawker",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.1.7.0",
+        "inspectedDllSha256": "5e83ccd276586b7918c49db4ce2c3bb0486b08ee764d73d8b0bc46857c1cc579"
+      },
+      "evidence": {
+        "zipSha256": "8520ddf1f114aa0dbfbb41a4bfad1b08cf7790aa128f0a322f08468326dfdc45",
+        "dllSha256": "5e83ccd276586b7918c49db4ce2c3bb0486b08ee764d73d8b0bc46857c1cc579",
+        "version": "1.1.7.0",
+        "internalName": "GraceGawker",
+        "pluginManifestProject": "https://github.com/mashirochan/FFXIV-GraceGawker",
+        "archiveManifest": "GraceGawker.json",
+        "mainAssembly": "GraceGawker.dll",
+        "distinctOriginalsInBaseline": 12,
+        "foundOriginalsAtLeast4Characters": 12,
+        "examples": [
+          "No Grace buff has been used since starting plugin",
+          "Opens the configuration menu for Grace Gawker."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/GraceGawker?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/mashirochan/FFXIV-GraceGawker",
+        "provenanceNote": "FireGaze 目录标为 Dalamud 官方收录，当前官方清单的 InternalName 和 Author 与目录相符。 发行 ZIP 内 GraceGawker.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 12 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "HuntHelper",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.0.34",
+        "inspectedDllSha256": "3a88c2527fcdfb23e14cfd9e207b8388696f508a940fa2daa6cc8683e2d5c45a"
+      },
+      "evidence": {
+        "zipSha256": "06c79170cdd772cacf33cc77b4732330bd1246e836d652aecaf7153f9be3893b",
+        "dllSha256": "3a88c2527fcdfb23e14cfd9e207b8388696f508a940fa2daa6cc8683e2d5c45a",
+        "version": "1.0.0.34",
+        "internalName": "HuntHelper",
+        "pluginManifestProject": "https://github.com/img02/HuntHelper",
+        "archiveManifest": "HuntHelper.json",
+        "mainAssembly": "HuntHelper.dll",
+        "distinctOriginalsInBaseline": 34,
+        "foundOriginalsAtLeast4Characters": 34,
+        "examples": [
+          "You can opt in / out from the settings on the main map ui.",
+          "Select which Rank to display Spawn Points for"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/HuntHelper?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/img02/HuntHelper",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Hyperborea",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.1.2",
+        "inspectedDllSha256": "36927aa2a38735f018499e068cabeb37f2635c6e37059c7a520ff1210da8f9d6",
+        "sourceUrl": "https://github.com/kawaii/Hyperborea"
+      },
+      "evidence": {
+        "zipSha256": "37998f5526b2c9f614ebf37d05848569e3d8b56f43d8922e35e9b45fe6aadfeb",
+        "dllSha256": "36927aa2a38735f018499e068cabeb37f2635c6e37059c7a520ff1210da8f9d6",
+        "version": "1.0.1.2",
+        "internalName": "Hyperborea",
+        "pluginManifestProject": "https://github.com/kawaii/Hyperborea",
+        "archiveManifest": "Hyperborea.json",
+        "mainAssembly": "Hyperborea.dll",
+        "distinctOriginalsInBaseline": 64,
+        "foundOriginalsAtLeast4Characters": 64,
+        "examples": [
+          "Set the zone spawn point to your character's current location.",
+          "Zone data is being loaded from your data overrides file."
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/kawaii",
+        "artifactUrl": "https://puni.sh/api/plugins/download/45/Hyperborea/versions/1.0.1.2/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/kawaii/Hyperborea",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=Hyperborea 和版本 1.0.1.2，在主 DLL 静态匹配 64 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "ItemSearchPlugin",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.10.6.0",
+        "inspectedDllSha256": "e7548da0dcb0cb39955fa75849cb08976ea5a98829cf3432ee3703aadac8cf84"
+      },
+      "evidence": {
+        "zipSha256": "ad4edc425d7dbb62a7092f49706688a1fe621c818afc1cdd29ad41820c5a6b61",
+        "dllSha256": "e7548da0dcb0cb39955fa75849cb08976ea5a98829cf3432ee3703aadac8cf84",
+        "version": "1.10.6.0",
+        "internalName": "ItemSearchPlugin",
+        "pluginManifestProject": "https://github.com/Caraxi/ItemSearchPlugin",
+        "archiveManifest": "ItemSearchPlugin.json",
+        "mainAssembly": "ItemSearchPlugin.dll",
+        "distinctOriginalsInBaseline": 105,
+        "foundOriginalsAtLeast4Characters": 103,
+        "examples": [
+          "Enabling FFXIV Store will cause Item Search Plugin to contact the FFXIV Store website to determine which items are available.",
+          "Note: To preview housing fixtures you must have the 'Remodel Interior' window open."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/ItemSearchPlugin?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Caraxi/ItemSearchPlugin",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL ItemSearchPlugin.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "JustBackup",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.1.1.502",
+        "inspectedDllSha256": "44fd04dc88086a008b4c70caa6c9e3a96363eb3cf5aa4fa0c43ceecd3c299b7c",
+        "sourceUrl": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "777b8053f8ec1f456ce644daa12f7b3df9ee2c4e89241e3bf446b165186991e4",
+        "dllSha256": "44fd04dc88086a008b4c70caa6c9e3a96363eb3cf5aa4fa0c43ceecd3c299b7c",
+        "version": "1.1.1.502",
+        "internalName": "JustBackup",
+        "pluginManifestProject": "https://github.com/NightmareXIV/JustBackup",
+        "archiveManifest": "JustBackup.json",
+        "mainAssembly": "JustBackup.dll",
+        "distinctOriginalsInBaseline": 49,
+        "foundOriginalsAtLeast4Characters": 49,
+        "examples": [
+          "The higher this value, the longer backup creation will take but the less loaded your SSD/HDD will be. Increase this value if you're experiencing lag during backup process.",
+          "Backup will not be created if previous backup was created less than this amount of minutes. Note that only successfully completed backups will update interval."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/QianChangUwU/DalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/QianChangUwU/JustBackup/releases/download/v1.1.1.502/JustBackup.zip",
+        "reviewedPublisherProject": "https://github.com/QianChangUwU/JustBackup",
+        "provenanceNote": "当前 FireGaze 目录中的来源和作者名称与发行清单一致。 发行 ZIP 内 JustBackup.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 1 个不同原文完全相同。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "LazyCrafter",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.1.7.13",
+        "inspectedDllSha256": "cb00abe44814742af63943095530c3e69776ad492678db88ef4b6d9cfa30c538",
+        "sourceUrl": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "5ce2e1982bcb260205a7308e06fad589ad2d7a223efa4dfac95f747f51200ce6",
+        "dllSha256": "cb00abe44814742af63943095530c3e69776ad492678db88ef4b6d9cfa30c538",
+        "version": "0.1.7.13",
+        "internalName": "LazyCrafter",
+        "pluginManifestProject": null,
+        "archiveManifest": "LazyCrafter.json",
+        "mainAssembly": "LazyCrafter.dll",
+        "distinctOriginalsInBaseline": 143,
+        "foundOriginalsAtLeast4Characters": 98,
+        "examples": [
+          "[LazyCrafter] nothing to fetch - every material the cart needs is already in your bags.",
+          "Lifestream is busy - walk to a summoning bell yourself (they stand in every inn room)."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/dajoey/lalalazy/releases/download/LazyCrafter-v0.1.7.13/LazyCrafter.zip",
+        "reviewedPublisherProject": "https://github.com/dajoey/lalalazy/tree/main/src/LazyCrafter",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "LazyCrucible",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.1.9.24",
+        "inspectedDllSha256": "fc1af68d1af37bc4128da6a5170cb9506327ee8481d952083a20131971c9897c",
+        "sourceUrl": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "e206a51f78bad868445b938676bc7ad1d649f3f39085ad754cd4d7c82fe1b411",
+        "dllSha256": "fc1af68d1af37bc4128da6a5170cb9506327ee8481d952083a20131971c9897c",
+        "version": "0.1.9.24",
+        "internalName": "LazyCrucible",
+        "pluginManifestProject": null,
+        "archiveManifest": "LazyCrucible.json",
+        "mainAssembly": "LazyCrucible.dll",
+        "distinctOriginalsInBaseline": 30,
+        "foundOriginalsAtLeast4Characters": 24,
+        "examples": [
+          "Open the fight guide on the upcoming fight",
+          "Crucible fight guide###LazyCrucibleGuide"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/dajoey/lalalazy/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/dajoey/lalalazy/releases/download/LazyCrucible-v0.1.9.24/LazyCrucible.zip",
+        "reviewedPublisherProject": "https://github.com/dajoey/lalalazy/tree/main/src/LazyCrucible",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=LazyCrucible 和版本 0.1.9.24，在主 DLL 静态匹配 25 条基础包原文。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "LazyGatherer",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.4.5.0",
+        "inspectedDllSha256": "5715a5a0224e83a350a3af5a1089d097f3cc4bd609020c571c21718d2b5fb84e"
+      },
+      "evidence": {
+        "zipSha256": "6fdbf995563dc0f5e08eac8e9a9e5ab884f98ec8bc3cc6822513550cb891bb5d",
+        "dllSha256": "5715a5a0224e83a350a3af5a1089d097f3cc4bd609020c571c21718d2b5fb84e",
+        "version": "1.4.5.0",
+        "internalName": "LazyGatherer",
+        "pluginManifestProject": "https://github.com/Hiroa/LazyGatherer",
+        "archiveManifest": "LazyGatherer.json",
+        "mainAssembly": "LazyGatherer.dll",
+        "distinctOriginalsInBaseline": 2,
+        "foundOriginalsAtLeast4Characters": 2,
+        "examples": [
+          "Displays GP alert configuration.\n/gpalert <On/Off> -> enable or disable the alert.\n/gpalert <1-9999> -> set the GP threshold.",
+          "Open the configuration"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/LazyGatherer?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Hiroa/LazyGatherer",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL LazyGatherer.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "MacroMate",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {},
+      "reason": "当前目录指向 OLDBAI213 的二次汉化 1.0.27.4，清单项目链接指向 grittyfrog/MacroMate，但实际 ZIP 属于 OLDBAI213；原作者项目的公开发行历史不能证明二次包与原作者 DLL 相同。两条投稿没有来源字段，保留来源歧义。 https://raw.githubusercontent.com/OLDBAI213/ff14-dalamud-plugin-zh/main/pluginmaster.json https://github.com/grittyfrog/MacroMate/releases"
+    },
+    {
+      "internalName": "Mahjong.Plugin.Dalamud",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.2.1.0",
+        "inspectedDllSha256": "7734a9279e3efad3583ae34057ccd0e9bf515dcc525417c841102fbd29672735",
+        "sourceUrl": "https://github.com/XeldarAlz/FFXIV-AutoMahjongSolver"
+      },
+      "evidence": {
+        "zipSha256": "26ea7d31572657d14d3932762a48df4e77217379aa5027add64be0649245250f",
+        "dllSha256": "7734a9279e3efad3583ae34057ccd0e9bf515dcc525417c841102fbd29672735",
+        "version": "0.2.1.0",
+        "internalName": "Mahjong.Plugin.Dalamud",
+        "pluginManifestProject": "https://github.com/XeldarAlz/FFXIV-AutoMahjongSolver",
+        "archiveManifest": "Mahjong.Plugin.Dalamud.json",
+        "mainAssembly": "Mahjong.Plugin.Dalamud.dll",
+        "distinctOriginalsInBaseline": 59,
+        "foundOriginalsAtLeast4Characters": 17,
+        "examples": [
+          "Click to open · right-click to copy",
+          "Report a bug"
+        ],
+        "distributionFeed": "https://grindless.pages.dev/repo.json",
+        "artifactUrl": "https://grindless.pages.dev/plugins/Mahjong.Plugin.Dalamud/0.2.1.0/latest.zip",
+        "reviewedPublisherProject": "https://github.com/XeldarAlz/FFXIV-AutoMahjongSolver",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "MahjongHater",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.2.0.0",
+        "inspectedDllSha256": "dd5c04460baa0ad8ac1fb6855345a81085b25bdf9dfffc1541e9951029345f00",
+        "sourceUrl": "https://github.com/Tihlyn/MahjongHater"
+      },
+      "evidence": {
+        "zipSha256": "9de1ad9a32c3c319f12c63d00b0b4254bf8a799da8cf526b38d879fd0456f3b3",
+        "dllSha256": "dd5c04460baa0ad8ac1fb6855345a81085b25bdf9dfffc1541e9951029345f00",
+        "version": "3.2.0.0",
+        "internalName": "MahjongHater",
+        "pluginManifestProject": "https://github.com/Tihlyn/MahjongHater",
+        "archiveManifest": "MahjongHater.json",
+        "mainAssembly": "MahjongHater.dll",
+        "distinctOriginalsInBaseline": 40,
+        "foundOriginalsAtLeast4Characters": 39,
+        "examples": [
+          "Toggle the Mahjong Hater overlay. '/mhater config' opens the settings, '/mhater focus' logs why the table may not be taking clicks.",
+          "Use the trained discard/riichi policy and opponent predictions. Requires learned_policy.json. Save and reload to apply."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Tihlyn/MahjongHater/main/repo.json",
+        "artifactUrl": "https://github.com/Tihlyn/MahjongHater/releases/download/v3.2.0/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Tihlyn/MahjongHater",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=MahjongHater 和版本 3.2.0.0，在主 DLL 静态匹配 40 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Mappy",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.2.0.0",
+        "inspectedDllSha256": "d144ba122ea5e0764751d7615abb3f0798f90f2c0e83493a996fee554de26aaf"
+      },
+      "evidence": {
+        "zipSha256": "a1f3fde936d9c533967b20d4f48813af492dec9ca2832820acb0f9a40e00acc8",
+        "dllSha256": "d144ba122ea5e0764751d7615abb3f0798f90f2c0e83493a996fee554de26aaf",
+        "version": "3.2.0.0",
+        "internalName": "Mappy",
+        "pluginManifestProject": "https://github.com/harbingerftw/Mappy",
+        "archiveManifest": "Mappy.json",
+        "mainAssembly": "Mappy.dll",
+        "distinctOriginalsInBaseline": 111,
+        "foundOriginalsAtLeast4Characters": 109,
+        "examples": [
+          "Warning, Mappy does not protect you from spoilers and will show everything.",
+          "Automatically sets zoom to a reasonable value relative to the map size."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/Mappy?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/harbingerftw/Mappy",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL Mappy.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "MarketBoardPlugin",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.13.0.0",
+        "inspectedDllSha256": "e8d96f740389719592a49d6a872022e5e2d56aa0f5051b200aa46c0370fb9506"
+      },
+      "evidence": {
+        "zipSha256": "cba6df7c7f49f00cac0e871e6f096c914ef34f6095882cb73e9a7421fc002019",
+        "dllSha256": "e8d96f740389719592a49d6a872022e5e2d56aa0f5051b200aa46c0370fb9506",
+        "version": "1.13.0.0",
+        "internalName": "MarketBoardPlugin",
+        "pluginManifestProject": "https://github.com/fmauNeko/MarketBoardPlugin",
+        "archiveManifest": "MarketBoardPlugin.json",
+        "mainAssembly": "MarketBoardPlugin.dll",
+        "distinctOriginalsInBaseline": 3,
+        "foundOriginalsAtLeast4Characters": 3,
+        "examples": [
+          "Market Board Shopping List",
+          "Market Board Config"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/MarketBoardPlugin?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/fmauNeko/MarketBoardPlugin",
+        "provenanceNote": "当前目录引用的历史清单与新版官方 Dalamud 收录清单明确列出同一作者与同一项目 URL。 发行 ZIP 内 MarketBoardPlugin.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 3 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Mogmail",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.3.0.0",
+        "inspectedDllSha256": "000ceba37f4af902be0aa86fc6d9ee016f8b133dc3420d4679afffc37e47317a",
+        "sourceUrl": "https://github.com/Nexaii/Mogmail"
+      },
+      "evidence": {
+        "zipSha256": "3e49f6b6b5b7c64de8b5694ded545529f6cb80451aadc74e659625ecb9ab5a5c",
+        "dllSha256": "000ceba37f4af902be0aa86fc6d9ee016f8b133dc3420d4679afffc37e47317a",
+        "version": "1.3.0.0",
+        "internalName": "Mogmail",
+        "pluginManifestProject": "https://github.com/Nexaii/Mogmail",
+        "archiveManifest": "Mogmail.json",
+        "mainAssembly": "Mogmail.dll",
+        "distinctOriginalsInBaseline": 57,
+        "foundOriginalsAtLeast4Characters": 50,
+        "examples": [
+          "Open settings. Subcommands: pop (use inventory items), stop (abort runs), archive (open archive viewer).",
+          "Remove all selected entries from the local archive."
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/nexai",
+        "artifactUrl": "https://puni.sh/api/plugins/download/148/Mogmail/versions/1.3.0.0/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Nexaii/Mogmail",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "NecroLens",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.8.12",
+        "inspectedDllSha256": "f77506e2dc484d6f4a1c1a7859b64444997ba402a2ce5914519e348db8e0a923",
+        "sourceUrl": "https://github.com/Jukkales/NecroLens"
+      },
+      "evidence": {
+        "zipSha256": "12d3224a2e855115b0fd43705fcb364e8897e0064c838b818c5935302779e334",
+        "dllSha256": "f77506e2dc484d6f4a1c1a7859b64444997ba402a2ce5914519e348db8e0a923",
+        "version": "1.0.8.12",
+        "internalName": "NecroLens",
+        "pluginManifestProject": "https://github.com/Jukkales/NecroLens",
+        "archiveManifest": "NecroLens.json",
+        "mainAssembly": "NecroLens.dll",
+        "distinctOriginalsInBaseline": 65,
+        "foundOriginalsAtLeast4Characters": 65,
+        "examples": [
+          "Once you approach a treasure coffer a light circle shows up the maximum distance to open.",
+          "Even open chests which can be Mimics on the current floor"
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/jukka",
+        "artifactUrl": "https://puni.sh/api/plugins/download/53/NecroLens/versions/1.0.8.12/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Jukkales/NecroLens",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=NecroLens 和版本 1.0.8.12，在主 DLL 静态匹配 65 条基础包原文。 本记录只证明本行指定的发行来源可匹配；同内部名的其他分支需要分别核验，投稿原始分支未证实。",
+        "otherDistributions": {
+          "https://raw.githubusercontent.com/iVeigar/MyDalamudPlugins/master/pluginmaster.json": {
+            "version": "7.50.0.0",
+            "authorRepo": "https://github.com/iVeigar/NecroLens"
+          }
+        }
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "NoSoliciting",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.2.10.0",
+        "inspectedDllSha256": "4d40f945fd8b3c11932c6b9c509e8b3077eca9e93004888856b06b32414bfd47"
+      },
+      "evidence": {
+        "zipSha256": "071cbea5ebdbfa4db47d6579c85cb03a846c57c9daddc06260cddd9ea315d60c",
+        "dllSha256": "4d40f945fd8b3c11932c6b9c509e8b3077eca9e93004888856b06b32414bfd47",
+        "version": "3.2.10.0",
+        "internalName": "NoSoliciting",
+        "pluginManifestProject": "https://github.com/Noevain/NoSoliciting",
+        "archiveManifest": "NoSoliciting.json",
+        "mainAssembly": "NoSoliciting.dll",
+        "distinctOriginalsInBaseline": 90,
+        "foundOriginalsAtLeast4Characters": 90,
+        "examples": [
+          "Messages advertising trading items or services for gil, such as omnicrafters looking for work or people selling rare items off the market board",
+          "Reporting this message will let the developer know that you think this message was incorrectly classified."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/NoSoliciting?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Noevain/NoSoliciting",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL NoSoliciting.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "PalacePal",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {},
+      "reason": "目录所录 ryon5541 的历史聚合清单指向 PunishXIV/PalacePal 4.9.0.0。清单中的 Puni.sh ZIP 和按 4.9.0.0 请求的版本 ZIP 均返回 404，作者库 GitHub Releases 未列出可核验的发行件。未据转发包建立身份。 https://github.com/ryon5541/dalamud-repo-up/raw/main/ffxiv_custom_repo.json https://puni.sh/api/plugins/download/32/PalacePal/versions/latest.zip"
+    },
+    {
+      "internalName": "PartyIcons",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.2.3.5",
+        "inspectedDllSha256": "06f8a4dcd66a42560b57e89578c222c665f9d663b9bc7fb4fd393abbcf20fd93"
+      },
+      "evidence": {
+        "zipSha256": "0608f851a101712cf271ee7d9ee6c975c1d0d86d9ea6576e0071972d5edf3a4e",
+        "dllSha256": "06f8a4dcd66a42560b57e89578c222c665f9d663b9bc7fb4fd393abbcf20fd93",
+        "version": "1.2.3.5",
+        "internalName": "PartyIcons",
+        "pluginManifestProject": "https://github.com/nebel/xivPartyIcons",
+        "archiveManifest": "PartyIcons.json",
+        "mainAssembly": "PartyIcons.dll",
+        "distinctOriginalsInBaseline": 70,
+        "foundOriginalsAtLeast4Characters": 70,
+        "examples": [
+          "Applies settings to any player, contrary to only the ones that are in the party.",
+          "Use Japanese data center role naming convention (MT ST D1-D4 H1-2)."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/PartyIcons?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/nebel/xivPartyIcons",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "PassportCheckerReborn",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.8.2",
+        "inspectedDllSha256": "b7b468cdaf3d92046939176d3981e13dc890a7a3b7a933ec11d5206b1a17c5d3",
+        "sourceUrl": "https://github.com/FFXIV-CombatReborn/PassportCheckerReborn"
+      },
+      "evidence": {
+        "zipSha256": "a8f9fd0c1bad33459792e0df38e669185dea241baf09e59bf75bfbf8cbfed856",
+        "dllSha256": "b7b468cdaf3d92046939176d3981e13dc890a7a3b7a933ec11d5206b1a17c5d3",
+        "version": "7.5.8.2",
+        "internalName": "PassportCheckerReborn",
+        "pluginManifestProject": "https://github.com/FFXIV-CombatReborn/PassportCheckerReborn",
+        "archiveManifest": "PassportCheckerReborn.json",
+        "mainAssembly": "PassportCheckerReborn.dll",
+        "distinctOriginalsInBaseline": 46,
+        "foundOriginalsAtLeast4Characters": 44,
+        "examples": [
+          "Keep your token private. It grants access to your Tomestone account data.",
+          "[PassportChecker] Unable to request this player's Party Finder listing."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/FFXIV-CombatReborn/PassportCheckerReborn/releases/download/7.5.8.2/latest.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-CombatReborn/PassportCheckerReborn",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=PassportCheckerReborn 和版本 7.5.8.2，在主 DLL 静态匹配 45 条基础包原文。 本记录只证明本行指定的发行来源可匹配；同内部名的其他分支需要分别核验，投稿原始分支未证实。",
+        "otherDistributions": {
+          "https://raw.githubusercontent.com/pnsdh/DalamudPlugins/main/pluginmaster.json": {
+            "version": "7.5.7.5",
+            "authorRepo": "https://github.com/pnsdh/PassportCheckerReborn"
+          }
+        }
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "PeepingTom",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.7.25",
+        "inspectedDllSha256": "2438edde520bd76ac874bfd25d8b012ea4f7b8018b8cc86833464682c2ef330b"
+      },
+      "evidence": {
+        "zipSha256": "3b05183835b08c65bf6ac5ae5baea5b0bc1134b956e81fcfa2ba8b6e0fbc5606",
+        "dllSha256": "2438edde520bd76ac874bfd25d8b012ea4f7b8018b8cc86833464682c2ef330b",
+        "version": "1.7.25",
+        "internalName": "PeepingTom",
+        "pluginManifestProject": "https://github.com/Caraxi/PeepingTom",
+        "archiveManifest": "PeepingTom.json",
+        "mainAssembly": "PeepingTom.dll",
+        "distinctOriginalsInBaseline": 47,
+        "foundOriginalsAtLeast4Characters": 47,
+        "examples": [
+          "Use with no arguments to show the list. Use with \"c\" or \"config\" to show the config",
+          "Click to link, Alt-click to examine, or right click to target."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/PeepingTom?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Caraxi/PeepingTom",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL PeepingTom.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "PixelPerfect",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.3.4.0",
+        "inspectedDllSha256": "f6e1c9f878df0fb1b91a25b5bad07e9336a5d15c73aebbf383161037b97a07e8"
+      },
+      "evidence": {
+        "zipSha256": "12f1dfbc8622a029bee9b44b91ecddc9c31c7f8aaca9d66af066fd8498c539ab",
+        "dllSha256": "f6e1c9f878df0fb1b91a25b5bad07e9336a5d15c73aebbf383161037b97a07e8",
+        "version": "3.3.4.0",
+        "internalName": "PixelPerfect",
+        "pluginManifestProject": "https://github.com/Haplo064/PixelPerfect",
+        "archiveManifest": "PixelPerfect.json",
+        "mainAssembly": "PixelPerfect.dll",
+        "distinctOriginalsInBaseline": 48,
+        "foundOriginalsAtLeast4Characters": 47,
+        "examples": [
+          "Select the Doodle tab in the config, and the selected doodle will highlight in the editor.",
+          "You can export and import your doodles to share, by using the buttons below."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/PixelPerfect?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Haplo064/PixelPerfect",
+        "provenanceNote": "当前目录引用的历史清单与新版官方 Dalamud 收录清单明确列出同一作者与同一项目 URL。 发行 ZIP 内 PixelPerfect.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 47 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "PositionalGuide",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "4.8.3",
+        "inspectedDllSha256": "9bfbf252e428cd01a38efaf55468075f7a6415cd6412e3acecc48aed72b728bd"
+      },
+      "evidence": {
+        "zipSha256": "218f8d35dac3acb244f6ff6b9a2531015646f8c089f994901eb7aa29dbd077d6",
+        "dllSha256": "9bfbf252e428cd01a38efaf55468075f7a6415cd6412e3acecc48aed72b728bd",
+        "version": "4.8.3",
+        "internalName": "PositionalGuide",
+        "pluginManifestProject": "https://github.com/VariableVixen/PositionalAssistant",
+        "archiveManifest": "PositionalGuide.json",
+        "mainAssembly": "PositionalGuide.dll",
+        "distinctOriginalsInBaseline": 46,
+        "foundOriginalsAtLeast4Characters": 46,
+        "examples": [
+          "How big should the outer circle be?\n\nValue is an offset to the target circle, and a value of 10 corresponds to 1 yalm.\nA value of 35 very closely resembles the max melee range.",
+          "If enabled, the tether will be drawn entirely on the same plane as your target, even if your height is different. This is recommended if you intend to limit the tether length."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/PositionalGuide?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/VariableVixen/PositionalAssistant",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "ProjectGagSpeak",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.2.5.0",
+        "inspectedDllSha256": "2b34ef39a54c0f2b98c92b0b047d482ce6b4951227d9eb918de6c30844a4d86d",
+        "sourceUrl": "https://github.com/Project-GagSpeak/client"
+      },
+      "evidence": {
+        "zipSha256": "93c1fb547cd7e0190cb0e084abfd8fe8a1e25f2b626438b71812776fc1dde2b3",
+        "dllSha256": "2b34ef39a54c0f2b98c92b0b047d482ce6b4951227d9eb918de6c30844a4d86d",
+        "version": "2.2.5.0",
+        "internalName": "ProjectGagSpeak",
+        "pluginManifestProject": "https://github.com/Project-GagSpeak/client",
+        "archiveManifest": "ProjectGagSpeak.json",
+        "mainAssembly": "ProjectGagSpeak.dll",
+        "distinctOriginalsInBaseline": 107,
+        "foundOriginalsAtLeast4Characters": 105,
+        "examples": [
+          "Reverts all hardcore settings. For emergency uses.",
+          "Reverts all active features. For emergency uses."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Project-GagSpeak/repo/main/projectgagspeak.json",
+        "artifactUrl": "https://files.kinkporium.studio/releases/gagspeak/2.2.5.0.zip",
+        "reviewedPublisherProject": "https://github.com/Project-GagSpeak/client",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=ProjectGagSpeak 和版本 2.2.5.0，在主 DLL 静态匹配 107 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "Pulsar",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.0.0",
+        "inspectedDllSha256": "0328e4e31e0921f78c8aefb7381da6c3c09817c5a795815822520d7db52e22e8",
+        "sourceUrl": "https://raw.githubusercontent.com/Drovolon/Pulsar/repo/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "cf664961fb75a3bb7c3197ebad28ee8cc50c9999582082270aba094221fe1686",
+        "dllSha256": "0328e4e31e0921f78c8aefb7381da6c3c09817c5a795815822520d7db52e22e8",
+        "version": "1.0.0.0",
+        "internalName": "Pulsar",
+        "pluginManifestProject": null,
+        "archiveManifest": "Pulsar.json",
+        "mainAssembly": "Pulsar.dll",
+        "distinctOriginalsInBaseline": 112,
+        "foundOriginalsAtLeast4Characters": 111,
+        "examples": [
+          "Extract Ogg audio from all SCD files, including subfolders. The output keeps the same folder structure. Existing files are skipped.",
+          "Only Vorbis SCDs are supported. (This is what most plugins use, except for sound effects.)"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Drovolon/Pulsar/repo/repo.json",
+        "artifactUrl": "https://github.com/Drovolon/Pulsar/releases/download/v1.0.0.0/Pulsar.zip",
+        "reviewedPublisherProject": "https://github.com/Drovolon/Pulsar",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL Pulsar.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "RebornToolbox",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.0.0",
+        "inspectedDllSha256": "ec4ee83e895b452ad9b8648375f05d40578a4157405be5d91a7b0f6420c9ca36",
+        "sourceUrl": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "10a325aa9ea310392e5446f88677ab793daf81e385595cbcc7e7ad9cf0c57e71",
+        "dllSha256": "ec4ee83e895b452ad9b8648375f05d40578a4157405be5d91a7b0f6420c9ca36",
+        "version": "7.5.0.0",
+        "internalName": "RebornToolbox",
+        "pluginManifestProject": null,
+        "archiveManifest": "RebornToolbox.json",
+        "mainAssembly": "RebornToolbox.dll",
+        "distinctOriginalsInBaseline": 55,
+        "foundOriginalsAtLeast4Characters": 55,
+        "examples": [
+          "Amount of this item you have across all characters (including retainers and alts)\nSourced from Allagan Tools\nSee Allagan Tools for detailed information",
+          "Use VNavmesh to move to the nearest marketboard automatically after teleporting to a new server. (only Limsa and Grid are supported)"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/FFXIV-CombatReborn/RebornToolbox/releases/download/7.5.0.0/RebornToolbox.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-CombatReborn/RebornToolbox",
+        "provenanceNote": "FireGaze 发现列表所选源与作者发行清单的项目地址或发行件相同；以作者自己的清单为准。 发行 ZIP 内 RebornToolbox.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 54 个不同原文完全相同。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "Redirect",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.2.7.1",
+        "inspectedDllSha256": "98508e1366289af242a0c51fdcc34f3b895551f8f9f251dfb685ca58d8a6930b"
+      },
+      "evidence": {
+        "zipSha256": "308547ae042679c0454629fb8e6f7cab9321120cf37e6b6d819d2ce32f4324b8",
+        "dllSha256": "98508e1366289af242a0c51fdcc34f3b895551f8f9f251dfb685ca58d8a6930b",
+        "version": "1.2.7.1",
+        "internalName": "Redirect",
+        "pluginManifestProject": "https://github.com/cairthenn/Redirect",
+        "archiveManifest": "Redirect.json",
+        "mainAssembly": "Redirect.dll",
+        "distinctOriginalsInBaseline": 19,
+        "foundOriginalsAtLeast4Characters": 19,
+        "examples": [
+          "Treat all ground-targeted actions as mouseovers",
+          "Treat all friendly actions as mouseovers"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/Redirect?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/cairthenn/Redirect",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Relicable",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.5.9.7",
+        "inspectedDllSha256": "443558c52a751ee9f78834f856035cca30a13a920bb563c7f6550a3e65b9fd39",
+        "sourceUrl": "https://github.com/OmegaJackie/Relicable"
+      },
+      "evidence": {
+        "zipSha256": "bd6208985735fd9d37fbf6180418fb34c937289eb03cba921176a2cc3aeec90d",
+        "dllSha256": "443558c52a751ee9f78834f856035cca30a13a920bb563c7f6550a3e65b9fd39",
+        "version": "1.5.9.7",
+        "internalName": "Relicable",
+        "pluginManifestProject": "https://github.com/OmegaJackie/Relicable",
+        "archiveManifest": "Relicable.json",
+        "mainAssembly": "Relicable.dll",
+        "distinctOriginalsInBaseline": 79,
+        "foundOriginalsAtLeast4Characters": 74,
+        "examples": [
+          "Copy the crafted items and their crafters to the clipboard.",
+          "A key item -- key items cannot be entrusted to a retainer."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/OmegaJackie/Relicable/main/repo.json",
+        "artifactUrl": "https://github.com/OmegaJackie/Relicable/releases/latest/download/Relicable.zip",
+        "reviewedPublisherProject": "https://github.com/OmegaJackie/Relicable",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=Relicable 和版本 1.5.9.7，在主 DLL 静态匹配 79 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "RotationSolver",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.8.12",
+        "inspectedDllSha256": "fa93ff0f7b40707e289c47ebfdc9bd2b671a239b7dc2e09d7619c81f8dea5ccb",
+        "sourceUrl": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn"
+      },
+      "evidence": {
+        "zipSha256": "e9cf45ee02f20b477045b5374198e5ce89f938f3224aa112441172bdfcd9be9f",
+        "dllSha256": "fa93ff0f7b40707e289c47ebfdc9bd2b671a239b7dc2e09d7619c81f8dea5ccb",
+        "version": "7.5.8.12",
+        "internalName": "RotationSolver",
+        "pluginManifestProject": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn",
+        "archiveManifest": "RotationSolver.json",
+        "mainAssembly": "RotationSolver.dll",
+        "distinctOriginalsInBaseline": 609,
+        "foundOriginalsAtLeast4Characters": 439,
+        "examples": [
+          "A scrolling record of the actions you use: GCDs on the top lane with their cast and recast, oGCDs beneath them with their animation lock.",
+          "Raise while Swiftcast is on cooldown and cooldown is higher than raise cast time and other healers are dead"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn/releases/download/7.5.8.12/latest.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL RotationSolver.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "SamplePlugin",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.0.26",
+        "inspectedDllSha256": "f79ab5358ec2f1ca5b08a3f4b034b99e0850387d51d6c20498038cb97221c9e7",
+        "sourceUrl": "https://github.com/MrSuricate2/AutoRepairKit"
+      },
+      "evidence": {
+        "zipSha256": "89f4c9e5696451fd32e421689ae1d3499b6fcefb8edfd0f808e19de3b82f3b30",
+        "dllSha256": "f79ab5358ec2f1ca5b08a3f4b034b99e0850387d51d6c20498038cb97221c9e7",
+        "version": "1.0.0.26",
+        "internalName": "SamplePlugin",
+        "pluginManifestProject": "https://github.com/MrSuricate2/AutoRepairKit",
+        "archiveManifest": "SamplePlugin.json",
+        "mainAssembly": "SamplePlugin.dll",
+        "distinctOriginalsInBaseline": 95,
+        "foundOriginalsAtLeast4Characters": 92,
+        "examples": [
+          "Pas de seuil à régler : c'est une règle fixe du jeu (100% de lien). Traite les pièces\nune par une, quelques secondes d'écart entre chacune.",
+          "La réparation ne se déclenche que si au moins une pièce d'équipement\npasse sous ce seuil. Rien n'est réparé (ni consommé) au-dessus."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/MrSuricate2/AutoRepairKit/master/pluginmaster.json",
+        "artifactUrl": "https://github.com/MrSuricate2/AutoRepairKit/releases/download/experimental/latest.zip",
+        "reviewedPublisherProject": "https://github.com/MrSuricate2/AutoRepairKit",
+        "provenanceNote": "当前 FireGaze 目录中的来源和作者名称与发行清单一致。 发行 ZIP 内 SamplePlugin.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 66 个不同原文完全相同。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "SentinelHunts",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {},
+      "reason": "原作者已撤回独立 SentinelHunts 的分发条目与旧可安装发行包，历史源码保留供参考。见 https://github.com/MarshalTitan/SRankSentinel/blob/a54f01f339820e56dd630175225bc0b2cb0404cc/README.md#L159 。现存 SRankSentinel 是另一 InternalName。"
+    },
+    {
+      "internalName": "SonarPlugin-preview",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "15.757.0.1",
+        "inspectedDllSha256": "33677136d458a9e0b1ed6f3d888af38f35155f904536a1dcb9d88a77754deadc",
+        "sourceUrl": "https://raw.githubusercontent.com/FFXIV-Sonar/SonarRepo/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "e8a83caeaf596cc660bf8dcbd5ee6650c43901f332f3deec812e98532a104ddc",
+        "dllSha256": "33677136d458a9e0b1ed6f3d888af38f35155f904536a1dcb9d88a77754deadc",
+        "version": "15.757.0.1",
+        "internalName": "SonarPlugin-preview",
+        "pluginManifestProject": "https://discord.gg/K7y24Rr",
+        "archiveManifest": "SonarPlugin-preview.json",
+        "mainAssembly": "SonarPlugin-preview.dll",
+        "distinctOriginalsInBaseline": 199,
+        "foundOriginalsAtLeast4Characters": 190,
+        "examples": [
+          "Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.",
+          "Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-Sonar/SonarRepo/main/pluginmaster.json",
+        "artifactUrl": "https://raw.githubusercontent.com/FFXIV-Sonar/SonarRepo/main/plugins/SonarPlugin-preview/latest.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-Sonar/SonarRepo",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=SonarPlugin-preview 和版本 15.757.0.1，在主 DLL 静态匹配 192 条基础包原文。 作者发布库是 SonarRepo；清单的 RepoUrl 指向作者 Discord。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "SoundFilter",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.5.3.0",
+        "inspectedDllSha256": "3ea407e958e73b68bd16b98c24587f7c8ac250bd9c019cbd2f5db6ef3c8de6af"
+      },
+      "evidence": {
+        "zipSha256": "3b4aebd06e1924cb5b323d22cb11640f4f15be15e3b032b7d58675d3afb17d7b",
+        "dllSha256": "3ea407e958e73b68bd16b98c24587f7c8ac250bd9c019cbd2f5db6ef3c8de6af",
+        "version": "1.5.3.0",
+        "internalName": "SoundFilter",
+        "pluginManifestProject": "https://github.com/Cytraen/SoundFilter",
+        "archiveManifest": "SoundFilter.json",
+        "mainAssembly": "SoundFilter.dll",
+        "distinctOriginalsInBaseline": 17,
+        "foundOriginalsAtLeast4Characters": 17,
+        "examples": [
+          "Not enough arguments.",
+          "Show sound log window"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/SoundFilter?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/Cytraen/SoundFilter",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL SoundFilter.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "Splatoon",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.9.2.33",
+        "inspectedDllSha256": "961245def44bc242c7fec7a7b337478aa18d3351908855d29a9ab77032aa947a",
+        "sourceUrl": "https://github.com/PunishXIV/Splatoon"
+      },
+      "evidence": {
+        "zipSha256": "107ede69b36b8343d9487636ddec61fca33d0b1b9435f8d0d241b6f77d960ce8",
+        "dllSha256": "961245def44bc242c7fec7a7b337478aa18d3351908855d29a9ab77032aa947a",
+        "version": "3.9.2.33",
+        "internalName": "Splatoon",
+        "pluginManifestProject": "https://github.com/PunishXIV/Splatoon",
+        "archiveManifest": "Splatoon.json",
+        "mainAssembly": "Splatoon.dll",
+        "distinctOriginalsInBaseline": 186,
+        "foundOriginalsAtLeast4Characters": 183,
+        "examples": [
+          "This element is currently not being rendered",
+          "Holding CTRL when clicking will also paste:"
+        ],
+        "distributionFeed": "https://love.puni.sh/ment.json",
+        "artifactUrl": "https://puni.sh/api/plugins/download/10/Splatoon/versions/3.9.2.33/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/PunishXIV/Splatoon",
+        "provenanceNote": "FireGaze 发现列表所选源与作者发行清单的项目地址或发行件相同；以作者自己的清单为准。 发行 ZIP 内 Splatoon.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 77 个不同原文完全相同。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "SRankSentinel",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.7.80.0",
+        "inspectedDllSha256": "03b14620c1528f1f1e3b8b3dbbd788b1a939c071d5f13b09071c12c449a5b89d",
+        "sourceUrl": "https://raw.githubusercontent.com/MarshalTitan/SRankSentinel/main/repo.json"
+      },
+      "evidence": {
+        "zipSha256": "1ba2233ed38e1adb9fa97200a8f0786b0cb34b821577860ce8565e2d22921e31",
+        "dllSha256": "03b14620c1528f1f1e3b8b3dbbd788b1a939c071d5f13b09071c12c449a5b89d",
+        "version": "0.7.80.0",
+        "internalName": "SRankSentinel",
+        "pluginManifestProject": null,
+        "archiveManifest": "SRankSentinel.json",
+        "mainAssembly": "SRankSentinel.dll",
+        "distinctOriginalsInBaseline": 50,
+        "foundOriginalsAtLeast4Characters": 48,
+        "examples": [
+          "Classic uses the compact one-page layout. Sentinel Modern groups the same settings into pages.",
+          "Behavior profiles are independent from the expansion hunting checkboxes."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/MarshalTitan/SRankSentinel/main/repo.json",
+        "artifactUrl": "https://github.com/MarshalTitan/SRankSentinel/releases/download/v0.7.80.0/SRankSentinel.zip",
+        "reviewedPublisherProject": "https://github.com/MarshalTitan/SRankSentinel",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "StarfallStudio",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.2.37",
+        "inspectedDllSha256": "423bcc56ba29c917ca54476d4e0cbd8d090bb85f9527837d40aa4cd0434bd20f",
+        "sourceUrl": "https://github.com/BluntEXE/StarfallStudio"
+      },
+      "evidence": {
+        "zipSha256": "58490f4b6c6ff92f2bc885d2b1738e506d6dd9b7adec7156cbc6ae47ef966f0e",
+        "dllSha256": "423bcc56ba29c917ca54476d4e0cbd8d090bb85f9527837d40aa4cd0434bd20f",
+        "version": "0.2.37",
+        "internalName": "StarfallStudio",
+        "pluginManifestProject": "https://github.com/BluntEXE/StarfallStudio",
+        "archiveManifest": "StarfallStudio.json",
+        "mainAssembly": "StarfallStudio.dll",
+        "distinctOriginalsInBaseline": 146,
+        "foundOriginalsAtLeast4Characters": 144,
+        "examples": [
+          "ATTENTION: Projects made in this version will be incompatible with the next version of StarfallStudio!",
+          "Starfall Studio PROJECT BETA###starfall_project_window"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/BluntEXE/StarfallStudio/main/repo.json",
+        "artifactUrl": "https://github.com/BluntEXE/StarfallStudio/releases/download/v0.2.37/StarfallStudio.zip",
+        "reviewedPublisherProject": "https://github.com/BluntEXE/StarfallStudio",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=StarfallStudio 和版本 0.2.37，在主 DLL 静态匹配 146 条基础包原文。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "TheCollector",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.8.2.0",
+        "inspectedDllSha256": "9cd7d429e8932c93e700d647df0d93ca8b9e6415207a7e8521779c3ce5663783",
+        "sourceUrl": "https://github.com/Ashylila/TheCollector"
+      },
+      "evidence": {
+        "zipSha256": "5b87eaac76e649de1350d640bf0b0dbf27b2837e97ac2adae128c0c4161f3244",
+        "dllSha256": "9cd7d429e8932c93e700d647df0d93ca8b9e6415207a7e8521779c3ce5663783",
+        "version": "0.8.2.0",
+        "internalName": "TheCollector",
+        "pluginManifestProject": "https://github.com/Ashylila/TheCollector",
+        "archiveManifest": "TheCollector.json",
+        "mainAssembly": "TheCollector.dll",
+        "distinctOriginalsInBaseline": 100,
+        "foundOriginalsAtLeast4Characters": 98,
+        "examples": [
+          "Please configure your preferred shop territory in the Settings tab!",
+          "Inventory near full — pausing Artisan to turn collectables in."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Ashylila/AshPluggyRepo/refs/heads/main/repo.json",
+        "artifactUrl": "https://github.com/Ashylila/TheCollector/releases/latest/download/TheCollector.zip",
+        "reviewedPublisherProject": "https://github.com/Ashylila/TheCollector",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL TheCollector.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "TitleEdit",
+      "decision": "pending",
+      "runtimeBinding": null,
+      "evidence": {
+        "zipSha256": "cb0ed5f95f2182e6a973e3414b341d88e68536867fbd5c7db8fe278f270de8e9",
+        "dllSha256": "5a4eced55fb427400443e61de5d023826e7a32b0acf14f1b30ff9d66f319ea19",
+        "version": "2.2.3.2",
+        "internalName": "TitleEdit",
+        "pluginManifestProject": "https://github.com/lmcintyre/TitleEditPlugin",
+        "archiveManifest": "TitleEdit.json",
+        "mainAssembly": "TitleEdit.dll",
+        "distinctOriginalsInBaseline": 71,
+        "foundOriginalsAtLeast4Characters": 12,
+        "examples": [
+          "File path: ",
+          "Location: "
+        ],
+        "distributionFeed": "https://github.com/Haplo064/DalamudPlugins/raw/refs/heads/master/pluginmaster.json",
+        "artifactUrl": "https://github.com/slotthhy/TitleEditPlugin/releases/download/2.2.3.2/TitleEdit.zip",
+        "reviewedPublisherProject": "https://github.com/slotthhy/TitleEditPlugin",
+        "provenanceNote": "目录中的历史清单署名 attick & perchbird，列出的项目 lmcintyre/TitleEditPlugin 实际重定向 slotthhy/TitleEditPlugin。作者同版本标签直接发布发行 ZIP。 发行 ZIP 内 TitleEdit.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 6 个不同原文完全相同。"
+      },
+      "reason": "认证到原发行件以及项目重定向。旧来源为多作者汇总库，包内项目与跳转后的项目不同，当前消费端不能把第三方来源只锁定到这一个旧构建。"
+    },
+    {
+      "internalName": "Umbra",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "3.1.18.0",
+        "inspectedDllSha256": "5a68159013b24411b1fa5159532eb45c12f8cfa5a6178ed47442b950cff19bff"
+      },
+      "evidence": {
+        "zipSha256": "aa81fcdff2e02b5f5ad95bd1d48e858d266f49abf506576c898d48ce6fe0b2ed",
+        "dllSha256": "5a68159013b24411b1fa5159532eb45c12f8cfa5a6178ed47442b950cff19bff",
+        "version": "3.1.18.0",
+        "internalName": "Umbra",
+        "pluginManifestProject": "https://github.com/una-xiv/umbra",
+        "archiveManifest": "Umbra.json",
+        "mainAssembly": "Umbra.dll",
+        "distinctOriginalsInBaseline": 19,
+        "foundOriginalsAtLeast4Characters": 12,
+        "examples": [
+          "Usage: /umbra-toolbar-profile <profile name>.",
+          "Usage: /umbra-aux <show|hide|toggle> [name]."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/Umbra?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/una-xiv/umbra",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "vfaux",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.0.12",
+        "inspectedDllSha256": "799c3645a3806b6c35a02d2aa023c595e849bec24a03c862fc2f6ad18183e345",
+        "sourceUrl": "https://puni.sh/api/repository/veyn"
+      },
+      "evidence": {
+        "zipSha256": "7663b8d43eb974e1d4b13507618b9d24052e14ab0c2d786865c2d02a7a11f81b",
+        "dllSha256": "799c3645a3806b6c35a02d2aa023c595e849bec24a03c862fc2f6ad18183e345",
+        "version": "0.0.0.12",
+        "internalName": "vfaux",
+        "pluginManifestProject": null,
+        "archiveManifest": "vfaux.json",
+        "mainAssembly": "vfaux.dll",
+        "distinctOriginalsInBaseline": 9,
+        "foundOriginalsAtLeast4Characters": 9,
+        "examples": [
+          "Easier Faux Hollows is not compatible with ezFauxHollows",
+          "Solver strategy: always find swords first"
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/veyn",
+        "artifactUrl": "https://puni.sh/api/plugins/download/29/vfaux/versions/0.0.0.12/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/awgil/vfaux",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=vfaux 和版本 0.0.0.12，在主 DLL 静态匹配 9 条基础包原文。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "VFXEditor",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.9.4.6",
+        "inspectedDllSha256": "5061af13b7d74bf8ec916b3c5fbdc0120ff911980d9a3e40bfb398f72bb220ba"
+      },
+      "evidence": {
+        "zipSha256": "5a4e018c0178d883de9e99d233b6799d96c5286069b48352aafa7a76a06d6a11",
+        "dllSha256": "5061af13b7d74bf8ec916b3c5fbdc0120ff911980d9a3e40bfb398f72bb220ba",
+        "version": "1.9.4.6",
+        "internalName": "VFXEditor",
+        "pluginManifestProject": "https://github.com/0ceal0t/Dalamud-VFXEditor",
+        "archiveManifest": "VFXEditor.json",
+        "mainAssembly": "VFXEditor.dll",
+        "distinctOriginalsInBaseline": 309,
+        "foundOriginalsAtLeast4Characters": 305,
+        "examples": [
+          "Changes to the temp file location may require a restart to take effect",
+          "Audio player settings. These do not have any effect on the .scd file"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/VFXEditor?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/0ceal0t/Dalamud-VFXEditor",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL VFXEditor.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "visland",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.0.153",
+        "inspectedDllSha256": "1d46cf84028016de89a8bb8d068af6e30b68cdf5e93df66ef8ceef12984cee68",
+        "sourceUrl": "https://github.com/awgil/ffxiv_visland"
+      },
+      "evidence": {
+        "zipSha256": "4df09c6c582719387ff7b001dac128b4d918f2f199d0bacbf1a56ef137481c92",
+        "dllSha256": "1d46cf84028016de89a8bb8d068af6e30b68cdf5e93df66ef8ceef12984cee68",
+        "version": "0.0.0.153",
+        "internalName": "visland",
+        "pluginManifestProject": "https://github.com/awgil/ffxiv_visland",
+        "archiveManifest": "visland.json",
+        "mainAssembly": "visland.dll",
+        "distinctOriginalsInBaseline": 74,
+        "foundOriginalsAtLeast4Characters": 73,
+        "examples": [
+          "Skipping rest-day adjustment for this week — set rest days manually if needed",
+          "Plugin log is available via /xllog or Dalamud log window."
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/veyn",
+        "artifactUrl": "https://puni.sh/api/plugins/download/28/visland/versions/0.0.0.153/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/awgil/ffxiv_visland",
+        "provenanceNote": "FireGaze 发现列表所选源与作者发行清单的项目地址或发行件相同；以作者自己的清单为准。 发行 ZIP 内 visland.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 64 个不同原文完全相同。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "VIWI",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.0.62",
+        "inspectedDllSha256": "5233110dc160061120080d88a15f15336768416ab6f1e7d466d3867da3d32691",
+        "sourceUrl": "https://github.com/VeraNala/VIWI"
+      },
+      "evidence": {
+        "zipSha256": "523e1b25bad31be858db98b22fa4bd790e351a1303daef9a37767731889c14f2",
+        "dllSha256": "5233110dc160061120080d88a15f15336768416ab6f1e7d466d3867da3d32691",
+        "version": "0.0.0.62",
+        "internalName": "VIWI",
+        "pluginManifestProject": "https://github.com/VeraNala/VIWI",
+        "archiveManifest": "VIWI.json",
+        "mainAssembly": "VIWI.dll",
+        "distinctOriginalsInBaseline": 94,
+        "foundOriginalsAtLeast4Characters": 88,
+        "examples": [
+          "Can't switch characters (bound by duty or occupied)",
+          "Repair Kits###WorkshoppaRepairKitWindow"
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/vera",
+        "artifactUrl": "https://puni.sh/api/plugins/download/108/VIWI/versions/0.0.0.62/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/VeraNala/VIWI",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "WahJumps",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "20.0.0.2",
+        "inspectedDllSha256": "5a37aacdcf7aa28ec1175e42275cb0fcc813e9aa76f39c3f6ce95ecefb9bba55",
+        "sourceUrl": "https://puni.sh/api/repository/wah"
+      },
+      "evidence": {
+        "zipSha256": "76b67758f6ec14eb4abbadb94bb481ccf2cbeacdcede69b553d7584037d8983f",
+        "dllSha256": "5a37aacdcf7aa28ec1175e42275cb0fcc813e9aa76f39c3f6ce95ecefb9bba55",
+        "version": "20.0.0.2",
+        "internalName": "WahJumps",
+        "pluginManifestProject": "https://git.wahapp.com/wah/WahJumps",
+        "archiveManifest": "WahJumps.json",
+        "mainAssembly": "WahJumps.dll",
+        "distinctOriginalsInBaseline": 76,
+        "foundOriginalsAtLeast4Characters": 75,
+        "examples": [
+          "No data loaded yet. Please wait for data to load or refresh.",
+          "Lifestream not available - is it installed and enabled?"
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/wah",
+        "artifactUrl": "https://puni.sh/api/plugins/download/93/WahJumps/versions/20.0.0.2/install/latest.zip",
+        "reviewedPublisherProject": "https://git.wahapp.com/wah/WahJumps",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=WahJumps 和版本 20.0.0.2，在主 DLL 静态匹配 76 条基础包原文。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "WaymarkStudio",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "0.0.0.53",
+        "inspectedDllSha256": "b1135db220536f3503f6b510033ab73a94084afd88ae7993ef0c41991a4c4f1b",
+        "sourceUrl": "https://puni.sh/api/repository/sourpuh"
+      },
+      "evidence": {
+        "zipSha256": "c367e8eaade2d2bdc5f1fb2dcb5e59d412142eae30d1085d03a54b84155ed57a",
+        "dllSha256": "b1135db220536f3503f6b510033ab73a94084afd88ae7993ef0c41991a4c4f1b",
+        "version": "0.0.0.53",
+        "internalName": "WaymarkStudio",
+        "pluginManifestProject": null,
+        "archiveManifest": "WaymarkStudio.json",
+        "mainAssembly": "WaymarkStudio.dll",
+        "distinctOriginalsInBaseline": 73,
+        "foundOriginalsAtLeast4Characters": 72,
+        "examples": [
+          "Snap marker, trigger, and guide cursor to the grid.\nIf you have placed a guide, this will also snap cursor to helpful points on the guide.",
+          "Only place draft markers if real waymarks are unavailable, such as while in combat, duty recorder, or while character is occupied."
+        ],
+        "distributionFeed": "https://puni.sh/api/repository/sourpuh",
+        "artifactUrl": "https://puni.sh/api/plugins/download/62/WaymarkStudio/versions/0.0.0.53/install/latest.zip",
+        "reviewedPublisherProject": "https://github.com/sourpuh/ffxiv_waymarkstudio",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL WaymarkStudio.dll；包内清单版本交叉核对。旧元数据另有来源，此身份仅适用于所列发行包。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "Weatherman",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.5.0.6",
+        "inspectedDllSha256": "4c6bc51a04b9a513cec8446742c30ace2323dd0cb94c0936bc5be4abdd992ff1"
+      },
+      "evidence": {
+        "zipSha256": "01ddf3bd7148ead089d5b394b3c9246218211524328168a7e87e43e9c6fdd053",
+        "dllSha256": "4c6bc51a04b9a513cec8446742c30ace2323dd0cb94c0936bc5be4abdd992ff1",
+        "version": "2.5.0.6",
+        "internalName": "Weatherman",
+        "pluginManifestProject": "https://github.com/NightmareXIV/Weatherman",
+        "archiveManifest": "Weatherman.json",
+        "mainAssembly": "Weatherman.dll",
+        "distinctOriginalsInBaseline": 94,
+        "foundOriginalsAtLeast4Characters": 94,
+        "examples": [
+          "To unblacklist specific zone without overriding it's weather, go to zone-specific settings and check \"Weather control\"",
+          "This setting is not effective for zones that have their weathers overriden in zone-specific settings."
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/Weatherman?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/NightmareXIV/Weatherman",
+        "provenanceNote": "FireGaze 目录标为 Dalamud 官方收录，当前官方清单的 InternalName 和 Author 与目录相符。 发行 ZIP 内 Weatherman.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 93 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "WigglyQuest",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.31",
+        "inspectedDllSha256": "34a78ab1bffb1c4ff147001236cfa85577d4b8ca82a691484e177219aef1cfed",
+        "sourceUrl": "https://raw.githubusercontent.com/WigglyCorp/DalamudPlugins/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "8bfd6044c24a05dcc90e496b0f6e1e108410efc9d3f0080928f070fce371cbab",
+        "dllSha256": "34a78ab1bffb1c4ff147001236cfa85577d4b8ca82a691484e177219aef1cfed",
+        "version": "7.5.31",
+        "internalName": "WigglyQuest",
+        "pluginManifestProject": "https://github.com/WigglyCorp/Questionable",
+        "archiveManifest": "WigglyQuest.json",
+        "mainAssembly": "WigglyQuest.dll",
+        "distinctOriginalsInBaseline": 184,
+        "foundOriginalsAtLeast4Characters": 182,
+        "examples": [
+          "Add FATE definitions to the FatePaths folder to get started.",
+          "Unable to load plugin, check /xllog for details"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/WigglyCorp/DalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/WigglyCorp/WigglyQuest/releases/download/v7.5.31/latest.zip",
+        "reviewedPublisherProject": "https://github.com/WigglyCorp/WigglyQuest",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    },
+    {
+      "internalName": "XIVComboExpanded",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "2.0.6.8",
+        "inspectedDllSha256": "aad5eee058add4ed84bdb3794b1578b6414339f1c9272172c1366a567d38f11b",
+        "sourceUrl": "https://github.com/Shinoyami/XIVComboExpanded"
+      },
+      "evidence": {
+        "zipSha256": "033d772d6eed0fa59211d4e2116341e068585c84ca4fde082e5094d4d3f67b7f",
+        "dllSha256": "aad5eee058add4ed84bdb3794b1578b6414339f1c9272172c1366a567d38f11b",
+        "version": "2.0.6.8",
+        "internalName": "XIVComboExpanded",
+        "pluginManifestProject": "https://github.com/Shinoyami/XIVComboExpanded",
+        "archiveManifest": "XIVComboExpanded.json",
+        "mainAssembly": "XIVComboExpanded.dll",
+        "distinctOriginalsInBaseline": 61,
+        "foundOriginalsAtLeast4Characters": 60,
+        "examples": [
+          "With the introduction of new combos and features, an ever-growing list of jobs,\nthis plugin ended up having to be reworked for better UI & clarity.",
+          "One last thing. If you used to use XIVCombo Expanded before,\nyou should check whether your previous settings correctly imported or not."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Shinoyami/DalamudPlugins/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/Shinoyami/XIVComboExpanded/releases/download/sage-alt-v2.0.6.8/XIVComboExpanded-Alt-2.0.6.8.zip",
+        "reviewedPublisherProject": "https://github.com/Shinoyami/XIVComboExpanded",
+        "provenanceNote": "来源清单及 ZIP 自带清单逐字匹配 InternalName=XIVComboExpanded 和版本 2.0.6.8，在主 DLL 静态匹配 61 条基础包原文。 本记录只证明本行指定的发行来源可匹配；同内部名的其他分支需要分别核验，投稿原始分支未证实。",
+        "otherDistributions": {
+          "https://raw.githubusercontent.com/ZapleMyrup/MyDalamudPlugins/master/pluginmaster.json": {
+            "version": "2.0.1.1",
+            "authorRepo": "https://github.com/daemitus/XIVComboPlugin"
+          },
+          "https://raw.githubusercontent.com/daemitus/MyDalamudPlugins/master/pluginmaster.json": {
+            "version": "2.0.6.3",
+            "authorRepo": "https://github.com/daemitus/XIVComboPlugin"
+          },
+          "https://raw.githubusercontent.com/nucode1498/MyDalamudPlugins/master/pluginmaster.json": {
+            "version": "2.0.6.3",
+            "authorRepo": "https://github.com/nucode1498/XIVComboExpanded"
+          }
+        }
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "XIVSchAssitant",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.4.1.0",
+        "inspectedDllSha256": "6cd16745e865471b73ea4abb65612706ea1a91393f50bdfeab80a043e75a2862",
+        "sourceUrl": "https://github.com/Maateria/XIVSchAssistant"
+      },
+      "evidence": {
+        "zipSha256": "f316c75fb85f75236a03b19aaaf615a3259d120ab661c032f838e8d40e6c2f2c",
+        "dllSha256": "6cd16745e865471b73ea4abb65612706ea1a91393f50bdfeab80a043e75a2862",
+        "version": "1.4.1.0",
+        "internalName": "XIVSchAssitant",
+        "pluginManifestProject": "https://github.com/Maateria/XIVSchAssistant",
+        "archiveManifest": "XIVSchAssitant.json",
+        "mainAssembly": "XIVSchAssitant.dll",
+        "distinctOriginalsInBaseline": 32,
+        "foundOriginalsAtLeast4Characters": 32,
+        "examples": [
+          "Eos could not reach the default position (100, 100) — this arena has a non-standard center. Use /xivsch → Custom Arena Centers to configure the correct position.",
+          "[XIVSchAssistant] No target selected — please target the boss first, then click again to return Eos to the arena center."
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/Maateria/XIVSchAssistant/main/repo.json",
+        "artifactUrl": "https://github.com/Maateria/XIVSchAssistant/releases/latest/download/latest.zip",
+        "reviewedPublisherProject": "https://github.com/Maateria/XIVSchAssistant",
+        "provenanceNote": "发行库唯一 InternalName，ZIP 内主 DLL XIVSchAssitant.dll；包内清单版本交叉核对。"
+      },
+      "bindingMode": "manifest-project"
+    },
+    {
+      "internalName": "ZodiacBuddy",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "1.15.0.0",
+        "inspectedDllSha256": "5b9e5445c265cd50561c03108d51c3d5413ea6eefe4591f6d8cdeb053578cfba"
+      },
+      "evidence": {
+        "zipSha256": "4ffd57490868d870ad34d04dac16992e2332618e045f1ee331f6812680ba5f68",
+        "dllSha256": "5b9e5445c265cd50561c03108d51c3d5413ea6eefe4591f6d8cdeb053578cfba",
+        "version": "1.15.0.0",
+        "internalName": "ZodiacBuddy",
+        "pluginManifestProject": "https://github.com/foophoof/ZodiacBuddy",
+        "archiveManifest": "ZodiacBuddy.json",
+        "mainAssembly": "ZodiacBuddy.dll",
+        "distinctOriginalsInBaseline": 41,
+        "foundOriginalsAtLeast4Characters": 40,
+        "examples": [
+          "Pro tip: Use the Sonar plugin to track Fate uptime across your entire datacenter.\n",
+          "Notify duty with bonus only when an applicable relic is equipped"
+        ],
+        "distributionFeed": "https://kamori.goats.dev/Plugin/PluginMaster?channel=stable",
+        "artifactUrl": "https://kamori.goats.dev/Plugin/Download/ZodiacBuddy?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+        "reviewedPublisherProject": "https://github.com/foophoof/ZodiacBuddy",
+        "provenanceNote": "FireGaze 目录标为 Dalamud 官方收录，当前官方清单的 InternalName 和 Author 与目录相符。 发行 ZIP 内 ZodiacBuddy.json 的 InternalName、版本与清单吻合；静态 UI 提取与团队包有 41 个不同原文完全相同。"
+      },
+      "bindingMode": "official-exact-build"
+    },
+    {
+      "internalName": "ZodiacBuddyReborn",
+      "decision": "bound",
+      "runtimeBinding": {
+        "inspectedVersion": "7.5.6.1",
+        "inspectedDllSha256": "c80760217a141d09da7cd5fe7cc72459c82b636369a756ada17cf32a3087a1ad",
+        "sourceUrl": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json"
+      },
+      "evidence": {
+        "zipSha256": "90efbca70fbf6cd9fc3dbe08ec242ff84a64023e152d9ab2206f0fb861461dd3",
+        "dllSha256": "c80760217a141d09da7cd5fe7cc72459c82b636369a756ada17cf32a3087a1ad",
+        "version": "7.5.6.1",
+        "internalName": "ZodiacBuddyReborn",
+        "pluginManifestProject": null,
+        "archiveManifest": "ZodiacBuddyReborn.json",
+        "mainAssembly": "ZodiacBuddyReborn.dll",
+        "distinctOriginalsInBaseline": 68,
+        "foundOriginalsAtLeast4Characters": 64,
+        "examples": [
+          "Pro tip: Use the Sonar plugin to track Fate uptime across your entire datacenter.\n",
+          "Notify duty with bonus only when an applicable relic is equipped"
+        ],
+        "distributionFeed": "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json",
+        "artifactUrl": "https://github.com/FFXIV-CombatReborn/ZodiacBuddyReborn/releases/download/7.5.6.1/ZodiacBuddyReborn.zip",
+        "reviewedPublisherProject": "https://github.com/FFXIV-CombatReborn/ZodiacBuddyReborn",
+        "provenanceNote": "发行索引与 ZIP 内清单均精确匹配 InternalName 和发行版本；已对 ZIP 中唯一同名主 DLL 计算 SHA-256。"
+      },
+      "bindingMode": "distribution-feed"
+    }
+  ],
+  "installedSupplement": [
+    {
+      "internalName": "NotificationMaster",
+      "snapshotVersion": "2.1.1.16",
+      "snapshotDllSha256": "8d4bc06fddc1ca5142e7cdd831a9b85d6f48053a74e4407816123bc25ed4aa42",
+      "publishedVersion": "2.1.1.17",
+      "publishedDllSha256": "87e102430e4ea8bf219a9312dc7e6de73d40d4368c7be5e2f8c104113d5dee7b",
+      "authorRepoUrl": "https://github.com/NightmareXIV/NotificationMaster",
+      "artifactUrl": "https://kamori.goats.dev/Plugin/Download/NotificationMaster?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+      "zipSha256": "270025e92411beff31f998038eebfea073e8b96ef8801f9d495c16948397ee5b",
+      "runtimeBinding": {
+        "inspectedVersion": "2.1.1.17",
+        "inspectedDllSha256": "87e102430e4ea8bf219a9312dc7e6de73d40d4368c7be5e2f8c104113d5dee7b"
+      },
+      "note": "国服官方槽的新增构建，保留原有快照指纹。"
+    },
+    {
+      "internalName": "XivReflex",
+      "snapshotVersion": "1.0.0.0",
+      "snapshotDllSha256": "210375c0f76e777823f45d4196fca59d7002c194cc1e5812d557bdae1144ae21",
+      "publishedVersion": "1.0.1.0",
+      "publishedDllSha256": "ecaf46388728b3adfeac0678150465be08aff1e777f69c0f4007505825ab4ea8",
+      "authorRepoUrl": "https://github.com/Haselnussbomber/XivReflex",
+      "artifactUrl": "https://kamori.goats.dev/Plugin/Download/XivReflex?isUpdate=False&isTesting=False&branch=api9&isDip17=True",
+      "zipSha256": "2880f22e5655616963b17739a0bb72631f309c3c1f4e7c5cde3f308feb9d1b94",
+      "runtimeBinding": {
+        "inspectedVersion": "1.0.1.0",
+        "inspectedDllSha256": "ecaf46388728b3adfeac0678150465be08aff1e777f69c0f4007505825ab4ea8"
+      },
+      "note": "国服官方槽的新增构建，保留原有快照指纹。"
+    },
+    {
+      "internalName": "ChilledLeves",
+      "snapshotVersion": "1.0.2.4",
+      "snapshotDllSha256": "f49580699cfc9617e8d7f49b7f50c70719a65181b9f4fa43de751a7b5b99839c",
+      "publishedVersion": "1.0.2.4",
+      "publishedDllSha256": "f49580699cfc9617e8d7f49b7f50c70719a65181b9f4fa43de751a7b5b99839c",
+      "authorRepoUrl": "https://github.com/LeontopodiumNivale14/LeveItAlone",
+      "artifactUrl": "https://puni.sh/api/plugins/download/68/ChilledLeves/versions/1.0.2.4/install/latest.zip",
+      "zipSha256": "40f8a31486d6f7c2e6942fe6ac344de0bc256e421a26d5fb6b526834201e892e",
+      "runtimeBinding": null,
+      "note": "作者发行件匹配原有快照；同版本的本地修改件不加入公共身份。"
+    }
+  ]
+}

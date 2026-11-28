@@ -260,11 +260,51 @@
       "Source": "library"
     },
     {
+      "Original": "Make a role in the Roles section to give a task to one role.",
+      "Context": "[Mnemosyne] MyTasksSection.DrawFor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "在“职责”区创建职责，即可将任务分配给该职责。",
+      "Source": "library"
+    },
+    {
       "Original": "Make a role on the settings page.",
       "Context": "[Mnemosyne] MainWindow.DrawRoleMenu",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "可在设置页创建身份组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mnemosyne stores character data only on this PC. It is never uploaded anywhere.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Mnemosyne 仅将角色数据保存在本机，不会上传。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mnemosyne stores character data only on this PC. It is never uploaded anywhere. It reads the game and never writes to it; its optional switch button asks Lifestream to change character. Log into each character once and it appears in the list. Type /mnemo to open it.",
+      "Context": "[Mnemosyne] SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Mnemosyne 仅将角色数据保存在本机。插件只读取游戏数据。可选的切换按钮会请求 Lifestream 切换角色。每个角色登录一次后便会出现在列表中。输入 /mnemo 打开。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts, minions and more, the crafting, gathering and sightseeing logs, and achievements.",
+      "Context": "[Mnemosyne] SettingsWindow.CategoryWords",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "坐骑、宠物等收藏，以及制作、采集、探索笔记和成就。",
+      "Source": "library"
+    },
+    {
+      "Original": "New characters get",
+      "Context": "[Mnemosyne] RolesSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "新角色获得",
       "Source": "library"
     },
     {
@@ -301,6 +341,14 @@
       "Source": "library"
     },
     {
+      "Original": "Nobody is picked yet, so the task is for nobody.",
+      "Context": "[Mnemosyne] MyTasksSection.DrawPicked",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未选中任何角色，此任务目前未分配。",
+      "Source": "library"
+    },
+    {
       "Original": "Nothing due this week",
       "Context": "[Mnemosyne] CharacterPage.Draw",
       "Role": "UI",
@@ -325,12 +373,93 @@
       "Source": "library"
     },
     {
+      "Original": "Nothing is said in chat during a duty, a cutscene or combat.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "副本、过场动画或战斗期间不在聊天栏中发送任何消息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to do on any character.",
+      "Context": "[Mnemosyne] TasksView.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "所有角色都没有待办事项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to show; ",
+      "Context": "[Mnemosyne] TasksView.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "没有可显示的项目； ",
+      "Source": "library"
+    },
+    {
+      "Original": "One chat line after the daily reset while something is still to do today.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "每日重置后，若今天仍有待办事项，在聊天栏中提醒一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "One chat line on login",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "登录时在聊天栏中提醒一次",
+      "Source": "library"
+    },
+    {
+      "Original": "One chat line when an event not done yet moves into Ending soon.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尚未完成的活动即将结束时，在聊天栏中提醒一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "One chat line when the game's own warning says a house needs a visit.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "游戏发出需要探访房屋的提醒时，在聊天栏中提醒一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "One chat line when your Wondrous Tails journal is close to expiring.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "天书奇谈笔记即将过期时，在聊天栏中提醒一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open or close Mnemosyne. /mnemo settings, /mnemo <character name>, /mnemo dump, /mnemo help",
+      "Context": "[Mnemosyne] MnemosyneCommand..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭 Mnemosyne。/mnemo settings、/mnemo <character name>、/mnemo dump、/mnemo help",
+      "Source": "library"
+    },
+    {
       "Original": "Picked characters",
       "Context": "[Mnemosyne] MyTasksSection.DrawFor",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.RadioButton",
       "Translated": "指定角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Pin",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "置顶",
       "Source": "library"
     },
     {
@@ -342,12 +471,61 @@
       "Source": "library"
     },
     {
+      "Original": "Remind: My tasks before reset",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒：重置前的个人任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Remind: Wondrous Tails expiring",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒：天书奇谈即将过期",
+      "Source": "library"
+    },
+    {
+      "Original": "Remind: daily reset passed",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒：已过每日重置时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Remind: event ending",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒：活动即将结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Remind: house visit due",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒：该探访房屋了",
+      "Source": "library"
+    },
+    {
       "Original": "Rename",
       "Context": "[Mnemosyne] RolesSection.DrawSelected",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重命名",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename display",
+      "Context": "[Mnemosyne] MainWindow.DrawCharacterMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "重命名显示名称",
       "Source": "library"
     },
     {
@@ -377,6 +555,22 @@
       "Source": "library"
     },
     {
+      "Original": "Rows ignored on every character, from a row's right-click menu.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawIgnored",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "通过右键菜单为所有角色忽略的行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rows ignored on one character only.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawIgnored",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅为单个角色忽略的行。",
+      "Source": "library"
+    },
+    {
       "Original": "Save changes",
       "Context": "[Mnemosyne] MyTasksSection.DrawForm",
       "PreserveID": true,
@@ -386,11 +580,44 @@
       "Source": "library"
     },
     {
+      "Original": "Seasonal events, collaboration quests and the Moogle Treasure Trove.",
+      "Context": "[Mnemosyne] SettingsWindow.CategoryWords",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "季节活动、联动任务和莫古莫古大收集。",
+      "Source": "library"
+    },
+    {
+      "Original": "Server info bar counter",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "服务器信息栏计数",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": "[Mnemosyne] .ctor",
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Settings will not be saved this session: the file could not be read or is from a newer build.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此文件无法读取或由较新版本创建，本次使用期间不会保存设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Snooze until next reset (",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "推迟提醒至下次重置（",
       "Source": "library"
     },
     {
@@ -408,6 +635,115 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InvisibleButton",
       "Translated": "切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch off what this role leaves out. Switching on one group inside a category that is off switches the category back on, with only that group on.",
+      "Context": "[Mnemosyne] RolesSection.DrawSelected",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "关闭此职责不承担的项目。在已关闭的类别中打开一个组时，会重新启用该类别，并且仅启用这个组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Take one back",
+      "Context": "[Mnemosyne] CharacterPage.DrawCountItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "恢复一个",
+      "Source": "library"
+    },
+    {
+      "Original": "The file holds every character's name, world, content id and progress, and your settings. Mnemosyne writes it only where you choose and never sends it anywhere.",
+      "Context": "[Mnemosyne] Transfer.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "文件包含每个角色的名字、服务器、内容 ID、进度和你的设置。Mnemosyne 只会写入你所选的位置，不会向外发送。",
+      "Source": "library"
+    },
+    {
+      "Original": "The main scenario, and the class, job, role and other quest lines.",
+      "Context": "[Mnemosyne] SettingsWindow.CategoryWords",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "主线、职业、特职、职能及其他系列任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "The same count in the server info bar at the top of the screen; a click on it opens Mnemosyne's main window.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawAttention",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在屏幕顶部的服务器信息栏显示相同的计数；点击可打开 Mnemosyne 主窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "The tasks you add by hand in the My tasks section below.",
+      "Context": "[Mnemosyne] SettingsWindow.CategoryWords",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在下方“我的任务”区域中手动添加的任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Things the game cannot tell Mnemosyne, ticked by hand per character: in the character's own list, or beside its name under the task's All tasks line.",
+      "Context": "[Mnemosyne] MyTasksSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "游戏无法直接提供的信息需按角色手动勾选：可在角色自己的清单中勾选，或在“所有任务”下的角色名旁勾选。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unhide",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "取消隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Unpin",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "取消置顶",
+      "Source": "library"
+    },
+    {
+      "Original": "Up",
+      "Context": "[Mnemosyne] MyTasksSection.DrawSelected",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "上",
+      "Source": "library"
+    },
+    {
+      "Original": "Wake",
+      "Context": "[Mnemosyne] TasksView.DrawMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "恢复提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Weeklies count toward the badge",
+      "Context": "[Mnemosyne] SettingsWindow.DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "徽标计入每周任务",
+      "Source": "library"
+    },
+    {
+      "Original": "When off, the badge counts only what is ending soon and what is due today.",
+      "Context": "[Mnemosyne] SettingsWindow.DrawGeneral",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "关闭后，徽标只统计即将结束及今天到期的事项。",
       "Source": "library"
     },
     {

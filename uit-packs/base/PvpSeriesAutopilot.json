@@ -8,12 +8,30 @@
   },
   "entries": [
     {
+      "Original": "PVP Series Autopilot###PvpSeriesAutopilotMain",
+      "Context": "AppWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PvP 系列赛自动助手",
+      "Source": "library"
+    },
+    {
       "Original": "PVP Series Autopilot",
       "Context": "HeaderBar.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "PvP 系列赛自动排队",
+      "Source": "library"
+    },
+    {
+      "Original": "Based on Auto PVP Series Grind by XeldarAlz",
+      "Context": "AboutPage..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "基于 XeldarAlz 开发的 Auto PVP Series Grind",
       "Source": "library"
     },
     {

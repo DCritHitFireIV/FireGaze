@@ -17,12 +17,30 @@
       "Source": "library"
     },
     {
+      "Original": "Open automatically",
+      "Context": "MainWindow.DrawOptionsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "自动打开",
+      "Source": "library"
+    },
+    {
       "Original": "Sort by",
       "Context": "MainWindow.DrawSortByMenu",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImRaii.Menu",
       "Translated": "排序方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Times",
+      "Context": "MainWindow.DrawTimesMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "时段",
       "Source": "library"
     },
     {
@@ -53,12 +71,39 @@
       "Source": "library"
     },
     {
+      "Original": "Show finished",
+      "Context": "MainWindow.DrawVisibilityMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示已完成地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Show unavailable",
+      "Context": "MainWindow.DrawVisibilityMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示条件未满足的地点",
+      "Source": "library"
+    },
+    {
       "Original": "Show current zone only",
       "Context": "MainWindow.DrawVisibilityMenu",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.MenuItem",
       "Translated": "只显示当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Show inaccessible",
+      "Context": "MainWindow.DrawVisibilityMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "显示无法抵达的地点",
       "Source": "library"
     },
     {
@@ -98,12 +143,30 @@
       "Source": "library"
     },
     {
+      "Original": "Vistas 21 to 80 require the completion of the first 20. Talk to Millith Ironheart in Old Gridania to unlock the rest.",
+      "Context": "MainWindow.DrawHelpMenu",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "先完成前 20 个探索点，再与格里达尼亚旧街的米莉丝·艾恩哈特交谈，即可解锁第 21 至 80 个探索点。",
+      "Source": "library"
+    },
+    {
       "Original": "Show vista on map",
       "Context": "MainWindow.DrawGroup",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "在地图上标出探索地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Fly/walk to location\nCurrently, mounting is not done automatically. Mount up to start moving.",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "飞行或步行至目的地\n目前不会自动骑乘，请先手动骑上坐骑以开始移动。",
       "Source": "library"
     },
     {
@@ -170,6 +233,42 @@
       "Source": "library"
     },
     {
+      "Original": "Next down",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "下一处降点",
+      "Source": "library"
+    },
+    {
+      "Original": "Next up",
+      "Context": "MainWindow.DrawGroup",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "下一处升点",
+      "Source": "library"
+    },
+    {
+      "Original": "vnav couldn't fly through this door; the vista is on an outcrop on the inside wall to the left",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "vnav 无法飞过这道门。探索点在门内左侧墙壁的突出处。",
+      "Source": "library"
+    },
+    {
+      "Original": "Jump puzzle",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "跳跳乐",
+      "Source": "library"
+    },
+    {
       "Original": "Inside house, upstairs above door",
       "Context": "MainWindow..cctor",
       "PreserveID": false,
@@ -188,6 +287,15 @@
       "Source": "library"
     },
     {
+      "Original": "The vista is on a branch sticking out of the cliff below",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "探索点在下方悬崖伸出的树枝上",
+      "Source": "library"
+    },
+    {
       "Original": "Can't land on the flag",
       "Context": "MainWindow..cctor",
       "PreserveID": false,
@@ -203,6 +311,60 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "无法落到尖顶上",
+      "Source": "library"
+    },
+    {
+      "Original": "vnav couldn't nav inside this building; the vista is on one of the hanging lamps in the middle",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "vnav 无法在这栋建筑内寻路。探索点在中央悬挂的一盏灯上。",
+      "Source": "library"
+    },
+    {
+      "Original": "vnav couldn't fly inside this structure; the vista is inside on the left wall",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "vnav 无法飞入该结构。探索点在内部左侧墙上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk to npc, vista is inside tunnel, between crates on the right before the large spiral stairwell",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "与 NPC 交谈。探索点在隧道里，位于大型螺旋楼梯前右侧的箱子之间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Big jump. The chain is solid fyi.",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这里要跳得远一些。可以站在锁链上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't fly in here, make sure you stop navigation before going through the door",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这里无法飞行。请在穿过门前停止导航。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the TouristMod interface",
+      "Context": "CommandService.StartAsync",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 TouristMod 界面",
       "Source": "library"
     },
     {

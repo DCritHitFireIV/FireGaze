@@ -602,12 +602,84 @@
       "Source": "library"
     },
     {
+      "Original": "Active bg (running out)",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "营业背景（即将打烊）",
+      "Source": "library"
+    },
+    {
+      "Original": "Active bg (long left)",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "营业背景（剩余时间较长）",
+      "Source": "library"
+    },
+    {
+      "Original": "Closed bg",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "已打烊的背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom-venue bg",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "自定义场所背景",
+      "Source": "library"
+    },
+    {
       "Original": "Apartment cell bg",
       "Context": "SettingsWindow.DrawColorsBackgrounds",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.ColorEdit4",
       "Translated": "公寓场所的单元格底色",
+      "Source": "library"
+    },
+    {
+      "Original": "Other-continent text",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "其他大洲的文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted text",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "黑名单文字",
+      "Source": "library"
+    },
+    {
+      "Original": "SFW text",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "全年龄场所文字",
+      "Source": "library"
+    },
+    {
+      "Original": "NSFW text",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "成人场所文字",
       "Source": "library"
     },
     {
@@ -701,6 +773,15 @@
       "Source": "library"
     },
     {
+      "Original": "Travel features are hidden because Lifestream is not currently loaded. Install or enable Lifestream and click Recheck below.",
+      "Context": "SettingsWindow.DrawLifestreamTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尚未加载 Lifestream，已隐藏旅行功能。安装或启用后，点击下方的「重新检查」。",
+      "Source": "library"
+    },
+    {
       "Original": "Check for Lifestream",
       "Context": "SettingsWindow.DrawLifestreamTab",
       "PreserveID": true,
@@ -716,6 +797,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "从场所说明中推断标签（备用）",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, tag-like words found in venue descriptions appear as a third source.\nAPI and Local tags are never overridden.",
+      "Context": "SettingsWindow.DrawAdvancedTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "开启后，会将场所介绍中的标签词用作第三种来源。\nAPI 标签和本地标签不会被覆盖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Suggestion pool used for AddEdit quick-pick. Not effective tags by themselves.",
+      "Context": "SettingsWindow.DrawTags",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "供新增或编辑时快速选择的建议。选择前不会作为实际标签。",
       "Source": "library"
     },
     {
@@ -824,6 +923,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "选择显示时区",
+      "Source": "library"
+    },
+    {
+      "Original": "\nLocal: ",
+      "Context": "VenueFinderWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n本地时间： ",
       "Source": "library"
     },
     {
@@ -1043,6 +1151,15 @@
       "Source": "library"
     },
     {
+      "Original": "Remove favorite",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "取消收藏",
+      "Source": "library"
+    },
+    {
       "Original": "Remove from Blacklist",
       "Context": "ContextMenuBuilder.Draw",
       "PreserveID": true,
@@ -1076,6 +1193,48 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.MenuItem",
       "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit (override)",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "编辑（覆盖原设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Override",
+      "Context": "ContextMenuBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "还原覆盖设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset lines to defaults##linesReset",
+      "Context": "SettingsWindow.DrawColorsLines",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "将线条恢复为默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset bars to defaults##barsReset",
+      "Context": "SettingsWindow.DrawColorsBars",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "将条形样式恢复为默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset backgrounds to defaults##bgReset",
+      "Context": "SettingsWindow.DrawColorsBackgrounds",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "将背景恢复为默认设置",
       "Source": "library"
     },
     {

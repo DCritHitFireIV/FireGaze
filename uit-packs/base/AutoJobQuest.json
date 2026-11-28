@@ -336,6 +336,14 @@
       "Source": "library"
     },
     {
+      "Original": " が集まりませんでした（",
+      "Context": "ReduceTask.Tick",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 未能收集到（",
+      "Source": "library"
+    },
+    {
       "Original": " しかありません",
       "Context": "QuestTask.OnStart",
       "Role": "UI",
@@ -661,6 +669,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": " 正在攻击你，将优先击败它（",
+      "Source": "library"
+    },
+    {
+      "Original": " に替えてください）",
+      "Context": "QuestTask.HandleFishBait",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 请换成此项）",
       "Source": "library"
     },
     {
@@ -5773,6 +5789,14 @@
       "Source": "library"
     },
     {
+      "Original": "」と答えました：",
+      "Context": "QuestTask.HandleQuestDialogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "」的回复：",
+      "Source": "library"
+    },
+    {
       "Original": "」の完了が要ります",
       "Context": "VendorAccess.WhyNot",
       "Role": "UI",
@@ -5901,6 +5925,14 @@
       "Source": "library"
     },
     {
+      "Original": "」をクリア済み",
+      "Context": "StartConditions.Evaluate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "」已经完成",
+      "Source": "library"
+    },
+    {
       "Original": "」を一意に選べません：",
       "Context": "RetainerStockTask.TickMenu",
       "Role": "UI",
@@ -5930,6 +5962,14 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "」还原为原状态（",
+      "Source": "library"
+    },
+    {
+      "Original": "」を取り込み",
+      "Context": "SpearfishTask.ImportGigPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "」已导入",
       "Source": "library"
     },
     {
@@ -5981,6 +6021,14 @@
       "Source": "library"
     },
     {
+      "Original": "」を進めます",
+      "Context": "JobQuestFlow.StartUnlock",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "」将继续进行",
+      "Source": "library"
+    },
+    {
       "Original": "」を進められません：",
       "Context": "UnlockFeatureTask.OnStart",
       "Role": "UI",
@@ -5994,6 +6042,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "」，已选中。正在等待任务进入下一阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "」を選びました：",
+      "Context": "QuestTask.HandleQuestDialogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "」已选中：",
       "Source": "library"
     },
     {

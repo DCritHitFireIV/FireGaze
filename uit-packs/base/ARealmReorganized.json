@@ -259,6 +259,14 @@
       "Source": "library"
     },
     {
+      "Original": "Tidy up your glam collection! Scans your Glamour Dresser for items that can be moved to the Armoire, detects sets that can be regrouped, and helps you free inventory/retainers/chocobo space.",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "整理你的幻化收藏！扫描幻化台中可移入收藏柜的物品，找出可合并的套装，为背包、雇员和陆行鸟鞍囊腾出空间。",
+      "Source": "library"
+    },
+    {
       "Original": "Undyed",
       "Context": "DuplicatesTab.DrawDyeSwatch",
       "Role": "UI",
@@ -272,6 +280,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "以下物品持有多件，请选择要保留的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Your saddlebag wasn't readable when you scanned, which happens in instances and until you open it. Anything in it may be missing from the lists below, so open the saddlebag once and scan again.",
+      "Context": "MainWindow.DrawSaddlebagUnavailableBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "扫描时未能读取陆行鸟鞍囊。在副本中或尚未打开鞍囊时可能出现此情况。下方清单可能有遗漏，请先打开一次鞍囊再重新扫描。",
       "Source": "library"
     },
     {

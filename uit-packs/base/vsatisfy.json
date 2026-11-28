@@ -8,12 +8,75 @@
   },
   "entries": [
     {
+      "Original": "Fetch...",
+      "Context": "MainWindow.DrawMainTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取…",
+      "Source": "library"
+    },
+    {
+      "Original": "Seed: ",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "随机种子： ",
+      "Source": "library"
+    },
+    {
       "Original": "Guarantee row: ",
       "Context": "MainWindow.DrawDebug",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "保底记录： ",
+      "Source": "library"
+    },
+    {
+      "Original": "> buy from ",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "> 购买于 ",
+      "Source": "library"
+    },
+    {
+      "Original": "> turnin to ",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "> 交纳给 ",
+      "Source": "library"
+    },
+    {
+      "Original": "> spearfish from ",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "> 刺鱼地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "> fish from ",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "> 垂钓地点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement #",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "成就编号",
       "Source": "library"
     },
     {

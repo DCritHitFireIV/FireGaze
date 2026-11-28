@@ -8,11 +8,67 @@
   },
   "entries": [
     {
+      "Original": "\n\n* Left click to copy name to clipboard",
+      "Context": "MainInterface.DrawIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n\n* 左键点击可将名称复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "\n(no primary dye)",
+      "Context": "MainInterface.DrawIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n（主染色为空）",
+      "Source": "library"
+    },
+    {
       "Original": " window",
       "Context": "Commands..ctor",
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": " 窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "' to clipboard.",
+      "Context": "MainInterface.DrawIcon",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "」到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "-'New Plate' button now allows picking a folder to create the plate in",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－点击「新建投影模板」时可指定所在文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "-Clipboard and EC imports now allow picking a folder to create the plate in",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－从剪贴板或 Eorzea Collection 导入模板时可选择文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "-Previously, the selection process was all or nothing. It will now attempt to find a match with a valuable dye, or an item with any matching dye first",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－之前的筛选只接受完全匹配的物品。现在会优先寻找已使用相同珍贵染剂的物品，其次选择任一染色匹配的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "-TryOn/Examine dropdowns now allow picking a folder to create the plate in",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－在「试穿」与「查看角色信息」的菜单中新建模板时也可选择文件夹。",
       "Source": "library"
     },
     {
@@ -66,6 +122,14 @@
       "Source": "library"
     },
     {
+      "Original": "Click an item to edit it. Right-click to dye.",
+      "Context": "MainInterface.DrawPlateDetail",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击物品即可编辑，右键可染色。",
+      "Source": "library"
+    },
+    {
       "Original": "Click: link to chat",
       "Context": "AlternativeFinder.DrawInner",
       "Role": "UI",
@@ -83,11 +147,27 @@
       "Source": "library"
     },
     {
+      "Original": "Copied '",
+      "Context": "MainInterface.DrawIcon",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已复制「",
+      "Source": "library"
+    },
+    {
       "Original": "Copied to clipboard!",
       "Context": "MainInterface.DrawDyeListLabel",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "已复制到剪贴板！",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy an Eorzea Collection URL to import it.",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "复制 Eorzea Collection 的网址即可导入。",
       "Source": "library"
     },
     {
@@ -97,6 +177,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "创建",
+      "Source": "library"
+    },
+    {
+      "Original": "Create glamour plate",
+      "Context": "HelperUtil.DrawCreatePlateMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "创建投影模板",
       "Source": "library"
     },
     {
@@ -117,6 +206,64 @@
       "Source": "library"
     },
     {
+      "Original": "Delete Folder (and all contents)",
+      "Context": "MainInterface.DrawPlateList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除文件夹及其全部内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Folder (move contents out)",
+      "Context": "MainInterface.DrawPlateList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "删除文件夹并移出内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this folder and ALL its contents? This cannot be undone.",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定删除此文件夹及其全部内容吗？此操作无法撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this folder and move all contents out?",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "删除此文件夹并移出其中的所有内容吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this plate? This cannot be undone.",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定删除此投影模板吗？此操作无法撤销。",
+      "Source": "library"
+    },
+    {
+      "Original": "Does not modify the glamour itself!\n\nIf enabled, empty slots will be filled with the New Emperor set when tried on or applied to plates.",
+      "Context": "MainInterface.DrawRightPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "不会更改原有投影！\n\n启用后，试穿或应用投影模板时会用皇帝的新装填充空栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyes on items already in the current plate will no longer be ovewritten and waste a dye",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前模板中物品已使用的染剂将保留，避免重复消耗染剂。",
+      "Source": "library"
+    },
+    {
       "Original": "Ears",
       "Context": "PlateSlotExt.Name",
       "Role": "UI",
@@ -133,11 +280,53 @@
       "Source": "library"
     },
     {
+      "Original": "Eorzea Collection Mass Import",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从 Eorzea Collection 批量导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Export as Text",
+      "Context": "MainInterface.DrawPlateButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导出为文本",
+      "Source": "library"
+    },
+    {
       "Original": "Feet",
       "Context": "PlateSlotExt.Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "脚部",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill Empty Slots with New Emperor",
+      "Context": "MainInterface.DrawRightPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "用皇帝的新装填充空栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill empty slots with New Emperor for Try on & Apply",
+      "Context": "MainInterface.DrawRightPanel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "试穿或应用模板时，用皇帝的新装填充空栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Fills empty slots with the New Emperor set.",
+      "Context": "MainInterface.DrawRightPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "使用皇帝的新装填充空栏位。",
       "Source": "library"
     },
     {
@@ -190,6 +379,30 @@
       "Source": "library"
     },
     {
+      "Original": "Hold Control and click to overwrite.",
+      "Context": "HelperUtil.DrawCreatePlateMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按住 Ctrl 并点击可覆盖。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hover to view dyes (click to copy)",
+      "Context": "MainInterface.DrawDyeListLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "悬停查看染剂，点击复制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import failed.. copy a new link to try again",
+      "Context": "ImportEorzeaCollection.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导入失败，请复制新链接后重试。",
+      "Source": "library"
+    },
+    {
       "Original": "Import from Clipboard",
       "Context": "MainInterface.DrawMenuBar",
       "PreserveID": true,
@@ -208,11 +421,35 @@
       "Source": "library"
     },
     {
+      "Original": "Imported ",
+      "Context": "ImportEorzeaCollection.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已导入 ",
+      "Source": "library"
+    },
+    {
       "Original": "Importing...",
       "Context": "MainInterface.DrawMassImportWindow",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "正在导入…",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved third-party plugin support.",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "改进了对第三方插件的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Input a tag and press Enter",
+      "Context": "MainInterface.DrawPlateTags",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入标签后按回车键",
       "Source": "library"
     },
     {
@@ -249,6 +486,22 @@
       "Source": "library"
     },
     {
+      "Original": "Moving '",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在移动「",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving folder '",
+      "Context": "MainInterface.DrawPlateList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在移动文件夹「",
+      "Source": "library"
+    },
+    {
       "Original": "Neck",
       "Context": "PlateSlotExt.Name",
       "Role": "UI",
@@ -274,6 +527,22 @@
       "Source": "library"
     },
     {
+      "Original": "No folders created yet.",
+      "Context": "HelperUtil.DrawFolderMenuItems",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚未创建文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "No new changes.",
+      "Context": "MainInterface.DrawChangelog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "暂无新变化。",
+      "Source": "library"
+    },
+    {
       "Original": "No valid plate data in clipboard.",
       "Context": "MainInterface.DrawMenuBar",
       "Role": "UI",
@@ -291,11 +560,36 @@
       "Source": "library"
     },
     {
+      "Original": "None (keep existing)",
+      "Context": "MainInterface.DrawItemPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无（保留现有设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "None (remove existing)",
+      "Context": "MainInterface.DrawItemPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无（移除现有设置）",
+      "Source": "library"
+    },
+    {
       "Original": "Off Hand",
       "Context": "PlateSlotExt.Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show items in the armoire/dresser",
+      "Context": "MainInterface.DrawItemPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示收藏柜或投影台中的物品",
       "Source": "library"
     },
     {
@@ -316,6 +610,38 @@
       "Source": "library"
     },
     {
+      "Original": "Plates should now always fully apply and refresh on first try",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "首次应用时即可完整应用并刷新模板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Press Enter to save.",
+      "Context": "MainInterface.DrawPlateDetail",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按回车键保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Primary Dye",
+      "Context": "MainInterface.DrawDyePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "主染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent changes since you last opened Glamaholic",
+      "Context": "MainInterface.DrawChangelog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自上次打开 Glamaholic 以来的更新",
+      "Source": "library"
+    },
+    {
       "Original": "Rename Folder:",
       "Context": "MainInterface.DrawPlateList",
       "Role": "UI",
@@ -330,6 +656,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "还原",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert Glamourer",
+      "Context": "MainInterface.DrawMassImportWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "还原 Glamourer 外观",
       "Source": "library"
     },
     {
@@ -363,6 +698,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Secondary Dye",
+      "Context": "MainInterface.DrawDyePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "副染色",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a folder, enter a name and then press then <Enter> to create a new plate, or choose a plate below to overwrite.",
+      "Context": "HelperUtil.DrawCreatePlateMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择文件夹并输入名称，按 <Enter> 新建模板，或在下方选择要覆盖的模板。",
       "Source": "library"
     },
     {
@@ -410,11 +761,28 @@
       "Source": "library"
     },
     {
+      "Original": "Tags (",
+      "Context": "MainInterface.DrawPlateTags",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "标签（",
+      "Source": "library"
+    },
+    {
       "Original": "Target:",
       "Context": "MainInterface.DrawMassImportWindow",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "The '(Dye)' suffix is now present in clipboard exports for better interop with other plugins (thanks @SubaruYashiro)",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "剪贴板导出中现已包含「(Dye)」后缀，方便与其他插件配合使用（感谢 @SubaruYashiro）。",
       "Source": "library"
     },
     {
@@ -433,6 +801,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.MenuItem",
       "Translated": "移至根目录",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle visibility of the ",
+      "Context": "Commands..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "切换显示 ",
       "Source": "library"
     },
     {
@@ -463,6 +839,32 @@
       "Source": "library"
     },
     {
+      "Original": "Try on Glamourer",
+      "Context": "TryOnHelper.DrawDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "使用 Glamourer 试穿",
+      "Source": "library"
+    },
+    {
+      "Original": "Try on Glamourer - New Emperor",
+      "Context": "TryOnHelper.DrawDropdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "使用 Glamourer 试穿（皇帝的新装）",
+      "Source": "library"
+    },
+    {
+      "Original": "Try on an EC glamour using Glamourer, link can be provided in the command or in the clipboard",
+      "Context": "Glamourer.RefreshStatus",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "用 Glamourer 试穿 Eorzea Collection 的投影，可在命令中提供网址，也可从剪贴板读取。",
+      "Source": "library"
+    },
+    {
       "Original": "Unnamed Folder",
       "Context": "FolderNode..ctor",
       "Role": "UI",
@@ -487,11 +889,28 @@
       "Source": "library"
     },
     {
+      "Original": "Valuable dyes are now factored into the item selection process when applying plates",
+      "Context": "Changelog..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "应用模板时，选择物品会考虑染剂的价值。",
+      "Source": "library"
+    },
+    {
       "Original": "Version ",
       "Context": "MainInterface.DrawChangelog",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "View Changelog",
+      "Context": "MainInterface.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "查看更新日志",
       "Source": "library"
     },
     {
@@ -503,11 +922,53 @@
       "Source": "library"
     },
     {
+      "Original": "Warnings (",
+      "Context": "MainInterface.DrawWarnings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "警告（",
+      "Source": "library"
+    },
+    {
+      "Original": "What's New in Glamaholic",
+      "Context": "MainInterface.DrawChangelog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "Glamaholic 更新内容",
+      "Source": "library"
+    },
+    {
       "Original": "Wrists",
       "Context": "PlateSlotExt.Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "手镯",
+      "Source": "library"
+    },
+    {
+      "Original": "[Folder] ",
+      "Context": "HelperUtil.DrawCreatePlateMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "［文件夹］ ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Glamaholic] Failed to import glamour from Eorzea Collection URL, check /xllog for more information.",
+      "Context": "TryOnCommand.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Glamaholic] 无法从 Eorzea Collection 的网址导入投影。请使用 /xllog 查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Glamaholic] No valid Eorzea Collection URL provided or found in clipboard",
+      "Context": "Glamourer.TryOnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Glamaholic] 未提供有效的 Eorzea Collection 网址，剪贴板中也未找到。",
       "Source": "library"
     },
     {

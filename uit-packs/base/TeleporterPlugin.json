@@ -107,12 +107,93 @@
       "Source": "library"
     },
     {
+      "Original": "Show Chat Messages",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Error Messages",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示错误消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Use English Aetheryte Names",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用以太之光的英文名称",
+      "Source": "library"
+    },
+    {
+      "Original": "This does not apply to Estate Names (Appartment, Shared Estate etc.)",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此设置不影响房屋名称（如公寓、共享房屋等）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Partial Match:",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "允许部分匹配：",
+      "Source": "library"
+    },
+    {
       "Original": "Aetheryte",
       "Context": "ConfigWindow.DrawGeneralTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Ticket Teleport",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用大国防联军传送网使用券",
+      "Source": "library"
+    },
+    {
+      "Original": "Eternity Ring Teleport",
+      "Context": "ConfigWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用同心戒指传送",
+      "Source": "library"
+    },
+    {
+      "Original": "No Aetherytes Available",
+      "Context": "ConfigWindow.DrawAliasTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有可用的以太之光",
+      "Source": "library"
+    },
+    {
+      "Original": "Click here to Update",
+      "Context": "ConfigWindow.DrawAliasTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "点此更新",
       "Source": "library"
     },
     {

@@ -26,6 +26,33 @@
       "Source": "library"
     },
     {
+      "Original": "Download and extract 270+ pre-compiled option previews for this mod.\nSize: ",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "下载并解压此模组的 270 多张预制选项预览图。\n大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": " MB\nSource: Pixeldrain",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " MB\n来源：Pixeldrain",
+      "Source": "library"
+    },
+    {
+      "Original": "⚠️ WARNING: Age Gate & Adult Content",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "⚠️ 警告：年龄限制及成人内容",
+      "Source": "library"
+    },
+    {
       "Original": "Size: ",
       "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
       "PreserveID": false,
@@ -35,12 +62,66 @@
       "Source": "library"
     },
     {
+      "Original": "Source Host: Pixeldrain",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "来源站点：Pixeldrain",
+      "Source": "library"
+    },
+    {
+      "Original": "By proceeding, you confirm that you are at least 18 years",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "继续即表示你确认自己已年满 18",
+      "Source": "library"
+    },
+    {
+      "Original": "of age and consent to download and view adult content.",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "周岁，并同意下载及查看成人内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "I am 18+ & Download",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "我已年满 18 岁，开始下载",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "✓ Option Previews Pack Active",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "✓ 选项预览包已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "The pre-compiled option previews pack is currently installed and active.",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDrawCallback",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "预制选项预览包已安装并启用。",
       "Source": "library"
     },
     {
@@ -62,12 +143,48 @@
       "Source": "library"
     },
     {
+      "Original": "Automatic import failed: This mod is NSFW/Restricted on XIVModArchive. To add a preview manually, copy the image from your browser and click 'Paste Clipboard'.",
+      "Context": "PreSettingsTabBarDrawCallback.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "自动导入失败：此模组在 XIVModArchive 上标为成人或受限内容。要手动添加预览，请在浏览器中复制图片，再点击“从剪贴板粘贴”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Penumbra Preview Manager UI. Use '/ppm settings' to open settings.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Penumbra 预览管理器界面。使用 '/ppm settings' 可打开设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Preview Manager Settings###PPM_Config",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Penumbra 预览管理器设置",
+      "Source": "library"
+    },
+    {
       "Original": "Display Options",
       "Context": "ConfigWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "显示选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Preview Image Size:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 预览图尺寸：",
       "Source": "library"
     },
     {
@@ -86,6 +203,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "主预览图导入时的裁剪方式：",
+      "Source": "library"
+    },
+    {
+      "Original": "No Crop (Preserve Aspect)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "不裁剪（保持宽高比）",
       "Source": "library"
     },
     {
@@ -125,6 +251,24 @@
       "Source": "library"
     },
     {
+      "Original": "Option Preview Trigger Icon:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选项预览触发图标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Image Frame Icon",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "相框图标",
+      "Source": "library"
+    },
+    {
       "Original": "Eye / View Icon",
       "Context": "ConfigWindow.Draw",
       "PreserveID": false,
@@ -140,6 +284,69 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "悬停在选项文字上时也显示预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the option preview tooltip when hovering over the option's text name,\nin addition to hovering over the preview icon.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "鼠标悬停在选项名称上时也显示预览提示，\n与悬停在预览图标上相同。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Window Quick Buttons:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Penumbra 窗口快捷按钮：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show \"Paste from Clipboard\"",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示“从剪贴板粘贴”",
+      "Source": "library"
+    },
+    {
+      "Original": "Show \"Search XMA\"",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示“搜索 XMA”",
+      "Source": "library"
+    },
+    {
+      "Original": "Show \"Browse File\"",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示“浏览文件”",
+      "Source": "library"
+    },
+    {
+      "Original": "Show \"Copy Search Terms\"",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示“复制搜索词”",
+      "Source": "library"
+    },
+    {
+      "Original": "Show \"Grab from URL\"",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示“从网址获取”",
       "Source": "library"
     },
     {
@@ -179,6 +386,15 @@
       "Source": "library"
     },
     {
+      "Original": "Force PPM to draw previews even for mods managed by Heliosphere.\nNote: This can lead to double preview images if the Heliosphere plugin is running at the same time.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "也为 Heliosphere 管理的模组显示 PPM 预览。\n注意：同时运行 Heliosphere 插件时，预览图可能重复显示。",
+      "Source": "library"
+    },
+    {
       "Original": "Hide option previews from Penumbra File Redirections",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -188,12 +404,75 @@
       "Source": "library"
     },
     {
+      "Original": "Mark the 'ppm' option preview folders and their files with the system 'Hidden' attribute.\nThis hides them from Penumbra's 'File Redirections' tab to prevent UI clutter.\nNote: This will also hide the 'ppm' folders in Windows File Explorer unless you have 'Show hidden files' enabled.\nNormal end mod consumers do not need this; it is mostly useful for mod creators\nor users who edit file redirections directly.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为 'ppm' 选项预览文件夹及其中的文件设置系统“隐藏”属性。\n这些文件将从 Penumbra 的“文件重定向”页签中隐藏，减少列表干扰。\n注意：若未在 Windows 资源管理器中开启“显示隐藏的文件”，'ppm' 文件夹也会被隐藏。\n此选项主要适用于模组作者\n或直接编辑文件重定向的用户。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support & Community",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "支持与社区",
+      "Source": "library"
+    },
+    {
+      "Original": "Join Support Discord",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "加入技术支持 Discord",
+      "Source": "library"
+    },
+    {
       "Original": "Support on Ko-fi",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Preview Manager###PPM_Main",
+      "Context": "PreviewWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Penumbra 预览管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Mod List",
+      "Context": "PreviewWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新模组列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning Penumbra mod directories... Please wait.",
+      "Context": "PreviewWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在扫描 Penumbra 模组目录，请稍候。",
+      "Source": "library"
+    },
+    {
+      "Original": "No mods detected or Penumbra Mod Directory is not configured!",
+      "Context": "PreviewWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "未找到模组，或尚未配置 Penumbra 模组目录！",
       "Source": "library"
     },
     {
@@ -224,6 +503,15 @@
       "Source": "library"
     },
     {
+      "Original": "Select a mod from the list to manage its preview.",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从列表选择模组以管理其预览图。",
+      "Source": "library"
+    },
+    {
       "Original": "Author: ",
       "Context": "PreviewWindow.DrawModDetails",
       "PreserveID": false,
@@ -251,6 +539,42 @@
       "Source": "library"
     },
     {
+      "Original": "✓ Preview Image Found:",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "✓ 已找到预览图：",
+      "Source": "library"
+    },
+    {
+      "Original": "[Image file found but could not be loaded into game texture wrapper]",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "[已找到图片文件，但无法将其加载为游戏纹理]",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Preview Image",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除预览图",
+      "Source": "library"
+    },
+    {
+      "Original": "✗ No Preview Image Found",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "✗ 未找到预览图",
+      "Source": "library"
+    },
+    {
       "Original": "Add an image to display a preview for this mod. It will automatically crop and scale it into a high-quality PNG preview according to your settings!",
       "Context": "PreviewWindow.DrawModDetails",
       "PreserveID": false,
@@ -269,12 +593,93 @@
       "Source": "library"
     },
     {
+      "Original": "Paste URL (e.g. https://xivmodarchive.com/...)",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "粘贴网址（例如 https://xivmodarchive.com/...）",
+      "Source": "library"
+    },
+    {
+      "Original": "Grabbing...",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在获取…",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Local Image File / Clipboard",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从本地文件或剪贴板设置图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste local path (e.g. C:\\image.png)",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "粘贴本地路径（例如 C:\\image.png）",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Local Image",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置本地图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste Image from Clipboard",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板粘贴图片",
+      "Source": "library"
+    },
+    {
       "Original": "Mod Option Previews",
       "Context": "PreviewWindow.DrawModDetails",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "模组选项预览",
+      "Source": "library"
+    },
+    {
+      "Original": "This mod does not have any setting groups configured in Penumbra.",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "此模组未在 Penumbra 中配置任何选项组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Option Group:",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择选项组：",
+      "Source": "library"
+    },
+    {
+      "Original": "No options available in this group.",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "此组中没有可用选项。",
       "Source": "library"
     },
     {
@@ -287,12 +692,48 @@
       "Source": "library"
     },
     {
+      "Original": "✓ Preview Image Found for [",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "✓ 已找到以下选项的预览图：[",
+      "Source": "library"
+    },
+    {
+      "Original": "✗ No Preview Image Found for [",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "✗ 未找到以下选项的预览图：[",
+      "Source": "library"
+    },
+    {
       "Original": "1:1 Square",
       "Context": "PreviewWindow.DrawModDetails",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "1:1 正方形",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a preview image for the option '",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "为以下选项添加预览图：'",
+      "Source": "library"
+    },
+    {
+      "Original": "' (default crop: ",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "'（默认裁剪： ",
       "Source": "library"
     },
     {
@@ -305,12 +746,73 @@
       "Source": "library"
     },
     {
+      "Original": "Paste URL (e.g. XIVModArchive or direct image link)",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "粘贴网址（如 XIVModArchive 页面或图片直链）",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Option Local Image File / Clipboard",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从本地文件或剪贴板设置选项图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste local path...",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "粘贴本地路径…",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign Unassigned Image from ppm/",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从 ppm/ 分配尚未使用的图片",
+      "Source": "library"
+    },
+    {
+      "Original": "No unassigned images found in ppm/ folder.",
+      "Context": "PreviewWindow.DrawModDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "ppm/ 文件夹中没有尚未分配的图片。",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": ".ctor",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Search Terms (Folder Name & Author)##ClipboardCopy",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "复制搜索词（文件夹名与作者）",
+      "Source": "library"
+    },
+    {
+      "Original": "Search for Mod on XMA##XMASearch",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "在 XMA 上搜索模组",
       "Source": "library"
     },
     {
@@ -330,11 +832,51 @@
       "Source": "library"
     },
     {
+      "Original": "Remove Option Preview Image##RemoveOptionImg",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "移除选项预览图",
+      "Source": "library"
+    },
+    {
+      "Original": "Grab & Crop Option Image##GrabOptionBtn",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "获取并裁剪选项图片",
+      "Source": "library"
+    },
+    {
       "Original": "Browse...##BrowseOptionImg",
       "Context": "PreviewWindow.DrawModDetails",
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
       "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Option Image##SetOptionBtn",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "设置选项图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste Option Image from Clipboard##PasteOptionBtn",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "从剪贴板粘贴选项图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign Selected Image##AssignUnassignedBtn",
+      "Context": "PreviewWindow.DrawModDetails",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "分配所选图片",
       "Source": "library"
     }
   ],

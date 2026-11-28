@@ -48,6 +48,14 @@
       "Source": "library"
     },
     {
+      "Original": "Awaiting next fate before searching again ...",
+      "Context": "OccultWindow.TabTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "正在等待下一次危命任务，此后再重新搜索……",
+      "Source": "library"
+    },
+    {
       "Original": "Copy tracker instance id to clipboard.",
       "Context": "OccultWindow.TabTracker",
       "Role": "UI",
@@ -81,6 +89,14 @@
       "Source": "library"
     },
     {
+      "Original": "Display the pot FATE timer in the server info bar. Click the timer to place a flag on the map.",
+      "Context": "MainWindow.TabPot",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在服务器信息栏显示魔壶危命任务的计时器。点击可在地图上标记。",
+      "Source": "library"
+    },
+    {
       "Original": "Drops",
       "Context": "OccultWindow.TabTracker",
       "PreserveID": true,
@@ -103,6 +119,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "危命任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "For more detailed loot tracking take a look at the plugin TrackyTack~",
+      "Context": "MainWindow.TabStats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "更详细的掉落追踪请参阅 TrackyTack 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Forked Tower is already active.",
+      "Context": "OccultWindow.TabTower",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "二岔塔已经开启。",
       "Source": "library"
     },
     {
@@ -736,6 +768,13 @@
       "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
       "Key": "TrackerSearch",
       "Translated": "正在查找活跃的追踪器…",
+      "Source": "library"
+    },
+    {
+      "Original": "Awaiting next fate before searching again ...",
+      "Container": "EurekaTrackerAutoPopper.Resources.Language.resources",
+      "Key": "TrackerSearchAgain",
+      "Translated": "正在等待下一次危命任务，此后再重新搜索……",
       "Source": "library"
     },
     {

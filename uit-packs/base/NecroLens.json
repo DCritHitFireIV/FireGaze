@@ -44,6 +44,13 @@
       "Source": "library"
     },
     {
+      "Original": "Automatically opens chest for you once you're in interaction range.\r\nThe plugin only tries to open a chest one time!",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_ChestsTab_OpenChests_Details",
+      "Translated": "进入交互范围后自动开箱。\r\n每个宝箱只尝试一次！",
+      "Source": "library"
+    },
+    {
       "Original": "EXPERIMENTAL",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "ConfigWindow_ChestsTab_OpenChests_EXPERIMENTAL",
@@ -163,6 +170,13 @@
       "Source": "library"
     },
     {
+      "Original": "Draw sight-, proximity- and sound-range.\r\nSound Mobs will also have hit box.",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_ESPTab_ShowAggroRange_Details",
+      "Translated": "显示视觉、距离和听觉感知范围。\r\n对声音有反应的敌人还会显示判定圈。",
+      "Source": "library"
+    },
+    {
       "Original": "Proximity and Sight",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "ConfigWindow_ESPTab_ShowAggroRange_Proximity_and_Sight",
@@ -226,10 +240,24 @@
       "Source": "library"
     },
     {
+      "Original": "Show the ID for elements. \r\nPlease turn this on before you submit a bug report. \r\nIt helps me to identify problems faster.",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_ExtrasTab_ShowDebugInformation_Details",
+      "Translated": "显示元素的 ID。\r\n提交故障报告前请打开此项，\r\n以便更快定位问题。",
+      "Source": "library"
+    },
+    {
       "Original": "Automatically open in DeepDungeon",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "ConfigWindow_GeneralTab_AutomaticallyOpen",
       "Translated": "进入深层迷宫时自动打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Main window when you enter a DeepDungeon.\r\nIt shows some handy information and quick access to Settings.",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_GeneralTab_AutomaticallyOpen_Details",
+      "Translated": "进入深层迷宫时打开主窗口。\r\n可在此查看相关信息并快速打开设置。",
       "Source": "library"
     },
     {
@@ -240,10 +268,24 @@
       "Source": "library"
     },
     {
+      "Original": "Draws the ESP overlay showing the positions of Chests, Mobs and all aggro ranges.\r\nYou can configure everything you want to see under ESP Settings.\r\nImportant: The ESP can only show objects in the games render distance.\r\nThis is fixed and CAN NOT be changed!",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_GeneralTab_EnableOverlay_Details",
+      "Translated": "叠加显示宝箱、怪物位置及敌人的感知范围。\r\n可在叠加显示设置中选择要显示的内容。\r\n注意：只能显示游戏渲染距离以内的对象。\r\n这个距离固定，无法修改！",
+      "Source": "library"
+    },
+    {
       "Original": "Enable OpenChests",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "ConfigWindow_GeneralTab_OpenChests",
       "Translated": "启用开箱功能",
+      "Source": "library"
+    },
+    {
+      "Original": "EXPERIMENTAL FEATURE\r\nAutomatically opens chest for you once you're in interaction range.\r\nBy default it will NOT open chests which can be Mimics this set!\r\n\r\nThis feature can cause your character being stuck next to a chest!\r\nIf this happens disable this feature.",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "ConfigWindow_GeneralTab_OpenChests_Details",
+      "Translated": "实验性功能\r\n进入交互范围后自动开箱。\r\n默认会跳过本组楼层中可能出现宝箱怪的宝箱！\r\n\r\n此功能可能导致角色卡在宝箱旁。\r\n如果发生，请关闭此功能。",
       "Source": "library"
     },
     {
@@ -331,6 +373,41 @@
       "Source": "library"
     },
     {
+      "Original": "Affluence",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_CurrentFloorEffects_Affluence",
+      "Translated": "宝箱增加",
+      "Source": "library"
+    },
+    {
+      "Original": "Alteration",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_CurrentFloorEffects_Alteration",
+      "Translated": "改变敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Flight",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_CurrentFloorEffects_Flight",
+      "Translated": "减少敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Fortune",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_CurrentFloorEffects_Fortune",
+      "Translated": "运气上升",
+      "Source": "library"
+    },
+    {
+      "Original": "Safety",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_CurrentFloorEffects_Safety",
+      "Translated": "咒印解除",
+      "Source": "library"
+    },
+    {
       "Original": "Sight",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "MainWindow_CurrentFloorEffects_Sight",
@@ -363,6 +440,13 @@
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "MainWindow_OpenChestButton_Help",
       "Translated": "尝试打开距你最近的宝箱。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Open Chests respecting your settings.\r\n\r\nIMPORTANT:\r\nIf you're stuck near a chest and cant move anymore disable this option!",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "MainWindow_OpenChests_Help",
+      "Translated": "按照当前设置启用或停用自动开箱。\r\n\r\n重要：\r\n如果角色卡在宝箱旁且无法移动，请关闭此选项！",
       "Source": "library"
     },
     {
@@ -450,10 +534,59 @@
       "Source": "library"
     },
     {
+      "Original": "Enfeebling Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Enfeebling_Trap",
+      "Translated": "弱化陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Fae Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Fae_Trap",
+      "Translated": "妖灵陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Impeding Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Impeding_Trap",
+      "Translated": "妨碍陷阱",
+      "Source": "library"
+    },
+    {
       "Original": "Landmine",
       "Container": "NecroLens.Data.Strings.resources",
       "Key": "Traps_Landmine",
       "Translated": "地雷",
+      "Source": "library"
+    },
+    {
+      "Original": "Luring Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Luring_Trap",
+      "Translated": "诱饵陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Odder Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Odder_Trap",
+      "Translated": "獭獭陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Owlet Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Owlet_Trap",
+      "Translated": "猫头小鹰陷阱",
+      "Source": "library"
+    },
+    {
+      "Original": "Toad Trap",
+      "Container": "NecroLens.Data.Strings.resources",
+      "Key": "Traps_Toad_Trap",
+      "Translated": "蛙变陷阱",
       "Source": "library"
     },
     {

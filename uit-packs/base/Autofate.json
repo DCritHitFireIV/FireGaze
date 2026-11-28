@@ -2166,6 +2166,15 @@
       "Source": "library"
     },
     {
+      "Original": "Autofate###AutofateMain",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "危命任务助手",
+      "Source": "library"
+    },
+    {
       "Original": "Follow (no stance)",
       "Context": "MainWindow..cctor",
       "PreserveID": false,
@@ -2175,12 +2184,102 @@
       "Source": "library"
     },
     {
+      "Original": "Defender",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "防守方",
+      "Source": "library"
+    },
+    {
+      "Original": "Attacker",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "进攻方",
+      "Source": "library"
+    },
+    {
       "Original": "Healer",
       "Context": "MainWindow..cctor",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EnumCombo",
       "Translated": "治疗职业",
+      "Source": "library"
+    },
+    {
+      "Original": "BossMod / BMR (autorotation)",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "BossMod / BMR（自动技能循环）",
+      "Source": "library"
+    },
+    {
+      "Original": "Leveling (current class)",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "练级（当前职业）",
+      "Source": "library"
+    },
+    {
+      "Original": "Single Zone",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "单一区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared FATEs (ShB/EW/DT)",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "双色宝石危命任务（暗影之逆焰／晓月之终途／金曦之遗辉）",
+      "Source": "library"
+    },
+    {
+      "Original": "Atma (ARR Zodiac)",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "魂晶（重生之境黄道武器）",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual selection",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "手动选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Self repair (Dark Matter)",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "自行修理（暗物质）",
+      "Source": "library"
+    },
+    {
+      "Original": "Mender NPC",
+      "Context": "MainWindow..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "修理工 NPC",
       "Source": "library"
     },
     {

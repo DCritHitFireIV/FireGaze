@@ -125,6 +125,78 @@
       "Source": "library"
     },
     {
+      "Original": "Correction Factor: %.3f",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "校正系数：%.3f",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple Progress Setter",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "简易进度设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Main timeline: id ",
+      "Context": "DebugWindow.DumpTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "主时间轴编号 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", stance ",
+      "Context": "DebugWindow.DumpTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "，姿态 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", slot ",
+      "Context": "DebugWindow.DumpTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "，槽位 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation Progress: ",
+      "Context": "DebugWindow.DumpTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "动画进度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Create or edit a portrait to get started.",
+      "Context": "MainWindow.Unopened",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "创建或编辑一张肖像即可开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "Portrait List",
+      "Context": "MainWindow.Unopened",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "肖像列表",
+      "Source": "library"
+    },
+    {
       "Original": "Adventurer Plate",
       "Context": "MainWindow.Unopened",
       "PreserveID": true,
@@ -161,12 +233,147 @@
       "Source": "library"
     },
     {
+      "Original": "Okay",
+      "Context": "ImPB.ColorConfirm4",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "确定",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical angle",
+      "Context": "ImPB.Direction",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "垂直角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal angle",
+      "Context": "ImPB.Direction",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "水平角度",
+      "Source": "library"
+    },
+    {
       "Original": "Reset Rotation",
       "Context": "CameraPanel.ResetRotationButton",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重置旋转角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Face Character",
+      "Context": "CameraPanel.FaceCharacterButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "面向角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Track Motion",
+      "Context": "CameraPanel.TrackMotionCheckbox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "追踪动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Continuously adjust the camera as the character moves\nUseful for PVP limit breaks and other poses with extreme movement.",
+      "Context": "CameraPanel.TrackMotionCheckbox",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "相机随角色移动持续调整。\n适用于 PvP 极限技等动作幅度较大的姿势。",
+      "Source": "library"
+    },
+    {
+      "Original": "FoV Adjust",
+      "Context": "CameraPanel.FoVCompensationCheckbox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "调整视野",
+      "Source": "library"
+    },
+    {
+      "Original": "Move the camera closer or father when changing the lens's field of view,\nattempting to keep the same portion of the image in-frame. Effect is more\nprecise if the camera is exactly facing the character first.",
+      "Context": "CameraPanel.FoVCompensationCheckbox",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "改变镜头视野时，会同时拉近或拉远相机，\n尽量维持原有构图。先将镜头正对角色，\n调整更准确。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation: %d°",
+      "Context": "CameraPanel.ImageRotationSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "旋转：%d°",
+      "Source": "library"
+    },
+    {
+      "Original": "Image rotation",
+      "Context": "CameraPanel.ImageRotationSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "图像旋转",
+      "Source": "library"
+    },
+    {
+      "Original": "Height: %.1f",
+      "Context": "CameraPanel.PivotHeightSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "高度：%.1f",
+      "Source": "library"
+    },
+    {
+      "Original": "Pivot height",
+      "Context": "CameraPanel.PivotHeightSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "旋转中心高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Pitch: %+.0f°",
+      "Context": "CameraPanel.CameraPitchSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "俯仰：%+.0f°",
+      "Source": "library"
+    },
+    {
+      "Original": "Lens: %.0fmm",
+      "Context": "CameraPanel.CameraZoomSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "镜头：%.0fmm",
+      "Source": "library"
+    },
+    {
+      "Original": "Focal length (zoom)",
+      "Context": "CameraPanel.CameraZoomSlider",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "焦距（缩放）",
       "Source": "library"
     }
   ],

@@ -8,6 +8,15 @@
   },
   "entries": [
     {
+      "Original": "No active picker target.",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前没有可拾取的目标。",
+      "Source": "library"
+    },
+    {
       "Original": "Close",
       "Context": "ActionTimelinePickerWindow.Draw",
       "PreserveID": true,
@@ -44,6 +53,15 @@
       "Source": "library"
     },
     {
+      "Original": "(unnamed)",
+      "Context": "ActionTimelinePickerWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（未命名）",
+      "Source": "library"
+    },
+    {
       "Original": "yes",
       "Context": "ActionTimelinePickerWindow.Draw",
       "PreserveID": false,
@@ -62,12 +80,75 @@
       "Source": "library"
     },
     {
+      "Original": "Reload Config",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载配置",
+      "Source": "library"
+    },
+    {
       "Original": "Save Config",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "保存配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh IPC",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "刷新 IPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Actors",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "场景角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Scene Objects",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "本地场景物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Lights",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "本地光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Scene Editor",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "场景编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Native Scene Edits",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "原生场景改动",
       "Source": "library"
     },
     {
@@ -80,12 +161,30 @@
       "Source": "library"
     },
     {
+      "Original": "Interface Language",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "界面语言",
+      "Source": "library"
+    },
+    {
       "Original": "English",
       "Context": "MainWindow.DrawSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plugin windows in GPose",
+      "Context": "MainWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式中显示插件窗口",
       "Source": "library"
     },
     {
@@ -392,6 +491,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "还原 MDL 模型路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Point Light",
+      "Context": "MainWindow.DrawLocalLights",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建点光源",
       "Source": "library"
     },
     {

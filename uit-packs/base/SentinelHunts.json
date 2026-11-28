@@ -49,6 +49,14 @@
       "Source": "library"
     },
     {
+      "Original": "Active hunt disappeared before teleport",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "传送前，当前的狩猎目标已消失",
+      "Source": "library"
+    },
+    {
       "Original": "Active hunt skipped by user",
       "Context": "[SentinelHunts] HuntCoordinator.SkipCurrent",
       "Role": "UI",
@@ -65,11 +73,27 @@
       "Source": "library"
     },
     {
+      "Original": "Arrived at the Ul'dah waiting hub",
+      "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已抵达乌尔达哈的等候点",
+      "Source": "library"
+    },
+    {
       "Original": "Automation stopped; reports continue to queue",
       "Context": "[SentinelHunts] HuntCoordinator.StopAutomation",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "自动操作已停止，仍将继续接收报告",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking a protected route to the parking point",
+      "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在检查前往停留点的路线是否保持安全距离",
       "Source": "library"
     },
     {
@@ -117,6 +141,14 @@
       "Source": "library"
     },
     {
+      "Original": "Following a route that respects the protected hitbox radius",
+      "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正沿与目标判定圈保持安全距离的路线移动",
+      "Source": "library"
+    },
+    {
       "Original": "Heavensward",
       "Context": "[SentinelHunts] Plugin.DrawUi",
       "PreserveID": true,
@@ -143,11 +175,35 @@
       "Source": "library"
     },
     {
+      "Original": "Incidental aggro cleared; resuming the interrupted hunt state",
+      "Context": "[SentinelHunts] HuntCoordinator.TickClearAggro",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已摆脱意外引来的敌人，正在恢复狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Sonar message could not be parsed",
+      "Context": "[SentinelHunts] SonarSource.OnChatMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法解析 Sonar 的上一条消息",
+      "Source": "library"
+    },
+    {
       "Original": "Last event: ",
       "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "上次事件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Lost the S rank before Tomahawk; reacquiring without attacking",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用飞斧前丢失了 S 级恶名精英，正在重新寻找，期间不发动攻击",
       "Source": "library"
     },
     {
@@ -164,6 +220,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "默认关闭。观察模式仍会接收、筛选、合并重复报告并显示结果，角色由你自行控制。",
+      "Source": "library"
+    },
+    {
+      "Original": "One Tomahawk was accepted; retreating immediately",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已成功使用一次飞斧，立即撤离",
       "Source": "library"
     },
     {
@@ -199,12 +263,36 @@
       "Source": "library"
     },
     {
+      "Original": "Remounting to finish the reported-area scan",
+      "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在重新骑乘坐骑，继续搜索报告区域",
+      "Source": "library"
+    },
+    {
       "Original": "Retry current",
       "Context": "[SentinelHunts] Plugin.DrawUi",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重试当前狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "Retrying the active hunt from the current territory",
+      "Context": "[SentinelHunts] HuntCoordinator.RetryCurrent",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在当前区域重新尝试本次狩猎",
+      "Source": "library"
+    },
+    {
+      "Original": "S rank positively identified before reaching the report point",
+      "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已在抵达报告位置前确认 S 级恶名精英",
       "Source": "library"
     },
     {
@@ -285,11 +373,43 @@
       "Source": "library"
     },
     {
+      "Original": "Tag complete; waiting for positive S-rank death confirmation",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTaggedWait",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已命中目标，正在等待确认 S 级恶名精英死亡",
+      "Source": "library"
+    },
+    {
       "Original": "Territory and instance verified",
       "Context": "[SentinelHunts] HuntCoordinator.TickChangeInstance",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "已确认区域与副本分区",
+      "Source": "library"
+    },
+    {
+      "Original": "The S rank is not currently visible; reacquiring it",
+      "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前看不到 S 级恶名精英，正在重新寻找",
+      "Source": "library"
+    },
+    {
+      "Original": "The active S rank died before the tag attempt",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "本次追踪的 S 级恶名精英已在尝试命中前死亡",
+      "Source": "library"
+    },
+    {
+      "Original": "The active hunt no longer resolves in the catalog",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "狩猎名录中已查不到当前目标",
       "Source": "library"
     },
     {
@@ -299,6 +419,30 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderFloat",
       "Translated": "飞斧触发体力阈值",
+      "Source": "library"
+    },
+    {
+      "Original": "Tomahawk accepted; retreating to protected clearance",
+      "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已成功使用飞斧，正撤回安全距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Ul'dah ready for World Visit",
+      "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可在乌尔达哈进行跨界传送",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting at Ul'dah",
+      "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在乌尔达哈等候",
       "Source": "library"
     },
     {
@@ -331,6 +475,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "正在等待玩家登录",
+      "Source": "library"
+    },
+    {
+      "Original": "World Visit requires the Ul'dah hub",
+      "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "需要前往乌尔达哈的以太之光进行跨界传送",
       "Source": "library"
     },
     {

@@ -53,6 +53,15 @@
       "Source": "library"
     },
     {
+      "Original": "Group letters with && (AND), || (OR), ! (NOT) and ( )\nOnly saved while the expression is valid",
+      "Context": "ConditionExpressionUi.DrawTextMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "用 &&（与）、||（或）、!（非）和括号组合各组的字母\n仅在表达式有效时保存",
+      "Source": "library"
+    },
+    {
       "Original": "Empty - groups combined with AND/OR",
       "Context": "ConditionExpressionUi.DrawFrame",
       "PreserveID": false,
@@ -68,6 +77,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
       "Translated": "\n无效，将改用 ",
+      "Source": "library"
+    },
+    {
+      "Original": " of groups",
+      "Context": "ConditionExpressionUi.DrawFrame",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": " 组中",
       "Source": "library"
     },
     {
@@ -206,6 +224,60 @@
       "Source": "library"
     },
     {
+      "Original": " must be true",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": " 必须成立",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently false",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "当前为假",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently true",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "当前为真",
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete: ",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "不完整： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Group disabled",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "此组已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete condition",
+      "Context": "ConditionUi.DrawChipRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "删除条件",
+      "Source": "library"
+    },
+    {
       "Original": "Disable",
       "Context": "ConditionUi.DrawChipRow",
       "PreserveID": true,
@@ -242,12 +314,183 @@
       "Source": "library"
     },
     {
+      "Original": "Show editor",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "显示编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide editor",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "隐藏编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Export/import conditions & expression (Base64)",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "导出／导入条件与表达式（Base64）",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions / Expression Export",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "导出条件／表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Export conditions",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Export expression",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Import conditions",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Import expression",
+      "Context": "ConditionUi.DrawSetHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Evaluate: NOT - condition must be false",
+      "Context": "ConditionUi.DrawInverseToggle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "求值：非，条件必须为假",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading fish data...",
+      "Context": "FishDataWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在加载鱼类数据……",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load fish data: ",
+      "Context": "FishDataWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无法加载鱼类数据： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a fish.",
+      "Context": "FishDataWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请选择鱼。",
+      "Source": "library"
+    },
+    {
+      "Original": "No fishing spot data for this fish.",
+      "Context": "FishDataWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "这条鱼没有钓场数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "No spots",
+      "Context": "FishDataWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "无钓场",
+      "Source": "library"
+    },
+    {
+      "Original": "Both",
+      "Context": "FishDataWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "两者",
+      "Source": "library"
+    },
+    {
+      "Original": "All spots: ",
+      "Context": "FishDataWindow.SourceTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "全部钓场： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nThis spot: ",
+      "Context": "FishDataWindow.SourceTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n此钓场： ",
+      "Source": "library"
+    },
+    {
       "Original": "Window",
       "Context": "FishDataWindow.DrawIntuitionChain",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Catch path",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "垂钓路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Tug / hook",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "咬钩力度／提钩方式",
       "Source": "library"
     },
     {
@@ -260,12 +503,255 @@
       "Source": "library"
     },
     {
+      "Original": "Click to show this fish",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "点击查看这条鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Include casts where nothing was caught",
+      "Context": "FishDataWindow.DrawMatrix",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "包括一无所获的抛竿记录",
+      "Source": "library"
+    },
+    {
+      "Original": "No catches recorded for this filter.",
+      "Context": "FishDataWindow.DrawMatrix",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前筛选条件下没有渔获记录。",
+      "Source": "library"
+    },
+    {
+      "Original": " casts",
+      "Context": "FishDataWindow.DrawMatrix",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": " 次抛竿",
+      "Source": "library"
+    },
+    {
+      "Original": " (few samples)",
+      "Context": "FishDataWindow.DrawMatrix",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": " （样本较少）",
+      "Source": "library"
+    },
+    {
+      "Original": "\nClick to show bite times",
+      "Context": "FishDataWindow.DrawMatrix",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "\n点击查看咬钩耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "No bait selected",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未选择钓饵",
+      "Source": "library"
+    },
+    {
+      "Original": "Teamcraft doesn't record Chum. Use GB records or Both.",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "Teamcraft 不记录撒饵。请选择 GB 记录或同时使用两者。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bite times while Chum is active (from your records)",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "撒饵生效期间的咬钩耗时（来自自己的记录）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide < %.0f%%",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "隐藏低于 %.0f%% 的项",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide fish this bait rarely catches",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "隐藏此饵很少钓到的鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "No bite times recorded for this bait.",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此钓饵没有咬钩耗时记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "No chum bite times recorded for this bait.",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "此钓饵没有撒饵时的咬钩耗时记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "no bite data",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "没有咬钩数据",
+      "Source": "library"
+    },
+    {
+      "Original": "% of catches",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "占渔获的百分比",
+      "Source": "library"
+    },
+    {
+      "Original": " bites",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 次咬钩",
+      "Source": "library"
+    },
+    {
+      "Original": " with Chum",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " （撒饵）",
+      "Source": "library"
+    },
+    {
       "Original": "Range: ",
       "Context": "FishDataWindow.DrawBiteRow",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "范围： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Median: ",
+      "Context": "FishDataWindow.DrawBiteRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "中位数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing caught",
+      "Context": "FishDataWindow.DrawItemIcon",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "无渔获",
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental — leave feedback on Discord.",
+      "Context": "PresetCreator.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "实验功能，欢迎在 Discord 反馈。",
+      "Source": "library"
+    },
+    {
+      "Original": "FishSolver data not loaded.",
+      "Context": "PresetCreator.DrawAutoV2Section",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未加载 FishSolver 数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "No plan for this fish.",
+      "Context": "PresetCreator.DrawAutoV2Section",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "这条鱼没有可用方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Arrive early: ",
+      "Context": "PresetCreator.DrawAutoV2Section",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "提前抵达： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Prep steps",
+      "Context": "PresetCreator.DrawAutoV2Section",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "准备步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate Auto V2",
+      "Context": "PresetCreator.DrawAutoV2Section",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "生成 Auto V2",
+      "Source": "library"
+    },
+    {
+      "Original": "Legacy generator",
+      "Context": "PresetCreator.DrawAutoV1Section",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "旧版生成器",
+      "Source": "library"
+    },
+    {
+      "Original": "Mooch: ",
+      "Context": "PresetCreator.DrawAutoV1Section",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "以小钓大： ",
       "Source": "library"
     },
     {
@@ -278,12 +764,147 @@
       "Source": "library"
     },
     {
+      "Original": "Condition Evals",
+      "Context": "ReplayDetailsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "条件求值",
+      "Source": "library"
+    },
+    {
+      "Original": "Back 1 step",
+      "Context": "ReplayDetailsWindow.DrawControlRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "后退一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Forward 1 step",
+      "Context": "ReplayDetailsWindow.DrawControlRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "前进一步",
+      "Source": "library"
+    },
+    {
+      "Original": "(empty replay)",
+      "Context": "ReplayDetailsWindow.DrawTimelineRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（空回放）",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrub timeline",
+      "Context": "ReplayDetailsWindow.DrawTimelineRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "拖动时间轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Bands: ",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "时间带： ",
+      "Source": "library"
+    },
+    {
+      "Original": "■ intuition",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "■ 捕鱼人之识",
+      "Source": "library"
+    },
+    {
+      "Original": "■ spectral",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "■ 幻海流",
+      "Source": "library"
+    },
+    {
       "Original": "Markers: ",
       "Context": "ReplayDetailsWindow.DrawTimelineLegend",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "标记： ",
+      "Source": "library"
+    },
+    {
+      "Original": "● session",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "● 垂钓时段",
+      "Source": "library"
+    },
+    {
+      "Original": "● bite",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 咬钩",
+      "Source": "library"
+    },
+    {
+      "Original": "● catch",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 渔获",
+      "Source": "library"
+    },
+    {
+      "Original": "● bait",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 钓饵",
+      "Source": "library"
+    },
+    {
+      "Original": "● action",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 技能",
+      "Source": "library"
+    },
+    {
+      "Original": "● preset",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 预设",
+      "Source": "library"
+    },
+    {
+      "Original": "● decision",
+      "Context": "ReplayDetailsWindow.DrawTimelineLegend",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "● 决策",
       "Source": "library"
     },
     {
@@ -314,6 +935,60 @@
       "Source": "library"
     },
     {
+      "Original": "Import replay preset",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入回放预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported preset from replay.",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已从回放导入预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to import preset.",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "导入预设失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "(no preset snapshot)",
+      "Context": "ReplayDetailsWindow.DrawSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（无预设快照）",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing happened within 5s of scrub position",
+      "Context": "ReplayDetailsWindow.DrawDecisions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "时间轴当前位置前后 5 秒内没有事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Context",
+      "Context": "ReplayDetailsWindow.DrawDecisions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "上下文",
+      "Source": "library"
+    },
+    {
       "Original": "Detail",
       "Context": "ReplayDetailsWindow.DrawDecisions",
       "PreserveID": true,
@@ -341,6 +1016,24 @@
       "Source": "library"
     },
     {
+      "Original": "Open replay folder",
+      "Context": "ReplayManagementWindow.DrawRecordingRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开回放文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Last file: ",
+      "Context": "ReplayManagementWindow.DrawRecordingRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "最近文件： ",
+      "Source": "library"
+    },
+    {
       "Original": "Open file",
       "Context": "ReplayManagementWindow.DrawNewEntry",
       "PreserveID": false,
@@ -356,6 +1049,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "打开",
+      "Source": "library"
+    },
+    {
+      "Original": "unload",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "卸载",
+      "Source": "library"
+    },
+    {
+      "Original": "(failed)",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（失败）",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions...",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "操作……",
       "Source": "library"
     },
     {
@@ -377,6 +1097,15 @@
       "Source": "library"
     },
     {
+      "Original": "Unload",
+      "Context": "ReplayManagementWindow.DrawEntries",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "卸载",
+      "Source": "library"
+    },
+    {
       "Original": "Unselect all",
       "Context": "ReplayManagementWindow.DrawEntriesOperations",
       "PreserveID": true,
@@ -392,6 +1121,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Show selected",
+      "Context": "ReplayManagementWindow.DrawEntriesOperations",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示已选项",
       "Source": "library"
     },
     {
@@ -413,6 +1151,42 @@
       "Source": "library"
     },
     {
+      "Original": "Hook success: ",
+      "Context": "DrawBody",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "提钩成功率： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a condition to get started",
+      "Context": "SubTabConditions.DrawConditionsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "添加一个条件即可开始配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto ocean fishing in Settings to use this.",
+      "Context": "SubTabExtra.DrawAutoOceanFish",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "请在设置中启用自动出海垂钓以使用此功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Data",
+      "Context": "SubTabFish.DrawFishDataButton",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "鱼类数据",
+      "Source": "library"
+    },
+    {
       "Original": "Fish caught: ",
       "Context": "DrawFishTab",
       "PreserveID": false,
@@ -422,12 +1196,39 @@
       "Source": "library"
     },
     {
+      "Original": "Spearfishing Presets",
+      "Context": "TabAutoGig.get_TabName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "刺鱼预设",
+      "Source": "library"
+    },
+    {
+      "Original": "No new presets to import.",
+      "Context": "TabCommunity.ImportAllFishingCategory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "没有可导入的新预设。",
+      "Source": "library"
+    },
+    {
       "Original": "Import ",
       "Context": "TabCommunity.DrawHeaderList",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "导入 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Imports this folder and its subfolders",
+      "Context": "TabCommunity.DrawWikiFolderExport",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "导入此文件夹及其子文件夹",
       "Source": "library"
     },
     {
@@ -521,12 +1322,75 @@
       "Source": "library"
     },
     {
+      "Original": "Invalid import data",
+      "Context": "TabFishingPresets.DrawCombinedImport",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "导入数据无效",
+      "Source": "library"
+    },
+    {
+      "Original": " presets · ",
+      "Context": "TabFishingPresets.DrawCombinedImport",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 个预设 · ",
+      "Source": "library"
+    },
+    {
+      "Original": " subfolders",
+      "Context": "TabFishingPresets.DrawCombinedImport",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 个子文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "No voyages match these filters.",
+      "Context": "TabOceanFishing.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有符合筛选条件的航线。",
+      "Source": "library"
+    },
+    {
       "Original": "Route",
       "Context": "TabOceanFishing.DrawTable",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Objectives",
+      "Context": "TabOceanFishing.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Bonus",
+      "Context": "TabOceanFishing.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "boarding, ",
+      "Context": "TabOceanFishing.DrawTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "登船中， ",
       "Source": "library"
     },
     {
@@ -539,12 +1403,30 @@
       "Source": "library"
     },
     {
+      "Original": "Every fish on this route has been caught",
+      "Context": "TabOceanFishing.DrawCaught",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已钓齐此航线上的所有鱼",
+      "Source": "library"
+    },
+    {
       "Original": "Missing",
       "Context": "TabOceanFishing.DrawCaught",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "缺失",
+      "Source": "library"
+    },
+    {
+      "Original": " (spectral)",
+      "Context": "TabOceanFishing.DrawCaught",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": " （幻海流）",
       "Source": "library"
     },
     {
@@ -575,12 +1457,48 @@
       "Source": "library"
     },
     {
+      "Original": "Reset caught counters",
+      "Context": "AutoGigConfig.DrawExtraTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置渔获计数",
+      "Source": "library"
+    },
+    {
+      "Original": "NotificationMaster not installed. NotificationMaster-specific options below will have no effect",
+      "Context": "NotificationConfig.DrawConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未安装 NotificationMaster。下方仅适用于该插件的选项不会生效。",
+      "Source": "library"
+    },
+    {
       "Original": "Chat message",
       "Context": "DrawConfig",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "聊天消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast message",
+      "Context": "DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "屏幕提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Tray message",
+      "Context": "DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "系统托盘通知",
       "Source": "library"
     },
     {
@@ -593,12 +1511,84 @@
       "Source": "library"
     },
     {
+      "Original": "Max (0 = no cap)",
+      "Context": "ConditionParams.DrawSingleRangeParams",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputDouble",
+      "Translated": "上限（0 表示无限制）",
+      "Source": "library"
+    },
+    {
+      "Original": "select an action",
+      "Context": "ActionCooldownCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择技能",
+      "Source": "library"
+    },
+    {
       "Original": "select an item",
       "Context": "ActionCooldownCD.IncompleteReason",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
       "Translated": "选择物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown (sec)",
+      "Context": "ActionCooldownCD.DrawParams",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "冷却时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Collected",
+      "Context": "CosmicCollectedTotalCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "已收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Score",
+      "Context": "CosmicMissionScoreCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "当前得分",
+      "Source": "library"
+    },
+    {
+      "Original": "select a bait",
+      "Context": "CurrentBaitCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择鱼饵",
+      "Source": "library"
+    },
+    {
+      "Original": "select a fish",
+      "Context": "FishCaughtCounterCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择鱼类",
+      "Source": "library"
+    },
+    {
+      "Original": "Slots",
+      "Context": "FreeInventorySlotsCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "格数",
       "Source": "library"
     },
     {
@@ -611,12 +1601,57 @@
       "Source": "library"
     },
     {
+      "Original": "Points",
+      "Context": "OceanLastFishPointsCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "分数",
+      "Source": "library"
+    },
+    {
+      "Original": "Mission",
+      "Context": "OceanMissionProgressCD.DrawParams",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "任务",
+      "Source": "library"
+    },
+    {
       "Original": "Progress",
       "Context": "OceanMissionProgressCD.DrawParams",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputInt",
       "Translated": "进度",
+      "Source": "library"
+    },
+    {
+      "Original": "select a mission",
+      "Context": "OceanMissionTypeCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Players",
+      "Context": "OceanPlayerCountCD.get_ValueLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "select a route",
+      "Context": "OceanRouteCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择航线",
       "Source": "library"
     },
     {
@@ -638,11 +1673,55 @@
       "Source": "library"
     },
     {
+      "Original": "select a status",
+      "Context": "StatusActiveCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Start (HH:mm)",
+      "Context": "TimeWindowCD.DrawParams",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "开始时间（HH:mm）",
+      "Source": "library"
+    },
+    {
+      "Original": "End (HH:mm)",
+      "Context": "TimeWindowCD.DrawParams",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "结束时间（HH:mm）",
+      "Source": "library"
+    },
+    {
+      "Original": "select a weather",
+      "Context": "WeatherCD.IncompleteReason",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "选择天气",
+      "Source": "library"
+    },
+    {
       "Original": "Delete",
       "Context": "ConditionUi.DrawChipRow",
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.MenuItem",
       "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish",
+      "Context": "FishDataWindow.DrawIntuitionChain",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "鱼类",
       "Source": "library"
     },
     {
@@ -662,6 +1741,22 @@
       "Source": "library"
     },
     {
+      "Original": "Misses",
+      "Context": "FishDataWindow.DrawMatrix",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "未命中",
+      "Source": "library"
+    },
+    {
+      "Original": "Chum",
+      "Context": "FishDataWindow.DrawBiteTimeline",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "撒饵",
+      "Source": "library"
+    },
+    {
       "Original": "Name",
       "Context": "PresetCreator.DrawHeader",
       "Role": "UI",
@@ -675,6 +1770,14 @@
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
       "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "ReplayDetailsWindow.DrawDecisions",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "技能",
       "Source": "library"
     },
     {
@@ -694,15 +1797,115 @@
       "Source": "library"
     },
     {
+      "Original": "Spearfishing",
+      "Context": "TabDebug.DrawWorldState",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.CollapsingHeader",
+      "Translated": "刺鱼",
+      "Source": "library"
+    },
+    {
       "Original": "Status",
       "Context": "TabDebug.DrawFshActionInfo",
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
       "Translated": "状态",
       "Source": "library"
+    },
+    {
+      "Original": "Caught",
+      "Context": "TabOceanFishing.DrawTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "已捕获",
+      "Source": "library"
     }
   ],
   "resources": [
+    {
+      "Original": "Missing Any Fish",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "MissingAnyFish",
+      "Translated": "还有鱼尚未钓到",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Allagan Tools to include items outside your inventory when checking how many you own.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ScripKeepAllaganToolsHelp",
+      "Translated": "使用 Allagan Tools 检查持有数量时，也会统计角色背包以外的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Folder must be empty to delete",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "FolderMostBeEmpty",
+      "Translated": "只有空文件夹才能删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Caught:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Caught_Counter",
+      "Translated": "已钓到：",
+      "Source": "library"
+    },
+    {
+      "Original": "If disabled, mooching opportunity will be lost",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "IdenticalCast_HelpText",
+      "Translated": "禁用后将失去以小钓大的机会",
+      "Source": "library"
+    },
+    {
+      "Original": "Ending time to allow auto casting",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoCastEndTime",
+      "Translated": "允许自动抛竿的截止时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Doesn't have affect when Chum is active",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DoesntHaveAffectUnderChum",
+      "Translated": "撒饵生效期间，此项无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Set zero (0) to ignore Min. or Max. timers",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "SetZeroToIgnore",
+      "Translated": "设为 0 可忽略最短或最长时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Every fish at this spot is already in the list.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AddAllFishAtSpot_AllAdded",
+      "Translated": "此钓场的鱼已全部在列表中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Fish Caught Counter",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Reset_fish_caught_counter",
+      "Translated": "重置渔获计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Preset name (press Enter to confirm)",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "EnterToConfirm",
+      "Translated": "编辑预设名称（按 Enter 确认）",
+      "Source": "library"
+    },
+    {
+      "Original": "AutoHook Enabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoHook_Enabled",
+      "Translated": "AutoHook 已启用",
+      "Source": "library"
+    },
     {
       "Original": "Support me on Ko-fi",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
@@ -725,6 +1928,83 @@
       "Source": "library"
     },
     {
+      "Original": "Reset Hook/Fish Counter After Swapping Presets",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Reset_counter_after_swapping_presets",
+      "Translated": "切换预设后重置提钩／渔获计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Guides",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Draw_Guides",
+      "Translated": "指南",
+      "Source": "library"
+    },
+    {
+      "Original": "The hitbox its only available for the fish of the Size and Speed selected",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawFishHitboxHelpMarker",
+      "Translated": "仅显示符合所选体型和速度的鱼的判定范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving folder:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "MovingFolder_",
+      "Translated": "正在移动文件夹：",
+      "Source": "library"
+    },
+    {
+      "Original": "A preset with the same name already exists",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetAlreadyExist",
+      "Translated": "已存在同名预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay Settings",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DelaySettings",
+      "Translated": "延迟设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Mooch/Bait Name",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "MoochBaitName",
+      "Translated": "以小钓大的鱼／钓饵名称",
+      "Source": "library"
+    },
+    {
+      "Original": "If time filter is enabled, this is ignored during time window",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoCastOnlyUnderFishEyesHelpText",
+      "Translated": "启用时间筛选时，此项在指定时段内无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Hooked:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Hooked_Counter",
+      "Translated": "已提钩：",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use when the fish is caught",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Only_use_when_the_fish_is_caught",
+      "Translated": "仅在钓到此鱼时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Surface Slap Options",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Surface_Slap_Options",
+      "Translated": "拍击水面选项",
+      "Source": "library"
+    },
+    {
       "Original": "Select an item",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanTrip_SelectItem",
@@ -732,10 +2012,80 @@
       "Source": "library"
     },
     {
+      "Original": "Enable AutoGig",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Enable_AutoGig",
+      "Translated": "启用自动刺鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use when patience is active",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Only_When_Patience_Active",
+      "Translated": "仅在耐心生效时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Chat Logs",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Show_Chat_Logs",
+      "Translated": "显示聊天记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Hooking Timer",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "HookingTimer",
+      "Translated": "提钩计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Only when Catch Everything is enabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "CatchAllNaturesBountyHelpText",
+      "Translated": "仅在开启“全部捕获”时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Mooch Setting",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Mooch_Setting",
+      "Translated": "以小钓大设置",
+      "Source": "library"
+    },
+    {
       "Original": "Preset Name",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "PresetName",
       "Translated": "预设名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Voyages with a party achievement you haven't completed",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "MissingPartyHelpText",
+      "Translated": "含有你尚未完成的小队成就的航线",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop/Quit Fishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "StopQuitFishing",
+      "Translated": "停止／结束垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Catch all is enabled. Below settings will be ignored when spearfishing..",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "CatchAllNotice",
+      "Translated": "已开启“全部捕获”。刺鱼时将忽略下方设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Import this folder and its presets?",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "ImportFolderAndPresets",
+      "Translated": "导入此文件夹及其中的预设？",
       "Source": "library"
     },
     {
@@ -753,10 +2103,66 @@
       "Source": "library"
     },
     {
+      "Original": "Config / Guides",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "TabName_Config_Guides",
+      "Translated": "配置／指南",
+      "Source": "library"
+    },
+    {
       "Original": "Previous",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "Previous",
       "Translated": "上一步",
+      "Source": "library"
+    },
+    {
+      "Original": "Getting to the boat, buying bait and what happens after the voyage.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_VoyagesHelp",
+      "Translated": "前往码头、购买钓饵以及航行结束后的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "(condition missing)",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetConditions_Missing",
+      "Translated": "（缺少条件）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reusable named conditions for this preset. Reference them within any condition set",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetConditions_HelpText",
+      "Translated": "为此预设创建可重复使用的具名条件，并在任意条件组中引用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Eyes will be used and cancel the mooch attempt.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "IgnoreMoochFishEyes",
+      "Translated": "将使用鱼眼并取消此次以小钓大。",
+      "Source": "library"
+    },
+    {
+      "Original": "Surface Slap",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Surface_Slap",
+      "Translated": "拍击水面",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduction complete. Resuming fishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AetherialReduction_Complete",
+      "Translated": "精选完成，继续垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Disabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Plugin_Disabled",
+      "Translated": "插件已禁用",
       "Source": "library"
     },
     {
@@ -767,6 +2173,34 @@
       "Source": "library"
     },
     {
+      "Original": "Auto Actions from the Global Preset are being used instead",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "GlobalActionsBeingUsed",
+      "Translated": "正在使用全局预设的自动技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Selling fish",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_StatusSelling",
+      "Translated": "正在出售渔获",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Imported",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetImported",
+      "Translated": "预设已导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish Hitbox Offset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Fish_Hitbox_Offset",
+      "Translated": "鱼的判定范围偏移",
+      "Source": "library"
+    },
+    {
       "Original": "Import",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "Import",
@@ -774,10 +2208,45 @@
       "Source": "library"
     },
     {
+      "Original": "Any sanctuary",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_AnySanctuary",
+      "Translated": "任意休息区",
+      "Source": "library"
+    },
+    {
+      "Original": "none assigned",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_NoneAssigned",
+      "Translated": "未分配",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra Options",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "ExtraOptions",
+      "Translated": "其他选项",
+      "Source": "library"
+    },
+    {
       "Original": "FC house",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanTrip_HomeFreeCompany",
       "Translated": "部队房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Current Bait/Mooch",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AddCurrentBaitMooch",
+      "Translated": "添加当前钓饵／以小钓大的鱼",
+      "Source": "library"
+    },
+    {
+      "Original": "Patience",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoPatience_Patience",
+      "Translated": "耐心",
       "Source": "library"
     },
     {
@@ -795,10 +2264,157 @@
       "Source": "library"
     },
     {
+      "Original": "Export preset to clipboard.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "ExportPresetToClipboard",
+      "Translated": "将预设导出到剪贴板。",
+      "Source": "library"
+    },
+    {
       "Original": "Apartment",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanTrip_HomeApartment",
       "Translated": "公寓",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Current Status Header",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Show_Current_Status_Header",
+      "Translated": "显示当前状态标题栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Points",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanFishGoal_Points",
+      "Translated": "分数",
+      "Source": "library"
+    },
+    {
+      "Original": "Modest Lure",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "ModestLure",
+      "Translated": "谦逊之饵",
+      "Source": "library"
+    },
+    {
+      "Original": "Start AutoRetainer multi mode",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_StepStartAutoRetainerMulti",
+      "Translated": "启动 AutoRetainer 的多角色模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide overlay during Spearfishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "HideOverlayDuringSpearfishing",
+      "Translated": "刺鱼时隐藏悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions will be used from top to bottom. Click the arrow buttons to reorder.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Auto_Cast_Sort_Notice",
+      "Translated": "技能按从上到下的顺序使用。点击箭头按钮可调整顺序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep {0} scrips",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ScripReserve",
+      "Translated": "保留 {0} 张票据",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw fish hitbox",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawFishHitbox",
+      "Translated": "绘制鱼的判定范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay before canceling the fishing attempt (in ms)",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DelayBeforeCancel",
+      "Translated": "放弃本次垂钓前的延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Mooch II",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Use_Mooch_II",
+      "Translated": "使用以小钓大 II",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click for options",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "RightClickOptions",
+      "Translated": "右键点击查看选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Availability",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Availability",
+      "Translated": "可用情况",
+      "Source": "library"
+    },
+    {
+      "Original": "Intuition",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Intuition",
+      "Translated": "捕鱼人之识",
+      "Source": "library"
+    },
+    {
+      "Original": "Type 2",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Type_2",
+      "Translated": "类型 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Type 1",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Type_1",
+      "Translated": "类型 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Cast Line",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoCastLine_Auto_Cast_Line",
+      "Translated": "自动抛竿",
+      "Source": "library"
+    },
+    {
+      "Original": "Unassign",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_Unassign",
+      "Translated": "取消分配",
+      "Source": "library"
+    },
+    {
+      "Original": "Only use when Surface Slap is active",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OnlyUseWhenActiveSurfaceSlap",
+      "Translated": "仅在拍击水面生效时使用",
+      "Source": "library"
+    },
+    {
+      "Original": "If theres no Hi-Cordials, Cordials will be used instead",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoCastUseCordialHelpMarker",
+      "Translated": "没有高级强心剂时改用强心剂",
+      "Source": "library"
+    },
+    {
+      "Original": "Use with ocean fishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "UseWithOceanFishing",
+      "Translated": "出海垂钓时使用",
       "Source": "library"
     },
     {
@@ -809,6 +2425,20 @@
       "Source": "library"
     },
     {
+      "Original": "Auto Ocean Fish",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoOceanFish",
+      "Translated": "自动漫游垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto move",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoOceanFish_AllowMovement",
+      "Translated": "自动移动",
+      "Source": "library"
+    },
+    {
       "Original": "Achievements",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanFishGoal_Achievements",
@@ -816,10 +2446,73 @@
       "Source": "library"
     },
     {
+      "Original": "Add New Preset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AddNewPreset",
+      "Translated": "添加新预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Presets",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "TabNameCustomPresets",
+      "Translated": "自定义预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Show messages like \"Preset Swapped\" in chat",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Show_Chat_Logs_HelpText",
+      "Translated": "在聊天栏中显示「已切换预设」等消息",
+      "Source": "library"
+    },
+    {
       "Original": "Timeout",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "Timeout",
       "Translated": "超时",
+      "Source": "library"
+    },
+    {
+      "Original": "Boat alarms",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_BoatAlarms",
+      "Translated": "开船提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipping bite - No hook for this bite is enabled",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Status_NoHookEnabled",
+      "Translated": "跳过咬钩：未启用此种咬钩力度对应的提钩方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Swap Bait",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Swap_Bait",
+      "Translated": "更换钓饵",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing Presets",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "FishingPresets",
+      "Translated": "垂钓预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't fish here",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "CantFishHere",
+      "Translated": "这里无法垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "When a spectral current becomes inactive...",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "When_losing_spectral_current",
+      "Translated": "幻海流结束时……",
       "Source": "library"
     },
     {
@@ -837,10 +2530,220 @@
       "Source": "library"
     },
     {
+      "Original": "Only when mooch is not available",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OnlyWhenMoochNotAvailable",
+      "Translated": "仅在无法以小钓大时",
+      "Source": "library"
+    },
+    {
+      "Original": "not enough free inventory slots",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ReasonInventoryFull",
+      "Translated": "背包空位不足",
+      "Source": "library"
+    },
+    {
+      "Original": "Select bait to start fishing with:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "SelectBaitStartFishing",
+      "Translated": "选择开始垂钓时使用的钓饵：",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw gig hitbox",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "DrawGigHitbox",
+      "Translated": "绘制渔叉的判定范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Lure Type:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "LureType",
+      "Translated": "拟饵类型：",
+      "Source": "library"
+    },
+    {
+      "Original": "Spend scrips",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_SpendScrips",
+      "Translated": "消耗票据",
+      "Source": "library"
+    },
+    {
+      "Original": "New condition",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PresetConditions_NewName",
+      "Translated": "新建条件",
+      "Source": "library"
+    },
+    {
+      "Original": "When losing fisher's intuition...",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "When_losing_fishers_intuition",
+      "Translated": "失去捕鱼人之识时……",
+      "Source": "library"
+    },
+    {
+      "Original": "Registered, waiting for departure",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_StatusRegistered",
+      "Translated": "已报名，等待出航",
+      "Source": "library"
+    },
+    {
+      "Original": "Departing for {0}",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_Departing",
+      "Translated": "即将启程前往 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Surface Slap & Identical Cast",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "SurfaceSlapIdenticalCast",
+      "Translated": "拍击水面与专一垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable AutoHook",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Enable_AutoHook",
+      "Translated": "启用 AutoHook",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Extra Configs",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Enable_Extra_Configs",
+      "Translated": "启用额外配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Vital Sight",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "VitalSight",
+      "Translated": "聚精鱼眼",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Triple Hook",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "UseTripleHook",
+      "Translated": "使用三重提钩",
+      "Source": "library"
+    },
+    {
+      "Original": "Let the fish escape if GP is below the required",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "LetTheFishEscape",
+      "Translated": "采集力不足时让鱼逃走",
+      "Source": "library"
+    },
+    {
+      "Original": "This might conflict with Auto Thaliak's Favor",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "TabAutoCasts_DrawMakeShiftBait_HelpText",
+      "Translated": "此项可能与自动使用沙利亚克的恩宠冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable AutoGig",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "EnableAutoGig",
+      "Translated": "启用自动刺鱼",
+      "Source": "library"
+    },
+    {
       "Original": "Conditions",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "Conditions",
       "Translated": "条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Gig Hitbox",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "GigHitbox",
+      "Translated": "渔叉判定范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Spectral Current Settings",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "SpectralCurrentSettings",
+      "Translated": "幻海流设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Use AllaganTools",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "OceanTrip_ScripKeepAllaganTools",
+      "Translated": "使用 AllaganTools",
+      "Source": "library"
+    },
+    {
+      "Original": "Important!!!\n\nIf disabled, the fish will NOT be hooked.",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "EnabledConfigArrowhelpMarker",
+      "Translated": "重要！\n\n禁用后，即使鱼咬钩也不会提钩。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chum Timer",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "ChumTimer",
+      "Translated": "撒饵计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Hook Type",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "HookType",
+      "Translated": "提钩类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple Hook",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Triple_Hook",
+      "Translated": "三重提钩",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate Preset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "GeneratePreset",
+      "Translated": "生成预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Cordial",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Cordial",
+      "Translated": "强心剂",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Last Catch:",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AddLastCatch",
+      "Translated": "添加上次渔获：",
+      "Source": "library"
+    },
+    {
+      "Original": "Retain Hook/Fish Counter Between Sessions",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Retain_counters_between_sessions",
+      "Translated": "在不同垂钓时段之间保留提钩／渔获计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Thaliak's Favor",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Thaliaks_Favor",
+      "Translated": "沙利亚克的恩宠",
       "Source": "library"
     },
     {
@@ -858,10 +2761,31 @@
       "Source": "library"
     },
     {
+      "Original": "Fish Eyes",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Fish_Eyes",
+      "Translated": "鱼眼",
+      "Source": "library"
+    },
+    {
+      "Original": "Baited Breath",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "BaitedBreath",
+      "Translated": "闭气",
+      "Source": "library"
+    },
+    {
       "Original": "Sell to vendor",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanTrip_SellToVendor",
       "Translated": "售予商店",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Light",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AutoCastLight",
+      "Translated": "垂钓之光",
       "Source": "library"
     },
     {
@@ -879,10 +2803,24 @@
       "Source": "library"
     },
     {
+      "Original": "Precision Hookset",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "PrecisionHookset",
+      "Translated": "精准提钩",
+      "Source": "library"
+    },
+    {
       "Original": "Default",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "DefaultSubTab",
       "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Ambitious Lure",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "AmbitiousLure",
+      "Translated": "雄心之饵",
       "Source": "library"
     },
     {
@@ -904,6 +2842,13 @@
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "DrawHeader_GeneralSettings",
       "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Spearfishing",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Spearfishing",
+      "Translated": "刺鱼",
       "Source": "library"
     },
     {
@@ -1068,6 +3013,13 @@
       "Source": "library"
     },
     {
+      "Original": "Use Mooch II",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "UseMoochII",
+      "Translated": "使用以小钓大 II",
+      "Source": "library"
+    },
+    {
       "Original": "Rename Folder",
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "RenameFolder",
@@ -1079,6 +3031,13 @@
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanTrip_Repair",
       "Translated": "修理",
+      "Source": "library"
+    },
+    {
+      "Original": "A preset with the same name already exists",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "APresetWithTheSameNameAlreadyExists",
+      "Translated": "已存在同名预设",
       "Source": "library"
     },
     {
@@ -1114,6 +3073,20 @@
       "Container": "AutoHook.Resources.Localization.UIStrings.resources",
       "Key": "OceanFishing",
       "Translated": "出海垂钓",
+      "Source": "library"
+    },
+    {
+      "Original": "Fish",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Fish",
+      "Translated": "鱼类",
+      "Source": "library"
+    },
+    {
+      "Original": "Chum",
+      "Container": "AutoHook.Resources.Localization.UIStrings.resources",
+      "Key": "Chum",
+      "Translated": "撒饵",
       "Source": "library"
     },
     {

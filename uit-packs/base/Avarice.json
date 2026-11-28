@@ -42,6 +42,56 @@
       "Source": "library"
     },
     {
+      "Original": "A dot at the configured centre of the duty arena. This is per-profile.",
+      "Context": "TabTank.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在副本场地配置的中心点显示标记。各配置方案独立设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "A dot under the boss to help centre the arena. This is per-profile.",
+      "Context": "TabTank.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在首领脚下显示标记，方便与场地中央对齐。各配置方案独立设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "A ring around you showing auto-attack reach.",
+      "Context": "TabSettings.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "用圆圈标出你的自动攻击范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "A small pixel at your feet for the damage hitbox. Default thickness is recommended.",
+      "Context": "TabSettings.DrawPlayer",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在脚下显示一个小点以标示受击判定位置。推荐使用默认粗细。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ability / weaponskill range",
+      "Context": "TabSettings.DrawTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "能力／战技范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Ability/weaponskill Range Size",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "能力／战技范围大小",
+      "Source": "library"
+    },
+    {
       "Original": "About",
       "Context": "ConfigWindow..cctor",
       "PreserveID": true,
@@ -57,6 +107,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Action Not Set",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "尚未设置技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new override:",
+      "Context": "TabTank.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "添加覆盖选项：",
       "Source": "library"
     },
     {
@@ -87,12 +153,37 @@
       "Source": "library"
     },
     {
+      "Original": "Assign profiles to jobs",
+      "Context": "TabProfiles..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiGroup.BeginGroupBox",
+      "Translated": "为各职业分配配置方案",
+      "Source": "library"
+    },
+    {
       "Original": "Auto",
       "Context": "TabTank.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-attack range (2y)",
+      "Context": "TabSettings.DrawTarget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动攻击范围（2 星码）",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically clips rendering around native UI elements.",
+      "Context": ".cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在游戏原生界面周围自动裁切绘制区域。",
       "Source": "library"
     },
     {
@@ -110,6 +201,24 @@
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "Avarice 叠加显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Centred Pixel Colour",
+      "Context": "TabTank.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "中心点颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Change colour in danger zones",
+      "Context": "TabSplatoon.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入危险区域时更改颜色",
       "Source": "library"
     },
     {
@@ -131,11 +240,88 @@
       "Source": "library"
     },
     {
+      "Original": "Clear data (hold Shift+Ctrl)",
+      "Context": "TabStatistics.DrawTotals",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "清除数据（按住 Shift+Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear data (hold shift+ctrl)",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "清除数据（按住 Shift+Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": "Clip around native UI",
+      "Context": ".cctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "避开原生界面绘制",
+      "Source": "library"
+    },
+    {
       "Original": "Color",
       "Context": "TabSettings.DrawTarget",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Text",
       "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour used while you are standing in a Splatoon danger zone.",
+      "Context": "TabSplatoon.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "角色站在 Splatoon 标出的危险区域内时使用的颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour:",
+      "Context": ".cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "颜色：",
+      "Source": "library"
+    },
+    {
+      "Original": "Current encounter",
+      "Context": "TabStatistics..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiGroup.BeginGroupBox",
+      "Translated": "当前战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Current profile:",
+      "Context": "TabProfiles.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "当前配置方案：",
+      "Source": "library"
+    },
+    {
+      "Original": "Danger Pixel Colour",
+      "Context": "TabSplatoon.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "危险提示点颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Danger colour",
+      "Context": "TabSplatoon.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "危险区域颜色",
       "Source": "library"
     },
     {

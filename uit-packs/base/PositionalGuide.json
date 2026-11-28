@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\nWhich guidelines do you want, and in what colours?",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n需要显示哪些辅助线？分别使用什么颜色？",
+      "Source": "library"
+    },
+    {
       "Original": "Action may be any of the following:",
       "Context": "ConfigWindow.Draw",
       "Role": "UI",
@@ -289,6 +297,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "投影到目标所在平面",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown action '",
+      "Context": "Plugin.OnPluginCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知操作“",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown target '",
+      "Context": "Plugin.OnPluginCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未知目标“",
       "Source": "library"
     },
     {

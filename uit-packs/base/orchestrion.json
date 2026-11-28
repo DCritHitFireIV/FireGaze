@@ -17,6 +17,51 @@
       "Source": "library"
     },
     {
+      "Original": "Checked ",
+      "Context": "Util.CheckSongData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已检查 ",
+      "Source": "library"
+    },
+    {
+      "Original": " songs with ",
+      "Context": "Util.CheckSongData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 首乐曲，其中 ",
+      "Source": "library"
+    },
+    {
+      "Original": " errors and ",
+      "Context": "Util.CheckSongData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 项出错，发现 ",
+      "Source": "library"
+    },
+    {
+      "Original": " fallbacks found (lang ",
+      "Context": "Util.CheckSongData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个备用结果（语言 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", version ",
+      "Context": "Util.CheckSongData",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，版本 ",
+      "Source": "library"
+    },
+    {
       "Original": "unknown",
       "Context": "Util.CheckSongData",
       "PreserveID": false,
@@ -50,6 +95,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "常规设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio streaming is disabled. This may be due to Sound Filter or a third-party plugin. The above setting may not work as expected and you may encounter other audio issues such as popping or tracks not swapping channels. This is not related to the Orchestrion Plugin.",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "音频流式播放已停用。这可能是 Sound Filter 或第三方插件所致。",
       "Source": "library"
     },
     {
@@ -134,6 +188,60 @@
       "Source": "library"
     },
     {
+      "Original": "Playlist",
+      "Context": "MainWindow.DrawDeepDungeonModeSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "播放列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Deep Dungeon Mode",
+      "Context": "MainWindow.DrawDeepDungeonModeSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "进入深层迷宫模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Deep Dungeon Mode",
+      "Context": "MainWindow.DrawDeepDungeonModeSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "退出深层迷宫模式",
+      "Source": "library"
+    },
+    {
+      "Original": "streaming enabled: ",
+      "Context": "MainWindow.DrawDebugTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "流式播放已启用： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Audible: ",
+      "Context": "MainWindow.DrawDebugTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可听见： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Inn: ",
+      "Context": "MainWindow.DrawDebugTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "旅馆： ",
+      "Source": "library"
+    },
+    {
       "Original": "No Playlist Selected",
       "Context": "MainWindow.DrawPlaylistSongs",
       "PreserveID": false,
@@ -152,6 +260,24 @@
       "Source": "library"
     },
     {
+      "Original": "playing",
+      "Context": "MainWindow.DrawPlaylistPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "正在播放",
+      "Source": "library"
+    },
+    {
+      "Original": "title",
+      "Context": "MainWindow.DrawPlaylistPane",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "标题",
+      "Source": "library"
+    },
+    {
       "Original": "Click again to confirm deletion",
       "Context": "MainWindow.DrawPlaylistPane",
       "PreserveID": false,
@@ -167,6 +293,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "新建播放列表……",
+      "Source": "library"
+    },
+    {
+      "Original": "will be replaced with",
+      "Context": "MainWindow.DrawReplacementList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将被替换为",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Song",
+      "Context": "MainWindow.DrawCurrentReplacement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "目标乐曲",
       "Source": "library"
     },
     {
@@ -197,12 +341,30 @@
       "Source": "library"
     },
     {
+      "Original": "Title: ",
+      "Context": "BgmTooltip.DrawBgmTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "标题： ",
+      "Source": "library"
+    },
+    {
       "Original": "Alternate Title: ",
       "Context": "BgmTooltip.DrawBgmTooltip",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "其他语言曲名： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Mode Title: ",
+      "Context": "BgmTooltip.DrawBgmTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "特殊模式标题： ",
       "Source": "library"
     },
     {
@@ -233,12 +395,30 @@
       "Source": "library"
     },
     {
+      "Original": "This song is unavailable; the track is not present in the current game files.",
+      "Context": "BgmTooltip.DrawBgmTooltip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法使用此曲目，当前游戏文件中没有对应的音轨。",
+      "Source": "library"
+    },
+    {
       "Original": "File Path: ",
       "Context": "BgmTooltip.DrawBgmTooltip",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "文件路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "From: {0}",
+      "Context": "Player.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "来源：{0}",
       "Source": "library"
     },
     {
@@ -278,12 +458,93 @@
       "Source": "library"
     },
     {
+      "Original": "Shuffle Off: Playing songs in order",
+      "Context": "Player.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "随机播放已关闭：按顺序播放",
+      "Source": "library"
+    },
+    {
+      "Original": "Shuffle On: Playing songs randomly",
+      "Context": "Player.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "随机播放已开启：随机选曲",
+      "Source": "library"
+    },
+    {
       "Original": "time",
       "Context": "RenderableSongList.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Song ID",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Title",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲标题",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Alternate Title",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Special Mode Title",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "特殊模式下的乐曲标题",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Location",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲地点",
+      "Source": "library"
+    },
+    {
+      "Original": "Song Additional Info",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲附加信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Song File Path",
+      "Context": "RenderableSongList.DrawCopyContentSubmenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "乐曲文件路径",
       "Source": "library"
     },
     {

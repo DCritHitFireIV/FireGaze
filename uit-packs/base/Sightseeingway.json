@@ -107,6 +107,51 @@
       "Source": "library"
     },
     {
+      "Original": "Sightseeingway Configuration",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Sightseeingway 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification Settings",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "通知设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show name changes in chat window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏中显示名称变更",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows a message in the chat window when a screenshot is renamed.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "截图重命名时在聊天栏显示提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable this if you don't want to see these notifications.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "如不希望收到这些通知，可关闭此选项。",
+      "Source": "library"
+    },
+    {
       "Original": "Save Settings",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -134,12 +179,93 @@
       "Source": "library"
     },
     {
+      "Original": "Field Selection and Order",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "字段选择与排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Select which fields to include and the order they'll be used.",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择要包含的字段，并指定其排列顺序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires Shadingway ReShade addon to be installed and enabled.",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "需要安装并启用 Shadingway 的 ReShade 附加组件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Status: ",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Detected",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未检测到",
+      "Source": "library"
+    },
+    {
+      "Original": "Detected & Enabled",
+      "Context": "FieldOrderingComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已检测到并启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Example:",
+      "Context": "FilenamePreviewComponent.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "示例：",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading example...",
+      "Context": "FilenamePreviewComponent..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在加载示例…",
+      "Source": "library"
+    },
+    {
       "Original": "Format",
       "Context": "TimestampFormatSelector.Render",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Combo",
       "Translated": "格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Examples:",
+      "Context": "TimestampFormatSelector.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "示例：",
       "Source": "library"
     },
     {
@@ -152,12 +278,65 @@
       "Source": "library"
     },
     {
+      "Original": "Regular: ",
+      "Context": "TimestampFormatSelector.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "常规： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Readable: ",
+      "Context": "TimestampFormatSelector.Render",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "易读： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact (yyyyMMddHHmmssfff)",
+      "Context": "TimestampFormatSelector..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "紧凑（yyyyMMddHHmmssfff）",
+      "Source": "library"
+    },
+    {
+      "Original": "Regular (yyyyMMdd-HHmmss-fff)",
+      "Context": "TimestampFormatSelector..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "常规（yyyyMMdd-HHmmss-fff）",
+      "Source": "library"
+    },
+    {
+      "Original": "Readable (yyyy-MM-dd_HH-mm-ss.fff)",
+      "Context": "TimestampFormatSelector..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "易读（yyyy-MM-dd_HH-mm-ss.fff）",
+      "Source": "library"
+    },
+    {
       "Original": " Error: ",
       "Context": "Logger.Error",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ IChatGui.PrintError",
       "Translated": " 错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Timestamp",
+      "Context": "TimestampFormatSelector.Render",
+      "Role": "UI",
+      "RoleReason": "direct string argument 1 to Dalamud.Bindings.ImGui.ImGui.TextColored",
+      "Translated": "时间戳",
       "Source": "library"
     }
   ],

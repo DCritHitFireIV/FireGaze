@@ -717,6 +717,30 @@
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "更多信息请见“/facade help”。",
       "Source": "library"
+    },
+    {
+      "Original": "  Switching from an override back to 'No override' might not re-apply the original festival.\n  Re-visit the current ward to fix this.",
+      "Context": "ConfigWindow.DrawFestivalFacadeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "  从替换外观切回「沿用原设置」后，原有的节庆外观可能不会立即恢复。\n  重新进入当前住宅区即可。",
+      "Source": "library"
+    },
+    {
+      "Original": "  You can only change the Festival Facade of the current ward.\n  (Click to see the location of other Festival Facades.)",
+      "Context": "ConfigWindow.DrawFestivalFacadeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "  只能更改当前住宅区的节庆外观。\n  （点击可查看其他节庆外观所在的住宅区。）",
+      "Source": "library"
+    },
+    {
+      "Original": "  You can only load presets for the correct plot size.\n  You can export presets if you hold SHIFT.\n  You can delete presets if you hold CTRL.",
+      "Context": "ConfigWindow.DrawPresets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "  只能加载适用于当前地块大小的预设。\n  按住 Shift 可导出预设。\n  按住 Ctrl 可删除预设。",
+      "Source": "library"
     }
   ],
   "resources": [],

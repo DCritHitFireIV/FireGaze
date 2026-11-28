@@ -71,6 +71,15 @@
       "Source": "library"
     },
     {
+      "Original": "Hide Moodles while you are bound by a duty or in PvP.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "进入副本或 PvP 时隐藏 Moodles 状态。",
+      "Source": "library"
+    },
+    {
       "Original": "Disable Moodles whilst in combat",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -113,6 +122,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "自己施加的减益状态",
+      "Source": "library"
+    },
+    {
+      "Original": "You",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "自己",
+      "Source": "library"
+    },
+    {
+      "Original": "Allies",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "友方",
       "Source": "library"
     },
     {
@@ -284,6 +311,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "只显示剩余时间低于此值的状态，设为 0 则显示全部。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggles configuration window\n/npdebuffs toggle → Toggle Nameplate Debuffs\n/npdebuffs enable → Enables Nameplate Debuffs\n/npdebuffs disable → Disables Nameplate Debuffs",
+      "Context": "NamePlateDebuffsPlugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开或关闭设置窗口\n/npdebuffs toggle → 切换姓名牌减益效果\n/npdebuffs enable → 启用姓名牌减益效果\n/npdebuffs disable → 禁用姓名牌减益效果",
       "Source": "library"
     },
     {

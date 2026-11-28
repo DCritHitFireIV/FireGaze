@@ -8,6 +8,30 @@
   },
   "entries": [
     {
+      "Original": "\n   Right-click to open menu.",
+      "Context": "ClipZoneSelector.PostDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "\n   右键打开菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "       Invalid configuration. Your settings will be ignored",
+      "Context": "RenderableZoneSelector.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "       配置无效，将忽略这些设置",
+      "Source": "library"
+    },
+    {
+      "Original": "       Right click to bring context menu.",
+      "Context": "ClipZoneSelector.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "       右键打开快捷菜单。",
+      "Source": "library"
+    },
+    {
       "Original": "   Zone ",
       "Context": "ClipZoneSelector.PostDraw",
       "Role": "UI",
@@ -32,11 +56,35 @@
       "Source": "library"
     },
     {
+      "Original": " degrees clockwise",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 度（顺时针）",
+      "Source": "library"
+    },
+    {
+      "Original": " degrees counter-clockwise",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 度（逆时针）",
+      "Source": "library"
+    },
+    {
       "Original": " elements",
       "Context": "CGui.DrawArchiveEntries",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.TextV",
       "Translated": " 个元素",
+      "Source": "library"
+    },
+    {
+      "Original": "(in seconds)",
+      "Context": "CGui.LayoutDrawElement",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "（秒）",
       "Source": "library"
     },
     {
@@ -46,6 +94,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "- 显示全部 -",
+      "Source": "library"
+    },
+    {
+      "Original": "Accent color override",
+      "Context": "PointerLineStyle.DrawColorEdits",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ColorEdit4",
+      "Translated": "覆盖强调色",
       "Source": "library"
     },
     {
@@ -71,6 +127,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginPopup",
       "Translated": "添加布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Additionally highlight rectangle outline",
+      "Context": "DisplayRenderers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "同时高亮矩形轮廓",
       "Source": "library"
     },
     {
@@ -165,6 +230,15 @@
       "Source": "library"
     },
     {
+      "Original": "Blacklist mode",
+      "Context": "CGui.LayoutDrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "黑名单模式",
+      "Source": "library"
+    },
+    {
       "Original": "Blacklisted",
       "Context": "TabProjection.Draw",
       "Role": "UI",
@@ -237,6 +311,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Close this window",
+      "Context": "Loader.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭此窗口",
       "Source": "library"
     },
     {
@@ -404,6 +487,14 @@
       "Source": "library"
     },
     {
+      "Original": "Default Configuration can not be removed",
+      "Context": "DrawLayoutConfigurations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "无法移除默认配置",
+      "Source": "library"
+    },
+    {
       "Original": "Default:",
       "Context": "InternationalString.ImGuiEdit",
       "PreserveID": true,
@@ -443,6 +534,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable script cache",
+      "Context": "DisplayGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用脚本缓存",
       "Source": "library"
     },
     {
@@ -493,6 +593,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconButtonWithText",
       "Translated": "编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit Roles",
+      "Context": "PriorityList.DrawModeSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "编辑职能",
       "Source": "library"
     },
     {
@@ -782,6 +890,15 @@
       "Source": "library"
     },
     {
+      "Original": "Invert condition",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "反转条件",
+      "Source": "library"
+    },
+    {
       "Original": "Language",
       "Context": "CGui.DisplayGeneralSettings",
       "Role": "UI",
@@ -847,6 +964,15 @@
       "Source": "library"
     },
     {
+      "Original": "Limit by remaining time",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "按剩余时间限制",
+      "Source": "library"
+    },
+    {
       "Original": "List ",
       "Context": "Draw",
       "Role": "UI",
@@ -868,6 +994,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EzTabBar",
       "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Match one attribute",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "匹配任一属性",
       "Source": "library"
     },
     {
@@ -999,6 +1134,14 @@
       "Source": "library"
     },
     {
+      "Original": "Only in combat OR instance",
+      "Context": "Splatoon.Load",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "仅在战斗中或副本内",
+      "Source": "library"
+    },
+    {
       "Original": "Only selected",
       "Context": "ZlockSelector.DrawZlockSelector",
       "PreserveID": true,
@@ -1099,6 +1242,14 @@
       "Source": "library"
     },
     {
+      "Original": "Please name your configuration",
+      "Context": "SplatoonScript.DrawConfigurations",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "请为配置命名",
+      "Source": "library"
+    },
+    {
       "Original": "Preparing",
       "Context": "Draw",
       "Role": "UI",
@@ -1128,6 +1279,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Text",
       "Translated": "脉冲大小： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pulse duration, seconds",
+      "Context": "TabProjection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SliderIntAsFloat",
+      "Translated": "脉冲持续时间（秒）",
       "Source": "library"
     },
     {
@@ -1218,6 +1378,15 @@
       "Source": "library"
     },
     {
+      "Original": "Reset condition",
+      "Context": "CGui.LayoutDrawElement",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重置条件",
+      "Source": "library"
+    },
+    {
       "Original": "Restore",
       "Context": "CGui.DrawArchiveEntries",
       "Role": "UI",
@@ -1284,6 +1453,15 @@
       "Source": "library"
     },
     {
+      "Original": "Select zone ",
+      "Context": "ClipZoneSelector.HandlePopupMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "选择区域 ",
+      "Source": "library"
+    },
+    {
       "Original": "Share:",
       "Context": "CGui.LayoutDrawHeader",
       "Role": "UI",
@@ -1306,6 +1484,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Checkbox",
       "Translated": "来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Splatoon Priority Editor",
+      "Context": "PriorityPopupWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Splatoon 优先级编辑器",
       "Source": "library"
     },
     {
@@ -1416,6 +1603,14 @@
       "Source": "library"
     },
     {
+      "Original": "Unsupported in ImGui Legacy renderer",
+      "Context": "ImGuiUtils.StyleEdit",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "旧版 ImGui 渲染器不支持此项",
+      "Source": "library"
+    },
+    {
       "Original": "VFX Path",
       "Context": "Element.Init",
       "Role": "UI",
@@ -1513,6 +1708,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.BeginDefaultTable",
       "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Whitelist",
+      "Context": "CGui.LayoutDrawHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "区域白名单",
       "Source": "library"
     },
     {

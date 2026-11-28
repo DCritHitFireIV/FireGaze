@@ -165,6 +165,14 @@
       "Source": "library"
     },
     {
+      "Original": "Keeps track of mobs that are no longer visible to you. Use to estimate a possible kill count range when you are not killing alone.",
+      "Context": "ConfigWindow.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "追踪已离开视野的怪物。多人一起打怪时，可借此估算击杀数量的范围。",
+      "Source": "library"
+    },
+    {
       "Original": "Minion",
       "Context": "ConfigWindow.DrawConfig",
       "PreserveID": true,
@@ -265,6 +273,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "粘贴列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Pot FATE",
+      "Context": "ConfigWindow.DrawFieldOp",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "魔壶危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Pots: ",
+      "Context": "MainWindow.DrawPotFateCooldown",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelpers.CenteredText",
+      "Translated": "魔壶： ",
       "Source": "library"
     },
     {

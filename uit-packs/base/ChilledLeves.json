@@ -24,6 +24,30 @@
       "Source": "library"
     },
     {
+      "Original": " Leves",
+      "Context": "MainWindow.DrawJobToggle",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 项理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": " items)",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 件物品）",
+      "Source": "library"
+    },
+    {
+      "Original": " worklists",
+      "Context": "WorkListUi.DrawSavedWorklistsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 份任务清单",
+      "Source": "library"
+    },
+    {
       "Original": "Accepted",
       "Context": "MainWindow.Draw",
       "Role": "UI",
@@ -38,6 +62,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Add character to ",
+      "Context": "AlertSettings.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将角色添加到 ",
       "Source": "library"
     },
     {
@@ -359,6 +392,14 @@
       "Source": "library"
     },
     {
+      "Original": "Copy a worklist in JSON format to your clipboard, then click the button below to import it.",
+      "Context": "WorkListUi.DrawImportSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将 JSON 格式的任务清单复制到剪贴板，再点击下方按钮导入。",
+      "Source": "library"
+    },
+    {
       "Original": "Copy as formatted JSON for sharing with others",
       "Context": "WorkListUi.DrawImportSection",
       "Role": "UI",
@@ -534,6 +575,22 @@
       "Source": "library"
     },
     {
+      "Original": "Exports the items you need as a \"Final Items\" list. \nDoes not include Pre-Crafts",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将所需物品导出为「最终成品」清单。\n不含中间素材。",
+      "Source": "library"
+    },
+    {
+      "Original": "Exports the items you need as a \"Pre-craft Items\" list. \nDoes not include Final Items",
+      "Context": "WorkListUi.WorklistMode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "将所需物品导出为「中间素材」清单。\n不含最终成品。",
+      "Source": "library"
+    },
+    {
       "Original": "Filter Leves",
       "Context": "MainWindow.Draw",
       "Role": "UI",
@@ -640,6 +697,23 @@
       "Source": "library"
     },
     {
+      "Original": "HEY! You've hit the threshold for the alert on this character for leves! \n",
+      "Context": "AlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "该角色的理符限额已经达到提醒阈值！ \n",
+      "Source": "library"
+    },
+    {
+      "Original": "Have###CrafterCompleteCheck",
+      "Context": "WorkListUi.WorklistMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已持有",
+      "Source": "library"
+    },
+    {
       "Original": "Have###GatheringCompleteCheck",
       "Context": "GatherModeUi.GatheringMode",
       "PreserveID": true,
@@ -654,6 +728,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "已持有： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Have?###CrafterCompleteCheck",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已持有？",
       "Source": "library"
     },
     {
@@ -746,6 +829,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "物品名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Turnin###CrafterTurninItems",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "交纳物品",
       "Source": "library"
     },
     {
@@ -858,6 +950,15 @@
       "Source": "library"
     },
     {
+      "Original": "Leve Name###CrafterLeveNames",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "理符任务名称",
+      "Source": "library"
+    },
+    {
       "Original": "Leve Name###GatheringLeveName",
       "Context": "GatherModeUi.GatheringMode",
       "PreserveID": true,
@@ -906,6 +1007,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "理符任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "LeveID: ",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "理符任务 ID： ",
       "Source": "library"
     },
     {
@@ -1029,12 +1138,29 @@
       "Source": "library"
     },
     {
+      "Original": "Need###CrafterAmountNecessary",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "需求数量",
+      "Source": "library"
+    },
+    {
       "Original": "Need###GatheringAmountNecessary",
       "Context": "GatherModeUi.GatheringMode",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "需求数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Next in: ",
+      "Context": "MainWindow.DrawSimpleHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "距下次恢复还有： ",
       "Source": "library"
     },
     {
@@ -1128,6 +1254,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "在文件资源管理器中打开委托清单文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Press the button to copy the repo to your clipboard",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "点击按钮将仓库地址复制到剪贴板",
       "Source": "library"
     },
     {
@@ -1241,6 +1375,15 @@
       "Source": "library"
     },
     {
+      "Original": "Run Amount###CrafterRunAmounts",
+      "Context": "SettingsWindow.MainPlanner",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "执行次数",
+      "Source": "library"
+    },
+    {
       "Original": "Run Until:",
       "Context": "GatherModeUi.DrawGatheringTableRows",
       "Role": "UI",
@@ -1296,6 +1439,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "所选理符任务详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Setting Selection",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "设置项目",
       "Source": "library"
     },
     {
@@ -1384,6 +1536,14 @@
       "Source": "library"
     },
     {
+      "Original": "Starting Zone:",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "起始区域：",
+      "Source": "library"
+    },
+    {
       "Original": "Status",
       "Context": "MainWindow.Draw",
       "Role": "UI",
@@ -1436,6 +1596,31 @@
       "Source": "library"
     },
     {
+      "Original": "Text Information",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "文本信息",
+      "Source": "library"
+    },
+    {
+      "Original": "These aren't supported yet, but will be in a future update!",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "这些功能尚未支持，将在未来版本中添加。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is just a nice little pop-up saying \" Hey, you should really turn these in before you cap out\"",
+      "Context": "AlertWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "理符限额即将满额时，显示弹窗提醒你及时交纳。",
+      "Source": "library"
+    },
+    {
       "Original": "This will replace your current worklist with data from clipboard. Continue?",
       "Context": "WorkListUi.WorklistMode",
       "Role": "UI",
@@ -1458,6 +1643,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "切换自动选择交纳物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle between custom ice theme and Dalamud's default theme",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在自定义冰雪主题和 Dalamud 默认主题之间切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Triple?",
+      "Context": "GatherModeUi.GatheringMode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "可交纳三次？",
       "Source": "library"
     },
     {
@@ -1598,6 +1800,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EzTabBar",
       "Translated": "委托清单规划",
+      "Source": "library"
+    },
+    {
+      "Original": "Worklist Window ",
+      "Context": "SettingsWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "任务清单窗口 ",
       "Source": "library"
     },
     {

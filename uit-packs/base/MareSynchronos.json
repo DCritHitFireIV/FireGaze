@@ -98,12 +98,93 @@
       "Source": "library"
     },
     {
+      "Original": "- VFX",
+      "Context": "CreateSyncshellUI.DrawInternal",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "－特效",
+      "Source": "library"
+    },
+    {
+      "Original": "This tab allows you to attempt to fix mods that do not sync correctly, especially those with modded models and animations.",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "此页可尝试修复未正确同步的模组，尤其是包含自定义模型或动画的模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "To use this, start the recording, execute one or multiple emotes/animations you want to attempt to fix and check if new data appears in the table below.",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "请先开始记录，再播放需要修复的动作或动画，观察下方表格里是否增加数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "If it doesn't, Mare is not able to catch the data or already has recorded the animation files (check 'Show previously added transient files' to see if not all is already present).",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "若没有新数据，可能是 Mare 无法捕获，或已记录过相关动画文件。勾选「显示此前添加的临时文件」可检查后者。",
+      "Source": "library"
+    },
+    {
+      "Original": "For most animations, vfx, etc. it is enough to just run them once unless they have random variations. Longer animations do not require to play out in their entirety to be captured.",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "多数动画和特效只需播放一次；如果存在随机变体，则需分别触发。长动画无需完整播放就能捕获。",
+      "Source": "library"
+    },
+    {
+      "Original": "Important Note: If you need to fix an animation that should apply across multiple jobs, you need to repeat this process with at least one additional job, otherwise the animation will only be fixed for the currently active job. This goes primarily for emotes that are used across multiple jobs.",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "注意：要修复多个职业共用的动画，请至少再切换一个职业重复该流程。否则修复仅对当前职业生效。此情况多见于跨职业共用的情感动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "WARNING: WHILE RECORDING TRANSIENT DATA, DO NOT CHANGE YOUR APPEARANCE, ENABLED MODS OR ANYTHING. JUST DO THE ANIMATION(S) OR WHATEVER YOU NEED DOING AND STOP THE RECORDING.",
+      "Context": "DrawRecording",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "警告：记录临时数据时请勿更改外观、已启用的模组或其他设置。只播放需要的动画、执行相应操作，然后停止记录。",
+      "Source": "library"
+    },
+    {
       "Original": "Content",
       "Context": "PFinderWindow.DrawPF",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "内容",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "PFinderWindow.DrawPF",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Halted (",
+      "Context": "UiSharedService.DrawFileScanState",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已暂停（",
       "Source": "library"
     },
     {
@@ -116,12 +197,30 @@
       "Source": "library"
     },
     {
+      "Original": "Tag:",
+      "Context": "PFinderPopupHandler.DrawContent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "标签：",
+      "Source": "library"
+    },
+    {
       "Original": "Agreement of Usage of Service",
       "Context": "ToSStrings..ctor",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "服务使用协议",
+      "Source": "library"
+    },
+    {
+      "Original": "'I agree' button will be available in",
+      "Context": "ToSStrings..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "「我同意」按钮将在以下时间后可用：",
       "Source": "library"
     },
     {

@@ -8,6 +8,22 @@
   },
   "entries": [
     {
+      "Original": " (Can afford)",
+      "Context": "GlamourSetter.DrawSetRange",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " （可负担）",
+      "Source": "library"
+    },
+    {
+      "Original": " (Can be completed)",
+      "Context": "GlamourSetter.DrawSetRange",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " （可完成）",
+      "Source": "library"
+    },
+    {
       "Original": " Active",
       "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
       "PreserveID": true,
@@ -17,12 +33,28 @@
       "Source": "library"
     },
     {
+      "Original": " Authentication Errors",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 身份验证错误",
+      "Source": "library"
+    },
+    {
       "Original": " Buy",
       "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": " 购买",
+      "Source": "library"
+    },
+    {
+      "Original": " Connection Errors",
+      "Context": "AutoLoginPage.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 连接错误",
       "Source": "library"
     },
     {
@@ -40,6 +72,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": " 物品",
+      "Source": "library"
+    },
+    {
+      "Original": " Target Level",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": " 目标等级",
       "Source": "library"
     },
     {
@@ -80,6 +121,14 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "友好部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Buy ",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "自动购买 ",
       "Source": "library"
     },
     {
@@ -132,11 +181,28 @@
       "Source": "library"
     },
     {
+      "Original": "Character Switcher",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "角色切换器",
+      "Source": "library"
+    },
+    {
       "Original": "Check Inventory",
       "Context": "WorkshoppaWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "检查背包",
+      "Source": "library"
+    },
+    {
+      "Original": "Clipboard",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "剪贴板",
       "Source": "library"
     },
     {
@@ -715,6 +781,14 @@
       "Source": "library"
     },
     {
+      "Original": "Trophy Crystals: ",
+      "Context": "GlamourSetter.DrawMissingItemHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "对战水晶： ",
+      "Source": "library"
+    },
+    {
       "Original": "Unlocked!",
       "Context": "MainDashboardWindow.DrawPasskeyField",
       "Role": "UI",
@@ -728,6 +802,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "实用工具",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, overlay only appears while holding Ctrl.",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "启用后，仅在按住 Ctrl 时显示悬浮窗。",
       "Source": "library"
     },
     {

@@ -71,6 +71,42 @@
       "Source": "library"
     },
     {
+      "Original": "DeathCam: Disabled",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "死亡镜头：停用",
+      "Source": "library"
+    },
+    {
+      "Original": "DeathCam: Spectate",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "死亡镜头：观战",
+      "Source": "library"
+    },
+    {
+      "Original": "DeathCam: FreeCam",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "死亡镜头：自由镜头",
+      "Source": "library"
+    },
+    {
+      "Original": "Spectate Focus/Soft Target: ",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "观战焦点目标或临时目标： ",
+      "Source": "library"
+    },
+    {
       "Original": "Disabled",
       "Context": "ConfigWindow.DrawHeader",
       "PreserveID": false,
@@ -89,12 +125,66 @@
       "Source": "library"
     },
     {
+      "Original": "Camera Collision: ",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "镜头碰撞： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Keybinds",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "按键绑定",
+      "Source": "library"
+    },
+    {
       "Original": "\nMove: ",
       "Context": "ConfigWindow.DrawHeader",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.SetItemTooltip",
       "Translated": "\n移动： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nAscend: ",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "\n上升： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nDescend: ",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "\n下降： ",
+      "Source": "library"
+    },
+    {
+      "Original": "\nAdjust_Speed: SCROLLWHEEL\nPan_Camera: LCLICK/RCLICK\nExit_FreeCam: ESCAPE",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "\n调节速度：滚轮\n平移镜头：鼠标左键/右键\n退出自由镜头：Esc",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle FreeCam\n(Can also toggle with /freecam command)\n\n",
+      "Context": "ConfigWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "切换自由镜头\n（也可使用 /freecam 命令）\n\n",
       "Source": "library"
     },
     {
@@ -152,12 +242,91 @@
       "Source": "library"
     },
     {
+      "Original": "Zoom Properties",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNode",
+      "Translated": "镜头缩放设置",
+      "Source": "library"
+    },
+    {
+      "Original": "FoV Properties",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNode",
+      "Translated": "视野角度设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset Properties",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNode",
+      "Translated": "镜头偏移设置",
+      "Source": "library"
+    },
+    {
+      "Original": "PoV Properties",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNode",
+      "Translated": "第一人称视角设置",
+      "Source": "library"
+    },
+    {
+      "Original": "When in 1st person view:\n- Enables rendering of your character.\n- Camera follows character's head position.",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "第一人称视角下：\n- 显示自己的角色模型。\n- 镜头跟随角色头部位置。",
+      "Source": "library"
+    },
+    {
       "Original": "Camera follows head rotation.",
       "Context": "ConfigWindow.DrawPresetEditor",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.SetItemTooltip",
       "Translated": "镜头跟随头部转动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore Default",
+      "Context": "ConfigWindow.ResetDragFloat",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "恢复默认",
+      "Source": "library"
+    },
+    {
+      "Original": "PyonCam FreeCam Keybinds",
+      "Context": "KeybindsWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "PyonCam 自由镜头按键绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable PoV##enablePoV",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "启用第一人称视角",
+      "Source": "library"
+    },
+    {
+      "Original": "Track Rotation##trackRotation",
+      "Context": "ConfigWindow.DrawPresetEditor",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "跟随旋转",
       "Source": "library"
     }
   ],

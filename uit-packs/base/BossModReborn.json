@@ -35148,6 +35148,14 @@
       "Source": "library"
     },
     {
+      "Original": "Raidwide (%HP based)",
+      "Context": "Launcher..ctor",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "全体伤害（按 %HP 结算）",
+      "Source": "library"
+    },
+    {
       "Original": "There are uncovered black hole buffers!",
       "Context": "BlackHole.AddHints",
       "Role": "UI",
@@ -40691,6 +40699,30 @@
       "Source": "library"
     },
     {
+      "Original": " casts Silence which should be interrupted.",
+      "Context": "Stage24Act2..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 将咏唱沉默，请打断",
+      "Source": "library"
+    },
+    {
+      "Original": " counters magical attacks, the other claw counters physical attacks.",
+      "Context": "Stage17Act1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 会反击魔法攻击，另一只爪会反击物理攻击。",
+      "Source": "library"
+    },
+    {
+      "Original": " is weak to wind spells.",
+      "Context": "Stage08Act2..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 的弱点是风属性魔法。",
+      "Source": "library"
+    },
+    {
       "Original": " offset",
       "Context": "DebugGraphics.InsertShapesIntoOverlay",
       "PreserveID": true,
@@ -40709,6 +40741,46 @@
       "Source": "library"
     },
     {
+      "Original": " will have phases where all magic damage gets reflected.",
+      "Context": "Stage30Act1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 会在特定阶段反射所有魔法伤害。",
+      "Source": "library"
+    },
+    {
+      "Original": " will reflect all magic attacks.",
+      "Context": "Stage25Act2..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 会反射所有魔法攻击。",
+      "Source": "library"
+    },
+    {
+      "Original": " will reflect all physical damage in act 1, all magic damage in act 2 and switch between both in act 3.",
+      "Context": "Stage25Act1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 第一幕反射所有物理伤害，第二幕反射所有魔法伤害，第三幕在两者之间切换。",
+      "Source": "library"
+    },
+    {
+      "Original": " will spawn upto 4 waves of adds which are weak to fire.",
+      "Context": "Stage28..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 最多召唤 4 批小怪，它们的弱点是火属性。",
+      "Source": "library"
+    },
+    {
+      "Original": "4x Raidwide!",
+      "Context": "FivefoldFallout.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "连续 4 次全体伤害！",
+      "Source": "library"
+    },
+    {
       "Original": "Always use AOE rotation, even on one target",
       "Context": "GeneratedStrategies.Add3",
       "Role": "UI",
@@ -40717,11 +40789,155 @@
       "Source": "library"
     },
     {
+      "Original": "Applies blind debuff",
+      "Context": "SandTempest..ctor",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "附加失明",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies paralysis debuff",
+      "Context": "Thunderbolt.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "附加麻痹",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies poison!",
+      "Context": "NoxiousNova..ctor",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.GlobalHints（→ 提示区）",
+      "Translated": "附加中毒！",
+      "Source": "library"
+    },
+    {
+      "Original": "Attack from unshielded side!",
+      "Context": "AetherialWard.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "从没有护盾的一侧攻击！",
+      "Source": "library"
+    },
+    {
+      "Original": "Attack the arcane sphere with the green circle around it!",
+      "Context": "Comet.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "攻击周围带绿圈的奥术球！",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best rotation based on targets nearby - will break current combo if in one",
+      "Context": "AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/AOEStrategy>.AddOption",
+      "Translated": "根据附近目标选择合适的技能循环，必要时会中断当前连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit as ranged attack if outside melee range - will use Shield Lob as fallback",
+      "Context": "AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "近战距离外自动使用圣灵进行远程攻击，无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit at the start of combat if outside melee range - will use Shield Lob as fallback",
+      "Context": "AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "战斗开始时，若超出近战距离，自动使用圣灵；无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit at the start of combat, regardless of range - will use Shield Lob as fallback",
+      "Context": "AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "战斗开始时，无论距离都自动使用圣灵；无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
       "Original": "Automatically use Shield Lob as ranged attack if outside melee range",
       "Context": "AkechiPLD.Definition",
       "Role": "UI",
       "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
       "Translated": "超出近战范围时自动以投盾作为远程攻击",
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid breaking the eggs!",
+      "Context": "ZuPiece..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "小心不要打破蛋！",
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid intersecting egg hitboxes!",
+      "Context": "CrossbreezeBait.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "避免碰到蛋的判定范围！",
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid intersecting zombies hitboxes!",
+      "Context": "DeathDriveBait.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "避免碰到僵尸的判定范围！",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait away from puddles!",
+      "Context": "WrigglingPhlegmBait.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "将攻击引导到地面伤害区域之外！",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait far away on one side of the map!",
+      "Context": "MoltenMetalBait.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "在场地一侧远离人群引导攻击！",
+      "Source": "library"
+    },
+    {
+      "Original": "Bats are weak to lightning. The wolf is weak to fire.",
+      "Context": "Stage04Act1..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "蝙蝠弱雷，狼弱火。",
+      "Source": "library"
+    },
+    {
+      "Original": "Be on bottom floor!",
+      "Context": "FloorAOEs.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "前往下层！",
+      "Source": "library"
+    },
+    {
+      "Original": "Be on top floor!",
+      "Context": "FloorAOEs.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "前往上层！",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanse Doom!",
+      "Context": "Doom.AddHints",
+      "Role": "UI",
+      "RoleReason": "→ BossMod.TextHints（→ 提示区）",
+      "Translated": "解除死亡宣告！",
       "Source": "library"
     },
     {
@@ -40805,6 +41021,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "新建",
+      "Source": "library"
+    },
+    {
+      "Original": "Show boss mod settings UI",
+      "Context": "Plugin.InitOnFrameworkThread",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Boss Mod 设置窗口",
       "Source": "library"
     },
     {

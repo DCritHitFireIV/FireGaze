@@ -8,12 +8,63 @@
   },
   "entries": [
     {
+      "Original": "Expansion ",
+      "Context": "ContentInfo.get_ExLong",
+      "Translated": "资料片 ",
+      "Source": "library"
+    },
+    {
       "Original": "A Realm Reborn",
       "Context": "ContentIndex..cctor",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImDrawListPtr.AddText",
       "Translated": "重生之境",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavensward",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "苍穹之禁城",
+      "Source": "library"
+    },
+    {
+      "Original": "Stormblood",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "红莲之狂潮",
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowbringers",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "暗影之逆焰",
+      "Source": "library"
+    },
+    {
+      "Original": "Endwalker",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "晓月之终途",
+      "Source": "library"
+    },
+    {
+      "Original": "Dawntrail",
+      "Context": "ContentIndex..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "金曦之遗辉",
       "Source": "library"
     },
     {
@@ -53,9 +104,71 @@
       "Source": "library"
     },
     {
+      "Original": "Become a small territorial wisp (x0.50, raised off the floor).\nAn unobtrusive marker for a DM who isn't physically in the scene.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "变为一团小型浮空光点（缩放至 0.50 倍）。\n适合不直接出场的主持人标示所在位置。",
+      "Source": "library"
+    },
+    {
       "Original": "Hide",
       "Context": "MainWindow.DrawHeader",
       "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Unhide",
+      "Context": "MainWindow.DrawRows",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Selectable",
+      "Translated": "取消隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Pull your character out of the render entirely: a DM 'here but not\nphysically present' switch. Click again to reappear.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将自己的角色完全隐藏，主持人仍可留在现场\n而不以实体出现。再次点击即可现身。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename nameplate to disguise",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将名牌改为伪装对象的名字",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires the Moniker (HMoniker) plugin, v2.1 or newer, installed and enabled.\nIf you have it and this is still disabled, its IPC version may be older than 2.1.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "需安装并启用 2.1 或更高版本的 Moniker（HMoniker）。\n如果已安装但此项仍不可用，其 IPC 版本可能低于 2.1。",
+      "Source": "library"
+    },
+    {
+      "Original": "Also set your nameplate to the disguise's name via Moniker,\nsynced to nearby players through HMS. Revert clears it.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "同时通过 Moniker 将名牌改为伪装对象的名字，\n并通过 HMS 同步给附近玩家。解除伪装时将清除该名字。",
+      "Source": "library"
+    },
+    {
+      "Original": "Log in to disguise yourself.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "登录后即可使用伪装。",
       "Source": "library"
     },
     {
@@ -65,12 +178,27 @@
       "Source": "library"
     },
     {
+      "Original": "Sizes the active disguise, applied immediately.\nNative = the selected mob's authored scale (per-mob; tracks the model, e.g. x2.0 for Galatea Magna).\nx0.5 / x1 = quick multipliers; the box and slider set any custom size (0.1 … 10).",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "立即调整当前伪装的尺寸。\n原始大小采用所选怪物的模型比例，各怪物不同，如大型伽拉忒亚人偶为 2.0 倍。\n可选 0.5 倍、1 倍，或用输入框和滑动条指定 0.1 至 10 之间的数值。",
+      "Source": "library"
+    },
+    {
       "Original": "Custom",
       "Context": "MainWindow.DrawHeader",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Type an exact scale (0.1 to 10). Anything above 10 clamps to 10.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "输入精确缩放比例（0.1 至 10），超过上限时将设为 10。",
       "Source": "library"
     },
     {
@@ -89,6 +217,39 @@
       "Source": "library"
     },
     {
+      "Original": "Restore your real model + size and un-stick any animation.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恢复真实模型和大小，并解除卡住的动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "No live puppets to despawn. Spawn one first.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "当前没有可移除的傀儡，请先生成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Despawn every live puppet. A zone change clears them too.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "移除全部已生成的傀儡。切换区域也会清除它们。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disguise focused puppet",
+      "Context": "MainWindow.DrawHeader",
+      "Translated": "伪装当前选中的傀儡",
+      "Source": "library"
+    },
+    {
       "Original": " on ",
       "Context": "MainWindow.DrawHeader",
       "Translated": " 开启 ",
@@ -104,6 +265,24 @@
       "Source": "library"
     },
     {
+      "Original": "Search catalog…",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索图鉴…",
+      "Source": "library"
+    },
+    {
+      "Original": "Search by name, home location, BaseId, ModelChara id, or m-code.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按名称、常驻区域、BaseId、ModelChara ID 或模型代码搜索。",
+      "Source": "library"
+    },
+    {
       "Original": "Clear the search.",
       "Context": "MainWindow.DrawHeader",
       "PreserveID": false,
@@ -113,12 +292,48 @@
       "Source": "library"
     },
     {
+      "Original": "matches",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "个匹配项",
+      "Source": "library"
+    },
+    {
+      "Original": "zones",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "个区域",
+      "Source": "library"
+    },
+    {
+      "Original": "mobs",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "个怪物",
+      "Source": "library"
+    },
+    {
       "Original": "minions",
       "Context": "MainWindow.DrawHeader",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "宠物",
+      "Source": "library"
+    },
+    {
+      "Original": "  (hidden by filter)",
+      "Context": "MainWindow.DrawDetailStrip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "  （筛选器已隐藏）",
       "Source": "library"
     },
     {
@@ -138,12 +353,30 @@
       "Source": "library"
     },
     {
+      "Original": "Resident of: ",
+      "Context": "MainWindow.DrawDetailStrip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "常驻区域： ",
+      "Source": "library"
+    },
+    {
       "Original": "Minion: ",
       "Context": "MainWindow.DrawDetailStrip",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "宠物： ",
+      "Source": "library"
+    },
+    {
+      "Original": "NPC · humanoid character (apply, or spawn a copy)",
+      "Context": "MainWindow.DrawDetailStrip",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "NPC · 人形角色（可应用外观或生成副本）",
       "Source": "library"
     },
     {

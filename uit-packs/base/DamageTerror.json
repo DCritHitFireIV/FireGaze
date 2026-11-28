@@ -8,6 +8,79 @@
   },
   "entries": [
     {
+      "Original": "200-Player Hunt Train",
+      "Context": "SampleDataPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "200 人狩猎车",
+      "Source": "library"
+    },
+    {
+      "Original": "24-Player Alliance Raid",
+      "Context": "SampleDataPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "24 人团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "4-Player Dungeon",
+      "Context": "SampleDataPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "4 人迷宫",
+      "Source": "library"
+    },
+    {
+      "Original": "8-Player Raid (Full Party)",
+      "Context": "SampleDataPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "8 人团队任务（满编小队）",
+      "Source": "library"
+    },
+    {
+      "Original": "9999-Player Stress Test",
+      "Context": "SampleDataPage..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "9,999 人压力测试",
+      "Source": "library"
+    },
+    {
+      "Original": "A couple of behavior choices — the rest lives in Settings when you want it.",
+      "Context": "FirstRunWindow.DrawBehaviorStep",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这里可以调整几个基本选项，其他设置可稍后在「设置」中更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Abbreviated (12.3K)",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数值简写（12.3K）",
+      "Source": "library"
+    },
+    {
+      "Original": "Abbreviated decimal places",
+      "Context": "FormattingSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "简写数值的小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Abbreviation Thresholds",
+      "Context": "FormattingSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "数值简写阈值",
+      "Source": "library"
+    },
+    {
       "Original": "Accent Color",
       "Context": "AppearanceTab.DrawPresetBreakdown",
       "PreserveID": true,
@@ -44,6 +117,15 @@
       "Source": "library"
     },
     {
+      "Original": "Active Text Color",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "当前文字颜色",
+      "Source": "library"
+    },
+    {
       "Original": "All",
       "Context": "MeterTabBasicsSection..cctor",
       "Role": "UI",
@@ -65,6 +147,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Combo",
       "Translated": "团队",
+      "Source": "library"
+    },
+    {
+      "Original": "Alliance Raids",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "团队任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount",
+      "Context": "SkillsTabRenderer.DrawSkillTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "数量",
       "Source": "library"
     },
     {
@@ -110,6 +209,14 @@
       "Source": "library"
     },
     {
+      "Original": "Axis & Mouse Text",
+      "Context": "GraphConfigBlock.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "坐标轴和鼠标提示文字",
+      "Source": "library"
+    },
+    {
       "Original": "Back",
       "Context": "ColumnWizardWindow.DrawNavRow",
       "PreserveID": true,
@@ -146,11 +253,69 @@
       "Source": "library"
     },
     {
+      "Original": "Backup",
+      "Context": "GeneralTab.DrawBackupAndRecoverySection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "备份",
+      "Source": "library"
+    },
+    {
+      "Original": "Backup & Recovery",
+      "Context": "GeneralTab.DrawBackupAndRecoverySection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "备份与恢复",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Background",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorButton",
+      "Translated": "条形背景",
+      "Source": "library"
+    },
+    {
       "Original": "Bar Font Size",
       "Context": "AppearanceTab.DrawPresetBreakdown",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "条形文字字号",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Height",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "条形高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Opacity",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "条形不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Rounding",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "条形圆角",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Spacing",
+      "Context": "AppearanceTab.DrawPresetBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "条形间距",
       "Source": "library"
     },
     {
@@ -172,6 +337,50 @@
       "Source": "library"
     },
     {
+      "Original": "Bar height",
+      "Context": "BarsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "条形高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar opacity",
+      "Context": "BarsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "条形不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar rounding",
+      "Context": "BarsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "条形圆角",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar spacing",
+      "Context": "BarsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "条形间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Bars",
+      "Context": "MeterTabContentSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "条形图",
+      "Source": "library"
+    },
+    {
       "Original": "Base Classes",
       "Context": "CustomizationWizardWindow.DrawColorsStep",
       "PreserveID": true,
@@ -181,12 +390,110 @@
       "Source": "library"
     },
     {
+      "Original": "Bot-Left",
+      "Context": "PositionSizeSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "左下",
+      "Source": "library"
+    },
+    {
+      "Original": "Bot-Right",
+      "Context": "PositionSizeSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "右下",
+      "Source": "library"
+    },
+    {
       "Original": "Browse...",
       "Context": "AppearanceGeneralSection.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Buff fill",
+      "Context": "DetailsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "增益状态填充色",
+      "Source": "library"
+    },
+    {
+      "Original": "Buff/debuff text",
+      "Context": "FontSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "增益／减益文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Buffs / Debuffs — Colors",
+      "Context": "DetailsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "增益／减益：配色",
+      "Source": "library"
+    },
+    {
+      "Original": "Buffs / Debuffs — Dimensions",
+      "Context": "DetailsSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "增益／减益：尺寸",
+      "Source": "library"
+    },
+    {
+      "Original": "Built-in",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "内置",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Color",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "按钮颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Height",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "按钮高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Rounding",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "按钮圆角",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Spacing",
+      "Context": "MeterTabsPage.DrawButtonAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "按钮间距",
       "Source": "library"
     },
     {
@@ -208,6 +515,23 @@
       "Source": "library"
     },
     {
+      "Original": "Cannot overwrite a built-in preset.",
+      "Context": "AppearanceTab.DrawPresetSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "无法覆盖内置预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Font...",
+      "Context": "FontSection.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择字体……",
+      "Source": "library"
+    },
+    {
       "Original": "Classic MiniParse style — sharp bars, dark background, compact layout.",
       "Context": "BuiltInPresets.Kagerou",
       "Role": "UI",
@@ -222,6 +546,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All History",
+      "Context": "EncounterHistoryTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除全部历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Sample Data",
+      "Context": "SampleDataPage.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除示例数据",
       "Source": "library"
     },
     {

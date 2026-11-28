@@ -49,6 +49,15 @@
       "Source": "library"
     },
     {
+      "Original": "Active source",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "当前来源",
+      "Source": "library"
+    },
+    {
       "Original": "Add Item",
       "Context": "MainWindow.DrawFirmamentAddItem",
       "PreserveID": true,
@@ -64,6 +73,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiHelper.AccentButton",
       "Translated": "添加命令",
+      "Source": "library"
+    },
+    {
+      "Original": "All-Time Scrips Spent",
+      "Context": "MainWindow.DrawPlannerSession",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "累计消耗票据",
+      "Source": "library"
+    },
+    {
+      "Original": "Already in list",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已在清单中",
       "Source": "library"
     },
     {
@@ -113,6 +139,15 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.PrintError",
       "Translated": "自动操作已停止： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy items after each trade instead of on capping scrips",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "每次交纳后立即购买物品，无需等待票据达到上限",
       "Source": "library"
     },
     {
@@ -176,6 +211,15 @@
       "Source": "library"
     },
     {
+      "Original": "Clear total scrips spent",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空累计消耗的票据数",
+      "Source": "library"
+    },
+    {
       "Original": "Collect on finish crafting an Artisan list",
       "Context": "MainWindow.DrawSettingsIntegrations",
       "PreserveID": true,
@@ -217,6 +261,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Config version",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "配置版本",
       "Source": "library"
     },
     {
@@ -297,6 +349,14 @@
       "Source": "library"
     },
     {
+      "Original": "Firmament turn-in",
+      "Context": "AddonDelays..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "天穹街交纳",
+      "Source": "library"
+    },
+    {
       "Original": "Fixed Firmament turn-ins stalling on the second item",
       "Context": "ChangelogUi.Add_0_8_2",
       "Role": "UI",
@@ -326,6 +386,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "背包空余栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "Full config",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "完整配置",
       "Source": "library"
     },
     {
@@ -362,6 +431,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiHelper.AccentButton",
       "Translated": "知道了",
+      "Source": "library"
+    },
+    {
+      "Original": "Has collectible",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "持有收藏品",
       "Source": "library"
     },
     {
@@ -426,11 +503,28 @@
       "Source": "library"
     },
     {
+      "Original": "Items purchased",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已购物品",
+      "Source": "library"
+    },
+    {
       "Original": "Never show on launch",
       "Context": "ChangelogWindow.DrawFooter",
       "Role": "UI",
       "RoleReason": "→ ImGui.Combo",
       "Translated": "启动时不显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal Scrips",
+      "Context": "MainWindow.DrawSystemToggle",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "普通票据",
       "Source": "library"
     },
     {
@@ -510,6 +604,15 @@
       "Source": "library"
     },
     {
+      "Original": "Purchase List",
+      "Context": "DrawItemsList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader",
+      "Translated": "采购清单",
+      "Source": "library"
+    },
+    {
       "Original": "Purchase list complete! Stopping automation.",
       "Context": "AutomationHandler.OnFinishedTradingCore",
       "Role": "UI",
@@ -562,6 +665,23 @@
       "Source": "library"
     },
     {
+      "Original": "Reset purchased amounts",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置已购数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Resource inspection",
+      "Context": "AddonDelays..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "查看资源",
+      "Source": "library"
+    },
+    {
       "Original": "Resource inspection done — starting Artisan list.",
       "Context": "AutomationHandler.TryStartStage",
       "Role": "UI",
@@ -605,11 +725,27 @@
       "Source": "library"
     },
     {
+      "Original": "Scrip exchange",
+      "Context": "AddonDelays..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "票据兑换",
+      "Source": "library"
+    },
+    {
       "Original": "Scrip turn-ins, purchases, and gathering loops",
       "Context": "MainWindow.DrawHero",
       "Role": "UI",
       "RoleReason": "→ ImGuiHelper.HeroBanner",
       "Translated": "交纳收藏品、购买物品和循环采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Scrips earned",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "获得票据",
       "Source": "library"
     },
     {
@@ -638,6 +774,14 @@
       "Source": "library"
     },
     {
+      "Original": "Session started",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "本轮已开始",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
@@ -652,6 +796,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Combo",
       "Translated": "显示新更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Kupo of Fortune",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始库啵好运道",
+      "Source": "library"
+    },
+    {
+      "Original": "Start deliveroo",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "启动 Deliveroo",
+      "Source": "library"
+    },
+    {
+      "Original": "Start scrip shop",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "开始在票据交易所购物",
       "Source": "library"
     },
     {
@@ -838,6 +1009,14 @@
       "Source": "library"
     },
     {
+      "Original": "Unique items can only be owned one at a time",
+      "Context": "DrawItemsList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "独占物品最多只能持有一个",
+      "Source": "library"
+    },
+    {
       "Original": "View changelog",
       "Context": "MainWindow.DrawSettingsGeneral",
       "PreserveID": true,
@@ -865,5 +1044,36 @@
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [
+    {
+      "Original": "AutoRetainer running",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::AutoRetainer",
+      "Translated": "AutoRetainer 运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Exchanging items",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::ExchangingItems",
+      "Translated": "正在兑换物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::Idle",
+      "Translated": "空闲",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving to vendor",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::MovingToCollectableVendor",
+      "Translated": "正在前往商人处",
+      "Source": "library"
+    },
+    {
+      "Original": "Spending scrip",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::SpendingScrip",
+      "Translated": "正在使用票据",
+      "Source": "library"
+    }
+  ]
 }

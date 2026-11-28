@@ -8,13 +8,6 @@
   },
   "entries": [
     {
-      "Original": "shaders",
-      "Context": "[Brio] ActorAppearanceWindow.DrawBody",
-      "PreserveID": false,
-      "Translated": "着色器",
-      "Source": "library"
-    },
-    {
       "Original": "Goop Demo",
       "Context": "ActorDebugWidget.DrawBody",
       "PreserveID": false,
@@ -102,13 +95,6 @@
       "Source": "library"
     },
     {
-      "Original": "resetZoom",
-      "Context": "[Brio] CameraEditor.DrawBrioCam",
-      "PreserveID": false,
-      "Translated": "重置缩放",
-      "Source": "library"
-    },
-    {
       "Original": "Camera Offset",
       "Context": "CameraEditor.DrawBrioCutscene",
       "PreserveID": true,
@@ -127,89 +113,12 @@
       "Source": "library"
     },
     {
-      "Original": "EnableMovement",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "启用移动",
-      "Source": "library"
-    },
-    {
-      "Original": "LateralMovement",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "横向移动",
-      "Source": "library"
-    },
-    {
-      "Original": "portraitMode",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "肖像模式",
-      "Source": "library"
-    },
-    {
-      "Original": "resetFoV",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "重置视场角",
-      "Source": "library"
-    },
-    {
-      "Original": "resetMouseSensitivity",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "重置鼠标灵敏度",
-      "Source": "library"
-    },
-    {
-      "Original": "resetMovementSpeed",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "重置移动速度",
-      "Source": "library"
-    },
-    {
-      "Original": "resetRotation",
-      "Context": "[Brio] CameraEditor.DrawFreeCam",
-      "PreserveID": false,
-      "Translated": "重置旋转",
-      "Source": "library"
-    },
-    {
       "Original": "Toggle as Camera Movement",
       "Context": "CameraEntity.DrawContextButton",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "切换为相机移动",
-      "Source": "library"
-    },
-    {
-      "Original": "CameraLifetime_clone",
-      "Context": "[Brio] CameraLifetimeWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "相机生命周期_克隆",
-      "Source": "library"
-    },
-    {
-      "Original": "CameraLifetime_lock",
-      "Context": "[Brio] CameraLifetimeWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "相机生命周期_守卫驻所",
-      "Source": "library"
-    },
-    {
-      "Original": "CameraLifetime_rename",
-      "Context": "[Brio] CameraLifetimeWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "相机生命周期_重命名",
-      "Source": "library"
-    },
-    {
-      "Original": "CameraLifetime_target",
-      "Context": "[Brio] CameraLifetimeWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "相机生命周期_目标",
       "Source": "library"
     },
     {
@@ -380,13 +289,6 @@
       "Source": "library"
     },
     {
-      "Original": "DebugTabBar",
-      "Context": "[Brio] DebugWidget.DrawBody",
-      "PreserveID": false,
-      "Translated": "调试标签栏",
-      "Source": "library"
-    },
-    {
       "Original": "IsPosing: ",
       "Context": "[Brio] DebugWidget.DrawGPose",
       "PreserveID": false,
@@ -430,45 +332,10 @@
       "Source": "library"
     },
     {
-      "Original": "Manager_clone",
-      "Context": "[Brio] EntityManagerWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "管理器_克隆",
-      "Source": "library"
-    },
-    {
-      "Original": "Manager_folderoptions",
-      "Context": "[Brio] EntityManagerWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "管理器_文件夹选项",
-      "Source": "library"
-    },
-    {
-      "Original": "Manager_move",
-      "Context": "[Brio] EntityManagerWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "管理器_移动",
-      "Source": "library"
-    },
-    {
-      "Original": "Manager_selectinhierarchy",
-      "Context": "[Brio] EntityManagerWidget.DrawQuickIcons",
-      "PreserveID": false,
-      "Translated": "管理器_选择层级",
-      "Source": "library"
-    },
-    {
       "Original": "character",
       "Context": "[Brio] ExtendedAppearanceEditor.DrawTints",
       "PreserveID": false,
       "Translated": "角色",
-      "Source": "library"
-    },
-    {
-      "Original": "ImportTransform",
-      "Context": "[Brio] FileUIHelpers.DrawImportPoseMenuPopup",
-      "PreserveID": false,
-      "Translated": "导入变换",
       "Source": "library"
     },
     {
@@ -560,13 +427,6 @@
       "Source": "library"
     },
     {
-      "Original": "visor",
-      "Context": "[Brio] GearEditor.DrawGearSlot",
-      "PreserveID": false,
-      "Translated": "面罩",
-      "Source": "library"
-    },
-    {
       "Original": "hideweap",
       "Context": "[Brio] GearEditor.DrawWeaponSlot",
       "PreserveID": false,
@@ -617,20 +477,6 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "禁用",
-      "Source": "library"
-    },
-    {
-      "Original": "contentBar",
-      "Context": "[Brio] ImSequencer.Draw",
-      "PreserveID": false,
-      "Translated": "内容栏",
-      "Source": "library"
-    },
-    {
-      "Original": "topBar",
-      "Context": "[Brio] ImSequencer.DrawHeader",
-      "PreserveID": false,
-      "Translated": "顶栏",
       "Source": "library"
     },
     {
@@ -688,13 +534,6 @@
       "Source": "library"
     },
     {
-      "Original": "togglelight",
-      "Context": "[Brio] LightEditor.DrawLightTransformHeader",
-      "PreserveID": false,
-      "Translated": "切换灯光",
-      "Source": "library"
-    },
-    {
       "Original": "Turn OFF ",
       "Context": "[Brio] LightLifetimeWidget.DrawPopup",
       "PreserveID": false,
@@ -746,82 +585,12 @@
       "Source": "library"
     },
     {
-      "Original": "mouthColor",
-      "Context": "[Brio] ModelShaderEditor.DrawBodyColors",
-      "PreserveID": false,
-      "Translated": "唇色",
-      "Source": "library"
-    },
-    {
-      "Original": "skinColor",
-      "Context": "[Brio] ModelShaderEditor.DrawBodyColors",
-      "PreserveID": false,
-      "Translated": "肤色",
-      "Source": "library"
-    },
-    {
-      "Original": "hairColor",
-      "Context": "[Brio] ModelShaderEditor.DrawHairColors",
-      "PreserveID": false,
-      "Translated": "发色",
-      "Source": "library"
-    },
-    {
-      "Original": "hairHighlight",
-      "Context": "[Brio] ModelShaderEditor.DrawHairColors",
-      "PreserveID": false,
-      "Translated": "发丝高光",
-      "Source": "library"
-    },
-    {
-      "Original": "featureColor",
-      "Context": "[Brio] ModelShaderEditor.DrawOtherColors",
-      "PreserveID": false,
-      "Translated": "特征色",
-      "Source": "library"
-    },
-    {
-      "Original": "leftEyeColor",
-      "Context": "[Brio] ModelShaderEditor.DrawOtherColors",
-      "PreserveID": false,
-      "Translated": "左眼色",
-      "Source": "library"
-    },
-    {
-      "Original": "rightEyeColor",
-      "Context": "[Brio] ModelShaderEditor.DrawOtherColors",
-      "PreserveID": false,
-      "Translated": "右眼色",
-      "Source": "library"
-    },
-    {
-      "Original": "posingGraphicalWindow",
-      "Context": "[Brio] PosingGraphicalWindow.DrawImportButtons",
-      "PreserveID": false,
-      "Translated": "姿势图形窗口",
-      "Source": "library"
-    },
-    {
       "Original": "(This Entity has no Bones)",
       "Context": "PosingOverlayToolbarWindow.DrawButtons",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "（此实体没有骨骼）",
-      "Source": "library"
-    },
-    {
-      "Original": "postingOverlay",
-      "Context": "[Brio] PosingOverlayToolbarWindow.DrawButtons",
-      "PreserveID": false,
-      "Translated": "姿势叠加层",
-      "Source": "library"
-    },
-    {
-      "Original": "copypaste",
-      "Context": "[Brio] PosingTransformEditor.Draw",
-      "PreserveID": false,
-      "Translated": "复制粘贴",
       "Source": "library"
     },
     {
@@ -859,27 +628,6 @@
       "Context": "[Brio] PosingWidget.DrawButtons",
       "PreserveID": false,
       "Translated": "叠加层",
-      "Source": "library"
-    },
-    {
-      "Original": "postingWidget",
-      "Context": "[Brio] PosingWidget.DrawButtons",
-      "PreserveID": false,
-      "Translated": "姿势窗口",
-      "Source": "library"
-    },
-    {
-      "Original": "redo",
-      "Context": "[Brio] PosingWidget.DrawButtons",
-      "PreserveID": false,
-      "Translated": "重做",
-      "Source": "library"
-    },
-    {
-      "Original": "undo",
-      "Context": "[Brio] PosingWidget.DrawButtons",
-      "PreserveID": false,
-      "Translated": "撤销",
       "Source": "library"
     },
     {
@@ -989,13 +737,6 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "在变换编辑器中交换旋转 X 和 Y",
-      "Source": "library"
-    },
-    {
-      "Original": "refresh_Customize",
-      "Context": "[Brio] SettingsWindow.DrawThirdPartyIPC",
-      "PreserveID": false,
-      "Translated": "醒神_Customize",
       "Source": "library"
     },
     {
@@ -1163,20 +904,6 @@
       "Source": "library"
     },
     {
-      "Original": "export",
-      "Context": "[Brio] ActorAppearanceWindow.DrawHeader",
-      "PreserveID": false,
-      "Translated": "导出",
-      "Source": "library"
-    },
-    {
-      "Original": "import",
-      "Context": "[Brio] ActorAppearanceWindow.DrawHeader",
-      "PreserveID": false,
-      "Translated": "导入",
-      "Source": "library"
-    },
-    {
       "Original": " pose",
       "Context": "AutoSaveWindow.DrawAutoSaveEntry",
       "PreserveID": false,
@@ -1214,61 +941,12 @@
       "Source": "library"
     },
     {
-      "Original": "ImportPosition",
-      "Context": "[Brio] FileUIHelpers.DrawImportPoseMenuPopup",
-      "PreserveID": false,
-      "Translated": "导入位置",
-      "Source": "library"
-    },
-    {
-      "Original": "ImportRotation",
-      "Context": "[Brio] FileUIHelpers.DrawImportPoseMenuPopup",
-      "PreserveID": false,
-      "Translated": "导入旋转",
-      "Source": "library"
-    },
-    {
-      "Original": "ImportScale",
-      "Context": "[Brio] FileUIHelpers.DrawImportPoseMenuPopup",
-      "PreserveID": false,
-      "Translated": "导入缩放",
-      "Source": "library"
-    },
-    {
-      "Original": "attachweapon",
-      "Context": "[Brio] GearEditor.DrawWeaponSlot",
-      "PreserveID": false,
-      "Translated": "附加武器",
-      "Source": "library"
-    },
-    {
       "Original": "Enable",
       "Context": "ImBrio.ToggleSelecterStrip",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "启用",
-      "Source": "library"
-    },
-    {
-      "Original": "propagate",
-      "Context": "[Brio] PosingTransformEditor.Draw",
-      "PreserveID": false,
-      "Translated": "传播",
-      "Source": "library"
-    },
-    {
-      "Original": "resetTransform",
-      "Context": "[Brio] PosingTransformEditor.Draw",
-      "PreserveID": false,
-      "Translated": "重置变换",
-      "Source": "library"
-    },
-    {
-      "Original": "flipButton",
-      "Context": "[Brio] PosingWidget.DrawButtons",
-      "PreserveID": false,
-      "Translated": "翻转",
       "Source": "library"
     },
     {
@@ -1279,45 +957,10 @@
       "Source": "library"
     },
     {
-      "Original": "reset",
-      "Context": "[Brio] PosingWidget.DrawButtons",
-      "PreserveID": false,
-      "Translated": "重置",
-      "Source": "library"
-    },
-    {
-      "Original": "customizePane",
-      "Context": "[Brio] ActorAppearanceWindow.DrawBody",
-      "PreserveID": false,
-      "Translated": "自定义面板",
-      "Source": "library"
-    },
-    {
-      "Original": "equipmentPane",
-      "Context": "[Brio] ActorAppearanceWindow.DrawBody",
-      "PreserveID": false,
-      "Translated": "装备面板",
-      "Source": "library"
-    },
-    {
-      "Original": "extended",
-      "Context": "[Brio] ActorAppearanceWindow.DrawBody",
-      "PreserveID": false,
-      "Translated": "扩展",
-      "Source": "library"
-    },
-    {
       "Original": "Actor ",
       "Context": "[Brio] ApplyDataToActor.MoveNext",
       "PreserveID": false,
       "Translated": "角色 ",
-      "Source": "library"
-    },
-    {
-      "Original": "customizeGroup",
-      "Context": "[Brio] CustomizeEditor.DrawCustomize",
-      "PreserveID": false,
-      "Translated": "自定义分组",
       "Source": "library"
     },
     {
@@ -1336,13 +979,6 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "室内",
-      "Source": "library"
-    },
-    {
-      "Original": "facewear",
-      "Context": "[Brio] GearEditor.DrawFacewearSlot",
-      "PreserveID": false,
-      "Translated": "面部饰品",
       "Source": "library"
     },
     {

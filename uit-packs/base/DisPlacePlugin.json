@@ -754,6 +754,87 @@
       "RoleReason": "→ IChatGui.Print",
       "Translated": "布局导出完成",
       "Source": "library"
+    },
+    {
+      "Original": "(Manage Furnishings -> Place Furnishing Glamours)",
+      "Context": "ConfigurationWindow.LogLayoutMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "（布置家具 → 布置家具投影）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Housing -> Indoor/Outdoor Furnishings)",
+      "Context": "ConfigurationWindow.LogLayoutMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "（房屋 → 室内／室外家具）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to load and apply layouts outside of Rotate Layout mode",
+      "Context": "ConfigurationWindow.CheckModeForLoad",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请先进入旋转布置模式，再加载并应用布局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to load layouts outside of Layout mode",
+      "Context": "ConfigurationWindow.CheckModeForLoad",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请先进入布置模式，再加载布局。",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Error: ",
+      "Context": "ConfigurationWindow.SaveLayoutToFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "保存失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported {0} items",
+      "Context": "ConfigurationWindow.LoadLayoutFromFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已导入 {0} 件家具",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Error: ",
+      "Context": "ConfigurationWindow.LoadLayoutFromFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "加载失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to set position for ",
+      "Context": "ConfigurationWindow.DrawRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法设置位置： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to set position while not in rotate layout mode",
+      "Context": "ConfigurationWindow.DrawItemOnScreen",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "请先进入旋转布置模式，再设置位置。",
+      "Source": "library"
     }
   ],
   "resources": [],

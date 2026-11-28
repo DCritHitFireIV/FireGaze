@@ -8,6 +8,38 @@
   },
   "entries": [
     {
+      "Original": " (total: ",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " （总计： ",
+      "Source": "library"
+    },
+    {
+      "Original": " Check 'Subscription > Status' for details.",
+      "Context": "MainWindow.DrawAlertIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 详情见“订阅 > 状态”。",
+      "Source": "library"
+    },
+    {
+      "Original": " found in this group.",
+      "Context": "MainWindow.DrawAlertIcon",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 在此组中找到。",
+      "Source": "library"
+    },
+    {
+      "Original": " has too many lines (max 15)",
+      "Context": "VanillaMacroManager.SetMacro",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": " 行数过多（最多 15 行）",
+      "Source": "library"
+    },
+    {
       "Original": " macros ",
       "Context": "MainWindow.DrawImportFromGamePopup",
       "Role": "UI",
@@ -16,11 +48,78 @@
       "Source": "library"
     },
     {
+      "Original": ": Skipped (already managed by Macro Mate)",
+      "Context": "MacroConfig.BulkImportFromXIV",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "：已跳过（已由 Macro Mate 管理）",
+      "Source": "library"
+    },
+    {
       "Original": "Achievements",
       "Context": "IconPickerIndex.ApplyHardcodedCategories",
       "Role": "UI",
       "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
       "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Add 'And' Condition",
+      "Context": "AddAndConditionBulkEditAction.DrawLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加“且”条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add 'Or' Condition",
+      "Context": "AddOrConditionBulkEditAction.DrawLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加“或”条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add 'Or' group",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加“或”条件组",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Action",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "添加操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Add All Current Conditions",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加所有当前条件",
       "Source": "library"
     },
     {
@@ -51,11 +150,52 @@
       "Source": "library"
     },
     {
+      "Original": "Add a new bulk edit action to the action list",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "将新的批量编辑操作添加到操作列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Add conditions to all groups that match our filters",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为符合筛选条件的所有组添加条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds all currently active conditions to this or condition",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将所有当前生效的条件添加到此“或”条件中",
+      "Source": "library"
+    },
+    {
       "Original": "Adventurer Plate",
       "Context": "IconPickerIndex.ApplyHardcodedCategories",
       "Role": "UI",
       "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
       "Translated": "冒险者铭牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Aesthetics",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory",
+      "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Linked",
+      "Context": "MacroWindow.DrawConditionExprEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终关联",
       "Source": "library"
     },
     {
@@ -65,6 +205,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "已应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies all bulk edit actions to all selected macros",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "对选中的所有宏执行全部批量编辑操作",
       "Source": "library"
     },
     {

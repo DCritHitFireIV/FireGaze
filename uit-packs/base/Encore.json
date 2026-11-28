@@ -50,11 +50,67 @@
       "Source": "library"
     },
     {
+      "Original": "Add a free-form macro step (FFXIV macro syntax with /wait support)",
+      "Context": "RoutineEditorWindow.DrawAddMacroButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加自定义宏步骤（使用 FF14 的宏语法，支持 /wait）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add modifier",
+      "Context": "PresetEditorWindow.DrawModifiersSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加修饰项",
+      "Source": "library"
+    },
+    {
       "Original": "Align to Target",
       "Context": "MainWindow.DrawFooterInner",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "与目标对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow All Emotes",
+      "Context": "SettingsWindow.DrawConsoleBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "允许所有情感动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Sit / Doze Anywhere",
+      "Context": "SettingsWindow.DrawConsoleBanner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "允许在任意地点坐下或打盹",
+      "Source": "library"
+    },
+    {
+      "Original": "Animation files: ",
+      "Context": "PresetEditorWindow.DrawContentInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "动画文件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Target",
+      "Context": "PatchNotesWindow.DrawVersion1010Notes",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "应用到目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Ascending",
+      "Context": "ImGuiFileBrowserWindow.DrawFileListHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "升序",
       "Source": "library"
     },
     {
@@ -79,6 +135,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "面板（设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse the Penumbra mod list and click the dance mod you want.",
+      "Context": "HelpWindow.DrawCreatePage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "浏览 Penumbra 模组列表，点击要使用的舞蹈模组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bug Fixes",
+      "Context": "PatchNotesWindow.DrawVersion1006Notes",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "问题修复",
       "Source": "library"
     },
     {
@@ -116,11 +188,92 @@
       "Source": "library"
     },
     {
+      "Original": "Chat Commands",
+      "Context": "PatchNotesWindow.DrawVersion100Notes",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "聊天命令",
+      "Source": "library"
+    },
+    {
       "Original": "Choose an icon",
       "Context": "HelpWindow.DrawCreatePage",
       "Role": "UI",
       "RoleReason": "→ ImDrawListPtr.AddText",
       "Translated": "选择图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear icon",
+      "Context": "RoutineEditorWindow.DrawMarquee",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "清除图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Refresh (or Shift+Refresh to rescan)",
+      "Context": "PresetEditorWindow.DrawContentInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击「刷新」（按住 Shift 再刷新可重新扫描）",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to add as a dependency",
+      "Context": "PresetEditorWindow.DrawDependencyListRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击添加为依赖项",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to cancel.",
+      "Context": "MainWindow.DrawFooterInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "点击取消。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to cycle variants - right-click to reset to base",
+      "Context": "RoutineEditorWindow.DrawStepCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击切换变体，右键点击可恢复基础版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to match step duration to the mod's loop length",
+      "Context": "RoutineEditorWindow.DrawStepCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击使此步骤的时长与模组循环时长一致。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to pick a preset variant",
+      "Context": "RoutineEditorWindow.DrawStepCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击选择一个预设变体",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to remove this dependency",
+      "Context": "PresetEditorWindow.DrawDependencyListRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击移除此依赖项",
+      "Source": "library"
+    },
+    {
+      "Original": "Click: Refresh mod list from cache",
+      "Context": "PresetEditorWindow.DrawContentInner",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "点击：从缓存刷新模组列表",
       "Source": "library"
     },
     {

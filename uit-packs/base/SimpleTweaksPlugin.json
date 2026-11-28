@@ -410,76 +410,11 @@
       "Source": "library"
     },
     {
-      "Original": "hotbarColumns",
-      "Context": "SyncCrafterBars.DrawConfig",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Columns",
-      "Translated": "快捷栏列数",
-      "Source": "library"
-    },
-    {
-      "Original": "crosshotbarColumns",
-      "Context": "SyncCrafterBars.DrawConfig",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Columns",
-      "Translated": "交叉快捷栏列数",
-      "Source": "library"
-    },
-    {
-      "Original": "tryOnCorrectItemSettings",
-      "Context": "TryOnCorrectItem.DrawConfig",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Table",
-      "Translated": "试穿正确物品设置",
-      "Source": "library"
-    },
-    {
       "Original": "Available Collection items:",
       "Context": "UseCollectionCommand.OnCommand",
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "可用收藏品：",
-      "Source": "library"
-    },
-    {
-      "Original": "configTable",
-      "Context": "ChangeMapAreaColors.DrawConfig",
-      "Translated": "配置表",
-      "Source": "library"
-    },
-    {
-      "Original": "personalCustomizations",
-      "Context": "CustomFreeCompanyTags.DrawConfig",
-      "Translated": "个人自定义",
-      "Source": "library"
-    },
-    {
-      "Original": "iconViewer",
-      "Context": "CustomFreeCompanyTags.DrawConfig",
-      "Translated": "图标查看器",
-      "Source": "library"
-    },
-    {
-      "Original": "placeholdersTable",
-      "Context": "CustomFreeCompanyTags.TagCustomizationEditor",
-      "Translated": "占位符表",
-      "Source": "library"
-    },
-    {
-      "Original": "removeColumnSpacing",
-      "Context": "ExpandedCurrencyDisplay.DrawGridConfig",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExt.IconButton",
-      "Translated": "移除列间距",
-      "Source": "library"
-    },
-    {
-      "Original": "addGridSpacing",
-      "Context": "ExpandedCurrencyDisplay.DrawGridConfig",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExt.IconButton",
-      "Translated": "添加网格间距",
       "Source": "library"
     },
     {
@@ -523,12 +458,6 @@
       "Source": "library"
     },
     {
-      "Original": "bannerList",
-      "Context": "HideUnwantedBanner.DrawConfig",
-      "Translated": "横幅列表",
-      "Source": "library"
-    },
-    {
       "Original": "You have no saved gearset for ",
       "Context": "ImprovedCraftingLog.ClickSynthesisButtonDetour",
       "Role": "UI",
@@ -558,32 +487,6 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "颜色值",
-      "Source": "library"
-    },
-    {
-      "Original": "hotkeyDisplay",
-      "Context": "ItemHotkeys.DrawHotkeyConfig",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText",
-      "Translated": "热键显示",
-      "Source": "library"
-    },
-    {
-      "Original": "forcedPlayerNames",
-      "Context": "ChatNameColours.DrawConfig",
-      "Translated": "强制玩家名称",
-      "Source": "library"
-    },
-    {
-      "Original": "chatChannelConfig",
-      "Context": "ChatNameColours.DrawConfig",
-      "Translated": "聊天频道配置",
-      "Source": "library"
-    },
-    {
-      "Original": "presetList",
-      "Context": "CustomTimestampFormat.DrawConfig",
-      "Translated": "预设列表",
       "Source": "library"
     },
     {
@@ -649,6 +552,14 @@
       "Source": "library"
     },
     {
+      "Original": "  At least one modifier key must be enabled.",
+      "Context": "QuickSellItems.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "  必须启用至少一个修饰键。",
+      "Source": "library"
+    },
+    {
       "Original": "  Experimental",
       "Context": "BaseTweak.DrawCommon",
       "Role": "UI",
@@ -702,6 +613,15 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": " 保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Ability Name Alignment",
+      "Context": "ShiftTargetCastBarText.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HorizontalAlignmentSelector",
+      "Translated": "技能名对齐方式",
       "Source": "library"
     },
     {
@@ -860,6 +780,15 @@
       "Source": "library"
     },
     {
+      "Original": "Center the HP Bar on jobs that don't use MP",
+      "Context": "ParameterBarAdjustments.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "当前职业不使用魔力时将体力条居中",
+      "Source": "library"
+    },
+    {
       "Original": "Changelog Options",
       "Context": "SimpleTweaksPluginConfig.DrawConfigUI",
       "PreserveID": true,
@@ -891,6 +820,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "点击复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Completed Color",
+      "Context": "ColoredDutyRoulette.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "已完成项目颜色",
       "Source": "library"
     },
     {
@@ -979,12 +917,38 @@
       "Source": "library"
     },
     {
+      "Original": "Delivery Complete",
+      "Context": "HideUnwantedBanner..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "交纳完毕",
+      "Source": "library"
+    },
+    {
       "Original": "Disable Changelog Notifications",
       "Context": "SimpleTweaksPluginConfig.DrawConfigUI",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "关闭更新日志通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Hook",
+      "Context": "AgentDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停用提钩",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Interaction",
+      "Context": "ExpandedCurrencyDisplay.DrawGridConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "停用任务指令",
       "Source": "library"
     },
     {
@@ -1044,6 +1008,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "持续时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Element Selector",
+      "Context": "UIDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "元素选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Focus Target",
+      "Context": "TargetCastbarCountdown.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用焦点目标",
       "Source": "library"
     },
     {
@@ -1232,6 +1213,15 @@
       "Source": "library"
     },
     {
+      "Original": "Hide Sun",
+      "Context": "MinimapAdjustments.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏太阳",
+      "Source": "library"
+    },
+    {
       "Original": "Hide after (seconds)",
       "Context": "HideMouseAfterInactivity.DrawConfig",
       "PreserveID": true,
@@ -1309,6 +1299,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginCombo",
       "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete Color",
+      "Context": "ColoredDutyRoulette.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "未完成项目颜色",
       "Source": "library"
     },
     {
@@ -1460,6 +1459,15 @@
       "Source": "library"
     },
     {
+      "Original": "New Tweaks##",
+      "Context": "Changelog.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "新微调",
+      "Source": "library"
+    },
+    {
       "Original": "New:",
       "Context": "CommandAlias.DrawConfig",
       "Role": "UI",
@@ -1607,6 +1615,24 @@
       "Source": "library"
     },
     {
+      "Original": "Position Offset##focus",
+      "Context": "TargetCastbarCountdown.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "位置偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Position Offset##primary",
+      "Context": "TargetCastbarCountdown.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat2",
+      "Translated": "位置偏移",
+      "Source": "library"
+    },
+    {
       "Original": "Position##CoordinatePosition",
       "Context": "MinimapAdjustments.DrawConfig",
       "PreserveID": true,
@@ -1665,6 +1691,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "优先级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Recolor Incomplete Roulettes",
+      "Context": "ColoredDutyRoulette.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "更改未完成随机任务的颜色",
       "Source": "library"
     },
     {
@@ -1737,6 +1772,15 @@
       "Source": "library"
     },
     {
+      "Original": "Saturation for random colours",
+      "Context": "ChatNameColours.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "随机配色的饱和度",
+      "Source": "library"
+    },
+    {
       "Original": "Scale: ",
       "Context": "UIDebug.DrawUnitBase",
       "Role": "UI",
@@ -1775,6 +1819,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "显示实验性微调。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show History",
+      "Context": "SpecialCharacterInput.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示历史记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Preview",
+      "Context": "HideUnwantedBanner.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示预览",
       "Source": "library"
     },
     {
@@ -1873,6 +1935,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "系统",
+      "Source": "library"
+    },
+    {
+      "Original": "TT cards sales",
+      "Context": "AlwaysYes.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "九宫幻卡出售记录",
       "Source": "library"
     },
     {
@@ -2075,6 +2146,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputInt",
       "Translated": "垂直偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "View On Console Games Wiki",
+      "Context": "ViewOnConsoleGamesWiki.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 Console Games Wiki 中查看",
       "Source": "library"
     },
     {

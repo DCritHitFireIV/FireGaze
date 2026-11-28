@@ -56,6 +56,14 @@
       "Source": "library"
     },
     {
+      "Original": "Accessibility combo",
+      "Context": "ConfigWindow.DrawPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "辅助连击",
+      "Source": "library"
+    },
+    {
       "Original": "All SET",
       "Context": "XIVComboExpandedPlugin.OnCommand",
       "Role": "UI",
@@ -137,11 +145,36 @@
       "Source": "library"
     },
     {
+      "Original": "Completely disables the plugin's functionalities along with every combo when unchecked.",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "取消勾选将停用插件及全部连击。",
+      "Source": "library"
+    },
+    {
       "Original": "Conflicts with ",
       "Context": "ConfigWindow.DrawPreset",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "冲突项 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Contributors and special thanks",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "贡献者及特别鸣谢",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the Dalamud Repository URL",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制卫月插件仓库地址",
       "Source": "library"
     },
     {
@@ -151,6 +184,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "启用辅助连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable hotbar icon recoloring.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用热键栏图标重新着色。",
       "Source": "library"
     },
     {
@@ -169,6 +211,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "启用 XIVCombo 的扩展功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables this plugin.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用本插件。",
       "Source": "library"
     },
     {
@@ -197,6 +248,14 @@
       "Source": "library"
     },
     {
+      "Original": "Expanded combo",
+      "Context": "ConfigWindow.DrawPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "扩展连击",
+      "Source": "library"
+    },
+    {
       "Original": "Expanded follows the set of rules that XIVCombo Expanded used to follow.",
       "Context": "OneTimeModal.Draw",
       "Role": "UI",
@@ -221,12 +280,46 @@
       "Source": "library"
     },
     {
+      "Original": "GitHub Repository",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "GitHub 仓库",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide children of disabled combos and features.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已停用连击及功能的子选项。",
+      "Source": "library"
+    },
+    {
       "Original": "Hide icons for combos and features.",
       "Context": "OneTimeModal.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "隐藏连击和功能图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the Ko-Fi link.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏 Ko-fi 链接。",
+      "Source": "library"
+    },
+    {
+      "Original": "Icon color",
+      "Context": "ConfigWindow.DrawTintPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图标颜色",
       "Source": "library"
     },
     {
@@ -280,6 +373,15 @@
       "Source": "library"
     },
     {
+      "Original": "Open the GitHub Repository URL",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 GitHub 仓库",
+      "Source": "library"
+    },
+    {
       "Original": "Open the Main Interface",
       "Context": "OneTimeModal.Draw",
       "PreserveID": true,
@@ -297,11 +399,28 @@
       "Source": "library"
     },
     {
+      "Original": "Overrides the global coloring method for this combo only.",
+      "Context": "ConfigWindow.DrawTintPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "仅对此连击覆盖全局着色方式。",
+      "Source": "library"
+    },
+    {
       "Original": "Please set up your ideal configuration.\nDo not worry, you will be able to change those later.",
       "Context": "OneTimeModal.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "请先设置合适的选项。\n之后可以随时修改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-open the first time pop-up window",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新打开首次使用提示",
       "Source": "library"
     },
     {
@@ -326,6 +445,14 @@
       "Context": "OneTimeModal.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
+      "Translated": "隐藏连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Secret combo",
+      "Context": "ConfigWindow.DrawPreset",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "隐藏连击",
       "Source": "library"
     },
@@ -359,6 +486,14 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Statistics for nerds",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "详细统计",
       "Source": "library"
     },
     {

@@ -8,6 +8,60 @@
   },
   "entries": [
     {
+      "Original": " (Aliases: ",
+      "Context": "CommandFactory.BuildCommandInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " （别名： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ring (Right)",
+      "Context": "ModelData.GetSlotString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "戒指（右手）",
+      "Source": "library"
+    },
+    {
+      "Original": "Ring (Left)",
+      "Context": "ModelData.GetSlotString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "戒指（左手）",
+      "Source": "library"
+    },
+    {
+      "Original": "Tail/Ears",
+      "Context": "ModelData.GetSlotString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "尾巴／耳朵",
+      "Source": "library"
+    },
+    {
+      "Original": "Glasses",
+      "Context": "ModelData.GetSlotString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "眼镜",
+      "Source": "library"
+    },
+    {
+      "Original": "Slot ",
+      "Context": "ModelData.GetSlotString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "栏位 ",
+      "Source": "library"
+    },
+    {
       "Original": "Pathfinder Settings",
       "Context": "ConfigWindow..ctor",
       "PreserveID": true,
@@ -170,6 +224,24 @@
       "Source": "library"
     },
     {
+      "Original": "When enabled, displays memory addresses for objects in the results table.",
+      "Context": "ConfigWindow.DrawAdvancedTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用后在结果表中显示对象的内存地址。",
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, embeds Dynamis-compatible address links instead of only copyable text.",
+      "Context": "ConfigWindow.DrawAdvancedTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "启用后将嵌入兼容 Dynamis 的地址链接，而不只是可复制的文本。",
+      "Source": "library"
+    },
+    {
       "Original": "Overlay disabled",
       "Context": "MainWindow.DrawContextControls",
       "PreserveID": true,
@@ -233,12 +305,48 @@
       "Source": "library"
     },
     {
+      "Original": "Max Range",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "最大距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the maximum range requirement.\nDisabling this may cause visual clutter and lag in large areas!",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换是否限制最大距离。\n在大区域内关闭此限制可能导致画面拥挤、性能下降！",
+      "Source": "library"
+    },
+    {
       "Original": "Toggle rendering for the outer line.",
       "Context": "RangeControls.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "切换外圈线条的显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Min Range",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "最小距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the minimum range requirement.\nThis is helpful if you don't want to see your own character, weapons, etc.",
+      "Context": "RangeControls.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "切换是否限制最小距离。\n若不希望看到自己的角色、武器等近处物体，可启用此项。",
       "Source": "library"
     },
     {

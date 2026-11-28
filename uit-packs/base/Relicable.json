@@ -40,6 +40,15 @@
       "Source": "library"
     },
     {
+      "Original": "Abandon Ifrit EX when the Infernal Nails spawn",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "炎狱之楔出现时退出火神伊弗利特歼殛战",
+      "Source": "library"
+    },
+    {
       "Original": "Active job (auto)",
       "Context": "BaseRelicWindow.DrawJobSelector",
       "PreserveID": true,
@@ -57,6 +66,15 @@
       "Source": "library"
     },
     {
+      "Original": "Atma backend",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "魂晶收集工具",
+      "Source": "library"
+    },
+    {
       "Original": "Auto",
       "Context": "MainWindow.DrawStageSelection",
       "PreserveID": true,
@@ -66,12 +84,38 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-grab the nearest FATE mob",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动选定最近的危命任务怪物",
+      "Source": "library"
+    },
+    {
       "Original": "Buy",
       "Context": "NovusWindow.DrawScroll",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "购买",
+      "Source": "library"
+    },
+    {
+      "Original": "Class and job quests to level 50",
+      "Context": "PrerequisiteChecker.BuildGlobalPrerequisites",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "50 级及以下的职业与特职任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat backend",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "战斗工具",
       "Source": "library"
     },
     {
@@ -126,6 +170,15 @@
       "Source": "library"
     },
     {
+      "Original": "Discard at or under (gil to a vendor)",
+      "Context": "ConfigWindow.DrawInventory",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "丢弃卖给商店的价格不超过此金额的物品（金币）",
+      "Source": "library"
+    },
+    {
       "Original": "Dungeon",
       "Context": "MainWindow.KindLabel",
       "Role": "UI",
@@ -164,6 +217,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE rotate after (seconds)",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "更换危命任务的等待时间（秒）",
       "Source": "library"
     },
     {
@@ -228,12 +290,30 @@
       "Source": "library"
     },
     {
+      "Original": "Ignore non-FATE mobs while in a FATE",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "参与危命任务时忽略任务外的怪物",
+      "Source": "library"
+    },
+    {
       "Original": "Install",
       "Context": "ConfigWindow.DrawDependencies",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "安装",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction (TextAdvance)",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "交互（TextAdvance）",
       "Source": "library"
     },
     {
@@ -267,6 +347,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "理符任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Level 50 on the relic job",
+      "Context": "PrerequisiteChecker.BuildLevelRequirement",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "古武对应职业达到 50 级",
       "Source": "library"
     },
     {
@@ -305,6 +393,15 @@
       "Source": "library"
     },
     {
+      "Original": "Max materia stats",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "魔晶石属性上限",
+      "Source": "library"
+    },
+    {
       "Original": "Navmesh:",
       "Context": "MainWindow.DrawNavmeshControls",
       "Role": "UI",
@@ -319,6 +416,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "所需",
+      "Source": "library"
+    },
+    {
+      "Original": "Never discard",
+      "Context": "ConfigWindow.DrawBagPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "永不丢弃",
       "Source": "library"
     },
     {
@@ -338,11 +443,29 @@
       "Source": "library"
     },
     {
+      "Original": "Novus weapon",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "新星武器",
+      "Source": "library"
+    },
+    {
       "Original": "Objective:",
       "Context": "MainWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "目标：",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Novus planner",
+      "Context": "MainWindow.DrawStageSelection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开新星武器规划器",
       "Source": "library"
     },
     {
@@ -372,6 +495,15 @@
       "Source": "library"
     },
     {
+      "Original": "Pull items from retainers",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "从雇员处取回物品",
+      "Source": "library"
+    },
+    {
       "Original": "Qty",
       "Context": "ConfigWindow.DrawBagPreview",
       "PreserveID": true,
@@ -386,6 +518,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "任务阶段",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-sync above (% health)",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "体力高于此百分比时重新同步等级",
       "Source": "library"
     },
     {
@@ -412,6 +553,15 @@
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "Relicable 古武任务图",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat completed stages",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "重复已完成的阶段",
       "Source": "library"
     },
     {
@@ -532,6 +682,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "已停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Use a ticket at or above (gil)",
+      "Context": "ConfigWindow.DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "传送费达到此金额时使用传送网使用券（金币）",
       "Source": "library"
     },
     {

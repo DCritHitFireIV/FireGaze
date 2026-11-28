@@ -8,6 +8,22 @@
   },
   "entries": [
     {
+      "Original": "\nClick to Entrust.",
+      "Context": "RetainerTable.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "\n点击托付。",
+      "Source": "library"
+    },
+    {
+      "Original": "\nThis is manual processing plan",
+      "Context": "RetainerTable.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "\n这是手动处理方案",
+      "Source": "library"
+    },
+    {
       "Original": "\r\nCount: ",
       "Context": "DebugReader.Draw",
       "Role": "UI",
@@ -24,11 +40,108 @@
       "Source": "library"
     },
     {
+      "Original": "    Quick Exploration",
+      "Context": "VenturePlanner.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "    快速探险",
+      "Source": "library"
+    },
+    {
+      "Original": " (5 slots per retainer).",
+      "Context": "TroubleshootingUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": " （每名雇员 5 格）。",
+      "Source": "library"
+    },
+    {
       "Original": " (Hold CTRL)",
       "Context": "SubmarinePointPlanUI.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.ButtonCtrl",
       "Translated": " （按住 Ctrl）",
+      "Source": "library"
+    },
+    {
+      "Original": " (default)",
+      "Context": "WorkshopUI.DrawRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": " （默认）",
+      "Source": "library"
+    },
+    {
+      "Original": " (unavailable)",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " （当前不可用）",
+      "Source": "library"
+    },
+    {
+      "Original": " characters",
+      "Context": "DeployablesTab.MassConfigurationChangeWidget",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": " 名角色",
+      "Source": "library"
+    },
+    {
+      "Original": " characters in total",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 名角色（总计）",
+      "Source": "library"
+    },
+    {
+      "Original": " day(s) ago",
+      "Context": "FcDataManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 天前",
+      "Source": "library"
+    },
+    {
+      "Original": " has duplicate submersible names. Submersible names must be unique.",
+      "Context": "TroubleshootingUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": " 存在重名潜水艇。各潜水艇的名称必须唯一。",
+      "Source": "library"
+    },
+    {
+      "Original": " hour(s) ago",
+      "Context": "FcDataManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 小时前",
+      "Source": "library"
+    },
+    {
+      "Original": " items left",
+      "Context": "AutoGCHandinOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": " 件物品剩余",
+      "Source": "library"
+    },
+    {
+      "Original": " items, among which ",
+      "Context": "DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.CollapsingHeader",
+      "Translated": " 件物品，其中 ",
+      "Source": "library"
+    },
+    {
+      "Original": " minute(s) ago",
+      "Context": "FcDataManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": " 分钟前",
       "Source": "library"
     },
     {
@@ -56,11 +169,36 @@
       "Source": "library"
     },
     {
+      "Original": " saved!",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": " 已保存！",
+      "Source": "library"
+    },
+    {
       "Original": " selected",
       "Context": "DrawListNew",
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginCombo",
       "Translated": " 已选中",
+      "Source": "library"
+    },
+    {
+      "Original": " submarines",
+      "Context": "DeployablesTab.MassConfigurationChangeWidget",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": " 艘潜水艇",
+      "Source": "library"
+    },
+    {
+      "Original": " tasks",
+      "Context": "AutoRetainerWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 项任务",
       "Source": "library"
     },
     {
@@ -72,11 +210,60 @@
       "Source": "library"
     },
     {
+      "Original": "+Armor",
+      "Context": "DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "+防具",
+      "Source": "library"
+    },
+    {
+      "Original": "+Main/offhand",
+      "Context": "DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "+主手／副手",
+      "Source": "library"
+    },
+    {
+      "Original": ". Ctrl + click to reset",
+      "Context": "FcDataManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "。按住 Ctrl 并点击可重置",
+      "Source": "library"
+    },
+    {
+      "Original": "4. Once finished, click the following button:",
+      "Context": "CharacterSync.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "4. 完成后，点击下方按钮：",
+      "Source": "library"
+    },
+    {
+      "Original": "ALL submersibles",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "所有潜水艇",
+      "Source": "library"
+    },
+    {
       "Original": "About",
       "Context": "AutoRetainerWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EzTabBar",
       "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Accept and continue",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "接受并继续",
       "Source": "library"
     },
     {
@@ -121,6 +308,14 @@
       "Source": "library"
     },
     {
+      "Original": "Add Entries...",
+      "Context": "UIUtils.DrawSortableEnumList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "添加条目……",
+      "Source": "library"
+    },
+    {
       "Original": "Add Items",
       "Context": "ExchangeLists.DrawGCEchangeList",
       "Role": "UI",
@@ -129,11 +324,36 @@
       "Source": "library"
     },
     {
+      "Original": "Add all missing items",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加所有缺少的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new plan",
+      "Context": "DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "添加新计划",
+      "Source": "library"
+    },
+    {
       "Original": "Add retainers by level to selection",
       "Context": "RetainersTab.MassConfigurationChangeWidget",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconButtonWithText",
       "Translated": "按等级追加选择雇员",
+      "Source": "library"
+    },
+    {
+      "Original": "Add these items to list",
+      "Context": "DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "将这些物品添加到清单",
       "Source": "library"
     },
     {
@@ -186,6 +406,15 @@
       "Source": "library"
     },
     {
+      "Original": "Allow going over stack",
+      "Context": "EntrustManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许超过单组的堆叠上限",
+      "Source": "library"
+    },
+    {
       "Original": "Allow this character to buy FC buffs",
       "Context": "Draw",
       "Role": "UI",
@@ -218,6 +447,22 @@
       "Source": "library"
     },
     {
+      "Original": "Allows entrust duplicates to create new stacks of items that already exist in the selected retainer.",
+      "Context": "EntrustManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "将重复物品交给雇员时，如果已有同种物品，允许新开一组。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alt - delete from any list",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "Alt：从任意清单删除",
+      "Source": "library"
+    },
+    {
       "Original": "Alt - delete from entrust plan",
       "Context": "Draw",
       "Role": "UI",
@@ -231,6 +476,66 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Text",
       "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount to keep",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "保留数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount to keep in your inventory",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "在自己背包中保留的数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount, %",
+      "Context": "RetainerConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "数量（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply this plan to:",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "将此计划应用于：",
+      "Source": "library"
+    },
+    {
+      "Original": "Approach bell",
+      "Context": "WorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "靠近传唤铃",
+      "Source": "library"
+    },
+    {
+      "Original": "Approach panel",
+      "Context": "WorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "靠近航行管制面板",
+      "Source": "library"
+    },
+    {
+      "Original": "Artisan integration",
+      "Context": "ExpertTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "与 Artisan 联动",
       "Source": "library"
     },
     {
@@ -392,12 +697,60 @@
       "Source": "library"
     },
     {
+      "Original": "Bow:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "船首：",
+      "Source": "library"
+    },
+    {
+      "Original": "Bridge:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "舰桥：",
+      "Source": "library"
+    },
+    {
+      "Original": "By level:",
+      "Context": "DeployablesTab.MassConfigurationChangeWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "按等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculating optimized path. Please wait.",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "正在计算最佳路线，请稍候。",
+      "Source": "library"
+    },
+    {
       "Original": "Can not enqueue GC delivery as it is disabled for current character",
       "Context": "TaskDeliverItems.Enqueue",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ Notify.Error",
       "Translated": "当前角色已禁用大国防联军交纳，无法加入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Can not troubleshoot when not logged in.",
+      "Context": "TroubleshootingUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "请登录游戏后再进行故障排查。",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't change this now",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "目前无法更改",
       "Source": "library"
     },
     {
@@ -450,6 +803,15 @@
       "Source": "library"
     },
     {
+      "Original": "Clear Free company data",
+      "Context": "DrawExcludeReset",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除部队数据",
+      "Source": "library"
+    },
+    {
       "Original": "Clear Venture list",
       "Context": "DebugVenture.Draw",
       "PreserveID": true,
@@ -464,6 +826,42 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconButtonWithText",
       "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear plan",
+      "Context": "WorkshopUI.DrawRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear the list (Hold CTRL and click)",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Selectable",
+      "Translated": "清空列表（按住 Ctrl 并点击）",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to add this single item to list immediately",
+      "Context": "DrawListNew",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HoveredAndClicked",
+      "Translated": "点击立刻将这件物品加入列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to relog",
+      "Context": "GilDisplayManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HoveredAndClicked",
+      "Translated": "点击重新登录",
       "Source": "library"
     },
     {
@@ -494,12 +892,47 @@
       "Source": "library"
     },
     {
+      "Original": "Combine Discard list",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并丢弃列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Combine Protection list",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并保护列表",
+      "Source": "library"
+    },
+    {
       "Original": "Combine Quick Venture sell list",
       "Context": "InventoryCleanupCommon.DrawPlanSelector",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "合并快速探险出售清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Combine Unconditional sell list",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并无条件出售列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Combine this plan's lists with default plan:",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "将此方案的列表与默认方案合并：",
       "Source": "library"
     },
     {
@@ -528,6 +961,23 @@
       "Source": "library"
     },
     {
+      "Original": "Copy gil settings to...",
+      "Context": "RetainerConfig.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "将金币设置复制到……",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy plan settings",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制方案设置",
+      "Source": "library"
+    },
+    {
       "Original": "Copy to Clipboard",
       "Context": "InventoryManagementCommon.DrawListNew",
       "Role": "UI",
@@ -542,6 +992,15 @@
       "Role": "UI",
       "RoleReason": "→ Notify.Error",
       "Translated": "找不到目标角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not import clipboard content. Is it correct plan?",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法从剪贴板导入。请检查复制的是否为正确的方案。",
       "Source": "library"
     },
     {
@@ -587,11 +1046,51 @@
       "Source": "library"
     },
     {
+      "Original": "Currently executing: ",
+      "Context": "WorkshopUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "正在执行： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Not Ready",
+      "Context": "RetainersOld.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "数据尚未就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Data center total (",
+      "Context": "GilDisplayManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "数据中心合计（",
+      "Source": "library"
+    },
+    {
+      "Original": "Data is absent for this retainer. Access retainer bell and select that retainer to populate data.",
+      "Context": "VentureBrowser.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "缺少此雇员的数据。请使用传唤铃并选择该雇员以获取数据。",
+      "Source": "library"
+    },
+    {
       "Original": "Date",
       "Context": "AnomalyWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.BeginDefaultTable",
       "Translated": "日期",
+      "Source": "library"
+    },
+    {
+      "Original": "Default exchange plan can not be renamed",
+      "Context": "DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "无法重命名默认交换计划",
       "Source": "library"
     },
     {
@@ -603,11 +1102,55 @@
       "Source": "library"
     },
     {
+      "Original": "Delete plan",
+      "Context": "VenturePlanner.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "删除方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this plan",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ButtonCtrl",
+      "Translated": "删除此方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this plan. Hold CTRL and click.",
+      "Context": "DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "按住 Ctrl 并点击可删除此方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Deletion",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
       "Original": "Delivery mode",
       "Context": "GCCharacterConfiguration.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.BeginDefaultTable",
       "Translated": "交纳模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Deposit",
+      "Context": "RetainerConfig.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "存入",
       "Source": "library"
     },
     {
@@ -627,12 +1170,29 @@
       "Source": "library"
     },
     {
+      "Original": "Detect and use the closest Summoning Bell within valid distance of the player.",
+      "Context": "SuperSecret.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在可交互范围内查找并使用距离最近的传唤铃。",
+      "Source": "library"
+    },
+    {
       "Original": "Did not read any characters",
       "Context": "CharacterSync.Parse",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ Notify.Error",
       "Translated": "未读取到角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Different setup for first Submersible###firstSubDifferent",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为首艘潜水艇单独设置",
       "Source": "library"
     },
     {
@@ -684,6 +1244,15 @@
       "Source": "library"
     },
     {
+      "Original": "Display current point exploration order",
+      "Context": "SubmarineUnlockPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "显示当前航点的探索顺序",
+      "Source": "library"
+    },
+    {
       "Original": "Display deployables checkbox in workshop",
       "Context": "ExpertTab..ctor",
       "Role": "UI",
@@ -697,6 +1266,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.TextWrapped",
       "Translated": "显示多角色模式类型选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Display notification in game chat",
+      "Context": "Notifications.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在游戏聊天栏显示通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Display on login overlay",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "显示在登录悬浮窗中",
       "Source": "library"
     },
     {
@@ -726,6 +1312,15 @@
       "Source": "library"
     },
     {
+      "Original": "Do not display overlay in duty or combat",
+      "Context": "Notifications.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在副本或战斗中隐藏悬浮窗",
+      "Source": "library"
+    },
+    {
       "Original": "Do not error check venture planner",
       "Context": "ExpertTab..ctor",
       "Role": "UI",
@@ -740,6 +1335,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "AutoRetainer 已启用或多角色模式正在运行时不通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Do not show plugin status icons",
+      "Context": "ExpertTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "隐藏插件状态图标",
       "Source": "library"
     },
     {
@@ -758,6 +1361,14 @@
       "Role": "UI",
       "RoleReason": "→ Notify.Info",
       "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate this listing.",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "复制此条目。",
       "Source": "library"
     },
     {
@@ -930,6 +1541,22 @@
       "Source": "library"
     },
     {
+      "Original": "Enter plan name",
+      "Context": "InventoryCleanupCommon.DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入方案名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter plan name...",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "输入方案名称……",
+      "Source": "library"
+    },
+    {
       "Original": "Entrust Duplicates",
       "Context": "EntrustManager.Draw",
       "PreserveID": true,
@@ -967,7 +1594,7 @@
       "Context": "Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
-      "Translated": "托管计划 ",
+      "Translated": "托付方案 ",
       "Source": "library"
     },
     {
@@ -979,12 +1606,47 @@
       "Source": "library"
     },
     {
+      "Original": "Exchange plan name",
+      "Context": "DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "交换方案名称",
+      "Source": "library"
+    },
+    {
       "Original": "Exclude Character",
       "Context": "DrawExcludeReset",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.ButtonCtrl",
       "Translated": "排除此角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude from list",
+      "Context": "CharacterSync.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "从列表中排除",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude items present in protection list",
+      "Context": "EntrustManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除保护列表中的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclusions",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "排除项",
       "Source": "library"
     },
     {
@@ -1023,6 +1685,24 @@
       "Source": "library"
     },
     {
+      "Original": "FC points",
+      "Context": "FcDataManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "部队战绩",
+      "Source": "library"
+    },
+    {
+      "Original": "Fast addition/removal",
+      "Context": "EntrustManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader",
+      "Translated": "快速添加／移除",
+      "Source": "library"
+    },
+    {
       "Original": "Filter by name",
       "Context": "DrawListNew",
       "PreserveID": true,
@@ -1032,11 +1712,52 @@
       "Source": "library"
     },
     {
+      "Original": "Filter items...",
+      "Context": "VentureStatsManager.DrawVentures",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选物品……",
+      "Source": "library"
+    },
+    {
       "Original": "Filter...",
       "Context": "VentureBrowser.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "筛选…",
+      "Source": "library"
+    },
+    {
+      "Original": "Finish by purchasing items",
+      "Context": "DrawGCEchangeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "最后购买物品",
+      "Source": "library"
+    },
+    {
+      "Original": "First Sub Behavior:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "首艘潜水艇的行为：",
+      "Source": "library"
+    },
+    {
+      "Original": "First Sub Mode:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "首艘潜水艇的模式：",
+      "Source": "library"
+    },
+    {
+      "Original": "First Sub Plan:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "首艘潜水艇的方案：",
       "Source": "library"
     },
     {
@@ -1081,6 +1802,15 @@
       "Source": "library"
     },
     {
+      "Original": "Functions",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "功能",
+      "Source": "library"
+    },
+    {
       "Original": "Gil",
       "Context": "FcDataManager.Draw",
       "PreserveID": true,
@@ -1115,6 +1845,15 @@
       "Source": "library"
     },
     {
+      "Original": "Hide this overlay",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "隐藏此悬浮窗",
+      "Source": "library"
+    },
+    {
       "Original": "Hold CTRL and click",
       "Context": "Draw",
       "Role": "UI",
@@ -1132,6 +1871,14 @@
       "Source": "library"
     },
     {
+      "Original": "Hull:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "船体：",
+      "Source": "library"
+    },
+    {
       "Original": "I agree that I may lose all AutoRetainer data",
       "Context": "SingletonNotifyWindow.DrawContent",
       "PreserveID": true,
@@ -1141,11 +1888,28 @@
       "Source": "library"
     },
     {
+      "Original": "I have recently renamed this vessel",
+      "Context": "WorkshopUI.DrawRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "我最近为这艘艇改过名",
+      "Source": "library"
+    },
+    {
       "Original": "If all above are disabled or fail, will be teleported to inn.",
       "Context": "MultiModeCommon..ctor",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "若上方选项均已关闭或执行失败，将传送到旅馆。",
+      "Source": "library"
+    },
+    {
+      "Original": "If game is inactive: (requires NotificationMaster to be installed and enabled)",
+      "Context": "Notifications.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "游戏处于后台时（需安装并启用 NotificationMaster）：",
       "Source": "library"
     },
     {
@@ -1176,12 +1940,65 @@
       "Source": "library"
     },
     {
+      "Original": "Import blacklisted entries from Discard Helper",
+      "Context": "InventoryManagementCommon.ImportBlacklistFromArDiscard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "从 Discard Helper 导入黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Import discard entries from Discard Helper",
+      "Context": "InventoryManagementCommon.ImportFromArDiscard",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Button",
+      "Translated": "从 Discard Helper 导入丢弃清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Imported plan from clipboard",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "已从剪贴板导入方案",
+      "Source": "library"
+    },
+    {
       "Original": "Include other characters",
       "Context": "Notifications.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "包含其他角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Interaction",
+      "Context": "RetainersOld.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid data",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "数据无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory slots: ",
+      "Context": "RetainersOld.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "背包格数： ",
       "Source": "library"
     },
     {
@@ -1211,6 +2028,14 @@
       "Source": "library"
     },
     {
+      "Original": "Keep",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "保留",
+      "Source": "library"
+    },
+    {
       "Original": "Last updated ",
       "Context": "FcDataManager.Draw",
       "Role": "UI",
@@ -1225,6 +2050,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.HoveredAndClicked",
       "Translated": "左键：重新登录此角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Left click - relog to this character\nRight click - open quick travel window",
+      "Context": "WorkshopUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HoveredAndClicked",
+      "Translated": "左键点击：重新登录至此角色\n右键点击：打开快捷旅行窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Level range:",
+      "Context": "VenturePlanner.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "等级范围：",
       "Source": "library"
     },
     {
@@ -1255,6 +2097,14 @@
       "Source": "library"
     },
     {
+      "Original": "Load saved plan...",
+      "Context": "VenturePlanner.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "加载已保存的方案……",
+      "Source": "library"
+    },
+    {
       "Original": "Make night mode status persistent",
       "Context": "NightMode.Draw",
       "PreserveID": true,
@@ -1270,6 +2120,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "关机命令改为启用夜间模式，不再关闭游戏",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual execution only",
+      "Context": "EntrustManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅手动执行",
       "Source": "library"
     },
     {
@@ -1290,6 +2149,41 @@
       "Source": "library"
     },
     {
+      "Original": "Mass addition/removal",
+      "Context": "InventoryManagementCommon.DrawListNew",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader",
+      "Translated": "批量添加／移除",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum item level",
+      "Context": "DrawListNew",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最高品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Merge with Clipboard",
+      "Context": "InventoryManagementCommon.DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "与剪贴板内容合并",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum item level",
+      "Context": "DrawListNew",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最低品级",
+      "Source": "library"
+    },
+    {
       "Original": "Mode",
       "Context": "GCCharacterConfiguration.Draw",
       "PreserveID": true,
@@ -1307,6 +2201,14 @@
       "Source": "library"
     },
     {
+      "Original": "Move to the top",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "移至顶部",
+      "Source": "library"
+    },
+    {
       "Original": "MultiMode controls this option. Hold CTRL to override.",
       "Context": "RetainerListOverlay.Draw",
       "Role": "UI",
@@ -1320,6 +2222,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.TextV",
       "Translated": "名称： ",
+      "Source": "library"
+    },
+    {
+      "Original": "New plan",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建方案",
       "Source": "library"
     },
     {
@@ -1361,6 +2272,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginCombo",
       "Translated": "未选择计划，或所选计划无法识别",
+      "Source": "library"
+    },
+    {
+      "Original": "No submersibles",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "没有潜水艇",
       "Source": "library"
     },
     {
@@ -1421,6 +2341,22 @@
       "Source": "library"
     },
     {
+      "Original": "On plan completion:",
+      "Context": "VenturePlanner.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "方案完成后：",
+      "Source": "library"
+    },
+    {
+      "Original": "One-Time",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginDefaultTable",
+      "Translated": "仅一次",
+      "Source": "library"
+    },
+    {
       "Original": "Only Selected",
       "Context": "DrawGCEchangeList",
       "PreserveID": true,
@@ -1447,6 +2383,14 @@
       "Source": "library"
     },
     {
+      "Original": "Open Plugin Settings",
+      "Context": "RetainerListOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "打开插件设置",
+      "Source": "library"
+    },
+    {
       "Original": "Open Submarine Point Plan Editor",
       "Context": "SubmarinePointPlanUI..cctor",
       "Role": "UI",
@@ -1460,6 +2404,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconButtonWithText",
       "Translated": "打开潜水艇解锁计划编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Voyage Route Planner",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开航行路线规划器",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Voyage Unlockable Planner",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开航点解锁规划器",
       "Source": "library"
     },
     {
@@ -1489,12 +2451,37 @@
       "Source": "library"
     },
     {
+      "Original": "Open settings window",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Options marked with this marker will use values from global configuration",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "带此标记的选项采用全局配置中的值",
+      "Source": "library"
+    },
+    {
       "Original": "Output entrusted items into chat",
       "Context": "EntrustManager.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "在聊天栏显示寄存的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Overall total: ",
+      "Context": "GilDisplayManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "总计： ",
       "Source": "library"
     },
     {
@@ -1514,11 +2501,69 @@
       "Source": "library"
     },
     {
+      "Original": "Paste plan settings",
+      "Context": "SubmarinePointPlanUI.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "粘贴方案设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Pasted successfully",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "粘贴成功",
+      "Source": "library"
+    },
+    {
       "Original": "Paused",
       "Context": "RetainerListOverlay.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Text",
       "Translated": "已暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan ",
+      "Context": "SubmarineUnlockPlanUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "方案 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan name",
+      "Context": "EntrustManager.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "方案名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Plan:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "方案：",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin load has been halted in order to prevent data loss.",
+      "Context": "SingletonNotifyWindow.DrawContent",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "为防止数据丢失，插件已停止加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin operation is suppressed by other plugin.",
+      "Context": "AutoRetainerWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "其他插件暂时阻止了本插件运行。",
       "Source": "library"
     },
     {
@@ -1576,7 +2621,23 @@
       "Context": "RetainerListOverlay.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Tooltip",
-      "Translated": "快速寄存",
+      "Translated": "快速托付",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Withdraw Gil",
+      "Context": "RetainerListOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "快速取出金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Ranges:",
+      "Context": "DeployablesTab.AutomatedSubPlannerWidget",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "范围：",
       "Source": "library"
     },
     {
@@ -1598,11 +2659,36 @@
       "Source": "library"
     },
     {
+      "Original": "Remove 0-quantity items",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "移除数量为零的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove all locks",
+      "Context": "MultiModeLockout.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "解除所有锁定",
+      "Source": "library"
+    },
+    {
       "Original": "Remove entrust plan from selected retainers",
       "Context": "RetainersTab.MassConfigurationChangeWidget",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconButtonWithText",
       "Translated": "清除所选雇员的寄存计划",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove these items to list",
+      "Context": "DrawListNew",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText",
+      "Translated": "从清单中移除这些物品",
       "Source": "library"
     },
     {
@@ -1656,6 +2742,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重置计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset quantities to 0",
+      "Context": "ExchangeLists.DrawGCEchangeList",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "将数量重置为 0",
       "Source": "library"
     },
     {
@@ -1960,6 +3055,15 @@
       "Source": "library"
     },
     {
+      "Original": "Show HQ and non-HQ together",
+      "Context": "VentureStatsManager.DrawVentures",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将普通品质和高品质物品合并显示",
+      "Source": "library"
+    },
+    {
       "Original": "Show MultiMode checkbox on plugin UI bar",
       "Context": "ExpertTab..ctor",
       "Role": "UI",
@@ -1974,6 +3078,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "显示夜间模式开关",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only wallet FC",
+      "Context": "FcDataManager.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示启用钱包功能的部队",
       "Source": "library"
     },
     {
@@ -2170,6 +3283,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.TextWrapped",
       "Translated": "启用多角色模式时尝试进入附近房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Use server time instead of PC time",
+      "Context": "ExpertTab..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "使用服务器时间代替电脑时间",
       "Source": "library"
     },
     {

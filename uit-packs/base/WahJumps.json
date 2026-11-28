@@ -77,6 +77,14 @@
       "Source": "library"
     },
     {
+      "Original": "Avg Difficulty: ",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "平均难度： ",
+      "Source": "library"
+    },
+    {
       "Original": "Browse puzzles and click ♡ to favorite them",
       "Context": "MainWindow.DrawPuzzleTableView",
       "Role": "UI",
@@ -90,6 +98,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "建造者",
+      "Source": "library"
+    },
+    {
+      "Original": "Builder: ",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "建造者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "By Region: ",
+      "Context": "OverviewTab.DrawSummaryStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "按地区： ",
       "Source": "library"
     },
     {
@@ -127,6 +151,22 @@
       "Source": "library"
     },
     {
+      "Original": "Data count: ",
+      "Context": "InformationTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数据数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Data loaded: ",
+      "Context": "InformationTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "数据已加载： ",
+      "Source": "library"
+    },
+    {
       "Original": "Data loading completed successfully!",
       "Context": "MainWindow.OnDataLoaded",
       "Role": "UI",
@@ -159,6 +199,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "要素",
+      "Source": "library"
+    },
+    {
+      "Original": "Error loading data: ",
+      "Context": "MainWindow.LoadCsvDataFromFile",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "加载数据出错： ",
       "Source": "library"
     },
     {
@@ -368,6 +416,14 @@
       "Source": "library"
     },
     {
+      "Original": "Puzzles: ",
+      "Context": "OverviewTab.DrawTopBuildersTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "跳跳乐： ",
+      "Source": "library"
+    },
+    {
       "Original": "Ratings & puzzle code reference",
       "Context": "MainWindow.DrawToolStrip",
       "Role": "UI",
@@ -510,6 +566,14 @@
       "Source": "library"
     },
     {
+      "Original": "Summary: ",
+      "Context": "OverviewTab.DrawSummaryStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "概览： ",
+      "Source": "library"
+    },
+    {
       "Original": "Thanks to the Strange Housing staff & community!",
       "Context": "StrangeHousingTab.Draw",
       "Role": "UI",
@@ -553,6 +617,14 @@
       "Source": "library"
     },
     {
+      "Original": "Travel to ",
+      "Context": "MainWindow.DrawPuzzleTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "前往 ",
+      "Source": "library"
+    },
+    {
       "Original": "Try clearing the search or rating filter",
       "Context": "MainWindow.DrawPuzzleTableView",
       "Role": "UI",
@@ -574,6 +646,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "无法加载说明数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unique Builders: ",
+      "Context": "OverviewTab.DrawSummaryStatistics",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "不同建造者人数： ",
       "Source": "library"
     },
     {

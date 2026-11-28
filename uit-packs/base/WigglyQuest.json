@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\nCheck logs for details.",
+      "Context": "QuestSequenceComponent.DrawQuestSequences",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "\n详情请查阅日志。",
+      "Source": "library"
+    },
+    {
       "Original": " Not Found",
       "Context": "QuestSequenceComponent.DrawQuestSequences",
       "Role": "UI",
@@ -64,6 +72,22 @@
       "Source": "library"
     },
     {
+      "Original": "Accepted and available quests - type to search all quests",
+      "Context": "QuestSelector.DrawSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已接受及可接受的任务，输入文字可搜索所有任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "UiUtils.GetQuestStyle",
+      "Role": "UI",
+      "RoleReason": "→ ThemeStatus.ChecklistItem",
+      "Translated": "生效中",
+      "Source": "library"
+    },
+    {
       "Original": "Add FATE definitions to the FatePaths folder to get started.",
       "Context": "FateSelectionWindow.DrawContent",
       "Role": "UI",
@@ -78,6 +102,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "添加步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Add fate action target",
+      "Context": "QuestEditorFieldDrawers.DrawFateActionTargetsField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加危命任务技能目标",
       "Source": "library"
     },
     {
@@ -130,6 +162,14 @@
       "Source": "library"
     },
     {
+      "Original": "Answer (Not Set)###Answer",
+      "Context": "QuestEditorFieldDrawers.DrawDialogueChoicesField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "回答（未设置）",
+      "Source": "library"
+    },
+    {
       "Original": "Author:",
       "Context": "QuestEditorQuestManager.DrawNewQuestTab",
       "Role": "UI",
@@ -167,6 +207,14 @@
       "Role": "UI",
       "RoleReason": "→ SidebarNav.Draw",
       "Translated": "黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted",
+      "Context": "UiUtils.GetQuestStyle",
+      "Role": "UI",
+      "RoleReason": "→ ThemeStatus.ChecklistItem",
+      "Translated": "已加入黑名单",
       "Source": "library"
     },
     {
@@ -269,6 +317,23 @@
       "Source": "library"
     },
     {
+      "Original": "Combat Delay",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "战斗延迟",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Target ",
+      "Context": "QuestEditorFieldDrawers.DrawComplexCombatDataField",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "战斗目标 ",
+      "Source": "library"
+    },
+    {
       "Original": "Comment",
       "Context": "QuestEditorStepEditor.DrawStepEditorContent",
       "PreserveID": true,
@@ -359,6 +424,14 @@
       "Source": "library"
     },
     {
+      "Original": "Delay at Start (seconds)",
+      "Context": "QuestEditorFieldDrawers.DrawAdvancedFields",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "开始前延迟（秒）",
+      "Source": "library"
+    },
+    {
       "Original": "Delete",
       "Context": "SavedPresetsComponent.DrawPresetEntry",
       "Role": "UI",
@@ -446,6 +519,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TreeNodeEx",
       "Translated": "事件",
+      "Source": "library"
+    },
+    {
+      "Original": "Execute single step",
+      "Context": "ActiveQuestComponent.DrawQuestCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "执行单个步骤",
       "Source": "library"
     },
     {
@@ -595,6 +676,14 @@
       "Source": "library"
     },
     {
+      "Original": "Hold CTRL to delete",
+      "Context": "SavedPresetsComponent.DrawPresetEntry",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Ctrl 以删除",
+      "Source": "library"
+    },
+    {
       "Original": "Hold CTRL to enable this button.",
       "Context": "ManualPriorityComponent.Draw",
       "Role": "UI",
@@ -616,6 +705,14 @@
       "Role": "UI",
       "RoleReason": "→ ThemeControls.IconTextButton",
       "Translated": "导入",
+      "Source": "library"
+    },
+    {
+      "Original": "Import (",
+      "Context": "SavedPresetsComponent.DrawBottomButtons",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "导入（",
       "Source": "library"
     },
     {
@@ -830,6 +927,14 @@
       "Source": "library"
     },
     {
+      "Original": "Next Quest ID",
+      "Context": "QuestEditorFieldDrawers.DrawNextQuestIdField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "下一个任务的 ID",
+      "Source": "library"
+    },
+    {
       "Original": "Next: ",
       "Context": "ActiveQuestComponent.DrawQuestCard",
       "Role": "UI",
@@ -1022,6 +1127,14 @@
       "Source": "library"
     },
     {
+      "Original": "Quest Sequence Viewer",
+      "Context": "QuestSequenceComponent.DrawCustomHeader",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "任务顺序查看器",
+      "Source": "library"
+    },
+    {
       "Original": "Quest sim active (experimental)",
       "Context": "ActiveQuestComponent.DrawSimulationControls",
       "Role": "UI",
@@ -1088,6 +1201,22 @@
       "Source": "library"
     },
     {
+      "Original": "Remove Done",
+      "Context": "ManualPriorityComponent.DrawCompact",
+      "Role": "UI",
+      "RoleReason": "→ ThemeControls.IconTextButton",
+      "Translated": "移除已完成项",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove this choice",
+      "Context": "QuestEditorFieldDrawers.DrawPointMenuChoicesField",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "移除此选项",
+      "Source": "library"
+    },
+    {
       "Original": "Required plugins",
       "Context": "PluginsStep.get_Title",
       "Role": "UI",
@@ -1117,6 +1246,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "需要变身",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires:",
+      "Context": "QuestTooltipComponent.DrawQuestUnlocks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需条件：",
       "Source": "library"
     },
     {
@@ -1168,6 +1305,15 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TreeNode",
       "Translated": "序列 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sequence Number",
+      "Context": "QuestEditorSequenceManager.DrawSequenceEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputByte",
+      "Translated": "顺序编号",
       "Source": "library"
     },
     {
@@ -1278,6 +1424,14 @@
       "Source": "library"
     },
     {
+      "Original": "Target Data ID",
+      "Context": "QuestEditorFieldDrawers.GetFriendlyFieldName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "目标数据 ID",
+      "Source": "library"
+    },
+    {
       "Original": "Target: ",
       "Context": "CreationUtilsComponent.DrawTargetDetails",
       "Role": "UI",
@@ -1324,6 +1478,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "文字： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel Mode",
+      "Context": "QuestEditorFieldDrawers.DrawAdvancedFields",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "移动方式",
       "Source": "library"
     },
     {

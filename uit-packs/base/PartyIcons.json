@@ -8,6 +8,23 @@
   },
   "entries": [
     {
+      "Original": " Don't show\nstatus icons\n      at all",
+      "Context": "UpgradeGuideTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": " 完全\n隐藏\n状态图标",
+      "Source": "library"
+    },
+    {
+      "Original": "(Status icons are the icons for online statuses such as Disconnected, Viewing Cutscene, Waiting for Duty, Mentor, New Adventurer (sprout), and so on.)",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "（状态图标表示离线、观看过场动画、正在等待任务、指导者、初学者等在线状态。）",
+      "Source": "library"
+    },
+    {
       "Original": "Add context menu command to save a role as static",
       "Context": "StaticAssignmentsTab.Draw",
       "Role": "UI",
@@ -21,6 +38,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "添加用于分配站位的右键菜单项",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds context menu commands to assign roles to players. When applicable, commands to swap role and use a suggested role are also added.",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在右键菜单中添加为玩家分配职责的命令。适用时也会提供交换职责和使用建议职责的选项。",
       "Source": "library"
     },
     {
@@ -56,6 +81,14 @@
       "Source": "library"
     },
     {
+      "Original": "Allows party members to assign themselves a role, e.g. saying 'h1' in party chat will give that player the healer 1 role.",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "允许队员自行认领职责。例如在小队聊天中输入 h1 即可认领治疗 1。",
+      "Source": "library"
+    },
+    {
       "Original": "Appearance",
       "Context": "SettingsWindow.Draw",
       "Role": "UI",
@@ -72,12 +105,28 @@
       "Source": "library"
     },
     {
+      "Original": "Can be used to determine the duty type before fully loading in.",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "可在场景完全加载前判断任务类型。",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "UpgradeGuideTab.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Certain important status icons (like Disconnected, AFK or Viewing Cutscene) replace job icons entirely when appropriate, but status icons are otherwise hidden.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "离线、离开、观看过场动画等重要状态出现时，以状态图标替代职业图标。其他状态图标保持隐藏。",
       "Source": "library"
     },
     {
@@ -156,6 +205,14 @@
       "Source": "library"
     },
     {
+      "Original": "Determines how to perform icon swaps for statuses set to 'Important':\r\n- 'None' does nothing\r\n- 'Swap' will swap the status icon and job icon positions\r\n- 'Replace' will move the status icon into the job item slot, leaving the status icon empty",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "设置标为「重要」的状态如何切换图标：\r\n－无：不调整。\r\n－互换：交换状态与职业图标的位置。\r\n－替代：将状态图标放到职业栏位，留空原状态栏位。",
+      "Source": "library"
+    },
+    {
       "Original": "Display chat message when entering duty",
       "Context": "GeneralTab.Draw",
       "Role": "UI",
@@ -222,6 +279,14 @@
       "Source": "library"
     },
     {
+      "Original": "From this version, it's now possible to display both job icons and status icons together, and to customize this setting for each nameplate display type.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "从本版本起，状态图标与职业图标可同时显示，并可针对每种姓名牌类型分别设置。",
+      "Source": "library"
+    },
+    {
       "Original": "General",
       "Context": "SettingsWindow.Draw",
       "Role": "UI",
@@ -251,6 +316,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "按住 Ctrl 并点击滑块可输入精确数值",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control to allow clicking",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip",
+      "Translated": "按住 Ctrl 允许点击",
       "Source": "library"
     },
     {
@@ -303,6 +376,14 @@
       "Source": "library"
     },
     {
+      "Original": "In duties, certain important statuses are swapped with the job icon, but otherwise mostly hidden. In the overworld, most statuses are displayed in their own status icon slot.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "副本中，重要状态图标与职业图标互换，其余状态大多隐藏。野外的大多数状态则显示在独立的状态图标栏位。",
+      "Source": "library"
+    },
+    {
       "Original": "Instances",
       "Context": "ChatNameTab.Draw",
       "PreserveID": true,
@@ -317,6 +398,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "职业图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Name should include world name, separated by @. Keep in mind that if players job is not appropriate for the assigned role, the assignment will be ignored!",
+      "Context": "StaticAssignmentsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "名称应包含服务器名，并使用 @ 分隔。若玩家当前职业不适合被分配的职责，插件将忽略这次分配。",
       "Source": "library"
     },
     {
@@ -341,6 +430,22 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "姓名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "No changes will be made.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "不会更改现有设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: Priority status icons are now configured per nameplate type from the 'Appearance' tab via the 'Swap Style' option. You can also configure which icons are considered important enough to prioritize in the 'Status Icons' tab.",
+      "Context": "GeneralTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "现在可在「外观」页为各类姓名牌分别设置「切换样式」。可在「状态图标」页选择哪些状态需要优先显示。",
       "Source": "library"
     },
     {
@@ -377,11 +482,28 @@
       "Source": "library"
     },
     {
+      "Original": "Only works when nameplates set to 'Role letters' or 'Small job icon, role and name'.",
+      "Context": "StaticAssignmentsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.ImGuiHelpTooltip",
+      "Translated": "仅当姓名牌设为「职能字母」或「小职业图标、职能和名称」时生效。",
+      "Source": "library"
+    },
+    {
       "Original": "Other actions",
       "Context": "AppearanceTab.DrawDisplayConfig",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "其他操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Other actions: ",
+      "Context": "StatusTab.DrawStatusConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "其他操作： ",
       "Source": "library"
     },
     {
@@ -402,6 +524,14 @@
       "Source": "library"
     },
     {
+      "Original": "Party Icons Upgrade Guide (for version 1.2)",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Party Icons 1.2 版升级指南",
+      "Source": "library"
+    },
+    {
       "Original": "Party:",
       "Context": "ChatNameTab.Draw",
       "Role": "UI",
@@ -415,6 +545,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "将已启用的右键菜单指令放到单独的子菜单中",
+      "Source": "library"
+    },
+    {
+      "Original": "Please select one of the above options to continue. You can bring this window up again from the General tab, or customize status icon visibility in much greater detail from the Appearance and Status Icons tabs.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请选择上方一项继续。你可以在「常规」页重新打开此窗口，或在「外观」与「状态图标」页进一步调整显示方式。",
       "Source": "library"
     },
     {
@@ -456,6 +594,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "在小队列表中用站位替换队员编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Replicate the\n  old priority\n      system",
+      "Context": "UpgradeGuideTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "沿用\n旧版\n优先级",
       "Source": "library"
     },
     {
@@ -541,11 +688,35 @@
       "Source": "library"
     },
     {
+      "Original": "Swap style",
+      "Context": "AppearanceTab.DrawDisplayConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "切换样式",
+      "Source": "library"
+    },
+    {
+      "Original": "The Dawntrail update of Party Icons brings some changes to how status icons are displayed.",
+      "Context": "UpgradeGuideTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Party Icons 在「金曦之遗辉」更新中调整了状态图标的显示方式。",
+      "Source": "library"
+    },
+    {
       "Original": "This plugin is intentionally disabled during PvP matches.",
       "Context": "NameplateTab.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "此插件在玩家对战期间停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown (",
+      "Context": "UiNames.GetName",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "未知（",
       "Source": "library"
     },
     {
@@ -557,12 +728,29 @@
       "Source": "library"
     },
     {
+      "Original": "Use the new\n    defaults",
+      "Context": "UpgradeGuideTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用新版\n默认设置",
+      "Source": "library"
+    },
+    {
       "Original": "User-created",
       "Context": "AppearanceTab.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGuiExt.SectionHeader",
       "Translated": "用户创建",
+      "Source": "library"
+    },
+    {
+      "Original": "You can turn your own nameplate on and also turn this\nsetting own to only use nameplate to display own raid position.\nIf you don't want your position displayed with this setting you can simply disable\nyour nameplates in the Character settings.",
+      "Context": "NameplateTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "可以打开自己的姓名牌，并开启此项\n以仅用姓名牌显示自己的副本位置。\n如果不希望显示自己的位置，可直接在角色设置中\n关闭自己的姓名牌。",
       "Source": "library"
     },
     {

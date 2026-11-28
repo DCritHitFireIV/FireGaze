@@ -8,6 +8,51 @@
   },
   "entries": [
     {
+      "Original": "Error processing regex search. ",
+      "Context": "CharacterConfig.GetTitlesBySearchString",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "处理正则表达式搜索时出错。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "World Name",
+      "Context": "ConfigWindow.DrawCharacterList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "服务器名称",
+      "Source": "library"
+    },
+    {
+      "Original": "[DEBUG] IPC Assignments",
+      "Context": "ConfigWindow.DrawCharacterList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "［调试］IPC 分配",
+      "Source": "library"
+    },
+    {
+      "Original": "This window does not support 'Click Through' and was somehow enabled accidentally. Please disable Click Through by clicking the three lines on the top right of the window.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此窗口不支持鼠标穿透，但该功能意外开启了。请点击窗口右上角的三横线，关闭鼠标穿透。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Identity:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前身份：",
+      "Source": "library"
+    },
+    {
       "Original": "Reset",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -35,6 +80,15 @@
       "Source": "library"
     },
     {
+      "Original": "Plugin Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "插件选项",
+      "Source": "library"
+    },
+    {
       "Original": "Support",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -53,12 +107,102 @@
       "Source": "library"
     },
     {
+      "Original": "DEBUG INFO",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "调试信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Object: ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "活动对象： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Title:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前称号：",
+      "Source": "library"
+    },
+    {
+      "Original": "Displayed Title:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "显示的称号：",
+      "Source": "library"
+    },
+    {
+      "Original": "According to Dalamud",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "根据 Dalamud 的数据",
+      "Source": "library"
+    },
+    {
       "Original": "Title is Hidden",
       "Context": "ConfigWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "称号已隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Expected Title:",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "预期称号：",
+      "Source": "library"
+    },
+    {
+      "Original": "Titles Match?: ",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "称号是否匹配： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Title not currently visible.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前未显示称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character is not currently in world.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "该角色目前不在场景中。",
+      "Source": "library"
+    },
+    {
+      "Original": "This character's title is currently assigned by another plugin.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前称号由其他插件指定。",
       "Source": "library"
     },
     {
@@ -71,12 +215,84 @@
       "Source": "library"
     },
     {
+      "Original": "Title",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Prefix",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "前缀",
+      "Source": "library"
+    },
+    {
       "Original": "Colour",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Glow",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "辉光",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Titles to Clipboard",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将称号导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Titles from Clipboard",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从剪贴板导入称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold SHIFT to import titles, keeping existing titles.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "按住 Shift 导入称号并保留现有称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL and ALT to import titles, replacing existing titles.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按住 Ctrl 和 Alt 导入称号并替换现有称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Honorific Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Honorific 选项",
       "Source": "library"
     },
     {
@@ -98,12 +314,120 @@
       "Source": "library"
     },
     {
+      "Original": "Display titles in 'Examine' window.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在「查看角色信息」窗口显示称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Display preview in config window.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在设置窗口中显示预览。",
+      "Source": "library"
+    },
+    {
+      "Original": "Attempt to reduce nameplate flashing",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "尝试减少姓名牌闪烁",
+      "Source": "library"
+    },
+    {
       "Original": "Hide Vanilla Titles",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TreeNode",
       "Translated": "隐藏游戏原有称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides titles that were not set by honorific.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "隐藏由 Honorific 以外来源指定的称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide 《 and 》 from honorific titles.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏 Honorific 称号两侧的《》符号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Ko-fi Support button",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏 Ko-fi 赞助按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Supporter Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "赞助者选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Supporting me on Ko-fi will allow access to extra features within honorific. I can make no guarantee these features will remain available, but I will do my best.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "通过 Ko-fi 支持开发者可使用 Honorific 的额外功能。作者会尽力维护，但无法保证这些功能永久可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Support Caraxi on Ko-Fi",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在 Ko-fi 上支持 Caraxi",
+      "Source": "library"
+    },
+    {
+      "Original": "Tick this box to enable supporter only features",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "勾选此项以启用赞助者专用功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Debugging",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "调试",
+      "Source": "library"
+    },
+    {
+      "Original": "Index",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "索引",
       "Source": "library"
     },
     {
@@ -125,12 +449,174 @@
       "Source": "library"
     },
     {
+      "Original": "No Object",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无对象",
+      "Source": "library"
+    },
+    {
       "Original": "Commands",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Titles",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "切换称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Any one of Enable, Disable, or Toggle",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "选择 Enable、Disable 或 Toggle 之一",
+      "Source": "library"
+    },
+    {
+      "Original": "Any configured title on the active character.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前角色已设置的任一称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "If multiple titles are configured with the same text, only the first listed will be used.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "若多个称号的文字相同，只会使用排在最前面的一个。",
+      "Source": "library"
+    },
+    {
+      "Original": "A titles Unique ID may also be used, which can be obtained by right clicking the enable checkbox.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "也可使用唯一 ID。右键点击称号的启用复选框即可获取。",
+      "Source": "library"
+    },
+    {
+      "Original": " may be used to target all titles configured on active character.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 可用于指定当前角色的所有称号。",
+      "Source": "library"
+    },
+    {
+      "Original": " may be used to target the 'default' title of the active character",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 可用于指定当前角色的默认称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable, Disable, or Toggle a title on the current character.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启用、停用或切换当前角色的某个称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Forced Titles",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "强制称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Title Text",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "称号文本",
+      "Source": "library"
+    },
+    {
+      "Original": "(Optional) Prefix or Suffix\nSets the title to prefix or suffix position.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "（可选）Prefix 或 Suffix\n指定称号显示在姓名前还是姓名后。",
+      "Source": "library"
+    },
+    {
+      "Original": "(Optional) #RRGGBB hex colour code for the main colour of the title.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "（可选）称号主色的十六进制颜色值，格式为 #RRGGBB。",
+      "Source": "library"
+    },
+    {
+      "Original": "(Optional) #RRGGBB hex colour code for the glow colour of the title.\nCan only be used if the main colour is set.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "（可选）称号辉光的十六进制颜色值，格式为 #RRGGBB。\n必须先设置主色才能使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets a title that will override all other configured titles.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "指定一个优先于其他设置的称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Generator",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "命令生成器",
+      "Source": "library"
+    },
+    {
+      "Original": "Gradient Builder",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "渐变编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "The Gradient Builder is for me to create new preset designs. It is not intended for use by end users, but I've left it available to allow people to create them to share with me to add. You will not be able to use any gradient you create on a title.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "此工具用于制作新的预设样式。你可以编辑渐变并分享给开发者，以供加入预设；自行制作的渐变无法直接用于称号。",
       "Source": "library"
     },
     {
@@ -161,6 +647,24 @@
       "Source": "library"
     },
     {
+      "Original": "Override Title",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "覆盖称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Title has been assigned using \"/honorific force set\" command.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "此称号由 /honorific force set 命令指定。",
+      "Source": "library"
+    },
+    {
       "Original": "Hold SHIFT to delete.",
       "Context": "ConfigWindow.DrawCharacterView",
       "PreserveID": false,
@@ -170,12 +674,48 @@
       "Source": "library"
     },
     {
+      "Original": "This title will not be used as another title with the same condition precedes it.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "此称号的条件与前一个称号相同，前一个称号优先生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is the current active title.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "这是当前生效的称号。",
+      "Source": "library"
+    },
+    {
       "Original": "Toggle this title",
       "Context": "ConfigWindow.DrawCharacterView",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "切换此称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Right click to copy toggle command.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "右键点击以复制切换命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown(",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "未知（",
       "Source": "library"
     },
     {
@@ -224,6 +764,87 @@
       "Source": "library"
     },
     {
+      "Original": "Any World",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "任意服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "小区",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "小区 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Division",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "主区",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub Division",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "扩建区",
+      "Source": "library"
+    },
+    {
+      "Original": "All Divisions",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "所有分区",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Plot ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "地块 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Any Plot",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "任意地块",
+      "Source": "library"
+    },
+    {
       "Original": "Room",
       "Context": "ConfigWindow.DrawCharacterView",
       "PreserveID": true,
@@ -242,12 +863,30 @@
       "Source": "library"
     },
     {
+      "Original": "Any Room",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "任意房间",
+      "Source": "library"
+    },
+    {
       "Original": "Set to current location",
       "Context": "ConfigWindow.DrawCharacterView",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "设为当前位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Title",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "默认称号",
       "Source": "library"
     },
     {
@@ -260,6 +899,87 @@
       "Source": "library"
     },
     {
+      "Original": "Using random titles allows your title to be picked from all titles that currently meet their conditions.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "启用后会从当前所有满足条件的称号中随机选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "The selected random title will be locked in until its condition is no longer met, allowing another title to be picked.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前随机称号会一直保留，直至不再满足条件，再重新选择。",
+      "Source": "library"
+    },
+    {
+      "Original": "Using the '",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "点击「",
+      "Source": "library"
+    },
+    {
+      "Original": "Next Random",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "下一个随机称号",
+      "Source": "library"
+    },
+    {
+      "Original": "' button or command '",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "」按钮或输入命令「",
+      "Source": "library"
+    },
+    {
+      "Original": "' will force it to pick a new random title.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "」可立即重新抽取称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: The default title will never be included in the random title selection.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "注意：默认称号不参与随机抽取。",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a new random title on zone change",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "切换区域时重新随机选择称号",
+      "Source": "library"
+    },
+    {
+      "Original": "Select a new random title after",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "经过指定时间后重新随机选择称号",
+      "Source": "library"
+    },
+    {
       "Original": "minutes",
       "Context": "ConfigWindow.DrawCharacterView",
       "PreserveID": true,
@@ -269,12 +989,147 @@
       "Source": "library"
     },
     {
+      "Original": "Current Title: ",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前称号： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Honorific appears to be failing to set this characters title.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "Honorific 似乎未能为该角色设置称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "If this is unexpected, please check the following:",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "如果这不符合预期，请检查以下项目：",
+      "Source": "library"
+    },
+    {
+      "Original": " - PlayerTags configuration may be set to override titles.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " －PlayerTags 可能设置为覆盖称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "PlayerTags is another plugin known to cause issues with certain configurations and has been detected as installed.\n\nIt is possible to configure PlayerTags in a way that does not conflict with Honorific.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "已检测到 PlayerTags。该插件的某些设置可能与 Honorific 冲突。\n\n可以调整 PlayerTags 的设置，使其与 Honorific 同时使用。",
+      "Source": "library"
+    },
+    {
+      "Original": " - Another plugin may be setting the title causing a conflict.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " －可能有其他插件正在指定称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Title is currently not visible.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前未显示称号。",
+      "Source": "library"
+    },
+    {
+      "Original": " - PlayerTags configuration may be set to hide titles.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " －PlayerTags 可能设置为隐藏称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "PlayerTags is another plugin you have installed.\nAdjust the 'Title Visibility' options.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "你已安装 PlayerTags。\n请检查「称号可见性」选项。",
+      "Source": "library"
+    },
+    {
+      "Original": " - Another plugin may be hiding the title.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " －可能有其他插件隐藏了称号。",
+      "Source": "library"
+    },
+    {
+      "Original": " - Ensure game options are set to allow this character's title to be displayed.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " －请在游戏设置中允许显示该角色的称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "No Colour",
+      "Context": "ConfigWindow.DrawColorPicker",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "无颜色",
+      "Source": "library"
+    },
+    {
       "Original": "Clear selected colour",
       "Context": "ConfigWindow.DrawColorPicker",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "清除所选颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Revert to previous selection",
+      "Context": "ConfigWindow.DrawColorPicker",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "恢复上次选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Glow",
+      "Context": "ConfigWindow.DrawGradientPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "默认辉光",
+      "Source": "library"
+    },
+    {
+      "Original": "Wave",
+      "Context": "ConfigWindow.DrawGradientPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "波动",
       "Source": "library"
     },
     {
@@ -320,6 +1175,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginCombo",
       "Translated": "显示类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Key",
+      "Context": "PerformanceMonitors.DrawTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "键",
       "Source": "library"
     },
     {
@@ -377,12 +1241,174 @@
       "Source": "library"
     },
     {
+      "Original": "Open the Honorific config window.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Honorific 设置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to use command. Character not found.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法执行命令：找不到角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to use command. This character has not been configured.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法执行命令：尚未为该角色配置称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "' is not setup on this character.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "」未在此角色上设置。",
+      "Source": "library"
+    },
+    {
+      "Original": " titles.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "' is not a valid action.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "」不是有效的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "This character is not configured to use random titles.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "此角色未启用随机称号。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to use set command. Character not found.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法执行 set 命令：找不到角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to use set command. Config failure.",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无法执行 set 命令：设置出错。",
+      "Source": "library"
+    },
+    {
+      "Original": "Title is too long: '",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "称号过长：「",
+      "Source": "library"
+    },
+    {
+      "Original": "'. (Max ",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "」。（上限 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Option in Set: '",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "set 命令中存在重复选项：「",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Option in Set: '",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "set 命令中存在无效选项：「",
+      "Source": "library"
+    },
+    {
+      "Original": "World not found: '",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "找不到服务器：「",
+      "Source": "library"
+    },
+    {
+      "Original": "World not found: 'World#",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "找不到服务器：「World#",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Subcommand: '",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无效的子命令：「",
+      "Source": "library"
+    },
+    {
+      "Original": "Spread",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "扩散",
+      "Source": "library"
+    },
+    {
       "Original": "Mode",
       "Context": "GradientBuilder.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderInt",
       "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Node",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "删除节点",
       "Source": "library"
     },
     {
@@ -395,6 +1421,15 @@
       "Source": "library"
     },
     {
+      "Original": "Export Steps",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "导出步骤",
+      "Source": "library"
+    },
+    {
       "Original": "Preview Animation Style",
       "Context": "GradientBuilder.Draw",
       "PreserveID": true,
@@ -404,12 +1439,57 @@
       "Source": "library"
     },
     {
+      "Original": "Preview Text",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "预览文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Colour",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit3",
+      "Translated": "预览颜色",
+      "Source": "library"
+    },
+    {
       "Original": "Export JSON",
       "Context": "GradientBuilder.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "导出 JSON",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Style",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Export for Production",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出发布版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Preview",
+      "Context": "GradientBuilder.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除预览",
       "Source": "library"
     },
     {
@@ -438,6 +1518,14 @@
       "Source": "library"
     },
     {
+      "Original": "Alliance Members##HideVanillaAlliance",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "团队成员",
+      "Source": "library"
+    },
+    {
       "Original": "Friends##HideVanillaFriends",
       "Context": "ConfigWindow.Draw",
       "Role": "UI",
@@ -446,11 +1534,27 @@
       "Source": "library"
     },
     {
+      "Original": "Other Players##HideVanillaOther",
+      "Context": "ConfigWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "其他玩家",
+      "Source": "library"
+    },
+    {
       "Original": "Clear##ClearOverride",
       "Context": "ConfigWindow.DrawCharacterView",
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
       "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Static",
+      "Context": "ConfigWindow.DrawGradientPicker",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
+      "Translated": "静态",
       "Source": "library"
     }
   ],

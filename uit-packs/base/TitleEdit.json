@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\nThis will also save your chocobo's gear and color",
+      "Context": "PresetTab.DrawPresetControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n同时保存陆行鸟的装备与羽色",
+      "Source": "library"
+    },
+    {
       "Original": " preset",
       "Context": "GuiUtils.DrawDisplayTypeTooltipPresetInfo",
       "Role": "UI",
@@ -29,6 +37,41 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a button to character select screen that opens this window",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在角色选择画面添加一个打开此窗口的按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Add preset",
+      "Context": "GroupTab.DrawGroupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加预设",
+      "Source": "library"
+    },
+    {
+      "Original": "All characters configured",
+      "Context": "Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已配置所有角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply expansion colors",
+      "Context": "GuiUtils.DrawUiColorPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用资料片配色",
       "Source": "library"
     },
     {
@@ -57,6 +100,40 @@
       "Source": "library"
     },
     {
+      "Original": "Button highlight color",
+      "Context": "GuiUtils.DrawUiColorPicker",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "按钮高亮颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Position",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "镜头位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera follow mode",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "镜头跟随模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera follow mode override",
+      "Context": "PresetTab.DrawPresetControls",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "单独指定镜头跟随模式",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "GroupTab.DrawGroupActions",
       "PreserveID": true,
@@ -71,6 +148,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "部分背景音乐不会循环播放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character overrides",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "角色专用设置",
       "Source": "library"
     },
     {
@@ -98,6 +183,22 @@
       "Source": "library"
     },
     {
+      "Original": "Character select screen",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "角色选择画面",
+      "Source": "library"
+    },
+    {
+      "Original": "Character state",
+      "Context": "PresetTab.DrawPresetControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "角色状态",
+      "Source": "library"
+    },
+    {
       "Original": "Config button overlay",
       "Context": "ConfigButtonOverlay.get_Title",
       "Role": "UI",
@@ -119,6 +220,14 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "找不到 V2 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Create new preset",
+      "Context": "PresetTab.DrawPresetListControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "新建预设",
       "Source": "library"
     },
     {
@@ -178,6 +287,23 @@
       "Source": "library"
     },
     {
+      "Original": "Default author name",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "默认作者名",
+      "Source": "library"
+    },
+    {
+      "Original": "Default title screen logo",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "默认标题画面标志",
+      "Source": "library"
+    },
+    {
       "Original": "Delete",
       "Context": "GroupTab.DrawGroupActions",
       "PreserveID": true,
@@ -187,12 +313,37 @@
       "Source": "library"
     },
     {
+      "Original": "Display Type Overrides",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "单独指定显示类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate group",
+      "Context": "GroupTab.DrawGroupListControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "复制分组",
+      "Source": "library"
+    },
+    {
       "Original": "Edge color",
       "Context": "GuiUtils.DrawUiColorPicker",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.ColorEdit4",
       "Translated": "边缘颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable seasonal easter eggs",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用季节性彩蛋",
       "Source": "library"
     },
     {
@@ -210,6 +361,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Export to file",
+      "Context": "PresetTab.DrawPresetListControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出到文件",
       "Source": "library"
     },
     {
@@ -237,6 +397,14 @@
       "Source": "library"
     },
     {
+      "Original": "Group entries",
+      "Context": "GroupTab.DrawGroupControls",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table",
+      "Translated": "分组条目",
+      "Source": "library"
+    },
+    {
       "Original": "Groups",
       "Context": "GroupTab.get_Title",
       "Role": "UI",
@@ -250,6 +418,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "苍穹之禁城： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide character names in character select",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在角色选择画面隐藏角色名",
       "Source": "library"
     },
     {
@@ -288,6 +465,15 @@
       "Source": "library"
     },
     {
+      "Original": "Import from file",
+      "Context": "PresetTab.DrawPresetListControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从文件导入",
+      "Source": "library"
+    },
+    {
       "Original": "Info: ",
       "Context": "DrawBgmTooltip",
       "Role": "UI",
@@ -301,6 +487,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "上次位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Last used mount",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "上次使用的坐骑",
       "Source": "library"
     },
     {
@@ -336,12 +531,29 @@
       "Source": "library"
     },
     {
+      "Original": "Missing files",
+      "Context": "LobbyService.LeavingTitleScreen",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "缺少文件",
+      "Source": "library"
+    },
+    {
       "Original": "Name",
       "Context": "GroupTab.DrawGroupControls",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputText",
       "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "New Title Screen group",
+      "Context": "GroupTab.DrawGroupListControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "新建标题画面分组",
       "Source": "library"
     },
     {
@@ -354,11 +566,36 @@
       "Source": "library"
     },
     {
+      "Original": "Now displaying last recorded location",
+      "Context": "LobbyService.GetLocationForContentId",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "正在显示上次记录的位置",
+      "Source": "library"
+    },
+    {
       "Original": "Open Title Edit configuration",
       "Context": "Plugin..ctor",
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "打开 Title Edit 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Override preset title screen logo setting",
+      "Context": "DisplayTypeTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖预设中的标题画面标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Periodically save incase of a crash or process termination",
+      "Context": "SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "定期保存，以免崩溃或进程终止时丢失记录",
       "Source": "library"
     },
     {
@@ -368,6 +605,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputFloat3",
       "Translated": "位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset that is used when no character is selected",
+      "Context": "DisplayTypeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "未选择角色时使用的预设",
       "Source": "library"
     },
     {
@@ -421,6 +666,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "保存",
+      "Source": "library"
+    },
+    {
+      "Original": "Save festivals",
+      "Context": "PresetTab.DrawPresetControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存节庆活动",
+      "Source": "library"
+    },
+    {
+      "Original": "Save period in seconds",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "保存间隔（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Save song",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存乐曲",
       "Source": "library"
     },
     {

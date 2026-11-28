@@ -33,6 +33,15 @@
       "Source": "library"
     },
     {
+      "Original": "Add Dependency",
+      "Context": "DrawDependencies",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加依赖项",
+      "Source": "library"
+    },
+    {
       "Original": "Add File Dependency",
       "Context": "DrawDependencies",
       "PreserveID": true,
@@ -72,6 +81,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiUtils.Section",
       "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Always echo /loop commands",
+      "Context": "DrawTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终在聊天栏回显 /loop 命令",
       "Source": "library"
     },
     {
@@ -135,6 +153,15 @@
       "Source": "library"
     },
     {
+      "Original": "Clear Addon Event Config",
+      "Context": "DrawTriggers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除界面事件配置",
+      "Source": "library"
+    },
+    {
       "Original": "Click Commands",
       "Context": "HelpClicksTab.DrawTab",
       "PreserveID": true,
@@ -149,6 +176,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiUtils.CenteredButtons",
       "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "Collapse",
+      "Context": "StatusWindow.DrawCollapsibleMacro",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "折叠",
       "Source": "library"
     },
     {
@@ -202,6 +237,15 @@
       "Source": "library"
     },
     {
+      "Original": "Count /loop number as total iterations",
+      "Context": "DrawTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将 /loop 的数字视为总循环次数",
+      "Source": "library"
+    },
+    {
       "Original": "Create",
       "Context": "CreateFolderModal.DrawModal",
       "Role": "UI",
@@ -232,6 +276,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.MenuItem",
       "Translated": "新建文件夹……",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Version",
+      "Context": "VersionHistoryModal.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "当前版本",
       "Source": "library"
     },
     {
@@ -284,6 +337,14 @@
       "Source": "library"
     },
     {
+      "Original": "Enter the full path to a local file",
+      "Context": "DrawDependencies",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "输入本地文件的完整路径",
+      "Source": "library"
+    },
+    {
       "Original": "Error Handling",
       "Context": "SettingsTab.DrawTab",
       "PreserveID": true,
@@ -314,6 +375,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "示例：",
+      "Source": "library"
+    },
+    {
+      "Original": "Expand",
+      "Context": "StatusWindow.DrawCollapsibleMacro",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.IconButton",
+      "Translated": "展开",
       "Source": "library"
     },
     {
@@ -368,6 +437,14 @@
       "Source": "library"
     },
     {
+      "Original": "Import Selected Macros",
+      "Context": "MigrationModal.DrawModal",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.CenteredButtons",
+      "Translated": "导入所选宏",
+      "Source": "library"
+    },
+    {
       "Original": "Importing...",
       "Context": "CreateMacroModal.DrawModal",
       "Role": "UI",
@@ -393,6 +470,15 @@
       "Source": "library"
     },
     {
+      "Original": "Lua Scripting",
+      "Context": "HelpLuaTab.DrawTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtils.Section",
+      "Translated": "Lua 脚本",
+      "Source": "library"
+    },
+    {
       "Original": "Lua require paths (where to look for Lua modules):",
       "Context": "SettingsTab.DrawTab",
       "Role": "UI",
@@ -407,6 +493,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiUtils.Section",
       "Translated": "依赖宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Macro States",
+      "Context": "DrawTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "宏状态",
       "Source": "library"
     },
     {
@@ -467,6 +561,14 @@
       "Source": "library"
     },
     {
+      "Original": "No macro dependencies configured",
+      "Context": "DrawDependencies",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未配置宏依赖项",
+      "Source": "library"
+    },
+    {
       "Original": "No matching folders or macros",
       "Context": "MacrosTab.DrawSearchResults",
       "Role": "UI",
@@ -488,6 +590,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "没有注册触发事件",
+      "Source": "library"
+    },
+    {
+      "Original": "No valid configuration found in clipboard or config file",
+      "Context": "MigrationModal.PreviewMigration",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "剪贴板或配置文件中没有有效配置",
       "Source": "library"
     },
     {
@@ -555,6 +665,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BulletText",
       "Translated": "就绪：宏已加载，尚未开始运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Registered Trigger Events",
+      "Context": "StatusWindow.DrawTriggerEventsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "已注册的触发事件",
       "Source": "library"
     },
     {
@@ -633,6 +751,14 @@
       "Source": "library"
     },
     {
+      "Original": "Select a macro to view and edit its settings",
+      "Context": "MacroSettingsSection.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "选择一个宏以查看和编辑其设置",
+      "Source": "library"
+    },
+    {
       "Original": "Select destination folder:",
       "Context": "MacrosTab.HandleMacroContextMenu",
       "Role": "UI",
@@ -672,6 +798,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "高品质率达到 100% 时跳过提高品质的技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Smart wait for crafting actions",
+      "Context": "DrawTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "智能等待制作技能",
       "Source": "library"
     },
     {
@@ -798,6 +933,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "版本 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Version History",
+      "Context": "DrawGitInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx/EzButtonGroup.AddIconWithText",
+      "Translated": "版本历史",
       "Source": "library"
     },
     {

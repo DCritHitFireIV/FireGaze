@@ -71,6 +71,15 @@
       "Source": "library"
     },
     {
+      "Original": "Center",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "居中",
+      "Source": "library"
+    },
+    {
       "Original": "Button transparent unless hovered",
       "Context": "Mini.Draw",
       "PreserveID": true,
@@ -86,6 +95,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "按钮始终可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable this if you want button to show in cutscenes/gpose\neven if you have selected Dalamud to hide interface during it",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "即使已设置 Dalamud 在过场动画或集体动作模式中隐藏界面，\n启用后也会显示该按钮。",
       "Source": "library"
     },
     {
@@ -179,6 +197,24 @@
       "Source": "library"
     },
     {
+      "Original": "   - FPS will not be limited while in duty or crafting",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "   －进入副本或制作时不限帧",
+      "Source": "library"
+    },
+    {
+      "Original": "   - Unminimizing may take a second with this option",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "   －启用后，从最小化恢复可能会稍等片刻",
+      "Source": "library"
+    },
+    {
       "Original": "Minimize button always on top",
       "Context": "Mini.Draw",
       "PreserveID": true,
@@ -230,6 +266,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "最小化时停止渲染",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables 3D render while game is minimized. \n\nThis option will bring GPU usage down significantly while game is minimized. \n\nIt is adviced to use frame limiter in conjunction with this option to reduce CPU usage as well.\n\nWarning: this option may cause flashes, flickers, visual smearing so please use it only if you do not have increased photosensitivity. ",
+      "Context": "Mini.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "游戏最小化时暂停 3D 渲染。\n\n这能显著降低游戏最小化时的 GPU 占用。\n\n建议同时使用帧率限制器来降低 CPU 占用。\n\n警告：此选项可能导致闪光、闪烁或画面拖影。对闪光敏感时请勿使用。 ",
       "Source": "library"
     },
     {

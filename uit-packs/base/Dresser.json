@@ -24,24 +24,10 @@
       "Source": "library"
     },
     {
-      "Original": "AddSortSorter",
-      "Context": "GearBrowser.DrawSort",
-      "PreserveID": false,
-      "Translated": "添加排序规则",
-      "Source": "library"
-    },
-    {
       "Original": "Restore default order sets",
       "Context": "GearBrowser.DrawSort",
       "PreserveID": false,
       "Translated": "恢复默认排序集",
-      "Source": "library"
-    },
-    {
-      "Original": "RestoreDefaultSorters",
-      "Context": "GearBrowser.DrawSort",
-      "PreserveID": false,
-      "Translated": "恢复默认排序",
       "Source": "library"
     },
     {
@@ -88,13 +74,6 @@
       "Context": "GearBrowser.DrawTagFilters",
       "PreserveID": false,
       "Translated": "排除所有标签",
-      "Source": "library"
-    },
-    {
-      "Original": "OpenTagManager",
-      "Context": "GearBrowser.DrawTagFilters",
-      "PreserveID": false,
-      "Translated": "打开标签管理",
       "Source": "library"
     },
     {
@@ -855,13 +834,6 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重新导入幻化套装并清除待处理套装",
-      "Source": "library"
-    },
-    {
-      "Original": "reimportDisabledTooltim",
-      "Context": "ConfigWindow.DrawPlatesConfig",
-      "PreserveID": false,
-      "Translated": "重新导入已禁用提示",
       "Source": "library"
     },
     {
@@ -3539,6 +3511,33 @@
       "Context": "SlotsEnumExtensions.ToFriendlyName",
       "PreserveID": false,
       "Translated": "雇员市场",
+      "Source": "library"
+    },
+    {
+      "Original": " modded items are applied temporarily",
+      "Context": "DrawInfoSearchBarClothes",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 件模组物品已临时应用",
+      "Source": "library"
+    },
+    {
+      "Original": " items found with the selected filters",
+      "Context": "DrawInfoSearchBarClothes",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 件物品符合所选筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "SandBox Plate",
+      "Context": "DrawPlateButton",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "试验用投影模板",
       "Source": "library"
     }
   ],

@@ -233,6 +233,15 @@
       "Source": "library"
     },
     {
+      "Original": "Frontline",
+      "Context": "ConfigWindow.DrawPerformanceSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "纷争前线",
+      "Source": "library"
+    },
+    {
       "Original": "Rival Wings",
       "Context": "ConfigWindow.DrawPerformanceSettings",
       "PreserveID": true,
@@ -311,6 +320,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiHelper.DrawNumericCell",
       "Translated": "其他： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite",
+      "Context": "MatchList`1..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "覆盖",
       "Source": "library"
     },
     {
@@ -413,12 +431,30 @@
       "Source": "library"
     },
     {
+      "Original": "Average MP Drain",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均魔力消耗",
+      "Source": "library"
+    },
+    {
       "Original": "Total MP Gain",
       "Context": "CrystallineConflictMatchDetail.DrawActionTable",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "总魔力恢复量",
+      "Source": "library"
+    },
+    {
+      "Original": "Average MP Gain",
+      "Context": "CrystallineConflictMatchDetail.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均魔力恢复",
       "Source": "library"
     },
     {
@@ -482,6 +518,393 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "团队 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Royal Authority Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "王权剑连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Sepulchre Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "葬送剑连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Blade of Valor Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "英勇之剑连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Storm's Path Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "暴风斩连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Souleater Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "噬魂斩连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Torcleaver Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "戮山连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Salt and Darkness",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "腐秽黑暗",
+      "Source": "library"
+    },
+    {
+      "Original": "Burst Strike Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "爆发击连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Wicked Talon Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "凶禽爪连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Relentless Rush",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "连续剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Terminal Trigger",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "终结击",
+      "Source": "library"
+    },
+    {
+      "Original": "Fall Malefic",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "落陷凶星",
+      "Source": "library"
+    },
+    {
+      "Original": "Aspected Benefic",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "吉星相位",
+      "Source": "library"
+    },
+    {
+      "Original": "Gravity II",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "中重力",
+      "Source": "library"
+    },
+    {
+      "Original": "Pouncing Coeurl Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "豹袭崩拳连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Drakesbane Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "云蒸龙变连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Sky Shatter",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "天穹破碎",
+      "Source": "library"
+    },
+    {
+      "Original": "Aeolian Edge Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "旋风刃连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Fuma Shuriken",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "风魔手里剑",
+      "Source": "library"
+    },
+    {
+      "Original": "Zesho Meppo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "是生灭法",
+      "Source": "library"
+    },
+    {
+      "Original": "Fleeting Raiju Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "月影雷兽牙连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Seiton Tenchu",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "星遁天诛",
+      "Source": "library"
+    },
+    {
+      "Original": "Kasha Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "花车连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Infernal Slice Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "地狱切割连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross Reaping Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "交错收割连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Death Warrant",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "斩首令",
+      "Source": "library"
+    },
+    {
+      "Original": "Ravenous Bite Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "啮噬獠齿连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Sanguine Feast Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "血宴盘蛇连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Fourth Generation Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "祖灵之牙四式连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Harmonic Arrow",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "和弦箭",
+      "Source": "library"
+    },
+    {
+      "Original": "Honing Ovation",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "刃舞·终",
+      "Source": "library"
+    },
+    {
+      "Original": "Fountainfall Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "坠喷泉连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Honing Dance",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "刃舞",
+      "Source": "library"
+    },
+    {
+      "Original": "Saber Dance",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "剑舞",
+      "Source": "library"
+    },
+    {
+      "Original": "Starfall Dance",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "流星舞",
+      "Source": "library"
+    },
+    {
+      "Original": "Dance of the Dawn",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "拂晓舞",
+      "Source": "library"
+    },
+    {
+      "Original": "Fire IV Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "炽炎连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Blizzard IV Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "冰澈连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Enchanted Redoublement Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "魔连攻连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Water in Blue Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "流水之蓝连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Thunder in Magenta Combo",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "闪雷之品红连击",
+      "Source": "library"
+    },
+    {
+      "Original": "Creature Motif",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "动物彩绘",
+      "Source": "library"
+    },
+    {
+      "Original": "Living Muse",
+      "Context": "ActionSet..cctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "动物构想",
       "Source": "library"
     },
     {

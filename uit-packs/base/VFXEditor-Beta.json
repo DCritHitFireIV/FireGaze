@@ -59,6 +59,14 @@
       "Source": "library"
     },
     {
+      "Original": "Actors",
+      "Context": "TmbFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "角色对象",
+      "Source": "library"
+    },
+    {
       "Original": "Add to node library",
       "Context": "IUiNodeView`1.DrawControls",
       "Role": "UI",
@@ -126,6 +134,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.ColorEdit4",
       "Translated": "压缩文件颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Audio",
+      "Context": "ScdFile.DrawAudio",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "音频",
       "Source": "library"
     },
     {
@@ -298,6 +314,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Capsules",
+      "Context": "PhybCollision.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "胶囊体",
       "Source": "library"
     },
     {
@@ -576,6 +600,23 @@
       "Source": "library"
     },
     {
+      "Original": "Display Raw Indexes",
+      "Context": "SklbSimpleMapping.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示原始索引",
+      "Source": "library"
+    },
+    {
+      "Original": "Domain Shaders",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "域着色器",
+      "Source": "library"
+    },
+    {
       "Original": "Don't add or remove entries in this file",
       "Context": "TmbFile.DontAddRemoveWarning",
       "Role": "UI",
@@ -610,11 +651,37 @@
       "Source": "library"
     },
     {
+      "Original": "Ellipsoids",
+      "Context": "PhybCollision.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "椭球体",
+      "Source": "library"
+    },
+    {
       "Original": "Emitter Vertices",
       "Context": "AvfxModel.Draw",
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "发射器顶点",
+      "Source": "library"
+    },
+    {
+      "Original": "Empty Loop",
+      "Context": "ScdSoundEntry.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "空循环",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Data",
+      "Context": "AvfxData.DrawEnableCheckbox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用数据",
       "Source": "library"
     },
     {
@@ -673,6 +740,15 @@
       "Role": "UI",
       "RoleReason": "→ Notification.set_Content",
       "Translated": "已导出到 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Extensions",
+      "Context": "PenumbraImportDialog.DrawBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "扩展",
       "Source": "library"
     },
     {
@@ -817,6 +893,15 @@
       "Source": "library"
     },
     {
+      "Original": "Frame",
+      "Context": "PapMotionMaterial.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "帧",
+      "Source": "library"
+    },
+    {
       "Original": "Function Color",
       "Context": "Configuration.DrawTmb",
       "PreserveID": true,
@@ -874,6 +959,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputInt",
       "Translated": "可抓取距离",
+      "Source": "library"
+    },
+    {
+      "Original": "Graph",
+      "Context": "PapMotionMaterial.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "图表",
+      "Source": "library"
+    },
+    {
+      "Original": "Grayscale",
+      "Context": "TextureDrawable.DrawExportReplaceButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "灰度",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground",
+      "Context": "VfxSpawn.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "地面",
       "Source": "library"
     },
     {
@@ -957,6 +1069,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "在 Penumbra 自带的模组设置窗口中隐藏此选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Hull Shaders",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "外壳着色器",
       "Source": "library"
     },
     {
@@ -1211,6 +1331,14 @@
       "Source": "library"
     },
     {
+      "Original": "Look At",
+      "Context": "SkpFile.DrawLookAt",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "注视目标",
+      "Source": "library"
+    },
+    {
       "Original": "Loop Music",
       "Context": "ScdFile.DrawAudio",
       "PreserveID": true,
@@ -1269,6 +1397,32 @@
       "Source": "library"
     },
     {
+      "Original": "Maximum Trigger",
+      "Context": "AvfxTimelineClip.DrawRandomTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最大触发值",
+      "Source": "library"
+    },
+    {
+      "Original": "Meshes",
+      "Context": "MdlLod.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Trigger",
+      "Context": "AvfxTimelineClip.DrawRandomTrigger",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "最小触发值",
+      "Source": "library"
+    },
+    {
       "Original": "Misc File Color",
       "Context": "Configuration.DrawFileBrowser",
       "PreserveID": true,
@@ -1292,6 +1446,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "模组",
+      "Source": "library"
+    },
+    {
+      "Original": "Motion",
+      "Context": "ItemTabPap.LoadSelection",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "运动",
       "Source": "library"
     },
     {
@@ -1411,6 +1573,14 @@
       "Source": "library"
     },
     {
+      "Original": "Nodes",
+      "Context": "NodeRoot..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "节点",
+      "Source": "library"
+    },
+    {
       "Original": "Nodes Being Imported",
       "Context": "PapGltfImportModal.DrawBody",
       "Role": "UI",
@@ -1424,6 +1594,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "引用此组件的节点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal Planes",
+      "Context": "PhybCollision.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "法线平面",
       "Source": "library"
     },
     {
@@ -1463,6 +1641,14 @@
       "Source": "library"
     },
     {
+      "Original": "Parents",
+      "Context": "SklbNewData.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "父级",
+      "Source": "library"
+    },
+    {
       "Original": "Parsing Issues",
       "Context": "UiUtils.ShowVerifiedStatus",
       "Role": "UI",
@@ -1476,6 +1662,22 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Pictures",
+      "Context": "FileBrowserSideBar.PopulateQuickAccess",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Pin",
+      "Context": "PhybSimulator..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "固定",
       "Source": "library"
     },
     {
@@ -1608,6 +1810,15 @@
       "Source": "library"
     },
     {
+      "Original": "Radians",
+      "Context": "LineEditorGroup.DrawControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "弧度",
+      "Source": "library"
+    },
+    {
       "Original": "Recent",
       "Context": "SelectDialog..ctor",
       "Role": "UI",
@@ -1647,6 +1858,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "刷新",
+      "Source": "library"
+    },
+    {
+      "Original": "Reloaded ",
+      "Context": "FileManagerDocument`2.DisplaySourceBar",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "已重新加载 ",
       "Source": "library"
     },
     {
@@ -1750,6 +1969,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "选择",
+      "Source": "library"
+    },
+    {
+      "Original": "Samplers",
+      "Context": "ShpkFile.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "采样器",
       "Source": "library"
     },
     {
@@ -1872,6 +2099,15 @@
       "Source": "library"
     },
     {
+      "Original": "Show HD",
+      "Context": "UldTexture.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示高清版本",
+      "Source": "library"
+    },
+    {
       "Original": "Show Icons in Select Dialog",
       "Context": "Configuration.DrawConfiguration",
       "PreserveID": true,
@@ -1951,6 +2187,14 @@
       "Source": "library"
     },
     {
+      "Original": "Slope",
+      "Context": "SkpFile.DrawSlope",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "斜率",
+      "Source": "library"
+    },
+    {
       "Original": "Sort",
       "Context": "LineEditorGroup.DrawControls",
       "PreserveID": true,
@@ -2000,6 +2244,22 @@
       "Source": "library"
     },
     {
+      "Original": "Spheres",
+      "Context": "PhybCollision.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "球体",
+      "Source": "library"
+    },
+    {
+      "Original": "Springs",
+      "Context": "PhybSimulator.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "弹簧",
+      "Source": "library"
+    },
+    {
       "Original": "Start Hidden",
       "Context": "AvfxTimelineClip.DrawKill",
       "PreserveID": true,
@@ -2031,6 +2291,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "要转换的字符串",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Meshes",
+      "Context": "MdlMesh.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "子网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-View",
+      "Context": "ShpkFile.DrawKeys",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "子视图",
       "Source": "library"
     },
     {
@@ -2066,11 +2342,28 @@
       "Source": "library"
     },
     {
+      "Original": "Templates",
+      "Context": "AvfxManager.DrawEditMenuItems",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu",
+      "Translated": "模板",
+      "Source": "library"
+    },
+    {
       "Original": "Texture is missing",
       "Context": "TextureMissing.DrawControls",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "缺少纹理",
+      "Source": "library"
+    },
+    {
+      "Original": "Tiling",
+      "Context": "MtrlColorRowLegacy.DrawTabs",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "平铺",
       "Source": "library"
     },
     {
@@ -2105,6 +2398,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.MenuItem",
       "Translated": "工具",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracks",
+      "Context": "ScdFile.DrawTracks",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "轨道",
       "Source": "library"
     },
     {
@@ -2148,6 +2449,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消全选",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "不支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Unused",
+      "Context": "TmbFile.DrawUnused",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "未使用",
       "Source": "library"
     },
     {
@@ -2195,6 +2512,14 @@
       "Source": "library"
     },
     {
+      "Original": "Verified",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已验证",
+      "Source": "library"
+    },
+    {
       "Original": "Version ",
       "Context": "AvfxMain.Draw",
       "Role": "UI",
@@ -2216,6 +2541,14 @@
       "Role": "UI",
       "RoleReason": "→ ImRaii.TabItem",
       "Translated": "顶点顺序",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertex Shader",
+      "Context": "ShpkFile..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "顶点着色器",
       "Source": "library"
     },
     {
@@ -2253,6 +2586,14 @@
       "Source": "library"
     },
     {
+      "Original": "Videos",
+      "Context": "FileBrowserSideBar.PopulateQuickAccess",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "视频",
+      "Source": "library"
+    },
+    {
       "Original": "WARNING: Add a selectable item first!",
       "Context": "AvfxNodeSelectList`1.Draw",
       "Role": "UI",
@@ -2274,6 +2615,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "网站",
+      "Source": "library"
+    },
+    {
+      "Original": "Workspace",
+      "Context": "UiUtils.ShowVerifiedStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "工作区",
       "Source": "library"
     },
     {

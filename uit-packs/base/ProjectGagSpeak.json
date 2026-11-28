@@ -8,11 +8,67 @@
   },
   "entries": [
     {
+      "Original": " Global Perms",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": " 全局权限",
+      "Source": "library"
+    },
+    {
       "Original": " Slot",
       "Context": "PairGagCombo.DrawItemTooltip",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": " 栏位",
+      "Source": "library"
+    },
+    {
+      "Original": "%% Opacity",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%% 不透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "%.2fx Spin Speed",
+      "Context": "CompactConfigTab.DrawContents",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%.2fx 旋转速度",
+      "Source": "library"
+    },
+    {
+      "Original": "%.2fx Zoom",
+      "Context": "CompactConfigTab.DrawContents",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "%.2fx 缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "%d%% Chance",
+      "Context": "DetectionDrawer.DrawSpellActionEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "%d%% 概率",
+      "Source": "library"
+    },
+    {
+      "Original": "%dms Fade-In Time",
+      "Context": "CompactConfigTab.DrawContents",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "%dms 淡入时间",
+      "Source": "library"
+    },
+    {
+      "Original": "%dms Fade-Out Time",
+      "Context": "CompactConfigTab.DrawContents",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "%dms 淡出时间",
       "Source": "library"
     },
     {
@@ -22,6 +78,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "Account Reputation",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "账号声誉",
       "Source": "library"
     },
     {
@@ -77,6 +141,24 @@
       "Source": "library"
     },
     {
+      "Original": "All Requests",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "全部请求",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow Sit Requests",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "允许坐下请求",
+      "Source": "library"
+    },
+    {
       "Original": "Apartment",
       "Context": "SidePanelPair.DrawAddressConfig",
       "PreserveID": true,
@@ -103,12 +185,29 @@
       "Source": "library"
     },
     {
+      "Original": "Attached Message",
+      "Context": "DebugStorageUI.DrawKinksterRequests",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "附加消息",
+      "Source": "library"
+    },
+    {
       "Original": "Changelog UI###Gagspeak_ChangelogUI",
       "Context": "ChangelogUI..ctor",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "更新记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Collar Data",
+      "Context": "DebugPersonalDataUI.DrawCollar",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "项圈数据",
       "Source": "library"
     },
     {
@@ -161,6 +260,15 @@
       "Role": "UI",
       "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
       "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Stains",
+      "Context": "DebugStorageUI.DrawRestraintLayers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "自定义染剂",
       "Source": "library"
     },
     {
@@ -292,12 +400,29 @@
       "Source": "library"
     },
     {
+      "Original": "Folder Map",
+      "Context": "DebugStorageUI.DrawFolderMap",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "文件夹映射",
+      "Source": "library"
+    },
+    {
       "Original": "Follow",
       "Context": "PermHelper.DrawHardcoreStatus",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
       "Translated": "跟随",
+      "Source": "library"
+    },
+    {
+      "Original": "Glam/Mod Access",
+      "Context": "CollarRequestsOutgoingTab.DrawRequestCreator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "幻化与模组访问权限",
       "Source": "library"
     },
     {
@@ -497,6 +622,15 @@
       "Source": "library"
     },
     {
+      "Original": "Max Restraint Lock Time",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "最长拘束锁定时间",
+      "Source": "library"
+    },
+    {
       "Original": "Message ",
       "Context": "HybridChatDrawer.GetChatInputHint",
       "Role": "UI",
@@ -549,6 +683,15 @@
       "Source": "library"
     },
     {
+      "Original": "Offline Folder",
+      "Context": "DDSPrefs..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "离线文件夹",
+      "Source": "library"
+    },
+    {
       "Original": "Open Profile",
       "Context": "HybridChatDrawer.DrawContentMenu",
       "PreserveID": true,
@@ -579,6 +722,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Parent",
+      "Context": "DebugStorageUI.DrawFolderInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "父级",
+      "Source": "library"
+    },
+    {
+      "Original": "Playback Duration",
+      "Context": "AlarmsPanel.DrawPatternTimeSpans",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "播放时长",
       "Source": "library"
     },
     {
@@ -625,6 +786,15 @@
       "Source": "library"
     },
     {
+      "Original": "Profile Editing",
+      "Context": "DebugPersonalDataUI.DrawAccountReputation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "编辑个人资料",
+      "Source": "library"
+    },
+    {
       "Original": "Pulse:",
       "Context": "ArousalService.DrawCacheTable",
       "Role": "UI",
@@ -642,12 +812,30 @@
       "Source": "library"
     },
     {
+      "Original": "Remove Restraint",
+      "Context": "SidePanelPair.DrawRestraintActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "移除拘束",
+      "Source": "library"
+    },
+    {
       "Original": "Remove from Favorites",
       "Context": "RichEmoteChatDrawer.DrawQuickEmoteWindow",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "取消收藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Restriction Visuals",
+      "Context": "DebugPersonalDataUI.DrawGlobalPermissions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "限制外观",
       "Source": "library"
     },
     {
@@ -709,11 +897,28 @@
       "Source": "library"
     },
     {
+      "Original": "Show unread bubble",
+      "Context": "SettingsMainChat.DrawFormattingOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示未读气泡",
+      "Source": "library"
+    },
+    {
       "Original": "Sort by name.",
       "Context": "PairName.get_Tooltip",
       "Role": "UI",
       "RoleReason": "→ 接口文本属性",
       "Translated": "按名称排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort by online status.",
+      "Context": "Online.get_Tooltip",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性",
+      "Translated": "按在线状态排序。",
       "Source": "library"
     },
     {
@@ -786,6 +991,15 @@
       "Source": "library"
     },
     {
+      "Original": "Total Tasks",
+      "Context": "HcTaskManager.DrawCollectionTask",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "任务总数",
+      "Source": "library"
+    },
+    {
       "Original": "Triggers ###GagSpeakTriggers",
       "Context": "TriggersUI..ctor",
       "PreserveID": true,
@@ -821,12 +1035,30 @@
       "Source": "library"
     },
     {
+      "Original": "Unknown Action",
+      "Context": "DebugPersonalDataUI.DrawActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "未知技能",
+      "Source": "library"
+    },
+    {
       "Original": "Unknown Item",
       "Context": "DebugStorageUI.DrawRestraintEquipment",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGuiUtil.DrawTableColumn",
       "Translated": "未知物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock Gags",
+      "Context": "DebugPersonalDataUI.DrawPairPerms",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.DrawTableColumn",
+      "Translated": "解锁口塞",
       "Source": "library"
     },
     {

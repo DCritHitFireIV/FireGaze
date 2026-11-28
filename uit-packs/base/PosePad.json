@@ -8,6 +8,24 @@
   },
   "entries": [
     {
+      "Original": "Open the PosePad main window. Aliases: /posepad, /posspad.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 PosePad 主窗口。别名：/posepad、/posspad。",
+      "Source": "library"
+    },
+    {
+      "Original": "カテゴリ ",
+      "Context": "ActionText.EmoteCategory",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "分类 ",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": "UiText.Settings",
       "PreserveID": true,
@@ -17,12 +35,48 @@
       "Source": "library"
     },
     {
+      "Original": "名前またはIDで検索",
+      "Context": "UiText.SearchHint",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按名称或 ID 搜索",
+      "Source": "library"
+    },
+    {
       "Original": "Search by name or ID",
       "Context": "UiText.SearchHint",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "按名称或编号搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "よく使う動作",
+      "Context": "UiText.CommonActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常用动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Common Actions",
+      "Context": "UiText.CommonActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "常用动作",
+      "Source": "library"
+    },
+    {
+      "Original": "エモート",
+      "Context": "UiText.Emotes",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "情感动作",
       "Source": "library"
     },
     {
@@ -44,12 +98,39 @@
       "Source": "library"
     },
     {
+      "Original": "Mod Actions",
+      "Context": "UiText.ModActions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "模组动作",
+      "Source": "library"
+    },
+    {
       "Original": "Recent",
       "Context": "UiText.Recent",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready.",
+      "Context": "UiText.Ready",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已就绪。",
+      "Source": "library"
+    },
+    {
+      "Original": "最近使用したエモートはありません。",
+      "Context": "UiText.NoRecent",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "最近未使用情感动作。",
       "Source": "library"
     },
     {
@@ -62,12 +143,66 @@
       "Source": "library"
     },
     {
+      "Original": "現在の条件に一致する動作はありません。",
+      "Context": "UiText.NoFilterResults",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有符合当前条件的动作。",
+      "Source": "library"
+    },
+    {
       "Original": "No actions match the current filter.",
       "Context": "UiText.NoFilterResults",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "没有符合当前筛选条件的动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "使う",
+      "Context": "UiText.Use",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "使用",
+      "Source": "library"
+    },
+    {
+      "Original": "Use",
+      "Context": "UiText.Use",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "使用",
+      "Source": "library"
+    },
+    {
+      "Original": "動作を解除",
+      "Context": "UiText.CancelAction",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "解除动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel Action",
+      "Context": "UiText.CancelAction",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消动作",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfav",
+      "Context": "UiText.Unfavorite",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "取消收藏",
       "Source": "library"
     },
     {
@@ -89,12 +224,93 @@
       "Source": "library"
     },
     {
+      "Original": "Favorite actions: ",
+      "Context": "UiText.FavoriteCount",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "收藏的动作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Recent actions: ",
+      "Context": "UiText.RecentCount",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "最近使用的动作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra Integration",
+      "Context": "UiText.PenumbraIntegration",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Penumbra 联动",
+      "Source": "library"
+    },
+    {
+      "Original": "最近使用を消去",
+      "Context": "UiText.ClearRecent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空最近使用记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Recent",
+      "Context": "UiText.ClearRecent",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空最近使用记录",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose中でもUIを表示したままにする",
+      "Context": "UiText.DisableGposeUiHide",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在集体动作模式中保持界面可见",
+      "Source": "library"
+    },
+    {
       "Original": "Keep UI visible in GPose",
       "Context": "UiText.DisableGposeUiHide",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "在集体动作模式下保留界面",
+      "Source": "library"
+    },
+    {
+      "Original": "GPose開始時にPosePadを自動で開く",
+      "Context": "UiText.OpenOnEnterGPose",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入集体动作模式时自动打开 PosePad",
+      "Source": "library"
+    },
+    {
+      "Original": "Open PosePad automatically when entering GPose",
+      "Context": "UiText.OpenOnEnterGPose",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "进入集体动作模式时自动打开 PosePad",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra の初期化を待っています。",
+      "Context": "UiText.PenumbraWaiting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在等待 Penumbra 初始化。",
       "Source": "library"
     },
     {
@@ -107,6 +323,15 @@
       "Source": "library"
     },
     {
+      "Original": "利用可能な Penumbra が見つかりません。",
+      "Context": "UiText.PenumbraUnavailable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未找到可用的 Penumbra。",
+      "Source": "library"
+    },
+    {
       "Original": "Penumbra is not available.",
       "Context": "UiText.PenumbraUnavailable",
       "PreserveID": false,
@@ -116,12 +341,57 @@
       "Source": "library"
     },
     {
+      "Original": "Penumbra は導入されていますが、現在は無効です。",
+      "Context": "UiText.PenumbraDisabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已安装 Penumbra，但目前尚未启用。",
+      "Source": "library"
+    },
+    {
       "Original": "Penumbra is installed but currently disabled.",
       "Context": "UiText.PenumbraDisabled",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "已安装 Penumbra，但当前未启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "現在のキャラクターに適用されている Penumbra コレクションを解決できません。",
+      "Context": "UiText.PenumbraCollectionUnavailable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法确定当前角色正在使用的 Penumbra 收藏集。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not resolve the active Penumbra collection for the current character.",
+      "Context": "UiText.PenumbraCollectionUnavailable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法确定当前角色正在使用的 Penumbra 收藏集。",
+      "Source": "library"
+    },
+    {
+      "Original": " 件の Mod 動作を読み込みました。",
+      "Context": "UiText.PenumbraDetectedModActions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 个模组动作已加载。",
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra の Mod 動作を読み込めませんでした。",
+      "Context": "UiText.PenumbraRefreshFailed",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法加载 Penumbra 模组动作。",
       "Source": "library"
     },
     {

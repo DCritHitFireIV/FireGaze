@@ -25,6 +25,14 @@
       "Source": "library"
     },
     {
+      "Original": "All Open",
+      "Context": "TriadGameModifierAllOpen..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "全明牌",
+      "Source": "library"
+    },
+    {
       "Original": "Auto-pick best deck",
       "Context": "TriadSettingsUi.DrawDeckBody",
       "PreserveID": true,
@@ -34,11 +42,54 @@
       "Source": "library"
     },
     {
+      "Original": "Break length (minutes)",
+      "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "休息时长（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Build optimized deck",
+      "Context": "TriadSettingsUi.DrawDeckBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "构建优化牌组",
+      "Source": "library"
+    },
+    {
+      "Original": "Building deck… ",
+      "Context": "TriadSession.DescribePremadeDeckOptimizerStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在构建牌组… ",
+      "Source": "library"
+    },
+    {
       "Original": "Cache",
       "Context": "PluginUI.DrawTriadPanel",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EzTabBar",
       "Translated": "缓存",
+      "Source": "library"
+    },
+    {
+      "Original": "Cached deck outdated · generating new…",
+      "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "缓存的牌组已过期，正在重新生成…",
+      "Source": "library"
+    },
+    {
+      "Original": "Card Search",
+      "Context": "TriadCardSearchWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "幻卡搜索",
       "Source": "library"
     },
     {
@@ -72,6 +123,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Cursor in target zone",
+      "Context": "LimbManager.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "光标位于目标区间内",
       "Source": "library"
     },
     {
@@ -118,6 +177,15 @@
       "Source": "library"
     },
     {
+      "Original": "Farm all NPC cards once",
+      "Context": "TriadSettingsUi.DrawRunModeBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "收集所有 NPC 能掉落的每种幻卡",
+      "Source": "library"
+    },
+    {
       "Original": "Fortemps Manor",
       "Context": "FortempsManservantRoute..cctor",
       "Role": "UI",
@@ -134,11 +202,28 @@
       "Source": "library"
     },
     {
+      "Original": "Game recommended",
+      "Context": "TriadSettingsUi.DrawDeckBody",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "游戏推荐",
+      "Source": "library"
+    },
+    {
       "Original": "Games",
       "Context": "PluginUI.DrawTriadRows",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "对局数",
+      "Source": "library"
+    },
+    {
+      "Original": "Gold Saucer card search panels",
+      "Context": "TriadSettingsUi.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "金碟游乐场幻卡搜索面板",
       "Source": "library"
     },
     {
@@ -148,6 +233,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiLayout.DrawCollapsingSection",
       "Translated": "金碟游乐场机遇临门",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide completed NPCs",
+      "Context": "TriadCardSearchWindow.DrawNpcTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "隐藏已完成的 NPC",
       "Source": "library"
     },
     {
@@ -199,6 +293,15 @@
       "Source": "library"
     },
     {
+      "Original": "Log out when run completes",
+      "Context": "TriadSettingsUi.DrawRunModeBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "本轮结束后登出",
+      "Source": "library"
+    },
+    {
       "Original": "MACHINES",
       "Context": "PluginUI.DrawSidebar",
       "Role": "UI",
@@ -229,6 +332,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "指标",
+      "Source": "library"
+    },
+    {
+      "Original": "Min seconds for another round",
+      "Context": "DrawSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "再进行一轮所需的最少秒数",
       "Source": "library"
     },
     {
@@ -338,6 +450,15 @@
       "Source": "library"
     },
     {
+      "Original": "Open installer",
+      "Context": "PluginDependenciesUi.DrawStatus",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开插件安装器",
+      "Source": "library"
+    },
+    {
       "Original": "Open sound folder — drop MP3s here to add your own.",
       "Context": "TriadSettingsUi.DrawSoundPicker",
       "Role": "UI",
@@ -371,6 +492,15 @@
       "Source": "library"
     },
     {
+      "Original": "Optimizer timeout (min)",
+      "Context": "TriadSettingsUi.DrawDeckOptimizerTimeoutSlider",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "优化器超时（分钟）",
+      "Source": "library"
+    },
+    {
       "Original": "Optional integrations",
       "Context": "PluginUI.DrawSliceIsRightPanel",
       "Role": "UI",
@@ -393,6 +523,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "雇员就绪且附近有传唤铃时暂停",
+      "Source": "library"
+    },
+    {
+      "Original": "Paused — Questionable is running",
+      "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已暂停，Questionable 正在运行",
       "Source": "library"
     },
     {
@@ -446,12 +584,29 @@
       "Source": "library"
     },
     {
+      "Original": "Request input",
+      "Context": "LimbManager.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "请求输入",
+      "Source": "library"
+    },
+    {
       "Original": "Reset",
       "Context": "LimbManager.DrawDebug",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重置",
+      "Source": "library"
+    },
+    {
+      "Original": "Run mode",
+      "Context": "TriadSettingsUi.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "运行模式",
       "Source": "library"
     },
     {
@@ -504,12 +659,29 @@
       "Source": "library"
     },
     {
+      "Original": "Skipped — NPC beaten or all cards owned",
+      "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已跳过，已击败此 NPC 或已拥有其全部幻卡",
+      "Source": "library"
+    },
+    {
       "Original": "Step",
       "Context": "DrawSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.DragInt",
       "Translated": "步骤",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop after first card drop",
+      "Context": "TriadSettingsUi.DrawRunModeBody",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "首次获得幻卡后停止",
       "Source": "library"
     },
     {
@@ -554,6 +726,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "剩余时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Travel",
+      "Context": "TriadSettingsUi.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "移动",
       "Source": "library"
     },
     {

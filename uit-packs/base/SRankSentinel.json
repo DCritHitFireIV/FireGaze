@@ -145,6 +145,14 @@
       "Source": "library"
     },
     {
+      "Original": "Idle",
+      "Context": "Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "空闲",
+      "Source": "library"
+    },
+    {
       "Original": "InFlight was lost before or during the long-distance flying route",
       "Context": "Plugin.TickApproachAlertCoordinates",
       "Role": "UI",
@@ -166,6 +174,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderFloat",
       "Translated": "初始坐标停靠点",
+      "Source": "library"
+    },
+    {
+      "Original": "Initiating Return to Ul'dah",
+      "Context": "Plugin.TickDeadReturnRecovery",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在使用返回前往乌尔达哈",
       "Source": "library"
     },
     {
@@ -209,6 +225,14 @@
       "Source": "library"
     },
     {
+      "Original": "Persistent hunt queue restore failed; see the plugin log",
+      "Context": "Plugin.RestorePersistentQueueOnFrameworkThread",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "恢复已保存的狩猎队列失败，详情见插件日志",
+      "Source": "library"
+    },
+    {
       "Original": "Plugin",
       "Context": "Plugin.DrawCompanionCard",
       "PreserveID": true,
@@ -243,6 +267,22 @@
       "Source": "library"
     },
     {
+      "Original": "Raise acceptance callback submitted; waiting for revival",
+      "Context": "Plugin.TickRaiseAcceptance",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已提交接受复活的请求，正在等待复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-establishing the normal territory route",
+      "Context": "Plugin.TickOpenHinterlandsGateway",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在恢复常规区域路线",
+      "Source": "library"
+    },
+    {
       "Original": "Removed ",
       "Context": "Plugin.RemoveKilledQueuedAlerts",
       "Role": "UI",
@@ -256,6 +296,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "已确认返回，等待切换区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Return locked until the S rank's death is confirmed",
+      "Context": "Plugin.TickResetToUldah",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "确认 S 级恶名精英死亡前无法返回",
       "Source": "library"
     },
     {
@@ -360,6 +408,14 @@
       "Source": "library"
     },
     {
+      "Original": "The pull reset before a tag was required; returning to safe wait",
+      "Context": "Plugin.TickTagApproach",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "命中目标前战斗已重置，正在返回安全位置等待",
+      "Source": "library"
+    },
+    {
       "Original": "Theme",
       "Context": "Plugin.CreateModernNavigation",
       "Role": "UI",
@@ -384,11 +440,27 @@
       "Source": "library"
     },
     {
+      "Original": "Validating randomized post-tag retreat route",
+      "Context": "Plugin.TryStartNextParkingRoute",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在检查命中目标后随机选取的撤离路线",
+      "Source": "library"
+    },
+    {
       "Original": "Validating the return leg to the exact parked position",
       "Context": "Plugin.PollParkingFacingSettleReturnPath",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "正在检查返回原停留点的路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Walking normally to the Ul'dah World Visit aetheryte",
+      "Context": "Plugin.TickWorldVisit",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在步行前往乌尔达哈可跨界传送的以太之光",
       "Source": "library"
     },
     {

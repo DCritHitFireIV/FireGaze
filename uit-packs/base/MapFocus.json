@@ -26,6 +26,42 @@
       "Source": "library"
     },
     {
+      "Original": "Open MapFocus settings. Subcommands: center | toggle",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 MapFocus 设置。子命令为 center 或 toggle。",
+      "Source": "library"
+    },
+    {
+      "Original": "MapFocus Settings###MapFocusConfig",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "MapFocus 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable MapFocus",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 MapFocus",
+      "Source": "library"
+    },
+    {
+      "Original": "Map behavior",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "地图行为",
+      "Source": "library"
+    },
+    {
       "Original": "Stop the map from centering on you",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -71,12 +107,57 @@
       "Source": "library"
     },
     {
+      "Original": "Centers the open map on the map itself. Also available as the \"/mapfocus center\" command.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "使当前打开的地图居中。也可以输入 /mapfocus center。",
+      "Source": "library"
+    },
+    {
+      "Original": "Map button",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "地图按钮",
+      "Source": "library"
+    },
+    {
       "Original": "Show center buttons on the map",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "在地图上显示居中按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds two round buttons to the bottom-right corner of the map window: center on player and center the map. Their layout is configured below.",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "在地图窗口右下角添加两个圆形按钮，分别用于以角色为中心显示及使地图居中。可在下方设置排列方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "横向",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "纵向",
       "Source": "library"
     },
     {

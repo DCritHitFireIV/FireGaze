@@ -17,6 +17,14 @@
       "Source": "library"
     },
     {
+      "Original": "EngageTimer stopwatch (",
+      "Context": "DtrBarUi.GetEntry",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get",
+      "Translated": "EngageTimer 秒表（",
+      "Source": "library"
+    },
+    {
       "Original": "Play",
       "Context": "SfxDebug.Draw",
       "Role": "UI",
@@ -144,10 +152,24 @@
       "Source": "library"
     },
     {
+      "Original": "Applies the color to the floating window stopwatch during the alarm",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Color_Tooltip",
+      "Translated": "提醒期间将此颜色应用于悬浮窗口的秒表。",
+      "Source": "library"
+    },
+    {
       "Original": "Duration",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "AlarmEdit_Duration",
       "Translated": "持续时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Stops the color/blink after this amount of time",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Duration_Tooltip",
+      "Translated": "经过设定时长后停止变色或闪烁。",
       "Source": "library"
     },
     {
@@ -256,6 +278,13 @@
       "Source": "library"
     },
     {
+      "Original": "Allows you to display a text notification at the alarm time",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "AlarmEdit_Text_Tooltip",
+      "Translated": "在提醒触发时显示文字通知。",
+      "Source": "library"
+    },
+    {
       "Original": "Type",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "AlarmEdit_Text_Type",
@@ -288,6 +317,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "AlarmEdit_Type_GameToast",
       "Translated": "游戏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not save the file in this directory (access denied). Please try again with another directory.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "CombatAlarm_AccessDenied",
+      "Translated": "无法在此目录保存文件（访问被拒绝）。请改选其他目录。",
       "Source": "library"
     },
     {
@@ -333,10 +369,45 @@
       "Source": "library"
     },
     {
+      "Original": "enable or disable the big countdown (toggles by default)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_Countdown",
+      "Translated": "开启或关闭大号倒计时（默认切换开关状态）",
+      "Source": "library"
+    },
+    {
       "Original": "Countdown is now {0}",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "MainCommand_Help_Countdown_Success",
       "Translated": "倒计时现为 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "enable or disable the server info bar (toggles by default)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_Dtr",
+      "Translated": "开启或关闭服务器信息栏显示（默认切换开关状态）",
+      "Source": "library"
+    },
+    {
+      "Original": "Server info bar is now {0}",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_Dtr_Success",
+      "Translated": "服务器信息栏当前为 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "enable or disable the floating window (toggles by default)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_FW",
+      "Translated": "开启或关闭悬浮窗（默认切换开关状态）",
+      "Source": "library"
+    },
+    {
+      "Original": "Floating window is now {0}",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "MainCommand_Help_FW_Success",
+      "Translated": "悬浮窗当前为 {0}",
       "Source": "library"
     },
     {
@@ -379,6 +450,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_AboutTab_Title",
       "Translated": "关于",
+      "Source": "library"
+    },
+    {
+      "Original": "This page allows you to set alarms based on elapsed combat time.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_AlarmsTab_Line1",
+      "Translated": "在此页根据已进入战斗的时长设置提醒。",
       "Source": "library"
     },
     {
@@ -438,6 +516,20 @@
       "Source": "library"
     },
     {
+      "Original": "Use legacy audio (breaks linux)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Audio_LegacyAudio",
+      "Translated": "使用旧版音频（Linux 不兼容）",
+      "Source": "library"
+    },
+    {
+      "Original": "Will be removed, please contact me if you use it. Crashes on non-Windows systems.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Audio_LegacyAudio_Help",
+      "Translated": "此选项即将移除。如果你正在使用，请联系作者。它会导致非 Windows 系统崩溃。",
+      "Source": "library"
+    },
+    {
       "Original": "Sound volume",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_Audio_LegacyVolume",
@@ -480,6 +572,13 @@
       "Source": "library"
     },
     {
+      "Original": "This setting determines at what point during the countdown the timer will become visible. For example, if the value is set to 7, the countdown timer will not be shown until 7 seconds have passed, and will then be displayed until the end of the countdown.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_CountdownDisplayThreshold_Help",
+      "Translated": "设置倒计时开始后多久显示计时器。例如设为 7 时，倒计时开始 7 秒后才会显示计时器，并持续显示到倒计时结束。",
+      "Source": "library"
+    },
+    {
       "Original": "Scale",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_CountdownScale",
@@ -498,6 +597,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_DefaultOriginalCountDown",
       "Translated": "避开游戏原生倒计时（默认）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the custom countdown under 5 to prevent overlapping with the vanilla one.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_DefaultOriginalCountDown_Help",
+      "Translated": "倒计时小于 5 秒时隐藏自定义显示，以免与游戏原生倒计时重叠。",
       "Source": "library"
     },
     {
@@ -536,10 +642,31 @@
       "Source": "library"
     },
     {
+      "Original": "Allows you to have the vanilla countdown showing on your game but still use the custom one in a corner or overlaping if you like chaos. Useful if you setup your OBS to not capture addons and want to look unmodified.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_IgnoreOriginalCountDown_Help",
+      "Translated": "保留游戏原有倒计时，同时在角落或原位置叠加自定义倒计时。若已将 OBS 设置为不捕获插件界面，观众仍可看到原版倒计时。",
+      "Source": "library"
+    },
+    {
+      "Original": "The \"big countdown\" feature adds the missing numbers to the in-game timer !",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Info1",
+      "Translated": "“大号倒计时”会补齐游戏倒计时中原本省略的数字。",
+      "Source": "library"
+    },
+    {
       "Original": "Fixed width",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_Monospaced",
       "Translated": "固定宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "When using the multi monitor windows option, positioning the countdown outside of the game (even a little bit) will create a background. As rendering transparent windows is impossible outside of the game, this cannot be fixed for now. Please use the border as a guide.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_MultiMonitorWarning",
+      "Translated": "启用多显示器窗口后，只要倒计时窗口有一部分超出游戏边界，就会显示背景。游戏外无法绘制透明窗口，请以边框为准调整位置。",
       "Source": "library"
     },
     {
@@ -554,6 +681,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_NumberLuminance",
       "Translated": "亮度",
+      "Source": "library"
+    },
+    {
+      "Original": "Recolor instead of shifting hue",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberRecolor",
+      "Translated": "直接替换颜色，不进行色相偏移",
       "Source": "library"
     },
     {
@@ -585,6 +719,13 @@
       "Source": "library"
     },
     {
+      "Original": "Enable custom negative margin",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_NumberStyle_EnableCustomNegativeMargin",
+      "Translated": "启用自定义负边距",
+      "Source": "library"
+    },
+    {
       "Original": "Add a leading 0",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_NumberStyle_LeadingZero",
@@ -596,6 +737,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_OffsetText",
       "Translated": "倒计时偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning : when not hiding the original countdown, changing values in this section might create incoherent results",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_PositionWarning",
+      "Translated": "提醒：如果保留游戏原有倒计时，修改此处设置可能导致两处倒计时的显示不一致。",
       "Source": "library"
     },
     {
@@ -648,10 +796,24 @@
       "Source": "library"
     },
     {
+      "Original": "Readable",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_Texture_yellow",
+      "Translated": "易读",
+      "Source": "library"
+    },
+    {
       "Original": "Start playing from",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_CountdownTab_TickFrom",
       "Translated": "起播位置",
+      "Source": "library"
+    },
+    {
+      "Original": "This setting will make it so the sound plays from numbers 5 to the selected value. Note: this plugin cannot remove the tick sound for numbers 1-5.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_CountdownTab_TickFrom_Help",
+      "Translated": "从所选数字到 5 的范围内播放倒计时提示音。游戏原有的 1～5 秒提示音无法由此插件关闭。",
       "Source": "library"
     },
     {
@@ -697,6 +859,13 @@
       "Source": "library"
     },
     {
+      "Original": "seconds after combat end",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrCombatTimer_HideAfterRight",
+      "Translated": "脱战后经过的秒数",
+      "Source": "library"
+    },
+    {
       "Original": "Prefix",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_DtrCombatTimer_Prefix",
@@ -708,6 +877,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_DtrCombatTimer_Suffix",
       "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "This option will display the current combat time in the Server Info Bar (right next to the world & time). Please note that you can reorder all integrations in Dalamud Settings.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_DtrTab_Info",
+      "Translated": "在服务器信息栏的服务器和时间旁显示本次战斗时长。可在 Dalamud 设置中调整信息栏各项的排列顺序。",
       "Source": "library"
     },
     {
@@ -725,10 +901,24 @@
       "Source": "library"
     },
     {
+      "Original": "See the Big countdown tab for an explanation",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_AccurateCountdown_Help",
+      "Translated": "参见“大号倒计时”选项卡中的说明。",
+      "Source": "library"
+    },
+    {
       "Original": "Hide",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_AutoHide_Left",
       "Translated": "隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "seconds after combat end",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_AutoHide_Right",
+      "Translated": "脱战后经过的秒数",
       "Source": "library"
     },
     {
@@ -767,6 +957,13 @@
       "Source": "library"
     },
     {
+      "Original": "Display countdown with",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_CountdownPrecision_With_Left",
+      "Translated": "倒计时显示精度",
+      "Source": "library"
+    },
+    {
       "Original": "Enable floating window",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_Display",
@@ -778,6 +975,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_DisplayStopwatchOnlyInDuty",
       "Translated": "副本外隐藏战斗计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Basically hides the stopwatch when you are in the overworld",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_DisplayStopwatchOnlyInDuty_Help",
+      "Translated": "在野外隐藏秒表",
       "Source": "library"
     },
     {
@@ -795,6 +999,13 @@
       "Source": "library"
     },
     {
+      "Original": "The floating window is a movable window that can display the countdown and the current combat duration.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_Help",
+      "Translated": "可移动的悬浮窗可以显示倒计时及当前战斗时长。",
+      "Source": "library"
+    },
+    {
       "Original": "Hide in cutscenes",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_HideInCutscenes",
@@ -806,6 +1017,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_HideWhileOccupiedInCombat",
       "Translated": "战斗过场动画中隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the floating window during transition cutscenes that occur mid-combat (\"Occupied38\" flag)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_HideWhileOccupiedInCombat_Help",
+      "Translated": "战斗中播放过场动画时隐藏悬浮窗（Occupied38 标志）。",
       "Source": "library"
     },
     {
@@ -830,10 +1048,24 @@
       "Source": "library"
     },
     {
+      "Original": "Leave at 0 unless you have very consistent lag or some specific reason.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_PrePullOffset_Help",
+      "Translated": "一般保留为 0。延迟非常稳定或有特定需要时再调整。",
+      "Source": "library"
+    },
+    {
       "Original": "Enable pre-pull warning",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_ShowPrePulling",
       "Translated": "启用提前开怪提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes the countdown color when casting a spell that would result in a pre-pull.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_ShowPrePulling_Help",
+      "Translated": "如果当前咏唱会导致提前开怪，更改倒计时颜色。",
       "Source": "library"
     },
     {
@@ -862,6 +1094,13 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_FWTab_StopwatchPrecision_Right",
       "Translated": "小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Display combat timer with",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_FWTab_StopwatchPrecision_With_Left",
+      "Translated": "战斗计时显示精度",
       "Source": "library"
     },
     {
@@ -921,6 +1160,27 @@
       "Source": "library"
     },
     {
+      "Original": "Enable webserver on port",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_EnablePort",
+      "Translated": "启用网页服务，使用端口",
+      "Source": "library"
+    },
+    {
+      "Original": "This feature allows you to add a countdown and stopwatch overlay into your OBS (or other software) streams and recordings via a browser source.",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_Help",
+      "Translated": "在 OBS 或其他软件中添加浏览器源，即可在直播和录像中叠加倒计时与秒表。",
+      "Source": "library"
+    },
+    {
+      "Original": "To add it to your scene, enable the webserver then create a browser source in your scene and add the following URL : ",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_HelpAdd",
+      "Translated": "先启用网页服务，再在场景中创建浏览器源，填入以下网址： ",
+      "Source": "library"
+    },
+    {
       "Original": "Recommended window size is 300x100.",
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_Web_HelpSize",
@@ -932,6 +1192,20 @@
       "Container": "EngageTimer.Properties.Strings.resources",
       "Key": "Settings_Web_Hide_Left",
       "Translated": "隐藏叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "seconds after combat ends",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_Hide_Right",
+      "Translated": "秒（战斗结束后）",
+      "Source": "library"
+    },
+    {
+      "Original": "Web Server (OBS)",
+      "Container": "EngageTimer.Properties.Strings.resources",
+      "Key": "Settings_Web_Title",
+      "Translated": "网页服务（OBS）",
       "Source": "library"
     }
   ],

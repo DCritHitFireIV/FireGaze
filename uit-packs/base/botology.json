@@ -98,6 +98,60 @@
       "Source": "library"
     },
     {
+      "Original": "There are no local catalog changes to prepare for interactive review.",
+      "Context": "Plugin.PrepareCatalogUploadPackage",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "当前没有可提交交互式审查的本地目录更改。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not prepare the catalog upload package: ",
+      "Context": "Plugin.PrepareCatalogUploadPackage",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法准备目录上传包： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not locate the catalog folder.",
+      "Context": "Plugin.OpenCatalogFolder",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "未能找到目录文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opened the Botology catalog folder.",
+      "Context": "Plugin.OpenCatalogFolder",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已打开 Botology 目录文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not open the Botology catalog folder.",
+      "Context": "Plugin.OpenCatalogFolder",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法打开 Botology 目录文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "Global DTR controls are always available.",
+      "Context": "Plugin.SetGlobalDtrControlsEnabled",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "服务器信息栏的全局控件始终可用。",
+      "Source": "library"
+    },
+    {
       "Original": "disabled",
       "Context": "Plugin.ToggleTrackedPlugin",
       "PreserveID": false,
@@ -143,12 +197,66 @@
       "Source": "library"
     },
     {
+      "Original": "Discarded the new local entry draft.",
+      "Context": "CatalogEditorWindow.DropLocalChanges",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已丢弃新建本地条目的草稿。",
+      "Source": "library"
+    },
+    {
       "Original": "Plugin enabled",
       "Context": "ConfigWindow.DrawGeneralSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "插件已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Show DTR bar entry",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast warnings on changes",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "有更改时显示弹窗提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast for catalog notes affecting installed plugins.",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "目录备注涉及已安装的插件时显示弹窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup box that requires OK",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示需要点击「确定」的弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the plugin window on changes",
+      "Context": "ConfigWindow.DrawGeneralSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "发生更改时打开插件窗口",
       "Source": "library"
     },
     {
@@ -275,6 +383,13 @@
       "Source": "library"
     },
     {
+      "Original": "Show DTR bar entry",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Show DTR bar entry",
+      "Translated": "在服务器信息栏中显示",
+      "Source": "library"
+    },
+    {
       "Original": "Manage",
       "Container": "botology.Localization.Strings_en.resources",
       "Key": "Manage",
@@ -293,6 +408,13 @@
       "Container": "botology.Localization.Strings_en.resources",
       "Key": "Cancel",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast warnings on changes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Toast warnings on changes",
+      "Translated": "有更改时显示弹窗提醒",
       "Source": "library"
     },
     {
@@ -590,6 +712,13 @@
       "Source": "library"
     },
     {
+      "Original": "Open the plugin window on changes",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Open the plugin window on changes",
+      "Translated": "发生更改时打开插件窗口",
+      "Source": "library"
+    },
+    {
       "Original": "Preview unavailable",
       "Container": "botology.Localization.Strings_en.resources",
       "Key": "Preview unavailable",
@@ -783,6 +912,13 @@
       "Container": "botology.Localization.Strings_en.resources",
       "Key": "State",
       "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Popup box that requires OK",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Popup box that requires OK",
+      "Translated": "显示需要点击「确定」的弹窗",
       "Source": "library"
     },
     {
@@ -993,6 +1129,13 @@
       "Container": "botology.Localization.Strings_en.resources",
       "Key": "Description",
       "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Toast for catalog notes affecting installed plugins.",
+      "Container": "botology.Localization.Strings_en.resources",
+      "Key": "Toast for catalog notes affecting installed plugins.",
+      "Translated": "目录备注涉及已安装的插件时显示弹窗。",
       "Source": "library"
     },
     {

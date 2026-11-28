@@ -8,6 +8,15 @@
   },
   "entries": [
     {
+      "Original": "[PlatePeek] Probe ON. Open Edit Plate, change each design dropdown by one step, toggle Invert, then run /platepeek probe again to stop.",
+      "Context": "DesignProbe.Enable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已开启探测。打开「编辑铭牌」，将每个设计下拉框切换一个选项，再切换「反转」，最后再次输入 /platepeek probe 停止。",
+      "Source": "library"
+    },
+    {
       "Original": "[PlatePeek] Probe OFF.",
       "Context": "DesignProbe.Disable",
       "PreserveID": false,
@@ -59,6 +68,33 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "[PlatePeek] 已载入粘贴的外观。点击导入按钮即可应用。",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Saved favorite \"",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 已保存收藏「",
+      "Source": "library"
+    },
+    {
+      "Original": "[PlatePeek] Favorite \"",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[PlatePeek] 收藏「",
+      "Source": "library"
+    },
+    {
+      "Original": "\" could not be read.",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "」读取失败。",
       "Source": "library"
     },
     {
@@ -350,6 +386,15 @@
       "Source": "library"
     },
     {
+      "Original": " (rank ",
+      "Context": "InspectorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " （等级 ",
+      "Source": "library"
+    },
+    {
       "Original": "Free Company: ",
       "Context": "InspectorWindow.Draw",
       "PreserveID": false,
@@ -437,6 +482,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "请先打开自己的肖像编辑器：\n编辑铭牌肖像，请在自己的铭牌中选择编辑铭牌 > 肖像 > 编辑；\n编辑套装肖像，请在肖像列表中选择编辑。\n预设将导入当前编辑器，导入后请点击保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Applies ",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将 ",
+      "Source": "library"
+    },
+    {
+      "Original": "'s captured portrait to your open editor.",
+      "Context": "InspectorWindow.DrawActionButtons",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已捕获的肖像应用到当前打开的编辑器。",
       "Source": "library"
     },
     {
@@ -563,6 +626,42 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "删除此收藏",
+      "Source": "library"
+    },
+    {
+      "Original": " unchecked)",
+      "Context": "InspectorWindow.DrawOwnershipSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 项未勾选）",
+      "Source": "library"
+    },
+    {
+      "Original": "You own all ",
+      "Context": "InspectorWindow.DrawOwnershipSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "你已集齐 ",
+      "Source": "library"
+    },
+    {
+      "Original": "You own ",
+      "Context": "InspectorWindow.DrawOwnershipSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "你持有 ",
+      "Source": "library"
+    },
+    {
+      "Original": ". Missing: ",
+      "Context": "InspectorWindow.DrawOwnershipSummary",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "。缺少： ",
       "Source": "library"
     },
     {

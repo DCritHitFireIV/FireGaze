@@ -128,6 +128,14 @@
       "Source": "library"
     },
     {
+      "Original": "If checked, will highlight menu selections so items are easier to find.\n\nNOTE: If you search for another item that is sold by a vendor whose menu you already have open, this\nwill cause both the previous item and the new item to be highlighted. I could fix this, but the only way I\nknow how is to redraw every non-highlighted item with the original color. The highlighting occurs every\nframe, and I'm not willing to add another loop per frame for this use case which I think is stupid.",
+      "Context": "SettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "勾选后会高亮菜单项，方便定位物品。\n\n注意：如果商人菜单已打开，此时又搜索该商人出售的另一件物品，\n上一次与这一次找到的物品都会保持高亮。若要重置旧高亮，就需要把所有\n未高亮的物品重新按原色绘制。高亮会在每一帧刷新，作者认为没有必要\n为这种情况在每一帧额外遍历一次菜单。",
+      "Source": "library"
+    },
+    {
       "Original": "If checked, will highlight npcs that sell last item searched for once they are visible on-screen",
       "Context": "SettingsWindow.Draw",
       "Role": "UI",

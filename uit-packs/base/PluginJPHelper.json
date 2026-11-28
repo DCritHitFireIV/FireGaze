@@ -539,6 +539,15 @@
       "Source": "library"
     },
     {
+      "Original": "から自動適用]",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "自动应用］",
+      "Source": "library"
+    },
+    {
       "Original": "検出テストモード",
       "Context": "Plugin.DrawAdditionalWindowControls",
       "PreserveID": false,
@@ -554,6 +563,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "点击后，请在游戏内打开需要翻译的独立窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "秒　対象の別ウィンドウを開いてください。開始時から開いていた場合は、一度閉じて約0.5秒待ってから開き直してください。",
+      "Context": "Plugin.DrawAdditionalWindowControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "秒。请打开目标插件的另一个窗口。如果开始时已经打开，请先关闭，等待约 0.5 秒后再打开。",
       "Source": "library"
     },
     {
@@ -701,6 +719,2292 @@
       "Source": "library"
     },
     {
+      "Original": "詳細 → とらめもブログ",
+      "Context": "Plugin.CaptureToramemoTitleBarLinkLayout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "详情 → とらめも博客",
+      "Source": "library"
+    },
+    {
+      "Original": "とらめもブログを開く",
+      "Context": "Plugin.DrawToramemoTitleBarLinkOverlay",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开とらめも博客",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin JP Helper は、とらめも内で開発しているDalamudプラグインです。",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Plugin JP Helper 是由とらめも开发的 Dalamud 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "【開発協力・コントリビューター】",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【开发协作与贡献者】",
+      "Source": "library"
+    },
+    {
+      "Original": "PR #6 / #7 にて、.gitignore整備、プラグイン別処理の分離・構造整理などにご協力いただいています。",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "通过 PR #6 和 #7 协助整理 .gitignore，拆分各插件的处理逻辑并调整代码结构。",
+      "Source": "library"
+    },
+    {
+      "Original": "PR #8 以降にて、v0.4.12実ソースへの統合・整理、その後の安定性改善や各種修正にご協力いただいています。",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "从 PR #8 起协助将改动整合进 v0.4.12 源码，之后持续改进稳定性并修复问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "【不具合報告・動作確認への協力】",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【问题反馈与测试】",
+      "Source": "library"
+    },
+    {
+      "Original": "とらめも交流所 Discordメンバーの皆さま",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "とらめも交流所 Discord 的各位成员",
+      "Source": "library"
+    },
+    {
+      "Original": "不具合報告、再現確認、動作検証、改善提案など、多くのご協力をいただいています。ありがとうございます。",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "感谢大家报告问题、协助复现、测试功能并提出改进建议。",
+      "Source": "library"
+    },
+    {
+      "Original": "【案内・サポート】",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【指南与支持】",
+      "Source": "library"
+    },
+    {
+      "Original": "導入方法・使い方・更新情報：とらめも PJH記事",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "安装方法、使用说明与更新信息：とらめも的 PJH 文章",
+      "Source": "library"
+    },
+    {
+      "Original": "とらめも PJH記事を開く",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开とらめも的 PJH 文章",
+      "Source": "library"
+    },
+    {
+      "Original": "とらめも TOP",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "とらめも首页",
+      "Source": "library"
+    },
+    {
+      "Original": "不具合報告・改善提案：GitHub Issue / PR",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "报告问题或提出改进：GitHub Issue / PR",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHubを開く",
+      "Context": "Plugin.DrawCreditsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开 GitHub",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin JP Helper は、他のDalamudプラグインの表示文字列をCSV辞書で日本語化する補助プラグインです。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Plugin JP Helper 使用 CSV 词典将其他 Dalamud 插件的界面文字翻译成日语。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installerの日本語化：使い方・仕様",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "插件安装器日文化：用法和工作方式",
+      "Source": "library"
+    },
+    {
+      "Original": "DalamudのPlugin Installerに表示される公開プラグインの説明文を、専用JSON辞書を使って日本語化します。Plugin本体を書き換える機能ではなく、表示だけを日本語へ差し替えます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "通过专用 JSON 词典，将 Dalamud 插件安装器中公开插件的介绍翻译为日语。此功能只替换显示的文本，不会改写插件本体。",
+      "Source": "library"
+    },
+    {
+      "Original": "【基本的な使い方】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【基本用法】",
+      "Source": "library"
+    },
+    {
+      "Original": "「Plugin Installer」タブを開きます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "打开「插件安装器」标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "「Plugin Installerの説明を辞書で日本語化」をONにします。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "开启「用词典将插件安装器的介绍翻译为日语」。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書に登録済みのプラグインは、Plugin Installerの説明文が日本語で表示されます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "插件在词典中有译文时，安装器将显示日语介绍。",
+      "Source": "library"
+    },
+    {
+      "Original": "「翻訳の下に原文も表示」をONにすると、日本語の下に元の英文も表示できます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "开启「在译文下方显示原文」后，日语下方也会显示原英文。",
+      "Source": "library"
+    },
+    {
+      "Original": "日本語化のチェックをOFFにすると、その場で元の英文表示へ戻ります。保存済みの翻訳辞書は削除されません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "关闭日文化开关后，立即恢复英文显示，已保存的词典会保留。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 再度ONにすると、保存済みの翻訳をそのまま使用します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 再次开启时，将沿用已保存的翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installerの検索は本来英語が中心ですが、PJHの検索欄へ日本語を入力すると、対応する用語を英語へ置き換えてDalamudへ渡します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "插件安装器主要支持英文搜索。在 PJH 搜索栏输入日语时，它会将有对应译名的词语转换为英文，再交给 Dalamud 搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "例：手配書、討伐手帳、製作、リテイナーなど、登録済みの検索用語に対応します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "例如，可搜索词典中已收录的狩猎通缉令、讨伐笔记、制作、雇员等日语词汇。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 日本語検索は辞書に登録された用語を使う補助機能です。すべての日本語を自由文として理解して検索する機能ではありません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 日语搜索使用词典中的词语匹配，不能理解任意日语句子。",
+      "Source": "library"
+    },
+    {
+      "Original": "【翻訳の保存と差分更新】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【保存翻译与增量更新】",
+      "Source": "library"
+    },
+    {
+      "Original": "一度翻訳したPlugin Installerの説明は plugin-installer-translations.json に保存します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "安装器介绍的译文会保存到 plugin-installer-translations.json。",
+      "Source": "library"
+    },
+    {
+      "Original": "次回以降は毎回すべてを翻訳せず、新しく追加されたプラグイン、または原文が変更された部分だけを差分として確認します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "下次只检查新增插件和原文有变动的部分，不会重新翻译全部内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "既に手動で確認・編集した辞書項目は優先して保護し、Google翻訳で自動上書きしません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已手动确认或编辑的词条会优先保留，Google 翻译不会自动覆盖。",
+      "Source": "library"
+    },
+    {
+      "Original": "「今すぐ差分チェック」を押すと、設定した待ち時間を待たずに差分確認を行います。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "点击「立即检查变更」即可开始，不必等待设定的间隔。",
+      "Source": "library"
+    },
+    {
+      "Original": "【Google翻訳とPJH中継サーバー】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【Google 翻译与 PJH 中转服务器】",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳方式で『PJH中継サーバー』を選んでいても、Google翻訳が利用可能な場合はGoogle翻訳を優先します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "即使选择「PJH 中转服务器」，只要 Google 翻译可用，仍会优先使用 Google 翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "Google翻訳を利用できない場合はPJH中継サーバーへ切り替えます。画面には実際に使用している翻訳先を表示します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "Google 翻译不可用时，将切换到 PJH 中转服务器。界面会显示实际使用的服务。",
+      "Source": "library"
+    },
+    {
+      "Original": "PJH中継サーバーは利用者側のAPIキー設定は不要です。中継サーバー側には月間45万文字の安全上限があります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "使用 PJH 中转服务器无需设置个人 API 密钥。服务器每月设有 45 万字符的使用上限。",
+      "Source": "library"
+    },
+    {
+      "Original": "『利用可能チェック』は手動確認用です。Googleは確認用通信を1回行い、中継サーバーは状態確認のみで翻訳文字数を消費しません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "「检查可用性」用于手动测试。检查 Google 时会发出一次请求；检查中转服务器只会读取状态，不消耗翻译字符数。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳サービスへの自動再試行は行いません。差分チェックだけでは外部翻訳へ送信しません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "外部翻译服务不会自动重试。仅检查变更不会发送文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "【Google翻訳とFFXIV用語】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【Google 翻译与 FFXIV 术语】",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳・変更分の説明文は、設定した翻訳方式（Google翻訳 / PJH中継サーバー）を利用して日本語化します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "尚未翻译或已变更的介绍，会由所选服务（Google 翻译或 PJH 中转服务器）译为日语。",
+      "Source": "library"
+    },
+    {
+      "Original": "FFXIV/Dalamud固有用語や保護対象の文字列は、Googleへ送る前に一時的な目印へ置き換えます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "发送至 Google 前，会用临时标记替换 FFXIV、Dalamud 术语及需要保留的字符串。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳後、その目印の位置へPJHの用語辞書に登録したFFXIV表記を戻します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "翻译后，PJH 会在标记所在位置填回术语词典中的游戏用语。",
+      "Source": "library"
+    },
+    {
+      "Original": "この方式により、Google翻訳後の文章から『どの日本語が元のFFXIV用語だったか』を推測して置換するのではなく、翻訳前から場所を確保して用語を戻します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这种方式预先标记术语的位置，无需等 Google 译完再猜测哪个日语词对应原术语。",
+      "Source": "library"
+    },
+    {
+      "Original": "【Google側の制限について】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【Google 服务限制】",
+      "Source": "library"
+    },
+    {
+      "Original": "短時間に多数の翻訳が必要になった場合、Google側の制限で一時的に翻訳できないことがあります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "短时间需要翻译大量内容时，可能触发 Google 限制，暂时无法翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "制限中は状態欄に表示されます。すぐに何度も再実行せず、少し時間を空けてから差分チェックしてください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "触发限制时会在状态栏提示。请稍后再检查变更，避免短时间内反复运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳済みの内容は保存されているため、再確認時も未翻訳・変更分だけが対象になります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已完成的译文会保存，再次检查时只处理未翻译或有变更的部分。",
+      "Source": "library"
+    },
+    {
+      "Original": "【プライバシー・対象範囲】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【隐私与适用范围】",
+      "Source": "library"
+    },
+    {
+      "Original": "差分確認とGoogle翻訳の対象は、Dalamudで公開されているRemote Manifestのプラグインだけです。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "仅检查具有 Dalamud 公开远程清单的插件，并仅对这些插件使用 Google 翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "Local-only / private Pluginは、差分確認・Google送信・辞書自動更新の対象外です。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "仅本地或私有插件不参与差异检查、向 Google 发送内容或词典自动更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "導入済み公開PluginのLocal Manifestは、表示へ翻訳を適用するためだけに使用します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已安装的公开插件，其本地清单仅用于将已有译文应用到显示文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ Local-only / private Pluginの名前や説明文をGoogle翻訳へ送信しないよう分離しています。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 仅本地或私有插件的名称和介绍不会发送到 Google 翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "【Plugin Installer用の辞書ファイル】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【插件安装器词典文件】",
+      "Source": "library"
+    },
+    {
+      "Original": "plugin-installer-translations.json：Pluginごとの説明文・Punchlineの翻訳を保存する辞書です。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "plugin-installer-translations.json：保存各插件介绍和一句话简介的翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "plugin-installer-terminology.json：FFXIV/Dalamud用語など、翻訳時に保護・補正するための用語辞書です。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "plugin-installer-terminology.json：翻译时用于保留和校正 FFXIV、Dalamud 等术语。",
+      "Source": "library"
+    },
+    {
+      "Original": "通常はPlugin JP Helperの配布ZIPに含まれているため、個別にダウンロードして配置する必要はありません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这些文件通常已随 Plugin JP Helper 的 ZIP 包分发，无需另行下载。",
+      "Source": "library"
+    },
+    {
+      "Original": "【翻訳辞書が0件・日本語化されない場合】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【词典为 0 条或未显示日语】",
+      "Source": "library"
+    },
+    {
+      "Original": "「辞書ファイル設定」の「使用中」に plugin-installer-translations.json が表示されているか確認します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "检查「词典文件设置」的「使用中」一栏是否显示 plugin-installer-translations.json。",
+      "Source": "library"
+    },
+    {
+      "Original": "「読込件数」が0の場合は「再読み込み」を試してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "若「已读取条目」为 0，请尝试「重新加载」。",
+      "Source": "library"
+    },
+    {
+      "Original": "別のJSONを指定している場合は「翻訳ファイルを選択」またはパス欄から正しい辞書を指定し、「この辞書を使用」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "若指定了其他 JSON，请点击「选择翻译文件」或在路径栏中指定正确词典，然后点击「使用此词典」。",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイル自体がおかしい、または再読み込みしても0件のままの場合は、Plugin JP Helperの再インストールをお試しください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "若词典文件异常或重新加载后仍为 0 条，请尝试重新安装 Plugin JP Helper。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 再インストール時にPlugin Installer用の初期辞書ファイルも一緒に配置されます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 重新安装时会一并放置插件安装器所需的初始词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "【負荷について】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【性能开销】",
+      "Source": "library"
+    },
+    {
+      "Original": "PJHは作り始めの頃、広い範囲へ翻訳処理を適用するとフレームレートへ影響することがあったため、現在は対象を限定し、保存済み辞書と差分処理を優先して重い処理を増やさないようにしています。必要のないプラグインは日本語化をOFFにして使用できます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "PJH 早期对大量内容应用翻译时曾影响帧率，现已缩小范围，优先使用已保存的词典和增量处理。可单独关闭不需要的插件的日文化。",
+      "Source": "library"
+    },
+    {
+      "Original": "かんたん：公式CSVを使う方法",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "快速入门：使用官方 CSV",
+      "Source": "library"
+    },
+    {
+      "Original": "「公式辞書」タブを開き、「公式辞書一覧を取得」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "打开「官方词典」页，点击「获取官方词典列表」。",
+      "Source": "library"
+    },
+    {
+      "Original": "使いたいCSVにチェックを入れ、「選択した辞書をダウンロード／更新」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "勾选需要的 CSV，再点击「下载／更新所选词典」。",
+      "Source": "library"
+    },
+    {
+      "Original": "「公式辞書フォルダーを開く」でダウンロード先を開きます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "点击「打开官方词典文件夹」查看下载位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "使いたいCSVを「ローカル辞書フォルダー」へコピーします。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "将要使用的 CSV 复制到「本地词典文件夹」。",
+      "Source": "library"
+    },
+    {
+      "Original": "「翻訳辞書」タブでCSVを読み込み、日本語化を有効にします。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "在「翻译词典」中读取 CSV 并启用日文化。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 公式辞書フォルダーは配布・更新確認用です。そこへ置いただけでは翻訳に使用されません。ローカル辞書フォルダーへコピーしてから使用してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 官方词典文件夹用于分发和检查更新。请先将文件复制到本地词典文件夹，才能实际用于翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 公式辞書を更新しても、ローカル側でユーザーが作成・編集したCSVは自動で上書きしません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 更新官方词典时，不会自动覆盖你在本地创建或编辑的 CSV。",
+      "Source": "library"
+    },
+    {
+      "Original": "自分で辞書を作る方法（未翻訳取得・自動翻訳）",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自行创建词典（采集未译文本及自动翻译）",
+      "Source": "library"
+    },
+    {
+      "Original": "「未翻訳・取得」タブは、取得作業と自動翻訳作業を分けています。上から順番に進めると安全に辞書を作れます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "「未译文本与采集」页将采集与自动翻译分开，按页面从上到下操作即可创建词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "【1. 翻訳対象プラグインを選ぶ】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【1. 选择翻译目标插件】",
+      "Source": "library"
+    },
+    {
+      "Original": "「インストール済みプラグインから追加」で、日本語化したいプラグインを選んで「翻訳対象に追加」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "在「从已安装插件中添加」选择要译为日语的插件，点击「添加到翻译目标」。",
+      "Source": "library"
+    },
+    {
+      "Original": "対象プラグインを切り替える場合は、画面上部の翻訳対象プラグイン選択から変更します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "如需切换插件，请使用页面顶部的目标插件选择器。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 取得中・自動翻訳中・翻訳結果の確認待ち中は、誤操作を防ぐため対象変更や関係するボタンが一時的に無効になります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 采集、自动翻译或等待确认结果期间，切换目标及相关按钮暂时不可用。",
+      "Source": "library"
+    },
+    {
+      "Original": "【2. 「未翻訳取得」サブタブで文字列を集める】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【2. 在「采集未译文本」中收集文字】",
+      "Source": "library"
+    },
+    {
+      "Original": "「取得開始」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "点击「开始采集」。",
+      "Source": "library"
+    },
+    {
+      "Original": "対象プラグインの設定画面・タブ・ボタン・ツールチップ・プルダウンなど、翻訳したい場所を一通り表示・操作します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "依次打开并操作需要翻译的设置页、标签、按钮、悬浮提示和下拉菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "確認が終わったら「取得停止」を押します。取得中は、一覧編集・対象変更・自動翻訳開始などはできません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "检查完毕后点击「停止采集」。采集期间无法编辑列表、切换目标或开始自动翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "取り込み方式が「自動」の場合は、取得停止時に対象分を翻訳辞書へ取り込みます。「手動」の場合は一覧確認後に「翻訳辞書へ取り込む」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "选择「自动」时，停止采集会将目标文本导入词典。选择「手动」时，先检查列表，再点击「导入翻译词典」。",
+      "Source": "library"
+    },
+    {
+      "Original": "【3. 取得結果を確認する】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【3. 检查采集结果】",
+      "Source": "library"
+    },
+    {
+      "Original": "「対象プラグイン」には対象として判定できた未翻訳文字列を表示します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "「目标插件」列出已确认属于目标插件的未译文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "「対象候補」には対象プラグイン由来の可能性が高い文字列を表示します。必要なものだけ確認して対象側へ移します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "「候选」列出可能来自目标插件的文本。请检查后只将所需内容移入目标列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "「他プラグイン」は別プラグイン由来と判定した文字列です。対象辞書へは自動で混ぜません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "「其他插件」列出已判定来自其他插件的文字，不会自动加入当前词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "「判定不能」は所有元を安全に判断できなかった文字列です。必要な場合だけ確認してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "「无法判断」列出无法可靠判断归属的文字，仅在需要时检查。",
+      "Source": "library"
+    },
+    {
+      "Original": "キャラクター名・サーバー名・FC名・時刻・座標・ログ・ローカルパスなど、公開辞書に不要な動的／個人的文字列は削除してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "请删除角色名、服务器名、部队名、时间、坐标、日志、本地路径等公开词典不需要的动态或个人信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "【4. 「自動翻訳」サブタブで下書きを作る】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【4. 在「自动翻译」中生成初稿】",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳取得を停止してから「未翻訳を自動翻訳」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "停止采集未译文本后，点击「自动翻译未译文本」。",
+      "Source": "library"
+    },
+    {
+      "Original": "選択した翻訳方式を利用し、翻訳可能な固定UI文字列だけを順番に翻訳します。翻訳中は対象変更・取得開始・取り込みなどの操作を無効化します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "所选翻译服务会依次翻译可处理的静态界面文本。在此期间无法切换目标、开始采集或导入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "URL・コマンド・ローカルパス・明らかな動的数値・技術ID・作者表記などは可能な範囲で翻訳対象外にします。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "网址、命令、本地路径、明显的动态数值、技术 ID、作者信息等会尽量排除。",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグイン名などの固有名詞やFFXIV用語は、可能な範囲で保護してから翻訳します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "翻译前会尽量保护插件名等专有名词和 FFXIV 术语。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 自動翻訳は完成した公式訳を作る機能ではなく、ユーザーが辞書を作るための下書き補助です。自然さや意味が正しいか必ず確認してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 自动翻译只为制作词典提供初稿。请检查译文是否自然、准确，再用于正式词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "【5. 翻訳ログを確認する】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【5. 检查翻译日志】",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳ログには、翻訳開始・成功・スキップ理由・失敗・Google側エラーなどを表示します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "自动翻译日志会记录开始、成功、跳过原因、失败及 Google 返回的错误等信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "「利用可能チェック」で、選択中の翻訳方式へ1回だけ通信し、利用可能か、HTTP 429か、通信エラーかを確認できます。429時は自動再試行せず停止します。Plugin Installer側にも同じ設定があります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "点击「检查可用性」会向所选服务发送一次请求，可确认服务是否可用、是否返回 HTTP 429 或出现通信错误。收到 429 时会停止，不会自动重试。插件安装器页也有同一设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳中は「停止」ボタンで途中停止できます。429待機中でも停止でき、途中までの翻訳結果は保持します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "自动翻译期间可点击「停止」。即使正在等待 HTTP 429 的限制解除，也能停止，并保留已完成的结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "問題がある場合は「ログをコピー」で内容を共有できます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "如遇问题，可点击「复制日志」分享内容。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ Google側の制限が出た場合は、短時間に何度も再実行せず、少し時間を空けてから再度お試しください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ Google 触发限制后，请稍等再试，避免短时间内反复运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "【6. 翻訳結果を辞書へ反映する】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【6. 将结果写入词典】",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳結果を確認し、問題なければ「翻訳結果を辞書へ反映」を押します。不要なら「自動翻訳結果を破棄」を押します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "检查译文后，点击「将翻译结果写入词典」。如不需要，点击「丢弃自动翻译结果」。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳結果の確認待ち中は、別の取得や対象変更を行えないようにしています。反映または破棄を完了してから次の作業へ進んでください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "等待确认结果期间不能开始其他采集或切换插件。请先写入词典或丢弃结果，再继续。",
+      "Source": "library"
+    },
+    {
+      "Original": "既にユーザーが作成・修正した翻訳や既存の翻訳がある項目は、自動翻訳で勝手に上書きしません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "已有翻译以及用户创建或修改的译文不会被自动覆盖。",
+      "Source": "library"
+    },
+    {
+      "Original": "【7. 翻訳辞書タブで仕上げる】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【7. 在翻译词典中完成校订】",
+      "Source": "library"
+    },
+    {
+      "Original": "「翻訳辞書」タブへ移動し、日本語訳を確認・修正します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "进入「翻译词典」页，检查并修正日语译文。",
+      "Source": "library"
+    },
+    {
+      "Original": "内容が整ったらCSVへ保存します。Google自動翻訳の作業用CSVは再生成できますが、手修正済みの既存辞書は自動翻訳で勝手に置き換えない方針です。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "整理后保存为 CSV。Google 自动翻译的工作用 CSV 可以重新生成，已手动校订的词典不会被自动翻译替换。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ コミュニティ辞書や公式辞書として公開する場合は、個人情報・動的値・別プラグインの文字列が混ざっていないか、必ず最後に確認してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 发布为社区或官方词典前，请最后检查是否混入个人信息、动态值或其他插件的文字。",
+      "Source": "library"
+    },
+    {
+      "Original": "コミュニティ辞書を投稿・削除する方法",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "投稿或删除社区词典",
+      "Source": "library"
+    },
+    {
+      "Original": "「コミュニティ辞書」タブの「コミュニティ辞書をアップロード」を押すと投稿ページが開きます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "在「社区词典」页点击「上传社区词典」，即可打开投稿页面。",
+      "Source": "library"
+    },
+    {
+      "Original": "投稿者名、削除用パスワード、投稿するCSVを指定して投稿します。GitHubアカウントは必要ありません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "填写投稿者名称、删除密码并选择 CSV 后提交。无需 GitHub 账号。",
+      "Source": "library"
+    },
+    {
+      "Original": "アップロードしたCSVのファイル名は変更されず、そのままコミュニティ辞書名として登録されます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "上传时保留 CSV 文件名，并用该名称登记为社区词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "削除する場合は投稿ページ下部の削除欄から自分の辞書を選び、投稿時に決めた削除用パスワードを入力します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "需删除时，在投稿页面底部选择自己的词典，输入投稿时设定的删除密码。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ 削除用パスワードは必ず自分で覚えておいてください。旧方式で登録された辞書など、削除用パスワードを持たない辞書はWeb画面から削除できません。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ 请自行保管删除密码。旧方式登记的词典等没有删除密码的内容，无法从网页删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "【アップロード前に必ず確認してください】",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "【上传前请务必检查】",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグインによっては、キャラクター名・サーバー名・FC名など、個人を特定される可能性がある表示文字列まで翻訳・取得されてCSVに含まれる場合があります。コミュニティ辞書として公開すると、その内容も第三者から見える状態になります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "部分插件可能会采集并翻译角色名、服务器名、部队名等可识别个人身份的文字，并写入 CSV。发布为社区词典后，这些内容也会对外公开。",
+      "Source": "library"
+    },
+    {
+      "Original": "投稿前にCSVを開き、自分のキャラクター名やサーバー名などで検索してください。該当する行が見つかった場合は、その行を削除してからアップロードしてください。必要に応じて他のキャラクター名、ログ、座標、時刻などの個人的・動的な情報も確認してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "投稿前请打开 CSV 搜索自己的角色名、服务器名等信息。找到后先删除相关行再上传。请按需检查其他角色名、日志、坐标、时间等个人或动态信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "※ Plugin JP Helper側ですべての個人情報を自動判定することはできません。公開前の確認は投稿者自身で行ってください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "※ Plugin JP Helper 无法自动识别所有个人信息，投稿者需在公开前自行检查。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書と対象プラグインについて",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "翻译词典与目标插件",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書タブでは、対象プラグインごとのCSVを読み込み、表示文字列の日本語化を有効／無効にできます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "「翻译词典」页可按插件读取 CSV，并分别开启或关闭界面文字的日文化。",
+      "Source": "library"
+    },
+    {
+      "Original": "初めて使うプラグインは「未翻訳・取得」から対象プラグインへ追加してください。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "首次使用某插件时，请在「未译文本与采集」中将其加入目标列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin JP Helper をOFFにすると、対象プラグインの表示は元の文字列へ戻ります。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "关闭 Plugin JP Helper 后，目标插件将恢复原文显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書の更新通知について",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "词典更新通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin JP Helper起動時と、その後1時間ごとに公式辞書・コミュニティ辞書の更新を確認します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Plugin JP Helper 启动时检查官方和社区词典更新，以后每小时再检查一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "公式辞書はGitHubの Dictionaries/Official フォルダー内のCSVに追加・更新・削除があった場合に通知します。コミュニティ辞書は community-index.json の更新を確認します。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "GitHub 的 Dictionaries/Official 中增删或更新 CSV 时会发出官方词典通知。社区词典则通过 community-index.json 检查更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "更新がある場合はタイトルバーに【公式辞書に更新があります。】【コミュニティ辞書に更新があります。】のように表示されます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "有更新时，标题栏会显示「官方词典有更新」或「社区词典有更新」。",
+      "Source": "library"
+    },
+    {
+      "Original": "各辞書タブで「一覧を取得」が成功すると、その時点を確認済みとして通知が消えます。",
+      "Context": "Plugin.DrawHelpTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在对应标签页成功获取列表后，该次更新会标记为已查看，提示随之消失。",
+      "Source": "library"
+    },
+    {
+      "Original": "動作診断（日本語化されないとき・不具合報告用）",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "运行诊断（日文化未生效或反馈问题时使用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin JP HelperはImGuiの描画関数をフックして文字列を差し替えます。日本語化されない場合は、まずフックが有効かどうかを確認してください。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Plugin JP Helper 通过监听 ImGui 绘制函数替换显示文本。未显示日语时，请先检查监听是否生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "件すべて有効",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "个全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "ImGuiのバージョンによっては存在しない関数があり、一部の失敗は正常です（例: SeparatorText）。多数が失敗している場合はDalamudのバージョンを確認してください。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "ImGui 的不同版本可能不包含某些函数，例如 SeparatorText，少数失败属正常情况。如果多数失败，请检查 Dalamud 版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "有効なフック一覧",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "已启用的监听列表",
+      "Source": "library"
+    },
+    {
+      "Original": "【カウンター】自分のウィンドウぶんは数えません。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "【计数】不计入本插件自己的窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳を差し替えた回数",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "译文替换次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo(配列) 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Combo 调用（数组）",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo(NUL区切り) 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Combo 调用（以 NUL 分隔）",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo(コールバック) 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Combo 调用（回调）",
+      "Source": "library"
+    },
+    {
+      "Original": "BeginCombo 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "BeginCombo 调用",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo内Selectable 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "Combo 内的 Selectable 调用",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo内で差し替えた項目",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在 Combo 中已替换的项目",
+      "Source": "library"
+    },
+    {
+      "Original": "SliderInt 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "SliderInt 调用",
+      "Source": "library"
+    },
+    {
+      "Original": "TableSetupColumn 呼び出し",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "TableSetupColumn 调用",
+      "Source": "library"
+    },
+    {
+      "Original": "診断情報をコピー",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制诊断信息",
+      "Source": "library"
+    },
+    {
+      "Original": "不具合報告に貼り付けてください。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请将诊断信息粘贴到问题报告中。",
+      "Source": "library"
+    },
+    {
+      "Original": "フック通過ログを記録する",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记录经过监听的文本",
+      "Source": "library"
+    },
+    {
+      "Original": "ONの間だけ、直近",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "仅在开启时记录最近",
+      "Source": "library"
+    },
+    {
+      "Original": "件の通過内容を記録します。常時ONにする必要はありません。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "条经过的内容。无需一直开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "記録は停止中です。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "记录已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "まだ記録がありません。対象プラグインの画面を開いてください。",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "尚无记录，请打开目标插件窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "判定プラグイン",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "判定归属插件",
+      "Source": "library"
+    },
+    {
+      "Original": "並び順：",
+      "Context": "Plugin.DrawListSortControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "排序：",
+      "Source": "library"
+    },
+    {
+      "Original": "GitHubの公式CSV辞書を確認し、必要なものだけダウンロード／更新できます。使用方法は「ヘルプ」タブを確認してください。",
+      "Context": "Plugin.DrawOfficialDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "查看 GitHub 的官方 CSV 词典，按需下载或更新。用法见「帮助」页。",
+      "Source": "library"
+    },
+    {
+      "Original": "公式辞書一覧を取得",
+      "Context": "Plugin.DrawOfficialDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取官方词典列表",
+      "Source": "library"
+    },
+    {
+      "Original": "公式辞書フォルダーを開く",
+      "Context": "Plugin.DrawOfficialDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开官方词典文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "ローカル辞書フォルダーを開く",
+      "Context": "Plugin.DrawOfficialDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开本地词典文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "「公式辞書一覧を取得」を押すとGitHub上のCSV一覧を表示します。",
+      "Context": "Plugin.DrawOfficialDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "点击「获取官方词典列表」可显示 GitHub 上的 CSV 列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳対象がありません。「未翻訳・取得」タブからインストール済みプラグインを追加してください。",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有翻译目标。请在「未译文本与采集」页添加已安装插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "対象プラグイン：",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "目标插件：",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳・取得側にも適用",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "同时应用到未译文本采集",
+      "Source": "library"
+    },
+    {
+      "Original": " 件 / ユーザー訳 ",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 条／用户译文 ",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳対象から外す",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从翻译目标中移除",
+      "Source": "library"
+    },
+    {
+      "Original": "完全リセット後の取得済み原文を表示しています。旧標準訳は使いません。",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前显示完全重置后重新采集的原文，不使用旧版标准译文。",
+      "Source": "library"
+    },
+    {
+      "Original": "配布されたCSVを使う場合は「CSVを選択して読み込む」だけで利用できます。",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "如使用已分发的 CSV，点击「选择并加载 CSV」即可。",
+      "Source": "library"
+    },
+    {
+      "Original": "CSVを選択して読み込む",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择并加载 CSV",
+      "Source": "library"
+    },
+    {
+      "Original": "再読み込み",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "名前を付けて書き出し",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "另存为",
+      "Source": "library"
+    },
+    {
+      "Original": "保存フォルダーを開く",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开保存文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "指定中CSV: なし",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前 CSV：无",
+      "Source": "library"
+    },
+    {
+      "Original": "未訳だけ表示",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅显示未译项目",
+      "Source": "library"
+    },
+    {
+      "Original": "原文・訳を絞り込み",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "筛选原文或译文",
+      "Source": "library"
+    },
+    {
+      "Original": "検索結果を一括削除",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "批量删除搜索结果",
+      "Source": "library"
+    },
+    {
+      "Original": "」に一致する翻訳辞書の項目をすべて削除します。\nこの操作は指定中CSVにも反映されます。",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "」的所有词条将从翻译词典中删除。\n此操作也会写入当前指定的 CSV。",
+      "Source": "library"
+    },
+    {
+      "Original": "削除する",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "キャンセル",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "RSR本体の左メニューと同じ順番で表示しています。",
+      "Context": "Plugin.DrawDictionaryTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按 RSR 本身左侧菜单的顺序显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "この列を内容に合わせる",
+      "Context": "Plugin.DrawJapaneseColumnSizingMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "按内容调整此列宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "すべての列を内容に合わせる",
+      "Context": "Plugin.DrawJapaneseColumnSizingMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "按内容调整所有列宽",
+      "Source": "library"
+    },
+    {
+      "Original": "新しい翻訳辞書を作るときに使います。まず「インストール済みプラグインから追加」で日本語化したいプラグインを追加してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "用于创建新的翻译词典。请先在「从已安装插件中添加」选择要译为日语的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "追加後は「取得開始」→対象プラグインの画面やツールチップを一通り表示→「取得停止」の順で操作します。ツールチップ等も可能な限り対象プラグインへ自動分類します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "添加后点击「开始采集」，依次打开插件各界面与悬浮提示，再点击「停止采集」。可识别的悬浮提示等将自动归入目标插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "インストール済みプラグインから追加",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从已安装插件中添加",
+      "Source": "library"
+    },
+    {
+      "Original": "日本語化したいプラグインを選択して追加します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择并添加需要日文化的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳対象に追加",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加到翻译目标",
+      "Source": "library"
+    },
+    {
+      "Original": "手入力で追加（自動判定できない場合のみ）",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "手动输入添加（仅限无法自动识别时）",
+      "Source": "library"
+    },
+    {
+      "Original": "通常は使いません。自動判定できないプラグインだけ手入力します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "通常无需使用，仅在自动识别插件失败时手动输入。",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグイン名",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "插件名称",
+      "Source": "library"
+    },
+    {
+      "Original": "ウィンドウ名キーワード",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "窗口名称关键词",
+      "Source": "library"
+    },
+    {
+      "Original": "手入力で追加",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "手动输入添加",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳対象プラグイン",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "翻译目标插件",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書側にも適用",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "同时应用到翻译词典",
+      "Source": "library"
+    },
+    {
+      "Original": "選択中を翻訳対象から外す",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从翻译目标移除所选插件",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書データは削除せず、翻訳対象からだけ外します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "只从目标列表移除，保留词典数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "先に翻訳対象プラグインを追加してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请先添加翻译目标插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "作業途中で対象プラグインや取得内容が変わらないよう、関係するボタンを一時的に無効化しています。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "为避免处理中更换目标或改动采集结果，相关按钮已暂时禁用。",
+      "Source": "library"
+    },
+    {
+      "Original": "取得 → 自動翻訳 → 内容確認 → 辞書へ反映、の順に進めてください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请依次完成采集、自动翻译、检查内容及写入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書への取り込み：",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "导入翻译词典：",
+      "Source": "library"
+    },
+    {
+      "Original": "取得停止時に、取得した未翻訳項目を翻訳辞書へ自動で取り込みます。通常はこちらを使用します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停止采集时自动将取得的未译条目导入词典，一般使用此选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "取得結果を一覧で確認し、不要な項目を削除してから手動で翻訳辞書へ取り込みます。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "先在列表检查结果，删除不需要的条目，再手动导入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳辞書へ取り込む",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入翻译词典",
+      "Source": "library"
+    },
+    {
+      "Original": "現在の対象プラグインの取得結果をまとめて翻訳辞書へ取り込みます。不要な項目は先に削除してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将当前目标插件的采集结果批量导入词典。请先删除不需要的条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "取得停止・翻訳作業の完了後、取得結果がある場合に使用できます。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停止采集并完成翻译后，若有采集结果即可使用。",
+      "Source": "library"
+    },
+    {
+      "Original": " を取得中",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 正在采集",
+      "Source": "library"
+    },
+    {
+      "Original": "対象プラグインの画面を一通り開いて操作してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请依次打开并操作目标插件的各个界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳の確認・反映を完了してから新しい取得を開始できます。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "确认并写入自动翻译结果后，即可开始新的采集。",
+      "Source": "library"
+    },
+    {
+      "Original": "一覧クリア",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清空列表",
+      "Source": "library"
+    },
+    {
+      "Original": "対象分をコピー",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制目标插件的条目",
+      "Source": "library"
+    },
+    {
+      "Original": "その他取得分をコピー",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制其他采集条目",
+      "Source": "library"
+    },
+    {
+      "Original": "対象プラグイン由来の可能性が高い項目です。確認してから対象側へ移してください。自動では辞書へ混ぜません。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "这些条目可能来自目标插件。请确认后再移动，不会自动加入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "候補を対象プラグインへ移す",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将候选移入目标插件",
+      "Source": "library"
+    },
+    {
+      "Original": "インストール済みの別プラグインのウィンドウ名と一致した項目です。対象辞書には取り込みません。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "这些条目匹配到其他已安装插件的窗口名，不会导入当前词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "所有元を安全に判定できなかった項目です。必要な場合だけコピーして確認してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "无法可靠判断来源。需要时可复制并检查。",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳は辞書作成を補助するための下書き機能です。訳文は必ず確認し、必要に応じて修正してから辞書へ反映してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动翻译仅为词典制作提供初稿。请先核对并按需修改，再写入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "既に翻訳済みの項目は自動翻訳の対象にせず、ユーザーが作成・修正した訳を優先します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "已有译文的条目不会参与自动翻译，优先使用用户创建或修改的译文。",
+      "Source": "library"
+    },
+    {
+      "Original": "現在の翻訳先: Google翻訳（PJH中継サーバー選択中）",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前翻译服务：Google 翻译（已选择 PJH 中转服务器）",
+      "Source": "library"
+    },
+    {
+      "Original": "現在の翻訳先: PJH中継サーバー",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前翻译服务：PJH 中转服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳取得中のため、自動翻訳は開始できません。先に「未翻訳取得」タブで取得を停止してください。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在采集未译文本，暂时无法开始自动翻译。请先到「采集未译文本」页停止采集。",
+      "Source": "library"
+    },
+    {
+      "Original": "で順番に処理しています。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "正在依次处理。",
+      "Source": "library"
+    },
+    {
+      "Original": "側がHTTP 429を返しました。自動再試行は行わず停止します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "返回 HTTP 429。已停止，不会自动重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳を自動翻訳",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自动翻译未译文本",
+      "Source": "library"
+    },
+    {
+      "Original": "URL・パス・コマンド・動的値・技術IDなどは除外します。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "排除网址、路径、命令、动态值和技术 ID 等。",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳できる未翻訳項目がありません。",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "没有可自动翻译的未译条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳結果を辞書へ反映",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将翻译结果写入词典",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳結果を破棄",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "丢弃自动翻译结果",
+      "Source": "library"
+    },
+    {
+      "Original": "自動翻訳ログ",
+      "Context": "Plugin.DrawCaptureTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自动翻译日志",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳の英語・種類などを絞り込み",
+      "Context": "Plugin.DrawCapturedTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "按未译英文、类型等筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "」に一致する未翻訳取得 ",
+      "Context": "Plugin.DrawCapturedTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "」的未译采集结果 ",
+      "Source": "library"
+    },
+    {
+      "Original": " 件を一覧から削除します。\n削除した項目は翻訳辞書へ取り込まれません。",
+      "Context": "Plugin.DrawCapturedTable",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 条将从列表中删除。\n删除的条目不会导入词典。",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化けを検知 v0.5.4###PluginJPHelperMojibakeAlert",
+      "Context": "MojibakeAlertWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "检测到乱码 v0.5.4",
+      "Source": "library"
+    },
+    {
+      "Original": "現在、確認が必要な文字化けはありません。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "目前没有需要检查的乱码。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installerの翻訳で文字化けを検知しました。この項目だけ原文に戻しました。ほかのInstaller翻訳は継続します。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在插件安装器的译文中检测到乱码。仅此条目已还原为原文，其他安装器译文继续显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "以下の翻訳の文字化けを検知、対象のプラグインの翻訳をOFFにします。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "下列翻译出现乱码，将关闭对应插件的翻译。",
+      "Source": "library"
+    },
+    {
+      "Original": "【対象プラグイン】 ",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "【目标插件】 ",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグイン翻訳",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "插件翻译",
+      "Source": "library"
+    },
+    {
+      "Original": "検知した翻訳",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "检测到的译文",
+      "Source": "library"
+    },
+    {
+      "Original": "この項目はPJHが自動で元Manifestの原文表示へ戻しました。正常なほかの翻訳はそのまま使用されます。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "PJH 已自动将此项还原为原始清单中的文字，其他正常译文继续使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "恒久的に直す場合は、修復履歴画面で『再翻訳』または『今後は翻訳しない』を選び、最後に現在の翻訳ファイルへ上書き保存してください。保存しない場合は今回の起動中だけの処理です。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "如需永久修复，请到修复历史中选择「重新翻译」或「今后不翻译」，最后覆盖保存到当前翻译文件。否则只在本次运行中生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "修復履歴・再処理画面を開く",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开修复历史与重新处理界面",
+      "Source": "library"
+    },
+    {
+      "Original": "閉じる",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "処理を選択してください。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "请选择处理方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書を表示して修正",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "查看并修改词典",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳を無効にしプラグインを起動",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "停用翻译并启动插件",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化けのままプラグインを起動",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "保留乱码并启动插件",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化けを検知した辞書を開きます。内容を修正し、「保存」「削除」「訳を消す」のいずれかを行った後、名前を付けて書き出してください。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开出现乱码的词典，修改内容后选择「保存」「删除」或「清除译文」，再另存为文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "翻訳を無効にし、未翻訳のまま対象プラグインを起動します。\n翻訳を有効にした時、文字化けの修正が行われていなければ再度表示します。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "关闭翻译，以原文启动目标插件。\n重新启用翻译时，若乱码未修复，仍会显示此提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化けした翻訳をそのまま使用して、対象プラグインを起動します。\n他へ影響が波及する可能性があるため、おすすめはできません。\n文字化けの理由が分かっており、修正できない、または修正する必要がない場合のみ選択してください。\nこの警告はPJHを再起動した時に再表示します。",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "保留乱码译文并启动目标插件。\n可能影响其他内容，不建议使用。\n仅在已知乱码原因且无法修复或无需修复时选择。\n重新启动 PJH 后会再次显示此警告。",
+      "Source": "library"
+    },
+    {
+      "Original": "選択した処理を実行",
+      "Context": "MojibakeAlertWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "执行所选操作",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書を再読み込みしました（",
+      "Context": "PluginInstallerModule.ReloadDictionaryFromDisk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已重新加载词典（",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書再読み込み失敗",
+      "Context": "PluginInstallerModule.ReloadDictionaryFromDisk",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "重新加载词典失败",
+      "Source": "library"
+    },
+    {
+      "Original": "ファイル選択に失敗",
+      "Context": "PluginInstallerModule.SelectDictionaryFile",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择文件失败",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイルのパスを入力してください",
+      "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "请输入词典文件路径",
+      "Source": "library"
+    },
+    {
+      "Original": "指定した辞書ファイルが見つかりません",
+      "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "找不到指定词典文件",
+      "Source": "library"
+    },
+    {
+      "Original": "指定した辞書は0件です",
+      "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "指定词典中没有条目",
+      "Source": "library"
+    },
+    {
+      "Original": "指定辞書を読み込みました（",
+      "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已加载指定词典（",
+      "Source": "library"
+    },
+    {
       "Original": "辞書ファイル指定に失敗",
       "Context": "PluginInstallerModule.ApplyManualDictionaryPath",
       "PreserveID": false,
@@ -725,6 +3029,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "正在等待插件管理器",
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud Plugin Installer読み込み完了待ち",
+      "Context": "PluginInstallerModule.IsPluginInstallerReadyForTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待 Dalamud 插件安装器加载完成",
       "Source": "library"
     },
     {
@@ -764,6 +3077,33 @@
       "Source": "library"
     },
     {
+      "Original": "接続済み（Remote ",
+      "Context": "PluginInstallerModule.ScanAllInstallerManifests",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已连接（远程 ",
+      "Source": "library"
+    },
+    {
+      "Original": " 件を検出（手動翻訳待ち）",
+      "Context": "PluginInstallerModule.ScanAllInstallerManifests",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 条待手动翻译",
+      "Source": "library"
+    },
+    {
+      "Original": "件）。辞書作成待ち",
+      "Context": "PluginInstallerModule.ScanAllInstallerManifests",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "条），等待创建词典",
+      "Source": "library"
+    },
+    {
       "Original": "Plugin Installerへ接続できません",
       "Context": "PluginInstallerModule.ReacquireCommandDescriptions",
       "PreserveID": false,
@@ -779,6 +3119,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "无法获取 Dalamud 命令列表",
+      "Source": "library"
+    },
+    {
+      "Original": "件 / 翻訳待ち ",
+      "Context": "PluginInstallerModule.ReacquireCommandDescriptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条／待翻译 ",
       "Source": "library"
     },
     {
@@ -800,12 +3149,48 @@
       "Source": "library"
     },
     {
+      "Original": "Plugin Installer日本語化をONにしてください",
+      "Context": "PluginInstallerModule.StartChangelogTranslation",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "请先开启插件安装器日文化",
+      "Source": "library"
+    },
+    {
       "Original": "未翻訳 0件 / すべて翻訳済み",
       "Context": "PluginInstallerModule.StartChangelogTranslation",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "未译 0 条 / 已全部翻译",
+      "Source": "library"
+    },
+    {
+      "Original": "件 / 残り未翻訳 ",
+      "Context": "PluginInstallerModule.ApplyCompletedChangelogTranslations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条／剩余未译 ",
+      "Source": "library"
+    },
+    {
+      "Original": "件完了 / 失敗・対象外 ",
+      "Context": "PluginInstallerModule.ApplyCompletedChangelogTranslations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条已完成／失败或排除 ",
+      "Source": "library"
+    },
+    {
+      "Original": "件完了 / 残り未翻訳 ",
+      "Context": "PluginInstallerModule.ApplyCompletedChangelogTranslations",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条已完成／剩余未译 ",
       "Source": "library"
     },
     {
@@ -824,6 +3209,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "无法获取 DalamudInterface",
+      "Source": "library"
+    },
+    {
+      "Original": "PluginInstallerWindowを取得できません",
+      "Context": "PluginInstallerModule.TryResolvePluginInstaller",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "无法获取 PluginInstallerWindow",
       "Source": "library"
     },
     {
@@ -860,6 +3254,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "传给 Dalamud 的英语： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installerの説明を辞書で日本語化",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "用词典将插件安装器介绍翻译为日语",
       "Source": "library"
     },
     {
@@ -917,6 +3320,15 @@
       "Source": "library"
     },
     {
+      "Original": "差分チェックや再取得だけでは翻訳サービスへ送信しません。『翻訳待ちを開始』を押した時だけ送信します。",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "仅检查变更或重新获取不会发送内容到翻译服务。只有点击「开始翻译待处理条目」才会发送。",
+      "Source": "library"
+    },
+    {
       "Original": "更新履歴を翻訳",
       "Context": "MainWindow.DrawMainTab",
       "PreserveID": true,
@@ -935,12 +3347,39 @@
       "Source": "library"
     },
     {
+      "Original": "[制限中] 次回再試行まで約 ",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "［服务受限］距离下次重试约 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Manifest: Remote ",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清单：远程 ",
+      "Source": "library"
+    },
+    {
       "Original": "翻訳ファイルを選択",
       "Context": "MainWindow.DrawMainTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "选择译文文件",
+      "Source": "library"
+    },
+    {
+      "Original": "JSONファイルを選択すると、そのまま適用して次回も使用します",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择 JSON 文件后会直接应用，下次也将使用该文件。",
       "Source": "library"
     },
     {
@@ -977,6 +3416,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": " 个插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Remote Manifestのみを対象にします。Local Manifestは翻訳・差分判定・Google送信の対象外です。既存辞書を優先し、FFXIV/Dalamud用語は送信前に保護します。",
+      "Context": "MainWindow.DrawMainTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "仅处理远程清单。本地清单不参与翻译、差异判断，也不会发给 Google。优先使用现有词典，并在发送前保护 FFXIV 和 Dalamud 术语。",
       "Source": "library"
     },
     {
@@ -1040,6 +3488,177 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "[错误/限制] ",
+      "Source": "library"
+    },
+    {
+      "Original": "（残り ",
+      "Context": "StartWorkerIfNeeded.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "（剩余 ",
+      "Source": "library"
+    },
+    {
+      "Original": " 件は未送信のまま保持）",
+      "Context": "StartWorkerIfNeeded.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 条保留，尚未发送）",
+      "Source": "library"
+    },
+    {
+      "Original": "停止しました（",
+      "Context": "TranslateChangelogEntriesAsync.MoveNext",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已停止（",
+      "Source": "library"
+    },
+    {
+      "Original": "確認画面を開く##MojibakeSafetyReopen",
+      "Context": "Plugin.DrawMainWindowContents",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "打开确认窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin Installer",
+      "Context": "Plugin.DrawMainWindowContents",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
+      "Translated": "插件安装器",
+      "Source": "library"
+    },
+    {
+      "Original": "文字化け設定",
+      "Context": "Plugin.DrawMainWindowContents",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
+      "Translated": "乱码设置",
+      "Source": "library"
+    },
+    {
+      "Original": "負荷軽減モード##LowImpactTranslationMode",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Checkbox",
+      "Translated": "降低性能开销",
+      "Source": "library"
+    },
+    {
+      "Original": "繰り返し回数##moji_rule_add_count",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputInt",
+      "Translated": "重复次数",
+      "Source": "library"
+    },
+    {
+      "Original": "選択項目を再翻訳##RetranslateInstallerMojibake",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "重新翻译选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "選択項目を今後は翻訳しない##NoTranslateInstallerMojibake",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "今后不翻译选中项",
+      "Source": "library"
+    },
+    {
+      "Original": "現在の翻訳ファイルへ上書き保存##CommitInstallerMojibakeRepairs",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "覆盖保存到当前翻译文件",
+      "Source": "library"
+    },
+    {
+      "Original": "修復履歴を消去##ClearInstallerMojibakeRepairHistory",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
+      "Translated": "清除修复历史",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグイン",
+      "Context": "Plugin.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "対応プラグイン",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "支持的插件",
+      "Source": "library"
+    },
+    {
+      "Original": "プラグインスイッチ",
+      "Context": "Plugin.DrawCommunityDictionaryTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "插件开关",
+      "Source": "library"
+    },
+    {
+      "Original": "ウィンドウ",
+      "Context": "Plugin.DrawDiagnosticsSection",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "並び順##dictSort",
+      "Context": "Plugin.DrawDictionaryTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginCombo",
+      "Translated": "排序",
+      "Source": "library"
+    },
+    {
+      "Original": "メニュー",
+      "Context": "Plugin.DrawCapturedTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "未翻訳の原文",
+      "Context": "Plugin.DrawCapturedTable",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "未译原文",
+      "Source": "library"
+    },
+    {
+      "Original": "メイン",
+      "Context": "MainWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.BeginTabItem",
+      "Translated": "主界面",
+      "Source": "library"
+    },
+    {
+      "Original": "辞書ファイル設定",
+      "Context": "MainWindow.DrawMainTab",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.CollapsingHeader",
+      "Translated": "词典文件设置",
       "Source": "library"
     }
   ],

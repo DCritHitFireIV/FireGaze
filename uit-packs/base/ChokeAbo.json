@@ -8,11 +8,115 @@
   },
   "entries": [
     {
+      "Original": " stars",
+      "Context": "MainWindow.FormatStars",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 星",
+      "Source": "library"
+    },
+    {
+      "Original": ", XP ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，经验值 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", acceleration ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，加速力 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", cunning ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，适应力 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", endurance ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，耐久力 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", pedigree ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，血统 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", plan ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，计划 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", rating ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，综合力 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", sessions ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，训练次数 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", speed ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，最高速度 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", stamina ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "，体力 ",
+      "Source": "library"
+    },
+    {
       "Original": "Automation stopped.",
       "Context": "Plugin.StopAutomation",
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "自动操作已停止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chocobo stats unavailable. Planned trainings: ",
+      "Context": "MainWindow.BuildStatusLine",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "无法读取陆行鸟属性。已计划的训练次数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Hindi UI fonts are unavailable. Use English to continue.",
+      "Context": "ChokeAppearance.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "级别",
       "Source": "library"
     },
     {

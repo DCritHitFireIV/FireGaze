@@ -8,6 +8,23 @@
   },
   "entries": [
     {
+      "Original": "Add new constant",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加常量",
+      "Source": "library"
+    },
+    {
+      "Original": "Bottom to top",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "从下到上",
+      "Source": "library"
+    },
+    {
       "Original": "Buy ",
       "Context": "GameWindow.DrawFarmTabNoseShop",
       "Role": "UI",
@@ -32,11 +49,59 @@
       "Source": "library"
     },
     {
+      "Original": "Choose action for \"",
+      "Context": "CoordinateActionLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "选择技能：",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose emote mode for \"",
+      "Context": "EmoteModeLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "选择情感动作模式：",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose facewear for \"",
+      "Context": "FacewearLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "选择眼镜：",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose recipe for \"",
+      "Context": "CraftingRecipeLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "选择配方：",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose site for \"",
+      "Context": "WikiSiteLookup.GetPlaceholder",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "选择站点：",
+      "Source": "library"
+    },
+    {
       "Original": "Copy",
       "Context": "SettingsWindow.DrawMacroSettingsView",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy constants to clipboard",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将常量复制到剪贴板",
       "Source": "library"
     },
     {
@@ -48,11 +113,35 @@
       "Source": "library"
     },
     {
+      "Original": "Crafting Recipe (",
+      "Context": "CraftingRecipeResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "制作配方（",
+      "Source": "library"
+    },
+    {
       "Original": "Crafting recipes",
       "Context": "SettingsWindow.DrawGeneralTab",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "制作配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Duty",
+      "Context": "WikiLookup.Lookup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Choice",
+      "Context": "EmoteModeChoicerResult.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "默认选项",
       "Source": "library"
     },
     {
@@ -62,6 +151,51 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Directly go to wiki mode when opening search",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "打开搜索时直接进入 Wiki 模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable background blur",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭背景模糊",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable fade in/out",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭淡入淡出",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable mouse selection in results list unless Quick Select Key is held",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在按住快速选择键时才允许用鼠标选择搜索结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable window sounds",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "关闭窗口音效",
       "Source": "library"
     },
     {
@@ -83,6 +217,14 @@
       "Source": "library"
     },
     {
+      "Original": "Duty Roulette",
+      "Context": "ContentRouletteSearchResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "随机任务",
+      "Source": "library"
+    },
+    {
       "Original": "Emote",
       "Context": "EmoteSearchResult.get_CatName",
       "Role": "UI",
@@ -100,11 +242,53 @@
       "Source": "library"
     },
     {
+      "Original": "Enable Search History",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用搜索历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Facewear Style",
+      "Context": "FacewearStyleResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "眼镜款式",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to set wallpaper as the registry key could not found.",
+      "Context": "Wallpaper.Set",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "未找到注册表键，无法设置壁纸。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to set wallpaper.",
+      "Context": "Wallpaper.Set",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title",
+      "Translated": "无法设置壁纸。",
+      "Source": "library"
+    },
+    {
       "Original": "Fashion Accessory",
       "Context": "FashionAccessoryResult.get_CatName",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "时尚配饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Force TeamCraft links to open in your browser",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终在浏览器中打开 Teamcraft 链接",
       "Source": "library"
     },
     {
@@ -123,6 +307,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputText",
       "Translated": "分词模糊搜索前缀",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathering Item",
+      "Context": "GatheringItemResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "采集物品",
       "Source": "library"
     },
     {
@@ -166,11 +358,35 @@
       "Source": "library"
     },
     {
+      "Original": "Import constants from clipboard",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从剪贴板导入常量",
+      "Source": "library"
+    },
+    {
       "Original": "Inputting one of the prefixes below as the first character of your search text will temporarily change the search mode for that search.",
       "Context": "SettingsWindow.DrawGeneralTab",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "将下列前缀放在搜索词开头，可临时切换本次搜索的模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid macro: ",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "宏无效： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid slash command:",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "斜杠命令无效：",
       "Source": "library"
     },
     {
@@ -242,11 +458,53 @@
       "Source": "library"
     },
     {
+      "Original": "Macro links",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "宏链接",
+      "Source": "library"
+    },
+    {
       "Original": "Macros",
       "Context": "MacroLinkSearchResult.get_CatName",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "宏",
+      "Source": "library"
+    },
+    {
+      "Original": "Math constants",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "数学常量",
+      "Source": "library"
+    },
+    {
+      "Original": "Mathematical Expressions",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CheckboxFlags",
+      "Translated": "数学表达式",
+      "Source": "library"
+    },
+    {
+      "Original": "Merge multiple crafting recipes for the same item",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "合并同一物品的多种制作配方",
+      "Source": "library"
+    },
+    {
+      "Original": "Minion",
+      "Context": "MinionResult.get_CatName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "宠物",
       "Source": "library"
     },
     {

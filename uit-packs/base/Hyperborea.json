@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": " (unknown)",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": " （未知）",
+      "Source": "library"
+    },
+    {
       "Original": " No MapEffect slots found for this zone.",
       "Context": "EditorWindow.Draw",
       "Role": "UI",
@@ -24,11 +32,44 @@
       "Source": "library"
     },
     {
+      "Original": "0 (no-op)",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "0（无操作）",
+      "Source": "library"
+    },
+    {
       "Original": "Add a new MapEffect.",
       "Context": "EditorWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Tooltip",
       "Translated": "添加地图效果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional Data:",
+      "Context": "UI.DrawNeo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "附加数据：",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced: override which timelines actively play, independent of State.\nLeave at default (0) unless you need to combine multiple independent effects on this slot (e.g. torches + gate) or trigger a transition bit that isn't a resting State value.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "高级：单独指定要播放的时间轴，不受状态值影响。\n通常保留默认值 0。若需要在同一槽位叠加多个独立效果（如火把与大门），或触发静止状态值以外的过渡位，再更改此项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Another entry in this phase already targets this slot. Only the last one in the list will actually apply.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "此阶段已有条目使用这个槽位，只有列表中最后一项会生效。",
       "Source": "library"
     },
     {
@@ -40,12 +81,39 @@
       "Source": "library"
     },
     {
+      "Original": "Argument 4",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "参数 4",
+      "Source": "library"
+    },
+    {
+      "Original": "Argument 5",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "参数 5",
+      "Source": "library"
+    },
+    {
       "Original": "Browse",
       "Context": "EditorWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "浏览",
+      "Source": "library"
+    },
+    {
+      "Original": "CFC Override",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "覆盖 CFC 设置",
       "Source": "library"
     },
     {
@@ -80,6 +148,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently editing: ",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "正在编辑： ",
       "Source": "library"
     },
     {
@@ -161,6 +237,14 @@
       "Source": "library"
     },
     {
+      "Original": "Free Trial:",
+      "Context": "UI.DrawNeo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "免费体验版：",
+      "Source": "library"
+    },
+    {
       "Original": "General settings",
       "Context": "SettingsWindow.Draw",
       "PreserveID": true,
@@ -187,6 +271,15 @@
       "Source": "library"
     },
     {
+      "Original": "Hyperborea Debug Window",
+      "Context": "DebugWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Hyperborea 调试窗口",
+      "Source": "library"
+    },
+    {
       "Original": "Hyperborea Overlay",
       "Context": "Overlay..ctor",
       "PreserveID": true,
@@ -202,6 +295,14 @@
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "Hyperborea 区域编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyperborea cannot be enabled as you are under the following restricted condition(s):\n",
+      "Context": "UI.DrawNeo",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.HelpMarker",
+      "Translated": "以下限制条件导致 Hyperborea 无法启用：\n",
       "Source": "library"
     },
     {
@@ -262,6 +363,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.TextV",
       "Translated": "名称：",
+      "Source": "library"
+    },
+    {
+      "Original": "No configuration found for this zone in either the master or override data file(s).",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "主数据和覆盖数据文件均未包含此区域的配置。",
       "Source": "library"
     },
     {
@@ -444,6 +553,15 @@
       "Source": "library"
     },
     {
+      "Original": "Territory Type ID",
+      "Context": "UI.DrawNeo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "区域类型 ID",
+      "Source": "library"
+    },
+    {
       "Original": "This zone is unsupported",
       "Context": "EditorWindow.Draw",
       "Role": "UI",
@@ -482,6 +600,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Tooltip",
       "Translated": "选择要控制的地图效果栏位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Which state to set the slot to. By default this also drives which timeline actively plays.",
+      "Context": "EditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip",
+      "Translated": "指定槽位的状态。默认也会决定播放哪条时间轴。",
       "Source": "library"
     },
     {

@@ -24,6 +24,15 @@
       "Source": "library"
     },
     {
+      "Original": "Accepted levequests",
+      "Context": "LeveDebugWindow.DrawAcceptedLeves",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已接受的理符任务",
+      "Source": "library"
+    },
+    {
       "Original": "Activity: ",
       "Context": "TargetInfoWindow.Draw",
       "Role": "UI",
@@ -77,6 +86,15 @@
       "Source": "library"
     },
     {
+      "Original": "Cancel automation test",
+      "Context": "LeveDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "取消自动化测试",
+      "Source": "library"
+    },
+    {
       "Original": "Chat channel",
       "Context": "ConfigWindow.DrawGeneral",
       "PreserveID": true,
@@ -110,6 +128,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "自动将目标名称复制到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy selected FATE diagnostics",
+      "Context": "FateDebugWindow.DrawLiveFateHarness",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制选中危命任务的诊断信息",
       "Source": "library"
     },
     {
@@ -174,6 +201,15 @@
       "Source": "library"
     },
     {
+      "Original": "Dump diagnostics to log",
+      "Context": "LeveDebugWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将诊断信息写入日志",
+      "Source": "library"
+    },
+    {
       "Original": "Enable Atma Manager",
       "Context": "TargetInfoWindow.Draw",
       "PreserveID": true,
@@ -215,6 +251,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "常规",
+      "Source": "library"
+    },
+    {
+      "Original": "Grind local FATEs while selected target is unavailable",
+      "Context": "FateDebugWindow.DrawBookTargetHarness",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "所选目标不可用时在当前区域完成危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Context": "FateAutomationContext..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "空闲",
       "Source": "library"
     },
     {
@@ -309,6 +362,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "新星",
+      "Source": "library"
+    },
+    {
+      "Original": "Novus Zodiac Information",
+      "Context": "NovusWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin",
+      "Translated": "新星古武信息",
       "Source": "library"
     },
     {
@@ -435,6 +496,15 @@
       "Source": "library"
     },
     {
+      "Original": "Restore Anyway",
+      "Context": "FateGrinderWindow.DrawCombatPolicy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "仍然恢复",
+      "Source": "library"
+    },
+    {
       "Original": "Selected: ",
       "Context": "FateDebugWindow.DrawBookTargetDetails",
       "Role": "UI",
@@ -538,6 +608,24 @@
       "Source": "library"
     },
     {
+      "Original": "Travel",
+      "Context": "FateGrinderWindow.DrawTravelPolicy",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Trials of the Braves target tests",
+      "Context": "FateDebugWindow.DrawBookTargetHarness",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "黄道十二宫文书目标测试",
+      "Source": "library"
+    },
+    {
       "Original": "Waiting for book credit: ",
       "Context": "TargetInfoWindow.DrawMonsterProgress",
       "Role": "UI",
@@ -552,6 +640,15 @@
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "Zodiac Buddy 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "ZodiacBuddy FATE Grinder",
+      "Context": "FateGrinderWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "ZodiacBuddy 危命任务刷取",
       "Source": "library"
     },
     {

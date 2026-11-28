@@ -98,12 +98,174 @@
       "Source": "library"
     },
     {
+      "Original": "Failed to save the renamed history entry.",
+      "Context": "MainWindow.SetHistoryEntryDescription",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法保存已重命名的历史记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "History entry renamed.",
+      "Context": "MainWindow.SetHistoryEntryDescription",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "历史记录已重命名。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copied data to clipboard.",
+      "Context": "MainWindow.DrawHistoryEntryControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "已将数据复制到剪贴板。",
+      "Source": "library"
+    },
+    {
       "Original": "Files",
       "Context": "MainWindow.DrawPmpItemList",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported file type. Please select a .mcdf or .pcp file.",
+      "Context": "MainWindow.DrawActionButtons",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "不支持此文件类型。请选择 .mcdf 或 .pcp 文件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Working directory updated.",
+      "Context": "Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "工作目录已更新。",
+      "Source": "library"
+    },
+    {
+      "Original": "Some snapshots could not be reverted. Please try again.",
+      "Context": "ActiveSnapshotManager.RevertAllSnapshots",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "部分快照无法还原，请重试。",
+      "Source": "library"
+    },
+    {
+      "Original": "No active snapshots to revert.",
+      "Context": "ActiveSnapshotManager.RevertAllSnapshots",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "没有可还原的活动快照。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid character selected for snapshot loading.",
+      "Context": "SnapshotApplicationService.LoadSnapshot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "所选角色无效，无法加载快照。",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not load snapshot: Penumbra rejected the temporary collection.",
+      "Context": "SnapshotApplicationService.LoadSnapshot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法加载快照：Penumbra 拒绝了临时收藏集。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid character selected for snapshot update.",
+      "Context": "SnapshotFileService.CaptureSnapshotState",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "所选角色无效，无法更新快照。",
+      "Source": "library"
+    },
+    {
+      "Original": "New snapshot name cannot be empty.",
+      "Context": "SnapshotFileService.RenameSnapshot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "新快照名称不能为空。",
+      "Source": "library"
+    },
+    {
+      "Original": "Snapshot names cannot contain path separators or invalid filename characters.",
+      "Context": "SnapshotFileService.RenameSnapshot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "快照名称不能包含路径分隔符或无效的文件名字符。",
+      "Source": "library"
+    },
+    {
+      "Original": "A directory with that name already exists.",
+      "Context": "SnapshotFileService.RenameSnapshot",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "已有同名文件夹。",
+      "Source": "library"
+    },
+    {
+      "Original": "An export is already in progress.",
+      "Context": "SnapshotToPMPAsync.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "正在执行另一项导出。",
+      "Source": "library"
+    },
+    {
+      "Original": "Export failed: Could not read snapshot.json.",
+      "Context": "SnapshotToPMPAsync.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "导出失败：无法读取 snapshot.json。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to load snapshot info for PCP export",
+      "Context": "ExportPcp.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "导出 PCP 时无法加载快照信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Another snapshot import is already in progress.",
+      "Context": "PcpImportService.ImportPcp",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Info",
+      "Translated": "正在导入另一份快照。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to load snapshot info for MCDF export.",
+      "Context": "ExportMcdf.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "导出 MCDF 时无法加载快照信息。",
       "Source": "library"
     },
     {

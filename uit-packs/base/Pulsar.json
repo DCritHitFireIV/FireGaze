@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\n  prefetch: ",
+      "Context": "[Pulsar] DebugTab.QueryGetPlayerData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "\n  预读取： ",
+      "Source": "library"
+    },
+    {
       "Original": " converted, ",
       "Context": "[Pulsar] ConfigTab.DrawScdConverter",
       "Role": "UI",
@@ -186,6 +194,14 @@
       "Source": "library"
     },
     {
+      "Original": "Can't sync '",
+      "Context": "[Pulsar] BroadcastTab.DrawBeefwebControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无法同步“",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel conversion",
       "Context": "[Pulsar] ConfigTab.DrawScdConverter",
       "PreserveID": true,
@@ -277,6 +293,14 @@
       "Source": "library"
     },
     {
+      "Original": "Enabling ",
+      "Context": "[Pulsar] BroadcastTab.DrawOnAir",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "正在启用 ",
+      "Source": "library"
+    },
+    {
       "Original": "Extract Ogg audio from all SCD files, including subfolders. The output keeps the same folder structure. Existing files are skipped.",
       "Context": "[Pulsar] ConfigTab.DrawScdConverter",
       "Role": "UI",
@@ -298,6 +322,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "已完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "IPC tester",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "IPC 测试工具",
       "Source": "library"
     },
     {
@@ -572,6 +604,15 @@
       "Source": "library"
     },
     {
+      "Original": "Pair id",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "配对 ID",
+      "Source": "library"
+    },
+    {
       "Original": "Password",
       "Context": "[Pulsar] BroadcastTab.DrawBeefwebConfig",
       "PreserveID": true,
@@ -699,6 +740,14 @@
       "Source": "library"
     },
     {
+      "Original": "Resend (same epoch)",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "重新发送（同一轮次）",
+      "Source": "library"
+    },
+    {
       "Original": "Resume",
       "Context": "[Pulsar] BroadcastTab.DrawControls",
       "Role": "UI",
@@ -744,6 +793,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "选择文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Send (new event)",
+      "Context": "[Pulsar] DebugTab.DrawIpcTester",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "发送（新事件）",
       "Source": "library"
     },
     {

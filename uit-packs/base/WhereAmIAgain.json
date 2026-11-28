@@ -17,6 +17,15 @@
       "Source": "library"
     },
     {
+      "Original": "Use the text box below to define how you want the text to be formatted.\nUse symbols {0} {1} {2} {3} {4} where you want the following values to be in the string\n\n{0} - Region (Ex. The Northern Empty)\n{1} - Territory (Ex. Old Sharlayan)\n{2} - Area (Ex. Archons Design)\n{3} - Sub-Area (Ex. Old Sharlayan Aetheryte Plaza)\n{4} - Housing Ward (Ex. Ward 14)",
+      "Context": "ConfigurationWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在下方文本框中设置位置的显示格式。\n用 {0} {1} {2} {3} {4} 指定以下信息的显示位置。\n\n{0} - 大区（例：北洋地域）\n{1} - 区域（例：旧萨雷安）\n{2} - 地区（例：七贤人庭园）\n{3} - 小区域（例：以太之光广场）\n{4} - 住宅区（例：第 14 区）",
+      "Source": "library"
+    },
+    {
       "Original": "Show Instance Number",
       "Context": "ConfigurationWindow.Draw",
       "PreserveID": true,
@@ -50,6 +59,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "将「第 14 区」细化为「第 14 区扩建区 23 号」。",
+      "Source": "library"
+    },
+    {
+      "Original": "There is an error in the ",
+      "Context": "ConfigurationWindow.FormatInputBox",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "此处存在错误： ",
       "Source": "library"
     },
     {

@@ -8,12 +8,30 @@
   },
   "entries": [
     {
+      "Original": "Pet Settings",
+      "Context": "PetConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "宠物设置",
+      "Source": "library"
+    },
+    {
       "Original": "Pet Dev Window",
       "Context": "PetDevWindow..ctor",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "宠物调试窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "List Size: ",
+      "Context": "PetDevWindow.DrawTextReplacer",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "列表大小： ",
       "Source": "library"
     },
     {
@@ -71,6 +89,78 @@
       "Source": "library"
     },
     {
+      "Original": "Current Pronoun: ",
+      "Context": "PetDevWindow.DrawPronoun",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前代词： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Pronoun: ",
+      "Context": "PetDevWindow.DrawPronoun",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上次使用的代词： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Is Active: ",
+      "Context": "PetDevWindow.DrawDatabaseUser",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已启用： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Found in Userlist: ",
+      "Context": "PetDevWindow.DrawDatabaseUser",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已在用户列表中找到： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Entry Usage Count: ",
+      "Context": "PetDevWindow.DrawDatabaseUser",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "条目使用次数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sharing:",
+      "Context": "PetDevWindow.DrawSharing",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "共享：",
+      "Source": "library"
+    },
+    {
+      "Original": "LEGACY",
+      "Context": "PetDevWindow.DrawSharing",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "旧版",
+      "Source": "library"
+    },
+    {
+      "Original": "No Pet",
+      "Context": "PetDevWindow.GetPetText",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "没有宠物",
+      "Source": "library"
+    },
+    {
       "Original": "No Player",
       "Context": "PetDevWindow.GetUserText",
       "PreserveID": false,
@@ -80,12 +170,93 @@
       "Source": "library"
     },
     {
+      "Original": "[Soft Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[临时目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "[Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "[Target of Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[目标的目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "[Soft Target of Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[目标的临时目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "[Target of Soft Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[临时目标的目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "[Soft Target of Soft Target]: [",
+      "Context": "PetDevWindow.DrawTargeting",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "[临时目标的临时目标]：[",
+      "Source": "library"
+    },
+    {
+      "Original": "Total Party Size: ",
+      "Context": "PetDevWindow.DrawPartyLeft",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队总人数： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Recollect Data",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新收集数据",
+      "Source": "library"
+    },
+    {
       "Original": "Clear Last Data",
       "Context": "PetDevWindow.DrawIPCTester",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清除上次的数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Available",
+      "Context": "PetDevWindow.DrawIPCTester",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "目标可用",
       "Source": "library"
     },
     {
@@ -122,6 +293,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清除数据",
+      "Source": "library"
+    },
+    {
+      "Original": "DONT CLICK THIS! IT WILL DELETE THE USER'S ENTRY",
+      "Context": "PetDevWindow.NewDrawUser",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "请勿点击！这将删除用户的条目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pet List",
+      "Context": "PetListWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "宠物列表",
       "Source": "library"
     },
     {

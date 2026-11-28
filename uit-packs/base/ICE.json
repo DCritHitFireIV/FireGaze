@@ -8,6 +8,24 @@
   },
   "entries": [
     {
+      "Original": "Class Score: ",
+      "Context": "OverlayWindow.ClassExpDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui_Ice.Draw_XPBar",
+      "Translated": "职业得分： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Mastery: ",
+      "Context": "OverlayWindow.ClassExpDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui_Ice.Draw_XPBar",
+      "Translated": "熟练度： ",
+      "Source": "library"
+    },
+    {
       "Original": "Job ",
       "Context": "Ui_ClassInfo.Draw",
       "PreserveID": false,
@@ -35,6 +53,24 @@
       "Source": "library"
     },
     {
+      "Original": "Export Selected Flag",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出所选标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing flag data for Zone ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "区域钓点标记数据： ",
+      "Source": "library"
+    },
+    {
       "Original": "Fishing Hole Selector",
       "Context": "Ui_Fish_HoleEditor.Draw",
       "PreserveID": true,
@@ -50,6 +86,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "区域： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Open map position",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "在地图上查看位置",
       "Source": "library"
     },
     {
@@ -71,6 +116,69 @@
       "Source": "library"
     },
     {
+      "Original": "Stop naving",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止导航",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop All Task",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止全部任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Viable fishing spot: ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可用钓点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "First Available Fishing Spot: ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "首个可用钓点： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Face toward spot",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "面向钓点",
+      "Source": "library"
+    },
+    {
+      "Original": "View Fishing Spots",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "查看钓点",
+      "Source": "library"
+    },
+    {
+      "Original": "View Nav Spots",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "查看导航点",
+      "Source": "library"
+    },
+    {
       "Original": "Zone ",
       "Context": "Ui_Fish_HoleEditor.Draw",
       "PreserveID": false,
@@ -89,6 +197,15 @@
       "Source": "library"
     },
     {
+      "Original": "Editing Spot ",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在编辑钓点 ",
+      "Source": "library"
+    },
+    {
       "Original": "Fishing Position",
       "Context": "Ui_Fish_HoleEditor.Draw",
       "PreserveID": true,
@@ -98,12 +215,84 @@
       "Source": "library"
     },
     {
+      "Original": "Set fishing to current",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设为当前垂钓位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Nav Position",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "导航位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Fishing Rotation",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置垂钓朝向",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation Tolerance (degrees)",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "朝向容差（度）",
+      "Source": "library"
+    },
+    {
+      "Original": "Test Naving to [New]",
+      "Context": "Ui_Fish_HoleEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "测试导航到新位置",
+      "Source": "library"
+    },
+    {
       "Original": "Total: ",
       "Context": "Ui_GatherEditor.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "总计： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Save Location",
+      "Context": "Ui_GatherEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置保存位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Route Selector",
+      "Context": "Ui_GatherEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "路线选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Route Editor",
+      "Context": "Ui_GatherEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "路线编辑器",
       "Source": "library"
     },
     {
@@ -125,6 +314,51 @@
       "Source": "library"
     },
     {
+      "Original": "Move To Navmesh",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "移动至导航网格",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Route",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Move To [Smart]",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "智能移动至目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Fan Start",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "扇形起点",
+      "Source": "library"
+    },
+    {
+      "Original": "Fan End",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "扇形终点",
+      "Source": "library"
+    },
+    {
       "Original": "Min Distance",
       "Context": "Ui_GatherEditor.RouteInfo",
       "PreserveID": true,
@@ -143,6 +377,33 @@
       "Source": "library"
     },
     {
+      "Original": "Fan Height",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "扇形高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Gather Fan",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "采集扇区",
+      "Source": "library"
+    },
+    {
+      "Original": "Selected Fan",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "所选扇区",
+      "Source": "library"
+    },
+    {
       "Original": "No route file exist. Do you want to create one?",
       "Context": "Ui_GatherEditor.RouteInfo",
       "PreserveID": false,
@@ -152,12 +413,48 @@
       "Source": "library"
     },
     {
+      "Original": "Create files",
+      "Context": "Ui_GatherEditor.RouteInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "创建文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Select mission to import",
+      "Context": "Ui_IPCTesting.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "选择要导入的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait ID",
+      "Context": "Ui_IPCTesting.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputUInt",
+      "Translated": "鱼饵 ID",
+      "Source": "library"
+    },
+    {
       "Original": "Current Mission: ",
       "Context": "Ui_TestButtons.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "当前任务： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance to nearest: ",
+      "Context": "Ui_TestButtons.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "距最近目标的距离： ",
       "Source": "library"
     },
     {
@@ -194,6 +491,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "（选择后可添加名称）",
+      "Source": "library"
+    },
+    {
+      "Original": "Search by Attribute",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "按属性搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Rank ID",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderUInt",
+      "Translated": "等级 ID",
       "Source": "library"
     },
     {
@@ -251,12 +566,30 @@
       "Source": "library"
     },
     {
+      "Original": "Export CSV",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出 CSV",
+      "Source": "library"
+    },
+    {
       "Original": "2nd Job",
       "Context": "Table_MissionInfo.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "第二职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Item 1",
+      "Context": "Table_MissionInfo.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "主要物品 1",
       "Source": "library"
     },
     {

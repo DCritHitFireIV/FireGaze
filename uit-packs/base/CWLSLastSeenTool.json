@@ -17,6 +17,15 @@
       "Source": "library"
     },
     {
+      "Original": "No CWLS Have Been Cached",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尚未缓存任何跨界通讯贝",
+      "Source": "library"
+    },
+    {
       "Original": "Backup and Restore (Hold CTRL)",
       "Context": "ConfigWindow.DrawCWLSOptions",
       "PreserveID": false,
@@ -32,6 +41,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清除当前跨界通讯贝数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore CWLS Data Internal Backup",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从内部备份还原跨界通讯贝数据",
       "Source": "library"
     },
     {
@@ -53,12 +71,39 @@
       "Source": "library"
     },
     {
+      "Original": "No Backups",
+      "Context": "ConfigWindow.DrawCWLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "没有备份",
+      "Source": "library"
+    },
+    {
+      "Original": "No Linkshells Have Been Cached",
+      "Context": "ConfigWindow.DrawLSOptions",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "尚未缓存任何通讯贝",
+      "Source": "library"
+    },
+    {
       "Original": "Clear Active Linkshell Data",
       "Context": "ConfigWindow.DrawLSOptions",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "清除当前通讯贝数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Restore Linkshell Data Internal Backup",
+      "Context": "ConfigWindow.DrawLSOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从内部备份还原通讯贝数据",
       "Source": "library"
     },
     {
@@ -98,12 +143,48 @@
       "Source": "library"
     },
     {
+      "Original": "Home World Options",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "所属服务器选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Linkshell Tools",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "通讯贝工具",
+      "Source": "library"
+    },
+    {
       "Original": "Cache Members",
       "Context": "MainWindow.DrawCWLSTabContents",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "缓存成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Members: ",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "成员： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Cached: ",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上次缓存： ",
       "Source": "library"
     },
     {
@@ -134,12 +215,48 @@
       "Source": "library"
     },
     {
+      "Original": "Hold CTRL",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "按住 Ctrl",
+      "Source": "library"
+    },
+    {
+      "Original": "Never Seen",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "从未见过",
+      "Source": "library"
+    },
+    {
       "Original": "Cached ",
       "Context": "MainWindow.DrawCWLSTabContents",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "已缓存 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Update CWLS Data",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新跨界通讯贝数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Update Linkshell Data",
+      "Context": "MainWindow.DrawLSTabContents",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "更新通讯贝数据",
       "Source": "library"
     },
     {
@@ -179,12 +296,75 @@
       "Source": "library"
     },
     {
+      "Original": "Home World Linkshells",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "所属服务器的通讯贝",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to get World/DC data.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法获取服务器或大区数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to get merge list name.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法获取待合并列表的名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to get Linkshell info.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "无法获取通讯贝信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target merge shell already exists.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标通讯贝已存在。",
+      "Source": "library"
+    },
+    {
       "Original": "Cross-world Linkshell info written successfully.",
       "Context": "ShellTools.CacheShell",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "跨界通讯贝信息已保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Linkshell info written successfully.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "通讯贝信息已保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to write Linkshell info.",
+      "Context": "ShellTools.CacheShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "保存通讯贝信息失败。",
       "Source": "library"
     },
     {
@@ -197,12 +377,47 @@
       "Source": "library"
     },
     {
+      "Original": "Linkshell List Empty.",
+      "Context": "ShellTools.RemoveShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "通讯贝列表为空。",
+      "Source": "library"
+    },
+    {
       "Original": "Cross-world Linkshell info removed successfully.",
       "Context": "ShellTools.RemoveShell",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "跨界通讯贝信息已移除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Linkshell info removed successfully.",
+      "Context": "ShellTools.RemoveShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "通讯贝信息已移除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to remove Linkshell info.",
+      "Context": "ShellTools.RemoveShell",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "移除通讯贝信息失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Member",
+      "Context": "MainWindow.DrawCWLSTabContents",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "成员",
       "Source": "library"
     }
   ],

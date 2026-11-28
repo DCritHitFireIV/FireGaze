@@ -107,6 +107,15 @@
       "Source": "library"
     },
     {
+      "Original": "My Stages",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "我的场景",
+      "Source": "library"
+    },
+    {
       "Original": "New",
       "Context": "LibraryWindow.Draw",
       "PreserveID": true,
@@ -152,6 +161,15 @@
       "Source": "library"
     },
     {
+      "Original": "Ward",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "住宅区号",
+      "Source": "library"
+    },
+    {
       "Original": "Room",
       "Context": "LibraryWindow.Draw",
       "PreserveID": true,
@@ -161,12 +179,39 @@
       "Source": "library"
     },
     {
+      "Original": "Ward ",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "住宅区号 ",
+      "Source": "library"
+    },
+    {
       "Original": "Room ",
       "Context": "LibraryWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "房间 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Paste auto load condition",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "粘贴自动加载条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Ward & Division",
+      "Context": "LibraryWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "小区与分区",
       "Source": "library"
     },
     {
@@ -197,6 +242,33 @@
       "Source": "library"
     },
     {
+      "Original": "Show the Stagehand main window",
+      "Context": "LibraryWindow.StartAsync",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "显示 Stagehand 主窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Stagehand Quick Picker",
+      "Context": "QuickPickerWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Stagehand 快速选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Objects",
+      "Context": "QuickPickerWindow.DrawNearbyTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "刷新对象",
+      "Source": "library"
+    },
+    {
       "Original": "Click to copy",
       "Context": "QuickPickerWindow.DrawDetailsTab",
       "PreserveID": false,
@@ -221,6 +293,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "撤销 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to undo",
+      "Context": "EditorWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "没有可撤销的操作",
       "Source": "library"
     },
     {
@@ -260,6 +341,15 @@
       "Source": "library"
     },
     {
+      "Original": "Unlink from Penumbra Mod",
+      "Context": "EmbeddedModpackDefinitionEditor.OnDrawProperties",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "取消与 Penumbra 模组的关联",
+      "Source": "library"
+    },
+    {
       "Original": "Game Path",
       "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
       "PreserveID": true,
@@ -296,12 +386,48 @@
       "Source": "library"
     },
     {
+      "Original": "Add redirection",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawResourcesTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加重定向",
+      "Source": "library"
+    },
+    {
       "Original": "Options:",
       "Context": "EmbeddedModpackDefinitionEditor.DrawPenumbraImportTab",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "选项：",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to Default Settings",
+      "Context": "EmbeddedModpackDefinitionEditor.DrawPenumbraImportTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose new file",
+      "Context": "ModRowDrawer.VisitDiskModResourceDefinition",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择新文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Author Name",
+      "Context": "StageDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "作者名",
       "Source": "library"
     },
     {
@@ -314,12 +440,30 @@
       "Source": "library"
     },
     {
+      "Original": "Flat",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "平面",
+      "Source": "library"
+    },
+    {
       "Original": "Specular Highlights",
       "Context": "LightDefinitionEditor.OnDrawProperties",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "镜面高光",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Angle",
+      "Context": "LightDefinitionEditor.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "锥角",
       "Source": "library"
     },
     {
@@ -377,12 +521,48 @@
       "Source": "library"
     },
     {
+      "Original": "Copy Position",
+      "Context": "ObjectDefinitionEditor`1.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Scale",
+      "Context": "ObjectDefinitionEditor`1.OnDrawProperties",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "复制缩放比例",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Asset Library",
+      "Context": "ObjectDefinitionEditor`1.DrawResourceGamePath",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "打开资源库",
+      "Source": "library"
+    },
+    {
       "Original": "VFX Path",
       "Context": "VfxObjectDefinitionEditor.OnDrawProperties",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "特效路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Primary & Secondary Dye",
+      "Context": "WeaponDefinitionEditor.OnDrawProperties",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "主染色与副染色",
       "Source": "library"
     },
     {
@@ -413,6 +593,24 @@
       "Source": "library"
     },
     {
+      "Original": "Don't preview the hovered asset in the game",
+      "Context": "AssetLibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "鼠标悬停时不在游戏中预览资源",
+      "Source": "library"
+    },
+    {
+      "Original": "Add this to the Stage being edited",
+      "Context": "AssetLibraryWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将此项添加到正在编辑的场景",
+      "Source": "library"
+    },
+    {
       "Original": "Paste",
       "Context": "BookmarkTreeViewComponent.DrawContextMenu",
       "PreserveID": true,
@@ -436,6 +634,14 @@
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.Button",
       "Translated": "删除",
+      "Source": "library"
+    },
+    {
+      "Original": "House & Room##Disabled",
+      "Context": "LibraryWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.InputText",
+      "Translated": "房屋与房间",
       "Source": "library"
     },
     {

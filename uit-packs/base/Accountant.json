@@ -16,6 +16,32 @@
       "Source": "library"
     },
     {
+      "Original": "Add Current Player",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加当前玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Add the plot ",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加地块 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Airship Entries",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "飞空艇记录",
+      "Source": "library"
+    },
+    {
       "Original": "All Crops Growing (Header)",
       "Context": "[Accountant] ColorIdExtensions.Name",
       "Role": "UI",
@@ -56,6 +82,86 @@
       "Source": "library"
     },
     {
+      "Original": "Blocked Crops",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Free Companies (Aetherial Wheels)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽部队（以太转轮）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Free Companies (Airships)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽部队（飞空艇）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Free Companies (Submersibles)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽部队（潜水艇）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Players (Crops)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽玩家（作物）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Players (Retainers)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽玩家（雇员）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Players (Tasks)",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽玩家（任务）",
+      "Source": "library"
+    },
+    {
+      "Original": "Blocked Plots",
+      "Context": "[Accountant] ConfigWindow.DrawBlocklistsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已屏蔽的地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear FC Data",
+      "Context": "[Accountant] ConfigWindow.DrawTests",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清除部队数据",
+      "Source": "library"
+    },
+    {
       "Original": "Click to copy to clipboard.",
       "Context": "[Accountant] ConfigWindow.CopyOnClickSelectable",
       "Role": "UI",
@@ -69,6 +175,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
       "Translated": "折叠标题的边框",
+      "Source": "library"
+    },
+    {
+      "Original": "Crop Entries",
+      "Context": "[Accountant] ConfigWindow.DrawDeleteTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "作物记录",
       "Source": "library"
     },
     {
@@ -112,6 +227,38 @@
       "Source": "library"
     },
     {
+      "Original": "Current House",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前房屋",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Housing Territory",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前住宅区",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Plot",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Ward",
+      "Context": "[Accountant] ConfigWindow.DrawPositionInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前小区",
+      "Source": "library"
+    },
+    {
       "Original": "Custom Name",
       "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
       "PreserveID": true,
@@ -146,11 +293,100 @@
       "Source": "library"
     },
     {
+      "Original": "Delete Selected Plot",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除选中的地块",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete the selected plot.",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "删除所选地块。",
+      "Source": "library"
+    },
+    {
       "Original": "Disabled Text",
       "Context": "[Accountant] ColorIdExtensions.Name",
       "Role": "UI",
       "RoleReason": "→ ImGuiRaii.ConfigColorPicker",
       "Translated": "已禁用的文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Aetherial Wheel Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用以太转轮计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Airship Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用飞空艇计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Crop Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用作物计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Custom Delivery Allowance Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用老主顾交易交纳次数计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Jumbo Cactpot Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用仙人仙彩计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Leve Allowance Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用理符限额计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Map Allowance Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用藏宝图采集计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Mini Cactpot Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用仙人微彩计时器",
       "Source": "library"
     },
     {
@@ -163,11 +399,65 @@
       "Source": "library"
     },
     {
+      "Original": "Enable Retainer Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用雇员计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Squadron Mission Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用冒险者分队任务计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Submersible Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用潜水艇计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Tribe Allowance Timers",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "启用友好部族任务限额计时器",
+      "Source": "library"
+    },
+    {
       "Original": "Finished:",
       "Context": "[Accountant] GenerateTooltip",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "成熟时间：",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix Timer Window Width",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "固定计时器窗口宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Timer Window Width",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "计时器窗口固定宽度",
       "Source": "library"
     },
     {
@@ -177,6 +467,113 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "部队",
+      "Source": "library"
+    },
+    {
+      "Original": "Free Company Leader",
+      "Context": "[Accountant] ConfigWindow.DrawCompanyInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "部队会长",
+      "Source": "library"
+    },
+    {
+      "Original": "Group Crop Beds by Plant",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "按作物种类归集种植区",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Disabled Objects",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "隐藏已禁用的项目",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide objects that are disabled or limited from the timers.",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip",
+      "Translated": "从计时器中隐藏已禁用或受限的项目。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control and click this button to force the last visit to now.",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Ctrl 并点击此按钮，把上次到访时间更新为现在。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control to delete the selected plot.",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Ctrl 可删除选中的地块。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Control, Shift and right-click to delete.",
+      "Context": "[Accountant] ConfigWindow.DrawDeletePlotCrops",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip",
+      "Translated": "按住 Ctrl 和 Shift 并右键点击即可删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift and right-click to delete.",
+      "Context": "[Accountant] ConfigWindow.DrawDeletePlotCrops",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.HoverTooltip",
+      "Translated": "按住 Shift 并右键点击即可删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore Indoor Plot Plants",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "忽略室内种植的作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Change: ",
+      "Context": "[Accountant] ConfigWindow.DrawFreeCompanyStorage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "上次更改： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Visit: ",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上次到访： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Visit: Less than a day ago",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上次到访：不到一天前",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Visit: More than ",
+      "Context": "[Accountant] ConfigWindow.DrawDemolitionData",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "上次到访：已超过 ",
       "Source": "library"
     },
     {
@@ -220,11 +617,77 @@
       "Source": "library"
     },
     {
+      "Original": "Leve Allowances Warning",
+      "Context": "[Accountant] ConfigWindow.DrawLeveAllowancesWarningInput",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "理符限额提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Mission End",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Mission ID",
+      "Context": "[Accountant] ConfigWindow.DrawSquadron",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "任务 ID",
+      "Source": "library"
+    },
+    {
       "Original": "Never",
       "Context": "[Accountant] CropCache.TimeSpanString2",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "从不",
+      "Source": "library"
+    },
+    {
+      "Original": "New Free Company Name...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCompanies",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新部队名称……",
+      "Source": "library"
+    },
+    {
+      "Original": "New Player Name...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedPlayers",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新玩家姓名……",
+      "Source": "library"
+    },
+    {
+      "Original": "New Priority Name...",
+      "Context": "[Accountant] ConfigWindow.DrawOrderNamesTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "新的优先级名称……",
+      "Source": "library"
+    },
+    {
+      "Original": "New Recruits",
+      "Context": "[Accountant] GenerateTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "新队员",
+      "Source": "library"
+    },
+    {
+      "Original": "No Collapsed Header Styling",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "不设置折叠标题样式",
       "Source": "library"
     },
     {
@@ -253,6 +716,24 @@
       "Source": "library"
     },
     {
+      "Original": "No Timer Window Movement",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "禁止移动计时器窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "No Timer Window Resize",
+      "Context": "[Accountant] ConfigWindow.DrawConfigTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiRaii.ConfigCheckmark",
+      "Translated": "禁止调整计时器窗口大小",
+      "Source": "library"
+    },
+    {
       "Original": "None",
       "Context": "[Accountant] GenerateTooltip",
       "Role": "UI",
@@ -266,6 +747,23 @@
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "打开 Accountant 设置。使用 /acct 或 /accountant timers 可显示或隐藏计时器窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant Name",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCrops",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "作物名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant Name...",
+      "Context": "[Accountant] ConfigWindow.DrawBlockedCrops",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "作物名称……",
       "Source": "library"
     },
     {

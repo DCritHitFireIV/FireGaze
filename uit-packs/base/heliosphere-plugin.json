@@ -2830,6 +2830,32 @@
       "Source": "library"
     },
     {
+      "Original": "Open on Heliosphere website",
+      "Context": "FindMatchesWindow.DrawResults",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.IconButton",
+      "Translated": "在 Heliosphere 网站上打开",
+      "Source": "library"
+    },
+    {
+      "Original": "Forums",
+      "Context": "Support.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "论坛",
+      "Source": "library"
+    },
+    {
+      "Original": "Variant",
+      "Context": "MultiPromptWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "变体",
+      "Source": "library"
+    },
+    {
       "Original": "Version",
       "Context": "MultiPromptWindow.Draw",
       "Role": "UI",
@@ -2851,6 +2877,14 @@
       "Role": "UI",
       "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
       "Translated": "数值",
+      "Source": "library"
+    },
+    {
+      "Original": "mods",
+      "Context": "Manager.Draw",
+      "Role": "UI",
+      "RoleReason": "direct string argument 0 to Dalamud.Bindings.ImGui.ImGui.TableSetupColumn",
+      "Translated": "模组",
       "Source": "library"
     }
   ],

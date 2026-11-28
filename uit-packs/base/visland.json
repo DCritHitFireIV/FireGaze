@@ -8,11 +8,51 @@
   },
   "entries": [
     {
+      "Original": " (missing)",
+      "Context": "WorkshopOCImport.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " （缺少）",
+      "Source": "library"
+    },
+    {
+      "Original": " (next week)",
+      "Context": "WorkshopOCImport.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " （下周）",
+      "Source": "library"
+    },
+    {
+      "Original": " (this week)",
+      "Context": "WorkshopOCImport.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " （本周）",
+      "Source": "library"
+    },
+    {
       "Original": " Type: ",
       "Context": "GatherDebug.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": " 类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": " pause → pause current route\n/",
+      "Context": "Plugin.get_HelpMessage",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " pause → 暂停当前路线\n/",
+      "Source": "library"
+    },
+    {
+      "Original": " stop → stop current route\n/",
+      "Context": "Plugin.get_HelpMessage",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " stop → 停止当前路线\n/",
       "Source": "library"
     },
     {
@@ -72,6 +112,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "新建路线",
+      "Source": "library"
+    },
+    {
+      "Original": "Current week: #",
+      "Context": "WorkshopDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "本周编号：",
       "Source": "library"
     },
     {
@@ -434,6 +482,14 @@
       "Source": "library"
     },
     {
+      "Original": "Retainers Ready: ",
+      "Context": "GatherDebug.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已就绪的雇员： ",
+      "Source": "library"
+    },
+    {
       "Original": "Rewards: ",
       "Context": "PastureDebug.Draw",
       "Role": "UI",
@@ -556,6 +612,14 @@
       "Source": "library"
     },
     {
+      "Original": "Stop Route",
+      "Context": "GatherWindow.DrawEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "停止路线",
+      "Source": "library"
+    },
+    {
       "Original": "Tabs",
       "Context": "WorkshopWindow.Draw",
       "Role": "UI",
@@ -578,6 +642,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "本周",
+      "Source": "library"
+    },
+    {
+      "Original": "Wait for Condition",
+      "Context": "GatherWindow.DrawWaypoint",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "等待条件满足",
       "Source": "library"
     },
     {

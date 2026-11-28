@@ -8,11 +8,67 @@
   },
   "entries": [
     {
+      "Original": " (Aliases: ",
+      "Context": "CommandFactory.BuildCommandInfo",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": " （别名： ",
+      "Source": "library"
+    },
+    {
+      "Original": " (Copy)",
+      "Context": "SceneEntityMenuBuilder.DuplicateObject",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " （副本）",
+      "Source": "library"
+    },
+    {
+      "Original": " Root",
+      "Context": "SceneTree.DrawVisibilityButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 根节点",
+      "Source": "library"
+    },
+    {
       "Original": " on ",
       "Context": "CameraWindow.DrawTracking",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": " 开启 ",
+      "Source": "library"
+    },
+    {
+      "Original": " wasn't found, do you want select a file to load for them?",
+      "Context": "SceneMCDFModal.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 未找到。要为此角色选择文件并加载吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "!\nCheck /xllog for further details.",
+      "Context": "McdfManager.DeleteGlamourerData",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "！\n输入 /xllog 查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "(Parent-Relative)",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（相对父节点）",
+      "Source": "library"
+    },
+    {
+      "Original": "(World → Default)",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（世界坐标 → 默认）",
       "Source": "library"
     },
     {
@@ -24,6 +80,32 @@
       "Source": "library"
     },
     {
+      "Original": ".\nThis function is only usable with a valid set of v0.2 offsets.\nHold CTRL+Shift to confirm.",
+      "Context": "OffsetEditor.DrawSkeletonCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "。\n此功能仅可用于有效的 v0.2 偏移数据。\n按住 Ctrl+Shift 确认。",
+      "Source": "library"
+    },
+    {
+      "Original": "APPLY (Clipboard)##LoadPose",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "应用剪贴板中的姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "ActionKeybindEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "动作",
+      "Source": "library"
+    },
+    {
       "Original": "Actor #",
       "Context": "Spawn.MoveNext",
       "Role": "UI",
@@ -32,11 +114,87 @@
       "Source": "library"
     },
     {
+      "Original": "Actors ",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Actor ",
+      "Context": "SceneDraw.DrawWorldActors",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "添加角色 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add World Light",
+      "Context": "SceneDraw.DrawWorldLights",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "添加场景光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply design for ",
+      "Context": "ActorDesignPopup.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "应用外观方案： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Assigning collection for ",
+      "Context": "ActorCollectionPopup.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在为以下对象分配合集： ",
+      "Source": "library"
+    },
+    {
       "Original": "Balloon ",
       "Context": "OverlayBuilder.BuildBalloon",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "气泡 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Batch GET",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "批量读取",
+      "Source": "library"
+    },
+    {
+      "Original": "Batch Names",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "批量名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Batch Operations",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "批量操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Batch SET (Current Transform)",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "批量写入当前变换",
       "Source": "library"
     },
     {
@@ -49,11 +207,28 @@
       "Source": "library"
     },
     {
+      "Original": "Bone Transform Get/Set",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "读取／设置骨骼变换",
+      "Source": "library"
+    },
+    {
       "Original": "Camera Light ",
       "Context": "LightModule.AddLight",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "相机光源 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cameras ",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "相机 ",
       "Source": "library"
     },
     {
@@ -74,6 +249,14 @@
       "Source": "library"
     },
     {
+      "Original": "Clipboard Pose Data: ",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "剪贴板中的姿势数据： ",
+      "Source": "library"
+    },
+    {
       "Original": "Confirm",
       "Context": "EntityRenameModal.OnDraw",
       "PreserveID": true,
@@ -83,11 +266,51 @@
       "Source": "library"
     },
     {
+      "Original": "Context: ",
+      "Context": "OverlayWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上下文： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not create object with path: ",
+      "Context": "SpawnObjectPopup.Confirm",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法按此路径创建物体： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not duplicate object with null transform",
+      "Context": "SceneEntityMenuBuilder.DuplicateObject",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法复制没有变换数据的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Could not duplicate object with path: ",
+      "Context": "SceneEntityMenuBuilder.DuplicateObject",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法复制此路径下的物体： ",
+      "Source": "library"
+    },
+    {
       "Original": "Couldn't find the MCDF linked to the actor ",
       "Context": "SceneDataService.SetupActor",
       "Role": "UI",
       "RoleReason": "→ Notification.set_Content",
       "Translated": "找不到该角色关联的 MCDF 文件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently set to: ",
+      "Context": "ActorCollectionPopup.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "当前设置为： ",
       "Source": "library"
     },
     {
@@ -123,6 +346,14 @@
       "Source": "library"
     },
     {
+      "Original": "Editing Light: ",
+      "Context": "LightWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在编辑光源： ",
+      "Source": "library"
+    },
+    {
       "Original": "Empty",
       "Context": "EquipmentEditorTab.PrepareItemLabel",
       "Role": "UI",
@@ -131,11 +362,28 @@
       "Source": "library"
     },
     {
+      "Original": "Encountered a UI error!\nPlease submit a bug report.",
+      "Context": "PropertyEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "界面出错！\n请提交问题报告。",
+      "Source": "library"
+    },
+    {
       "Original": "Enter GPose to complete legacy config setup.",
       "Context": "CommandService.OnMainCommandLegacy",
       "Role": "UI",
       "RoleReason": "→ IChatGui.PrintError",
       "Translated": "请进入集体动作模式以完成旧版设置迁移。",
+      "Source": "library"
+    },
+    {
+      "Original": "Environment",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "环境",
       "Source": "library"
     },
     {
@@ -164,12 +412,54 @@
       "Source": "library"
     },
     {
+      "Original": "Failed to load Ktisis configuration. A backup of the old file was saved.",
+      "Context": "ConfigManager.Load",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "未能加载 Ktisis 设置，旧文件已备份。",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to load NPCs.\nCheck your error log for more information.",
+      "Context": "NpcSelect.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未能加载 NPC。\n详情请查看错误日志。",
+      "Source": "library"
+    },
+    {
       "Original": "Formatter",
       "Context": "ConfigWindow.DrawAutoSaveFormatting",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "格式化规则",
+      "Source": "library"
+    },
+    {
+      "Original": "From: ",
+      "Context": "SceneWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "来源： ",
+      "Source": "library"
+    },
+    {
+      "Original": "GET (Clipboard)##SavePose",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制姿势到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "GET##SelectedBones",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取所选骨骼",
       "Source": "library"
     },
     {
@@ -208,6 +498,23 @@
       "Source": "library"
     },
     {
+      "Original": "Get All Matrices",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取所有矩阵",
+      "Source": "library"
+    },
+    {
+      "Original": "Havok (Matrix Decompose / Raw Transform)",
+      "Context": "DebugWindow.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "Havok（矩阵分解／原始变换）",
+      "Source": "library"
+    },
+    {
       "Original": "History: ",
       "Context": "OverlayWindow.DrawDebug",
       "Role": "UI",
@@ -241,6 +548,40 @@
       "Source": "library"
     },
     {
+      "Original": "Keep existing actors",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保留已有角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Keys",
+      "Context": "ActionKeybindEditor.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "键",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Published: ",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上次发布时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Last Value: ",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "上一个值： ",
+      "Source": "library"
+    },
+    {
       "Original": "Light",
       "Context": "LightModule.CreateLight",
       "Role": "UI",
@@ -258,6 +599,108 @@
       "Source": "library"
     },
     {
+      "Original": "Load Environment",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载环境",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Objects",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Load Overlays",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Load actors",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Load cameras",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载相机",
+      "Source": "library"
+    },
+    {
+      "Original": "Load lights",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "加载光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Loading NPCs...",
+      "Context": "NpcSelect.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "正在加载 NPC……",
+      "Source": "library"
+    },
+    {
+      "Original": "MCDF has Customize+ data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+      "Context": "McdfManager.ApplyCustomizeData",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "MCDF 中有 Customize+ 数据，但未找到 IPC！\n请检查所需插件是否均已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "MCDF has Glamourer data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+      "Context": "McdfManager.ApplyGlamourerData",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "MCDF 中有 Glamourer 数据，但未找到 IPC！\n请检查所需插件是否均已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "MCDF has Penumbra data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+      "Context": "McdfManager.ApplyPenumbraMods",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "MCDF 中有 Penumbra 数据，但未找到 IPC！\n请检查所需插件是否均已启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "MCDF wasnt found for this character\nPlease try applying manually after loading the scene",
+      "Context": "SceneWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "未找到该角色的 MCDF 文件。\n请在加载场景后尝试手动应用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Model #",
+      "Context": "NpcSelect.DrawItem",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "模型编号",
+      "Source": "library"
+    },
+    {
       "Original": "New Status",
       "Context": "StatusOverlay..ctor",
       "Role": "UI",
@@ -271,6 +714,30 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputText",
       "Translated": "新建对话……",
+      "Source": "library"
+    },
+    {
+      "Original": "No dye set.",
+      "Context": "EquipmentEditorTab.DrawDyeTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未设置染剂。",
+      "Source": "library"
+    },
+    {
+      "Original": "Object ",
+      "Context": "WorldObjectPopup.Confirm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物体 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Object Details...",
+      "Context": "SceneDraw.DrawWorldObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "物体详情……",
       "Source": "library"
     },
     {
@@ -315,11 +782,147 @@
       "Source": "library"
     },
     {
+      "Original": "Overlay: ",
+      "Context": "OverlayWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "叠加层： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Overlays ",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "叠加层 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Particles",
+      "Context": "SceneWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "粒子",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick File",
+      "Context": "SceneMCDFModal.OnDraw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "选择文件",
+      "Source": "library"
+    },
+    {
       "Original": "Pose",
       "Context": "PoseBuilder..ctor",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Posing: ",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "姿势编辑： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Position:\n\tX: ",
+      "Context": "DebugWindow.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "位置：\n\tX： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename '",
+      "Context": "EntityRenameModal.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "重命名「",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation:\n\tX: ",
+      "Context": "DebugWindow.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "旋转：\n\tX： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Environment",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存环境",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Objects",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Overlays",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存叠加层",
+      "Source": "library"
+    },
+    {
+      "Original": "Save actors",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Save cameras",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存相机",
+      "Source": "library"
+    },
+    {
+      "Original": "Save lights",
+      "Context": "SceneWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "保存光源",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale:\n\tX: ",
+      "Context": "DebugWindow.DrawTransform",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "缩放：\n\tX： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Scene: ",
+      "Context": "OverlayWindow.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "场景： ",
       "Source": "library"
     },
     {
@@ -344,6 +947,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "骨架： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Sky",
+      "Context": "SceneWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "天空",
       "Source": "library"
     },
     {
@@ -379,11 +990,27 @@
       "Source": "library"
     },
     {
+      "Original": "The MCDF linked to the actor ",
+      "Context": "SceneMCDFModal.OnDraw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "该角色关联的 MCDF 文件 ",
+      "Source": "library"
+    },
+    {
       "Original": "Tracking mode: ",
       "Context": "CameraWindow.DrawOrbitTarget",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "追踪模式： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Transform Matrix:",
+      "Context": "DrawProviderTab.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "变换矩阵：",
       "Source": "library"
     },
     {
@@ -396,11 +1023,36 @@
       "Source": "library"
     },
     {
+      "Original": "Unable to fully clear Glamourer IPC data for Actor ",
+      "Context": "McdfManager.DeleteGlamourerData",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "无法完全清除该角色的 Glamourer IPC 数据： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use World Space",
+      "Context": "DrawProviderTab.MoveNext",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用世界坐标",
+      "Source": "library"
+    },
+    {
       "Original": "Version: ",
       "Context": "DrawProviderTab.MoveNext",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "版本： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: This will replace ALL current offsets for ",
+      "Context": "OffsetEditor.DrawSkeletonCombo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "警告：此操作将替换以下对象的所有现有偏移： ",
       "Source": "library"
     },
     {

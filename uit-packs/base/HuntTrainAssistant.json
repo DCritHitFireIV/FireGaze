@@ -26,6 +26,24 @@
       "Source": "library"
     },
     {
+      "Original": "- Assign conductors either by right-clicking them in chat/world or enter their names manually;",
+      "Context": "MainWindow.Help",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped",
+      "Translated": "－在聊天栏或场景中右键点击玩家，或手动输入角色名称，即可指定领车人；",
+      "Source": "library"
+    },
+    {
+      "Original": "Bar",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar",
+      "Translated": "栏",
+      "Source": "library"
+    },
+    {
       "Original": "Debug",
       "Context": "SettingsWindow.Draw",
       "PreserveID": false,
@@ -44,12 +62,48 @@
       "Source": "library"
     },
     {
+      "Original": "text",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "文本",
+      "Source": "library"
+    },
+    {
+      "Original": "set text",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "设置文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Normal",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "普通",
+      "Source": "library"
+    },
+    {
       "Original": "Select group",
       "Context": "TabDebug.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "选择队伍",
+      "Source": "library"
+    },
+    {
+      "Original": "Instance",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Int32>.Get",
+      "Translated": "分线",
       "Source": "library"
     },
     {
@@ -98,12 +152,39 @@
       "Source": "library"
     },
     {
+      "Original": "Is moving: ",
+      "Context": "TabDebug.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "移动中： ",
+      "Source": "library"
+    },
+    {
       "Original": "Territory",
       "Context": "TabDebug.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Weather",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "天气",
+      "Source": "library"
+    },
+    {
+      "Original": "Aetheryte",
+      "Context": "TabDebug.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "以太之光",
       "Source": "library"
     }
   ],

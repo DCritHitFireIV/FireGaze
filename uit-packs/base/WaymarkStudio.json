@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\nRight click to clear",
+      "Context": "StudioWindow.WaymarkButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\n右键点击以清除",
+      "Source": "library"
+    },
+    {
       "Original": " for ",
       "Context": "BaseWindow.PresetImportButton",
       "Role": "UI",
@@ -80,6 +88,14 @@
       "Source": "library"
     },
     {
+      "Original": "Clear Waymarks",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清除场地标记",
+      "Source": "library"
+    },
+    {
       "Original": "Clear waymark when beginning placement",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -139,6 +155,22 @@
       "Source": "library"
     },
     {
+      "Original": "Depth:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "深度：",
+      "Source": "library"
+    },
+    {
+      "Original": "Detach",
+      "Context": "StudioWindow.DrawTriggerList",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "解除关联",
+      "Source": "library"
+    },
+    {
       "Original": "Disable World Preset Placement Safety Checks",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
@@ -189,6 +221,14 @@
       "Source": "library"
     },
     {
+      "Original": "Grid Size:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "网格大小：",
+      "Source": "library"
+    },
+    {
       "Original": "Guide",
       "Context": "StudioWindow.Draw",
       "PreserveID": true,
@@ -214,6 +254,14 @@
       "Source": "library"
     },
     {
+      "Original": "Hide Waymarks Locally\nRight click to adjust transparency",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "仅在本机隐藏场地标记\n右键点击可调整透明度",
+      "Source": "library"
+    },
+    {
       "Original": "Import From FFLogs (Disabled for API updates)",
       "Context": "BaseWindow.ImguiFFLogsImportButton",
       "Role": "UI",
@@ -227,6 +275,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "导入预设",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Waymarks as draft",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将场地标记导入为草稿",
       "Source": "library"
     },
     {
@@ -278,11 +334,35 @@
       "Source": "library"
     },
     {
+      "Original": "New trigger",
+      "Context": "TriggerEditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "新建触发器",
+      "Source": "library"
+    },
+    {
       "Original": "No Presets Found",
       "Context": "LibraryWindow.DrawLibrary",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "未找到预设",
+      "Source": "library"
+    },
+    {
+      "Original": "No attached preset",
+      "Context": "DrawTriggerList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "未关联任何预设",
+      "Source": "library"
+    },
+    {
+      "Original": "One or more Waymarks are currently hidden",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "有一个或多个场地标记已隐藏",
       "Source": "library"
     },
     {
@@ -366,11 +446,27 @@
       "Source": "library"
     },
     {
+      "Original": "Place Trigger",
+      "Context": "TriggerEditorWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText",
+      "Translated": "放置触发器",
+      "Source": "library"
+    },
+    {
       "Original": "Position:",
       "Context": "StudioWindow.DrawGuideSection",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "位置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Preset Library",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "预设库",
       "Source": "library"
     },
     {
@@ -440,11 +536,51 @@
       "Source": "library"
     },
     {
+      "Original": "Reset Alpha",
+      "Context": "StudioWindow.WaymarkVisibilityEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "重置透明度",
+      "Source": "library"
+    },
+    {
+      "Original": "Rings:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "圆环：",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotate 90° Clockwise",
+      "Context": "StudioWindow.ImguiRotationInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "顺时针旋转 90°",
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation:",
+      "Context": "StudioWindow.DrawGuideSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "旋转：",
+      "Source": "library"
+    },
+    {
       "Original": "Save Draft",
       "Context": "StudioWindow.DrawDraftSection",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.IconButtonWithText",
       "Translated": "保存草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "Save Waymarks to presets",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将场地标记保存为预设",
       "Source": "library"
     },
     {
@@ -512,6 +648,14 @@
       "Source": "library"
     },
     {
+      "Original": "Show Waymarks Locally\nRight click to adjust transparency",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "仅在本机显示场地标记\n右键点击可调整透明度",
+      "Source": "library"
+    },
+    {
       "Original": "Snap marker, trigger, and guide cursor to the grid.\nIf you have placed a guide, this will also snap cursor to helpful points on the guide.",
       "Context": "StudioWindow.DrawDraftSection",
       "Role": "UI",
@@ -553,6 +697,14 @@
       "Source": "library"
     },
     {
+      "Original": "Trigger Editor",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "触发器编辑器",
+      "Source": "library"
+    },
+    {
       "Original": "Triggers",
       "Context": "StudioWindow.DrawTriggerList",
       "Role": "UI",
@@ -588,6 +740,31 @@
       "Source": "library"
     },
     {
+      "Original": "Waymark Studio Trigger Editor",
+      "Context": "TriggerEditorWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Waymark Studio 触发器编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymarks UI",
+      "Context": ".ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "场地标记界面",
+      "Source": "library"
+    },
+    {
+      "Original": "Waymarks not allowed in current area",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前区域不允许放置场地标记",
+      "Source": "library"
+    },
+    {
       "Original": "Width:",
       "Context": "StudioWindow.DrawGuideSection",
       "Role": "UI",
@@ -602,6 +779,31 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "［测试中］启用场地标记特效追踪",
+      "Source": "library"
+    },
+    {
+      "Original": "draft",
+      "Context": "StudioWindow.WaymarkButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "草稿",
+      "Source": "library"
+    },
+    {
+      "Original": "library",
+      "Context": "StudioWindow.DrawMarkerInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButton",
+      "Translated": "预设库",
+      "Source": "library"
+    },
+    {
+      "Original": "waymark",
+      "Context": "StudioWindow.WaymarkButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "场地标记",
       "Source": "library"
     }
   ],

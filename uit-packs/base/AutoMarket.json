@@ -80,6 +80,24 @@
       "Source": "library"
     },
     {
+      "Original": "Showing ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前显示 ",
+      "Source": "library"
+    },
+    {
+      "Original": " listings, cheapest first.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": " 条在售记录，按价格由低到高排序。",
+      "Source": "library"
+    },
+    {
       "Original": "Add optimized plan to list",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
@@ -305,12 +323,30 @@
       "Source": "library"
     },
     {
+      "Original": "Searching ",
+      "Context": "MainWindow.StartSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在搜索 ",
+      "Source": "library"
+    },
+    {
       "Original": "Found ",
       "Context": "MainWindow.FinishSearch",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "已找到 ",
+      "Source": "library"
+    },
+    {
+      "Original": " listings across ",
+      "Context": "MainWindow.FinishSearch",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 条在售记录，涉及 ",
       "Source": "library"
     },
     {
@@ -356,6 +392,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "没有商品同时符合数量、单价和预算限制。",
+      "Source": "library"
+    },
+    {
+      "Original": " units, ",
+      "Context": "MainWindow.AddToCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 件，预估 ",
+      "Source": "library"
+    },
+    {
+      "Original": " gil estimated.",
+      "Context": "MainWindow.AddToCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 金币。",
+      "Source": "library"
+    },
+    {
+      "Original": " to the shopping list.",
+      "Context": "MainWindow.AddListingToCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 加入购物清单。",
       "Source": "library"
     },
     {
@@ -446,6 +509,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "开始分组采购",
+      "Source": "library"
+    },
+    {
+      "Original": "Started a ",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已开始一条跨越 ",
+      "Source": "library"
+    },
+    {
+      "Original": "-world route.",
+      "Context": "MainWindow.DrawCart",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "个服务器的路线。",
       "Source": "library"
     },
     {

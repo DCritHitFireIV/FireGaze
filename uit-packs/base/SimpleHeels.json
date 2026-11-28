@@ -32,6 +32,14 @@
       "Source": "library"
     },
     {
+      "Original": "A character can appear in multiple groups, the top group will be applied first.",
+      "Context": "Changelogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "角色可以属于多个分组，优先应用排在最上方的分组。",
+      "Source": "library"
+    },
+    {
       "Original": "Active Character",
       "Context": "ConfigWindow.DrawCharacterList",
       "Role": "UI",
@@ -137,6 +145,23 @@
       "Source": "library"
     },
     {
+      "Original": "Detailed",
+      "Context": "ExtraDebug.TabPerformance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "详细",
+      "Source": "library"
+    },
+    {
+      "Original": "Different Sitting and Sleeping poses can be assigned individual offsets.",
+      "Context": "Changelogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可为不同的坐姿和睡姿分别设置偏移量。",
+      "Source": "library"
+    },
+    {
       "Original": "Display Type",
       "Context": "PerformanceMonitors.DrawTable",
       "PreserveID": true,
@@ -151,6 +176,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "显示偏移： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Due to the way the game handles cutscenes, cutscenes featuring non-standing poses will be incorrect.",
+      "Context": "Changelogs",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "受游戏处理过场动画的方式影响，非站姿的过场动画可能显示异常。",
       "Source": "library"
     },
     {
@@ -221,12 +254,29 @@
       "Source": "library"
     },
     {
+      "Original": "Invalid option: ",
+      "Context": "Plugin.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "无效选项： ",
+      "Source": "library"
+    },
+    {
       "Original": "Last Check",
       "Context": "PerformanceMonitors.DrawTable",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "上次检查",
+      "Source": "library"
+    },
+    {
+      "Original": "Length",
+      "Context": "ExtraDebug.TabEmoteTiming",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "长度",
       "Source": "library"
     },
     {
@@ -293,6 +343,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "不可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Offset Provider: ",
+      "Context": "ExtraDebug.TabObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "偏移量来源： ",
       "Source": "library"
     },
     {
@@ -450,6 +508,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "全部同步",
+      "Source": "library"
+    },
+    {
+      "Original": "These options have little to nothing to do with heels. I just like them.",
+      "Context": "ConfigWindow.DrawCharacterView",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "这些选项与高跟鞋关系不大，纯属作者个人喜好。",
       "Source": "library"
     },
     {

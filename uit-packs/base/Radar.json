@@ -17,6 +17,15 @@
       "Source": "library"
     },
     {
+      "Original": "Opens the Radar config window.\r\n/radar map → Toggle external map\r\n/radar hunt → Toggle hunt mobs overlay\r\n/radar 2d → Toggle 2D overlay\r\n/radar 3d → Toggle 3D overlay\r\n/radar custom → Toggle custom object overlay",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Radar 设置窗口。\r\n/radar map → 切换独立地图\r\n/radar hunt → 切换狩猎目标显示\r\n/radar 2d → 切换二维叠加显示\r\n/radar 3d → 切换三维叠加显示\r\n/radar custom → 切换自定义对象显示",
+      "Source": "library"
+    },
+    {
       "Original": "[Radar] External Map ",
       "Context": "Plugin.OnCommand",
       "PreserveID": false,

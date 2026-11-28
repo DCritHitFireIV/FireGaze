@@ -17,6 +17,24 @@
       "Source": "library"
     },
     {
+      "Original": "The active cross-world polling cycle was stopped.",
+      "Context": "Plugin.SetAutomaticPollingMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已停止本轮跨服查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world automatic polling enabled.",
+      "Context": "Plugin.SetAutomaticPollingMode",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已启用本服好友自动查询。",
+      "Source": "library"
+    },
+    {
       "Original": "All-world automatic polling enabled.",
       "Context": "Plugin.SetAutomaticPollingMode",
       "PreserveID": false,
@@ -35,6 +53,51 @@
       "Source": "library"
     },
     {
+      "Original": "Same-world automatic polling cycle started.",
+      "Context": "Plugin.StartAutomaticRefreshCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已开始本轮本服好友自动查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world automatic polling cycle finished.",
+      "Context": "Plugin.StartAutomaticRefreshCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "本轮本服好友自动查询已完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "All-world automatic polling cycle started.",
+      "Context": "Plugin.StartAutomaticRefreshCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已开始本轮全服好友自动查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for the final friend status result to settle.",
+      "Context": "Plugin.StartRefreshCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "正在等待最后一名好友的状态查询结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: Cross-world status requests could not continue because the Friend List agent was unavailable.",
+      "Context": "Plugin.ProcessCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：好友名单不可用，无法继续跨服状态查询。",
+      "Source": "library"
+    },
+    {
       "Original": "Cross-world status request ",
       "Context": "Plugin.ProcessCrossWorldCheckCycle",
       "PreserveID": false,
@@ -44,12 +107,102 @@
       "Source": "library"
     },
     {
+      "Original": " sent.",
+      "Context": "Plugin.ProcessCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已发送。",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: Cross-world status request ",
+      "Context": "Plugin.ProcessCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：跨服状态查询 ",
+      "Source": "library"
+    },
+    {
+      "Original": " failed.",
+      "Context": "Plugin.ProcessCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "Next cross-world status request scheduled in ",
+      "Context": "Plugin.ScheduleNextCrossWorldRequest",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "下次跨服查询将在 ",
+      "Source": "library"
+    },
+    {
       "Original": " seconds.",
       "Context": "Plugin.ScheduleNextCrossWorldRequest",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": " 秒。",
+      "Source": "library"
+    },
+    {
+      "Original": "Queued ",
+      "Context": "Plugin.BuildCrossWorldCheckQueue",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已加入队列： ",
+      "Source": "library"
+    },
+    {
+      "Original": " friends ",
+      "Context": "Plugin.BuildCrossWorldCheckQueue",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 名好友， ",
+      "Source": "library"
+    },
+    {
+      "Original": "for individual world-status checks.",
+      "Context": "Plugin.BuildCrossWorldCheckQueue",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "将逐一检查其所在服务器及状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: The cross-world polling cycle stopped because the Friend List could not be read.",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：无法读取好友名单，已停止本轮跨服查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "The cross-world polling cycle stopped after ",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "跨服查询已停止，已处理 ",
+      "Source": "library"
+    },
+    {
+      "Original": " friends were processed.",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 名好友。",
       "Source": "library"
     },
     {
@@ -71,6 +224,123 @@
       "Source": "library"
     },
     {
+      "Original": " finished. ",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已完成。 ",
+      "Source": "library"
+    },
+    {
+      "Original": " requests were sent.",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个请求已发送。",
+      "Source": "library"
+    },
+    {
+      "Original": "Next automatic polling cycle scheduled in ",
+      "Context": "Plugin.ScheduleNextPoll",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "下次自动查询将在 ",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: The general Friend List refresh could not start because the Friend List was unavailable.",
+      "Context": "Plugin.RequestFriendListRefresh",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：好友名单不可用，无法开始刷新。",
+      "Source": "library"
+    },
+    {
+      "Original": "General Friend List refresh request sent.",
+      "Context": "Plugin.RequestFriendListRefresh",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "已发送好友名单刷新请求。",
+      "Source": "library"
+    },
+    {
+      "Original": "The game did not send the general Friend List refresh request.",
+      "Context": "Plugin.RequestFriendListRefresh",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "游戏未发送好友名单刷新请求。",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: The general Friend List refresh failed.",
+      "Context": "Plugin.RequestFriendListRefresh",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：刷新好友名单失败。",
+      "Source": "library"
+    },
+    {
+      "Original": "The active cross-world polling cycle was stopped because the Friend List was opened.",
+      "Context": "Plugin.OnFriendListOpened",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "好友名单已打开，已停止本轮跨服查询。",
+      "Source": "library"
+    },
+    {
+      "Original": "ERROR: The locally stored Friend List could not be read.",
+      "Context": "Plugin.TryScanFriendList",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "错误：无法读取本机保存的好友名单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for the initial friend-list baseline.",
+      "Context": "Plugin.GetTrackingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待读取初始好友名单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tracking ",
+      "Context": "Plugin.GetTrackingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在追踪 ",
+      "Source": "library"
+    },
+    {
+      "Original": " friend entries.",
+      "Context": "Plugin.GetTrackingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 名好友。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic all-world polling is in progress. ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在全服查询好友状态。 ",
+      "Source": "library"
+    },
+    {
       "Original": "Manual sync in progress. ",
       "Context": "Plugin.GetPollingStatus",
       "PreserveID": false,
@@ -80,12 +350,120 @@
       "Source": "library"
     },
     {
+      "Original": "Refreshing the Friend List before checking cross-world friends.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在刷新好友名单，之后将检查跨服好友。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for the final world-status result.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "正在等待最终的跨服状态结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "General Friend List refresh complete. ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已完成好友名单刷新。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Cross-world checks: ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "跨服查询： ",
+      "Source": "library"
+    },
+    {
       "Original": "Automatic polling is disabled.",
       "Context": "Plugin.GetPollingStatus",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "自动轮询已停用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world automatic polling is enabled and will begin after login.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已启用本服好友自动查询，登录后开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "All-world automatic polling is enabled and will begin after login.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已启用全服好友自动查询，登录后开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world automatic polling is enabled and waiting to be scheduled.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已启用本服好友自动查询，正在等待执行。",
+      "Source": "library"
+    },
+    {
+      "Original": "All-world automatic polling is enabled and waiting to be scheduled.",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已启用全服好友自动查询，正在等待执行。",
+      "Source": "library"
+    },
+    {
+      "Original": " automatic polling is enabled. ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 自动查询已启用。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Next refresh in approximately ",
+      "Context": "Plugin.GetPollingStatus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "预计距离下次刷新还有 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Character login detected. Friend tracking was reset.",
+      "Context": "Plugin.OnLogin",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "角色已登录，好友追踪数据已重置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Logout detected. Active polling and timers were stopped.",
+      "Context": "Plugin.OnLogout",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "角色已登出，已停止查询及计时。",
       "Source": "library"
     }
   ],

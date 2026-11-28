@@ -116,6 +116,213 @@
       "Source": "library"
     },
     {
+      "Original": "UI Properties",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "界面属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared Browser Properties",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "共享浏览器属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared Renderer Properties",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "共享渲染属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared Lighting Properties",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "共享光照属性",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Accent Colours",
+      "Context": "ConfigWindow.DrawUiTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "界面强调色",
+      "Source": "library"
+    },
+    {
+      "Original": "Home Uri Type",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "主页地址类型",
+      "Source": "library"
+    },
+    {
+      "Original": "- Blank: Display a blank homepage (pix:// or about:blank)\n- Starry: Display a starry homepage (pix://starry)\n- Custom: Display a custom homepage",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "- 空白：显示空白主页（pix:// 或 about:blank）\n- 星空：显示星空主页（pix://starry）\n- 自定义：显示指定的主页",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Home Uri",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "自定义主页地址",
+      "Source": "library"
+    },
+    {
+      "Original": "Homepage to display when creating a new Pix or when clicking the browser Home button.\n- Eg. https://google.com",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledInput",
+      "Translated": "新建 Pix 或点击浏览器的主页按钮时打开的页面。\n- 例如 https://google.com",
+      "Source": "library"
+    },
+    {
+      "Original": "Spawn Behaviour",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "创建行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory Spawn Behaviour",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "切换区域时的创建行为",
+      "Source": "library"
+    },
+    {
+      "Original": "The spawn behaviour of a Pix browser environment when changing territory.",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "改变区域时如何创建 Pix 浏览器环境。",
+      "Source": "library"
+    },
+    {
+      "Original": "Despawn Behaviour",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "移除行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Territory Despawn Behaviour",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "切换区域时的移除行为",
+      "Source": "library"
+    },
+    {
+      "Original": "The despawn behaviour of a Pix browser environment when changing territory.",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "改变区域时如何移除 Pix 浏览器环境。",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to automatically enter theatre mode when navigating to a page with a video element.",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "浏览含视频元素的页面时，是否自动进入影院模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether to allow syncing of navigation to a uri with the local 'file:///' scheme.",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "是否允许同步打开使用本机 file:/// 协议的地址。",
+      "Source": "library"
+    },
+    {
+      "Original": "Screen Interaction Conditions",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "屏幕交互条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture:",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "捕获：",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture LButton",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "捕获鼠标左键",
+      "Source": "library"
+    },
+    {
+      "Original": "Whether any screen can receive left mouse button click.",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "是否允许屏幕接收鼠标左键点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture RButton",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "捕获鼠标右键",
+      "Source": "library"
+    },
+    {
+      "Original": "Perform Cursor Changes",
+      "Context": "ConfigWindow.DrawBrowserTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "允许更改光标",
+      "Source": "library"
+    },
+    {
       "Original": "Source: ",
       "Context": "ConfigWindow.DrawRendererTab",
       "PreserveID": false,
@@ -125,12 +332,39 @@
       "Source": "library"
     },
     {
+      "Original": "Source Blend",
+      "Context": "ConfigWindow.DrawRendererTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "源混合系数",
+      "Source": "library"
+    },
+    {
       "Original": "Destination: ",
       "Context": "ConfigWindow.DrawRendererTab",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.EnumCombo",
       "Translated": "目的地： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Render Target Write Mask",
+      "Context": "ConfigWindow.DrawRendererTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumFlagsCombo",
+      "Translated": "渲染目标写入掩码",
+      "Source": "library"
+    },
+    {
+      "Original": "Master Volume",
+      "Context": "ConfigWindow.DrawAudioTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Drag",
+      "Translated": "主音量",
       "Source": "library"
     },
     {
@@ -161,6 +395,24 @@
       "Source": "library"
     },
     {
+      "Original": "Remove Extension",
+      "Context": "ExtensionsWindow.DrawExtensionRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "移除扩展名",
+      "Source": "library"
+    },
+    {
+      "Original": "Close PyonPix Changelog",
+      "Context": "MainWindow.DrawControlExtras",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "关闭 PyonPix 更新日志",
+      "Source": "library"
+    },
+    {
       "Original": "Support me on Ko-fi!",
       "Context": "MainWindow.DrawControlExtras",
       "PreserveID": false,
@@ -170,12 +422,39 @@
       "Source": "library"
     },
     {
+      "Original": "Open User Config",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "打开用户配置",
+      "Source": "library"
+    },
+    {
       "Original": "Owner: ",
       "Context": "MainWindow.DrawPixRow",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconLabel",
       "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Spawn Pix",
+      "Context": "MainWindow.DrawPixRow",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "生成 Pix",
+      "Source": "library"
+    },
+    {
+      "Original": "Renderer Properties",
+      "Context": "PixConfigWindow..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "渲染器属性",
       "Source": "library"
     },
     {
@@ -194,6 +473,42 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.StyledInput",
       "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Set to Current Territory",
+      "Context": "PixConfigWindow.DrawInfoTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton",
+      "Translated": "设置为当前区域",
+      "Source": "library"
+    },
+    {
+      "Original": "Shared Cookies",
+      "Context": "PixConfigWindow.DrawBrowserTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Checkbox",
+      "Translated": "共享 Cookie",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Scale Height",
+      "Context": "PixConfigWindow.DrawBrowserTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Drag",
+      "Translated": "自定义缩放高度",
+      "Source": "library"
+    },
+    {
+      "Original": "Depth Comparison: ",
+      "Context": "PixConfigWindow.DrawRendererTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo",
+      "Translated": "深度比较： ",
       "Source": "library"
     },
     {
@@ -221,6 +536,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.StyledInput",
       "Translated": "密码",
+      "Source": "library"
+    },
+    {
+      "Original": "Upload this pix to the Sync Service",
+      "Context": "PixConfigWindow.DrawSyncTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconTextButton",
+      "Translated": "将此 Pix 上传到同步服务",
       "Source": "library"
     },
     {
@@ -269,6 +593,15 @@
       "Source": "library"
     },
     {
+      "Original": "Broadcasting a Pix",
+      "Context": "SetupWindow.DrawSyncing",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.BeginContainer",
+      "Translated": "广播 Pix",
+      "Source": "library"
+    },
+    {
       "Original": "Join",
       "Context": "SyncSearchWindow.DrawHeader",
       "PreserveID": false,
@@ -293,6 +626,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconToggleButton",
       "Translated": "清除筛选条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Current Territory Only",
+      "Context": "SyncSearchWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconToggleButton",
+      "Translated": "仅显示当前区域",
       "Source": "library"
     },
     {
@@ -323,12 +665,39 @@
       "Source": "library"
     },
     {
+      "Original": "Other Changes",
+      "Context": "UpdatesWindow.DrawChangelog",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "其他更改",
+      "Source": "library"
+    },
+    {
       "Original": "Apply",
       "Context": "UserWindow.DrawProperties",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.IconTextButton",
       "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes Applied",
+      "Context": "UserWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "更改已应用",
+      "Source": "library"
+    },
+    {
+      "Original": "Browser Initialization Failed",
+      "Context": "BrowserService.InitializeBrowser",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.StyledText",
+      "Translated": "浏览器初始化失败",
       "Source": "library"
     }
   ],

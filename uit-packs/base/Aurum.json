@@ -50,6 +50,14 @@
       "Source": "library"
     },
     {
+      "Original": "Add to Crafting List",
+      "Context": "DashboardWindow.DrawProfitRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加到制作清单",
+      "Source": "library"
+    },
+    {
       "Original": "All Jobs",
       "Context": "FilterWindow.DrawCurrentFilterTab",
       "PreserveID": true,
@@ -65,6 +73,15 @@
       "Role": "UI",
       "RoleReason": "→ 窗口标题",
       "Translated": "Aurum 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Optimize Frequency (Days)",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "自动优化间隔（天）",
       "Source": "library"
     },
     {
@@ -192,12 +209,72 @@
       "Source": "library"
     },
     {
+      "Original": "Craft with Caution",
+      "Context": "DetailWindow.DrawRecommendation",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "谨慎制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafted Items",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作成品",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting & Gathering",
+      "Context": "DashboardWindow.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作与采集",
+      "Source": "library"
+    },
+    {
       "Original": "Crafting & Gathering Gear",
       "Context": "ConfigWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "制作与采集装备",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Cost:",
+      "Context": "DetailWindow.DrawProfitBreakdown",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作成本：",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Level: ",
+      "Context": "DashboardWindow.DrawProfitRow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "制作等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Materials",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "制作素材",
+      "Source": "library"
+    },
+    {
+      "Original": "Crafting Plan",
+      "Context": "ShoppingListWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "制作计划",
       "Source": "library"
     },
     {
@@ -259,6 +336,23 @@
       "Source": "library"
     },
     {
+      "Original": "Export to CSV",
+      "Context": "ShoppingListWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出为 CSV",
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by equipment slot:",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "按装备部位筛选：",
+      "Source": "library"
+    },
+    {
       "Original": "Filtering & Sorting",
       "Context": "ConfigWindow.Draw",
       "Role": "UI",
@@ -272,6 +366,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "筛选条件：",
+      "Source": "library"
+    },
+    {
+      "Original": "Gathered Items",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "采集物品",
       "Source": "library"
     },
     {
@@ -515,6 +618,23 @@
       "Source": "library"
     },
     {
+      "Original": "Reset Sort",
+      "Context": "DashboardWindow.DrawFilters",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default sort (Recommendation Score)",
+      "Context": "DashboardWindow.DrawFilters",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "还原默认排序（按推荐分数）",
+      "Source": "library"
+    },
+    {
       "Original": "Retainer",
       "Context": "DetailWindow.DrawCurrentListings",
       "PreserveID": true,
@@ -550,6 +670,15 @@
       "Source": "library"
     },
     {
+      "Original": "Save as Preset",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "保存为预设",
+      "Source": "library"
+    },
+    {
       "Original": "Score: ",
       "Context": "DetailWindow.DrawRiskAnalysis",
       "Role": "UI",
@@ -564,6 +693,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Select specific jobs to include:",
+      "Context": "FilterWindow.DrawCurrentFilterTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "选择要包含的职业：",
+      "Source": "library"
+    },
+    {
+      "Original": "Show High Risk Items",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示高风险物品",
       "Source": "library"
     },
     {

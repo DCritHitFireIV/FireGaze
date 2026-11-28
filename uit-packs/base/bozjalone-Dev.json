@@ -8,11 +8,35 @@
   },
   "entries": [
     {
+      "Original": " has Despawned",
+      "Context": "Alerter.OnFateDespawned",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已消失",
+      "Source": "library"
+    },
+    {
+      "Original": " has Spawned",
+      "Context": "Alerter.OnFateSpawned",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已出现",
+      "Source": "library"
+    },
+    {
       "Original": "(Inactive)",
       "Context": "Render",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "（未激活）",
+      "Source": "library"
+    },
+    {
+      "Original": "(Preparing: ",
+      "Context": "Render",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（准备中： ",
       "Source": "library"
     },
     {
@@ -130,11 +154,35 @@
       "Source": "library"
     },
     {
+      "Original": "Needed (",
+      "Context": "EventIconRenderer.Demiatma",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "需要（",
+      "Source": "library"
+    },
+    {
       "Original": "No target selected.",
       "Context": "Render",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "未选择目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not Needed (",
+      "Context": "EventIconRenderer.Demiatma",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "无需（",
+      "Source": "library"
+    },
+    {
+      "Original": "Pathfind to ",
+      "Context": "Teleporter.PathfindingButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "寻路至 ",
       "Source": "library"
     },
     {

@@ -8,11 +8,111 @@
   },
   "entries": [
     {
+      "Original": " (world zone)",
+      "Context": "ConfigGui.MPPrintZone",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": " （野外区域）",
+      "Source": "library"
+    },
+    {
       "Original": " minutes",
       "Context": "NotificationMaster.OnCommand",
       "Role": "UI",
       "RoleReason": "→ Notify.Success",
       "Translated": " 分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "$B - bite type (light/medium/heavy)",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$B - 咬钩力度（轻、中、重）",
+      "Source": "library"
+    },
+    {
+      "Original": "$G - available GP",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$G - 当前采集力",
+      "Source": "library"
+    },
+    {
+      "Original": "$M - mob name",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$M - 怪物名称",
+      "Source": "library"
+    },
+    {
+      "Original": "$N - name of the duty\n$T - time left to accept the duty",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$N - 副本名称\n$T - 剩余确认时间",
+      "Source": "library"
+    },
+    {
+      "Original": "$S - sender\n$M - message\n$T - chat type",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "$S - 发送者\n$M - 消息\n$T - 聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "(Restores default sounds and settings)",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "（恢复默认音效和设置）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add custom type",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加自定义类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Add mobs",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Add mobs (one per line; case sensitive; extra spaces will be trimmed; duplicates will be removed)",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "添加怪物（每行一个，区分大小写，自动去除多余空格和重复项）",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow deleting entries",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许删除条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Also trigger on crossing X/Y flag axis before reaching set distance",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在达到设定距离前跨过旗标的 X 或 Y 轴时也触发",
       "Source": "library"
     },
     {
@@ -33,6 +133,31 @@
       "Source": "library"
     },
     {
+      "Original": "Awaiting file selection...",
+      "Context": "ConfigGui.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "等待选择文件…",
+      "Source": "library"
+    },
+    {
+      "Original": "Axis cross tolerance",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "跨轴容差",
+      "Source": "library"
+    },
+    {
+      "Original": "Bite type settings:",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "咬钩力度设置：",
+      "Source": "library"
+    },
+    {
       "Original": "Bring FFXIV to foreground",
       "Context": "ConfigGui.DrawMapFlagConfig",
       "PreserveID": true,
@@ -48,6 +173,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "浏览…",
+      "Source": "library"
+    },
+    {
+      "Original": "Case insensitive",
+      "Context": "ChatMessageElement..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "不区分大小写",
       "Source": "library"
     },
     {
@@ -92,6 +225,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "过场动画即将结束",
+      "Source": "library"
+    },
+    {
+      "Original": "Del",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "删除",
       "Source": "library"
     },
     {
@@ -147,11 +288,35 @@
       "Source": "library"
     },
     {
+      "Original": "Error during playing audio file:\n",
+      "Context": "BeginThread",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "播放音频文件时出错：\n",
+      "Source": "library"
+    },
+    {
       "Original": "Error: ",
       "Context": "SelectFile",
       "Role": "UI",
       "RoleReason": "→ Notify.Error",
       "Translated": "错误： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Exact",
+      "Context": "ChatMessageElement..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "完全匹配",
+      "Source": "library"
+    },
+    {
+      "Original": "Exceptions:",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "例外：",
       "Source": "library"
     },
     {
@@ -161,6 +326,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "游戏处于前台时也执行操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Export mob names to clipboard",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将怪物名称导出到剪贴板",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to open file dialog",
+      "Context": "AudioSelector.SelectFile",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法打开文件选择框",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to reset settings",
+      "Context": "FishBite.ResetToDefaults",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "无法重置设置",
       "Source": "library"
     },
     {
@@ -181,12 +373,30 @@
       "Source": "library"
     },
     {
+      "Original": "Fish Notify settings reset to defaults",
+      "Context": "FishBite.ResetToDefaults",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "钓鱼提醒设置已恢复默认",
+      "Source": "library"
+    },
+    {
       "Original": "Flash taskbar icon",
       "Context": "ConfigGui.DrawMapFlagConfig",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "闪烁任务栏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "GP can't be negative",
+      "Context": "GpNotify.OnCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "采集力不能为负数",
       "Source": "library"
     },
     {
@@ -205,6 +415,31 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "重杆（!!!）",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL + click to delete",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 CTRL 并点击以删除",
+      "Source": "library"
+    },
+    {
+      "Original": "If your GP is lower than targeted by not more than this amount, notification will not be sent upon regaining it.",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "如果当前采集力距目标的差额未超过这个数值，则恢复至目标时不发送通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invanid command",
+      "Context": "NotificationMaster.OnCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "命令无效",
       "Source": "library"
     },
     {
@@ -265,6 +500,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "没有可用项",
+      "Source": "library"
+    },
+    {
+      "Original": "Note: this is in-game coordinates distance, not map coordinates distance.",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注意：此处使用游戏内实际距离，与地图坐标间距离不同。",
       "Source": "library"
     },
     {
@@ -339,12 +582,47 @@
       "Source": "library"
     },
     {
+      "Original": "Only world zones",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅野外区域",
+      "Source": "library"
+    },
+    {
       "Original": "PartyFinder",
       "Context": "ConfigGui.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "队员招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Path to file: ",
+      "Context": "ConfigGui.DrawSoundSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "文件路径： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pause log",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "暂停日志",
+      "Source": "library"
+    },
+    {
+      "Original": "Perform following HTTP requests:",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "执行以下 HTTP 请求：",
       "Source": "library"
     },
     {
@@ -357,12 +635,114 @@
       "Source": "library"
     },
     {
+      "Original": "Player X: ",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "玩家 X 坐标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Y: ",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "玩家 Y 坐标： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Please enter amount of time in minutes",
+      "Context": "NotificationMaster.OnCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error",
+      "Translated": "请输入时长（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Please note that is required that you CAN SEE the mob for plugin to detect it's pull.\nIf your area is extremely congested, A ranks may disappear.\nS/SS should always be visible, however. Solution to this problem will come at a later date.",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "注意：只有你能看到的怪物，插件才能检测到开怪。\n区域非常拥挤时，A级恶名精英可能无法显示。\nS 级和 SS 级通常始终可见。后续版本会改进此问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin operation resumed",
+      "Context": "NotificationMaster.OnCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "插件已恢复运行",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin paused for ",
+      "Context": "NotificationMaster.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "插件已暂停，时长： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Plugin paused until restart",
+      "Context": "NotificationMaster.OnCommand",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "插件已暂停至下次重启",
+      "Source": "library"
+    },
+    {
+      "Original": "Potion capacity",
+      "Context": "ConfigGui.DrawGpNotify",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "药剂恢复量",
+      "Source": "library"
+    },
+    {
+      "Original": "Potion cooldown: ",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "药剂冷却时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Print warning in chat",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏中显示警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Regexp",
+      "Context": "ChatMessageElement..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "正则表达式",
+      "Source": "library"
+    },
+    {
       "Original": "Repeat",
       "Context": "ConfigGui.DrawSoundSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "重复",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat in 30 seconds if invitation still not accepted",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "30 秒后仍未接受邀请时再次提醒",
       "Source": "library"
     },
     {
@@ -380,6 +760,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "搜索模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Sender",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "发送者",
+      "Source": "library"
+    },
+    {
+      "Original": "Set flag on your map to see your current distance to it",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在地图上设置旗标后可查看当前距它的距离",
       "Source": "library"
     },
     {
@@ -419,6 +815,15 @@
       "Source": "library"
     },
     {
+      "Original": "Suppress notification if no potential gathering places are around",
+      "Context": "ConfigGui.DrawGpNotify",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "附近没有潜在采集点时不发出通知",
+      "Source": "library"
+    },
+    {
       "Original": "Territory: ",
       "Context": "ConfigGui.DrawMapFlagConfig",
       "Role": "UI",
@@ -436,6 +841,23 @@
       "Source": "library"
     },
     {
+      "Original": "Tolerance",
+      "Context": "ConfigGui.DrawGpNotify",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragInt",
+      "Translated": "容差",
+      "Source": "library"
+    },
+    {
+      "Original": "Trigger GP amount set to ",
+      "Context": "GpNotify.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ Notify.Success",
+      "Translated": "触发提醒的采集力已设为 ",
+      "Source": "library"
+    },
+    {
       "Original": "Triggers",
       "Context": "ConfigGui.DrawChatMessageGui",
       "PreserveID": true,
@@ -450,6 +872,167 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "类型",
+      "Source": "library"
+    },
+    {
+      "Original": "Unfortunately bringing FFXIV to foreground isn't very reliable function.\nIf it fails to work for you - not much can be done.",
+      "Context": "ConfigGui.ForegroundWarning",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "将 FFXIV 窗口切到前台并不总能成功。\n如果你这里无法生效，目前可用的解决办法有限。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use command /gp <number> to quickly change this amount",
+      "Context": "ConfigGui.DrawGpNotify",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可使用 /gp <number> 命令快速修改此数值",
+      "Source": "library"
+    },
+    {
+      "Original": "When a fish bites, do the following:",
+      "Context": "ConfigGui.DrawFishBiteConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "鱼咬钩时执行以下操作：",
+      "Source": "library"
+    },
+    {
+      "Original": "When chat message matching any rule received, if FFXIV is running in background:",
+      "Context": "ConfigGui.DrawChatMessageGui",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "FFXIV 在后台且收到符合任意规则的聊天消息时：",
+      "Source": "library"
+    },
+    {
+      "Original": "When cutscene ends do the following if FFXIV is running in background:",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "FFXIV 在后台且过场动画结束时执行以下操作：",
+      "Source": "library"
+    },
+    {
+      "Original": "When duty pops, do the following if FFXIV is running in background:",
+      "Context": "ConfigGui.DrawCfPopConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "FFXIV 在后台且副本匹配成功时执行以下操作：",
+      "Source": "library"
+    },
+    {
+      "Original": "When getting close to map flag if FFXIV is running in background:",
+      "Context": "ConfigGui.DrawMapFlagConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "FFXIV 在后台且靠近地图旗标时执行以下操作：",
+      "Source": "library"
+    },
+    {
+      "Original": "When mob from list in specified zones is pulled, do the following",
+      "Context": "ConfigGui.DrawMobPulledConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "指定区域内，列表中的怪物进入战斗时执行以下操作",
+      "Source": "library"
+    },
+    {
+      "Original": "When server connection error occurs, do the following",
+      "Context": "ConfigGui.DrawLoginErrorConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "与服务器断开连接时执行以下操作",
+      "Source": "library"
+    },
+    {
+      "Original": "When someone joins or leaves the party",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有玩家加入或离开小队时",
+      "Source": "library"
+    },
+    {
+      "Original": "When someone joins or leaves the party, or the party is delisted",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "有玩家加入、离开小队或撤下招募时",
+      "Source": "library"
+    },
+    {
+      "Original": "When the party fills",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队满员时",
+      "Source": "library"
+    },
+    {
+      "Original": "When the party fills or is delisted",
+      "Context": "ConfigGui.DrawPartyFinderConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "小队满员或撤下招募时",
+      "Source": "library"
+    },
+    {
+      "Original": "You have installed NotificationMaster plugin. By default, it has no modules enabled. \nA settings window has been opened: please configure the plugin.",
+      "Context": "NotificationMaster..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Warning",
+      "Translated": "你已安装 NotificationMaster。默认不会启用任何模块。\n已打开设置窗口，请配置所需功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "You may use following placeholders:\n",
+      "Context": "ConfigGui.DrawHttpMaster",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可使用以下占位符：\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone locking:",
+      "Context": "ConfigGui.DrawCutsceneConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "区域限制：",
+      "Source": "library"
+    },
+    {
+      "Original": "heavy",
+      "Context": "FishBite.OnBite",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "重杆",
+      "Source": "library"
+    },
+    {
+      "Original": "light",
+      "Context": "FishBite.OnBite",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "轻杆",
+      "Source": "library"
+    },
+    {
+      "Original": "medium",
+      "Context": "FishBite.OnBite",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "中杆",
+      "Source": "library"
+    },
+    {
+      "Original": "open config\n/gp <number> → set trigger GP amount",
+      "Context": "GpNotify..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开设置\n/gp <number> → 设置触发提醒的采集力",
       "Source": "library"
     }
   ],

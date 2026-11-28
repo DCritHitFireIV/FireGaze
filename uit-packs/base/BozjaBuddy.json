@@ -147,11 +147,35 @@
       "Source": "library"
     },
     {
+      "Original": "Alarm #",
+      "Context": "Alarm..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "提醒 #",
+      "Source": "library"
+    },
+    {
       "Original": "Alarm Name",
       "Context": "GUIAlarm.ResetFields",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "提醒名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm for a specific Fate or CE. Can go off once, or every time the FATE or CE comes around.",
+      "Context": "AlarmFateCe..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "针对指定的危命任务或临界遭遇战设置提醒。可以仅触发一次，也可以每次出现时都触发。",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm for a specific time. Can only go off once.",
+      "Context": "AlarmTime..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "在指定时间提醒，仅触发一次。",
       "Source": "library"
     },
     {
@@ -180,6 +204,14 @@
       "Source": "library"
     },
     {
+      "Original": "Audio duration [s]",
+      "Context": "GUIAlarm.DrawACPUTextInput_Default",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "音效时长（秒）",
+      "Source": "library"
+    },
+    {
       "Original": "Audio path ",
       "Context": "ConfigWindow.DrawTabAlarm",
       "Role": "UI",
@@ -196,12 +228,28 @@
       "Source": "library"
     },
     {
+      "Original": "Beware of Ice spike.",
+      "Context": "DrsSection.DrawTopic_Wrath",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "注意冰棘反伤。",
+      "Source": "library"
+    },
+    {
       "Original": "Bozja Questline",
       "Context": "RelicSection.DrawTopicList",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginPopupContextItem",
       "Translated": "博兹雅任务线",
+      "Source": "library"
+    },
+    {
+      "Original": "BozjaBuddy: Keep this open for CE-related features.\n(To turn off: Config > UI hints > [A] > [2])",
+      "Context": "GUIAssistManager.Draw_MycInfoAlarm",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "BozjaBuddy：使用临界遭遇战相关功能时请保持此窗口打开。\n（关闭提示：设置 → 界面提示 → [A] → [2]）",
       "Source": "library"
     },
     {
@@ -213,11 +261,75 @@
       "Source": "library"
     },
     {
+      "Original": "Canvas",
+      "Context": "NodeGraphViewer.DrawExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "画布",
+      "Source": "library"
+    },
+    {
+      "Original": "Canvas ",
+      "Context": "NodeCanvas..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "画布 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Canvas copied to clipboard!",
+      "Context": "NodeGraphViewer.DrawViewerExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "画布已复制到剪贴板！",
+      "Source": "library"
+    },
+    {
+      "Original": "Canvas imported from clipboard!",
+      "Context": "NodeGraphViewer.DrawViewerExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "已从剪贴板导入画布！",
+      "Source": "library"
+    },
+    {
       "Original": "Cast time",
       "Context": "AuxNode.DrawDetailPackage",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "咏唱时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Caster",
+      "Context": "UtilsGUI.DrawRoleFlagAsIconString",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "远程魔法职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Charges",
+      "Context": "AuxNode.DrawDetailPackage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all fields.",
+      "Context": "ExtGui_MycItemBox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清空全部字段。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to link item to chat.",
+      "Context": "UtilsGUI.ItemLinkButton_Image",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "点击将物品链接发送到聊天栏。",
       "Source": "library"
     },
     {
@@ -254,6 +366,14 @@
       "Source": "library"
     },
     {
+      "Original": "Configs for Action-Running-out Alert (also found in Config > Misc > [A])",
+      "Context": "CharStatsWindow.Draw_CharStats",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "技能存量不足提醒设置（也可在「设置 → 杂项 → [A]」中找到）",
+      "Source": "library"
+    },
+    {
       "Original": "Content",
       "Context": "BasicNode.DrawNodeEditPU_Fields",
       "PreserveID": true,
@@ -271,12 +391,37 @@
       "Source": "library"
     },
     {
+      "Original": "Copy [Ctrl + C]",
+      "Context": "NodeGraphViewer.DrawCanvasExtraOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "复制 [Ctrl + C]",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy currently selected canvas to clipboard.",
+      "Context": "NodeGraphViewer.DrawViewerExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将当前选中的画布复制到剪贴板。",
+      "Source": "library"
+    },
+    {
       "Original": "Copy quick info",
       "Context": "UtilsGUI.SypnosisClipboardButton",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "复制摘要",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy selected nodes to clipboard.",
+      "Context": "NodeGraphViewer.DrawCanvasExtraOptions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将选中节点复制到剪贴板。",
       "Source": "library"
     },
     {
@@ -320,11 +465,108 @@
       "Source": "library"
     },
     {
+      "Original": "Delete ALL selected nodes [Del]",
+      "Context": "NodeGraphViewer.DrawUtilsBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "删除全部选中节点 [Del]",
+      "Source": "library"
+    },
+    {
+      "Original": "Delubrum Reginae (Savage) is a 48-man duty.",
+      "Context": "DrsSection.DrawTopic_Intro",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "零式女王古殿是供 48 人挑战的副本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Detail",
+      "Context": "Fragment.SetUpAuxiliary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "详情",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops from FATEs in:",
+      "Context": "RelicSection.DrawTopic_ResistanceA",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可从以下地区的危命任务获得：",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops from FATEs/CE in Bozja Zone 1",
+      "Context": "RelicSection.DrawTopic_ResistanceA",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可从博兹雅南方战线第一地区的危命任务或临界遭遇战获得",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops from FATEs/CE in Bozja Zone 2",
+      "Context": "RelicSection.DrawTopic_ResistanceA",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可从博兹雅南方战线第二地区的危命任务或临界遭遇战获得",
+      "Source": "library"
+    },
+    {
+      "Original": "Drops from FATEs/CE in Bozja Zone 3",
+      "Context": "RelicSection.DrawTopic_ResistanceA",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "可从博兹雅南方战线第三地区的危命任务或临界遭遇战获得",
+      "Source": "library"
+    },
+    {
+      "Original": "EU region",
+      "Context": "DrsSection.DrawTopic_Communities",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "欧洲大区",
+      "Source": "library"
+    },
+    {
       "Original": "EXP reward",
       "Context": "AuxNode.DrawDetailPackage",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "经验值奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit / Discard edit",
+      "Context": "AuxiliaryViewerSection.DrawTabHeaderLoadout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "编辑／放弃编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit node",
+      "Context": "Node.DrawHandeExtraOptionPU",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "编辑节点",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable / Disable most UI features for this section.",
+      "Context": "ExtGui_MycItemBox.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开启或关闭此区域的大部分界面功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable/Disable all UI features for this section such as Search all bar, Alarm reminder, etc.",
+      "Context": "ConfigWindow.DrawTabUiHint",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "开启或关闭此区域的全部界面功能，包括全局搜索栏、提醒等。",
       "Source": "library"
     },
     {
@@ -334,6 +576,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "已过期提醒（",
+      "Source": "library"
+    },
+    {
+      "Original": "Export current",
+      "Context": "NodeGraphViewer.DrawViewerExtraOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "导出当前项目",
       "Source": "library"
     },
     {

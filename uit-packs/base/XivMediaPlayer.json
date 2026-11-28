@@ -107,12 +107,174 @@
       "Source": "library"
     },
     {
+      "Original": "No description provided.",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "暂无说明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Listing",
+      "Context": "WatchPartyWindow.DrawBrowseTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "删除活动条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Discord Login Required",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "需要登录 Discord",
+      "Source": "library"
+    },
+    {
+      "Original": "Log in with Discord",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "使用 Discord 登录",
+      "Source": "library"
+    },
+    {
+      "Original": "Advertise your venue's watch party to the community!",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "向社区发布你在场地举办的观影活动！",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Detected Location:",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前检测到的位置：",
+      "Source": "library"
+    },
+    {
+      "Original": " Ward ",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": " 区 ",
+      "Source": "library"
+    },
+    {
+      "Original": ", Plot ",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "，地块 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Not inside housing venue",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "当前不在住宅场地内",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-detect Location",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新检测位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Event Title",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "活动标题",
+      "Source": "library"
+    },
+    {
       "Original": "Description",
       "Context": "WatchPartyWindow.DrawHostTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextMultiline",
       "Translated": "说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Banner Image URL (Optional)",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "横幅图片地址（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Start Date & Time (Local Time):",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "开始日期与时间（当地时间）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Start to Now",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "以当前时间为开始时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Tomorrow 8 PM",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "明晚 8 点",
+      "Source": "library"
+    },
+    {
+      "Original": "Starts: ",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "开始： ",
+      "Source": "library"
+    },
+    {
+      "Original": "End Date & Time (Local Time):",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "结束日期与时间（当地时间）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Publish Watch Party Event",
+      "Context": "WatchPartyWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "发布观影活动",
       "Source": "library"
     },
     {

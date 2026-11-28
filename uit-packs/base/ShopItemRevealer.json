@@ -8,12 +8,39 @@
   },
   "entries": [
     {
+      "Original": "This plugin opens its own window when speaking with a shop vendor and has no UI here.",
+      "Context": "LandingWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "与商人交谈时，插件会自行打开窗口。此处没有可操作的界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Docs",
+      "Context": "LandingWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开文档",
+      "Source": "library"
+    },
+    {
       "Original": "Close",
       "Context": "LandingWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "No supported shops found for this NPC.",
+      "Context": "MainWindow.Open",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "未找到此 NPC 可用的商店。",
       "Source": "library"
     },
     {
@@ -26,12 +53,48 @@
       "Source": "library"
     },
     {
+      "Original": "Fate ranks not initialized. Please open the Shared FATEs window to populate.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "危命任务等级尚未初始化，请打开“危命任务达成度”窗口以读取数据。",
+      "Source": "library"
+    },
+    {
       "Original": "Open Shared FATEs",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "打开危命任务达成度",
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click an item for more options.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "右键点击物品可查看更多选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "If the FATE rank is not showing or is incorrect, re-open the Shared FATEs window to update.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "若危命任务等级缺失或错误，请重新打开“危命任务达成度”窗口以更新数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only Unrevealed Items",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.Checkbox",
+      "Translated": "只显示尚未解锁的物品",
       "Source": "library"
     },
     {
@@ -50,6 +113,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiUtil.Checkbox",
       "Translated": "不对此 NPC 显示",
+      "Source": "library"
+    },
+    {
+      "Original": "If you don't want to see the items for this NPC, check this box. You can still use /shopitems to open this window.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HelpMarker",
+      "Translated": "勾选后将隐藏此 NPC 的商店物品。仍可通过 /shopitems 打开此窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Achievements",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开成就窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement window needs to be open to refresh obtained achievement data.",
+      "Context": "MainWindow.DrawHeader",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HelpMarker",
+      "Translated": "打开成就窗口后，才能刷新已完成的成就。",
       "Source": "library"
     },
     {
@@ -98,6 +188,15 @@
       "Source": "library"
     },
     {
+      "Original": "Find Item In Garland Tools",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在 Garland Tools 中查询物品",
+      "Source": "library"
+    },
+    {
       "Original": "Search Quest in Wiki",
       "Context": "MainWindow.CreateContextMenu",
       "PreserveID": true,
@@ -116,12 +215,30 @@
       "Source": "library"
     },
     {
+      "Original": "Search Beast Tribe in Wiki",
+      "Context": "MainWindow.CreateContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "在百科中查询友好部族",
+      "Source": "library"
+    },
+    {
       "Original": "Copy Beast Tribe Name",
       "Context": "MainWindow.CreateContextMenu",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "复制友好部族名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the Shop Item Revealer window.",
+      "Context": "CommandManager.Initialize",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Shop Item Revealer 窗口。",
       "Source": "library"
     },
     {

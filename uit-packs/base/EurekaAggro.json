@@ -49,12 +49,48 @@
       "Source": "library"
     },
     {
+      "Original": "Aggro Circles & Vision Cones",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "感知范围与视野锥",
+      "Source": "library"
+    },
+    {
+      "Original": "Aggro Type",
+      "Context": "MainWindow.DrawMonstersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "感知方式",
+      "Source": "library"
+    },
+    {
+      "Original": "Alert Message",
+      "Context": "MainWindow.DrawActionsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "提醒消息",
+      "Source": "library"
+    },
+    {
       "Original": "Always show Sleeping Dragons (regardless of level)",
       "Context": "MainWindow.DrawConfigurationTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "始终显示沉睡的龙，无视等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Always show Sprites / Elementals (Magic aggro)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "始终显示精灵类怪物（魔法感知）",
       "Source": "library"
     },
     {
@@ -93,11 +129,63 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-walk activation range",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "自动步行触发范围",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-walk near Sleeping Dragons (prevents accidental running aggro)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "接近熟睡的龙时自动切换为步行，避免奔跑引起注意。",
+      "Source": "library"
+    },
+    {
       "Original": "BREAK LINE OF SIGHT (HIDE)!",
       "Context": "CastAlertWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "躲到掩体后，避开视线！",
+      "Source": "library"
+    },
+    {
+      "Original": "BREAK LINE OF SIGHT (LOS)!",
+      "Context": "CastMonitor.ProcessEnemyCast",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "快躲到障碍物后！",
+      "Source": "library"
+    },
+    {
+      "Original": "Caution Monsters##colCaution",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "需要留意的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Palette & Customization:",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "配色与自定义：",
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Angle (°)",
+      "Context": "MainWindow.DrawMonstersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "视野角度（°）",
       "Source": "library"
     },
     {
@@ -107,6 +195,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Monster Label Color##colText",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "自定义怪物标签颜色",
       "Source": "library"
     },
     {
@@ -127,6 +224,42 @@
       "Source": "library"
     },
     {
+      "Original": "Distance (m)",
+      "Context": "MainWindow.DrawMonstersTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "距离（米）",
+      "Source": "library"
+    },
+    {
+      "Original": "Dragon Running Danger Alert Text##colWarnText",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "接近龙时奔跑的警告文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Dragon Safe / Auto-Walk Engaged Text##colSafeText",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "安全／已自动切换步行的文字",
+      "Source": "library"
+    },
+    {
+      "Original": "Easy / Safe Monsters##colEasy",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "低危或安全的怪物",
+      "Source": "library"
+    },
+    {
       "Original": "Elemental Level & Safe Mob Filtering (Anti-Clutter):",
       "Context": "MainWindow.DrawConfigurationTab",
       "Role": "UI",
@@ -144,12 +277,37 @@
       "Source": "library"
     },
     {
+      "Original": "Enable floating HUD alert for dangerous casts (Interrupt, Stun, LOS)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "危险咏唱时显示 HUD 提示（打断、眩晕或躲避视线）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy Action & Cast Alerts (HUD):",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "敌人技能与咏唱提醒（HUD）：",
+      "Source": "library"
+    },
+    {
       "Original": "Enemy Actions & Counters",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "敌方技能与应对方法",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Aggro Mechanics & Distances:",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "优雷卡怪物的感知方式与距离：",
       "Source": "library"
     },
     {
@@ -171,6 +329,15 @@
       "Source": "library"
     },
     {
+      "Original": "Fill opacity",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "填充不透明度",
+      "Source": "library"
+    },
+    {
       "Original": "Filter out lower-level monsters that cannot aggro you",
       "Context": "MainWindow.DrawConfigurationTab",
       "PreserveID": true,
@@ -186,6 +353,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "过滤悬崖、岩架和洞穴等不同高度的怪物",
+      "Source": "library"
+    },
+    {
+      "Original": "HEALING / REGEN NEEDED!",
+      "Context": "CastMonitor.ProcessEnemyCast",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "需要治疗或持续恢复！",
+      "Source": "library"
+    },
+    {
+      "Original": "High Danger Monsters##colDanger",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "高危怪物",
       "Source": "library"
     },
     {
@@ -239,6 +423,15 @@
       "Source": "library"
     },
     {
+      "Original": "Lock alert window position (uncheck to drag anywhere with mouse)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "锁定提醒窗口位置（取消勾选后可以拖动）",
+      "Source": "library"
+    },
+    {
       "Original": "Manual",
       "Context": "MainWindow.DrawStatusBar",
       "Role": "UI",
@@ -265,12 +458,63 @@
       "Source": "library"
     },
     {
+      "Original": "Mounted",
+      "Context": "DragonWalkService.Update",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "骑乘中",
+      "Source": "library"
+    },
+    {
+      "Original": "Mutation Available Now (Active)##colMutActive",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "当前可发生变异",
+      "Source": "library"
+    },
+    {
+      "Original": "Mutation Upcoming (Inactive)##colMutInactive",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4",
+      "Translated": "即将可发生变异",
+      "Source": "library"
+    },
+    {
       "Original": "Name",
       "Context": "MainWindow.DrawMonstersTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Night (Active)",
+      "Context": "EurekaEnvironmentService.CheckMutation",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "夜间（生效中）",
+      "Source": "library"
+    },
+    {
+      "Original": "On Foot",
+      "Context": "DragonWalkService.Update",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "步行",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show cast alerts for current target (ignore background enemies)",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅提示当前目标的咏唱，忽略其他敌人",
       "Source": "library"
     },
     {
@@ -282,12 +526,56 @@
       "Source": "library"
     },
     {
+      "Original": "Override floating monster name label color",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "覆盖悬浮怪物名称的文字颜色",
+      "Source": "library"
+    },
+    {
       "Original": "Pagos (35)",
       "Context": "MainWindow.DrawConfigurationTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.SmallButton",
       "Translated": "恒冰地带（35）",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview & drag alert window position now",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "预览并拖动提醒窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Print Auto-Walk notifications to chat log",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将自动步行提醒发送到聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Print dangerous enemy casts to in-game chat log",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将敌人的危险咏唱发送到游戏聊天栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Proximity",
+      "Context": "MainWindow.DrawMonstersTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "距离感知",
       "Source": "library"
     },
     {
@@ -305,6 +593,48 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "快速选择等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Requires Night (18:00 ET)",
+      "Context": "EurekaEnvironmentService.CheckMutation",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "仅限夜间（艾欧泽亚时间 18:00）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All Colors to Default",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "将所有颜色还原为默认值",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Window Position",
+      "Context": "MainWindow.DrawConfigurationTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "SILENCE / INTERRUPT NOW!",
+      "Context": "CastMonitor.ProcessEnemyCast",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "立即沉默或打断！",
+      "Source": "library"
+    },
+    {
+      "Original": "STUN NOW!",
+      "Context": "CastMonitor.ProcessEnemyCast",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "立即眩晕！",
       "Source": "library"
     },
     {
@@ -340,6 +670,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "保存更改",
+      "Source": "library"
+    },
+    {
+      "Original": "Search action or mob name...",
+      "Context": "MainWindow.DrawActionsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "搜索技能或怪物名称……",
       "Source": "library"
     },
     {

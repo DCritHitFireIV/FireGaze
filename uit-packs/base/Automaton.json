@@ -56,6 +56,71 @@
       "Source": "library"
     },
     {
+      "Original": "Add Sort Criteria",
+      "Context": "FateToolKit.DrawCustomConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加排序条件",
+      "Source": "library"
+    },
+    {
+      "Original": "Add an achievement",
+      "Context": "AchievementTrackerWindow.DrawSearch",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "添加成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional options when logging in.",
+      "Context": "EnhancedLoginLogout.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "登录时的附加选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a context menu entry to lookup a character on lalachievements",
+      "Context": "LalaLookup.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "在右键菜单中添加通过 Lalachievements 查询角色的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a context menu entry to lookup a character on lalachievements or ffxivcollect",
+      "Context": "LalaLookup.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "在右键菜单中添加通过 Lalachievements 或 FFXIV Collect 查询角色的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a context menu item that will retrieve all materia from an item.",
+      "Context": "RetrieveMateria.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "在右键菜单中添加从装备中回收全部魔晶石的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a world switcher to the World entry in the server bar.",
+      "Context": "DTRWorldSwitcher.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "在服务器信息栏的服务器名称旁添加跨界切换功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds an achievement tracker",
+      "Context": "AchievementTracker.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "添加成就追踪器",
+      "Source": "library"
+    },
+    {
       "Original": "Alert when above threshold",
       "Context": "SimpleCurrencyAlert.DrawAlertList",
       "Role": "UI",
@@ -80,11 +145,101 @@
       "Source": "library"
     },
     {
+      "Original": "Allow partial world matching",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许输入部分服务器名称进行匹配",
+      "Source": "library"
+    },
+    {
+      "Original": "Already in party",
+      "Context": "InviteCommand.Tooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.IconButton",
+      "Translated": "已在小队中",
+      "Source": "library"
+    },
+    {
+      "Original": "Ascending (lowest first)",
+      "Context": "FateToolKit.DrawCustomConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.TooltipOnHover",
+      "Translated": "升序（从低到高）",
+      "Source": "library"
+    },
+    {
+      "Original": "Assume blank worlds are local",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "服务器留空时视为当前服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto invite people to your party based on a chat message.",
+      "Context": "AutoInvite.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "根据聊天消息自动邀请玩家加入小队。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically completes snipe quests.",
+      "Context": "AutoSnipeQuests.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "自动完成狙击任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically equips any exp boosting item on level change.",
+      "Context": "AutoEquipXPBoosts.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "升级时自动穿戴可提高经验值获得量的装备。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically execute certain actions when the duty starts or ends.",
+      "Context": "EnhancedDutyStartEnd.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "副本开始或结束时自动执行指定操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically hop in to other peoples' mounts when you are near them.",
+      "Context": "AutoPillion.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped",
+      "Translated": "靠近其他玩家的多人坐骑时自动搭乘。",
+      "Source": "library"
+    },
+    {
       "Original": "Automation: ",
       "Context": "FateToolKitWindow.DrawContent",
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "自动化： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Available Commands",
+      "Context": "Tweak.DrawCommands",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExtensions.DrawSection",
+      "Translated": "可用命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Available tags: <world>, <type>, <flag>",
+      "Context": "HuntRelayHelper.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "可用标签：<world>、<type>、<flag>",
       "Source": "library"
     },
     {
@@ -94,6 +249,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderInt",
       "Translated": "提示音次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Beep Duration",
+      "Context": "GMAlert.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "提示音时长",
       "Source": "library"
     },
     {

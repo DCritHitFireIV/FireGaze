@@ -58,6 +58,14 @@
       "Source": "library"
     },
     {
+      "Original": "Busy",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "忙碌",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "SupportWindow.DrawForm",
       "PreserveID": true,
@@ -178,6 +186,14 @@
       "Source": "library"
     },
     {
+      "Original": "Fates Tracker",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "临危受命追踪",
+      "Source": "library"
+    },
+    {
       "Original": "Granular Hunt Reporting Settings",
       "Context": "SonarConfigWindow.DrawHuntTab",
       "Role": "UI",
@@ -219,6 +235,14 @@
       "Source": "library"
     },
     {
+      "Original": "Hunts Tracker",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "狩猎目标追踪",
+      "Source": "library"
+    },
+    {
       "Original": "Hunts: ",
       "Context": "SonarTrackerWindow.Draw",
       "Role": "UI",
@@ -250,6 +274,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "当前登录角色需要完成 Lodestone 验证：",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Level",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "日志级别",
       "Source": "library"
     },
     {
@@ -310,6 +343,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputText",
       "Translated": "玩家姓名",
+      "Source": "library"
+    },
+    {
+      "Original": "Player Tracker",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "玩家追踪",
       "Source": "library"
     },
     {
@@ -548,6 +589,14 @@
       "Source": "library"
     },
     {
+      "Original": "Version Information",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "版本信息",
+      "Source": "library"
+    },
+    {
       "Original": "You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.",
       "Context": "LodestoneVerifyWindow.Draw",
       "Role": "UI",
@@ -668,6 +717,12 @@
       "Source": "library"
     },
     {
+      "Original": "Alive",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Alive",
+      "Translated": "存活",
+      "Source": "library"
+    },
+    {
       "Original": "All",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::AllTab; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::All",
       "Translated": "全部",
@@ -740,6 +795,12 @@
       "Source": "library"
     },
     {
+      "Original": "Complete",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Complete",
+      "Translated": "完成",
+      "Source": "library"
+    },
+    {
       "Original": "Contact Sonar Support should this appear",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::UnknownTooltip",
       "Translated": "若出现此提示，请联系 Sonar 支持人员",
@@ -755,6 +816,12 @@
       "Original": "Contribute Hunts",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeHunts",
       "Translated": "上报狩猎情报",
+      "Source": "library"
+    },
+    {
+      "Original": "Coordinates",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Coordinates",
+      "Translated": "坐标",
       "Source": "library"
     },
     {
@@ -800,6 +867,18 @@
       "Source": "library"
     },
     {
+      "Original": "Dawntrail",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Dawntrail",
+      "Translated": "金曦之遗辉",
+      "Source": "library"
+    },
+    {
+      "Original": "Dead",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Dead",
+      "Translated": "已死亡",
+      "Source": "library"
+    },
+    {
       "Original": "Debug",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DebugTab; [属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Debug; [属性] EnumLocAttribute Sonar.Enums.SonarBuildEnvironment::Debug",
       "Translated": "调试",
@@ -809,6 +888,18 @@
       "Original": "Default",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::DefaultColorPreset; [属性] EnumLocAttribute SonarPlugin.Config.ClickAction::Default; [属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.RelayStateSortingMode::Default; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::Default; [属性] EnumLocAttribute Sonar.Enums.SonarJurisdiction::Default; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::Default",
       "Translated": "默认",
+      "Source": "library"
+    },
+    {
+      "Original": "Default plugin fallbacks",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Notes",
+      "Translated": "插件默认备用选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Default sonar fallbacks",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.__LocMeta::Notes",
+      "Translated": "Sonar 默认备用选项",
       "Source": "library"
     },
     {
@@ -854,9 +945,21 @@
       "Source": "library"
     },
     {
+      "Original": "Endwalker",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Endwalker",
+      "Translated": "晓月之终途",
+      "Source": "library"
+    },
+    {
       "Original": "English",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Language; [属性] EnumLocAttribute Sonar.Localization.__LocMeta::Language; [属性] EnumLocAttribute SonarPlugin.Config.LocalizationPreset::English; [属性] EnumLocAttribute Sonar.Enums.SonarLanguage::English",
       "Translated": "英语",
+      "Source": "library"
+    },
+    {
+      "Original": "Expired",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Expired",
+      "Translated": "已过期",
       "Source": "library"
     },
     {
@@ -881,6 +984,18 @@
       "Original": "FATEs",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::FatesTab",
       "Translated": "危命任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Failed",
+      "Translated": "失败",
+      "Source": "library"
+    },
+    {
+      "Original": "Fallbacks",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Fallbacks",
+      "Translated": "备用选项",
       "Source": "library"
     },
     {
@@ -956,9 +1071,27 @@
       "Source": "library"
     },
     {
+      "Original": "Global Disabled",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigLoc::ContributeGlobalDisabled",
+      "Translated": "全局停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Heavensward",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Heavensward",
+      "Translated": "苍穹之禁城",
+      "Source": "library"
+    },
+    {
       "Original": "Hide Title Bar",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::HideTitleBar",
       "Translated": "隐藏标题栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Hunt",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayType::Hunt",
+      "Translated": "狩猎",
       "Source": "library"
     },
     {
@@ -1088,6 +1221,12 @@
       "Source": "library"
     },
     {
+      "Original": "Linkshell Transmission",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::ResLinkshellTransmission",
+      "Translated": "通讯贝转发",
+      "Source": "library"
+    },
+    {
       "Original": "Load",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Load",
       "Translated": "加载",
@@ -1133,6 +1272,12 @@
       "Original": "Minified export",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLocLoc::MinifiedExport",
       "Translated": "紧凑格式导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Multiple",
+      "Context": "[属性] EnumCheapLocAttribute SonarPlugin.Config.NotifyMode::Multiple",
+      "Translated": "多个",
       "Source": "library"
     },
     {
@@ -1190,6 +1335,12 @@
       "Source": "library"
     },
     {
+      "Original": "Players",
+      "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Players",
+      "Translated": "玩家",
+      "Source": "library"
+    },
+    {
       "Original": "Plugin",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Plugin",
       "Translated": "插件",
@@ -1199,6 +1350,12 @@
       "Original": "Preferred City State",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::PreferredCityState",
       "Translated": "首选城邦",
+      "Source": "library"
+    },
+    {
+      "Original": "Preparing",
+      "Context": "[属性] EnumLocAttribute Sonar.Relays.RelayStatus::Preparing",
+      "Translated": "准备中",
       "Source": "library"
     },
     {
@@ -1229,6 +1386,12 @@
       "Original": "Remove hunt from the list until next update",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.MainWindowLoc::DetailRemoveToolTip",
       "Translated": "暂时从列表移除该狩猎目标，直到下次更新",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.PluginLoc::Resources",
+      "Translated": "资源",
       "Source": "library"
     },
     {
@@ -1280,6 +1443,12 @@
       "Source": "library"
     },
     {
+      "Original": "Shadowbringers",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Shadowbringers",
+      "Translated": "暗影之逆焰",
+      "Source": "library"
+    },
+    {
       "Original": "Shift Middle Click",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::ShiftMiddleClick",
       "Translated": "Shift + 鼠标中键",
@@ -1322,6 +1491,12 @@
       "Source": "library"
     },
     {
+      "Original": "Sonar Team",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.__LocMeta::Author; [属性] EnumLocAttribute Sonar.Localization.__LocMeta::Author",
+      "Translated": "Sonar 团队",
+      "Source": "library"
+    },
+    {
       "Original": "Sorting Mode",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SortingMode",
       "Translated": "排序方式",
@@ -1349,6 +1524,18 @@
       "Original": "Status",
       "Context": "[属性] EnumLocAttribute Sonar.Localization.RelayDetailsLoc::Status",
       "Translated": "状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Stormblood",
+      "Context": "[属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Stormblood",
+      "Translated": "红莲之狂潮",
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress Verification Requests",
+      "Context": "[属性] EnumLocAttribute SonarPlugin.Localization.ConfigWindowLoc::SuppressLodestoneVerifications",
+      "Translated": "忽略验证请求",
       "Source": "library"
     },
     {
@@ -1385,6 +1572,12 @@
       "Original": "Unknown",
       "Context": "[属性] EnumLocAttribute SonarPlugin.Sounds.SoundsLoc::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayStatus::Unknown; [属性] EnumLocAttribute Sonar.Relays.RelayType::Unknown; [属性] EnumLocAttribute Sonar.Enums.ExpansionPack::Unknown",
       "Translated": "未知",
+      "Source": "library"
+    },
+    {
+      "Original": "Updated",
+      "Context": "[属性] EnumLocAttribute Sonar.Trackers.RelayStateStatus::Updated",
+      "Translated": "已更新",
       "Source": "library"
     },
     {

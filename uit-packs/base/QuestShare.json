@@ -8,6 +8,42 @@
   },
   "entries": [
     {
+      "Original": "Not connected to the server, check main window.",
+      "Context": "MiniWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "尚未连接服务器，请查看主窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Status: ",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "服务器状态： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Host Group",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "创建共享组",
+      "Source": "library"
+    },
+    {
+      "Original": "Join Group",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "加入共享组",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
@@ -53,12 +89,30 @@
       "Source": "library"
     },
     {
+      "Original": "Share Code:",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "共享码：",
+      "Source": "library"
+    },
+    {
       "Original": "Click to copy to clipboard.",
       "Context": "MainWindow.DrawHostTab",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "点击复制到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel the current session. This will permanently remove the share code and all connected clients.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "结束当前会话。共享码将永久失效，所有已连接的客户端都会断开。",
       "Source": "library"
     },
     {
@@ -71,12 +125,48 @@
       "Source": "library"
     },
     {
+      "Original": "Allows new players to join the group without being in your party first.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "允许其他玩家直接加入共享组，无需先加入你的小队。",
+      "Source": "library"
+    },
+    {
       "Original": "Sends quest updates to the server.",
       "Context": "MainWindow.DrawHostTab",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "向服务器发送任务进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically share the Main Scenario Quest with your group when it is accepted.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "接受主线任务时自动分享给组内成员。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically share new quests with your group when they are accepted. Mutually exclusive with MSQ share.",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "接受新任务时自动分享给组内成员。与只分享主线任务的选项互斥。",
+      "Source": "library"
+    },
+    {
+      "Original": "---SELECT---",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "---请选择---",
       "Source": "library"
     },
     {
@@ -95,6 +185,24 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "尚未选择任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Quest:",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前任务：",
+      "Source": "library"
+    },
+    {
+      "Original": "Generate New",
+      "Context": "MainWindow.DrawHostTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重新生成",
       "Source": "library"
     },
     {
@@ -143,12 +251,66 @@
       "Source": "library"
     },
     {
+      "Original": "Session: ",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TreeNode",
+      "Translated": "会话： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Mini",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "显示迷你窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave Group",
+      "Context": "MainWindow.DrawJoinTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "离开共享组",
+      "Source": "library"
+    },
+    {
       "Original": "Owner: ",
       "Context": "MainWindow.DrawSessionDetails",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "所有者： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Get Marker",
+      "Context": "MainWindow.DrawSessionDetails",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "获取地图标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Generates a map marker for the current step's destination.",
+      "Context": "MainWindow.DrawSessionDetails",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为当前任务步骤的目的地生成地图标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "API Server",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "API 服务器",
       "Source": "library"
     },
     {
@@ -188,6 +350,15 @@
       "Source": "library"
     },
     {
+      "Original": "Are you sure you want to delete this server?",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定删除该服务器吗？",
+      "Source": "library"
+    },
+    {
       "Original": "Yes",
       "Context": "MainWindow.DrawSettingsTab",
       "PreserveID": true,
@@ -206,6 +377,51 @@
       "Source": "library"
     },
     {
+      "Original": "Automatically connect to the selected API server when the game is started.",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "启动游戏后自动连接所选 API 服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides future steps of the quest from the UI when viewing your hosted quest. This does not affect the quest sharing process.",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在查看自己主持共享的任务时隐藏后续步骤。任务仍会照常共享。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides future steps of the quest from the UI when viewing a shared quest. This does not affect the quest sharing process.",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "在查看他人共享的任务时隐藏后续步骤。任务仍会照常共享。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the steps of the quest from the mini window, only showing the current step.",
+      "Context": "MainWindow.DrawSettingsTab",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "迷你窗口只显示当前任务步骤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Need help? Click here to get support.",
+      "Context": "MainWindow.DrawSupportButton",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "需要帮助？点此获取支持。",
+      "Source": "library"
+    },
+    {
       "Original": "Close",
       "Context": "MainWindow.DrawSupportButton",
       "PreserveID": true,
@@ -221,6 +437,15 @@
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "打开任务共享窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Quest Share mini window. Requires a valid share code entered.",
+      "Context": "CommandService.Initialize",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Quest Share 迷你窗口。需要先输入有效的共享码。",
       "Source": "library"
     },
     {

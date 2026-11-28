@@ -44,12 +44,66 @@
       "Source": "library"
     },
     {
+      "Original": "Musical Guide is disabled, enable it with /mguide toggle to use real first person handling.",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide 已停用。输入 /mguide toggle 启用后，可使用真实第一人称视角。",
+      "Source": "library"
+    },
+    {
+      "Original": "Musical Guide real first person handling ",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide 真实第一人称控制 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Musical Guide is disabled, enable it with /mguide toggle to use first person handling in Gpose.",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide 已停用。输入 /mguide toggle 启用后，可在集体动作模式中使用第一人称视角。",
+      "Source": "library"
+    },
+    {
+      "Original": "Musical Guide: first person handling is disabled, enable it with /mguide 1pp to use it in Gpose.",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide：第一人称控制已关闭。输入 /mguide 1pp 后，可在集体动作模式中使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Musical Guide: first person handling in Gpose ",
+      "Context": "MusicalGuide.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "Musical Guide：集体动作模式中的第一人称控制 ",
+      "Source": "library"
+    },
+    {
       "Original": "Compatibility Notice",
       "Context": "MusicalGuide.OnPluginsChanged",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ Notification.set_Title",
       "Translated": "兼容性提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Cammy was loaded after Musical Guide. Loading Cammy after Musical Guide breaks the real first person mode. An automatic fix has been attempted, but you may need to reload Musical Guide yourself, or disable Cammy.",
+      "Context": "MusicalGuide.OnPluginsChanged",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "Cammy 在 Musical Guide 之后加载，导致真实第一人称视角失效。已尝试自动修复，若仍无效，请重新加载 Musical Guide 或停用 Cammy。",
       "Source": "library"
     },
     {
@@ -80,6 +134,33 @@
       "Source": "library"
     },
     {
+      "Original": "Warning! You are using the \"Always\" setting for \"1st Person Camera Auto-adjustment\".",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "注意：目前「第一人称相机自动调整」设为「始终」。",
+      "Source": "library"
+    },
+    {
+      "Original": "This setting can cause additional nausea and makes you unable to control your view direction in first person.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此设置可能加重眩晕，并使你无法在第一人称视角中控制朝向。",
+      "Source": "library"
+    },
+    {
+      "Original": "Recommended setting is either \"Never\" or \"Only when moving\" while using real first person.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "使用真实第一人称视角时，建议选择「从不」或「仅在移动时」。",
+      "Source": "library"
+    },
+    {
       "Original": "Enable real first person",
       "Context": "ConfigWindow.DrawFirstPersonSettings",
       "PreserveID": true,
@@ -98,12 +179,57 @@
       "Source": "library"
     },
     {
+      "Original": "Disables rotating the camera automatically with head movement and allows the camera to rotate 360 degrees, which is recommended for regular gameplay to reduce motion sickness.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "关闭头部动作对镜头的自动转向，并允许镜头旋转 360 度。建议在日常游戏中使用，有助于减少眩晕。",
+      "Source": "library"
+    },
+    {
       "Original": "Allow full motion in emotes",
       "Context": "ConfigWindow.DrawFirstPersonSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "情感动作期间保留完整动作幅度",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows full head tracking in emotes and emote-like stationary activities (crafting, gathering, fishing). If disabled, the camera will not rotate with head movement even in emotes.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "播放情感动作，或进行制作、采集、捕鱼等原地动作时完整追踪头部。关闭后，即便使用情感动作，镜头也不会随头部转动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove camera roll in first person",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "第一人称视角禁用镜头侧倾",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps your camera rotation on level with the horizon, which can help reduce motion sickness. Does not apply in reduced motion mode. May cause issues when the head is pointed directly up or down (for example, some sleeping positions.)",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "保持画面水平，可缓解眩晕。减轻动态效果模式下此项无效。角色脸部正朝上或正朝下时，例如某些睡姿，画面可能异常。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduce motion in combat and instanced content",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗和副本中减少镜头晃动",
       "Source": "library"
     },
     {
@@ -170,12 +296,30 @@
       "Source": "library"
     },
     {
+      "Original": "You may need to adjust this if your face bone is already rotated from the standard.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "如果面部骨骼本身的朝向与标准模型不同，可能需要调整此项。",
+      "Source": "library"
+    },
+    {
       "Original": "Maximum vertical angle",
       "Context": "ConfigWindow.DrawFirstPersonSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderInt",
       "Translated": "最大垂直角度",
+      "Source": "library"
+    },
+    {
+      "Original": "You may need to adjust this to prevent looking inside your own head.",
+      "Context": "ConfigWindow.DrawFirstPersonSettings",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "如镜头穿进自己头部，请调整此项。",
       "Source": "library"
     },
     {
@@ -206,12 +350,39 @@
       "Source": "library"
     },
     {
+      "Original": "Third Person Camera Distances",
+      "Context": "ConfigWindow.DrawThirdPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "第三人称镜头距离",
+      "Source": "library"
+    },
+    {
       "Original": "Enable third person camera control",
       "Context": "ConfigWindow.DrawThirdPersonSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "启用第三人称镜头控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Use further camera for larger mounts",
+      "Context": "ConfigWindow.DrawThirdPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "骑大型坐骑时拉远镜头",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember previously used distances",
+      "Context": "ConfigWindow.DrawThirdPersonSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记住上次使用的距离",
       "Source": "library"
     }
   ],

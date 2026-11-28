@@ -197,6 +197,60 @@
       "Source": "library"
     },
     {
+      "Original": "Repair below durability (%)",
+      "Context": "BeastmasterWindow.DrawRepair",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "耐久度低于此百分比时修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Target amount",
+      "Context": "BeastmasterWindow.DrawSetupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "目标数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Training target rank",
+      "Context": "BeastmasterWindow.DrawSetupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "训练目标等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Boards this run",
+      "Context": "BeastmasterWindow.DrawSetupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "本轮棋盘数",
+      "Source": "library"
+    },
+    {
+      "Original": "Boards per trigger",
+      "Context": "BeastmasterWindow.DrawSetupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "每次触发的棋盘数",
+      "Source": "library"
+    },
+    {
+      "Original": "Team cap",
+      "Context": "BeastmasterWindow.DrawSetupControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "队伍上限",
+      "Source": "library"
+    },
+    {
       "Original": "Open coffers###VermaxionCoffers",
       "Context": "CofferOpeningWindow..ctor",
       "PreserveID": true,
@@ -224,6 +278,51 @@
       "Source": "library"
     },
     {
+      "Original": "Minimum gil for teleport tasks",
+      "Context": "ConfigWindow.DrawGlobalSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "传送任务所需的最低金币",
+      "Source": "library"
+    },
+    {
+      "Original": "Listing action delay (ms)",
+      "Context": "ConfigWindow.DrawGlobalSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "上架操作间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Listing inter-item delay (ms)",
+      "Context": "ConfigWindow.DrawGlobalSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "不同物品的上架间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Fisher level",
+      "Context": "ConfigWindow.DrawGlobalSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "捕鱼人等级上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing pre-window offset",
+      "Context": "ConfigWindow.DrawGlobalSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "出海垂钓开始前的提前量",
+      "Source": "library"
+    },
+    {
       "Original": "Reset to Default",
       "Context": "ConfigWindow.DrawCharacterList",
       "PreserveID": true,
@@ -242,12 +341,111 @@
       "Source": "library"
     },
     {
+      "Original": "Fishing repair threshold %",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "钓鱼装备修理阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Specific food item id (0 = auto)",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "指定食物道具 ID（0 表示自动）",
+      "Source": "library"
+    },
+    {
       "Original": "Target pedigree",
       "Context": "ConfigWindow.DrawCharacterSettings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.InputInt",
       "Translated": "目标血统等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil reserve",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "保留的金币",
+      "Source": "library"
+    },
+    {
+      "Original": "MGP reserve",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "保留的金碟币",
+      "Source": "library"
+    },
+    {
+      "Original": "Preferred feed grade",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "首选饲料等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Current points",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "当前点数",
+      "Source": "library"
+    },
+    {
+      "Original": "Point cap",
+      "Context": "ConfigWindow.DrawCharacterSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "点数上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum onion unit price (gil)",
+      "Context": "ConfigWindow.DrawMarketboardSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "洋葱最高单价（金币）",
+      "Source": "library"
+    },
+    {
+      "Original": "Total gil limit per onion purchase (including tax)",
+      "Context": "ConfigWindow.DrawMarketboardSettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "每次购买洋葱的金币上限（含税）",
+      "Source": "library"
+    },
+    {
+      "Original": "Default target",
+      "Context": "ConfigWindow.DrawFishingStockCatalogEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "默认目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Default reorder point",
+      "Context": "ConfigWindow.DrawFishingStockCatalogEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "默认补货阈值",
       "Source": "library"
     },
     {
@@ -284,6 +482,33 @@
       "Role": "UI",
       "RoleReason": "→ IChatGui.PrintError",
       "Translated": "[Vermaxion] 应用设置向导前，请先选择一个账户。",
+      "Source": "library"
+    },
+    {
+      "Original": "Advance (minutes)",
+      "Context": "FishCollectionWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "提前时间（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat (minutes)",
+      "Context": "FishCollectionWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "重复间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Next window",
+      "Context": "FishCollectionWindow.DrawTargets",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "下一个时段",
       "Source": "library"
     },
     {
@@ -382,6 +607,13 @@
   ],
   "resources": [
     {
+      "Original": "Preparing team",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Preparing team",
+      "Translated": "正在准备队伍",
+      "Source": "library"
+    },
+    {
       "Original": "Chocobo Racing:",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Chocobo Racing:",
@@ -452,6 +684,13 @@
       "Source": "library"
     },
     {
+      "Original": "Team cap",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Team cap",
+      "Translated": "队伍上限",
+      "Source": "library"
+    },
+    {
       "Original": "Enable",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Enable",
@@ -459,10 +698,24 @@
       "Source": "library"
     },
     {
+      "Original": "Next run",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Next run",
+      "Translated": "下次运行",
+      "Source": "library"
+    },
+    {
       "Original": "Export",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Export",
       "Translated": "导出",
+      "Source": "library"
+    },
+    {
+      "Original": "Expand",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Expand",
+      "Translated": "展开",
       "Source": "library"
     },
     {
@@ -494,6 +747,13 @@
       "Source": "library"
     },
     {
+      "Original": "Boards this run",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Boards this run",
+      "Translated": "本轮棋盘数",
+      "Source": "library"
+    },
+    {
       "Original": "Alerts",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Alerts",
@@ -505,6 +765,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Duplicate",
       "Translated": "创建副本",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing pre-window offset",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Ocean Fishing pre-window offset",
+      "Translated": "出海垂钓开始前的提前量",
       "Source": "library"
     },
     {
@@ -543,6 +810,13 @@
       "Source": "library"
     },
     {
+      "Original": "Max Fisher level",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Max Fisher level",
+      "Translated": "捕鱼人等级上限",
+      "Source": "library"
+    },
+    {
       "Original": "Minion",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Minion",
@@ -554,6 +828,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Manual",
       "Translated": "手动",
+      "Source": "library"
+    },
+    {
+      "Original": "Default target",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Default target",
+      "Translated": "默认目标",
       "Source": "library"
     },
     {
@@ -690,10 +971,31 @@
       "Source": "library"
     },
     {
+      "Original": "Advance (minutes)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Advance (minutes)",
+      "Translated": "提前时间（分钟）",
+      "Source": "library"
+    },
+    {
       "Original": "Makes controls and selection states more distinct.",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Makes controls and selection states more distinct.",
       "Translated": "让控件和选中状态更容易辨认。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fishing repair threshold %",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Fishing repair threshold %",
+      "Translated": "钓鱼装备修理阈值（%）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable FC Buff",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Enable FC Buff",
+      "Translated": "启用部队特效",
       "Source": "library"
     },
     {
@@ -753,10 +1055,24 @@
       "Source": "library"
     },
     {
+      "Original": "MGP reserve",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "MGP reserve",
+      "Translated": "保留的金碟币",
+      "Source": "library"
+    },
+    {
       "Original": "Choose background image",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Choose background image",
       "Translated": "选择背景图片",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat (minutes)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Repeat (minutes)",
+      "Translated": "重复间隔（分钟）",
       "Source": "library"
     },
     {
@@ -879,6 +1195,13 @@
       "Source": "library"
     },
     {
+      "Original": "Listing action delay (ms)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Listing action delay (ms)",
+      "Translated": "上架操作间隔（毫秒）",
+      "Source": "library"
+    },
+    {
       "Original": "Creation date",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Creation date",
@@ -949,6 +1272,20 @@
       "Source": "library"
     },
     {
+      "Original": "Repair below durability (%)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Repair below durability (%)",
+      "Translated": "耐久度低于此百分比时修理",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All Character Task State",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Reset All Character Task State",
+      "Translated": "重置所有角色的任务状态",
+      "Source": "library"
+    },
+    {
       "Original": "Paused: ",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Paused: ",
@@ -967,6 +1304,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Confirm",
       "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Frontline",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Frontline",
+      "Translated": "纷争前线",
       "Source": "library"
     },
     {
@@ -1005,6 +1349,20 @@
       "Source": "library"
     },
     {
+      "Original": "Listing inter-item delay (ms)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Listing inter-item delay (ms)",
+      "Translated": "不同物品的上架间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Leaving the completed board",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Leaving the completed board",
+      "Translated": "正在离开已完成的棋盘",
+      "Source": "library"
+    },
+    {
       "Original": "Language",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Language",
@@ -1016,6 +1374,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Background",
       "Translated": "背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Challenging the board",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Challenging the board",
+      "Translated": "正在挑战棋盘",
       "Source": "library"
     },
     {
@@ -1065,6 +1430,20 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Current",
       "Translated": "当前",
+      "Source": "library"
+    },
+    {
+      "Original": "FULL STOP",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "FULL STOP",
+      "Translated": "全部停止",
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum onion unit price (gil)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Maximum onion unit price (gil)",
+      "Translated": "洋葱最高单价（金币）",
       "Source": "library"
     },
     {
@@ -1149,6 +1528,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "List name",
       "Translated": "列表名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Ocean Fishing positioning",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Ocean Fishing positioning",
+      "Translated": "出海垂钓站位",
       "Source": "library"
     },
     {
@@ -1355,6 +1741,13 @@
       "Source": "library"
     },
     {
+      "Original": "Preferred feed grade",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Preferred feed grade",
+      "Translated": "首选饲料等级",
+      "Source": "library"
+    },
+    {
       "Original": "Controls",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Controls",
@@ -1383,6 +1776,13 @@
       "Source": "library"
     },
     {
+      "Original": "Collapse",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Collapse",
+      "Translated": "折叠",
+      "Source": "library"
+    },
+    {
       "Original": "Add items",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Add items",
@@ -1401,6 +1801,20 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Complete",
       "Translated": "完成",
+      "Source": "library"
+    },
+    {
+      "Original": "Three strong fighters + trainees",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Three strong fighters + trainees",
+      "Translated": "三名强力战斗成员加上受训成员",
+      "Source": "library"
+    },
+    {
+      "Original": "Gil reserve",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Gil reserve",
+      "Translated": "保留的金币",
       "Source": "library"
     },
     {
@@ -1439,10 +1853,24 @@
       "Source": "library"
     },
     {
+      "Original": "Fisher inspection required",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Fisher inspection required",
+      "Translated": "需要检查捕鱼人",
+      "Source": "library"
+    },
+    {
       "Original": "Running",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Running",
       "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Default reorder point",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Default reorder point",
+      "Translated": "默认补货阈值",
       "Source": "library"
     },
     {
@@ -1478,6 +1906,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Wave colour 3",
       "Translated": "波形颜色 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset character settings?",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Reset character settings?",
+      "Translated": "重置角色设置？",
       "Source": "library"
     },
     {
@@ -1530,6 +1965,13 @@
       "Source": "library"
     },
     {
+      "Original": "Finishing the board",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Finishing the board",
+      "Translated": "正在完成棋盘",
+      "Source": "library"
+    },
+    {
       "Original": "Imported",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Imported",
@@ -1558,10 +2000,24 @@
       "Source": "library"
     },
     {
+      "Original": "Total gil limit per onion purchase (including tax)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Total gil limit per onion purchase (including tax)",
+      "Translated": "每次购买洋葱的金币上限（含税）",
+      "Source": "library"
+    },
+    {
       "Original": "Window appearance",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Window appearance",
       "Translated": "窗口外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Always fish on this character if window open",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Always fish on this character if window open",
+      "Translated": "垂钓时段开启时始终使用此角色钓鱼",
       "Source": "library"
     },
     {
@@ -1600,6 +2056,13 @@
       "Source": "library"
     },
     {
+      "Original": "Target amount",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Target amount",
+      "Translated": "目标数量",
+      "Source": "library"
+    },
+    {
       "Original": "Pinned: ",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Pinned: ",
@@ -1625,6 +2088,34 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Highlight contrast",
       "Translated": "高亮对比度",
+      "Source": "library"
+    },
+    {
+      "Original": "Training target rank",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Training target rank",
+      "Translated": "训练目标等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Search configured item ID or name",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Search configured item ID or name",
+      "Translated": "按物品 ID 或名称搜索已配置物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Current points",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Current points",
+      "Translated": "当前点数",
+      "Source": "library"
+    },
+    {
+      "Original": "Next window",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Next window",
+      "Translated": "下一个时段",
       "Source": "library"
     },
     {
@@ -1663,6 +2154,13 @@
       "Source": "library"
     },
     {
+      "Original": "Enable inherited character automation",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Enable inherited character automation",
+      "Translated": "允许角色继承自动化设置",
+      "Source": "library"
+    },
+    {
       "Original": "Reset colours",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Reset colours",
@@ -1674,6 +2172,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Invalid",
       "Translated": "无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum gil for teleport tasks",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Minimum gil for teleport tasks",
+      "Translated": "传送任务所需的最低金币",
       "Source": "library"
     },
     {
@@ -1698,6 +2203,13 @@
       "Source": "library"
     },
     {
+      "Original": "Point cap",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Point cap",
+      "Translated": "点数上限",
+      "Source": "library"
+    },
+    {
       "Original": "Language visible on main window",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Language visible on main window",
@@ -1712,10 +2224,24 @@
       "Source": "library"
     },
     {
+      "Original": "Boards per trigger",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Boards per trigger",
+      "Translated": "每次触发的棋盘数",
+      "Source": "library"
+    },
+    {
       "Original": "Character",
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Character",
       "Translated": "角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Specific food item id (0 = auto)",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Specific food item id (0 = auto)",
+      "Translated": "指定食物道具 ID（0 表示自动）",
       "Source": "library"
     },
     {
@@ -1779,6 +2305,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Pause backdrop for screenshots",
       "Translated": "截图时暂停背景",
+      "Source": "library"
+    },
+    {
+      "Original": "This character",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "This character",
+      "Translated": "当前角色",
       "Source": "library"
     },
     {
@@ -1870,6 +2403,13 @@
       "Container": "VERMAXION.Localization.Strings_en.resources",
       "Key": "Copy",
       "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Container": "VERMAXION.Localization.Strings_en.resources",
+      "Key": "Idle",
+      "Translated": "空闲",
       "Source": "library"
     },
     {

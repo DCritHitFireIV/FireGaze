@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\t\tDynamic Presets",
+      "Context": "ConditionSetUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "\t\t动态预设",
+      "Source": "library"
+    },
+    {
       "Original": "\nCondition: ",
       "Context": "ConditionSetUI.DrawConditionSetEditor",
       "Role": "UI",
@@ -24,11 +32,124 @@
       "Source": "library"
     },
     {
+      "Original": "\nThe bar will be exported to clipboard first.",
+      "Context": "PluginUI.DrawBarManager",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n将先把快捷栏导出到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "\nThe shortcut will be exported to clipboard first.",
+      "Context": "ShortcutUI.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n将先把快捷方式导出到剪贴板。",
+      "Source": "library"
+    },
+    {
+      "Original": "\nWarning: this will always be true!",
+      "Context": "MiscConditionHelpers.DrawTimespanInput",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "\n警告：此条件始终成立！",
+      "Source": "library"
+    },
+    {
+      "Original": "# Party Member Exists",
+      "Context": "PartyCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "指定编号的小队成员存在",
+      "Source": "library"
+    },
+    {
+      "Original": "Achievements/Hunting Log",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "成就/讨伐笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Hotkeys - ",
+      "Context": "Keybind.DrawDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前生效的快捷键 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new shortcut.",
+      "Context": "ShortcutUI.DrawCategory",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "添加新的快捷方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Addon Config (HUD Layout #)",
+      "Context": "PluginUI.DrawDebugMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "界面配置（界面布局编号）",
+      "Source": "library"
+    },
+    {
+      "Original": "Addon Exists",
+      "Context": "AddonExistsCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "界面组件存在",
+      "Source": "library"
+    },
+    {
+      "Original": "Addon Visible",
+      "Context": "AddonVisibleCondition.get_ConditionName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "界面组件可见",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced condition.",
+      "Context": "JobCondition.GetSelectableTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "高级条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adventurer Plates",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "冒险者铭牌",
+      "Source": "library"
+    },
+    {
       "Original": "Alignment",
       "Context": "ConfigEditorUI.EditBarGeneralOptions",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "All currently active condition flags",
+      "Context": "AllCurrentConditionFlagsPreset.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "当前生效的全部条件标志",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow exporting sensitive condition sets",
+      "Context": "PluginUI.DrawSettingsMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许导出含敏感信息的条件组合",
       "Source": "library"
     },
     {
@@ -80,6 +201,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderInt",
       "Translated": "按钮宽度",
+      "Source": "library"
+    },
+    {
+      "Original": "Center",
+      "Context": "ConfigEditorUI.EditBarGeneralOptions",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "居中",
       "Source": "library"
     },
     {
@@ -577,6 +707,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "无",
+      "Source": "library"
+    },
+    {
+      "Original": "Occult Crescent",
+      "Context": "IconBrowserUI.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.SetItemTooltip",
+      "Translated": "新月岛",
       "Source": "library"
     },
     {

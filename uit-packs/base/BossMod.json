@@ -96,11 +96,123 @@
       "Source": "library"
     },
     {
+      "Original": "A preset is active, which fully overrides the CD plan.",
+      "Context": "[BossMod] UIRotationWindow.DrawPlanSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前预设已启用，会完全覆盖技能时间轴计划。",
+      "Source": "library"
+    },
+    {
+      "Original": "AI disabled",
+      "Context": "[BossMod] RegisterAISlashCommands",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "AI 已禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "AI enabled",
+      "Context": "[BossMod] RegisterAISlashCommands",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "AI 已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "AI feature is now deprecated and will be removed in one of the future versions.",
+      "Context": "[BossMod] AIMigrationNotice.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "AI 功能已弃用，将在今后的版本中移除。",
+      "Source": "library"
+    },
+    {
+      "Original": "AI hints",
+      "Context": "[BossMod] ReplayDetailsWindow.DrawAI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "AI 提示",
+      "Source": "library"
+    },
+    {
+      "Original": "AOE leeway",
+      "Context": "[BossMod] FloodFillTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "范围攻击的时间余量",
+      "Source": "library"
+    },
+    {
+      "Original": "AOE offset",
+      "Context": "[BossMod] ComplexBoundsTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "范围攻击偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "AOE radius",
+      "Context": "[BossMod] ComplexBoundsTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "范围攻击半径",
+      "Source": "library"
+    },
+    {
+      "Original": "AOE rotation",
+      "Context": "[BossMod] ComplexBoundsTest.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "范围攻击朝向",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Healer AI",
+      "Context": "[BossMod] UIPresetEditor.SuggestHealerAI",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加治疗 AI",
+      "Source": "library"
+    },
+    {
+      "Original": "Add log marker",
+      "Context": "[BossMod] ReplayManagementWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加日志标记",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new!",
+      "Context": "[BossMod] ColumnEnemiesCastEvents.DrawConfig",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加新项目！",
+      "Source": "library"
+    },
+    {
       "Original": "Add new...",
       "Context": "[BossMod] UIPresetEditor.DrawSettingsList",
       "Role": "UI",
       "RoleReason": "→ ImRaii.Combo",
       "Translated": "新增…",
+      "Source": "library"
+    },
+    {
+      "Original": "Add or select rotation module to configure its strategies",
+      "Context": "[BossMod] UIPresetEditor.DrawSettingsList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加或选择技能循环模块以配置各项策略。",
       "Source": "library"
     },
     {
@@ -110,6 +222,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "添加连线（自身与当前选中的对象）",
+      "Source": "library"
+    },
+    {
+      "Original": "Align with 2-minute raid buffs (0/6, 2/8, etc)",
+      "Context": "[BossMod.Autorotation] VeynWAR.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynWAR/PotionStrategy>.AddOption",
+      "Translated": "配合双数分钟的团队增益窗口（0/6、2/8 等）",
       "Source": "library"
     },
     {
@@ -147,11 +267,141 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-heal/auto-raise",
+      "Context": "[BossMod] UIPresetEditor.SuggestHealerAI",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动治疗／复活",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-target",
+      "Context": "[BossMod] AIWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "自动选择目标",
+      "Source": "library"
+    },
+    {
       "Original": "Automates movement during boss fights.",
       "Context": "[BossMod] AboutTab.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "在首领战中自动走位。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic (3-6-9)",
+      "Context": "[BossMod.Autorotation] VeynBRD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ VeynBRD/SongStrategy>.AddOption",
+      "Translated": "自动（3-6-9）",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically deal with special conditions (knockbacks, pyretics, etc)",
+      "Context": "[BossMod.Autorotation] NormalMovement.Definition",
+      "Role": "UI",
+      "RoleReason": "→ NormalMovement/SpecialModesStrategy>.AddOption",
+      "Translated": "自动处理击退、热病等特殊机制。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically hand in FATE items at 10+",
+      "Context": "[BossMod.Autorotation] FateUtils.Definition",
+      "Role": "UI",
+      "RoleReason": "→ FateUtils/Flag>.AddOption",
+      "Translated": "危命任务物品累计到 10 个或以上时自动交纳",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically late-weaves True North when out of positional",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/TrueNorthStrategy>.AddOption",
+      "Translated": "身位不符时，在下一个公共复唱前尽量靠后使用「真北」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically late-weaves True North when out of positional - will clip GCD if needed",
+      "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiDRG/TrueNorthStrategy>.AddOption",
+      "Translated": "身位不符时，尽量靠后使用「真北」；必要时允许延后下一个公共复唱。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically moves your character based on safe zones determined by a boss's module, visible on the radar.",
+      "Context": "[BossMod] AboutTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "根据首领模块判定的安全区自动移动角色。安全区会显示在雷达上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically pick best target",
+      "Context": "[BossMod] TargetingRenderer.DrawValue",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "自动选择最佳目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically prioritize targets",
+      "Context": "[BossMod.Autorotation] AutoTarget.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AutoTarget/GeneralStrategy>.AddOption",
+      "Translated": "自动决定目标优先级",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best rotation based on targets nearby - finishes current combo if possible",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/AOEStrategy>.AddOption",
+      "Translated": "根据附近目标选择合适的技能循环，尽可能打完当前连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best rotation based on targets nearby - will break current combo if in one",
+      "Context": "[BossMod.Autorotation] AkechiMCH.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiMCH/AOEStrategy>.AddOption",
+      "Translated": "根据附近目标选择合适的技能循环，必要时会中断当前连击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best target",
+      "Context": "[BossMod.Autorotation] AkechiGNBPvP.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiGNBPvP/TargetingStrategy>.AddOption",
+      "Translated": "自动选择最佳目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best target (highest number of nearby targets) for AOE actions",
+      "Context": "[BossMod.Autorotation] Extendxan.DefineSharedTA",
+      "Role": "UI",
+      "RoleReason": "→ Targeting>.AddOption",
+      "Translated": "范围技能自动选择能覆盖最多敌人的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best target for AOE actions - ensure player target is hit",
+      "Context": "[BossMod.Autorotation] Extendxan.DefineSharedTA",
+      "Role": "UI",
+      "RoleReason": "→ Targeting>.AddOption",
+      "Translated": "为范围技能选择最佳目标，确保命中玩家当前选中的目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select best target for AOE actions - if player has a target, ensure that target is hit",
+      "Context": "[BossMod.Autorotation] Extendxan.DefineSharedTA",
+      "Role": "UI",
+      "RoleReason": "→ Targeting>.AddOption",
+      "Translated": "为范围技能选择最佳目标。若玩家当前选有目标，确保将其命中。",
       "Source": "library"
     },
     {
@@ -291,6 +541,78 @@
       "Source": "library"
     },
     {
+      "Original": "Automatically use Guard when HP is not full and four or more targets are targeting you",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "自身生命值未满且至少有 4 个敌人以自己为目标时，自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Guard when HP is not full and three or more targets are targeting you",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "自身生命值未满且至少有 3 个敌人以自己为目标时，自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Guard when HP is not full and two or more targets are targeting you",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "自身生命值未满且至少有 2 个敌人以自己为目标时，自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Guard when HP% is under 30%",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "生命值低于 30% 时自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Guard when HP% is under 50%",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "生命值低于 50% 时自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Guard when HP% is under 70%",
+      "Context": "[BossMod.Autorotation] RolePvPUtility.Definition",
+      "Role": "UI",
+      "RoleReason": "→ RolePvPUtility/GuardStrategy>.AddOption",
+      "Translated": "生命值低于 70% 时自动使用防御",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit as ranged attack if outside melee range - will use Shield Lob as fallback",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "近战距离外自动使用圣灵进行远程攻击，无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit at the start of combat if outside melee range - will use Shield Lob as fallback",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "战斗开始时，若超出近战距离，自动使用圣灵；无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Holy Spirit at the start of combat, regardless of range - will use Shield Lob as fallback",
+      "Context": "[BossMod.Autorotation] AkechiPLD.Definition",
+      "Role": "UI",
+      "RoleReason": "→ AkechiPLD/RangedStrategy>.AddOption",
+      "Translated": "战斗开始时，无论距离都自动使用圣灵；无法使用时改用投盾。",
+      "Source": "library"
+    },
+    {
       "Original": "Automatically use Jump",
       "Context": "[BossMod.Autorotation] AkechiDRG.Definition",
       "Role": "UI",
@@ -400,6 +722,30 @@
       "Role": "UI",
       "RoleReason": "→ AkechiDRG/CommonStrategy>.AddOption",
       "Translated": "有猛枪增益时自动使用坠星冲",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use potion when party raid buffs are imminent or active",
+      "Context": "[BossMod.Autorotation] ToolsExtensions.DefinePotion",
+      "Role": "UI",
+      "RoleReason": "→ PotionStrategy>.AddOption",
+      "Translated": "团队增益即将开始或已经生效时自动使用爆发药",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use potion when personal buffs are imminent or active",
+      "Context": "[BossMod.Autorotation] ToolsExtensions.DefinePotion",
+      "Role": "UI",
+      "RoleReason": "→ PotionStrategy>.AddOption",
+      "Translated": "自身增益即将开始或已经生效时自动使用爆发药",
+      "Source": "library"
+    },
+    {
+      "Original": "Autorotation is disabled. Click Disabled again or pick a preset to re-enable it.",
+      "Context": "[BossMod] UIRotationWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动循环已禁用。再次点击「已禁用」或选择预设即可重新启用。",
       "Source": "library"
     },
     {

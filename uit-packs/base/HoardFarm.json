@@ -16,6 +16,13 @@
       "Source": "library"
     },
     {
+      "Original": "Safety mode will NOT search for hoards.\r\nIt instantly leaves if the hoard is unreachable. \r\nSafer and faster runs but you will miss a lot of hoards.\r\nIt will take longer overall.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_FarmMode_Safety_Help",
+      "Translated": "安全模式不会搜索秘宝。\r\n若无法抵达秘宝位置，将立即退出。\r\n每次探索更快也更安全，但会错过许多秘宝。\r\n总体耗时会更长。",
+      "Source": "library"
+    },
+    {
       "Original": "Done",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "HoardFarm_Status_Done",
@@ -41,6 +48,13 @@
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "MainWindow_DoRetainers_WrongWorld",
       "Translated": "请检查当前服务器名称或背包格子。",
+      "Source": "library"
+    },
+    {
+      "Original": "Slow mode will wait some seconds before requeue again.\r\nNot really necessary, but makes some people feel better.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_SlowMode_Help",
+      "Translated": "慢速模式会等待几秒后再次排队。\r\n通常无需等待，你也可以按喜好开启。",
       "Source": "library"
     },
     {
@@ -135,6 +149,13 @@
       "Source": "library"
     },
     {
+      "Original": "Suffer mode. Unable to calculate the remaining time.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_ProgressNoTime",
+      "Translated": "苦行模式：无法估算剩余时间。",
+      "Source": "library"
+    },
+    {
       "Original": "Searching {0}",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "HoardFarm_Status_SearchingObject",
@@ -142,10 +163,52 @@
       "Source": "library"
     },
     {
+      "Original": "Player died",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_PlayerDied",
+      "Translated": "角色已死亡",
+      "Source": "library"
+    },
+    {
       "Original": "Running",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "HoardFarm_Status_Running",
       "Translated": "运行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Savegame 1",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Savegame_1",
+      "Translated": "存档 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Savegame 2",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Savegame_2",
+      "Translated": "存档 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Do retainers:",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_DoRetainers",
+      "Translated": "派遣雇员：",
+      "Source": "library"
+    },
+    {
+      "Original": "Runs: {0}",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Statistics_Runs",
+      "Translated": "探索次数：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Searching",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_Searching",
+      "Translated": "正在搜索",
       "Source": "library"
     },
     {
@@ -191,10 +254,122 @@
       "Source": "library"
     },
     {
+      "Original": "Please prepare before starting.\r\nYou need at least one Intuition Pomander\r\nand one Concealment.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_Error_MinimalSetup",
+      "Translated": "请在开始前做好准备。\r\n至少需要一个「魔陶器：感知宝藏」\r\n和一个「魔陶器：隐形」。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hoard Found",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_HoardFound",
+      "Translated": "已发现秘宝",
+      "Source": "library"
+    },
+    {
+      "Original": "Runs",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_StopAfter_Runs",
+      "Translated": "探索次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Move to Hoard",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_MoveToHoard",
+      "Translated": "前往秘宝位置",
+      "Source": "library"
+    },
+    {
+      "Original": "You will need at least {0} Days and {1} of farming to complete the achievement.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_RemainingTimeDays",
+      "Translated": "完成此成就至少还需探索 {0} 天又 {1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Savegame:",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Savegame",
+      "Translated": "存档：",
+      "Source": "library"
+    },
+    {
+      "Original": "Moving to HoH",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_MoveToHoH",
+      "Translated": "正在前往天之御柱",
+      "Source": "library"
+    },
+    {
+      "Original": "HoardFarm Config",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_Title",
+      "Translated": "HoardFarm 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Client-Language",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_Language_default",
+      "Translated": "客户端语言",
+      "Source": "library"
+    },
+    {
+      "Original": "Found: {0}   ({1:0.##} %)",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Statistics_Found",
+      "Translated": "已发现：{0}   ({1:0.##} %)",
+      "Source": "library"
+    },
+    {
+      "Original": "This features requires AutoRetainer to be installed and configured.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_DoRetainers_AutoretainerNeeded",
+      "Translated": "此功能需要安装并配置 AutoRetainer。",
+      "Source": "library"
+    },
+    {
+      "Original": "Wait between:",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_WaitBetween",
+      "Translated": "等待间隔：",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables global gathering of runtimes and found hoards.\r\nPurely used to build a accurate global statistic.\r\nOnly sends time of a run, if a hoard is found and the travel time to hoard.\r\nCharacter, timestamp or any other identifying info will NEVER send!",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_DisableStatisticGathering_Help",
+      "Translated": "停用全局探索用时及秘宝发现情况的统计。\r\n这些数据仅用于计算总体统计。\r\n发送内容仅包括每次探索的用时、是否找到秘宝及前往秘宝的用时。\r\n不会发送角色信息、时间戳或其他身份信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Config",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_OpenConfig",
+      "Translated": "打开设置",
+      "Source": "library"
+    },
+    {
       "Original": "Open Help",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "MainWindow_OpenHelp",
       "Translated": "打开帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Wanna support me? Buy me a coffee!",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_SupportMe",
+      "Translated": "想支持开发者？请我喝杯咖啡吧！",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable HoardFarm Mode",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_EnableHoardFarmMode",
+      "Translated": "启用秘宝探索模式",
       "Source": "library"
     },
     {
@@ -205,10 +380,31 @@
       "Source": "library"
     },
     {
+      "Original": "Please prepare before starting.\r\nFloor One is not supported.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_Error_Unprepared",
+      "Translated": "请在开始前做好准备。\r\n当前不支持第 1 层。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to run:",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_UnableToRun",
+      "Translated": "无法运行：",
+      "Source": "library"
+    },
+    {
       "Original": "Support on Ko-fi",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "ConfigWindow_SupportKofi",
       "Translated": "在 Ko-fi 上支持作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Efficiency",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_FarmMode_Efficiency",
+      "Translated": "效率",
       "Source": "library"
     },
     {
@@ -226,10 +422,38 @@
       "Source": "library"
     },
     {
+      "Original": "This features requires \"vnavmesh\" to be installed.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_vnavmeshRequired",
+      "Translated": "此功能需要安装 vnavmesh。",
+      "Source": "library"
+    },
+    {
       "Original": "Error",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "HoardFarm_Status_Error",
       "Translated": "错误",
+      "Source": "library"
+    },
+    {
+      "Original": "Damn it will take ages. Trust me",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_ProgressZero",
+      "Translated": "这可要花上好长时间！",
+      "Source": "library"
+    },
+    {
+      "Original": "No Hoard",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_NoHoard",
+      "Translated": "没有秘宝",
+      "Source": "library"
+    },
+    {
+      "Original": "Time: {0}   (Ø {1})",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_TimeWithAverage",
+      "Translated": "耗时：{0}（平均 {1}）",
       "Source": "library"
     },
     {
@@ -240,10 +464,80 @@
       "Source": "library"
     },
     {
+      "Original": "Actually no really much to configure here.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_GreetingText",
+      "Translated": "这里没有太多需要调整的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Efficiency mode will search and try to find every hoard.\r\n>20% of the hoards are unreachable from start.\r\nIt will take some seconds to find it.\r\nThis mode is still recommended.",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_FarmMode_Efficiency_Help",
+      "Translated": "效率模式会搜索并尝试找到每处秘宝。\r\n超过 20% 的秘宝无法从起点直接抵达。\r\n寻找秘宝需要几秒钟。\r\n仍建议使用此模式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Waiting for vnavmesh",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_WaitingNavmesh",
+      "Translated": "正在等待 vnavmesh",
+      "Source": "library"
+    },
+    {
       "Original": "Minutes",
       "Container": "HoardFarm.Data.Strings.resources",
       "Key": "MainWindow_StopAfter_Minutes",
       "Translated": "分钟",
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Running",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "HoardFarm_Status_RetainerRunning",
+      "Translated": "雇员任务进行中",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Hoardfarm",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "DeepDungeonMenuOverlay_OpenHoardfarm",
+      "Translated": "打开 HoardFarm",
+      "Source": "library"
+    },
+    {
+      "Original": "and",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_And",
+      "Translated": "和",
+      "Source": "library"
+    },
+    {
+      "Original": "Current Session",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_Statistics_CurrentSession",
+      "Translated": "本次会话",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable statistic gathering",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_DisableStatisticGathering",
+      "Translated": "关闭统计数据收集",
+      "Source": "library"
+    },
+    {
+      "Original": "Found Hoards",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "MainWindow_StopAfter_Hoards",
+      "Translated": "发现的秘宝",
+      "Source": "library"
+    },
+    {
+      "Original": "Slower mode",
+      "Container": "HoardFarm.Data.Strings.resources",
+      "Key": "ConfigWindow_SlowMode",
+      "Translated": "慢速模式",
       "Source": "library"
     },
     {

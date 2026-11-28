@@ -66,6 +66,40 @@
       "Source": "library"
     },
     {
+      "Original": "Add an alarm",
+      "Context": "AlarmWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "添加提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm Configurations / Edit",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "提醒设置与编辑",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm Information",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "提醒信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Alarm Name",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "提醒名称",
+      "Source": "library"
+    },
+    {
       "Original": "Always Clear Elementals",
       "Context": "PluginWindow.DrawElementalTab",
       "PreserveID": true,
@@ -100,6 +134,14 @@
       "Source": "library"
     },
     {
+      "Original": "Attempts to auto pop fate when connected to a tracker (if you have the password)",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "连接追踪器后尝试自动登记出现的危命任务（需要密码）。",
+      "Source": "library"
+    },
+    {
       "Original": "Auto Create Tracker",
       "Context": "PluginWindow.DrawSettingsTab",
       "PreserveID": true,
@@ -118,11 +160,29 @@
       "Source": "library"
     },
     {
+      "Original": "Auto Pop fate within range",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动登记范围内出现的危命任务",
+      "Source": "library"
+    },
+    {
       "Original": "Auto creates tracker when joining an instance and prints the tracker link to chat",
       "Context": "PluginWindow.DrawSettingsTab",
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "进入副本实例时自动创建追踪器，并将链接发到聊天栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto pop fate",
+      "Context": "PluginWindow.DrawSettingsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动登记危命任务",
       "Source": "library"
     },
     {
@@ -265,6 +325,23 @@
       "Source": "library"
     },
     {
+      "Original": "Delete All",
+      "Context": "AlarmWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete the current alarm",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "删除当前提醒",
+      "Source": "library"
+    },
+    {
       "Original": "Display Elemental",
       "Context": "PluginWindow.DrawElementalTab",
       "PreserveID": true,
@@ -292,12 +369,38 @@
       "Source": "library"
     },
     {
+      "Original": "Display Server Id in \"server info\" bar",
+      "Context": "PluginWindow.DrawInstanceTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在服务器信息栏显示副本编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Server Id in chat",
+      "Context": "PluginWindow.DrawInstanceTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏中显示副本编号",
+      "Source": "library"
+    },
+    {
       "Original": "Display Toast",
       "Context": "PluginWindow.DrawSettingsTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "显示弹出提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Display a toast whenever the alarm is triggered",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "提醒触发时显示弹窗",
       "Source": "library"
     },
     {
@@ -351,12 +454,45 @@
       "Source": "library"
     },
     {
+      "Original": "Edit Alarm",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "编辑提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit the current alarm",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "编辑当前提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Element:",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "属性：",
+      "Source": "library"
+    },
+    {
       "Original": "Elemental",
       "Context": "PluginWindow.DrawElementalTab",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
       "Translated": "元素精灵",
+      "Source": "library"
+    },
+    {
+      "Original": "Elementals",
+      "Context": "PluginWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "元灵",
       "Source": "library"
     },
     {
@@ -386,6 +522,14 @@
       "Source": "library"
     },
     {
+      "Original": "End:",
+      "Context": "AlarmWindow.DrawAlarmTable",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "结束时间：",
+      "Source": "library"
+    },
+    {
       "Original": "Ends in ",
       "Context": "DrawTrackerTab.MoveNext",
       "Role": "UI",
@@ -410,11 +554,54 @@
       "Source": "library"
     },
     {
+      "Original": "Eureka Helper",
+      "Context": "PluginWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "优雷卡助手",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Helper - Alarms",
+      "Context": "AlarmWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "优雷卡助手：提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Eureka Helper - Relic",
+      "Context": "RelicWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "优雷卡助手：武器",
+      "Source": "library"
+    },
+    {
       "Original": "Exports the current tracker to a new one",
       "Context": "DrawTrackerTab.MoveNext",
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "将当前追踪器的数据导出到新追踪器",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE Level: ",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "危命任务等级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE Name: ",
+      "Context": "PluginWindow.DrawTracker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "危命任务名称： ",
       "Source": "library"
     },
     {

@@ -8,6 +8,22 @@
   },
   "entries": [
     {
+      "Original": " named attacks.",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 次有名称的攻击中出现一次。",
+      "Source": "library"
+    },
+    {
+      "Original": "A rare damage type will occur for 1 in every ",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "稀有伤害类型平均每 ",
+      "Source": "library"
+    },
+    {
       "Original": "Action Text",
       "Context": "PluginUI.DrawSettingsWindow",
       "Role": "UI",
@@ -170,6 +186,15 @@
       "Source": "library"
     },
     {
+      "Original": "Debug Log Enabled",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用调试日志",
+      "Source": "library"
+    },
+    {
       "Original": "Delete",
       "Context": "Fools2023.DrawConfig",
       "Role": "UI",
@@ -192,6 +217,22 @@
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "打开伤害信息设置界面。",
+      "Source": "library"
+    },
+    {
+      "Original": "Due to the castbar border texture being yellow, the blue channel does not appear properly on the castbar border.",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "读条边框的纹理为黄色，因此边框无法正确显示蓝色通道。",
+      "Source": "library"
+    },
+    {
+      "Original": "Each attack in the game has a specific damage type, such as blunt, piercing, magic, limit break, \"breath\", and more. The only important damage types for mitigation are physical (encompassing slashing, blunt, and piercing), magic, and unique (sometimes referred to by the community as \"darkness\" damage).",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "每种攻击都有特定的伤害类型，如打击、突刺、魔法、极限技或吐息。选择减伤手段时，主要区分物理伤害（斩击、打击、突刺）、魔法伤害和特殊伤害（玩家有时称为“暗黑伤害”）。",
       "Source": "library"
     },
     {
@@ -425,6 +466,14 @@
       "Source": "library"
     },
     {
+      "Original": "Physical damage can be mitigated by reducing an enemy's strength stat, or with moves that specifically mention physical damage reduction. Magic damage can be mitigated by reducing an enemy's intelligence stat, or with moves that specifically mention magic damage reduction. Unique damage cannot be mitigated by reducing an enemy's stats or mitigating against physical or magic damage - only moves that \"reduce a target's damage dealt\" will affect unique damage.",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "降低敌人的力量或使用专门减轻物理伤害的技能，可以减轻物理伤害。降低敌人的智力或使用专门减轻魔法伤害的技能，可以减轻魔法伤害。前述手段均无法减轻特殊伤害，只有注明“降低目标造成的伤害”的技能对其有效。",
+      "Source": "library"
+    },
+    {
       "Original": "Physical##bg",
       "Context": "PluginUI.DrawSettingsWindow",
       "PreserveID": true,
@@ -449,6 +498,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.ColorEdit4",
       "Translated": "物理",
+      "Source": "library"
+    },
+    {
+      "Original": "Please note this 'feature' is in maintenance mode and will not have anything new added, but will be fixed in case of bugs.",
+      "Context": "Fools2023.DrawConfig",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "此功能已进入维护阶段。后续仅修复问题，不再添加新内容。",
       "Source": "library"
     },
     {
@@ -652,6 +709,30 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputText",
       "Translated": "后缀",
+      "Source": "library"
+    },
+    {
+      "Original": "The Positional Action Text options will not override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will not show, even if you have any prefixes or suffixes enabled.",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "对有身位要求的攻击，身位提示沿用技能文字设置。例如，若已关闭造成伤害的技能文字，即使启用前缀或后缀，身位提示也会隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "The Positional Action Text options will override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will still show if you have any prefixes or suffixes enabled.",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "对有身位要求的攻击，身位提示优先采用自己的设置。例如，即使已关闭造成伤害的技能文字，启用了前缀或后缀仍会显示身位提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will wipe your existing flytext colors for physical, magical,\nand unique damage, and replace them with pre-set colors\nthat match the vanilla flytext damage type icons.\nThis is meant to complement the vanilla damage icons\nrather than improve damage type visibility.\n\nThis cannot be undone automatically.\nAre you sure you want to continue?",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "此操作将清除物理、魔法和特殊伤害的飘字颜色，\n并替换为与游戏原版飘字伤害图标匹配的预设颜色。\n预设颜色用于搭配原版伤害图标，\n以保持显示风格一致，\n不会进一步突出伤害类型。\n\n此更改无法自动撤销。\n确定继续吗？",
       "Source": "library"
     },
     {

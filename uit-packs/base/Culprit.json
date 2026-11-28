@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": " ms total pause",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": " 毫秒的总停顿时间",
+      "Source": "library"
+    },
+    {
       "Original": ". See the Live tab.",
       "Context": "[Culprit] Notifier.ShowReducedMode",
       "Role": "UI",
@@ -84,6 +92,15 @@
       "Source": "library"
     },
     {
+      "Original": "Culprit###CulpritMain",
+      "Context": "[Culprit] MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Culprit 卡顿分析",
+      "Source": "library"
+    },
+    {
       "Original": "Detail",
       "Context": "[Culprit] IncidentsTab.Draw",
       "PreserveID": true,
@@ -124,6 +141,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "最长绘制耗时",
+      "Source": "library"
+    },
+    {
+      "Original": "Draw stats",
+      "Context": "[Culprit] DrawStatsProbe..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "绘制统计",
       "Source": "library"
     },
     {
@@ -178,6 +203,14 @@
       "Source": "library"
     },
     {
+      "Original": "Frames over the unattributed limit where no plugin crossed the stall limit. The game itself causes most of these, so they are logged but not shown by default.",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "帧耗时超过归因阈值，但没有插件超过卡顿阈值。大部分此类卡顿由游戏自身导致，默认仅记录，不弹窗。",
+      "Source": "library"
+    },
+    {
       "Original": "Framework update tracking is off in /xlstats",
       "Context": "[Culprit] Sampler.get_TrackingWarnings",
       "Role": "UI",
@@ -192,6 +225,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "忽略",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored plugins",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已忽略的插件",
       "Source": "library"
     },
     {
@@ -222,6 +263,14 @@
       "Source": "library"
     },
     {
+      "Original": "Log stream",
+      "Context": "[Culprit] LogProbe..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "实时日志",
+      "Source": "library"
+    },
+    {
       "Original": "Logged only (cooldown, mute, or unattributed)",
       "Context": "[Culprit] IncidentsTab.Draw",
       "Role": "UI",
@@ -247,11 +296,35 @@
       "Source": "library"
     },
     {
+      "Original": "None. Tick Ignore on the Live tab to add one.",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "暂无。请在「实时」页勾选「忽略」以添加插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Off: a plugin must stall or drain twice within the repeat window before you get a toast, so one-off costs like opening a window stay quiet. Every incident is still recorded on the Incidents tab.",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭时，同一插件必须在统计时段内出现两次卡顿或持续高耗时才会弹窗。打开窗口等一次性开销不会触发提醒，每次异常仍会记入「异常事件」页。",
+      "Source": "library"
+    },
+    {
       "Original": "Only plugins with an incident, an error, or a 5 s average of 1 ms or more are listed.",
       "Context": "[Culprit] LiveTab.DrawTable",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "仅列出发生过异常、报告过错误或 5 秒内平均耗时至少为 1 毫秒的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Culprit. \"/culprit pause\" and \"/culprit resume\" toggle detection, \"/culprit reset\" clears counters, \"/culprit report\" saves a text report you can share.",
+      "Context": "[Culprit] Plugin..ctor",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "打开 Culprit。输入 /culprit pause 暂停检测，/culprit resume 恢复检测，/culprit reset 清零计数，/culprit report 保存可分享的文本报告。",
       "Source": "library"
     },
     {
@@ -278,6 +351,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "插件",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduced mode: some signals are missing. Dalamud's internals may have changed; report the red line above.",
+      "Context": "[Culprit] LiveTab.DrawStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "精简模式：缺少部分检测信号。Dalamud 内部可能有变更，请反馈上方红色提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Repeat window (min)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "重复检测时段（分钟）",
       "Source": "library"
     },
     {
@@ -436,6 +526,15 @@
       "Source": "library"
     },
     {
+      "Original": "Toast unattributed stalls",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "为无法归因的卡顿弹窗",
+      "Source": "library"
+    },
+    {
       "Original": "Unattributed",
       "Context": "[Culprit] ReportBuilder.RuleName",
       "Role": "UI",
@@ -471,6 +570,14 @@
       "Source": "library"
     },
     {
+      "Original": "Update stats",
+      "Context": "[Culprit] UpdateStatsProbe..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "更新耗时统计",
+      "Source": "library"
+    },
+    {
       "Original": "Value",
       "Context": "[Culprit] IncidentsTab.Draw",
       "PreserveID": true,
@@ -486,6 +593,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "首次出现异常即警告",
+      "Source": "library"
+    },
+    {
+      "Original": "Write incidents to /xllog (debug level)",
+      "Context": "[Culprit] SettingsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将异常事件写入 /xllog（调试级别）",
       "Source": "library"
     },
     {

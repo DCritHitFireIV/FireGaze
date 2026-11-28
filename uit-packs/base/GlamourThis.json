@@ -64,6 +64,14 @@
       "Source": "library"
     },
     {
+      "Original": " pieces of this set.",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": " 件属于此套装。",
+      "Source": "library"
+    },
+    {
       "Original": " sets",
       "Context": "MainWindow.DrawSetsTab",
       "Role": "UI",
@@ -77,6 +85,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "（投影台已关闭，无法操作）",
+      "Source": "library"
+    },
+    {
+      "Original": ": a copy is in your Armoire, and the game treats it as one-of-a-kind. Remove the Armoire copy first if you want this one in your bags.",
+      "Context": "DresserActionService.DriveRestores",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "：收藏柜中已有一件，游戏将其视为稀有物品。如想将这件放入背包，请先从收藏柜中取出已有的物品。",
       "Source": "library"
     },
     {
@@ -187,6 +203,14 @@
       "Source": "library"
     },
     {
+      "Original": "Filter by expansion, approximated from each item's required level.\nLevel 1 cosmetic / event gear is grouped under \"Special (Lv 1)\".",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按资料片筛选，根据各物品的装备等级估算所属版本。\n1 级外观或活动装备归入「特殊（1 级）」。",
+      "Source": "library"
+    },
+    {
       "Original": "Glamour This - Settings###GlamourThisConfig",
       "Context": "ConfigWindow..ctor",
       "PreserveID": true,
@@ -245,6 +269,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Items tab: show only Outfit Glamour-ready pieces.\nSets tab: show only complete sets you can still store as an outfit.",
+      "Context": "MainWindow.DrawToolbar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "物品页：仅显示可作为整套装备投影存放的部件。\n套装页：仅显示已收齐且仍可整套存放的套装。",
       "Source": "library"
     },
     {
@@ -345,6 +377,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "按名称搜索…",
+      "Source": "library"
+    },
+    {
+      "Original": "Set #",
+      "Context": "OutfitSetService.ResolveSetName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "套装编号",
       "Source": "library"
     },
     {
@@ -478,11 +518,27 @@
       "Source": "library"
     },
     {
+      "Original": "You own ",
+      "Context": "MainWindow.DrawSetGroup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已持有 ",
+      "Source": "library"
+    },
+    {
       "Original": "You own all pieces of this set.",
       "Context": "MainWindow.DrawSetGroup",
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "此套装的所有部件均已集齐。",
+      "Source": "library"
+    },
+    {
+      "Original": "complete = you own every piece of the set (so it can be stored as one outfit glamour).\nstored = the set is already condensed into a single outfit slot in your dresser.\nx/y = how many of the set's pieces you currently own.\n\nWith \"Outfit-ready\" ticked this lists only sets you own in full and have not stored yet,\nand a set drops off the list once you have stored it as an outfit.",
+      "Context": "MainWindow.DrawSetsTab",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已集齐：你持有套装的所有部件，可以整套存入投影台。\n已存放：该套装已合并，在投影台中占用一个栏位。\nx/y：你目前持有的部件数／套装总件数。\n\n勾选「可整套存放」后，此处只列出已集齐且尚未整套存放的套装。\n整套存放后，套装会从列表中移除。",
       "Source": "library"
     }
   ],

@@ -134,6 +134,15 @@
       "Source": "library"
     },
     {
+      "Original": "Sound to play (SE.1 - SE.16)",
+      "Context": "ConfigurationWindow.TargetSoundConfig",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "播放的提示音（SE.1 至 SE.16）",
+      "Source": "library"
+    },
+    {
       "Original": "Play the selected sound effect",
       "Context": "ConfigurationWindow.TargetSoundConfig",
       "PreserveID": false,
@@ -248,6 +257,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "插件设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the OhHey main window if used by itself or when using '/ohhey main'.\nUse '/ohhey config' to open the configuration window.",
+      "Context": "ChatCommandService..ctor",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage",
+      "Translated": "单独输入指令或输入 /ohhey main 可打开 OhHey 主窗口。\n输入 /ohhey config 打开设置。",
       "Source": "library"
     }
   ],

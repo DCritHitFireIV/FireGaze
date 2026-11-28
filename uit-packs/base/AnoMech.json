@@ -1871,12 +1871,135 @@
       "Source": "library"
     },
     {
+      "Original": "A player is on a different plugin build -- everyone needs to match.",
+      "Context": "[AnoMech] MultiplayerUi.StartBlockedReason",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "有玩家正在使用不同的插件版本。所有人都需要使用相同版本。",
+      "Source": "library"
+    },
+    {
+      "Original": "After the charges (~38.6s):",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.DrawThunderIIIPlan",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "冲锋结束后（约 38.6 秒）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Assign specific mechanics to players",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "指定每位玩家负责的机制",
+      "Source": "library"
+    },
+    {
+      "Original": "Ban them",
+      "Context": "[AnoMech] PartyPanelWindow.DrawConfirmPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "封禁该玩家",
+      "Source": "library"
+    },
+    {
+      "Original": "Ban...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawPeerMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem",
+      "Translated": "封禁……",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start: ",
+      "Context": "[AnoMech] RunController.StartRefusal",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "无法开始： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Caster",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "远程魔法职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Checking everyone's ready...",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionMessages",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "正在检查所有人是否已准备……",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose which mechanic each player gets in ",
+      "Context": "[AnoMech] MultiplayerUi.DrawAssignMechanicsButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为每位玩家指定机制： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Clockwise",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "顺时针",
+      "Source": "library"
+    },
+    {
+      "Original": "Clone order:",
+      "Context": "[AnoMech] UmadP3LimitCutSettingsWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "分身顺序：",
+      "Source": "library"
+    },
+    {
+      "Original": "Connect to a server",
+      "Context": "[AnoMech] MultiplayerUi.DrawSetupScreen",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "连接服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected -- measuring ping...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已连接，正在测量延迟……",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected -- waiting for a status update...",
+      "Context": "[AnoMech] PartyPanelWindow.DrawStatusDot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已连接，正在等待状态更新……",
+      "Source": "library"
+    },
+    {
+      "Original": "Connected to the server",
+      "Context": "[AnoMech] MultiplayerUi.DrawConnectionDot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "已连接到服务器",
       "Source": "library"
     },
     {
@@ -1902,6 +2025,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "复制",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the session code. Others join with it and your server's address.",
+      "Context": "[AnoMech] MultiplayerUi.DrawSessionStrip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "复制会话代码。其他玩家可使用此代码和你的服务器地址加入。",
+      "Source": "library"
+    },
+    {
+      "Original": "Counter-clockwise",
+      "Context": "[AnoMech] UmadP5FloodSettingsWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "逆时针",
       "Source": "library"
     },
     {

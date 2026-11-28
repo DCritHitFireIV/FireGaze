@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "Off leaves every window in your own Dalamud style.\nThe setting is shared, so it applies to every XIV Hub plugin at once.",
+      "Context": "HubThemeEditor.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "关闭后，各窗口将使用你自己的 Dalamud 样式。\n此设置由所有 XIV Hub 插件共享。",
+      "Source": "library"
+    },
+    {
       "Original": "Reset all",
       "Context": "HubThemeEditor.Draw",
       "PreserveID": true,
@@ -36,6 +44,13 @@
   ],
   "resources": [
     {
+      "Original": "Fertilize Crop",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Action_Fertilize",
+      "Translated": "给作物施肥",
+      "Source": "library"
+    },
+    {
       "Original": "Harvest",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Action_Harvest",
@@ -43,10 +58,80 @@
       "Source": "library"
     },
     {
+      "Original": "Plant Seeds",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Action_PlantSeeds",
+      "Translated": "播种",
+      "Source": "library"
+    },
+    {
       "Original": "Remove Crop",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Action_RemoveCrop",
       "Translated": "移除作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Tend Crop",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Action_Tend",
+      "Translated": "照料作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipped bed {0}: {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "ActivityLog_SkippedBeds_One",
+      "Translated": "已跳过第 {0} 块种植地：{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Skipped {0} beds: {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "ActivityLog_SkippedBeds_Other",
+      "Translated": "已跳过 {0} 块种植地：{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop: {0} was open but would not close.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Cleanup_AddonWouldNotClose",
+      "Translated": "已停止：{0} 已打开，但未能关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop: closed the open {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Cleanup_ClosedAddon",
+      "Translated": "已停止：已关闭打开的{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop: closed the open bed menu.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Cleanup_ClosedBedMenu",
+      "Translated": "已停止：已关闭种植地菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop: dismissed the open crop dialogue.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Cleanup_DismissedTalk",
+      "Translated": "已停止：已关闭作物对话框。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop: the open bed menu has no {0} entry; closing it directly instead.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Cleanup_NoQuitEntry",
+      "Translated": "已停止：种植地菜单中没有 {0} 项，直接关闭菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Gardener window. Subcommands: dump, dump menu.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Command_HelpMessage",
+      "Translated": "打开 Gardener 窗口。子命令：dump、dump menu。",
       "Source": "library"
     },
     {
@@ -78,10 +163,59 @@
       "Source": "library"
     },
     {
+      "Original": "Delay between beds (ms)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_BedDelayMs",
+      "Translated": "种植地间操作延迟（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reach distance to start a run (yalms)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_BedReachDistance",
+      "Translated": "开始作业所需的距离（星码）",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm before running a sweep",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_ConfirmBeforeRun",
+      "Translated": "开始巡视前确认",
+      "Source": "library"
+    },
+    {
       "Original": "Automation",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Config_Automation_Header",
       "Translated": "自动化",
+      "Source": "library"
+    },
+    {
+      "Original": "Menu wait timeout (ms)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_MenuTimeoutMs",
+      "Translated": "等待菜单的超时（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance that counts as moved away (yalms)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_MoveAbortDistance",
+      "Translated": "判定为已离开的距离（星码）",
+      "Source": "library"
+    },
+    {
+      "Original": "Raising this makes runs slower but more reliable.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_SlowerReliable",
+      "Translated": "提高此值会降低作业速度，但能提高稳定性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delay between actions (ms)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Automation_StepDelayMs",
+      "Translated": "操作间隔（毫秒）",
       "Source": "library"
     },
     {
@@ -92,10 +226,80 @@
       "Source": "library"
     },
     {
+      "Original": "Record how long your own crops take to mature and become harvestable",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Data_CollectGrowSamples",
+      "Translated": "记录自家作物从种下到成熟可收获的时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Narrows the harvest window in the Reminders tab from your own garden's timing.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Data_CollectGrowSamplesNote",
+      "Translated": "根据自家菜园的实际时间缩小“提醒”页签中的收获时段。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show data gap warnings",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Data_ShowGapWarnings",
+      "Translated": "显示数据缺失警告",
+      "Source": "library"
+    },
+    {
       "Original": "Developer",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Config_Developer_Header",
       "Translated": "开发者",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic (first one held)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_AutomaticFirstHeld",
+      "Translated": "自动（使用持有的第一种）",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown per bed (minutes)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_CooldownMinutes",
+      "Translated": "每块种植地的施肥间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "The game accepts one application per bed per hour regardless of this setting; a shorter cooldown here just tries earlier and gets refused.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_CooldownNote",
+      "Translated": "无论此设置为何，游戏每块种植地每小时只接受一次施肥。间隔更短只会提前尝试，操作会被拒绝。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fertilizer",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_Header",
+      "Translated": "肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Only fertilize a growing bed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_OnlyGrowing",
+      "Translated": "仅给有作物生长的种植地施肥",
+      "Source": "library"
+    },
+    {
+      "Original": "Which fertilizer to use",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Fertilizer_WhichHeader",
+      "Translated": "使用的肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic (follow Dalamud)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Language_Automatic",
+      "Translated": "自动（跟随 Dalamud）",
       "Source": "library"
     },
     {
@@ -113,6 +317,34 @@
       "Source": "library"
     },
     {
+      "Original": "(not held)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_NotHeld",
+      "Translated": "（未持有）",
+      "Source": "library"
+    },
+    {
+      "Original": "Planting defaults",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Planting_Header",
+      "Translated": "默认播种设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Which topsoil to reach for when the plugin plants for you.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Planting_Intro",
+      "Translated": "设置由插件代为播种时使用的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned soil",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Planting_PinnedSoilHeader",
+      "Translated": "指定土壤",
+      "Source": "library"
+    },
+    {
       "Original": "Soil for a crossbreed step",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Config_Planting_SoilForCross",
@@ -127,10 +359,80 @@
       "Source": "library"
     },
     {
+      "Original": "Echo reminders to chat",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_ChatEcho",
+      "Translated": "在聊天栏中显示提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat reminder interval (minutes)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_ChatIntervalMinutes",
+      "Translated": "聊天提醒间隔（分钟）",
+      "Source": "library"
+    },
+    {
+      "Original": "Reminders",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_Header",
+      "Translated": "提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "Narrate sweeps in chat",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_NarrateSweeps",
+      "Translated": "在聊天栏中报告巡视进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints a line in chat as a sweep tends, fertilizes, harvests, plants or skips each bed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_NarrateSweepsNote",
+      "Translated": "巡视时，每次照料、施肥、收获、播种或跳过种植地都会显示一条消息。",
+      "Source": "library"
+    },
+    {
       "Original": "Show reminder counts on the server info bar",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Config_Reminders_ShowDtr",
       "Translated": "在服务器信息栏显示提醒数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Warn this many hours before a bed wilts",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Reminders_WiltWarningHours",
+      "Translated": "作物枯萎前提前几小时提醒",
+      "Source": "library"
+    },
+    {
+      "Original": "One specific soil, pinned below",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_SoilPreference_Fixed",
+      "Translated": "以下方指定的一种土壤为准",
+      "Source": "library"
+    },
+    {
+      "Original": "Highest-grade La Noscean Topsoil (Potting Soil-equivalent)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_SoilPreference_HighestLaNoscean",
+      "Translated": "最高等级的拉诺西亚土壤（效果与培育用腐殖质相当）",
+      "Source": "library"
+    },
+    {
+      "Original": "Highest-grade Shroud Topsoil (best yield)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_SoilPreference_HighestShroud",
+      "Translated": "最高等级的黑衣森林土壤（提高产量）",
+      "Source": "library"
+    },
+    {
+      "Original": "Highest-grade Thanalan Topsoil (best intercross rate)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_SoilPreference_HighestThanalan",
+      "Translated": "最高等级的萨纳兰土壤（提高杂交概率）",
       "Source": "library"
     },
     {
@@ -141,10 +443,108 @@
       "Source": "library"
     },
     {
+      "Original": "Shared with every XIV Hub plugin.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_Theme_SharedNote",
+      "Translated": "此设置与所有 XIV Hub 插件共享。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardener Settings",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Config_WindowTitle",
+      "Translated": "Gardener 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing due.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Dtr_TooltipNothingDue",
+      "Translated": "当前没有到期事项。",
+      "Source": "library"
+    },
+    {
+      "Original": "about {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Duration_About",
+      "Translated": "约 {0}",
+      "Source": "library"
+    },
+    {
       "Original": "every {0}",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Duration_Every",
       "Translated": "每 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "every day",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Duration_EveryDay",
+      "Translated": "每天",
+      "Source": "library"
+    },
+    {
+      "Original": "a game error while opening the item menu",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_AgentUnavailableChat",
+      "Translated": "打开物品菜单时游戏报错",
+      "Source": "library"
+    },
+    {
+      "Original": "it's already mature; fertilizer wouldn't help",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_AlreadyMatureChat",
+      "Translated": "作物已经成熟，施肥不会生效",
+      "Source": "library"
+    },
+    {
+      "Original": "the item menu didn't open",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_ContextMenuNotOpenChat",
+      "Translated": "物品菜单未打开",
+      "Source": "library"
+    },
+    {
+      "Original": "fertilizing was disabled on the item",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_EntryDisabledOnItemChat",
+      "Translated": "该物品的施肥选项不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Fertilized bed {0} ({1}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_FertilizedChat",
+      "Translated": "已为第 {0} 块种植地施肥（{1}）。",
+      "Source": "library"
+    },
+    {
+      "Original": "the menu closed before it could be fertilized",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_MenuClosedChat",
+      "Translated": "尚未施肥，菜单已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "fertilizing didn't start",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_ModeNeverEngagedChat",
+      "Translated": "施肥未开始",
+      "Source": "library"
+    },
+    {
+      "Original": "fertilizing wasn't offered for this bed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_NoFertilizeEntryChat",
+      "Translated": "此种植地没有施肥选项",
+      "Source": "library"
+    },
+    {
+      "Original": "fertilizing wasn't offered on the item",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_NoFertilizeOnItemChat",
+      "Translated": "此物品没有施肥选项",
       "Source": "library"
     },
     {
@@ -155,10 +555,38 @@
       "Source": "library"
     },
     {
+      "Original": "already fertilized recently",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Fertilize_RecentlyFertilizedChat",
+      "Translated": "最近已施过肥",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_BedTooltipHeading",
+      "Translated": "第 {0} 块种植地",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_ColBed",
+      "Translated": "种植地",
+      "Source": "library"
+    },
+    {
       "Original": "Crop",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Garden_ColCrop",
       "Translated": "作物",
+      "Source": "library"
+    },
+    {
+      "Original": "Growth",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_ColGrowth",
+      "Translated": "生长状态",
       "Source": "library"
     },
     {
@@ -183,6 +611,125 @@
       "Source": "library"
     },
     {
+      "Original": "ripe",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CropRipe",
+      "Translated": "成熟",
+      "Source": "library"
+    },
+    {
+      "Original": "vigorous",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CropVigorous",
+      "Translated": "长势良好",
+      "Source": "library"
+    },
+    {
+      "Original": "wilted",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CropWilted",
+      "Translated": "萎蔫",
+      "Source": "library"
+    },
+    {
+      "Original": "withered",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_CropWithered",
+      "Translated": "枯死",
+      "Source": "library"
+    },
+    {
+      "Original": "Forget",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_ForgetButton",
+      "Translated": "忘记记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvest readiness is checked roughly once an hour, so a bed can stay unlisted for a while after it matures.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_HarvestLagNote",
+      "Translated": "插件大约每小时检查一次是否可收获，因此作物成熟后可能要过一段时间才会显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Last seen by {0}, {1}h ago.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_LastSeenLine",
+      "Translated": "{0} 上次查看于 {1} 小时前。",
+      "Source": "library"
+    },
+    {
+      "Original": "no data for this patch",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_NoDataForPatch",
+      "Translated": "尚无此菜圃的数据",
+      "Source": "library"
+    },
+    {
+      "Original": "No patches discovered. Stand in an outdoor housing plot.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_NoPatches",
+      "Translated": "尚未发现菜圃。请前往住宅用地的庭院。",
+      "Source": "library"
+    },
+    {
+      "Original": "Beds recorded here before, not found this visit ({0})",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_OrphansHeader",
+      "Translated": "此前在此记录、本次未发现的种植地（{0}）",
+      "Source": "library"
+    },
+    {
+      "Original": "This patch may be in storage, or it may have moved; either way the record stays and its timers are paused. Forget a record to stop tracking it.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_OrphansNote",
+      "Translated": "菜圃可能已收起或移位。记录会保留，计时暂停。忘记该记录可停止追踪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planted {0}h ago",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_PlantedHoursAgoButton",
+      "Translated": "种于 {0} 小时前",
+      "Source": "library"
+    },
+    {
+      "Original": "When was this bed planted?",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_PlantingTimePopupHeading",
+      "Translated": "这块地是什么时候播种的？",
+      "Source": "library"
+    },
+    {
+      "Original": "seen by {0}, {1}h ago",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_SeenBy",
+      "Translated": "{0} 于 {1} 小时前查看",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets every bed on this patch with no recorded planting time to planted this many hours ago:",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_SetAllPlantingTimesBody",
+      "Translated": "将此菜圃中未记录播种时间的所有种植地设为在以下小时数之前播种：",
+      "Source": "library"
+    },
+    {
+      "Original": "Set them all",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_SetAllPlantingTimesButton",
+      "Translated": "全部设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Set planting time",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_SetPlantingTimeButton",
+      "Translated": "设置播种时间",
+      "Source": "library"
+    },
+    {
       "Original": "growing ({0} of 4)",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Garden_StageGrowing",
@@ -190,10 +737,45 @@
       "Source": "library"
     },
     {
+      "Original": "mature (4)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_StageMature",
+      "Translated": "成熟（4）",
+      "Source": "library"
+    },
+    {
+      "Original": "Garden",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_TabLabel",
+      "Translated": "菜园",
+      "Source": "library"
+    },
+    {
+      "Original": "row {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_UnresolvedSeedRow",
+      "Translated": "第 {0} 行",
+      "Source": "library"
+    },
+    {
       "Original": "Mature.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Garden_WhenMature",
       "Translated": "已成熟。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not recorded yet.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenNotRecordedYet",
+      "Translated": "尚未记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready in {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenReadyIn",
+      "Translated": "{0} 后可收获。",
       "Source": "library"
     },
     {
@@ -218,10 +800,171 @@
       "Source": "library"
     },
     {
+      "Original": "Wilted; tend within {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Garden_WhenWiltedTendWithin",
+      "Translated": "已萎蔫，请在 {0} 内照料。",
+      "Source": "library"
+    },
+    {
       "Original": "Withered.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Garden_WhenWithered",
       "Translated": "已枯死。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pinned soil item {0} is not a recognised topsoil.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "GardeningItems_PinnedSoilNotRecognised",
+      "Translated": "已指定的土壤物品 {0} 无法识别为种植土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold no soil of this kind. {0} is the one to get.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "GardeningItems_SoilFamilyNotInBag",
+      "Translated": "未持有此类土壤。需要取得 {0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "no item id recorded for grade {0} {1} soil",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "GardeningItems_SoilNameUnresolved",
+      "Translated": "未记录 {0} 级{1}土壤的物品 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "No {0} in the bag.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "GardeningItems_SoilNotInBag",
+      "Translated": "背包中没有{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You already hold {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_AlreadyHold",
+      "Translated": "你已经持有 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant one in {0} and harvest in {1} for {2} {3} and {4} seed back.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_AlreadyMetPlan",
+      "Translated": "在{0}中种下一个，{1} 后可收获 {2} 个{3}，并取得 {4} 粒种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed {0} is growing. You will know whether it crossed when it is ready to harvest.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_AttemptUnresolved",
+      "Translated": "第 {0} 块种植地的作物正在生长，收获时才能知道是否杂交成功。",
+      "Source": "library"
+    },
+    {
+      "Original": "Beds: {0} ({1} pairs), assuming a single Deluxe patch; no patch has been recorded yet.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_BedsCountAssumed",
+      "Translated": "种植地：{0} 块（{1} 对）。尚未记录菜圃，暂按一个高级菜圃计算。",
+      "Source": "library"
+    },
+    {
+      "Original": "Beds: {0} across {1} patches ({2} pairs).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_BedsCountManyPatches",
+      "Translated": "种植地：共 {0} 块，分布于 {1} 个菜圃（{2} 对）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Beds: {0} ({1} pairs).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_BedsCountOnePatch",
+      "Translated": "种植地：{0} 块（{1} 对）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardener cannot fit this step into the free beds on this patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CannotFitStep",
+      "Translated": "此菜圃空余的种植地不足以完成这一步。",
+      "Source": "library"
+    },
+    {
+      "Original": "Patches with an unconfirmed layout: {0}. This route does not plant on them.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CapacityIgnoresUnconfirmed",
+      "Translated": "以下菜圃布局尚未确认，本方案不会在其中播种：{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear goal",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ClearGoalButton",
+      "Translated": "清除目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant on {0}: {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ConfirmPlantPatchBody",
+      "Translated": "在 {0} 播种：{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant this step?",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ConfirmPlantStepTitle",
+      "Translated": "执行这一步播种吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Nobody has published the split between the two, so Gardener treats it as a coin toss.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossCoinToss",
+      "Translated": "尚无公开数据说明这两种结果的比例，因此按各半估算。",
+      "Source": "library"
+    },
+    {
+      "Original": "One round plants {0} pairs.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossFinalRoundsPerRound",
+      "Translated": "每轮种植 {0} 对。",
+      "Source": "library"
+    },
+    {
+      "Original": "This cross wants about {0} attempts, so plan on {1} rounds, about {2} days total.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossFinalRoundsPlan",
+      "Translated": "这组杂交预计需要尝试约 {0} 次，计划分 {1} 轮种植，共约 {2} 天。",
+      "Source": "library"
+    },
+    {
+      "Original": "The crossing beds come back as {0}, and you cannot pick which.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossMultiOutcome",
+      "Translated": "杂交种植地将产出 {0}，无法指定结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Half the beds hold {0} and half hold {1}, alternating around the ring.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossPlantLayout",
+      "Translated": "种植地一半种 {0}、一半种 {1}，沿圈交替排列。",
+      "Source": "library"
+    },
+    {
+      "Original": "This pair makes nothing else.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossSingleOutcomeOnly",
+      "Translated": "此组合不会产生其他杂交结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Grow {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_CrossStepTitle",
+      "Translated": "种植 {0}",
       "Source": "library"
     },
     {
@@ -232,10 +975,80 @@
       "Source": "library"
     },
     {
+      "Original": "The final cross needs {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_DemandFinalCross",
+      "Translated": "最后一次杂交需要 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
       "Original": "Later steps need {0} {1}.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Goal_DemandLaterSteps",
       "Translated": "后续步骤需要 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing {0} needs {1} {2}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_DemandNamedStep",
+      "Translated": "种植 {0} 需要 {1} 个{2}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardener does not know how long this seed takes to grow.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_GrowTimeUnknown",
+      "Translated": "Gardener 尚无这类种子的生长时长数据。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_GrowingNoEarliest",
+      "Translated": "正在第 {0} 块种植地生长。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. About {1} left, at the earliest.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_GrowingTimeLeft",
+      "Translated": "正在第 {0} 块种植地生长。最早还需约 {1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. About {1} left, at the earliest, estimated.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_GrowingTimeLeftEstimated",
+      "Translated": "正在第 {0} 块种植地生长。估算最早还需约 {1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. Gardener does not know when this one is ready. Set when you planted it on the Garden tab.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_GrowingUnknownTiming",
+      "Translated": "正在第 {0} 块种植地生长，成熟时间未知。请在“菜园”页签填写播种时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvest gives {0} {1} and {2} seed back at any soil grade.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_HarvestYieldFixed",
+      "Translated": "任意等级的土壤均可收获 {0} 个{1}，并获得 {2} 粒种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvest gives {0} {1} and {2} seed back, depending on your soil.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_HarvestYieldVaries",
+      "Translated": "产量取决于土壤，可收获 {0} 个{1}，并获得 {2} 粒种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "This is what Gardener saw on your last visit, {0} ago.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_LastVisitAge",
+      "Translated": "这是 Gardener 在 {0} 前上次查看时记录的情况。",
       "Source": "library"
     },
     {
@@ -246,10 +1059,185 @@
       "Source": "library"
     },
     {
+      "Original": "Now",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_MarkerNow",
+      "Translated": "现在",
+      "Source": "library"
+    },
+    {
+      "Original": "Mine Grade 3 in {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_MineHint",
+      "Translated": "在{0}采集三级土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "You need {0} and {1} to plant this step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NeedBothSeeds",
+      "Translated": "这一步播种需要{0}和{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You need {0} more {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NeedMoreSeed",
+      "Translated": "还需 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You need 1 more {0} to plant this step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NeedOneMoreSeed",
+      "Translated": "这一步播种还缺 1 个{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You need {0} to plant this step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NeedSeedsToPlant",
+      "Translated": "这一步播种需要{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardener has never seen a garden of yours. Stand at your plot once and it will know which step you are on.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NeverSeenGarden",
+      "Translated": "Gardener 尚未见过你的菜园。请前往住宅用地一次，插件即可识别目前的进度。",
+      "Source": "library"
+    },
+    {
+      "Original": "You do not need to crossbreed {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoCrossbreedNeeded",
+      "Translated": "无需杂交培育{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gardener cannot find a way to grow {0} from seeds you can buy or gather.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoRouteCannotGrow",
+      "Translated": "Gardener 找不到从可购买或采集的种子培育出{0}的途径。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Settings and check Data health.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoRouteCheckSettings",
+      "Translated": "打开设置，检查数据完整性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Its crossbreed data has no parent pair for it, so there is nothing to plan.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoRouteNoParentPair",
+      "Translated": "杂交数据中没有记录它的亲本组合，无法规划。",
+      "Source": "library"
+    },
+    {
+      "Original": "You have no soil for this step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoSoilForStepFallback",
+      "Translated": "没有这一步所需的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not at the garden.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NotAtGarden",
+      "Translated": "你不在菜园旁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not started.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NotStarted",
+      "Translated": "尚未开始。",
+      "Source": "library"
+    },
+    {
+      "Original": "ffxivgardening.com rates this pair {0} out of 100.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoteRating",
+      "Translated": "ffxivgardening.com 为此组合评了 {0} 分（满分 100 分）。",
+      "Source": "library"
+    },
+    {
+      "Original": "That rating is per pair, not per result, and its meaning isn't published, so Gardener only uses it to prefer one pair over another and sizes this step from the soil estimate instead.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_NoteRatingMeaning",
+      "Translated": "该评分针对亲本组合，没有公布具体含义，也不区分各个产物。Gardener 只用它来比较组合，尝试次数仍按土壤估算。",
+      "Source": "library"
+    },
+    {
+      "Original": "You will also need {0} and {1} later in this route.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ObtainSoilNote",
+      "Translated": "本方案稍后还会用到{0}和{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You will also need {0} later in this route.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ObtainSoilNoteSame",
+      "Translated": "本方案稍后还会用到{0}。",
+      "Source": "library"
+    },
+    {
       "Original": "Get the starting seeds",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Goal_ObtainTitle",
       "Translated": "获取起始种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Where: {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ObtainWhere",
+      "Translated": "地点：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "bed {0}: {1}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PairBedExisting",
+      "Translated": "第 {0} 块地：{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "bed {0}: plant {1} here",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PairBedPlantHere",
+      "Translated": "第 {0} 块地：种植{1}",
+      "Source": "library"
+    },
+    {
+      "Original": "Stand closer to this patch to plant it ({0}y away).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PatchOutOfReach",
+      "Translated": "请靠近菜圃后再播种（相距 {0} 星码）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick something else",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PickSomethingElseButton",
+      "Translated": "选择其他目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick a seed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PickerHeader",
+      "Translated": "选择种子",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick what you want to grow and Gardener works out the steps from what you already hold.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PickerIntro",
+      "Translated": "选择想种植的作物，Gardener 会根据你已有的物品规划步骤。",
       "Source": "library"
     },
     {
@@ -260,10 +1248,157 @@
       "Source": "library"
     },
     {
+      "Original": "This step plants into",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_PlantsIntoHeader",
+      "Translated": "本步骤的播种位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Quickest from what you hold right now:",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_QuickPicksHeader",
+      "Translated": "按目前持有的物品，最快的方案是：",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready {0} after you plant.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_ReadyAfterPlant",
+      "Translated": "播种后 {0} 可收获。",
+      "Source": "library"
+    },
+    {
       "Original": "Ready to harvest in bed {0}.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Goal_ReadyToHarvest",
       "Translated": "种植位 {0} 的作物可以收获了。",
+      "Source": "library"
+    },
+    {
+      "Original": "Care",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SectionCare",
+      "Translated": "照料",
+      "Source": "library"
+    },
+    {
+      "Original": "Plant",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SectionPlant",
+      "Translated": "播种",
+      "Source": "library"
+    },
+    {
+      "Original": "How many",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SectionSizing",
+      "Translated": "数量",
+      "Source": "library"
+    },
+    {
+      "Original": "It gives back {0} seeds at any soil grade, so a bed of these multiplies over time.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SeedReturnMany",
+      "Translated": "任意等级的土壤均可回收 {0} 粒种子，因此每轮种植都会增加种子库存。",
+      "Source": "library"
+    },
+    {
+      "Original": "It gives back no seeds when harvested, so plant another from your stock each time.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SeedReturnNone",
+      "Translated": "收获时不会返还种子，每轮都需从库存中取种播种。",
+      "Source": "library"
+    },
+    {
+      "Original": "It gives back the one seed you planted, at any soil grade, so a bed sustains itself but never multiplies.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SeedReturnOne",
+      "Translated": "任意等级的土壤均可收回原先种下的那粒种子，所以可以持续种植，但不会增加种子数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Over {0} rounds that is {1} and {2}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilAllRounds",
+      "Translated": "{0} 轮共需{1}和{2}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Over {0} rounds that is {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilAllRoundsSame",
+      "Translated": "{0} 轮共需{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold {0} {1} and {2} {3}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilHeld",
+      "Translated": "你持有 {0} 个{1}和 {2} 个{3}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilHeldSame",
+      "Translated": "你持有 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "This round needs {0} {1} and {2} {3}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilPerRound",
+      "Translated": "本轮需要 {0} 个{1}和 {2} 个{3}。",
+      "Source": "library"
+    },
+    {
+      "Original": "This round needs {0} {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilPerRoundSame",
+      "Translated": "本轮需要 {0} 个{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil: {0} in every bed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilSameFamily",
+      "Translated": "土壤：所有种植地均使用{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Soil: {0} in the crossing beds, {1} in the beds that cross with nothing and come back as seed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SoilTwoFamilies",
+      "Translated": "土壤：杂交种植地使用{0}，不杂交、用于回收种子的种植地使用{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Where: not recorded.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SourcesNotRecorded",
+      "Translated": "地点：未记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Where: {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_SourcesWhere",
+      "Translated": "地点：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Stand at your garden to plant this step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StandAtGardenPlantHandoff",
+      "Translated": "前往菜园即可执行这一步播种。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stand at your garden to see which beds this uses.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StandAtGardenSeeBeds",
+      "Translated": "前往菜园可查看这一步用到的种植地。",
       "Source": "library"
     },
     {
@@ -281,10 +1416,59 @@
       "Source": "library"
     },
     {
+      "Original": "Step {0}: {1}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_StepHeader",
+      "Translated": "步骤 {0}：{1}",
+      "Source": "library"
+    },
+    {
       "Original": "Step {0} of {1}",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Goal_StepProgress",
       "Translated": "第 {0} 步，共 {1} 步",
+      "Source": "library"
+    },
+    {
+      "Original": "Goal",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TabLabel",
+      "Translated": "目标",
+      "Source": "library"
+    },
+    {
+      "Original": "crossbreed only",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TagCrossbreedOnly",
+      "Translated": "仅可通过杂交获得",
+      "Source": "library"
+    },
+    {
+      "Original": "you can buy or gather this",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TagGatherable",
+      "Translated": "可购买或采集",
+      "Source": "library"
+    },
+    {
+      "Original": "no crossbreed data, see Settings",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TagNoCrossData",
+      "Translated": "没有杂交数据，请查看设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Tend these beds {0} or they wilt.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TendOrWilt",
+      "Translated": "请{0}照料这些种植地，以免作物萎蔫。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. Tend it within {1} hour or it wilts.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_TendWithinHours_One",
+      "Translated": "正在第 {0} 块种植地生长。请在 {1} 小时内照料，以免萎蔫。",
       "Source": "library"
     },
     {
@@ -295,6 +1479,90 @@
       "Source": "library"
     },
     {
+      "Original": "That is {0} visit.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_WiltVisitCount_One",
+      "Translated": "共需探访 {0} 次。",
+      "Source": "library"
+    },
+    {
+      "Original": "That is {0} visits.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_WiltVisitCount_Other",
+      "Translated": "共需探访 {0} 次。",
+      "Source": "library"
+    },
+    {
+      "Original": "Growing in bed {0}. It has wilted; tend it before it withers.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_WiltedTendBeforeWithers",
+      "Translated": "正在第 {0} 块种植地生长。已萎蔫，请在枯死前照料。",
+      "Source": "library"
+    },
+    {
+      "Original": "A bed of {0} returns 1 seed, so one round of {1} beds covers it.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_YieldCoversOne_One",
+      "Translated": "每块地种植{0}可收回 1 粒种子，因此用 {1} 块地种一轮即可。",
+      "Source": "library"
+    },
+    {
+      "Original": "A bed of {0} returns {1} seeds, so one round of {2} beds covers it.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_YieldCoversOne_Other",
+      "Translated": "每块地种植{0}可收回 {1} 粒种子，因此用 {2} 块地种一轮即可。",
+      "Source": "library"
+    },
+    {
+      "Original": "A bed of {0} returns 1 seed, so this needs {1} rounds of {2} beds, about {3} days total.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_YieldNeedsRounds_One",
+      "Translated": "每块地种植{0}可收回 1 粒种子，需要用 {2} 块地种 {1} 轮，共约 {3} 天。",
+      "Source": "library"
+    },
+    {
+      "Original": "A bed of {0} returns {1} seeds, so this needs {2} rounds of {3} beds, about {4} days total.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Goal_YieldNeedsRounds_Other",
+      "Translated": "每块地种植{0}可收回 {1} 粒种子，需要用 {3} 块地种 {2} 轮，共约 {4} 天。",
+      "Source": "library"
+    },
+    {
+      "Original": "This character may lack FC rank permissions here; gardening actions may silently fail.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_FcPermissionsWarning",
+      "Translated": "当前角色可能没有部队的栽培权限，园艺操作可能失败而不显示提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearest patch is {0}y away (limit {1}y).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_NearestPatchTooFar",
+      "Translated": "最近的菜圃距离 {0} 星码（上限 {1} 星码）。",
+      "Source": "library"
+    },
+    {
+      "Original": "No patches discovered here.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_NoPatchesHere",
+      "Translated": "此处未发现菜圃。",
+      "Source": "library"
+    },
+    {
+      "Original": "No patches discovered on plot {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_NoPatchesOnPlot",
+      "Translated": "在 {0} 号地未发现菜圃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Not standing in a housing territory.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_NotInHousing",
+      "Translated": "当前不在住宅区内。",
+      "Source": "library"
+    },
+    {
       "Original": "Player is occupied ({0}).",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Guard_OccupiedGeneric",
@@ -302,10 +1570,136 @@
       "Source": "library"
     },
     {
+      "Original": "Player is occupied in a quest event ({0}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_OccupiedQuestEvent",
+      "Translated": "角色正处于任务事件中（{0}）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player is occupied at a summoning bell ({0}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_OccupiedSummoningBell",
+      "Translated": "角色正在使用传唤铃（{0}）。",
+      "Source": "library"
+    },
+    {
+      "Original": "This patch is {0}y away (limit {1}y).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_PatchTooFar",
+      "Translated": "此菜圃距离 {0} 星码（上限 {1} 星码）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Player position unavailable.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Guard_PlayerPositionUnavailable",
+      "Translated": "无法获取角色位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "bundled",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_ConfidenceBundled",
+      "Translated": "内置数据",
+      "Source": "library"
+    },
+    {
+      "Original": "estimated",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_ConfidenceEstimated",
+      "Translated": "估算",
+      "Source": "library"
+    },
+    {
+      "Original": "observed, {0} sample(s)",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_ConfidenceObserved",
+      "Translated": "实测，{0} 个样本",
+      "Source": "library"
+    },
+    {
+      "Original": "Harvested bed {0} ({1}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_HarvestedChat",
+      "Translated": "已收获第 {0} 块种植地（{1}）。",
+      "Source": "library"
+    },
+    {
+      "Original": "the menu closed before it could be harvested",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_MenuClosedChat",
+      "Translated": "尚未收获，菜单已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "it wasn't actually ready to harvest yet",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Harvest_NoHarvestEntryChat",
+      "Translated": "作物其实还未成熟",
+      "Source": "library"
+    },
+    {
       "Original": "Log",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Log_TabLabel",
       "Translated": "日志",
+      "Source": "library"
+    },
+    {
+      "Original": "About {0} in 10",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Odds_AboutNInTen",
+      "Translated": "约为十分之 {0}",
+      "Source": "library"
+    },
+    {
+      "Original": "its dialogue box would not close",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_DialogueStillOpenChat",
+      "Translated": "无法关闭其对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "the bed can't be found right now",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_EntityGoneChat",
+      "Translated": "暂时找不到这块种植地",
+      "Source": "library"
+    },
+    {
+      "Original": "its position kept disagreeing with the map",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_GaveUpAfterAttemptsChat",
+      "Translated": "检测到的位置一直与地图不符",
+      "Source": "library"
+    },
+    {
+      "Original": "its menu never opened",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_MenuNeverOpenedChat",
+      "Translated": "未能打开其菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "the game hasn't located this bed yet",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_NoPredictedEntityChat",
+      "Translated": "游戏尚未定位到这块种植地",
+      "Source": "library"
+    },
+    {
+      "Original": "its menu wasn't recognized",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_PromptUnparsedChat",
+      "Translated": "无法识别其菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "a game error while targeting",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "OpenBed_TargetSystemUnavailableChat",
+      "Translated": "选择目标时游戏报错",
       "Source": "library"
     },
     {
@@ -323,10 +1717,248 @@
       "Source": "library"
     },
     {
+      "Original": "Shared estate",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Patch_EstateShared",
+      "Translated": "共享住宅",
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown estate",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Patch_EstateUnknown",
+      "Translated": "未知住宅",
+      "Source": "library"
+    },
+    {
+      "Original": "This patch has not been recorded yet.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Patch_NotRecorded",
+      "Translated": "尚未记录此菜圃。",
+      "Source": "library"
+    },
+    {
+      "Original": "an unknown number of",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Phrase_UnknownCount",
+      "Translated": "数量未知的",
+      "Source": "library"
+    },
+    {
+      "Original": "This cross can also yield {0} instead of {1}; the result isn't guaranteed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_AlsoYields",
+      "Translated": "本次杂交也可能产出{0}，不保证获得{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed {0} ({1}) no longer crosses the way the plan expected; skipped.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_BedCrossMismatch",
+      "Translated": "第 {0} 块种植地（{1}）已不满足方案的杂交条件，已跳过。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed {0} is no longer empty; the {1} step was dropped.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_BedNoLongerEmpty",
+      "Translated": "第 {0} 块种植地已不再空闲，已取消{1}步骤。",
+      "Source": "library"
+    },
+    {
+      "Original": "You need {0} and {1} to start this pair; none held.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NeedParentsToStart",
+      "Translated": "开始此组合需要{0}和{1}，两者均未持有。",
+      "Source": "library"
+    },
+    {
+      "Original": "No {0} left for the cross beds.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NoCrossSoilLeft",
+      "Translated": "杂交种植地所需的{0}已用完。",
+      "Source": "library"
+    },
+    {
+      "Original": "No free beds are left on this patch to start a new pair.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NoFreeBedsLeft",
+      "Translated": "此菜圃没有可用于新组合的空地。",
+      "Source": "library"
+    },
+    {
+      "Original": "No known cross produces {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NoKnownCross",
+      "Translated": "尚无已知杂交组合可产出{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "No soil available for the crossing step.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NoSoilForCrossingFallback",
+      "Translated": "没有可用于杂交步骤的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "No soil for the parent beds.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_NoSoilForParentFallback",
+      "Translated": "没有可用于亲本种植地的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold {0} {1} for the parent beds.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_ParentSoilStock",
+      "Translated": "你持有 {0} 个{1}，可用于亲本种植地。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planting {0} instead of {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_PlantingFewerPairs",
+      "Translated": "将改种{0}，替代{1}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Only {0} of free beds fit on this patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_ReasonBeds",
+      "Translated": "此菜圃只容得下 {0} 块空闲种植地。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold enough {0} and {1} for {2}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_ReasonSeeds",
+      "Translated": "你持有的{0}和{1}足以完成{2}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold enough topsoil for {0}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_ReasonSoil",
+      "Translated": "你持有的土壤足以完成{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "You hold {0} {1}, and a pair needs one for the parent bed and one for the cross bed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_SoilSharedStock",
+      "Translated": "你持有 {0} 个{1}。每对组合需要在亲本和杂交种植地各用一个。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crosses with its neighbouring {0} to reach {1} (ffxivgardening.com rating: {2}/100).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_WhyCrossRated",
+      "Translated": "与相邻的{0}杂交可产出{1}（ffxivgardening.com 评分：{2}/100）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Crosses with its neighbouring {0} to reach {1} (no rating yet).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_WhyCrossUnrated",
+      "Translated": "与相邻的{0}杂交可产出{1}（暂无评分）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Parent for {0}: plant here first so its neighbours can cross with it.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plan_WhyParent",
+      "Translated": "{0}的亲本：先在此处播种，附近作物才能与其杂交。",
+      "Source": "library"
+    },
+    {
+      "Original": "a game error while planting",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_AgentUnavailableChat",
+      "Translated": "播种时游戏报错",
+      "Source": "library"
+    },
+    {
+      "Original": "the planting dialog never opened",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_DialogNeverOpenedChat",
+      "Translated": "播种窗口未打开",
+      "Source": "library"
+    },
+    {
+      "Original": "the menu closed before it could be planted",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_MenuClosedChat",
+      "Translated": "尚未播种，菜单已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "planting wasn't offered for this bed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_NoPlantSeedsEntryChat",
+      "Translated": "此种植地没有播种选项",
+      "Source": "library"
+    },
+    {
       "Original": "No soil available.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Plant_NoSoilAvailableFallback",
       "Translated": "没有可用的土壤。",
+      "Source": "library"
+    },
+    {
+      "Original": "Stopped: bed {0}'s planting couldn't be confirmed.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_NotConfirmedChat",
+      "Translated": "已停止：无法确认第 {0} 块种植地是否播种成功。",
+      "Source": "library"
+    },
+    {
+      "Original": "Planted {0} in bed {1}, {2}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_PlantedChat",
+      "Translated": "已将{0}种在第 {1} 块种植地，{2}。",
+      "Source": "library"
+    },
+    {
+      "Original": "that seed is no longer in your bags",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_SeedGoneChat",
+      "Translated": "背包中已没有这种种子",
+      "Source": "library"
+    },
+    {
+      "Original": "your {0} is gone",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Plant_SoilStaleGoneChat",
+      "Translated": "你持有的{0}已用完",
+      "Source": "library"
+    },
+    {
+      "Original": "About to wither ({0})",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_AboutToWitherHeader",
+      "Translated": "即将枯死（{0}）",
+      "Source": "library"
+    },
+    {
+      "Original": "Every bed is tended.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_AllTended",
+      "Translated": "所有种植地均已照料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Every bed's planting time is known.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_AllTimingKnown",
+      "Translated": "所有种植地的播种时间均已记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Due to tend ({0})",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_DueToTendHeader",
+      "Translated": "需要照料（{0}）",
       "Source": "library"
     },
     {
@@ -337,10 +1969,52 @@
       "Source": "library"
     },
     {
+      "Original": "Nothing is close to withering.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_NothingWithering",
+      "Translated": "没有即将枯死的作物。",
+      "Source": "library"
+    },
+    {
       "Original": "Show in the Garden tab",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Reminders_OpenInGardenButton",
       "Translated": "在园艺标签页中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "no character seen here yet",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_ReachNone",
+      "Translated": "尚无角色到过此处的记录",
+      "Source": "library"
+    },
+    {
+      "Original": "switch to {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_ReachSwitch",
+      "Translated": "切换至{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "Ready to harvest ({0})",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_ReadyHeader",
+      "Translated": "可以收获（{0}）",
+      "Source": "library"
+    },
+    {
+      "Original": "nothing due",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_SummaryNothingDue",
+      "Translated": "暂无到期事项",
+      "Source": "library"
+    },
+    {
+      "Original": "Reminders",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Reminders_TabLabel",
+      "Translated": "提醒",
       "Source": "library"
     },
     {
@@ -351,6 +2025,139 @@
       "Source": "library"
     },
     {
+      "Original": "Removed {0} from bed {1}.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "RemoveCrop_RemovedChat",
+      "Translated": "已从第 {1} 块种植地移除{0}。",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't remove a crop while a sweep is running.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "RemoveCrop_SweepRunning",
+      "Translated": "巡视期间无法移除作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Already running.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_AlreadyRunning",
+      "Translated": "已在运行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sweep complete.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_GenericComplete",
+      "Translated": "巡视完成。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sweep finished.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_GenericFinished",
+      "Translated": "巡视结束。",
+      "Source": "library"
+    },
+    {
+      "Original": "you left the housing area.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_LeftHousingArea",
+      "Translated": "你已离开住宅区。",
+      "Source": "library"
+    },
+    {
+      "Original": "you moved away from the patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_MovedAwayFromPatch",
+      "Translated": "你已远离菜圃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Need at least {0} free inventory slots to harvest.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NeedFreeSlotsToHarvest",
+      "Translated": "收获需要背包至少有 {0} 个空位。",
+      "Source": "library"
+    },
+    {
+      "Original": "No fertilizer in the bag.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NoFertilizerInBag",
+      "Translated": "背包中没有肥料。",
+      "Source": "library"
+    },
+    {
+      "Original": "No plan to run.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NoPlanToRun",
+      "Translated": "没有可执行的方案。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to fertilize on {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToFertilize",
+      "Translated": "{0}菜圃中没有需要施肥的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to fertilize on your {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToFertilizeChat",
+      "Translated": "你的{0}菜圃中没有需要施肥的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to harvest on {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToHarvest",
+      "Translated": "{0}菜圃中没有可以收获的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to harvest on your {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToHarvestChat",
+      "Translated": "你的{0}菜圃中没有可以收获的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to tend on {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToTend",
+      "Translated": "{0}菜圃中没有需要照料的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing to tend on your {0} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_NothingToTendChat",
+      "Translated": "你的{0}菜圃中没有需要照料的作物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing left to plant; every step in the plan no longer checks out.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_PlanNothingLeft",
+      "Translated": "没有可播种的项目，方案中的所有步骤都已不满足条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing left to plant; the plan no longer checks out.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_PlanNothingLeftChat",
+      "Translated": "没有可播种的项目，当前方案已不满足条件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Started {0} on {1} patch.",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_Started",
+      "Translated": "已在{1}菜圃中开始{0}。",
+      "Source": "library"
+    },
+    {
       "Original": "Stopped.",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Scheduler_StoppedNoReason",
@@ -358,10 +2165,59 @@
       "Source": "library"
     },
     {
+      "Original": "Stopped: {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Scheduler_StoppedWithReason",
+      "Translated": "已停止：{0}",
+      "Source": "library"
+    },
+    {
+      "Original": "row {0}'s seed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "SeedItems_ItemRowFallback",
+      "Translated": "第 {0} 行的种子",
+      "Source": "library"
+    },
+    {
+      "Original": "row {0}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "SeedItems_ProduceRowFallback",
+      "Translated": "第 {0} 行",
+      "Source": "library"
+    },
+    {
+      "Original": "Bed order verified: {0}/{1}",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Sweep_BedOrderVerified",
+      "Translated": "已核实种植地顺序：{0}/{1}",
+      "Source": "library"
+    },
+    {
       "Original": "Stop",
       "Container": "Gardener.Localization.Strings.resources",
       "Key": "Sweep_StopButton",
       "Translated": "停止",
+      "Source": "library"
+    },
+    {
+      "Original": "the menu closed before it could be tended",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Tend_MenuClosedChat",
+      "Translated": "尚未照料，菜单已关闭",
+      "Source": "library"
+    },
+    {
+      "Original": "tending wasn't offered for this bed",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Tend_NoCareEntryChat",
+      "Translated": "此种植地没有照料选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Tended bed {0} ({1}).",
+      "Container": "Gardener.Localization.Strings.resources",
+      "Key": "Tend_TendedChat",
+      "Translated": "已照料第 {0} 块种植地（{1}）。",
       "Source": "library"
     }
   ],

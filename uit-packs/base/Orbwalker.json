@@ -16,6 +16,14 @@
       "Source": "library"
     },
     {
+      "Original": "Actions that are not technically casts but can be interrupted or stopped early due to movement of any kind.",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "部分技能无需咏唱，但移动会提前中断或停止技能效果。",
+      "Source": "library"
+    },
+    {
       "Original": "All",
       "Context": "UI.Jobs",
       "PreserveID": true,
@@ -25,12 +33,37 @@
       "Source": "library"
     },
     {
+      "Original": "Allows emergency movement via holding down MB1 and MB2 simultaneously.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "同时按住鼠标左右键可以紧急移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows use when in PvP game modes such as Frontlines and Crystaline Conflict.\n\nThis is considered an unfair advantage over other players so use at your own risk (and conscious).",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "允许在纷争前线和水晶冲突等 PvP 模式中使用。\n\n作者认为这会使你相对其他玩家取得不公平的优势，请自行权衡使用风险。",
+      "Source": "library"
+    },
+    {
       "Original": "Always",
       "Context": "UI.Settings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-detect new key",
+      "Context": "UI.DrawKeybind",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "自动识别新按键",
       "Source": "library"
     },
     {
@@ -68,6 +101,22 @@
       "Source": "library"
     },
     {
+      "Original": "Block movement when these actions are active:",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "以下技能生效时禁止移动：",
+      "Source": "library"
+    },
+    {
+      "Original": "Block movement when these actions are being casted:",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "咏唱以下技能时禁止移动：",
+      "Source": "library"
+    },
+    {
       "Original": "Blocks all movement when holding down a specified key.",
       "Context": "UI.Settings",
       "Role": "UI",
@@ -82,6 +131,23 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "首发咏唱加入队列",
+      "Source": "library"
+    },
+    {
+      "Original": "Casters",
+      "Context": "UI.Jobs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "魔法职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose when to display the Orbwalker overlay when enabled.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "选择启用 Orbwalker 后显示悬浮窗的时机。",
       "Source": "library"
     },
     {
@@ -128,12 +194,64 @@
       "Source": "library"
     },
     {
+      "Original": "Display Overlay",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "显示悬浮窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Display buttons vertically instead of horizontally. Only available with vector-based overlay.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "将按钮纵向排列。仅支持矢量悬浮窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "DoH",
+      "Context": "UI.Jobs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "能工巧匠",
+      "Source": "library"
+    },
+    {
+      "Original": "DoL",
+      "Context": "UI.Jobs",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "大地使者",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Mouse Button Release",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许使用鼠标按键解除移动限制",
+      "Source": "library"
+    },
+    {
       "Original": "Enable Orbwalker",
       "Context": "UI.Settings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "启用 Orbwalker",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable PvP Orbwalking",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在 PvP 中启用移动限制",
       "Source": "library"
     },
     {
@@ -153,12 +271,81 @@
       "Source": "library"
     },
     {
+      "Original": "Flamethrower (MCH)",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "火焰喷射器（机工士）",
+      "Source": "library"
+    },
+    {
+      "Original": "GCD: ",
+      "Context": "UI.Debug",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "公共复唱时间： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Ground Targeting Hold (seconds):",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "地面目标锁定时间（秒）：",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "按住",
+      "Source": "library"
+    },
+    {
+      "Original": "Image-based",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "图片模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Improvisation (DNC)",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "即兴表演（舞者）",
+      "Source": "library"
+    },
+    {
       "Original": "In Combat",
       "Context": "UI.Settings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "In Duty",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "副本中",
+      "Source": "library"
+    },
+    {
+      "Original": "Job-specific Actions",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "职业专属技能",
       "Source": "library"
     },
     {
@@ -194,11 +381,36 @@
       "Source": "library"
     },
     {
+      "Original": "Meditate (SAM)",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "默想（武士）",
+      "Source": "library"
+    },
+    {
+      "Original": "Miscellaneous Casts",
+      "Context": "UI.Extras",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "其他咏唱技能",
+      "Source": "library"
+    },
+    {
       "Original": "Movement",
       "Context": "UI.Settings",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextColored",
       "Translated": "移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Movement keys:",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "移动键：",
       "Source": "library"
     },
     {
@@ -226,12 +438,39 @@
       "Source": "library"
     },
     {
+      "Original": "Overlay scale",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "悬浮窗缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Passage of Arms (PLD)",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "武装戍卫（骑士）",
+      "Source": "library"
+    },
+    {
       "Original": "Permanently Release",
       "Context": "UI.Settings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "持续解除锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Phantom Flurry (BLU)",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "鬼宿脚（青魔法师）",
       "Source": "library"
     },
     {
@@ -251,6 +490,14 @@
       "Source": "library"
     },
     {
+      "Original": "Release Key Mode:",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text",
+      "Translated": "解除移动限制的按键模式：",
+      "Source": "library"
+    },
+    {
       "Original": "Releases player movement - used primarily by the release key setting above.",
       "Context": "UI.Settings",
       "Role": "UI",
@@ -259,11 +506,36 @@
       "Source": "library"
     },
     {
+      "Original": "Removes the requirement for the player to be stationary when channeling the first cast by buffering it until movement is halted. This setting may cause strange behavior with plugins such as Redirect or ReAction, or prevent their options from working at all, be warned!",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "先缓存第一次咏唱，直至角色停下再开始施法，起手前无需先站定。此项可能影响 Redirect 或 ReAction 等插件的行为，甚至使其部分功能失效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Return",
+      "Context": "UI.Extras",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "返回",
+      "Source": "library"
+    },
+    {
       "Original": "Select key manually:",
       "Context": "UI.DrawKeybind",
       "Role": "UI",
       "RoleReason": "→ ImGuiEx.Text",
       "Translated": "手动选择按键：",
+      "Source": "library"
+    },
+    {
+      "Original": "Select the jobs you wish to use Orbwalker's movement locking features on. Not all jobs have cast times, but if you have the extra features enabled for the general actions it will apply to those jobs.",
+      "Context": "UI.Jobs",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "选择要启用移动锁定的职业。部分职业没有读条技能，启用通用技能的额外功能后，那些职业也会受到影响。",
       "Source": "library"
     },
     {
@@ -317,11 +589,35 @@
       "Source": "library"
     },
     {
+      "Original": "Spells which have cast times that are also targeted on the ground (mainly found in BLU) register casting as the target appears, and will cancel cast times if moving as it's confirmed. This option forces your character to stop as the target appears for however long as to not cancel the cast pre-emptively.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "需咏唱的地面目标法术（多见于青魔法师）在出现选区时开始读条，确认选区时若移动则会取消。此项使角色从出现选区时起暂时停下，以免过早取消读条。",
+      "Source": "library"
+    },
+    {
       "Original": "Switch between automatic slidecast window calibration or manually setting a value.\n\n\"Automatic\" mode is fully reliable, but will always result in smaller slidecast windows. You may also need to manually configure based on current spell speed or network latency.",
       "Context": "UI.Settings",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "选择自动校准滑步时机或手动设定时长。\n\n自动模式较为保守，可滑步的时间会更短。根据当前咏唱速度和网络延迟，可能需要手动调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch between two available Orbwalking modes:\n\n \"Slidecast\" mode is the default and simply prevents player movement until the slidecast window is available, locking movement again to begin the next cast. You must be stationary for the first cast in most cases. \n\n\"Slidelock\" mode on the otherhand permanently locks the player from moving while in combat and only allows for movement during the slidecast window. The movement release key is the only way to enable movement when this mode is used.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "可选两种移动锁定模式：\n\n“滑步施法”是默认模式，只在可滑步的时间段放开移动，下次施法前重新锁定。第一次施法通常需要先站定。\n\n“战斗锁定”会在战斗中持续禁止移动，仅在滑步窗口允许移动。除此之外，只能使用解除移动限制键来移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Switches the movement release key from needing to be held, to becoming a toggle.",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "将解除移动限制的按键从按住生效改为点击切换。",
       "Source": "library"
     },
     {
@@ -334,12 +630,45 @@
       "Source": "library"
     },
     {
+      "Original": "Toggle",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle:",
+      "Context": "UI.Jobs",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV",
+      "Translated": "切换：",
+      "Source": "library"
+    },
+    {
       "Original": "Unlock at, s",
       "Context": "UI.Settings",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderFloat",
       "Translated": "解除锁定时机（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Vector-based",
+      "Context": "UI.Settings",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool",
+      "Translated": "矢量模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical layout",
+      "Context": "UI.Settings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "纵向排列",
       "Source": "library"
     }
   ],

@@ -170,6 +170,105 @@
       "Source": "library"
     },
     {
+      "Original": "Advanced native Guard threat weights",
+      "Context": "ConfigurationWindow.DrawNativeCombat",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "原生防御判断的高级威胁权重",
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced native target-score weights",
+      "Context": "ConfigurationWindow.DrawNativeCombat",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNode",
+      "Translated": "原生目标评分的高级权重",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset session match counter",
+      "Context": "ConfigurationWindow.DrawFrontline",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置本次会话的对局计数",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch to Classic",
+      "Context": "ConfigurationWindow.DrawAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "切换为经典主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration theme",
+      "Context": "ConfigurationWindow.DrawAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "设置界面主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Classic",
+      "Context": "ConfigurationWindow.DrawAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "经典",
+      "Source": "library"
+    },
+    {
+      "Original": "Sentinel Modern",
+      "Context": "ConfigurationWindow.DrawAppearance",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "Sentinel 现代主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh unlocked mounts",
+      "Context": "ConfigurationWindow.DrawPreferredMount",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "刷新已解锁的坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "External Combat / ACR",
+      "Context": "ConfigurationWindow.DrawCombatProvider",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "外部战斗循环",
+      "Source": "library"
+    },
+    {
+      "Original": "RotationSolverReborn (External)",
+      "Context": "ConfigurationWindow.DrawCombatProvider",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "RotationSolverReborn（外部）",
+      "Source": "library"
+    },
+    {
+      "Original": "Native PvPSentinel (experimental)",
+      "Context": "ConfigurationWindow.DrawCombatProvider",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "PvPSentinel 内置循环（实验性）",
+      "Source": "library"
+    },
+    {
       "Original": "not loaded",
       "Context": "ConfigurationWindow.DrawCombatProvider",
       "PreserveID": false,
@@ -215,12 +314,30 @@
       "Source": "library"
     },
     {
+      "Original": "Frontline Classification",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "纷争前线分类",
+      "Source": "library"
+    },
+    {
       "Original": "UNAVAILABLE",
       "Context": "DiagnosticWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "不可用",
+      "Source": "library"
+    },
+    {
+      "Original": "Declared / resolved members",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "声明的成员数 / 已确认的成员数",
       "Source": "library"
     },
     {
@@ -251,6 +368,15 @@
       "Source": "library"
     },
     {
+      "Original": "Center",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "居中",
+      "Source": "library"
+    },
+    {
       "Original": "Nearby",
       "Context": "DiagnosticWindow.Draw",
       "PreserveID": false,
@@ -260,12 +386,30 @@
       "Source": "library"
     },
     {
+      "Original": "Friendly / enemy / unknown within 20y",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "20 米内的友方 / 敌方 / 未知目标",
+      "Source": "library"
+    },
+    {
       "Original": "Targetable",
       "Context": "DiagnosticWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "可选为目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Strategic Target Recommendation",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "推荐的战略目标",
       "Source": "library"
     },
     {
@@ -296,6 +440,15 @@
       "Source": "library"
     },
     {
+      "Original": "Mesh build progress",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "寻路网格构建进度",
+      "Source": "library"
+    },
+    {
       "Original": "Destination",
       "Context": "DiagnosticWindow.Draw",
       "PreserveID": false,
@@ -305,12 +458,93 @@
       "Source": "library"
     },
     {
+      "Original": "Controller active",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "控制器已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit gauge",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "极限槽",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed / loaded / version",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "安装状态 / 加载状态 / 版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Queue state",
+      "Context": "DiagnosticWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "排队状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Death / respawn",
+      "Context": "DiagnosticWindow.DrawBattlefield",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "死亡 / 重生",
+      "Source": "library"
+    },
+    {
       "Original": "Final state",
       "Context": "DiagnosticWindow.DrawBattlefield",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "最终状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Navigation requests / arrivals / failures",
+      "Context": "DiagnosticWindow.DrawBattlefield",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "导航请求数 / 到达数 / 失败数",
+      "Source": "library"
+    },
+    {
+      "Original": "Manual navigation armed",
+      "Context": "DiagnosticWindow.DrawTestingControls",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "手动导航已就绪",
+      "Source": "library"
+    },
+    {
+      "Original": "Waypoint Count / route length",
+      "Context": "DiagnosticWindow.DrawManualNavigationDiagnostics",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "路点数 / 路线长度",
+      "Source": "library"
+    },
+    {
+      "Original": "Distance Remaining",
+      "Context": "DiagnosticWindow.DrawManualNavigationDiagnostics",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "剩余距离",
       "Source": "library"
     },
     {

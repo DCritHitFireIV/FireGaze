@@ -8,6 +8,33 @@
   },
   "entries": [
     {
+      "Original": "Can't have a target rank less than 1",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "目标等级不能低于 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Can't have a target rank greater than 107397 (are you really gonna be able to reach that anyways?)",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "目标等级不能超过 107397（真能达到这么高吗？）",
+      "Source": "library"
+    },
+    {
+      "Original": "You've already surpassed Rank ",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "你已超过等级 ",
+      "Source": "library"
+    },
+    {
       "Original": "Normal",
       "Context": "ConfigWindow..ctor",
       "PreserveID": false,
@@ -35,11 +62,38 @@
       "Source": "library"
     },
     {
+      "Original": "Malmstone Config",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "Malmstone 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "PVP Match",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "PvP 比赛",
+      "Source": "library"
+    },
+    {
       "Original": "Goal Series Level",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
       "RoleReason": "FireGaze reviewed visible UI consumer",
       "Translated": "目标系列赛等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculator will auto-populate with this number after initializing\nAlso controls the notification override settings below",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "初始化后，计算器会自动填入此数字。\n此项也控制下方的通知覆盖设置。",
       "Source": "library"
     },
     {
@@ -77,6 +131,15 @@
       "Source": "library"
     },
     {
+      "Original": "Shows a notification with current series level EXP progression after ALL PVP matches",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "每次 PvP 比赛结束后，通知当前系列赛等级的经验进度",
+      "Source": "library"
+    },
+    {
       "Original": "Show EXP progression after PVP matches",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
@@ -101,11 +164,29 @@
       "Source": "library"
     },
     {
+      "Original": "Show Wins/Losses needed until next Series Level in chat after Crystalline Conflict matches",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "水晶冲突结束后，在聊天栏中显示升至下一系列赛等级所需的胜负场数",
+      "Source": "library"
+    },
+    {
       "Original": "Crystalline Conflict",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
       "RoleReason": "FireGaze reviewed visible UI consumer",
       "Translated": "水晶冲突",
+      "Source": "library"
+    },
+    {
+      "Original": "Show placements needed until next Series Level in chat after Frontline matches\nRoulettes shown in parentheses",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "纷争前线结束后，在聊天栏中显示升至下一系列赛等级所需的名次\n随机任务结果列在括号内",
       "Source": "library"
     },
     {
@@ -117,11 +198,29 @@
       "Source": "library"
     },
     {
+      "Original": "(EXPERIMENTAL) Track the reward bonus you get for consecutive losses in Frontline\n3rd place = +10 percent bonus (max 50 percent)\n2nd place = Current bonus is kept\n1st Place = Bonus reset to 0\n",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（实验性）记录纷争前线连续未获第一时得到的奖励加成\n第三名：加成增加 10%，最高 50%\n第二名：保持当前加成\n第一名：加成归零\n",
+      "Source": "library"
+    },
+    {
       "Original": "Track Frontline Reward Bonus",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
       "RoleReason": "FireGaze reviewed visible UI consumer",
       "Translated": "跟踪纷争前线的报酬加成",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Wins/Losses needed until next Series Level in chat after Rival Wings matches",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "烈羽争锋结束后，在聊天栏中显示升至下一系列赛等级所需的胜负场数",
       "Source": "library"
     },
     {
@@ -133,11 +232,29 @@
       "Source": "library"
     },
     {
+      "Original": "Show remaining matches to the Default Target rank instead of the next rank for postmatch chat notifications\nThis only works if the Default Target rank is higher than your current rank, otherwise this setting will be ignored",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "赛后聊天通知显示达到默认目标等级所需的剩余场数。\n默认目标等级高于当前等级时才会生效。",
+      "Source": "library"
+    },
+    {
       "Original": "Show matches until Goal Series Level instead of next rank",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
       "RoleReason": "FireGaze reviewed visible UI consumer",
       "Translated": "显示达到目标系列赛等级所需场次",
+      "Source": "library"
+    },
+    {
+      "Original": "User Interface",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "用户界面",
       "Source": "library"
     },
     {
@@ -166,11 +283,38 @@
       "Source": "library"
     },
     {
+      "Original": "FFXIV stops tracking Series Level after 30.\nMalmstone Calculator can track and display your actual series level far beyond the maximum",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "游戏只记录到系列赛等级 30。\nMalmstone 计算器可以继续记录并显示超过该上限的实际等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plugin tracked Series Level in the PVP Reward window (supports Series Levels above 30)\n[This modifies the game's native UI]",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在 PvP 报酬窗口显示插件记录的系列赛等级（支持 30 级以上）。\n[此项会修改原生游戏界面]",
+      "Source": "library"
+    },
+    {
       "Original": "PVP Reward window",
       "Context": "Malmstone.Windows.ConfigWindow.Draw",
       "Role": "UI",
       "RoleReason": "FireGaze reviewed visible UI consumer",
       "Translated": "系列赛报酬窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Show plugin tracked Series Level in the PVP Profile window (supports Series Levels above 30)\n[This modifies the game's native UI]",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "在 PvP 个人信息窗口显示插件记录的系列赛等级（支持 30 级以上）。\n[此项会修改原生游戏界面]",
       "Source": "library"
     },
     {
@@ -208,6 +352,33 @@
       "Source": "library"
     },
     {
+      "Original": "Target Series Level:",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目标系列赛等级：",
+      "Source": "library"
+    },
+    {
+      "Original": "You must really love PVP... Congrats on maxing out Series Malmstone\nThe Infinite Level is known to max out at 100 unclaimed rewards\nYou will not gain additional Series EXP until you claim them!",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "你一定很喜欢 PvP……恭喜领满系列赛报酬！\n可累积的重复报酬最多为 100 份。\n领取报酬后才能继续获得系列赛经验！",
+      "Source": "library"
+    },
+    {
+      "Original": "Win: 900 Series EXP\nLose: 700 Series EXP",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "胜利：900 系列赛经验\n失败：700 系列赛经验",
+      "Source": "library"
+    },
+    {
       "Original": "Calculated Expected Value based on a 50/50 win/loss ratio",
       "Context": "MainWindow.Draw",
       "PreserveID": false,
@@ -235,12 +406,48 @@
       "Source": "library"
     },
     {
+      "Original": "Frontlines (Roulette)",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "纷争前线（随机任务）",
+      "Source": "library"
+    },
+    {
       "Original": "An additional 1500 Series EXP on top of Frontline rewards (once per day)",
       "Context": "MainWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "除纷争前线的基础奖励外，额外获得 1500 系列经验值（每日一次）。",
+      "Source": "library"
+    },
+    {
+      "Original": "matches/days",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "场/天",
+      "Source": "library"
+    },
+    {
+      "Original": "match/day",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "场/天",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculated Expected Value based on a 1/3 chance for each placement.\nAlso the minimum number of days to reach your goal if you only play Frontlines once per day.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "按三个名次各有三分之一的概率计算期望值。\n若每天只参加一次纷争前线，此值也是达成目标所需的最少天数。",
       "Source": "library"
     },
     {
@@ -253,12 +460,120 @@
       "Source": "library"
     },
     {
+      "Original": "This calculates the losing streak bonus you receive after consecutive losses in Frontlines\nPlay a match of Frontline to confirm your existing losing bonus\nYou can turn off tracking entirely in the settings",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "根据纷争前线连续未获第一的场次计算奖励加成。\n参加一次纷争前线即可确认已有的加成。\n可在设置中关闭此项记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Primed For Bonus: You'll receive a 10% reward bonus if you place 3rd",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已满足加成条件：获得第三名时，奖励将提高 10%",
+      "Source": "library"
+    },
+    {
+      "Original": "You're primed for a reward bonus! You will get a 10% reward bonus if you place 3rd again\nCounter resets if you rank 1st",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "已满足奖励加成条件！再次获得第三名即可获得 10% 奖励加成。\n获得第一名时计数清零。",
+      "Source": "library"
+    },
+    {
+      "Original": "No Frontline Reward Bonus Currently Active",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前没有纷争前线奖励加成",
+      "Source": "library"
+    },
+    {
+      "Original": "You'll earn a percentage bonus on PvP EXP, Series EXP, and Wolf Marks until attaining First Place",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "取得第一名前，可额外获得 PvP 经验、系列赛经验和狼印战绩。",
+      "Source": "library"
+    },
+    {
+      "Original": "\nThis increased bonus will also apply to the match where this happens",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "\n提高后的加成也适用于触发它的这场比赛",
+      "Source": "library"
+    },
+    {
+      "Original": "(Outdated)",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "（已过时）",
+      "Source": "library"
+    },
+    {
+      "Original": "This information may be outdated due to Frontline tracking unloading!\nCalculations will refresh after your next match of Frontline",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "纷争前线记录已停止，此信息可能已过时。\n下次纷争前线结束后将重新计算。",
+      "Source": "library"
+    },
+    {
+      "Original": "Win: 1250 Series EXP\nLose: 750 Series EXP",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "胜利：1250 系列赛经验\n失败：750 系列赛经验",
+      "Source": "library"
+    },
+    {
       "Original": "Don't forget to claim your Series Malmstone rewards!",
       "Context": "MainWindow.Draw",
       "PreserveID": false,
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "别忘了领取系列赛奖励！",
+      "Source": "library"
+    },
+    {
+      "Original": "PvP Profile is not loaded.",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "尚未加载 PvP 个人信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Malmstone Calculator] Unable to get earned Series EXP: ",
+      "Context": "PvPMatchAddon.CheckFrontlineBonus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Malmstone Calculator] 无法获取已获得的系列赛经验： ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Malmstone Calculator] Unable to get current Frontline match results",
+      "Context": "PvPMatchAddon.CheckFrontlineBonus",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "[Malmstone Calculator] 无法获取当前纷争前线的比赛结果",
       "Source": "library"
     },
     {

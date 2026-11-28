@@ -496,6 +496,15 @@
       "Source": "library"
     },
     {
+      "Original": "Profiling",
+      "Context": "Gui.DrawTabDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "性能分析",
+      "Source": "library"
+    },
+    {
       "Original": "Quick control",
       "Context": "Gui.Draw",
       "PreserveID": true,
@@ -667,6 +676,22 @@
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "切换插件设置窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Total ticks: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "累计计时刻度： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Total time: ",
+      "Context": "Gui.DrawTabDebug",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "总耗时： ",
       "Source": "library"
     },
     {

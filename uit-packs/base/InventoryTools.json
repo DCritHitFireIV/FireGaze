@@ -8226,11 +8226,99 @@
       "Source": "library"
     },
     {
+      "Original": " items selected",
+      "Context": "MultipleChoiceSetting`1.GetPreviewValue",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": " 项物品已选中",
+      "Source": "library"
+    },
+    {
       "Original": " job",
       "Context": "ItemJobSoulCrystalUseRenderer.get_DrawTooltip",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": " 职业",
+      "Source": "library"
+    },
+    {
+      "Original": "(none selected)",
+      "Context": "ChocoboColourWindow.DrawTargetPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "（未选择）",
+      "Source": "library"
+    },
+    {
+      "Original": "(such as the FC Workshop or your Grand Company supply list).",
+      "Context": "CraftsWindow.DrawAddFromGameMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "（如部队工房或所属大国防联军的筹备任务清单）。",
+      "Source": "library"
+    },
+    {
+      "Original": "A button that opens the crafting log for the item",
+      "Context": "CraftButtonColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "打开该物品制作笔记的按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "A button/list to show you where you can buy an item",
+      "Context": "CraftBuyColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "显示物品购买地点的按钮或列表",
+      "Source": "library"
+    },
+    {
+      "Original": "A compact panel that follows your active craft list while you are in the game, so you can see what is still needed without opening a window.",
+      "Context": "CraftOverlayLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在游戏中以小面板显示当前制作清单，无需打开窗口即可查看还缺哪些材料。",
+      "Source": "library"
+    },
+    {
+      "Original": "A couple of calculators sit outside lists, crafts and the compendium. Both are in the menu button at the bottom of any Allagan Tools window.",
+      "Context": "IntroWindowsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "清单、制作和图鉴以外还有两个计算器。打开任意 Allagan Tools 窗口底部的菜单即可找到它们。",
+      "Source": "library"
+    },
+    {
+      "Original": "A craft list takes what you want to make and breaks it into every intermediate item and raw material, then checks that against what you already own.",
+      "Context": "IntroCraftingLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "制作清单会把成品逐级拆解为中间材料和原料，再与你已有的物品核对。",
+      "Source": "library"
+    },
+    {
+      "Original": "A database covering items, monsters, duties, NPCs, airships and more telling you where things come from and what they are used for.",
+      "Context": "IntroWelcomeLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "查询物品、怪物、副本、NPC、飞空艇等数据，了解来源和用途。",
+      "Source": "library"
+    },
+    {
+      "Original": "A full material tree, not just the immediate ingredients.",
+      "Context": "IntroCraftingLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "显示完整的材料树，包括各级中间材料。",
+      "Source": "library"
+    },
+    {
+      "Original": "A list of extra worlds we should automatically price",
+      "Context": "MarketBoardExtraWorldsSetting..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "自动查询价格的额外服务器",
       "Source": "library"
     },
     {
@@ -8242,11 +8330,36 @@
       "Source": "library"
     },
     {
+      "Original": "Achievement",
+      "Context": "ItemAchievementSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "成就",
+      "Source": "library"
+    },
+    {
       "Original": "Achievements",
       "Context": "ItemAchievementSourceRenderer.get_PluralName",
       "Role": "UI",
       "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
       "Translated": "成就",
+      "Source": "library"
+    },
+    {
+      "Original": "Acquired Items",
+      "Context": "CharacterDebuggerPane.DrawInfo",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "已获得物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Acquired:",
+      "Context": "ItemWindow.DrawWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已获得：",
       "Source": "library"
     },
     {
@@ -8258,11 +8371,62 @@
       "Source": "library"
     },
     {
+      "Original": "Acquisition tracker",
+      "Context": "TroubleshootingLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "收集进度",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "CraftOverlayWindow.DrawWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Active Character",
+      "Context": "CharacterScopePicker.GetScopeName",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "当前角色",
+      "Source": "library"
+    },
+    {
+      "Original": "Active lists",
+      "Context": "HighlightingLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用中的清单",
+      "Source": "library"
+    },
+    {
       "Original": "Active: ",
       "Context": "CraftsWindow.DrawCraftPanel",
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "生效中： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add (Preconfigured)",
+      "Context": "FiltersWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "添加（预设）",
+      "Source": "library"
+    },
+    {
+      "Original": "Add All",
+      "Context": "MultipleChoiceSetting`1.DrawSearchBox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部添加",
       "Source": "library"
     },
     {
@@ -8280,6 +8444,152 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "将部队合建项目添加到列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Add From Game",
+      "Context": "CraftsWindow.DrawAddFromGameMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "从游戏中添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item",
+      "Context": "ShopHighlighting.DrawDebug",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item Preference:",
+      "Context": "CraftIngredientPreferenceFilter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加物品偏好：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Override:",
+      "Context": "CraftItemIngredientOverridesFilter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加覆盖设置：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Preference:",
+      "Context": "CraftIngredientPreferenceFilter.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加偏好：",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new column. Leave the column name blank if you want to use the default.",
+      "Context": "ColumnsFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "添加新列。列名留空时使用默认名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new craft list",
+      "Context": "CraftsWindow.DrawTabBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "新建制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new craft list.",
+      "Context": "CraftsWindow.DrawTabBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "新建制作清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new ephemeral craft list that will be deleted once all the items in it are completed.",
+      "Context": "CraftsWindow.DrawTabBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "新建临时制作清单。当所有项目完成后，清单会自动删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new list",
+      "Context": "ConfigurationWindow.DrawSideBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "新建清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new list.",
+      "Context": "FiltersWindow.DrawSidebar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "新建清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add a sample filter",
+      "Context": "ConfigurationWindow.DrawSideBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "添加示例筛选器",
+      "Source": "library"
+    },
+    {
+      "Original": "Add all from ",
+      "Context": "IngredientSearchFilter.DrawSearchBox",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "全部添加自 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add all from filter",
+      "Context": "IngredientSearchFilter.DrawSearchBox",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "添加筛选结果中的全部物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Add item to craft list - ",
+      "Context": "ItemWindow.DrawWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "将物品添加到制作清单 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Add new Item",
+      "Context": "CraftsWindow.DrawMainWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "添加新物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Craft List",
+      "Context": "ContextMenuService.MenuOpened",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "添加到制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Curated List",
+      "Context": "ContextMenuService.MenuOpened",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Menu",
+      "Translated": "添加到自选清单",
       "Source": "library"
     },
     {
@@ -8301,12 +8611,47 @@
       "Source": "library"
     },
     {
+      "Original": "Add to new Craft List",
+      "Context": "EquipmentSuggestSelectedItemColumn.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加到新的制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to new Craft List (ephemeral)",
+      "Context": "EquipmentSuggestSelectedItemColumn.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加到新的临时制作清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Add to new Curated List",
+      "Context": "EquipmentSuggestSelectedItemColumn.DrawFooter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "添加到新的自选清单",
+      "Source": "library"
+    },
+    {
       "Original": "Add##ItemOverride",
       "Context": "CraftItemIngredientOverridesFilter.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "添加",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a button for quickly removing items from your list",
+      "Context": "RemoveButtonColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "添加一个可从清单快速移除物品的按钮",
       "Source": "library"
     },
     {
@@ -8326,12 +8671,69 @@
       "Source": "library"
     },
     {
+      "Original": "Airships Window",
+      "Context": "ConfigurationWindow.Initialize",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "飞空艇窗口",
+      "Source": "library"
+    },
+    {
       "Original": "All",
       "Context": "CharacterScopePicker.GetScopeName",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
       "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "All Lists",
+      "Context": "FiltersWindow.DrawTabBar",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem",
+      "Translated": "全部清单",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools can add extra lines to the game's item tooltips.",
+      "Context": "TooltipsFeature.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Allagan Tools 可在游戏的物品说明中添加额外信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools can add extra lines to the game's item tooltips. Every feature in this section is inactive unless tooltip tweaks are enabled.",
+      "Context": "TooltipsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Allagan Tools 可在游戏的物品说明中添加额外信息。启用物品说明增强后，本节功能才会生效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools does three main things. The next few pages cover each briefly. It should take a minute, and all of it is in the Help window later if you want more detail.",
+      "Context": "IntroWelcomeLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Allagan Tools 有三项主要功能。接下来的几页会逐项简要介绍，约需一分钟。之后可随时在帮助窗口查看详情。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools is a multi-purpose plugin providing 3 primary features: tracking and displaying your inventory data, helping you plan crafts, and providing information about items.",
+      "Context": "GeneralHelpLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Allagan Tools 提供三项主要功能：记录和显示持有物品、规划制作，以及查询物品资料。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools keeps its own record of your inventories. These control how often that record is written to disk.",
+      "Context": "GeneralLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Allagan Tools 会单独记录你的持有物品。以下选项控制记录写入磁盘的频率。",
       "Source": "library"
     },
     {
@@ -8351,11 +8753,323 @@
       "Source": "library"
     },
     {
+      "Original": "Allowance Cost: ",
+      "Context": "ItemBattleLeveSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "消耗的理符限额： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to search for specific items across all your inventories. If you just need to find an item but don't want help sorting it, this is the list type you want.",
+      "Context": "ListBasicsHelpLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在所有储物空间中查找特定物品。如果只想找物品，可以使用这种清单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Almost everything in the plugin hangs off a list. A list is a saved search over your items, and once you have one you can highlight its results in game, sort them, or track them.",
+      "Context": "IntroListsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "这个插件的大多数功能都围绕清单展开。清单会保存物品查询条件，之后可在游戏内高亮、排序或追踪查询结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Craftable: ",
+      "Context": "CraftAmountRequiredColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可制作数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Missing",
+      "Context": "CraftAmountUnavailableColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "缺少数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Missing: ",
+      "Context": "CraftAmountRequiredColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "缺少数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Originally Required: ",
+      "Context": "CraftAmountRequiredColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "最初所需数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Required",
+      "Context": "CraftAmountRequiredColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "所需数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount Required: ",
+      "Context": "ItemSkybuilderInspectionSourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "所需数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount can Craft",
+      "Context": "CraftAmountCanCraftColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "可制作数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount in Character Inventory",
+      "Context": "CraftAmountReadyColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "角色背包中的数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount in Inventory: ",
+      "Context": "CraftAmountRequiredColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "持有数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount to Retrieve",
+      "Context": "TooltipDisplayRetrieveAmountSetting..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "待取出数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount to Retrieve: ",
+      "Context": "CraftAmountRequiredColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "待取出数量： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Amount to retrieve",
+      "Context": "TooltipsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "待取出数量",
+      "Source": "library"
+    },
+    {
+      "Original": "An bonus attributes of the item(Strength, HP, Perception, etc)",
+      "Context": "AttributeColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品的附加属性（如力量、体力值、鉴别力等）",
+      "Source": "library"
+    },
+    {
       "Original": "Appearance",
       "Context": "TooltipsLayout.Build",
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Aquarium",
+      "Context": "ItemAquariumUseRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "水族箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Are Recipes Completed?",
+      "Context": "IsRecipeCompletedFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "已完成配方？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to clear all your stored history?",
+      "Context": "DrawFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "确定要清空所有已保存的历史记录吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to clear this curated list?",
+      "Context": "FiltersWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定要清空此自选清单吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to clear your craft list?",
+      "Context": "CraftsWindow.DrawMenuBar",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定要清空制作清单吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to remove this craft list?",
+      "Context": "CraftsWindow.GetFilterMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定要移除此制作清单吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to remove this filter?",
+      "Context": "ConfigurationWindow.GetFilterMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定要移除此筛选器吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to reset the default craft list?.\nThis operation cannot be undone!\n\n",
+      "Context": "CraftsWindow.DrawSettingsPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "确定要重置默认制作清单吗？\n此操作无法撤销！\n\n",
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to reset your configuration to the default?",
+      "Context": "DrawSettingsPanel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "确定要将配置恢复为默认值吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire - ",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "收藏柜 - ",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Body",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 身体",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Ear",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 耳饰",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Feet",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 脚部",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Hand",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 手部",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Head",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 头部",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Legs",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 腿部",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Main",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 主手",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Neck",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 项链",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Offhand",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 副手",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Ring",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 戒指",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Soul Crystal",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 灵魂水晶",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Waist",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 腰部",
+      "Source": "library"
+    },
+    {
+      "Original": "Armory - Wrist",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "兵装库 - 手镯",
       "Source": "library"
     },
     {
@@ -8368,11 +9082,148 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-Switch",
+      "Context": "WindowsAndListsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Available From: ",
+      "Context": "ImGuiTooltipService.DrawItemTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "获取途径： ",
+      "Source": "library"
+    },
+    {
       "Original": "Available: ",
       "Context": "CraftMarketPriceColumn.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "可用： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Average iLvl",
+      "Context": "RetainerTasksWindow.Initialize",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "平均品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Average iLvl: ",
+      "Context": "RetainerTaskWindow.DrawWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "平均品级： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Bag 1",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包 1",
+      "Source": "library"
+    },
+    {
+      "Original": "Bag 2",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包 2",
+      "Source": "library"
+    },
+    {
+      "Original": "Bag 3",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包 3",
+      "Source": "library"
+    },
+    {
+      "Original": "Bag 4",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包 4",
+      "Source": "library"
+    },
+    {
+      "Original": "Bag 5",
+      "Context": "ItemLocalizer.SortedContainerName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包 5",
+      "Source": "library"
+    },
+    {
+      "Original": "Basics",
+      "Context": "BasicFeature.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "基础知识",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle Leve",
+      "Context": "ItemBattleLeveSourceRenderer.get_SingularName",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "战斗理符",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle: Increases EXP earned by your chocobo companion.",
+      "Context": "ItemBuddySourceRenderer.get_DrawTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "战斗：增加搭档陆行鸟获得的经验。",
+      "Source": "library"
+    },
+    {
+      "Original": "Behaviour",
+      "Context": "CraftOverlayLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "行为",
+      "Source": "library"
+    },
+    {
+      "Original": "Bell",
+      "Context": "CraftOverlayWindow.DrawWindow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "传唤铃",
+      "Source": "library"
+    },
+    {
+      "Original": "Break a craft down into every sub-item, see what you already own, and find where the rest can be bought or gathered.",
+      "Context": "IntroWelcomeLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将制作配方分解为各级材料，查看已有材料及其余材料的购买或采集地点。",
+      "Source": "library"
+    },
+    {
+      "Original": "Builds on the search list, but also lets you pick where you want the items to be sorted. It'll attempt to show you the most optimised plan for storing the items in the destinations you pick.",
+      "Context": "ListBasicsHelpLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在搜索清单基础上指定物品的收纳位置，插件会为所选目的地规划存放方式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Button Types",
+      "Context": "ButtonColumnSetting..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "按钮类型",
       "Source": "library"
     },
     {
@@ -8384,11 +9235,220 @@
       "Source": "library"
     },
     {
+      "Original": "Buy Button",
+      "Context": "CraftBuyColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "购买按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy From Vendor Price",
+      "Context": "BuyFromVendorPriceFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "商店购买价",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy from Calamity Salvager: ",
+      "Context": "ItemWindow.DrawWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从失物管理人处购买： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Buy from Vendor: ",
+      "Context": "ItemWindow.DrawWindow",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "从商店购买： ",
+      "Source": "library"
+    },
+    {
       "Original": "Buy##Buy",
       "Context": "CraftBuyColumn.DrawVendorButton",
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "购买",
+      "Source": "library"
+    },
+    {
+      "Original": "By default, the plugin is configured with a default set of features enabled.",
+      "Context": "IntroDefaultsLayout.Build",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "插件预先启用了一组默认功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculate Crafts",
+      "Context": "CraftCalculatorColumn.DrawFooterFilter",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "计算制作数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Can Craft: ",
+      "Context": "DebugCraftColumn.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "可制作： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be Equipped?",
+      "Context": "CanBeEquippedFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可装备？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be HQ",
+      "Context": "ImGuiTooltipService.DrawBaseAttributes",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可为优质品",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be High Quality?",
+      "Context": "CanBeHighQualityFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可为优质品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be Placed on Market?",
+      "Context": "CanBePlacedOnMarketFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可在市场出售？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can be Traded?",
+      "Context": "CanBeTradedFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "可交易？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be dyed?",
+      "Context": "CanBeDyedColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可染色？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be equipped?",
+      "Context": "CanBeEquippedFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "物品可装备？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be gathered?",
+      "Context": "CanBeGatheredColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可采集？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be high quality?",
+      "Context": "CanBeHighQualityFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "物品可为优质品？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be placed on the marketboard?",
+      "Context": "CanBePlacedOnMarketColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可在市场布告板出售？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be purchased with gil?",
+      "Context": "CanBePurchasedColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可用金币购买？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item be traded?",
+      "Context": "CanBeTradedColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可交易？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can the item by desynthed?",
+      "Context": "CanBeDesynthedColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可分解？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be crafted?",
+      "Context": "CraftColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可制作？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be equipped?",
+      "Context": "CanBeEquippedColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可装备？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be placed on the market?",
+      "Context": "CanBePlacedOnMarketFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "物品可在市场出售？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be put in a aquarium?",
+      "Context": "IsAquariumItemColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可放进水族箱？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be traded?",
+      "Context": "CanBeTradedFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiService.HelpMarker",
+      "Translated": "物品可交易？",
+      "Source": "library"
+    },
+    {
+      "Original": "Can this item be used to craft another item?",
+      "Context": "IsCraftingItemColumn..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.HoverTooltip",
+      "Translated": "物品可作为其他物品的制作材料？",
       "Source": "library"
     },
     {
@@ -8407,6 +9467,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Categories",
+      "Context": "ItemUiCategoryFilter..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "类别",
       "Source": "library"
     },
     {

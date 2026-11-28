@@ -8,11 +8,91 @@
   },
   "entries": [
     {
+      "Original": "  |  Selected: ",
+      "Context": "ArchiveWindow.DrawFooter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "  已选择： ",
+      "Source": "library"
+    },
+    {
+      "Original": " -> Delete (Read & Empty)",
+      "Context": "ReadAllManager.Complete",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " → 删除（已读且无附件）",
+      "Source": "library"
+    },
+    {
+      "Original": " -> Delete (Taken)",
+      "Context": "ClaimQueueManager.CompleteRun",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " → 删除（已领取）",
+      "Source": "library"
+    },
+    {
+      "Original": " GM letters are protected and will be kept.",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " GM 信件受保护，将予以保留。",
+      "Source": "library"
+    },
+    {
+      "Original": " aborted (",
+      "Context": "ReadAllManager.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已中止（",
+      "Source": "library"
+    },
+    {
+      "Original": " already unlocked, ",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已解锁， ",
+      "Source": "library"
+    },
+    {
+      "Original": " consecutive skips",
+      "Context": "AttachmentPopManager.CheckConsecutiveSkipAbort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 次连续跳过",
+      "Source": "library"
+    },
+    {
+      "Original": " done, ",
+      "Context": "AttachmentPopManager.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已完成， ",
+      "Source": "library"
+    },
+    {
+      "Original": " entries to ",
+      "Context": "ArchiveWindow.WriteExportAll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 条记录到 ",
+      "Source": "library"
+    },
+    {
       "Original": " hidden by current filter",
       "Context": "ArchiveWindow.DrawBatchPane",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": " 封被当前筛选条件隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": " in disabled categories.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 属于已停用的分类。",
       "Source": "library"
     },
     {
@@ -24,6 +104,22 @@
       "Source": "library"
     },
     {
+      "Original": " letter(s) and then delete them?",
+      "Context": "TakeDeleteConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 封信件后删除？",
+      "Source": "library"
+    },
+    {
+      "Original": " letters have unclaimed attachments and will be skipped. Use Take Attachment(s) first.",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 封信件仍有未领取的附件，将跳过。请先点击「领取附件」。",
+      "Source": "library"
+    },
+    {
       "Original": " letters selected",
       "Context": "ArchiveWindow.DrawBatchPane",
       "Role": "UI",
@@ -32,11 +128,67 @@
       "Source": "library"
     },
     {
+      "Original": " letters will be deleted.",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 封信件将被删除。",
+      "Source": "library"
+    },
+    {
+      "Original": " more.",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": " 项。",
+      "Source": "library"
+    },
+    {
+      "Original": " read, ",
+      "Context": "ReadAllManager.Complete",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 封已读， ",
+      "Source": "library"
+    },
+    {
+      "Original": " registrable items are already unlocked.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个可登记物品已解锁。",
+      "Source": "library"
+    },
+    {
+      "Original": " registrable items are in disabled categories.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 个可登记物品属于已停用的分类。",
+      "Source": "library"
+    },
+    {
       "Original": " selected entries?",
       "Context": "ArchiveWindow.DrawBatchDeleteControls",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": " 条已选记录？",
+      "Source": "library"
+    },
+    {
+      "Original": " sensitive item(s) detected in inventory:",
+      "Context": "SensitivePopConfirm.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " 个需确认的物品已在背包中发现：",
+      "Source": "library"
+    },
+    {
+      "Original": " skipped.",
+      "Context": "AttachmentPopManager.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": " 已跳过。",
       "Source": "library"
     },
     {
@@ -56,12 +208,53 @@
       "Source": "library"
     },
     {
+      "Original": "(empty)",
+      "Context": "ArchiveWindow.ResolveBodyDisplay",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "（空）",
+      "Source": "library"
+    },
+    {
+      "Original": "(unread - open letter in game to capture body)",
+      "Context": "ArchiveWindow.ResolveBodyDisplay",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "（未读，请在游戏中打开信件以记录正文）",
+      "Source": "library"
+    },
+    {
+      "Original": ": no matching letters.",
+      "Context": "ToolbarWindow.FireDeleteForScope",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "：没有匹配的信件。",
+      "Source": "library"
+    },
+    {
+      "Original": ": no read & empty letters.",
+      "Context": "ReadAllManager.FireDeleteChain",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "：没有已读且无附件的信件。",
+      "Source": "library"
+    },
+    {
       "Original": "All",
       "Context": "ArchiveWindow..cctor",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginCombo",
       "Translated": "全部",
+      "Source": "library"
+    },
+    {
+      "Original": "Archive",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "存档",
       "Source": "library"
     },
     {
@@ -73,11 +266,60 @@
       "Source": "library"
     },
     {
+      "Original": "Auto Pop",
+      "Context": "PopTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自动使用物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Pop: Off",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动使用：关",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Pop: On",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "自动使用：开",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically pop items after Take.",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "领取后自动使用物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bardings",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "陆行鸟装甲",
+      "Source": "library"
+    },
+    {
       "Original": "Body",
       "Context": "ArchiveWindow.DrawDetailPane",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "正文",
+      "Source": "library"
+    },
+    {
+      "Original": "Bozjan Field Notes",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "博兹雅战果记录",
       "Source": "library"
     },
     {
@@ -98,6 +340,22 @@
       "Source": "library"
     },
     {
+      "Original": "Choose scope:",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "选择范围：",
+      "Source": "library"
+    },
+    {
+      "Original": "Claim attachments from ",
+      "Context": "TakeDeleteConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "领取附件，来源： ",
+      "Source": "library"
+    },
+    {
       "Original": "Clear Selection",
       "Context": "ArchiveWindow.DrawBatchPane",
       "PreserveID": true,
@@ -107,12 +365,29 @@
       "Source": "library"
     },
     {
+      "Original": "Company Seal Vouchers",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "军票兑换券",
+      "Source": "library"
+    },
+    {
       "Original": "Confirm",
       "Context": "TakeDeleteConfirmDialog.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "确认",
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm before delete",
+      "Context": "GeneralTab.DrawDeletionSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "删除前确认",
       "Source": "library"
     },
     {
@@ -132,6 +407,38 @@
       "Source": "library"
     },
     {
+      "Original": "Delete (All)",
+      "Context": "ToolbarWindow.ScopeLabel",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "删除（全部）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete (Empty)",
+      "Context": "ToolbarWindow.ScopeLabel",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "删除（无附件）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete (Read & Empty)",
+      "Context": "ToolbarWindow.ScopeLabel",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "删除（已读且无附件）",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete (System)",
+      "Context": "ToolbarWindow.ScopeLabel",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "删除（系统信件）",
+      "Source": "library"
+    },
+    {
       "Original": "Delete Selected",
       "Context": "ArchiveWindow.DrawBatchDeleteControls",
       "PreserveID": true,
@@ -141,11 +448,107 @@
       "Source": "library"
     },
     {
+      "Original": "Delete all read mail.",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "删除所有已读信件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete from archive",
+      "Context": "ArchiveWindow.DrawEntryDeleteControls",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "从本地存档删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Delete this entry?",
+      "Context": "ArchiveWindow.DrawEntryDeleteControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "删除这条记录吗？",
+      "Source": "library"
+    },
+    {
+      "Original": "Deletion",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "删除",
+      "Source": "library"
+    },
+    {
       "Original": "Diagnostics",
       "Context": "DiagnosticsTab.get_Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.BeginTabItem",
       "Translated": "诊断",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable all",
+      "Context": "PopTab.DrawCategoriesSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't ask again",
+      "Context": "ConfirmDialog.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "不再询问",
+      "Source": "library"
+    },
+    {
+      "Original": "Echo gift sender's name to chat",
+      "Context": "GeneralTab.DrawGiftEchoSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在聊天栏显示礼物赠送者的名字",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotes, hairstyles, and riding maps.",
+      "Context": "ItemRegistryClassifier.CategoryTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "情感动作、发型和骑乘地图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Auto Pop items after use of Take.",
+      "Context": "PopTab.DrawAutoPopSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用「领取」后自动使用可登记的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable all",
+      "Context": "PopTab.DrawCategoriesSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable archive",
+      "Context": "GeneralTab.DrawArchiveSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用存档",
       "Source": "library"
     },
     {
@@ -200,6 +603,14 @@
       "Source": "library"
     },
     {
+      "Original": "Framer's Kits",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "肖像教材",
+      "Source": "library"
+    },
+    {
       "Original": "Friends",
       "Context": "ArchiveWindow.CategoryLabel",
       "PreserveID": true,
@@ -230,6 +641,47 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "金币： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Glasses",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "眼镜",
+      "Source": "library"
+    },
+    {
+      "Original": "Include GM letters",
+      "Context": "GeneralTab.DrawDeletionSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含 GM 信件",
+      "Source": "library"
+    },
+    {
+      "Original": "Item#",
+      "Context": "ItemNameResolver.Fallback",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText",
+      "Translated": "物品编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Left-click: Claim attachments.\nRight-click: Claim then delete.",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左键：领取附件。\n右键：领取后删除。",
+      "Source": "library"
+    },
+    {
+      "Original": "Left-click: Mark all as read.\nRight-click: Mark all as read then delete.",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "左键：全部标为已读。\n右键：全部标为已读后删除。",
       "Source": "library"
     },
     {
@@ -283,6 +735,23 @@
       "Source": "library"
     },
     {
+      "Original": "Occult Records",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "新月岛记录",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Archive",
+      "Context": "GeneralTab.DrawArchiveSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "打开存档",
+      "Source": "library"
+    },
+    {
       "Original": "Open settings.",
       "Context": "ToolbarWindow.GetButtonSpec",
       "Role": "UI",
@@ -299,11 +768,51 @@
       "Source": "library"
     },
     {
+      "Original": "Open the archive viewer window.",
+      "Context": "GeneralTab.DrawArchiveSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "打开存档查看窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Opt-in. One per Pop run.",
+      "Context": "PopTab.DrawSensitiveSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自行启用。每轮使用最多一件。",
+      "Source": "library"
+    },
+    {
       "Original": "Orchestrion Rolls",
       "Context": "ItemRegistryClassifier.CategoryLabel",
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "管弦乐琴乐谱",
+      "Source": "library"
+    },
+    {
+      "Original": "Other (",
+      "Context": "ArchiveWindow.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "其他（",
+      "Source": "library"
+    },
+    {
+      "Original": "Phantom Soul Shards",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "幻影魂石碎片",
+      "Source": "library"
+    },
+    {
+      "Original": "Pick No to run the pop without using any sensitive item.",
+      "Context": "SensitivePopConfirm.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "选择「否」即可继续使用其他物品，跳过需确认的物品。",
       "Source": "library"
     },
     {
@@ -315,6 +824,72 @@
       "Source": "library"
     },
     {
+      "Original": "Plugin log file",
+      "Context": "DiagnosticsTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "插件日志文件",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop",
+      "Context": "ProcessingOverlay.GetActiveSnapshot",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "使用物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop ",
+      "Context": "PopProgressOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "使用物品 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop Categories [",
+      "Context": "PopTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "自动使用分类［",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop armed",
+      "Context": "PopProgressOverlay.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已准备使用物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop items now. Also: /mogmail pop",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "立即使用物品，也可输入 /mogmail pop。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pop will use at most 1 of these per session. These changes are irreversible. Continue?",
+      "Context": "SensitivePopConfirm.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "本次最多使用其中一件，使用后无法撤销。是否继续？",
+      "Source": "library"
+    },
+    {
+      "Original": "Purchases & Rewards",
+      "Context": "ArchiveWindow.CategoryLabel",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "购买与奖励",
+      "Source": "library"
+    },
+    {
       "Original": "Range: ",
       "Context": "ArchiveWindow.DrawBatchPane",
       "Role": "UI",
@@ -323,11 +898,51 @@
       "Source": "library"
     },
     {
+      "Original": "Re-enable in Settings > Confirm before delete.",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "可在「设置 → 删除前确认」中重新开启。",
+      "Source": "library"
+    },
+    {
+      "Original": "Read All",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "全部标为已读",
+      "Source": "library"
+    },
+    {
+      "Original": "Read All + Delete",
+      "Context": "ToolbarWindow.OnReadAllAndDeleteClicked",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "全部标为已读并删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Record received letters (header, attachments, gil, full body when read) per character. Local files only.",
+      "Context": "GeneralTab.DrawArchiveSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按角色将收到的信件保存在本地，包含标题、附件和金币。正文会在阅读后记录。",
+      "Source": "library"
+    },
+    {
       "Original": "Remove all selected entries from the local archive.",
       "Context": "ArchiveWindow.DrawBatchDeleteControls",
       "Role": "UI",
       "RoleReason": "→ ImGui.SetTooltip",
       "Translated": "从本地归档移除所有选中记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove this entry from the local archive file.",
+      "Context": "ArchiveWindow.DrawEntryDeleteControls",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "从本地存档文件移除此项。",
       "Source": "library"
     },
     {
@@ -340,11 +955,27 @@
       "Source": "library"
     },
     {
+      "Original": "Reset all Mogmail settings to defaults?",
+      "Context": "DiagnosticsTab.DrawResetSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "将 Mogmail 的所有设置恢复为默认值吗？",
+      "Source": "library"
+    },
+    {
       "Original": "Reset all for this character?",
       "Context": "ArchiveWindow.DrawResetConfirmInline",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "重置此角色的全部归档？",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset every Mogmail setting to its install default.",
+      "Context": "DiagnosticsTab.DrawResetSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将 Mogmail 全部设置恢复为初次安装时的默认值。",
       "Source": "library"
     },
     {
@@ -354,6 +985,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "恢复默认设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Save plugin log to external file",
+      "Context": "DiagnosticsTab.DrawExternalLogSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "将插件日志保存为外部文件",
       "Source": "library"
     },
     {
@@ -373,11 +1013,27 @@
       "Source": "library"
     },
     {
+      "Original": "Save this single letter to a .md file.",
+      "Context": "ArchiveWindow.DrawEntryActions",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将这封信件保存为 .md 文件。",
+      "Source": "library"
+    },
+    {
       "Original": "Search sender, date, items, body",
       "Context": "ArchiveWindow.DrawFilterRow",
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "按发件人、日期、物品或正文搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Senders:",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "发件人：",
       "Source": "library"
     },
     {
@@ -389,11 +1045,36 @@
       "Source": "library"
     },
     {
+      "Original": "Sensitive items",
+      "Context": "PopTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "需确认的物品",
+      "Source": "library"
+    },
+    {
       "Original": "Settings",
       "Context": "ToolbarWindow.GetButtonSpec",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a confirm dialog before bulk delete and Take + Delete.",
+      "Context": "GeneralTab.DrawDeletionSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "批量删除以及领取后删除前，显示确认窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Side",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "侧边",
       "Source": "library"
     },
     {
@@ -422,6 +1103,38 @@
       "Source": "library"
     },
     {
+      "Original": "Take",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "领取",
+      "Source": "library"
+    },
+    {
+      "Original": "Take + Delete",
+      "Context": "ToolbarWindow.OnTakeAndDeleteClicked",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "领取并删除",
+      "Source": "library"
+    },
+    {
+      "Original": "Take Attachment(s)",
+      "Context": "ToolbarWindow.OnTakeClicked",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "领取附件",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle toolbar side.",
+      "Context": "ToolbarWindow.GetButtonSpec",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "切换工具栏所在侧。",
+      "Source": "library"
+    },
+    {
       "Original": "Total attachments: ",
       "Context": "ArchiveWindow.DrawBatchPane",
       "Role": "UI",
@@ -446,11 +1159,157 @@
       "Source": "library"
     },
     {
+      "Original": "Unlock Items",
+      "Context": "ItemRegistryClassifier.CategoryLabel",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "解锁物品",
+      "Source": "library"
+    },
+    {
+      "Original": "When you claim attachments from a gift letter, print the original gift sender and the items to local echo chat.",
+      "Context": "GeneralTab.DrawGiftEchoSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "领取礼物信件附件时，在本地聊天回显中显示原赠送者和物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes, allow up to 1",
+      "Context": "SensitivePopConfirm.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是，最多允许使用一件",
+      "Source": "library"
+    },
+    {
+      "Original": "Yes, reset",
+      "Context": "DiagnosticsTab.DrawResetSection",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "是，重置",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] Read All: RequestLetterDetail unavailable, mark-read disabled.",
+      "Context": "ReadAllManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 全部标为已读：RequestLetterDetail 不可用，无法更改已读状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] Read All: nothing to mark.",
+      "Context": "ReadAllManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 全部标为已读：没有要处理的信件。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] aborted (",
+      "Context": "ClaimQueueManager.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 已中止（",
+      "Source": "library"
+    },
+    {
       "Original": "[Mogmail] archive is disabled. Enable it in Settings > General > Archive.",
       "Context": "Plugin.OnCommand",
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "[Mogmail] 信件归档已关闭。可在「设置 → 常规 → 归档」中启用。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] export failed: ",
+      "Context": "ArchiveWindow.WriteExportAll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 导出失败： ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] export failed: entry not found.",
+      "Context": "ArchiveWindow.WriteSingleExport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 导出失败：找不到记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] exported ",
+      "Context": "ArchiveWindow.WriteExportAll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 已导出 ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] exported 1 entry to ",
+      "Context": "ArchiveWindow.WriteSingleExport",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 已将一条记录导出至 ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] no entries to export.",
+      "Context": "ArchiveWindow.WriteExportAll",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 没有可导出的记录。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] no letters with attachments to claim.",
+      "Context": "ToolbarWindow.OnTakeClicked",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 没有可领取附件的信件。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] pop aborted (",
+      "Context": "AttachmentPopManager.Abort",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 已中止使用物品（",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] pop already running.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 正在使用物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] pop requires login.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 请先登录角色再使用物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] pop started. ",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "[Mogmail] 使用物品： ",
+      "Source": "library"
+    },
+    {
+      "Original": "[Mogmail] pop: ",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "动作管理器不可用 ",
       "Source": "library"
     },
     {
@@ -462,11 +1321,43 @@
       "Source": "library"
     },
     {
+      "Original": "action manager unavailable",
+      "Context": "AttachmentPopManager.TryAdvanceHead",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "以及",
+      "Source": "library"
+    },
+    {
       "Original": "all ",
       "Context": "AttachmentPopManager.Start",
       "Role": "UI",
       "RoleReason": "→ IChatGui.Print",
       "Translated": "全部 ",
+      "Source": "library"
+    },
+    {
+      "Original": "and ",
+      "Context": "ConfirmDialog.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "背包中没有可登记的物品。 ",
+      "Source": "library"
+    },
+    {
+      "Original": "no registrable items found in inventory.",
+      "Context": "AttachmentPopManager.Start",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "更新时出现异常",
+      "Source": "library"
+    },
+    {
+      "Original": "tick exception",
+      "Context": "AttachmentPopManager.Tick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "用户已取消",
       "Source": "library"
     },
     {

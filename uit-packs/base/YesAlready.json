@@ -16,6 +16,22 @@
       "Source": "library"
     },
     {
+      "Original": " Materia Blacklist",
+      "Context": "MateriaBlacklistWindow..ctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 魔晶石黑名单",
+      "Source": "library"
+    },
+    {
+      "Original": " Zone List",
+      "Context": "ZoneListWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": " 区域列表",
+      "Source": "library"
+    },
+    {
       "Original": "(none)",
       "Context": "Bothers.DrawGardeningItemCombo",
       "PreserveID": true,
@@ -49,6 +65,46 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "添加新条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add current target as a new entry",
+      "Context": "Talk.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "将当前目标添加为新条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add entry",
+      "Context": "MainWindow.TextNodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "添加条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add folder",
+      "Context": "MainWindow.TextNodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "添加文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Add last seen as new entry",
+      "Context": "MainWindow.TextNodePopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "将上次显示的内容添加为新条目",
+      "Source": "library"
+    },
+    {
+      "Original": "Add last selected as new entry",
+      "Context": "Lists.DrawButtons",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "将上次选择的内容添加为新条目",
       "Source": "library"
     },
     {
@@ -93,6 +149,24 @@
       "Source": "library"
     },
     {
+      "Original": "Auto Collectables",
+      "Context": "YesNo.DrawYesnoBothers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动处理收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Select Quests",
+      "Context": "Lists.DrawSelectStringBothers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动选择任务",
+      "Source": "library"
+    },
+    {
       "Original": "Auto confirm##GardeningConfirm",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
       "PreserveID": true,
@@ -108,6 +182,33 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "自动选择肥料",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically accept collectables that are worth turning in and decline insufficient ones.",
+      "Context": "YesNo.DrawYesnoBothers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "自动接受达到交纳要求的收藏品，拒绝收藏价值不足的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically confirm when joining a party finder group.",
+      "Context": "YesNo.DrawYesnoBothers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "加入队员招募中的小队时自动确认。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically select the first string that's a quest name",
+      "Context": "Lists.DrawSelectStringBothers",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IndentedTextColored",
+      "Translated": "自动选择第一个与任务名称相符的选项",
       "Source": "library"
     },
     {
@@ -170,11 +271,37 @@
       "Source": "library"
     },
     {
+      "Original": "Click No",
+      "Context": "YesNo.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "点击“否”",
+      "Source": "library"
+    },
+    {
+      "Original": "Click Yes",
+      "Context": "YesNo.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "点击“是”",
+      "Source": "library"
+    },
+    {
       "Original": "Click to configure",
       "Context": "BotherBadges.DrawTooltip",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "点击配置",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditions List",
+      "Context": "YesNo.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "条件列表",
       "Source": "library"
     },
     {
@@ -186,11 +313,35 @@
       "Source": "library"
     },
     {
+      "Original": "Could not find name",
+      "Context": "Numerics.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText",
+      "Translated": "未找到名称",
+      "Source": "library"
+    },
+    {
       "Original": "Current Conditions: ",
       "Context": "ConditionsListWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "当前条件： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Current ID: ",
+      "Context": "ZoneListWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "当前 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently only supports number extraction",
+      "Context": "YesNo.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "目前仅支持提取数值",
       "Source": "library"
     },
     {
@@ -219,12 +370,47 @@
       "Source": "library"
     },
     {
+      "Original": "Disable Hotkey",
+      "Context": "MainWindow.DrawHotkeySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "停用快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "DoH",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "能工巧匠",
+      "Source": "library"
+    },
+    {
+      "Original": "DoL",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "大地使者",
+      "Source": "library"
+    },
+    {
       "Original": "Enabled",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "已启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Equal",
+      "Context": "MainWindow.ComparisonTypeToText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "等于",
       "Source": "library"
     },
     {
@@ -245,11 +431,78 @@
       "Source": "library"
     },
     {
+      "Original": "Fill with current target",
+      "Context": "Lists.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "填入当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Fill with current zone",
+      "Context": "Numerics.DrawPopup",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.IconButton",
+      "Translated": "填入当前区域",
+      "Source": "library"
+    },
+    {
       "Original": "Filter by name",
       "Context": "MateriaBlacklistWindow.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.InputTextWithHint",
       "Translated": "按名称筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Force unlock",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "强制解锁",
+      "Source": "library"
+    },
+    {
+      "Original": "Forced Talk Hotkey",
+      "Context": "MainWindow.DrawHotkeySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "强制推进对话快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "Forced Yes Hotkey",
+      "Context": "MainWindow.DrawHotkeySettings",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "强制确认快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "Grade",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Greater than",
+      "Context": "MainWindow.ComparisonTypeToText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "大于",
+      "Source": "library"
+    },
+    {
+      "Original": "Greater than or equal",
+      "Context": "MainWindow.ComparisonTypeToText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "大于或等于",
       "Source": "library"
     },
     {
@@ -277,6 +530,67 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiX.IndentedTextColored",
       "Translated": "找不到首选土壤或种子时，使用背包中第一个符合条件的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Target Regex",
+      "Context": "Lists.DisplayListEntryNode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.TextTooltip",
+      "Translated": "目标正则表达式无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Text Regex",
+      "Context": "MainWindow.DisplayEntryNode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.TextTooltip",
+      "Translated": "文本正则表达式无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Text and Target Regex",
+      "Context": "Lists.DisplayListEntryNode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.TextTooltip",
+      "Translated": "文本和目标正则表达式均无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Text and Zone Regex",
+      "Context": "Numerics.DisplayEntryNode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.TextTooltip",
+      "Translated": "文本和区域正则表达式均无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Zone Regex",
+      "Context": "Numerics.DisplayEntryNode",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiX.TextTooltip",
+      "Translated": "区域正则表达式无效",
+      "Source": "library"
+    },
+    {
+      "Original": "Less than",
+      "Context": "MainWindow.ComparisonTypeToText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "小于",
+      "Source": "library"
+    },
+    {
+      "Original": "Less than or equal",
+      "Context": "MainWindow.ComparisonTypeToText",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "小于或等于",
       "Source": "library"
     },
     {
@@ -400,6 +714,14 @@
       "Source": "library"
     },
     {
+      "Original": "Outdated/not shown materia are automatically blacklisted",
+      "Context": "MateriaBlacklistWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "过时或未显示的魔晶石会自动加入黑名单",
+      "Source": "library"
+    },
+    {
       "Original": "Parameters:",
       "Context": "Custom.DrawPopup",
       "Role": "UI",
@@ -414,6 +736,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderInt",
       "Translated": "最大值的百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Percentage",
+      "Context": "Numerics.DrawPopup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "百分比",
       "Source": "library"
     },
     {

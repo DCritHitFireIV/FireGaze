@@ -34,12 +34,202 @@
       "Source": "library"
     },
     {
+      "Original": "An actor added with this look (Actors page) gets this name, and keeps this look. Empty: Limber 1, Limber 2...",
+      "Context": "AppearanceTab.DrawLooks",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "以此外观添加的角色（“角色”页）将使用此名称并保留此外观。留空则依次命名为 Limber 1、Limber 2……",
+      "Source": "library"
+    },
+    {
+      "Original": "Angles from the rest pose###fk_from_rest",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "相对于静止姿势的角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Apply as I change###app_live",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "编辑时立即应用",
+      "Source": "library"
+    },
+    {
       "Original": "Apply###app_apply",
       "Context": "AppearanceTab.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "应用",
+      "Source": "library"
+    },
+    {
+      "Original": "At the end###repeat",
+      "Context": "LimberAnimationsTab.DrawExpansionPart",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "播放结束时",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-build###lmb_bs_autobuild",
+      "Context": "BodyShapeTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "自动构建",
+      "Source": "library"
+    },
+    {
+      "Original": "Back to its original look###app_original",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "还原原始外观",
+      "Source": "library"
+    },
+    {
+      "Original": "Bakes the shape into every model this character wears (body and outfit) as a mod above your\nothers in its collection, and redraws it. Your own mods are only read. Live-only sliders aren't built.",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将体型烘焙进角色身上的每个模型（身体和服装），生成的模组优先于该合集中的其他模组，\n然后重绘角色。已有模组只读。仅实时预览生效的滑块不会参与构建。",
+      "Source": "library"
+    },
+    {
+      "Original": "Body only",
+      "Context": "AppearanceTab.DrawLooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "仅身体",
+      "Source": "library"
+    },
+    {
+      "Original": "Body physics - how to use it###LimberBodyPhysicsHelp",
+      "Context": "BodyPhysicsHelpWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "身体物理效果使用说明",
+      "Source": "library"
+    },
+    {
+      "Original": "Body shape on###lmb_bs_on",
+      "Context": "BodyShapeTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用体型调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Body###app_body",
+      "Context": "AppearanceTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "身体",
+      "Source": "library"
+    },
+    {
+      "Original": "Bone axes###fk_axes_bone",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "骨骼坐标轴",
+      "Source": "library"
+    },
+    {
+      "Original": "Bounce###extras_ragdoll_bounce",
+      "Context": "ExtrasTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "弹性",
+      "Source": "library"
+    },
+    {
+      "Original": "Branch back to animation###fk_branch_clear",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "让此骨骼分支恢复动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Breast shapes: no shaped top drawn yet.",
+      "Context": "BustShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "胸型：尚未绘制有胸型变化的上衣。",
+      "Source": "library"
+    },
+    {
+      "Original": "Brows",
+      "Context": "MainWindow.DrawFaceTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "眉毛",
+      "Source": "library"
+    },
+    {
+      "Original": "Build",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "构建",
+      "Source": "library"
+    },
+    {
+      "Original": "Build###lmb_bs_build",
+      "Context": "BodyShapeTab.DrawBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "构建",
+      "Source": "library"
+    },
+    {
+      "Original": "Building...###lmb_bs_build",
+      "Context": "BodyShapeTab.DrawBuild",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在构建…",
+      "Source": "library"
+    },
+    {
+      "Original": "Builds (and redraws the character) about a second after you let go of a detail slider.",
+      "Context": "BodyShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "松开细节滑块约一秒后开始构建并重绘角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Built into this character's models.",
+      "Context": "BodyShapeTab.DrawBuild",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已写入该角色的模型。",
+      "Source": "library"
+    },
+    {
+      "Original": "Changing a left or right bone changes the one on the other side the mirrored way.",
+      "Context": "FacePosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "调整左侧或右侧骨骼时，对侧骨骼会按镜像方式变化。",
       "Source": "library"
     },
     {
@@ -52,11 +242,78 @@
       "Source": "library"
     },
     {
+      "Original": "Character or actor name",
+      "Context": "GlobalPresetsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint",
+      "Translated": "角色或扮演者名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Cheeks",
+      "Context": "MainWindow.DrawFaceTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "脸颊",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a character at the top first.",
+      "Context": "ExtrasTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请先在顶部选择角色。",
+      "Source": "library"
+    },
+    {
       "Original": "Choose a character at the top of the window.",
       "Context": "AnimationsTab.Draw",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "请在窗口上方选择角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a character at the top: everything Limber has for them is saved as one preset.",
+      "Context": "GlobalPresetsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "在顶部选择角色，即可将 Limber 为该角色配置的全部内容存为一个预设。",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a character first.",
+      "Context": "BodyShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "请先选择角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clan###app_clan",
+      "Context": "AppearanceTab.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "部族",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear FK for this bone###fk_bone_clear",
+      "Context": "FkPosingTab.DrawEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除此骨骼的正向运动学设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear FK###fk_clear",
+      "Context": "FkPosingTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除正向运动学设置",
       "Source": "library"
     },
     {
@@ -66,6 +323,46 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.SmallButton",
       "Translated": "清除",
+      "Source": "library"
+    },
+    {
+      "Original": "Click for the colours.",
+      "Context": "AppearanceTab.ColourPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击选择颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click for the hairstyles.",
+      "Context": "AppearanceTab.HairPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击选择发型。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click the star next to an item to add it to your favourites.",
+      "Context": "HousingPropsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击物品旁的星标即可收藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Click to add it to your favourites.",
+      "Context": "Favorites.Star",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击加入收藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Closer and further than the game allows, looking straight up or down, and a wider / narrower field of view.",
+      "Context": "CameraTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "允许突破游戏原有的镜头距离限制、垂直向上或向下看，以及扩大或缩小视野。",
       "Source": "library"
     },
     {
@@ -101,6 +398,56 @@
       "Source": "library"
     },
     {
+      "Original": "Copied the sliders as text.",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "已将滑块设置复制为文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copies the pose on screen (animation, IK and all) into FK, bone by bone, so it holds still and you can edit it.",
+      "Context": "FkPosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "逐根骨骼将当前姿势（包括动画与逆向运动学）复制到正向运动学，以便固定并继续编辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copies the sliders as text, to share or keep.",
+      "Context": "BodyShapeTab.DrawPresets",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "以文本形式复制滑块设置，可供分享或保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy as text###app_copy",
+      "Context": "AppearanceTab.DrawLooks",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制为文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy from###app_from",
+      "Context": "AppearanceTab.DrawLooks",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo",
+      "Translated": "复制自",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy the settings above to all###dyn_copyall",
+      "Context": "DynamicBonesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton",
+      "Translated": "将上述设置复制到全部",
+      "Source": "library"
+    },
+    {
       "Original": "Copy###fk_copy",
       "Context": "FkPosingTab.DrawEditor",
       "PreserveID": true,
@@ -124,6 +471,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextDisabled",
       "Translated": "无法读取游戏动画列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Current GPose target",
+      "Context": "ChannelTarget.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "当前集体动作目标",
       "Source": "library"
     },
     {
@@ -162,12 +518,126 @@
       "Source": "library"
     },
     {
+      "Original": "Dots on the character's face bones: click one to pick it, drag it to move it.\nTip: Freeze motion first, so the animation's own expression doesn't fight you.",
+      "Context": "FacePosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "点击面部骨骼上的点即可选中，拖动可移动。\n提示：先冻结动作，以免动画表情干扰调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Drag: turn   Wheel: zoom",
+      "Context": "HousingPropsTab.DrawPreview",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "拖动旋转，滚轮缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Dyes",
+      "Context": "AppearanceTab.DrawGear",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "染剂",
+      "Source": "library"
+    },
+    {
+      "Original": "Each bone separately###dyn_perbone",
+      "Context": "DynamicBonesTab.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "分别设置每根骨骼",
+      "Source": "library"
+    },
+    {
+      "Original": "Each bone you pose holds its own turn and stops animating; the bones you haven't touched keep animating.",
+      "Context": "FkPosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "摆过姿势的骨骼会保持当前旋转角度，停止播放动画；未调整的骨骼仍照常播放动画。",
+      "Source": "library"
+    },
+    {
+      "Original": "Each bone's FK is a turn added to what the animation does, so the character keeps animating (breathing, emotes, idles) with your pose on it. Freeze motion (top of the window) to hold everything still.",
+      "Context": "FkPosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每根骨骼的正向运动学旋转会叠加在角色动画上，角色仍可按当前姿势做呼吸、情感动作或待机动作。使用窗口顶部的冻结动作可固定全部骨骼。",
+      "Source": "library"
+    },
+    {
+      "Original": "Each change goes on as soon as you let go of it (race, clan, sex, face and colours redraw the character).",
+      "Context": "AppearanceTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "每次松开后立即应用更改。修改种族、部族、性别、脸型或颜色时，角色会重绘。",
+      "Source": "library"
+    },
+    {
+      "Original": "Each eye its own colour. Off: both eyes take the right eye's colour.",
+      "Context": "AppearanceTab.DrawBody",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "为双眼分别设置颜色。关闭时双眼都采用右眼颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Edit this preset: set the chosen character up the way you want, then press this to save it over the preset.",
+      "Context": "GlobalPresetsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "编辑此预设：将所选角色调整到所需状态，再点击此处覆盖保存。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enter GPose to pick other characters.",
+      "Context": "ChannelTarget.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "进入集体动作即可选择其他角色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Every bone to the skeleton's own rest pose (the pose the model is built in).",
+      "Context": "FkPosingTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将所有骨骼恢复为模型构建时的原始静止姿势。",
+      "Source": "library"
+    },
+    {
+      "Original": "Every page's settings in this preset replace the chosen character's.",
+      "Context": "GlobalPresetsTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "用本预设中各页的设置覆盖所选角色的设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Every slider back to the body as it is.",
+      "Context": "BodyShapeTab.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "将所有滑块重置为角色当前体型的值。",
+      "Source": "library"
+    },
+    {
       "Original": "Expansion###lanim_expansion",
       "Context": "LimberAnimationsTab.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.CollapsingHeader",
       "Translated": "资料片",
+      "Source": "library"
+    },
+    {
+      "Original": "Eyes",
+      "Context": "LimberAnimationsTab.DrawAhegao",
+      "Role": "UI",
+      "RoleReason": "包含可翻译的独立显示位置；功能或未证明的位置保持原文，写入时逐位置核对",
+      "Translated": "眼睛",
       "Source": "library"
     },
     {

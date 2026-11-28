@@ -24,6 +24,22 @@
       "Source": "library"
     },
     {
+      "Original": "(No response)",
+      "Context": "SendMessage.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "（不回应）",
+      "Source": "library"
+    },
+    {
+      "Original": "*turns away and refuses to speak*",
+      "Context": "NpcChatWindow.SendMessage",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "*转身，不愿开口*",
+      "Source": "library"
+    },
+    {
       "Original": "-- Detection Settings --",
       "Context": "EditorWindow.DrawQuestNodeEditor",
       "Role": "UI",
@@ -72,6 +88,30 @@
       "Source": "library"
     },
     {
+      "Original": "API Base URL:",
+      "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "API 服务地址：",
+      "Source": "library"
+    },
+    {
+      "Original": "API Key (optional for local servers):",
+      "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "API 密钥（使用本地服务时可留空）：",
+      "Source": "library"
+    },
+    {
+      "Original": "API Key:",
+      "Context": "CustomNpcWindow.DrawGeminiSettings",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "API 密钥：",
+      "Source": "library"
+    },
+    {
       "Original": "Add Caught Blurb",
       "Context": "EditorWindow.DrawQuestNodeEditor",
       "PreserveID": true,
@@ -99,11 +139,78 @@
       "Source": "library"
     },
     {
+      "Original": "Animation Context (optional)",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "动画上下文（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Appearance Method",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "外观设置方式",
+      "Source": "library"
+    },
+    {
       "Original": "Author",
       "Context": "MainWindow.DrawInstalledQuestInformation",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "作者",
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior & Animation",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "行为与动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Birth Date (Lore)",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "出生日期（背景设定）",
+      "Source": "library"
+    },
+    {
+      "Original": "Birth Location (Lore)",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "出生地点（背景设定）",
+      "Source": "library"
+    },
+    {
+      "Original": "Body Animation Id: ",
+      "Context": "AQuestReborn.OnEmote",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "身体动画 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Branching Choices Editor",
+      "Context": "EditorWindow.DrawBranchingChoicesMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分支选项编辑器",
+      "Source": "library"
+    },
+    {
+      "Original": "Branching Choices List",
+      "Context": "EditorWindow.DrawBranchingChoicesMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "分支选项列表",
       "Source": "library"
     },
     {
@@ -116,6 +223,104 @@
       "Source": "library"
     },
     {
+      "Original": "Camera End Position",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "镜头结束位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera End Rotation#2",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "镜头结束角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Ending Field Of View#2",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "镜头结束视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Ending Zoom#2",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "镜头结束缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Is Not Affected During Event",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "事件过程中不改变镜头",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Movement Speed (In Milliseconds)#2",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "镜头移动时长（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Start Position",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "镜头起始位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Start Rotation",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat3",
+      "Translated": "镜头起始角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Starting Field Of View",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "镜头起始视野角度",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Starting Zoom",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat",
+      "Translated": "镜头起始缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Camera Uses Dolly",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "使用镜头轨道移动",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "CustomNpcWindow.DrawListBox",
       "PreserveID": true,
@@ -125,11 +330,70 @@
       "Source": "library"
     },
     {
+      "Original": "Chat Greeting",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "聊天问候语",
+      "Source": "library"
+    },
+    {
       "Original": "Chat with a custom NPC",
       "Context": "Plugin..ctor",
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "与自定义 NPC 交谈",
+      "Source": "library"
+    },
+    {
+      "Original": "Check URL",
+      "Context": "RewardWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "检查网址",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Memory",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "清除全部记忆",
+      "Source": "library"
+    },
+    {
+      "Original": "Configure Branching Questline",
+      "Context": "EditorWindow.DrawBranchingChoicesEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "配置分支任务线",
+      "Source": "library"
+    },
+    {
+      "Original": "Content Rating:",
+      "Context": "QuestAcceptanceWindow.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "内容分级：",
+      "Source": "library"
+    },
+    {
+      "Original": "Conversation Summaries",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "对话摘要",
+      "Source": "library"
+    },
+    {
+      "Original": "Conversational Provider Settings",
+      "Context": "CustomNpcWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "对话服务设置",
       "Source": "library"
     },
     {
@@ -184,12 +448,71 @@
       "Source": "library"
     },
     {
+      "Original": "Current Location: Eorzea",
+      "Context": "Plugin.GetEnvironmentContext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "当前位置：艾欧泽亚",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom NPC",
+      "Context": "CustomNpcWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "自定义 NPC",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom NPC Configuration",
+      "Context": "CustomNpcWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "自定义 NPC 设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom NPCs",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "自定义 NPC 列表",
+      "Source": "library"
+    },
+    {
       "Original": "Decline",
       "Context": "QuestAcceptanceWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "拒绝",
+      "Source": "library"
+    },
+    {
+      "Original": "Default (Built-in)",
+      "Context": "CustomNpcWindow..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo",
+      "Translated": "默认（内置）",
+      "Source": "library"
+    },
+    {
+      "Original": "Default (From Class)",
+      "Context": "CustomNpcWindow.RefreshWeaponList",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "默认（按职业设定）",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Animation Id: ",
+      "Context": "NPCTransformEditorWindow.DrawTransformEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "默认动画 ID： ",
       "Source": "library"
     },
     {
@@ -209,6 +532,24 @@
       "Source": "library"
     },
     {
+      "Original": "Dismiss NPC",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "让 NPC 离开",
+      "Source": "library"
+    },
+    {
+      "Original": "Donate To Further Development",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "赞助后续开发",
+      "Source": "library"
+    },
+    {
       "Original": "Dragon/Linkpearl",
       "Context": "EditorWindow..ctor",
       "Role": "UI",
@@ -217,11 +558,87 @@
       "Source": "library"
     },
     {
+      "Original": "Edit Quest",
+      "Context": "MainWindow.DrawInstalledQuestInformation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "编辑任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote Id: ",
+      "Context": "AQuestReborn.OnEmote",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "情感动作 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Emotion Override (optional)",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "覆盖情绪（可选）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Click-to-Chat with Custom NPCs",
+      "Context": "MainWindow.DrawInitialSetup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许点击自定义 NPC 开始对话",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Controller Interaction (Turn off if false triggers)",
+      "Context": "MainWindow.DrawInitialSetup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "允许手柄交互（若误触请关闭）",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable NPC Ambient Chatter",
+      "Context": "MainWindow.DrawInitialSetup",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 NPC 环境闲聊",
+      "Source": "library"
+    },
+    {
+      "Original": "Enemy Id:",
+      "Context": "EditorWindow.DrawQuestNodeEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "敌人 ID：",
+      "Source": "library"
+    },
+    {
       "Original": "Eorzea",
       "Context": "Plugin.GetEnvironmentContext",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "艾欧泽亚",
+      "Source": "library"
+    },
+    {
+      "Original": "Equipped Weapon",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "已装备的武器",
+      "Source": "library"
+    },
+    {
+      "Original": "Error loading config! Renaming old file and resetting...",
+      "Context": "PluginConfiguration.LoadConfig",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content",
+      "Translated": "加载配置失败！正在重命名旧文件并恢复默认设置……",
       "Source": "library"
     },
     {
@@ -243,12 +660,39 @@
       "Source": "library"
     },
     {
+      "Original": "Event Sets New Cutscene Player Position",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "事件会更改过场中玩家的位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Event Sets New NPC Position",
+      "Context": "EditorWindow.DrawQuestEventEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "事件会更改 NPC 的位置",
+      "Source": "library"
+    },
+    {
       "Original": "Exit",
       "Context": "NpcChatWindow.DrawDialogueContent",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "退出",
+      "Source": "library"
+    },
+    {
+      "Original": "Export Quest",
+      "Context": "MainWindow.DrawInstalledQuestInformation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导出任务",
       "Source": "library"
     },
     {
@@ -261,11 +705,28 @@
       "Source": "library"
     },
     {
+      "Original": "Failed: Empty response received. The model may have generated nothing or timed out.",
+      "Context": "TestAiConnection.MoveNext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "失败：收到空回复。模型可能没有生成内容或已超时。",
+      "Source": "library"
+    },
+    {
       "Original": "Female",
       "Context": "Plugin.GetEnvironmentContext",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "女性",
+      "Source": "library"
+    },
+    {
+      "Original": "Follow",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "跟随",
       "Source": "library"
     },
     {
@@ -277,12 +738,102 @@
       "Source": "library"
     },
     {
+      "Original": "Full AI Context Preview",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored",
+      "Translated": "完整 AI 上下文预览",
+      "Source": "library"
+    },
+    {
+      "Original": "General & Appearance",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "通用与外观",
+      "Source": "library"
+    },
+    {
       "Original": "Has Quest Acceptance Popup",
       "Context": "EditorWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "显示任务接受窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Hobbies",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "兴趣爱好",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift To Delete Objectives",
+      "Context": "EditorWindow.DrawQuestObjectives",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "按住 Shift 可删除目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift to delete this NPC.",
+      "Context": "CustomNpcWindow.DrawListBox",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Shift 可删除此 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift to enable this button.",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "按住 Shift 可启用此按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "How long the animation plays before the NPC returns to normal.",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "动画播放多久后 NPC 恢复常态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hrothgar",
+      "Context": "EventWindow.Race",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "硌狮族",
+      "Source": "library"
+    },
+    {
+      "Original": "Hyur",
+      "Context": "EventWindow.Race",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "人族",
+      "Source": "library"
+    },
+    {
+      "Original": "Idle Pose",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.LabelText",
+      "Translated": "待机姿势",
+      "Source": "library"
+    },
+    {
+      "Original": "Import Branching Questline",
+      "Context": "EditorWindow.DrawBranchingChoicesEditor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "导入分支任务线",
       "Source": "library"
     },
     {
@@ -304,11 +855,73 @@
       "Source": "library"
     },
     {
+      "Original": "Install Quest",
+      "Context": "MainWindow.DrawInstalledQuestSelector",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "安装任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed Quest Information",
+      "Context": "MainWindow.InstalledQuestsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已安装任务的信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed Quest Selector",
+      "Context": "MainWindow.InstalledQuestsTab",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "已安装任务选择器",
+      "Source": "library"
+    },
+    {
+      "Original": "Installed Quests",
+      "Context": "MainWindow.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "已安装的任务",
+      "Source": "library"
+    },
+    {
+      "Original": "Instantly switch to this animation",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip",
+      "Translated": "立即切换为此动画",
+      "Source": "library"
+    },
+    {
+      "Original": "Job & Weapon",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem",
+      "Translated": "职业与武器",
+      "Source": "library"
+    },
+    {
       "Original": "Just now",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "刚刚",
+      "Source": "library"
+    },
+    {
+      "Original": "Keyword",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "关键词",
       "Source": "library"
     },
     {
@@ -535,6 +1148,15 @@
       "Source": "library"
     },
     {
+      "Original": "Reset Quest Progress",
+      "Context": "MainWindow.DrawInstalledQuestInformation",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "重置任务进度",
+      "Source": "library"
+    },
+    {
       "Original": "Save Quest",
       "Context": "EditorWindow.Draw",
       "PreserveID": true,
@@ -634,6 +1256,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TreeNode",
       "Translated": "发现／抓到玩家时的台词",
+      "Source": "library"
+    },
+    {
+      "Original": "Stop Animation",
+      "Context": "CustomNpcWindow.DrawNPCConfigurator",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "停止动画",
       "Source": "library"
     },
     {

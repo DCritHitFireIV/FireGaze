@@ -17,12 +17,108 @@
       "Source": "library"
     },
     {
+      "Original": "Action Combat Targeting",
+      "Context": "ActionTargeting.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用技能时选择战斗目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Activates your tank stance automatically upon job switching or entering a dungeon.",
+      "Context": "AutoTankStance.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换职业或进入迷宫时自动开启防御姿态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add \"Open All\" to Coffers",
+      "Context": "OpenAllCoffers.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "为物品箱添加“全部打开”",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a button to Aetherial Reduction to process all items.",
+      "Context": "ReduceAll.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在精选窗口中添加一个处理全部物品的按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a button to the bottom of the saddlebag to entrust duplicates.",
+      "Context": "EntrustChocoboDuplicates.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在陆行鸟鞍囊底部添加一个按钮，用于存入相同种类的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a button to the desynthesis window to desynth all from the current dropdown. (Disclaimer: Pandora takes no responsibility for the loss of any Ultimate weapons or other rare items. Please use responsibly.)",
+      "Context": "Desynth.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在分解窗口添加按钮，用于分解当前分类中的全部物品。（请谨慎操作，Pandora 对误分解的绝境战武器等贵重物品概不负责。）",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a button to the extract materia window to start extracting all.",
+      "Context": "ExtractAll.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在精制魔晶石窗口添加一键全部精制的按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a context menu to items whilst the FC chest is open to quickly deposit them.",
+      "Context": "FCChestQuickDeposit.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开部队储物柜时，在物品右键菜单中添加快捷存入选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a description of what stage a quest is for when talking to the NPC.",
+      "Context": "SimplifyRelicQuest..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "与 NPC 交谈时，显示任务当前阶段的说明。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds an \"Open All\" option to the right click menu of various items that stack and can be opened from the inventory.",
+      "Context": "OpenAllCoffers.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "为可堆叠且可从背包打开的物品添加“全部打开”右键菜单项。",
+      "Source": "library"
+    },
+    {
       "Original": "Aliases",
       "Context": "MainWindow.DrawCommands",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows deciphering treaure maps from hotbar.",
+      "Context": "HotbarMapDecipher..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "允许在热键栏上解读陈旧的地图。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Active Time Maneuver",
+      "Context": "ATMSolver..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动完成紧急操作",
       "Source": "library"
     },
     {
@@ -35,11 +131,35 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-Collect",
+      "Context": "AutoCollect.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动开启收藏品采集",
+      "Source": "library"
+    },
+    {
       "Original": "Auto-Commendation after Duty",
       "Context": "AutoVoteMvp.get_Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "任务结束后自动投最优队员",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Cordial",
+      "Context": "AutoCordial.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动使用强心剂",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Equip Recommended Gear",
+      "Context": "AutoRecommended.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动穿戴推荐装备",
       "Source": "library"
     },
     {
@@ -51,11 +171,123 @@
       "Source": "library"
     },
     {
+      "Original": "Auto-Meditation",
+      "Context": "AutoMeditation.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动默想",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Motif (Out of Combat)",
+      "Context": "AutoMotif.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动绘画（非战斗时）",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Mount After Combat",
+      "Context": "AutoMountCombat.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "战斗结束后自动骑乘",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Mount after Gathering",
+      "Context": "AutoMountGathering.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "采集结束后自动骑乘",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Mount on Zone Change",
+      "Context": "AutoMountZoneChange.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换区域时自动骑乘",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Open Map Coords",
+      "Context": "AutoOpenCoords.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动打开地图坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Prospect/Triangulate",
+      "Context": "AutoProspectTriangulate.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动开启矿脉勘探或三角测量",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Sprint in Sanctuaries",
+      "Context": "AutoSprint.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在休息区自动冲刺",
+      "Source": "library"
+    },
+    {
       "Original": "Auto-Sprint on Island Sanctuary",
       "Context": "SanctuarySprint.get_Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "在无人岛上自动冲刺",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Summon Fairy/Carbuncle",
+      "Context": "AutoFairy.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动召唤小仙女或宝石兽",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Sync FATEs",
+      "Context": "AutoSyncFate.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动同步临危受命等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Tank Stance",
+      "Context": "AutoTankStance.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动开启防御姿态",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Teleport to Map Coords",
+      "Context": "AutoTPCoords.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动传送至地图坐标",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-interact with Gathering Nodes",
+      "Context": "AutoInteractGathering.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动与采集点交互",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-interact with Objects in Instances",
+      "Context": "AutoInteractDungeons.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动与副本内物体交互",
       "Source": "library"
     },
     {
@@ -75,6 +307,62 @@
       "Source": "library"
     },
     {
+      "Original": "Automatically Enabled Yes Buttons",
+      "Context": "EnableYesButtons.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动启用“是”按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically Open Chests",
+      "Context": "AutoOpenChests.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动开箱",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically Refresh Party Finder",
+      "Context": "RefreshPF..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动刷新招募板",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically confirms the lower quality popup menu.",
+      "Context": "QuickLowerQuality.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动确认降低物品品质的弹窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically consumes a Gysahl Green in the overworld if you don't have your chocobo out.",
+      "Context": "AutoChocobo.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在野外尚未召出搭档陆行鸟时，自动使用基萨尔野菜。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically draws motifs when outside of combat and not in a sanctuary.",
+      "Context": "AutoMotif.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在休息区以外且脱离战斗时自动绘画。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically equip recommended gear upon job changing.",
+      "Context": "AutoRecommended.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换职业后自动穿戴推荐装备。",
+      "Source": "library"
+    },
+    {
       "Original": "Automatically fill in gardening windows with seeds and soil.",
       "Context": "AutoSelectGardening.get_Description",
       "Role": "UI",
@@ -91,11 +379,116 @@
       "Source": "library"
     },
     {
+      "Original": "Automatically hits a button or mashes for you when the ATM is on screen.",
+      "Context": "ATMSolver..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "出现紧急操作界面时，自动按键或连续按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically merge stacks of same items",
+      "Context": "MergeStacks.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动合并相同物品的堆叠",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically opens the map to coordinates posted in chat.",
+      "Context": "AutoOpenCoords.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动打开地图并定位到聊天中发布的坐标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically reset enmity on target dummies if you do not perform an action after a specified amount of time.",
+      "Context": "AfkDummyReset.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "对木人停止攻击达到设定时长后，自动重置仇恨。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically summons your Fairy or Carbuncle upon switching to SCH or SMN respectively.",
+      "Context": "AutoFairy.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换为学者时自动召唤小仙女，切换为召唤师时自动召唤宝石兽。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically targets and switches your target to the nearest within your line of sight.",
+      "Context": "ActionTargeting.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动选中视野内最近的目标，必要时切换目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically teleports to the nearest aetheryte to a map link posted in chat. Requires \"Teleporter\" plugin installed.",
+      "Context": "AutoTPCoords.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动传送至聊天地图链接附近的以太之光。需要安装 Teleporter 插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically try to pick all the keys, levers, and other thingymabobs. Also works to try and open doors and stuff. (VERY EXPERIMENTAL)",
+      "Context": "AutoInteractDungeons.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动尝试拾取钥匙、操作拉杆、开门或与其他物件交互。（实验性功能）",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use Meditation when out of combat.",
+      "Context": "AutoMeditation.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "脱离战斗时自动使用默想。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically use a cordial when below a given threshold.",
+      "Context": "AutoCordial.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "采集力低于设定阈值时自动使用强心剂。",
+      "Source": "library"
+    },
+    {
       "Original": "Automatically uses Isle Sprint.",
       "Context": "SanctuarySprint.get_Description",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "自动使用海岛冲刺。",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically uses sprint when in an area you are gaining rested experience, such as cities.",
+      "Context": "AutoSprint.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在城市等可积累休息经验的区域自动使用冲刺。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot leave during combat.",
+      "Context": "LeaveDuty.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "战斗中无法退出。",
+      "Source": "library"
+    },
+    {
+      "Original": "Channel Filters (Whitelist)",
+      "Context": "AutoOpenCoords.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader",
+      "Translated": "频道筛选（允许列表）",
       "Source": "library"
     },
     {
@@ -108,11 +501,36 @@
       "Source": "library"
     },
     {
+      "Original": "Congratulations! You have no more MSQ quests to complete.... for now!",
+      "Context": "MSQCountdown.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print",
+      "Translated": "恭喜！你暂时已完成当前所有主线任务。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cooldown after interacting (seconds)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "交互后的冷却时间（秒）",
+      "Source": "library"
+    },
+    {
       "Original": "Currently Disabled",
       "Context": "BaseFeature.DrawAutoConfig",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "当前已停用",
+      "Source": "library"
+    },
+    {
+      "Original": "Default Grand Company Shop Menu",
+      "Context": "GCVendorDefault.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "军票交换所默认菜单",
       "Source": "library"
     },
     {
@@ -150,12 +568,39 @@
       "Source": "library"
     },
     {
+      "Original": "Disable Starting Buffs on Nodes with Collectibles",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "遇到含收藏品的采集点时禁用起手增益",
+      "Source": "library"
+    },
+    {
       "Original": "Disable Theme",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "停用主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable in fates",
+      "Context": "AutoMountCombat.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "临危受命中禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable while in combat",
+      "Context": "AutoOpenCoords.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "战斗中禁用",
       "Source": "library"
     },
     {
@@ -175,12 +620,83 @@
       "Source": "library"
     },
     {
+      "Original": "Don't Buff if Item Not Present",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "目标物品不存在时不使用增益",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't Unset Target",
+      "Context": "ActionTargeting.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "保留当前目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable P. Gathering",
+      "Context": "PandoraGathering.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 Pandora 采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Pandora Gathering",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "启用 Pandora 采集",
+      "Source": "library"
+    },
+    {
       "Original": "Enable Theme",
       "Context": "MainWindow.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Selectable",
       "Translated": "启用主题",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable rapid fire button presses on controller by holding down a button.",
+      "Context": "TurboController..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按住手柄按钮时连续触发按键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Entrust Duplicates",
+      "Context": "EntrustChocoboDuplicates.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "存入相同种类的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Combat",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除战斗",
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Exits",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "排除出口",
       "Source": "library"
     },
     {
@@ -202,6 +718,56 @@
       "Source": "library"
     },
     {
+      "Original": "Excluded Buttons",
+      "Context": "TurboController.get_DrawConfigTree",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "排除的按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Extract All Materia",
+      "Context": "ExtractAll.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "全部精制魔晶石",
+      "Source": "library"
+    },
+    {
+      "Original": "Extract All###StartExtract",
+      "Context": "ExtractAll.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部精制",
+      "Source": "library"
+    },
+    {
+      "Original": "Extracting. Click to abort.###AbortExtract",
+      "Context": "ExtractAll.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在精制，点击中止。",
+      "Source": "library"
+    },
+    {
+      "Original": "FATE Targeting Mode",
+      "Context": "FATETargeting..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "临危受命目标选择模式",
+      "Source": "library"
+    },
+    {
+      "Original": "FC Chest Quick Deposit",
+      "Context": "FCChestQuickDeposit.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "快速存入部队储物柜",
+      "Source": "library"
+    },
+    {
       "Original": "Fertilizer",
       "Context": "AutoSelectGardening.get_DrawConfigTree",
       "PreserveID": true,
@@ -211,12 +777,28 @@
       "Source": "library"
     },
     {
+      "Original": "For quickly linking multiple gearsets to a glamour plate.",
+      "Context": "QuickPlateLink.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "用于将多套套装快速关联到投影套装。",
+      "Source": "library"
+    },
+    {
       "Original": "Function only in a duty",
       "Context": "AutoPeloton.get_DrawConfigTree",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "仅在副本中生效",
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Plate Link",
+      "Context": "QuickPlateLink.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "关联投影套装",
       "Source": "library"
     },
     {
@@ -238,12 +820,55 @@
       "Source": "library"
     },
     {
+      "Original": "Ignore <pos> flags",
+      "Context": "AutoOpenCoords.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "忽略 <pos> 标记",
+      "Source": "library"
+    },
+    {
+      "Original": "In Combat Only",
+      "Context": "TurboController.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在战斗中",
+      "Source": "library"
+    },
+    {
+      "Original": "In the Diadem, this will remember the last slot selected and not the last item due to the varying nature of the nodes.",
+      "Context": "PandoraGathering.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text",
+      "Translated": "云冠群岛的采集点内容会变化，因此会记住所选栏位，而非上一次采集的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Inactivity Dummy Reset",
+      "Context": "AfkDummyReset.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "长时间无操作时重置木人仇恨",
+      "Source": "library"
+    },
+    {
       "Original": "Include Fertilizing",
       "Context": "AutoSelectGardening.get_DrawConfigTree",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "包括施肥",
+      "Source": "library"
+    },
+    {
+      "Original": "Include Sonar links",
+      "Context": "AutoOpenCoords.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "包含 Sonar 链接",
       "Source": "library"
     },
     {
@@ -255,11 +880,146 @@
       "Source": "library"
     },
     {
+      "Original": "Interacts with gathering nodes when close enough and on the correct job.",
+      "Context": "AutoInteractGathering.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用相应采集职业且距离足够近时，与采集点交互。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interacts with your current target.",
+      "Context": "InteractCommand.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "与当前目标交互。",
+      "Source": "library"
+    },
+    {
+      "Original": "Interval (ms)",
+      "Context": "TurboController.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt",
+      "Translated": "间隔（毫秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "It's like the other item link commands, but allows searching.",
+      "Context": "ItemLinkCommand.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "可像其他物品链接命令一样使用，并支持搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Link",
+      "Context": "ItemLinkCommand.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "物品链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Jump after mounting",
+      "Context": "AutoMountCombat.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "骑乘后跳跃",
+      "Source": "library"
+    },
+    {
       "Original": "Leave Duty",
       "Context": "LeaveDuty.get_Name",
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "退出副本",
+      "Source": "library"
+    },
+    {
+      "Original": "MSQ Countdown",
+      "Context": "MSQCountdown.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "剩余主线任务数",
+      "Source": "library"
+    },
+    {
+      "Original": "Map Hotbar Decipher",
+      "Context": "HotbarMapDecipher..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "通过热键栏解读地图",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Distance (yalms)",
+      "Context": "ActionTargeting.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "最大距离（星码）",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Height Difference (yalms)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "最大高度差（星码）",
+      "Source": "library"
+    },
+    {
+      "Original": "Min. GP###MinGP1",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最低采集力",
+      "Source": "library"
+    },
+    {
+      "Original": "Min. GP###MinGP2",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最低采集力",
+      "Source": "library"
+    },
+    {
+      "Original": "Min. GP###MinGP5",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt",
+      "Translated": "最低采集力",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts on zone change if not already mounted.",
+      "Context": "AutoMountZoneChange.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换区域时自动骑乘（已骑乘时跳过）。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts upon ending combat.",
+      "Context": "AutoMountCombat.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "战斗结束后自动骑乘。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mounts upon finishing gathering from a node. Will try to execute for up to 3 seconds after the delay if moving.",
+      "Context": "AutoMountGathering.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "完成当前采集点的采集后自动骑乘。如果正在移动，会在延迟结束后的 3 秒内持续尝试。",
       "Source": "library"
     },
     {
@@ -289,11 +1049,28 @@
       "Source": "library"
     },
     {
+      "Original": "Only Attempt Whilst Not Moving",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "仅在静止时尝试",
+      "Source": "library"
+    },
+    {
       "Original": "Opens the Pandora menu.",
       "Context": "PandorasBox.Initialize",
       "Role": "UI",
       "RoleReason": "→ CommandInfo.HelpMessage",
       "Translated": "打开 Pandora 菜单。",
+      "Source": "library"
+    },
+    {
+      "Original": "Pandora Quick Gather",
+      "Context": "PandoraGathering.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "Pandora 快速采集",
       "Source": "library"
     },
     {
@@ -303,6 +1080,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TableSetupColumn",
       "Translated": "参数",
+      "Source": "library"
+    },
+    {
+      "Original": "Party Finder Show More",
+      "Context": "PartyFinderShowMore.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "招募板显示更多条目",
       "Source": "library"
     },
     {
@@ -319,6 +1104,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextWrapped",
       "Translated": "保留地图链接的格式，使粘贴后的链接仍可点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents the Command Panel from closing during load screens.",
+      "Context": "StickyQuickPanel..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换区域加载时保持指令面板打开。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints a message in chat with how many main scenario quests left in the current expansion you have to complete.",
+      "Context": "MSQCountdown.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "在聊天栏中显示当前资料片剩余的主线任务数量。",
       "Source": "library"
     },
     {
@@ -349,12 +1150,137 @@
       "Source": "library"
     },
     {
+      "Original": "Quick Lower Quality",
+      "Context": "QuickLowerQuality.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "快速降低品质",
+      "Source": "library"
+    },
+    {
+      "Original": "Quickly leaves a duty.",
+      "Context": "LeaveDuty.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "快速退出当前副本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Raise the display limit from 50 to the 100 limit actually allowed by the game.",
+      "Context": "PartyFinderShowMore.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将显示上限从 50 条提高至游戏实际支持的 100 条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduce All Items",
+      "Context": "ReduceAll.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "精选全部物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduce All###StartReduce",
+      "Context": "ReduceAll.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部精选",
+      "Source": "library"
+    },
+    {
+      "Original": "Reducing. Click to abort.###AbortReduce",
+      "Context": "ReduceAll.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在精选，点击中止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshes the Party Finder at set intervals",
+      "Context": "RefreshPF..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "按设定的时间间隔刷新招募板",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Item",
+      "Context": "PandoraGathering.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "记住所选物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Item Between Nodes",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在采集点之间记住所选物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces the Quick Gather checkbox with a new one that enables better quick gathering. Works on all nodes and can be interrupted at any point by disabling the checkbox. Also remembers your settings between sessions.",
+      "Context": "PandoraGathering.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用增强的快速采集开关替换原复选框。适用于所有采集点，可随时取消勾选来中断采集，设置会保留至下次登录。",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces the Trade button on the collectables interface with a Trade All button for the selected collectable.",
+      "Context": "TradeAllCollectibles.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "将收藏品界面的交纳按钮替换为全部交纳按钮，适用于选中的收藏品。",
+      "Source": "library"
+    },
+    {
       "Original": "Reset Death Tracker on Wipe",
       "Context": "AutoVoteMvp.get_DrawConfigTree",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "团灭后重置死亡次数",
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Enmity",
+      "Context": "ResetEnmity.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "重置仇恨",
+      "Source": "library"
+    },
+    {
+      "Original": "Resets combat with target dummies. Accepts arguments for t(arget) or a(ll). Defaults to all.",
+      "Context": "ResetEnmity.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "结束与木人的战斗。参数 t 表示当前目标，a 表示全部，默认全部。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reveal Hidden Items",
+      "Context": "PandoraGathering.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "显示隐藏物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Saddlebag Entrust Duplicates",
+      "Context": "EntrustChocoboDuplicates.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "向陆行鸟鞍囊存入相同种类的物品",
       "Source": "library"
     },
     {
@@ -400,12 +1326,56 @@
       "Source": "library"
     },
     {
+      "Original": "Select Mount",
+      "Context": "AutoMountCombat.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择坐骑",
+      "Source": "library"
+    },
+    {
+      "Original": "Select Rank",
+      "Context": "GCVendorDefault.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo",
+      "Translated": "选择等级",
+      "Source": "library"
+    },
+    {
+      "Original": "Set <flag> without opening the map",
+      "Context": "AutoOpenCoords.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "设置 <flag> 时不打开地图",
+      "Source": "library"
+    },
+    {
       "Original": "Set Delay (seconds)",
       "Context": "AutoPeloton.get_DrawConfigTree",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.SliderFloat",
       "Translated": "设置延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Set delay (seconds)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat",
+      "Translated": "设置延迟（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the Yes button on Yes/No prompts to automatically be enabled if normally a checkbox needed checked.",
+      "Context": "EnableYesButtons.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "需要先勾选复选框才能点击“是”时，自动启用该按钮。",
       "Source": "library"
     },
     {
@@ -417,12 +1387,36 @@
       "Source": "library"
     },
     {
+      "Original": "Sets the default tab in the grand company menu when you open it.",
+      "Context": "GCVendorDefault.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "设置打开军队菜单时默认显示的页签。",
+      "Source": "library"
+    },
+    {
       "Original": "Show Only Inventory Items",
       "Context": "AutoSelectGardening.get_DrawConfigTree",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "仅显示背包中的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Simplify Relic Quest Pickup",
+      "Context": "SimplifyRelicQuest..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "简化古武任务的接取",
+      "Source": "library"
+    },
+    {
+      "Original": "Skip '/mount' In Macros If Mounted",
+      "Context": "SkipMount.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已骑乘时跳过宏中的 '/mount'",
       "Source": "library"
     },
     {
@@ -444,12 +1438,165 @@
       "Source": "library"
     },
     {
+      "Original": "Start moving after mounting",
+      "Context": "AutoMountGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "骑乘后开始移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Sticky Command Panel",
+      "Context": "StickyQuickPanel..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "保持指令面板开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Switch Gatherers Automatically",
+      "Context": "AutoSwitchGatherer.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "自动切换采集职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Switches to the appropriate gathering job when approaching a gathering spot and you have both Triangulate & Prospect active. Must have a gearset for the job to switch to.",
+      "Context": "AutoSwitchGatherer.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "同时开启三角测量和矿脉勘探时，靠近采集点将自动切换到相应职业。须事先保存该职业的套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "Syncs when entering a FATE if you're overlevelled.",
+      "Context": "AutoSyncFate.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "角色等级过高时，进入临危受命范围后自动同步等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "This node contains quest nodes which can result in soft-locking the quest. Pandora Gathering has been disabled.",
+      "Context": "PandoraGathering.CheckNodeAndClick",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "当前采集点含任务专用内容，继续自动采集可能导致任务无法推进。已关闭 Pandora 采集。",
+      "Source": "library"
+    },
+    {
+      "Original": "This will stop Pandora from using any actions when you start a node with a collectible on it. This is intended to prevent wasting GP on buffs that don't apply to collectibles.",
+      "Context": "PandoraGathering.get_DrawConfigTree",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "开始采集时，若该采集点含有收藏品，将禁止 Pandora 使用任何技能，以免对收藏品无效的增益浪费采集力。",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade All Collectables",
+      "Context": "TradeAllCollectibles.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "交纳全部收藏品",
+      "Source": "library"
+    },
+    {
+      "Original": "Trade All###StartTrade",
+      "Context": "TradeAllCollectibles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "全部交纳",
+      "Source": "library"
+    },
+    {
+      "Original": "Trading. Click to abort.###AbortTrade",
+      "Context": "TradeAllCollectibles.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "正在交纳，点击中止。",
+      "Source": "library"
+    },
+    {
+      "Original": "Try Interact Method 1 (interacts with most things)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "尝试交互方式 1（适用于多数对象）",
+      "Source": "library"
+    },
+    {
+      "Original": "Try Interact Method 2 (interacts with things method 1 doesn't)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "尝试交互方式 2（用于方式 1 无法交互的对象）",
+      "Source": "library"
+    },
+    {
+      "Original": "Try Interact with Both Methods (buggy on many things, use with caution)",
+      "Context": "AutoInteractDungeons.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "尝试两种交互方式（与多种对象交互时可能出错，请谨慎使用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Turbo Controller",
+      "Context": "TurboController..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "手柄连发",
+      "Source": "library"
+    },
+    {
+      "Original": "Unset Target if not in cone range (all times, use with caution)",
+      "Context": "ActionTargeting.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "目标在扇形范围以外时取消选中（始终生效，请谨慎使用）",
+      "Source": "library"
+    },
+    {
+      "Original": "Unset Target if not in cone range (only in combat)",
+      "Context": "ActionTargeting.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton",
+      "Translated": "目标在扇形范围以外时取消选中（仅战斗中）",
+      "Source": "library"
+    },
+    {
       "Original": "Use ",
       "Context": "PandoraGathering.Draw",
       "PreserveID": true,
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "使用 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Item",
+      "Context": "UseItem.get_Name",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Use on Island Sanctuary",
+      "Context": "AutoMountGathering.get_DrawConfigTree",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox",
+      "Translated": "在无人岛使用",
       "Source": "library"
     },
     {
@@ -470,11 +1617,67 @@
       "Source": "library"
     },
     {
+      "Original": "Uses an Item from your inventory.",
+      "Context": "UseItem.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "使用背包中的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Using a macro with /mount in it will skip that line if you're already mounted",
+      "Context": "SkipMount.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "已骑乘时，执行包含 /mount 的宏会跳过该行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Walk up to a chest to automatically open it. (Does not work with Deep Dungeon chests)",
+      "Context": "AutoOpenChests.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "靠近宝箱时自动开启。（对深层迷宫宝箱无效）",
+      "Source": "library"
+    },
+    {
       "Original": "When enabled, this will select the first soil/seed found in your inventory if the\nprimary ones chosen are not found.",
       "Context": "AutoSelectGardening.get_DrawConfigTree",
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "找不到首选土壤或种子时，\n使用背包中的第一份土壤或种子。",
+      "Source": "library"
+    },
+    {
+      "Original": "When in a FATE and able to participate (synced), automatically targets FATE associated enemies.",
+      "Context": "FATETargeting..ctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "参与临危受命且等级已同步时，自动选中相关敌人。",
+      "Source": "library"
+    },
+    {
+      "Original": "When switching to FSH, ensures Collector's Glove will always be on.",
+      "Context": "AutoCollect.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换为捕鱼人时，确保开启收藏品采集。",
+      "Source": "library"
+    },
+    {
+      "Original": "When switching to MIN or BTN, automatically activate the other jobs searching ability.",
+      "Context": "AutoProspectTriangulate.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "切换至采矿工或园艺工时，自动开启另一职业的采集点探测技能。",
+      "Source": "library"
+    },
+    {
+      "Original": "When you open your inventory, the plugin will try and pull all stacks of the same item together.",
+      "Context": "MergeStacks.get_Description",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped",
+      "Translated": "打开背包时，插件会尝试将同种物品堆叠到一起。",
       "Source": "library"
     },
     {
@@ -499,6 +1702,22 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Text",
       "Translated": "请先从坐骑上下来",
+      "Source": "library"
+    },
+    {
+      "Original": "You are not in a duty to leave.",
+      "Context": "LeaveDuty.OnCommand",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError",
+      "Translated": "当前不在副本中，无法退出。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zone Whitelist (",
+      "Context": "FeatureConfigEditor.TerritorySelectionEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "区域允许列表（",
       "Source": "library"
     }
   ],

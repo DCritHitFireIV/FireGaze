@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": "\nSelect a placed item to use the gizmo",
+      "Context": "[Intoner] EditorToolbar.DrawHeaderGizmoModeButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "\n选中已放置的物体即可使用操作手柄",
+      "Source": "library"
+    },
+    {
       "Original": " Catalog",
       "Context": "[Intoner] CreateWorkspace.DrawCreateBrowserActionButton",
       "Role": "UI",
@@ -104,6 +112,14 @@
       "Source": "library"
     },
     {
+      "Original": "%.2f seconds",
+      "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat",
+      "Translated": "%.2f 秒",
+      "Source": "library"
+    },
+    {
       "Original": "%d seconds",
       "Context": "[Intoner] ObjectModelEditor.DrawVfxRows",
       "Role": "UI",
@@ -117,6 +133,24 @@
       "Role": "UI",
       "RoleReason": "→ ImDrawListPtr.AddText",
       "Translated": "1 个文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Action",
+      "Context": "[Intoner] DebugWorkspace.BeginObjectIpcActionTable",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Context": "[Intoner] EditorCard.DrawCardHeader",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "操作",
       "Source": "library"
     },
     {
@@ -144,6 +178,30 @@
       "Source": "library"
     },
     {
+      "Original": "Add to Library",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawCatalogEntryLibraryContext",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "添加到资源库",
+      "Source": "library"
+    },
+    {
+      "Original": "Align",
+      "Context": "[Intoner] EditorToolbar.DrawSurfaceAlignToolbarButton",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Align To Normal",
+      "Context": "[Intoner] EditorToolbar.DrawSurfaceAlignPopup",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "对齐到表面法线",
+      "Source": "library"
+    },
+    {
       "Original": "All ",
       "Context": "[Intoner] CollectionModSettingsEditor.DrawObjectCollectionModSettingsToolbar",
       "Role": "UI",
@@ -157,6 +215,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "始终",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Visible",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "始终可见",
       "Source": "library"
     },
     {
@@ -184,6 +250,14 @@
       "Source": "library"
     },
     {
+      "Original": "Assign Collection",
+      "Context": "[Intoner] SceneEditorCommands.ApplyObjectCollectionToSelectedObjects",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "分配合集",
+      "Source": "library"
+    },
+    {
       "Original": "Assign Folder",
       "Context": "[Intoner] ObjectLibraryBrowser.DrawLibraryFolderAssignmentMenu",
       "Role": "UI",
@@ -192,11 +266,99 @@
       "Source": "library"
     },
     {
+      "Original": "Assigned Objects",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionViewSelector",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "已分配的物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "自动",
+      "Source": "library"
+    },
+    {
+      "Original": "Behind UI",
+      "Context": "[Intoner] CoreSettingFactory.ResolveDrawOverGameUiStatus",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "显示在界面之后",
+      "Source": "library"
+    },
+    {
+      "Original": "Bounds Enabled",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsOptionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "已启用边界框",
+      "Source": "library"
+    },
+    {
+      "Original": "Bounds Filter",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsFilter",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "边界框筛选",
+      "Source": "library"
+    },
+    {
+      "Original": "Box Selection",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsOptionsPopup",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "框选",
+      "Source": "library"
+    },
+    {
+      "Original": "Box selection",
+      "Context": "[Intoner] EditorToolbar.DrawBoundsToolbarTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "框选",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse all ",
+      "Context": "[Intoner] ObjectBrowserPanel.DrawCreateBrowserSourceMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "浏览全部 ",
+      "Source": "library"
+    },
+    {
+      "Original": "Browse the available catalog entry",
+      "Context": "[Intoner] ObjectBrowserPanel.DrawCreateBrowserSourceMenu",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "浏览可用的图鉴条目",
+      "Source": "library"
+    },
+    {
       "Original": "Cancel",
       "Context": "[Intoner] EditorDialog.DrawActions",
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "取消",
+      "Source": "library"
+    },
+    {
+      "Original": "Capture Source",
+      "Context": "[Intoner] SceneItemInspector.DrawDisplayCaptureTargetRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "捕获来源",
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog + Create",
+      "Context": "[Intoner] EditorWorkspaceHost..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "图鉴与创建",
       "Source": "library"
     },
     {
@@ -214,6 +376,30 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.CalcTextSize",
       "Translated": "类别",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Display Lock",
+      "Context": "[Intoner] SceneItemInspector.DrawDisplaySnapshotEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "更改显示锁定状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Display Visibility",
+      "Context": "[Intoner] SceneItemInspector.DrawDisplaySnapshotEditor",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "更改显示可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Object World",
+      "Context": "[Intoner] HistoryCoordinator.TryChangeObjectWorld",
+      "Role": "UI",
+      "RoleReason": "→ ImDrawListPtr.AddText",
+      "Translated": "更改物体所属世界",
       "Source": "library"
     },
     {
@@ -257,6 +443,38 @@
       "Source": "library"
     },
     {
+      "Original": "Choose Collection",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "选择合集",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Folder",
+      "Context": "[Intoner] DrawInspectorFolderRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "选择文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose a collection to manage",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "选择要管理的合集",
+      "Source": "library"
+    },
+    {
+      "Original": "Choose which saved copy to open in the Library",
+      "Context": "[Intoner] CreateWorkspace.DrawCreateBrowserActionButton",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "选择要在资源库中打开的已保存副本",
+      "Source": "library"
+    },
+    {
       "Original": "Clear",
       "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
       "Role": "UI",
@@ -290,6 +508,22 @@
       "Source": "library"
     },
     {
+      "Original": "Clear Objects",
+      "Context": "[Intoner] SceneWorkspace.OpenClearPlacedObjectsDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "清除物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Placed Objects",
+      "Context": "[Intoner] SceneWorkspace.OpenClearPlacedObjectsDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "清除已放置的物体",
+      "Source": "library"
+    },
+    {
       "Original": "Clear filter: ",
       "Context": "[Intoner] CollectionPanel.DrawObjectCollectionPanelSearch",
       "Role": "UI",
@@ -306,11 +540,51 @@
       "Source": "library"
     },
     {
+      "Original": "Collection",
+      "Context": "[Intoner] SceneItemInspector.DrawObjectCollectionSelectionRow",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "合集",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection menu",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionHeaderActions",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "合集菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Collection status",
+      "Context": "[Intoner] CollectionStatusUi.DrawObjectCollectionStatusTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "合集状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Collections",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled",
+      "Translated": "合集",
+      "Source": "library"
+    },
+    {
       "Original": "Color",
       "Context": "[Intoner] ObjectModelEditor.DrawFurnitureRows",
       "Role": "UI",
       "RoleReason": "→ EditorPropertyTable.DrawLabel",
       "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Compact",
+      "Context": "[Intoner] CoreSettingFactory..cctor",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable",
+      "Translated": "紧凑",
       "Source": "library"
     },
     {
@@ -339,6 +613,15 @@
       "Source": "library"
     },
     {
+      "Original": "Control",
+      "Context": "[Intoner] SectionPanel.DrawSettingBlock",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn",
+      "Translated": "控制",
+      "Source": "library"
+    },
+    {
       "Original": "Copy",
       "Context": "[Intoner] EditorShortcuts..cctor",
       "Role": "UI",
@@ -355,6 +638,59 @@
       "Source": "library"
     },
     {
+      "Original": "Copy Asset Path",
+      "Context": "[Intoner] ObjectLibraryBrowser.DrawCopyAssetPathAction",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "复制资源路径",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Folder",
+      "Context": "[Intoner] SceneWorkspace.DrawPlacedObjectFolderRow",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "复制文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Last Result",
+      "Context": "[Intoner] DebugWorkspace.DrawObjectIpcTesterToolbar",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button",
+      "Translated": "复制上次结果",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Object",
+      "Context": "[Intoner] SceneItemControls.DrawSceneItemContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "复制物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Objects",
+      "Context": "[Intoner] SceneItemControls.DrawSceneItemContextMenu",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton",
+      "Translated": "复制多个物体",
+      "Source": "library"
+    },
+    {
+      "Original": "Covered From Rain",
+      "Context": "[Intoner] ObjectModelEditor.DrawBgObjectRows",
+      "Role": "UI",
+      "RoleReason": "→ EditorPropertyTable.DrawLabel",
+      "Translated": "可遮雨",
+      "Source": "library"
+    },
+    {
       "Original": "Create",
       "Context": "[Intoner] SceneHistoryDescription.GetKindLabel",
       "Role": "UI",
@@ -363,11 +699,83 @@
       "Source": "library"
     },
     {
+      "Original": "Create Checkpoint",
+      "Context": "[Intoner] HistoryWorkspace.OpenHistoryCheckpointDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建检查点",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Layout",
+      "Context": "[Intoner] LayoutWorkspace.DrawLayoutCreationSection",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建布局",
+      "Source": "library"
+    },
+    {
+      "Original": "Create Library Folder",
+      "Context": "[Intoner] ObjectLibraryBrowser.OpenCreateLibraryFolderDialog",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "创建资源库文件夹",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a Library folder",
+      "Context": "[Intoner] DrawObjectLibraryBrowser",
+      "Role": "UI",
+      "RoleReason": "→ EditorIconButton.DrawTooltip",
+      "Translated": "创建资源库文件夹",
+      "Source": "library"
+    },
+    {
       "Original": "Create a checkpoint on the current history state",
       "Context": "[Intoner] HistoryWorkspace.DrawHistoryHeroActions",
       "Role": "UI",
       "RoleReason": "→ EditorIconButton.DrawTooltip",
       "Translated": "为当前历史状态创建还原点",
+      "Source": "library"
+    },
+    {
+      "Original": "Create a collection to assign Penumbra mods to placed objects.",
+      "Context": "[Intoner] DrawObjectCollectionEmptyWorkspace",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建合集，将 Penumbra 模组分配给已放置的物体。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create or import an object to utilize the list.",
+      "Context": "[Intoner] DrawPlacedObjectsListCard",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建或导入物体后即可使用此列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Create the first collection",
+      "Context": "[Intoner] CollectionsWorkspace.DrawObjectCollectionPicker",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "创建首个合集",
+      "Source": "library"
+    },
+    {
+      "Original": "Current action",
+      "Context": "[Intoner] HistoryWorkspace.DrawToolbarHistoryActionTooltip",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "当前操作",
+      "Source": "library"
+    },
+    {
+      "Original": "Currently used as the default layout",
+      "Context": "[Intoner] LayoutWorkspace.DrawSelectedLayoutSummary",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize",
+      "Translated": "当前用作默认布局",
       "Source": "library"
     },
     {

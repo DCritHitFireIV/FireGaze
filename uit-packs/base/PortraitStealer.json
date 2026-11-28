@@ -17,6 +17,15 @@
       "Source": "library"
     },
     {
+      "Original": "Portrait Stealer###PortraitStealerMainWindow",
+      "Context": "MainWindow..ctor",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题",
+      "Translated": "肖像收藏",
+      "Source": "library"
+    },
+    {
       "Original": "Failed to generate string!",
       "Context": "MainWindow.PerformInitialCalculations",
       "PreserveID": false,
@@ -50,6 +59,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "注意：获取此肖像时使用的是 ",
+      "Source": "library"
+    },
+    {
+      "Original": ".\nIt might look incorrect if applied to a different job.",
+      "Context": "MainWindow.DrawExplanationAndWarning",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": "。\n应用到其他职业时外观可能有所不同。",
       "Source": "library"
     },
     {
@@ -134,6 +152,15 @@
       "Source": "library"
     },
     {
+      "Original": " | Captured: ",
+      "Context": "MainWindow.DrawAdventurerPlateDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " | 捕获时间： ",
+      "Source": "library"
+    },
+    {
       "Original": "Cached: ",
       "Context": "MainWindow.DrawAdventurerPlateDetailPane",
       "PreserveID": false,
@@ -212,6 +239,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TextUnformatted",
       "Translated": "对象 ID： ",
+      "Source": "library"
+    },
+    {
+      "Original": " | Last Update: ",
+      "Context": "MainWindow.DrawDetailPane",
+      "PreserveID": false,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted",
+      "Translated": " | 上次更新： ",
       "Source": "library"
     }
   ],

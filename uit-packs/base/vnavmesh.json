@@ -8,6 +8,14 @@
   },
   "entries": [
     {
+      "Original": " (active)",
+      "Context": "DebugLayout.DrawLayout",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": " （生效中）",
+      "Source": "library"
+    },
+    {
       "Original": " layout",
       "Context": "DebugLayout.DrawLayout",
       "Role": "UI",
@@ -37,6 +45,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGuiComponents.HelpMarker",
       "Translated": "设为 0 使用全部可用核心。正数指定使用的核心数，负数指定要空闲的核心数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Context": "DebugLayout.DrawWorld",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "生效中",
       "Source": "library"
     },
     {
@@ -108,6 +125,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Checkbox",
       "Translated": "切换区域时自动加载或生成导航数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Border size: ",
+      "Context": "DebugSolidHeightfield.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "边界大小： ",
       "Source": "library"
     },
     {
@@ -272,6 +297,15 @@
       "Source": "library"
     },
     {
+      "Original": "Navmesh properties",
+      "Context": "DebugNavmeshCustom.Draw",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "导航网格属性",
+      "Source": "library"
+    },
+    {
       "Original": "New: ",
       "Context": "DebugNavmeshCustom.Draw",
       "Role": "UI",
@@ -346,6 +380,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.InputInt",
       "Translated": "多边形生成：每个多边形的最大顶点数",
+      "Source": "library"
+    },
+    {
+      "Original": "Primitives: ",
+      "Context": "DebugGameCollision.DrawColliderMeshPCBNode",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "图元： ",
       "Source": "library"
     },
     {
@@ -425,6 +467,15 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.Button",
       "Translated": "重新加载",
+      "Source": "library"
+    },
+    {
+      "Original": "Resources",
+      "Context": "DebugLayout.DrawLayout",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx",
+      "Translated": "资源",
       "Source": "library"
     },
     {
@@ -553,6 +604,14 @@
       "Role": "UI",
       "RoleReason": "→ ImGui.TreeNodeEx",
       "Translated": "类型： ",
+      "Source": "library"
+    },
+    {
+      "Original": "Undocumented",
+      "Context": "NavmeshSettings.Draw",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker",
+      "Translated": "无文档说明",
       "Source": "library"
     },
     {

@@ -707,6 +707,12 @@
       "Source": "library"
     },
     {
+      "Original": "Start the addon in Auto mode. When out of combat or when combat starts, switches the target according to the set condition. \r\n Optionally: You can add the target type to the end of the command you want RSR to do. For example: /rotation Auto Big",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::Auto",
+      "Translated": "以自动模式启动插件。脱战时或进入战斗时，根据设定条件切换目标。\r\n可选：在命令末尾加上目标类型，让 RSR 按该类型选择目标。例如 /rotation Auto Big。",
+      "Source": "library"
+    },
+    {
       "Original": "Start in Target-Only mode. RSR will auto-select targets per normal logic but will not perform any actions.",
       "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::TargetOnly",
       "Translated": "以仅选目标模式启动。RSR 会按常规逻辑自动选择目标，但不会执行任何动作。",
